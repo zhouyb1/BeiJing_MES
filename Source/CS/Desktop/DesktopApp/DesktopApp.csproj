@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA0142EF-7925-4407-AABB-998A13D96E4D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DesktopApp</RootNamespace>
+    <AssemblyName>DesktopApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\RFID\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>5E744C1228640A0C840B4EF45C18566C7B84010C</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>DesktopApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IrisSkin4, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=127be25a6db25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\IrisSkin4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.35985, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\untCommon.cs" />
+    <Compile Include="System\frmAreaEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmAreaEdit.Designer.cs">
+      <DependentUpon>frmAreaEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmAbout.Designer.cs">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmBackup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmBackup.designer.cs">
+      <DependentUpon>frmBackup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmEquipmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmEquipmentEdit.Designer.cs">
+      <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmInspectList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmInspectList.Designer.cs">
+      <DependentUpon>frmInspectList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmEquipmentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmEquipmentList.Designer.cs">
+      <DependentUpon>frmEquipmentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmDictionaryEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmDictionaryEdit.Designer.cs">
+      <DependentUpon>frmDictionaryEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmDictionaryList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmDictionaryList.Designer.cs">
+      <DependentUpon>frmDictionaryList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmAreaSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmAreaSet.Designer.cs">
+      <DependentUpon>frmAreaSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmPowerSet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmPowerSet.Designer.cs">
+      <DependentUpon>frmPowerSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmConfig.Designer.cs">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmSerialPortConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmSerialPortConfig.designer.cs">
+      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmUserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmUserEdit.Designer.cs">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmUserList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmUserList.Designer.cs">
+      <DependentUpon>frmUserList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmPasswordEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmPasswordEdit.Designer.cs">
+      <DependentUpon>frmPasswordEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmDepartmentEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmDepartmentEdit.Designer.cs">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmRoleEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmRoleEdit.Designer.cs">
+      <DependentUpon>frmRoleEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmCompanyEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmCompanyEdit.Designer.cs">
+      <DependentUpon>frmCompanyEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmDepartmentList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmDepartmentList.Designer.cs">
+      <DependentUpon>frmDepartmentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmRoleList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmRoleList.Designer.cs">
+      <DependentUpon>frmRoleList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmCompanyList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmCompanyList.Designer.cs">
+      <DependentUpon>frmCompanyList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmLogin.designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\PagerControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System\PagerControl.designer.cs">
+      <DependentUpon>PagerControl.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="System\frmAbout.resx">
+      <DependentUpon>frmAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmAreaEdit.resx">
+      <DependentUpon>frmAreaEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmBackup.resx">
+      <DependentUpon>frmBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmEquipmentEdit.resx">
+      <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmInspectList.resx">
+      <DependentUpon>frmInspectList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmEquipmentList.resx">
+      <DependentUpon>frmEquipmentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmDictionaryEdit.resx">
+      <DependentUpon>frmDictionaryEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmDictionaryList.resx">
+      <DependentUpon>frmDictionaryList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmAreaSet.resx">
+      <DependentUpon>frmAreaSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmPowerSet.resx">
+      <DependentUpon>frmPowerSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmConfig.resx">
+      <DependentUpon>frmConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmSerialPortConfig.resx">
+      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmUserEdit.resx">
+      <DependentUpon>frmUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmUserList.resx">
+      <DependentUpon>frmUserList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmPasswordEdit.resx">
+      <DependentUpon>frmPasswordEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmDepartmentEdit.resx">
+      <DependentUpon>frmDepartmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmRoleEdit.resx">
+      <DependentUpon>frmRoleEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmCompanyEdit.resx">
+      <DependentUpon>frmCompanyEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmDepartmentList.resx">
+      <DependentUpon>frmDepartmentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmRoleList.resx">
+      <DependentUpon>frmRoleList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmCompanyList.resx">
+      <DependentUpon>frmCompanyList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="System\PagerControl.resx">
+      <DependentUpon>PagerControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="bin\Debug\Skins\Calmness.ssk" />
+    <None Include="bin\Debug\Skins\CalmnessColor1.ssk" />
+    <None Include="bin\Debug\Skins\CalmnessColor2.ssk" />
+    <None Include="bin\Debug\Skins\DeepCyan.ssk" />
+    <None Include="bin\Debug\Skins\DeepGreen.ssk" />
+    <None Include="bin\Debug\Skins\DeepOrange.ssk" />
+    <None Include="bin\Debug\Skins\DiamondBlue.ssk" />
+    <None Include="bin\Debug\Skins\DiamondGreen.ssk" />
+    <None Include="bin\Debug\Skins\DiamondOlive.ssk" />
+    <None Include="bin\Debug\Skins\DiamondPurple.ssk" />
+    <None Include="bin\Debug\Skins\DiamondRed.ssk" />
+    <None Include="bin\Debug\Skins\Eighteen.ssk" />
+    <None Include="bin\Debug\Skins\EighteenColor1.ssk" />
+    <None Include="bin\Debug\Skins\EighteenColor2.ssk" />
+    <None Include="bin\Debug\Skins\Emerald.ssk" />
+    <None Include="bin\Debug\Skins\EmeraldColor1.ssk" />
+    <None Include="bin\Debug\Skins\EmeraldColor2.ssk" />
+    <None Include="bin\Debug\Skins\EmeraldColor3.ssk" />
+    <None Include="bin\Debug\Skins\GlassBrown.ssk" />
+    <None Include="bin\Debug\Skins\GlassGreen.ssk" />
+    <None Include="bin\Debug\Skins\GlassOrange.ssk" />
+    <None Include="bin\Debug\Skins\Longhorn.ssk" />
+    <None Include="bin\Debug\Skins\MacOS.ssk" />
+    <None Include="bin\Debug\Skins\Midsummer.ssk" />
+    <None Include="bin\Debug\Skins\MidsummerColor1.ssk" />
+    <None Include="bin\Debug\Skins\MidsummerColor2.ssk" />
+    <None Include="bin\Debug\Skins\MidsummerColor3.ssk" />
+    <None Include="bin\Debug\Skins\mp10.ssk" />
+    <None Include="bin\Debug\Skins\mp10green.ssk" />
+    <None Include="bin\Debug\Skins\mp10maroon.ssk" />
+    <None Include="bin\Debug\Skins\mp10mulberry.ssk" />
+    <None Include="bin\Debug\Skins\mp10pink.ssk" />
+    <None Include="bin\Debug\Skins\mp10purple.ssk" />
+    <None Include="bin\Debug\Skins\MSN.ssk" />
+    <None Include="bin\Debug\Skins\office2007.ssk" />
+    <None Include="bin\Debug\Skins\OneBlue.ssk" />
+    <None Include="bin\Debug\Skins\OneCyan.ssk" />
+    <None Include="bin\Debug\Skins\OneGreen.ssk" />
+    <None Include="bin\Debug\Skins\OneOrange.ssk" />
+    <None Include="bin\Debug\Skins\Page.ssk" />
+    <None Include="bin\Debug\Skins\PageColor1.ssk" />
+    <None Include="bin\Debug\Skins\PageColor2.ssk" />
+    <None Include="bin\Debug\Skins\RealOne.ssk" />
+    <None Include="bin\Debug\Skins\Silver.ssk" />
+    <None Include="bin\Debug\Skins\SilverColor1.ssk" />
+    <None Include="bin\Debug\Skins\SilverColor2.ssk" />
+    <None Include="bin\Debug\Skins\SportsBlack.ssk" />
+    <None Include="bin\Debug\Skins\SportsBlue.ssk" />
+    <None Include="bin\Debug\Skins\SportsCyan.ssk" />
+    <None Include="bin\Debug\Skins\SportsGreen.ssk" />
+    <None Include="bin\Debug\Skins\SportsOrange.ssk" />
+    <None Include="bin\Debug\Skins\SteelBlack.ssk" />
+    <None Include="bin\Debug\Skins\SteelBlue.ssk" />
+    <None Include="bin\Debug\Skins\vista1.ssk" />
+    <None Include="bin\Debug\Skins\vista1_green.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color1.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color2.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color3.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color4.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color5.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color6.ssk" />
+    <None Include="bin\Debug\Skins\Vista2_color7.ssk" />
+    <None Include="bin\Debug\Skins\Warm.ssk" />
+    <None Include="bin\Debug\Skins\WarmColor1.ssk" />
+    <None Include="bin\Debug\Skins\WarmColor2.ssk" />
+    <None Include="bin\Debug\Skins\WarmColor3.ssk" />
+    <None Include="bin\Debug\Skins\Wave.ssk" />
+    <None Include="bin\Debug\Skins\WaveColor1.ssk" />
+    <None Include="bin\Debug\Skins\WaveColor2.ssk" />
+    <None Include="bin\Debug\Skins\XPBlue.ssk" />
+    <None Include="bin\Debug\Skins\XPGreen.ssk" />
+    <None Include="bin\Debug\Skins\XPOrange.ssk" />
+    <None Include="bin\Debug\Skins\XPSilver.ssk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{c0af7520-ae6b-4fd1-8e42-5c9e57c4a1a9}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{bb3d8345-2096-490c-9c7b-f58a4d84e962}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tools\Tools.csproj">
+      <Project>{029e5bf8-86a2-47c2-8c54-d1f49bc7e3dd}</Project>
+      <Name>Tools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\UHFReader86.dll" />
+    <Content Include="Images\add.gif" />
+    <Content Include="Images\archives.gif" />
+    <Content Include="Images\attibutes.gif" />
+    <Content Include="Images\attribution.png" />
+    <Content Include="Images\back.gif" />
+    <Content Include="Images\back.png" />
+    <Content Include="Images\bg.jpg" />
+    <Content Include="Images\blank.gif" />
+    <Content Include="Images\bluebook.gif" />
+    <Content Include="Images\bookpen.gif" />
+    <Content Include="Images\book_addresses.png" />
+    <Content Include="Images\busy.gif" />
+    <Content Include="Images\calendar.gif" />
+    <Content Include="Images\camera_lens.png" />
+    <Content Include="Images\cog.png" />
+    <Content Include="Images\comment.png" />
+    <Content Include="Images\database_yellow.png" />
+    <Content Include="Images\disable_enable_demo_mode.png" />
+    <Content Include="Images\education.png" />
+    <Content Include="Images\Excel.png" />
+    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\folder_close.png" />
+    <Content Include="Images\folder_document.png" />
+    <Content Include="Images\folder_open.png" />
+    <Content Include="Images\group.png" />
+    <Content Include="Images\house.png" />
+    <Content Include="Images\information.png" />
+    <Content Include="Images\legend.png" />
+    <Content Include="Images\report.png" />
+    <Content Include="Images\time.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\wrench.png" />
+    <Content Include="Library\WeifenLuo.WinFormsUI.Docking.dll" />
+    <None Include="Images\cancel.png" />
+    <Content Include="Images\candle.gif" />
+    <Content Include="Images\clear.png" />
+    <Content Include="Images\coffee.gif" />
+    <Content Include="Images\comment.gif" />
+    <Content Include="Images\communication.gif" />
+    <Content Include="Images\config.gif" />
+    <Content Include="Images\customers.gif" />
+    <Content Include="Images\cut.gif" />
+    <Content Include="Images\cut.png" />
+    <Content Include="Images\database.gif" />
+    <Content Include="Images\date.png" />
+    <Content Include="Images\delete.gif" />
+    <Content Include="Images\discuss.gif" />
+    <Content Include="Images\down.gif" />
+    <Content Include="Images\edit.gif" />
+    <None Include="Images\edit.png" />
+    <Content Include="Images\edit_add.png" />
+    <Content Include="Images\edit_remove.png" />
+    <Content Include="Images\filesave.png" />
+    <Content Include="Images\filter.png" />
+    <Content Include="Images\graywarn.gif" />
+    <None Include="Images\green.png" />
+    <Content Include="Images\greenwarn.gif" />
+    <Content Include="Images\help.gif" />
+    <Content Include="Images\help.png" />
+    <Content Include="Images\home.gif" />
+    <Content Include="Images\large_chart.png" />
+    <Content Include="Images\large_clipart.png" />
+    <Content Include="Images\large_picture.png" />
+    <Content Include="Images\large_shapes.png" />
+    <Content Include="Images\large_smartart.png" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\lock.gif" />
+    <Content Include="Images\lock.png" />
+    <None Include="Images\logo.jpg" />
+    <Content Include="Images\logout.gif" />
+    <Content Include="Images\mailbox.gif" />
+    <Content Include="Images\man.png" />
+    <Content Include="Images\memeber.gif" />
+    <Content Include="Images\mini_add.png" />
+    <Content Include="Images\mini_edit.png" />
+    <Content Include="Images\mini_refresh.png" />
+    <Content Include="Images\modify.gif" />
+    <Content Include="Images\more.png" />
+    <Content Include="Images\msn.gif" />
+    <Content Include="Images\myaccount.gif" />
+    <Content Include="Images\no.png" />
+    <Content Include="Images\ok.gif" />
+    <None Include="Images\ok.png" />
+    <None Include="Images\open.png" />
+    <Content Include="Images\outbox.gif" />
+    <Content Include="Images\pager.gif" />
+    <Content Include="Images\pencil.png" />
+    <Content Include="Images\photograph.gif" />
+    <Content Include="Images\plus.gif" />
+    <Content Include="Images\prev.gif" />
+    <Content Include="Images\print.gif" />
+    <Content Include="Images\print.png" />
+    <Content Include="Images\process.gif" />
+    <Content Include="Images\qq.gif" />
+    <None Include="Images\red.png" />
+    <Content Include="Images\redo.png" />
+    <Content Include="Images\refresh.gif" />
+    <Content Include="Images\reload.png" />
+    <Content Include="Images\right.gif" />
+    <Content Include="Images\role.gif" />
+    <Content Include="Images\save-disabled.gif" />
+    <Content Include="Images\save.gif" />
+    <Content Include="Images\search.gif" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\search2.gif" />
+    <Content Include="Images\settings.gif" />
+    <None Include="Images\timer.png" />
+    <Content Include="Images\sum.png" />
+    <Content Include="Images\tip.png" />
+    <Content Include="Images\true.gif" />
+    <Content Include="Images\undo.png" />
+    <Content Include="Images\up.gif" />
+    <Content Include="Images\ver.png" />
+    <Content Include="Images\view.gif" />
+    <Content Include="Library\IrisSkin4.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
