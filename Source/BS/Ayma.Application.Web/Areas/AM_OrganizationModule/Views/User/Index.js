@@ -152,23 +152,23 @@ var bootstrap = function ($, ayma) {
                 }
             });
             // 管理授权
-            $('#am_manageauthorize').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('F_UserId');
-                var F_Account = $('#girdtable').jfGridValue('F_Account');
-                selectedRow = $('#girdtable').jfGridGet('rowdata');
-                if (ayma.checkrow(keyValue)) {
-                ayma.layerForm({
-                    id: 'am_manageauthorize',
-                    title: '管理授权 ',
-                    url: top.$.rootUrl + '/ShopErpDev/UserPowers/Form?keyValue=' + keyValue + "&F_Account=" + F_Account,
-                    width: 610,
-                    height: 750,
-                    callBack: function (id) {
-                        return top[id].acceptClick();
-                    }
-                });
-                }
-            });
+            //$('#am_manageauthorize').on('click', function () {
+            //    var keyValue = $('#girdtable').jfGridValue('F_UserId');
+            //    var F_Account = $('#girdtable').jfGridValue('F_Account');
+            //    selectedRow = $('#girdtable').jfGridGet('rowdata');
+            //    if (ayma.checkrow(keyValue)) {
+            //    ayma.layerForm({
+            //        id: 'am_manageauthorize',
+            //        title: '管理授权 ',
+            //        url: top.$.rootUrl + '/ShopErpDev/UserPowers/Form?keyValue=' + keyValue + "&F_Account=" + F_Account,
+            //        width: 610,
+            //        height: 750,
+            //        callBack: function (id) {
+            //            return top[id].acceptClick();
+            //        }
+            //    });
+            //    }
+            //});
             // 数据授权
             $('#am_dataauthorize').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('F_UserId');
