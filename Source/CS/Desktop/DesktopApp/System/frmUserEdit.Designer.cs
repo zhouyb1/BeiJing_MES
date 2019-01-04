@@ -30,29 +30,29 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserEdit));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.U_UpdateDate = new System.Windows.Forms.DateTimePicker();
-            this.U_CreateDate = new System.Windows.Forms.DateTimePicker();
+            this.F_ModifyDate = new System.Windows.Forms.DateTimePicker();
+            this.F_CreateDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.U_UpdateBy = new System.Windows.Forms.TextBox();
+            this.F_ModifyUserName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.U_CreateBy = new System.Windows.Forms.TextBox();
+            this.F_CreateUserName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.U_Active = new System.Windows.Forms.CheckBox();
+            this.F_EnabledMark = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
-            this.U_Remark = new System.Windows.Forms.TextBox();
+            this.F_Description = new System.Windows.Forms.TextBox();
             this.U_Address = new System.Windows.Forms.TextBox();
-            this.U_WeChat = new System.Windows.Forms.TextBox();
-            this.U_QQ = new System.Windows.Forms.TextBox();
-            this.U_Email = new System.Windows.Forms.TextBox();
+            this.F_WeChat = new System.Windows.Forms.TextBox();
+            this.F_OICQ = new System.Windows.Forms.TextBox();
+            this.F_Email = new System.Windows.Forms.TextBox();
             this.R_Code = new System.Windows.Forms.ComboBox();
-            this.U_Sex = new System.Windows.Forms.ComboBox();
-            this.U_Pwd = new System.Windows.Forms.TextBox();
-            this.U_Phone = new System.Windows.Forms.TextBox();
+            this.F_Gender = new System.Windows.Forms.ComboBox();
+            this.F_Password = new System.Windows.Forms.TextBox();
+            this.F_Mobile = new System.Windows.Forms.TextBox();
             this.D_Code = new System.Windows.Forms.ComboBox();
-            this.U_Code = new System.Windows.Forms.TextBox();
-            this.U_Name = new System.Windows.Forms.TextBox();
+            this.F_Account = new System.Windows.Forms.TextBox();
+            this.F_RealName = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -73,13 +73,13 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.U_UpdateDate);
-            this.groupBox2.Controls.Add(this.U_CreateDate);
+            this.groupBox2.Controls.Add(this.F_ModifyDate);
+            this.groupBox2.Controls.Add(this.F_CreateDate);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.U_UpdateBy);
+            this.groupBox2.Controls.Add(this.F_ModifyUserName);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.U_CreateBy);
+            this.groupBox2.Controls.Add(this.F_CreateUserName);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(12, 278);
             this.groupBox2.Name = "groupBox2";
@@ -88,21 +88,21 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "人员信息";
             // 
-            // U_UpdateDate
+            // F_ModifyDate
             // 
-            this.U_UpdateDate.Enabled = false;
-            this.U_UpdateDate.Location = new System.Drawing.Point(296, 56);
-            this.U_UpdateDate.Name = "U_UpdateDate";
-            this.U_UpdateDate.Size = new System.Drawing.Size(160, 21);
-            this.U_UpdateDate.TabIndex = 9;
+            this.F_ModifyDate.Enabled = false;
+            this.F_ModifyDate.Location = new System.Drawing.Point(296, 56);
+            this.F_ModifyDate.Name = "F_ModifyDate";
+            this.F_ModifyDate.Size = new System.Drawing.Size(160, 21);
+            this.F_ModifyDate.TabIndex = 9;
             // 
-            // U_CreateDate
+            // F_CreateDate
             // 
-            this.U_CreateDate.Enabled = false;
-            this.U_CreateDate.Location = new System.Drawing.Point(296, 26);
-            this.U_CreateDate.Name = "U_CreateDate";
-            this.U_CreateDate.Size = new System.Drawing.Size(160, 21);
-            this.U_CreateDate.TabIndex = 8;
+            this.F_CreateDate.Enabled = false;
+            this.F_CreateDate.Location = new System.Drawing.Point(296, 26);
+            this.F_CreateDate.Name = "F_CreateDate";
+            this.F_CreateDate.Size = new System.Drawing.Size(160, 21);
+            this.F_CreateDate.TabIndex = 8;
             // 
             // label3
             // 
@@ -122,13 +122,13 @@
             this.label4.TabIndex = 6;
             this.label4.Text = "创建日期：";
             // 
-            // U_UpdateBy
+            // F_ModifyUserName
             // 
-            this.U_UpdateBy.Enabled = false;
-            this.U_UpdateBy.Location = new System.Drawing.Point(72, 56);
-            this.U_UpdateBy.Name = "U_UpdateBy";
-            this.U_UpdateBy.Size = new System.Drawing.Size(160, 21);
-            this.U_UpdateBy.TabIndex = 4;
+            this.F_ModifyUserName.Enabled = false;
+            this.F_ModifyUserName.Location = new System.Drawing.Point(72, 56);
+            this.F_ModifyUserName.Name = "F_ModifyUserName";
+            this.F_ModifyUserName.Size = new System.Drawing.Size(160, 21);
+            this.F_ModifyUserName.TabIndex = 4;
             // 
             // label2
             // 
@@ -139,13 +139,13 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "更新人：";
             // 
-            // U_CreateBy
+            // F_CreateUserName
             // 
-            this.U_CreateBy.Enabled = false;
-            this.U_CreateBy.Location = new System.Drawing.Point(72, 26);
-            this.U_CreateBy.Name = "U_CreateBy";
-            this.U_CreateBy.Size = new System.Drawing.Size(160, 21);
-            this.U_CreateBy.TabIndex = 2;
+            this.F_CreateUserName.Enabled = false;
+            this.F_CreateUserName.Location = new System.Drawing.Point(72, 26);
+            this.F_CreateUserName.Name = "F_CreateUserName";
+            this.F_CreateUserName.Size = new System.Drawing.Size(160, 21);
+            this.F_CreateUserName.TabIndex = 2;
             // 
             // label6
             // 
@@ -158,20 +158,20 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.U_Active);
+            this.groupBox1.Controls.Add(this.F_EnabledMark);
             this.groupBox1.Controls.Add(this.label17);
-            this.groupBox1.Controls.Add(this.U_Remark);
+            this.groupBox1.Controls.Add(this.F_Description);
             this.groupBox1.Controls.Add(this.U_Address);
-            this.groupBox1.Controls.Add(this.U_WeChat);
-            this.groupBox1.Controls.Add(this.U_QQ);
-            this.groupBox1.Controls.Add(this.U_Email);
+            this.groupBox1.Controls.Add(this.F_WeChat);
+            this.groupBox1.Controls.Add(this.F_OICQ);
+            this.groupBox1.Controls.Add(this.F_Email);
             this.groupBox1.Controls.Add(this.R_Code);
-            this.groupBox1.Controls.Add(this.U_Sex);
-            this.groupBox1.Controls.Add(this.U_Pwd);
-            this.groupBox1.Controls.Add(this.U_Phone);
+            this.groupBox1.Controls.Add(this.F_Gender);
+            this.groupBox1.Controls.Add(this.F_Password);
+            this.groupBox1.Controls.Add(this.F_Mobile);
             this.groupBox1.Controls.Add(this.D_Code);
-            this.groupBox1.Controls.Add(this.U_Code);
-            this.groupBox1.Controls.Add(this.U_Name);
+            this.groupBox1.Controls.Add(this.F_Account);
+            this.groupBox1.Controls.Add(this.F_RealName);
             this.groupBox1.Controls.Add(this.label16);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label14);
@@ -191,14 +191,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "用户信息";
             // 
-            // U_Active
+            // F_EnabledMark
             // 
-            this.U_Active.AutoSize = true;
-            this.U_Active.Location = new System.Drawing.Point(72, 232);
-            this.U_Active.Name = "U_Active";
-            this.U_Active.Size = new System.Drawing.Size(15, 14);
-            this.U_Active.TabIndex = 13;
-            this.U_Active.UseVisualStyleBackColor = true;
+            this.F_EnabledMark.AutoSize = true;
+            this.F_EnabledMark.Location = new System.Drawing.Point(72, 232);
+            this.F_EnabledMark.Name = "F_EnabledMark";
+            this.F_EnabledMark.Size = new System.Drawing.Size(15, 14);
+            this.F_EnabledMark.TabIndex = 13;
+            this.F_EnabledMark.UseVisualStyleBackColor = true;
             // 
             // label17
             // 
@@ -209,12 +209,12 @@
             this.label17.TabIndex = 26;
             this.label17.Text = "是否启用：";
             // 
-            // U_Remark
+            // F_Description
             // 
-            this.U_Remark.Location = new System.Drawing.Point(72, 204);
-            this.U_Remark.Name = "U_Remark";
-            this.U_Remark.Size = new System.Drawing.Size(384, 21);
-            this.U_Remark.TabIndex = 12;
+            this.F_Description.Location = new System.Drawing.Point(72, 204);
+            this.F_Description.Name = "F_Description";
+            this.F_Description.Size = new System.Drawing.Size(384, 21);
+            this.F_Description.TabIndex = 12;
             // 
             // U_Address
             // 
@@ -223,26 +223,26 @@
             this.U_Address.Size = new System.Drawing.Size(384, 21);
             this.U_Address.TabIndex = 11;
             // 
-            // U_WeChat
+            // F_WeChat
             // 
-            this.U_WeChat.Location = new System.Drawing.Point(296, 144);
-            this.U_WeChat.Name = "U_WeChat";
-            this.U_WeChat.Size = new System.Drawing.Size(160, 21);
-            this.U_WeChat.TabIndex = 10;
+            this.F_WeChat.Location = new System.Drawing.Point(296, 144);
+            this.F_WeChat.Name = "F_WeChat";
+            this.F_WeChat.Size = new System.Drawing.Size(160, 21);
+            this.F_WeChat.TabIndex = 10;
             // 
-            // U_QQ
+            // F_OICQ
             // 
-            this.U_QQ.Location = new System.Drawing.Point(72, 144);
-            this.U_QQ.Name = "U_QQ";
-            this.U_QQ.Size = new System.Drawing.Size(160, 21);
-            this.U_QQ.TabIndex = 9;
+            this.F_OICQ.Location = new System.Drawing.Point(72, 144);
+            this.F_OICQ.Name = "F_OICQ";
+            this.F_OICQ.Size = new System.Drawing.Size(160, 21);
+            this.F_OICQ.TabIndex = 9;
             // 
-            // U_Email
+            // F_Email
             // 
-            this.U_Email.Location = new System.Drawing.Point(295, 114);
-            this.U_Email.Name = "U_Email";
-            this.U_Email.Size = new System.Drawing.Size(160, 21);
-            this.U_Email.TabIndex = 8;
+            this.F_Email.Location = new System.Drawing.Point(295, 114);
+            this.F_Email.Name = "F_Email";
+            this.F_Email.Size = new System.Drawing.Size(160, 21);
+            this.F_Email.TabIndex = 8;
             // 
             // R_Code
             // 
@@ -253,31 +253,32 @@
             this.R_Code.Size = new System.Drawing.Size(160, 20);
             this.R_Code.TabIndex = 6;
             // 
-            // U_Sex
+            // F_Gender
             // 
-            this.U_Sex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.U_Sex.FormattingEnabled = true;
-            this.U_Sex.Items.AddRange(new object[] {
+            this.F_Gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.F_Gender.FormattingEnabled = true;
+            this.F_Gender.Items.AddRange(new object[] {
             "男",
             "女"});
-            this.U_Sex.Location = new System.Drawing.Point(296, 56);
-            this.U_Sex.Name = "U_Sex";
-            this.U_Sex.Size = new System.Drawing.Size(161, 20);
-            this.U_Sex.TabIndex = 13;
+            this.F_Gender.Location = new System.Drawing.Point(296, 56);
+            this.F_Gender.Name = "F_Gender";
+            this.F_Gender.Size = new System.Drawing.Size(161, 20);
+            this.F_Gender.TabIndex = 13;
             // 
-            // U_Pwd
+            // F_Password
             // 
-            this.U_Pwd.Location = new System.Drawing.Point(72, 55);
-            this.U_Pwd.Name = "U_Pwd";
-            this.U_Pwd.Size = new System.Drawing.Size(160, 21);
-            this.U_Pwd.TabIndex = 3;
+            this.F_Password.Location = new System.Drawing.Point(72, 55);
+            this.F_Password.Name = "F_Password";
+            this.F_Password.ReadOnly = true;
+            this.F_Password.Size = new System.Drawing.Size(160, 21);
+            this.F_Password.TabIndex = 3;
             // 
-            // U_Phone
+            // F_Mobile
             // 
-            this.U_Phone.Location = new System.Drawing.Point(72, 114);
-            this.U_Phone.Name = "U_Phone";
-            this.U_Phone.Size = new System.Drawing.Size(160, 21);
-            this.U_Phone.TabIndex = 7;
+            this.F_Mobile.Location = new System.Drawing.Point(72, 114);
+            this.F_Mobile.Name = "F_Mobile";
+            this.F_Mobile.Size = new System.Drawing.Size(160, 21);
+            this.F_Mobile.TabIndex = 7;
             // 
             // D_Code
             // 
@@ -288,19 +289,19 @@
             this.D_Code.Size = new System.Drawing.Size(160, 20);
             this.D_Code.TabIndex = 5;
             // 
-            // U_Code
+            // F_Account
             // 
-            this.U_Code.Location = new System.Drawing.Point(72, 25);
-            this.U_Code.Name = "U_Code";
-            this.U_Code.Size = new System.Drawing.Size(160, 21);
-            this.U_Code.TabIndex = 1;
+            this.F_Account.Location = new System.Drawing.Point(72, 25);
+            this.F_Account.Name = "F_Account";
+            this.F_Account.Size = new System.Drawing.Size(160, 21);
+            this.F_Account.TabIndex = 1;
             // 
-            // U_Name
+            // F_RealName
             // 
-            this.U_Name.Location = new System.Drawing.Point(297, 27);
-            this.U_Name.Name = "U_Name";
-            this.U_Name.Size = new System.Drawing.Size(160, 21);
-            this.U_Name.TabIndex = 2;
+            this.F_RealName.Location = new System.Drawing.Point(297, 27);
+            this.F_RealName.Name = "F_RealName";
+            this.F_RealName.Size = new System.Drawing.Size(160, 21);
+            this.F_RealName.TabIndex = 2;
             // 
             // label16
             // 
@@ -462,41 +463,41 @@
 
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox U_CreateBy;
+        private System.Windows.Forms.TextBox F_CreateUserName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox U_Code;
-        private System.Windows.Forms.TextBox U_Name;
-        private System.Windows.Forms.TextBox U_UpdateBy;
+        private System.Windows.Forms.TextBox F_Account;
+        private System.Windows.Forms.TextBox F_RealName;
+        private System.Windows.Forms.TextBox F_ModifyUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DateTimePicker U_UpdateDate;
-        private System.Windows.Forms.DateTimePicker U_CreateDate;
+        private System.Windows.Forms.DateTimePicker F_ModifyDate;
+        private System.Windows.Forms.DateTimePicker F_CreateDate;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox D_Code;
-        private System.Windows.Forms.TextBox U_Remark;
+        private System.Windows.Forms.TextBox F_Description;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox U_Address;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox U_WeChat;
+        private System.Windows.Forms.TextBox F_WeChat;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox U_QQ;
-        private System.Windows.Forms.TextBox U_Email;
+        private System.Windows.Forms.TextBox F_OICQ;
+        private System.Windows.Forms.TextBox F_Email;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.ComboBox R_Code;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox U_Sex;
+        private System.Windows.Forms.ComboBox F_Gender;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox U_Pwd;
-        private System.Windows.Forms.TextBox U_Phone;
+        private System.Windows.Forms.TextBox F_Password;
+        private System.Windows.Forms.TextBox F_Mobile;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.CheckBox U_Active;
+        private System.Windows.Forms.CheckBox F_EnabledMark;
     }
 }

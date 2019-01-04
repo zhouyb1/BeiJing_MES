@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -81,61 +82,61 @@ namespace Business
             }
         }
 
-        public List<SysUser> loadData(string key)
+        public DataTable loadData(string key)
         {
             try
             {
                 string sql = "";
                 if (string.IsNullOrEmpty(key))
                 {
-                    sql = @"SELECT [U_Code]
-      ,[U_Name]
-      ,[U_Pwd]
-      ,[U_Sex]
-      ,('['+Sys_User.[D_Code]+']'+Sys_Department.D_Name) D_Code
-      ,('['+Sys_User.[R_Code]+']'+Sys_Role.R_Name) R_Code
-      ,[U_Phone]
-      ,[U_Email]
-      ,[U_QQ]
-      ,[U_WeChat]
-      ,[U_Address]
-      ,[U_Remark]
-      ,[U_Active]
-      ,[U_CreateBy]
-      ,[U_CreateDate]
-      ,[U_UpdateBy]
-      ,[U_UpdateDate]
-  FROM [Sys_User]
-  LEFT JOIN Sys_Department ON Sys_Department.D_Code = Sys_User.D_Code
-  LEFT JOIN Sys_Role ON Sys_Role.R_Code = Sys_User.R_Code";
+                    sql = @"SELECT  F_Account ,
+        F_RealName ,
+        '******' F_Password ,
+        CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
+        ( '[' + AM_Base_User.[D_Code] + ']' + Sys_Department.D_Name ) D_Code ,
+        ( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code ,
+        F_Mobile ,
+        F_Email ,
+        F_OICQ ,
+        F_WeChat ,
+        U_Address ,
+        F_Description ,
+        F_EnabledMark ,
+        F_CreateUserName ,
+        F_CreateDate ,
+        F_ModifyUserName ,
+        F_ModifyDate
+FROM    AM_Base_User
+        LEFT JOIN Sys_Department ON Sys_Department.D_Code = AM_Base_User.D_Code
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.R_Code";
                 }
                 else
                 {
-                    sql = string.Format(@"SELECT [U_Code]
-      ,[U_Name]
-      ,[U_Pwd]
-      ,[U_Sex]
-      ,('['+Sys_User.[D_Code]+']'+Sys_Department.D_Name) D_Code
-      ,('['+Sys_User.[R_Code]+']'+Sys_Role.R_Name) R_Code
-      ,[U_Phone]
-      ,[U_Email]
-      ,[U_QQ]
-      ,[U_WeChat]
-      ,[U_Address]
-      ,[U_Remark]
-      ,[U_Active]
-      ,[U_CreateBy]
-      ,[U_CreateDate]
-      ,[U_UpdateBy]
-      ,[U_UpdateDate]
-  FROM [Sys_User]
-  LEFT JOIN Sys_Department ON Sys_Department.D_Code = Sys_User.D_Code
-  LEFT JOIN Sys_Role ON Sys_Role.R_Code = Sys_User.R_Code
-  WHERE Sys_User.U_Code LIKE '%{0}%' OR Sys_User.U_Name LIKE '%{0}%'", key);
+                    sql = string.Format(@"SELECT  F_Account ,
+        F_RealName ,
+        F_Password ,
+        CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
+        ( '[' + AM_Base_User.[D_Code] + ']' + Sys_Department.D_Name ) D_Code ,
+        ( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code ,
+        F_Mobile ,
+        F_Email ,
+        F_OICQ ,
+        F_WeChat ,
+        U_Address ,
+        F_Description ,
+        F_EnabledMark ,
+        F_CreateUserName ,
+        F_CreateDate ,
+        F_ModifyUserName ,
+        F_ModifyDate
+FROM    AM_Base_User
+        LEFT JOIN Sys_Department ON Sys_Department.D_Code = AM_Base_User.D_Code
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.R_Code
+  WHERE AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%'", key);
                 }
 
                 SqlHelper db = new SqlHelper();
-                var rows = db.ExecuteObjects<SysUser>(sql);
+                var rows = db.ExecuteDataTable(sql); //db.ExecuteObjects<SysUser>(sql);
 
                 return rows;
             }
@@ -150,25 +151,25 @@ namespace Business
         {
             try
             {
-                string sql = string.Format(@"SELECT [U_Code]
-      ,[U_Name]
-      ,[U_Pwd]
-      ,[U_Sex]
-      ,[D_Code]
-      ,[R_Code]
-      ,[U_Phone]
-      ,[U_Email]
-      ,[U_QQ]
-      ,[U_WeChat]
+                string sql = string.Format(@"SELECT F_Account
+      ,F_RealName
+      ,F_Password
+      ,F_Gender
+      ,D_Code
+      ,R_Code
+      ,F_Mobile
+      ,F_Email
+      ,F_OICQ
+      ,F_WeChat
       ,[U_Address]
-      ,[U_Remark]
-      ,[U_Active]
-      ,[U_CreateBy]
-      ,[U_CreateDate]
-      ,[U_UpdateBy]
-      ,[U_UpdateDate]
-  FROM [Sys_User]
-WHERE U_Code='{0}'", key);
+      ,F_Description
+      ,F_EnabledMark
+      ,F_CreateUserName
+      ,F_CreateDate
+      ,F_ModifyUserName
+      ,F_ModifyDate
+  FROM AM_Base_User
+WHERE F_Account='{0}'", key);
 
 
                 SqlHelper db = new SqlHelper();
@@ -345,30 +346,27 @@ WHERE U_Code='{0}'", key);
         {
             try
             {
-                string sql = @"UPDATE [Sys_User]
+                string sql = @"UPDATE [AM_Base_User]
    SET 
-       [U_Name] = @U_Name
-      ,[U_Pwd] = @U_Pwd
-      ,[U_Sex] = @U_Sex
+       [F_RealName] = @U_Name
+      ,[F_Gender] = @U_Sex
       ,[D_Code] = @D_Code
       ,[R_Code] = @R_Code
-      ,[U_Phone] = @U_Phone
-      ,[U_Email] = @U_Email
-      ,[U_QQ] = @U_QQ
-      ,[U_WeChat] = @U_WeChat
+      ,[F_Mobile] = @U_Phone
+      ,[F_Email] = @U_Email
+      ,[F_OICQ] = @U_QQ
+      ,[F_WeChat] = @U_WeChat
       ,[U_Address] = @U_Address
-      ,[U_Remark] = @U_Remark
-      ,[U_Active] = @U_Active
-      ,[U_CreateBy] = @U_CreateBy
-      ,[U_CreateDate] = @U_CreateDate
-      ,[U_UpdateBy] = @U_UpdateBy
-      ,[U_UpdateDate] = @U_UpdateDate
- WHERE [U_Code] = @U_Code";
+      ,[F_Description] = @U_Remark
+      ,[F_EnabledMark] = @U_Active
+      ,[F_ModifyUserName] = @U_UpdateBy
+      ,[F_ModifyDate] = @U_UpdateDate
+ WHERE [F_Account] = @U_Code";
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
                 parameters.Add(new SqlParameter("@U_Code", user.F_Account));
                 parameters.Add(new SqlParameter("@U_Name", user.F_RealName));
-                parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
+                //parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
                 parameters.Add(new SqlParameter("@U_Sex", user.F_Gender));
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
                 parameters.Add(new SqlParameter("@R_Code", user.R_Code));
@@ -432,14 +430,7 @@ WHERE U_Code='{0}'", key);
 
 
 
-                if (!string.IsNullOrEmpty(user.F_CreateUserName))
-                {
-                    parameters.Add(new SqlParameter("@U_CreateBy", user.F_CreateUserName));
-                }
-                else
-                {
-                    parameters.Add(new SqlParameter("@U_CreateBy", DBNull.Value));
-                }
+               
 
                 if (!string.IsNullOrEmpty(user.F_ModifyUserName))
                 {
@@ -450,15 +441,6 @@ WHERE U_Code='{0}'", key);
                     parameters.Add(new SqlParameter("@U_UpdateBy", DBNull.Value));
                 }
 
-
-                if (user.F_CreateDate.HasValue)
-                {
-                    parameters.Add(new SqlParameter("@U_CreateDate", user.F_CreateDate));
-                }
-                else
-                {
-                    parameters.Add(new SqlParameter("@U_CreateDate", DBNull.Value));
-                }
 
                 if (!user.F_ModifyDate.HasValue)
                 {

@@ -41,13 +41,13 @@ namespace DesktopApp
             {
                 getDetail();
 
-                this.U_UpdateBy.Text = User.F_Account;
-                this.U_Code.ReadOnly = true;
+                this.F_ModifyUserName.Text = User.F_Account;
+                this.F_Account.ReadOnly = true;
             }
 
             if (OperationType == 1)
             {
-                U_CreateBy.Text = User.F_Account;
+                F_CreateUserName.Text = User.F_Account;
             }
 
             loadDroplistData();
@@ -99,37 +99,37 @@ namespace DesktopApp
                 SysUserBLL userbll = new SysUserBLL();
                 SysUser user = userbll.getDetail(PrimaryKey);
 
-                U_Code.Text=user.F_Account;
-                U_Name.Text=user.F_RealName;
-                U_Pwd.Text=user.F_Password ;
-                U_Sex.SelectedItem=user.F_Gender;
+                F_Account.Text=user.F_Account;
+                F_RealName.Text=user.F_RealName;
+                F_Password.Text = "******";//user.F_Password ;
+                F_Gender.SelectedItem=user.F_Gender==1?"男":"女";
                 department = user.D_Code;
                 role = user.R_Code;
 
-                U_Phone.Text=user.F_Mobile;
-                U_Email.Text=user.F_Email;
-                U_QQ.Text=user.F_OICQ;
-                U_WeChat.Text=user.F_WeChat;
+                F_Mobile.Text=user.F_Mobile;
+                F_Email.Text=user.F_Email;
+                F_OICQ.Text=user.F_OICQ;
+                F_WeChat.Text=user.F_WeChat;
 
                 U_Address.Text=user.U_Address;
-                U_Remark.Text=user.F_Description;
-                U_Active.Checked=user.F_EnabledMark;
+                F_Description.Text=user.F_Description;
+                F_EnabledMark.Checked=user.F_EnabledMark;
 
-                U_CreateBy.Text = user.F_CreateUserName;
-                U_UpdateBy.Text = user.F_ModifyUserName;
+                F_CreateUserName.Text = user.F_CreateUserName;
+                F_ModifyUserName.Text = user.F_ModifyUserName;
 
                 if (user.F_CreateDate.HasValue)
-                    U_CreateDate.Value = user.F_CreateDate.Value;
+                    F_CreateDate.Value = user.F_CreateDate.Value;
                 else
                 {
-                    U_CreateDate.Value = DateTime.Now;
+                    F_CreateDate.Value = DateTime.Now;
                 }
 
                 if (user.F_ModifyDate.HasValue)
-                    U_UpdateDate.Value = user.F_ModifyDate.Value;
+                    F_ModifyDate.Value = user.F_ModifyDate.Value;
                 else
                 {
-                    U_UpdateDate.Value = DateTime.Now;
+                    F_ModifyDate.Value = DateTime.Now;
                     ;
                 }
             }
@@ -150,24 +150,24 @@ namespace DesktopApp
                 {
                     SysUser user = new SysUser();
 
-                    user.F_Account = U_Code.Text;
-                    user.F_RealName = U_Name.Text;
-                    user.F_Password = U_Pwd.Text;
-                    user.F_Gender = U_Sex.Text;
+                    user.F_Account = F_Account.Text;
+                    user.F_RealName = F_RealName.Text;
+                    user.F_Password = F_Password.Text;
+                    user.F_Gender = F_Gender.Text=="男"?1:0;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
                     user.R_Code = R_Code.SelectedValue.ToString();
-                    user.F_Mobile = U_Phone.Text;
-                    user.F_Email = U_Email.Text;
-                    user.F_OICQ = U_QQ.Text;
-                    user.F_WeChat = U_WeChat.Text;
+                    user.F_Mobile = F_Mobile.Text;
+                    user.F_Email = F_Email.Text;
+                    user.F_OICQ = F_OICQ.Text;
+                    user.F_WeChat = F_WeChat.Text;
 
                     user.U_Address = U_Address.Text;
-                    user.F_Description = U_Remark.Text;
-                    user.F_EnabledMark = U_Active.Checked;
+                    user.F_Description = F_Description.Text;
+                    user.F_EnabledMark = F_EnabledMark.Checked;
 
-                    user.F_CreateUserName = U_CreateBy.Text;
-                    user.F_CreateDate = U_CreateDate.Value;
+                    user.F_CreateUserName = F_CreateUserName.Text;
+                    user.F_CreateDate = F_CreateDate.Value;
                     user.F_ModifyUserName = null;
                     user.F_ModifyDate = null;
 
@@ -201,27 +201,27 @@ namespace DesktopApp
                 {
                     SysUser user = new SysUser();
 
-                    user.F_Account = U_Code.Text;
-                    user.F_RealName = U_Name.Text;
-                    user.F_Password = U_Pwd.Text;
-                    user.F_Gender = U_Sex.Text;
+                    user.F_Account = F_Account.Text;
+                    user.F_RealName = F_RealName.Text;
+                    //user.F_Password = U_Pwd.Text;
+                    user.F_Gender = F_Gender.Text=="男"?1:0;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
                     user.R_Code = R_Code.SelectedValue.ToString();
-                    user.F_Mobile = U_Phone.Text;
-                    user.F_Email = U_Email.Text;
-                    user.F_OICQ = U_QQ.Text;
-                    user.F_WeChat = U_WeChat.Text;
+                    user.F_Mobile = F_Mobile.Text;
+                    user.F_Email = F_Email.Text;
+                    user.F_OICQ = F_OICQ.Text;
+                    user.F_WeChat = F_WeChat.Text;
 
                     user.U_Address = U_Address.Text;
-                    user.F_Description = U_Remark.Text;
-                    user.F_EnabledMark = U_Active.Checked;
+                    user.F_Description = F_Description.Text;
+                    user.F_EnabledMark = F_EnabledMark.Checked;
 
-                    user.F_CreateUserName = U_CreateBy.Text;
-                    user.F_CreateDate = U_CreateDate.Value;
+                    user.F_CreateUserName = F_CreateUserName.Text;
+                    user.F_CreateDate = F_CreateDate.Value;
 
-                    user.F_ModifyUserName = U_UpdateBy.Text;
-                    user.F_ModifyDate = U_UpdateDate.Value;
+                    user.F_ModifyUserName = F_ModifyUserName.Text;
+                    user.F_ModifyDate = F_ModifyDate.Value;
 
                     SysUserBLL userbll = new SysUserBLL();
                     if (userbll.Edit(user) > 0)
@@ -249,25 +249,25 @@ namespace DesktopApp
         /// <returns></returns>
         private bool checkInput()
         {
-            if (string.IsNullOrEmpty(U_Code.Text))
+            if (string.IsNullOrEmpty(F_Account.Text))
             {
                 untCommon.InfoMsg("用户编码不能为空！");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(U_Name.Text))
+            if (string.IsNullOrEmpty(F_RealName.Text))
             {
                 untCommon.InfoMsg("用户名称不能为空！");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(U_Pwd.Text))
+            if (string.IsNullOrEmpty(F_Password.Text))
             {
                 untCommon.InfoMsg("用户密码不能为空！");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(U_Sex.Text))
+            if (string.IsNullOrEmpty(F_Gender.Text))
             {
                 untCommon.InfoMsg("用户性别不能为空！");
                 return false;

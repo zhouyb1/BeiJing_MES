@@ -30,7 +30,7 @@ namespace Model
         /// <summary>
         /// 用户性别
         /// </summary>
-        public string F_Gender { set; get; }
+        public int? F_Gender { set; get; }
         /// <summary>
         /// 所属部门
         /// </summary>
@@ -201,6 +201,11 @@ namespace Model
         /// 登录状态
         /// </summary>
         public bool LoginOk { get; set; }
+
+        /// <summary>
+        /// 性别
+        /// </summary>
+        public string StrGender { get; set; }
         #endregion
     }
 }

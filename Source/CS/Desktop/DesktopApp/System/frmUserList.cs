@@ -36,7 +36,7 @@ namespace DesktopApp
                 SysUserBLL companybll = new SysUserBLL();
                 var rows = companybll.loadData(key);
 
-                if (rows == null || rows.Count < 1)
+                if (rows == null || rows.Rows.Count < 1)
                 {
                     untCommon.InfoMsg("没有任何数据！");
                     return;
@@ -87,7 +87,7 @@ namespace DesktopApp
             if (dataGridView.SelectedRows.Count < 1)
                 return;
 
-            string U_Code = dataGridView.SelectedRows[0].Cells["U_Code"].Value.ToString();
+            string U_Code = dataGridView.SelectedRows[0].Cells["F_Account"].Value.ToString();
             frmUserEdit frmUserEdit = new frmUserEdit(this, frmMain.User, U_Code, 2);
             frmUserEdit.ShowDialog();
         }
@@ -107,7 +107,7 @@ namespace DesktopApp
             if (dataGridView.SelectedRows.Count < 1)
                 return;
 
-            string U_Code = dataGridView.SelectedRows[0].Cells["U_Code"].Value.ToString();
+            string U_Code = dataGridView.SelectedRows[0].Cells["F_Account"].Value.ToString();
             frmUserEdit frmUserEdit = new frmUserEdit(this, frmMain.User, U_Code, 3);
             frmUserEdit.ShowDialog();
         }
@@ -130,7 +130,7 @@ namespace DesktopApp
                 if (dataGridView.SelectedRows.Count < 1)
                     return;
 
-                string U_Code = dataGridView.SelectedRows[0].Cells["U_Code"].Value.ToString();
+                string U_Code = dataGridView.SelectedRows[0].Cells["F_Account"].Value.ToString();
 
                 if (untCommon.QuestionMsg("您确定删除[" + U_Code + "]该项吗？"))
                 {
