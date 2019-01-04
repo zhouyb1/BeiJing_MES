@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Model;
+using Tools;
 
 namespace DesktopApp
 {
@@ -38,20 +39,22 @@ namespace DesktopApp
                 untCommon.InfoMsg("确认密码不能为空！");
                 return;
             }
-
-            if (frmMain.User.U_Pwd != txtOldPwd.Text)
+            string password = Md5Helper.Encrypt(txtOldPwd.Text.Trim(),32);
+            password = Md5Helper.Encrypt(DESEncrypt.Encrypt(password.ToLower(), frmMain.User.F_Secretkey).ToLower(), 32).ToLower();
+            if (frmMain.User.F_Password != password)
             {
-                untCommon.InfoMsg("旧密码不匹配！");
+                untCommon.ErrorMsg("旧密码不匹配！");
                 return;
             }
 
             if (txtAgainPwd.Text != txtNewPwd.Text)
             {
-                untCommon.InfoMsg("两次输入密码不一致！");
+                untCommon.ErrorMsg("两次输入密码不一致！");
                 return;
             }
-
-            frmMain.User.U_Pwd = txtNewPwd.Text;
+            var newPassword = Md5Helper.Encrypt(txtNewPwd.Text.Trim(), 32);
+            newPassword= Md5Helper.Encrypt(DESEncrypt.Encrypt(newPassword.ToLower(), frmMain.User.F_Secretkey).ToLower(), 32).ToLower();
+            frmMain.User.F_Password = newPassword;
             try
             {
 
@@ -62,12 +65,12 @@ namespace DesktopApp
                 }
                 else
                 {
-                    untCommon.InfoMsg("密码修改失败！");
+                    untCommon.ErrorMsg("密码修改失败！");
                 }
             }
             catch (Exception ex)
             {
-                 untCommon.InfoMsg("密码修改异常："+ex.Message);
+                untCommon.ErrorMsg("密码修改异常：" + ex.Message);
             }
         }
 

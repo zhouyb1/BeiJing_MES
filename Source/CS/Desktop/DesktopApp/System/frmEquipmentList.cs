@@ -276,7 +276,7 @@ namespace DesktopApp
 
                         SysLog log = new SysLog();
                         log.L_Date = DateTime.Now;
-                        log.L_User = frmMain.User.U_Code;
+                        log.L_User = frmMain.User.F_Account;
                         log.L_Module = "设备管理";
                         log.L_Button = "删除";
                         log.L_Key = E_Code;
@@ -294,7 +294,7 @@ namespace DesktopApp
 
                         SysLog log = new SysLog();
                         log.L_Date = DateTime.Now;
-                        log.L_User = frmMain.User.U_Code;
+                        log.L_User = frmMain.User.F_Account;
                         log.L_Module = "设备管理";
                         log.L_Button = "删除";
                         log.L_Key = E_Code;

@@ -41,13 +41,13 @@ namespace DesktopApp
             {
                 getDetail();
 
-                this.U_UpdateBy.Text = User.U_Code;
+                this.U_UpdateBy.Text = User.F_Account;
                 this.U_Code.ReadOnly = true;
             }
 
             if (OperationType == 1)
             {
-                U_CreateBy.Text = User.U_Code;
+                U_CreateBy.Text = User.F_Account;
             }
 
             loadDroplistData();
@@ -99,34 +99,34 @@ namespace DesktopApp
                 SysUserBLL userbll = new SysUserBLL();
                 SysUser user = userbll.getDetail(PrimaryKey);
 
-                U_Code.Text=user.U_Code;
-                U_Name.Text=user.U_Name;
-                U_Pwd.Text=user.U_Pwd ;
-                U_Sex.SelectedItem=user.U_Sex;
+                U_Code.Text=user.F_Account;
+                U_Name.Text=user.F_RealName;
+                U_Pwd.Text=user.F_Password ;
+                U_Sex.SelectedItem=user.F_Gender;
                 department = user.D_Code;
                 role = user.R_Code;
 
-                U_Phone.Text=user.U_Phone;
-                U_Email.Text=user.U_Email;
-                U_QQ.Text=user.U_QQ;
-                U_WeChat.Text=user.U_WeChat;
+                U_Phone.Text=user.F_Mobile;
+                U_Email.Text=user.F_Email;
+                U_QQ.Text=user.F_OICQ;
+                U_WeChat.Text=user.F_WeChat;
 
                 U_Address.Text=user.U_Address;
-                U_Remark.Text=user.U_Remark;
-                U_Active.Checked=user.U_Active;
+                U_Remark.Text=user.F_Description;
+                U_Active.Checked=user.F_EnabledMark;
 
-                U_CreateBy.Text = user.U_CreateBy;
-                U_UpdateBy.Text = user.U_UpdateBy;
+                U_CreateBy.Text = user.F_CreateUserName;
+                U_UpdateBy.Text = user.F_ModifyUserName;
 
-                if (user.U_CreateDate.HasValue)
-                    U_CreateDate.Value = user.U_CreateDate.Value;
+                if (user.F_CreateDate.HasValue)
+                    U_CreateDate.Value = user.F_CreateDate.Value;
                 else
                 {
                     U_CreateDate.Value = DateTime.Now;
                 }
 
-                if (user.U_UpdateDate.HasValue)
-                    U_UpdateDate.Value = user.U_UpdateDate.Value;
+                if (user.F_ModifyDate.HasValue)
+                    U_UpdateDate.Value = user.F_ModifyDate.Value;
                 else
                 {
                     U_UpdateDate.Value = DateTime.Now;
@@ -150,26 +150,26 @@ namespace DesktopApp
                 {
                     SysUser user = new SysUser();
 
-                    user.U_Code = U_Code.Text;
-                    user.U_Name = U_Name.Text;
-                    user.U_Pwd = U_Pwd.Text;
-                    user.U_Sex = U_Sex.Text;
+                    user.F_Account = U_Code.Text;
+                    user.F_RealName = U_Name.Text;
+                    user.F_Password = U_Pwd.Text;
+                    user.F_Gender = U_Sex.Text;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
                     user.R_Code = R_Code.SelectedValue.ToString();
-                    user.U_Phone = U_Phone.Text;
-                    user.U_Email = U_Email.Text;
-                    user.U_QQ = U_QQ.Text;
-                    user.U_WeChat = U_WeChat.Text;
+                    user.F_Mobile = U_Phone.Text;
+                    user.F_Email = U_Email.Text;
+                    user.F_OICQ = U_QQ.Text;
+                    user.F_WeChat = U_WeChat.Text;
 
                     user.U_Address = U_Address.Text;
-                    user.U_Remark = U_Remark.Text;
-                    user.U_Active = U_Active.Checked;
+                    user.F_Description = U_Remark.Text;
+                    user.F_EnabledMark = U_Active.Checked;
 
-                    user.U_CreateBy = U_CreateBy.Text;
-                    user.U_CreateDate = U_CreateDate.Value;
-                    user.U_UpdateBy = null;
-                    user.U_UpdateDate = null;
+                    user.F_CreateUserName = U_CreateBy.Text;
+                    user.F_CreateDate = U_CreateDate.Value;
+                    user.F_ModifyUserName = null;
+                    user.F_ModifyDate = null;
 
                     SysUserBLL userbll = new SysUserBLL();
                     if (userbll.Add(user) > 0)
@@ -201,27 +201,27 @@ namespace DesktopApp
                 {
                     SysUser user = new SysUser();
 
-                    user.U_Code = U_Code.Text;
-                    user.U_Name = U_Name.Text;
-                    user.U_Pwd = U_Pwd.Text;
-                    user.U_Sex = U_Sex.Text;
+                    user.F_Account = U_Code.Text;
+                    user.F_RealName = U_Name.Text;
+                    user.F_Password = U_Pwd.Text;
+                    user.F_Gender = U_Sex.Text;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
                     user.R_Code = R_Code.SelectedValue.ToString();
-                    user.U_Phone = U_Phone.Text;
-                    user.U_Email = U_Email.Text;
-                    user.U_QQ = U_QQ.Text;
-                    user.U_WeChat = U_WeChat.Text;
+                    user.F_Mobile = U_Phone.Text;
+                    user.F_Email = U_Email.Text;
+                    user.F_OICQ = U_QQ.Text;
+                    user.F_WeChat = U_WeChat.Text;
 
                     user.U_Address = U_Address.Text;
-                    user.U_Remark = U_Remark.Text;
-                    user.U_Active = U_Active.Checked;
+                    user.F_Description = U_Remark.Text;
+                    user.F_EnabledMark = U_Active.Checked;
 
-                    user.U_CreateBy = U_CreateBy.Text;
-                    user.U_CreateDate = U_CreateDate.Value;
+                    user.F_CreateUserName = U_CreateBy.Text;
+                    user.F_CreateDate = U_CreateDate.Value;
 
-                    user.U_UpdateBy = U_UpdateBy.Text;
-                    user.U_UpdateDate = U_UpdateDate.Value;
+                    user.F_ModifyUserName = U_UpdateBy.Text;
+                    user.F_ModifyDate = U_UpdateDate.Value;
 
                     SysUserBLL userbll = new SysUserBLL();
                     if (userbll.Edit(user) > 0)

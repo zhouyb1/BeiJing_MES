@@ -104,11 +104,11 @@ namespace DesktopApp
                 try
                 {
                     SysUserBLL sysUserBll = new SysUserBLL();
-                    SysUser User = sysUserBll.Login(this.txtUser.Text, txtPass.Text);
+                    SysUser userEntity = sysUserBll.Login(this.txtUser.Text, txtPass.Text);
 
-                    if (User == null)
+                    if (!userEntity.LoginOk)//µÇÂ¼Ê§°Ü
                     {
-                        untCommon.InfoMsg("ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+                        untCommon.ErrorMsg("µÇÂ¼Ê§°Ü:" + userEntity.LoginMsg);
                     }
                     else
                     {
@@ -138,7 +138,7 @@ namespace DesktopApp
                         }
 
                         frmMain main = new frmMain(this);
-                        main.User = User;
+                        main.User = userEntity;
 
                         main.Show();
                         this.Hide();

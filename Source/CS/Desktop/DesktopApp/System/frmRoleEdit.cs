@@ -39,13 +39,13 @@ namespace DesktopApp
             {
                 getDetail();
 
-                this.R_UpdateBy.Text = User.U_Code;
+                this.R_UpdateBy.Text = User.F_Account;
                 this.R_Code.ReadOnly = true;
             }
 
             if (OperationType == 1)
             {
-                R_CreateBy.Text = User.U_Code;
+                R_CreateBy.Text = User.F_Account;
             }
 
         }

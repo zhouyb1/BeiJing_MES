@@ -62,11 +62,9 @@ WHERE Sys_Module.M_Active = 1";
                 SqlHelper.ExecuteNonQuery(tran, CommandType.Text, string.Format(sql, role));
 
                 string insert = @"INSERT INTO [Sys_ModulePower]
-           ([R_Code]
-           ,[M_Code])
+           (ID,R_Code,M_Code)
      VALUES
-           ('{0}'
-           ,'{1}')";
+           (newid(),'{0}','{1}')";
 
                 foreach (var row in modules)
                 {

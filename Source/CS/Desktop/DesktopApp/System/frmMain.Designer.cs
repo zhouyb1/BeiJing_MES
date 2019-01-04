@@ -126,7 +126,7 @@
             // 
             this.cmsCompany.Image = global::DesktopApp.Properties.Resources.house;
             this.cmsCompany.Name = "cmsCompany";
-            this.cmsCompany.Size = new System.Drawing.Size(124, 22);
+            this.cmsCompany.Size = new System.Drawing.Size(152, 22);
             this.cmsCompany.Text = "公司管理";
             this.cmsCompany.Click += new System.EventHandler(this.cmsCompany_Click);
             // 
@@ -134,7 +134,7 @@
             // 
             this.cmsDepartment.Image = global::DesktopApp.Properties.Resources.disable_enable_demo_mode;
             this.cmsDepartment.Name = "cmsDepartment";
-            this.cmsDepartment.Size = new System.Drawing.Size(124, 22);
+            this.cmsDepartment.Size = new System.Drawing.Size(152, 22);
             this.cmsDepartment.Text = "部门管理";
             this.cmsDepartment.Click += new System.EventHandler(this.cmsDepartment_Click);
             // 
@@ -142,20 +142,20 @@
             // 
             this.cmsRole.Image = global::DesktopApp.Properties.Resources.attribution;
             this.cmsRole.Name = "cmsRole";
-            this.cmsRole.Size = new System.Drawing.Size(124, 22);
+            this.cmsRole.Size = new System.Drawing.Size(152, 22);
             this.cmsRole.Text = "角色管理";
             this.cmsRole.Click += new System.EventHandler(this.cmsRole_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(121, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
             // cmsArea
             // 
             this.cmsArea.Image = global::DesktopApp.Properties.Resources.legend;
             this.cmsArea.Name = "cmsArea";
-            this.cmsArea.Size = new System.Drawing.Size(124, 22);
+            this.cmsArea.Size = new System.Drawing.Size(152, 22);
             this.cmsArea.Text = "区域管理";
             this.cmsArea.Click += new System.EventHandler(this.cmsArea_Click);
             // 
@@ -163,7 +163,7 @@
             // 
             this.cmsDictionary.Image = global::DesktopApp.Properties.Resources.education;
             this.cmsDictionary.Name = "cmsDictionary";
-            this.cmsDictionary.Size = new System.Drawing.Size(124, 22);
+            this.cmsDictionary.Size = new System.Drawing.Size(152, 22);
             this.cmsDictionary.Text = "常规信息";
             this.cmsDictionary.Click += new System.EventHandler(this.cmsDictionary_Click);
             // 
@@ -180,7 +180,7 @@
             // 
             this.cmsEquipmentBox.Image = global::DesktopApp.Properties.Resources.camera_lens;
             this.cmsEquipmentBox.Name = "cmsEquipmentBox";
-            this.cmsEquipmentBox.Size = new System.Drawing.Size(124, 22);
+            this.cmsEquipmentBox.Size = new System.Drawing.Size(152, 22);
             this.cmsEquipmentBox.Text = "设备登记";
             this.cmsEquipmentBox.Click += new System.EventHandler(this.cmsEquipmentBox_Click);
             // 
@@ -188,7 +188,7 @@
             // 
             this.cmsHistory.Image = global::DesktopApp.Properties.Resources.book_addresses;
             this.cmsHistory.Name = "cmsHistory";
-            this.cmsHistory.Size = new System.Drawing.Size(124, 22);
+            this.cmsHistory.Size = new System.Drawing.Size(152, 22);
             this.cmsHistory.Text = "巡检记录";
             this.cmsHistory.Click += new System.EventHandler(this.cmsHistory_Click);
             // 
@@ -207,7 +207,7 @@
             // 
             this.cmsUser.Image = global::DesktopApp.Properties.Resources.group;
             this.cmsUser.Name = "cmsUser";
-            this.cmsUser.Size = new System.Drawing.Size(124, 22);
+            this.cmsUser.Size = new System.Drawing.Size(152, 22);
             this.cmsUser.Text = "用户管理";
             this.cmsUser.Click += new System.EventHandler(this.cmsUser_Click);
             // 
@@ -215,20 +215,20 @@
             // 
             this.cmsPower.Image = global::DesktopApp.Properties.Resources.wrench;
             this.cmsPower.Name = "cmsPower";
-            this.cmsPower.Size = new System.Drawing.Size(124, 22);
+            this.cmsPower.Size = new System.Drawing.Size(152, 22);
             this.cmsPower.Text = "权限管理";
             this.cmsPower.Click += new System.EventHandler(this.cmsPower_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(121, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // cmsPassword
             // 
             this.cmsPassword.Image = global::DesktopApp.Properties.Resources.lock1;
             this.cmsPassword.Name = "cmsPassword";
-            this.cmsPassword.Size = new System.Drawing.Size(124, 22);
+            this.cmsPassword.Size = new System.Drawing.Size(152, 22);
             this.cmsPassword.Text = "密码修改";
             this.cmsPassword.Click += new System.EventHandler(this.cmsPasswordEdit_Click);
             // 
@@ -269,7 +269,7 @@
             // 
             this.btnExit.Image = global::DesktopApp.Properties.Resources.cancel1;
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(124, 22);
+            this.btnExit.Size = new System.Drawing.Size(152, 22);
             this.btnExit.Text = "退出系统";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -277,7 +277,7 @@
             // 
             this.btnOutLogin.Image = global::DesktopApp.Properties.Resources.undo;
             this.btnOutLogin.Name = "btnOutLogin";
-            this.btnOutLogin.Size = new System.Drawing.Size(124, 22);
+            this.btnOutLogin.Size = new System.Drawing.Size(152, 22);
             this.btnOutLogin.Text = "注销系统";
             this.btnOutLogin.Click += new System.EventHandler(this.btnOutLogin_Click);
             // 
@@ -294,7 +294,7 @@
             // 
             this.cmsSkin.Image = global::DesktopApp.Properties.Resources.cog;
             this.cmsSkin.Name = "cmsSkin";
-            this.cmsSkin.Size = new System.Drawing.Size(124, 22);
+            this.cmsSkin.Size = new System.Drawing.Size(152, 22);
             this.cmsSkin.Text = "皮肤设置";
             this.cmsSkin.Click += new System.EventHandler(this.cmsSkinSet_Click);
             // 
@@ -302,7 +302,7 @@
             // 
             this.cmsAbout.Image = global::DesktopApp.Properties.Resources.information;
             this.cmsAbout.Name = "cmsAbout";
-            this.cmsAbout.Size = new System.Drawing.Size(124, 22);
+            this.cmsAbout.Size = new System.Drawing.Size(152, 22);
             this.cmsAbout.Text = "关于";
             this.cmsAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
@@ -466,7 +466,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "欢迎使用RFID巡检系统——天河区";
+            this.Text = "欢迎使用MES系统";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);

@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.SqlServer;
 using Model;
+using Tools;
 
 namespace Business
 {
     public class SysUserBLL
     {
-        /// <summary
+        /// <summary>
         /// 用户登录
         /// </summary>
         /// <param name="U_Code"></param>
@@ -21,31 +22,37 @@ namespace Business
         {
             try
             {
+                string sql = @"SELECT * FROM AM_Base_User WHERE F_Account=@F_Account";
                 SqlHelper db = new SqlHelper();
-                string sql = @"SELECT [U_Code],
-    [U_Name],
-    [U_Pwd],
-    [U_Sex],
-    [U_Code],
-    [R_Code],
-    [U_Phone],
-    [U_Email],
-    [U_QQ],
-    [U_WeChat],
-    [U_Address],
-    [U_Remark],
-    [U_Active],
-    [U_CreateBy],
-    [U_CreateDate],
-    [U_UpdateBy],
-    [U_UpdateDate]
-FROM [Sys_User]
-WHERE [U_Code] = '{0}'
-      AND [U_Pwd] = '{1}';";
-
-                SysUser user = db.ExecuteObject<SysUser>(string.Format(sql, U_Code, U_Pwd));
-                
-                return user;
+                var userEntity = db.ExecuteObject<SysUser>(sql, new SqlParameter("@F_Account", U_Code));
+                if (userEntity == null)
+                {
+                    userEntity = new SysUser()
+                    {
+                        LoginMsg = "账户不存在!",
+                        LoginOk = false
+                    };
+                    return userEntity;
+                }
+                userEntity.LoginOk = false;
+                if (userEntity.F_EnabledMark)
+                {
+                    U_Pwd = Md5Helper.Encrypt(U_Pwd, 32);
+                    string dbPassword = Md5Helper.Encrypt(DESEncrypt.Encrypt(U_Pwd.ToLower(), userEntity.F_Secretkey).ToLower(), 32).ToLower();
+                    if (dbPassword == userEntity.F_Password)
+                    {
+                        userEntity.LoginOk = true;
+                    }
+                    else
+                    {
+                        userEntity.LoginMsg = "密码和账户名不匹配!";
+                    }
+                }
+                else
+                {
+                    userEntity.LoginMsg = "账户被系统锁定,请联系管理员!";
+                }
+                return userEntity;
             }
             catch (Exception ex)
             {
@@ -61,12 +68,12 @@ WHERE [U_Code] = '{0}'
         {
             try
             {
-                string sql = @"UPDATE [Sys_User]
-   SET [U_Pwd] = '{0}'
- WHERE [U_Code]='{1}'";
-
+                string sql = @"UPDATE AM_Base_User SET F_Password=@F_Password WHERE F_Account=@F_Account";
                 SqlHelper db = new SqlHelper();
-                return db.ExecuteNonQuery(string.Format(sql, user.U_Pwd, user.U_Code));
+                var paras = new List<SqlParameter>();
+                paras.Add(new SqlParameter("@F_Account", user.F_Account));
+                paras.Add(new SqlParameter("@F_Password", user.F_Password));
+                return db.ExecuteNonQuery(sql, paras.ToArray());
             }
             catch (Exception)
             {
@@ -219,35 +226,35 @@ WHERE U_Code='{0}'", key);
 ";
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@U_Code", user.U_Code));
-                parameters.Add(new SqlParameter("@U_Name", user.U_Name));
-                parameters.Add(new SqlParameter("@U_Pwd", user.U_Pwd));
-                parameters.Add(new SqlParameter("@U_Sex", user.U_Sex));
+                parameters.Add(new SqlParameter("@U_Code", user.F_Account));
+                parameters.Add(new SqlParameter("@U_Name", user.F_RealName));
+                parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
+                parameters.Add(new SqlParameter("@U_Sex", user.F_Gender));
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
                 parameters.Add(new SqlParameter("@R_Code", user.R_Code));
-                parameters.Add(new SqlParameter("@U_Active", user.U_Active));
+                parameters.Add(new SqlParameter("@U_Active", user.F_EnabledMark));
 
-                if (!string.IsNullOrEmpty(user.U_Phone))
+                if (!string.IsNullOrEmpty(user.F_Mobile))
                 {
-                    parameters.Add(new SqlParameter("@U_Phone", user.U_Phone));
+                    parameters.Add(new SqlParameter("@U_Phone", user.F_Mobile));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_Phone", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_Email))
+                if (!string.IsNullOrEmpty(user.F_Email))
                 {
-                    parameters.Add(new SqlParameter("@U_Email", user.U_Email));
+                    parameters.Add(new SqlParameter("@U_Email", user.F_Email));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_Email", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_QQ))
+                if (!string.IsNullOrEmpty(user.F_OICQ))
                 {
-                    parameters.Add(new SqlParameter("@U_QQ", user.U_QQ));
+                    parameters.Add(new SqlParameter("@U_QQ", user.F_OICQ));
                 }
                 else
                 {
@@ -255,9 +262,9 @@ WHERE U_Code='{0}'", key);
                 }
 
 
-                if (!string.IsNullOrEmpty(user.U_WeChat))
+                if (!string.IsNullOrEmpty(user.F_WeChat))
                 {
-                    parameters.Add(new SqlParameter("@U_WeChat", user.U_WeChat));
+                    parameters.Add(new SqlParameter("@U_WeChat", user.F_WeChat));
                 }
                 else
                 {
@@ -274,9 +281,9 @@ WHERE U_Code='{0}'", key);
                     parameters.Add(new SqlParameter("@U_Address", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_Remark))
+                if (!string.IsNullOrEmpty(user.F_Description))
                 {
-                    parameters.Add(new SqlParameter("@U_Remark", user.U_Remark));
+                    parameters.Add(new SqlParameter("@U_Remark", user.F_Description));
                 }
                 else
                 {
@@ -285,18 +292,18 @@ WHERE U_Code='{0}'", key);
 
                
 
-                if (!string.IsNullOrEmpty(user.U_CreateBy))
+                if (!string.IsNullOrEmpty(user.F_CreateUserName))
                 {
-                    parameters.Add(new SqlParameter("@U_CreateBy", user.U_CreateBy));
+                    parameters.Add(new SqlParameter("@U_CreateBy", user.F_CreateUserName));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_CreateBy", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_UpdateBy))
+                if (!string.IsNullOrEmpty(user.F_ModifyUserName))
                 {
-                    parameters.Add(new SqlParameter("@U_UpdateBy", user.U_UpdateBy));
+                    parameters.Add(new SqlParameter("@U_UpdateBy", user.F_ModifyUserName));
                 }
                 else
                 {
@@ -304,18 +311,18 @@ WHERE U_Code='{0}'", key);
                 }
 
 
-                if (user.U_CreateDate.HasValue)
+                if (user.F_CreateDate.HasValue)
                 {
-                    parameters.Add(new SqlParameter("@U_CreateDate", user.U_CreateDate));
+                    parameters.Add(new SqlParameter("@U_CreateDate", user.F_CreateDate));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_CreateDate", DBNull.Value));
                 }
 
-                if (!user.U_UpdateDate.HasValue)
+                if (!user.F_ModifyDate.HasValue)
                 {
-                    parameters.Add(new SqlParameter("@U_UpdateDate", user.U_UpdateDate));
+                    parameters.Add(new SqlParameter("@U_UpdateDate", user.F_ModifyDate));
                 }
                 else
                 {
@@ -359,35 +366,35 @@ WHERE U_Code='{0}'", key);
  WHERE [U_Code] = @U_Code";
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
-                parameters.Add(new SqlParameter("@U_Code", user.U_Code));
-                parameters.Add(new SqlParameter("@U_Name", user.U_Name));
-                parameters.Add(new SqlParameter("@U_Pwd", user.U_Pwd));
-                parameters.Add(new SqlParameter("@U_Sex", user.U_Sex));
+                parameters.Add(new SqlParameter("@U_Code", user.F_Account));
+                parameters.Add(new SqlParameter("@U_Name", user.F_RealName));
+                parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
+                parameters.Add(new SqlParameter("@U_Sex", user.F_Gender));
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
                 parameters.Add(new SqlParameter("@R_Code", user.R_Code));
-                parameters.Add(new SqlParameter("@U_Active", user.U_Active));
+                parameters.Add(new SqlParameter("@U_Active", user.F_EnabledMark));
 
-                if (!string.IsNullOrEmpty(user.U_Phone))
+                if (!string.IsNullOrEmpty(user.F_Mobile))
                 {
-                    parameters.Add(new SqlParameter("@U_Phone", user.U_Phone));
+                    parameters.Add(new SqlParameter("@U_Phone", user.F_Mobile));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_Phone", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_Email))
+                if (!string.IsNullOrEmpty(user.F_Email))
                 {
-                    parameters.Add(new SqlParameter("@U_Email", user.U_Email));
+                    parameters.Add(new SqlParameter("@U_Email", user.F_Email));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_Email", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_QQ))
+                if (!string.IsNullOrEmpty(user.F_OICQ))
                 {
-                    parameters.Add(new SqlParameter("@U_QQ", user.U_QQ));
+                    parameters.Add(new SqlParameter("@U_QQ", user.F_OICQ));
                 }
                 else
                 {
@@ -395,9 +402,9 @@ WHERE U_Code='{0}'", key);
                 }
 
 
-                if (!string.IsNullOrEmpty(user.U_WeChat))
+                if (!string.IsNullOrEmpty(user.F_WeChat))
                 {
-                    parameters.Add(new SqlParameter("@U_WeChat", user.U_WeChat));
+                    parameters.Add(new SqlParameter("@U_WeChat", user.F_WeChat));
                 }
                 else
                 {
@@ -414,9 +421,9 @@ WHERE U_Code='{0}'", key);
                     parameters.Add(new SqlParameter("@U_Address", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_Remark))
+                if (!string.IsNullOrEmpty(user.F_Description))
                 {
-                    parameters.Add(new SqlParameter("@U_Remark", user.U_Remark));
+                    parameters.Add(new SqlParameter("@U_Remark", user.F_Description));
                 }
                 else
                 {
@@ -425,18 +432,18 @@ WHERE U_Code='{0}'", key);
 
 
 
-                if (!string.IsNullOrEmpty(user.U_CreateBy))
+                if (!string.IsNullOrEmpty(user.F_CreateUserName))
                 {
-                    parameters.Add(new SqlParameter("@U_CreateBy", user.U_CreateBy));
+                    parameters.Add(new SqlParameter("@U_CreateBy", user.F_CreateUserName));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_CreateBy", DBNull.Value));
                 }
 
-                if (!string.IsNullOrEmpty(user.U_UpdateBy))
+                if (!string.IsNullOrEmpty(user.F_ModifyUserName))
                 {
-                    parameters.Add(new SqlParameter("@U_UpdateBy", user.U_UpdateBy));
+                    parameters.Add(new SqlParameter("@U_UpdateBy", user.F_ModifyUserName));
                 }
                 else
                 {
@@ -444,18 +451,18 @@ WHERE U_Code='{0}'", key);
                 }
 
 
-                if (user.U_CreateDate.HasValue)
+                if (user.F_CreateDate.HasValue)
                 {
-                    parameters.Add(new SqlParameter("@U_CreateDate", user.U_CreateDate));
+                    parameters.Add(new SqlParameter("@U_CreateDate", user.F_CreateDate));
                 }
                 else
                 {
                     parameters.Add(new SqlParameter("@U_CreateDate", DBNull.Value));
                 }
 
-                if (!user.U_UpdateDate.HasValue)
+                if (!user.F_ModifyDate.HasValue)
                 {
-                    parameters.Add(new SqlParameter("@U_UpdateDate", user.U_UpdateDate));
+                    parameters.Add(new SqlParameter("@U_UpdateDate", user.F_ModifyDate));
                 }
                 else
                 {

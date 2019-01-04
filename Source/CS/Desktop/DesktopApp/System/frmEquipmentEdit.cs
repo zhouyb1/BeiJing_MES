@@ -45,7 +45,7 @@ namespace DesktopApp
             {
                 getDetail();
 
-                this.E_UpdateBy.Text = User.U_Code;
+                this.E_UpdateBy.Text = User.F_Account;
                 this.E_Code.ReadOnly = true;
                 this.E_City.Enabled = false;
                 this.E_MonitorNumber.ReadOnly = true;
@@ -53,7 +53,7 @@ namespace DesktopApp
 
             if (OperationType == 1)
             {
-                E_CreateBy.Text = User.U_Code;
+                E_CreateBy.Text = User.F_Account;
             }
 
         }
@@ -310,7 +310,7 @@ namespace DesktopApp
 
                             SysLog log = new SysLog();
                             log.L_Date = DateTime.Now;
-                            log.L_User = User.U_Code;
+                            log.L_User = User.F_Account;
                             log.L_Module = "设备管理";
                             log.L_Button = "添加";
                             log.L_Key = Equipment.E_Code;
@@ -326,7 +326,7 @@ namespace DesktopApp
 
                             SysLog log = new SysLog();
                             log.L_Date = DateTime.Now;
-                            log.L_User = User.U_Code;
+                            log.L_User = User.F_Account;
                             log.L_Module = "设备管理";
                             log.L_Button = "添加";
                             log.L_Key = Equipment.E_Code;
@@ -399,7 +399,7 @@ namespace DesktopApp
 
                     SysLog log = new SysLog();
                     log.L_Date = DateTime.Now;
-                    log.L_User = User.U_Code;
+                    log.L_User = User.F_Account;
                     log.L_Module = "设备管理";
                     log.L_Button = "修改";
                     log.L_Key = Equipment.E_Code;
@@ -415,7 +415,7 @@ namespace DesktopApp
 
                     SysLog log = new SysLog();
                     log.L_Date = DateTime.Now;
-                    log.L_User = User.U_Code;
+                    log.L_User = User.F_Account;
                     log.L_Module = "设备管理";
                     log.L_Button = "修改";
                     log.L_Key = Equipment.E_Code;

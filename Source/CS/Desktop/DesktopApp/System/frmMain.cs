@@ -45,7 +45,7 @@ namespace DesktopApp
         {
             loadModule();
             lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
-            lbUser.Text = "["+User.U_Code + "]" + User.U_Name;
+            lbUser.Text = "["+User.F_Account + "]" + User.F_RealName;
         }
 
 

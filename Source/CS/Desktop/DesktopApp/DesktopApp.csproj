@@ -57,7 +57,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="IrisSkin4, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=127be25a6db25e07, processorArchitecture=MSIL">
@@ -309,79 +309,6 @@
     <EmbeddedResource Include="System\PagerControl.resx">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="bin\Debug\Skins\Calmness.ssk" />
-    <None Include="bin\Debug\Skins\CalmnessColor1.ssk" />
-    <None Include="bin\Debug\Skins\CalmnessColor2.ssk" />
-    <None Include="bin\Debug\Skins\DeepCyan.ssk" />
-    <None Include="bin\Debug\Skins\DeepGreen.ssk" />
-    <None Include="bin\Debug\Skins\DeepOrange.ssk" />
-    <None Include="bin\Debug\Skins\DiamondBlue.ssk" />
-    <None Include="bin\Debug\Skins\DiamondGreen.ssk" />
-    <None Include="bin\Debug\Skins\DiamondOlive.ssk" />
-    <None Include="bin\Debug\Skins\DiamondPurple.ssk" />
-    <None Include="bin\Debug\Skins\DiamondRed.ssk" />
-    <None Include="bin\Debug\Skins\Eighteen.ssk" />
-    <None Include="bin\Debug\Skins\EighteenColor1.ssk" />
-    <None Include="bin\Debug\Skins\EighteenColor2.ssk" />
-    <None Include="bin\Debug\Skins\Emerald.ssk" />
-    <None Include="bin\Debug\Skins\EmeraldColor1.ssk" />
-    <None Include="bin\Debug\Skins\EmeraldColor2.ssk" />
-    <None Include="bin\Debug\Skins\EmeraldColor3.ssk" />
-    <None Include="bin\Debug\Skins\GlassBrown.ssk" />
-    <None Include="bin\Debug\Skins\GlassGreen.ssk" />
-    <None Include="bin\Debug\Skins\GlassOrange.ssk" />
-    <None Include="bin\Debug\Skins\Longhorn.ssk" />
-    <None Include="bin\Debug\Skins\MacOS.ssk" />
-    <None Include="bin\Debug\Skins\Midsummer.ssk" />
-    <None Include="bin\Debug\Skins\MidsummerColor1.ssk" />
-    <None Include="bin\Debug\Skins\MidsummerColor2.ssk" />
-    <None Include="bin\Debug\Skins\MidsummerColor3.ssk" />
-    <None Include="bin\Debug\Skins\mp10.ssk" />
-    <None Include="bin\Debug\Skins\mp10green.ssk" />
-    <None Include="bin\Debug\Skins\mp10maroon.ssk" />
-    <None Include="bin\Debug\Skins\mp10mulberry.ssk" />
-    <None Include="bin\Debug\Skins\mp10pink.ssk" />
-    <None Include="bin\Debug\Skins\mp10purple.ssk" />
-    <None Include="bin\Debug\Skins\MSN.ssk" />
-    <None Include="bin\Debug\Skins\office2007.ssk" />
-    <None Include="bin\Debug\Skins\OneBlue.ssk" />
-    <None Include="bin\Debug\Skins\OneCyan.ssk" />
-    <None Include="bin\Debug\Skins\OneGreen.ssk" />
-    <None Include="bin\Debug\Skins\OneOrange.ssk" />
-    <None Include="bin\Debug\Skins\Page.ssk" />
-    <None Include="bin\Debug\Skins\PageColor1.ssk" />
-    <None Include="bin\Debug\Skins\PageColor2.ssk" />
-    <None Include="bin\Debug\Skins\RealOne.ssk" />
-    <None Include="bin\Debug\Skins\Silver.ssk" />
-    <None Include="bin\Debug\Skins\SilverColor1.ssk" />
-    <None Include="bin\Debug\Skins\SilverColor2.ssk" />
-    <None Include="bin\Debug\Skins\SportsBlack.ssk" />
-    <None Include="bin\Debug\Skins\SportsBlue.ssk" />
-    <None Include="bin\Debug\Skins\SportsCyan.ssk" />
-    <None Include="bin\Debug\Skins\SportsGreen.ssk" />
-    <None Include="bin\Debug\Skins\SportsOrange.ssk" />
-    <None Include="bin\Debug\Skins\SteelBlack.ssk" />
-    <None Include="bin\Debug\Skins\SteelBlue.ssk" />
-    <None Include="bin\Debug\Skins\vista1.ssk" />
-    <None Include="bin\Debug\Skins\vista1_green.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color1.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color2.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color3.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color4.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color5.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color6.ssk" />
-    <None Include="bin\Debug\Skins\Vista2_color7.ssk" />
-    <None Include="bin\Debug\Skins\Warm.ssk" />
-    <None Include="bin\Debug\Skins\WarmColor1.ssk" />
-    <None Include="bin\Debug\Skins\WarmColor2.ssk" />
-    <None Include="bin\Debug\Skins\WarmColor3.ssk" />
-    <None Include="bin\Debug\Skins\Wave.ssk" />
-    <None Include="bin\Debug\Skins\WaveColor1.ssk" />
-    <None Include="bin\Debug\Skins\WaveColor2.ssk" />
-    <None Include="bin\Debug\Skins\XPBlue.ssk" />
-    <None Include="bin\Debug\Skins\XPGreen.ssk" />
-    <None Include="bin\Debug\Skins\XPOrange.ssk" />
-    <None Include="bin\Debug\Skins\XPSilver.ssk" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -412,7 +339,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\UHFReader86.dll" />
     <Content Include="Images\add.gif" />
     <Content Include="Images\archives.gif" />
     <Content Include="Images\attibutes.gif" />
@@ -545,6 +471,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\Skins\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
