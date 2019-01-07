@@ -114,6 +114,7 @@
     <Compile Include="MesDev\Mes_GoodsMap.cs" />
     <Compile Include="MesDev\Mes_MoveRecordMap.cs" />
     <Compile Include="MesDev\Mes_BomMap.cs" />
+    <Compile Include="MesDev\Mes_WeightRecordMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

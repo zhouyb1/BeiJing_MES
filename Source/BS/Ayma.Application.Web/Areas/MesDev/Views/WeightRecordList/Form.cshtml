@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "称重记录列表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">生产订单号</div>
+        <input id="P_OrderNo" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">称重类型</div>
+        <input id="W_Kind" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">时间</div>
+        <input id="W_Date" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">物料编码</div>
+        <input id="W_GoodsCode" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">物料名称</div>
+        <input id="W_GoodsName" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">单位</div>
+        <input id="W_Unit" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">数量</div>
+        <input id="W_Qty" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_WeightRecord" >
+        <div class="am-form-item-title">批次</div>
+        <input id="W_Batch" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/WeightRecordList/Form.js")

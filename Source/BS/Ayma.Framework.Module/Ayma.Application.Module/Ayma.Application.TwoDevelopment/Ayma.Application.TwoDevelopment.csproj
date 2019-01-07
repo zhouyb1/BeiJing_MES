@@ -85,6 +85,10 @@
     <Compile Include="MesDev\BomList\BomListService.cs" />
     <Compile Include="MesDev\BomList\BomListBLL.cs" />
     <Compile Include="MesDev\BomList\BomListIBLL.cs" />
+    <Compile Include="MesDev\WeightRecordList\Mes_WeightRecordEntity.cs" />
+    <Compile Include="MesDev\WeightRecordList\WeightRecordListService.cs" />
+    <Compile Include="MesDev\WeightRecordList\WeightRecordListBLL.cs" />
+    <Compile Include="MesDev\WeightRecordList\WeightRecordListIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
