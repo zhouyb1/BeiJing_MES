@@ -217,6 +217,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
     <Compile Include="Areas\MesDev\MesDevAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Report\data\SQLParam.ashx.cs">
       <DependentUpon>SQLParam.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\MesDev\Controllers\SupplyListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2113,6 +2115,10 @@
     <Content Include="Report\data\SQLDataParam.ashx" />
     <Content Include="Report\data\SQLParam.ashx" />
     <Content Include="Report\grf\1a.grf" />
+    <Content Include="Areas\MesDev\Views\SupplyList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyList\Index.js" />
+    <Content Include="Areas\MesDev\Views\SupplyList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyList\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where F_Name=@F_Name");
+                strSql.Append("select * from " + tables + " where S_Name=@F_Name");
                 var dp = new DynamicParameters(new { });
                 dp.Add("F_Name", names, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
@@ -51,7 +51,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
-        /// 名称重复验证
+        /// 单号重复验证
         /// </summary>
         /// <param name="tables">表名</param>
         /// <param name="orderNo">单号</param>
@@ -64,6 +64,39 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 strSql.Append("select * from " + tables + " where F_OrderNo=@OrderNo");
                 var dp = new DynamicParameters(new { });
                 dp.Add("OrderNo", orderNo, DbType.String);
+                int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
+                if (count > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="code">编码</param>
+        /// <returns></returns>
+        public bool IsCode(string tables, string code)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("select * from " + tables + " where S_Code=@Code");
+                var dp = new DynamicParameters(new { });
+                dp.Add("Code", code, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
                 if (count > 0)
                 {

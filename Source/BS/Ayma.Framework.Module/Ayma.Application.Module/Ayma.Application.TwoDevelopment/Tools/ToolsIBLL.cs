@@ -26,6 +26,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="orderNo">单号</param>
         /// <returns></returns>
         bool IsOrderNo(string tables, string orderNo);
+        /// <summary>
+        /// 编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="code">编码</param>
+        /// <returns></returns>
+        bool IsCode(string tables, string code);
         #endregion
 
     }

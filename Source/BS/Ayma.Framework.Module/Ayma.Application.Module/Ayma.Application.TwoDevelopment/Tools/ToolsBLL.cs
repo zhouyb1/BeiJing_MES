@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
-        /// 名称重复验证
+        /// 单号重复验证
         /// </summary>
         /// <param name="tables">表名</param>
         /// <param name="orderNo">单号</param>
@@ -50,6 +50,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.IsOrderNo(tables, orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="code">编码</param>
+        /// <returns></returns>
+        public bool IsCode(string tables, string code)
+        {
+            try
+            {
+                return toolsService.IsCode(tables, code);
             }
             catch (Exception ex)
             {
