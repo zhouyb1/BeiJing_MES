@@ -14,6 +14,52 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         #region 获取数据
         /// <summary>
+        /// 根据物料编码获取物料实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetGoodsEntity(string code)
+        {
+            var supplyList = toosIBLL.ByCodeGetGoodsEntity(code);
+            return Success(supplyList);
+        }
+        /// <summary>
+        /// 获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsList()
+        {
+            var supplyList = toosIBLL.GetGoodsList();
+            return Success(supplyList);
+        }
+        /// <summary>
+        /// 根据门编码获取门实体信息
+        /// </summary>
+        /// <param name="code">门编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetDoorEntity(string code)
+        {
+            var supplyList = toosIBLL.ByCodeGetDoorEntity(code);
+            return Success(supplyList);
+        }
+        /// <summary>
+        /// 获取门列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetDoorList()
+        {
+            var supplyList = toosIBLL.GetDoorList();
+            return Success(supplyList);
+        }
+        /// <summary>
         /// 根据主键获取供应商实体信息
         /// </summary>
         /// <param name="keyValue">主键</param>

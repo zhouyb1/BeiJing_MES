@@ -112,6 +112,8 @@
     <Compile Include="MesDev\Mes_DoorMap.cs" />
     <Compile Include="MesDev\Mes_StockMap.cs" />
     <Compile Include="MesDev\Mes_GoodsMap.cs" />
+    <Compile Include="MesDev\Mes_MoveRecordMap.cs" />
+    <Compile Include="MesDev\Mes_BomMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

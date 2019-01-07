@@ -14,6 +14,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
     {
         #region 获取数据
         /// <summary>
+        /// 根据物料编码获取物料实体信息
+        /// <param name="code">物料编码</param>
+        /// </summary>
+        /// <returns></returns>
+        Mes_GoodsEntity ByCodeGetGoodsEntity(string code);
+        /// <summary>
+        /// 获取物料
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> GetGoodsList();
+        /// <summary>
+        /// 根据门编码获取门实体信息
+        /// </summary>
+        /// <param name="code">门编码</param>
+        /// <returns></returns>
+        Mes_DoorEntity ByCodeGetDoorEntity(string code);
+        /// <summary>
+        /// 获取门列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_DoorEntity> GetDoorList();
+        /// <summary>
         /// 根据主键获取供应商实体信息
         /// </summary>
         /// <param name="keyValue">主键</param>

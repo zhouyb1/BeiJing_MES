@@ -19,6 +19,96 @@ namespace Ayma.Application.TwoDevelopment.Tools
 
         #region 获取数据
         /// <summary>
+        /// 根据物料编码获取物料实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        public Mes_GoodsEntity ByCodeGetGoodsEntity(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(x=>x.G_Code==code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_GoodsEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据门编码获取门实体信息
+        /// </summary>
+        /// <param name="code">门编码</param>
+        /// <returns></returns>
+        public Mes_DoorEntity ByCodeGetDoorEntity(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_DoorEntity>(x=>x.D_Code==code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取门列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_DoorEntity> GetDoorList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_DoorEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据主键获取供应商实体信息
         /// </summary>
         /// <param name="keyValue">主键</param>

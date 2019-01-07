@@ -77,6 +77,14 @@
     <Compile Include="MesDev\GoodsList\GoodsListService.cs" />
     <Compile Include="MesDev\GoodsList\GoodsListBLL.cs" />
     <Compile Include="MesDev\GoodsList\GoodsListIBLL.cs" />
+    <Compile Include="MesDev\MoveRecordList\Mes_MoveRecordEntity.cs" />
+    <Compile Include="MesDev\MoveRecordList\MoveRecordListService.cs" />
+    <Compile Include="MesDev\MoveRecordList\MoveRecordListBLL.cs" />
+    <Compile Include="MesDev\MoveRecordList\MoveRecordListIBLL.cs" />
+    <Compile Include="MesDev\BomList\Mes_BomEntity.cs" />
+    <Compile Include="MesDev\BomList\BomListService.cs" />
+    <Compile Include="MesDev\BomList\BomListBLL.cs" />
+    <Compile Include="MesDev\BomList\BomListIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

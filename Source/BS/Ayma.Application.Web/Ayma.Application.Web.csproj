@@ -247,6 +247,8 @@
     <Compile Include="Areas\MesDev\Controllers\DoorListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\StockListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\GoodsListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\MoveRecordListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\BomListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2134,6 +2136,14 @@
     <Content Include="Areas\MesDev\Views\GoodsList\Index.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\Form.js" />
+    <Content Include="Areas\MesDev\Views\MoveRecordList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\MoveRecordList\Index.js" />
+    <Content Include="Areas\MesDev\Views\MoveRecordList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\MoveRecordList\Form.js" />
+    <Content Include="Areas\MesDev\Views\BomList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\BomList\Index.js" />
+    <Content Include="Areas\MesDev\Views\BomList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\BomList\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
