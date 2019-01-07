@@ -16,30 +16,13 @@ namespace Ayma.Application.Web.Controllers
     {
         private ExcelImportIBLL excelImportIBLL = new ExcelImportBLL();
         private AnnexesFileIBLL annexesFileIBLL = new AnnexesFileBLL();
-        private ToolsIBLL toolsIBLL=new ToolsBLL();
-
+        private ToolsIBLL toosIBLL = new ToolsBLL();
         #region 导入
 
        
         #endregion
 
-        #region 通用方法
-        /// <summary>
-        /// 名称重复验证
-        /// </summary>
-        /// <param name="tables">表名</param>
-        /// <param name="names">名称</param>
-        /// <returns></returns>
-        [HttpGet]
-        public ActionResult IsName(string tables,string names)
-        {
-            var isOk=toolsIBLL.IsName(tables, names);
-            if (isOk)
-            {
-                return Fail("名称重复");
-            }
-            return Success(isOk);
-        }
+        #region 通用方法 获取数据
         #endregion
     }
 }

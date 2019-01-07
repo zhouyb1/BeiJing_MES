@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-07 09:31
- * 描  述：供应商列表
+ * 日  期：2019-01-07 11:04
+ * 描  述：门列表
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -22,8 +22,8 @@ var bootstrap = function ($, ayma) {
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增供应商',
-                    url: top.$.rootUrl + '/MesDev/SupplyList/Form',
+                    title: '新增门列表',
+                    url: top.$.rootUrl + '/MesDev/DoorList/Form',
                     width: 600,
                     height: 400,
                     maxmin: true,
@@ -38,8 +38,8 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑供应商',
-                        url: top.$.rootUrl + '/MesDev/SupplyList/Form?keyValue=' + keyValue,
+                        title: '编辑门列表',
+                        url: top.$.rootUrl + '/MesDev/DoorList/Form?keyValue=' + keyValue,
                         width: 600,
                         height: 400,
                         maxmin: true,
@@ -55,7 +55,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/SupplyList/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/DoorList/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -66,21 +66,16 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/SupplyList/GetPageList',
+                url: top.$.rootUrl + '/MesDev/DoorList/GetPageList',
                 headData: [
-                    { label: "供应商编码", name: "S_Code", width: 160, align: "left"},
-                    { label: "供应商名称", name: "S_Name", width: 160, align: "left"},
-                    { label: "资质期限", name: "S_EffectTime", width: 160, align: "left" },
-                    { label: "备注", name: "S_Remark", width: 160, align: "left"},
-                    { label: "添加人", name: "S_CreateBy", width: 160, align: "left"},
-                    { label: "添加时间", name: "S_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "S_UpdateBy", width: 160, align: "left"},
-                    { label: "修改时间", name: "S_UpdateDate", width: 160, align: "left"}
+                    { label: "门编码", name: "D_Code", width: 160, align: "left"},
+                    { label: "门名称", name: "D_Name", width: 160, align: "left"},
+                    { label: "备注", name: "D_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',
                 isPage: true,
-                sidx: "S_CreateBy",
-                sord: "DESC"
+                sidx: "D_Code",
+                sord:"ASC"
             });
             page.search();
         },

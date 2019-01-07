@@ -16,9 +16,10 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
         /// <returns></returns>
-        bool IsName(string tables, string names);
+        bool IsName(string tables,string field, string names);
         /// <summary>
         /// 单号重复验证
         /// </summary>
@@ -30,9 +31,10 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 编码重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
         /// <returns></returns>
-        bool IsCode(string tables, string code);
+        bool IsCode(string tables,string field,string code);
         #endregion
 
     }

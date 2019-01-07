@@ -109,6 +109,7 @@
     <Compile Include="CRM\CrmInvoiceMap.cs" />
     <Compile Include="CRM\CrmReceivableMap.cs" />
     <Compile Include="MesDev\Mes_SupplyMap.cs" />
+    <Compile Include="MesDev\Mes_DoorMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

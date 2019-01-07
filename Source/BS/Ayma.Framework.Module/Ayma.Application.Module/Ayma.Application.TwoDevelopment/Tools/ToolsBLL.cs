@@ -19,13 +19,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
         /// <returns></returns>
-        public bool IsName(string tables, string names)
+        public bool IsName(string tables,string field, string names)
         {
             try
             {
-                return toolsService.IsName(tables, names);
+                return toolsService.IsName(tables,field, names);
             }
             catch (Exception ex)
             {
@@ -67,13 +68,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 编码重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
         /// <returns></returns>
-        public bool IsCode(string tables, string code)
+        public bool IsCode(string tables,string field, string code)
         {
             try
             {
-                return toolsService.IsCode(tables, code);
+                return toolsService.IsCode(tables,field, code);
             }
             catch (Exception ex)
             {

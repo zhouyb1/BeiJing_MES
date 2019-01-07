@@ -21,14 +21,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
         /// <returns></returns>
-        public bool IsName(string tables, string names)
+        public bool IsName(string tables, string field, string names)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where S_Name=@F_Name");
+                strSql.Append("select * from " + tables + " where "+field+"=@F_Name");
                 var dp = new DynamicParameters(new { });
                 dp.Add("F_Name", names, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
@@ -87,14 +88,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 编码重复验证
         /// </summary>
         /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
         /// <returns></returns>
-        public bool IsCode(string tables, string code)
+        public bool IsCode(string tables,string field, string code)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where S_Code=@Code");
+                strSql.Append("select * from " + tables + " where "+field+"=@Code");
                 var dp = new DynamicParameters(new { });
                 dp.Add("Code", code, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;

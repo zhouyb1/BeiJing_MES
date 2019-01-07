@@ -65,6 +65,10 @@
     <Compile Include="MesDev\SupplyList\SupplyListService.cs" />
     <Compile Include="MesDev\SupplyList\SupplyListBLL.cs" />
     <Compile Include="MesDev\SupplyList\SupplyListIBLL.cs" />
+    <Compile Include="MesDev\DoorList\Mes_DoorEntity.cs" />
+    <Compile Include="MesDev\DoorList\DoorListService.cs" />
+    <Compile Include="MesDev\DoorList\DoorListBLL.cs" />
+    <Compile Include="MesDev\DoorList\DoorListIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
