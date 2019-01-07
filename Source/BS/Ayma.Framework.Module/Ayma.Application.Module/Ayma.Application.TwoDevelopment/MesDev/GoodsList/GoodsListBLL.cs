@@ -2,30 +2,54 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using Ayma.Application.TwoDevelopment.MesDev;
 
-namespace Ayma.Application.TwoDevelopment.Tools
+namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2018-10-09 10:32
-    /// 描 述：商家
+    /// 日 期：2019-01-07 13:55
+    /// 描 述：物料列表
     /// </summary>
-    public partial class ToolsBLL : ToolsIBLL
+    public partial class GoodsListBLL : GoodsListIBLL
     {
-        private  ToolsService toolsService=new ToolsService();
+        private GoodsListService goodsListService = new GoodsListService();
 
         #region 获取数据
+
         /// <summary>
-        /// 根据主键获取供应商实体信息
+        /// 获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return goodsListService.GetPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取Mes_Goods表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_SupplyEntity ByIdGetSupplyEntity(string keyValue)
+        public Mes_GoodsEntity GetMes_GoodsEntity(string keyValue)
         {
             try
             {
-                return toolsService.ByIdGetSupplyEntity(keyValue);
+                return goodsListService.GetMes_GoodsEntity(keyValue);
             }
             catch (Exception ex)
             {
@@ -39,103 +63,60 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-        /// <summary>
-        /// 获取供应商列表
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Mes_SupplyEntity> GetSupplyList()
-        {
-            try
-            {
-                return toolsService.GetSupplyList();
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-        /// <summary>
-        /// 名称重复验证
-        /// </summary>
-        /// <param name="tables">表名</param>
-        /// <param name="field">字段名</param>
-        /// <param name="names">名称</param>
-        /// <returns></returns>
-        public bool IsName(string tables,string field, string names)
-        {
-            try
-            {
-                return toolsService.IsName(tables,field, names);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-        /// <summary>
-        /// 单号重复验证
-        /// </summary>
-        /// <param name="tables">表名</param>
-        /// <param name="orderNo">单号</param>
-        /// <returns></returns>
-        public bool IsOrderNo(string tables, string orderNo)
-        {
-            try
-            {
-                return toolsService.IsOrderNo(tables, orderNo);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-        /// <summary>
-        /// 编码重复验证
-        /// </summary>
-        /// <param name="tables">表名</param>
-        /// <param name="field">字段名</param>
-        /// <param name="code">编码</param>
-        /// <returns></returns>
-        public bool IsCode(string tables,string field, string code)
-        {
-            try
-            {
-                return toolsService.IsCode(tables,field, code);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
+
         #endregion
-        
+
+        #region 提交数据
+
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteEntity(string keyValue)
+        {
+            try
+            {
+                goodsListService.DeleteEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 保存实体数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveEntity(string keyValue, Mes_GoodsEntity entity)
+        {
+            try
+            {
+                goodsListService.SaveEntity(keyValue, entity);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        #endregion
+
     }
 }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Ayma.Application.TwoDevelopment.MesDev;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -17,6 +18,51 @@ namespace Ayma.Application.TwoDevelopment.Tools
     {
 
         #region 获取数据
+        /// <summary>
+        /// 根据主键获取供应商实体信息
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_SupplyEntity ByIdGetSupplyEntity(string keyValue)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x=>x.ID==keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取供应商列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_SupplyEntity> GetSupplyList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_SupplyEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 名称重复验证
         /// </summary>

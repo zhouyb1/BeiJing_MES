@@ -1,6 +1,7 @@
 ﻿using Ayma.Util;
 using System.Collections.Generic;
 using System.Data;
+using Ayma.Application.TwoDevelopment.MesDev;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -12,6 +13,17 @@ namespace Ayma.Application.TwoDevelopment.Tools
     public interface ToolsIBLL
     {
         #region 获取数据
+        /// <summary>
+        /// 根据主键获取供应商实体信息
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        Mes_SupplyEntity ByIdGetSupplyEntity(string keyValue);
+        /// <summary>
+        /// 获取供应商列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_SupplyEntity> GetSupplyList();
         /// <summary>
         /// 名称重复验证
         /// </summary>

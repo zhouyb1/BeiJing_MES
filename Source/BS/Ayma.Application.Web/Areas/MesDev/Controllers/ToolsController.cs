@@ -14,6 +14,29 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         #region 获取数据
         /// <summary>
+        /// 根据主键获取供应商实体信息
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByIdGetSupplyEntity(string keyValue)
+        {
+            var supplyList = toosIBLL.ByIdGetSupplyEntity(keyValue);
+            return Success(supplyList);
+        }
+        /// <summary>
+        /// 获取供应商列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetSupplyList()
+        {
+            var supplyList = toosIBLL.GetSupplyList();
+            return Success(supplyList);
+        }
+        /// <summary>
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
