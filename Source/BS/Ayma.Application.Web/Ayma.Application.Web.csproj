@@ -245,6 +245,7 @@
     </Compile>
     <Compile Include="Areas\MesDev\Controllers\SupplyListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\DoorListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\StockListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2124,6 +2125,10 @@
     <Content Include="Areas\MesDev\Views\DoorList\Index.js" />
     <Content Include="Areas\MesDev\Views\DoorList\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\DoorList\Form.js" />
+    <Content Include="Areas\MesDev\Views\StockList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\StockList\Index.js" />
+    <Content Include="Areas\MesDev\Views\StockList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\StockList\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
