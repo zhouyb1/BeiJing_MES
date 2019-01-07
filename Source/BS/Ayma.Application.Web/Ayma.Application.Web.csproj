@@ -216,6 +216,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSchemeController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
     <Compile Include="Areas\MesDev\MesDevAreaRegistration.cs" />
@@ -461,6 +462,9 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\html5shiv.min.js" />
@@ -2073,6 +2077,9 @@
     <Content Include="Areas\AM_ReportModule\Views\GridReport\PrintReport.cshtml" />
     <Content Include="Areas\AM_ReportModule\Views\GridReport\TempIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\web.config" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

@@ -63,6 +63,8 @@
     <Compile Include="Form\FormSchemeInfoMap.cs" />
     <Compile Include="Form\FormSchemeMap.cs" />
     <Compile Include="IM\IMContentMap.cs" />
+    <Compile Include="MesDev\Mes_ProductOrderDetailMap.cs" />
+    <Compile Include="MesDev\Mes_ProductOrderHeadMap.cs" />
     <Compile Include="OA\ScheduleMap.cs" />
     <Compile Include="OA\NewsMap.cs" />
     <Compile Include="Organization\CompanyMap.cs" />

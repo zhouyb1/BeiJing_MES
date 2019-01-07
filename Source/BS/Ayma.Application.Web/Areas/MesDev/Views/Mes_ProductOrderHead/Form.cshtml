@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "查询生成清单";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">ID</div>
+        <input id="ID" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">生产订单号</div>
+        <input id="P_OrderNo" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">车站ID</div>
+        <input id="P_OrderStationID" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">订单时间</div>
+        <input id="P_OrderDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">车站名称</div>
+        <input id="P_OrderStationName" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">添加人</div>
+        <input id="P_CreateBy" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">添加时间</div>
+        <input id="P_CreateDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">修改人</div>
+        <input id="P_UpdateBy" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">修改时间</div>
+        <input id="P_UpdateDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">生产订单号</div>
+        <input id="P_OrderNo" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">ID</div>
+        <input id="ID" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">订单时间</div>
+        <input id="P_OrderDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">物料编码</div>
+        <input id="P_GoodsCode" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">物料名称</div>
+        <input id="P_GoodsName" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">单位</div>
+        <input id="P_Unit" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductOrderDetail" >
+        <div class="am-form-item-title">数量</div>
+        <input id="P_Qty" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_ProductOrderHead/Form.js")
