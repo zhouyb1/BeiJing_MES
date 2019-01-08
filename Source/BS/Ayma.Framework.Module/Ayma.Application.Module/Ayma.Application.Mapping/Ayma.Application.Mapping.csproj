@@ -117,6 +117,8 @@
     <Compile Include="MesDev\Mes_MoveRecordMap.cs" />
     <Compile Include="MesDev\Mes_BomMap.cs" />
     <Compile Include="MesDev\Mes_WeightRecordMap.cs" />
+    <Compile Include="MesDev\Mes_MaterInHeadMap.cs" />
+    <Compile Include="MesDev\Mes_MaterInDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

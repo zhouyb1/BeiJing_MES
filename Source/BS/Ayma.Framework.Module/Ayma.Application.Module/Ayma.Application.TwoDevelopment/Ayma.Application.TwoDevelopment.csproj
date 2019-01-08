@@ -94,6 +94,11 @@
     <Compile Include="MesDev\WeightRecordList\WeightRecordListService.cs" />
     <Compile Include="MesDev\WeightRecordList\WeightRecordListBLL.cs" />
     <Compile Include="MesDev\WeightRecordList\WeightRecordListIBLL.cs" />
+    <Compile Include="MesDev\MaterInBill\Mes_MaterInHeadEntity.cs" />
+    <Compile Include="MesDev\MaterInBill\Mes_MaterInDetailEntity.cs" />
+    <Compile Include="MesDev\MaterInBill\MaterInBillService.cs" />
+    <Compile Include="MesDev\MaterInBill\MaterInBillBLL.cs" />
+    <Compile Include="MesDev\MaterInBill\MaterInBillIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

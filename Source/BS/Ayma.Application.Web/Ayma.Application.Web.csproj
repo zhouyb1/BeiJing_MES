@@ -251,6 +251,7 @@
     <Compile Include="Areas\MesDev\Controllers\MoveRecordListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\BomListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\WeightRecordListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\MaterInBillController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -462,6 +463,7 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
@@ -2080,6 +2082,7 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2156,6 +2159,10 @@
     <Content Include="Areas\MesDev\Views\WeightRecordList\Index.js" />
     <Content Include="Areas\MesDev\Views\WeightRecordList\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\WeightRecordList\Form.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\Index.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
