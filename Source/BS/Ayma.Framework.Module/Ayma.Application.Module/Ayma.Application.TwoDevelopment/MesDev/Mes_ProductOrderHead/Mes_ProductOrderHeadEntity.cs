@@ -57,6 +57,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("P_UPDATEDATE")]
         public DateTime? P_UpdateDate { get; set; }
+
+
+        /// <summary>
+        /// 使用日期
+        /// </summary>
+        [Column("P_USEDATE")]
+        public DateTime? P_UseDate { get; set; }
+
+        /// <summary>
+        /// 生产单状态
+        /// </summary>
+        [Column("P_STATUS")]
+        public int P_Status { get; set; }
+
         #endregion
 
         #region 扩展操作

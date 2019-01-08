@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.Application.TwoDevelopment.MesDev.Mes_ProductOrderHead;
+using Ayma.Util;
 using System.Collections.Generic;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -48,5 +49,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         void SaveEntity(string keyValue, Mes_ProductOrderHeadEntity entity,Mes_ProductOrderDetailEntity mes_ProductOrderDetailEntity);
         #endregion
 
+
+                /// <summary>
+        /// 获取ERP的餐食计划清单
+        /// </summary>
+        /// <param name="useDate"></param>
+        List<ERPFoodListModel> GetErpFoodList(string useDate, string timeStamp);
+
+
+        /// <summary>
+        /// 保存ERP餐食清单
+        /// </summary>
+        /// <param name="foodEntity"></param>
+         void SaveERPFood(List<ERPFoodListModel> foodEntity, out int msgCode, out string msgInfo);
     }
 }

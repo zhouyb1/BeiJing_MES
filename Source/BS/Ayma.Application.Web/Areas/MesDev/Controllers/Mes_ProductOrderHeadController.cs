@@ -2,6 +2,9 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System;
+using Newtonsoft.Json.Linq;
+using Ayma.Application.TwoDevelopment.MesDev.Mes_ProductOrderHead;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -118,6 +121,52 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success("保存成功！");
         }
         #endregion
+
+
+        /// <summary>
+        /// 获取ERP餐料清单
+        /// </summary>
+        /// <param name="useDate"></param>
+        /// <param name="timeStamp"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+
+        public ActionResult GetErpFoodList(string useDate)
+        {
+            var timeStamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            var result= mes_ProductOrderHeadIBLL.GetErpFoodList( useDate,  timeStamp);
+            var jsonData = new
+            {
+                ERPFoodList = result
+            };
+            return Success(jsonData); 
+        }
+
+        /// <summary>
+        /// 保存ERP餐食清单
+        /// </summary>
+        /// <param name="ERPFoodListEntity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult SaveERPFoodList(string ERPFoodListEntity)
+        {
+           List< ERPFoodListModel> foodEntity=  ERPFoodListEntity.ToObject<List<ERPFoodListModel>>();
+
+            int msgCode=0;
+            string msgInfo=string.Empty;
+            mes_ProductOrderHeadIBLL.SaveERPFood(foodEntity, out msgCode, out msgInfo);
+            if (100 == msgCode)
+            {
+             return   Success("保存成功!");
+            }
+            else {
+              return  Fail(msgInfo);
+            }
+        
+        }
 
     }
 }

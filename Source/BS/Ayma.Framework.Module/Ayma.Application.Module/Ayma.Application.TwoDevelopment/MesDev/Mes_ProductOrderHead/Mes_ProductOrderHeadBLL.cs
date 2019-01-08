@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.Application.TwoDevelopment.MesDev.Mes_ProductOrderHead;
+using Ayma.Util;
 using System;
 using System.Collections.Generic;
 
@@ -140,6 +141,56 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         #endregion
+
+
+        /// <summary>
+        /// 获取ERP的餐食计划清单
+        /// </summary>
+        /// <param name="useDate"></param>
+        public List<ERPFoodListModel> GetErpFoodList(string useDate, string timeStamp)
+        {
+            try
+            {
+             return  mes_ProductOrderHeadService.GetErpFoodList( useDate,  timeStamp);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+
+                /// <summary>
+        /// 保存ERP餐食清单
+        /// </summary>
+        /// <param name="foodEntity"></param>
+        public void SaveERPFood(List<ERPFoodListModel> foodEntity, out int msgCode, out string msgInfo)
+        {
+            try
+            {
+                 mes_ProductOrderHeadService.SaveERPFood(foodEntity, out  msgCode, out msgInfo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+
 
     }
 }

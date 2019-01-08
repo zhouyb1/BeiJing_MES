@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using Ayma.Application.TwoDevelopment.MesDev.Mes_ProductOrderHead;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -38,6 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_CreateDate,
                 t.P_UpdateBy,
                 t.P_UpdateDate,
+                t.P_UseDate,
                 t1.P_GoodsCode,
                 t1.P_GoodsName,
                 t1.P_Unit,
@@ -53,7 +56,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.P_OrderDate >= @startTime AND t.P_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.P_UseDate >= @startTime AND t.P_UseDate <= @endTime ) ");
                 }
                 if (!queryParam["P_OrderDate"].IsEmpty())
                 {
@@ -201,6 +204,170 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         #endregion
+
+
+        /// <summary>
+        /// 获取ERP的餐食计划清单
+        /// </summary>
+        /// <param name="useDate"></param>
+        public List<ERPFoodListModel> GetErpFoodList(string useDate, string timeStamp)
+        {
+            var URL_ERPFood=  Config.GetValue("URL_ERPFood");
+            List<ERPFoodListModel> list = null;
+            try
+            {
+                URL_ERPFood = String.Format(URL_ERPFood + "?useDate={0}&timeStamp={1}", useDate, timeStamp);
+                var result = HttpMethods.DoGet(URL_ERPFood);
+               
+                JObject obj = JObject.Parse(result);
+                if ("200" == obj["msgCode"].ToString())
+                {
+                    list = new List<ERPFoodListModel>();
+                    var json=JObject.Parse( obj["data"].ToString());
+                    var company = json["company"].ToString();
+                    var com_name = json["com_name"].ToString();
+                    var stock = json["stock"].ToString();
+                    var name = json["name"].ToString();
+                    var wj = json["wj"].ToString();
+                    var t_date = json["t_date"].ToString();
+                    var use_date = json["use_date"].ToString();
+                    var data = JArray.Parse(json["bodyList"].ToString());
+                    foreach(var item in data)
+                    {
+                        ERPFoodListModel food = new ERPFoodListModel();
+                        food.pratno = item["pratno"].ToString();
+                        food.pname = item["pname"].ToString();
+                        food.qty = item["qty"].ToString();
+                        food.company = company;
+                        food.com_name = com_name;
+                        food.stock = stock;
+                        food.name = name;
+                        food.wj = wj;
+                        food.t_date = t_date;
+                        food.use_date = use_date;
+                        list.Add(food);
+                    }
+                }
+
+                return list;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 生产订单状态
+        /// </summary>
+        public enum  ProductState
+        { 
+            /// <summary>
+            /// 待生产
+            /// </summary>
+            ProductTn=0,
+            /// <summary>
+            /// 生产中
+            /// </summary>
+            ProductIn = 1,
+
+            /// <summary>
+            /// 生产完成
+            /// </summary>
+            ProductOk = 2,
+
+            /// <summary>
+            /// 生产完成已入库
+            /// </summary>
+            ProductFinish = 3,
+
+        };
+
+        /// <summary>
+        /// 保存ERP餐食清单
+        /// </summary>
+        /// <param name="foodEntity"></param>
+        public void SaveERPFood(List<ERPFoodListModel> foodEntity,out int msgCode,out string msgInfo)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                var dp = new DynamicParameters(new { });
+                sb.Append(" select * from dbo.Mes_ProductOrderHead ");
+                sb.Append(" where CONVERT(varchar(10),P_UseDate,23)=@P_UseDate ");
+                dp.Add("@P_UseDate",foodEntity[0].use_date);
+                //根据生产日期判断生产清单是否已经存在
+                var headEntity = this.BaseRepository().FindEntity<Mes_ProductOrderHeadEntity>(sb.ToString(), dp);
+                if(headEntity==null)
+                {
+                    sb.Clear();
+                    sb.Append(" INSERT INTO MES_PRODUCTORDERHEAD(ID, P_ORDERNO, P_ORDERDATE, P_ORDERSTATIONID, P_ORDERSTATIONNAME, P_CREATEBY, P_CREATEDATE, P_USEDATE, P_STATUS) ");
+                    sb.Append(" VALUES(@ID, @P_ORDERNO, @P_ORDERDATE, @P_ORDERSTATIONID, @P_ORDERSTATIONNAME, @P_CREATEBY, @P_CREATEDATE,@P_USEDATE, @P_STATUS) ");
+
+                    //生成订单号
+                    Random rm=new Random();
+                    var P_ORDERNO=DateTime.Now.ToString("yyyyMMddHHmmss")+rm.Next(1000,9999);
+               
+                    dp.Add("@ID",Guid.NewGuid().ToString() );
+                    dp.Add("@P_ORDERNO", P_ORDERNO);
+                    dp.Add("@P_ORDERDATE", foodEntity[0].t_date);
+                    dp.Add("@P_ORDERSTATIONID", foodEntity[0].stock);
+                    dp.Add("@P_ORDERSTATIONNAME", foodEntity[0].name);
+                    var userInfo = LoginUserInfo.Get();//获取登录用户
+                    dp.Add("@P_CREATEBY", userInfo.realName);
+                    dp.Add("@P_CREATEDATE", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                    dp.Add("@P_USEDATE", foodEntity[0].use_date);
+                    dp.Add("@P_STATUS", ProductState.ProductTn);
+                    db.ExecuteBySql(sb.ToString(), dp);
+                    sb.Clear();
+                    sb.Append(" INSERT INTO MES_PRODUCTORDERDETAIL(ID, P_ORDERNO, P_ORDERDATE, P_GOODSCODE, P_GOODSNAME, P_QTY) ");
+                    sb.Append(" VALUES(@ID, @P_ORDERNO, @P_ORDERDATE, @P_GOODSCODE, @P_GOODSNAME, @P_QTY) ");
+                
+                    foreach (var item in foodEntity)
+                    {
+                        var dp2 = new DynamicParameters(new { });
+                        dp2.Add("@ID", Guid.NewGuid().ToString());
+                        dp2.Add("@P_ORDERNO", P_ORDERNO);
+                        dp2.Add("@P_ORDERDATE", item.t_date);
+                        dp2.Add("@P_GOODSCODE", item.pratno);
+                        dp2.Add("@P_GOODSNAME", item.pname);
+                        dp2.Add("@P_QTY", item.qty);
+                        db.ExecuteBySql(sb.ToString(),dp2);
+
+                    }
+                    db.Commit();
+                    msgCode = 100;
+                    msgInfo = "保存成功";
+                }else{
+                    msgCode = 101;
+                    msgInfo = "已经存在生产清单";
+                }
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                msgCode = 101;
+                msgInfo = "保存异常";
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        
+        }
 
     }
 }

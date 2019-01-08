@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
             // 时间搜索框
             $('#datesearch').amdate({
                 dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00','d',3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
                     { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
                     { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
                     { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
@@ -51,10 +51,10 @@ var bootstrap = function ($, ayma) {
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增',
+                    title: '查询ERP餐料清单',
                     url: top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/FoodList',
-                    width: 600,
-                    height: 400,
+                    width: 900,
+                    height: 600,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -98,23 +98,43 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/GetPageList',
                 headData: [
                     { label: "ID", name: "ID", width: 160, align: "left", hidden:true},
-                    { label: "生产单号", name: "P_OrderNo", width: 160, align: "left"},
+                    { label: "生产单号", name: "P_OrderNo", width: 160, align: "left" },
+                    {
+                        label: "使用日期", name: "P_UseDate", width: 100, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+
+                    },
                     { label: "车站ID", name: "P_OrderStationID", width: 160, align: "left", hidden: true },
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
+                    {
+                        label: "订单时间", name: "P_OrderDate", width: 100, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                            
+                    },
                     { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left" },
                     { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
                     { label: "单位", name: "P_Unit", width: 160, align: "left",hidden:true },
-                    { label: "数量", name: "P_Qty", width: 160, align: "left" },
-                    { label: "车站名称", name: "P_OrderStationName", width: 160, align: "left"},
+                    { label: "数量", name: "P_Qty", width: 100, align: "left", isStatistics: true, },
+                    {
+                        label: "状态", name: "P_Status", width: 160, align: "left",
+                        //formatter: function (cellvalue, options, rowObject) {
+                        //    return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        //}
+                    },
+                    { label: "车站名称", name: "P_OrderStationName", width: 100, align: "left"},
                     { label: "添加人", name: "P_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "P_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "P_UpdateBy", width: 160, align: "left"},
+                    { label: "修改人", name: "P_UpdateBy", width: 100, align: "left"},
                     { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left"},
 
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                isStatistics: true,
             });
         },
         search: function (param) {
