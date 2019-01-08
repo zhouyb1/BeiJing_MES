@@ -121,6 +121,7 @@
     <Compile Include="MesDev\Mes_MaterInDetailMap.cs" />
     <Compile Include="MesDev\Mes_InventoryMap.cs" />
     <Compile Include="MesDev\Mes_InventoryLSMap.cs" />
+    <Compile Include="MesDev\T_DocumentsMakeLogMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

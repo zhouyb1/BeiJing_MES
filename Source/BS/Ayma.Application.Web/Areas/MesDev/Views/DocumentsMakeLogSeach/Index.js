@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-08 17:27
- * 描  述：历史库存查询
+ * 日  期：2019-01-08 17:51
+ * 描  述：操作记录查询
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -47,23 +47,23 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
+            
         },
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/InventoryLSSeach/GetPageList',
+                url: top.$.rootUrl + '/MesDev/DocumentsMakeLogSeach/GetPageList',
                 headData: [
-                    { label: "库存时间", name: "I_Date", width: 160, align: "left"},
-                    { label: "仓库编码", name: "I_StockCode", width: 160, align: "left"},
-                    { label: "仓库名称", name: "I_StockName", width: 160, align: "left"},
-                    { label: "物料编码", name: "I_GoodsCode", width: 160, align: "left"},
-                    { label: "物料名称", name: "I_GoodsName", width: 160, align: "left"},
-                    { label: "单位", name: "I_Unit", width: 160, align: "left"},
-                    { label: "旧的库存数量", name: "I_OldQty", width: 160, align: "left"},
-                    { label: "数量", name: "I_Qty", width: 160, align: "left"},
-                    { label: "批次", name: "I_Batch", width: 160, align: "left"},
+                    { label: "仓库编号", name: "F_StockCode", width: 160, align: "left"},
+                    { label: "仓库名称", name: "F_StockName", width: 160, align: "left"},
+                    { label: "单据类型", name: "F_BillType", width: 160, align: "left"},
+                    { label: "操作类型", name: "F_OperationType", width: 160, align: "left"},
+                    { label: "操作单号", name: "F_OrderNo", width: 160, align: "left"},
+                    { label: "备注", name: "F_Remark", width: 160, align: "left"},
+                    { label: "创建时间", name: "F_CreateDate", width: 160, align: "left"},
+                    { label: "创建人", name: "F_CreateUserName", width: 160, align: "left"},
                 ],
-                mainId:'ID',
+                mainId:'F_Id',
                 reloadSelected: true,
                 isPage: true
             });

@@ -254,6 +254,7 @@
     <Compile Include="Areas\MesDev\Controllers\MaterInBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventorySeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventoryLSSeachController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\DocumentsMakeLogSeachController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2173,6 +2174,10 @@
     <Content Include="Areas\MesDev\Views\InventoryLSSeach\Index.js" />
     <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.js" />
+    <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Index.js" />
+    <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -107,6 +107,10 @@
     <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachService.cs" />
     <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachBLL.cs" />
     <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachIBLL.cs" />
+    <Compile Include="MesDev\DocumentsMakeLogSeach\T_DocumentsMakeLogEntity.cs" />
+    <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachService.cs" />
+    <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachBLL.cs" />
+    <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

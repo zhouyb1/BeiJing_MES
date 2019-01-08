@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "操作记录查询";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">仓库编号</div>
+        <input id="F_StockCode" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">仓库名称</div>
+        <input id="F_StockName" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">单据类型</div>
+        <input id="F_BillType" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">操作类型</div>
+        <input id="F_OperationType" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">操作单号</div>
+        <input id="F_OrderNo" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">备注</div>
+        <input id="F_Remark" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">创建时间</div>
+        <input id="F_CreateDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="T_DocumentsMakeLog" >
+        <div class="am-form-item-title">创建人</div>
+        <input id="F_CreateUserName" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/DocumentsMakeLogSeach/Form.js")
