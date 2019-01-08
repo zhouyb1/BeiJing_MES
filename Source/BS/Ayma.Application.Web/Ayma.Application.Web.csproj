@@ -252,6 +252,8 @@
     <Compile Include="Areas\MesDev\Controllers\BomListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\WeightRecordListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\MaterInBillController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\InventorySeachController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\InventoryLSSeachController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2163,6 +2165,14 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\Index.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\Form.js" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\Index.js" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\Form.js" />
+    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Index.js" />
+    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

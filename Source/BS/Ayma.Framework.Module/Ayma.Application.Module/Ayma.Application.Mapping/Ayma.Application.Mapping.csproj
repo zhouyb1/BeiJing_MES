@@ -119,6 +119,8 @@
     <Compile Include="MesDev\Mes_WeightRecordMap.cs" />
     <Compile Include="MesDev\Mes_MaterInHeadMap.cs" />
     <Compile Include="MesDev\Mes_MaterInDetailMap.cs" />
+    <Compile Include="MesDev\Mes_InventoryMap.cs" />
+    <Compile Include="MesDev\Mes_InventoryLSMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
