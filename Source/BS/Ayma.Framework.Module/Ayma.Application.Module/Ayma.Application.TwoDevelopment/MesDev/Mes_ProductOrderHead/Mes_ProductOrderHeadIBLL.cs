@@ -62,5 +62,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="foodEntity"></param>
          void SaveERPFood(List<ERPFoodListModel> foodEntity, out int msgCode, out string msgInfo);
+
+
+
     }
 }

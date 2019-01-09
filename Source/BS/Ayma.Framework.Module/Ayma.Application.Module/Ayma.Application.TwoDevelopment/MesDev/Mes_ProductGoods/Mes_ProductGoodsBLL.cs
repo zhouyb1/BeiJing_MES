@@ -7,12 +7,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 17:54
-    /// 描 述：查询生成清单
+    /// 日 期：2019-01-09 15:20
+    /// 描 述：同步ERP成品商品资料
     /// </summary>
-    public partial class Mes_ProductOrderHeadBLL : Mes_ProductOrderHeadIBLL
+    public partial class Mes_ProductGoodsBLL : Mes_ProductGoodsIBLL
     {
-        private Mes_ProductOrderHeadService mes_ProductOrderHeadService = new Mes_ProductOrderHeadService();
+        private Mes_ProductGoodsService mes_ProductGoodsService = new Mes_ProductGoodsService();
 
         #region 获取数据
 
@@ -21,11 +21,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ProductOrderHeadEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_ProductGoodsEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
-                return mes_ProductOrderHeadService.GetPageList(pagination, queryJson);
+                return mes_ProductGoodsService.GetPageList(pagination, queryJson);
             }
             catch (Exception ex)
             {
@@ -41,39 +41,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_ProductOrderHead表实体数据
+        /// 获取Mes_ProductGoods表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_ProductOrderHeadEntity GetMes_ProductOrderHeadEntity(string keyValue)
+        public Mes_ProductGoodsEntity GetMes_ProductGoodsEntity(string keyValue)
         {
             try
             {
-                return mes_ProductOrderHeadService.GetMes_ProductOrderHeadEntity(keyValue);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 获取Mes_ProductOrderDetail表实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public Mes_ProductOrderDetailEntity GetMes_ProductOrderDetailEntity(string keyValue)
-        {
-            try
-            {
-                return mes_ProductOrderHeadService.GetMes_ProductOrderDetailEntity(keyValue);
+                return mes_ProductGoodsService.GetMes_ProductGoodsEntity(keyValue);
             }
             catch (Exception ex)
             {
@@ -101,7 +77,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                mes_ProductOrderHeadService.DeleteEntity(keyValue);
+                mes_ProductGoodsService.DeleteEntity(keyValue);
             }
             catch (Exception ex)
             {
@@ -121,11 +97,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_ProductOrderHeadEntity entity,Mes_ProductOrderDetailEntity mes_ProductOrderDetailEntity)
+        public void SaveEntity(string keyValue, Mes_ProductGoodsEntity entity)
         {
             try
             {
-                mes_ProductOrderHeadService.SaveEntity(keyValue, entity,mes_ProductOrderDetailEntity);
+                mes_ProductGoodsService.SaveEntity(keyValue, entity);
             }
             catch (Exception ex)
             {
@@ -143,15 +119,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #endregion
 
 
-        /// <summary>
-        /// 获取ERP的餐食计划清单
+         /// <summary>
+        /// 获取ERP的商品资料
         /// </summary>
-        /// <param name="useDate"></param>
-        public List<ERPFoodListModel> GetErpFoodList(string useDate, string timeStamp)
+        public List<ERPTgoodsListModel> GetErpTgoodsList()
         {
             try
             {
-             return  mes_ProductOrderHeadService.GetErpFoodList( useDate,  timeStamp);
+                return mes_ProductGoodsService.GetErpTgoodsList();
             }
             catch (Exception ex)
             {
@@ -163,33 +138,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
+                
             }
         }
-
-
-                /// <summary>
-        /// 保存ERP餐食清单
-        /// </summary>
-        /// <param name="foodEntity"></param>
-        public void SaveERPFood(List<ERPFoodListModel> foodEntity, out int msgCode, out string msgInfo)
-        {
-            try
-            {
-                 mes_ProductOrderHeadService.SaveERPFood(foodEntity, out  msgCode, out msgInfo);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-
 
     }
 }

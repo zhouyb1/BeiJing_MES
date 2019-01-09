@@ -62,15 +62,14 @@ var bootstrap = function ($, ayma) {
 
             $("#am_add").on("click", function () {
                 keyValue = $("#F_OrderDate").val();
-                page.initData();
-
+                page.initData(keyValue);
             });
         },
         initData: function () {
             if (!!keyValue) {
                 $.SetForm(top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/GetErpFoodList?useDate=' + keyValue, function (data) {
-                    if (data.ERPFoodList != null)
-                    {
+                    //if (data.ERPFoodList != null)
+                    //{
                         for (var id in data) {
                             $('#ERPFoodList').jfGridSet('refreshdata', { rowdatas: data[id] });
                             //if (!!data[id].length && data[id].length > 0) {
@@ -81,7 +80,7 @@ var bootstrap = function ($, ayma) {
                             
                             //}
                         }
-                    }
+                    //}
                 });
             }
         },
@@ -97,11 +96,13 @@ var bootstrap = function ($, ayma) {
             return false;
         }
         var postData = {};
-
         var foodData = JSON.stringify($('#ERPFoodList').jfGridGet('rowdatas'));
-        console.log("ERPFoodList:" + JSON.stringify(ERPFoodList));
-
         //var entityPost = { F_ReviewMark: entityGoodsPriceDrive.F_ReviewMark, F_ReviewRemark: entityGoodsPriceDrive.F_ReviewRemark, F_ReviewFileId: entityGoodsPriceDrive.F_ReviewFileId };
+
+        if (foodData == "[]") {
+            ayma.alert.error("没有任何餐食计划清单");
+            return;
+        }
         postData.ERPFoodListEntity = foodData;
 
         $.SaveForm(top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/SaveERPFoodList', postData, function (res) {

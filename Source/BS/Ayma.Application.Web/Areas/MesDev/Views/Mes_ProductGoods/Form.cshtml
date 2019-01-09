@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "同步ERP成品商品资料";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">ID</div>
+        <input id="ID" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">商品编码</div>
+        <input id="G_Code" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">商品名称</div>
+        <input id="G_Name" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">保质时间</div>
+        <input id="G_Period" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">价格</div>
+        <input id="G_Price" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">单位</div>
+        <input id="G_Unit" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">添加人</div>
+        <input id="G_CreateBy" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">添加时间</div>
+        <input id="G_CreateDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">修改人</div>
+        <input id="G_UpdateBy" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">修改时间</div>
+        <input id="G_UpdateDate" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_ProductGoods" >
+        <div class="am-form-item-title">备注</div>
+        <input id="G_Remark" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_ProductGoods/Form.js")

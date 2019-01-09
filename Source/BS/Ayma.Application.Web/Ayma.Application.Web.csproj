@@ -255,6 +255,7 @@
     <Compile Include="Areas\MesDev\Controllers\InventorySeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventoryLSSeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\DocumentsMakeLogSeachController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_ProductGoodsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -467,6 +468,7 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
@@ -2086,6 +2088,7 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2178,6 +2181,10 @@
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Index.js" />
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
