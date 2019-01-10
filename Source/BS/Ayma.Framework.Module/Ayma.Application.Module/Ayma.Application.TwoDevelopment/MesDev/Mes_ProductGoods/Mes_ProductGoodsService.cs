@@ -187,5 +187,54 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
 
+
+        /// <summary>
+        /// 保存ERP同步过来的商品信息
+        /// </summary>
+        /// <param name="ERPTgoodsListEntity"></param>
+        public void SaveErpTgoods(List<ERPTgoodsListModel> ERPTgoodsListEntity)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(" SELECT * FROM DBO.MES_PRODUCTGOODS");
+                sb.Append(" WHERE G_CODE=@G_CODE ");
+                 var userInfo = LoginUserInfo.Get();//获取登录用户
+                foreach(var item in ERPTgoodsListEntity)
+                {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@G_CODE",item.partno);
+                    var table= this.BaseRepository().FindTable(sb.ToString(),dp);
+                    if(table.Rows.Count<1)
+                    {
+                        Mes_ProductGoodsEntity product = new Mes_ProductGoodsEntity();
+                        product.ID = Guid.NewGuid().ToString();
+                        product.G_Code = item.partno;
+                        product.G_Name = item.pname;
+                        product.G_Price = item.price;
+                        product.G_Unit = item.pack_uom;
+                        product.G_CreateBy = userInfo.realName;
+                        product.G_CreateDate = DateTime.Now;
+                        this.BaseRepository().Insert<Mes_ProductGoodsEntity>(product);
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+                
+            }
+
+        
+        }
+
     }
 }

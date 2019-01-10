@@ -142,5 +142,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 保存ERP同步过来的商品信息
+        /// </summary>
+        /// <param name="ERPTgoodsListEntity"></param>
+        public void SaveErpTgoods(List<ERPTgoodsListModel> ERPTgoodsListEntity)
+        {
+            try
+            {
+                mes_ProductGoodsService.SaveErpTgoods(ERPTgoodsListEntity);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+                
+            }
+        }
+
+
     }
 }

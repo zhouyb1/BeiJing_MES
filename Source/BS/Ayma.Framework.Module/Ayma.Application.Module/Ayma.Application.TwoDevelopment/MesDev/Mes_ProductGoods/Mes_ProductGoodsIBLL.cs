@@ -49,5 +49,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         List<ERPTgoodsListModel> GetErpTgoodsList();
 
+        /// <summary>
+        /// 保存ERP同步过来的商品信息
+        /// </summary>
+        /// <param name="ERPTgoodsListEntity"></param>
+        void SaveErpTgoods(List<ERPTgoodsListModel> ERPTgoodsListEntity);
+        
+
     }
 }

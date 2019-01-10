@@ -129,5 +129,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         }
 
+
+        /// <summary>
+        /// 保存ERP商品资料
+        /// </summary>
+        /// <param name="ERPFoodListEntity"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult SaveERPTgoodsList(string ERPTgoodsListEntity)
+        {
+            List<ERPTgoodsListModel> tgoodsEntity = ERPTgoodsListEntity.ToObject<List<ERPTgoodsListModel>>();
+            mes_ProductGoodsIBLL.SaveErpTgoods(tgoodsEntity);
+            return Success("保存成功!");
+        }
+
     }
 }

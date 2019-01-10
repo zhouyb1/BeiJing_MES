@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ayma.Application.TwoDevelopment.MesDev.Mes_ProductOrderHead
+namespace Ayma.Application.TwoDevelopment.MesDev
 {
    public class ERPTgoodsListModel
     {

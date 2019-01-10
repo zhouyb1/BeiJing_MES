@@ -21,7 +21,7 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '查询ERP商品资料',
                     url: top.$.rootUrl + '/MesDev/Mes_ProductGoods/ERPTgoodsList',
-                    width: 800,
+                    width: 850,
                     height: 600,
                     maxmin: true,
                     callBack: function (id) {
@@ -65,21 +65,23 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/Mes_ProductGoods/GetPageList',
                 headData: [
-                    { label: "ID", name: "ID", width: 160, align: "left"},
-                    { label: "商品编码", name: "G_Code", width: 160, align: "left"},
+                    { label: "ID", name: "ID", width: 160, align: "left", hidden:true},
+                    { label: "商品编码", name: "G_Code", width: 100, align: "left"},
                     { label: "商品名称", name: "G_Name", width: 160, align: "left"},
-                    { label: "保质时间", name: "G_Period", width: 160, align: "left"},
-                    { label: "价格", name: "G_Price", width: 160, align: "left"},
-                    { label: "单位", name: "G_Unit", width: 160, align: "left"},
-                    { label: "添加人", name: "G_CreateBy", width: 160, align: "left"},
+                    { label: "售价(元)", name: "G_Price", width: 80, align: "left"},
+                    { label: "单位", name: "G_Unit", width: 80, align: "left"},
+                    { label: "添加人", name: "G_CreateBy", width: 100, align: "left"},
                     { label: "添加时间", name: "G_CreateDate", width: 160, align: "left"},
                     { label: "修改人", name: "G_UpdateBy", width: 160, align: "left"},
-                    { label: "修改时间", name: "G_UpdateDate", width: 160, align: "left"},
+                    { label: "修改时间", name: "G_UpdateDate", width: 160, align: "left" },
+                    { label: "保质时间", name: "G_Period", width: 100, align: "left" },
                     { label: "备注", name: "G_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'G_Code',
+                sord: 'ASC',
             });
             page.search();
         },

@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="Common\ErpEnums.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
-    <Compile Include="MesDev\Mes_ProductOrderHead\ERPTgoodsListModel.cs" />
+    <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadBLL.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadEntity.cs" />
