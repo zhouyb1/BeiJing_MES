@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "入库单制作";
+    ViewBag.Title = "调拨单制作";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <div class="am-layout" >
@@ -17,20 +17,28 @@
                         <div id="multiple_condition_query">
                             <div class="am-query-formcontent">
                                 <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">入库单号</div>
-                                    <input id="M_MaterInNo" type="text" class="form-control"/>
+                                    <div class="am-form-item-title">调拨单号</div>
+                                    <input id="R_RequistNo" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">原仓库编码</div>
+                                    <input id="R_StockCode" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">原仓库名称</div>
+                                    <input id="R_StockName" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title" style="width: 82px; left: 4px;">调拨仓库编码</div>
+                                    <input id="R_StockToCode" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title" style="width: 82px; left: 4px;">调拨仓库名称</div>
+                                    <input id="R_StockToName" type="text" class="form-control"/>
                                 </div>
                                 <div class="col-xs-6 am-form-item">
                                     <div class="am-form-item-title">生产订单号</div>
-                                    <input id="M_OrderNo" type="text" class="form-control"/>
-                                </div>
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">物料编码</div>
-                                    <input id="M_StockCode" type="text" class="form-control"/>
-                                </div>
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">物料名称</div>
-                                    <input id="M_StockName" type="text" class="form-control"/>
+                                    <input id="P_OrderNo" type="text" class="form-control"/>
                                 </div>
                             </div>
                         </div>
@@ -41,11 +49,8 @@
                         <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
                     </div>
                     <div class=" btn-group btn-group-sm" ayma-authorize="yes">
-                        @*<a id="am_add"   class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>*@
-                        <a id="am_auditing" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;审核单据</a>
-                        <a id="am_post" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;提交单据</a>
-                        <a id="am_edit" class="btn btn-default"><i class="fa fa-arrows"></i>&nbsp;查看详情</a>
-                        @*<a id="am_delete" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>*@
+                        <a id="am_detail" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;查看详情</a>
+                        <a id="am_cancel" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;撤销单据</a>
                     </div>
                 </div>
             </div>
@@ -53,4 +58,4 @@
         </div>
     </div>
 </div>
-@Html.AppendJsFile("/Areas/MesDev/Views/MaterInBill/Index.js")
+@Html.AppendJsFile("/Areas/MesDev/Views/RequistBill/PostIndex.js")

@@ -19,6 +19,51 @@ namespace Ayma.Application.TwoDevelopment.Tools
 
         #region 获取数据
         /// <summary>
+        /// 根据仓库编码获取仓库实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        public Mes_StockEntity ByCodeGetStockEntity(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
         /// <param name="code">物料编码</param>
@@ -109,15 +154,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
-        /// 根据主键获取供应商实体信息
+        /// 根据供应商编码获取供应商实体信息
         /// </summary>
-        /// <param name="keyValue">主键</param>
+        /// <param name="code">编码</param>
         /// <returns></returns>
-        public Mes_SupplyEntity ByIdGetSupplyEntity(string keyValue)
+        public Mes_SupplyEntity ByCodeGetSupplyEntity(string code)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x=>x.ID==keyValue);
+                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x=>x.S_Code==code);
             }
             catch (Exception ex)
             {
@@ -192,13 +237,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="tables">表名</param>
         /// <param name="orderNo">单号</param>
+        /// <param name="field">字段名</param>
         /// <returns></returns>
-        public bool IsOrderNo(string tables, string orderNo)
+        public bool IsOrderNo(string tables,string field, string orderNo)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where F_OrderNo=@OrderNo");
+                strSql.Append("select * from " + tables + " where "+field+"=@OrderNo");
                 var dp = new DynamicParameters(new { });
                 dp.Add("OrderNo", orderNo, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
@@ -256,5 +302,65 @@ namespace Ayma.Application.TwoDevelopment.Tools
         }
         #endregion
         
+        #region 提交数据
+        /// <summary>
+        /// 审核单据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
+        public void AuditingBill(string keyValue,string tables,string field)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("update " + tables + " set " + field + " ='2' where ID='" + keyValue + "' ");
+                this.BaseRepository().ExecuteBySql(strSql.ToString());
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }            
+        }
+        /// <summary>
+        /// 提交单据,撤销单据
+        /// </summary>
+        /// <param name="orderNo">单号</param>
+        /// <param name="proc">存储过程</param>
+        /// <param name="errMsg">错误信息</param>
+        public int PostOrCancelOrDeleteBill(string orderNo, string proc, out string errMsg)
+        {
+            try
+            {
+                UserInfo userinfo = LoginUserInfo.Get();
+                var dp = new DynamicParameters(new { });
+                dp.Add("@OrderNo", orderNo);
+                dp.Add("@UserName", userinfo.realName);
+                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                this.BaseRepository().ExecuteByProc(proc, dp);
+                errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+                return dp.Get<int>("@errcode");//返回的错误代码 0：成功
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        #endregion
     }
 }

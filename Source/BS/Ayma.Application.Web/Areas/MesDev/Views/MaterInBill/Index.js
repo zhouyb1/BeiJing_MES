@@ -47,21 +47,7 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 新增
-            $('#am_add').on('click', function () {
-                ayma.layerForm({
-                    id: 'form',
-                    title: '新增入库单',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/Form',
-                    width: 600,
-                    height: 400,
-                    maxmin: true,
-                    callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
-                    }
-                });
-            });
-            // 编辑
+            // 查看详情
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
@@ -79,19 +65,6 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            // 删除
-            $('#am_delete').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认删除该项！', function (res) {
-                        if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/MaterInBill/DeleteForm', { keyValue: keyValue}, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");
@@ -103,7 +76,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认审核该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/MaterInBill/AuditingBill', { keyValue: keyValue }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_MaterInHead', field: 'M_Status' }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -121,7 +94,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认提交该单据！', function(res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/MaterInBill/PostBill', { orderNo: orderNo }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterIn_Post', type: 1 }, function () {
                                 refreshGirdData();
                             });
                         }

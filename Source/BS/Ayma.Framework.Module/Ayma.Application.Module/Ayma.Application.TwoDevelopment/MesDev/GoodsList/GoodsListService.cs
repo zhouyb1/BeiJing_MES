@@ -46,11 +46,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.G_CreateDate,
                 t.G_UpdateBy,
                 t.G_UpdateDate,
-                t.G_Remark,
-                t1.S_Name SupplyName
+                t.G_Remark
                 ");
                 strSql.Append("  FROM Mes_Goods t ");
-                strSql.Append("  left join Mes_Supply t1 on t.G_Supply=t1.ID");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数

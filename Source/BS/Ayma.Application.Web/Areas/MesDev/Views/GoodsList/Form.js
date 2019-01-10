@@ -21,8 +21,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //供应商列表
             var dfop = {
                 type: 'default',
-                value: 'ID',
-                text: 'S_Name',
+                value: 'S_Code',
+                text: 'S_Code',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -32,7 +32,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $("#G_Supply").select(dfop);
+            $("#G_SupplyCode").select(dfop).on('change', function () {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetSupplyEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#G_Supply").val(entity.S_Name);
+                    }
+                });
+            });
             //编码重复验证
             $("#G_Code").on('keyup', function () {
                 var code = $.trim($(this).val()); //去除空格

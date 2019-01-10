@@ -14,7 +14,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class GoodsListController : MvcControllerBase
     {
         private GoodsListIBLL goodsListIBLL = new GoodsListBLL();
-        private ToolsIBLL toolsIBLL=new ToolsBLL();
 
         #region 视图功能
 
@@ -101,8 +100,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_GoodsEntity entity = strEntity.ToObject<Mes_GoodsEntity>();
-            var supplyCode = toolsIBLL.ByIdGetSupplyEntity(entity.G_Supply).S_Code; //获取供应商编码
-            entity.G_SupplyCode = supplyCode;
             goodsListIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }

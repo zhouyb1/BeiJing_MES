@@ -60,6 +60,11 @@
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadService.cs" />
+    <Compile Include="MesDev\RequistBill\Mes_RequistDetailEntity.cs" />
+    <Compile Include="MesDev\RequistBill\Mes_RequistHeadEntity.cs" />
+    <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />
+    <Compile Include="MesDev\RequistBill\RequistBillIBLL.cs" />
+    <Compile Include="MesDev\RequistBill\RequistBillService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveBLL.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveEntity.cs" />

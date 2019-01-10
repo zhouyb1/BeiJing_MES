@@ -113,8 +113,8 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    //{ label: "供应商编码", name: "G_SupplyCode", width: 160, align: "left"},
-                    { label: "供应商名称", name: "supplyname", width: 160, align: "left" },
+                    { label: "供应商编码", name: "g_supplycode", width: 160, align: "left"},
+                    { label: "供应商名称", name: "g_supply", width: 160, align: "left" },
                     { label: "数量", name: "g_qty", width: 160, align: "left" },
                     { label: "上限预警比例", name: "g_super", width: 160, align: "left" },
                     { label: "下限预警比例", name: "g_lower", width: 160, align: "left" },

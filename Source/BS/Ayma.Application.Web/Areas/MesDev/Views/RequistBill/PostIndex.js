@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-08 14:58
- * 描  述：入库单制作
+ * 日  期：2019-01-09 10:20
+ * 描  述：调拨单制作
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -42,10 +42,41 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
+            }, 220, 500);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
+            });
+            // 新增
+            $('#am_add').on('click', function () {
+                ayma.layerForm({
+                    id: 'RequistBill',
+                    title: '新增调拨单',
+                    url: top.$.rootUrl + '/MesDev/RequistBill/Form?formId=RequistBill',
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
+            // 编辑
+            $('#am_edit').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'RequistBill',
+                        title: '编辑调拨单',
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill',
+                        width: 800,
+                        height: 600,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
             });
             // 查看详情
             $('#am_detail').on('click', function () {
@@ -54,7 +85,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '查看详情',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue,
                         width: 800,
                         height: 600,
                         maxmin: true,
@@ -67,11 +98,11 @@ var bootstrap = function ($, ayma) {
             });
             //撤销单据
             $("#am_cancel").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");
+                var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认撤销该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterIn_Cancel', type: 2 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterTransfer_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -82,25 +113,26 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList',
+                url: top.$.rootUrl + '/MesDev/RequistBill/GetPostPageList',
                 headData: [
-
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "物料编码", name: "M_StockCode", width: 160, align: "left" },
-                    { label: "物料名称", name: "M_StockName", width: 160, align: "left" },
-                    { label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
-                    { label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
-                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "M_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "M_UpdateBy", width: 160, align: "left" },
-                    { label: "修改时间", name: "M_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "M_UploadBy", width: 160, align: "left"},
-                    { label: "提交时间", name: "M_UploadDate", width: 160, align: "left"}
+                    { label: "调拨单号", name: "R_RequistNo", width: 160, align: "left"},
+                    { label: "原仓库编码", name: "R_StockCode", width: 160, align: "left"},
+                    { label: "原仓库名称", name: "R_StockName", width: 160, align: "left"},
+                    { label: "调拨仓库编码", name: "R_StockToCode", width: 160, align: "left"},
+                    { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "left"},
+                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left"},
+                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left"},
+                    { label: "备注", name: "R_Remark", width: 160, align: "left" },
+                    { label: "添加人", name: "R_CreateBy", width: 160, align: "left"},
+                    { label: "添加时间", name: "R_CreateDate", width: 160, align: "left"},
+                    { label: "修改人", name: "R_UpdateBy", width: 160, align: "left"},
+                    { label: "修改时间", name: "R_UpdateDate", width: 160, align: "left"},
+                    { label: "提交人", name: "R_UploadBy", width: 160, align: "left"},
+                    { label: "提交时间", name: "R_UploadDate", width: 160, align: "left"}
                 ],
-                mainId: 'ID',
+                mainId:'ID',
                 isPage: true,
-                sidx: 'M_MaterInNo',
+                sidx: 'R_RequistNo',
                 sord: 'DESC'
             });
         },

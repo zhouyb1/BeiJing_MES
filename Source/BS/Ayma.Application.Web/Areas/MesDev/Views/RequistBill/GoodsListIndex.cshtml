@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "商品列表";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout">
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="物料编码/物料名称" style="width: 230px;" />
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">商品类型</div>
+                                    <div id="GoodsType"></div>
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">供应商编码</div>
+                                    <input type="text" class="form-control" id="SupplyCode" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">供应商名称</div>
+                                    <input type="text" class="form-control" id="SupplyName" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">批次</div>
+                                    <input type="text" class="form-control"  id="Batch" placeholder="格式:yyyyMMdd(20190101)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class="col-xs-12 am-form-item">
+                        <div class="am-form-item-title" style="width: 140px; left: -130px;">调拨数量一键设置：</div>
+                        <div class="am-form-item-title">
+                            <input type="number" id="quantity" class="form-control" style="height: 25px;margin-top: 5px" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="am-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/RequistBill/GoodsListIndex.js")
