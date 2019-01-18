@@ -18,6 +18,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
+        /// 商品类型
+        /// </summary>
+        [Column("M_KIND")]
+        public string M_Kind { get; set; }
+        /// <summary>
         /// 入库单号
         /// </summary>
         [Column("M_MATERINNO")]

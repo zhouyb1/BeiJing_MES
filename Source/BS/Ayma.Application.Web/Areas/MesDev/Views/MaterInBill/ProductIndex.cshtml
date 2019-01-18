@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "入库单制作";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout" >
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div class="am-searchtxt">生产订单时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">入库单号</div>
+                                    <input id="M_MaterInNo" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">生产订单号</div>
+                                    <input id="M_OrderNo" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">物料编码</div>
+                                    <input id="M_StockCode" type="text" class="form-control"/>
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">物料名称</div>
+                                    <input id="M_StockName" type="text" class="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" ayma-authorize="yes">
+                        @*<a id="am_add"   class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>*@
+                        <a id="am_auditing" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;审核单据</a>
+                        <a id="am_post" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;提交单据</a>
+                        <a id="am_edit" class="btn btn-default"><i class="fa fa-arrows"></i>&nbsp;查看详情</a>
+                        @*<a id="am_delete" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>*@
+                    </div>
+                </div>
+            </div>
+            <div class="am-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/MaterInBill/ProductIndex.js")

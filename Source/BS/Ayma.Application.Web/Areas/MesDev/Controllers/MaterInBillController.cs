@@ -43,6 +43,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 成品入库单页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ProductIndex()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据

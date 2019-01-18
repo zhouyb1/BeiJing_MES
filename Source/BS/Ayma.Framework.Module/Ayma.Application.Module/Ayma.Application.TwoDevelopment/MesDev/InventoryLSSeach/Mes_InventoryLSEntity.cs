@@ -18,6 +18,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
+        /// 商品类型
+        /// </summary>
+        [Column("M_IIND")]
+        public string I_Kind { get; set; }
+        /// <summary>
         /// 库存时间
         /// </summary>
         [Column("I_DATE")]

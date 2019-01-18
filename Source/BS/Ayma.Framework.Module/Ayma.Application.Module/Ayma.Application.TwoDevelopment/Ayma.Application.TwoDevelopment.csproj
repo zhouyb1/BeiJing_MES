@@ -122,6 +122,14 @@
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsService.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsBLL.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsIBLL.cs" />
+    <Compile Include="MesDev\ScanKindList\Mes_ScanKindEntity.cs" />
+    <Compile Include="MesDev\ScanKindList\ScanKindListService.cs" />
+    <Compile Include="MesDev\ScanKindList\ScanKindListBLL.cs" />
+    <Compile Include="MesDev\ScanKindList\ScanKindListIBLL.cs" />
+    <Compile Include="MesDev\BasketList\Mes_BasketEntity.cs" />
+    <Compile Include="MesDev\BasketList\BasketListService.cs" />
+    <Compile Include="MesDev\BasketList\BasketListBLL.cs" />
+    <Compile Include="MesDev\BasketList\BasketListIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

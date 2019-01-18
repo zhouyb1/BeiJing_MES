@@ -257,6 +257,8 @@
     <Compile Include="Areas\MesDev\Controllers\InventoryLSSeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\DocumentsMakeLogSeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductGoodsController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ScanKindListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\BasketListController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -469,6 +471,7 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
@@ -2098,6 +2101,7 @@
     <Content Include="Areas\MesDev\Views\RequistBill\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\RequistBill\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\RequistBill\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2194,6 +2198,14 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\Form.js" />
+    <Content Include="Areas\MesDev\Views\ScanKindList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScanKindList\Index.js" />
+    <Content Include="Areas\MesDev\Views\ScanKindList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScanKindList\Form.js" />
+    <Content Include="Areas\MesDev\Views\BasketList\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\BasketList\Index.js" />
+    <Content Include="Areas\MesDev\Views\BasketList\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\BasketList\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
