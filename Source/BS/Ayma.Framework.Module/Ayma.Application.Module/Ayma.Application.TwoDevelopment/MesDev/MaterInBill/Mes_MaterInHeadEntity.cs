@@ -106,7 +106,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         public void Create()
         {
+            var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
+            this.M_Kind = "3";
+            this.M_Status = "1";
+            this.M_CreateDate = DateTime.Now;
+            this.M_CreateBy = userInfo.realName;
         }
         /// <summary>
         /// 编辑调用
@@ -114,7 +119,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
+            var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
+            this.M_UpdateDate = DateTime.Now;
+            this.M_UpdateBy = userInfo.realName;
         }
         #endregion
         #region 扩展字段

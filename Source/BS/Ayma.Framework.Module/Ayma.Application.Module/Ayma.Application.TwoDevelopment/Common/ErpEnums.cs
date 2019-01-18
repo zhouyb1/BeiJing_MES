@@ -21,7 +21,10 @@ namespace Ayma.Application.TwoDevelopment
             /// 仓库调拨单
             /// </summary>
             Requist = 10000,
-            
+            /// <summary>
+            /// 成品入库单
+            /// </summary>
+            MaterIn = 10001,         
         }
     }
 }

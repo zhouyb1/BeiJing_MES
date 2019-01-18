@@ -12,6 +12,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     {
         #region 获取数据
         /// <summary>
+        /// 获取成品入库商品列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ProductGoodsEntity> GetProductList(Pagination pagination, string queryJson, string keyword);
+        /// <summary>
+        /// 获取成品入库已提交的成品入库
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_MaterInHeadEntity> GetPostProductPageList(Pagination pagination, string queryJson);
+        /// <summary>
+        /// 获取成品入库显示数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_MaterInHeadEntity> GetProductPageList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取已提交单据列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

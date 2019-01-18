@@ -470,6 +470,9 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\ProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
@@ -2102,6 +2105,9 @@
     <Content Include="Areas\MesDev\Views\RequistBill\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\RequistBill\PostIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\ProductForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

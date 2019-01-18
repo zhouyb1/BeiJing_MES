@@ -2,6 +2,9 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.Base.SystemModule;
+using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -13,6 +16,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class MaterInBillController : MvcControllerBase
     {
         private MaterInBillIBLL materInBillIBLL = new MaterInBillBLL();
+        private ToolsIBLL toolsIBLL=new ToolsBLL();
 
         #region 视图功能
 
@@ -52,9 +56,101 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 成品入库单表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ProductForm()
+        {
+            if (Request["keyValue"] == null)
+            {
+                ViewBag.OrderNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());//自动获取主编码
+            }
+            return View();
+        }
+        /// <summary>
+        /// 成品入库商品列表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GoodsListIndex()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 成品入库查询页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PostProductIndex()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据
+        /// <summary>
+        /// 获取成品入库商品列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProductList(string pagination, string queryJson, string keyword)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materInBillIBLL.GetProductList(paginationobj, queryJson, keyword);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取已提交的成品入库
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPostProductPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materInBillIBLL.GetPostProductPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取成品入库显示数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProductPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materInBillIBLL.GetProductPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
         /// <summary>
         /// 获取已提交单据列表数据
         /// </summary>
@@ -187,6 +283,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                var codeRulebll = new CodeRuleBLL();
+                if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString())))
+                {
+                    //若重复 先占用再赋值
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
+                    entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
+                }
+                else
+                {
+                    entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
+                }
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
+            }
             materInBillIBLL.SaveEntity(keyValue,entity,mes_MaterInDetailList);
             return Success("保存成功！");
         }

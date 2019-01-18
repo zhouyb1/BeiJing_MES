@@ -375,6 +375,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.R_RequistNo = mes_RequistHeadEntityTmp.R_RequistNo;
+                        item.P_OrderNo = entity.P_OrderNo;
                         db.Insert(item);
                     }
                 }
@@ -386,6 +387,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.R_RequistNo = entity.R_RequistNo;
+                        item.P_OrderNo = entity.P_OrderNo;
                         db.Insert(item);
                     }
                 }

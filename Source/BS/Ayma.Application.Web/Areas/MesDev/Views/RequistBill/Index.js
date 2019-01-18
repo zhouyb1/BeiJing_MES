@@ -81,12 +81,12 @@ var bootstrap = function ($, ayma) {
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");
-                var status = $("#girdtable").jfGridValue("R_Status");
-                if (status != "1") {
-                    ayma.alert.error("已审核");
-                    return false;
-                }
                 if (ayma.checkrow(keyValue)) {
+                    var status = $("#girdtable").jfGridValue("R_Status");
+                    if (status != "1") {
+                        ayma.alert.error("已审核");
+                        return false;
+                    }
                     ayma.layerConfirm('是否确认审核该单据！', function (res) {
                         if (res) {
                             ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_RequistHead', field: 'R_Status' }, function () {
@@ -99,12 +99,12 @@ var bootstrap = function ($, ayma) {
             //删除单据
             $("#am_delete").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
-                var status = $("#girdtable").jfGridValue("R_Status");
-                if (status == "2") {
-                    ayma.alert.error("已审核不能删除");
-                    return false;
-                }
                 if (ayma.checkrow(orderNo)) {
+                    var status = $("#girdtable").jfGridValue("R_Status");
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
                     ayma.layerConfirm('是否确认删除该单据！', function (res) {
                         if (res) {
                             ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterTransfer_Delete', type: 3 }, function () {
@@ -117,12 +117,12 @@ var bootstrap = function ($, ayma) {
             //提交单据
             $("#am_post").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
-                var status = $("#girdtable").jfGridValue("R_Status");
-                if (status == "1") {
-                    ayma.alert.error("未审核");
-                    return false;
-                }
                 if (ayma.checkrow(orderNo)) {
+                    var status = $("#girdtable").jfGridValue("R_Status");
+                    if (status == "1") {
+                        ayma.alert.error("未审核");
+                        return false;
+                    }
                     ayma.layerConfirm('是否确认提交该单据！', function (res) {
                         if (res) {
                             ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterTransfer_Post', type: 1 }, function () {

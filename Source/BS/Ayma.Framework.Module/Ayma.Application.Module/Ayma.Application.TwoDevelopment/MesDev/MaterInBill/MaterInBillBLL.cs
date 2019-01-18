@@ -14,7 +14,76 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private MaterInBillService materInBillService = new MaterInBillService();
 
         #region 获取数据
-
+        /// <summary>
+        /// 获取已提交单据列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductGoodsEntity> GetProductList(Pagination pagination, string queryJson, string keyword)
+        {
+            try
+            {
+                return materInBillService.GetProductList(pagination, queryJson, keyword);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取成品入库已提交单据列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_MaterInHeadEntity> GetPostProductPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return materInBillService.GetPostProductPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取已提交单据列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_MaterInHeadEntity> GetProductPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return materInBillService.GetProductPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取已提交单据列表数据
         /// </summary>
