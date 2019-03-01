@@ -47,20 +47,54 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 查看详情
-            $('#am_edit').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
+            // 新增
+            $('#am_add').on('click', function () {
+              
                     ayma.layerForm({
-                        id: 'form',
-                        title: '查看详情',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
-                        width: 800,
-                        height: 600,
+                        id: 'MaterInBillForm',
+                        title: '新增入库单',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?formId=MaterInBillForm',
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         btn:null,
                         callBack: function (id) {
                            
+                        }
+                    });
+                
+            });
+            // 编辑
+            $('#am_edit').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MaterInBillForm',
+                        title: '编辑入库单',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue + '&formId=MaterInBillForm',
+                        width: 900,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+            //删除单据
+            $("#am_delete").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");
+                if (ayma.checkrow(orderNo)) {
+                    var status = $("#girdtable").jfGridValue("M_Status");
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
+                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_MaterIn_Delete', type: 3 }, function () {
+                                refreshGirdData();
+                            });
                         }
                     });
                 }
@@ -94,7 +128,25 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认提交该单据！', function(res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterIn_Post', type: 1 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_MaterIn_Post', type: 1 }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
+            //撤销单据
+            $("#am_cancel").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");
+                var status = $("#girdtable").jfGridValue("M_Status");
+                if (status!="3") {
+                    ayma.alert.error("单据没提交,不能撤销");
+                    return false;
+                }
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function(res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_MaterIn_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }

@@ -361,6 +361,38 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+        /// <summary>
+        /// 提交单据,撤销单据,删除单据(入库单)
+        /// </summary>
+        /// <param name="orderNo">单号</param>
+        /// <param name="proc">存储过程</param>
+        /// <param name="errMsg">错误信息</param>
+        public int PostOrCancelOrDeleteMaterInBill(string orderNo, string proc, out string errMsg)
+        {
+            try
+            {
+                UserInfo userinfo = LoginUserInfo.Get();
+                var dp = new DynamicParameters(new { });
+                dp.Add("@OrderNo", orderNo);
+                dp.Add("@UserName", userinfo.realName);
+                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                this.BaseRepository().ExecuteByProc(proc, dp);
+                errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+                return dp.Get<int>("@errcode");//返回的错误代码 0：成功
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
     }
 }

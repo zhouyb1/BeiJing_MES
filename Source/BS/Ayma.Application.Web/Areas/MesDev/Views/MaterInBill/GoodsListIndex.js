@@ -45,12 +45,12 @@ var bootstrap = function ($, ayma) {
                 page.search();
             });
             //商品类型
-            $("#GoodsType").DataItemSelect({code:"GoodsType"});
+            $("#GoodsType").DataItemSelect({ code: "GoodsType" });
             //数量验证
             $("#quantity").on('keyup', function () {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 if (quantity < 0) {
-                    ayma.alert.error("嘤嘤嘤请别输入负数！");
+                    ayma.alert.error("请别输入负数！");
                     $("#quantity").val("");
                     return;
                 }
@@ -94,7 +94,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductList?stockCode=' + stockCode,
                 headData: [
-                    { label: "物料编码", name: "ID", width: 130, align: "left",hidden:true },
+                    { label: "物料编码", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },
                     { label: "物料名称", name: "G_Name", width: 130, align: "left" },
                     { label: "保质时间", name: "G_Period", width: 80, align: "left" },
@@ -131,15 +131,19 @@ var bootstrap = function ($, ayma) {
                 onRenderComplete: function (rows) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
-                    var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
-                    for (var i = 0; i < rows.length; i++) {
-                        for (var j = 0; j < rowlistlenght; j++) {
-                            if (rows[i]['g_code'] == rowslist[j]['R_GoodsCode']) {
-                                $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
-                                break;
+                    if (JSON.stringify(rowslist) !== '[]') {
+                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        for (var i = 0; i < rows.length; i++) {
+                            for (var j = 0; j < rowlistlenght; j++) {
+                                console.log(rows[i])
+                                if (rows[i]['G_Code'] == rowslist[j]['M_GoodsCode']) {
+                                    $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
+                                    break;
+                                }
                             }
                         }
                     }
+
                 }
             });
             page.search();

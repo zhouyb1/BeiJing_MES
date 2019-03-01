@@ -323,6 +323,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        }  
+        /// <summary>
+        /// 提交单据,撤销单据,删除单据(入库单)
+        /// </summary>
+        /// <param name="orderNo">单号</param>
+        /// <param name="proc">存储过程</param>
+        /// <param name="errMsg">错误信息</param>
+        public int PostOrCancelOrDeleteMaterInBill(string orderNo, string proc, out string errMsg)
+        {
+            try
+            {
+                return toolsService.PostOrCancelOrDeleteMaterInBill(orderNo, proc, out errMsg);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         #endregion

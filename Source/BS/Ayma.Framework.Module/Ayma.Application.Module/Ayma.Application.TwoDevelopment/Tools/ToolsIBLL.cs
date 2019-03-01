@@ -99,6 +99,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="proc">存储过程</param>
         /// <param name="errMsg">错误信息</param>
         int PostOrCancelOrDeleteBill(string orderNo, string proc, out string errMsg);
+        /// <summary>
+        /// 提交单据,撤销单据,删除单据(入库单)
+        /// </summary>
+        /// <param name="orderNo">单号</param>
+        /// <param name="proc">存储过程</param>
+        /// <param name="errMsg">错误信息</param>
+        int PostOrCancelOrDeleteMaterInBill(string orderNo, string proc, out string errMsg);
 
         #endregion
 

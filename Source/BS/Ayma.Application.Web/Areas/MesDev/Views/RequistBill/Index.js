@@ -132,6 +132,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //撤销单据
+            $("#am_cancel").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
+                var status = $("#girdtable").jfGridValue("R_Status");
+                if (status != "3") {
+                    ayma.alert.error("单据没提交,不能撤销");
+                    return false;
+                }
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterTransfer_Cancel', type: 2 }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

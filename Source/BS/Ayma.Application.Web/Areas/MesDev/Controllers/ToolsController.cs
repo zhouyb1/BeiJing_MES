@@ -164,6 +164,35 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success("审核完成");
         }
         /// <summary>
+        /// 提交单据(入库单)
+        /// </summary>
+        /// <param name="orderNo">单号</param>
+        /// <param name="proc">存储过程</param>
+        /// <param name="type">操作类型：1，提交单据，2撤销单据,3删除单据</param>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult PostOrCancelOrDeleteMaterInBill(string orderNo, string proc, int type)
+        {
+            string errMsg = "";
+            int status = toosIBLL.PostOrCancelOrDeleteMaterInBill(orderNo, proc, out errMsg);
+            if (status == 0)
+            {
+                switch (type)
+                {
+                    case 1:
+                        return Success("提交成功");
+                        break;
+                    case 2:
+                        return Success("撤销成功");
+                        break;
+                    case 3:
+                        return Success("删除成功");
+                        break;                       
+                }               
+            }
+            return Fail(errMsg);
+        }
+        /// <summary>
         /// 提交单据
         /// </summary>
         /// <param name="orderNo">单号</param>

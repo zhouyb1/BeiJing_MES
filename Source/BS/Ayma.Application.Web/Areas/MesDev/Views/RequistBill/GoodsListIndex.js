@@ -48,7 +48,7 @@ var bootstrap = function ($, ayma) {
             $("#quantity").on('keyup', function () {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 if (quantity < 0) {
-                    ayma.alert.error("嘤嘤嘤请别输入负数！");
+                    ayma.alert.error("请别输入负数！");
                     $("#quantity").val("");
                     return;
                 }
