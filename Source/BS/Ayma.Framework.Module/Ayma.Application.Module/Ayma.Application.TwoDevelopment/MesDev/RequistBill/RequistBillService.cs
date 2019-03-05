@@ -109,7 +109,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.R_UploadDate
                 ");
                 strSql.Append("  FROM Mes_RequistHead t ");
-                strSql.Append("  WHERE t.R_Status = 3 ");
+                strSql.Append("  WHERE t.R_Status != -1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

@@ -115,6 +115,27 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/RequistBill/GetPostPageList',
                 headData: [
+                    {
+                        label: "状态", name: "R_Status", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'RequistStatus',
+                                callback: function (_data) {
+                                    console.log(_data)
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else if (value == 2) {
+                                        callback("<span class='label label-info'>" + _data.text + "</span>");
+                                    } else if (value == 3) {
+                                        callback("<span class='label label-success'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
+                        }
+                    },
                     { label: "调拨单号", name: "R_RequistNo", width: 160, align: "left"},
                     { label: "原仓库编码", name: "R_StockCode", width: 160, align: "left"},
                     { label: "原仓库名称", name: "R_StockName", width: 160, align: "left"},

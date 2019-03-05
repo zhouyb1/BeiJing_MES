@@ -43,6 +43,7 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
+            $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -84,7 +85,26 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList',
                 headData: [
-
+                    {
+                        label: "状态", name: "M_Status", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'MaterInStatus',
+                                callback: function (_data) {
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else if (value == 2) {
+                                        callback("<span class='label label-info'>" + _data.text + "</span>");
+                                    } else if (value == 3) {
+                                        callback("<span class='label label-success'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
+                        }
+                    },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
                     { label: "物料编码", name: "M_StockCode", width: 160, align: "left" },
                     { label: "物料名称", name: "M_StockName", width: 160, align: "left" },

@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 500);
+            }, 220, 550);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -53,8 +53,8 @@ var bootstrap = function ($, ayma) {
                     id: 'RequistBill',
                     title: '新增调拨单',
                     url: top.$.rootUrl + '/MesDev/RequistBill/Form?formId=RequistBill',
-                    width: 800,
-                    height: 600,
+                    width: 950,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'RequistBill',
                         title: '编辑调拨单',
                         url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill',
-                        width: 800,
-                        height: 600,
+                        width: 950,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -132,60 +132,50 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //撤销单据
-            $("#am_cancel").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
-                var status = $("#girdtable").jfGridValue("R_Status");
-                if (status != "3") {
-                    ayma.alert.error("单据没提交,不能撤销");
-                    return false;
-                }
-                if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
-                        if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterTransfer_Cancel', type: 2 }, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
+
         },
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/RequistBill/GetPageList',
                 headData: [
-                     {
-                         label: "状态",
-                         name: "R_Status",
-                         width: 160,
-                         align: "left",
-                         formatterAsync: function (callback, value, row) {
-                             if (value == 1) {
-                                 callback("<span class='label label-info'>" + "待审核" + "</span>");
-                             } else {
-                                 callback("<span class='label label-success'>" + "审核通过" + "</span>");
-                             }
-                         }
-                     },
-                    { label: "调拨单号", name: "R_RequistNo", width: 160, align: "left"},
-                    { label: "原仓库编码", name: "R_StockCode", width: 160, align: "left"},
-                    { label: "原仓库名称", name: "R_StockName", width: 160, align: "left"},
-                    { label: "调拨仓库编码", name: "R_StockToCode", width: 160, align: "left"},
-                    { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "left"},
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left"},
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left"},
+                      {
+                          label: "状态", name: "R_Status", width: 160, align: "left",
+                          formatterAsync: function (callback, value, row) {
+                              ayma.clientdata.getAsync('dataItem', {
+                                  key: value,
+                                  code: 'RequistStatus',
+                                  callback: function (_data) {
+                                      console.log(_data)
+                                      if (value == 1) {
+                                          callback("<span class='label label-default'>" + _data.text + "</span>");
+                                      } else if (value == 2) {
+                                          callback("<span class='label label-info'>" + _data.text + "</span>");
+                                      } else if (value == 3) {
+                                          callback("<span class='label label-success'>" + _data.text + "</span>");
+                                      } else {
+                                          callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                      }
+                                  }
+                              });
+                          }
+                      },
+                    { label: "调拨单号", name: "R_RequistNo", width: 160, align: "left" },
+                    { label: "原仓库编码", name: "R_StockCode", width: 160, align: "left" },
+                    { label: "原仓库名称", name: "R_StockName", width: 160, align: "left" },
+                    { label: "调拨仓库编码", name: "R_StockToCode", width: 160, align: "left" },
+                    { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "left" },
+                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
+                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "R_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "R_CreateBy", width: 160, align: "left"},
-                    { label: "添加时间", name: "R_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "R_UpdateBy", width: 160, align: "left"},
-                    { label: "修改时间", name: "R_UpdateDate", width: 160, align: "left"}
-
-                    //{ label: "提交人", name: "R_UploadBy", width: 160, align: "left"},
-                    //{ label: "提交时间", name: "R_UploadDate", width: 160, align: "left"},
+                    { label: "添加人", name: "R_CreateBy", width: 160, align: "left" },
+                    { label: "添加时间", name: "R_CreateDate", width: 160, align: "left" },
+                    { label: "修改人", name: "R_UpdateBy", width: 160, align: "left" },
+                    { label: "修改时间", name: "R_UpdateDate", width: 160, align: "left" },
+                    { label: "提交人", name: "R_UploadBy", width: 160, align: "left" },
+                    { label: "提交时间", name: "R_UploadDate", width: 160, align: "left" }
                 ],
-                mainId:'ID',
+                mainId: 'ID',
                 isPage: true,
                 sidx: 'R_RequistNo',
                 sord: 'DESC'

@@ -43,6 +43,7 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
+            $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -135,24 +136,7 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //撤销单据
-            $("#am_cancel").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");
-                var status = $("#girdtable").jfGridValue("M_Status");
-                if (status!="3") {
-                    ayma.alert.error("单据没提交,不能撤销");
-                    return false;
-                }
-                if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认撤销该单据！', function(res) {
-                        if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_MaterIn_Cancel', type: 2 }, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
+         
         },
         // 初始化列表
         initGird: function () {
@@ -160,16 +144,23 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetPageList',
                 headData: [
                     {
-                        label: "状态",
-                        name: "M_Status",
-                        width: 160,
-                        align: "left",
-                        formatterAsync: function(callback, value, row) {
-                            if (value == 1) {
-                                callback("<span class='label label-info'>" + "待审核" + "</span>");
-                            } else {
-                                callback("<span class='label label-success'>" + "审核通过" + "</span>");
-                            }
+                        label: "状态", name: "M_Status", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'MaterInStatus',
+                                callback: function (_data) {
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else if (value == 2) {
+                                        callback("<span class='label label-info'>" + _data.text + "</span>");
+                                    } else if (value == 3) {
+                                        callback("<span class='label label-success'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
                         }
                     },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },

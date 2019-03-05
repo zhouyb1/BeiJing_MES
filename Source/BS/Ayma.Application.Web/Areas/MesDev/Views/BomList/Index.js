@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-07 15:39
- * 描  述：物料清单列表
+ * 日  期：2019-03-02 14:08
+ * 描  述：BOM表
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -51,10 +51,10 @@ var bootstrap = function ($, ayma) {
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增物料清单',
+                    title: '新增',
                     url: top.$.rootUrl + '/MesDev/BomList/Form',
-                    width: 700,
-                    height: 450,
+                    width: 900,
+                    height: 600,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -67,10 +67,10 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑物料清单',
+                        title: '编辑',
                         url: top.$.rootUrl + '/MesDev/BomList/Form?keyValue=' + keyValue,
-                        width: 700,
-                        height: 450,
+                        width: 900,
+                        height: 600,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -97,8 +97,9 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/BomList/GetPageList',
                 headData: [
-                    { label: "生产订单日期", name: "B_Date", width: 160, align: "left"},
-                    { label: "生产订单号", name: "B_OrderNo", width: 160, align: "left"},
+                    { label: "ID", name: "ID", width: 160, align: "left"},
+                    { label: "BOM日期", name: "B_Date", width: 160, align: "left"},
+                    { label: "BOM单号", name: "B_OrderNo", width: 160, align: "left"},
                     { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left"},
                     { label: "物料名称", name: "B_GoodsName", width: 160, align: "left"},
                     { label: "单位", name: "B_Unit", width: 160, align: "left"},

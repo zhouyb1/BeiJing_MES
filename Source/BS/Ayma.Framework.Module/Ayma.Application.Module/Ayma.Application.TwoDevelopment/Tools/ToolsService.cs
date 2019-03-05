@@ -314,7 +314,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("update " + tables + " set " + field + " ='2' where ID='" + keyValue + "' ");
+                strSql.Append("update " + tables + " set " + field + " =2 where ID='" + keyValue + "' ");
                 this.BaseRepository().ExecuteBySql(strSql.ToString());
             }
             catch (Exception ex)

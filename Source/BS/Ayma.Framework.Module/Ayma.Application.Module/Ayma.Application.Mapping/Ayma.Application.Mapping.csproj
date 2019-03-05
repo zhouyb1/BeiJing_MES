@@ -127,6 +127,8 @@
     <Compile Include="MesDev\Mes_ProductGoodsMap.cs" />
     <Compile Include="MesDev\Mes_ScanKindMap.cs" />
     <Compile Include="MesDev\Mes_BasketMap.cs" />
+    <Compile Include="MesDev\Mes_ProOutHeadMap.cs" />
+    <Compile Include="MesDev\Mes_ProOutDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

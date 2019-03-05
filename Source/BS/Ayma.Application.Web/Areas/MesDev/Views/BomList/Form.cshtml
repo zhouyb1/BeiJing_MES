@@ -1,52 +1,55 @@
 ﻿@{
-    ViewBag.Title = "物料清单列表";
+    ViewBag.Title = "BOM表";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 <div class="am-form-wrap" id="form">
+  
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">生产订单日期<font face="宋体">*</font></div>
-        <input id="B_Date" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" isvalid="yes" checkexpession="NotNull" />
-    </div>
-    <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">生产订单号<font face="宋体">*</font></div>
+        <div class="am-form-item-title">BOM单号<font face="宋体">*</font></div>
         <input id="B_OrderNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
-        <div id="B_GoodsCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input id="B_GoodsCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-    <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">物料名称</div>
-        <input id="B_GoodsName" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
+    <div class="col-xs-6 am-form-item" data-table="Mes_Bom">
+        <div class="am-form-item-title">物料名称<font face="宋体">*</font>
+        </div>
+        <input id="B_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_Bom">
+        <div class="am-form-item-title">BOM日期<font face="宋体">*</font></div>
+        <input id="B_Date" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">单位</div>
-        <input id="B_Unit" type="text" class="form-control" disabled="disabled" style="background: #f1efef"  />
+        <input id="B_Unit" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">等级<font face="宋体">*</font></div>
-        <input id="B_Grade" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">等级</div>
+        <input id="B_Grade" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">下级物料编码<font face="宋体">*</font></div>
-        <div id="B_SecGoodsCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <div class="am-form-item-title">下级物料编码</div>
+        <input id="B_SecGoodsCode" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">下级物料名称</div>
-        <input id="B_SecGoodsName" type="text" class="form-control" disabled="disabled" style="background: #f1efef; " />
+        <input id="B_SecGoodsName" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">下级物料单位</div>
-        <input id="B_SecUnit" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
+        <input id="B_SecUnit" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
-        <div class="am-form-item-title">下级物料数量</div>
-        <input id="B_SecQty" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
+        <div class="am-form-item-title">下级物料数量<font face="宋体">*</font></div>
+        <input id="B_SecQty" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">转换率<font face="宋体">*</font></div>
-        <input id="B_Conversion" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <input id="B_Conversion" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
     </div>
+    
     <div class="col-xs-6 am-form-item"  data-table="Mes_Bom" >
         <div class="am-form-item-title">备注</div>
         <input id="B_Remark" type="text" class="form-control"  />

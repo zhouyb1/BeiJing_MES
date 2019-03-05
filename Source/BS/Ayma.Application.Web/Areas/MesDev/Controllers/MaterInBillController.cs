@@ -77,7 +77,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GoodsListIndex()
         {
             return View();
+        }  
+        /// <summary>
+        /// 成品入库单查询表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PostProductForm()
+        {
+            return View();
         }
+
         /// <summary>
         /// 成品入库查询页
         /// </summary>

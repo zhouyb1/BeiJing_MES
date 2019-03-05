@@ -52,7 +52,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
    
         /// </summary>
         [Column("M_STATUS")]
-        public string M_Status { get; set; }
+        public ErpEnums.MaterInStatusEnum M_Status { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -109,7 +109,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
             this.M_Kind = "3";
-            this.M_Status = "1";
+            this.M_Status = ErpEnums.MaterInStatusEnum.NoAudit;
             this.M_CreateDate = DateTime.Now;
             this.M_CreateBy = userInfo.realName;
         }

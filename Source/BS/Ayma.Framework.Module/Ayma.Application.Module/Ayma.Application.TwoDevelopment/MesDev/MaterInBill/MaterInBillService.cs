@@ -229,7 +229,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status = 3  ");
+                strSql.Append("  WHERE t.M_Status != -1  ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -258,6 +258,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("M_StockName", "%" + queryParam["M_StockName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.M_StockName Like @M_StockName ");
+                }
+                if (!queryParam["M_Status"].IsEmpty())
+                {
+                    dp.Add("M_Status", queryParam["M_Status"].ToString(), DbType.Int32);
+                    strSql.Append(" AND t.M_Status = @M_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_MaterInHeadEntity>(strSql.ToString(), dp, pagination);
             }
@@ -333,6 +338,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("M_StockName", "%" + queryParam["M_StockName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.M_StockName Like @M_StockName ");
+                } 
+                if (!queryParam["M_Status"].IsEmpty())
+                {
+                    dp.Add("M_Status", queryParam["M_Status"].ToString(),DbType.Int32);
+                    strSql.Append(" AND t.M_Status = @M_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_MaterInHeadEntity>(strSql.ToString(),dp, pagination);
             }
@@ -432,7 +442,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var entity = GetMes_MaterInHeadEntity(keyValue);
-                entity.M_Status = "2";
+                entity.M_Status = ErpEnums.MaterInStatusEnum.Audit;
                 this.BaseRepository().Update(entity);
             }
             catch (Exception ex)

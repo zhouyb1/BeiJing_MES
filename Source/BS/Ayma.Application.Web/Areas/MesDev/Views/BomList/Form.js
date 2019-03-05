@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-07 15:39
- * 描  述：物料清单列表
+ * 日  期：2019-03-02 14:08
+ * 描  述：BOM表
  */
 var acceptClick;
 var keyValue = request('keyValue');
@@ -14,47 +14,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            //物料列表
-            var dfop = {
-                type: 'default',
-                value: 'G_Code',
-                text: 'G_Code',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
-                // 访问数据接口参数
-                param: {}
-            }
-            $("#B_GoodsCode").select(dfop).on('change',function() {
-                var code = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
-                    success: function (data) {
-                        var entity = JSON.parse(data).data;
-                        $("#B_GoodsName").val(entity.G_Name);
-                        $("#B_Unit").val(entity.G_Unit);
-                    }
-                });
-            });
-            $("#B_SecGoodsCode").select(dfop).on('change',function() {
-                var code = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
-                    success: function (data) {
-                        var entity = JSON.parse(data).data;
-                        $("#B_SecGoodsName").val(entity.G_Name);
-                        $("#B_SecUnit").val(entity.G_Unit);
-                        $("#B_SecQty").val(entity.G_Qty);
-                    }
-                });
-            });
         },
         initData: function () {
             if (!!keyValue) {
@@ -66,7 +25,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
                     }
-                    $("#B_Date").val(data.Mes_BomData.B_Date);
                 });
             }
         }
@@ -74,10 +32,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
-            return false;
-        }
-        if ($("#B_GoodsCode").selectGet() == $("#B_SecGoodsCode").selectGet()) {
-            ayma.alert.error("下级物料编码跟上级物料编码不能一致");
             return false;
         }
         var postData = {

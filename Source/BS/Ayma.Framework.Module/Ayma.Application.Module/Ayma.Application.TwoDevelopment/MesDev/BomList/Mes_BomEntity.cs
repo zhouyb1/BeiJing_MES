@@ -6,8 +6,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 15:39
-    /// 描 述：物料清单列表
+    /// 日 期：2019-03-02 14:08
+    /// 描 述：BOM表
     /// </summary>
     public partial class Mes_BomEntity 
     {
@@ -105,10 +105,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         public void Create()
         {
-            var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
-            this.B_CreateDate = DateTime.Now;
-            this.B_CreateBy = userInfo.realName;
         }
         /// <summary>
         /// 编辑调用
@@ -116,10 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
-            var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
-            this.B_UpdateDate = DateTime.Now;
-            this.B_UpdateBy = userInfo.realName;
         }
         #endregion
         #region 扩展字段

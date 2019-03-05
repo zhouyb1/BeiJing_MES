@@ -259,6 +259,8 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductGoodsController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ScanKindListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\BasketListController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ProductOrderMakeController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ProOutMakeController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -470,6 +472,7 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductForm.js" />
@@ -479,6 +482,12 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.js" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Form.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Index.js" />
@@ -2108,6 +2117,13 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductForm.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2212,6 +2228,14 @@
     <Content Include="Areas\MesDev\Views\BasketList\Index.js" />
     <Content Include="Areas\MesDev\Views\BasketList\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\BasketList\Form.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\Form.js" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

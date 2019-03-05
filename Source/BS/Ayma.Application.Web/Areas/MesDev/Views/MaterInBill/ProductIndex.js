@@ -139,16 +139,23 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductPageList',
                 headData: [
                     {
-                        label: "状态",
-                        name: "M_Status",
-                        width: 160,
-                        align: "left",
-                        formatterAsync: function(callback, value, row) {
-                            if (value == 1) {
-                                callback("<span class='label label-info'>" + "待审核" + "</span>");
-                            } else {
-                                callback("<span class='label label-success'>" + "审核通过" + "</span>");
-                            }
+                        label: "状态", name: "M_Status", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'MaterInStatus',
+                                callback: function (_data) {
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else if (value == 2) {
+                                        callback("<span class='label label-info'>" + _data.text + "</span>");
+                                    } else if (value == 3) {
+                                        callback("<span class='label label-success'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
                         }
                     },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },

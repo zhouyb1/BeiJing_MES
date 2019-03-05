@@ -10,8 +10,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 15:39
-    /// 描 述：物料清单列表
+    /// 日 期：2019-03-02 14:08
+    /// 描 述：BOM表
     /// </summary>
     public partial class BomListService : RepositoryFactory
     {
@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                t.ID,
                 t.ID,
                 t.B_Date,
                 t.B_OrderNo,
@@ -56,12 +57,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.B_Date >= @startTime AND t.B_Date <= @endTime ) ");
+                    strSql.Append(" AND ( t.B_CreateDate >= @startTime AND t.B_CreateDate <= @endTime ) ");
                 }
-                if (!queryParam["B_OrderNo"].IsEmpty())
+                if (!queryParam["B_CreateDate"].IsEmpty())
                 {
-                    dp.Add("B_OrderNo", "%" + queryParam["B_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_OrderNo Like @B_OrderNo ");
+                    dp.Add("B_CreateDate", "%" + queryParam["B_CreateDate"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_CreateDate Like @B_CreateDate ");
+                }
+                if (!queryParam["B_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("B_GoodsCode", "%" + queryParam["B_GoodsCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_GoodsCode Like @B_GoodsCode ");
                 }
                 if (!queryParam["B_GoodsName"].IsEmpty())
                 {

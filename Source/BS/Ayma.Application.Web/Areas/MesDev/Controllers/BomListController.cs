@@ -7,8 +7,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 15:39
-    /// 描 述：物料清单列表
+    /// 日 期：2019-03-02 14:08
+    /// 描 述：BOM表
     /// </summary>
     public partial class BomListController : MvcControllerBase
     {

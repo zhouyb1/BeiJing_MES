@@ -57,7 +57,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
    
         /// </summary>
         [Column("R_STATUS")]
-        public string R_Status { get; set; }
+        public ErpEnums.RequistStatusEnum R_Status { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -113,7 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
-            this.R_Status = "1";
+            this.R_Status = ErpEnums.RequistStatusEnum.NoAudit;
             this.R_CreateDate = DateTime.Now;
             this.R_CreateBy = userInfo.realName;
         }

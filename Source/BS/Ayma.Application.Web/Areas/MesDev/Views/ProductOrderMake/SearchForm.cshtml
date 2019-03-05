@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "生成订单查询";
+    Layout = "~/Views/Shared/_GirdForm.cshtml";
+}
+<style>
+    .jfgrid-data-cell {
+        border-bottom: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+    }
+</style>
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">生产订单号<font face="宋体">*</font></div>
+        <input id="P_OrderNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" disabled="disabled" />
+    </div>
+  
+    <div class="col-xs-6 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">车站名称</div>
+        <input id="P_OrderStationName" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">生产订单状态<font face="宋体">*</font></div>
+        <div id="P_Status" isvalid="yes" checkexpession="NotNull" disabled="disabled"></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_ProductOrderHead">
+
+        <div class="am-form-item-title">订单时间<font face="宋体">*</font>
+        </div>
+        <input id="P_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" disabled="disabled" />
+    </div>
+
+    <div class="col-xs-12 am-form-item am-form-item-grid" >
+        <div id="Mes_ProductOrderDetail"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/ProductOrderMake/SearchForm.js")

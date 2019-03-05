@@ -66,10 +66,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public DateTime? P_UseDate { get; set; }
 
         /// <summary>
-        /// 生产单状态
+        /// 生产单状态(0-生产中 1-入库 2-出库)
         /// </summary>
         [Column("P_STATUS")]
-        public int P_Status { get; set; }
+        public ErpEnums.PStatusEnum P_Status { get; set; }
 
         #endregion
 
@@ -79,7 +79,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         public void Create()
         {
+            var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
+            this.P_CreateDate = DateTime.Now;
+            this.P_CreateBy = userInfo.realName;
         }
         /// <summary>
         /// 编辑调用
@@ -87,7 +90,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
+            var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
+            this.P_UpdateDate = DateTime.Now;
+            this.P_UpdateBy = userInfo.realName;
         }
         #endregion
         #region 扩展字段
