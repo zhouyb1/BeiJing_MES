@@ -10,12 +10,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 13:55
-    /// 描 述：物料列表
+    /// 日 期：2019-03-05 20:21
+    /// 描 述：商品二级分类
     /// </summary>
-    public partial class GoodsListService : RepositoryFactory
+    public partial class GoodKindService : RepositoryFactory
     {
-        
         #region 获取数据
 
         /// <summary>
@@ -23,37 +22,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public DataTable GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_GoodKindEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                   t.[ID]
-                  ,t.[G_Code]
-                  ,t.[G_Name]
-                  ,t.[G_Kind]
-                  ,t.[G_Period]
-                  ,t.[G_Price]
-                  ,t.[G_Unit]
-                  ,t.[G_Super]
-                  ,t.[G_Lower]
-                  ,t.[G_CreateBy]
-                  ,t.[G_CreateDate]
-                  ,t.[G_UpdateBy]
-                  ,t.[G_UpdateDate]
-                  ,t.[G_Remark]
-                  ,t.[G_Erpcode]
-                  ,t.[G_TKind]
-                  ,t.[G_UnitQty]
-                  ,t.[G_Self]
-                  ,t.[G_Online]
-                  ,t.[G_Prepareday]
-                  ,t.[G_Otax]
-                  ,t.[G_Itax]
+                t.ID,
+                t.G_Code,
+                t.G_Name,
+                t.G_Remark
                 ");
-                strSql.Append("  FROM Mes_Goods t ");
+                strSql.Append("  FROM Mes_GoodKind t ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -68,17 +49,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("G_Name", "%" + queryParam["G_Name"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.G_Name Like @G_Name ");
                 }
-                if (!queryParam["G_Supply"].IsEmpty())
-                {
-                    dp.Add("G_Supply", "%" + queryParam["G_Supply"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Supply Like @G_Supply ");
-                }
-                if (!queryParam["G_Kind"].IsEmpty())
-                {
-                    dp.Add("G_Kind", "%" + queryParam["G_Kind"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Kind Like @G_Kind ");
-                }
-                return this.BaseRepository().FindTable(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_GoodKindEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
             {
@@ -94,15 +65,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_Goods表实体数据
+        /// 获取Mes_GoodKind表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_GoodsEntity GetMes_GoodsEntity(string keyValue)
+        public Mes_GoodKindEntity GetMes_GoodKindEntity(string keyValue)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Mes_GoodKindEntity>(keyValue);
             }
             catch (Exception ex)
             {
@@ -130,7 +101,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                this.BaseRepository().Delete<Mes_GoodsEntity>(t=>t.ID == keyValue);
+                this.BaseRepository().Delete<Mes_GoodKindEntity>(t=>t.ID == keyValue);
             }
             catch (Exception ex)
             {
@@ -150,7 +121,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_GoodsEntity entity)
+        public void SaveEntity(string keyValue, Mes_GoodKindEntity entity)
         {
             try
             {

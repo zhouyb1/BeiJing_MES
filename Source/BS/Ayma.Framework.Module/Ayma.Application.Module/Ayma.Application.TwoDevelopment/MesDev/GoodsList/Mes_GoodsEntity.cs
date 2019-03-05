@@ -31,37 +31,28 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 商品类型
         /// </summary>
         [Column("G_KIND")]
-        public string G_Kind { get; set; }
+        public ErpEnums.GkindEnum? G_Kind { get; set; }
         /// <summary>
         /// 保质时间
         /// </summary>
         [Column("G_PERIOD")]
-        public string G_Period { get; set; }
+        public int? G_Period { get; set; }
         /// <summary>
         /// 价格
         /// </summary>
         [Column("G_PRICE")]
-        public string G_Price { get; set; }
+        public decimal? G_Price { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
         [Column("G_UNIT")]
-        public string G_Unit { get; set; }
+        public string G_Unit { get; set; } 
         /// <summary>
-        /// 供应商编码
+        /// 单位重量
         /// </summary>
-        [Column("G_SUPPLYCODE")]
-        public string G_SupplyCode { get; set; }
-        /// <summary>
-        /// 供应商名称
-        /// </summary>
-        [Column("G_SUPPLY")]
-        public string G_Supply { get; set; }
-        /// <summary>
-        /// 数量
-        /// </summary>
-        [Column("G_QTY")]
-        public decimal? G_Qty { get; set; }
+        [Column("G_UNITWEIGHT")]
+        public int? G_UnitWeight { get; set; }
+        
         /// <summary>
         /// 上限预警比例
         /// </summary>
@@ -96,7 +87,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 备注
         /// </summary>
         [Column("G_REMARK")]
-        public string G_Remark { get; set; }
+        public string G_Remark { get; set; }     
+        /// <summary>
+        /// ERP中的编码(成品必填)
+        /// </summary>
+        [Column("G_ERPCODE")]
+        public string G_Erpcode { get; set; }   
+        /// <summary>
+        /// 商品二级分类
+        /// </summary>
+        [Column("G_TKIND")]
+        public string G_TKind { get; set; } 
+        /// <summary>
+        /// 包装规格
+        /// </summary>
+        [Column("G_UNITQTY")]
+        public string G_UnitQty { get; set; }  
+        /// <summary>
+        /// 是否自制(0-否 1-是)
+        /// </summary>
+        [Column("G_SELF")]
+        public ErpEnums.YesOrNoEnum? G_Self { get; set; } 
+        /// <summary>
+        /// 是否还在使用这个物料(0-否 1-是)
+        /// </summary>
+        [Column("G_ONLINE")]
+        public ErpEnums.YesOrNoEnum? G_Online { get; set; }
+        /// <summary>
+        /// 备料天数(当一级分类为原料，必填、程序控制)
+        /// </summary>
+        [Column("G_PREPAREDAY")]
+        public int? G_Prepareday { get; set; }  
+        /// <summary>
+        /// 销售税率
+        /// </summary>
+        [Column("G_Otax")]
+        public decimal? G_Otax { get; set; }
+        /// <summary>
+        /// 购进税率
+        /// </summary>
+        [Column("G_ITAX")]
+        public decimal? G_Itax { get; set; }
         #endregion
 
         #region 扩展操作

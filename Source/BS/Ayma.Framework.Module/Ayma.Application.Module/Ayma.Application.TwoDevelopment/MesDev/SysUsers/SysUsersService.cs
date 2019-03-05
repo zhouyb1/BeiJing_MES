@@ -10,12 +10,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 13:55
-    /// 描 述：物料列表
+    /// 日 期：2019-03-05 20:34
+    /// 描 述：用户表
     /// </summary>
-    public partial class GoodsListService : RepositoryFactory
+    public partial class SysUsersService : RepositoryFactory
     {
-        
         #region 获取数据
 
         /// <summary>
@@ -23,62 +22,57 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public DataTable GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Sys_UsersEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                   t.[ID]
-                  ,t.[G_Code]
-                  ,t.[G_Name]
-                  ,t.[G_Kind]
-                  ,t.[G_Period]
-                  ,t.[G_Price]
-                  ,t.[G_Unit]
-                  ,t.[G_Super]
-                  ,t.[G_Lower]
-                  ,t.[G_CreateBy]
-                  ,t.[G_CreateDate]
-                  ,t.[G_UpdateBy]
-                  ,t.[G_UpdateDate]
-                  ,t.[G_Remark]
-                  ,t.[G_Erpcode]
-                  ,t.[G_TKind]
-                  ,t.[G_UnitQty]
-                  ,t.[G_Self]
-                  ,t.[G_Online]
-                  ,t.[G_Prepareday]
-                  ,t.[G_Otax]
-                  ,t.[G_Itax]
+                t.ID,
+                t.ID,
+                t.U_Code,
+                t.U_Name,
+                t.U_Pass,
+                t.U_Department,
+                t.U_Post,
+                t.U_Ralecode,
+                t.U_Kind,
+                t.U_Telephone,
+                t.U_RFIDCode,
+                t.U_Group,
+                t.U_Indate,
+                t.U_Outdate,
+                t.U_Cert,
+                t.U_Sex,
+                t.U_Nation,
+                t.U_Record,
+                t.U_Origin,
+                t.U_Address,
+                t.U_Picture1
                 ");
-                strSql.Append("  FROM Mes_Goods t ");
+                strSql.Append("  FROM Sys_Users t ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (!queryParam["G_Code"].IsEmpty())
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
-                    dp.Add("G_Code", "%" + queryParam["G_Code"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Code Like @G_Code ");
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.U_Indate >= @startTime AND t.U_Indate <= @endTime ) ");
                 }
-                if (!queryParam["G_Name"].IsEmpty())
+                if (!queryParam["U_Indate"].IsEmpty())
                 {
-                    dp.Add("G_Name", "%" + queryParam["G_Name"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Name Like @G_Name ");
+                    dp.Add("U_Indate",queryParam["U_Indate"].ToString(), DbType.String);
+                    strSql.Append(" AND t.U_Indate = @U_Indate ");
                 }
-                if (!queryParam["G_Supply"].IsEmpty())
+                if (!queryParam["U_Name"].IsEmpty())
                 {
-                    dp.Add("G_Supply", "%" + queryParam["G_Supply"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Supply Like @G_Supply ");
+                    dp.Add("U_Name", "%" + queryParam["U_Name"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.U_Name Like @U_Name ");
                 }
-                if (!queryParam["G_Kind"].IsEmpty())
-                {
-                    dp.Add("G_Kind", "%" + queryParam["G_Kind"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Kind Like @G_Kind ");
-                }
-                return this.BaseRepository().FindTable(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Sys_UsersEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
             {
@@ -94,15 +88,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_Goods表实体数据
+        /// 获取Sys_Users表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_GoodsEntity GetMes_GoodsEntity(string keyValue)
+        public Sys_UsersEntity GetSys_UsersEntity(string keyValue)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Sys_UsersEntity>(keyValue);
             }
             catch (Exception ex)
             {
@@ -130,7 +124,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                this.BaseRepository().Delete<Mes_GoodsEntity>(t=>t.ID == keyValue);
+                this.BaseRepository().Delete<Sys_UsersEntity>(t=>t.ID == keyValue);
             }
             catch (Exception ex)
             {
@@ -150,7 +144,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_GoodsEntity entity)
+        public void SaveEntity(string keyValue, Sys_UsersEntity entity)
         {
             try
             {

@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-03-02 15:05
- * 描  述：生成订单制作
+ * 日  期：2019-03-05 20:34
+ * 描  述：用户表
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -43,7 +43,6 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
-            $('#P_Status').DataItemSelect({ code: 'ProductOrderStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -51,9 +50,9 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
-                    id: 'ProductOrderMake',
-                    title: '新增生产订单',
-                    url: top.$.rootUrl + '/MesDev/ProductOrderMake/Form?formId=ProductOrderMake',
+                    id: 'form',
+                    title: '新增',
+                    url: top.$.rootUrl + '/MesDev/SysUsers/Form',
                     width: 950,
                     height: 700,
                     maxmin: true,
@@ -67,9 +66,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'ProductOrderMake',
-                        title: '编辑生产订单',
-                        url: top.$.rootUrl + '/MesDev/ProductOrderMake/Form?keyValue=' + keyValue + '&formId=ProductOrderMake',
+                        id: 'form',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/SysUsers/Form?keyValue=' + keyValue,
                         width: 950,
                         height: 700,
                         maxmin: true,
@@ -85,7 +84,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/ProductOrderMake/DeleteForm', { keyValue: keyValue }, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/SysUsers/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -96,35 +95,29 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ProductOrderMake/GetPageList',
+                url: top.$.rootUrl + '/MesDev/SysUsers/GetPageList',
                 headData: [
-                    {
-                        label: "状态", name: "P_Status", width: 160, align: "left",
-                        formatterAsync: function (callback, value, row) {
-                            ayma.clientdata.getAsync('dataItem', {
-                                key: value,
-                                code: 'ProductOrderStatus',
-                                callback: function (_data) {
-                                    if (value == 1) {
-                                        callback("<span class='label label-default'>" + _data.text + "</span>");
-                                    } else if (value == 2) {
-                                        callback("<span class='label label-info'>" + _data.text + "</span>");
-                                    } else {
-                                        callback("<span class='label label-success'>" + _data.text + "</span>");
-                                    } 
-                                }
-                            });
-                        }
-                    },
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
-                    { label: "车站名称", name: "P_OrderStationName", width: 160, align: "left" },
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
-                     { label: "添加人", name: "P_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "P_UpdateBy", width: 160, align: "left" },
-                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left" }
+                    { label: "编码", name: "U_Code", width: 160, align: "left"},
+                    { label: "名称", name: "U_Name", width: 160, align: "left"},
+                    { label: "密码", name: "U_Pass", width: 160, align: "left"},
+                    { label: "部门", name: "U_Department", width: 160, align: "left"},
+                    { label: "岗位", name: "U_Post", width: 160, align: "left"},
+                    { label: "角色ID", name: "U_Ralecode", width: 160, align: "left"},
+                    { label: "员工类型", name: "U_Kind", width: 160, align: "left"},
+                    { label: "电话", name: "U_Telephone", width: 160, align: "left"},
+                    { label: "RFID芯片编码", name: "U_RFIDCode", width: 160, align: "left"},
+                    { label: "组别", name: "U_Group", width: 160, align: "left"},
+                    { label: "入职日期", name: "U_Indate", width: 160, align: "left"},
+                    { label: "离职日期", name: "U_Outdate", width: 160, align: "left"},
+                    { label: "身份证", name: "U_Cert", width: 160, align: "left"},
+                    { label: "性别", name: "U_Sex", width: 160, align: "left"},
+                    { label: "民族", name: "U_Nation", width: 160, align: "left"},
+                    { label: "学历", name: "U_Record", width: 160, align: "left"},
+                    { label: "籍贯", name: "U_Origin", width: 160, align: "left"},
+                    { label: "地址", name: "U_Address", width: 160, align: "left"},
+                    { label: "照片", name: "U_Picture1", width: 160, align: "left"},
                 ],
-                mainId: 'ID',
+                mainId:'ID',
                 reloadSelected: true,
                 isPage: true
             });

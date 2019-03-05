@@ -31,6 +31,69 @@ namespace Ayma.Application.TwoDevelopment
             ProOut = 10002,         
         }
         /// <summary>
+        /// 是否
+        /// </summary>
+        public enum YesOrNoEnum
+        {
+            /// <summary>
+            /// 是
+            /// </summary>
+            Yes = 1,
+            /// <summary>
+            /// 否
+            /// </summary>
+            No = 0     
+        } 
+        
+        /// <summary>
+        /// 商品类型
+        /// </summary>
+        public enum GkindEnum
+        {
+            /// <summary>
+            /// 原材料
+            /// </summary>
+            Material = 0,
+            /// <summary>
+            /// 半成品
+            /// </summary>
+            ParProduct = 1,   
+            /// <summary>
+            /// 成品
+            /// </summary>
+            FinishedProduct= 2      
+        } 
+        /// <summary>
+        /// 商品类型(二级分类)
+        /// </summary>
+        public enum GTkindEnum
+        {
+            /// <summary>
+            /// 肉食
+            /// </summary>
+            Carnivorous = 1,
+            /// <summary>
+            /// 蔬菜
+            /// </summary>
+            Vegetables = 2,   
+            /// <summary>
+            /// 调料
+            /// </summary>
+            Seasoning = 3,
+            /// <summary>
+            /// 冷链
+            /// </summary>
+            ColdChain = 4,
+            /// <summary>
+            /// 面条
+            /// </summary>
+            Noodle = 5, 
+            /// <summary>
+            /// 糕点
+            /// </summary>
+            Cakes = 6
+        } 
+        /// <summary>
         /// 生成订单状态
         /// </summary>
         public enum PStatusEnum

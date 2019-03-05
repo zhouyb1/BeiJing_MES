@@ -118,6 +118,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
+                if (!queryParam["P_Status"].IsEmpty())
+                {
+                    dp.Add("P_Status", queryParam["P_Status"].ToString(), DbType.Int32);
+                    strSql.Append(" AND t.P_Status = @P_Status ");
+                }
                 return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

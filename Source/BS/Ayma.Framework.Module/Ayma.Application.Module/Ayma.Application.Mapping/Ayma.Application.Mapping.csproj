@@ -129,6 +129,10 @@
     <Compile Include="MesDev\Mes_BasketMap.cs" />
     <Compile Include="MesDev\Mes_ProOutHeadMap.cs" />
     <Compile Include="MesDev\Mes_ProOutDetailMap.cs" />
+    <Compile Include="MesDev\Mes_PurchaseHeadMap.cs" />
+    <Compile Include="MesDev\Mes_PurchaseDetailMap.cs" />
+    <Compile Include="MesDev\Mes_GoodKindMap.cs" />
+    <Compile Include="MesDev\Sys_UsersMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-03-02 15:05
- * 描  述：生成订单制作
+ * 日  期：2019-03-05 11:20
+ * 描  述：采购单制作及查询
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -42,8 +42,8 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
-            $('#P_Status').DataItemSelect({ code: 'ProductOrderStatus' });
+            }, 250, 400);
+            $('#P_Status').DataItemSelect({ code: 'PurchaseStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -51,9 +51,9 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
-                    id: 'ProductOrderMake',
-                    title: '新增生产订单',
-                    url: top.$.rootUrl + '/MesDev/ProductOrderMake/Form?formId=ProductOrderMake',
+                    id: 'form',
+                    title: '新增采购单',
+                    url: top.$.rootUrl + '/MesDev/PurchaseHead/Form',
                     width: 950,
                     height: 700,
                     maxmin: true,
@@ -67,9 +67,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'ProductOrderMake',
-                        title: '编辑生产订单',
-                        url: top.$.rootUrl + '/MesDev/ProductOrderMake/Form?keyValue=' + keyValue + '&formId=ProductOrderMake',
+                        id: 'form',
+                        title: '编辑采购单',
+                        url: top.$.rootUrl + '/MesDev/PurchaseHead/Form?keyValue=' + keyValue,
                         width: 950,
                         height: 700,
                         maxmin: true,
@@ -85,7 +85,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/ProductOrderMake/DeleteForm', { keyValue: keyValue }, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/PurchaseHead/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -96,35 +96,34 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ProductOrderMake/GetPageList',
+                url: top.$.rootUrl + '/MesDev/PurchaseHead/GetPageList',
                 headData: [
-                    {
-                        label: "状态", name: "P_Status", width: 160, align: "left",
+                    { label: "采购单号", name: "P_PurchaseNo", width: 160, align: "left"},
+                    { label: "仓库编码", name: "P_StockCode", width: 160, align: "left"},
+                    { label: "仓库名称", name: "P_StockName", width: 160, align: "left"},
+                    { label: "供应商编码", name: "P_SupplyCode", width: 160, align: "left"},
+                    { label: "供应商名称", name: "P_SupplyName", width: 160, align: "left"},
+                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left"},
+                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left"},
+                    { label: "状态", name: "P_Status", width: 160, align: "left",
                         formatterAsync: function (callback, value, row) {
-                            ayma.clientdata.getAsync('dataItem', {
-                                key: value,
-                                code: 'ProductOrderStatus',
-                                callback: function (_data) {
-                                    if (value == 1) {
-                                        callback("<span class='label label-default'>" + _data.text + "</span>");
-                                    } else if (value == 2) {
-                                        callback("<span class='label label-info'>" + _data.text + "</span>");
-                                    } else {
-                                        callback("<span class='label label-success'>" + _data.text + "</span>");
-                                    } 
-                                }
-                            });
-                        }
-                    },
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
-                    { label: "车站名称", name: "P_OrderStationName", width: 160, align: "left" },
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
-                     { label: "添加人", name: "P_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "P_UpdateBy", width: 160, align: "left" },
-                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left" }
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 itemCode: 'PurchaseStatus',
+                                 callback: function (_data) {
+                                     callback(_data.F_ItemName);
+                                 }
+                             });
+                        }},
+                    { label: "添加人", name: "P_CreateBy", width: 160, align: "left"},
+                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left"},
+                    { label: "修改人", name: "P_UpdateBy", width: 160, align: "left"},
+                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left"},
+                    { label: "备注", name: "P_Remark", width: 160, align: "left"},
+                    { label: "提交人", name: "P_UploadBy", width: 160, align: "left"},
+                    { label: "提交时间", name: "P_UploadDate", width: 160, align: "left"},
                 ],
-                mainId: 'ID',
+                mainId:'ID',
                 reloadSelected: true,
                 isPage: true
             });

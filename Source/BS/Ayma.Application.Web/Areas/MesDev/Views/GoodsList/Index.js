@@ -13,28 +13,28 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 500);
+            }, 220, 400);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
             //商品类型
             $("#G_Kind").DataItemSelect({ code: "GoodsType" });
-            //供应商列表
-            var dfop = {
-                type: 'default',
-                value: 'ID',
-                text: 'S_Name',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
-                // 访问数据接口参数
-                param: {}
-            }
-            $("#G_Supply").select(dfop);
+            ////供应商列表
+            //var dfop = {
+            //    type: 'default',
+            //    value: 'ID',
+            //    text: 'S_Name',
+            //    // 展开最大高度
+            //    maxHeight: 200,
+            //    // 是否允许搜索
+            //    allowSearch: true,
+            //    // 访问数据接口地址
+            //    url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
+            //    // 访问数据接口参数
+            //    param: {}
+            //}
+            //$("#G_Supply").select(dfop);
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
@@ -86,6 +86,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/GoodsList/GetPageList',
                 headData: [
                     { label: "商品编码", name: "g_code", width: 160, align: "left" },
+                    { label: "商品erp编码", name: "g_erpcode", width: 160, align: "left" },
                     { label: "商品名称", name: "g_name", width: 160, align: "left" },
                     {
                         label: "商品类型", name: "g_kind", width: 160, align: "left",
@@ -93,6 +94,18 @@ var bootstrap = function ($, ayma) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
                                 code: 'GoodsType',
+                                callback: function (_data) {
+                                    callback(_data.text);
+                                }
+                            });
+                        }
+                    },
+                    {
+                        label: "商品二级类型", name: "g_tkind", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'GoodsTypeT',
                                 callback: function (_data) {
                                     callback(_data.text);
                                 }
@@ -113,11 +126,37 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "供应商编码", name: "g_supplycode", width: 160, align: "left"},
-                    { label: "供应商名称", name: "g_supply", width: 160, align: "left" },
-                    { label: "数量", name: "g_qty", width: 160, align: "left" },
-                    { label: "上限预警比例", name: "g_super", width: 160, align: "left" },
-                    { label: "下限预警比例", name: "g_lower", width: 160, align: "left" },
+                    { label: "包装规格", name: "g_unitqty", width: 160, align: "left" },
+                    { label: "上限预警数量", name: "g_super", width: 160, align: "left" },
+                    { label: "下限预警数量", name: "g_lower", width: 160, align: "left" },
+                     {
+                         label: "单位", name: "g_self", width: 160, align: "left",
+                         formatterAsyns: function (callback, value, row) {
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 code: 'YesOrNo',
+                                 callback: function (_data) {
+                                     callback(_data.text);
+                                 }
+                             });
+                         }
+                     },
+                     {
+                         label: "是否在用", name: "g_online", width: 160, align: "left",
+                         formatterAsyns: function (callback, value, row) {
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 code: 'YesOrNo',
+                                 callback: function (_data) {
+                                     callback(_data.text);
+                                 }
+                             });
+                         }
+                     },
+                     {label: "备料天数", name: "g_prepareday", width: 160, align: "left"},
+                     { label: "单位重量", name: "g_unitweight", width: 160, align: "left" },
+                     { label: "销售税率(%)", name: "g_otax", width: 160, align: "left" },
+                     { label: "购进税率(%)", name: "g_itax", width: 160, align: "left" },
                     { label: "备注", name: "G_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "g_createby", width: 160, align: "left" },
                     { label: "添加时间", name: "g_createdate", width: 160, align: "left" },

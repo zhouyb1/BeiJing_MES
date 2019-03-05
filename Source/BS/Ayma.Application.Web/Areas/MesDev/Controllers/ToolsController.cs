@@ -11,7 +11,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public class ToolsController : MvcControllerBase
     {
         private ToolsIBLL toosIBLL = new ToolsBLL();
-
+        
         #region 获取数据
         /// <summary>
         /// 根据仓库编码获取仓库实体信息
@@ -58,6 +58,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsList = toosIBLL.GetGoodsList();
             return Success(goodsList);
+        }
+        /// <summary>
+        /// 获取商品二级分类列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsKind()
+        {
+            var goodsKind = toosIBLL.GetGoodsKind();
+            return Success(goodsKind);
         }
         /// <summary>
         /// 根据门编码获取门实体信息

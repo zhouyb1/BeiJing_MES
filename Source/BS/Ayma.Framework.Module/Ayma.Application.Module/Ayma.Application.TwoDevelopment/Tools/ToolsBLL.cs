@@ -107,6 +107,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取商品二级分类列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodKindEntity> GetGoodsKind()
+        {
+            try
+            {
+                return toolsService.GetGoodsKind();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据门编码获取门实体信息
         /// </summary>
         /// <param name="code">门编码</param>

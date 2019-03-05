@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = "用户表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+   
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">编码<font face="宋体">*</font></div>
+        <input id="U_Code" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">名称<font face="宋体">*</font></div>
+        <input id="U_Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">密码<font face="宋体">*</font></div>
+        <input id="U_Pass" type="password" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">部门<font face="宋体">*</font></div>
+        <input id="U_Department" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">岗位<font face="宋体">*</font></div>
+        <input id="U_Post" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">角色ID<font face="宋体">*</font></div>
+        <input id="U_Ralecode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">员工类型<font face="宋体">*</font></div>
+        <div id="U_Kind" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">电话</div>
+        <input id="U_Telephone" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">RFID芯片编码</div>
+        <input id="U_RFIDCode" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">组别</div>
+        <input id="U_Group" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">入职日期<font face="宋体">*</font></div>
+        <input id="U_Indate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ onpicked: function () { $('#U_Indate').trigger('change'); } })" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">离职日期</div>
+        <input id="U_Outdate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ onpicked: function () { $('#U_Outdate').trigger('change'); } })"   />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">身份证</div>
+        <input id="U_Cert" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">性别</div>
+        <input id="U_Sex" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">民族</div>
+        <input id="U_Nation" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">学历</div>
+        <input id="U_Record" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">籍贯</div>
+        <input id="U_Origin" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">地址</div>
+        <input id="U_Address" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Sys_Users" >
+        <div class="am-form-item-title">照片1地址</div>
+        <input id="U_Picture1" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/SysUsers/Form.js")

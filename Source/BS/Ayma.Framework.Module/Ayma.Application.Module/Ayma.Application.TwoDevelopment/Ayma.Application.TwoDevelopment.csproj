@@ -138,6 +138,19 @@
     <Compile Include="MesDev\ProOutMake\ProOutMakeService.cs" />
     <Compile Include="MesDev\ProOutMake\ProOutMakeBLL.cs" />
     <Compile Include="MesDev\ProOutMake\ProOutMakeIBLL.cs" />
+    <Compile Include="MesDev\PurchaseHead\Mes_PurchaseHeadEntity.cs" />
+    <Compile Include="MesDev\PurchaseHead\Mes_PurchaseDetailEntity.cs" />
+    <Compile Include="MesDev\PurchaseHead\PurchaseHeadService.cs" />
+    <Compile Include="MesDev\PurchaseHead\PurchaseHeadBLL.cs" />
+    <Compile Include="MesDev\PurchaseHead\PurchaseHeadIBLL.cs" />
+    <Compile Include="MesDev\GoodKind\Mes_GoodKindEntity.cs" />
+    <Compile Include="MesDev\GoodKind\GoodKindService.cs" />
+    <Compile Include="MesDev\GoodKind\GoodKindBLL.cs" />
+    <Compile Include="MesDev\GoodKind\GoodKindIBLL.cs" />
+    <Compile Include="MesDev\SysUsers\Sys_UsersEntity.cs" />
+    <Compile Include="MesDev\SysUsers\SysUsersService.cs" />
+    <Compile Include="MesDev\SysUsers\SysUsersBLL.cs" />
+    <Compile Include="MesDev\SysUsers\SysUsersIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

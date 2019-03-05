@@ -58,9 +58,8 @@ var bootstrap = function ($, ayma) {
                         width: 900,
                         height: 700,
                         maxmin: true,
-                        btn:null,
                         callBack: function (id) {
-                           
+                            return top[id].acceptClick(refreshGirdData);
                         }
                     });
                 

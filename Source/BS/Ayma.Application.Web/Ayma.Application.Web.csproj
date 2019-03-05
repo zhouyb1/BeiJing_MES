@@ -261,6 +261,9 @@
     <Compile Include="Areas\MesDev\Controllers\BasketListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProductOrderMakeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProOutMakeController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\PurchaseHeadController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\GoodKindController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\SysUsersController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2236,6 +2239,18 @@
     <Content Include="Areas\MesDev\Views\ProOutMake\Index.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\ProOutMake\Form.js" />
+    <Content Include="Areas\MesDev\Views\PurchaseHead\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\PurchaseHead\Index.js" />
+    <Content Include="Areas\MesDev\Views\PurchaseHead\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\PurchaseHead\Form.js" />
+    <Content Include="Areas\MesDev\Views\GoodKind\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodKind\Index.js" />
+    <Content Include="Areas\MesDev\Views\GoodKind\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodKind\Form.js" />
+    <Content Include="Areas\MesDev\Views\SysUsers\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\SysUsers\Index.js" />
+    <Content Include="Areas\MesDev\Views\SysUsers\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\SysUsers\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

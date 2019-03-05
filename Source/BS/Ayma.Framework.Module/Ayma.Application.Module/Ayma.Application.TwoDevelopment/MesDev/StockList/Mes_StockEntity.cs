@@ -31,7 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 仓库类型
         /// </summary>
         [Column("S_KIND")]
-        public string S_Kind { get; set; }
+        public int? S_Kind { get; set; }
         /// <summary>
         /// 仓库保管人
         /// </summary>
