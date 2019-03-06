@@ -151,6 +151,14 @@
     <Compile Include="MesDev\SysUsers\SysUsersService.cs" />
     <Compile Include="MesDev\SysUsers\SysUsersBLL.cs" />
     <Compile Include="MesDev\SysUsers\SysUsersIBLL.cs" />
+    <Compile Include="MesDev\WorkShopManager\Mes_WorkShopEntity.cs" />
+    <Compile Include="MesDev\WorkShopManager\WorkShopManagerService.cs" />
+    <Compile Include="MesDev\WorkShopManager\WorkShopManagerBLL.cs" />
+    <Compile Include="MesDev\WorkShopManager\WorkShopManagerIBLL.cs" />
+    <Compile Include="MesDev\ClassManager\Mes_ClassEntity.cs" />
+    <Compile Include="MesDev\ClassManager\ClassManagerService.cs" />
+    <Compile Include="MesDev\ClassManager\ClassManagerBLL.cs" />
+    <Compile Include="MesDev\ClassManager\ClassManagerIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
