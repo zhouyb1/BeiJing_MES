@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "工资参数设定";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Salary" >
+        <div class="am-form-item-title">用户类型<font face="宋体">*</font></div>
+        <div id="S_UserKind" isvalid="yes" checkexpession="NotNull" ></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Salary" >
+        <div class="am-form-item-title">工作类型<font face="宋体">*</font></div>
+        <div id="S_WorkKind" isvalid="yes" checkexpession="NotNull" ></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Salary" >
+        <div class="am-form-item-title">单位时间<font face="宋体">*</font></div>
+        <input id="S_TimeUnit" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Salary" >
+        <div class="am-form-item-title">金额<font face="宋体">*</font></div>
+        <input id="S_Pay" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Salary" >
+        <div class="am-form-item-title">备注</div>
+        <input id="S_Remark" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/SalaryManager/Form.js")
