@@ -184,7 +184,8 @@ namespace Ayma.Application.WebApi
                 "/webapi/openoauth/verificode",
                 "/webapi/openoauth/sendphonecode",
                 "/webapi/orders/cancelorder",
-               "/webapi/test/getca"
+               "/webapi/test/getca",
+               "/ayma/api/productorder/syncorder"
             };
 
             if (ignoreUrl.Contains(path.ToLower()))// 登录接口，默认页面接口不做权限验证处理

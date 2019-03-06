@@ -169,6 +169,7 @@
     <Compile Include="Modules\FormApi.cs" />
     <Compile Include="Modules\Index.cs" />
     <Compile Include="Modules\AM_Crm\Invoice.cs" />
+    <Compile Include="Modules\ProductOrder\ProductOrderApi.cs" />
     <Compile Include="Modules\TestApi.cs" />
     <Compile Include="Modules\UtilityApi.cs" />
     <Compile Include="Modules\WorkFlowApi.cs" />
