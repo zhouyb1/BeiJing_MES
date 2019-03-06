@@ -264,6 +264,8 @@
     <Compile Include="Areas\MesDev\Controllers\PurchaseHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\GoodKindController.cs" />
     <Compile Include="Areas\MesDev\Controllers\SysUsersController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\WorkShopManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ClassManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2251,6 +2253,14 @@
     <Content Include="Areas\MesDev\Views\SysUsers\Index.js" />
     <Content Include="Areas\MesDev\Views\SysUsers\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\SysUsers\Form.js" />
+    <Content Include="Areas\MesDev\Views\WorkShopManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\WorkShopManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\WorkShopManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\WorkShopManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\ClassManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ClassManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\ClassManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ClassManager\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
