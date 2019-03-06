@@ -163,6 +163,14 @@
     <Compile Include="MesDev\SalaryManager\SalaryManagerService.cs" />
     <Compile Include="MesDev\SalaryManager\SalaryManagerBLL.cs" />
     <Compile Include="MesDev\SalaryManager\SalaryManagerIBLL.cs" />
+    <Compile Include="MesDev\HumitureManager\Mes_HumitureEntity.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerBLL.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
+    <Compile Include="MesDev\ProceManager\Mes_ProceEntity.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerService.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
