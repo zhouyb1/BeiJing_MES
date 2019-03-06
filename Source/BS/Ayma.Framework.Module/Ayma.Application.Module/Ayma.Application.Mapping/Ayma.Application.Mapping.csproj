@@ -135,6 +135,7 @@
     <Compile Include="MesDev\Sys_UsersMap.cs" />
     <Compile Include="MesDev\Mes_WorkShopMap.cs" />
     <Compile Include="MesDev\Mes_ClassMap.cs" />
+    <Compile Include="MesDev\Mes_SalaryMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
