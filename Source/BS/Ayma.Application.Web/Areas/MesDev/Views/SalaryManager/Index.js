@@ -91,7 +91,7 @@ var bootstrap = function ($, ayma) {
                              });
                         }},
                     { label: "单位时间", name: "S_TimeUnit", width: 160, align: "left"},
-                    { label: "报酬/h", name: "S_Pay", width: 160, align: "left"},
+                    { label: "报酬(加班按小时)", name: "S_Pay", width: 160, align: "left"},
                     { label: "备注", name: "S_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',
