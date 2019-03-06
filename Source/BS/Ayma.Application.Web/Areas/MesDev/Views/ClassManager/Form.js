@@ -14,6 +14,26 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            $("#C_Code").on('keyup', function () {
+                var code = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                    data: { tables: "Mes_Class", field: "C_Code", code: code },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (isOk) {
+                            $("#C_Code").addClass("am-field-error");
+                            $("#C_Code").parent().append(html);
+                            ayma.alert.error("编码重复");
+                        } else {
+                            $("#C_Code").removeClass("am-field-error");
+                            $("#isCode").remove();
+                        }
+                    }
+                });
+            });
         },
         initData: function () {
             if (!!keyValue) {
