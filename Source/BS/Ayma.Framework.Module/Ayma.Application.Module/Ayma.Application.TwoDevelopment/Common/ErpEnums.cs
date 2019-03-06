@@ -104,9 +104,9 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             Productint = 0,
             /// <summary>
-            /// 入库
+            /// 单据生成
             /// </summary>
-            StockIn = 1,   
+            OrderInit = 1,   
             /// <summary>
             /// 出库
             /// </summary>

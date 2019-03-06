@@ -83,6 +83,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.P_CreateDate = DateTime.Now;
             this.P_CreateBy = userInfo.realName;
+            this.P_Status=ErpEnums.PStatusEnum.OrderInit;
         }
         /// <summary>
         /// 编辑调用

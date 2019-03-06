@@ -59,6 +59,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         void SaveEntity(string keyValue, Mes_ProductOrderHeadEntity entity,List<Mes_ProductOrderDetailEntity> mes_ProductOrderDetailList);
+
+        /// <summary>
+        /// 根据(订单号,keyValue)获取订单实体
+        /// </summary>
+        /// <returns></returns>
+        Mes_ProductOrderHeadEntity GetEntityByParam(string param);
+
         #endregion
 
     }

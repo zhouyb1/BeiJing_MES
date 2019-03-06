@@ -186,7 +186,28 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 根据(订单号,keyValue)获取订单实体
+        /// </summary>
+        /// <returns></returns>
+        public Mes_ProductOrderHeadEntity GetEntityByParam(string param)
+        {
+            try
+            {
+                return productOrderMakeService.GetEntityByParam(param);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         #endregion
 
     }

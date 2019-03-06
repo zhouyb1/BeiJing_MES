@@ -292,6 +292,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 根据(订单号,keyValue)获取订单实体
+        /// </summary>
+        /// <returns></returns>
+        public Mes_ProductOrderHeadEntity GetEntityByParam(string param)
+        {
+            return this.BaseRepository().FindEntity<Mes_ProductOrderHeadEntity>(c => c.P_OrderNo == param || c.ID == param);
+        }
+
         #endregion
 
     }
