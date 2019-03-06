@@ -29,8 +29,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.P_Record,
-                t.P_ProCode,
+                t.ID,
+                t.P_RecordCode,
+                t.P_ProNo,
                 t.P_ProName,
                 t.P_WorkShop,
                 t.P_Remark
@@ -112,7 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                this.BaseRepository().Delete<Mes_ProceEntity>(t=>t.P_Record == keyValue);
+                this.BaseRepository().Delete<Mes_ProceEntity>(t=>t.ID == keyValue);
             }
             catch (Exception ex)
             {

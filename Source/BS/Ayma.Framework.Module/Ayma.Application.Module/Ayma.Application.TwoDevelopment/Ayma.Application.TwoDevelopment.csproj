@@ -53,6 +53,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ErpEnums.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerBLL.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
+    <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
+    <Compile Include="MesDev\HumitureManager\Mes_HumitureEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
@@ -60,6 +64,10 @@
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadService.cs" />
+    <Compile Include="MesDev\ProceManager\Mes_ProceEntity.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
+    <Compile Include="MesDev\ProceManager\ProceManagerService.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistDetailEntity.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistHeadEntity.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />
@@ -163,14 +171,11 @@
     <Compile Include="MesDev\SalaryManager\SalaryManagerService.cs" />
     <Compile Include="MesDev\SalaryManager\SalaryManagerBLL.cs" />
     <Compile Include="MesDev\SalaryManager\SalaryManagerIBLL.cs" />
-    <Compile Include="MesDev\HumitureManager\Mes_HumitureEntity.cs" />
-    <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
-    <Compile Include="MesDev\HumitureManager\HumitureManagerBLL.cs" />
-    <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
-    <Compile Include="MesDev\ProceManager\Mes_ProceEntity.cs" />
-    <Compile Include="MesDev\ProceManager\ProceManagerService.cs" />
-    <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
-    <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
+    <Compile Include="MesDev\BomHead\Mes_BomHeadEntity.cs" />
+    <Compile Include="MesDev\BomHead\Mes_BomRecordEntity.cs" />
+    <Compile Include="MesDev\BomHead\BomHeadService.cs" />
+    <Compile Include="MesDev\BomHead\BomHeadBLL.cs" />
+    <Compile Include="MesDev\BomHead\BomHeadIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

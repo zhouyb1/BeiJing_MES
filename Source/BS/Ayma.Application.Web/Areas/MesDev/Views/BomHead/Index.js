@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-03-06 14:55
- * 描  述：工序管理
+ * 日  期：2019-03-06 17:41
+ * 描  述：配方表
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -23,8 +23,8 @@ var bootstrap = function ($, ayma) {
                 ayma.layerForm({
                     id: 'form',
                     title: '新增',
-                    url: top.$.rootUrl + '/MesDev/ProceManager/Form',
-                    width: 400,
+                    url: top.$.rootUrl + '/MesDev/BomHead/Form',
+                    width: 600,
                     height: 400,
                     maxmin: true,
                     callBack: function (id) {
@@ -39,7 +39,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/ProceManager/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/BomHead/Form?keyValue=' + keyValue,
                         width: 600,
                         height: 400,
                         maxmin: true,
@@ -55,7 +55,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/ProceManager/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/BomHead/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -66,15 +66,29 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ProceManager/GetPageList',
+                url: top.$.rootUrl + '/MesDev/BomHead/GetPageList',
                 headData: [
-                    { label: "工艺代码", name: "P_RecordCode", width: 160, align: "left"},
-                    { label: "工序号", name: "P_ProNo", width: 160, align: "left"},
-                    { label: "工序名称", name: "P_ProName", width: 160, align: "left"},
-                    { label: "车间", name: "P_WorkShop", width: 160, align: "left"},
-                    { label: "备注", name: "P_Remark", width: 160, align: "left"},
+                    { label: "工艺代码", name: "B_Record", width: 160, align: "left"},
+                    { label: "工序号", name: "B_ProCode", width: 160, align: "left"},
+                    { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left"},
+                    { label: "配方名称", name: "B_FormulaName", width: 160, align: "left"},
+                    { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left"},
+                    { label: "物料名称", name: "B_GoodsName", width: 160, align: "left"},
+                    { label: "是否生效", name: "B_Avail", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 itemCode: 'YesOrNo',
+                                 callback: function (_data) {
+                                     callback(_data.F_ItemName);
+                                 }
+                             });
+                        }},
+                    { label: "开始时间", name: "B_StartTime", width: 160, align: "left"},
+                    { label: "截止时间", name: "B_EndTime", width: 160, align: "left"},
+                    { label: "单位", name: "B_Unit", width: 160, align: "left"},
                 ],
-                mainId: 'ID',
+                mainId:'ID',
                 reloadSelected: true,
                 isPage: true
             });

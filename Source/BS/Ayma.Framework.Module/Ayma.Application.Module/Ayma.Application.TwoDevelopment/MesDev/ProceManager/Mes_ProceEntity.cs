@@ -13,15 +13,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     {
         #region 实体成员
         /// <summary>
+        /// 主键
+        /// </summary>
+        [Column("ID")]
+        public string ID { get; set; } 
+        /// <summary>
         /// 工艺代码
         /// </summary>
-        [Column("P_RECORD")]
-        public string P_Record { get; set; }
+        [Column("P_RECORDCODE")]
+        public string P_RecordCode { get; set; }
         /// <summary>
         /// 工序号
         /// </summary>
-        [Column("P_PROCODE")]
-        public string P_ProCode { get; set; }
+        [Column("P_PRONO")]
+        public string P_ProNo { get; set; }
         /// <summary>
         /// 工序名称
         /// </summary>
@@ -45,7 +50,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         public void Create()
         {
-            this.P_Record = Guid.NewGuid().ToString();
+            this.ID = Guid.NewGuid().ToString();
         }
         /// <summary>
         /// 编辑调用
@@ -53,7 +58,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
-            this.P_Record = keyValue;
+            this.ID = keyValue;
         }
         #endregion
         #region 扩展字段
