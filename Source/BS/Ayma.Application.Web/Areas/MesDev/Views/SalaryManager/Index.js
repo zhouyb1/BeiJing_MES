@@ -84,7 +84,7 @@ var bootstrap = function ($, ayma) {
                         formatterAsync: function (callback, value, row) {
                              ayma.clientdata.getAsync('dataItem', {
                                  key: value,
-                                 itemCode: 'GoodsType',
+                                 itemCode: 'WorkType',
                                  callback: function (_data) {
                                      callback(_data.F_ItemName);
                                  }
