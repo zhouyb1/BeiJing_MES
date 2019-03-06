@@ -159,6 +159,10 @@
     <Compile Include="MesDev\ClassManager\ClassManagerService.cs" />
     <Compile Include="MesDev\ClassManager\ClassManagerBLL.cs" />
     <Compile Include="MesDev\ClassManager\ClassManagerIBLL.cs" />
+    <Compile Include="MesDev\SalaryManager\Mes_SalaryEntity.cs" />
+    <Compile Include="MesDev\SalaryManager\SalaryManagerService.cs" />
+    <Compile Include="MesDev\SalaryManager\SalaryManagerBLL.cs" />
+    <Compile Include="MesDev\SalaryManager\SalaryManagerIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
