@@ -42,12 +42,13 @@ namespace Ayma.Application.Organization
                     return new List<UserEntity>();
                 }
 
-                List<UserEntity> list = cache.Read<List<UserEntity>>(cacheKey + companyId, CacheId.user);
-                if (list == null)
-                {
-                    list = (List<UserEntity>)userService.GetList(companyId);
-                    cache.Write<List<UserEntity>>(cacheKey + companyId, list, CacheId.user);
-                }
+                //List<UserEntity> list = cache.Read<List<UserEntity>>(cacheKey + companyId, CacheId.user);
+                //if (list == null)
+                //{
+                //    list = (List<UserEntity>)userService.GetList(companyId);
+                //    cache.Write<List<UserEntity>>(cacheKey + companyId, list, CacheId.user);
+                //}
+                List<UserEntity> list = (List<UserEntity>)userService.GetList(companyId);
                 return list;
             }
             catch (Exception ex)

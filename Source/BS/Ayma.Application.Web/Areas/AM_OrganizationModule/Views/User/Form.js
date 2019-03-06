@@ -20,9 +20,13 @@ var bootstrap = function ($, ayma) {
         },
         bind: function () {
             // 部门
-            $('#F_DepartmentId').DepartmentSelect({ companyId: companyId});
+            $('#F_DepartmentId').DepartmentSelect({ companyId: companyId });
+            //用户类型
+            $('#F_Kind').DataItemSelect({ code: 'EmployeeKind' });
             // 性别
             $('#F_Gender').select();
+            //照片
+            $('#F_Picture1').Uploader();
             /*检测重复项*/
             $('#F_Account').on('blur', function () {
                 $.ExistField(keyValue, 'F_Account', top.$.rootUrl + '/AM_OrganizationModule/User/ExistAccount');
@@ -30,6 +34,7 @@ var bootstrap = function ($, ayma) {
         },
         initData: function () {
             if (!!selectedRow) {
+                console.log(selectedRow)
                 keyValue = selectedRow.F_UserId;
                 selectedRow.F_Password = "******";
                 $('#form').SetFormData(selectedRow);

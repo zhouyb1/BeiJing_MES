@@ -44,6 +44,7 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             No = 0     
         } 
+       
         
         /// <summary>
         /// 商品类型

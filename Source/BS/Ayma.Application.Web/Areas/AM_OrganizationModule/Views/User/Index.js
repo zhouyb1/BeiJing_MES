@@ -57,8 +57,8 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '添加账号',
                     url: top.$.rootUrl + '/AM_OrganizationModule/User/Form?companyId=' + companyId,
-                    width: 750,
-                    height: 450,
+                    width: 900,
+                    height: 700,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
                     }
@@ -73,8 +73,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑账号',
                         url: top.$.rootUrl + '/AM_OrganizationModule/User/Form?companyId=' + companyId,
-                        width: 750,
-                        height: 450,
+                        width: 900,
+                        height: 700,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -254,6 +254,7 @@ var bootstrap = function ($, ayma) {
                             }
                         },
                         { label: '手机', name: 'F_Mobile', width: 100, align: 'center'},
+                        //{ label: '地址', name: 'U_Address', width: 100, align: 'center' },
                         {
                             label: '部门', name: 'F_DepartmentId', width: 100, align: 'left',
                             formatterAsync: function (callback, value, row) {

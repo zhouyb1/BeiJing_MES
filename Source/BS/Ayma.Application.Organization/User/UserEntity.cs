@@ -1,7 +1,6 @@
 ﻿using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Ayma.Application.Organization
 {
     /// <summary>
@@ -207,6 +206,81 @@ namespace Ayma.Application.Organization
         /// </summary>		
         [Column("F_MODIFYUSERNAME")]
         public string F_ModifyUserName { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>		
+        [Column("U_ADDRESS")]
+        public string U_Address { get; set; }
+        /// <summary>
+        /// 员工类型
+        /// </summary>		
+        [Column("F_KIND")]
+        public int? F_Kind { get; set; }
+        /// <summary>
+        /// RFID芯片编码
+        /// </summary>		
+        [Column("F_RFIDCODE")]
+        public string F_RFIDCode { get; set; }
+        /// <summary>
+        ///组别
+        /// </summary>		
+        [Column("F_GROUP")]
+        public string F_Group { get; set; } 
+        /// <summary>
+        ///入职日期
+        /// </summary>		
+        [Column("F_INDATE")]
+        public DateTime? F_Indate { get; set; } 
+        /// <summary>
+        ///离职日期
+        /// </summary>		
+        [Column("F_OUTDATE")]
+        public DateTime? F_Outdate { get; set; } 
+        /// <summary>
+        ///身份证
+        /// </summary>		
+        [Column("F_CERT")]
+        public string F_Cert { get; set; }  
+        /// <summary>
+        ///民族
+        /// </summary>		
+        [Column("F_NATION")]
+        public string F_Nation { get; set; } 
+        /// <summary>
+        ///学历
+        /// </summary>		
+        [Column("F_RECORD")]
+        public string F_Record { get; set; }
+        /// <summary>
+        ///籍贯
+        /// </summary>		
+        [Column("F_ORIGIN")]
+        public string F_Origin { get; set; }
+        /// <summary>
+        ///照片1
+        /// </summary>		
+        [Column("F_PICTURE1")]
+        public string F_Picture1 { get; set; } 
+        /// <summary>
+        ///照片2
+        /// </summary>		
+        [Column("F_PICTURE2")]
+        public string F_Picture2 { get; set; } 
+        /// <summary>
+        ///照片3
+        /// </summary>		
+        [Column("F_PICTURE3")]
+        public string F_Picture3 { get; set; } 
+        /// <summary>
+        ///照片4
+        /// </summary>		
+        [Column("F_PICTURE4")]
+        public string F_Picture4 { get; set; }  
+        /// <summary>
+        ///照片5
+        /// </summary>		
+        [Column("F_PICTURE5")]
+        public string F_Picture5 { get; set; }
         #endregion
 
         #region 扩展操作
