@@ -14,6 +14,48 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            //检查编码重复
+            $("#W_Code").on('keyup', function () {
+                var code = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                    data: { tables: "Mes_WorkShop", field: "W_Code", code: code },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (isOk) {
+                            $("#W_Code").addClass("am-field-error");
+                            $("#W_Code").parent().append(html);
+                            ayma.alert.error("编码重复");
+                        } else {
+                            $("#W_Code").removeClass("am-field-error");
+                            $("#isCode").remove();
+                        }
+                    }
+                });
+            });
+            //检查名称重复 W_Name
+            $("#W_Name").on('keyup', function () {
+                var code = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isCode" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                    data: { tables: "Mes_WorkShop", field: "W_Code", code: code },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (isOk) {
+                            $("#W_Name").addClass("am-field-error");
+                            $("#W_Name").parent().append(html);
+                            ayma.alert.error("名称重复");
+                        } else {
+                            $("#W_Name").removeClass("am-field-error");
+                            $("#isCode").remove();
+                        }
+                    }
+                });
+            });
         },
         initData: function () {
             if (!!keyValue) {

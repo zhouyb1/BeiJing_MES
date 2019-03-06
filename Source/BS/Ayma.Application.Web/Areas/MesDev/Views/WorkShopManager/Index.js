@@ -9,6 +9,7 @@ var bootstrap = function ($, ayma) {
         init: function () {
             page.initGird();
             page.bind();
+            page.dbClick();
         },
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
@@ -85,6 +86,25 @@ var bootstrap = function ($, ayma) {
         search: function (param) {
             param = param || {};
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
+        },
+
+        dbClick: function () {
+            $('#girdtable').on('dblclick', function() {
+                var keyValue = $('#girdtable').jfGridValue('Id');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/WorkShopManager/Form?keyValue=' + keyValue,
+                        width: 600,
+                        height: 400,
+                        maxmin: true,
+                        callBack: function(id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
         }
     };
     refreshGirdData = function () {

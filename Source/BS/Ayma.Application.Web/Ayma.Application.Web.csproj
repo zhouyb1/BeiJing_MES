@@ -216,9 +216,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSchemeController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
-    <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
@@ -269,7 +267,8 @@
     <Compile Include="Areas\MesDev\Controllers\WorkShopManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ClassManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\SalaryManagerController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\BomHeadController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -481,8 +480,6 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
-    <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.js" />
@@ -493,8 +490,6 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
-    <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
@@ -2137,10 +2132,6 @@
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.cshtml" />
-    <Content Include="Areas\MesDev\Views\HumitureManager\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\HumitureManager\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\ProceManager\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\ProceManager\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2277,10 +2268,14 @@
     <Content Include="Areas\MesDev\Views\SalaryManager\Index.js" />
     <Content Include="Areas\MesDev\Views\SalaryManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\SalaryManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\BomHead\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\BomHead\Index.js" />
-    <Content Include="Areas\MesDev\Views\BomHead\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\BomHead\Form.js" />
+    <Content Include="Areas\MesDev\Views\HumitureManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\HumitureManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\ProceManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProceManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

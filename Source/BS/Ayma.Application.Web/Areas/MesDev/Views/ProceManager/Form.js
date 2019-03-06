@@ -14,6 +14,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            //检查编码重复
             $("#P_RecordCode").on('keyup', function () {
                 var code = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
@@ -29,6 +30,27 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             ayma.alert.error("编码重复");
                         } else {
                             $("#P_RecordCode").removeClass("am-field-error");
+                            $("#isCode").remove();
+                        }
+                    }
+                });
+            });
+            //检查名称重复 
+            $("#P_ProName").on('keyup', function () {
+                var code = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isCode" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                    data: { tables: "Mes_Proce", field: "P_ProName", code: code },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (isOk) {
+                            $("#P_ProName").addClass("am-field-error");
+                            $("#P_ProName").parent().append(html);
+                            ayma.alert.error("名称重复");
+                        } else {
+                            $("#P_ProName").removeClass("am-field-error");
                             $("#isCode").remove();
                         }
                     }
