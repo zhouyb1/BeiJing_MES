@@ -42,7 +42,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_WorkShop", field: "W_Code", code: code },
+                    data: { tables: "Mes_WorkShop", field: "W_Name", code: code },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {
