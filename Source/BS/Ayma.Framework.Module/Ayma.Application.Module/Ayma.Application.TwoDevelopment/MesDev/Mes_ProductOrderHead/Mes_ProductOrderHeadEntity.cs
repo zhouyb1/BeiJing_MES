@@ -82,7 +82,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
             this.P_CreateDate = DateTime.Now;
-            this.P_CreateBy = userInfo.realName;
+            this.P_CreateBy = userInfo == null ? "ERP": userInfo.realName;
             this.P_Status=ErpEnums.PStatusEnum.OrderInit;
         }
         /// <summary>
