@@ -21,12 +21,13 @@ var bootstrap = function ($, ayma) {
             });
             // 新增
             $('#am_add').on('click', function () {
+                var id = $('#girdtable').jfGridValue('ID');
                 ayma.layerForm({
                     id: 'form',
                     title: '新增',
-                    url: top.$.rootUrl + '/MesDev/ProceManager/Form',
-                    width: 400,
-                    height: 400,
+                    url: top.$.rootUrl + '/MesDev/ProceManager/Form?parentId=' + id,
+                    width: 700,
+                    height: 500,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -41,8 +42,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/ProceManager/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -67,7 +68,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ProceManager/GetPageList',
+                url: top.$.rootUrl + '/MesDev/ProceManager/GetTreeList',
                 headData: [
                     { label: "工艺代码", name: "P_RecordCode", width: 160, align: "left"},
                     { label: "工序号", name: "P_ProNo", width: 160, align: "left"},
@@ -75,9 +76,11 @@ var bootstrap = function ($, ayma) {
                     { label: "车间", name: "P_WorkShop", width: 160, align: "left"},
                     { label: "备注", name: "P_Remark", width: 160, align: "left"},
                 ],
+                isTree: true,
                 mainId: 'ID',
+                parentId: 'P_ParentId',
                 reloadSelected: true,
-                isPage: true
+                isShowNum: true
             });
             page.search();
         },

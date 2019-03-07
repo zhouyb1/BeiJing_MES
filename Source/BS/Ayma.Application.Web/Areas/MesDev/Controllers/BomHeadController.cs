@@ -26,6 +26,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
              return View();
         }
         /// <summary>
+        /// 配方详情列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BomRecordIndex()
+        {
+             return View();
+        }
+        /// <summary>
+        /// 配方详情表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult BomRecordForm()
+        {
+             return View();
+        }
+        /// <summary>
         /// 表单页
         /// </summary>
         /// <returns></returns>
@@ -59,6 +77,31 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
         /// <summary>
+        /// 根据配方编码获取配方列表数据
+        /// </summary>
+        /// <param name="formulaCode">配方编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetBomRecordListBy(string formulaCode)
+        {
+            var data = bomHeadIBLL.GetBomRecordListBy(formulaCode);
+            return Success(data);
+        } 
+        /// <summary>
+        /// 配方树形列表
+        /// </summary>
+        /// <param name="queryJson">工艺代码、配方编码、配方名称、物料编码、物料名称</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetBomRecordTreeList(string queryJson)
+        {
+            var data = bomHeadIBLL.GetBomRecordTreeList(queryJson);
+
+            return Success(data);
+        }
+        /// <summary>
         /// 获取表单数据
         /// </summary>
         /// <returns></returns>
@@ -79,6 +122,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 提交数据
 
         /// <summary>
+        /// 删除配方表数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult DeleteBomRecordForm(string keyValue)
+        {
+            bomHeadIBLL.DeleteBomRecordForm(keyValue);
+            return Success("删除成功！");
+        }
+        /// <summary>
         /// 删除实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -98,11 +153,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity, string strmes_BomRecordList)
+        public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_BomHeadEntity entity = strEntity.ToObject<Mes_BomHeadEntity>();
-            List<Mes_BomRecordEntity> mes_BomRecordList = strmes_BomRecordList.ToObject<List<Mes_BomRecordEntity>>();
-            bomHeadIBLL.SaveEntity(keyValue,entity,mes_BomRecordList);
+            //List<Mes_BomRecordEntity> mes_BomRecordList = strmes_BomRecordList.ToObject<List<Mes_BomRecordEntity>>();
+            bomHeadIBLL.SaveEntity(keyValue,entity);
+            return Success("保存成功！");
+        }
+        /// <summary>
+        /// 保存配方表数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity)
+        {
+            bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
             return Success("保存成功！");
         }
         #endregion

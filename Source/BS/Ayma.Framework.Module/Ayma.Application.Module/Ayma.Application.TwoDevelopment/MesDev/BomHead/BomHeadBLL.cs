@@ -40,6 +40,51 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
+        /// 根据配方编码获取配方列表数据
+        /// </summary>
+        /// <param name="formulaCode">配方编码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomRecordListBy(string formulaCode)
+        {
+            try
+            {
+                return bomHeadService.GetBomRecordListBy(formulaCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取配方列表数据
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
+        {
+            try
+            {
+                return bomHeadService.GetBomRecordTreeList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取Mes_BomRecord表数据
         /// <summary>
         /// <returns></returns>
@@ -115,6 +160,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 提交数据
 
         /// <summary>
+        /// 删除配方表数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteBomRecordForm(string keyValue)
+        {
+            try
+            {
+                bomHeadService.DeleteBomRecordForm(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 删除实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -143,11 +211,34 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_BomHeadEntity entity,List<Mes_BomRecordEntity> mes_BomRecordList)
+        public void SaveEntity(string keyValue, Mes_BomHeadEntity entity)
         {
             try
             {
-                bomHeadService.SaveEntity(keyValue, entity,mes_BomRecordList);
+                bomHeadService.SaveEntity(keyValue, entity);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 保存配方表数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity)
+        {
+            try
+            {
+                bomHeadService.SaveBomRecordForm(keyValue, entity);
             }
             catch (Exception ex)
             {

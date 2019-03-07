@@ -20,16 +20,37 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_StockEntity ByCodeGetStockEntity(string code);
         /// <summary>
+        /// 获取配方表树形结构列表
+        /// </summary>
+        /// <returns></returns>
+        List<TreeModel> GetBomRecordTree();
+        /// <summary>
         /// 获取仓库列表
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_StockEntity> GetStockList();
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ProceEntity> GetProceList(string parentId);
+        /// <summary>
+        /// 获取配方表树形结构列表
+        /// </summary>
+        /// <returns></returns>
+        List<TreeModel> GetProceTreeList();
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// <param name="code">物料编码</param>
         /// </summary>
         /// <returns></returns>
         Mes_GoodsEntity ByCodeGetGoodsEntity(string code);
+        /// <summary>
+        /// 根据工艺代码获取工序表实体
+        /// <param name="code">工艺代码</param>
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ProceEntity> GetProceListBy(string code);
         /// <summary>
         /// 获取物料
         /// </summary>

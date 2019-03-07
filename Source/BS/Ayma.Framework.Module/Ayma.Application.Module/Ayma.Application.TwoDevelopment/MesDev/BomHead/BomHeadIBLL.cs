@@ -17,10 +17,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<Mes_BomHeadEntity> GetPageList(Pagination pagination, string queryJson);
+        IEnumerable<Mes_BomHeadEntity> GetPageList(Pagination pagination, string queryJson); 
+        /// <summary>
+        /// 根据配方编码获取配方列表数据
+        /// </summary>
+        /// <param name="formulaCode">配方编码</param>
+        /// <returns></returns>
+        IEnumerable<Mes_BomRecordEntity> GetBomRecordListBy(string formulaCode);        
+        /// <summary>
+        /// 获取配方列表数据
+        /// </summary>
+        /// <param name="queryJson">工艺代码、配方编码、配方名称、物料编码、物料名称</param>
+        /// <returns></returns>
+        IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList( string queryJson);
         /// <summary>
         /// 获取Mes_BomRecord表数据
-        /// <summary>
+        /// </summary>
+        /// <param name="keyValue"></param>
         /// <returns></returns>
         IEnumerable<Mes_BomRecordEntity> GetMes_BomRecordList(string keyValue);
         /// <summary>
@@ -40,6 +53,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 提交数据
 
         /// <summary>
+        /// 删除配方表数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        void DeleteBomRecordForm(string keyValue); 
+        /// <summary>
         /// 删除实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -50,7 +69,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        void SaveEntity(string keyValue, Mes_BomHeadEntity entity,List<Mes_BomRecordEntity> mes_BomRecordList);
+        void SaveEntity(string keyValue, Mes_BomHeadEntity entity); 
+        /// <summary>
+        /// 保存配方表数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        void SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity);
         #endregion
 
     }

@@ -4,6 +4,7 @@ using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using Ayma.Application.TwoDevelopment.MesDev;
 
@@ -62,7 +63,75 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取配方列表
+        /// </summary>
+        /// <returns></returns>
+        public List<Mes_BomRecordEntity> GetBomRecordList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_BomRecordEntity>().ToList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取工序树形列表
+        /// </summary>
+        /// <returns></returns>
+        public List<Mes_ProceEntity> GetProceTreeList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ProceEntity>().ToList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
+
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceList(string parentId)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ProceEntity>(t=>t.P_ParentId==parentId);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
@@ -86,6 +155,33 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 根据工序代码获取工序表实体
+        /// <param name="code">工艺代码</param>
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceListBy(string code)
+        {
+            try
+            {
+                var entity= this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == code);
+                var list = this.BaseRepository().FindList<Mes_ProceEntity>(t => t.P_ParentId == entity.ID || t.ID == entity.ID);
+                return list;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取物料列表
         /// </summary>

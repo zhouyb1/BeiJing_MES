@@ -26,6 +26,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(stockEntity);
         }
         /// <summary>
+        /// 获取配方表树形结构列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetBomRecordTree()
+        {
+            var bomRecordTree = toosIBLL.GetBomRecordTree();
+            return Success(bomRecordTree);
+        }  
+        /// <summary>
         /// 获取仓库列表
         /// </summary>
         /// <returns></returns>
@@ -35,6 +46,28 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var stockList = toosIBLL.GetStockList();
             return Success(stockList);
+        } 
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProceList(string parentId)
+        {
+            var stockList = toosIBLL.GetProceList(parentId);
+            return Success(stockList);
+        } 
+        /// <summary>
+        /// 获取工序树形列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProceTreeList()
+        {
+            var proceTreeList = toosIBLL.GetProceTreeList();
+            return Success(proceTreeList);
         }
         /// <summary>
         /// 根据物料编码获取物料实体信息
@@ -47,6 +80,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsEntity = toosIBLL.ByCodeGetGoodsEntity(code);
             return Success(goodsEntity);
+        }
+        /// <summary>
+        /// 根据工艺代码代码获取工序表实体
+        /// </summary>
+        /// <param name="code">工艺代码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProceListBy(string code)
+        {
+            var proceList = toosIBLL.GetProceListBy(code);
+            return Success(proceList);
         }
         /// <summary>
         /// 获取物料列表

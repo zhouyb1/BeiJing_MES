@@ -16,12 +16,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// ID
         /// </summary>
         [Column("ID")]
-        public string ID { get; set; }
+        public string ID { get; set; }    
+        /// <summary>
+        /// 父Id
+        /// </summary>
+        [Column("B_PARENTID")]
+        public string B_ParentID { get; set; }
+        /// <summary>
+        /// 工艺代码
+        /// </summary>
+        [Column("B_RECORDCODE")]
+        public string B_RecordCode { get; set; } 
+        /// <summary>
+        /// 工序号
+        /// </summary>
+        [Column("B_PRONO")]
+        public string B_ProNo { get; set; }
         /// <summary>
         /// 配方编码
         /// </summary>
         [Column("B_FORMULACODE")]
-        public string B_FormulaCode { get; set; }
+        public string B_FormulaCode { get; set; }   
+        /// <summary>
+        /// 配方名称
+        /// </summary>
+        [Column("B_FORMULANAME")]
+        public string B_FormulaName { get; set; }
         /// <summary>
         /// 物料编码
         /// </summary>
@@ -41,27 +61,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("B_QTY")]
-        public double? B_Qty { get; set; }
+        public decimal? B_Qty { get; set; }
         /// <summary>
-        /// 下级物料编码
+        /// 添加人
         /// </summary>
-        [Column("B_SECGOODSCODE")]
-        public string B_SecGoodsCode { get; set; }
+        [Column("B_CREATEBY")]
+        public string B_CreateBy { get; set; }
         /// <summary>
-        /// 下级物料名称
+        /// 添加时间
         /// </summary>
-        [Column("B_SECGOODSNAME")]
-        public string B_SecGoodsName { get; set; }
+        [Column("B_CREATEDATE")]
+        public DateTime? B_CreateDate { get; set; }
         /// <summary>
-        /// 下级物料数量
+        /// 修改人
         /// </summary>
-        [Column("B_SECQTY")]
-        public double? B_SecQty { get; set; }
+        [Column("B_UPDATEBY")]
+        public string B_UpdateBy { get; set; }
         /// <summary>
-        /// 下级物料单位
+        /// 修改时间
         /// </summary>
-        [Column("B_SECUNIT")]
-        public string B_SecUnit { get; set; }
+        [Column("B_UPDATEDATE")]
+        public DateTime? B_UpdateDate { get; set; }    
+        /// <summary>
+        /// 是否有效
+        /// </summary>
+        [Column("B_AVAIL")]
+        public ErpEnums.YesOrNoEnum? B_Avail { get; set; }
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        [Column("B_STARTTIME")]
+        public DateTime? B_StartTime { get; set; } 
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        [Column("B_ENDTIME")]
+        public DateTime? B_EndTime { get; set; }
+        /// <summary>
+        /// 备注
+        /// </summary>
+        [Column("B_REMARK")]
+        public string B_Remark { get; set; }
         #endregion
 
         #region 扩展操作
@@ -71,6 +111,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Create()
         {
             this.ID = Guid.NewGuid().ToString();
+            var userInfo = LoginUserInfo.Get();
+            this.B_CreateDate = DateTime.Now;
+            this.B_CreateBy = userInfo.realName;
         }
         /// <summary>
         /// 编辑调用
@@ -79,6 +122,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
+            var userInfo = LoginUserInfo.Get();
+            this.B_UpdateDate = DateTime.Now;
+            this.B_UpdateBy = userInfo.realName;
         }
         #endregion
     }

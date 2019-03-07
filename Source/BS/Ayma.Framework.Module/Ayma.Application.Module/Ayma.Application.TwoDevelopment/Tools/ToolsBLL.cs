@@ -40,6 +40,78 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取配方表树形数据
+        /// </summary>
+        /// <returns></returns>
+        public List<TreeModel> GetBomRecordTree()
+        {
+            try
+            {
+                List<Mes_BomRecordEntity> bomRecordList = toolsService.GetBomRecordList();
+                List<TreeModel> treeList = new List<TreeModel>();
+                foreach (var item in bomRecordList)
+                {
+                    TreeModel node = new TreeModel();
+                    node.id = item.ID;
+                    node.text = item.B_GoodsName;
+                    node.value = item.B_GoodsCode;
+                    node.showcheck = false;
+                    node.checkstate = 0;
+                    node.isexpand = true;
+                    node.parentId = item.B_ParentID;
+                    treeList.Add(node);
+                }
+                return treeList.ToTree();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取工序表树形列表
+        /// </summary>
+        /// <returns></returns>
+        public List<TreeModel> GetProceTreeList()
+        {
+            try
+            {
+                List<Mes_ProceEntity> proceTreeList = toolsService.GetProceTreeList();
+                List<TreeModel> treeList = new List<TreeModel>();
+                foreach (var item in proceTreeList)
+                {
+                    TreeModel node = new TreeModel();
+                    node.id = item.ID;
+                    node.text = item.P_ProName;
+                    node.value = item.P_RecordCode;
+                    node.showcheck = false;
+                    node.checkstate = 0;
+                    node.isexpand = true;
+                    node.parentId = item.P_ParentId;
+                    treeList.Add(node);
+                }
+                return treeList.ToTree();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取仓库列表
         /// </summary>
         /// <returns></returns>
@@ -48,6 +120,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.GetStockList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceList(string parentId)
+        {
+            try
+            {
+                return toolsService.GetProceList(parentId);
             }
             catch (Exception ex)
             {
@@ -71,6 +165,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.ByCodeGetGoodsEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据工艺代码获取工序表实体
+        /// <param name="code">工艺代码</param>
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceListBy(string code)
+        {
+            try
+            {
+                return toolsService.GetProceListBy(code);
             }
             catch (Exception ex)
             {

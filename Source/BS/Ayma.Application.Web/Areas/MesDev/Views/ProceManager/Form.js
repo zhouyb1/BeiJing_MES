@@ -4,9 +4,9 @@
  */
 var acceptClick;
 var keyValue = request('keyValue');
+var parentId = request('parentId');
 var bootstrap = function ($, ayma) {
     "use strict";
-    var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
         init: function () {
 $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
@@ -14,47 +14,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            //检查编码重复
-            $("#P_RecordCode").on('keyup', function () {
-                var code = $.trim($(this).val()); //去除空格
-                var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_Proce", field: "P_RecordCode", code: code },
-                    success: function (data) {
-                        var isOk = JSON.parse(data).data;
-                        if (isOk) {
-                            $("#P_RecordCode").addClass("am-field-error");
-                            $("#P_RecordCode").parent().append(html);
-                            ayma.alert.error("编码重复");
-                        } else {
-                            $("#P_RecordCode").removeClass("am-field-error");
-                            $("#isCode").remove();
-                        }
-                    }
-                });
-            });
-            //检查名称重复 
-            $("#P_ProName").on('keyup', function () {
-                var code = $.trim($(this).val()); //去除空格
-                var html = '<div class="am-field-error-info" id="isCode" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_Proce", field: "P_ProName", code: code },
-                    success: function (data) {
-                        var isOk = JSON.parse(data).data;
-                        if (isOk) {
-                            $("#P_ProName").addClass("am-field-error");
-                            $("#P_ProName").parent().append(html);
-                            ayma.alert.error("名称重复");
-                        } else {
-                            $("#P_ProName").removeClass("am-field-error");
-                            $("#isCode").remove();
-                        }
-                    }
-                });
+            // 上级
+            $('#P_ParentId').select({
+                url: top.$.rootUrl + '/MesDev/Tools/GetProceTreeList',
+                type: 'tree',
+                allowSearch: true,
+                maxHeight: 225
+            }).selectSet(parentId);
+            /*检测重复项*/
+            $('#P_RecordCode').on('blur', function () {
+                $.ExistField(keyValue, 'P_RecordCode', top.$.rootUrl + '/MesDev/ProceManager/ExistRecordCode');
             });
         },
         initData: function () {

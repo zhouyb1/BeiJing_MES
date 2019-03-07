@@ -16,7 +16,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 主键
         /// </summary>
         [Column("ID")]
-        public string ID { get; set; } 
+        public string ID { get; set; }    
+        /// <summary>
+        /// 父级Id
+        /// </summary>
+        [Column("P_PARENTID")]
+        public string P_ParentId { get; set; } 
         /// <summary>
         /// 工艺代码
         /// </summary>

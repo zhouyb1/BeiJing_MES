@@ -4,6 +4,7 @@ using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -67,6 +68,105 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     strSql.Append(" AND t.B_FormulaName Like @B_FormulaName ");
                 }
                 return this.BaseRepository().FindList<Mes_BomHeadEntity>(strSql.ToString(),dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根据配方编码获取配方列表数据
+        /// </summary>
+        /// <param name="formulaCode">配方编码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomRecordListBy(string formulaCode)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_BomRecordEntity>(t => t.B_FormulaCode == formulaCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取配方列表数据
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                           t.[ID]
+                          ,t.[B_RecordCode]
+                          ,t.[B_ProNo]
+                          ,t.[B_FormulaCode]
+                          ,t.[B_FormulaName]
+                          ,t.[B_GoodsCode]
+                          ,t.[B_GoodsName]
+                          ,t.[B_Unit]
+                          ,t.[B_Qty]
+                          ,t.[B_ParentID]
+                          ,t.[B_CreateBy]
+                          ,t.[B_CreateDate]
+                          ,t.[B_UpdateBy]
+                          ,t.[B_UpdateDate]
+                          ,t.[B_Avail]
+                          ,t.[B_StartTime]
+                          ,t.[B_EndTime]
+                          ,t.[B_Remark]
+                        ");
+                strSql.Append("  FROM [dbo].[Mes_BomRecord] t ");
+                strSql.Append("  WHERE 1=1 ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["B_RecordCode"].IsEmpty())
+                {
+                    dp.Add("B_RecordCode", queryParam["B_RecordCode"].ToString(), DbType.String);
+                    strSql.Append(" AND t.B_RecordCode = @B_RecordCode ");
+                }
+                if (!queryParam["B_FormulaCode"].IsEmpty())
+                {
+                    dp.Add("B_FormulaCode", "%" + queryParam["B_FormulaCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_FormulaCode Like @B_FormulaCode ");
+                }
+                if (!queryParam["B_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("B_GoodsCode", "%" + queryParam["B_GoodsCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_GoodsCode Like @B_GoodsCode ");
+                }
+                if (!queryParam["B_GoodsName"].IsEmpty())
+                {
+                    dp.Add("B_GoodsName", "%" + queryParam["B_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_GoodsName Like @B_GoodsName ");
+                }
+                if (!queryParam["B_FormulaName"].IsEmpty())
+                {
+                    dp.Add("B_FormulaName", "%" + queryParam["B_FormulaName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_FormulaName Like @B_FormulaName ");
+                }
+                return this.BaseRepository().FindList<Mes_BomRecordEntity>(strSql.ToString(), dp);
             }
             catch (Exception ex)
             {
@@ -157,6 +257,33 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 提交数据
 
         /// <summary>
+        /// 删除配方表数据以及子级的数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteBomRecordForm(string keyValue)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                db.Delete<Mes_BomRecordEntity>(t => t.ID == keyValue||t.B_ParentID==keyValue);
+
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 删除实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -190,40 +317,82 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_BomHeadEntity entity,List<Mes_BomRecordEntity> mes_BomRecordList)
+        public void SaveEntity(string keyValue, Mes_BomHeadEntity entity)
         {
             var db = this.BaseRepository().BeginTrans();
             try
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_BomHeadEntityTmp = GetMes_BomHeadEntity(keyValue); 
+                    //var mes_BomHeadEntityTmp = GetMes_BomHeadEntity(keyValue); 
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_BomRecordEntity>(t=>t.B_FormulaCode == mes_BomHeadEntityTmp.B_FormulaCode);
-                    foreach (Mes_BomRecordEntity item in mes_BomRecordList)
-                    {
-                        item.Create();
-                        item.B_FormulaCode = mes_BomHeadEntityTmp.B_FormulaCode;
-                        db.Insert(item);
-                    }
+                    //db.Delete<Mes_BomRecordEntity>(t=>t.B_FormulaCode == mes_BomHeadEntityTmp.B_FormulaCode);
+                    //foreach (Mes_BomRecordEntity item in mes_BomRecordList)
+                    //{
+                    //    item.Create();
+                    //    item.B_FormulaCode = mes_BomHeadEntityTmp.B_FormulaCode;
+                    //    db.Insert(item);
+                    //}
                 }
                 else
                 {
                     entity.Create();
                     db.Insert(entity);
-                    foreach (Mes_BomRecordEntity item in mes_BomRecordList)
+                    var bomRecord=new Mes_BomRecordEntity()
                     {
-                        item.Create();
-                        item.B_FormulaCode = entity.B_FormulaCode;
-                        db.Insert(item);
-                    }
+                        B_FormulaCode = entity.B_FormulaCode,
+                        
+                        B_GoodsCode = entity.B_GoodsCode,
+                        B_GoodsName = entity.B_GoodsName
+                    };
+                    bomRecord.Create();
+                    db.Insert(bomRecord);
+                    //foreach (Mes_BomRecordEntity item in mes_BomRecordList)
+                    //{
+                    //    item.Create();
+                    //    item.B_FormulaCode = entity.B_FormulaCode;
+                    //    db.Insert(item);
+                    //}
                 }
                 db.Commit();
             }
             catch (Exception ex)
             {
                 db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 保存配方表数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    entity.Modify(keyValue);
+                    this.BaseRepository().Update(entity);
+                }
+                else
+                {
+                    entity.Create();
+                    this.BaseRepository().Insert(entity);
+                }
+            }
+            catch (Exception ex)
+            {
                 if (ex is ExceptionEx)
                 {
                     throw;

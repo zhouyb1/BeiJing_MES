@@ -37,6 +37,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取页面显示树形列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetTreeList(string queryJson)
+        {
+            try
+            {
+                return proceManagerService.GetTreeList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         /// <summary>
@@ -117,5 +140,54 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #endregion
 
+        #region 验证数据
+        /// <summary>
+        /// 工艺代码不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="recordCode">工艺代码</param>
+        public bool ExistRecordCode(string keyValue, string recordCode)
+        {
+            try
+            {
+                return proceManagerService.ExistRecordCode(keyValue, recordCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 工艺代码不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="parentId">父级Id</param>
+        /// <param name="proNo">工艺代码</param>
+        public bool ExistProNo(string keyValue, string parentId, string proNo)
+        {
+            try
+            {
+                return proceManagerService.ExistProNo(keyValue, parentId, proNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        #endregion
     }
 }
