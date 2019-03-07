@@ -20,9 +20,9 @@ namespace Ayma.Application.WebApi.Modules.ProductOrder
         /// <summary>
         /// 注册接口方法
         /// </summary>
-        public ProductOrderApi() : base("/ayma/api/productOrder")
+        public ProductOrderApi() : base("/ayma/api/ProductOrder")
         {
-            Post["/syncOrder"] = syncOrder;
+            Post["/SyncOrder"] = SyncOrder;
         }
 
         /// <summary>
@@ -30,15 +30,11 @@ namespace Ayma.Application.WebApi.Modules.ProductOrder
         /// </summary>
         /// <param name="arg"></param>
         /// <returns></returns>
-        private Response syncOrder(dynamic arg)
+        private Response SyncOrder(dynamic arg)
         {
             #region 数据校验
 
-            var submitOrder = this.GetReqData().ToJObject().ToString();
-            if (string.IsNullOrWhiteSpace(submitOrder))
-            {
-                return Fail("submitOrder参数值为空");
-            }
+            var submitOrder = this.GetReqData().ToJObject();
             var order = this.GetReqData<ProductOrder>();
             if (order == null)
             {
