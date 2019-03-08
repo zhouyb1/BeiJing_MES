@@ -203,6 +203,27 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var isCode = toosIBLL.IsCode(tables,field, code);
             return Success(isCode);
         }
+
+        /// <summary>
+        /// 获取配方列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetBomList(string goodsCode)
+        {
+            var data = toosIBLL.GetBomList(goodsCode);
+            return Success(data);
+        }
+
+        /// <summary>
+        /// 获取原物料code
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetCode(string goodsCode)
+        {
+            var data = toosIBLL.GetCode(goodsCode);
+            return Success(data);
+        }
+
         #endregion
 
         #region 提交数据
