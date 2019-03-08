@@ -5,8 +5,8 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-03-02 15:05
-    /// 描 述：生成订单制作
+    /// 日 期：2019-03-07 11:05
+    /// 描 述：生产订单管理
     /// </summary>
     public partial class Mes_ProductOrderDetailMap : EntityTypeConfiguration<Mes_ProductOrderDetailEntity>
     {
