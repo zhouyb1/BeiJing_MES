@@ -78,5 +78,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         void SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity);
         #endregion
 
+        #region 验证重复
+        /// <summary>
+        /// 根据父Id、配方编码、物料编码判断是否重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="parentId">父Id</param>
+        /// <param name="formulaCode">配方编码</param>
+        /// <param name="goodsCode">物料编码</param>
+        /// <returns></returns>
+        bool ExistCode(string keyValue, string parentId, string formulaCode, string goodsCode); 
+        #endregion
     }
 }

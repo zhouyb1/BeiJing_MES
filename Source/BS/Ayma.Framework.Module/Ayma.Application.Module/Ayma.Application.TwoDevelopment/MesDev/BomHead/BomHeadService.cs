@@ -406,5 +406,41 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #endregion
 
+        #region 验证重复
+
+        /// <summary>
+        /// 根据父Id、配方编码、物料编码判断是否重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="parentId">父Id</param>
+        /// <param name="formulaCode">配方编码</param>
+        /// <param name="goodsCode">物料编码</param>
+        /// <returns></returns>
+        public bool ExistCode(string keyValue, string parentId, string formulaCode, string goodsCode)
+        {
+            try
+            {
+                var expression = LinqExtensions.True<Mes_BomRecordEntity>();
+                expression = expression.And(t => t.B_FormulaCode.Trim().ToUpper() == formulaCode.Trim().ToUpper() && t.B_GoodsCode.Trim().ToUpper() == goodsCode.Trim().ToUpper() && t.B_ParentID == parentId);
+
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    expression = expression.And(t => t.ID != keyValue);
+                }
+                return !this.BaseRepository().IQueryable(expression).Any();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        #endregion
     }
 }

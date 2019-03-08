@@ -9,7 +9,7 @@ var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
         init: function () {
-$('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
+            $('.am-form-wrap').mCustomScrollbar({ theme: "minimal-dark" });
             page.bind();
             page.initData();
         },
@@ -21,9 +21,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 allowSearch: true,
                 maxHeight: 225
             }).selectSet(parentId);
-            /*检测重复项*/
+            /*检测重复项 工艺代码*/
             $('#P_RecordCode').on('blur', function () {
                 $.ExistField(keyValue, 'P_RecordCode', top.$.rootUrl + '/MesDev/ProceManager/ExistRecordCode');
+            });
+            /*检测重复项 工序号*/
+            $('#P_ProNo').on('blur', function () {
+                var pId = $("#P_ParentId").selectGet();
+                if (pId != "" && pId != undefined) {
+                    $.ExistField(keyValue, 'P_ProNo', top.$.rootUrl + '/MesDev/ProceManager/ExistProNo?parentId=' + parentId);
+                }
             });
         },
         initData: function () {

@@ -23,7 +23,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 配方详情列表
@@ -32,7 +32,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult BomRecordIndex()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 配方详情表单
@@ -41,7 +41,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult BomRecordForm()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 表单页
@@ -50,7 +50,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-             return View();
+            return View();
         }
         #endregion
 
@@ -87,7 +87,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var data = bomHeadIBLL.GetBomRecordListBy(formulaCode);
             return Success(data);
-        } 
+        }
         /// <summary>
         /// 配方树形列表
         /// </summary>
@@ -109,9 +109,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_BomHeadData = bomHeadIBLL.GetMes_BomHeadEntity( keyValue );
-            var Mes_BomRecordData = bomHeadIBLL.GetMes_BomRecordList( Mes_BomHeadData.B_FormulaCode );
-            var jsonData = new {
+            var Mes_BomHeadData = bomHeadIBLL.GetMes_BomHeadEntity(keyValue);
+            var Mes_BomRecordData = bomHeadIBLL.GetMes_BomRecordList(Mes_BomHeadData.B_FormulaCode);
+            var jsonData = new
+            {
                 Mes_BomHeadData = Mes_BomHeadData,
                 Mes_BomRecordData = Mes_BomRecordData,
             };
@@ -157,7 +158,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_BomHeadEntity entity = strEntity.ToObject<Mes_BomHeadEntity>();
             //List<Mes_BomRecordEntity> mes_BomRecordList = strmes_BomRecordList.ToObject<List<Mes_BomRecordEntity>>();
-            bomHeadIBLL.SaveEntity(keyValue,entity);
+            bomHeadIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }
         /// <summary>
@@ -171,6 +172,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity)
         {
             bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
+            if (!string.IsNullOrEmpty(entity.B_ParentID))
+            {
+                if (entity.B_ParentID != "0")
+                {
+                    var resCode = bomHeadIBLL.ExistCode(keyValue, entity.B_ParentID, entity.B_FormulaCode, entity.B_GoodsCode);
+                    if (!resCode)
+                    {
+                        return Fail("该配方已存在！");
+                    }
+                }
+            }
+
             return Success("保存成功！");
         }
         #endregion

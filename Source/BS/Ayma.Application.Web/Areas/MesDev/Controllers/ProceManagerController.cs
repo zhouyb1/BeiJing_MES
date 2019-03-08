@@ -23,7 +23,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 表单页
@@ -32,7 +32,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-             return View();
+            return View();
         }
         #endregion
 
@@ -68,7 +68,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetTreeList(string queryJson)
         {
             var data = proceManagerIBLL.GetTreeList(queryJson);
-            
+
             return Success(data);
         }
         /// <summary>
@@ -79,8 +79,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_ProceData = proceManagerIBLL.GetMes_ProceEntity( keyValue );
-            var jsonData = new {
+            var Mes_ProceData = proceManagerIBLL.GetMes_ProceEntity(keyValue);
+            var jsonData = new
+            {
                 Mes_ProceData = Mes_ProceData,
             };
             return Success(jsonData);
@@ -112,20 +113,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_ProceEntity entity = strEntity.ToObject<Mes_ProceEntity>();
-            var resCode=proceManagerIBLL.ExistRecordCode(keyValue, entity.P_RecordCode);
+            var resCode = proceManagerIBLL.ExistRecordCode(keyValue, entity.P_RecordCode);
             if (!resCode)
             {
                 return Fail("该工艺代码已存在！");
             }
             if (!string.IsNullOrEmpty(entity.P_ParentId))
             {
-                var resProNo = proceManagerIBLL.ExistProNo(keyValue, entity.P_ParentId, entity.P_ProNo);
-                if (!resProNo)
+                if (entity.P_ParentId != "0")
                 {
-                    return Fail("该工艺号已存在！");
+                    var resProNo = proceManagerIBLL.ExistProNo(keyValue, entity.P_ParentId, entity.P_ProNo);
+                    if (!resProNo)
+                    {
+                        return Fail("该工艺号已存在！");
+                    }
                 }
             }
-            proceManagerIBLL.SaveEntity(keyValue,entity);
+            proceManagerIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }
         #endregion
@@ -144,7 +148,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             bool res = proceManagerIBLL.ExistRecordCode(keyValue, P_RecordCode);
             return Success(res);
         }
-        
+        /// <summary>
+        /// 工艺代码不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="P_ProNo">工序号</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ExistProNo(string keyValue, string parentId, string P_ProNo)
+        {
+            bool res = proceManagerIBLL.ExistProNo(keyValue, parentId, P_ProNo);
+            return Success(res);
+        }
+
         #endregion
     }
 }
