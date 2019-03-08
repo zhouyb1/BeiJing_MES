@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "生产订单管理";
+    Layout = "~/Views/Shared/_GirdForm.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item" data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">生产订单号</div>
+        <input id="P_OrderNo" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_ProductOrderHead">
+        <div class="am-form-item-title">订单时间</div>
+        <input id="P_OrderDate" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_ProductOrderHead " >
+        <div class="am-form-item-title">使用时间</div>
+        <input id="P_UseDate" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_ProductOrderHead" >
+        <div class="am-form-item-title">状态</div>
+        <div id="P_Status"  class="form-control" disabled="disabled"></div>
+    </div>
+    <div class="col-xs-12 am-form-item am-form-item-grid" data>
+        <div id="Mes_ProductOrderDetail"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/ProductOrderManager/Form.js")
