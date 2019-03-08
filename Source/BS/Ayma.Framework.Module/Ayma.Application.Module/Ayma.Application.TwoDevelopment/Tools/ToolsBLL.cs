@@ -410,6 +410,53 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 获取配方列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string goodsCode)
+        {
+            try
+            {
+                return toolsService.GetBomList(goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取原物料code
+        /// </summary>
+        /// <returns></returns>
+        public Mes_GoodsEntity GetCode(string goodsCode)
+        {
+            try
+            {
+                return toolsService.GetCode(goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

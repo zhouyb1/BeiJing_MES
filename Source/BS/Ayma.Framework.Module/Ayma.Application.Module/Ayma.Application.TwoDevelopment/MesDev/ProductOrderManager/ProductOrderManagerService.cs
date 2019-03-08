@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Net.Sockets;
+using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
 using System;
@@ -60,7 +61,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_GoodsName", "%" + queryParam["P_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t1.P_GoodsName Like @P_GoodsName ");
                 }
-                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -137,9 +138,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                var mes_ProductOrderHeadEntity = GetMes_ProductOrderHeadEntity(keyValue); 
-                db.Delete<Mes_ProductOrderHeadEntity>(t=>t.ID == keyValue);
-                db.Delete<Mes_ProductOrderDetailEntity>(t=>t.P_OrderNo == mes_ProductOrderHeadEntity.P_OrderNo);
+                var mes_ProductOrderHeadEntity = GetMes_ProductOrderHeadEntity(keyValue);
+                db.Delete<Mes_ProductOrderHeadEntity>(t => t.ID == keyValue);
+                db.Delete<Mes_ProductOrderDetailEntity>(t => t.P_OrderNo == mes_ProductOrderHeadEntity.P_OrderNo);
                 db.Commit();
             }
             catch (Exception ex)
@@ -168,10 +169,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_ProductOrderHeadEntityTmp = GetMes_ProductOrderHeadEntity(keyValue); 
+                    var mes_ProductOrderHeadEntityTmp = GetMes_ProductOrderHeadEntity(keyValue);
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_ProductOrderDetailEntity>(t=>t.P_OrderNo == mes_ProductOrderHeadEntityTmp.P_OrderNo);
+                    db.Delete<Mes_ProductOrderDetailEntity>(t => t.P_OrderNo == mes_ProductOrderHeadEntityTmp.P_OrderNo);
                     foreach (var item in mes_ProductOrderDetaillist)
                     {
                         item.Create();
@@ -217,6 +218,105 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             entity.P_Status = ErpEnums.PStatusEnum.StockOut;
             this.BaseRepository().Update(entity);
         }
+
+        /// <summary>
+        /// 递归统计bom
+        /// </summary>
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(@"WITH CTE");
+            sb.Append(" AS ");
+            sb.Append("( ");
+            sb.Append(@"
+               SELECT   b.ID ,
+                        b.B_ParentID ,
+                        b.B_GoodsCode ,
+                        b.B_GoodsName ,
+                        b.B_Unit ,
+                        b.B_Qty ,
+                        b.B_RecordCode ,
+                        b.B_ProNo
+               FROM     dbo.Mes_BomRecord  b
+               WHERE b.ID=@ID");
+            sb.Append(@"
+               UNION ALL ");
+            sb.Append(@"
+               SELECT   b1.ID ,
+                        b1.B_ParentID ,
+                        b1.B_GoodsCode ,
+                        b1.B_GoodsName ,
+                        b1.B_Unit ,
+                        b1.B_Qty ,
+                        b1.B_RecordCode ,
+                        b1.B_ProNo
+               FROM     Mes_BomRecord b1 ");
+            sb.Append(@"
+                        INNER JOIN CTE c ON c.ID = b1.B_ParentID ");
+            sb.Append(" )");
+            sb.Append("SELECT *FROM CTE ");
+            // 虚拟参数
+            var dp = new DynamicParameters(new { });
+            dp.Add("ID", parentId, DbType.String);
+            var entity =this.BaseRepository().FindList<Mes_BomRecordEntity>(sb.ToString(), dp);
+            return entity;
+        }
+
+        /// <summary>
+        /// 获取配方列表数据
+        /// </summary>
+        /// <returns></returns>
+//        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
+//        {
+//            try
+//            {
+//                var strSql = new StringBuilder();
+//                strSql.Append("SELECT ");
+//                strSql.Append(@"
+//                           t.[ID]
+//                          ,t.[B_RecordCode]
+//                          ,t.[B_ProNo]
+//                          ,t.[B_FormulaCode]
+//                          ,t.[B_FormulaName]
+//                          ,t.[B_GoodsCode]
+//                          ,t.[B_GoodsName]
+//                          ,t.[B_Unit]
+//                          ,t.[B_Qty]
+//                          ,t.[B_ParentID]
+//                          ,t.[B_CreateBy]
+//                          ,t.[B_CreateDate]
+//                          ,t.[B_UpdateBy]
+//                          ,t.[B_UpdateDate]
+//                          ,t.[B_Avail]
+//                          ,t.[B_StartTime]
+//                          ,t.[B_EndTime]
+//                          ,t.[B_Remark]
+//                        ");
+//                strSql.Append("  FROM [dbo].[Mes_BomRecord] t ");
+//                strSql.Append("  WHERE 1=1 ");
+//                var queryParam = queryJson.ToJObject();
+//                // 虚拟参数
+//                var dp = new DynamicParameters(new { });
+                
+//                if (!queryParam["ID"].IsEmpty())
+//                {
+//                    dp.Add("ID", "%" + queryParam["ID"].ToString() + "%", DbType.String);
+//                    strSql.Append(" AND t.ID Like @ID ");
+//                }
+//                return this.BaseRepository().FindList<Mes_BomRecordEntity>(strSql.ToString(), dp);
+//            }
+//            catch (Exception ex)
+//            {
+//                if (ex is ExceptionEx)
+//                {
+//                    throw;
+//                }
+//                else
+//                {
+//                    throw ExceptionEx.ThrowServiceException(ex);
+//                }
+//            }
+//        }
         #endregion
     }
 }

@@ -420,6 +420,53 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 获取配方列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string goodsCode)
+        {
+            try
+            {
+               return this.BaseRepository().FindList<Mes_BomRecordEntity>(c => c.B_GoodsCode == goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取原物料code
+        /// </summary>
+        /// <returns></returns>
+        public Mes_GoodsEntity GetCode(string goodsCode)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(c => c.G_Erpcode == goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
         
         #region 提交数据

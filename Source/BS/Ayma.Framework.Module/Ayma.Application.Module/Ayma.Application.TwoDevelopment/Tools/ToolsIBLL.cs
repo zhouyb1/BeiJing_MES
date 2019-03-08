@@ -107,6 +107,18 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="code">编码</param>
         /// <returns></returns>
         bool IsCode(string tables,string field,string code);
+
+        /// <summary>
+        /// 获取配方列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_BomRecordEntity> GetBomList(string goodsCode);
+
+        /// <summary>
+        /// 获取原物料code
+        /// </summary>
+        /// <returns></returns>
+        Mes_GoodsEntity GetCode(string goodsCode);
         #endregion
 
         #region 提交数据

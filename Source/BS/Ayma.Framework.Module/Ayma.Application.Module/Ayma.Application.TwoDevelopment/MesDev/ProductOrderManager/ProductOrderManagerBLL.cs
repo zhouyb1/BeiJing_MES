@@ -162,6 +162,28 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 递归统计bom
+        /// </summary>
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId)
+        {
+            try
+            {
+               return productOrderManagerService.GetBomList(parentId);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
     }

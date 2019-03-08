@@ -53,6 +53,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         void AuditingBill(string keyValue);
 
+        /// <summary>
+        /// 递归统计bom
+        /// </summary>
+        IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId);
+
         #endregion
 
     }
