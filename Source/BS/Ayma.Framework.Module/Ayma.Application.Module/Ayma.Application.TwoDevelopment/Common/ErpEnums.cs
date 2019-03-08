@@ -108,7 +108,7 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             OrderInit = 1,   
             /// <summary>
-            /// 出库
+            /// 审核成功
             /// </summary>
             StockOut= 2,         
         } 

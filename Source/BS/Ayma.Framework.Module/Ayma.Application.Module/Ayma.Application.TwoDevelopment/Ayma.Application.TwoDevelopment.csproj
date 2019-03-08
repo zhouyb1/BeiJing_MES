@@ -68,6 +68,15 @@
     <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerService.cs" />
+    <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerBLL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerIBLL.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerService.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MesDev\RequistBill\Mes_RequistDetailEntity.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistHeadEntity.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />
