@@ -127,11 +127,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         [AjaxOnly]
-        public ActionResult GetBomRecordTreeList()
+        public ActionResult GetBomTreeList(string parentId)
         {
-            return Fail("");
+            var list = productOrderManagerIBLL.GetBomList(parentId);
+            return Success(list);
         }
 
         #endregion
