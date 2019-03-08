@@ -25,8 +25,8 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/WorkShopManager/Form',
-                    width: 350,
-                    height: 300,
+                    width: 600,
+                    height: 400,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);

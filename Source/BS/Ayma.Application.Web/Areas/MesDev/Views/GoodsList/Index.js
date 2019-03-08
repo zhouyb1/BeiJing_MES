@@ -130,7 +130,7 @@ var bootstrap = function ($, ayma) {
                     { label: "上限预警数量", name: "g_super", width: 160, align: "left" },
                     { label: "下限预警数量", name: "g_lower", width: 160, align: "left" },
                      {
-                         label: "单位", name: "g_self", width: 160, align: "left",
+                         label: "是否自制", name: "g_self", width: 160, align: "left",
                          formatterAsyns: function (callback, value, row) {
                              ayma.clientdata.getAsync('dataItem', {
                                  key: value,
