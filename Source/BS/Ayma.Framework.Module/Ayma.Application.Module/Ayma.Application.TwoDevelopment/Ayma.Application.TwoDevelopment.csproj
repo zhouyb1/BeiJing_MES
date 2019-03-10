@@ -185,6 +185,7 @@
     <Compile Include="MesDev\BomHead\BomHeadService.cs" />
     <Compile Include="MesDev\BomHead\BomHeadBLL.cs" />
     <Compile Include="MesDev\BomHead\BomHeadIBLL.cs" />
+    <Compile Include="MesDev\Mes_Mater\Mes_MaterEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
