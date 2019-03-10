@@ -9,59 +9,74 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// 日 期：2019-03-06 17:41
     /// 描 述：配方表
     /// </summary>
-    public partial class Mes_BomRecordEntity 
+    public partial class Mes_BomRecordEntity
     {
         #region 实体成员
+
         /// <summary>
         /// ID
         /// </summary>
         [Column("ID")]
-        public string ID { get; set; }    
+        public string ID { get; set; }
+
         /// <summary>
         /// 父Id
         /// </summary>
         [Column("B_PARENTID")]
         public string B_ParentID { get; set; }
+
         /// <summary>
         /// 工艺代码
         /// </summary>
         [Column("B_RECORDCODE")]
-        public string B_RecordCode { get; set; } 
+        public string B_RecordCode { get; set; }
+
         /// <summary>
         /// 工序号
         /// </summary>
         [Column("B_PRONO")]
         public string B_ProNo { get; set; }
+
         /// <summary>
         /// 配方编码
         /// </summary>
         [Column("B_FORMULACODE")]
-        public string B_FormulaCode { get; set; }   
+        public string B_FormulaCode { get; set; }
+
         /// <summary>
         /// 配方名称
         /// </summary>
         [Column("B_FORMULANAME")]
         public string B_FormulaName { get; set; }
+
         /// <summary>
         /// 物料编码
         /// </summary>
         [Column("B_GOODSCODE")]
         public string B_GoodsCode { get; set; }
+
         /// <summary>
         /// 物料名称
         /// </summary>
         [Column("B_GOODSNAME")]
         public string B_GoodsName { get; set; }
+
         /// <summary>
         /// 单位
         /// </summary>
         [Column("B_UNIT")]
         public string B_Unit { get; set; }
+
         /// <summary>
         /// 数量
         /// </summary>
         [Column("B_QTY")]
         public decimal? B_Qty { get; set; }
+
+        [NotMapped]
+        public decimal? B_Total { get; set; }
+    
+
         /// <summary>
         /// 添加人
         /// </summary>
