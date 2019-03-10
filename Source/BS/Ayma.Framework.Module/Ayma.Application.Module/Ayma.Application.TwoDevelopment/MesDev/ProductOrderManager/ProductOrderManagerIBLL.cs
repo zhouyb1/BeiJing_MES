@@ -56,7 +56,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <summary>
         /// 递归统计bom
         /// </summary>
-        IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId);
+        IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId,int qty);
+
+        /// <summary>
+        /// 保存订单所需的原物料
+        /// </summary>
+        void SaveBomList(List<Mes_MaterEntity> entityList);
 
         #endregion
 

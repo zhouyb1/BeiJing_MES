@@ -222,7 +222,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <summary>
         /// 递归统计bom
         /// </summary>
-        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId)
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId,int qty)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append(@"WITH CTE");
@@ -236,7 +236,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b.B_Unit ,
                         b.B_Qty ,
                         b.B_RecordCode ,
-                        b.B_ProNo
+                        b.B_ProNo ,
+                        b.B_FormulaCode,
+                        b.B_FormulaName
                FROM     dbo.Mes_BomRecord  b
                WHERE b.ID=@ID");
             sb.Append(@"
@@ -249,74 +251,61 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b1.B_Unit ,
                         b1.B_Qty ,
                         b1.B_RecordCode ,
-                        b1.B_ProNo
+                        b1.B_ProNo ,
+                        b1.B_FormulaCode,
+                        b1.B_FormulaName
                FROM     Mes_BomRecord b1 ");
             sb.Append(@"
                         INNER JOIN CTE c ON c.ID = b1.B_ParentID ");
             sb.Append(" )");
-            sb.Append("SELECT *FROM CTE ");
+            sb.Append("SELECT *,SUM(B_Qty *@orderQty) B_Total FROM CTE ");
+            sb.Append(@" GROUP BY  ID ,
+                        B_ParentID ,
+                        B_GoodsCode ,
+                        B_GoodsName ,
+                        B_Unit ,
+                        B_RecordCode ,
+                        B_ProNo,
+                        B_Qty,
+                        B_FormulaCode,
+                        B_FormulaName
+                        ORDER BY B_ParentID asc");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             dp.Add("ID", parentId, DbType.String);
+            dp.Add("orderQty",qty,DbType.Int32);
             var entity =this.BaseRepository().FindList<Mes_BomRecordEntity>(sb.ToString(), dp);
             return entity;
         }
-
         /// <summary>
-        /// 获取配方列表数据
+        /// 保存订单所需的原物料
         /// </summary>
-        /// <returns></returns>
-//        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
-//        {
-//            try
-//            {
-//                var strSql = new StringBuilder();
-//                strSql.Append("SELECT ");
-//                strSql.Append(@"
-//                           t.[ID]
-//                          ,t.[B_RecordCode]
-//                          ,t.[B_ProNo]
-//                          ,t.[B_FormulaCode]
-//                          ,t.[B_FormulaName]
-//                          ,t.[B_GoodsCode]
-//                          ,t.[B_GoodsName]
-//                          ,t.[B_Unit]
-//                          ,t.[B_Qty]
-//                          ,t.[B_ParentID]
-//                          ,t.[B_CreateBy]
-//                          ,t.[B_CreateDate]
-//                          ,t.[B_UpdateBy]
-//                          ,t.[B_UpdateDate]
-//                          ,t.[B_Avail]
-//                          ,t.[B_StartTime]
-//                          ,t.[B_EndTime]
-//                          ,t.[B_Remark]
-//                        ");
-//                strSql.Append("  FROM [dbo].[Mes_BomRecord] t ");
-//                strSql.Append("  WHERE 1=1 ");
-//                var queryParam = queryJson.ToJObject();
-//                // 虚拟参数
-//                var dp = new DynamicParameters(new { });
-                
-//                if (!queryParam["ID"].IsEmpty())
-//                {
-//                    dp.Add("ID", "%" + queryParam["ID"].ToString() + "%", DbType.String);
-//                    strSql.Append(" AND t.ID Like @ID ");
-//                }
-//                return this.BaseRepository().FindList<Mes_BomRecordEntity>(strSql.ToString(), dp);
-//            }
-//            catch (Exception ex)
-//            {
-//                if (ex is ExceptionEx)
-//                {
-//                    throw;
-//                }
-//                else
-//                {
-//                    throw ExceptionEx.ThrowServiceException(ex);
-//                }
-//            }
-//        }
+        public void SaveBomList(List<Mes_MaterEntity> entityList)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                foreach (var item in entityList)
+                {
+                    item.Create();
+                }
+                db.Insert(entityList);
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
     }
 }

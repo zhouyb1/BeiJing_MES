@@ -165,11 +165,33 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <summary>
         /// 递归统计bom
         /// </summary>
-        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId)
+        public IEnumerable<Mes_BomRecordEntity> GetBomList(string parentId,int qty)
         {
             try
             {
-               return productOrderManagerService.GetBomList(parentId);
+               return productOrderManagerService.GetBomList(parentId,qty);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 保存订单所需的原物料
+        /// </summary>
+        public void SaveBomList(List<Mes_MaterEntity> entityList)
+        {
+            try
+            {
+                productOrderManagerService.SaveBomList(entityList);
             }
             catch (Exception ex)
             {
