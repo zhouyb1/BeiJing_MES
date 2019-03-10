@@ -46,8 +46,8 @@ var bootstrap = function ($, ayma) {
                     { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
                     { label: "工序号", name: "B_ProNo", width: 160, align: "left" },
                     { label: '单位', name: 'B_Unit', width: 100, align: 'left' },
-                    { label: '数量', name: 'B_Qty', width: 160, align: 'left' },
-                    { label: '物料统计', name: 'B_Total', width: 160, align: 'left' }
+                    { label: '标准数量', name: 'B_Qty', width: 160, align: 'left' },
+                    { label: '订单物料统计', name: 'B_Total', width: 160, align: 'left' }
                 ],
                 isTree: true,
                 mainId: 'ID',
