@@ -140,6 +140,7 @@
     <Compile Include="MesDev\Mes_SalaryMap.cs" />
     <Compile Include="MesDev\Mes_BomHeadMap.cs" />
     <Compile Include="MesDev\Mes_BomRecordMap.cs" />
+    <Compile Include="MesDev\Mes_MaterMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
