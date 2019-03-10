@@ -1,4 +1,6 @@
-﻿using Ayma.Util;
+﻿using System;
+using System.Linq;
+using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
@@ -129,10 +131,30 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetBomTreeList(string parentId)
+        public ActionResult GetBomTreeList(string parentId,int qty)
         {
-            var list = productOrderManagerIBLL.GetBomList(parentId);
+            var list = productOrderManagerIBLL.GetBomList(parentId,qty);
             return Success(list);
+        }
+
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult SaveBomData(string strJsonBomList,string orderNo,DateTime orderDate)
+        {
+            var bomList = strJsonBomList.ToObject<List<Mes_BomRecordEntity>>()
+                .Select(
+                    c =>
+                        new Mes_MaterEntity
+                        {
+                            P_GoodsCode = c.B_GoodsCode,
+                            P_GoodsName = c.B_GoodsName,
+                            P_Unit = c.B_Unit,
+                            P_Qty = c.B_Total,
+                            P_OrderNo = orderNo,
+                            P_OrderDate = orderDate
+                        }).ToList();
+            productOrderManagerIBLL.SaveBomList(bomList);
+            return Success("处理成功！");
         }
 
         #endregion

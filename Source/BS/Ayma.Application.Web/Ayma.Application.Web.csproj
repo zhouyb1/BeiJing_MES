@@ -219,7 +219,6 @@
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\ProductOrderManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
@@ -271,6 +270,7 @@
     <Compile Include="Areas\MesDev\Controllers\ClassManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\SalaryManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\BomHeadController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ProductOrderManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -504,8 +504,6 @@
     <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\BomPartSum.js" />
-    <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\ProductOrderManager\Index.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.js" />
@@ -2153,8 +2151,6 @@
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.cshtml" />
     <Content Include="Areas\AM_SystemModule\Views\DataItem\SingleDetailIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\BomPartSum.cshtml" />
-    <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\ProductOrderManager\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2295,6 +2291,10 @@
     <Content Include="Areas\MesDev\Views\BomHead\Index.js" />
     <Content Include="Areas\MesDev\Views\BomHead\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\BomHead\Form.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

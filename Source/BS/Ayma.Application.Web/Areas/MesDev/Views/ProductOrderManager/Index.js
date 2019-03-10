@@ -64,6 +64,9 @@ var bootstrap = function ($, ayma) {
             $('#am_sum').on('click', function() {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 var p_status = $('#girdtable').jfGridValue('P_Status');
+                var orderNo = $('#girdtable').jfGridValue('P_OrderNo');
+                var orderDate = $('#girdtable').jfGridValue('P_OrderDate');
+                var qty = $('#girdtable').jfGridValue('P_Qty');
                 var code = $('#girdtable').jfGridValue('P_GoodsCode');
                 if (p_status == "0") {
                     ayma.alert.error("订单处于生成计划中！");
@@ -77,8 +80,8 @@ var bootstrap = function ($, ayma) {
                     //打开统计页面BomPartSum 
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?GoodsCode=' + code,
+                        title: '配方',
+                        url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?GoodsCode=' + code+'&qty='+qty+'&orderNo='+orderNo+'&orderDate='+orderDate,
                         width: 800,
                         height: 600,
                         maxmin: true,
