@@ -51,7 +51,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 单位重量
         /// </summary>
         [Column("G_UNITWEIGHT")]
-        public int? G_UnitWeight { get; set; }
+        public decimal? G_UnitWeight { get; set; }
         
         /// <summary>
         /// 上限预警比例
