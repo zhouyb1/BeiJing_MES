@@ -28,12 +28,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_MATERINNO")]
         public string M_MaterInNo { get; set; }
         /// <summary>
-        /// 物料编码
+        /// 仓库编码
         /// </summary>
         [Column("M_STOCKCODE")]
         public string M_StockCode { get; set; }
         /// <summary>
-        /// 物料名称
+        /// 仓库名称
         /// </summary>
         [Column("M_STOCKNAME")]
         public string M_StockName { get; set; }

@@ -36,6 +36,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
+            if (Request["keyValue"] == null)
+            {
+                ViewBag.M_MaterInNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());//自动获取主编码
+            }
              return View();
         }
         /// <summary>

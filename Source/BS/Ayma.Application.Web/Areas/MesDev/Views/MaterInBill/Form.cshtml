@@ -11,15 +11,15 @@
 <div class="am-form-wrap" id="form">
     <div class="col-xs-6 am-form-item"  data-table="Mes_MaterInHead" >
         <div class="am-form-item-title">入库单号</div>
-        <input id="M_MaterInNo" type="text" class="form-control" disabled="disabled"  />
+        <input id="M_MaterInNo" type="text" value="@ViewBag.M_MaterInNo" class="form-control" disabled="disabled" style="background: #f1efef" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_MaterInHead">
+        <div class="am-form-item-title">仓库编码<font face="宋体">*</font></div>
+        <div id="M_StockCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_MaterInHead" >
-        <div class="am-form-item-title">物料编码</div>
-        <input id="M_StockCode" type="text" class="form-control"/>
-    </div>
-    <div class="col-xs-6 am-form-item"  data-table="Mes_MaterInHead" >
-        <div class="am-form-item-title">物料名称</div>
-        <input id="M_StockName" type="text" class="form-control"  />
+        <div class="am-form-item-title">仓库名称</div>
+        <input id="M_StockName" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_MaterInHead" >
         <div class="am-form-item-title">生产订单号</div>
