@@ -43,7 +43,6 @@ var bootstrap = function ($, ayma) {
                     { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },
                     { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left" },
                     { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
-                    { label: "工序号", name: "B_ProNo", width: 160, align: "left" },
                     { label: '单位', name: 'B_Unit', width: 100, align: 'left' },
                     { label: '标准数量', name: 'B_Qty', width: 160, align: 'left' },
                     { label: '订单物料统计', name: 'B_Total', width: 160, align: 'left' }
@@ -54,13 +53,13 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isShowNum: true,
                 footerrow: true,
+                isMultiselect: true,
                 height: 350
             });
         },
         initData: function (parentId,qty) {
             $.SetForm(top.$.rootUrl + '/MesDev/ProductOrderManager/GetBomTreeList?parentId=' + parentId+'&qty='+qty, function (data) {
                 $('#girdtable').jfGridSet('refreshdata', { rowdatas: data});
-                
             });
         }
     };
@@ -69,8 +68,26 @@ var bootstrap = function ($, ayma) {
         if (!$('body').Validform()) {
             return false;
         }
-        var strJsonBomList = JSON.stringify($('#girdtable').jfGridGet('rowdatas')[0].jfGrid_ChildRows);
-        $.SaveForm(top.$.rootUrl + '/MesDev/ProductOrderManager/SaveBomData', { strJsonBomList: strJsonBomList, orderNo: orderNo, orderDate: orderDate }, function (res) {
+        //var strJsonBomList = JSON.stringify($('#girdtable').jfGridGet('rowdata')[0].jfGrid_ChildRows);
+        var dataSelect = $('#girdtable').jfGridGet('rowdata');
+        if (dataSelect==undefined) {
+            ayma.alert.error("请选择商品");
+            return false;
+        }
+        var str = [];
+        //剔除父级数据
+        for (var i = 0;i< dataSelect.length;  i++) {
+
+            if (str.indexOf(dataSelect[i].B_GoodsCode)==1) {
+                ayma.alert.error('同一编码的物料只选择一个！');
+                return false;
+            }
+            str.push(dataSelect[i].B_GoodsCode);
+            if (dataSelect[i].B_ParentID=="0") {
+                dataSelect.splice(dataSelect.indexOf(dataSelect[i]), 1);
+            }
+        }
+        $.SaveForm(top.$.rootUrl + '/MesDev/ProductOrderManager/SaveBomData', { strJsonBomList: JSON.stringify(dataSelect), orderNo: orderNo, orderDate: orderDate }, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
                 callBack();
