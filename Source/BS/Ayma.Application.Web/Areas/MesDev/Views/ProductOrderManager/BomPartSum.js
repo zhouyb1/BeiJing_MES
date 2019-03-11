@@ -16,8 +16,7 @@ var bootstrap = function ($, ayma) {
         },
         bind: function () {
             $('#B_Qty').val(qty);
-            $('#orderNo').val();
-            $('#orderDate').val();
+            $('#P_OrderNo').val(orderNo);
             $.post(top.$.rootUrl + '/MesDev/Tools/GetCode', { goodsCode: goodsCode }, function (res) {
                 $('#B_ParentID').select({
                     url: top.$.rootUrl + '/MesDev/Tools/GetBomList',
@@ -55,7 +54,7 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isShowNum: true,
                 footerrow: true,
-                height: 300
+                height: 350
             });
         },
         initData: function (parentId,qty) {
