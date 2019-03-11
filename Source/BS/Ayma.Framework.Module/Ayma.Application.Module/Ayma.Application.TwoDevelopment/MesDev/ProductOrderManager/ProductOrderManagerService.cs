@@ -236,7 +236,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b.B_Unit ,
                         b.B_Qty ,
                         b.B_RecordCode ,
-                        b.B_ProNo ,
                         b.B_FormulaCode,
                         b.B_FormulaName
                FROM     dbo.Mes_BomRecord  b
@@ -251,7 +250,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b1.B_Unit ,
                         b1.B_Qty ,
                         b1.B_RecordCode ,
-                        b1.B_ProNo ,
                         b1.B_FormulaCode,
                         b1.B_FormulaName
                FROM     Mes_BomRecord b1 ");
@@ -265,7 +263,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         B_GoodsName ,
                         B_Unit ,
                         B_RecordCode ,
-                        B_ProNo,
                         B_Qty,
                         B_FormulaCode,
                         B_FormulaName
