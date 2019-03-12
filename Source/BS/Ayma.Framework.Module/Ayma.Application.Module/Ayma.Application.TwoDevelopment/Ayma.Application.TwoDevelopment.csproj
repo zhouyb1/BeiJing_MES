@@ -186,6 +186,11 @@
     <Compile Include="MesDev\BomHead\BomHeadBLL.cs" />
     <Compile Include="MesDev\BomHead\BomHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_Mater\Mes_MaterEntity.cs" />
+    <Compile Include="MesDev\PickingMater\Mes_CollarHeadEntity.cs" />
+    <Compile Include="MesDev\PickingMater\Mes_CollarDetailEntity.cs" />
+    <Compile Include="MesDev\PickingMater\PickingMaterService.cs" />
+    <Compile Include="MesDev\PickingMater\PickingMaterBLL.cs" />
+    <Compile Include="MesDev\PickingMater\PickingMaterIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

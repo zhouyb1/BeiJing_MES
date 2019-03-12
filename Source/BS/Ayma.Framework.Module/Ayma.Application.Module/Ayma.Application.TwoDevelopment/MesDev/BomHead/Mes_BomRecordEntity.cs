@@ -32,12 +32,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string B_RecordCode { get; set; }
 
         /// <summary>
-        /// 工序号
-        /// </summary>
-        [Column("B_PRONO")]
-        public string B_ProNo { get; set; }
-
-        /// <summary>
         /// 配方编码
         /// </summary>
         [Column("B_FORMULACODE")]
