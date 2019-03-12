@@ -58,7 +58,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
    
         /// </summary>
         [Column("P_STATUS")]
-        public ErpEnums.RequistStatusEnum P_Status { get; set; }
+        public ErpEnums.RequistStatusEnum? P_Status { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
