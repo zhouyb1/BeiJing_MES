@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 800,
+                        height: 600,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
