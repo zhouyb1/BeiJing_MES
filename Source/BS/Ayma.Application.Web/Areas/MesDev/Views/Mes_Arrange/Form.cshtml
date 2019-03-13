@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "排班记录";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">日期<font face="宋体">*</font></div>
+        <input id="A_Date" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">时间<font face="宋体">*</font></div>
+        <input id="A_DateTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'HH:mm:ss' })" value="@DateTime.Now.ToString("HH:mm:ss")" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">生产订单号<font face="宋体">*</font></div>
+        <input id="A_OrderNo" value="@ViewBag.ArrangeNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">车间编码<font face="宋体">*</font></div>
+        <div id="A_WorkShopCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">车间名称<font face="宋体">*</font></div>
+        <input id="A_WorkShopName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">用户编码<font face="宋体">*</font></div>
+        <div id="A_F_EnCode" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">工艺代码<font face="宋体">*</font></div>
+        <div id="A_Record" isvalid="yes" checkexpession="NotNull" ></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_Arrange">
+        <div class="am-form-item-title">工序号<font face="宋体">*</font></div>
+        <div id="A_ProCode" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">班次<font face="宋体">*</font></div>
+        <div id="A_ClassCode" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">是否有效<font face="宋体">*</font></div>
+        <div id="A_Avail" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_Arrange" >
+        <div class="am-form-item-title">备注</div>
+        <textarea id="A_Remark" class="form-control" style="height:40px;"  ></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_Arrange/Form.js")

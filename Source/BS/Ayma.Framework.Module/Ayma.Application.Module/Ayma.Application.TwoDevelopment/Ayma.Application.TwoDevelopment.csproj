@@ -81,6 +81,10 @@
     <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MesDev\Record\Mes_RecordEntity.cs" />
+    <Compile Include="MesDev\Record\RecordBLL.cs" />
+    <Compile Include="MesDev\Record\RecordIBLL.cs" />
+    <Compile Include="MesDev\Record\RecordService.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistDetailEntity.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistHeadEntity.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />
@@ -195,10 +199,13 @@
     <Compile Include="MesDev\PickingMater\PickingMaterService.cs" />
     <Compile Include="MesDev\PickingMater\PickingMaterBLL.cs" />
     <Compile Include="MesDev\PickingMater\PickingMaterIBLL.cs" />
-    <Compile Include="MesDev\Record\Mes_RecordEntity.cs" />
-    <Compile Include="MesDev\Record\RecordService.cs" />
-    <Compile Include="MesDev\Record\RecordBLL.cs" />
-    <Compile Include="MesDev\Record\RecordIBLL.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeService.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeBLL.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeIBLL.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordService.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordBLL.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

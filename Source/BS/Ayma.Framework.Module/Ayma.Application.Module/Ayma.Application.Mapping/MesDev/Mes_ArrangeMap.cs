@@ -5,16 +5,16 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-03-13 10:39
-    /// 描 述：班次表
+    /// 日 期：2019-03-12 17:32
+    /// 描 述：排班记录
     /// </summary>
-    public partial class Mes_ClassMap : EntityTypeConfiguration<Mes_ClassEntity>
+    public partial class Mes_ArrangeMap : EntityTypeConfiguration<Mes_ArrangeEntity>
     {
-        public Mes_ClassMap()
+        public Mes_ArrangeMap()
         {
             #region 表、主键
             //表
-            this.ToTable("MES_CLASS");
+            this.ToTable("MES_ARRANGE");
             //主键
             this.HasKey(t => t.ID);
             #endregion

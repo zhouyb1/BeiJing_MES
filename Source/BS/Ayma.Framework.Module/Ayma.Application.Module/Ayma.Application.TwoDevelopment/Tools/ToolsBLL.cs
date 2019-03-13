@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using Ayma.Application.TwoDevelopment.MesDev;
+using Ayma.Application.Organization;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -39,6 +40,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+      
         /// <summary>
         /// 获取配方表树形数据
         /// </summary>
@@ -74,8 +76,43 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
-        }
-       
+        }  
+        /// <summary>
+        /// 获取工序表树形列表
+        /// </summary>
+        /// <returns></returns>
+        //public List<TreeModel> GetProceTreeList()
+        //{
+        //    try
+        //    {
+        //        List<Mes_ProceEntity> proceTreeList = toolsService.GetProceTreeList();
+        //        List<TreeModel> treeList = new List<TreeModel>();
+        //        foreach (var item in proceTreeList)
+        //        {
+        //            TreeModel node = new TreeModel();
+        //            node.id = item.ID;
+        //            node.text = item.P_ProName;
+        //            node.value = item.P_RecordCode;
+        //            node.showcheck = false;
+        //            node.checkstate = 0;
+        //            node.isexpand = true;
+        //            node.parentId = item.P_ParentId;
+        //            treeList.Add(node);
+        //        }
+        //        return treeList.ToTree();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex is ExceptionEx)
+        //        {
+        //            throw;
+        //        }
+        //        else
+        //        {
+        //            throw ExceptionEx.ThrowBusinessException(ex);
+        //        }
+        //    }
+        //}
         /// <summary>
         /// 获取仓库列表
         /// </summary>
@@ -97,8 +134,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
-        } 
-        
+        }
         /// <summary>
         /// 获取车间列表
         /// </summary>
@@ -120,7 +156,74 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
-        } 
+        }
+        /// <summary>
+        /// 获取工艺列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_RecordEntity> GetRecordList()
+        {
+            try
+            {
+                return toolsService.GetRecordList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据车间编码获取车间实体信息
+        /// </summary>
+        /// <param name="code">车间编码</param>
+        /// <returns></returns>
+        public Mes_WorkShopEntity ByCodeGetWorkShopEntity(string code)
+        {
+            try
+            {
+                return toolsService.ByCodeGetWorkShopEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        //public IEnumerable<Mes_ProceEntity> GetProceList(string parentId)
+        //{
+        //    try
+        //    {
+        //        return toolsService.GetProceList(parentId);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex is ExceptionEx)
+        //        {
+        //            throw;
+        //        }
+        //        else
+        //        {
+        //            throw ExceptionEx.ThrowBusinessException(ex);
+        //        }
+        //    }
+        //}
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// <param name="code">物料编码</param>
@@ -144,7 +247,53 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-        
+        /// <summary>
+        /// 根据工艺代码获取工序表实体
+        /// <param name="code">工艺代码</param>
+        /// </summary>
+        /// <returns></returns>
+        //public IEnumerable<Mes_ProceEntity> GetProceListBy(string code)
+        //{
+        //    try
+        //    {
+        //        return toolsService.GetProceListBy(code);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex is ExceptionEx)
+        //        {
+        //            throw;
+        //        }
+        //        else
+        //        {
+        //            throw ExceptionEx.ThrowBusinessException(ex);
+        //        }
+        //    }
+        //}
+        /// <summary>
+        /// 工具工艺代码获取工序实体
+        /// </summary>
+        /// <param name="code">工艺代码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> ByCodeGetProceEntity(string code)
+        {
+            try
+            {
+                return toolsService.ByCodeGetProceEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取物料列表
         /// </summary>
@@ -280,6 +429,50 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserEntity> GetUserList()
+        {
+            try
+            {
+                return toolsService.GetUserList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取班次列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ClassEntity> GetClassList()
+        {
+            try
+            {
+                return toolsService.GetClassList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
@@ -316,6 +509,31 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.IsOrderNo(tables, field,orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 排班重复验证
+        /// </summary>
+        /// <param name="A_F_EnCode">用户编码</param>
+        /// <param name="A_ClassCode">班次</param>
+        /// <param name="A_Date">日期</param>
+        /// <returns></returns>
+        public bool IsExistRecord(string A_F_EnCode, string A_ClassCode, DateTime A_Date)
+        {
+            try
+            {
+                return toolsService.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date);
             }
             catch (Exception ex)
             {

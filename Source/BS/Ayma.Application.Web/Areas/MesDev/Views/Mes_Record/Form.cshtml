@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "工艺代码表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Record" >
+        <div class="am-form-item-title">主键</div>
+        <input id="ID" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Record" >
+        <div class="am-form-item-title">编码<font face="宋体">*</font></div>
+        <input id="R_Record" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Record" >
+        <div class="am-form-item-title">名称<font face="宋体">*</font></div>
+        <input id="R_Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_Record/Form.js")

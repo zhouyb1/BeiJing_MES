@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 成品出库单
             /// </summary>
-            ProOut = 10002,         
+            ProOut = 10002,
         }
         /// <summary>
         /// 是否

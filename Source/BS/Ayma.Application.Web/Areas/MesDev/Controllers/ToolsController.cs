@@ -25,6 +25,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var stockEntity = toosIBLL.ByCodeGetStockEntity(code);
             return Success(stockEntity);
         }
+       
         /// <summary>
         /// 获取配方表树形结构列表
         /// </summary>
@@ -46,9 +47,53 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var stockList = toosIBLL.GetStockList();
             return Success(stockList);
-        } 
+        }
+        /// <summary>
+        /// 获取车间列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetWorkShopList()
+        {
+            var workshopList = toosIBLL.GetWorkShopList();
+            return Success(workshopList);
+        }
         
-        
+        /// <summary>
+        /// 根据车间编码获取车间实体信息
+        /// </summary>
+        /// <param name="code">车间编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetWorkShopEntity(string code)
+        {
+            var workshopEntity = toosIBLL.ByCodeGetWorkShopEntity(code);
+            return Success(workshopEntity);
+        }
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        //[AjaxOnly]
+        //public ActionResult GetProceList(string parentId)
+        //{
+        //    var stockList = toosIBLL.GetProceList(parentId);
+        //    return Success(stockList);
+        //} 
+        /// <summary>
+        /// 获取工序树形列表
+        /// </summary>
+        /// <returns></returns>
+        //[HttpGet]
+        //[AjaxOnly]
+        //public ActionResult GetProceTreeList()
+        //{
+        //    var proceTreeList = toosIBLL.GetProceTreeList();
+        //    return Success(proceTreeList);
+        //}
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
@@ -61,18 +106,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var goodsEntity = toosIBLL.ByCodeGetGoodsEntity(code);
             return Success(goodsEntity);
         }
-        
         /// <summary>
-        /// 获取车间列表
+        /// 根据工艺代码代码获取工序表实体
         /// </summary>
+        /// <param name="code">工艺代码</param>
         /// <returns></returns>
-        [HttpGet]
-        [AjaxOnly]
-        public ActionResult GetWorkShopList()
-        {
-            var workShopList = toosIBLL.GetWorkShopList();
-            return Success(workShopList);
-        }
+        //[HttpGet]
+        //[AjaxOnly]
+        //public ActionResult GetProceListBy(string code)
+        //{
+        //    var proceList = toosIBLL.GetProceListBy(code);
+        //    return Success(proceList);
+        //}
         /// <summary>
         /// 获取物料列表
         /// </summary>
@@ -107,6 +152,30 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var doorEntity = toosIBLL.ByCodeGetDoorEntity(code);
             return Success(doorEntity);
         }
+        
+        /// <summary>
+        /// 获取工艺列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetRecordList()
+        {
+            var recordList = toosIBLL.GetRecordList();
+            return Success(recordList);
+        } 
+        /// <summary>
+        /// 根据工艺代码获取工序实体
+        /// </summary>
+        /// <param name="code">工艺代码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetProceEntity(string code)
+        {
+            var proceEntity = toosIBLL.ByCodeGetProceEntity(code);
+            return Success(proceEntity);
+        }
         /// <summary>
         /// 获取门列表
         /// </summary>
@@ -140,6 +209,28 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var supplyList = toosIBLL.GetSupplyList();
             return Success(supplyList);
+        }
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetUserList()
+        {
+            var userList = toosIBLL.GetUserList();
+            return Success(userList);
+        }
+        /// <summary>
+        /// 获取班次列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetClassList()
+        {
+            var classList = toosIBLL.GetClassList();
+            return Success(classList);
         }
         /// <summary>
         /// 名称重复验证

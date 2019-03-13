@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using Ayma.Application.TwoDevelopment.MesDev;
+using Ayma.Application.Organization;
+using System;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -20,6 +22,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_StockEntity ByCodeGetStockEntity(string code);
         /// <summary>
+        /// 根据车间编码获取车间实体信息
+        /// </summary>
+        /// <param name="code">车间编码</param>
+        /// <returns></returns>
+        Mes_WorkShopEntity ByCodeGetWorkShopEntity(string code);
+
+        /// <summary>
         /// 获取配方表树形结构列表
         /// </summary>
         /// <returns></returns>
@@ -29,19 +38,38 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_StockEntity> GetStockList();
-   
+        /// <summary>
+        /// 获取车间列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_WorkShopEntity> GetWorkShopList();
+        /// <summary>
+        /// 获取工艺列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_RecordEntity> GetRecordList();
+        /// <summary>
+        /// 获取工序列表
+        /// </summary>
+        /// <returns></returns>
+        //IEnumerable<Mes_ProceEntity> GetProceList(string parentId);
+        /// <summary>
+        /// 获取配方表树形结构列表
+        /// </summary>
+        /// <returns></returns>
+        //List<TreeModel> GetProceTreeList();
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// <param name="code">物料编码</param>
         /// </summary>
         /// <returns></returns>
         Mes_GoodsEntity ByCodeGetGoodsEntity(string code);
-    
         /// <summary>
-        /// 获取车间列表
+        /// 根据工艺代码获取工序表实体
+        /// <param name="code">工艺代码</param>
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_WorkShopEntity> GetWorkShopList();  
+        //IEnumerable<Mes_ProceEntity> GetProceListBy(string code);
         /// <summary>
         /// 获取物料
         /// </summary>
@@ -59,6 +87,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_DoorEntity ByCodeGetDoorEntity(string code);
         /// <summary>
+        /// 根据工艺代码获取工序实体
+        /// </summary>
+        /// <param name="code">工艺代码</param>
+        /// <returns></returns>
+        IEnumerable< Mes_ProceEntity> ByCodeGetProceEntity(string code);
+        /// <summary>
         /// 获取门列表
         /// </summary>
         /// <returns></returns>
@@ -75,6 +109,16 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         IEnumerable<Mes_SupplyEntity> GetSupplyList();
         /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<UserEntity> GetUserList();
+        /// <summary>
+        /// 获取班次列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ClassEntity> GetClassList();
+        /// <summary>
         /// 名称重复验证
         /// </summary>
         /// <param name="tables">表名</param>
@@ -90,6 +134,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="field">字段名</param>
         /// <returns></returns>
         bool IsOrderNo(string tables, string field,string orderNo);
+        /// <summary>
+        /// 排班重复验证
+        /// </summary>
+        /// <param name="A_F_EnCode">用户编码</param>
+        /// <param name="A_ClassCode">班次</param>
+        /// <param name="A_Date">日期</param>
+        /// <returns></returns>
+        bool IsExistRecord(string A_F_EnCode, string A_ClassCode, DateTime A_Date);
         /// <summary>
         /// 编码重复验证
         /// </summary>
