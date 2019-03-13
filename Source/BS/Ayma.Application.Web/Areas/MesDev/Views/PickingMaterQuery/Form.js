@@ -23,8 +23,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "批次", name: "C_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,
-                minheight: 400,
-                height: 300,
+                //minheight: 400,
+                height: 250,
             });
 
         },
@@ -45,18 +45,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     // 保存数据
     acceptClick = function (callBack) {
-        if (!$('body').Validform()) {
-            return false;
-        }
-        var postData = {};
-        postData.strEntity = JSON.stringify($('[data-table="Mes_CollarHead"]').GetFormData());
-        postData.strmes_CollarDetailEntity = JSON.stringify($('[data-table="Mes_CollarDetail"]').GetFormData());
-        $.SaveForm(top.$.rootUrl + '/MesDev/PickingMaterQuery/SaveForm?keyValue=' + keyValue, postData, function (res) {
-            // 保存成功后才回调
-            if (!!callBack) {
-                callBack();
-            }
-        });
+        Window.close();
+        //if (!$('body').Validform()) {
+        //    return false;
+        //}
+        //var postData = {};
+        //postData.strEntity = JSON.stringify($('[data-table="Mes_CollarHead"]').GetFormData());
+        //postData.strmes_CollarDetailEntity = JSON.stringify($('[data-table="Mes_CollarDetail"]').GetFormData());
+        //$.SaveForm(top.$.rootUrl + '/MesDev/PickingMaterQuery/SaveForm?keyValue=' + keyValue, postData, function (res) {
+        //    // 保存成功后才回调
+        //    if (!!callBack) {
+        //        callBack();
+        //    }
+        //});
     };
     page.init();
 }
