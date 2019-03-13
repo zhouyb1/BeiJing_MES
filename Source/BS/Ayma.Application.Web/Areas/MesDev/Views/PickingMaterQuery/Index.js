@@ -58,6 +58,7 @@ var bootstrap = function ($, ayma) {
                         width: 600,
                         height: 400,
                         maxmin: true,
+                        btn:null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -90,6 +91,7 @@ var bootstrap = function ($, ayma) {
                     { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left"},
                 ],
+                
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true
