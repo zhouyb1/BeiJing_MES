@@ -1,35 +1,19 @@
 ﻿@{
-    ViewBag.Title = "工序管理";
+    ViewBag.Title = "工艺代码表单";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 <div class="am-form-wrap" id="form">
-    <div class="col-xs-12 am-form-item">
-        <div class="am-form-item-title">上级</div>
-        <div id="P_ParentId"></div>
-    </div>
     <div class="col-xs-12 am-form-item" data-table="Mes_Proce">
         <div class="am-form-item-title">工艺代码<font face="宋体">*</font>
         </div>
-        <input id="P_RecordCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <input id="R_Record" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
+    
     <div class="col-xs-12 am-form-item" data-table="Mes_Proce">
-        <div class="am-form-item-title">工序号<font face="宋体">*</font>
+        <div class="am-form-item-title">名称<font face="宋体">*</font>
         </div>
-        <input id="P_ProNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
+        <input id="R_Name" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-    <div class="col-xs-12 am-form-item" data-table="Mes_Proce">
-        <div class="am-form-item-title">工序名称<font face="宋体">*</font>
-        </div>
-        <input id="P_ProName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
-    </div>
-    <div class="col-xs-12 am-form-item" data-table="Mes_Proce">
-        <div class="am-form-item-title">车间<font face="宋体">*</font>
-        </div>
-        <input id="P_WorkShop" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"/>
-    </div>
-    <div class="col-xs-12 am-form-item" data-table="Mes_Proce">
-        <div class="am-form-item-title">备注</div>
-        <input id="P_Remark" type="text" class="form-control"/>
-    </div>
+   
 </div>
 @Html.AppendJsFile("/Areas/MesDev/Views/ProceManager/Form.js")

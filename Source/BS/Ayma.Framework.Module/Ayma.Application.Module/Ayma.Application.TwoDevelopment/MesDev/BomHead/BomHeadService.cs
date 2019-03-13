@@ -119,7 +119,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"
                            t.[ID]
                           ,t.[B_RecordCode]
-                          ,t.[B_ProNo]
                           ,t.[B_FormulaCode]
                           ,t.[B_FormulaName]
                           ,t.[B_GoodsCode]

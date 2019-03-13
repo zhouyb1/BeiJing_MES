@@ -13,7 +13,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class ProceManagerController : MvcControllerBase
     {
         private ProceManagerIBLL proceManagerIBLL = new ProceManagerBLL();
-
+        private RecordIBLL recordIbll = new RecordBLL();
         #region 视图功能
 
         /// <summary>
@@ -31,6 +31,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Form()
+        {
+            return View();
+        } 
+        /// <summary>
+        /// 工序表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ProceForm()
         {
             return View();
         }
@@ -57,6 +66,39 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 records = paginationobj.records
             };
             return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetRecordList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = recordIbll.GetPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 根据工艺代码获取工序列表
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProceListBy(string record)
+        {
+            var data = proceManagerIBLL.GetProceListBy(record);
+
+            return Success(data);
         }
         /// <summary>
         /// 获取页面显示树形列表数据
@@ -86,6 +128,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+        /// <summary>
+        /// 获取工艺代码表单数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetRecordFormData(string keyValue)
+        {
+            var Mes_RecordData = recordIbll.GetMes_RecordEntity(keyValue);
+            var jsonData = new
+            {
+                Mes_RecordData = Mes_RecordData,
+            };
+            return Success(jsonData);
+        }
         #endregion
 
         #region 提交数据
@@ -102,34 +159,46 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             proceManagerIBLL.DeleteEntity(keyValue);
             return Success("删除成功！");
         }
+        
         /// <summary>
         /// 保存实体数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="record">工艺代码</param>
+        /// <param name="strEntity">实体</param>
+        /// <returns></returns>
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult SaveForm(string keyValue, string record, string strEntity)
+        {
+            Mes_ProceEntity entity = strEntity.ToObject<Mes_ProceEntity>();
+            if (!string.IsNullOrEmpty(record) && string.IsNullOrEmpty(keyValue))
+            {
+                entity.P_RecordCode = record;
+            }
+           
+            proceManagerIBLL.SaveEntity(keyValue, entity);
+            return Success("保存成功！");
+        }
+        /// <summary>
+        /// 保存工艺代码表（新增、修改）
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity)
+        public ActionResult SaveRecordForm(string keyValue, string strEntity)
         {
-            Mes_ProceEntity entity = strEntity.ToObject<Mes_ProceEntity>();
-            var resCode = proceManagerIBLL.ExistRecordCode(keyValue, entity.P_RecordCode);
+            Mes_RecordEntity entity = strEntity.ToObject<Mes_RecordEntity>();
+            var resCode = proceManagerIBLL.ExistRecordCode(keyValue, entity.R_Record);
             if (!resCode)
             {
                 return Fail("该工艺代码已存在！");
             }
-            if (!string.IsNullOrEmpty(entity.P_ParentId))
-            {
-                if (entity.P_ParentId != "0")
-                {
-                    var resProNo = proceManagerIBLL.ExistProNo(keyValue, entity.P_ParentId, entity.P_ProNo);
-                    if (!resProNo)
-                    {
-                        return Fail("该工艺号已存在！");
-                    }
-                }
-            }
-            proceManagerIBLL.SaveEntity(keyValue, entity);
+
+            recordIbll.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }
         #endregion
@@ -139,28 +208,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 工艺代码不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="P_RecordCode">工艺代码</param>
+        /// <param name="R_Record">工艺代码</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult ExistRecordCode(string keyValue, string P_RecordCode)
+        public ActionResult ExistRecordCode(string keyValue, string R_Record)
         {
-            bool res = proceManagerIBLL.ExistRecordCode(keyValue, P_RecordCode);
+            bool res = proceManagerIBLL.ExistRecordCode(keyValue, R_Record);
             return Success(res);
         }
-        /// <summary>
-        /// 工艺代码不能重复
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <param name="P_ProNo">工序号</param>
-        /// <returns></returns>
-        [HttpGet]
-        [AjaxOnly]
-        public ActionResult ExistProNo(string keyValue, string parentId, string P_ProNo)
-        {
-            bool res = proceManagerIBLL.ExistProNo(keyValue, parentId, P_ProNo);
-            return Success(res);
-        }
+
 
         #endregion
     }

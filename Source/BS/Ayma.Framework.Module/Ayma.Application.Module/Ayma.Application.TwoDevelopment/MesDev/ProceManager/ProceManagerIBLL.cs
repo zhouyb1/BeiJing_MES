@@ -24,6 +24,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
         IEnumerable<Mes_ProceEntity> GetTreeList(string queryJson);
+
+        /// <summary>
+        /// 根据工艺代码获取工序列表
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ProceEntity> GetProceListBy(string record);
         /// <summary>
         /// 获取Mes_Proce表实体数据
         /// </summary>

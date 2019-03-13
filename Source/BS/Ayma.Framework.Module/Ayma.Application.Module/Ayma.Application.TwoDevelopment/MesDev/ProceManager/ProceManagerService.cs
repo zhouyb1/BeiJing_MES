@@ -89,7 +89,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.P_ParentId,
                 t.P_RecordCode,
                 t.P_ProNo,
                 t.P_ProName,
@@ -121,6 +120,52 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_WorkShop", "%" + queryParam["P_WorkShop"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_WorkShop Like @P_WorkShop ");
                 }
+                return this.BaseRepository().FindList<Mes_ProceEntity>(strSql.ToString(),dp);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据工艺代码获取工序列表
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceListBy(string record)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.P_RecordCode,
+                t.P_ProNo,
+                t.P_ProName,
+                t.P_WorkShop,
+                t.P_Remark,
+                t.P_Kind
+                ");
+                strSql.Append("  FROM Mes_Proce t ");
+                strSql.Append("  WHERE P_RecordCode=@P_RecordCode ");
+                
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+
+                if (!record.IsEmpty())
+                {
+                    dp.Add("P_RecordCode", record, DbType.String);
+                    strSql.Append(" AND t.P_RecordCode = @P_RecordCode ");
+                }
+                strSql.Append("  ORDER BY P_ProNo ASC ");
                 return this.BaseRepository().FindList<Mes_ProceEntity>(strSql.ToString(),dp);
             }
             catch (Exception ex)
@@ -173,7 +218,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                this.BaseRepository().Delete<Mes_ProceEntity>(t=>t.ID == keyValue||t.P_ParentId==keyValue);
+                this.BaseRepository().Delete<Mes_ProceEntity>(t=>t.ID == keyValue);
             }
             catch (Exception ex)
             {
@@ -197,10 +242,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                if (string.IsNullOrEmpty(entity.P_ParentId))
-                {
-                    entity.P_ParentId = "0";
-                }
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     entity.Modify(keyValue);
@@ -237,8 +278,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                var expression = LinqExtensions.True<Mes_ProceEntity>();
-                expression = expression.And(t => t.P_RecordCode.Trim().ToUpper() == recordCode.Trim().ToUpper());
+                var expression = LinqExtensions.True<Mes_RecordEntity>();
+                expression = expression.And(t => t.R_Record.Trim().ToUpper() == recordCode.Trim().ToUpper());
                 
                 if (!string.IsNullOrEmpty(keyValue))
                 {
@@ -269,7 +310,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var expression = LinqExtensions.True<Mes_ProceEntity>();
-                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper() && (t.P_ParentId== parentId||t.ID==parentId));
+                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper());
                 
                 if (!string.IsNullOrEmpty(keyValue))
                 {

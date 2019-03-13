@@ -17,11 +17,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }    
-        /// <summary>
-        /// 父级Id
-        /// </summary>
-        [Column("P_PARENTID")]
-        public string P_ParentId { get; set; } 
+     
         /// <summary>
         /// 工艺代码
         /// </summary>
@@ -46,7 +42,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 备注
         /// </summary>
         [Column("P_REMARK")]
-        public string P_Remark { get; set; }
+        public string P_Remark { get; set; }  
+        /// <summary>
+        /// 是否本车间最后一道工序
+        /// </summary>
+        [Column("P_KIND")]
+        public ErpEnums.YesOrNoEnum? P_Kind { get; set; }
         #endregion
 
         #region 扩展操作

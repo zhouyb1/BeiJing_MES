@@ -961,6 +961,7 @@
                         var $dateinput;
                         if (!!node.fmt) {
                             var now2 = top.ayma.formatDate(new Date(), 'yyyy-MM-dd hh:mm:ss');
+                            console.log(now2)
                             $dateinput = $('<input  type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({dateFmt:\'yyyy-MM-dd HH:mm:ss\'})" />').val(top.ayma.formatDate(value, 'yyyy-MM-dd hh:mm:ss') || now2);
                         } else {
                             var now = top.ayma.formatDate(new Date(), "yyyy-MM-dd");

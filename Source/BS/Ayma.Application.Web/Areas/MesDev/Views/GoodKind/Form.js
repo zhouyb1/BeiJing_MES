@@ -14,6 +14,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            /*检测重复项*/
+            $('#G_Code').on('blur', function () {
+                $.ExistField(keyValue, 'G_Code', top.$.rootUrl + '/MesDev/GoodKind/ExistCode');
+            });
         },
         initData: function () {
             if (!!keyValue) {

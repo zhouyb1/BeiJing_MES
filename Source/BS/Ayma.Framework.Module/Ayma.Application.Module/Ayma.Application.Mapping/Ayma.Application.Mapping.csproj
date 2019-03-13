@@ -143,6 +143,7 @@
     <Compile Include="MesDev\Mes_MaterMap.cs" />
     <Compile Include="MesDev\Mes_CollarHeadMap.cs" />
     <Compile Include="MesDev\Mes_CollarDetailMap.cs" />
+    <Compile Include="MesDev\Mes_RecordMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

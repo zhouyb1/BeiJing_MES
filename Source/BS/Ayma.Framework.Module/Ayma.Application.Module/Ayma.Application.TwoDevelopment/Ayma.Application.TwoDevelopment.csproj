@@ -64,6 +64,10 @@
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadService.cs" />
+    <Compile Include="MesDev\PickingMaterQuery\Mes_CollarViewModel.cs" />
+    <Compile Include="MesDev\PickingMaterQuery\PickingMaterQueryBLL.cs" />
+    <Compile Include="MesDev\PickingMaterQuery\PickingMaterQueryIBLL.cs" />
+    <Compile Include="MesDev\PickingMaterQuery\PickingMaterQueryService.cs" />
     <Compile Include="MesDev\ProceManager\Mes_ProceEntity.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
@@ -191,6 +195,10 @@
     <Compile Include="MesDev\PickingMater\PickingMaterService.cs" />
     <Compile Include="MesDev\PickingMater\PickingMaterBLL.cs" />
     <Compile Include="MesDev\PickingMater\PickingMaterIBLL.cs" />
+    <Compile Include="MesDev\Record\Mes_RecordEntity.cs" />
+    <Compile Include="MesDev\Record\RecordService.cs" />
+    <Compile Include="MesDev\Record\RecordBLL.cs" />
+    <Compile Include="MesDev\Record\RecordIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

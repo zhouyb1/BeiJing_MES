@@ -61,7 +61,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 根据工艺代码获取工序列表
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProceEntity> GetProceListBy(string record)
+        {
+            try
+            {
+                return proceManagerService.GetProceListBy(record);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取Mes_Proce表实体数据
         /// </summary>

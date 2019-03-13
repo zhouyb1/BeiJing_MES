@@ -110,28 +110,6 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
-        /// <summary>
-        /// 获取工序列表
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> GetProceList(string parentId)
-        {
-            try
-            {
-                return this.BaseRepository().FindList<Mes_ProceEntity>(t=>t.P_ParentId==parentId);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
 
         /// <summary>
         /// 根据物料编码获取物料实体信息
@@ -157,18 +135,17 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+      
+
         /// <summary>
-        /// 根据工序代码获取工序表实体
-        /// <param name="code">工艺代码</param>
+        /// 获取车间列表
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> GetProceListBy(string code)
+        public IEnumerable<Mes_WorkShopEntity> GetWorkShopList()
         {
             try
             {
-                var entity= this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == code);
-                var list = this.BaseRepository().FindList<Mes_ProceEntity>(t => t.P_ParentId == entity.ID || t.ID == entity.ID);
-                return list;
+                return this.BaseRepository().FindList<Mes_WorkShopEntity>();
             }
             catch (Exception ex)
             {
@@ -181,8 +158,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        }
-
+        } 
         /// <summary>
         /// 获取物料列表
         /// </summary>

@@ -71,7 +71,8 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/SalaryManager/GetPageList',
                 headData: [
-                    { label: "用户类型", name: "S_UserKind", width: 160, align: "left",
+                    {
+                        label: "用工类型", name: "S_UserKind", width: 160, align: "left",
                         formatterAsync: function (callback, value, row) {
                              ayma.clientdata.getAsync('dataItem', {
                                  key: value,
