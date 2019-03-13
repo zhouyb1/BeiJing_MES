@@ -276,6 +276,7 @@
     <Compile Include="Areas\MesDev\Controllers\ProductOrderManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2322,6 +2323,10 @@
     <Content Include="Areas\MesDev\Views\Mes_Record\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_Record\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_Record\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

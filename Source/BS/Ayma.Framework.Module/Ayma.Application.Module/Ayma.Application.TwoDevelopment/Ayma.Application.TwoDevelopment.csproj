@@ -206,6 +206,10 @@
     <Compile Include="MesDev\Mes_Record\Mes_RecordService.cs" />
     <Compile Include="MesDev\Mes_Record\Mes_RecordBLL.cs" />
     <Compile Include="MesDev\Mes_Record\Mes_RecordIBLL.cs" />
+    <Compile Include="MesDev\Mes_Reson\Mes_ResonEntity.cs" />
+    <Compile Include="MesDev\Mes_Reson\Mes_ResonService.cs" />
+    <Compile Include="MesDev\Mes_Reson\Mes_ResonBLL.cs" />
+    <Compile Include="MesDev\Mes_Reson\Mes_ResonIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

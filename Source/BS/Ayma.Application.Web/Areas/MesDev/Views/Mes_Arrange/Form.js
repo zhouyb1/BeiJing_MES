@@ -102,6 +102,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         initData: function () {
             if (!!keyValue) {
                 $.SetForm(top.$.rootUrl + '/MesDev/Mes_Arrange/GetFormData?keyValue=' + keyValue, function (data) {
+                    console.log(data);
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                         }
