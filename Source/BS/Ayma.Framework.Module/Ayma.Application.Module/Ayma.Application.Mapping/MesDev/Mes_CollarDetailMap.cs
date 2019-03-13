@@ -5,8 +5,8 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-03-11 19:22
-    /// 描 述：领料单
+    /// 日 期：2019-03-13 10:06
+    /// 描 述：领料单查询
     /// </summary>
     public partial class Mes_CollarDetailMap : EntityTypeConfiguration<Mes_CollarDetailEntity>
     {
