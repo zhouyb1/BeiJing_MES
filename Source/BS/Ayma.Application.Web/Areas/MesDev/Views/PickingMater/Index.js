@@ -94,7 +94,7 @@ var bootstrap = function ($, ayma) {
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");
-                var status = $("#girdtable").jfGridValue("M_Status");
+                var status = $("#girdtable").jfGridValue("P_Status");
                 if (status != "1") {
                     ayma.alert.error("已审核");
                     return false;
