@@ -21,8 +21,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //绑定仓库
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -32,7 +32,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $("#C_StockCode").select(dfop).on('change', function() {
+            $("#C_StockName").select(dfop).on('change', function() {
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -40,13 +40,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockName").val(entity.S_Name);
+                        $("#C_StockCode").val(entity.S_Code);
                     }
                 });
             });
 
             //绑定目标仓
-            $("#C_StockToCode").select(dfop).on('change', function() {
+            $("#C_StockToName").select(dfop).on('change', function() {
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -54,7 +54,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockToName").val(entity.S_Name);
+                        $("#C_StockToCode").val(entity.S_Code);
                     }
                 });
             });
