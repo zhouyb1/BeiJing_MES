@@ -105,10 +105,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             Mes_ArrangeEntity entity = strEntity.ToObject<Mes_ArrangeEntity>();
             string A_F_EnCode = entity.A_F_EnCode;
             string A_ClassCode = entity.A_ClassCode;
-            DateTime A_Date =Convert.ToDateTime(entity.A_Date);
-            if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+            DateTime A_Date = Convert.ToDateTime(entity.A_Date);
+            if (string.IsNullOrEmpty(keyValue))
             {
-                return Fail("同一个用户编码不能在同一班次出现!");
+                if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+                {
+                    return Fail("同一个用户编码不能在同一班次出现!");
+                }
             }
             mes_ArrangeIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
