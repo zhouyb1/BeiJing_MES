@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code);
+                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code||x.S_Name==code);
             }
             catch (Exception ex)
             {
@@ -42,6 +42,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
         /// <summary>
         /// 获取仓库列表
         /// </summary>
