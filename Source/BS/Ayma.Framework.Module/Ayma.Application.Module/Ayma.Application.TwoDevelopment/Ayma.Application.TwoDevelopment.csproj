@@ -100,6 +100,8 @@
     <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillIBLL.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillService.cs" />
+    <Compile Include="MesDev\ScrapManager\GoodsEntity.cs" />
+    <Compile Include="MesDev\ScrapManager\Mes_ScrapDetailEntity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveBLL.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveEntity.cs" />
@@ -217,10 +219,10 @@
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerService.cs" />
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerBLL.cs" />
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerIBLL.cs" />
-    <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
-    <Compile Include="MesDev\Mes_Inspect\Mes_InspectService.cs" />
-    <Compile Include="MesDev\Mes_Inspect\Mes_InspectBLL.cs" />
-    <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
+    <Compile Include="MesDev\ScrapManager\Mes_ScrapHeadEntity.cs" />
+    <Compile Include="MesDev\ScrapManager\ScrapManagerService.cs" />
+    <Compile Include="MesDev\ScrapManager\ScrapManagerBLL.cs" />
+    <Compile Include="MesDev\ScrapManager\ScrapManagerIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
