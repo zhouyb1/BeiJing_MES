@@ -187,16 +187,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         } 
         /// <summary>
-        /// 工艺代码不能重复
+        /// 同一工艺代码 工序号不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="parentId">父级Id</param>
+        /// <param name="recordCode">工序号</param>
         /// <param name="proNo">工艺代码</param>
-        public bool ExistProNo(string keyValue, string parentId, string proNo)
+        public bool ExistProNo(string keyValue, string recordCode, string proNo)
         {
             try
             {
-                return proceManagerService.ExistProNo(keyValue, parentId, proNo);
+                return proceManagerService.ExistProNo(keyValue, recordCode, proNo);
             }
             catch (Exception ex)
             {

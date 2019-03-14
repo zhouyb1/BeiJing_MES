@@ -177,7 +177,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 entity.P_RecordCode = record;
             }
-           
+            var resProNo=proceManagerIBLL.ExistProNo(keyValue,entity.P_RecordCode, entity.P_ProNo);
+            if (!resProNo)
+            {
+                return Fail("该工序号已存在！");
+            }
             proceManagerIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }

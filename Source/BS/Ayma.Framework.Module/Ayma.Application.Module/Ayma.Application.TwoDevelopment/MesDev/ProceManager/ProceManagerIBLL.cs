@@ -66,14 +66,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         bool ExistRecordCode(string keyValue, string recordCode);
         /// <summary>
-        /// 同一父类里子级们的工序号不能重复
+        /// 同一工艺代码 工序号不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="parentId">父Id</param>
+        /// <param name="recordCode">工艺代码</param>
         /// <param name="proNo">工序号</param>
         /// <returns></returns>
 
-        bool ExistProNo(string keyValue,string parentId, string proNo);
+        bool ExistProNo(string keyValue, string recordCode, string proNo);
 
 
         #endregion

@@ -300,17 +300,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         } 
         /// <summary>
-        /// 工艺代码不能重复
+        /// 同一工艺代码 工序号不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="parentId">父级Id</param>
+        /// <param name="recordCode">工序代码</param>
         /// <param name="proNo">工艺代码</param>
-        public bool ExistProNo(string keyValue, string parentId, string proNo)
+        public bool ExistProNo(string keyValue, string recordCode, string proNo)
         {
             try
             {
                 var expression = LinqExtensions.True<Mes_ProceEntity>();
-                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper());
+                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper() && t.P_RecordCode.Trim().ToUpper() == recordCode.Trim().ToUpper());
                 
                 if (!string.IsNullOrEmpty(keyValue))
                 {
