@@ -61,6 +61,10 @@
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeIBLL.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeService.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectBLL.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectService.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
