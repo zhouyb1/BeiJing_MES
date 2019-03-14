@@ -74,7 +74,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取物料
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_GoodsEntity> GetGoodsList(); 
+        IEnumerable<Mes_GoodsEntity> GetGoodsList();
+        /// <summary>
+        /// 获取不合格原因实体
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ResonEntity> GetReasonList();
         /// <summary>
         /// 获取商品二级分类列表
         /// </summary>

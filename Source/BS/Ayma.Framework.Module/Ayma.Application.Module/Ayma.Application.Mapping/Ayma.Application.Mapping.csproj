@@ -148,6 +148,7 @@
     <Compile Include="MesDev\Mes_CollarDetailMap.cs" />
     <Compile Include="MesDev\Mes_OutWorkShopHeadMap.cs" />
     <Compile Include="MesDev\Mes_OutWorkShopDetailMap.cs" />
+    <Compile Include="MesDev\Mes_InspectMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

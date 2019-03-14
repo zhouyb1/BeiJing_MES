@@ -217,6 +217,10 @@
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerService.cs" />
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerBLL.cs" />
     <Compile Include="MesDev\OutWorkShopManager\OutWorkShopManagerIBLL.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectService.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectBLL.cs" />
+    <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

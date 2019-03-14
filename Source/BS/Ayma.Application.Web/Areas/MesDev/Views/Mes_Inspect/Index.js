@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-03-12 17:32
- * 描  述：排班记录
+ * 日  期：2019-03-13 20:54
+ * 描  述：抽检记录
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -51,10 +51,10 @@ var bootstrap = function ($, ayma) {
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增排班记录',
-                    url: top.$.rootUrl + '/MesDev/Mes_Arrange/Form',
-                    width: 900,
-                    height: 700,
+                    title: '新增抽检记录',
+                    url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form',
+                    width: 600,
+                    height: 400,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -67,8 +67,8 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑排班记录',
-                        url: top.$.rootUrl + '/MesDev/Mes_Arrange/Form?keyValue=' + keyValue,
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form?keyValue=' + keyValue,
                         width: 600,
                         height: 400,
                         maxmin: true,
@@ -84,7 +84,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Mes_Arrange/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Mes_Inspect/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -95,38 +95,34 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/Mes_Arrange/GetPageList',
+                url: top.$.rootUrl + '/MesDev/Mes_Inspect/GetPageList',
                 headData: [
-                    { label: "ID", name: "ID", width: 160, align: "left",hidden:"true"},
+                    { label: "主键", name: "ID", width: 160, align: "left",hidden:"true" },
+                    { label: "抽检单号", name: "I_InspectNo", width: 160, align: "left"},
+                    { label: "抽检时间", name: "I_Date", width: 160, align: "left"},
+                    { label: "生产订单号", name: "I_OrderNo", width: 160, align: "left"},
+                   
                     {
-                        label: "日期", name: "A_Date", width: 160, align: "left",
-                        formatter: function (cellvalue, options, rowObject) {
-                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        label: "抽检类型", name: "I_Kind", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            switch (value) {
+                                case 1:
+                                    callback("人为抽检");
+                                    break;
+                                case 2:
+                                    callback("机器生产线");
+                                    break;
+                            }
                         }
                     },
-                    {
-                        label: "时间", name: "A_DateTime", width: 160, align: "left", formatter: function (cellvalue, options, rowObject) {
-                            return ayma.formatDate(cellvalue, 'hh:mm:ss');
-                        }
-                    },
-                    { label: "生产订单号", name: "A_OrderNo", width: 160, align: "left"},
-                    { label: "车间编码", name: "A_WorkShopCode", width: 160, align: "left",},
-                    { label: "车间名称", name: "A_WorkShopName", width: 160, align: "left"},
-                    { label: "用户编码", name: "A_F_EnCode", width: 160, align: "left",},
-                    { label: "工艺代码", name: "A_Record", width: 160, align: "left",},
-                    { label: "工序号", name: "A_ProCode", width: 160, align: "left",},
-                    { label: "班次", name: "A_ClassCode", width: 160, align: "left",},
-                    {
-                        label: "是否生效", name: "A_Avail", width: 160, align: "left",
-                        formatter: function (cellvalue, options, rowObject) {
-                            return cellvalue == 1 ? "<span class=\"label label-success\" style=\"cursor: pointer;\">是</span>" : "<span class=\"label label-default\" style=\"cursor: pointer;\">否</span>";
-                        }
-                    },
-                    { label: "添加人", name: "A_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "A_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "A_UpdateBy", width: 160, align: "left" },
-                    { label: "修改时间", name: "A_UpdateDate", width: 160, align: "left" },
-                    { label: "备注", name: "A_Remark", width: 160, align: "left"},
+                    { label: "车间编码", name: "I_Class", width: 160, align: "left"},
+                    { label: "物料编码", name: "I_GoodsCode", width: 160, align: "left"},
+                    { label: "物料名称", name: "I_GoodsName", width: 160, align: "left"},
+                    { label: "抽检数量", name: "I_GoodsQty", width: 100, align: "left"},
+                    { label: "合格数量", name: "I_QualifiedQty", width: 100, align: "left"},
+                    { label: "不合格原因", name: "I_Reson", width: 360, align: "left" },
+                    { label: "添加人", name: "I_CreateBy", width: 120, align: "left"},
+                    { label: "添加时间", name: "I_CreateDate", width: 120, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,

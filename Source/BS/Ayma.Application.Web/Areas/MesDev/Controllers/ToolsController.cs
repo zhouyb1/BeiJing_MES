@@ -98,6 +98,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(goodsList);
         }
         /// <summary>
+        /// 获取不合格原因列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetReasonList()
+        {
+            var reasonList = toosIBLL.GetReasonList();
+            return Success(reasonList);
+        }
+        /// <summary>
         /// 获取商品二级分类列表
         /// </summary>
         /// <returns></returns>

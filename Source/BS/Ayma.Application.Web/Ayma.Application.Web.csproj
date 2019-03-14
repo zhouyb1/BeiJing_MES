@@ -274,6 +274,7 @@
     <Compile Include="Areas\MesDev\Controllers\PickingMaterController.cs" />
     <Compile Include="Areas\MesDev\Controllers\PickingMaterQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\OutWorkShopManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2322,6 +2323,10 @@
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Index.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

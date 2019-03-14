@@ -295,6 +295,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 获取不合格原因列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ResonEntity> GetReasonList()
+        {
+            try
+            {
+                return toolsService.GetReasonList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取商品二级分类列表
         /// </summary>

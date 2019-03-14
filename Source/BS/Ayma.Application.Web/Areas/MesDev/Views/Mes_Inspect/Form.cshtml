@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "抽检记录";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">抽检单号 <font face="宋体">*</font></div>
+        <input id="I_InspectNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">抽检时间 <font face="宋体">*</font></div>
+        <input id="I_Date" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">生产订单号 <font face="宋体">*</font></div>
+        <input id="I_OrderNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_Inspect">
+        <div class="am-form-item-title">抽检类型<font face="宋体">*</font></div>
+        <div id="I_Kind" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">车间编码 <font face="宋体">*</font></div>
+        <div id="I_Class" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">物料编码 <font face="宋体">*</font></div>
+        <div id="I_GoodsCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">物料名称 <font face="宋体">*</font></div>
+        <input id="I_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">抽检数量 <font face="宋体">*</font></div>
+        <input id="I_GoodsQty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">合格数量 <font face="宋体">*</font></div>
+        <input id="I_QualifiedQty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_Inspect" >
+        <div class="am-form-item-title">不合格原因 <font face="宋体">*</font></div>
+        <div id="I_Reson" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_Inspect/Form.js")
