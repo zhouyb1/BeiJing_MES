@@ -64,9 +64,8 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
-                // 访问数据接口参数
-                param: { parentId: "0" }
+                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList'
+               
             }).selectSet(recordCode);
             //物料编码
             $("#B_GoodsCode").select({

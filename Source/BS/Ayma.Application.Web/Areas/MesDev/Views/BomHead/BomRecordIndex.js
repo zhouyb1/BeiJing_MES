@@ -15,35 +15,18 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 500);
-            $('#B_ProNo').select();//下拉初始化
+            
             //工艺代码
             $("#B_RecordCode").select({
                 type: 'default',
-                value: 'P_RecordCode',
-                text: 'P_RecordCode',
+                value: 'R_Record',
+                text: 'R_Record',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
-                // 访问数据接口参数
-                param: { parentId: "0" }
-            }).on('change', function () {
-                var code = $(this).selectGet();
-                $("#B_ProNo").selectRefresh({
-                    type: 'default',
-                    value: 'P_ProNo',
-                    text: 'P_ProNo',
-                    // 展开最大高度
-                    maxHeight: 200,
-                    // 是否允许搜索
-                    allowSearch: true,
-                    // 访问数据接口地址
-                    url: top.$.rootUrl + '/MesDev/Tools/GetProceListBy',
-                    //访问数据接口参数
-                    param: { code: code }
-                });
+                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
 
             });
             // 刷新
