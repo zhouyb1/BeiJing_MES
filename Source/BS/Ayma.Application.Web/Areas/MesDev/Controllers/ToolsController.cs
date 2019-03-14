@@ -369,6 +369,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             return Fail(errMsg);
         }
+
+        /// <summary>
+        /// 获取车间list
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetWorkShopList()
+        {
+            var list = toosIBLL.GetWorkShopList();
+            return Success(list);
+        }
+
         #endregion
 	}
 }
