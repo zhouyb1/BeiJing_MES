@@ -218,10 +218,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\PickingMaterController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\PickingMaterQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
@@ -274,9 +271,9 @@
     <Compile Include="Areas\MesDev\Controllers\SalaryManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\BomHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProductOrderManagerController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\PickingMaterController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\PickingMaterQueryController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\OutWorkShopManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -504,10 +501,12 @@
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
-    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.js" />
-    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Index.js" />
-    <Content Include="Areas\MesDev\Views\PickingMater\Form.js" />
-    <Content Include="Areas\MesDev\Views\PickingMater\Index.js" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
+    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.cshtml">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
@@ -518,8 +517,6 @@
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.js" />
-    <Content Include="Areas\MesDev\Views\Record\Form.js" />
-    <Content Include="Areas\MesDev\Views\Record\Index.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Form.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Index.js" />
@@ -2164,13 +2161,10 @@
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.cshtml" />
     <Content Include="Areas\AM_SystemModule\Views\DataItem\SingleDetailIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\BomPartSum.cshtml" />
-    <Content Include="Areas\MesDev\Views\PickingMater\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\PickingMater\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.cshtml" />
-    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Record\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\Record\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2315,18 +2309,17 @@
     <Content Include="Areas\MesDev\Views\ProductOrderManager\Index.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Arrange\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Arrange\Form.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Record\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Record\Index.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Record\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Record\Form.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.js" />
+    <Content Include="Areas\MesDev\Views\PickingMater\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\Index.js" />
+    <Content Include="Areas\MesDev\Views\PickingMater\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\Form.js" />
+    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Index.js" />
+    <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.js" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2463,7 +2456,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
