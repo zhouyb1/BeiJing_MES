@@ -162,6 +162,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         Mes_GoodsEntity GetCode(string goodsCode);
+
+        /// <summary>
+        /// 获取车间
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_WorkShopEntity> GetWorkShopList();
         #endregion
 
         #region 提交数据

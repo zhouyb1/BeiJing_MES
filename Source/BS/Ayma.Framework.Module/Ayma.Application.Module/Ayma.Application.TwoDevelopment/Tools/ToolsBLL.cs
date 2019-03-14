@@ -619,6 +619,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取车间
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_WorkShopEntity> GetWorkShopList()
+        {
+            try
+            {
+               return  toolsService.GetWorkShopList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

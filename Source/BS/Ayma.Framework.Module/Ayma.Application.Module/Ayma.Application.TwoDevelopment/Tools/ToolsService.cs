@@ -638,6 +638,31 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+        /// <summary>
+        /// 获取车间
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_WorkShopEntity> GetWorkShopList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_WorkShopEntity>();
+            }
+            catch (Exception ex)
+            {
+
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+            
+        }
+
 
         #endregion
         
