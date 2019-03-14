@@ -274,7 +274,7 @@
     <Compile Include="Areas\MesDev\Controllers\PickingMaterController.cs" />
     <Compile Include="Areas\MesDev\Controllers\PickingMaterQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\OutWorkShopManagerController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ScrapManagerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -511,7 +511,6 @@
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
-    <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
@@ -523,6 +522,7 @@
     <Content Include="Areas\MesDev\Views\RequistBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Index.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\PostIndex.js" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\html5shiv.min.js" />
@@ -2167,7 +2167,7 @@
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.cshtml" />
-    <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2323,10 +2323,10 @@
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Index.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\Form.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
-    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
