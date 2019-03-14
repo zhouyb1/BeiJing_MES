@@ -57,6 +57,10 @@
     <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
     <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
     <Compile Include="MesDev\HumitureManager\Mes_HumitureEntity.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeBLL.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeIBLL.cs" />
+    <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeService.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
@@ -64,6 +68,9 @@
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderHeadService.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordBLL.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordIBLL.cs" />
+    <Compile Include="MesDev\Mes_Record\Mes_RecordService.cs" />
     <Compile Include="MesDev\PickingMaterQuery\Mes_CollarViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -80,6 +87,10 @@
     <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MesDev\Record\Mes_RecordEntity.cs" />
+    <Compile Include="MesDev\Record\RecordBLL.cs" />
+    <Compile Include="MesDev\Record\RecordIBLL.cs" />
+    <Compile Include="MesDev\Record\RecordService.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistDetailEntity.cs" />
     <Compile Include="MesDev\RequistBill\Mes_RequistHeadEntity.cs" />
     <Compile Include="MesDev\RequistBill\RequistBillBLL.cs" />

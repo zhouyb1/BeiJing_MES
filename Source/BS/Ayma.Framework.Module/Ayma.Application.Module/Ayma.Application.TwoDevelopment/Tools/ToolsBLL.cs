@@ -135,28 +135,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-        /// <summary>
-        /// 获取车间列表
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Mes_WorkShopEntity> GetWorkShopList()
-        {
-            try
-            {
-                return toolsService.GetWorkShopList();
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
+      
         /// <summary>
         /// 获取工艺列表
         /// </summary>
