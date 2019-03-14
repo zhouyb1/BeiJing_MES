@@ -29,7 +29,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code);
+                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code||x.S_Name==code);
             }
             catch (Exception ex)
             {
