@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OutWorkShopHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE t.O_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
