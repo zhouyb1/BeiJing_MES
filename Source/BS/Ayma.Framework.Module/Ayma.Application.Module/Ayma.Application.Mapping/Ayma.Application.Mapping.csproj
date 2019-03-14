@@ -63,12 +63,15 @@
     <Compile Include="Form\FormSchemeInfoMap.cs" />
     <Compile Include="Form\FormSchemeMap.cs" />
     <Compile Include="IM\IMContentMap.cs" />
+    <Compile Include="MesDev\Mes_ArrangeMap.cs" />
     <Compile Include="MesDev\Mes_HumitureMap.cs" />
     <Compile Include="MesDev\Mes_ProceMap.cs" />
     <Compile Include="MesDev\Mes_ProductOrderDetailMap.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHeadMap.cs" />
+    <Compile Include="MesDev\Mes_RecordMap.cs" />
     <Compile Include="MesDev\Mes_RequistDetailMap.cs" />
     <Compile Include="MesDev\Mes_RequistHeadMap.cs" />
+    <Compile Include="MesDev\Mes_ResonMap.cs" />
     <Compile Include="OA\ScheduleMap.cs" />
     <Compile Include="OA\NewsMap.cs" />
     <Compile Include="Organization\CompanyMap.cs" />
