@@ -89,26 +89,49 @@ var bootstrap = function ($, ayma) {
                         width: 700,
                         height: 500,
                         maxmin: true,
-                        callBack: function (id) {
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
                 }
-            })
-            // 删除
+            });
+            // 删除单据
             $('#am_delete').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认删除该项！', function (res) {
+                var orderNo = $("#girdtable").jfGridValue("O_OutNo");
+                if (ayma.checkrow(orderNo)) {
+                    var status = $("#girdtable").jfGridValue("O_Status");
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
+                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/OutWorkShopManager/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OutWorkShop_Delete', type: 3 }, function () {
                                 refreshGirdData();
                             });
                         }
                     });
                 }
             });
-            //审核
+            //提交单据
+            $('#am_submit').on('click', function() {
+                var orderNo = $("#girdtable").jfGridValue("O_OutNo");
+                var status = $("#girdtable").jfGridValue("O_Status");
+                if (status == "1") {
+                    ayma.alert.error("未审核");
+                    return false;
+                }
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认提交该单据！', function(res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OutWorkShop_Post', type: 1 }, function() {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
+
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");
