@@ -89,6 +89,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(data);
         }
         /// <summary>
+        /// 根据Id获取配方实体
+        /// </summary>
+        /// <param name="keyValue">配方表主键</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetBomRecordEntity(string keyValue)
+        {
+            var data = bomHeadIBLL.GetBomRecordEntity(keyValue);
+            return Success(data);
+        }
+        /// <summary>
         /// 配方树形列表
         /// </summary>
         /// <param name="queryJson">工艺代码、配方编码、配方名称、物料编码、物料名称</param>
@@ -171,12 +183,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveBomRecordForm(string keyValue, Mes_BomRecordEntity entity)
         {
-            bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
             if (!string.IsNullOrEmpty(entity.B_ParentID))
             {
                 if (entity.B_ParentID != "0")
                 {
-                    var resCode = bomHeadIBLL.ExistCode(keyValue, entity.B_ParentID, entity.B_FormulaCode, entity.B_GoodsCode);
+                    var resCode = bomHeadIBLL.ExistCode(keyValue, entity.B_ParentID, entity.B_RecordCode, entity.B_FormulaCode, entity.B_GoodsCode);
                     if (!resCode)
                     {
                         return Fail("该配方已存在！");
@@ -184,6 +195,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
             }
 
+            bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
+            
             return Success("保存成功！");
         }
         #endregion

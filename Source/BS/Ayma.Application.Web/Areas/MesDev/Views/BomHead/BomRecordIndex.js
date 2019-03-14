@@ -53,11 +53,12 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 var id = $('#girdtable').jfGridValue('ID');
+                var recordCode = $('#girdtable').jfGridValue('B_RecordCode');//工艺代码
                 selectedRow = null;
                 ayma.layerForm({
                     id: 'BomRecordForm',
                     title: '新增配方',
-                    url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?parentId=' + id,
+                    url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?recordCode=' + recordCode + '&parentId=' + id,
                     width: 700,
                     height: 500,
                     callBack: function (id) {
@@ -101,7 +102,6 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordTreeList',
                 headData: [
                            { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },
-                           { label: "工序号", name: "B_ProNo", width: 160, align: "left" },
                            { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left" },
                            { label: "配方名称", name: "B_FormulaName", width: 160, align: "left" },
                            { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left" },

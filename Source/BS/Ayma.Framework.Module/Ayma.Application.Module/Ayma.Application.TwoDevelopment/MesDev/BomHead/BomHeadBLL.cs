@@ -63,6 +63,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
         /// <summary>
+        /// 根据主键获取配方表实体
+        /// </summary>
+        /// <param name="keyValue">配方表主键</param>
+        /// <returns></returns>
+        public Mes_BomRecordEntity GetBomRecordEntity(string keyValue)
+        {
+            try
+            {
+                return bomHeadService.GetBomRecordEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取配方列表数据
         /// </summary>
         /// <returns></returns>
@@ -257,18 +280,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 验证重复
 
         /// <summary>
-        /// 根据父Id、配方编码、物料编码判断是否重复
+        /// 根据父Id、工艺代码、配方编码、物料编码判断是否重复
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <param name="parentId">父Id</param>
+        /// <param name="recordCode">工艺代码</param>
         /// <param name="formulaCode">配方编码</param>
         /// <param name="goodsCode">物料编码</param>
         /// <returns></returns>
-        public bool ExistCode(string keyValue, string parentId, string formulaCode, string goodsCode)
+        public bool ExistCode(string keyValue, string parentId,string recordCode, string formulaCode, string goodsCode)
         {
             try
             {
-                return bomHeadService.ExistCode(keyValue, parentId, formulaCode, goodsCode);
+                return bomHeadService.ExistCode(keyValue, parentId,recordCode, formulaCode, goodsCode);
             }
             catch (Exception ex)
             {

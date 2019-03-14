@@ -6,6 +6,7 @@
  * 描 述：配方管理	
  */
 var parentId = request('parentId');
+var recordCode = request('recordCode');//工艺代码
 var selectedRow = top.BomRecordIndexSelectedRow();
 
 var keyValue = '';
@@ -19,6 +20,12 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+           
+            if (parentId != '' && parentId!=undefined) {
+                $("#B_RecordCode").attr("disabled", "disabled");
+            } else {
+                $("#B_RecordCode").removeAttr("disabled");
+            }
             //是否有效
             $('#B_Avail').DataItemSelect({ code: 'YesOrNo' });
             // 上级
@@ -28,51 +35,64 @@ var bootstrap = function ($, ayma) {
                 allowSearch: true,
                 maxHeight: 225
             }).selectSet(parentId);
-            $('#B_ProNo').select();//下拉初始化
+            //上级改变事件
+            $('#B_ParentID').bind("change", function() {
+                var value = $(this).selectGet();
+                if (value != '' && value != undefined) {
+                    $.ajax({
+                        type: "get",
+                        url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordEntity',
+                        data: { keyValue: value },
+                        success: function (data) {
+                            var entity=JSON.parse(data).data;
+                            //工艺代码赋值
+                            $("#B_RecordCode").selectSet(entity.B_RecordCode);
+                        }
+                    });
+                    $("#B_RecordCode").attr("disabled", "disabled");
+                } else {
+                    $("#B_RecordCode").removeAttr("disabled");
+                }
+            });
             //工艺代码
             $("#B_RecordCode").select({
                 type: 'default',
-                value: 'P_RecordCode',
-                text: 'P_RecordCode',
+                value: 'R_Record',
+                text: 'R_Record',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
                 // 访问数据接口参数
                 param: { parentId: "0" }
-            }).on('change', function () {
+            }).selectSet(recordCode);
+            //物料编码
+            $("#B_GoodsCode").select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Code',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+            }).bind("change",function() {
                 var code = $(this).selectGet();
-                $("#B_ProNo").selectRefresh({
-                    type: 'default',
-                    value: 'P_ProNo',
-                    text: 'P_ProNo',
-                    // 展开最大高度
-                    maxHeight: 200,
-                    // 是否允许搜索
-                    allowSearch: true,
-                    // 访问数据接口地址
-                    url: top.$.rootUrl + '/MesDev/Tools/GetProceListBy',
-                    // 访问数据接口参数
-                    param: { code: code }
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#B_GoodsName").val(entity.G_Name);
+                    }
                 });
-                //$.ajax({
-                //    type: "get",
-                //    url: top.$.rootUrl + '/MesDev/Tools/GetProceEntityBy',
-                //    data: { code: code },
-                //    success: function (data) {
-                //        var entity = JSON.parse(data).data;
-                //        $("#B_ProNo").val(entity.P_ProNo);
-                //    }
-                //});
             });
-            //$('#F_ParentId').select({
-            //    url: top.$.rootUrl + '/AM_SystemModule/DataItem/GetClassifyTree',
-            //    type: 'tree',
-            //    allowSearch: true,
-            //    maxHeight:225
-            //}).selectSet(goodsCode);
+          
             /*检测重复项*/
             //$('#F_ItemName').on('blur', function () {
             //    $.ExistField(keyValue, 'F_ItemName', top.$.rootUrl + '/AM_SystemModule/DataItem/ExistItemName');
@@ -82,6 +102,7 @@ var bootstrap = function ($, ayma) {
             //});
         },
         initData: function () {
+            
             if (!!selectedRow) {
                 keyValue = selectedRow.ID || '';
                 $('#form').SetFormData(selectedRow);
@@ -89,6 +110,7 @@ var bootstrap = function ($, ayma) {
             } else {
                 $('#B_Avail').selectSet(1);
             }
+
         }
     };
     // 保存数据

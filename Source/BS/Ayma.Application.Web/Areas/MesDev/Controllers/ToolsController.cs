@@ -72,28 +72,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var workshopEntity = toosIBLL.ByCodeGetWorkShopEntity(code);
             return Success(workshopEntity);
         }
-        /// <summary>
-        /// 获取工序列表
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //[AjaxOnly]
-        //public ActionResult GetProceList(string parentId)
-        //{
-        //    var stockList = toosIBLL.GetProceList(parentId);
-        //    return Success(stockList);
-        //} 
-        /// <summary>
-        /// 获取工序树形列表
-        /// </summary>
-        /// <returns></returns>
-        //[HttpGet]
-        //[AjaxOnly]
-        //public ActionResult GetProceTreeList()
-        //{
-        //    var proceTreeList = toosIBLL.GetProceTreeList();
-        //    return Success(proceTreeList);
-        //}
+        
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
@@ -106,18 +85,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var goodsEntity = toosIBLL.ByCodeGetGoodsEntity(code);
             return Success(goodsEntity);
         }
-        /// <summary>
-        /// 根据工艺代码代码获取工序表实体
-        /// </summary>
-        /// <param name="code">工艺代码</param>
-        /// <returns></returns>
-        //[HttpGet]
-        //[AjaxOnly]
-        //public ActionResult GetProceListBy(string code)
-        //{
-        //    var proceList = toosIBLL.GetProceListBy(code);
-        //    return Success(proceList);
-        //}
+   
         /// <summary>
         /// 获取物料列表
         /// </summary>

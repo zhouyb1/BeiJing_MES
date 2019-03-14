@@ -8,37 +8,37 @@
         <div id="B_ParentID"></div>
     </div>
     <div class="col-xs-6 am-form-item" data-table="B_BusinessCategory">
-        <div class="am-form-item-title">工艺代码</div>
-        <div id="B_RecordCode"></div>
+        <div class="am-form-item-title">工艺代码<font face="宋体">*</font></div>
+        <div id="B_RecordCode" isvalid="yes" checkexpession="NotNull"></div>
 
     </div>
    
     <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">配方编码</div>
-        <input id="B_FormulaCode" type="text" class="form-control" />
+        <div class="am-form-item-title">配方编码<font face="宋体">*</font></div>
+        <input id="B_FormulaCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">配方名称</div>
-        <input id="B_FormulaName" type="text" class="form-control" />
+        <div class="am-form-item-title">配方名称<font face="宋体">*</font></div>
+        <input id="B_FormulaName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
     
     <div class="col-xs-6 am-form-item">
         <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
-        <input id="B_GoodsCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div id="B_GoodsCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
-        <input id="B_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">物料名称</div>
+        <input id="B_GoodsName" type="text" class="form-control" disabled="disabled" />
     </div>
 
    
     <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">数量</div>
-        <input id="B_Qty" type="number" class="form-control" />
+        <div class="am-form-item-title">数量<font face="宋体">*</font></div>
+        <input id="B_Qty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">单位</div>
-        <input id="B_Unit" type="text" class="form-control"/>
+        <div class="am-form-item-title">单位<font face="宋体">*</font></div>
+        <input id="B_Unit" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">开始时间</div>
