@@ -31,7 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 保质时间
         /// </summary>
         [Column("G_PERIOD")]
-        public string G_Period { get; set; }
+        public int? G_Period { get; set; }
         /// <summary>
         /// 价格
         /// </summary>
