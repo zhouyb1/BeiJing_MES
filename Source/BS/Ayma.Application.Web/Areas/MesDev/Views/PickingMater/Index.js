@@ -78,13 +78,13 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            // 删除
+            // 删除单据
             $('#am_delete').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
+                var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
+                if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/PickingMater/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Delete', type: 3 }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -103,6 +103,25 @@ var bootstrap = function ($, ayma) {
                     ayma.layerConfirm('是否确认审核该单据！', function (res) {
                         if (res) {
                             ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_CollarHead', field: 'P_Status' }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
+
+            //提交单据
+            $('#am_post').on('click', function() {
+                var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
+                var status = $("#girdtable").jfGridValue("P_Status");
+                if (status == "1") {
+                    ayma.alert.error("未审核");
+                    return false;
+                }
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认提交该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Post', type: 1 }, function () {
                                 refreshGirdData();
                             });
                         }
