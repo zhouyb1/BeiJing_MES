@@ -63,6 +63,7 @@
     <Compile Include="Form\FormSchemeInfoMap.cs" />
     <Compile Include="Form\FormSchemeMap.cs" />
     <Compile Include="IM\IMContentMap.cs" />
+    <Compile Include="MesDev\Mes_ScrapDetailMap.cs" />
     <Compile Include="MesDev\Mes_ArrangeMap.cs" />
     <Compile Include="MesDev\Mes_HumitureMap.cs" />
     <Compile Include="MesDev\Mes_ProceMap.cs" />
@@ -148,7 +149,7 @@
     <Compile Include="MesDev\Mes_CollarDetailMap.cs" />
     <Compile Include="MesDev\Mes_OutWorkShopHeadMap.cs" />
     <Compile Include="MesDev\Mes_OutWorkShopDetailMap.cs" />
-    <Compile Include="MesDev\Mes_InspectMap.cs" />
+    <Compile Include="MesDev\Mes_ScrapHeadMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
