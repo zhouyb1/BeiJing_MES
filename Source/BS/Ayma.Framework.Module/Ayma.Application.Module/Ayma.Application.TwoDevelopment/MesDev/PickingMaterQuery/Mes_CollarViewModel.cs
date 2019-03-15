@@ -18,6 +18,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
+        /// 状态
+        /// </summary>
+        public string P_Status { get; set; }
+
+        /// <summary>
         /// 领料单号
         /// </summary>
         [Column("C_COLLARNO")]

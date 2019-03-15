@@ -22,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_CollarViewModel> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_CollarHeadEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
@@ -30,18 +30,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
+                t.C_StockCode,
+                t.C_StockName,
+                t.C_StockToCode,
+                t.C_StockToName,
+                t.P_Status,
                 t.C_CollarNo,
-                t1.C_GoodsCode,
-                t1.C_GoodsName,
                 t.P_OrderNo,
-                t1.C_Unit,
-                t1.C_Qty,
-                t1.C_Batch,
+                t.C_Remark,
                 t.C_CreateBy,
                 t.C_CreateDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
-                strSql.Append("  LEFT JOIN Mes_CollarDetail t1 ON t1.C_CollarNo = t.C_CollarNo ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -62,17 +62,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
-                if (!queryParam["C_GoodsName"].IsEmpty())
-                {
-                    dp.Add("C_GoodsName", "%" + queryParam["C_GoodsName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t1.C_GoodsName Like @C_GoodsName ");
-                }
-                if (!queryParam["C_GoodsCode"].IsEmpty())
-                {
-                    dp.Add("C_GoodsCode", "%" + queryParam["C_GoodsCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t1.C_GoodsCode Like @C_GoodsCode ");
-                }
-                return this.BaseRepository().FindList<Mes_CollarViewModel>(strSql.ToString(), dp, pagination);
+                
+                return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
