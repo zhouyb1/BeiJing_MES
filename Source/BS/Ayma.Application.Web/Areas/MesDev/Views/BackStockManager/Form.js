@@ -6,19 +6,18 @@ var acceptClick;
 var refreshGirdData;//表格商品添加
 var parentFormId = request('formId');
 var RemoveGridData;//移除表格
-var stockCode;
 var tmp = new Map();
 var keyValue = request('keyValue');
-var bootstrap = function ($, ayma) {
+var bootstrap = function($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
-        init: function () {
-$('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
+        init: function() {
+            $('.am-form-wrap').mCustomScrollbar({ theme: "minimal-dark" });
             page.bind();
             page.initData();
         },
-        bind: function () {
+        bind: function() {
             //绑定仓库
             $('#B_StockName').select({
                 text: "s_name",
@@ -34,7 +33,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
                     data: { code: code },
-                    success: function (data) {
+                    success: function(data) {
                         var entity = JSON.parse(data).data;
                         $('#B_StockCode').val(entity.S_Code);
                     }
@@ -56,7 +55,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
                     data: { code: code },
-                    success: function (data) {
+                    success: function(data) {
                         var entity = JSON.parse(data).data;
                         $('#B_StockToCode').val(entity.S_Code);
                     }
@@ -64,7 +63,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
 
             //添加报废物料
-            $('#am_add').on('click', function () {
+            $('#am_add').on('click', function() {
                 var stock = $('#B_StockName').selectGet();
                 if (stock == "") {
                     ayma.alert.error("请选择仓库");
@@ -73,18 +72,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/BackStockManager/GoodsListIndex?formId=' + parentFormId + '&stockCode=' + stockCode,
+                    url: top.$.rootUrl + '/MesDev/BackStockManager/GoodsListIndex?formId=' + parentFormId + '&stockCode=' + stock,
                     width: 700,
                     height: 500,
                     maxmin: true,
-                    callback: function (id, index) {
+                    callback: function(id, index) {
                         return top[id].closeWindow();
                     }
                 });
             });
-
-        },
-        initGrid: function() {
             $('#Mes_BackStockDetail').jfGrid({
                 headData: [
                     { label: "物料编码", name: "B_GoodsCode", width: 130, align: "left", },
@@ -92,7 +88,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单价", name: "B_Price", width: 130, align: "left" },
                     { label: "单位", name: "B_Unit", width: 60, align: "left" },
                     { label: "返回数量", name: "B_Qty", width: 60, align: "left", editType: 'input' },
-                    { label: "现有数量", name: "B_OldQty", width: 60, align: "left", editType: 'input' },
+                    //{ label: "现有数量", name: "B_OldQty", width: 60, align: "left", editType: 'input' },
                     { label: "批次", name: "B_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,
@@ -104,42 +100,46 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 inputCount: 2
             });
         },
-        initData: function () {
+        initData: function() {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/BackStockManager/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/BackStockManager/GetFormData?keyValue=' + keyValue, function(data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_BackStockDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
 
-                        }
-                        else {
+                        } else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
                     }
                 });
             }
+        },
+        search: function (data) {
+            data = data || {};
+            $('#Mes_BackStockDetail').jfGridSet('refreshdata', { rowdatas: data });
         }
+
     };
-    // 保存数据
-    acceptClick = function (callBack) {
+    //保存数据
+    acceptClick = function(callBack) {
         if (!$('body').Validform()) {
             return false;
         }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_BackStockHead"]').GetFormData());
         postData.strmes_BackStockDetailList = JSON.stringify($('#Mes_BackStockDetail').jfGridGet('rowdatas'));
-        $.SaveForm(top.$.rootUrl + '/MesDev/BackStockManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
+        $.SaveForm(top.$.rootUrl + '/MesDev/BackStockManager/SaveForm?keyValue=' + keyValue, postData, function(res) {
             // 保存成功后才回调
             if (!!callBack) {
                 callBack();
             }
         });
     };
-    top.NewGirdData = function () {
+    top.NewGirdData = function() {
         return $('#Mes_BackStockDetail').jfGridGet('rowdatas');
     }
     //表格商品添加
-    refreshGirdData = function (data, row) {
+    refreshGirdData = function(data, row) {
         var rows = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
@@ -155,13 +155,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             }
         }
         //数组过滤
-        var filterarray = $.grep(rows, function (item) {
+        var filterarray = $.grep(rows, function(item) {
             return item["B_GoodsCode"] != undefined;
         });
         page.search(filterarray);
     };
     //表格商品删除
-    RemoveGridData = function (row) {
+    RemoveGridData = function(row) {
         var rows = $('#Mes_BackStockDetail').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["B_GoodsCode"] == row["G_GoodsCode"]) {
@@ -172,4 +172,5 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
     };
     page.init();
-}
+};
+

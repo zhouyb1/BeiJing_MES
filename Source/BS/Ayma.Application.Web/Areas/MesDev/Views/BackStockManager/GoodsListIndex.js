@@ -78,7 +78,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/ScrapManager/GetGoodsList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/BackStockManager/GetGoodsList?stockCode=' + stockCode,
                 headData: [
                     { label: "物料编码", name: "G_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "G_GoodsName", width: 130, align: "left" },
