@@ -523,6 +523,8 @@
     <Content Include="Areas\MesDev\Views\RequistBill\Index.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.js" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PostIndex.js" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PostPageForm.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\html5shiv.min.js" />
@@ -2168,6 +2170,8 @@
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PostPageForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
