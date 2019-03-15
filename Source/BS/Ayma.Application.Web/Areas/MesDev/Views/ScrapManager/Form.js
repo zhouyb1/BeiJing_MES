@@ -110,9 +110,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        var data = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
+        if (data[0].S_GoodsCode == undefined || data[0].S_GoodsCode=="") {
+            ayma.alert.error('请勾选物料');
+            return false;
+        }
         var postData = {
             strEntity: JSON.stringify($('body').GetFormData()),
-            detailList: JSON.stringify($('#Mes_ScrapDetail').jfGridGet('rowdatas'))
+            detailList: JSON.stringify(data)
         };
         $.SaveForm(top.$.rootUrl + '/MesDev/ScrapManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
