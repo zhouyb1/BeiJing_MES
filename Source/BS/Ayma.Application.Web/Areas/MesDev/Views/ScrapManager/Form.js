@@ -112,7 +112,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
         var data = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
         if (data[0].S_GoodsCode == undefined || data[0].S_GoodsCode=="") {
-            ayma.alert.error('请勾选物料');
+            ayma.alert.error('请添加物料');
             return false;
         }
         var postData = {
