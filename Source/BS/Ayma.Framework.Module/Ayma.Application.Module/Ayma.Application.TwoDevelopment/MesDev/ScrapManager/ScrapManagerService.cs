@@ -41,10 +41,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t ");
-                strSql.Append("  WHERE t.S_Status in (1,2) ");
+                strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (queryParam["type"].IsEmpty())
+                {
+                    strSql.Append(" AND t.S_Status in (1,2)");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
