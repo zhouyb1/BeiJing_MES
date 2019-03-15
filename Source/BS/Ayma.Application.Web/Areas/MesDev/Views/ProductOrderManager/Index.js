@@ -80,7 +80,7 @@ var bootstrap = function ($, ayma) {
                     //打开统计页面BomPartSum 
                     ayma.layerForm({
                         id: 'form',
-                        title: '配方',
+                        title: '配方物料统计',
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?GoodsCode=' + code+'&qty='+qty+'&orderNo='+orderNo+'&orderDate='+orderDate,
                         width: 800,
                         height: 600,
