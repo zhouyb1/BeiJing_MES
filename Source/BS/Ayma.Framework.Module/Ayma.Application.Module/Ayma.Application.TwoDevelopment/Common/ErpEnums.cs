@@ -30,9 +30,9 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             ProOut = 10002,
             /// <summary>
-            /// 报废单据
+            /// 退供应商单
             /// </summary>
-            Scrap=10003
+            BackSupply = 10004,
         }
         /// <summary>
         /// 是否
@@ -182,8 +182,10 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             IsDelete= -1,         
         }
-
-        public enum ScrapStatusEnum
+        /// <summary>
+        /// 退供应商单状态
+        /// </summary>
+        public enum BackSupplyStatusEnum
         {
             /// <summary>
             /// 单据生成
@@ -200,7 +202,7 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 单据删除
             /// </summary>
-            IsDelete = -1,         
+            IsDelete = -1,
         }
     }
 }

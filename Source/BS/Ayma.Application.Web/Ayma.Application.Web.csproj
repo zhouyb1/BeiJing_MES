@@ -217,8 +217,12 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TestController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ToolsController.cs" />
@@ -275,6 +279,7 @@
     <Compile Include="Areas\MesDev\Controllers\PickingMaterQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\OutWorkShopManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ScrapManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_BackSupplyController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -498,10 +503,18 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Arrange\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Record\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Record\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
@@ -518,6 +531,8 @@
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.js" />
+    <Content Include="Areas\MesDev\Views\Record\Form.js" />
+    <Content Include="Areas\MesDev\Views\Record\Index.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Form.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\RequistBill\Index.js" />
@@ -2172,6 +2187,16 @@
     <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ScrapManager\PostIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ScrapManager\PostPageForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Arrange\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Record\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Record\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Reson\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Record\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Record\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2331,6 +2356,10 @@
     <Content Include="Areas\MesDev\Views\ScrapManager\Index.js" />
     <Content Include="Areas\MesDev\Views\ScrapManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\ScrapManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

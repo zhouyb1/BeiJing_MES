@@ -150,6 +150,8 @@
     <Compile Include="MesDev\Mes_OutWorkShopHeadMap.cs" />
     <Compile Include="MesDev\Mes_OutWorkShopDetailMap.cs" />
     <Compile Include="MesDev\Mes_ScrapHeadMap.cs" />
+    <Compile Include="MesDev\Mes_BackSupplyHeadMap.cs" />
+    <Compile Include="MesDev\Mes_BackSupplyDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

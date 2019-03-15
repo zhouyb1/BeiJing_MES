@@ -227,6 +227,11 @@
     <Compile Include="MesDev\ScrapManager\ScrapManagerService.cs" />
     <Compile Include="MesDev\ScrapManager\ScrapManagerBLL.cs" />
     <Compile Include="MesDev\ScrapManager\ScrapManagerIBLL.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyHeadEntity.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyDetailEntity.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyService.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyBLL.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
