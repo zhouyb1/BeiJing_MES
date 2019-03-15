@@ -117,7 +117,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_CollarDetail').jfGridGet('rowdatas');
-        if (data[0].C_CollarNo == undefined || data[0].C_CollarNo=="") {
+        if (data[0].C_GoodsCode == undefined || data[0].C_GoodsCode == "") {
             ayma.alert.error('请添加物料');
             return false;
         }
