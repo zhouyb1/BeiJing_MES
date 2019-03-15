@@ -85,7 +85,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         },
         initGrid: function() {
-            $('#Mes_ScrapDetail').jfGrid({
+            $('#Mes_BackStockDetail').jfGrid({
                 headData: [
                     { label: "物料编码", name: "B_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
