@@ -136,9 +136,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        var data = $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
+        if (data.length==0) {
+            ayma.alert.error('请添加物料');
+            return false;
+        }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_OutWorkShopHead"]').GetFormData());
-        postData.strmes_OutWorkShopDetailList = JSON.stringify($('#Mes_OutWorkShopDetail').jfGridGet('rowdatas'));
+        postData.strmes_OutWorkShopDetailList = JSON.stringify();
         $.SaveForm(top.$.rootUrl + '/MesDev/OutWorkShopManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
