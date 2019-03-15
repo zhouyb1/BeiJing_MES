@@ -53,6 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ErpEnums.cs" />
+    <Compile Include="MesDev\BackStockManager\BackStockManagerBLL.cs" />
+    <Compile Include="MesDev\BackStockManager\BackStockManagerIBLL.cs" />
+    <Compile Include="MesDev\BackStockManager\BackStockManagerService.cs" />
+    <Compile Include="MesDev\BackStockManager\Mes_BackStockDetailEntity.cs" />
+    <Compile Include="MesDev\BackStockManager\Mes_BackStockHeadEntity.cs" />
     <Compile Include="MesDev\HumitureManager\HumitureManagerBLL.cs" />
     <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
     <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
