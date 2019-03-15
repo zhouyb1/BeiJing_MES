@@ -116,9 +116,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        var data = $('#Mes_CollarDetail').jfGridGet('rowdatas');
+        if (data[0].C_CollarNo == undefined || data[0].C_CollarNo=="") {
+            ayma.alert.error('请添加物料');
+            return false;
+        }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_CollarHead"]').GetFormData());
-        postData.strmes_CollarDetailEntity = JSON.stringify($('#Mes_CollarDetail').jfGridGet('rowdatas'));
+        postData.strmes_CollarDetailEntity = JSON.stringify(data);
         $.SaveForm(top.$.rootUrl + '/MesDev/PickingMater/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
