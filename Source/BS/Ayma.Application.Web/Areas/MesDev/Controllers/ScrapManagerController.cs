@@ -50,6 +50,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 报废单查询
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PostIndex()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 报废单查询表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PostPageForm()
+        {
+            return View();
+        }
+
         #endregion
 
         #region 获取数据
@@ -61,7 +80,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetPageList(string pagination, string queryJson)
+        public ActionResult GetPageList(string pagination, string queryJson )
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
             var data = scrapManagerIBLL.GetPageList(paginationobj, queryJson);

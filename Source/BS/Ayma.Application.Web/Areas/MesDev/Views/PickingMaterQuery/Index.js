@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
+            }, 220, 300);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -84,10 +84,33 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/PickingMaterQuery/GetPageList',
                 headData: [
+                      {
+                          label: "状态", name: "P_Status", width: 160, align: "left",
+                          formatterAsync: function (callback, value, row) {
+                              ayma.clientdata.getAsync('dataItem', {
+                                  key: value,
+                                  code: 'RequistStatus',
+                                  callback: function (_data) {
+                                      if (value == 1) {
+                                          callback("<span class='label label-default'>" + _data.text + "</span>");
+                                      } else if (value == 2) {
+                                          callback("<span class='label label-info'>" + _data.text + "</span>");
+                                      } else if (value == 3) {
+                                          callback("<span class='label label-success'>" + _data.text + "</span>");
+                                      } else {
+                                          callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                      }
+                                  }
+                              });
+                          }
+                      },
                     { label: "领料单号", name: "C_CollarNo", width: 160, align: "left"},
-                    { label: "物料编码", name: "C_GoodsCode", width: 160, align: "left"},
-                    { label: "物料名称", name: "C_GoodsName", width: 160, align: "left"},
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left"},
+                    { label: "生产订单", name: "P_OrderNo", width: 160, align: "left" },
+                    { label: "仓库编码", name: "C_StockCode", width: 160, align: "left" },
+                    { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
+                    { label: "领料仓编码", name: "C_StockToCode", width: 160, align: "left" },
+                    { label: "领料仓名称", name: "C_StockToName", width: 160, align: "left" },
+                    { label: "备注", name: "C_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left"},
                 ],
