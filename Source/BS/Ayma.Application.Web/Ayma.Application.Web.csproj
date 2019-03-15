@@ -216,6 +216,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSchemeController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
+    <Compile Include="Areas\MesDev\Controllers\BackStockManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
@@ -492,6 +493,9 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\Index.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordForm.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.css" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.js" />
@@ -507,6 +511,8 @@
     <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
@@ -2197,6 +2203,11 @@
     <Content Include="Areas\MesDev\Views\Record\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
