@@ -143,7 +143,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_OutWorkShopHead"]').GetFormData());
-        postData.strmes_OutWorkShopDetailList = JSON.stringify();
+        postData.strmes_OutWorkShopDetailList = JSON.stringify(data);
         $.SaveForm(top.$.rootUrl + '/MesDev/OutWorkShopManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
