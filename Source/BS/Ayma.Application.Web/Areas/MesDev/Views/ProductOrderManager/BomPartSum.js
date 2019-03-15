@@ -38,14 +38,14 @@ var bootstrap = function ($, ayma) {
         initGrid: function() {
             $('#girdtable').jfGrid({
                 headData: [
-                    { label: "配方名称", name: "B_FormulaName", width: 160, align: "left" },
-                    { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left" },
-                    { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },
-                    { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left" },
-                    { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
-                    { label: '单位', name: 'B_Unit', width: 100, align: 'left' },
-                    { label: '标准数量', name: 'B_Qty', width: 160, align: 'left' },
-                    { label: '订单物料统计', name: 'B_Total', width: 160, align: 'left' }
+                    { label: "配方名称", name: "B_FormulaName", width: 100, align: "left" },
+                    { label: "配方编码", name: "B_FormulaCode", width: 100, align: "left" },
+                    { label: "工艺代码", name: "B_RecordCode", width: 90, align: "left" },
+                    { label: "物料编码", name: "B_GoodsCode", width: 100, align: "left" },
+                    { label: "物料名称", name: "B_GoodsName", width: 100, align: "left" },
+                    { label: '单位', name: 'B_Unit', width: 60, align: 'left' },
+                    { label: '标准数量', name: 'B_Qty', width: 70, align: 'left' },
+                    { label: '订单物料统计', name: 'B_Total', width: 90, align: 'left' }
                 ],
                 isTree: true,
                 mainId: 'ID',
