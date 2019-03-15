@@ -30,9 +30,18 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             ProOut = 10002,
             /// <summary>
+            /// 报废单
+            /// </summary>
+            Scrap=10003,
+            /// <summary>
             /// 退供应商单
             /// </summary>
             BackSupply = 10004,
+            /// <summary>
+            /// 退库单
+            /// </summary>
+            BackToStock=10005
+
         }
         /// <summary>
         /// 是否
