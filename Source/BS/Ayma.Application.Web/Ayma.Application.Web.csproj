@@ -219,6 +219,7 @@
     <Compile Include="Areas\MesDev\Controllers\BackStockManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
