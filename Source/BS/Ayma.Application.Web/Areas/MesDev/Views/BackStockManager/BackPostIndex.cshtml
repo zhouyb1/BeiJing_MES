@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "退库单查询";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout">
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div class="am-searchtxt">订单时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">退库单号</div>
+                                    <input id="S_ScrapNo" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">仓库</div>
+                                    <input id="B_StockToName" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">状态</div>
+                                    <div id="B_Status" type="text" class="form-control"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" ayma-authorize="yes">
+                        <a id="am_detail" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;查看详情</a>
+                        <a id="am_cancel" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;撤销单据</a>
+                    </div>
+                </div>
+            </div>
+            <div class="am-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/BackStockManager/BackPostIndex.js")
+
+
