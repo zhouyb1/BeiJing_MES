@@ -7,6 +7,7 @@ var refreshGirdData;//表格商品添加
 var parentFormId = request('formId');
 var RemoveGridData;//移除表格
 var tmp = new Map();
+var stockCode;
 var keyValue = request('keyValue');
 var bootstrap = function($, ayma) {
     "use strict";
@@ -35,7 +36,8 @@ var bootstrap = function($, ayma) {
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $('#B_StockCode').val(entity.S_Code);
+                        stockCode = entity.S_Code;
+                        $('#B_StockCode').val(stockCode);
                     }
                 });
             });
@@ -72,7 +74,7 @@ var bootstrap = function($, ayma) {
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/BackStockManager/GoodsListIndex?formId=' + parentFormId + '&stockCode=' + stock,
+                    url: top.$.rootUrl + '/MesDev/BackStockManager/GoodsListIndex?formId=' + parentFormId + '&stockCode=' + stockCode,
                     width: 700,
                     height: 500,
                     maxmin: true,
@@ -140,7 +142,7 @@ var bootstrap = function($, ayma) {
     }
     //表格商品添加
     refreshGirdData = function(data, row) {
-        var rows = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
+        var rows = $('#Mes_BackStockDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
                 tmp.set(row, 1);
