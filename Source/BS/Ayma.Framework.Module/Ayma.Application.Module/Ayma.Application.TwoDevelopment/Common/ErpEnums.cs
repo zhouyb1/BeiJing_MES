@@ -40,7 +40,11 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 退库单
             /// </summary>
-            BackToStock=10005
+            BackToStock=10005,
+            /// <summary>
+            /// 组装单
+            /// </summary>
+            Org=10006
 
         }
         /// <summary>
