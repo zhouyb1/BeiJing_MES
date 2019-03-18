@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
                 }
             });
             // 撤销单据
-            $('#am_cancle').on('click', function () {
+            $('#am_cancel').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("B_BackStockNo");
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认撤销该单据！', function (res) {
