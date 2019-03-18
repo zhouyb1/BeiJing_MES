@@ -50,6 +50,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 获取已提交单据的页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BackPostIndex()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 获取表单页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PostPageForm()
+        {
+            return View();
+        }
+
         #endregion
 
         #region 获取数据
