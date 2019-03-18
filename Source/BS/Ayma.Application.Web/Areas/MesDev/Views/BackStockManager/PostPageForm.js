@@ -37,7 +37,7 @@ var bootstrap = function ($, ayma) {
                     { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
                     { label: "单价", name: "B_Price", width: 130, align: "left" },
                     { label: "单位", name: "B_Unit", width: 60, align: "left" },
-                    { label: "返回数量", name: "B_Qty", width: 60, align: "left", editType: 'input' },
+                    { label: "返回数量", name: "B_Qty", width: 60, align: "left", },
                     { label: "批次", name: "B_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,
