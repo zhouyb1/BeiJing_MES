@@ -18,6 +18,24 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
+            // 查看详情
+            $('#am_edit').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '库存查询',
+                        url: top.$.rootUrl + '/MesDev/InventorySeach/Form?keyValue=' + keyValue,
+                        width: 700,
+                        height: 500,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                            //return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
         },
         // 初始化列表
         initGird: function () {
@@ -30,7 +48,7 @@ var bootstrap = function ($, ayma) {
                     { label: "商品名称", name: "I_GoodsName", width: 160, align: "left"},
                     { label: "单位", name: "I_Unit", width: 160, align: "left"},
                     { label: "数量", name: "I_Qty", width: 160, align: "left"},
-                    { label: "入库时间", name: "I_Batch", width: 160, align: "left"},
+                    { label: "批次", name: "I_Batch", width: 160, align: "left"},
                     { label: "备注", name: "I_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',

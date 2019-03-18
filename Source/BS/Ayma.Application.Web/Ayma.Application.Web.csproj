@@ -218,6 +218,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
     <Compile Include="Areas\MesDev\Controllers\BackStockManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\InventortTrendController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
@@ -502,6 +503,8 @@
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
+    <Content Include="Areas\MesDev\Views\InventortTrend\Index.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.js" />
@@ -531,6 +534,7 @@
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
@@ -2209,6 +2213,9 @@
     <Content Include="Areas\MesDev\Views\BackStockManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\BackStockManager\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\BackStockManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventortTrend\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventortTrend\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

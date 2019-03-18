@@ -237,6 +237,10 @@
     <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyService.cs" />
     <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyBLL.cs" />
     <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyIBLL.cs" />
+    <Compile Include="MesDev\InventortTrend\Mes_InventoryTrendEntity.cs" />
+    <Compile Include="MesDev\InventortTrend\InventortTrendService.cs" />
+    <Compile Include="MesDev\InventortTrend\InventortTrendBLL.cs" />
+    <Compile Include="MesDev\InventortTrend\InventortTrendIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

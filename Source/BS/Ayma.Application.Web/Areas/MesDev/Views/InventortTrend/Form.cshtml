@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "库存动态表查询";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">单据类型</div>
+        <input id="I_OrderKind" type="text" class="form-control" disabled="disabled"  />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">仓库编码</div>
+        <input id="I_StockCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">仓库名称</div>
+        <input id="I_StockName" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">物料编码</div>
+        <input id="I_GoodsCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">物料名称</div>
+        <input id="I_GoodsName" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">单位</div>
+        <input id="I_Unit" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">批次</div>
+        <input id="I_Batch" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">保质期</div>
+        <input id="I_Period" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">单据号</div>
+        <input id="I_OrderNo" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">初始数量</div>
+        <input id="I_QtyOld" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">新数量</div>
+        <input id="I_QtyNew" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">移动数量</div>
+        <input id="I_QtyTrend" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InventoryTrend" >
+        <div class="am-form-item-title">备注</div>
+        <input id="I_Remark" type="text" class="form-control" disabled="disabled" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/InventortTrend/Form.js")
