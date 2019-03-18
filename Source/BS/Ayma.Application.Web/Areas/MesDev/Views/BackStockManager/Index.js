@@ -3,7 +3,6 @@
  * 描  述：线边仓退料到仓库
  */
 var refreshGirdData;
-var type;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -38,12 +37,10 @@ var bootstrap = function ($, ayma) {
                 selectfn: function (begin, end) {
                     startTime = begin;
                     endTime = end;
-                    type = "report";
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
-                queryJson.type = "report";
                 page.search(queryJson);
             }, 180, 500);
             $('#B_StockName').DataItemSelect({ code: 'StockType' });
@@ -54,9 +51,9 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
-                    id: 'form',
+                    id: 'BackIndexform',
                     title: '新增',
-                    url: top.$.rootUrl + '/MesDev/BackStockManager/Form',
+                    url: top.$.rootUrl + '/MesDev/BackStockManager/Form?formId=BackIndexform',
                     width: 800,
                     height: 600,
                     maxmin: true,
@@ -85,9 +82,9 @@ var bootstrap = function ($, ayma) {
 
             //审核单据
             $('#am_auditing').on('click', function() {
-                var orderNo = $('#girdtable').jfGridValue('B_BackStockNo');
+                var keyValue = $('#girdtable').jfGridValue('ID');
                 var status = $('#girdtable').jfGridValue('B_Status');
-                if (ayma.checkrow(orderNo)) {
+                if (ayma.checkrow(keyValue)) {
                     if (status != "1") {
                         ayma.alert.error("已审核");
                         return false;
@@ -162,16 +159,7 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "退仓库单号", name: "B_BackStockNo", width: 160, align: "left"},
                     { label: "仓库编码", name: "B_StockCode", width: 160, align: "left"},
-                    { label: "仓库名称", name: "B_StockName", width: 160, align: "left",
-                        formatterAsync: function (callback, value, row) {
-                             ayma.clientdata.getAsync('dataItem', {
-                                 key: value,
-                                 itemCode: 'StockType',
-                                 callback: function (_data) {
-                                     callback(_data.F_ItemName);
-                                 }
-                             });
-                        }},
+                    { label: "仓库名称", name: "B_StockName", width: 160, align: "left"},
                     { label: "退库仓库编码", name: "B_StockToCode", width: 160, align: "left"},
                     { label: "退库仓库名称", name: "B_StockToName", width: 160, align: "left"},
                     { label: "备注", name: "B_Remark", width: 160, align: "left"},
@@ -188,7 +176,6 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            param.type = type;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
