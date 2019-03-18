@@ -66,6 +66,9 @@
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeIBLL.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeService.cs" />
+    <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryBLL.cs" />
+    <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryIBLL.cs" />
+    <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryService.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectBLL.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />

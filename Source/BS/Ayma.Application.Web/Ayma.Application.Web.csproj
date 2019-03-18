@@ -220,6 +220,7 @@
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventortTrendController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_BackSupplyQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
@@ -513,6 +514,8 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\ProductIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_Arrange\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Arrange\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
@@ -2216,6 +2219,8 @@
     <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.cshtml" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
