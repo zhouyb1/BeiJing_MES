@@ -39,8 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockToName,
                 t.B_Remark,
                 t.B_CreateBy,
-                t.B_CreateDate,
-                t1.B_BackStockNo
+                t.B_CreateDate
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t ");
                 strSql.Append("  LEFT JOIN Mes_BackStockDetail t1 ON t1.B_BackStockNo = t.B_BackStockNo ");
@@ -48,6 +47,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (queryParam["type"].IsEmpty())
+                {
+                    strSql.Append(" AND B_Status IN (1,2)  ");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
