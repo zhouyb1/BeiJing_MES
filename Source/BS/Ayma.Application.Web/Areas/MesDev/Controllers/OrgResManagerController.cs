@@ -36,7 +36,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             if (Request["keyValue"]==null)
             {
-                ViewBag.OutNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());//自动获取主编码
+                ViewBag.orderNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());//自动获取主编码
             }
              return View();
         }
@@ -135,10 +135,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity, string strmes_OrgResDetaiList)
+        public ActionResult SaveForm(string keyValue, string strEntity, string detailList)
         {
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();
-            var mes_OrgResDetailList = strmes_OrgResDetaiList.ToObject<List<Mes_OrgResDetailEntity>>();
+            var mes_OrgResDetailList = detailList.ToObject<List<Mes_OrgResDetailEntity>>();
             orgResMangerIBLL.SaveEntity(keyValue, entity, mes_OrgResDetailList);
             return Success("保存成功！");
         }
