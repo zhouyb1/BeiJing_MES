@@ -98,11 +98,26 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+            //生产订单号校验
+            $('#A_OrderNo').on('blur', function () {
+                var orderNo = $.trim($(this).val()); //生产订单号
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
+                    data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (!isOk) {
+                            ayma.alert.error("生产订单不存在");
+                            return false;
+                        }
+                    }
+                });
+            });
         },
         initData: function () {
             if (!!keyValue) {
                 $.SetForm(top.$.rootUrl + '/MesDev/Mes_Arrange/GetFormData?keyValue=' + keyValue, function (data) {
-                    console.log(data);
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                         }
@@ -110,6 +125,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
                     }
+                    $('#A_DateTime').val(data.time);  //给时间框赋值
                 });
             }
         }

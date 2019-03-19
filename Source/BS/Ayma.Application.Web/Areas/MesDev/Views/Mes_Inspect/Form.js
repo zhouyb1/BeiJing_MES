@@ -70,6 +70,22 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+            //生产订单号校验
+            $('#I_OrderNo').on('blur', function () {
+                var orderNo = $.trim($(this).val()); //生产订单号
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
+                    data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (!isOk) {
+                            ayma.alert.error("生产订单不存在");
+                            return false;
+                        }
+                    }
+                });
+            });
         },
         initData: function () {
             if (!!keyValue) {

@@ -71,8 +71,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetFormData(string keyValue)
         {
             var Mes_ArrangeData = mes_ArrangeIBLL.GetMes_ArrangeEntity( keyValue );
+            var time = Mes_ArrangeData.A_DateTime.ToTimeString();           
             var jsonData = new {
                 Mes_ArrangeData = Mes_ArrangeData,
+                time=time,
             };
             return Success(jsonData);
         }
