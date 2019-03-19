@@ -124,6 +124,7 @@
     <Compile Include="SystemDemo\Demoleave\DemoleaveEntity.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveIBLL.cs" />
     <Compile Include="SystemDemo\Demoleave\DemoleaveService.cs" />
+    <Compile Include="Tools\Mes_ConvertEntity.cs" />
     <Compile Include="Tools\ToolsBLL.cs" />
     <Compile Include="Tools\ToolsIBLL.cs" />
     <Compile Include="Tools\ToolsService.cs" />

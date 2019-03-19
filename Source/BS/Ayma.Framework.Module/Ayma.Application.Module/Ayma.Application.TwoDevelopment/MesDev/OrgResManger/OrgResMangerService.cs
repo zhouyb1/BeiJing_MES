@@ -41,8 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_WorkShopName,
                 t.O_Remark,
                 t.O_CreateBy,
-                t.O_CreateDate,
-                t1.O_OrgResNo
+                t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
                 strSql.Append("  LEFT JOIN Mes_OrgResDetail t1 ON t1.O_OrgResNo = t.O_OrgResNo ");

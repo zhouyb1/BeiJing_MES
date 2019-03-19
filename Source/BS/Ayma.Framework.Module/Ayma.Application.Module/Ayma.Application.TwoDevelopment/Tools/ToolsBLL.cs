@@ -644,6 +644,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取Mes_Convert表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_ConvertEntity GetMes_ConvertEntity(string goodsCode)
+        {
+            try
+            {
+                return toolsService.GetMes_ConvertEntity(goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

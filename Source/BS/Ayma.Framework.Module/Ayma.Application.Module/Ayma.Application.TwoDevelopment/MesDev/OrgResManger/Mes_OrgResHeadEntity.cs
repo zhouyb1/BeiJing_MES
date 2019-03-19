@@ -57,7 +57,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
    
         /// </summary>
         [Column("O_STATUS")]
-        public string O_Status { get; set; }
+        public ErpEnums.MaterInStatusEnum? O_Status { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -119,6 +119,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
+            this.O_CreateBy = LoginUserInfo.Get().userId;
+            this.O_CreateDate = DateTime.Now;
+            this.O_Status = ErpEnums.MaterInStatusEnum.NoAudit;
             this.ID = keyValue;
         }
         #endregion

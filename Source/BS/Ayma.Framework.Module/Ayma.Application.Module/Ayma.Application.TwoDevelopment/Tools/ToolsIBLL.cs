@@ -168,6 +168,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_GoodsEntity GetCode(string goodsCode);
 
+        /// <summary>
+        /// 获取Mes_Convert表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        Mes_ConvertEntity GetMes_ConvertEntity(string goodsCode);
        
         #endregion
 
