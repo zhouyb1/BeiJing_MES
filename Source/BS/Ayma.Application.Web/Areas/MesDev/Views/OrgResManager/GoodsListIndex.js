@@ -107,6 +107,23 @@ var bootstrap = function ($, ayma) {
                         row['O_Unit'] = row['G_Unit'];
                         row["O_Qty"] = quantity;
                         row['O_Batch'] = row['G_Batch'];
+
+                        $.ajax({
+                            type:"get",
+                            url: '/MesDev/Tools/GetMesConverEntity',
+                            async: false,
+                            data: { goodsCode: row['G_GoodsCode'] },
+                            dataType:'JSON',
+                            success: function(res) {
+                                var result = res.data;
+                                row['O_SecGoodsCode'] = result.C_SecCode;
+                                row['O_SecGoodsName'] = result.C_SecName;
+                                row['O_SecUnit'] = row['G_Unit'];
+                                row["O_SecQty"] = 0;
+                                row['O_SecBatch'] = row['G_Batch'];
+                            }
+                        });
+                        
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

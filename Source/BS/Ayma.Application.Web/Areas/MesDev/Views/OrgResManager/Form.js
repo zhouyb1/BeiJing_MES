@@ -71,19 +71,58 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             $('#O_ProCode').select();
 
-            //添加报废物料
+            //添加物料
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
                     url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId ,
-                    width: 700,
+                    width: 800,
                     height: 500,
                     maxmin: true,
                     callback: function (id, index) {
                         return top[id].closeWindow();
                     }
                 });
+            });
+            $('#Mes_OrgResDetail').jfGrid({
+                headData: [
+                {
+                    label: "组装前",
+                    name: "B",
+                    width: 160,
+                    align: "center",
+                    children: [
+                        { label: "物料编码", name: "O_GoodsCode", width: 130, align: "left", },
+                        { label: "物料名称", name: "O_GoodsName", width: 130, align: "left" },
+                        { label: "单价", name: "O_Price", width: 60, align: "left" },
+                        { label: "单位", name: "O_Unit", width: 60, align: "left" },
+                        { label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'input' },
+                        { label: "批次", name: "O_Batch", width: 60, align: "left" }
+                    ]
+                },
+                    {
+                        label: "组装后",
+                        name: "B",
+                        width: 160,
+                        align: "center",
+                        children: [
+                            { label: "物料编码", name: "O_SecGoodsCode", width: 130, align: "left", },
+                            { label: "物料名称", name: "O_SecGoodsName", width: 130, align: "left" },
+                            { label: "单价", name: "O_SecPrice", width: 60, align: "left" },
+                            { label: "单位", name: "O_SecUnit", width: 60, align: "left" },
+                            { label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'input' },
+                            { label: "批次", name: "O_SecBatch", width: 60, align: "left" }
+                        ]
+                    }
+                ],
+                isAutoHeight: false,
+                footerrow: true,
+                minheight: 400,
+                isEidt: true,
+                isMultiselect: true,
+                height: 300,
+                inputCount: 2
             });
         },
         initData: function () {
@@ -100,10 +139,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             }
         },
-        search: function (data) {
-        data = data || {};
-        $('#Mes_OrgResDetail').jfGridSet('refreshdata', { rowdatas: data });
-    }
+        search: function(data) {
+            data = data || {};
+            $('#Mes_OrgResDetail').jfGridSet('refreshdata', { rowdatas: data });
+        }
     };
 
     // 保存数据
@@ -112,7 +151,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_OrgResDetail').jfGridGet('rowdatas');
-        if (data[0].S_GoodsCode == undefined || data[0].S_GoodsCode == "") {
+        if (data[0].O_GoodsCode == undefined || data[0].O_GoodsCode == "") {
             ayma.alert.error('请添加物料');
             return false;
         }

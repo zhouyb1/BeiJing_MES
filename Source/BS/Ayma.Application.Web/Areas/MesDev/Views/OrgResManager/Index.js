@@ -98,16 +98,11 @@ var bootstrap = function ($, ayma) {
             });
             // 删除单据
             $('#am_delete').on('click', function () {
-                var orderNo = $('#girdtable').jfGridValue('O_OrgResNo');
-                if (ayma.checkrow(orderNo)) {
-                    var status = $("#girdtable").jfGridValue("O_Status");
-                    if (status == "2") {
-                        ayma.alert.error("已审核不能删除");
-                        return false;
-                    }
-                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Scrap_Delete', type: 3 }, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/OrgResManager/DeleteForm', { keyValue: keyValue }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -140,7 +135,25 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/OrgResManager/GetPageList',
                 headData: [
-                    { label: "状态", name: "O_Status", width: 160, align: "left"},
+                    {
+                        label: "状态", name: "O_Status", width: 160, align: "left", formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'ProOutStatus',
+                                callback: function (_data) {
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else if (value == 2) {
+                                        callback("<span class='label label-info'>" + _data.text + "</span>");
+                                    } else if (value == 3) {
+                                        callback("<span class='label label-success'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
+                        }
+                    },
                     { label: "组织与拆分单据号", name: "O_OrgResNo", width: 160, align: "left"},
                     { label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
                     { label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},

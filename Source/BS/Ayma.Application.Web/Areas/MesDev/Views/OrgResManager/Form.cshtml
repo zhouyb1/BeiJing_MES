@@ -14,7 +14,7 @@
     </div>
     <div class="col-xs-4 am-form-item"  data-table="Mes_OrgResHead" >
         <div class="am-form-item-title">订单时间<font face="宋体">*</font></div>
-        <input id="O_OrderDate" type="text" class="form-control"  />
+        <input id="O_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-4 am-form-item"  data-table="Mes_OrgResHead" >
         <div class="am-form-item-title">工艺代码<font face="宋体">*</font></div>
