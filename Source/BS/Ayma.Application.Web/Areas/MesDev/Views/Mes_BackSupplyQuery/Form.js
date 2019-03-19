@@ -29,10 +29,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '物料名称', name: 'B_GoodsName', width: 160, align: 'left', editType: 'label'
                     },
                     {
-                        label: '单位', name: 'B_Unit', width: 160, align: 'left', editType: 'label'
+                        label: '单位', name: 'B_Unit', width: 50, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'B_Qty', width: 160, align: 'left', editType: 'label'
+                        label: '数量', name: 'B_Qty', width: 80, align: 'left', editType: 'label'
                     },
                     {
                         label: '批次', name: 'B_Batch', width: 160, align: 'left', editType: 'label'

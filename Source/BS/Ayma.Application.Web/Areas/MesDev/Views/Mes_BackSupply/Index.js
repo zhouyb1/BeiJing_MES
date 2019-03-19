@@ -66,9 +66,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'form',
+                        id: 'BackSupplyEditForm',
                         title: '编辑退供应商单',
-                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/Form?keyValue=' + keyValue + '&formId=BackSupplyEditForm',
                         width: 900,
                         height: 700,
                         maxmin: true,
