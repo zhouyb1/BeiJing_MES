@@ -36,7 +36,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var bomRecordTree = toosIBLL.GetBomRecordTree();
             return Success(bomRecordTree);
-        }  
+        }
+
+        /// <summary>
+        /// 获取物料转换实体
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMesConverEntity(string goodsCode)
+        {
+            var entity = toosIBLL.GetMes_ConvertEntity(goodsCode);
+            return Success(entity);
+        }
+
         /// <summary>
         /// 获取仓库列表
         /// </summary>
