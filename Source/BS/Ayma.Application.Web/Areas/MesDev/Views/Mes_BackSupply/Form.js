@@ -128,6 +128,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        var data = $('#Mes_BackSupplyDetail').jfGridGet('rowdatas');
+        if (data[0].B_GoodsCode == undefined || data[0].B_GoodsCode == "") {
+            ayma.alert.error('请添加物料');
+            return false;
+        }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_BackSupplyHead"]').GetFormData());
         postData.strmes_BackSupplyDetailList = JSON.stringify($('#Mes_BackSupplyDetail').jfGridGet('rowdatas'));
