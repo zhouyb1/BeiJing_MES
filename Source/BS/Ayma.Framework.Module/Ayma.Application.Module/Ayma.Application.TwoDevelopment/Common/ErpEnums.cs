@@ -44,7 +44,11 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 组装单
             /// </summary>
-            Org=10006
+            Org=10006,
+            /// <summary>
+            /// 抽检记录单
+            /// </summary>
+            Inspect=10007
 
         }
         /// <summary>

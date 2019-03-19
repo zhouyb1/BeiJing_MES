@@ -2,6 +2,8 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.TwoDevelopment;
+using Ayma.Application.Base.SystemModule;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -32,6 +34,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
+            if (Request["keyValue"] == null)
+            {
+                ViewBag.InspectNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString());//自动获取主编码
+            }
              return View();
         }
         #endregion

@@ -4,8 +4,8 @@
 }
 <div class="am-form-wrap" id="form">
     <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
-        <div class="am-form-item-title">抽检单号 <font face="宋体">*</font></div>
-        <input id="I_InspectNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">抽检单号</div>
+        <input id="I_InspectNo" type="text" class="form-control" value="@ViewBag.InspectNo" readonly="readonly" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">抽检时间 <font face="宋体">*</font></div>
@@ -37,7 +37,7 @@
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">合格数量 <font face="宋体">*</font></div>
-        <input id="I_QualifiedQty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <input id="I_QualifiedQty" type="number" class="form-control" isvalid=" yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-12 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">不合格原因 <font face="宋体">*</font></div>
@@ -46,3 +46,4 @@
 
 </div>
 @Html.AppendJsFile("/Areas/MesDev/Views/Mes_Inspect/Form.js")
+

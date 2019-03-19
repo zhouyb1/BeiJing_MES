@@ -90,6 +90,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        var I_QualifiedQty = $.trim($('#I_QualifiedQty').val()); //合格数量
+        var I_GoodsQty = $.trim($('#I_GoodsQty').val()); // 抽检数量
+        if (I_QualifiedQty > I_GoodsQty) {
+            ayma.alert.error('合格数量不能大于抽检数量!');
+            return false;
+        };
         var postData = {
             strEntity: JSON.stringify($('body').GetFormData())
         };

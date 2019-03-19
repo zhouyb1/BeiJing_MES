@@ -53,8 +53,8 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '新增抽检记录',
                     url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form',
-                    width: 600,
-                    height: 400,
+                    width: 900,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);

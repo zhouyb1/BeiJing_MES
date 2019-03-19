@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑排班记录',
                         url: top.$.rootUrl + '/MesDev/Mes_Arrange/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
