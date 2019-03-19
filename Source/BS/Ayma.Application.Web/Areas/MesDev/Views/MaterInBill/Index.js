@@ -149,6 +149,7 @@ var bootstrap = function ($, ayma) {
                                 key: value,
                                 code: 'MaterInStatus',
                                 callback: function (_data) {
+                                    
                                     if (value == 1) {
                                         callback("<span class='label label-default'>" + _data.text + "</span>");
                                     } else if (value == 2) {

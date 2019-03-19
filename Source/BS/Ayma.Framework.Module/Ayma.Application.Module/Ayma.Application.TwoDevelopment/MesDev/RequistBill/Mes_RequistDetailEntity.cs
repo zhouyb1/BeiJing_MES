@@ -22,11 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("R_REQUISTNO")]
         public string R_RequistNo { get; set; }
-        /// <summary>
-        /// 生产订单号
-        /// </summary>
-        [Column("P_ORDERNO")]
-        public string P_OrderNo { get; set; }
+       
         /// <summary>
         /// 物料编码
         /// </summary>

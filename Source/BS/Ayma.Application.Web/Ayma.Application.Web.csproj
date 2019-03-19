@@ -528,6 +528,9 @@
     <Content Include="Areas\MesDev\Views\Mes_Record\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_Reson\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\Index.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
@@ -2221,6 +2224,9 @@
     <Content Include="Areas\MesDev\Views\InventortTrend\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\Index.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
