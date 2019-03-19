@@ -143,8 +143,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             sb.Append(@"SELECT t.ID G_ID, t.I_StockCode G_StockCode ,
                                 t.I_StockName G_StockName ,
                                 t.I_Batch G_Batch ,
-                                I_GoodsCode G_GoodsCode,
-                                I_GoodsName G_GoodsName,
+                                t.I_GoodsCode G_GoodsCode,
+                                t.I_GoodsName G_GoodsName,
                                 t.I_Unit G_Unit ,
                                 g.G_Price ,
                                 t.I_Qty G_Qty 
@@ -155,7 +155,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                sb.Append(" AND P_GoodsCode+P_GoodsName like @keyword ");
+                sb.Append(" AND I_GoodsCode+I_GoodsName like @keyword ");
             }
             dp.Add("@I_StockCode",stockCode,DbType.String);
             return this.BaseRepository().FindList<GoodsEntity>(sb.ToString(), dp,obj);
