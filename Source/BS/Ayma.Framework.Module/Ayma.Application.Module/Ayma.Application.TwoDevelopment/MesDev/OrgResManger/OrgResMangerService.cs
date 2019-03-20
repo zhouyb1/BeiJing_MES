@@ -223,7 +223,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     foreach (var item in mes_OrgResDetailList)
                     {
                         item.Create();
-                        item.O_OrgResNo = item.O_OrgResNo;
+                        item.O_OrgResNo = entity.O_OrgResNo;
                     }
                     db.Insert(mes_OrgResDetailList);
                 }

@@ -666,11 +666,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_ConvertEntity GetMes_ConvertEntity(string goodsCode)
+        public Mes_GoodsEntity GetMes_ConvertEntity(string goodsCode)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_ConvertEntity>(c=>c.C_Code==goodsCode);
+                var entity= this.BaseRepository().FindEntity<Mes_ConvertEntity>(c=>c.C_SecCode==goodsCode);
+
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(c => c.G_Code == entity.C_Code);
             }
             catch (Exception ex)
             {

@@ -173,7 +173,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        Mes_ConvertEntity GetMes_ConvertEntity(string goodsCode);
+        Mes_GoodsEntity GetMes_ConvertEntity(string goodsCode);
        
         #endregion
 

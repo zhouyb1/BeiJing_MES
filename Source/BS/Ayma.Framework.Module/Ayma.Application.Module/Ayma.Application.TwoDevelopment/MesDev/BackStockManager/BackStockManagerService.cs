@@ -51,22 +51,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     strSql.Append(" AND B_Status IN (1,2)  ");
                 }
+                if (!queryParam["B_BackStockNo"].IsEmpty())
+                {
+                    dp.Add("B_BackStockNo", queryParam["B_BackStockNo"].ToString(), DbType.String);
+                    strSql.Append(" AND t.B_BackStockNo Like @B_BackStockNo ");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.B_OrderDate >= @startTime AND t.B_OrderDate <= @endTime ) ");
                 }
-                if (!queryParam["B_BackStockNo"].IsEmpty())
-                {
-                    dp.Add("B_BackStockNo", "%" + queryParam["B_BackStockNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_BackStockNo Like @B_BackStockNo ");
-                }
                 if (!queryParam["B_StockName"].IsEmpty())
                 {
-                    dp.Add("B_StockName",queryParam["B_StockName"].ToString(), DbType.String);
-                    strSql.Append(" AND t.B_StockName = @B_StockName ");
+                    dp.Add("B_StockName", "%" + queryParam["B_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_StockCode Like @B_StockName ");
                 }
+              
                 return this.BaseRepository().FindList<Mes_BackStockHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

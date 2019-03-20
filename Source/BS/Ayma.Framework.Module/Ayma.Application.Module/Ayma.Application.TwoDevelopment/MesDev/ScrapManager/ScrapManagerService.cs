@@ -60,10 +60,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("S_ScrapNo", "%" + queryParam["S_ScrapNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.S_ScrapNo Like @S_ScrapNo ");
                 }
-                if (!queryParam["S_StockCode"].IsEmpty())
+                if (!queryParam["S_StockName"].IsEmpty())
                 {
-                    dp.Add("S_StockCode", "%" + queryParam["S_StockCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.S_StockCode Like @S_StockCode ");
+                    dp.Add("S_StockName", "%" + queryParam["S_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_StockCode Like @S_StockName ");
                 }
                 if (!queryParam["S_Status"].IsEmpty())
                 {

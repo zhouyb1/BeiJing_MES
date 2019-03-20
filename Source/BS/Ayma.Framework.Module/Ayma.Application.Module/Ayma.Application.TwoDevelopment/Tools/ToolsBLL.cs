@@ -649,7 +649,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_ConvertEntity GetMes_ConvertEntity(string goodsCode)
+        public Mes_GoodsEntity GetMes_ConvertEntity(string goodsCode)
         {
             try
             {

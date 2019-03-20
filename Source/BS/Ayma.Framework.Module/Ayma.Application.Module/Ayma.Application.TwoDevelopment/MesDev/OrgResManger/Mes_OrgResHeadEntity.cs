@@ -112,6 +112,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Create()
         {
             this.ID = Guid.NewGuid().ToString();
+            this.O_CreateBy = LoginUserInfo.Get().userId;
+            this.O_CreateDate = DateTime.Now;
+            this.O_Status = ErpEnums.MaterInStatusEnum.NoAudit;
         }
         /// <summary>
         /// 编辑调用
@@ -119,9 +122,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue"></param>
         public void Modify(string keyValue)
         {
-            this.O_CreateBy = LoginUserInfo.Get().userId;
-            this.O_CreateDate = DateTime.Now;
-            this.O_Status = ErpEnums.MaterInStatusEnum.NoAudit;
+            this.O_UpdateBy = LoginUserInfo.Get().userId;
+            this.O_UpdateDate = DateTime.Now;
             this.ID = keyValue;
         }
         #endregion
