@@ -503,14 +503,20 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        public bool IsName(string tables, string field, string names)
+        public bool IsName(string tables, string field, string names, string keyValue)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where "+field+"=@F_Name");
+                strSql.Append("select * from " + tables + " where "+field+"=@F_Name ");
                 var dp = new DynamicParameters(new { });
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    strSql.Append(" AND ID!=@keyValue");
+                    dp.Add("keyValue", keyValue, DbType.String);
+                }
                 dp.Add("F_Name", names, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
                 if (count > 0)
@@ -608,15 +614,23 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        public bool IsCode(string tables,string field, string code)
+        public bool IsCode(string tables, string field, string code, string keyValue)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select Count(1) from " + tables + " where "+field+"=@Code");
+                strSql.Append("select * from " + tables + " where "+field+"=@Code ");
                 var dp = new DynamicParameters(new { });
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    strSql.Append(" AND ID !=@keyValue");
+                    dp.Add("keyValue", keyValue, DbType.String);
+                }
+                
                 dp.Add("Code", code, DbType.String);
+                
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
                 if (count > 0)
                 {

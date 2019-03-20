@@ -16,13 +16,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             $('#S_Kind').DataItemSelect({ code: 'StockType' });
             //编码重复验证
-            $("#S_Code").on('keyup', function () {
+            $("#S_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_Stock", field: "S_Code", code: code },
+                    data: { tables: "Mes_Stock", field: "S_Code", code: code, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {
@@ -37,13 +37,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
             //名称重复验证
-            $("#S_Name").on('keyup', function () {
+            $("#S_Name").on('blur', function () {
                 var name = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isName" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsName',
-                    data: { tables: "Mes_Stock", field: "S_Name", names: name },
+                    data: { tables: "Mes_Stock", field: "S_Name", names: name, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {

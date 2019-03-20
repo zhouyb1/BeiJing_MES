@@ -502,12 +502,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        public bool IsName(string tables,string field, string names)
+        public bool IsName(string tables, string field, string names, string keyValue)
         {
             try
             {
-                return toolsService.IsName(tables,field, names);
+                return toolsService.IsName(tables,field, names,keyValue);
             }
             catch (Exception ex)
             {
@@ -577,12 +578,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        public bool IsCode(string tables,string field, string code)
+        public bool IsCode(string tables, string field, string code, string keyValue)
         {
             try
             {
-                return toolsService.IsCode(tables,field, code);
+                return toolsService.IsCode(tables, field, code, keyValue);
             }
             catch (Exception ex)
             {

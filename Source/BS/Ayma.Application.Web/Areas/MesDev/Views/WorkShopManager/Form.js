@@ -15,13 +15,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         bind: function () {
             //检查编码重复
-            $("#W_Code").on('keyup', function () {
+            $("#W_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_WorkShop", field: "W_Code", code: code },
+                    data: { tables: "Mes_WorkShop", field: "W_Code", code: code, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {
@@ -36,13 +36,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
             //检查名称重复 W_Name
-            $("#W_Name").on('keyup', function () {
+            $("#W_Name").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isCode" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_WorkShop", field: "W_Name", code: code },
+                    data: { tables: "Mes_WorkShop", field: "W_Name", code: code, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {

@@ -80,7 +80,7 @@ var bootstrap = function ($, ayma) {
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_Goods", field: "G_Code", code: code },
+                    data: { tables: "Mes_Goods", field: "G_Code", code: code, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {
@@ -101,7 +101,7 @@ var bootstrap = function ($, ayma) {
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/IsName',
-                    data: { tables: "Mes_Goods", field: "G_Name", names: name },
+                    data: { tables: "Mes_Goods", field: "G_Name", names: name, keyValue: keyValue },
                     success: function (data) {
                         var isOk = JSON.parse(data).data;
                         if (isOk) {

@@ -241,12 +241,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult IsName(string tables,string field, string names)
+        public ActionResult IsName(string tables,string field, string names,string keyValue)
         {
-            var isName = toosIBLL.IsName(tables,field,names);
+            var isName = toosIBLL.IsName(tables, field, names, keyValue);
             return Success(isName);
         }
         /// <summary>
@@ -269,12 +270,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult IsCode(string tables,string field, string code)
+        public ActionResult IsCode(string tables, string field, string code, string keyValue)
         {
-            var isCode = toosIBLL.IsCode(tables,field, code);
+            var isCode = toosIBLL.IsCode(tables, field, code, keyValue);
             return Success(isCode);
         }
 

@@ -134,8 +134,9 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="names">名称</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        bool IsName(string tables,string field, string names);
+        bool IsName(string tables, string field, string names, string keyValue);
         /// <summary>
         /// 单号重复验证
         /// </summary>
@@ -158,8 +159,9 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
         /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
-        bool IsCode(string tables,string field,string code);
+        bool IsCode(string tables,string field,string code,string keyValue);
 
         /// <summary>
         /// 获取配方列表
