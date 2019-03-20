@@ -225,6 +225,7 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\OrgResManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
@@ -517,7 +518,6 @@
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
-    <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
@@ -2212,7 +2212,6 @@
     <Content Include="Areas\MesDev\Views\Mes_Reson\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Record\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Record\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\Mes_BackSupply\OrderMaterList.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.cshtml" />

@@ -186,7 +186,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'B_BackSupplyNo',
+                sord:'desc'
             });
         },
         search: function (param) {

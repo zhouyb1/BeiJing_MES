@@ -124,7 +124,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
-                    }
+                    } 
                     $('#A_DateTime').val(data.time);  //给时间框赋值
                 });
             }

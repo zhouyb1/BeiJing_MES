@@ -126,7 +126,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'I_InspectNo',
+                sord:'desc'
             });
         },
         search: function (param) {
