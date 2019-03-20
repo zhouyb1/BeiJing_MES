@@ -102,11 +102,14 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
-                        row['O_GoodsCode'] = row['G_GoodsCode'];
-                        row['O_GoodsName'] = row['G_GoodsName'];
-                        row['O_Unit'] = row['G_Unit'];
-                        row["O_Qty"] = quantity;
-                        row['O_Batch'] = row['G_Batch'];
+
+                        //产出物料
+                        row['O_SecGoodsCode'] = row['G_GoodsCode'];
+                        row['O_SecGoodsName'] = row['G_GoodsName'];
+                        row['O_SecUnit'] = row['G_Unit'];
+                        row["O_SecQty"] = quantity;
+                        row['O_SecBatch'] = row['G_Batch'];
+                        row["O_SecPrice"] = row["G_Price"];
 
                         $.ajax({
                             type:"get",
@@ -116,11 +119,12 @@ var bootstrap = function ($, ayma) {
                             dataType:'JSON',
                             success: function(res) {
                                 var result = res.data;
-                                row['O_SecGoodsCode'] = result.C_SecCode;
-                                row['O_SecGoodsName'] = result.C_SecName;
-                                row['O_SecUnit'] = row['G_Unit'];
-                                row["O_SecQty"] = 0;
-                                row['O_SecBatch'] = row['G_Batch'];
+                                row['O_GoodsCode'] = result.G_Code;
+                                row['O_GoodsName'] = result.G_Name;
+                                row['O_Unit'] = result.G_Unit;
+                                row["O_Qty"] = quantity;
+                                row["O_Price"] = result.G_Price;
+                                row['O_Batch'] = result.G_Batch;
                             }
                         });
                         

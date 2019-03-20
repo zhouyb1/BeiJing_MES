@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
                 page.search(queryJson);
             }, 220, 400);
             $('#S_UserKind').DataItemSelect({ code: 'EmployeeKind' });
-            $('#S_WorkKind').DataItemSelect({ code: 'GoodsType' });
+            $('#S_WorkKind').DataItemSelect({ code: 'WorkType' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();

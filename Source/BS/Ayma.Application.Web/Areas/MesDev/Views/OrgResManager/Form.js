@@ -98,7 +98,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         { label: "单价", name: "O_Price", width: 60, align: "left" },
                         { label: "单位", name: "O_Unit", width: 60, align: "left" },
                         { label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'input' },
-                        { label: "批次", name: "O_Batch", width: 60, align: "left" }
+                        { label: "批次", name: "O_Batch", width: 60, align: "left", editType: 'input' }
                     ]
                 },
                     {
@@ -127,7 +127,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/OrgResManger/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/OrgResManager/GetFormData?keyValue=' + keyValue, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_OrgResDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -159,6 +159,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             strEntity: JSON.stringify($('[data-table="Mes_OrgResHead"]').GetFormData()),
             detailList: JSON.stringify(data)
         };
+        for (var i = 0,j=data.length;i<j;i++) {
+            if (data[i].O_Batch == "" || data[i].O_Batch == null) {
+                ayma.alert.error('请输入批次(组装前)');
+                return false;
+            }
+        }
         $.SaveForm(top.$.rootUrl + '/MesDev/OrgResManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {

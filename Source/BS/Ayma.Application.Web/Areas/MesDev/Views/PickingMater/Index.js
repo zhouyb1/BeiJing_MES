@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
+            }, 220, 300);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
             $('#am_delete').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
                 if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认删除该项！', function (res) {
+                    ayma.layerConfirm('确认删除单据？', function (res) {
                         if (res) {
                             ayma.deleteForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Delete', type: 3 }, function () {
                                 refreshGirdData();
@@ -173,6 +173,8 @@ var bootstrap = function ($, ayma) {
         },
         search: function (param) {
             param = param || {};
+            param.StartTime = startTime;
+            param.EndTime = endTime;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

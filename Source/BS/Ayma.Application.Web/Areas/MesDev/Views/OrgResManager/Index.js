@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
-                        width: 600,
-                        height: 400,
+                        width: 800,
+                        height: 600,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -154,7 +154,7 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "组织与拆分单据号", name: "O_OrgResNo", width: 160, align: "left"},
+                    { label: "单据号", name: "O_OrgResNo", width: 160, align: "left"},
                     { label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
                     { label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
                     { label: "工艺代码", name: "O_Record", width: 160, align: "left"},
