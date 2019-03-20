@@ -30,30 +30,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                   t.[ID]
-                  ,t.[G_Code]
-                  ,t.[G_Name]
-                  ,t.[G_Kind]
-                  ,t.[G_Period]
-                  ,t.[G_Price]
-                  ,t.[G_Unit]
-                  ,t.[G_Super]
-                  ,t.[G_Lower]
-                  ,t.[G_CreateBy]
-                  ,t.[G_CreateDate]
-                  ,t.[G_UpdateBy]
-                  ,t.[G_UpdateDate]
-                  ,t.[G_Remark]
-                  ,t.[G_Erpcode]
-                  ,t.[G_TKind]
-                  ,t.[G_UnitQty]
-                  ,t.[G_Self]
-                  ,t.[G_Online]
-                  ,t.[G_Prepareday]
-                  ,t.[G_Otax]
-                  ,t.[G_Itax]
+                      g.[ID]
+                      ,g.[G_Code]
+                      ,g.[G_Name]
+                      ,g.[G_Kind]
+                      ,g.[G_Period]
+                      ,g.[G_Price]
+                      ,g.[G_Unit]
+                      ,g.[G_UnitWeight]
+                      ,g.[G_Super]
+                      ,g.[G_Lower]
+                      ,g.[G_CreateBy]
+                      ,g.[G_CreateDate]
+                      ,g.[G_UpdateBy]
+                      ,g.[G_UpdateDate]
+                      ,g.[G_Remark]
+                      ,g.[G_Erpcode]
+                      ,g.[G_TKind]
+                      ,g.[G_UnitQty]
+                      ,g.[G_Self]
+                      ,g.[G_Online]
+                      ,g.[G_Prepareday]
+                      ,g.[G_Otax]
+                      ,g.[G_Itax]
+                      ,k.G_Name KindName
                 ");
-                strSql.Append("  FROM Mes_Goods t ");
+                strSql.Append("  FROM Mes_Goods g LEFT JOIN dbo.Mes_GoodKind k ON(g.G_TKind=k.G_Code)");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -61,22 +63,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["G_Code"].IsEmpty())
                 {
                     dp.Add("G_Code", "%" + queryParam["G_Code"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Code Like @G_Code ");
+                    strSql.Append(" AND g.G_Code Like @G_Code ");
                 }
                 if (!queryParam["G_Name"].IsEmpty())
                 {
                     dp.Add("G_Name", "%" + queryParam["G_Name"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Name Like @G_Name ");
+                    strSql.Append(" AND g.G_Name Like @G_Name ");
                 }
                 if (!queryParam["G_Supply"].IsEmpty())
                 {
                     dp.Add("G_Supply", "%" + queryParam["G_Supply"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Supply Like @G_Supply ");
+                    strSql.Append(" AND g.G_Supply Like @G_Supply ");
                 }
                 if (!queryParam["G_Kind"].IsEmpty())
                 {
                     dp.Add("G_Kind", "%" + queryParam["G_Kind"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Kind Like @G_Kind ");
+                    strSql.Append(" AND g.G_Kind Like @G_Kind ");
                 }
                 return this.BaseRepository().FindTable(strSql.ToString(),dp, pagination);
             }

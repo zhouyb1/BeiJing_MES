@@ -133,6 +133,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(goodsKind);
         }
         /// <summary>
+        /// 根据编码获取商品二级分类实体
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsKindEntityBy(string code)
+        {
+            var goodsKind = toosIBLL.GetGoodsKindEntityBy(code);
+            return Success(goodsKind);
+        }
+        /// <summary>
         /// 根据门编码获取门实体信息
         /// </summary>
         /// <param name="code">门编码</param>

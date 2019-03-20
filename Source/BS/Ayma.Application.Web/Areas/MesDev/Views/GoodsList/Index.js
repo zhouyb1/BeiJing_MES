@@ -91,6 +91,7 @@ var bootstrap = function ($, ayma) {
                     {
                         label: "商品类型", name: "g_kind", width: 160, align: "left",
                         formatterAsync: function (callback, value, row) {
+                           
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
                                 code: 'GoodsType',
@@ -101,16 +102,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     {
-                        label: "商品二级类型", name: "g_tkind", width: 160, align: "left",
-                        formatterAsync: function (callback, value, row) {
-                            ayma.clientdata.getAsync('dataItem', {
-                                key: value,
-                                code: 'GoodsTypeT',
-                                callback: function (_data) {
-                                    callback(_data.text);
-                                }
-                            });
-                        }
+                        label: "商品二级类型", name: "kindname", width: 160, align: "left"
                     },
                     { label: "保质时间", name: "g_period", width: 160, align: "left" },
                     { label: "价格", name: "g_price", width: 160, align: "left" },

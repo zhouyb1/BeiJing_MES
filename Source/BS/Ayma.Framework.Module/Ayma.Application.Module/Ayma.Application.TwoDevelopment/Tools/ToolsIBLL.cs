@@ -84,7 +84,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取商品二级分类列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_GoodKindEntity> GetGoodsKind();
+        IEnumerable<Mes_GoodKindEntity> GetGoodsKind(); 
+        /// <summary>
+        /// 根据编码获取商品二级分类实体
+        /// </summary>
+        /// <returns></returns>
+        Mes_GoodKindEntity GetGoodsKindEntityBy(string code);
         /// <summary>
         /// 根据门编码获取门实体信息
         /// </summary>

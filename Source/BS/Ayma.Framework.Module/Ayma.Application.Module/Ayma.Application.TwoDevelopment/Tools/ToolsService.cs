@@ -341,6 +341,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
         }
 
         /// <summary>
+        /// 根据编码获取商品二级分类实体
+        /// </summary>
+        /// <returns></returns>
+        public Mes_GoodKindEntity GetGoodsKindEntityBy(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_GoodKindEntity>(t=>t.G_Code==code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 根据门编码获取门实体信息
         /// </summary>
         /// <param name="code">门编码</param>

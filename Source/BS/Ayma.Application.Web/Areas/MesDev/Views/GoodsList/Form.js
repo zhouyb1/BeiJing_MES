@@ -30,8 +30,8 @@ var bootstrap = function ($, ayma) {
 
             $("#G_TKind").select({
                 type: 'default',
-                value: 'G_Name',
-                text: 'G_Code',
+                value: 'G_Code',
+                text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
