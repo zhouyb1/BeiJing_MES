@@ -74,7 +74,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "物料名称", name: "S_GoodsName", width: 130, align: "left" },
                     { label: "单价", name: "S_Price", width: 130, align: "left" },
                     { label: "单位", name: "S_Unit", width: 60, align: "left" },
-                    { label: "数量", name: "S_Qty", width: 60, align: "left" ,editType:'input'},
+                    {
+                        label: "数量", name: "S_Qty", width: 60, align: "left" ,editType:'numinput',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (row.S_Qty != undefined && !!row.S_Qty) {
+                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.S_Qty.toString().replace('.', ''))) {
+                                        ayma.alert.error("数量必须是非负数.");
+                                        row.S_Qty = 0;
+                                    }
+                                }
+                            }
+                        }
+                    },
                     { label: "批次", name: "S_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,

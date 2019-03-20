@@ -144,6 +144,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
             var mes_CollarDetailEntityList = strmes_CollarDetailEntity.ToObject<List<Mes_CollarDetailEntity>>();
+            if (mes_CollarDetailEntityList.Any(c=>c.C_Qty<=0))
+            {
+                return Fail("数量只能是大于0的实数");
+            }
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();

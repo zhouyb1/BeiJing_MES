@@ -119,12 +119,16 @@ var bootstrap = function ($, ayma) {
                             dataType:'JSON',
                             success: function(res) {
                                 var result = res.data;
-                                row['O_GoodsCode'] = result.G_Code;
-                                row['O_GoodsName'] = result.G_Name;
-                                row['O_Unit'] = result.G_Unit;
-                                row["O_Qty"] = quantity;
-                                row["O_Price"] = result.G_Price;
-                                row['O_Batch'] = result.G_Batch;
+                                if (result != null) {
+                                    row['O_GoodsCode'] = result.G_Code;
+                                    row['O_GoodsName'] = result.G_Name;
+                                    row['O_Unit'] = result.G_Unit;
+                                    row["O_Qty"] = quantity;
+                                    row["O_Price"] = result.G_Price;
+                                    row['O_Batch'] = result.G_Batch;
+                                } else {
+                                    ayma.alert.error('请选择存在的物料关系');
+                                }
                             }
                         });
                         

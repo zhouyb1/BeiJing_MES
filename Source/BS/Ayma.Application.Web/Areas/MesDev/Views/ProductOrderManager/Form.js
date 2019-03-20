@@ -33,13 +33,15 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'P_Unit', width: 60, align: 'left', editType: 'label'
                     },
                      {
-                         label: '数量', name: 'P_Qty', width: 60, align: 'left', editType: 'input',
+                         label: '数量', name: 'P_Qty', width: 60, align: 'left', editType: 'numinput',
                          editOp: {
                              callback: function (rownum, row) {
-                                 if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
-                                     row.M_Qty = 0;
+                                 if (row.P_Qty != undefined && !!row.P_Qty) {
+                                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.P_Qty.toString().replace('.', ''))) {
+                                         ayma.alert.error("数量必须是非负数.");
+                                         row.P_Qty = 0;
+                                     }
                                  }
-
                              }
                          }
                      },

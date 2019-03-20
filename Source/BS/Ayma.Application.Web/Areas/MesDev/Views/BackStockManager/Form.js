@@ -89,7 +89,19 @@ var bootstrap = function($, ayma) {
                     { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
                     { label: "单价", name: "B_Price", width: 130, align: "left" },
                     { label: "单位", name: "B_Unit", width: 60, align: "left" },
-                    { label: "返回数量", name: "B_Qty", width: 60, align: "left", editType: 'input' },
+                    {
+                        label: "返回数量", name: "B_Qty", width: 60, align: "left", editType: 'numinput',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (row.B_Qty != undefined && !!row.B_Qty) {
+                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.B_Qty.toString().replace('.', ''))) {
+                                        ayma.alert.error("数量必须是非负数.");
+                                        row.B_Qty = 0;
+                                    }
+                                }
+                            }
+                        }
+                    },
                     //{ label: "现有数量", name: "B_OldQty", width: 60, align: "left", editType: 'input' },
                     { label: "批次", name: "B_Batch", width: 60, align: "left" }
                 ],

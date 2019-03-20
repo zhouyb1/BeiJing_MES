@@ -1,5 +1,7 @@
-﻿using Ayma.Application.Base.SystemModule;
+﻿using System.Linq;
+using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -15,7 +17,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class OrgResManagerController : MvcControllerBase
     {
         private OrgResMangerIBLL orgResMangerIBLL = new OrgResMangerBLL();
-
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
         #region 视图功能
 
         /// <summary>
@@ -139,6 +141,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();
             var mes_OrgResDetailList = detailList.ToObject<List<Mes_OrgResDetailEntity>>();
+            if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0))
+            {
+                return Fail("数量只能是大于0的实数");
+            }
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                var codeRulebll = new CodeRuleBLL();
+                if (toolsIBLL.IsOrderNo("Mes_OrgResHead", "O_OrgResNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString())))
+                {
+                    //若重复 先占用再赋值
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Org).ToString()); //标志已使用
+                    entity.O_OrgResNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());
+                }
+                else
+                {
+                    entity.O_OrgResNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());
+                }
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Org).ToString()); //标志已使用
+            }
             orgResMangerIBLL.SaveEntity(keyValue, entity, mes_OrgResDetailList);
             return Success("保存成功！");
         }

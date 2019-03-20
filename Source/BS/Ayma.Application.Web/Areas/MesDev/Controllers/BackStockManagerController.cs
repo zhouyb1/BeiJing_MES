@@ -1,5 +1,7 @@
-﻿using Ayma.Application.Base.SystemModule;
+﻿using System.Linq;
+using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -15,6 +17,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class BackStockManagerController : MvcControllerBase
     {
         private BackStockManagerIBLL backStockManagerIBLL = new BackStockManagerBLL();
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -157,6 +160,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_BackStockHeadEntity entity = strEntity.ToObject<Mes_BackStockHeadEntity>();
             var mes_BackStockDetailEntity = strmes_BackStockDetailList.ToObject<List<Mes_BackStockDetailEntity>>();
+            if (mes_BackStockDetailEntity.Any(c=>c.B_Qty<=0))
+            {
+                return Fail("数量只能是大于0的实数");
+            }
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                var codeRulebll = new CodeRuleBLL();
+                if (toolsIBLL.IsOrderNo("Mes_BackStockHead", "B_BackStockNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackToStock).ToString())))
+                {
+                    //若重复 先占用再赋值
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.BackToStock).ToString()); //标志已使用
+                    entity.B_BackStockNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackToStock).ToString());
+                }
+                else
+                {
+                    entity.B_BackStockNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackToStock).ToString());
+                }
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.BackToStock).ToString()); //标志已使用
+            }
             backStockManagerIBLL.SaveEntity(keyValue,entity,mes_BackStockDetailEntity);
             return Success("保存成功！");
         }

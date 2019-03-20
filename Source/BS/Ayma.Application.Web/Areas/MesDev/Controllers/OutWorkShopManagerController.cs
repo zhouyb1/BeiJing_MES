@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -16,7 +17,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class OutWorkShopManagerController : MvcControllerBase
     {
         private OutWorkShopManagerIBLL outWorkShopManagerIBLL = new OutWorkShopManagerBLL();
-
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
         #region 视图功能
 
         /// <summary>
@@ -175,6 +176,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_OutWorkShopHeadEntity entity = strEntity.ToObject<Mes_OutWorkShopHeadEntity>();
             var mes_OutWorkShopDetailList = strmes_OutWorkShopDetailList.ToObject<List<Mes_OutWorkShopDetailEntity>>();
+            if (mes_OutWorkShopDetailList.Any(c=>c.O_Qty<=0))
+            {
+                return Fail("数量只能是大于0的实数");
+            }
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                var codeRulebll = new CodeRuleBLL();
+                if (toolsIBLL.IsOrderNo("Mes_OutWorkShopHead", "O_OutNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString())))
+                {
+                    //若重复 先占用再赋值
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
+                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
+                }
+                else
+                {
+                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
+                }
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
+            }
             outWorkShopManagerIBLL.SaveEntity(keyValue, entity, mes_OutWorkShopDetailList);
             return Success("保存成功！");
         }

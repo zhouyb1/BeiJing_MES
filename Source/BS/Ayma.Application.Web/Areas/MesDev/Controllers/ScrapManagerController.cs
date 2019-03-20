@@ -1,5 +1,7 @@
-﻿using Ayma.Application.Base.SystemModule;
+﻿using System.Linq;
+using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -15,6 +17,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class ScrapManagerController : MvcControllerBase
     {
         private ScrapManagerIBLL scrapManagerIBLL = new ScrapManagerBLL();
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -158,6 +161,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_ScrapHeadEntity entity = strEntity.ToObject<Mes_ScrapHeadEntity>();
             var detail = detailList.ToObject<List<Mes_ScrapDetailEntity>>();
+            if (detail.Any(item => item.S_Qty<=0))
+            {
+                return Fail("数量只能是大于0的实数");
+            }
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                var codeRulebll = new CodeRuleBLL();
+                if (toolsIBLL.IsOrderNo("Mes_ScrapHead", "S_ScrapNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString())))
+                {
+                    //若重复 先占用再赋值
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString()); //标志已使用
+                    entity.S_ScrapNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString());
+                }
+                else
+                {
+                    entity.S_ScrapNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString());
+                }
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString()); //标志已使用
+            }
             scrapManagerIBLL.SaveEntity(keyValue,entity,detail);
             return Success("保存成功！");
         }
