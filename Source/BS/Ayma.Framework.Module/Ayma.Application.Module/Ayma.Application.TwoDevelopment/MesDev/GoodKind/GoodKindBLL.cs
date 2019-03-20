@@ -117,5 +117,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #endregion
 
+        #region 验证数据
+
+        /// <summary>
+        /// 验证编码是否重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="G_Code">编码</param>
+        /// <returns></returns>
+        public bool ExistCode(string keyValue, string G_Code)
+        {
+            try
+            {
+                return goodKindService.ExistCode(keyValue, G_Code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        #endregion
     }
 }

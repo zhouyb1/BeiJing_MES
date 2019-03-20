@@ -42,5 +42,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         void SaveEntity(string keyValue, Mes_GoodKindEntity entity);
         #endregion
 
+
+        #region 验证数据
+        /// <summary>
+        /// 验证编码是否重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="G_Code">编码</param>
+        /// <returns></returns>
+        bool ExistCode(string keyValue, string G_Code); 
+        #endregion
+
+
     }
 }

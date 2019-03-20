@@ -99,10 +99,30 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_GoodKindEntity entity = strEntity.ToObject<Mes_GoodKindEntity>();
+            bool res = goodKindIBLL.ExistCode(keyValue, entity.G_Code);
+            if (!res)
+            {
+                return Fail("该编码已存在!");
+            }
             goodKindIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }
         #endregion
 
+        #region 验证数据
+        /// <summary>
+        /// 验证编码是否重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="G_Code">二级分类编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ExistCode(string keyValue, string G_Code)
+        {
+            bool res = goodKindIBLL.ExistCode(keyValue, G_Code);
+            return Success(res);
+        } 
+        #endregion
     }
 }
