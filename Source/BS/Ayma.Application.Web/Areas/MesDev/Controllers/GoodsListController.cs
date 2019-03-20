@@ -14,6 +14,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class GoodsListController : MvcControllerBase
     {
         private GoodsListIBLL goodsListIBLL = new GoodsListBLL();
+        private ToolsIBLL toosIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -100,6 +101,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_GoodsEntity entity = strEntity.ToObject<Mes_GoodsEntity>();
+            var resCode = toosIBLL.IsCode("Mes_Goods", "G_Code", entity.G_Code, keyValue);
+            if (resCode)
+            {
+                return Fail("该编码已存在！");
+            }
+            var resName = toosIBLL.IsName("Mes_Goods", "G_Name", entity.G_Name, keyValue);
+            if (resName)
+            {
+                return Fail("该名称已存在！");
+            }
             goodsListIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }

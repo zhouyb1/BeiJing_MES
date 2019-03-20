@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -13,7 +14,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class SupplyListController : MvcControllerBase
     {
         private SupplyListIBLL supplyListIBLL = new SupplyListBLL();
-
+        private ToolsIBLL toosIBLL = new ToolsBLL();
         #region 视图功能
 
         /// <summary>
@@ -99,6 +100,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_SupplyEntity entity = strEntity.ToObject<Mes_SupplyEntity>();
+            var resCode=toosIBLL.IsCode("Mes_Supply", "S_Code", entity.S_Code, keyValue);
+            if (resCode)
+            {
+                return Fail("该编码已存在！");
+            }
+            var resName = toosIBLL.IsName("Mes_Supply", "S_Name", entity.S_Name, keyValue);
+            if (resName)
+            {
+                return Fail("该名称已存在！");
+            }
             supplyListIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }

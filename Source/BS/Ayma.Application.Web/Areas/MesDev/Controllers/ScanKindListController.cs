@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -13,6 +14,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class ScanKindListController : MvcControllerBase
     {
         private ScanKindListIBLL scanKindListIBLL = new ScanKindListBLL();
+        private ToolsIBLL toosIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -99,6 +101,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_ScanKindEntity entity = strEntity.ToObject<Mes_ScanKindEntity>();
+            var resCode = toosIBLL.IsCode("Mes_ScanKind", "S_ScanKindCode", entity.S_ScanKindCode, keyValue);
+            if (resCode)
+            {
+                return Fail("该编码已存在！");
+            }
+            var resName = toosIBLL.IsName("Mes_ScanKind", "S_ScanKindName", entity.S_ScanKindName, keyValue);
+            if (resName)
+            {
+                return Fail("该名称已存在！");
+            }
             scanKindListIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }

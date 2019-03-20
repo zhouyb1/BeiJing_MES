@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -13,6 +14,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class ClassManagerController : MvcControllerBase
     {
         private ClassManagerIBLL classManagerIBLL = new ClassManagerBLL();
+        private ToolsIBLL toosIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -99,6 +101,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_ClassEntity entity = strEntity.ToObject<Mes_ClassEntity>();
+            var resCode = toosIBLL.IsCode("Mes_Class", "C_Code", entity.C_Code, keyValue);
+            if (resCode)
+            {
+                return Fail("该编码已存在！");
+            }
+            var resName = toosIBLL.IsName("Mes_Class", "C_Name", entity.C_Name, keyValue);
+            if (resName)
+            {
+                return Fail("该名称已存在！");
+            }
             classManagerIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }
