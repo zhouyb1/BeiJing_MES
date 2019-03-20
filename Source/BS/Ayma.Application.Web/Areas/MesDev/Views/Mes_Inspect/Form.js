@@ -86,7 +86,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-            $('#I_QualifiedQty').keypress(function (e) {
+       
+            $('input[type=number]').keypress(function (e) {
                 if (!String.fromCharCode(e.keyCode).match(/[0-9\.]/)) {
                     return false;
                 }

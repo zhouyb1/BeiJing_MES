@@ -46,10 +46,4 @@
 
 </div>
 @Html.AppendJsFile("/Areas/MesDev/Views/Mes_Inspect/Form.js")
-<script type="text/javascript">
-$('input[type=number]').keypress(function(e) {
-　　if (!String.fromCharCode(e.keyCode).match(/[0-9\.]/)) {
-　　　　return false;
-　　}
-});
-</script>
+
