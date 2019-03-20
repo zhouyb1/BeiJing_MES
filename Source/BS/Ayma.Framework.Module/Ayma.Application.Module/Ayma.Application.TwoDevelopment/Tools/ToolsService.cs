@@ -591,7 +591,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where "+field+"=@Code");
+                strSql.Append("select Count(1) from " + tables + " where "+field+"=@Code");
                 var dp = new DynamicParameters(new { });
                 dp.Add("Code", code, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;

@@ -1,13 +1,12 @@
 ﻿using Ayma.Application.TwoDevelopment.MesDev;
 using System.Data.Entity.ModelConfiguration;
-using Ayma.Application.TwoDevelopment.Tools;
 
-namespace Ayma.Application.Mapping
+namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-03-19 15:30
-    /// 描 述：ds
+    /// 日 期：2019-03-20 09:36
+    /// 描 述：物料转换对应表
     /// </summary>
     public partial class Mes_ConvertMap : EntityTypeConfiguration<Mes_ConvertEntity>
     {
@@ -25,3 +24,4 @@ namespace Ayma.Application.Mapping
         }
     }
 }
+

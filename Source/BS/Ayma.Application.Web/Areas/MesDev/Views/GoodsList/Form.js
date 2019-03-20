@@ -74,7 +74,7 @@ var bootstrap = function ($, ayma) {
             //    });
             //});
             //编码重复验证
-            $("#G_Code").on('keyup', function () {
+            $("#G_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({
@@ -95,7 +95,7 @@ var bootstrap = function ($, ayma) {
                 });
             });
             //名称重复验证
-            $("#G_Name").on('keyup', function () {
+            $("#G_Name").on('blur', function () {
                 var name = $.trim($(this).val()); //去除空格
                 var html = '<div class="am-field-error-info" id="isName" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
                 $.ajax({

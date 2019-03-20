@@ -285,6 +285,7 @@
     <Compile Include="Areas\MesDev\Controllers\OutWorkShopManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ScrapManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_BackSupplyController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\ConvertController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2389,6 +2390,10 @@
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\Form.js" />
+    <Content Include="Areas\MesDev\Views\Convert\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Convert\Index.js" />
+    <Content Include="Areas\MesDev\Views\Convert\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Convert\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

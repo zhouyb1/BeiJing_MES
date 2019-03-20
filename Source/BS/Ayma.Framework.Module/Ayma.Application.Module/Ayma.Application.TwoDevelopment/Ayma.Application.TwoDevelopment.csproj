@@ -250,6 +250,10 @@
     <Compile Include="MesDev\InventortTrend\InventortTrendService.cs" />
     <Compile Include="MesDev\InventortTrend\InventortTrendBLL.cs" />
     <Compile Include="MesDev\InventortTrend\InventortTrendIBLL.cs" />
+    <Compile Include="MesDev\Convert\Mes_ConvertEntity.cs" />
+    <Compile Include="MesDev\Convert\ConvertService.cs" />
+    <Compile Include="MesDev\Convert\ConvertBLL.cs" />
+    <Compile Include="MesDev\Convert\ConvertIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
