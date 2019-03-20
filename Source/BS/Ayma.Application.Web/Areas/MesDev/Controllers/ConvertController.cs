@@ -99,6 +99,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_ConvertEntity entity = strEntity.ToObject<Mes_ConvertEntity>();
+            var recode=convertIBLL.ExistCode(keyValue, entity.C_SecCode);
+            if (!recode)
+            {
+                return Fail("该编码已存在！");
+            }
             convertIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }

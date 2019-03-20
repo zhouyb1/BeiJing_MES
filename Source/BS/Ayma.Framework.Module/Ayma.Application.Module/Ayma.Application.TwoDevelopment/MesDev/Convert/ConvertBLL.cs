@@ -117,5 +117,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #endregion
 
+        #region 验证重复
+
+        /// <summary>
+        /// 检查转换后的编码重复性
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="code">转换后的编码</param>
+        /// <returns></returns>
+        public bool ExistCode(string keyValue, string code)
+        {
+            try
+            {
+                return convertService.ExistCode(keyValue, code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        #endregion
     }
 }

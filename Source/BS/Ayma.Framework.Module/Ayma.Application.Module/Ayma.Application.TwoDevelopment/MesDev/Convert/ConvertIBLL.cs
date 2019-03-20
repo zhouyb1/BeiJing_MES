@@ -42,5 +42,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         void SaveEntity(string keyValue, Mes_ConvertEntity entity);
         #endregion
 
+        #region 验证重复
+        /// <summary>
+        ///检查转换的编码重复性
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="code">转换后的编码</param>
+        /// <returns></returns>
+        bool ExistCode(string keyValue, string code);
+        #endregion
     }
 }

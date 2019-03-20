@@ -4,6 +4,7 @@ using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -177,6 +178,39 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         #endregion
+        #region 验证重复
 
+        /// <summary>
+        /// 检查转换后的编码重复性
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="code">父Id</param>
+        /// <returns></returns>
+        public bool ExistCode(string keyValue, string code)
+        {
+            try
+            {
+                var expression = LinqExtensions.True<Mes_ConvertEntity>();
+                expression = expression.And(t => t.C_SecCode.Trim().ToUpper() == code.Trim().ToUpper());
+
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    expression = expression.And(t => t.ID != keyValue);
+                }
+                return !this.BaseRepository().IQueryable(expression).Any();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        #endregion
     }
 }
