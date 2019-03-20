@@ -86,7 +86,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-       
+
             $('input[type=number]').keypress(function (e) {
                 if (!String.fromCharCode(e.keyCode).match(/[0-9\.]/)) {
                     return false;
@@ -114,6 +114,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
         var I_QualifiedQty = $.trim($('#I_QualifiedQty').val()); //合格数量
         var I_GoodsQty = $.trim($('#I_GoodsQty').val()); // 抽检数量
+        //console.log(I_QualifiedQty);
+        //if (isNaN(I_QualifiedQty)) {
+        //    ayma.alert.error('合格数量输入的字符不合法!');
+        //    return false;
+        //}
         if (I_QualifiedQty > I_GoodsQty) {
             ayma.alert.error('合格数量不能大于抽检数量!');
             return false;

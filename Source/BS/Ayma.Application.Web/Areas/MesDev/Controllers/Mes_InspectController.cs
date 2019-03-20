@@ -107,6 +107,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_InspectEntity entity = strEntity.ToObject<Mes_InspectEntity>();
+            if (string.IsNullOrWhiteSpace(entity.I_GoodsQty + ""))
+            {
+                return Fail("输入的抽检数量不正确!");
+            }
+            if (string.IsNullOrWhiteSpace(entity.I_QualifiedQty+""))
+            {
+                return Fail("输入的合格数量不正确!");
+            }
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();
