@@ -65,7 +65,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["O_StockName"].IsEmpty())
                 {
                     dp.Add("O_StockName", "%" + queryParam["O_StockName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_StockName Like @O_StockName ");
+                    strSql.Append(" AND t.O_StockCode Like @O_StockName ");
                 }
                 if (!queryParam["O_Status"].IsEmpty())
                 {

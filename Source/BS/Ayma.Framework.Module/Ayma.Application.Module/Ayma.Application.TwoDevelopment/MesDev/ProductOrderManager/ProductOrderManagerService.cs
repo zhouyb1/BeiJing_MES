@@ -38,7 +38,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t1.P_Qty,
                 t1.P_Unit,
                 t1.P_GoodsName,
-                t.P_Status
+                t.P_Status,
+                t.P_CreateBy,
+                t.P_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ProductOrderHead t ");
                 strSql.Append("  LEFT JOIN Mes_ProductOrderDetail t1 ON t1.P_OrderNo = t.P_OrderNo ");
@@ -51,16 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
-                if (!queryParam["P_GoodsCode"].IsEmpty())
-                {
-                    dp.Add("P_GoodsCode", "%" + queryParam["P_GoodsCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t1.P_GoodsCode Like @P_GoodsCode ");
-                }
-                if (!queryParam["P_GoodsName"].IsEmpty())
-                {
-                    dp.Add("P_GoodsName", "%" + queryParam["P_GoodsName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t1.P_GoodsName Like @P_GoodsName ");
-                }
+                
                 return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
