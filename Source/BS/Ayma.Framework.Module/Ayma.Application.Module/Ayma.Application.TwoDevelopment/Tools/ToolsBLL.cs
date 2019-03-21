@@ -667,7 +667,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-
+        /// <summary>
+        /// 获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList()
+        {
+            try
+            {
+                return toolsService.GetProductOrderList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取Mes_Convert表实体数据
         /// </summary>

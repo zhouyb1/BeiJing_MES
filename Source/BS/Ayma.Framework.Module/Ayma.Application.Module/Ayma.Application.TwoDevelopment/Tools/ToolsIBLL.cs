@@ -44,6 +44,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         IEnumerable<Mes_WorkShopEntity> GetWorkShopList();
         /// <summary>
+        /// 获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList();
+        /// <summary>
         /// 获取工艺列表
         /// </summary>
         /// <returns></returns>

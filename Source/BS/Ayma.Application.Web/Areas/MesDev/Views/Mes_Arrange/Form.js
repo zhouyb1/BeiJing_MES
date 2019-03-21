@@ -42,6 +42,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //是否有效
             $('#A_Avail').DataItemSelect({ code: 'YesOrNo' });
             $('#A_ProCode').select();//工序号下拉初始化
+            //工艺代码
             $('#A_Record').select({
                 type: 'default',
                 value: 'R_Record',
@@ -71,7 +72,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
 
-
+            //用户编码
             $('#A_F_EnCode').select({
                 type: 'default',
                 value: 'F_EnCode',
@@ -85,6 +86,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+            //班次
             $('#A_ClassCode').select({
                 type: 'default',
                 value: 'C_Code',
@@ -98,22 +100,36 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
-            //生产订单号校验
-            $('#A_OrderNo').on('blur', function () {
-                var orderNo = $.trim($(this).val()); //生产订单号
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
-                    data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
-                    success: function (data) {
-                        var isOk = JSON.parse(data).data;
-                        if (!isOk) {
-                            ayma.alert.error("生产订单不存在");
-                            return false;
-                        }
-                    }
-                });
+            //生产订单号
+            $('#A_OrderNo').select({
+                type: 'default',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                // 访问数据接口参数
+                param: {}
             });
+            //生产订单号校验
+            //$('#A_OrderNo').on('blur', function () {
+            //    var orderNo = $.trim($(this).val()); //生产订单号
+            //    $.ajax({
+            //        type: "get",
+            //        url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
+            //        data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
+            //        success: function (data) {
+            //            var isOk = JSON.parse(data).data;
+            //            if (!isOk) {
+            //                ayma.alert.error("生产订单不存在");
+            //                return false;
+            //            }
+            //        }
+            //    });
+            //});
         },
         initData: function () {
             if (!!keyValue) {

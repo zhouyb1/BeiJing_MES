@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -72,7 +73,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var workshopList = toosIBLL.GetWorkShopList();
             return Success(workshopList);
         }
-        
+        /// <summary>
+        /// 获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProductOrderList()
+        {
+            var productorderList = toosIBLL.GetProductOrderList();
+            return Success(productorderList);
+        }
         /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>

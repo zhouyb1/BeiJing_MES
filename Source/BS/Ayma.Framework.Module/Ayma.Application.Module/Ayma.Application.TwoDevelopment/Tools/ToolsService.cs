@@ -89,6 +89,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>
         /// <param name="code">车间编码</param>
@@ -186,7 +208,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //{
         //    try
         //    {
-        //        return this.BaseRepository().FindList<Mes_ProceEntity>(t=>t.P_ParentId==parentId);
+        //        return this.BaseRepository().FindList<Mes_ProceEntity>(t => t.P_ParentId == parentId);
         //    }
         //    catch (Exception ex)
         //    {
@@ -234,7 +256,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //{
         //    try
         //    {
-        //        var entity= this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == code);
+        //        var entity = this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == code);
         //        var list = this.BaseRepository().FindList<Mes_ProceEntity>(t => t.P_ParentId == entity.ID || t.ID == entity.ID);
         //        return list;
         //    }
