@@ -76,6 +76,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
+        /// <summary>
+        /// 获取order明细
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetOrderDetail(string orderNo)
+        {
+            var list = productOrderManagerIBLL.GetMes_ProductOrderDetaillist(orderNo);
+            return Success(list);
+        }
+
         #endregion
 
         #region 提交数据

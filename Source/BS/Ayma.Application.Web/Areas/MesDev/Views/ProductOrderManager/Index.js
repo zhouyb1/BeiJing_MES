@@ -3,6 +3,10 @@
  * 描  述：生产订单管理
  */
 var refreshGirdData;
+var refreshSubGirdData;//子列表刷新
+var $subgridTable;//子列表
+var recordEdit;//编辑子列表
+var recordDel;//删除子列表
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -14,7 +18,7 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 220, 350);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -28,8 +32,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/Form?keyValue=' + keyValue,
-                        width: 800,
-                        height: 600,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -107,19 +111,21 @@ var bootstrap = function ($, ayma) {
         },
         // 初始化列表
         initGird: function () {
-            $('#girdtable').AuthorizeJfGrid({
+            $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/ProductOrderManager/GetPageList',
                 headData: [
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
+                    { label: "订单号", name: "P_OrderNo", width: 160, align: "left" },
+                    { label: "站点名称", name: "P_OrderStationName", width: 160, align: "left" },
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "使用时间", name: "P_UseDate", width: 160, align: "left" },
-                    { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left" },
-                    { label: "数量", name: "P_Qty", width: 160, align: "left" },
-                    { label: "单位", name: "P_Unit", width: 160, align: "left" },
-                    { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
+                    { label: "创建人", name: "P_CreateBy", width: 160, align: "left" },
+                    { label: "创建时间", name: "P_CreateDate", width: 160, align: "left" },
                     {
-                        label: "状态", name: "P_Status", width: 160, align: "left",
-                        formatterAsync: function (callback, value, row) {
+                        label: "状态",
+                        name: "P_Status",
+                        width: 160,
+                        align: "left",
+                        formatterAsync: function(callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
                                 code: 'ProductOrderStatus',
@@ -138,7 +144,26 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                isSubGrid: true, // 是否有子表editType 
+                subGridRowExpanded: function(subgridId, row) {
+                    var orderNo = row.P_OrderNo;
+                    var subgridTableId = subgridId + "_t";
+                    $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
+                    $subgridTable = $("#" + subgridTableId);
+                    $subgridTable.jfGrid({
+                        url: top.$.rootUrl + '/MesDev/ProductOrderManager/GetOrderDetail?orderNo=' + orderNo,
+                        headData: [
+                            { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left" },
+                            { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
+                            { label: "数量", name: "P_Qty", width: 160, align: "left" },
+                            { label: "单位", name: "P_Unit", width: 160, align: "left" },
+                            { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" }
+                        ],
+                        mainId: 'ID',
+                        reloadSelected: false
+                    }).jfGridSet("reload");
+                }
             });
             page.search();
         },
@@ -155,20 +180,25 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
                 }
-
             });
         }
     };
     refreshGirdData = function () {
+
         page.search();
     };
+    //子列表刷新
+    refreshSubGirdData = function () {
+        $subgridTable.jfGridSet("reload");
+    };
+    
     page.init();
 }
