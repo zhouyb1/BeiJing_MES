@@ -68,6 +68,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
                     }
+                    $('#C_StartTime').val(data.Mes_ClassData.C_StartTime);  //给开始时间框赋值
+                    $('#C_EndTime').val(data.Mes_ClassData.C_EndTime); //给结束时间框赋值
                 });
             }
         }
