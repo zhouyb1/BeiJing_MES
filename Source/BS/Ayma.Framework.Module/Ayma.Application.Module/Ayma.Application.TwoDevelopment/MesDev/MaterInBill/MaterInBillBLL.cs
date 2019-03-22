@@ -14,17 +14,42 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private MaterInBillService materInBillService = new MaterInBillService();
 
         #region 获取数据
+       
         /// <summary>
-        /// 获取已提交单据列表数据
+        /// 获取成品列表数据(现用)
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ProductGoodsEntity> GetProductList(Pagination pagination, string queryJson, string keyword)
+        public IEnumerable<Mes_GoodsEntity> GetProductGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
-                return materInBillService.GetProductList(pagination, queryJson, keyword);
+                return materInBillService.GetProductGoodsList(pagination, queryJson, keyword);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取非成品成品列表数据(非成品:原材料/半成品)
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
+        {
+            try
+            {
+                return materInBillService.GetGoodsList(pagination, queryJson, keyword);
             }
             catch (Exception ex)
             {

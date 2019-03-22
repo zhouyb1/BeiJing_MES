@@ -64,6 +64,20 @@ namespace Ayma.Application.TwoDevelopment
             /// 否
             /// </summary>
             No = 0     
+        }  
+        /// <summary>
+        /// 入库单据类型(成品与非成品)
+        /// </summary>
+        public enum OrderKindEnum
+        {
+            /// <summary>
+            /// 非成品
+            /// </summary>
+            NoProduct = 1,
+            /// <summary>
+            /// 成品
+            /// </summary>
+            IsProduct = 2     
         } 
        
         

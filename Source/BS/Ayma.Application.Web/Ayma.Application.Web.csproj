@@ -508,6 +508,7 @@
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Index.js" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductIndex.js" />
@@ -2227,6 +2228,7 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

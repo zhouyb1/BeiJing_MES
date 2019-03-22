@@ -172,7 +172,6 @@
     <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachService.cs" />
     <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachBLL.cs" />
     <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachIBLL.cs" />
-    <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsEntity.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsService.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsBLL.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\Mes_ProductGoodsIBLL.cs" />

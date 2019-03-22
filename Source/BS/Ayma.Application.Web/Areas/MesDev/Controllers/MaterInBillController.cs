@@ -60,6 +60,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+       
         /// <summary>
         /// 成品入库单表单
         /// </summary>
@@ -74,14 +75,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
         /// <summary>
-        /// 成品入库商品列表页
+        /// 入库商品列表页
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult GoodsListIndex()
         {
             return View();
-        }  
+        }
+        /// <summary>
+        /// 成品入库商品列表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GoodsProductListIndex()
+        {
+            return View();
+        }
         /// <summary>
         /// 成品入库单查询表单
         /// </summary>
@@ -115,7 +125,28 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetProductList(string pagination, string queryJson, string keyword)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = materInBillIBLL.GetProductList(paginationobj, queryJson, keyword);
+            var data = materInBillIBLL.GetProductGoodsList(paginationobj, queryJson, keyword);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        } 
+        /// <summary>
+        /// 获取非成品入库商品列表(非成品:原材料/半成品)
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsList(string pagination, string queryJson, string keyword)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materInBillIBLL.GetGoodsList(paginationobj, queryJson, keyword);
             var jsonData = new
             {
                 rows = data,
@@ -289,11 +320,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 保存实体数据（新增、修改）
         /// </summary>
         /// <param name="keyValue">主键</param>
+        /// <param name="orderKind">入库单据类型(1,非成品 2,成品)</param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity, string strmes_MaterInDetailList)
+        public ActionResult SaveForm(string keyValue,  ErpEnums.OrderKindEnum orderKind, string strEntity, string strmes_MaterInDetailList)
         {
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
@@ -311,6 +343,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
                 }
                 codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
+            }
+            if (string.IsNullOrEmpty(keyValue))
+            {
+                entity.M_OrderKind = orderKind;
             }
             materInBillIBLL.SaveEntity(keyValue,entity,mes_MaterInDetailList);
             return Success("保存成功！");

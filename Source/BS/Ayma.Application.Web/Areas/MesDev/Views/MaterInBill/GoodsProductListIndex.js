@@ -92,7 +92,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductList?stockCode=' + stockCode,
                 headData: [
                     { label: "物料编码", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },

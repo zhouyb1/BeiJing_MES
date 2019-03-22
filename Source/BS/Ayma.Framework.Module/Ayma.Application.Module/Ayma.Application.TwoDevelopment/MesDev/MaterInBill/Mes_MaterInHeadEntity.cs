@@ -18,10 +18,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
-        /// 商品类型
+        /// 入库单据类型(1=非成品,2=成品)
         /// </summary>
-        [Column("M_KIND")]
-        public string M_Kind { get; set; }
+        [Column("M_ORDERKIND")]
+        public ErpEnums.OrderKindEnum? M_OrderKind { get; set; }
         /// <summary>
         /// 入库单号
         /// </summary>
@@ -108,7 +108,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
-            this.M_Kind = "3";
             this.M_Status = ErpEnums.MaterInStatusEnum.NoAudit;
             this.M_CreateDate = DateTime.Now;
             this.M_CreateBy = userInfo.realName;

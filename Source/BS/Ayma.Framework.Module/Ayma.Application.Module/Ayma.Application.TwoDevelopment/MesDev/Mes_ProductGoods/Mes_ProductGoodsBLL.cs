@@ -16,105 +16,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #region 获取数据
 
-        /// <summary>
-        /// 获取页面显示列表数据
-        /// </summary>
-        /// <param name="queryJson">查询参数</param>
-        /// <returns></returns>
-        public IEnumerable<Mes_ProductGoodsEntity> GetPageList(Pagination pagination, string queryJson)
-        {
-            try
-            {
-                return mes_ProductGoodsService.GetPageList(pagination, queryJson);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
 
-        /// <summary>
-        /// 获取Mes_ProductGoods表实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public Mes_ProductGoodsEntity GetMes_ProductGoodsEntity(string keyValue)
-        {
-            try
-            {
-                return mes_ProductGoodsService.GetMes_ProductGoodsEntity(keyValue);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-
+      
         #endregion
 
         #region 提交数据
 
-        /// <summary>
-        /// 删除实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void DeleteEntity(string keyValue)
-        {
-            try
-            {
-                mes_ProductGoodsService.DeleteEntity(keyValue);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 保存实体数据（新增、修改）
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_ProductGoodsEntity entity)
-        {
-            try
-            {
-                mes_ProductGoodsService.SaveEntity(keyValue, entity);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
 
         #endregion
 
@@ -142,29 +49,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
-        /// <summary>
-        /// 保存ERP同步过来的商品信息
-        /// </summary>
-        /// <param name="ERPTgoodsListEntity"></param>
-        public void SaveErpTgoods(List<ERPTgoodsListModel> ERPTgoodsListEntity)
-        {
-            try
-            {
-                mes_ProductGoodsService.SaveErpTgoods(ERPTgoodsListEntity);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
+        ///// <summary>
+        ///// 保存ERP同步过来的商品信息
+        ///// </summary>
+        ///// <param name="ERPTgoodsListEntity"></param>
+        //public void SaveErpTgoods(List<ERPTgoodsListModel> ERPTgoodsListEntity)
+        //{
+        //    try
+        //    {
+        //        mes_ProductGoodsService.SaveErpTgoods(ERPTgoodsListEntity);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        if (ex is ExceptionEx)
+        //        {
+        //            throw;
+        //        }
+        //        else
+        //        {
+        //            throw ExceptionEx.ThrowBusinessException(ex);
+        //        }
                 
-            }
-        }
+        //    }
+        //}
 
 
     }

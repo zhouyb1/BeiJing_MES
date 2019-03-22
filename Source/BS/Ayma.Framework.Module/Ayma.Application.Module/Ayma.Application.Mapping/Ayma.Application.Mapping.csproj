@@ -136,7 +136,6 @@
     <Compile Include="MesDev\Mes_InventoryMap.cs" />
     <Compile Include="MesDev\Mes_InventoryLSMap.cs" />
     <Compile Include="MesDev\T_DocumentsMakeLogMap.cs" />
-    <Compile Include="MesDev\Mes_ProductGoodsMap.cs" />
     <Compile Include="MesDev\Mes_ScanKindMap.cs" />
     <Compile Include="MesDev\Mes_BasketMap.cs" />
     <Compile Include="MesDev\Mes_ProOutHeadMap.cs" />

@@ -47,9 +47,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $("#am_add").on("click", function () {
                 var batch = $("#M_Batch").val();
                 ayma.layerForm({
-                    id: 'GoodsForm',
-                    title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId + '&batch=' + batch,
+                    id: 'GoodsProductListIndex',
+                    title: '添加成品物料',
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsProductListIndex?formId=' + parentFormId + '&batch=' + batch,
                     width: 1000,
                     height: 800,
                     maxmin: true,
@@ -136,7 +136,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_MaterInHead"]').GetFormData());
         postData.strmes_MaterInDetailList = JSON.stringify($('#Mes_MaterInDetail').jfGridGet('rowdatas'));
-        $.SaveForm(top.$.rootUrl + '/MesDev/MaterInBill/SaveForm?keyValue=' + keyValue, postData, function (res) {
+        $.SaveForm(top.$.rootUrl + '/MesDev/MaterInBill/SaveForm?orderKind=2&keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
                 callBack();

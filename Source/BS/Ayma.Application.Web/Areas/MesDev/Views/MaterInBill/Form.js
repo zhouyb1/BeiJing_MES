@@ -126,7 +126,7 @@ var bootstrap = function ($, ayma) {
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_MaterInHead"]').GetFormData());
         postData.strmes_MaterInDetailList = JSON.stringify($('#Mes_MaterInDetail').jfGridGet('rowdatas'));
-        $.SaveForm(top.$.rootUrl + '/MesDev/MaterInBill/SaveForm?keyValue=' + keyValue, postData, function (res) {
+        $.SaveForm(top.$.rootUrl + '/MesDev/MaterInBill/SaveForm?orderKind=1&keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
                 callBack();

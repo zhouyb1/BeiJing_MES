@@ -16,28 +16,110 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public partial class MaterInBillService : RepositoryFactory
     {
         #region 获取数据
+       
         /// <summary>
-        /// 获取已提交单据列表数据
+        /// 获取成品列表数据(现用)
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ProductGoodsEntity> GetProductList(Pagination pagination, string queryJson, string keyword)
+        public IEnumerable<Mes_GoodsEntity> GetProductGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(" SELECT * FROM Mes_ProductGoods t ");
-                strSql.Append(" where 1=1");
+                strSql.Append(@" SELECT [ID]
+                                  ,[G_Code]
+                                  ,[G_Name]
+                                  ,[G_Kind]
+                                  ,[G_Period]
+                                  ,[G_Price]
+                                  ,[G_Unit]
+                                  ,[G_UnitWeight]
+                                  ,[G_Super]
+                                  ,[G_Lower]
+                                  ,[G_CreateBy]
+                                  ,[G_CreateDate]
+                                  ,[G_UpdateBy]
+                                  ,[G_UpdateDate]
+                                  ,[G_Remark]
+                                  ,[G_Erpcode]
+                                  ,[G_TKind]
+                                  ,[G_UnitQty]
+                                  ,[G_Self]
+                                  ,[G_Online]
+                                  ,[G_Prepareday]
+                                  ,[G_Otax]
+                                  ,[G_Itax]
+                              FROM [dbo].[Mes_Goods] t ");
+                strSql.Append(" where t.G_Kind=3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (!keyword .IsEmpty())
+                if (!keyword.IsEmpty())
                 {
-                    dp.Add("keyword", "%"+keyword+"%", DbType.String);
+                    dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
                 }
-                return this.BaseRepository().FindList<Mes_ProductGoodsEntity>(strSql.ToString(), dp, pagination);
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取非成品成品列表数据(非成品:原材料/半成品)
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <param name="keyword">编码/名称搜索</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@" SELECT [ID]
+                                  ,[G_Code]
+                                  ,[G_Name]
+                                  ,[G_Kind]
+                                  ,[G_Period]
+                                  ,[G_Price]
+                                  ,[G_Unit]
+                                  ,[G_UnitWeight]
+                                  ,[G_Super]
+                                  ,[G_Lower]
+                                  ,[G_CreateBy]
+                                  ,[G_CreateDate]
+                                  ,[G_UpdateBy]
+                                  ,[G_UpdateDate]
+                                  ,[G_Remark]
+                                  ,[G_Erpcode]
+                                  ,[G_TKind]
+                                  ,[G_UnitQty]
+                                  ,[G_Self]
+                                  ,[G_Online]
+                                  ,[G_Prepareday]
+                                  ,[G_Otax]
+                                  ,[G_Itax]
+                              FROM [dbo].[Mes_Goods] t ");
+                strSql.Append(" where t.G_Kind !=3 ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!keyword.IsEmpty())
+                {
+                    dp.Add("keyword", "%" + keyword + "%", DbType.String);
+                    strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
+                }
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -51,6 +133,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+
         /// <summary>
         /// 获取成品入库已提交的成品入库
         /// </summary>
@@ -155,7 +238,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status in (1,2) and t.M_Kind=3  ");
+                strSql.Append("  WHERE t.M_Status in (1,2) and t.M_OrderKind=2  ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -309,7 +392,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status in (1,2)  ");
+                strSql.Append("  WHERE t.M_Status in (1,2) AND t.M_OrderKind=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -556,7 +639,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         item.Create();
                         item.M_MaterInNo = entity.M_MaterInNo;
                         item.M_OrderNo = entity.M_OrderNo;
-                        item.M_Kind = entity.M_Kind;
+                        //item.M_Kind = entity.M_Kind;
                         db.Insert(item);
                     }
                 }
