@@ -114,7 +114,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 var I_QualifiedQty = $.trim($('#I_QualifiedQty').val()); //合格数量
                 var I_GoodsQty = $.trim($('#I_GoodsQty').val()); // 抽检数量
                 var html = '<div class="am-field-error-info" id="I_Qty" title="合格数量大于抽检数量！"><i class="fa fa-info-circle"></i></div>';
-                if (I_QualifiedQty > I_GoodsQty) {
+                if (parseInt(I_QualifiedQty) > parseInt(I_GoodsQty)) {
                     $("#I_QualifiedQty").addClass("am-field-error");
                     $("#I_QualifiedQty").parent().append(html);
                     ayma.alert.error('合格数量不能大于抽检数量!');
@@ -150,7 +150,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         //    ayma.alert.error('合格数量输入的字符不合法!');
         //    return false;
         //}
-        if (I_QualifiedQty > I_GoodsQty) {
+        if (parseInt(I_QualifiedQty) > parseInt(I_GoodsQty)) {
             ayma.alert.error('合格数量不能大于抽检数量!');
             return false;
         };
