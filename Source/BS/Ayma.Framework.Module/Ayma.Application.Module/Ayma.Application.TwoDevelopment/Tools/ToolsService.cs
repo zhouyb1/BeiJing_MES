@@ -96,7 +96,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut);
+                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut).OrderByDescending(t=>t.P_OrderNo);
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_RecordEntity>();
+                return this.BaseRepository().FindList<Mes_RecordEntity>().OrderBy(t=>t.R_Record);
             }
             catch (Exception ex)
             {
@@ -281,7 +281,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ProceEntity>(x => x.P_RecordCode == code);
+                return this.BaseRepository().FindList<Mes_ProceEntity>(x => x.P_RecordCode == code).OrderBy(x=>x.P_ProNo);
             }
             catch (Exception ex)
             {
