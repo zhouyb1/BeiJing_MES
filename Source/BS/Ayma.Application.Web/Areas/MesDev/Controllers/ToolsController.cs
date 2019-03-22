@@ -321,6 +321,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(data);
         }
 
+        /// <summary>
+        /// 获取订单里的商品
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetOrderGoodEntity(string goodsCode)
+        {
+            var data = toosIBLL.GetOrderGoodsEntity(goodsCode);
+            return Success(data);
+        }
         #endregion
 
         #region 提交数据

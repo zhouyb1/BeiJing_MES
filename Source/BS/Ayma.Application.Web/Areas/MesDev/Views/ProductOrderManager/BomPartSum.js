@@ -1,5 +1,4 @@
-﻿
-var goodsCode = request('GoodsCode');
+﻿var goodsCode = request('GoodsCode');
 var orderNo = request('orderNo');
 var orderDate = request('orderDate');
 var qty = request('qty');
@@ -8,7 +7,7 @@ var acceptClick;
 var bootstrap = function ($, ayma) {
     "user strict";
     var page = {
-       
+
         init: function () {
             $('.am-form-wrap').mCustomScrollbar({ theme: "minimal-dark" });
             page.bind();
@@ -24,28 +23,35 @@ var bootstrap = function ($, ayma) {
                 maxHeight: 225,
                 param: {},
 
-            });
-            $('#B_Qty').val(qty == ""  ? 0 : parseInt(qty));
+            }).on('change', function () {
+                var goodsCode = $(this).selectGet();
+                $.get(top.$.rootUrl + '/MesDev/Tools/GetOrderGoodEntity?goodsCode=' + goodsCode, function (res) {
+                    qty = res.data.P_Qty;
+                    $('#B_Qty').val(qty);
+                }, 'json');
+            }).selectSet($('#P_GoodsCode').get(0)._select.dfop.data[0].P_GoodsCode);
+            
+            //$('#B_Qty').val(qty == "" ? 0 : parseInt(qty));
             $('#P_OrderNo').val(orderNo);
-            $.post(top.$.rootUrl + '/MesDev/Tools/GetCode', { goodsCode: goodsCode }, function (res) {
+            $.post(top.$.rootUrl + '/MesDev/Tools/GetCode', { goodsCode: $('#P_GoodsCode').selectGet() }, function (res) {
                 $('#B_ParentID').select({
                     url: top.$.rootUrl + '/MesDev/Tools/GetBomList',
                     type: 'default',
                     value: 'ID',
                     text: "B_FormulaName",
                     maxHeight: 225,
-                    param: { goodsCode: res.data == null ? "" : res.data.G_Code }
+                    param: { goodsCode: res.data.G_Code }
                 });
 
             }, 'json');
             $('#B_ParentID').on('change', function () {
                 var parentId = $(this).selectGet();
-                page.initData(parentId,qty);
+                page.initData(parentId, qty);
 
             });
-           
+
         },
-        initGrid: function() {
+        initGrid: function () {
             $('#girdtable').jfGrid({
                 headData: [
                     { label: "配方名称", name: "B_FormulaName", width: 100, align: "left" },
@@ -67,9 +73,9 @@ var bootstrap = function ($, ayma) {
                 height: 350
             });
         },
-        initData: function (parentId,qty) {
-            $.SetForm(top.$.rootUrl + '/MesDev/ProductOrderManager/GetBomTreeList?parentId=' + parentId+'&qty='+qty, function (data) {
-                $('#girdtable').jfGridSet('refreshdata', { rowdatas: data});
+        initData: function (parentId, qty) {
+            $.SetForm(top.$.rootUrl + '/MesDev/ProductOrderManager/GetBomTreeList?parentId=' + parentId + '&qty=' + qty, function (data) {
+                $('#girdtable').jfGridSet('refreshdata', { rowdatas: data });
             });
         }
     };
@@ -80,20 +86,20 @@ var bootstrap = function ($, ayma) {
         }
         //var strJsonBomList = JSON.stringify($('#girdtable').jfGridGet('rowdata')[0].jfGrid_ChildRows);
         var dataSelect = $('#girdtable').jfGridGet('rowdata');
-        if (dataSelect==undefined) {
+        if (dataSelect == undefined) {
             ayma.alert.error("请选择商品");
             return false;
         }
         var str = [];
         //剔除父级数据
-        for (var i = 0;i< dataSelect.length;  i++) {
+        for (var i = 0; i < dataSelect.length; i++) {
 
-            if (str.indexOf(dataSelect[i].B_GoodsCode)==1) {
+            if (str.indexOf(dataSelect[i].B_GoodsCode) == 1) {
                 ayma.alert.error('同一编码的物料只选择一个！');
                 return false;
             }
             str.push(dataSelect[i].B_GoodsCode);
-            if (dataSelect[i].B_ParentID=="0") {
+            if (dataSelect[i].B_ParentID == "0") {
                 dataSelect.splice(dataSelect.indexOf(dataSelect[i]), 1);
             }
         }
@@ -105,5 +111,5 @@ var bootstrap = function ($, ayma) {
         });
     };
     page.init();
-    
+
 }

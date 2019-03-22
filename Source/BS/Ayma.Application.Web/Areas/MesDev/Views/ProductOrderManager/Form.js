@@ -61,14 +61,16 @@ var bootstrap = function ($, ayma) {
         initData: function () {
             if (!!keyValue) {
                 $.SetForm(top.$.rootUrl + '/MesDev/ProductOrderManager/GetFormData?keyValue=' + keyValue, function (data) {
-                    for (var id in data) {
-                        if (!!data[id].length && data[id].length > 0) {
-                            $('#Mes_ProductOrderDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
-                        }
-                        else {
-                            $('[data-table="' + id + '"]').SetFormData(data[id]);
-                        }
-                    }
+                    $('[data-table="Mes_ProductOrderHead"]').SetFormData(data[0]);
+                    $('#Mes_ProductOrderDetail').jfGridSet('refreshdata', { rowdatas: data });
+                    //for (var id in data) {
+                    //    if (!!data[id].length && data[id].length > 0) {
+                    //        $('#Mes_ProductOrderDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
+                    //    }
+                    //    else {
+                    //        $('[data-table="' + id + '"]').SetFormData(data[id]);
+                    //    }
+                    //}
                 });
             }
         }

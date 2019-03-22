@@ -68,13 +68,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_ProductOrderHeadData = productOrderManagerIBLL.GetMes_ProductOrderHeadEntity( keyValue );
-            var Mes_ProductOrderDetailData = productOrderManagerIBLL.GetMes_ProductOrderDetaillist(Mes_ProductOrderHeadData.P_OrderNo);
-            var jsonData = new {
-                Mes_ProductOrderHeadData = Mes_ProductOrderHeadData,
-                Mes_ProductOrderDetailData = Mes_ProductOrderDetailData,
-            };
-            return Success(jsonData);
+            //var Mes_ProductOrderHeadData = productOrderManagerIBLL.GetMes_ProductOrderHeadEntity( keyValue );
+            //var Mes_ProductOrderDetailData = productOrderManagerIBLL.GetMes_ProductOrderDetaillist(Mes_ProductOrderHeadData.P_OrderNo);
+            //var jsonData = new {
+            //    Mes_ProductOrderHeadData = Mes_ProductOrderHeadData,
+            //    Mes_ProductOrderDetailData = Mes_ProductOrderDetailData,
+            //};
+
+            var data = productOrderManagerIBLL.GetMes_ProductOrderDetailEntity(keyValue);
+            return Success(data);
         }
 
         /// <summary>
@@ -116,7 +118,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_ProductOrderDetaillist)
         {
-            Mes_ProductOrderHeadEntity entity = strEntity.ToObject<Mes_ProductOrderHeadEntity>();
+            Mes_ProductOrderHeadEntity entity = null;
             List<Mes_ProductOrderDetailEntity >mes_ProductOrderDetaillist = strmes_ProductOrderDetaillist.ToObject<List<Mes_ProductOrderDetailEntity>>();
             productOrderManagerIBLL.SaveEntity(keyValue, entity, mes_ProductOrderDetaillist);
             return Success("保存成功！");
