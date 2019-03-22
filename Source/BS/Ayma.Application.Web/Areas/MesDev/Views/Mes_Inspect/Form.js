@@ -45,14 +45,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //车间编码
             $('#I_Class').select({
                 type: 'default',
-                value: 'C_Code',
-                text: 'C_Code',
+                value: 'W_Code',
+                text: 'W_Code',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetClassList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
                 param: {}
             });

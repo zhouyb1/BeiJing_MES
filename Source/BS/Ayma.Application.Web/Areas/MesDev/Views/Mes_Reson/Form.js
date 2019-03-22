@@ -14,6 +14,53 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (keyValue != "") {
+                $("#R_Code").attr("readOnly", "true");
+            }
+            //编码重复验证
+            $("#R_Code").on('blur', function () {
+                var code = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isCode" title="编码重复！"><i class="fa fa-info-circle"></i></div>';
+                    $.ajax({
+                        type: "get",
+                        url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                        data: { tables: "Mes_Reson", field: "R_Code", code: code, keyValue: keyValue },
+                        success: function(data) {
+                            var isOk = JSON.parse(data).data;
+                            if (isOk) {
+                                $("#R_Code").addClass("am-field-error");
+                                $("#R_Code").parent().append(html);
+                                ayma.alert.error("编码重复");
+                                return false;
+                            } else {
+                                $("#R_Code").removeClass("am-field-error");
+                                $("#isCode").remove();
+                            }
+                        }
+                    });
+            });
+            //名称重复验证
+            $("#R_Name").on('blur', function () {
+                var name = $.trim($(this).val()); //去除空格
+                var html = '<div class="am-field-error-info" id="isName" title="名称重复！"><i class="fa fa-info-circle"></i></div>';
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/IsName',
+                    data: { tables: "Mes_Reson", field: "R_Name", names: name, keyValue: keyValue },
+                    success: function (data) {
+                        var isOk = JSON.parse(data).data;
+                        if (isOk) {
+                            $("#R_Name").addClass("am-field-error");
+                            $("#R_Name").parent().append(html);
+                            ayma.alert.error("名称重复");
+                            return false;
+                        } else {
+                            $("#R_Name").removeClass("am-field-error");
+                            $("#isName").remove();
+                        }
+                    }
+                });
+            });
         },
         initData: function () {
             if (!!keyValue) {
