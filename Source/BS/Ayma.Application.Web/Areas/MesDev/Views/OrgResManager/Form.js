@@ -84,7 +84,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
-
             //添加物料
             $('#am_add').on('click', function () {
                 ayma.layerForm({
