@@ -96,7 +96,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut).OrderByDescending(t=>t.P_OrderNo);
+
+              DateTime startTime= Convert.ToDateTime(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"));
+              return this.BaseRepository()
+                        .FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime)
+                        .OrderByDescending(t => t.P_OrderNo);
             }
             catch (Exception ex)
             {
