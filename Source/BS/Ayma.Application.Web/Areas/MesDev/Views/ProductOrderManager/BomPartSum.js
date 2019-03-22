@@ -2,7 +2,7 @@
 var goodsCode = request('GoodsCode');
 var orderNo = request('orderNo');
 var orderDate = request('orderDate');
-var qty = parseInt(request('qty'));
+var qty = request('qty');
 var acceptClick;
 
 var bootstrap = function ($, ayma) {
@@ -15,7 +15,17 @@ var bootstrap = function ($, ayma) {
             page.initGrid();
         },
         bind: function () {
-            $('#B_Qty').val(qty);
+            //绑定商品
+            $('#P_GoodsCode').select({
+                url: top.$.rootUrl + '/MesDev/Tools/GetOrderGoodsList?orderNo=' + orderNo,
+                type: 'default',
+                value: 'P_GoodsCode',
+                text: "P_GoodsName",
+                maxHeight: 225,
+                param: {},
+
+            });
+            $('#B_Qty').val(qty == ""  ? 0 : parseInt(qty));
             $('#P_OrderNo').val(orderNo);
             $.post(top.$.rootUrl + '/MesDev/Tools/GetCode', { goodsCode: goodsCode }, function (res) {
                 $('#B_ParentID').select({
@@ -24,7 +34,7 @@ var bootstrap = function ($, ayma) {
                     value: 'ID',
                     text: "B_FormulaName",
                     maxHeight: 225,
-                    param: { goodsCode: res.data.G_Code }
+                    param: { goodsCode: res.data == null ? "" : res.data.G_Code }
                 });
 
             }, 'json');
