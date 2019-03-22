@@ -30,6 +30,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         IEnumerable<Mes_ProductOrderDetailEntity> GetMes_ProductOrderDetaillist(string keyValue);
+        /// <summary>
+        /// 获取Mes_ProductOrderDetail表单实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ProductOrderDetailEntity> GetMes_ProductOrderDetailEntity(string keyValue);
         #endregion
 
         #region 提交数据

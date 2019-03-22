@@ -749,6 +749,54 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取订单里的商品
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderDetailEntity> GetOrderGoodsList(string orderNo)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ProductOrderDetailEntity>(c => c.P_OrderNo == orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取订单商品实体
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public Mes_ProductOrderDetailEntity GetOrderGoodsEntity(string goodsCode)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_ProductOrderDetailEntity>(c =>c.P_GoodsCode==goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
         
         #region 提交数据

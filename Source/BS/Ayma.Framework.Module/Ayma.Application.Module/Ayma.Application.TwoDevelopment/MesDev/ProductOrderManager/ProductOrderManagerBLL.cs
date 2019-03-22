@@ -87,6 +87,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取Mes_ProductOrderDetail表单实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderDetailEntity> GetMes_ProductOrderDetailEntity(string keyValue)
+        {
+            try
+            {
+                return productOrderManagerService.GetMes_ProductOrderDetailEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

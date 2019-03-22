@@ -713,6 +713,54 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取订单里的商品
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderDetailEntity> GetOrderGoodsList(string orderNo)
+        {
+            try
+            {
+                return toolsService.GetOrderGoodsList(orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取订单商品实体
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public Mes_ProductOrderDetailEntity GetOrderGoodsEntity(string goodsCode)
+        {
+            try
+            {
+                return toolsService.GetOrderGoodsEntity(goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

@@ -117,6 +117,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取Mes_ProductOrderDetail表单实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderDetailEntity> GetMes_ProductOrderDetailEntity(string keyValue)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ProductOrderDetailEntity>(c=>c.ID==keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
@@ -160,29 +184,37 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                if (!string.IsNullOrEmpty(keyValue))
+                #region 舍弃
+                //if (!string.IsNullOrEmpty(keyValue))
+                //{
+                //    var mes_ProductOrderHeadEntityTmp = GetMes_ProductOrderHeadEntity(keyValue);
+                //    entity.Modify(keyValue);
+                //    db.Update(entity);
+                //    db.Delete<Mes_ProductOrderDetailEntity>(t => t.P_OrderNo == mes_ProductOrderHeadEntityTmp.P_OrderNo);
+                //    foreach (var item in mes_ProductOrderDetaillist)
+                //    {
+                //        item.Create();
+                //        item.P_OrderNo = mes_ProductOrderHeadEntityTmp.P_OrderNo;
+                //    }
+                //    db.Insert(mes_ProductOrderDetaillist);
+                //}
+                //else
+                //{
+                //    entity.Create();
+                //    db.Insert(entity);
+                //    foreach (var item in mes_ProductOrderDetaillist)
+                //    {
+                //        item.Create();
+                //        item.P_OrderNo = entity.P_OrderNo;
+                //    }
+                //    db.Insert(mes_ProductOrderDetaillist);
+                //}
+                //db.Commit(); 
+                #endregion
+
+                if (!string.IsNullOrWhiteSpace(keyValue))
                 {
-                    var mes_ProductOrderHeadEntityTmp = GetMes_ProductOrderHeadEntity(keyValue);
-                    entity.Modify(keyValue);
-                    db.Update(entity);
-                    db.Delete<Mes_ProductOrderDetailEntity>(t => t.P_OrderNo == mes_ProductOrderHeadEntityTmp.P_OrderNo);
-                    foreach (var item in mes_ProductOrderDetaillist)
-                    {
-                        item.Create();
-                        item.P_OrderNo = mes_ProductOrderHeadEntityTmp.P_OrderNo;
-                    }
-                    db.Insert(mes_ProductOrderDetaillist);
-                }
-                else
-                {
-                    entity.Create();
-                    db.Insert(entity);
-                    foreach (var item in mes_ProductOrderDetaillist)
-                    {
-                        item.Create();
-                        item.P_OrderNo = entity.P_OrderNo;
-                    }
-                    db.Insert(mes_ProductOrderDetaillist);
+                    db.Update(mes_ProductOrderDetaillist[0]);
                 }
                 db.Commit();
             }
