@@ -108,12 +108,23 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     return false;
                 }
             });
-
+            //验证抽检数量格式
+            $('#I_GoodsQty').on('blur', function () {
+                var I_GoodsQty = $.trim($('#I_GoodsQty').val()); // 抽检数量
+                if ($.isEmptyObject(I_GoodsQty)) {
+                    ayma.alert.error('请输入正确的抽检数量!');
+                    return false;
+                };
+            });
             //验证合格数量是否大于抽检数量
             $('#I_QualifiedQty').on('blur', function() {
                 var I_QualifiedQty = $.trim($('#I_QualifiedQty').val()); //合格数量
                 var I_GoodsQty = $.trim($('#I_GoodsQty').val()); // 抽检数量
                 var html = '<div class="am-field-error-info" id="I_Qty" title="合格数量大于抽检数量！"><i class="fa fa-info-circle"></i></div>';
+                if ($.isEmptyObject(I_QualifiedQty)) {
+                    ayma.alert.error('请输入正确的合格数量!');
+                    return false;
+                };
                 if (parseInt(I_QualifiedQty) > parseInt(I_GoodsQty)) {
                     $("#I_QualifiedQty").addClass("am-field-error");
                     $("#I_QualifiedQty").parent().append(html);
