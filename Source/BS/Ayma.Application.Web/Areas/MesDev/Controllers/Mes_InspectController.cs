@@ -109,11 +109,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             Mes_InspectEntity entity = strEntity.ToObject<Mes_InspectEntity>();
             if (string.IsNullOrWhiteSpace(entity.I_GoodsQty + ""))
             {
-                return Fail("输入的抽检数量不正确!");
+                return Fail("请输入正确的抽检数量!");
             }
             if (string.IsNullOrWhiteSpace(entity.I_QualifiedQty+""))
             {
-                return Fail("输入的合格数量不正确!");
+                return Fail("请输入正确的合格数量!");
             }
             if (string.IsNullOrEmpty(keyValue))
             {
