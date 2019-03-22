@@ -24,6 +24,13 @@ var bootstrap = function ($, ayma) {
                     $("#div_Erpcode").html("商品erp编码");
                     $("#G_Erpcode").removeAttr("isvalid").removeAttr("checkexpession");
                 }
+                if (value == 1) {
+                    $("#div_Prepareday").html("备用天数<font face=\"宋体\">*</font>");
+                    $("#G_Prepareday").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                } else {
+                    $("#div_Prepareday").html("备用天数");
+                    $("#G_Prepareday").removeAttr("isvalid").removeAttr("checkexpession");
+                }
             });
             ////商品二级分类类型
             //$("#G_TKind").DataItemSelect({ code: "GoodsTypeT" });
@@ -115,6 +122,94 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+            //保质时间验证 不小于0
+            $("#G_Period").on('blur', function () {
+                var period = $.trim($(this).val()); //去除空格
+                if (period != undefined && period != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
+                        ayma.alert.error("保质时间必须是非负数.");
+                        $("#G_Period").val(0);
+                    }
+
+                }
+            });
+            //价格验证 不小于0
+            $("#G_Price").on('blur', function () {
+                var price = $.trim($(this).val()); //去除空格
+                if (price != undefined && price != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(price.toString().replace('.', ''))) {
+                        ayma.alert.error("价格必须是非负数.");
+                        $("#G_Price").val(0);
+                    }
+
+                }
+            });
+            //备用天数验证 不小于0
+            $("#G_Prepareday").on('blur', function () {
+                var prepareday = $.trim($(this).val()); //去除空格
+                if (prepareday != undefined && prepareday != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(prepareday.toString().replace('.', ''))) {
+                        ayma.alert.error("备用天数必须是非负数.");
+                        $("#G_Prepareday").val(0);
+                    }
+
+                }
+            });
+            //上限预警数量验证 不小于0
+            $("#G_Super").on('blur', function () {
+                var gsuper = $.trim($(this).val()); //去除空格
+                if (gsuper != undefined && gsuper != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(gsuper.toString().replace('.', ''))) {
+                        ayma.alert.error("上限预警数量必须是非负数.");
+                        $("#G_Super").val(0);
+                    }
+
+                }
+            });
+            //下限预警数量验证 不小于0
+            $("#G_Lower").on('blur', function () {
+                var lower = $.trim($(this).val()); //去除空格
+                if (lower != undefined && lower != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(lower.toString().replace('.', ''))) {
+                        ayma.alert.error("下限预警数量必须是非负数.");
+                        $("#G_Lower").val(0);
+                    }
+
+                }
+            });
+            //单位重量验证 不小于0
+            $("#G_UnitWeight").on('blur', function () {
+                var unitWeight = $.trim($(this).val()); //去除空格
+                if (unitWeight != undefined && unitWeight != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(unitWeight.toString().replace('.', ''))) {
+                        ayma.alert.error("单位重量必须是非负数.");
+                        $("#G_UnitWeight").val(0);
+                    }
+
+                }
+            });
+            //销售税率验证 不小于0
+            $("#G_Otax").on('blur', function () {
+                var otax = $.trim($(this).val()); //去除空格
+                if (otax != undefined && otax != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(otax.toString().replace('.', ''))) {
+                        ayma.alert.error("销售税率必须是非负数.");
+                        $("#G_Otax").val(0);
+                    }
+
+                }
+            });
+            //购进税率验证 不小于0
+            $("#G_Itax").on('blur', function () {
+                var itax = $.trim($(this).val()); //去除空格
+                if (itax != undefined && itax != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString().replace('.', ''))) {
+                        ayma.alert.error("购进税率必须是非负数.");
+                        $("#G_Itax").val(0);
+                    }
+
+                }
+            });
         },
         initData: function () {
             if (!!keyValue) {
@@ -140,7 +235,7 @@ var bootstrap = function ($, ayma) {
         }
         var gsuper = $("#G_Super").val();
         if (gsuper != undefined && gsuper != "") {
-           
+
             if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(gsuper.toString().replace('.', ''))) {
                 ayma.alert.error("上限预警数量必须是非负数.");
                 $("#G_Super").val(0);

@@ -91,7 +91,17 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
-          
+            //数量验证 不小于0
+            $("#B_Qty").on('blur', function () {
+                var qty = $.trim($(this).val()); //去除空格
+                if (qty != undefined && qty != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(qty.toString().replace('.', ''))) {
+                        ayma.alert.error("数量必须是非负数.");
+                        $("#B_Qty").val(0);
+                    }
+
+                }
+            });
             /*检测重复项*/
             //$('#F_ItemName').on('blur', function () {
             //    $.ExistField(keyValue, 'F_ItemName', top.$.rootUrl + '/AM_SystemModule/DataItem/ExistItemName');

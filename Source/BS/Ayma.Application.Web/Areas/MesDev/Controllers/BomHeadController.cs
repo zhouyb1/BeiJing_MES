@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -194,7 +195,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     }
                 }
             }
-
+            if (!string.IsNullOrEmpty(entity.B_Qty.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.B_Qty.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("数量必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.B_StartTime.ToString()) && !string.IsNullOrEmpty(entity.B_EndTime.ToString()))
+            {
+                if (entity.B_StartTime > entity.B_EndTime)
+                {
+                    return Fail("开始时间不能大于截止时间.");
+                }
+            }
             bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
             
             return Success("保存成功！");

@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
@@ -110,6 +111,70 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (resName)
             {
                 return Fail("该名称已存在！");
+            }
+            if (!string.IsNullOrEmpty(entity.G_Period.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Period.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("保质时间必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Price.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Price.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("价格必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Prepareday.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Prepareday.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("备用天数必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Super.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Super.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("上限预警比例必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Lower.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Lower.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("下限预警比例必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_UnitWeight.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_UnitWeight.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("单位重量必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Otax.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Otax.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("销售税率必须是非负数.");
+                }
+            }
+            if (!string.IsNullOrEmpty(entity.G_Itax.ToString()))
+            {
+                var reg = Regex.IsMatch(entity.G_Itax.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");
+                if (!reg)
+                {
+                    return Fail("购进税率必须是非负数.");
+                }
             }
             goodsListIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
