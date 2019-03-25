@@ -79,6 +79,7 @@ var bootstrap = function ($, ayma) {
                     //copy需要更改的地方
                     newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
                     newArray[i]['M_GoodsName'] = newArray[i]['G_Code'];
+                    newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]["M_Qty"] = quantity;
                     newArray[i]['M_Batch'] = batch;
@@ -115,7 +116,7 @@ var bootstrap = function ($, ayma) {
                     { label: "价格", name: "G_Price", width: 60, align: "left" },
                     { label: "单位", name: "G_Unit", width: 60, align: "left" }
                 ],
-                mainId: 'F_Id',
+                mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
@@ -132,6 +133,7 @@ var bootstrap = function ($, ayma) {
                         //copy需要更改的地方
                         row['M_GoodsCode'] = row['G_Code'];
                         row['M_GoodsName'] = row['G_Name'];
+                        row['M_Kind'] = row['G_Kind'];
                         row['M_Unit'] = row['G_Unit'];
                         row["M_Qty"] = quantity;
                         row['M_Batch'] = batch;

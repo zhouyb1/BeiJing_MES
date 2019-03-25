@@ -43,6 +43,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
+            //单据状态
+            $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
             //添加商品
             $("#am_add").on("click", function () {
                 var batch = $("#M_Batch").val();
@@ -60,12 +62,27 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             $('#Mes_MaterInDetail').jfGrid({
                 headData: [
+                   
                     {
                         label: '物料编码', name: 'M_GoodsCode', width: 140, align: 'left',editType: 'label'
                     },
                     {
                         label: '物料名称', name: 'M_GoodsName', width: 140, align: 'left', editType: 'label'
                     },
+                     {
+                         label: "商品类型", name: "M_Kind", width: 160, align: "left",
+                         formatterAsync: function (callback, value, row) {
+
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 code: 'GoodsType',
+                                 callback: function (_data) {
+                                     console.log(_data)
+                                     callback(_data.text);
+                                 }
+                             });
+                         }
+                     },
                     {
                         label: '单位', name: 'M_Unit', width: 60, align: 'left', editType: 'label'
                     },
@@ -110,6 +127,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 });
+            } else {
+                $("#M_Status").selectSet(1);//新增时默认为单据生成
             }
         },
         search: function (data) {

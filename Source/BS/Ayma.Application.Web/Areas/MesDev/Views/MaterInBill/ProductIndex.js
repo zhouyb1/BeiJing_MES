@@ -53,8 +53,8 @@ var bootstrap = function ($, ayma) {
                     id: 'MaterInBill',
                     title: '新增成品入库',
                     url: top.$.rootUrl + '/MesDev/MaterInBill/ProductForm?formId=MaterInBill',
-                    width: 800,
-                    height: 600,
+                    width: 900,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -69,8 +69,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MaterInBill',
                         title: '编辑成品入库',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/ProductForm?keyValue=' + keyValue + '&formId=MaterInBill',
-                        width: 800,
-                        height: 600,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
