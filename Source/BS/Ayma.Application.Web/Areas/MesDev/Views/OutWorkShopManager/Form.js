@@ -61,6 +61,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
             }
             $('#O_WorkShop').select(dfop);
+            $('#O_OrderNo').select({
+                type: 'default',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                // 访问数据接口参数
+                param: {}
+            });
 
             $('#Mes_OutWorkShopDetail').jfGrid({
                 headData: [

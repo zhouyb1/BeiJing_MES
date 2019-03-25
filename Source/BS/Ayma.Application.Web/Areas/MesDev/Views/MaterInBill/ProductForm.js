@@ -31,6 +31,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
+            $('#M_OrderNo').select({
+                type: 'default',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                // 访问数据接口参数
+                param: {}
+            });
             $("#M_StockCode").select(dfop).on('change', function () {
                 var code = $(this).selectGet();
                 $.ajax({
