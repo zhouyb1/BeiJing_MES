@@ -27,7 +27,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
                 // 访问数据接口参数
                 param: {}
             }
@@ -80,7 +80,6 @@ var bootstrap = function ($, ayma) {
                                  key: value,
                                  code: 'GoodsType',
                                  callback: function (_data) {
-                                     console.log(_data)
                                      callback(_data.text);
                                  }
                              });

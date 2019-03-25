@@ -52,7 +52,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
 
         /// <summary>
-        /// 获取仓库列表
+        /// 获取所有仓库列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -60,6 +60,28 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetStockList()
         {
             var stockList = toosIBLL.GetStockList();
+            return Success(stockList);
+        } 
+        /// <summary>
+        /// 获取非成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetNoProjStockList()
+        {
+            var stockList = toosIBLL.GetNoProjStockList();
+            return Success(stockList);
+        } 
+        /// <summary>
+        /// 获取成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProjStockList()
+        {
+            var stockList = toosIBLL.GetProjStockList();
             return Success(stockList);
         }
         /// <summary>

@@ -29,7 +29,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code||x.S_Name==code);
+                return this.BaseRepository().FindEntity<Mes_StockEntity>(x => x.S_Code == code || x.S_Name == code);
             }
             catch (Exception ex)
             {
@@ -43,7 +43,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-       
+
         /// <summary>
         /// 获取仓库列表
         /// </summary>
@@ -53,6 +53,50 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return this.BaseRepository().FindList<Mes_StockEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取非成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetNoProjStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind != 3);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetProjStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == 3);
             }
             catch (Exception ex)
             {
@@ -96,10 +140,10 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-              DateTime startTime= Convert.ToDateTime(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"));
-              return this.BaseRepository()
-                        .FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime)
-                        .OrderByDescending(t => t.P_OrderNo);
+                DateTime startTime = Convert.ToDateTime(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"));
+                return this.BaseRepository()
+                          .FindList<Mes_ProductOrderHeadEntity>(t => t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime)
+                          .OrderByDescending(t => t.P_OrderNo);
             }
             catch (Exception ex)
             {
@@ -144,7 +188,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_RecordEntity>().OrderBy(t=>t.R_Record);
+                return this.BaseRepository().FindList<Mes_RecordEntity>().OrderBy(t => t.R_Record);
             }
             catch (Exception ex)
             {
@@ -179,7 +223,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 获取工序树形列表
         /// </summary>
@@ -235,7 +279,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(x=>x.G_Code==code);
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(x => x.G_Code == code);
             }
             catch (Exception ex)
             {
@@ -284,7 +328,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ProceEntity>(x => x.P_RecordCode == code).OrderBy(x=>x.P_ProNo);
+                return this.BaseRepository().FindList<Mes_ProceEntity>(x => x.P_RecordCode == code).OrderBy(x => x.P_ProNo);
             }
             catch (Exception ex)
             {
@@ -373,7 +417,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_GoodKindEntity>(t=>t.G_Code==code);
+                return this.BaseRepository().FindEntity<Mes_GoodKindEntity>(t => t.G_Code == code);
             }
             catch (Exception ex)
             {
@@ -397,7 +441,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_DoorEntity>(x=>x.D_Code==code);
+                return this.BaseRepository().FindEntity<Mes_DoorEntity>(x => x.D_Code == code);
             }
             catch (Exception ex)
             {
@@ -442,7 +486,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x=>x.S_Code==code);
+                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x => x.S_Code == code);
             }
             catch (Exception ex)
             {
@@ -535,7 +579,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where "+field+"=@F_Name ");
+                strSql.Append("select * from " + tables + " where " + field + "=@F_Name ");
                 var dp = new DynamicParameters(new { });
                 if (!string.IsNullOrEmpty(keyValue))
                 {
@@ -569,12 +613,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="orderNo">单号</param>
         /// <param name="field">字段名</param>
         /// <returns></returns>
-        public bool IsOrderNo(string tables,string field, string orderNo)
+        public bool IsOrderNo(string tables, string field, string orderNo)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where "+field+"=@OrderNo");
+                strSql.Append("select * from " + tables + " where " + field + "=@OrderNo");
                 var dp = new DynamicParameters(new { });
                 dp.Add("OrderNo", orderNo, DbType.String);
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
@@ -646,16 +690,16 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("select * from " + tables + " where "+field+"=@Code ");
+                strSql.Append("select * from " + tables + " where " + field + "=@Code ");
                 var dp = new DynamicParameters(new { });
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     strSql.Append(" AND ID !=@keyValue");
                     dp.Add("keyValue", keyValue, DbType.String);
                 }
-                
+
                 dp.Add("Code", code, DbType.String);
-                
+
                 int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
                 if (count > 0)
                 {
@@ -684,7 +728,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-               return this.BaseRepository().FindList<Mes_BomRecordEntity>(c => c.B_GoodsCode == goodsCode);
+                return this.BaseRepository().FindList<Mes_BomRecordEntity>(c => c.B_GoodsCode == goodsCode);
             }
             catch (Exception ex)
             {
@@ -721,7 +765,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-        
+
 
         /// <summary>
         /// 获取Mes_Convert表实体数据
@@ -732,7 +776,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                var entity= this.BaseRepository().FindEntity<MesDev.Mes_ConvertEntity>(c=>c.C_SecCode==goodsCode);
+                var entity = this.BaseRepository().FindEntity<MesDev.Mes_ConvertEntity>(c => c.C_SecCode == goodsCode);
 
                 return this.BaseRepository().FindEntity<Mes_GoodsEntity>(c => c.G_Code == entity.C_Code);
             }
@@ -782,7 +826,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_ProductOrderDetailEntity>(c =>c.P_GoodsCode==goodsCode);
+                return this.BaseRepository().FindEntity<Mes_ProductOrderDetailEntity>(c => c.P_GoodsCode == goodsCode);
             }
             catch (Exception ex)
             {
@@ -798,7 +842,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         }
 
         #endregion
-        
+
         #region 提交数据
         /// <summary>
         /// 审核单据
@@ -806,7 +850,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="keyValue">主键</param>
         /// <param name="tables">表名</param>
         /// <param name="field">字段名</param>
-        public void AuditingBill(string keyValue,string tables,string field)
+        public void AuditingBill(string keyValue, string tables, string field)
         {
             try
             {
@@ -824,7 +868,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 {
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
-            }            
+            }
         }
         /// <summary>
         /// 提交单据,撤销单据
