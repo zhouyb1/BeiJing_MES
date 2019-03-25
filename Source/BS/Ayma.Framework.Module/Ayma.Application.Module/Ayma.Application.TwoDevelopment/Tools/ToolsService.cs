@@ -363,6 +363,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取成品物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetProjGoodsList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(c => c.G_Kind == ErpEnums.GkindEnum.FinishedProduct);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
         /// <summary>
         /// 获取不合格原因列表

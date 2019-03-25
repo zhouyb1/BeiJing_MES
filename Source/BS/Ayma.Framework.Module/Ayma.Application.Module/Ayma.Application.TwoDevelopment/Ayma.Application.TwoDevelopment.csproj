@@ -108,6 +108,7 @@
     <Compile Include="MesDev\ProductOrderManager\ProductOrderManagerService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MesDev\Record\Mes_RecordModel.cs" />
     <Compile Include="MesDev\Record\Mes_RecordEntity.cs" />
     <Compile Include="MesDev\Record\RecordBLL.cs" />
     <Compile Include="MesDev\Record\RecordIBLL.cs" />

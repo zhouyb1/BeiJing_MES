@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("G_NAME")]
         public string G_Name { get; set; }
         /// <summary>
-        /// 商品类型
+        /// 商品类型 1=原材料 2=半成品 3=成品
         /// </summary>
         [Column("G_KIND")]
         public ErpEnums.GkindEnum? G_Kind { get; set; }

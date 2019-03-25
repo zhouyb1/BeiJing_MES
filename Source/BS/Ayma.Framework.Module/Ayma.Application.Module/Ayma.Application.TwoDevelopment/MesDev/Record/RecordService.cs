@@ -22,18 +22,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_RecordEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_RecordModel> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.ID,
-                t.R_Record,
-                t.R_Name
+                        t.ID ,
+                        t.R_Record ,
+                        t.R_Name ,
+                        t.R_GoodsCode ,
+                        g.G_Name GoodsName
+                FROM    dbo.Mes_Record t
+                        LEFT JOIN dbo.Mes_Goods g ON ( t.R_GoodsCode = g.G_Code )
                 ");
-                strSql.Append("  FROM Mes_Record t ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -48,7 +51,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("R_Name", "%" + queryParam["R_Name"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.R_Name Like @R_Name ");
                 }
-                return this.BaseRepository().FindList<Mes_RecordEntity>(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_RecordModel>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {

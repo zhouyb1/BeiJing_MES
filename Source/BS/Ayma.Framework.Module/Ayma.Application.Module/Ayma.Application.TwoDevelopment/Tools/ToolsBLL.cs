@@ -338,6 +338,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取成品物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetProjGoodsList()
+        {
+            try
+            {
+                return toolsService.GetProjGoodsList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         /// <summary>

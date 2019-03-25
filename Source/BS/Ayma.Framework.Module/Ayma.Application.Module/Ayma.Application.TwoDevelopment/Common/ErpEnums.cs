@@ -89,15 +89,15 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 原材料
             /// </summary>
-            Material = 0,
+            Material = 1,
             /// <summary>
             /// 半成品
             /// </summary>
-            ParProduct = 1,   
+            ParProduct = 2,   
             /// <summary>
             /// 成品
             /// </summary>
-            FinishedProduct= 2      
+            FinishedProduct= 3      
         } 
         /// <summary>
         /// 商品类型(二级分类)

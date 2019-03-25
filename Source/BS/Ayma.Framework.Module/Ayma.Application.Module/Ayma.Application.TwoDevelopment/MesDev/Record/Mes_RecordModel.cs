@@ -7,9 +7,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// <summary>
     /// 创 建：超级管理员
     /// 日 期：2019-03-13 14:14
-    /// 描 述：工艺代码表
+    /// 描 述：工艺代码表 模型
     /// </summary>
-    public partial class Mes_RecordEntity 
+    public partial class Mes_RecordModel 
     {
         #region 实体成员
         /// <summary>
@@ -34,24 +34,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string R_GoodsCode { get; set; }
         #endregion
 
-        #region 扩展操作
-        /// <summary>
-        /// 新增调用
-        /// </summary>
-        public void Create()
-        {
-            this.ID = Guid.NewGuid().ToString();
-        }
-        /// <summary>
-        /// 编辑调用
-        /// </summary>
-        /// <param name="keyValue"></param>
-        public void Modify(string keyValue)
-        {
-            this.ID = keyValue;
-        }
-        #endregion
+        
         #region 扩展字段
+        /// <summary>
+        /// 物料名称
+        /// </summary>
+        [Column("GOODSNAME")]
+        public string GoodsName { get; set; }
         #endregion
     }
 }

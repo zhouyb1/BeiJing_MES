@@ -20,7 +20,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_RecordEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_RecordModel> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {

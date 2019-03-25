@@ -90,7 +90,9 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/ProceManager/GetRecordList',
                 headData: [
                     { label: "工艺代码", name: "R_Record", width: 200, align: "left" },
-                    { label: "工艺名称", name: "R_Name", width: 200, align: "left" }
+                    { label: "工艺名称", name: "R_Name", width: 200, align: "left" },
+                    { label: "成品物料编码", name: "R_GoodsCode", width: 200, align: "left" },
+                    { label: "成品物料名称", name: "GoodsName", width: 200, align: "left" }
                 ],
                 mainId: 'ID',
                 reloadSelected: false,
