@@ -52,7 +52,7 @@ var bootstrap = function ($, ayma) {
                 ayma.layerForm({
                     id: 'form',
                     title: '新增排班记录',
-                    url: top.$.rootUrl + '/MesDev/Mes_Arrange/Form',
+                    url: top.$.rootUrl + '/MesDev/Mes_Arrange/Form?formId=Mes_ArrangeForm',
                     width: 900,
                     height: 700,
                     maxmin: true,

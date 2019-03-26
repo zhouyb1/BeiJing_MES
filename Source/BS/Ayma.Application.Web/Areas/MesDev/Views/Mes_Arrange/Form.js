@@ -4,6 +4,8 @@
  */
 var acceptClick;
 var keyValue = request('keyValue');
+var tmp = new Map();
+var parentFormId = request('formId');//上一级formId
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -114,6 +116,126 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+            if (!keyValue) {
+                $('#Mes_Arrange').jfGrid({
+                    headData: [
+                        {
+                            label: '主键',
+                            name: 'ID',
+                            width: 160,
+                            align: 'left',
+                            editType: 'label',
+                            hidden: 'true'
+                        },
+                        {
+                            label: '日期',
+                            name: 'A_Date',
+                            width: 100,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '时间',
+                            name: 'A_DateTime',
+                            width: 100,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '生产订单号',
+                            name: 'A_OrderNo',
+                            width: 160,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '车间编码',
+                            name: 'A_WorkShopCode',
+                            width: 100,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '车间名称',
+                            name: 'A_WorkShopName',
+                            width: 100,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '用户编码',
+                            name: 'A_F_EnCode',
+                            width: 80,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '工艺代码',
+                            name: 'A_Record',
+                            width: 80,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '工序号',
+                            name: 'A_ProCode',
+                            width: 80,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '班次',
+                            name: 'A_ClassCode',
+                            width: 80,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '是否有效',
+                            name: 'A_Avail',
+                            width: 60,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                        {
+                            label: '备注',
+                            name: 'A_Remark',
+                            width: 160,
+                            align: 'left',
+                            editType: 'label'
+                        },
+                    ],
+                    isAutoHeight: true,
+                    isEidt: true,
+                    isMultiselect: true,
+                    footerrow: true,
+                    minheight: 400
+                });
+            } else {
+                $("#am_confirm").hide(); //隐藏确定按钮
+            }
+            // 确定
+            $('#am_confirm').on('click', function() {
+                var strEntity = $('body').GetFormData();
+                if (!$('body').Validform()) {
+                    return false;
+                }
+                var rows = $('#Mes_Arrange').jfGridGet('rowdatas');
+                for (var i = 0; i < rows.length; i++) {
+                    if (rows[i]["A_Date"] == strEntity.A_Date && rows[i]["A_F_EnCode"] == strEntity.A_F_EnCode && rows[i]["A_ClassCode"] == strEntity.A_ClassCode) {
+                        ayma.alert.error("同一个用户编码不能在同一班次出现");
+                        return false;
+                    }
+                }
+                if (!tmp.get(strEntity)) {
+                    tmp.set(strEntity, 1);
+                    rows.push(strEntity);
+                }
+                //数组过滤
+                var filterarray = $.grep(rows, function (item) {
+                    return item["A_OrderNo"] != undefined;
+                }); page.search(filterarray);
+            });
             //生产订单号校验
             //$('#A_OrderNo').on('blur', function () {
             //    var orderNo = $.trim($(this).val()); //生产订单号
@@ -144,16 +266,30 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     $('#A_DateTime').val(data.time);  //给时间框赋值
                 });
             }
+        },
+        search: function (data) {
+            data = data || {};
+            $('#Mes_Arrange').jfGridSet('refreshdata', { rowdatas: data });
         }
     };
     // 保存数据
     acceptClick = function (callBack) {
-        if (!$('body').Validform()) {
-            return false;
+        var postData;
+        if (!!keyValue) {
+            postData = {
+                strEntity: JSON.stringify($('body').GetFormData())
+            };
+        } else {
+            postData = {
+                strEntity: JSON.stringify($('#Mes_Arrange').jfGridGet('rowdatas'))
+            };
+            if (postData.strEntity == "[{}]") {
+                ayma.alert.error("请添加排班信息!");
+                return false;
+            }
         }
-        var postData = {
-            strEntity: JSON.stringify($('body').GetFormData())
-        };
+        console.log(JSON.stringify(postData.strEntity));
+        
         $.SaveForm(top.$.rootUrl + '/MesDev/Mes_Arrange/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
@@ -161,5 +297,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             }
         });
     };
+
     page.init();
 }

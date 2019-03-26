@@ -104,18 +104,33 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
-            Mes_ArrangeEntity entity = strEntity.ToObject<Mes_ArrangeEntity>();
-            string A_F_EnCode = entity.A_F_EnCode;
-            string A_ClassCode = entity.A_ClassCode;
-            DateTime A_Date = Convert.ToDateTime(entity.A_Date);
-            if (string.IsNullOrEmpty(keyValue))
+            if (!string.IsNullOrEmpty(keyValue))
             {
+                Mes_ArrangeEntity entity = strEntity.ToObject<Mes_ArrangeEntity>();
+                string A_F_EnCode = entity.A_F_EnCode;
+                string A_ClassCode = entity.A_ClassCode;
+                DateTime A_Date = Convert.ToDateTime(entity.A_Date);
                 if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
                 {
                     return Fail("同一个用户编码不能在同一班次出现!");
                 }
+                mes_ArrangeIBLL.SaveEntity(keyValue, entity);
             }
-            mes_ArrangeIBLL.SaveEntity(keyValue,entity);
+            else
+            {
+                var data = strEntity.ToList<Mes_ArrangeEntity>();
+                for (int i = 0; i < data.Count; i++)
+                {
+                    //string A_F_EnCode = data[i].A_F_EnCode;
+                    //string A_ClassCode = data[i].A_ClassCode;
+                    //DateTime A_Date = Convert.ToDateTime(data[i].A_Date);
+                    //if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+                    //{
+                    //    return Fail("同一个用户编码不能在同一班次出现!");
+                    //}
+                    mes_ArrangeIBLL.SaveEntity(keyValue, data[i]);
+                }
+            }
             return Success("保存成功！");
         }
         #endregion
