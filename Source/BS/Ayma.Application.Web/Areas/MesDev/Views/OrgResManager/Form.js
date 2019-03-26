@@ -190,7 +190,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.alert.error('请输入批次(组装前)');
                 return false;
             }
+            if (data[i].O_SecQty * data[i].O_SecPrice != data[i].O_Qty * data[i].O_Price) {
+                ayma.alert.error('组装前后的总价值要对等');
+                return false;
+            }
         }
+        //验证组装前后的总价是否相等
+        
+
         $.SaveForm(top.$.rootUrl + '/MesDev/OrgResManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
