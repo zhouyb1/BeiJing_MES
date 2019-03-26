@@ -145,6 +145,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
+            if (mes_OrgResDetailList.Any(c=>c.O_SecPrice*c.O_SecQty!=c.O_Qty*c.O_Price))
+            {
+                return Fail("组装前后的总价值要对等");
+            }
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();
