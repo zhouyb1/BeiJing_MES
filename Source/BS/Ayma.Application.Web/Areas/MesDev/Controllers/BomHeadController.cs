@@ -188,6 +188,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 if (entity.B_ParentID != "0")
                 {
+                    var tempEntity = bomHeadIBLL.GetBomRecordEntity(entity.B_ParentID);
+                    if (tempEntity.B_GoodsCode == entity.B_GoodsCode)
+                    {
+                        return Fail("上级和本级的物料不能相同！");
+                    }
                     var resCode = bomHeadIBLL.ExistCode(keyValue, entity.B_ParentID, entity.B_RecordCode, entity.B_FormulaCode, entity.B_GoodsCode);
                     if (!resCode)
                     {
@@ -211,7 +216,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
             }
             bomHeadIBLL.SaveBomRecordForm(keyValue, entity);
-            
+
             return Success("保存成功！");
         }
         #endregion
