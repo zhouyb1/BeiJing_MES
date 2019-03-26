@@ -121,13 +121,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var data = strEntity.ToList<Mes_ArrangeEntity>();
                 for (int i = 0; i < data.Count; i++)
                 {
-                    //string A_F_EnCode = data[i].A_F_EnCode;
-                    //string A_ClassCode = data[i].A_ClassCode;
-                    //DateTime A_Date = Convert.ToDateTime(data[i].A_Date);
-                    //if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
-                    //{
-                    //    return Fail("同一个用户编码不能在同一班次出现!");
-                    //}
+                    string A_F_EnCode = data[i].A_F_EnCode;
+                    string A_ClassCode = data[i].A_ClassCode;
+                    DateTime A_Date = Convert.ToDateTime(data[i].A_Date);
+                    if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+                    {
+                        return Fail("同一个用户编码不能在同一班次出现!");
+                    }
                     mes_ArrangeIBLL.SaveEntity(keyValue, data[i]);
                 }
             }
