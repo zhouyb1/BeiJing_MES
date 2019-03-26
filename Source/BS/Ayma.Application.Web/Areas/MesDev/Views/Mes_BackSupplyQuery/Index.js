@@ -64,13 +64,13 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            // 删除
-            $('#am_delete').on('click', function () {
+            //撤销单据
+            $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("B_BackSupplyNo");
                 if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_BackSupply_Delete', type: 3 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_BackSupply_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -91,6 +91,7 @@ var bootstrap = function ($, ayma) {
                                 key: value,
                                 code: 'BackSupplyStatus',
                                 callback: function (_data) {
+                                    console.log(value)
                                     if (value == 1) {
                                         callback("<span class='label label-default'>" + _data.text + "</span>");
                                     } else if (value == 2) {

@@ -18,11 +18,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
-            //仓库列表
-            var dfop1 = {
+            //绑定仓库
+            var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -31,8 +31,9 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetProjStockList',
                 // 访问数据接口参数
                 param: {}
-            }
-            $("#P_StockCode").select(dfop1).on('change', function () {
+            };
+            //绑定仓库
+            $('#P_StockName').select(dfop).on('change', function () {
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -40,13 +41,26 @@ var bootstrap = function ($, ayma) {
                     data: { code: code },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#P_StockName").val(entity.S_Name);
+                        $("#P_StockCode").val(entity.S_Code);
                     }
                 });
             });
+            $('#P_OrderNo').select({
+                type: 'default',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                // 访问数据接口参数
+                param: {}
+            });
             //添加商品
             $("#am_add").on("click", function () {
-                var stockCode = $('#P_StockCode').selectGet();
+                var stockCode = $('#P_StockCode').val();
                 if (stockCode == "") {
                     ayma.alert.error("请选择仓库");
                     return false;
@@ -72,35 +86,45 @@ var bootstrap = function ($, ayma) {
                     //    label: '生产订单号', name: 'P_OrderNo', width: 160, align: 'left',editType: 'input'
                     //},
                     {
-                        label: '物料编码', name: 'P_GoodsCode', width: 160, align: 'left', editType: 'input'
+                        label: '物料编码', name: 'P_GoodsCode', width: 130, align: 'left', editType: 'input'
                     },
                     {
-                        label: '物料名称', name: 'P_GoodsName', width: 160, align: 'left', editType: 'input'
+                        label: '物料名称', name: 'P_GoodsName', width: 130, align: 'left', editType: 'input'
                     },
                     {
-                        label: '单位', name: 'P_Unit', width: 160, align: 'left', editType: 'input'
+                        label: '单位', name: 'P_Unit', width: 100, align: 'left', editType: 'input'
                     },
                     {
-                        label: '数量', name: 'P_Qty', width: 160, align: 'left', editType: 'input',
+                        label: '数量', name: 'P_Qty', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
-                                if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
+                                //if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
+                                //    row.P_Qty = 0;
+                                //}
+                                if (row.P_Qty != undefined && !!row.P_Qty) {
+                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.P_Qty.toString().replace('.', ''))) {
+                                        ayma.alert.error("数量必须是非负数.");
+                                        row.P_Qty = 0;
+                                    }
+                                }
+                                if (row.P_Qty > row.I_Qty) {
+                                    ayma.alert.error("出库数量不能大于库存数量");
                                     row.P_Qty = 0;
                                 }
-
                             }
                         }
                     },
+                    { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
                     {
-                        label: '批次', name: 'P_Batch', width: 160, align: 'left', editType: 'input'
+                        label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'input'
                     },
                     {
-                        label: '备注', name: 'P_Remark', width: 160, align: 'left', editType: 'input'
+                        label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'input'
                     },
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 430,
+                minheight: 400,
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,

@@ -51,9 +51,9 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
-                    id: 'ProOutMake',
+                    id: 'ProOutMakeForm',
                     title: '新增成品出库单',
-                    url: top.$.rootUrl + '/MesDev/ProOutMake/Form?formId=ProOutMake',
+                    url: top.$.rootUrl + '/MesDev/ProOutMake/Form?formId=ProOutMakeForm',
                     width: 950,
                     height: 700,
                     maxmin: true,
@@ -67,9 +67,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'ProOutMake',
+                        id: 'ProOutMakeForm',
                         title: '编辑成品出库单',
-                        url: top.$.rootUrl + '/MesDev/ProOutMake/Form?keyValue=' + keyValue + '&formId=ProOutMake',
+                        url: top.$.rootUrl + '/MesDev/ProOutMake/Form?keyValue=' + keyValue + '&formId=ProOutMakeForm',
                         width: 950,
                         height: 700,
                         maxmin: true,

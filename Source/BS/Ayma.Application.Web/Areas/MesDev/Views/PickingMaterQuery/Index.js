@@ -65,13 +65,13 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            // 删除
-            $('#am_delete').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认删除该项！', function (res) {
+            //撤销单据
+            $("#am_cancel").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/PickingMaterQuery/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }

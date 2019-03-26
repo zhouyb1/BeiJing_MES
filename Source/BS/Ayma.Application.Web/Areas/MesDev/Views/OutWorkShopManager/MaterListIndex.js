@@ -70,9 +70,10 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['O_GoodsCode'] = newArray[i]['I_GoodsCode'];
                     newArray[i]['O_GoodsName'] = newArray[i]['I_GoodsName'];
                     newArray[i]['O_Unit'] = newArray[i]['I_Unit'];
+                    newArray[i]['I_Qty'] = newArray[i]['I_Qty'];
                     newArray[i]["O_Qty"] = quantity;
                     newArray[i]['O_Batch'] = newArray[i]["I_Batch"];
-                    //newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]["ID"] = newArray[i]['ID'];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -86,7 +87,6 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "订单时间", name: "I_OrderDate", width: 80, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 60, align: "left" }
@@ -110,9 +110,10 @@ var bootstrap = function ($, ayma) {
                         row['O_GoodsCode'] = row['I_GoodsCode'];
                         row['O_GoodsName'] = row['I_GoodsName'];
                         row['O_Unit'] = row['I_Unit'];
+                        row['I_Qty'] = row['I_Qty'];
                         row["O_Qty"] = quantity;
                         row['O_Batch'] =  row['I_Batch'];
-                        //row["ID"] = row['ID'];
+                        row["ID"] = row['ID'];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

@@ -90,9 +90,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         row.O_Qty = 0;
                                     }
                                 }
+                                if (row.O_Qty > row.I_Qty) {
+                                    ayma.alert.error("出库数量不能大于库存数量");
+                                    row.O_Qty = 0;
+                                }
                             }
                         }
                     },
+                    { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
                     { label: "批次", name: "O_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,
@@ -117,25 +122,25 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-            //订单校验
-            $('#O_OrderNo').on('blur', function () {
-                var orderNo = $.trim($(this).val()); //去除空格
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
-                    data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
-                    success: function(data) {
-                        var isOk = JSON.parse(data).data;
-                        if (!isOk) {
+            ////订单校验
+            //$('#O_OrderNo').on('blur', function () {
+            //    var orderNo = $.trim($(this).val()); //去除空格
+            //    $.ajax({
+            //        type: "get",
+            //        url: top.$.rootUrl + '/MesDev/Tools/IsOrderNo',
+            //        data: { tables: "Mes_ProductOrderHead", field: "P_OrderNo", orderNo: orderNo },
+            //        success: function(data) {
+            //            var isOk = JSON.parse(data).data;
+            //            if (!isOk) {
                          
-                            ayma.alert.error("订单不存在");
-                        } else {
-                            //$("#O_OrderNo").removeClass("am-field-error");
-                            //$("#isCode").remove();
-                        }
-                    }
-                });
-            });
+            //                ayma.alert.error("订单不存在");
+            //            } else {
+            //                //$("#O_OrderNo").removeClass("am-field-error");
+            //                //$("#isCode").remove();
+            //            }
+            //        }
+            //    });
+            //});
         },
         initData: function () {
             if (!!keyValue) {

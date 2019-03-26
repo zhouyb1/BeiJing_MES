@@ -62,6 +62,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
+            if (Request["keyValue"] == null)
+            {
+                ViewBag.OutNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());//自动获取主编码
+            }
              return View();
         }
         #endregion

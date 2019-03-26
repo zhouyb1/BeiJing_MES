@@ -77,11 +77,12 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]['P_GoodsCode'] = newArray[i]['G_Code'];
-                    newArray[i]['P_GoodsName'] = newArray[i]['G_Code'];
-                    newArray[i]['P_Unit'] = newArray[i]['G_Unit'];
+                    newArray[i]['P_GoodsCode'] = newArray[i]['I_GoodsCode'];
+                    newArray[i]['P_GoodsName'] = newArray[i]['I_GoodsName'];
+                    newArray[i]['P_Unit'] = newArray[i]['I_Unit'];
+                    newArray[i]['I_Qty'] = newArray[i]['I_Qty'];
                     newArray[i]["P_Qty"] = quantity;
-                    newArray[i]['P_Batch'] = batch;
+                    newArray[i]['P_Batch'] = newArray[i]["I_Batch"];
                     newArray[i]["ID"] = newArray[i]['ID'];
                     array.push(newArray[i]);
                 }
@@ -92,20 +93,19 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/OutWorkShopManager/GetMaterList?stockCode=' + stockCode,
                 headData: [
-                    { label: "物料编码", name: "ID", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "G_Code", width: 130, align: "left" },
-                    { label: "物料名称", name: "G_Name", width: 130, align: "left" },
-                    { label: "保质时间", name: "G_Period", width: 80, align: "left" },
-                    { label: "价格", name: "G_Price", width: 60, align: "left" },
-                    { label: "单位", name: "G_Unit", width: 60, align: "left" }
+                    { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
+                    { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
+                    { label: "单位", name: "I_Unit", width: 60, align: "left" },
+                    { label: "数量", name: "I_Qty", width: 60, align: "left" },
+                    { label: "批次", name: "I_Batch", width: 60, align: "left" }
                 ],
-                mainId: 'F_Id',
+                mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'G_Code',
+                sidx: 'I_GoodsCode',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
@@ -116,11 +116,12 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
-                        row['P_GoodsCode'] = row['G_Code'];
-                        row['P_GoodsName'] = row['G_Name'];
-                        row['P_Unit'] = row['G_Unit'];
+                        row['P_GoodsCode'] = row['I_GoodsCode'];
+                        row['P_GoodsName'] = row['I_GoodsName'];
+                        row['P_Unit'] = row['I_Unit'];
+                        row['I_Qty'] = row['I_Qty'];
                         row["P_Qty"] = quantity;
-                        row['P_Batch'] = batch;
+                        row['P_Batch'] = row['I_Batch'];
                         row["ID"] = row['ID'];
                         parentRefreshGirdData([], row);
                     }
@@ -136,7 +137,7 @@ var bootstrap = function ($, ayma) {
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
                                 console.log(rows[i])
-                                if (rows[i]['G_Code'] == rowslist[j]['P_GoodsCode']) {
+                                if (rows[i]['I_GoodsCode'] == rowslist[j]['P_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
