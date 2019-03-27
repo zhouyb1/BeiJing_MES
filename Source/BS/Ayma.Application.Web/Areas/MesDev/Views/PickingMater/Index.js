@@ -128,6 +128,48 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //打印
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '领料单打印',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport?keyValue=' + keyValue + "&report=CollacReport&data=Picking",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
+            // 预览打印
+            $('#am_printview').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
+                if (ayma.checkrow(keyValue)) {
+
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '领料单打印',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/PrintViewReport?keyValue=' + keyValue + "&report=CollacReport",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+
+
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

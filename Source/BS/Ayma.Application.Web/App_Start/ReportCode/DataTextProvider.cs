@@ -47,6 +47,36 @@ using MyDbReportData = DatabaseXmlReportData;
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
 
+        #region 实际业务
+        /// <summary>
+        /// 领料单
+        /// </summary>
+        /// <returns></returns>
+        public static string Picking(string doucno)
+        {
+            string sql = @"SELECT  
+                    t.P_Status ,
+                    t.C_CollarNo ,
+                    t.C_StockName ,
+                    t.C_StockToName ,
+                    t.P_OrderNo ,
+                    t.P_OrderDate ,
+                    t.C_CreateBy,
+                    d.C_Unit,
+                    d.C_Qty,
+                    d.C_GoodsCode,
+                    d.C_GoodsName
+            FROM    Mes_CollarHead t
+                    LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
+            WHERE   t.P_Status = 2 AND t.C_CollarNo ='{0}'
+            ORDER BY M_UploadDate DESC";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Picking"));
+
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
+
+        #endregion
 
         #region 根据 HTTP 请求中的参数生成报表数据，主要是为例子报表自动分配合适的数据生成函数
 
@@ -131,9 +161,14 @@ using MyDbReportData = DatabaseXmlReportData;
             #region 业务
            
             SpecialDataFunMap.Add("Test", Test);
-
+            SpecialDataFunMap.Add("Picking", Picking);
 
             #endregion
+        }
+
+        private static string Picking(HttpRequest Request)
+        {
+            return Picking(Request.QueryString["doucno"]);
         }
 
         #region 业务

@@ -2229,6 +2229,8 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\PrintViewReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2396,6 +2398,7 @@
     <Content Include="Areas\MesDev\Views\Convert\Index.js" />
     <Content Include="Areas\MesDev\Views\Convert\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Convert\Form.js" />
+    <Content Include="Report\grf\CollacReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
