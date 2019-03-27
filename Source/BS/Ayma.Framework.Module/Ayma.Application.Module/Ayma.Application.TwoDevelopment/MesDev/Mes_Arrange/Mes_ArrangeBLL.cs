@@ -1,6 +1,7 @@
 ﻿using Ayma.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -39,6 +40,50 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取页面列表数据
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetDataList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return mes_ArrangeService.GetDataList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取页面子列表数据
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSubDataList(string datetime, string time, string orderno, string workshopcode, string classcode)
+        {
+            try
+            {
+                return mes_ArrangeService.GetSubDataList(datetime, time, orderno, workshopcode, classcode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取Mes_Arrange表实体数据
         /// </summary>

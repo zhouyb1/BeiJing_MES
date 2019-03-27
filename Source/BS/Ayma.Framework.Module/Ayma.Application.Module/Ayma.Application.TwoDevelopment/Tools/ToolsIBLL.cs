@@ -173,7 +173,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="A_ClassCode">班次</param>
         /// <param name="A_Date">日期</param>
         /// <returns></returns>
-        bool IsExistRecord(string A_F_EnCode, string A_ClassCode, DateTime A_Date);
+        bool IsExistRecord(string keyValue,string A_F_EnCode, string A_ClassCode, DateTime A_Date);
         /// <summary>
         /// 编码重复验证
         /// </summary>

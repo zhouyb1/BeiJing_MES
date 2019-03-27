@@ -1,5 +1,6 @@
 ﻿using Ayma.Util;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -18,6 +19,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
         IEnumerable<Mes_ArrangeEntity> GetPageList(Pagination pagination, string queryJson);
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        DataTable GetDataList(Pagination pagination, string queryJson);
+        /// <summary>
+        /// 获取页面显示子列表数据
+        /// </summary>
+        /// <param name="datetime"></param>
+        /// <param name="time"></param>
+        /// <param name="orderno"></param>
+        /// <param name="workshopcode"></param>
+        /// <param name="classcode"></param>
+        /// <returns></returns>
+        DataTable GetSubDataList(string datetime, string time, string orderno, string workshopcode, string classcode);
         /// <summary>
         /// 获取Mes_Arrange表实体数据
         /// </summary>

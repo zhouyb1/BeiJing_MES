@@ -620,11 +620,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="A_ClassCode">班次</param>
         /// <param name="A_Date">日期</param>
         /// <returns></returns>
-        public bool IsExistRecord(string A_F_EnCode, string A_ClassCode, DateTime A_Date)
+        public bool IsExistRecord(string keyValue,string A_F_EnCode, string A_ClassCode, DateTime A_Date)
         {
             try
             {
-                return toolsService.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date);
+                return toolsService.IsExistRecord(keyValue,A_F_EnCode, A_ClassCode, A_Date);
             }
             catch (Exception ex)
             {

@@ -669,13 +669,18 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="A_ClassCode">班次</param>
         /// <param name="A_Date">日期</param>
         /// <returns></returns>
-        public bool IsExistRecord(string A_F_EnCode, string A_ClassCode, DateTime A_Date)
+        public bool IsExistRecord(string keyValue,string A_F_EnCode, string A_ClassCode, DateTime A_Date)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM dbo.Mes_Arrange  WHERE A_F_EnCode=@A_F_EnCode AND A_ClassCode=@A_ClassCode AND A_Date BETWEEN @StartDate AND @EndDate");
                 var dp = new DynamicParameters(new { });
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    strSql.Append(" AND ID !=@keyValue");
+                    dp.Add("keyValue", keyValue, DbType.String);
+                }
                 dp.Add("A_F_EnCode", A_F_EnCode, DbType.String);
                 dp.Add("A_ClassCode", A_ClassCode, DbType.String);
                 dp.Add("StartDate", A_Date.ToString("yyyy-MM-dd") + " 00:00:00", DbType.String);

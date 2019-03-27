@@ -62,6 +62,37 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public ActionResult GetDataList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            DataTable data = mes_ArrangeIBLL.GetDataList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取页面子列表数据
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetSubDataList(DateTime date, string time, string orderno, string workshopcode, string classcode)
+        {
+            string datetime = date.ToString("yyyy-MM-dd");
+            DataTable data = mes_ArrangeIBLL.GetSubDataList(datetime, time, orderno, workshopcode, classcode);
+            return Success(data);
+        }
+
         /// <summary>
         /// 获取表单数据
         /// </summary>
@@ -110,7 +141,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 string A_F_EnCode = entity.A_F_EnCode;
                 string A_ClassCode = entity.A_ClassCode;
                 DateTime A_Date = Convert.ToDateTime(entity.A_Date);
-                if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+                if (toolsIBLL.IsExistRecord(keyValue,A_F_EnCode, A_ClassCode, A_Date))
                 {
                     return Fail("同一个用户编码不能在同一班次出现!");
                 }
@@ -124,7 +155,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     string A_F_EnCode = data[i].A_F_EnCode;
                     string A_ClassCode = data[i].A_ClassCode;
                     DateTime A_Date = Convert.ToDateTime(data[i].A_Date);
-                    if (toolsIBLL.IsExistRecord(A_F_EnCode, A_ClassCode, A_Date))
+                    if (toolsIBLL.IsExistRecord(keyValue,A_F_EnCode, A_ClassCode, A_Date))
                     {
                         return Fail("同一个用户编码不能在同一班次出现!");
                     }

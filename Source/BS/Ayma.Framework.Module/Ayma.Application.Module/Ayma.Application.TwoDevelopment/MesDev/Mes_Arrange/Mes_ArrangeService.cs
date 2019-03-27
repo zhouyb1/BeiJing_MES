@@ -81,6 +81,91 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取页面列表数据
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public DataTable GetDataList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.A_Date,
+                t.A_DateTime,
+                t.A_OrderNo,
+                t.A_WorkShopCode,
+                t.A_ClassCode
+                ");
+                strSql.Append("  FROM Mes_Arrange t WHERE 1=1");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["A_OrderNo"].IsEmpty())
+                {
+                    dp.Add("A_OrderNo", "%" + queryParam["A_OrderNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.A_OrderNo Like @A_OrderNo ");
+                }
+                strSql.Append("  GROUP BY t.A_Date,t.A_DateTime ,t.A_OrderNo,t.A_WorkShopCode, t.A_ClassCode");
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取页面子列表数据
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSubDataList(string datetime, string time, string orderno, string workshopcode,
+            string classcode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.A_F_Encode,
+                t.A_Record,
+                t.A_ProCode,
+                t.A_Avail,
+                t.A_Remark
+                ");
+                strSql.Append(
+                    " FROM Mes_Arrange t WHERE 1=1 AND t.A_Date=@A_Date AND t.A_DateTime=@A_DateTime AND t.A_OrderNo=@A_OrderNo");
+                strSql.Append(" AND t.A_WorkShopCode=@A_WorkShopCode AND t.A_ClassCode=@A_ClassCode");
+                var dp = new DynamicParameters(new {});
+                dp.Add("A_Date", datetime, DbType.String);
+                dp.Add("A_DateTime", time, DbType.String);
+                dp.Add("A_OrderNo", orderno, DbType.String);
+                dp.Add("A_WorkShopCode", workshopcode, DbType.String);
+                dp.Add("A_ClassCode", classcode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取Mes_Arrange表实体数据
