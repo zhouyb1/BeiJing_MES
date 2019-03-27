@@ -67,8 +67,8 @@ var bootstrap = function ($, ayma) {
                     id: 'MaterForm',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?formId=MaterForm',
-                    width: 800,
-                    height: 600,
+                    width: 900,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -83,8 +83,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?keyValue=' + keyValue,
-                        width: 800,
-                        height: 600,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);

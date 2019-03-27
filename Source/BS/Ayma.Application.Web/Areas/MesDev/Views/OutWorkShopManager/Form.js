@@ -101,8 +101,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 400,
-                //isEidt: true,
+                minheight: 360,
+                isEidt: true,
                 isMultiselect: true,
                 height: 300,
                 inputCount: 2
