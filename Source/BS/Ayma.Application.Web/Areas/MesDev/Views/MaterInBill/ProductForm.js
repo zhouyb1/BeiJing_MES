@@ -18,19 +18,33 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            //绑定仓库
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProjStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
                 // 访问数据接口参数
                 param: {}
-            }
+            };
+            //绑定仓库
+            $('#M_StockName').select(dfop).on('change', function () {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#M_StockCode").val(entity.S_Code);
+                    }
+                });
+            });
             $('#M_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -43,18 +57,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
                 // 访问数据接口参数
                 param: {}
-            });
-            $("#M_StockCode").select(dfop).on('change', function () {
-                var code = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: code },
-                    success: function (data) {
-                        var entity = JSON.parse(data).data;
-                        $("#M_StockName").val(entity.S_Name);
-                    }
-                });
             });
             //单据状态
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });

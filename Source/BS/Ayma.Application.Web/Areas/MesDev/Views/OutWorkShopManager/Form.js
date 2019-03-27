@@ -47,7 +47,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-            dfop= {
+            $('#O_WorkShop').select({
                 type: 'default',
                 value: 'W_Code',
                 text: 'W_Name',
@@ -59,8 +59,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
                 param: {}
-            }
-            $('#O_WorkShop').select(dfop);
+            });
             $('#O_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
