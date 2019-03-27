@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using WeifenLuo.WinFormsUI.Docking;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Business.System;
 
 namespace DesktopApp
 {
@@ -52,6 +55,7 @@ namespace DesktopApp
 
         private void frmUserList_Load(object sender, EventArgs e)
         {
+            dataGridView.AutoGenerateColumns = false;
             loadData();
         }
 
@@ -86,7 +90,6 @@ namespace DesktopApp
         {
             if (dataGridView.SelectedRows.Count < 1)
                 return;
-
             string U_Code = dataGridView.SelectedRows[0].Cells["F_Account"].Value.ToString();
             frmUserEdit frmUserEdit = new frmUserEdit(this, frmMain.User, U_Code, 2);
             frmUserEdit.ShowDialog();
@@ -156,6 +159,16 @@ namespace DesktopApp
         {
             this.Close();
             this.Dispose();
+        }
+
+        private void btnFaceRecognition_Click(object sender, EventArgs e)
+        {
+            if (dataGridView.SelectedRows.Count < 1)
+                return;
+            string F_Account = dataGridView.SelectedRows[0].Cells["F_Account"].Value.ToString();
+
+            frmFaceRecognitionRegistration frmFaceRecognitionRegistration = new frmFaceRecognitionRegistration( F_Account,frmMain.User);
+            frmFaceRecognitionRegistration.ShowDialog();
         }
 
 

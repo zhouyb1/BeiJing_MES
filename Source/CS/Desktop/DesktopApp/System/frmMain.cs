@@ -57,7 +57,7 @@ namespace DesktopApp
             try
             {
                 SysModuleBLL modulebll = new SysModuleBLL();
-                Modules = modulebll.LoadRoleModule(User.R_Code);
+                Modules = modulebll.LoadRoleModule(User.F_Account);
 
                 cmsBaseManager.Visible = false;
                 cmsCompany.Visible = false;
@@ -86,6 +86,8 @@ namespace DesktopApp
                 cmsOtherManager.Visible = false;
                 cmsSkin.Visible = false;
                 cmsAbout.Visible = false;
+
+                //cmsDictionary.Visible = true;
 
                 foreach (var row in Modules)
                 {
@@ -343,7 +345,7 @@ namespace DesktopApp
             frmDictionary.Show(this.panMain);
         }
 
-        private void cmsRole_Click(object sender, EventArgs e)
+        public void cmsRole_Click(object sender, EventArgs e)
         {
             frmRoleList frmRole = new frmRoleList(this);
             frmRole.WindowState = FormWindowState.Maximized;
@@ -377,7 +379,7 @@ namespace DesktopApp
             frmDepartment.Show(this.panMain);
         }
 
-        private void cmsUser_Click(object sender, EventArgs e)
+        public void cmsUser_Click(object sender, EventArgs e)
         {
             frmUserList frmUser = new frmUserList(this);
             frmUser.WindowState = FormWindowState.Maximized;
@@ -454,6 +456,192 @@ namespace DesktopApp
         private void timer_Tick(object sender, EventArgs e)
         {
             lbDateTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        private void 原物料入库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmStorageList frmStorage = new frmStorageList(this);
+            frmStorage.TopLevel = false;
+            frmStorage.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmStorage.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmStorage.Show(this.panMain);
+        }
+
+        private void 肉食处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMeatProcessList frmMeatProcess = new frmMeatProcessList(this,User);
+            frmMeatProcess.TopLevel = false;
+            frmMeatProcess.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmMeatProcess.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmMeatProcess.Show(this.panMain);
+        }
+
+        private void 菜食处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmVegetableProcessList frmVegetableProcess = new frmVegetableProcessList(this,User);
+            frmVegetableProcess.TopLevel = false;
+            frmVegetableProcess.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmVegetableProcess.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmVegetableProcess.Show(this.panMain);
+        }
+
+        public void 设备管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDevice frmDevice = new frmDevice(this);
+            frmDevice.TopLevel = false;
+            frmDevice.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmDevice.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmDevice.Show(this.panMain);
+        }
+
+        private void 记录查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRecordQuery frmRecordQuery = new frmRecordQuery();
+            frmRecordQuery.TopLevel = false;
+            frmRecordQuery.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmRecordQuery.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmRecordQuery.Show(this.panMain);
+        }
+
+        private void 用户管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRoleList frmRole = new frmRoleList(this);
+            frmRole.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmRole.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmRole.Show(this.panMain);
+        }
+
+        private void 考勤管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            frmAttendanceManagement frmAttendanceManagement = new frmAttendanceManagement();
+            frmAttendanceManagement.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmAttendanceManagement.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmAttendanceManagement.Show(this.panMain);
+        }
+
+        private void 系统配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSystemConfiguration frmSystemConfiguration = new frmSystemConfiguration();
+            frmSystemConfiguration.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmSystemConfiguration.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmSystemConfiguration.Show(this.panMain);
+        }
+
+        private void 人脸ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 人员管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserList frmUser = new frmUserList(this);
+            frmUser.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmUser.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmUser.Show(this.panMain);
+        }
+
+        private void 设备配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 照片管理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmImageQuery frmImageQuery = new frmImageQuery(this, User);
+            frmImageQuery.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmImageQuery.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmImageQuery.Show(this.panMain);
         }
 
 

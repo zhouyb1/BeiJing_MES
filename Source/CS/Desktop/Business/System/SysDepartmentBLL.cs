@@ -55,6 +55,27 @@ FROM [Sys_Department]
             }
         }
 
+        public List<SysDepartment> getDepartment()
+        {
+            try
+            {
+                string sql = "";
+                    sql = @"SELECT 
+    [D_Name]
+FROM [Sys_Department]";
+
+                SqlHelper db = new SqlHelper();
+                var rows = db.ExecuteObjects<SysDepartment>(sql);
+
+                return rows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public SysDepartment getDetail(string key)
         {
             try

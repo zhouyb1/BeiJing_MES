@@ -39,10 +39,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\AMBaseAnnexesFileBLL.cs" />
+    <Compile Include="System\AMBaseDepartmentBLL.cs" />
+    <Compile Include="System\AMBaseUserBLL.cs" />
     <Compile Include="System\AreaBLL.cs" />
     <Compile Include="System\EquipmentBoxBLL.cs" />
     <Compile Include="System\InspectBLL.cs" />
+    <Compile Include="System\MesBasketBLL.cs" />
+    <Compile Include="System\MesBomBLL.cs" />
+    <Compile Include="System\MesCollarDetailBLL.cs" />
+    <Compile Include="System\MesCollarHeadBLL.cs" />
+    <Compile Include="System\MesDeviceBLL.cs" />
+    <Compile Include="System\MesDoorBLL.cs" />
+    <Compile Include="System\MesGoodsBLL.cs" />
+    <Compile Include="System\MesInventoryBLL.cs" />
+    <Compile Include="System\MesInventoryLSBLL.cs" />
+    <Compile Include="System\MesInventoryTrendBLL.cs" />
+    <Compile Include="System\MesIPToRFIDBLL.cs" />
+    <Compile Include="System\MesMaterBLL.cs" />
+    <Compile Include="System\MesMaterInDetailBLL.cs" />
+    <Compile Include="System\MesMaterInHeadBLL.cs" />
+    <Compile Include="System\MesMoveRecordBLL.cs" />
+    <Compile Include="System\MesOrgResDetailBLL.cs" />
+    <Compile Include="System\MesOrgResHeadBLL.cs" />
+    <Compile Include="System\MesProductGoodsBLL.cs" />
+    <Compile Include="System\MesProductOrderDetailBLL.cs" />
+    <Compile Include="System\MesProductOrderHeadBLL.cs" />
+    <Compile Include="System\MesProOutDetailBLL.cs" />
+    <Compile Include="System\MesProOutHeadBLL.cs" />
+    <Compile Include="System\MesPurchaseDetailBLL.cs" />
+    <Compile Include="System\MesPurchaseHeadBLL.cs" />
+    <Compile Include="System\MesRequistDetailBLL.cs" />
+    <Compile Include="System\MesRequistHeadBLL.cs" />
+    <Compile Include="System\MesStockBLL.cs" />
+    <Compile Include="System\MesSupplyBLL.cs" />
+    <Compile Include="System\MesWeightRecordBLL.cs" />
     <Compile Include="System\RWDev.cs" />
     <Compile Include="System\SysCompanyBLL.cs" />
     <Compile Include="System\SysDepartmentBLL.cs" />
@@ -69,6 +104,32 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="bin\Debug\Business.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\AutoMapper.dll" />
+    <Content Include="bin\Debug\AutoMapper.xml" />
+    <Content Include="bin\Debug\Business.dll" />
+    <Content Include="bin\Debug\Business.pdb" />
+    <Content Include="bin\Debug\DataAccess.dll" />
+    <Content Include="bin\Debug\DataAccess.pdb" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\log4net.xml" />
+    <Content Include="bin\Debug\Model.dll" />
+    <Content Include="bin\Debug\Model.pdb" />
+    <Content Include="bin\Debug\MySql.Data.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\Debug\Newtonsoft.Json.xml" />
+    <Content Include="bin\Debug\NPOI.dll" />
+    <Content Include="bin\Debug\NPOI.xml" />
+    <Content Include="bin\Debug\Oracle.ManagedDataAccess.dll" />
+    <Content Include="bin\Debug\System.Data.SQLite.dll" />
+    <Content Include="bin\Debug\Tools.dll" />
+    <Content Include="bin\Debug\Tools.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

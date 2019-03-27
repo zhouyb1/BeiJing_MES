@@ -9,25 +9,35 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Business;
 using Model;
+using Business.System;
+using System.IO;
+using System.Collections;
+using System.Reflection;
+using Microsoft.VisualBasic.Devices;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace DesktopApp
 {
     public partial class frmUserEdit : Form
     {
-        private int OperationType = 1;//1新增、2修改、3明细
-        private string PrimaryKey = "";
-        private SysUser User;
+        private int OperationType = 2;//1新增、2修改、3明细
+        private string PrimaryKey = "";//账户
+        private SysUser SysUser;
         private frmUserList frmParent;
         private string department = "";
         private string role = "";
-        
-        public frmUserEdit(frmUserList _frmUserList, SysUser _User, string _PrimaryKey, int _OperationType)
+        private string image = "";//照片名
+        private string imagefile = "";//照片路径
+        private string fileInfoLength = "";//文件大小
+
+        public frmUserEdit(frmUserList _frmUserList, SysUser _SysUser, string _PrimaryKey, int _OperationType)
         {
             InitializeComponent();
 
             PrimaryKey = _PrimaryKey;
             OperationType = _OperationType;
-            User = _User;
+            SysUser = _SysUser;
             frmParent = _frmUserList;
 
             if (OperationType == 3)
@@ -39,37 +49,45 @@ namespace DesktopApp
 
             if (OperationType == 2)
             {
+                loadDroplistData();
                 getDetail();
 
-                this.F_ModifyUserName.Text = User.F_Account;
+                this.F_ModifyUserName.Text = SysUser.F_Account;
                 this.F_Account.ReadOnly = true;
             }
 
             if (OperationType == 1)
             {
-                F_CreateUserName.Text = User.F_Account;
+                F_CreateUserName.Text = SysUser.F_Account;
             }
 
-            loadDroplistData();
+            //loadDroplistData();
         }
 
         private void loadDroplistData()
         {
             try
             {
-                SysDepartmentBLL departmentbll = new SysDepartmentBLL();
-                var rows = departmentbll.loadData("");
+                //SysDepartmentBLL departmentbll = new SysDepartmentBLL();
+                //var rowss = departmentbll.loadData("");
+                //D_Code.DataSource = rows;
+                //D_Code.ValueMember = "D_Code";
+                //D_Code.DisplayMember = "D_Name";
+
+                AMBaseDepartmentBLL AMBaseDepartmentBLL = new AMBaseDepartmentBLL();
+                List<AMBaseDepartmentEntity> rows = AMBaseDepartmentBLL.GetList_D_Name();
                 D_Code.DataSource = rows;
-                D_Code.ValueMember = "D_Code";
-                D_Code.DisplayMember = "D_Name";
-                if (string.IsNullOrEmpty(department))
-                {
-                    D_Code.SelectedIndex = 0;
-                }
-                else
-                {
-                    D_Code.SelectedValue = department;
-                }
+                D_Code.DisplayMember = "F_FullName";
+               // D_Code.ValueMember = "D_Code";
+
+                //if (string.IsNullOrEmpty(department))
+                //{
+                //    D_Code.SelectedIndex = 0;
+                //}
+                //else
+                //{
+                //    D_Code.SelectedValue = department;
+                //}
 
 
                 SysRoleBLL rolebll = new SysRoleBLL();
@@ -77,46 +95,112 @@ namespace DesktopApp
                 R_Code.DataSource = datas;
                 R_Code.ValueMember = "R_Code";
                 R_Code.DisplayMember = "R_Name";
-                if (string.IsNullOrEmpty(role))
-                {
-                    R_Code.SelectedIndex = 0;
-                }
-                else
-                {
-                    R_Code.SelectedValue = role;
-                }
+                //if (string.IsNullOrEmpty(role))
+                //{
+                //    R_Code.SelectedIndex = 0;
+                //}
+                //else
+                //{
+                //    R_Code.SelectedValue = role;
+                //}
             }
             catch (Exception ex)
             {
                 untCommon.ErrorMsg("用户管理加载数据异常：" + ex.Message);
             }
         }
-
+        /// <summary>
+        /// 初始化页面数据
+        /// </summary>
         private void getDetail()
         {
             try
             {
                 SysUserBLL userbll = new SysUserBLL();
                 SysUser user = userbll.getDetail(PrimaryKey);
+                AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
+                AMBaseAnnexesFileEntity AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture1);
 
-                F_Account.Text=user.F_Account;
-                F_RealName.Text=user.F_RealName;
-                F_Password.Text = "******";//user.F_Password ;
-                F_Gender.SelectedItem=user.F_Gender==1?"男":"女";
+
                 department = user.D_Code;
                 role = user.R_Code;
+                F_Account.Text = user.F_Account;
+                F_RealName.Text = user.F_RealName;
+                F_Password.Text = "******";//user.F_Password ;
+                F_Gender.SelectedItem = user.F_Gender == 1 ? "男" : "女";
+                F_Kind.Text = "正式工";
+                cmbImage.Text = "照片1";
 
-                F_Mobile.Text=user.F_Mobile;
-                F_Email.Text=user.F_Email;
-                F_OICQ.Text=user.F_OICQ;
-                F_WeChat.Text=user.F_WeChat;
+                D_Code.Text = department;
+                R_Code.Text = role;
 
-                U_Address.Text=user.U_Address;
-                F_Description.Text=user.F_Description;
-                F_EnabledMark.Checked=user.F_EnabledMark;
+                F_Mobile.Text = user.F_Mobile;
+                F_Email.Text = user.F_Email;
+                F_OICQ.Text = user.F_OICQ;
+                F_WeChat.Text = user.F_WeChat;
+
+                U_Address.Text = user.U_Address;
+                F_Description.Text = user.F_Description;
+                F_EnabledMark.Checked = user.F_EnabledMark;
 
                 F_CreateUserName.Text = user.F_CreateUserName;
                 F_ModifyUserName.Text = user.F_ModifyUserName;
+
+                switch (user.F_Kind)
+                {
+                    case 1:
+                        F_Kind.Text = "正式工";
+                        break;
+                    case 2:
+                        F_Kind.Text = "临时工";
+                        break;
+                    case 3:
+                        F_Kind.Text = "劳务工";
+                        break;
+                }
+                if (AMBaseAnnexesFileEntity !=null && !string.IsNullOrEmpty(AMBaseAnnexesFileEntity.F_FilePath))
+                {
+                    txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                }
+                //switch (cmbImage.Text)
+                //{
+                //    case "照片1":
+                //        txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                //        break;
+                //    case "照片2":
+                //        txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                //        break;
+                //    case "照片3":
+                //        txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                //        break;
+                //    case "照片4":
+                //        txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                //        break;
+                //    case "照片5":
+                //        txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
+                //        break;
+                //}
+
+                F_RFIDCode.Text = user.F_RFIDCode;
+                //user.F_Indate = F_Indate.Text;
+                //user.F_Outdate = F_Outdate.Text;
+                F_Cert.Text = user.F_Cert;
+                F_Nation.Text = user.F_Nation;
+                F_Record.Text = user.F_Record;
+                F_Origin.Text = user.F_Origin;
+
+                //照片显示
+                //AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture1);
+
+                //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + AMBaseAnnexesFileEntity.F_FilePath;
+                //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                //Byte[] mybyte = new byte[fs.Length];
+                //fs.Read(mybyte, 0, mybyte.Length);
+                //fs.Close();
+
+                //MemoryStream ms = new MemoryStream(mybyte);
+                //Bitmap myimge = new Bitmap(ms);
+                //pictureBox1.Image = myimge;
 
                 if (user.F_CreateDate.HasValue)
                     F_CreateDate.Value = user.F_CreateDate.Value;
@@ -130,7 +214,6 @@ namespace DesktopApp
                 else
                 {
                     F_ModifyDate.Value = DateTime.Now;
-                    ;
                 }
             }
             catch (Exception ex)
@@ -153,7 +236,7 @@ namespace DesktopApp
                     user.F_Account = F_Account.Text;
                     user.F_RealName = F_RealName.Text;
                     user.F_Password = F_Password.Text;
-                    user.F_Gender = F_Gender.Text=="男"?1:0;
+                    user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
                     user.R_Code = R_Code.SelectedValue.ToString();
@@ -168,8 +251,29 @@ namespace DesktopApp
 
                     user.F_CreateUserName = F_CreateUserName.Text;
                     user.F_CreateDate = F_CreateDate.Value;
-                    user.F_ModifyUserName = null;
-                    user.F_ModifyDate = null;
+                    user.F_ModifyUserName = SysUser.F_Account.ToString();
+                    user.F_ModifyDate = DateTime.Now;
+                    switch (F_Kind.Text)
+                    {
+                        case "正式工":
+                            user.F_Kind = 1;
+                            break;
+                        case "临时工":
+                            user.F_Kind = 2;
+                            break;
+                        case "劳务工":
+                            user.F_Kind = 3;
+                            break;
+                    }
+
+                    user.F_RFIDCode = F_RFIDCode.Text;
+                    //user.F_Indate = F_Indate.Text;
+                    //user.F_Outdate = F_Outdate.Text;
+                    user.F_Cert = F_Cert.Text;
+                    user.F_Nation = F_Nation.Text;
+                    user.F_Record = F_Record.Text;
+                    user.F_Origin = label99.Text;
+                    //user.F_Picture1 = F_RFIDCode.Text;
 
                     SysUserBLL userbll = new SysUserBLL();
                     if (userbll.Add(user) > 0)
@@ -200,14 +304,18 @@ namespace DesktopApp
                 if (checkInput())
                 {
                     SysUser user = new SysUser();
+                    AMBaseDepartmentBLL AMBaseDepartmentBLL = new AMBaseDepartmentBLL();
+                    var rows = AMBaseDepartmentBLL.GetList_F_ID(D_Code.Text);
 
                     user.F_Account = F_Account.Text;
                     user.F_RealName = F_RealName.Text;
                     //user.F_Password = U_Pwd.Text;
-                    user.F_Gender = F_Gender.Text=="男"?1:0;
-                    user.D_Code = D_Code.SelectedValue.ToString();
+                    user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
+                    //user.D_Code = D_Code.SelectedValue.ToString();
+                    user.D_Code = D_Code.Text;
+                    user.F_DepartmentId = rows[0].F_DepartmentId;
 
-                    user.R_Code = R_Code.SelectedValue.ToString();
+                    user.R_Code = R_Code.Text;
                     user.F_Mobile = F_Mobile.Text;
                     user.F_Email = F_Email.Text;
                     user.F_OICQ = F_OICQ.Text;
@@ -220,14 +328,36 @@ namespace DesktopApp
                     user.F_CreateUserName = F_CreateUserName.Text;
                     user.F_CreateDate = F_CreateDate.Value;
 
-                    user.F_ModifyUserName = F_ModifyUserName.Text;
-                    user.F_ModifyDate = F_ModifyDate.Value;
+                    user.F_ModifyUserName = SysUser.F_RealName.ToString();
+                    user.F_ModifyDate = DateTime.Now;
+                    switch (F_Kind.Text)
+                    {
+                        case "正式工":
+                            user.F_Kind = 1;
+                            break;
+                        case "临时工":
+                            user.F_Kind = 2;
+                            break;
+                        case "劳务工":
+                            user.F_Kind = 3;
+                            break;
+                    }
+
+                    user.F_RFIDCode = F_RFIDCode.Text;
+                    //user.F_Indate = F_Indate.Text;
+                    //user.F_Outdate = F_Outdate.Text;
+                    user.F_Cert = F_Cert.Text;
+                    user.F_Nation = F_Nation.Text;
+                    user.F_Record = F_Record.Text;
+                    user.F_Origin = F_Origin.Text;
+                    //user.F_Picture1 = F_RFIDCode.Text;
 
                     SysUserBLL userbll = new SysUserBLL();
                     if (userbll.Edit(user) > 0)
                     {
                         untCommon.InfoMsg("修改成功！");
                         frmParent.loadData();
+                        this.Close();
                     }
                     else
                     {
@@ -237,8 +367,8 @@ namespace DesktopApp
             }
             catch (Exception ex)
             {
-                
-                untCommon.ErrorMsg("角色管理更新数据异常："+ex.Message);
+
+                untCommon.ErrorMsg("角色管理更新数据异常：" + ex.Message);
             }
         }
 
@@ -306,5 +436,253 @@ namespace DesktopApp
             this.Close();
         }
 
+        private void frmUserEdit_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnUploadImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (file())
+                {
+                    string ID = Guid.NewGuid().ToString("N");//照片名称
+                    SysUser user = new SysUser();
+                    SysUserBLL SysUserBLL = new SysUserBLL();
+                    AMBaseAnnexesFileEntity AMBaseAnnexesFileEntity = new AMBaseAnnexesFileEntity();
+                    AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
+                    AMBaseAnnexesFileEntity.F_Id = ID;
+                    AMBaseAnnexesFileEntity.F_FolderId = Guid.NewGuid().ToString();
+                    AMBaseAnnexesFileEntity.F_FileName = Path.GetFileName(imagefile);//获取文件名和扩展名
+                    AMBaseAnnexesFileEntity.F_FilePath = "D:/fileAnnexes/shop_erp/System/" + DateTime.Now.ToString("yyyyMMdd") + "/" + AMBaseAnnexesFileEntity.F_Id;
+                    AMBaseAnnexesFileEntity.F_FileSize = fileInfoLength;
+                    AMBaseAnnexesFileEntity.F_FileExtensions = Path.GetExtension(imagefile);//获取文件扩展名
+                    AMBaseAnnexesFileEntity.F_FileType = imagefile.Substring(imagefile.LastIndexOf(".") + 1);// Path.GetExtension(imagefile).Substring(0, 1);
+                    //AMBaseAnnexesFileEntity.F_DownloadCount = "";
+                    AMBaseAnnexesFileEntity.F_CreateDate = DateTime.Now;
+                    AMBaseAnnexesFileEntity.F_CreateUserId = SysUser.F_Account.ToString();
+                    AMBaseAnnexesFileEntity.F_CreateUserName = SysUser.F_RealName.ToString();
+
+                    user.F_Account = PrimaryKey;
+                    switch (cmbImage.Text)
+                    {
+                        case "照片1":
+                            user.F_Picture1 = AMBaseAnnexesFileEntity.F_Id;
+                            break;
+                        case "照片2":
+                            user.F_Picture2 = AMBaseAnnexesFileEntity.F_Id;
+                            break;
+                        case "照片3":
+                            user.F_Picture3 = AMBaseAnnexesFileEntity.F_Id;
+                            break;
+                        case "照片4":
+                            user.F_Picture4 = AMBaseAnnexesFileEntity.F_Id;
+                            break;
+                        case "照片5":
+                            user.F_Picture5 = AMBaseAnnexesFileEntity.F_Id;
+                            break;
+                    }
+
+                    //Computer MyComputer = new Computer();
+                    //imagefile = System.AppDomain.CurrentDomain.BaseDirectory;
+                    //MyComputer.FileSystem.RenameFile(imagefile, image);//imagefile是所要重命名的文件的全路径，image是目标文件名
+                    //image = Path.GetFileNameWithoutExtension(imagefile);// 没有扩展名的文件名
+                    //FaceRecognition.Get_zjdz(imagefile);
+                    string str = FaceRecognition.ImageToBase64(imagefile);
+
+                    if (AMBaseAnnexesFileBLL.SaveEntity("", AMBaseAnnexesFileEntity) > 0)
+                    {
+                        if (SysUserBLL.Edit(user) > 0)
+                        {
+                            MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text);
+                            user = SysUserBLL.getDetail(PrimaryKey);
+
+                            string url = "http://" + MesDevice[0].D_IP + ":8090/person/create";
+
+                            string postData = "pass=12345678&personId=" + user.F_EnCode + "&faceId=" + ID + "&imgBase64" + str + "";
+
+                            string strtemp = FaceRecognition.Port(url, postData);
+                            if (!FaceRecognition.json(strtemp))
+                            {
+                                untCommon.InfoMsg("该IP地址不可用！");
+                                return;
+                            }
+                            JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                            if (!bool.Parse(joModel["success"].ToString()))
+                            {
+                                untCommon.InfoMsg(joModel["msg"].ToString());
+                                return;
+                            }
+                            else
+                            {
+                                untCommon.InfoMsg("人脸识别注册成功！");
+                            }
+                            switch (cmbImage.Text)
+                            {
+                                case "照片1":
+                                    AMBaseAnnexesFileBLL.DeleteEntity(user.F_Picture1);
+                                    break;
+                                case "照片2":
+                                    AMBaseAnnexesFileBLL.DeleteEntity(user.F_Picture2);
+                                    break;
+                                case "照片3":
+                                    AMBaseAnnexesFileBLL.DeleteEntity(user.F_Picture3);
+                                    break;
+                                case "照片4":
+                                    AMBaseAnnexesFileBLL.DeleteEntity(user.F_Picture4);
+                                    break;
+                                case "照片5":
+                                    AMBaseAnnexesFileBLL.DeleteEntity(user.F_Picture5);
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            untCommon.InfoMsg("上传失败！");
+                        }
+                    }
+                    else
+                    {
+                        untCommon.InfoMsg("上传失败！");
+                    }
+                    //string url = "183.236.45.60";
+                    //if (FaceRecognition.uploadFileByHttp(url, imagefile))
+                    //{
+                    //}
+
+                }
+            }
+            catch (Exception ex)
+            {
+                untCommon.ErrorMsg("照片上传失败!");
+            }
+        }
+
+        private bool file()
+        {
+            //初始化一个OpenFileDialog类
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            //fileDialog.Filter = "(*.jpg)|*.jpg";
+            //判断用户是否正确的选择了文件
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //获取用户选择文件的后缀名
+                string extension = Path.GetExtension(fileDialog.FileName);
+                //声明允许的后缀名
+                string[] str = new string[] { ".gif", ".jpge", ".jpg" };
+                if (!((IList)str).Contains(extension))
+                {
+                    MessageBox.Show("仅能上传gif,jpge,jpg格式的图片！");
+                    return false;
+                }
+                else
+                {
+                    //获取用户选择的文件，并判断文件大小不能超过100K，fileInfo.Length是以字节为单位的
+                    FileInfo fileInfo = new FileInfo(fileDialog.FileName);
+                    fileInfoLength = fileInfo.Length.ToString();
+                    if (fileInfo.Length > 102400)
+                    {
+                        MessageBox.Show("上传的图片不能大于100K");
+                        return false;
+                    }
+                    else
+                    {
+                        txtImageFile.Text = fileDialog.FileName;
+                        //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + fileDialog.FileName;
+                        //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                        //Byte[] mybyte = new byte[fs.Length];
+                        //fs.Read(mybyte, 0, mybyte.Length);
+                        //fs.Close();
+
+                        //MemoryStream ms = new MemoryStream(mybyte);
+                        //Bitmap myimge = new Bitmap(ms);
+                        //pictureBox1.Image = myimge;
+
+                        System.Drawing.Image imagename;
+                        imagename = System.Drawing.Image.FromFile(fileDialog.FileName);
+                        //image = Path.GetExtension(fileDialog.FileName);//获取扩展名
+                        image = Path.GetFileName(fileDialog.FileName);//获取文件名和扩展名
+                        imagefile = fileDialog.FileName;//获取文件路径
+
+                        Bitmap myBmp = new Bitmap(imagename);
+
+                        pictureBox1.Image = myBmp;
+                        //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //设置picturebox为缩放模式
+                        //pictureBox1.Width = myBmp.Width;
+                        //pictureBox1.Height = myBmp.Height;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        private void cmbImage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SysUserBLL userbll = new SysUserBLL();
+            SysUser user = userbll.getDetail(PrimaryKey);
+            AMBaseAnnexesFileEntity AMBaseAnnexesFileEntity = new AMBaseAnnexesFileEntity();
+            AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
+            switch (cmbImage.Text)
+            {
+                case "照片1":
+                    AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture1);
+                    break;
+                case "照片2":
+                    AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture2);
+                    break;
+                case "照片3":
+                    AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture3);
+                    break;
+                case "照片4":
+                    AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture4);
+                    break;
+                case "照片5":
+                    AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture5);
+                    break;
+            }
+            //照片显示
+
+            //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + AMBaseAnnexesFileEntity.F_FilePath;
+            //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+            //Byte[] mybyte = new byte[fs.Length];
+            //fs.Read(mybyte, 0, mybyte.Length);
+            //fs.Close();
+
+            //MemoryStream ms = new MemoryStream(mybyte);
+            //Bitmap myimge = new Bitmap(ms);
+            //pictureBox1.Image = myimge;
+        }
+
+        private void btnRegisterImage_Click(object sender, EventArgs e)
+        {
+            SysUser user = new SysUser();
+            MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+            SysUserBLL SysUserBLL = new SysUserBLL();
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text);
+            user = SysUserBLL.getDetail(PrimaryKey);
+            string url = "http://" + MesDevice[0].D_IP + ":8090/person/takeImg";
+
+            string postData = "pass=12345678&personId=" + user.F_EnCode + "";
+
+            string strtemp = FaceRecognition.Port(url, postData);
+            if (!FaceRecognition.json(strtemp))
+            {
+                untCommon.InfoMsg("该IP地址不可用！");
+                return;
+            }
+            JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+            if (!bool.Parse(joModel["success"].ToString()))
+            {
+                untCommon.InfoMsg(joModel["msg"].ToString());
+                return;
+            }
+            else
+            {
+                untCommon.InfoMsg("人脸识别注册成功！");
+            }
+        }
     }
 }

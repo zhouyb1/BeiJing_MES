@@ -206,6 +206,75 @@ namespace Model
         /// 性别
         /// </summary>
         public string StrGender { get; set; }
+
+        /// <summary>
+        /// 员工类型，1，正式工，2，临时工，3，劳务工
+        /// </summary>
+        public int F_Kind { set; get; }
+        /// <summary>
+        /// RFID编码
+        /// </summary>
+        public string F_RFIDCode { set; get; }
+        /// <summary>
+        /// 组别
+        /// </summary>
+        public string F_Group { set; get; }
+        /// <summary>
+        /// 入职日期
+        /// </summary>
+        public DateTime? F_Indate { set; get; }
+        /// <summary>
+        /// 离职日期
+        /// </summary>
+        public DateTime? F_Outdate { set; get; }
+        /// <summary>
+        /// 身份证
+        /// </summary>
+        public string F_Cert { set; get; }
+        /// <summary>
+        /// 民族
+        /// </summary>
+        public string F_Nation { set; get; }
+        /// <summary>
+        /// 学历
+        /// </summary>
+        public string F_Record { set; get; }
+        /// <summary>
+        /// 籍贯
+        /// </summary>
+        public string F_Origin { set; get; }
+        /// <summary>
+        /// 照片1
+        /// </summary>
+        public string F_Picture1 { set; get; }
+        /// <summary>
+        /// 照片2
+        /// </summary>
+        public string F_Picture2 { set; get; }
+        /// <summary>
+        /// 照片3
+        /// </summary>
+        public string F_Picture3 { set; get; }
+        /// <summary>
+        /// 照片4
+        /// </summary>
+        public string F_Picture4 { set; get; }
+        /// <summary>
+        /// 照片5
+        /// </summary>
+        public string F_Picture5 { set; get; }
+        /// <summary>
+        /// 时间
+        /// </summary>
+        public string K_Time { set; get; }
+        /// <summary>
+        /// 设备
+        /// </summary>
+        public string K_Device { set; get; }
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public string K_Status { set; get; }
         #endregion
     }
 }

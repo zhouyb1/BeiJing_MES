@@ -39,12 +39,79 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\AMBaseAnnexesFileDto.cs" />
+    <Compile Include="Dto\AMBaseDepartmentDto.cs" />
+    <Compile Include="Dto\AMBaseUserDto.cs" />
+    <Compile Include="Dto\MesBasketDto.cs" />
+    <Compile Include="Dto\MesBomDto.cs" />
+    <Compile Include="Dto\MesCollarDetailDto.cs" />
+    <Compile Include="Dto\MesCollarHeadDto.cs" />
+    <Compile Include="Dto\MesDeviceDto.cs" />
+    <Compile Include="Dto\MesDoorDto.cs" />
+    <Compile Include="Dto\MesGoodsDto.cs" />
+    <Compile Include="Dto\MesInventoryDto.cs" />
+    <Compile Include="Dto\MesInventoryLSDto.cs" />
+    <Compile Include="Dto\MesInventoryTrendDto.cs" />
+    <Compile Include="Dto\MesIPToRFIDDto.cs" />
+    <Compile Include="Dto\MesMaterDto.cs" />
+    <Compile Include="Dto\MesMaterInDetailDto.cs" />
+    <Compile Include="Dto\MesMaterInHeadDto.cs" />
+    <Compile Include="Dto\MesMoveRecordDto.cs" />
+    <Compile Include="Dto\MesOrgResDetailDto.cs" />
+    <Compile Include="Dto\MesOrgResHeadDto.cs" />
+    <Compile Include="Dto\MesProductGoodsDto.cs" />
+    <Compile Include="Dto\MesProductOrderDetailDto.cs" />
+    <Compile Include="Dto\MesProductOrderHeadDto.cs" />
+    <Compile Include="Dto\MesProOutDetailDto.cs" />
+    <Compile Include="Dto\MesProOutHeadDto.cs" />
+    <Compile Include="Dto\MesPurchaseDetailDto.cs" />
+    <Compile Include="Dto\MesPurchaseHeadDto.cs" />
+    <Compile Include="Dto\MesRequistDetailDto.cs" />
+    <Compile Include="Dto\MesRequistHeadDto.cs" />
+    <Compile Include="Dto\MesStockDto.cs" />
+    <Compile Include="Dto\MesSupplyDto.cs" />
+    <Compile Include="Dto\MesWeightRecordDto.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\AMBaseAnnexesFileEntity.cs" />
+    <Compile Include="System\AMBaseDepartmentEntity.cs" />
+    <Compile Include="System\AMBaseUserEntity.cs" />
     <Compile Include="System\Area.cs" />
     <Compile Include="System\COMInfo.cs" />
     <Compile Include="System\Equipment.cs" />
     <Compile Include="System\Inspect.cs" />
     <Compile Include="System\LoginInfo.cs" />
+    <Compile Include="System\MesBasketEntity.cs" />
+    <Compile Include="System\MesBomEntity.cs" />
+    <Compile Include="System\MesCollarDetailEntity.cs" />
+    <Compile Include="System\MesCollarHeadEntity.cs" />
+    <Compile Include="System\MesDeviceEntity.cs" />
+    <Compile Include="System\MesDoorEntity.cs" />
+    <Compile Include="System\MesGoodsEntity.cs" />
+    <Compile Include="System\MesInventoryEntity.cs" />
+    <Compile Include="System\MesInventoryLSEntity.cs" />
+    <Compile Include="System\MesInventoryTrendEntity.cs" />
+    <Compile Include="System\MesIPToRFIDEntity.cs" />
+    <Compile Include="System\MesMaterEntity.cs" />
+    <Compile Include="System\MesMaterInDetailEntity.cs" />
+    <Compile Include="System\MesMaterInHeadEntity.cs" />
+    <Compile Include="System\MesMoveRecordEntity.cs" />
+    <Compile Include="System\MesOrgResDetailEntity.cs" />
+    <Compile Include="System\MesOrgResHeadEntity.cs" />
+    <Compile Include="System\MesProductGoodsEntity.cs" />
+    <Compile Include="System\MesProductOrderDetailEntity.cs" />
+    <Compile Include="System\MesProductOrderHeadEntity.cs" />
+    <Compile Include="System\MesProOutDetailEntity.cs" />
+    <Compile Include="System\MesProOutHeadEntity.cs" />
+    <Compile Include="System\MesPurchaseDetailEntity.cs" />
+    <Compile Include="System\MesPurchaseHeadEntity.cs" />
+    <Compile Include="System\MesRequistDetailEntity.cs" />
+    <Compile Include="System\MesRequistHeadEntity.cs" />
+    <Compile Include="System\MesStockEntity.cs" />
+    <Compile Include="System\MesSupplyEntity.cs" />
+    <Compile Include="System\MesWeightRecordEntity.cs" />
     <Compile Include="System\SysConfig.cs" />
     <Compile Include="System\SysDictionary.cs" />
     <Compile Include="System\SysLog.cs" />
@@ -56,6 +123,16 @@
     <Compile Include="System\SysModulePower.cs" />
     <Compile Include="System\SysButtonPower.cs" />
     <Compile Include="System\SysButton.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Model.dll" />
+    <Content Include="bin\Debug\Model.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bin\Debug\Model.dll.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

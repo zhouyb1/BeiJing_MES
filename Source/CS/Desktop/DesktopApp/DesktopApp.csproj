@@ -60,12 +60,28 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BarCode">
+      <HintPath>Library\BarCode.dll</HintPath>
+    </Reference>
+    <Reference Include="BmpLib">
+      <HintPath>Library\BmpLib.dll</HintPath>
+    </Reference>
     <Reference Include="IrisSkin4, Version=2006.3.22.45, Culture=neutral, PublicKeyToken=127be25a6db25e07, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\IrisSkin4.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PcdLib">
+      <HintPath>Library\PcdLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,13 +90,136 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="ToolsLib">
+      <HintPath>Library\ToolsLib.dll</HintPath>
+    </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.35985, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Library\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ACR122UA9.cs" />
+    <Compile Include="Common\Barcode.cs" />
+    <Compile Include="Common\FaceRecognition.cs" />
+    <Compile Include="Common\IPcd.cs" />
+    <Compile Include="Common\Log.cs" />
+    <Compile Include="Common\MyLog.cs" />
+    <Compile Include="Common\NfcTag.cs" />
     <Compile Include="Common\untCommon.cs" />
+    <Compile Include="Common\USCB.cs" />
+    <Compile Include="Common\WI.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
+    <Compile Include="System\Face recognition\frmAttendanceCheckDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceCheckDetail.Designer.cs">
+      <DependentUpon>frmAttendanceCheckDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceManagement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceManagement.Designer.cs">
+      <DependentUpon>frmAttendanceManagement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceStatistics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceStatistics.Designer.cs">
+      <DependentUpon>frmAttendanceStatistics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceWorkDay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceWorkDay.Designer.cs">
+      <DependentUpon>frmAttendanceWorkDay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceWorkMonthly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmAttendanceWorkMonthly.Designer.cs">
+      <DependentUpon>frmAttendanceWorkMonthly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmBasicParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmBasicParameters.Designer.cs">
+      <DependentUpon>frmBasicParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmCallbackParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmCallbackParameter.Designer.cs">
+      <DependentUpon>frmCallbackParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDevice.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDevice.Designer.cs">
+      <DependentUpon>frmDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDeviceManagementEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDeviceManagementEdit.Designer.cs">
+      <DependentUpon>frmDeviceManagementEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDeviceManagementList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDeviceManagementList.Designer.cs">
+      <DependentUpon>frmDeviceManagementList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDisplayParameter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmDisplayParameter.Designer.cs">
+      <DependentUpon>frmDisplayParameter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmFaceRecognitionRegistration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmFaceRecognitionRegistration.Designer.cs">
+      <DependentUpon>frmFaceRecognitionRegistration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmImageQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmImageQuery.Designer.cs">
+      <DependentUpon>frmImageQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmNetworkParameters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmNetworkParameters.Designer.cs">
+      <DependentUpon>frmNetworkParameters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmParameterConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmParameterConfiguration.Designer.cs">
+      <DependentUpon>frmParameterConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmRecordQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmRecordQuery.Designer.cs">
+      <DependentUpon>frmRecordQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmRemoteOperation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmRemoteOperation.Designer.cs">
+      <DependentUpon>frmRemoteOperation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Face recognition\frmSystemConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\Face recognition\frmSystemConfiguration.Designer.cs">
+      <DependentUpon>frmSystemConfiguration.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmAreaEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +274,12 @@
     <Compile Include="System\frmAreaSet.Designer.cs">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmMeatProcessList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmMeatProcessList.Designer.cs">
+      <DependentUpon>frmMeatProcessList.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmPowerSet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +297,24 @@
     </Compile>
     <Compile Include="System\frmSerialPortConfig.designer.cs">
       <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmStorageAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmStorageAdd.Designer.cs">
+      <DependentUpon>frmStorageAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmStorageEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmStorageEdit.Designer.cs">
+      <DependentUpon>frmStorageEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmStorageList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmStorageList.Designer.cs">
+      <DependentUpon>frmStorageList.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmUserEdit.cs">
       <SubType>Form</SubType>
@@ -221,12 +384,78 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\frmVegetableProcessList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmVegetableProcessList.Designer.cs">
+      <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="System\PagerControl.designer.cs">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\pd.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="System\pd.Designer.cs">
+      <DependentUpon>pd.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="System\Face recognition\frmAttendanceCheckDetail.resx">
+      <DependentUpon>frmAttendanceCheckDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmAttendanceManagement.resx">
+      <DependentUpon>frmAttendanceManagement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmAttendanceStatistics.resx">
+      <DependentUpon>frmAttendanceStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmAttendanceWorkDay.resx">
+      <DependentUpon>frmAttendanceWorkDay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmAttendanceWorkMonthly.resx">
+      <DependentUpon>frmAttendanceWorkMonthly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmBasicParameters.resx">
+      <DependentUpon>frmBasicParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmCallbackParameter.resx">
+      <DependentUpon>frmCallbackParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmDevice.resx">
+      <DependentUpon>frmDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmDeviceManagementEdit.resx">
+      <DependentUpon>frmDeviceManagementEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmDeviceManagementList.resx">
+      <DependentUpon>frmDeviceManagementList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmDisplayParameter.resx">
+      <DependentUpon>frmDisplayParameter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmFaceRecognitionRegistration.resx">
+      <DependentUpon>frmFaceRecognitionRegistration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmImageQuery.resx">
+      <DependentUpon>frmImageQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmNetworkParameters.resx">
+      <DependentUpon>frmNetworkParameters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmParameterConfiguration.resx">
+      <DependentUpon>frmParameterConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmRecordQuery.resx">
+      <DependentUpon>frmRecordQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmRemoteOperation.resx">
+      <DependentUpon>frmRemoteOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\Face recognition\frmSystemConfiguration.resx">
+      <DependentUpon>frmSystemConfiguration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\frmAbout.resx">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -254,6 +483,9 @@
     <EmbeddedResource Include="System\frmAreaSet.resx">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System\frmMeatProcessList.resx">
+      <DependentUpon>frmMeatProcessList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\frmPowerSet.resx">
       <DependentUpon>frmPowerSet.cs</DependentUpon>
     </EmbeddedResource>
@@ -262,6 +494,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmSerialPortConfig.resx">
       <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmStorageAdd.resx">
+      <DependentUpon>frmStorageAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmStorageEdit.resx">
+      <DependentUpon>frmStorageEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmStorageList.resx">
+      <DependentUpon>frmStorageList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmUserEdit.resx">
       <DependentUpon>frmUserEdit.cs</DependentUpon>
@@ -306,9 +547,16 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="System\frmVegetableProcessList.resx">
+      <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\PagerControl.resx">
       <DependentUpon>PagerControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System\pd.resx">
+      <DependentUpon>pd.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -328,6 +576,10 @@
     <ProjectReference Include="..\Business\Business.csproj">
       <Project>{c0af7520-ae6b-4fd1-8e42-5c9e57c4a1a9}</Project>
       <Name>Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+      <Project>{ea8edbf8-6f9e-4655-9729-bd3e7b1f12fb}</Project>
+      <Name>DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{bb3d8345-2096-490c-9c7b-f58a4d84e962}</Project>

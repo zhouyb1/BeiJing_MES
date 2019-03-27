@@ -29,7 +29,9 @@ namespace DesktopApp
         {
             loadRole();
         }
-
+        /// <summary>
+        /// 加载角色模块
+        /// </summary>
         private void loadRole()
         {
             try
@@ -64,7 +66,7 @@ namespace DesktopApp
         }
 
         /// <summary>
-        /// 加载模块
+        /// 加载权限模块
         /// </summary>
         private void loadModule(string role)
         {

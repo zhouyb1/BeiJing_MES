@@ -82,56 +82,101 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// 不传入姓名时获取全部数据列表 也可传入姓名参数
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public DataTable loadData(string key)
         {
             try
             {
                 string sql = "";
-                if (string.IsNullOrEmpty(key))
+                if (string.IsNullOrEmpty(key))//AM_Base_Department.F_FullName
                 {
-                    sql = @"SELECT  F_Account ,
+                    sql = @"SELECT  F_UserId,
+        F_Account ,
         F_RealName ,
         '******' F_Password ,
         CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
-        ( '[' + AM_Base_User.[D_Code] + ']' + Sys_Department.D_Name ) D_Code ,
-        ( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code ,
+         AM_Base_Department.F_FullName  D_Code ,
+        Sys_Role.R_Name R_Code ,
         F_Mobile ,
-        F_Email ,
+        AM_Base_User.F_Email,
         F_OICQ ,
         F_WeChat ,
         U_Address ,
-        F_Description ,
-        F_EnabledMark ,
-        F_CreateUserName ,
-        F_CreateDate ,
-        F_ModifyUserName ,
-        F_ModifyDate
+        AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		(CASE F_Kind 
+                                       WHEN  1 THEN '正式工' 
+                                       WHEN  2 THEN '临时工'
+									   WHEN  3 THEN '劳务工'
+                                       ELSE '' END) F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_EnCode,
+        AM_Base_User.F_DepartmentId,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5
 FROM    AM_Base_User
-        LEFT JOIN Sys_Department ON Sys_Department.D_Code = AM_Base_User.D_Code
-        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.R_Code";
+        left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account";
                 }
                 else
                 {
-                    sql = string.Format(@"SELECT  F_Account ,
+                    sql = string.Format(@"SELECT F_UserId, F_Account ,
         F_RealName ,
-        F_Password ,
+        '******' F_Password ,
         CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
-        ( '[' + AM_Base_User.[D_Code] + ']' + Sys_Department.D_Name ) D_Code ,
-        ( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code ,
+         AM_Base_Department.F_FullName  D_Code ,
+        Sys_Role.R_Name R_Code ,
         F_Mobile ,
-        F_Email ,
+        AM_Base_User.F_Email,
         F_OICQ ,
         F_WeChat ,
         U_Address ,
-        F_Description ,
-        F_EnabledMark ,
-        F_CreateUserName ,
-        F_CreateDate ,
-        F_ModifyUserName ,
-        F_ModifyDate
+        AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		(CASE F_Kind 
+                                       WHEN  1 THEN '正式工' 
+                                       WHEN  2 THEN '临时工'
+									   WHEN  3 THEN '劳务工'
+                                       ELSE '' END) F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_DepartmentId,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5
 FROM    AM_Base_User
-        LEFT JOIN Sys_Department ON Sys_Department.D_Code = AM_Base_User.D_Code
-        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.R_Code
+        left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
   WHERE AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%'", key);
                 }
 
@@ -147,28 +192,116 @@ FROM    AM_Base_User
             }
         }
 
+        /// <summary>
+        /// 传入姓名或学号时获取全部数据列表
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public DataTable load_RealName(string key)
+        {
+            try
+            {
+              
+                 string   sql = string.Format(@"SELECT F_UserId, F_Account ,
+        F_RealName ,
+        '******' F_Password ,
+        CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
+         AM_Base_Department.F_FullName  D_Code ,
+         AM_Base_User.F_EnCode,
+        Sys_Role.R_Name R_Code ,
+        F_Mobile ,
+        AM_Base_User.F_Email,
+        F_OICQ ,
+        F_WeChat ,
+        U_Address ,
+        AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		(CASE F_Kind 
+                                       WHEN  1 THEN '正式工' 
+                                       WHEN  2 THEN '临时工'
+									   WHEN  3 THEN '劳务工'
+                                       ELSE '' END) F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_DepartmentId,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5
+FROM    AM_Base_User
+        left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
+  WHERE AM_Base_User.F_EnCode LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%'", key);
+
+                SqlHelper db = new SqlHelper();
+                var rows = db.ExecuteDataTable(sql); //db.ExecuteObjects<SysUser>(sql);
+
+                return rows;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 通过账户名获取数据列表
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public SysUser getDetail(string key)
         {
+            //( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name )
             try
             {
                 string sql = string.Format(@"SELECT F_Account
       ,F_RealName
       ,F_Password
       ,F_Gender
-      ,D_Code
-      ,R_Code
+      ,AM_Base_Department.F_FullName  D_Code 
+      ,Sys_Role.R_Name R_Code
       ,F_Mobile
-      ,F_Email
+      ,AM_Base_User.F_Email
       ,F_OICQ
       ,F_WeChat
       ,[U_Address]
-      ,F_Description
-      ,F_EnabledMark
-      ,F_CreateUserName
-      ,F_CreateDate
-      ,F_ModifyUserName
-      ,F_ModifyDate
+      ,AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_EnCode,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5,
+        AM_Base_User.F_DepartmentId
   FROM AM_Base_User
+        left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
 WHERE F_Account='{0}'", key);
 
 
@@ -183,6 +316,116 @@ WHERE F_Account='{0}'", key);
             }
         }
 
+        /// <summary>
+        /// 通过部门id获取数据列表
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public SysUser getDetail_F_DepartmentId(string F_DepartmentId)
+        {
+            try
+            {
+                string sql = string.Format(@"SELECT F_Account
+      ,F_RealName
+      ,F_Password
+      ,F_Gender
+      ,AM_Base_Department.F_FullName  D_Code 
+      ,( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code
+      ,F_Mobile
+      ,AM_Base_User.F_Email
+      ,F_OICQ
+      ,F_WeChat
+      ,[U_Address]
+      ,AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_EnCode,
+        AM_Base_User.F_DepartmentId,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5
+  FROM AM_Base_User
+        LEFT JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
+  WHERE AM_Base_User.F_DepartmentId='{0}'", F_DepartmentId);
+                SqlHelper db = new SqlHelper();
+                var rows = db.ExecuteObject<SysUser>(sql);
+
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<SysUser> getDetail_F_EnCode(string key)
+        {
+            try
+            {
+                string sql = string.Format(@"SELECT F_Account
+      ,F_RealName
+      ,F_Password
+      ,F_Gender
+      ,AM_Base_Department.F_FullName  D_Code 
+      ,( '[' + AM_Base_User.[R_Code] + ']' + Sys_Role.R_Name ) R_Code
+      ,F_Mobile
+      ,AM_Base_User.F_Email
+      ,F_OICQ
+      ,F_WeChat
+      ,[U_Address]
+      ,AM_Base_User.F_Description ,
+        AM_Base_User.F_EnabledMark ,
+        AM_Base_User.F_CreateUserName ,
+        AM_Base_User.F_CreateDate ,
+        AM_Base_User.F_ModifyUserName ,
+        AM_Base_User.F_ModifyDate ,
+		F_Kind,
+        F_RFIDCode,
+        F_Group,
+        F_Indate,
+        F_Outdate,
+        F_Cert,
+        F_Nation,
+        F_Record,
+        F_Origin,
+        AM_Base_User.F_EnCode,
+        AM_Base_User.F_DepartmentId,
+        F_Picture1,
+        F_Picture2,
+        F_Picture3,
+        F_Picture4,
+        F_Picture5
+  FROM AM_Base_User
+        left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
+WHERE F_Account='{0}'", key);
+
+
+                SqlHelper db = new SqlHelper();
+                var rows = db.ExecuteObjects<SysUser>(sql);
+               // db.ExecuteObjects<MesDeviceEntity>(strSql.ToString(), paramList.ToArray());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         public int Add(SysUser user)
         {
@@ -361,6 +604,21 @@ WHERE F_Account='{0}'", key);
       ,[F_EnabledMark] = @U_Active
       ,[F_ModifyUserName] = @U_UpdateBy
       ,[F_ModifyDate] = @U_UpdateDate
+      ,[F_Kind] = @F_Kind
+      ,[F_RFIDCode] = @F_RFIDCode
+      ,[F_Group] = @F_Group
+      ,[F_Indate] = @F_Indate
+      ,[F_Outdate] = @F_Outdate
+      ,[F_Cert] = @F_Cert
+      ,[F_Nation] = @F_Nation
+      ,[F_Record] = @F_Record
+      ,[F_Origin] = @F_Origin
+      ,[F_Picture1] = @F_Picture1
+,F_DepartmentId =@F_DepartmentId
+,[F_Picture2] = @F_Picture2
+,[F_Picture3] = @F_Picture3
+,[F_Picture4] = @F_Picture4
+,[F_Picture5] = @F_Picture5
  WHERE [F_Account] = @U_Code";
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
@@ -371,6 +629,40 @@ WHERE F_Account='{0}'", key);
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
                 parameters.Add(new SqlParameter("@R_Code", user.R_Code));
                 parameters.Add(new SqlParameter("@U_Active", user.F_EnabledMark));
+
+                parameters.Add(new SqlParameter("@F_Kind", user.F_Kind));
+                parameters.Add(new SqlParameter("@F_RFIDCode", user.F_RFIDCode));
+                parameters.Add(new SqlParameter("@F_Group", user.F_Group));
+                //parameters.Add(new SqlParameter("@F_Indate", user.F_Indate));
+                //parameters.Add(new SqlParameter("@F_Outdate", user.F_Outdate));
+                parameters.Add(new SqlParameter("@F_Cert", user.F_Cert));
+                parameters.Add(new SqlParameter("@F_Nation", user.F_Nation));
+                parameters.Add(new SqlParameter("@F_Record", user.F_Record));
+                parameters.Add(new SqlParameter("@F_Origin", user.F_Origin));
+                parameters.Add(new SqlParameter("@F_Picture1", user.F_Picture1));
+                parameters.Add(new SqlParameter("@F_DepartmentId", user.F_DepartmentId));
+                parameters.Add(new SqlParameter("@F_Picture2", user.F_Picture2));
+                parameters.Add(new SqlParameter("@F_Picture3", user.F_Picture3));
+                parameters.Add(new SqlParameter("@F_Picture4", user.F_Picture4));
+                parameters.Add(new SqlParameter("@F_Picture5", user.F_Picture5));
+
+                if (!user.F_Indate.HasValue)
+                {
+                    parameters.Add(new SqlParameter("@F_Indate", user.F_Indate));
+                }
+                else
+                {
+                    parameters.Add(new SqlParameter("@F_Indate", DBNull.Value));
+                }
+
+                if (!user.F_Outdate.HasValue)
+                {
+                    parameters.Add(new SqlParameter("@F_Outdate", user.F_Outdate));
+                }
+                else
+                {
+                    parameters.Add(new SqlParameter("@F_Outdate", DBNull.Value));
+                }
 
                 if (!string.IsNullOrEmpty(user.F_Mobile))
                 {
@@ -427,10 +719,6 @@ WHERE F_Account='{0}'", key);
                 {
                     parameters.Add(new SqlParameter("@U_Remark", DBNull.Value));
                 }
-
-
-
-               
 
                 if (!string.IsNullOrEmpty(user.F_ModifyUserName))
                 {

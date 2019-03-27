@@ -156,6 +156,11 @@ namespace DesktopApp
             this.Dispose();
         }
 
+        private void panTop_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
     }
 }
