@@ -17,5 +17,10 @@ namespace DesktopApp
         {
             InitializeComponent();
         }
+
+        private void btn_Setting_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

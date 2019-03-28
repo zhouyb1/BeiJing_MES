@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -162,6 +163,152 @@ namespace DesktopApp
             catch (Exception ex)
             {
                 untCommon.ErrorMsg("用户管理加载数据异常：" + ex.Message);
+            }
+        }
+
+        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            photo();
+        }
+
+        private void photo()
+        {
+            try
+            {
+                string D_Code = dataGridView.SelectedRows[0].Cells["部门"].Value.ToString();
+                MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code);
+                cmb_Device.DataSource = MesDevice;
+                cmb_Device.DisplayMember = "D_Name";
+                cmb_Image.Text = "照片1";
+            }
+            catch (Exception)
+            {
+                untCommon.InfoMsg("该员工照片显示错误！");
+            }
+        }
+
+        private void cmb_Device_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                }
+                if (dataGridView.SelectedRows.Count < 1)
+                    return;
+                string EnCode = dataGridView.SelectedRows[0].Cells["工号"].Value.ToString();
+
+                MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                var MesDevice = MesDeviceBLL.GetList_Name(cmb_Device.Text);
+                if (MesDevice.Count < 1)
+                {
+                    return;
+                }
+                string url = "http://" + MesDevice[0].D_IP + ":8090/face/find";
+
+                string postData = "pass=" + 12345678 + "&personId=" + EnCode + "";
+
+                string strtemp = FaceRecognition.Port(url, postData);
+                if (!FaceRecognition.json(strtemp))
+                {
+                    untCommon.InfoMsg("该IP地址不可用！");
+                    return;
+                }
+                JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                if (!bool.Parse(joModel["success"].ToString()))
+                {
+                    untCommon.InfoMsg(joModel["msg"].ToString());
+                    return;
+                }
+                else
+                {
+                    //untCommon.InfoMsg("人脸识别注册成功！");
+                    var jData = (JArray)joModel["data"];
+                    string strUrl = "";
+                    List<string> list = new List<string>();
+                    for (var i = 0; i < jData.Count; i++)
+                    {
+                        var jObj = (JObject)jData[i];
+                        strUrl = (string)jObj["path"].ToString();
+                        list.Add(strUrl);
+                    }
+                    Stream stream = FaceRecognition.Info(list[0].ToString());
+                    pictureBox1.Image = Image.FromStream(stream);
+                }
+            }
+            catch (Exception)
+            {
+                untCommon.InfoMsg("照片显示错误！");
+            }
+        }
+
+        private void cmb_Image_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (pictureBox1.Image != null)
+                {
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                }
+                if (dataGridView.SelectedRows.Count < 1)
+                    return;
+                string EnCode = dataGridView.SelectedRows[0].Cells["工号"].Value.ToString();
+
+                MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                var MesDevice = MesDeviceBLL.GetList_Name(cmb_Device.Text);
+
+                string url = "http://" + MesDevice[0].D_IP + ":8090/face/find";
+
+                string postData = "pass=" + 12345678 + "&personId=" + EnCode + "";
+
+                string strtemp = FaceRecognition.Port(url, postData);
+                if (!FaceRecognition.json(strtemp))
+                {
+                    untCommon.InfoMsg("该IP地址不可用！");
+                    return;
+                }
+                JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                if (!bool.Parse(joModel["success"].ToString()))
+                {
+                    untCommon.InfoMsg(joModel["msg"].ToString());
+                    return;
+                }
+                else
+                {
+                    //untCommon.InfoMsg("人脸识别注册成功！");
+                    var jData = (JArray)joModel["data"];
+                    string strUrl = "";
+                    int number = 0;
+                    List<string> list = new List<string>();
+                    for (var i = 0; i < jData.Count; i++)
+                    {
+                        var jObj = (JObject)jData[i];
+                        strUrl = (string)jObj["path"].ToString();
+                        list.Add(strUrl);
+                    }
+                    switch (cmb_Image.Text)
+                    {
+                        case "照片1":
+                            number = 0;
+                            break;
+                        case "照片2":
+                            number = 1;
+                            break;
+                        case "照片3":
+                            number = 2;
+                            break;
+                    }
+                    Stream stream = FaceRecognition.Info(list[number]);
+                    pictureBox1.Image = Image.FromStream(stream);
+                }
+            }
+            catch (Exception)
+            {
+                untCommon.InfoMsg("照片显示错误！");
             }
         }
     }
