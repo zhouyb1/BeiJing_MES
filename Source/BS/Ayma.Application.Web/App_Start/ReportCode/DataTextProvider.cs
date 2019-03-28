@@ -75,6 +75,101 @@ using MyDbReportData = DatabaseXmlReportData;
 
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
+        /// <summary>
+        /// 报废打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string Scrap(string doucno)
+        {
+            string sql = @"SELECT  h.S_ScrapNo ,
+                                    h.S_OrderDate ,
+                                    h.S_Remark ,
+                                    d.S_GoodsCode ,
+                                    d.S_GoodsName ,
+                                    d.S_Unit ,
+                                    d.S_Qty ,
+                                    d.S_Batch
+                            FROM    dbo.Mes_ScrapHead h
+                                    LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo 
+                            WHERE h.S_Status =2 AND h.S_ScrapNo ='{0}'"; 
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Scrap"));
+
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
+
+        /// <summary>
+        /// 退库打印
+        /// </summary>
+        /// <returns></returns>
+        public static string BackStock(string doucno)
+        {
+            var strsql = @"SELECT  h.B_BackStockNo ,
+                                    h.B_OrderDate ,
+                                    h.B_StockName ,
+                                    h.B_StockToName ,
+                                    d.B_GoodsCode ,
+                                    d.B_GoodsName ,
+                                    d.B_Qty ,
+                                    d.B_Unit
+                            FROM    dbo.Mes_BackStockHead h
+                                    LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo
+                            WHERE   B_Status = 2 AND  h.B_BackStockNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strsql, doucno), "BackStock"));
+
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
+
+        /// <summary>
+        /// 物料组装
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string OrgRes(string doucno)
+        {
+            var strSql = @"    SELECT  h.O_OrgResNo ,
+                                    h.O_OrderNo,
+                                    h.O_WorkShopName,
+                                    d.O_GoodsName ,
+                                    d.O_Qty,
+                                    d.O_Unit,
+                                    d.O_SecGoodsName ,
+                                    d.O_SecQty ,
+                                    d.O_SecUnit
+                            FROM    dbo.Mes_OrgResHead h
+                                    LEFT JOIN dbo.Mes_OrgResDetail D ON h.O_OrgResNo = d.O_OrgResNo
+                            WHERE   1=1 AND h.O_OrgResNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "OrgRes"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+
+        /// <summary>
+        /// 线边仓出库
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string OutWorkShop(string doucno)
+        {
+            var sql = @"SELECT  h.O_OutNo ,
+                                h.O_OrderNo ,
+                                h.O_OrderDate ,
+                                d.O_GoodsCode ,
+                                d.O_GoodsName ,
+                                d.O_Unit ,
+                                d.O_Qty ,
+                                d.O_Batch,
+                                h.O_StockName
+                        FROM    dbo.Mes_OutWorkShopHead h
+                                LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo
+                        WHERE   O_Status = 2 AND h.O_OutNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
 
         #endregion
 
@@ -162,13 +257,35 @@ using MyDbReportData = DatabaseXmlReportData;
            
             SpecialDataFunMap.Add("Test", Test);
             SpecialDataFunMap.Add("Picking", Picking);
-
+            SpecialDataFunMap.Add("Scrap", Scrap);
+            SpecialDataFunMap.Add("BackStock",BackStock);
+            SpecialDataFunMap.Add("OrgRes", OrgRes);
+            SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
             #endregion
+        }
+
+        private static string OutWorkShop(HttpRequest Request)
+        {
+            return OutWorkShop(Request.QueryString["doucno"]);
+        }
+
+        private static string OrgRes(HttpRequest Request)
+        {
+            return OrgRes(Request.QueryString["doucno"]);
+        }
+
+        private static string Scrap(HttpRequest Request)
+        {
+            return Scrap(Request.QueryString["doucno"]);
         }
 
         private static string Picking(HttpRequest Request)
         {
             return Picking(Request.QueryString["doucno"]);
+        }
+        private static string BackStock(HttpRequest Request)
+        {
+            return BackStock(Request.QueryString["doucno"]);
         }
 
         #region 业务
