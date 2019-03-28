@@ -68,6 +68,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 打印
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PrintReport()
+        {
+            return View();
+            ;
+        }
         #endregion
 
         #region 获取数据

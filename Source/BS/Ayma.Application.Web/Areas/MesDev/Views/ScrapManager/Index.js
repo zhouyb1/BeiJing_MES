@@ -149,6 +149,48 @@ var bootstrap = function ($, ayma) {
                 }
 
             });
+            //打印
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('S_ScrapNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '报废单打印',
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PrintReport?keyValue=' + keyValue + "&report=ScrapReport&data=Scrap",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
+            // 预览打印
+            $('#am_printview').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('S_ScrapNo');
+                if (ayma.checkrow(keyValue)) {
+
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '报废单打印',
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PrintViewReport?keyValue=' + keyValue + "&report=ScrapReport",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+
+
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

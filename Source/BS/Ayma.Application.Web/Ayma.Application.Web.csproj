@@ -498,9 +498,11 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\WorkformForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveForm.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfSystemDemo\DemoLeaveIndex.js" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\BackPostIndex.js" />
     <Content Include="Areas\MesDev\Views\BackStockManager\Form.js" />
     <Content Include="Areas\MesDev\Views\BackStockManager\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\BackStockManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\PostPageForm.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordForm.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.css" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.js" />
@@ -2231,6 +2233,18 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\PrintViewReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\ScrapManager\PrintViewReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\PostPageForm.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Areas\MesDev\Views\BackStockManager\BackPostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\BackStockManager\PrintViewReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\PrintViewReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintViewReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2399,6 +2413,10 @@
     <Content Include="Areas\MesDev\Views\Convert\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Convert\Form.js" />
     <Content Include="Report\grf\CollacReport.grf" />
+    <Content Include="Report\grf\BackStockReport.grf" />
+    <Content Include="Report\grf\ScrapReport.grf" />
+    <Content Include="Report\grf\OutWorkShopReport.grf" />
+    <Content Include="Report\grf\OrgResReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

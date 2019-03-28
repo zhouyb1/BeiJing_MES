@@ -143,6 +143,44 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('B_BackStockNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '退库单打印',
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/PrintReport?keyValue=' + keyValue + "&report=BackStockReport&data=BackStock",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
+            // 预览打印
+            $('#am_printview').on('click', function() {
+                var keyValue = $('#girdtable').jfGridValue('B_BackStockNo');
+                if (ayma.checkrow(keyValue)) {
+
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '退库单打印',
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/PrintViewReport?keyValue=' + keyValue + "&report=BackStockReport",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function(id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+
         },
         // 初始化列表
         initGird: function () {
