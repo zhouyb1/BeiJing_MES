@@ -76,6 +76,31 @@ using MyDbReportData = DatabaseXmlReportData;
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
         /// <summary>
+        /// 退供应商单
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string BackSupply(string doucno)
+        {
+            string sql = @"SELECT  
+                    a.B_BackSupplyNo ,
+                    a.B_StockName ,
+                    a.B_OrderDate ,
+                    b.B_GoodsCode ,
+                    b.B_GoodsName ,
+                    b.B_Unit ,
+                    b.B_Qty,
+                    b.B_Batch,
+                    b.B_Remark
+            FROM    dbo.Mes_BackSupplyHead a
+                    LEFT JOIN dbo.Mes_BackSupplyDetail b ON a.B_BackSupplyNo=b.B_BackSupplyNo
+            WHERE   a.B_BackSupplyNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "BackSupply"));
+
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
+        /// <summary>
         /// 报废打印
         /// </summary>
         /// <param name="doucno"></param>
@@ -261,12 +286,18 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
+            SpecialDataFunMap.Add("BackSupply", BackSupply);
             #endregion
         }
 
         private static string OutWorkShop(HttpRequest Request)
         {
             return OutWorkShop(Request.QueryString["doucno"]);
+        }
+
+        private static string BackSupply(HttpRequest Request)
+        {
+            return BackSupply(Request.QueryString["doucno"]);
         }
 
         private static string OrgRes(HttpRequest Request)

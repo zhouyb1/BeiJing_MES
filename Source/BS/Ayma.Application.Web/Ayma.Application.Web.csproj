@@ -2245,6 +2245,7 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintViewReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2417,6 +2418,7 @@
     <Content Include="Report\grf\ScrapReport.grf" />
     <Content Include="Report\grf\OutWorkShopReport.grf" />
     <Content Include="Report\grf\OrgResReport.grf" />
+    <Content Include="Report\grf\BackSupply.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

@@ -67,7 +67,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['B_GoodsCode'] = newArray[i]['i_goodscode'];
                     newArray[i]['B_GoodsName'] = newArray[i]['i_goodsname'];
                     newArray[i]['B_Unit'] = newArray[i]['i_unit'];
-                    row['B_Batch'] = row['i_batch'];
+                    newArray[i]['B_Batch'] = newArray[i]['i_batch'];
                     newArray[i]["B_Qty"] = quantity;
                     array.push(newArray[i]);
                 }

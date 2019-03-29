@@ -142,6 +142,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //打印
+            $('#am_print').on('click', function() {
+                var keyValue = $('#girdtable').jfGridValue('B_BackSupplyNo');
+                if (keyValue == "") {
+                    ayma.alert.error("请选择要打印的单据！");
+                } else {
+                    ayma.layerForm({
+                        id: 'BackSupplyReport',
+                        title: '退供应商单打印',
+                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/PrintReport?keyValue=' + keyValue + "&report=BackSupply&data=BackSupply",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
         },
 
         // 初始化列表
@@ -151,7 +170,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "主键", name: "ID", width: 160, align: "left", hidden: "true" },
                     {
-                        label: "状态", name: "B_Status", width: 160, align: "left",
+                        label: "状态", name: "B_Status", width: 100, align: "left",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -171,17 +190,17 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "退供应商单号", name: "B_BackSupplyNo", width: 160, align: "left"},
-                    { label: "仓库编码", name: "B_StockCode", width: 160, align: "left"},
-                    { label: "仓库名称", name: "B_StockName", width: 160, align: "left"},
+                    { label: "仓库编码", name: "B_StockCode", width: 80, align: "left"},
+                    { label: "仓库名称", name: "B_StockName", width: 100, align: "left"},
                     { label: "时间", name: "B_OrderDate", width: 160, align: "left"},    
                     { label: "备注", name: "B_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "B_CreateBy", width: 160, align: "left"},
+                    { label: "添加人", name: "B_CreateBy", width: 100, align: "left"},
                     { label: "添加时间", name: "B_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "B_UpdateBy", width: 160, align: "left"},
+                    { label: "修改人", name: "B_UpdateBy", width: 100, align: "left"},
                     { label: "修改时间", name: "B_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "B_UploadBy", width: 160, align: "left" },
+                    { label: "提交人", name: "B_UploadBy", width: 100, align: "left" },
                     { label: "提交时间", name: "B_UploadDate", width: 160, align: "left" },
-                    { label: "删除人", name: "B_DeleteBy", width: 160, align: "left"},
+                    { label: "删除人", name: "B_DeleteBy", width: 100, align: "left"},
                     { label: "删除时间", name: "B_DeleteDate", width: 160, align: "left"},    
                 ],
                 mainId:'ID',

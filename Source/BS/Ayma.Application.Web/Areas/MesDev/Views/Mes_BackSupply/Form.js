@@ -71,16 +71,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '退供应商单号', name: 'B_BackSupplyNo', width: 160, align: 'left', editType: 'label', hidden: 'true'
                     },
                     {
-                        label: '物料编码', name: 'B_GoodsCode', width: 160, align: 'left', editType: 'label'
+                        label: '物料编码', name: 'B_GoodsCode', width: 100, align: 'center', editType: 'label'
                     },
                     {
-                        label: '物料名称', name: 'B_GoodsName', width: 160, align: 'left', editType: 'label'
+                        label: '物料名称', name: 'B_GoodsName', width: 160, align: 'center', editType: 'label'
                     },
                     {
-                        label: '单位', name: 'B_Unit', width: 80, align: 'left', editType: 'label'
+                        label: '单位', name: 'B_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'B_Qty', width: 80, align: 'left', editType: 'input',
+                        label: '数量', name: 'B_Qty', width: 80, align: 'center', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.B_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -91,10 +91,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                     {
-                        label: '批次', name: 'B_Batch', width: 160, align: 'left', editType: 'label'
+                        label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'B_Remark', width: 160, align: 'left',editType: 'input'
+                        label: '备注', name: 'B_Remark', width: 200, align: 'left',editType: 'input'
                     },
                 ],
                 isAutoHeight: true,

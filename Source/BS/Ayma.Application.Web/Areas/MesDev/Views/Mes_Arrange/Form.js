@@ -209,7 +209,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     isEidt: true,
                     isMultiselect: true,
                     footerrow: true,
-                    minheight: 400
+                    minheight: 300
                 });
             } else {
                 $("#am_confirm").hide(); //隐藏确定按钮

@@ -148,7 +148,7 @@ var bootstrap = function ($, ayma) {
                         {
                             label: "是否有效", name: "a_avail", width: 80, align: "left",
                              formatter: function(cellvalue, options, rowObject) {
-                                return cellvalue == 1 ? "<span class=\"label label-success\" style=\"cursor: pointer;\">是</span>" : "<span class=\"label label-default\" style=\"cursor: pointer;\">否</span>";
+                                return cellvalue == 1 ? "<span>是</span>" : "<span  style=\"color: red;\">否</span>";
                             }
                         },
                         { label: '备注', name: 'a_remark', width: 200, align: 'left' }

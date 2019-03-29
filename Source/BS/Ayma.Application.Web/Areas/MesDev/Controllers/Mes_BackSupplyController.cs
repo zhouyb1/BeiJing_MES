@@ -43,6 +43,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
              return View();
         }
         /// <summary>
+        /// 报表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport()
+        {
+            return View();
+        }
+        /// <summary>
         /// 退供应商物料列表页
         /// </summary>
         /// <returns></returns>
@@ -139,6 +148,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_BackSupplyHeadEntity entity = strEntity.ToObject<Mes_BackSupplyHeadEntity>();
             List<Mes_BackSupplyDetailEntity> mes_BackSupplyDetailList = strmes_BackSupplyDetailList.ToObject<List<Mes_BackSupplyDetailEntity>>();
+            foreach (Mes_BackSupplyDetailEntity item in mes_BackSupplyDetailList)
+	        {
+	            if (string.IsNullOrEmpty(item.B_Batch))
+	            {
+	                return Fail("'" + item.B_GoodsName + "'的批次号不能为空!");
+	            }
+	        }
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();
