@@ -339,7 +339,7 @@ using MyDbReportData = DatabaseXmlReportData;
         private delegate string SpecialDataFun(HttpRequest Request);
 
         private static Dictionary<string, SpecialDataFun> SpecialDataFunMap = new Dictionary<string, SpecialDataFun>();
-
+ 
         public static string BuildByHttpRequest(HttpRequest Request)
         {
             string DataText;

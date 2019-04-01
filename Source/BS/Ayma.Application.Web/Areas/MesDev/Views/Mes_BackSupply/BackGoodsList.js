@@ -88,6 +88,7 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
+                reloadSelected: true,
                 isShowNum: true,
                 isPage: true,
                 sidx: 'i_goodscode',

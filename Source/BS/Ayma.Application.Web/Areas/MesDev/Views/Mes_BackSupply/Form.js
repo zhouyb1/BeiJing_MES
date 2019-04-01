@@ -99,6 +99,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: true,
                 isEidt: true,
+                reloadSelected: true,
                 isMultiselect: true,
                 footerrow: true,
                 minheight: 400
