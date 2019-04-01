@@ -56,10 +56,11 @@
 		"Column":[
 			{
 				"Name":"Column1",
-				"Width":2.98979
+				"Width":1.98438
 			},
 			{
-				"Name":"C_GoodsCode"
+				"Name":"C_GoodsCode",
+				"Width":3.78354
 			},
 			{
 				"Name":"C_GoodsName",
@@ -67,7 +68,7 @@
 			},
 			{
 				"Name":"C_Qty",
-				"Width":1.40229
+				"Width":1.79917
 			},
 			{
 				"Name":"C_Unit",
@@ -88,7 +89,7 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":0.079375,
+							"Left":-0.423333,
 							"Width":2.80458,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
