@@ -61,6 +61,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 生产订单报表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据

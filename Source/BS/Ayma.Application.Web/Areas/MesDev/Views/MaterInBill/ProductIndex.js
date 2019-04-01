@@ -140,7 +140,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'MaterInProjectReport',
                         title: '入库单打印',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport?keyValue=' + keyValue + "&report=MaterInProjectReporter&data=MaterInProject",
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport?keyValue=' + keyValue + "&report=MaterInProjectReport&data=MaterInProject",
                         width: 1000,
                         height: 800,
                         maxmin: true,

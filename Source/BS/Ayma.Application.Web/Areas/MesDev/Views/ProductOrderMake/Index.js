@@ -92,6 +92,45 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //审核单据
+            $("#am_auditing").on('click', function () {
+                var keyValue = $("#girdtable").jfGridValue("ID");
+                var status = $("#girdtable").jfGridValue("P_Status");
+                if (status != "1") {
+                    ayma.alert.error("已审核");
+                    return false;
+                }
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerConfirm('是否确认审核该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_ProductOrderHead', field: 'P_Status' }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
+            
+            //打印
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('P_OrderNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'ProductOrder',
+                        title: '生产订单打印',
+                        url: top.$.rootUrl + '/MesDev/ProductOrderMake/PrintReport?keyValue=' + keyValue + "&report=ProductOrderReport&data=ProductOrder",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

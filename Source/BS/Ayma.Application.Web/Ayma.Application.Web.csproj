@@ -2249,6 +2249,7 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\ProOutMake\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\RequistBill\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderMake\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2422,10 +2423,11 @@
     <Content Include="Report\grf\OutWorkShopReport.grf" />
     <Content Include="Report\grf\OrgResReport.grf" />
     <Content Include="Report\grf\BackSupply.grf" />
-    <Content Include="Report\grf\MaterInReporter.grf" />
-    <Content Include="Report\grf\MaterInProjectReporter.grf" />
+    <Content Include="Report\grf\MaterInReport.grf" />
+    <Content Include="Report\grf\MaterInProjectReport.grf" />
     <Content Include="Report\grf\ProOutMakeReport.grf" />
     <Content Include="Report\grf\RequistReport.grf" />
+    <Content Include="Report\grf\ProductOrderReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2566,7 +2568,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:20473/</IISUrl>
+          <IISUrl>http://localhost:20472/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

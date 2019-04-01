@@ -251,6 +251,28 @@ using MyDbReportData = DatabaseXmlReportData;
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
+        /// <summary>
+        /// 生产订单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string ProductOrder(string doucno)
+        {
+            var strSql = @"SELECT   h.P_OrderNo ,
+                                    h.P_OrderDate ,
+                                    h.P_OrderStationName,
+                                    d.P_GoodsCode ,
+                                    d.P_GoodsName ,
+                                    d.P_Qty ,
+                                    d.P_Unit 
+                            FROM    dbo.Mes_ProductOrderHead h
+                                    LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo
+                            WHERE   h.P_OrderNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "ProductOrder"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
 
         /// <summary>
         /// 线边仓出库
@@ -395,6 +417,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("MaterIn", MaterIn);
             SpecialDataFunMap.Add("MaterInProject", MaterInProject);
             SpecialDataFunMap.Add("Requist", Requist);
+            SpecialDataFunMap.Add("ProductOrder", ProductOrder);
             #endregion
         }
 
@@ -441,6 +464,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string Requist(HttpRequest Request)
         {
             return Requist(Request.QueryString["doucno"]);
+        }
+        private static string ProductOrder(HttpRequest Request)
+        {
+            return ProductOrder(Request.QueryString["doucno"]);
         }
 
         #region 业务

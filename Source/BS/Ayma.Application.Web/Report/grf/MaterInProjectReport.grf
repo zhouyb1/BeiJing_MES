@@ -62,13 +62,16 @@
 				"Name":"C_GoodsCode"
 			},
 			{
-				"Name":"C_GoodsName"
+				"Name":"C_GoodsName",
+				"Width":5.3975
 			},
 			{
-				"Name":"C_Qty"
+				"Name":"C_Qty",
+				"Width":1.40229
 			},
 			{
-				"Name":"C_Unit"
+				"Name":"C_Unit",
+				"Width":1.5875
 			},
 			{
 				"Name":"Column2"
