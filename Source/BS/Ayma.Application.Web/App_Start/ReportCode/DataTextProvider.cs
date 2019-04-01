@@ -171,6 +171,86 @@ using MyDbReportData = DatabaseXmlReportData;
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
+        /// <summary>
+        /// 入库单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string MaterIn(string doucno)
+        {
+            var strSql = @" SELECT  h.M_MaterInNo ,
+                                    h.M_StockName ,
+                                    h.M_OrderNo ,
+                                    h.M_OrderDate ,
+                                    h.M_CreateBy ,
+                                    d.M_GoodsCode ,
+                                    d.M_GoodsName ,
+                                    d.M_Kind,
+                                    d.M_Unit,
+                                    d.M_Qty,
+                                    d.M_Batch,
+                                    d.M_Remark
+                            FROM    dbo.Mes_MaterInHead h
+                                    LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
+                            WHERE   h.M_MaterInNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterIn"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 成品入库单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string MaterInProject(string doucno)
+        {
+            var strSql = @" SELECT  h.M_MaterInNo ,
+                                    h.M_StockName ,
+                                    h.M_OrderNo ,
+                                    h.M_OrderDate ,
+                                    h.M_CreateBy ,
+                                    d.M_GoodsCode ,
+                                    d.M_GoodsName ,
+                                    d.M_Kind,
+                                    d.M_Unit,
+                                    d.M_Qty,
+                                    d.M_Batch,
+                                    d.M_Remark
+                            FROM    dbo.Mes_MaterInHead h
+                                    LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
+                            WHERE   h.M_MaterInNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterInProject"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 调拨单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string Requist(string doucno)
+        {
+            var strSql = @" SELECT  h.R_RequistNo ,
+                                    h.P_OrderNo ,
+                                    h.P_OrderDate ,
+                                    h.R_StockName,
+                                    h.R_StockToName,
+                                    h.R_Remark,
+                                    d.R_GoodsCode ,
+                                    d.R_GoodsName ,
+                                    d.R_Unit ,
+                                    d.R_Qty ,
+                                    d.R_Batch 
+                            FROM    dbo.Mes_RequistHead h
+                                    LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo
+                            WHERE   h.R_RequistNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Requist"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
 
         /// <summary>
         /// 线边仓出库
@@ -195,6 +275,29 @@ using MyDbReportData = DatabaseXmlReportData;
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
+        /// <summary>
+        /// 成品出库
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string ProOutMake(string doucno)
+        {
+            var sql = @"SELECT  h.P_ProOutNo ,
+                                h.P_OrderNo ,
+                                h.P_OrderDate ,
+                                d.P_GoodsCode ,
+                                d.P_GoodsName ,
+                                d.P_Unit ,
+                                d.P_Qty ,
+                                d.P_Batch ,
+                                h.P_StockName
+                        FROM    dbo.Mes_ProOutHead h
+                                LEFT JOIN dbo.Mes_ProOutDetail d ON h.P_ProOutNo = d.P_ProOutNo
+                        WHERE   h.P_Status = 2 AND h.P_ProOutNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "ProOutMake"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
 
         #endregion
 
@@ -208,7 +311,7 @@ using MyDbReportData = DatabaseXmlReportData;
         //简单无参数报表数据的名称与函数映射表
         private delegate string SimpleDataFun();
 
-        private static Dictionary<string, SimpleDataFun> SimpleDataFunMap = new Dictionary<string, SimpleDataFun>();
+        //private static Dictionary<string, SimpleDataFun> SimpleDataFunMap = new Dictionary<string, SimpleDataFun>();
 
         //有参数报表数据的名称与函数映射表，参数来自 HttpRequest
         private delegate string SpecialDataFun(HttpRequest Request);
@@ -220,18 +323,19 @@ using MyDbReportData = DatabaseXmlReportData;
             string DataText;
             string DataName = Request.QueryString["data"];
 
-            Trace.Assert(SimpleDataFunMap.Count > 0, "DataFunMap isn't initialized!");
+            //Trace.Assert(SimpleDataFunMap.Count > 0, "DataFunMap isn't initialized!");
 
             if (DataName != null) //if (DataName != "")
             {
                 //根据数据名称查找映射表，如果找到，执行对应的报表数据函数获取数据
-                SimpleDataFun simpleFun;
+                //SimpleDataFun simpleFun;
                 SpecialDataFun specialFun;
-                if (SimpleDataFunMap.TryGetValue(DataName, out simpleFun))
-                {
-                    DataText = simpleFun();
-                }
-                else if (SpecialDataFunMap.TryGetValue(DataName, out specialFun))
+                //if (SimpleDataFunMap.TryGetValue(DataName, out simpleFun))
+                //{
+                //    DataText = simpleFun();
+                //}
+                //else 
+                if (SpecialDataFunMap.TryGetValue(DataName, out specialFun))
                 {
                     DataText = specialFun(Request);
                 }
@@ -276,23 +380,31 @@ using MyDbReportData = DatabaseXmlReportData;
         //初始化映射表(map)，在 Global.asax 中被调用
         public static void InitDataFunMap()
         {
-            Trace.Assert(SimpleDataFunMap.Count <= 0, "DataFunMap already initialized!");
+            //Trace.Assert(SimpleDataFunMap.Count <= 0, "DataFunMap already initialized!");
 
             #region 业务
            
-            SpecialDataFunMap.Add("Test", Test);
+            //SpecialDataFunMap.Add("Test", Test);
             SpecialDataFunMap.Add("Picking", Picking);
             SpecialDataFunMap.Add("Scrap", Scrap);
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
+            SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
+            SpecialDataFunMap.Add("MaterIn", MaterIn);
+            SpecialDataFunMap.Add("MaterInProject", MaterInProject);
+            SpecialDataFunMap.Add("Requist", Requist);
             #endregion
         }
 
         private static string OutWorkShop(HttpRequest Request)
         {
             return OutWorkShop(Request.QueryString["doucno"]);
+        }
+        private static string ProOutMake(HttpRequest Request)
+        {
+            return ProOutMake(Request.QueryString["doucno"]);
         }
 
         private static string BackSupply(HttpRequest Request)
@@ -317,6 +429,18 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string BackStock(HttpRequest Request)
         {
             return BackStock(Request.QueryString["doucno"]);
+        }
+        private static string MaterIn(HttpRequest Request)
+        {
+            return MaterIn(Request.QueryString["doucno"]);
+        }
+        private static string MaterInProject(HttpRequest Request)
+        {
+            return MaterInProject(Request.QueryString["doucno"]);
+        }
+        private static string Requist(HttpRequest Request)
+        {
+            return Requist(Request.QueryString["doucno"]);
         }
 
         #region 业务

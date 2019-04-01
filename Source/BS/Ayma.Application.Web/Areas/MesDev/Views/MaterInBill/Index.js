@@ -135,7 +135,26 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-         
+            //打印
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('M_MaterInNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MaterInReport',
+                        title: '入库单打印',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport?keyValue=' + keyValue + "&report=MaterInReporter&data=MaterIn",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

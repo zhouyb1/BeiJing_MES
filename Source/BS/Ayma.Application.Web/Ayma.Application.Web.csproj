@@ -2246,6 +2246,9 @@
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PrintViewReport.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProOutMake\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\RequistBill\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2419,6 +2422,10 @@
     <Content Include="Report\grf\OutWorkShopReport.grf" />
     <Content Include="Report\grf\OrgResReport.grf" />
     <Content Include="Report\grf\BackSupply.grf" />
+    <Content Include="Report\grf\MaterInReporter.grf" />
+    <Content Include="Report\grf\MaterInProjectReporter.grf" />
+    <Content Include="Report\grf\ProOutMakeReport.grf" />
+    <Content Include="Report\grf\RequistReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2555,11 +2562,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:6001</IISUrl>
+          <IISUrl>http://localhost:20473/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

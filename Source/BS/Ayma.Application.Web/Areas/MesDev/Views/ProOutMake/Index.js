@@ -135,6 +135,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('P_ProOutNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'ProOutMakeReport',
+                        title: '成品出库单打印',
+                        url: top.$.rootUrl + '/MesDev/ProOutMake/PrintReport?keyValue=' + keyValue + "&report=ProOutMakeReport&data=ProOutMake",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

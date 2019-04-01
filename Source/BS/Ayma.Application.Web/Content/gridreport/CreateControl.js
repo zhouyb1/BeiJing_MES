@@ -62,7 +62,7 @@ function CreatePrintViewerEx2(PluginID, Width, Height, ReportURL, DataURL, AutoR
     document.write('<object id="' + PluginID + '" ' + typeid);
     document.write(' width="' + Width + '" height="' + Height + '">');
     document.write('<param name="ReportURL" value="' + ReportURL + '">');
-    document.write('<param name="DataURL" value="' + DataURL + '">');
+    document.write('<param name="DataURL" value="' + DataURL +'&r='+Math.random()+ '">');
     document.write('<param name="AutoRun" value=' + AutoRun + '>');
     document.write('<param name="SerialNo" value="' + gr_SerialNo + '">');
     document.write('<param name="UserName" value="' + gr_UserName + '">');
@@ -87,7 +87,7 @@ function CreateDisplayViewerEx2(PluginID, Width, Height, ReportURL, DataURL, Aut
     document.write('<object id="' + PluginID + '" ' + typeid);
     document.write(' width="' + Width + '" height="' + Height + '">');
     document.write('<param name="ReportURL" value="' + ReportURL + '">');
-    document.write('<param name="DataURL" value="' + DataURL + '">');
+    document.write('<param name="DataURL" value="' + DataURL + '&r=' + Math.random() + '">');
     document.write('<param name="AutoRun" value=' + AutoRun + '>');
     document.write('<param name="SerialNo" value="' + gr_SerialNo + '">');
     document.write('<param name="UserName" value="' + gr_UserName + '">');
@@ -114,7 +114,7 @@ function CreateDesignerEx(Width, Height, LoadReportURL, SaveReportURL, DataURL, 
     document.write(' width="' + Width + '" height="' + Height + '">');
     document.write('<param name="LoadReportURL" value="' + LoadReportURL + '">');
     document.write('<param name="SaveReportURL" value="' + SaveReportURL + '">');
-    document.write('<param name="DataURL" value="' + DataURL + '">');
+    document.write('<param name="DataURL" value="' + DataURL + '&r=' + Math.random() + '">');
     document.write('<param name="SerialNo" value="' + gr_SerialNo + '">');
     document.write('<param name="UserName" value="' + gr_UserName + '">');
     document.write(ExParams);
