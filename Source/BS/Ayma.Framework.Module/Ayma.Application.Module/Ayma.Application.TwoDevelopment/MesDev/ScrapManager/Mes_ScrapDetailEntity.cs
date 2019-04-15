@@ -52,6 +52,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("S_REMARK")]
         public string S_Remark { get; set; }
+        /// <summary>
+        /// 价格 edit 2019年4月15日15:05:02
+        /// </summary>
+        [Column("S_PRICE")]
+        public decimal? S_Price { get; set; }
         #endregion
 
         #region 扩展操作
