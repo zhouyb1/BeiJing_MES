@@ -34,16 +34,11 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'M_Unit', width: 60, align: 'left', editType: 'label'
                     },
                      {
-                         label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'label',
-                         editOp: {
-                             callback: function (rownum, row) {
-                                 if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
-                                     row.M_Qty = 0;
-                                 }
-                                
-                             }
-                         }
+                         label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'label'
                      },
+                      {
+                          label: '价格', name: 'M_Price', width: 60, align: 'left', editType: 'label'
+                      },
                     {
                         label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'label'
                     },

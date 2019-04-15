@@ -45,6 +45,18 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+            var orderNo = "";
+            if (!!keyValue) {//根据主键获取生产订单号
+                $.ajax({
+                    url: top.$.rootUrl + '/MesDev/ProOutMake/GetOrderNoBy?keyValue=' + keyValue,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        orderNo = data.info;
+                    }
+                });
+            }
             $('#P_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -56,7 +68,7 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
                 // 访问数据接口参数
-                param: {}
+                param: { orderNo: orderNo }
             });
             //添加商品
             $("#am_add").on("click", function () {
@@ -115,6 +127,17 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
+                    {
+                        label: '价格', name: 'P_Price', width: 60, align: 'left', editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_Price = 0;
+                                }
+
+                            }
+                        }
+                    },
                     {
                         label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'input'
                     },

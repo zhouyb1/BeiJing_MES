@@ -84,6 +84,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     {
                         label: '数量', name: 'P_Qty', width: 160, align: 'left', editType: 'label'
                     },
+                     {
+                         label: '价格', name: 'P_Price', width: 60, align: 'left', editType: 'label'
+                     },
                     {
                         label: '批次', name: 'P_Batch', width: 160, align: 'left',editType: 'label'
                     },

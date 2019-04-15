@@ -51,7 +51,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 备注
         /// </summary>
         [Column("O_REMARK")]
-        public string O_Remark { get; set; }
+        public string O_Remark { get; set; } 
+        /// <summary>
+        /// 价格
+        /// </summary>
+        [Column("O_PRICE")]
+        public decimal? O_Price { get; set; }
         /// <summary>
         /// 价格 edit 2019年4月15日17:10:46
         /// </summary>

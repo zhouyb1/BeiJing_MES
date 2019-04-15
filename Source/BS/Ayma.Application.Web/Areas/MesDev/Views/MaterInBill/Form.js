@@ -101,7 +101,7 @@ var bootstrap = function ($, ayma) {
                         label: '物料名称', name: 'M_GoodsName', width: 140, align: 'left', editType: 'label'
                     },
                      {
-                         label: "商品类型", name: "M_Kind", width: 160, align: "left",
+                         label: "商品类型", name: "M_Kind", width: 100, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -122,6 +122,17 @@ var bootstrap = function ($, ayma) {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
                                      row.M_Qty = 0;
+                                 }
+
+                             }
+                         }
+                     },
+                     {
+                         label: '价格', name: 'M_Price', width: 60, align: 'left', editType: 'input',
+                         editOp: {
+                             callback: function (rownum, row) {
+                                 if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
+                                     row.M_Price = 0;
                                  }
 
                              }

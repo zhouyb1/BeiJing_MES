@@ -53,6 +53,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("R_REMARK")]
         public string R_Remark { get; set; }
+        /// <summary>
+        /// 价格
+        /// </summary>
+        [Column("R_PRICE")]
+        public decimal? R_Price { get; set; }
         #endregion
 
         #region 扩展操作

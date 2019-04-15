@@ -156,6 +156,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+        /// <summary>
+        /// 根据主键获取订单号
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetOrderNoBy(string keyValue)
+        {
+            var Mes_RequistHeadData = requistBillIBLL.GetMes_RequistHeadEntity(keyValue);
+
+            return Success(Mes_RequistHeadData.P_OrderNo);
+        }
         #endregion
 
         #region 提交数据

@@ -60,6 +60,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+            var orderNo = "";
+            if (!!keyValue) {//根据主键获取生产订单号
+                $.ajax({
+                    url: top.$.rootUrl + '/MesDev/OutWorkShopManager/GetOrderNoBy?keyValue=' + keyValue,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        orderNo = data.info;
+                    }
+                });
+            }
             $('#O_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -71,7 +83,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
                 // 访问数据接口参数
-                param: {}
+                param: { orderNo: orderNo }
             });
 
             $('#Mes_OutWorkShopDetail').jfGrid({
@@ -97,6 +109,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
+                     {
+                         label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'input',
+                         editOp: {
+                             callback: function (rownum, row) {
+                                 if (/\D/.test(row.O_Price.toString().replace('.', ''))) { //验证只能为数字
+                                     row.O_Price = 0;
+                                 }
+
+                             }
+                         }
+                     },
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
                     { label: "批次", name: "O_Batch", width: 60, align: "left" }
                 ],

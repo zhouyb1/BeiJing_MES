@@ -136,7 +136,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+        /// <summary>
+        /// 根据主键获取订单号
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetOrderNoBy(string keyValue)
+        {
+            var Mes_OutWorkShopHeadData = outWorkShopManagerIBLL.GetMes_OutWorkShopHeadEntity(keyValue);
 
+            return Success(Mes_OutWorkShopHeadData.O_OrderNo);
+        }
         /// <summary>
         /// 获取仓库物料
         /// </summary>

@@ -45,6 +45,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
+            var orderNo = "";
+            if (!!keyValue) {//根据主键获取生产订单号
+                $.ajax({
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GetOrderNoBy?keyValue=' + keyValue,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        orderNo = data.info;
+                    }
+                });
+            }
             $('#M_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -56,7 +68,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
                 // 访问数据接口参数
-                param: {}
+                param: { orderNo: orderNo }
             });
             //单据状态
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
@@ -113,6 +125,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
+                      {
+                          label: '价格', name: 'M_Price', width: 100, align: 'left', editType: 'input',
+                          editOp: {
+                              callback: function (rownum, row) {
+                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
+                                      row.M_Price = 0;
+                                  }
+
+                              }
+                          }
+                      },
                     {
                         label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input'
                     },
