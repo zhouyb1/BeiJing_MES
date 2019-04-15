@@ -71,8 +71,9 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['C_GoodsName'] = newArray[i]['P_GoodsName'];
                     newArray[i]['C_Unit'] = newArray[i]['P_Unit'];
                     newArray[i]["C_Qty"] = quantity;
-                    //newArray[i]['M_Batch'] = batch;
+                    //newArray[i]['M_Batch'] = batch; edit 2019年4月15日15:24:31
                     newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]["C_Price"] = newArray[i]['G_Price'];;
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
