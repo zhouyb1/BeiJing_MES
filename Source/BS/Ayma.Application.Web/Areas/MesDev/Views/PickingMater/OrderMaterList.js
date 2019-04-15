@@ -88,6 +88,7 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "P_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "P_GoodsName", width: 130, align: "left" },
                     { label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
+                    { label: "价格", name: "G_Price", width: 60, align: "left" },
                     { label: "单位", name: "P_Unit", width: 60, align: "left" },
                     { label: "数量", name: "P_Qty", width: 60, align: "left" }
                 ],
@@ -115,6 +116,7 @@ var bootstrap = function ($, ayma) {
                         row["C_Qty"] = quantity;
                         //row['M_Batch'] = batch;
                         row["ID"] = row['ID'];
+                        row["C_Price"] = row["G_Price"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

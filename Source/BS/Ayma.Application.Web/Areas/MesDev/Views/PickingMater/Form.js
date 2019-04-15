@@ -77,6 +77,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
                     { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "C_GoodsCode", width: 130, align: "left"},
+                    { label: "单价", name: "C_Price", width: 130, align: "left" },
                     { label: "物料名称", name: "C_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "C_Unit", width: 60, align: "left" },
                     {
