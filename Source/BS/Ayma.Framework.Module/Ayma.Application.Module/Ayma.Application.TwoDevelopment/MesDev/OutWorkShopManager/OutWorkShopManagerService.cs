@@ -214,8 +214,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-
-                return this.BaseRepository().FindList<Mes_InventoryEntity>(c => c.I_StockCode == stockCode, paginationobj);
+                //return this.BaseRepository().FindList<Mes_InventoryEntity>(c => c.I_StockCode == stockCode, paginationobj);
+                var strSql = new StringBuilder();
+                strSql.Append(@"select m.*,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_StockCode =@stockCode");
+                var dp = new DynamicParameters(new {});
+                dp.Add("@stockCode", stockCode,DbType.String);
+                
+               return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(),dp, paginationobj);
             }
             catch (Exception ex)
             {
