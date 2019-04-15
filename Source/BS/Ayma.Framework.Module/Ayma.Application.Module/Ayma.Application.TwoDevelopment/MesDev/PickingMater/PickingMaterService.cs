@@ -146,14 +146,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT ID
+                strSql.Append(@"SELECT Mes_Mater.ID
                                   ,P_OrderNo
                                   ,P_OrderDate
                                   ,P_GoodsCode
                                   ,P_GoodsName
                                   ,P_Unit
                                   ,P_Qty
-                              FROM Mes_Mater ");
+                                  ,G_Price
+                              FROM Mes_Mater LEFT JOIN Mes_Goods ON Mes_Mater.P_GoodsCode = Mes_Goods.G_Code ");
                 strSql.Append(" where 1=1");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
