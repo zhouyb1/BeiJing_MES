@@ -54,6 +54,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("P_QTY")]
         public decimal? P_Qty { get; set; }
+        /// <summary>
+        /// 价格 edit 2019年4月15日15:02:59
+        /// </summary>
+        [Column("C_PRICE")]
+        public decimal? G_Price { get; set; }
         #endregion
 
         #region 扩展操作
