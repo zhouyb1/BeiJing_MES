@@ -24,7 +24,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        Mes_ProductOrderHeadEntity GetMes_ProductOrderHeadEntity(string keyValue);
+        Mes_ProductOrderHeadEntity GetMes_ProductOrderHeadEntity(string keyValue); 
+        /// <summary>
+        /// 获取Mes_ProductOrderHead表实体数据
+        /// </summary>
+        /// <param name="orderNo">生产订单号</param>
+        /// <returns></returns>
+        Mes_ProductOrderHeadEntity GetEntityByNo(string orderNo);
         /// <summary>
         /// 获取Mes_ProductOrderDetail表实体数据
         /// </summary>

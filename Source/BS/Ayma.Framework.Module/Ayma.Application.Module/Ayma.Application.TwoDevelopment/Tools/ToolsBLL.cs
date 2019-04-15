@@ -737,11 +737,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取生产订单号列表
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList()
+        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList(string orderNo)
         {
             try
             {
-                return toolsService.GetProductOrderList();
+                return toolsService.GetProductOrderList(orderNo);
             }
             catch (Exception ex)
             {

@@ -58,7 +58,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取生产订单号列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList();
+        IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderList(string orderNo);
         /// <summary>
         /// 获取工艺列表
         /// </summary>

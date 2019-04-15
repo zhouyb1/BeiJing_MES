@@ -62,6 +62,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取Mes_ProductOrderHead表实体数据
+        /// </summary>
+        /// <param name="orderNo">生产订单号</param>
+        /// <returns></returns>
+        public Mes_ProductOrderHeadEntity GetEntityByNo(string orderNo)
+        {
+            try
+            {
+                return mes_ProductOrderHeadService.GetEntityByNo(orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         /// <summary>

@@ -4,6 +4,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
@@ -12,7 +13,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public class ToolsController : MvcControllerBase
     {
         private ToolsIBLL toosIBLL = new ToolsBLL();
-        
+        private Mes_ProductOrderHeadIBLL mesProductOrderHead=new Mes_ProductOrderHeadBLL();
         #region 获取数据
         /// <summary>
         /// 根据仓库编码获取仓库实体信息
@@ -98,12 +99,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <summary>
         /// 获取生产订单号列表
         /// </summary>
+        /// <param name="orderNo">生产订单号</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetProductOrderList()
+        public ActionResult GetProductOrderList(string orderNo)
         {
-            var productorderList = toosIBLL.GetProductOrderList();
+            
+            var productorderList = toosIBLL.GetProductOrderList(orderNo);
+           
             return Success(productorderList);
         }
         /// <summary>

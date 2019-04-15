@@ -18,7 +18,7 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
-            
+
             //绑定仓库
             var dfop = {
                 type: 'default',
@@ -46,6 +46,18 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+            var orderNo = "";
+            if (!!keyValue) {//根据主键获取生产订单号
+                $.ajax({
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GetOrderNoBy?keyValue=' + keyValue,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        orderNo = data.info;
+                    }
+                });
+            }
             $('#M_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -55,7 +67,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList?orderNo=' + orderNo,
                 // 访问数据接口参数
                 param: {}
             });
@@ -63,7 +75,7 @@ var bootstrap = function ($, ayma) {
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
             //添加商品
             $("#am_add").on("click", function () {
-               
+
                 ayma.layerForm({
                     id: 'GoodsListIndexForm',
                     title: '添加物料',
@@ -79,9 +91,9 @@ var bootstrap = function ($, ayma) {
             $('#Mes_MaterInDetail').jfGrid({
                 headData: [
                      {
-                         label: 'ID', name: 'ID', width: 160, align: 'left', editType: 'label',hidden:true
+                         label: 'ID', name: 'ID', width: 160, align: 'left', editType: 'label', hidden: true
                      },
-                    
+
                     {
                         label: '物料编码', name: 'M_GoodsCode', width: 140, align: 'left', editType: 'label'
                     },
@@ -111,7 +123,7 @@ var bootstrap = function ($, ayma) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
                                      row.M_Qty = 0;
                                  }
-                                
+
                              }
                          }
                      },
@@ -192,7 +204,7 @@ var bootstrap = function ($, ayma) {
     //表格商品删除
     RemoveGridData = function (row) {
         var rows = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
- 
+
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["M_GoodsCode"] == row["G_Code"]) {
                 rows.splice(i, 1);
