@@ -79,6 +79,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "物料编码", name: "O_GoodsCode", width: 130, align: "left" },
                     { label: "物料名称", name: "O_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "O_Unit", width: 60, align: "left" },
+                    { label:"单价", name:"O_Price", width:60, align:"left"},
                     {
                         label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'numinput' ,
                         editOp: {

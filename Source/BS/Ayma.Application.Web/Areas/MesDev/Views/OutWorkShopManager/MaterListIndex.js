@@ -74,6 +74,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["O_Qty"] = quantity;
                     newArray[i]['O_Batch'] = newArray[i]["I_Batch"];
                     newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]["O_Price"] = newArray[i]["I_Price"];//edit 2019年4月15日17:09:12
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -88,6 +89,7 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
+                    { label: "单价", name: "I_Price", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 60, align: "left" }
                 ],
@@ -114,6 +116,7 @@ var bootstrap = function ($, ayma) {
                         row["O_Qty"] = quantity;
                         row['O_Batch'] =  row['I_Batch'];
                         row["ID"] = row['ID'];
+                        row["O_Price"] = row["I_Price"];//edit 2019年4月15日17:09:12
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
