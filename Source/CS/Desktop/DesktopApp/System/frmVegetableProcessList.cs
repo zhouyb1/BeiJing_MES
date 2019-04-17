@@ -23,7 +23,7 @@ namespace DesktopApp
     public partial class frmVegetableProcessList : DockContent 
     {
         public frmMain frmMain { get; set; }
-        string Period; //保质期
+        decimal Period; //保质期
         private SysUser User;
         NfcTag nfcTag;
         Bmp2Bmp2Data b2d;
@@ -146,7 +146,7 @@ namespace DesktopApp
                 if (checkInput())
                 {
                     MesMaterInDetailBLL MaterInDetailBLL = new MesMaterInDetailBLL();
-                    var rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text);
+                    var rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,"");
                     if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
                     {
                         untCommon.InfoMsg("称重记录数据错误！");

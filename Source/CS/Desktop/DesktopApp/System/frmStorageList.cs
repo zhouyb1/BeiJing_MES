@@ -70,15 +70,15 @@ namespace DesktopApp
             {
                 return;
             }
-            if (MaterInHeadBLL.GetList(dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString())[0].M_Status == 1)
-            {
-                frmStorageEdit frmStorageEdit = new frmStorageEdit(this, frmMain.User, dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["生产订单号"].Value.ToString());
+            //if (MaterInHeadBLL.GetList(dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString())[0].M_Status == 1)
+            //{
+            frmStorageEdit frmStorageEdit = new frmStorageEdit(this, frmMain.User, dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["生产订单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["状态"].Value.ToString());
                 frmStorageEdit.ShowDialog();
-            }
-            else
-            {
-                untCommon.InfoMsg("请选择正确的入库单！");
-            }
+            //}
+            //else
+            //{
+                //untCommon.InfoMsg("请选择正确的入库单！");
+            //}
         }
 
         private void dataGridView_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

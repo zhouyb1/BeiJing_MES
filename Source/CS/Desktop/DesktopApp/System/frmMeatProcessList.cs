@@ -33,7 +33,7 @@ namespace DesktopApp
             InitializeComponent();
             frmMain = _frmMain;
             User = _User;
-            comKind.SelectedIndex = 0;//设置显示的item索引
+            //comKind.SelectedIndex = 0;//设置显示的item索引
         }
 
         private void frmMeatProcessList_Load(object sender, EventArgs e)
@@ -47,10 +47,10 @@ namespace DesktopApp
             Random ran = new Random();
             int RandKey = ran.Next(0, 9999);
             txtQty.Text = RandKey.ToString();
-            if (comKind.Text.Trim() == "肉食去皮前")
-            {
-                GetImg("物料" + txtGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + txtOrderNo.Text.Trim(), txtGoodsName.Text.Trim(), txtQty.Text.Trim());
-            }
+            //if (comKind.Text.Trim() == "肉食去皮前")
+            //{
+            //    GetImg("物料" + txtGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + txtOrderNo.Text.Trim(), txtGoodsName.Text.Trim(), txtQty.Text.Trim());
+            //}
             addWeighStorage();
         }
 
@@ -65,7 +65,7 @@ namespace DesktopApp
             try
             {
                 string strPath = Application.StartupPath + "\\img\\" + strHZ + ".bmp";
-                strHZ = "物料：" + txtGoodsCode.Text.Trim() + ",批次：" + txtBatch.Text.Trim() + ",单号：" + txtOrderNo.Text.Trim();
+                //strHZ = "物料：" + txtGoodsCode.Text.Trim() + ",批次：" + txtBatch.Text.Trim() + ",单号：" + txtOrderNo.Text.Trim();
                 int nLen = strHZ.Length;
                 byte[] fileData = Encoding.GetEncoding("GB2312").GetBytes(strHZ);
                 int nLen2 = fileData.Length;
@@ -98,7 +98,7 @@ namespace DesktopApp
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + Period, f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + User.F_Account, f4, b, 4, 70);//设置位置
-                g.DrawString("订单：" + txtOrderNo.Text.Trim(), f4, b, 4, 90);//设置位置
+                //g.DrawString("订单：" + txtOrderNo.Text.Trim(), f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
 
@@ -134,7 +134,7 @@ namespace DesktopApp
                 if (checkInput())
                 {
                     MesMaterInDetailBLL MaterInDetailBLL = new MesMaterInDetailBLL();
-                    var rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text);
+                    var rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,"");
                     if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
                     {
                         untCommon.InfoMsg("称重记录数据错误！");
@@ -142,8 +142,8 @@ namespace DesktopApp
                     }
                     MesWeightRecordEntity MesWeightRecord = new MesWeightRecordEntity();
 
-                    MesWeightRecord.P_OrderNo = txtOrderNo.Text;
-                    MesWeightRecord.W_Kind = comKind.Text;
+                    //MesWeightRecord.P_OrderNo = txtOrderNo.Text;
+                    //MesWeightRecord.W_Kind = comKind.Text;
                     MesWeightRecord.W_Date = DateTime.Now;
                     MesWeightRecord.W_GoodsCode = txtGoodsCode.Text;
                     MesWeightRecord.W_GoodsName = txtGoodsName.Text;
@@ -202,11 +202,11 @@ namespace DesktopApp
                 return false;
             }
 
-            if (string.IsNullOrEmpty(comKind.Text))
-            {
-                untCommon.InfoMsg("称重类型不能为空！");
-                return false;
-            }
+            //if (string.IsNullOrEmpty(comKind.Text))
+            //{
+            //    untCommon.InfoMsg("称重类型不能为空！");
+            //    return false;
+            //}
 
             return true;
         }
@@ -256,13 +256,13 @@ namespace DesktopApp
             if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
             {
                 MesProductOrderHeadBLL MesProductOrderHeadBLL = new MesProductOrderHeadBLL();
-                var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
-                if (rows == null || rows.Count < 1)
-                {
-                    untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
-                    txtOrderNo.Focus();
-                    txtOrderNo.SelectAll();
-                }
+                //var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
+                //if (rows == null || rows.Count < 1)
+                //{
+                //    untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
+                //    txtOrderNo.Focus();
+                //    txtOrderNo.SelectAll();
+                //}
             }
         }
 

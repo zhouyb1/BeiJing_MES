@@ -66,9 +66,9 @@ namespace DesktopApp
                 cmsArea.Visible = false;
                 cmsDictionary.Visible = false;
 
-                cmsEquipmentManager.Visible = false;
-                cmsEquipmentBox.Visible = false;
-                cmsHistory.Visible = false;
+                //cmsEquipmentManager.Visible = false;
+                //cmsEquipmentBox.Visible = false;
+                //cmsHistory.Visible = false;
 
                 cmsUserManager.Visible = false;
                 cmsUser.Visible = false;
@@ -125,21 +125,21 @@ namespace DesktopApp
                             }
 
 
-                        case "02":
-                            {
-                                cmsEquipmentManager.Visible = true;
-                                break;
-                            }
-                        case "0201":
-                            {
-                                cmsEquipmentBox.Visible = true;
-                                break;
-                            }
-                        case "0202":
-                            {
-                                cmsHistory.Visible = true;
-                                break;
-                            }
+                        //case "02":
+                        //    {
+                        //        cmsEquipmentManager.Visible = true;
+                        //        break;
+                        //    }
+                        //case "0201":
+                        //    {
+                        //        cmsEquipmentBox.Visible = true;
+                        //        break;
+                        //    }
+                        //case "0202":
+                        //    {
+                        //        cmsHistory.Visible = true;
+                        //        break;
+                        //    }
 
                         case "03":
                             {
@@ -496,20 +496,35 @@ namespace DesktopApp
 
         private void 菜食处理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmVegetableProcessList frmVegetableProcess = new frmVegetableProcessList(this,User);
-            frmVegetableProcess.TopLevel = false;
-            frmVegetableProcess.WindowState = FormWindowState.Maximized;
+            //frmVegetableProcessList frmVegetableProcess = new frmVegetableProcessList(this,User);
+            //frmVegetableProcess.TopLevel = false;
+            //frmVegetableProcess.WindowState = FormWindowState.Maximized;
+
+            //foreach (DockContent frm in this.panMain.Contents)
+            //{
+            //    if (frm.Name == frmVegetableProcess.Name)
+            //    {
+            //        frm.Activate();//激活
+            //        return;
+            //    }
+            //}
+
+            //frmVegetableProcess.Show(this.panMain);
+
+            frmInWorkShopList frmInWorkShop = new frmInWorkShopList(this, User);
+            frmInWorkShop.TopLevel = false;
+            frmInWorkShop.WindowState = FormWindowState.Maximized;
 
             foreach (DockContent frm in this.panMain.Contents)
             {
-                if (frm.Name == frmVegetableProcess.Name)
+                if (frm.Name == frmInWorkShop.Name)
                 {
                     frm.Activate();//激活
                     return;
                 }
             }
 
-            frmVegetableProcess.Show(this.panMain);
+            frmInWorkShop.Show(this.panMain);
         }
 
         public void 设备管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -642,6 +657,11 @@ namespace DesktopApp
             }
 
             frmImageQuery.Show(this.panMain);
+        }
+
+        private void panMain_ActiveContentChanged(object sender, EventArgs e)
+        {
+
         }
 
 

@@ -19,19 +19,20 @@ namespace DesktopApp
     {
         private string M_MaterInNo = "";//入库单号
         private string P_OrderNo = "";//生产订单号
+        private string M_Status = "";//单据状态
         private SysUser User;
         private frmStorageList frmStorage;
         private string W_Kind;//称重类型
         private int rowindex;//获得当前选中的行的索引
         int whether;//是否打印 2:打印 
-        public frmStorageEdit(frmStorageList _frmStorageList, SysUser _User, string _M_MaterInNo, string _P_OrderNo)
+        public frmStorageEdit(frmStorageList _frmStorageList, SysUser _User, string _M_MaterInNo, string _P_OrderNo, string _M_Status)
         {
             InitializeComponent();
             M_MaterInNo = _M_MaterInNo;
             P_OrderNo = _P_OrderNo;
             User = _User;
             frmStorage = _frmStorageList;
-
+            M_Status = _M_Status;
             getDetail();
         }
 
@@ -64,7 +65,7 @@ namespace DesktopApp
 
         private void frmStorageEdit_Load(object sender, EventArgs e)
         {
-
+            txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -79,7 +80,19 @@ namespace DesktopApp
         /// <param name="e"></param>
         private void btnWeigh_Click(object sender, EventArgs e)
         {
-            W_Kind = "入库重量";
+            if(M_Status == "2")
+            {
+                untCommon.InfoMsg("该单据已经审核，不能再添加！");
+            }
+            if (M_Status == "3")
+            {
+                untCommon.InfoMsg("该单据已经完成，不能再添加！");
+            }
+            if (M_Status == "-1")
+            {
+                untCommon.InfoMsg("该单据已经删除，不能再添加！");
+            }
+            W_Kind = "入库称重";
             //addWeighStorage();
              addStorage();
             if (whether == 2)
@@ -196,11 +209,11 @@ namespace DesktopApp
                 untCommon.InfoMsg("物料类型不能为空！");
                 return false;
             }
-            //if (string.IsNullOrEmpty(txtPrice.Text))
-            //{
-            //    untCommon.InfoMsg("入库单价不能为空！");
-            //   return false;
-            //}
+            if (string.IsNullOrEmpty(txtPrice.Text))
+            {
+                untCommon.InfoMsg("入库单价不能为空！");
+                return false;
+            }
 
             return true;
         }
@@ -213,10 +226,10 @@ namespace DesktopApp
             {
                 MesWeightRecordBLL MesWeightRecordBLL = new MesWeightRecordBLL();
                 MesMaterInDetailBLL MaterInDetailBLL = new MesMaterInDetailBLL();
-                var rows = MaterInDetailBLL.GetList_GoodsCode("");
+                var rows = MaterInDetailBLL.GetList_GoodsCode("","");
                 if (checkInput())
                 {
-                    rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text);
+                    rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,M_MaterInNo);
                     if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
                     {
                         untCommon.InfoMsg("称重记录数据错误！");
@@ -267,10 +280,10 @@ namespace DesktopApp
                 MesWeightRecordBLL MesWeightRecordBLL = new MesWeightRecordBLL();
                 MesMaterInDetailBLL MaterInDetailBLL = new MesMaterInDetailBLL();
                 MesWeightRecordEntity MesWeightRecord = new MesWeightRecordEntity();
-                var rows = MaterInDetailBLL.GetList_GoodsCode("");
+                var rows = MaterInDetailBLL.GetList_GoodsCode("","");
                 if (checkInput())
                 {
-                    rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text);
+                    rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,M_MaterInNo);
                     if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
                     {
                         untCommon.InfoMsg("称重记录数据错误！");
@@ -298,9 +311,10 @@ namespace DesktopApp
                     MaterInDetail.M_GoodsCode = txtGoodsCode.Text;
                     MaterInDetail.M_GoodsName = txtGoodsName.Text;
                     MaterInDetail.M_Batch = txtBatch.Text;
+                    MaterInDetail.M_Price = txtPrice.Text;
                     MaterInDetail.M_Qty = decimal.Parse(txtQty.Text) - decimal.Parse(Basket_rows[0].M_Weight.ToString());
                     MaterInDetail.M_Unit = txtUnit.Text;
-                    MaterInDetail.M_Kind = Goods_rows[0].G_Kind;
+                    MaterInDetail.M_Kind = Convert.ToString(Goods_rows[0].G_Kind);
 
                     // MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                     //var Goods_rows = GoodsBLL.GetList(MaterInDetail.M_GoodsCode, MaterInDetail.M_GoodsName);
@@ -310,7 +324,7 @@ namespace DesktopApp
                         untCommon.InfoMsg("输入的物料名称错误，请重新输入！");
                         return;
                     }
-                    else if (Goods_rows[0].G_Kind == "0")
+                    else if (Goods_rows[0].G_Kind == 1)
                     {
                         txtGoodsCode.Text = Goods_rows[0].G_Code;
                         txtGoodsName.Text = Goods_rows[0].G_Name;
@@ -338,9 +352,9 @@ namespace DesktopApp
                     }
                     if (cz == "存在")
                     {
-                        var MaterInDetai_rows = MaterInDetailBLL.GetList_GoodsCode(MaterInDetail.M_GoodsCode);
+                        var MaterInDetai_rows = MaterInDetailBLL.GetList_GoodsCode(MaterInDetail.M_GoodsCode,M_MaterInNo);
                         var rowData = MaterInDetailBLL.GetEntity(MaterInDetai_rows[0].ID);
-                        rowData.M_Qty += int.Parse(txtQty.Text.Trim());
+                        rowData.M_Qty += MaterInDetail.M_Qty;
                         if (MaterInDetailBLL.SaveEntityTrans(rowData.ID, rowData, "", MesWeightRecord) > 0)//事务
                         {
                             untCommon.InfoMsg("修改成功！");
@@ -396,23 +410,27 @@ namespace DesktopApp
                 MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                 //MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
                 var Goods_rows = GoodsBLL.GetList(txtGoodsCode.Text.Trim(), "");
-                if (Goods_rows == null || Goods_rows.Count < 1 || Goods_rows[0].G_Kind == "2")
+                if (Goods_rows == null || Goods_rows.Count < 1 || Goods_rows[0].G_Kind == 2)
                 {
                     untCommon.InfoMsg("输入的物料编码错误，请重新输入！");
+                    return;
                 }
-                else if (Goods_rows[0].G_Kind == "0")
+                if (Goods_rows[0].G_Kind == 1)
                 {
                     txtGoodsCode.Text = Goods_rows[0].G_Code;
                     txtGoodsName.Text = Goods_rows[0].G_Name;
                     txtUnit.Text = Goods_rows[0].G_Unit;
-                    if (Goods_rows[0].G_Kind == "0")
+                    if (Goods_rows[0].G_Kind == 1)
                     {
-                        txtKind.Text = "物料原材料";
+                        txtKind.Text = "原物料";
                     }
+                    txtPrice.Focus();
                 }
                 else
                 {
-                    untCommon.InfoMsg("输入的物料编码错误，请重新输入！");
+                    untCommon.InfoMsg("输入的物料编码不是原物料，请重新输入！");
+                    txtGoodsCode.Text = "";
+                    txtGoodsCode.Focus();
                 }
             }
         }
@@ -428,12 +446,12 @@ namespace DesktopApp
                 {
                     untCommon.InfoMsg("输入的物料名称错误，请重新输入！");
                 }
-                else if (Goods_rows[0].G_Kind == "0")
+                else if (Goods_rows[0].G_Kind == 0)
                 {
                     txtGoodsCode.Text = Goods_rows[0].G_Code;
                     txtGoodsName.Text = Goods_rows[0].G_Name;
                     txtUnit.Text = Goods_rows[0].G_Unit;
-                    if (Goods_rows[0].G_Kind == "0")
+                    if (Goods_rows[0].G_Kind == 0)
                     {
                         txtKind.Text = "物料原材料";
                     }
@@ -488,6 +506,24 @@ namespace DesktopApp
                         }
                     }
                 }
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtUnit_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrice_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
+            {
+                txtQty.Focus();
             }
         }
     }
