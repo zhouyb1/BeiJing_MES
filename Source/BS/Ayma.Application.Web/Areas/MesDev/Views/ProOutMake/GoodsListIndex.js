@@ -81,6 +81,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['P_GoodsName'] = newArray[i]['I_GoodsName'];
                     newArray[i]['P_Unit'] = newArray[i]['I_Unit'];
                     newArray[i]['I_Qty'] = newArray[i]['I_Qty'];
+                    newArray[i]['P_Price'] = newArray[i]['I_Price'];
                     newArray[i]["P_Qty"] = quantity;
                     newArray[i]['P_Batch'] = newArray[i]["I_Batch"];
                     newArray[i]["ID"] = newArray[i]['ID'];
@@ -93,13 +94,14 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/OutWorkShopManager/GetMaterList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/ProOutMake/GetMaterList?stockCode=' + stockCode,
                 headData: [
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "I_Batch", width: 60, align: "left" }
+                    { label: "单价", name: "I_Price", width: 60, align: "left" },
+                    { label: "批次", name: "I_Batch", width: 120, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -120,6 +122,7 @@ var bootstrap = function ($, ayma) {
                         row['P_GoodsName'] = row['I_GoodsName'];
                         row['P_Unit'] = row['I_Unit'];
                         row['I_Qty'] = row['I_Qty'];
+                        row['P_Price'] = row['I_Price'];
                         row["P_Qty"] = quantity;
                         row['P_Batch'] = row['I_Batch'];
                         row["ID"] = row['ID'];
@@ -136,7 +139,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                console.log(rows[i])
+                               
                                 if (rows[i]['I_GoodsCode'] == rowslist[j]['P_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;

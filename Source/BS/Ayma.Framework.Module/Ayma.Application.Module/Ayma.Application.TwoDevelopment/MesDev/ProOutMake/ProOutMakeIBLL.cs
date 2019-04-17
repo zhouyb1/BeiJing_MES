@@ -35,6 +35,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         Mes_ProOutDetailEntity GetMes_ProOutDetailEntity(string keyValue);
+        /// <summary>
+        /// 获取仓库成品物料
+        /// </summary>
+        /// <param name="stockCode">仓库编号</param>
+        /// <returns></returns>
+        IEnumerable<Mes_InventoryEntity> GetInventoryProMaterList(Pagination paginationobj, string stockCode);
         #endregion
 
         #region 提交数据

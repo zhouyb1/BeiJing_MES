@@ -2,6 +2,7 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.Tools;
@@ -128,6 +129,27 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var Mes_ProOutHeadData = proOutMakeIBLL.GetMes_ProOutHeadEntity(keyValue);
 
             return Success(Mes_ProOutHeadData.P_OrderNo);
+        }
+        /// <summary>
+        /// 获取仓库成品物料列表
+        /// </summary>
+        /// <param name="pagination">分页参数</param>
+        /// <param name="stockCode">仓库编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterList(string pagination, string stockCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var list = proOutMakeIBLL.GetInventoryProMaterList(paginationobj, stockCode).ToList();
+            var jsonData = new
+            {
+                rows = list,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
         #endregion
 

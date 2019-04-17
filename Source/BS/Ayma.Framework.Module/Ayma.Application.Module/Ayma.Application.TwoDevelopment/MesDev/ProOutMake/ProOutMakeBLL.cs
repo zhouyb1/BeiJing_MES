@@ -109,7 +109,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 获取仓库成品物料列表
+        /// </summary>
+        /// <param name="stockCode">仓库编码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InventoryEntity> GetInventoryProMaterList(Pagination paginationobj, string stockCode)
+        {
+            try
+            {
+                return proOutMakeService.GetInventoryProMaterList(paginationobj, stockCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 提交数据

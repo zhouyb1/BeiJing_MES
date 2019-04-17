@@ -57,10 +57,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("O_PRICE")]
         public decimal? O_Price { get; set; }
-        /// <summary>
-        /// 价格 edit 2019年4月15日17:10:46
-        /// </summary>
-        public decimal O_Price { get; set; }
 
         #endregion
 

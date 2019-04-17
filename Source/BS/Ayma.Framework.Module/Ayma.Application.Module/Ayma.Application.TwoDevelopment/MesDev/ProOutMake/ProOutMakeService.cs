@@ -157,6 +157,35 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取仓库成品物料列表
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InventoryEntity> GetInventoryProMaterList(Pagination paginationobj, string stockCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"select m.*,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_StockCode =@stockCode and g.G_Kind=3");
+                var dp = new DynamicParameters(new { });
+                dp.Add("@stockCode", stockCode, DbType.String);
+
+                return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, paginationobj);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
