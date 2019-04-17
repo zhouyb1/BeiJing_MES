@@ -28,7 +28,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetProjStockList',
                 // 访问数据接口参数
                 param: {}
             };
@@ -145,7 +145,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 360,
+                minheight: 320,
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
