@@ -23,15 +23,15 @@ namespace Model
         /// <summary>
         /// 商品类型
         /// </summary>
-        public string G_Kind{ set; get; }
+        public int G_Kind{ set; get; }
         /// <summary>
         /// 保质时间
         /// </summary>
-        public string G_Period{ set; get; }
+        public decimal G_Period { set; get; }
         /// <summary>
         /// 价格
         /// </summary>
-        public string G_Price{ set; get; }
+        public decimal G_Price { set; get; }
         /// <summary>
         /// 单位
         /// </summary>

@@ -40,6 +40,11 @@ namespace Model
         /// 数量
         /// </summary>
         public decimal W_Qty{ set; get; }
+
+        /// 价格
+        /// </summary>
+        public decimal W_Price { set; get; }
+
         /// <summary>
         /// 批次
         /// </summary>

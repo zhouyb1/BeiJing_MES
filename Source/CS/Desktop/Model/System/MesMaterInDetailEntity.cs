@@ -40,6 +40,11 @@ namespace Model
         /// 批次
         /// </summary>
         public string M_Batch{ set; get; }
+
+        /// <summary>
+        /// 价格
+        /// </summary>
+        public string M_Price { set; get; }
         /// <summary>
         /// 备注
         /// </summary>
