@@ -34,7 +34,30 @@ namespace Business.System
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// 通过主键获取实体
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns>MesInventory</returns>
+        public MesInventoryEntity GetValues(string keyValue)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Inventory");
+                strSql.Append(" WHERE I_StockCode=@StockCode");
+                var paramList = new List<SqlParameter>();
+                paramList.Add(new SqlParameter("@StockCode", keyValue));
+                var rowData = db.ExecuteObject<MesInventoryEntity>(strSql.ToString(), paramList.ToArray());
+                return rowData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// 通过主键获取实体
         /// </summary>

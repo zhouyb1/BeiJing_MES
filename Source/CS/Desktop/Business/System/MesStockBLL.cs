@@ -20,20 +20,20 @@ namespace Business.System
         /// 获取数据列表
         /// </summary>
         /// <returns></returns>
-        //public List<MesStockEntity> GetList()
-        //{
-        //    try
-        //    {
-        //        var strSql = new StringBuilder();
-        //        strSql.Append("SELECT * FROM Mes_Stock");
-        //        var rows = db.ExecuteObjects<MesStockEntity>(strSql.ToString());
-        //        return rows;
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
+        public List<MesStockEntity> GetList()
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Stock");
+                var rows = db.ExecuteObjects<MesStockEntity>(strSql.ToString());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         /// <summary>
         /// 通过仓库编码或仓库名称获取数据列表

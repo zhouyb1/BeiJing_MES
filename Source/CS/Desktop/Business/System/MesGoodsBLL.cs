@@ -75,6 +75,8 @@ namespace Business.System
                 throw;
             }
         }
+
+
         
         /// <summary>
         /// 通过主键获取实体

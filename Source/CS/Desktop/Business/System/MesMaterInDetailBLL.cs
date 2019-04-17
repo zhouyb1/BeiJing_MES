@@ -30,10 +30,9 @@ namespace Business.System
       ,[M_MaterInNo]
       ,[M_OrderNo]
       ,[M_GoodsCode]
-      ,(CASE M_Kind WHEN 0 THEN '原材料' 
-                    WHEN 1 THEN '半成品'
-					WHEN 3 THEN '成品'
-                    ELSE '' END) M_Kind
+      ,(CASE M_Kind WHEN 2 THEN '成品' 
+                  
+                    ELSE '非成品' END) M_Kind
       ,[M_GoodsName]
       ,[M_Unit]
       ,[M_Qty]
@@ -55,7 +54,7 @@ namespace Business.System
         /// 通过物料编码获取数据列表
         /// </summary>
         /// <returns></returns>
-        public List<MesMaterInDetailEntity> GetList_GoodsCode(string GoodsCode)
+        public List<MesMaterInDetailEntity> GetList_GoodsCode(string GoodsCode, string MaterInNo)
         {
             try
             {
@@ -64,18 +63,20 @@ namespace Business.System
       ,[M_MaterInNo]
       ,[M_OrderNo]
       ,[M_GoodsCode]
-      ,(CASE M_Kind WHEN 0 THEN '原材料' 
-                    WHEN 1 THEN '半成品'
-					WHEN 3 THEN '成品'
-                    ELSE '' END) M_Kind
+      ,(CASE M_Kind WHEN 2 THEN '成品' 
+
+                    ELSE '非成品' END) M_Kind
       ,[M_GoodsName]
       ,[M_Unit]
       ,[M_Qty]
       ,[M_Batch]
       ,[M_Remark] FROM Mes_MaterInDetail");
-                strSql.Append(" WHERE M_GoodsCode = @M_GoodsCode");
+                strSql.Append(" WHERE M_GoodsCode = @M_GoodsCode and M_MaterInNo=@M_MaterInNo");
                 var paramList = new List<SqlParameter>();
-                paramList.Add(new SqlParameter("@M_GoodsCode", string.Format("{0}", GoodsCode)));
+                paramList.Add(new SqlParameter("@M_GoodsCode",  GoodsCode));
+                paramList.Add(new SqlParameter("@M_MaterInNo", MaterInNo));
+
+
                 var rows = db.ExecuteObjects<MesMaterInDetailEntity>(strSql.ToString(), paramList.ToArray());
                 return rows;
             }
@@ -99,10 +100,7 @@ namespace Business.System
       ,[M_MaterInNo]
       ,[M_OrderNo]
       ,[M_GoodsCode]
-      ,(CASE M_Kind WHEN 0 THEN '原材料' 
-                    WHEN 1 THEN '半成品'
-					WHEN 3 THEN '成品'
-                    ELSE '' END) M_Kind
+      ,[M_Kind] 
       ,[M_GoodsName]
       ,[M_Unit]
       ,[M_Qty]
@@ -242,6 +240,7 @@ namespace Business.System
                     strSql.Append("M_Unit,");
                     strSql.Append("M_Qty,");
                     strSql.Append("M_Batch,");
+                    strSql.Append("M_Price,");
                     strSql.Append("M_Remark");
                     strSql.Append(")");
                     strSql.Append("VALUES(");
@@ -254,6 +253,7 @@ namespace Business.System
                     strSql.Append("@M_Unit,");
                     strSql.Append("@M_Qty,");
                     strSql.Append("@M_Batch,");
+                    strSql.Append("@M_Price,");
                     strSql.Append("@M_Remark");
                     strSql.Append(")");
                     paramList.Add(new SqlParameter("@ID", Guid.NewGuid().ToString()));
@@ -270,6 +270,7 @@ namespace Business.System
                     strSql.Append("M_Qty=@M_Qty,");
                     strSql.Append("M_Batch=@M_Batch,");
                     strSql.Append("M_Remark=@M_Remark ");
+
                     strSql.Append(" WHERE ID=@ID");
                     paramList.Add(new SqlParameter("@ID", keyValue));
                 }
@@ -281,6 +282,7 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@M_Unit", entity.M_Unit));
                 paramList.Add(new SqlParameter("@M_Qty", entity.M_Qty));
                 paramList.Add(new SqlParameter("@M_Batch", entity.M_Batch));
+                paramList.Add(new SqlParameter("@M_Price", entity.M_Price));
                 paramList.Add(new SqlParameter("@M_Remark", entity.M_Remark)); 
 
                 SqlHelper.ExecuteNonQuery(tran, CommandType.Text, strSql.ToString(), paramList.ToArray());

@@ -54,10 +54,9 @@ namespace Business.System
                 else
                 {
                     strSql.Append(@"SELECT [ID]
-      ,(CASE M_Kind WHEN 0 THEN '原材料' 
-                    WHEN 1 THEN '半成品'
+      ,(CASE M_OrderKind WHEN 1 THEN '半成品'
 					WHEN 2 THEN '成品'
-                    ELSE '' END) M_Kind
+                    ELSE '' END) M_OrderKind
       ,[M_MaterInNo]
       ,[M_StockCode]
       ,[M_StockName]
