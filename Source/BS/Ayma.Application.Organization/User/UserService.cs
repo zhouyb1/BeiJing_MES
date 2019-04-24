@@ -76,6 +76,8 @@ namespace Ayma.Application.Organization
                           ,t.[F_Picture3]
                           ,t.[F_Picture4]
                           ,t.[F_Picture5]
+                          ,t.[F_Status]
+                          ,t.[F_Contract]
                         ";
         }
         #endregion

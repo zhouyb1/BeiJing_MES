@@ -70,7 +70,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
             });
             $('#O_ProCode').select();
-
+            var orderNo = "";
+            if (!!keyValue) {//根据主键获取生产订单号
+                $.ajax({
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GetOrderNoBy?keyValue=' + keyValue,
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        orderNo = data.info;
+                    }
+                });
+            }
             $('#O_OrderNo').select({
                 type: 'default',
                 value: 'P_OrderNo',
@@ -80,7 +91,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList?orderNo=' + orderNo,
                 // 访问数据接口参数
                 param: {}
             });

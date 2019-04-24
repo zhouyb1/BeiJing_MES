@@ -23,6 +23,8 @@ var bootstrap = function ($, ayma) {
             $('#F_DepartmentId').DepartmentSelect({ companyId: companyId });
             //用户类型
             $('#F_Kind').DataItemSelect({ code: 'EmployeeKind' });
+            //在职状态
+            $('#F_Status').DataItemSelect({ code: 'JobStatus' });
             // 性别
             $('#F_Gender').select();
             //照片

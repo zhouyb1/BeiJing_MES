@@ -281,6 +281,16 @@ namespace Ayma.Application.Organization
         /// </summary>		
         [Column("F_PICTURE5")]
         public string F_Picture5 { get; set; }
+        /// <summary>
+        ///在职状态
+        /// </summary>		
+        [Column("F_STATUS")]
+        public int? F_Status { get; set; } 
+        /// <summary>
+        ///合同到期时间
+        /// </summary>		
+        [Column("F_CONTRACT")]
+        public DateTime? F_Contract { get; set; }
         #endregion
 
         #region 扩展操作

@@ -276,6 +276,27 @@ var bootstrap = function ($, ayma) {
                                 }
                             }
                         },
+                         {
+                             label: '在职状态', name: 'F_Status', width: 100, align: 'left',
+                             formatterAsync: function (callback, value, row) {
+                                 ayma.clientdata.getAsync('dataItem', {
+                                     key: value,
+                                     code: 'JobStatus',
+                                     callback: function (_data) {
+                                         console.log(value)
+                                         if (value == 0) {
+                                             callback("<span class='label label-info'>" + _data.text + "</span>");
+                                         } else if (value == 1) {
+                                             callback("<span class='label label-success'>" + _data.text + "</span>");
+                                         } else if (value == 3) {
+                                             callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                         } else {
+                                             callback("<span class='label label-default'>" + _data.text + "</span>");
+                                         }
+                                     }
+                                 });
+                             }
+                         },
                         { label: "备注", name: "F_Description", index: "F_Description", width: 200, align: "left" }
 
                 ],
