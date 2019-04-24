@@ -283,7 +283,6 @@ var bootstrap = function ($, ayma) {
                                      key: value,
                                      code: 'JobStatus',
                                      callback: function (_data) {
-                                         console.log(value)
                                          if (value == 0) {
                                              callback("<span class='label label-info'>" + _data.text + "</span>");
                                          } else if (value == 1) {
