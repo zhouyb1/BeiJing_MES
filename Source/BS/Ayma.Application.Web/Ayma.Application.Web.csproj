@@ -286,6 +286,8 @@
     <Compile Include="Areas\MesDev\Controllers\ScrapManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_BackSupplyController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ConvertController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\SocialSetController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\CheckRecordController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_SystemModule\Views\Annexes\PreviewForm.js" />
@@ -2432,6 +2434,14 @@
     <Content Include="Report\grf\ProOutMakeReport.grf" />
     <Content Include="Report\grf\RequistReport.grf" />
     <Content Include="Report\grf\ProductOrderReport.grf" />
+    <Content Include="Areas\MesDev\Views\SocialSet\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\SocialSet\Index.js" />
+    <Content Include="Areas\MesDev\Views\SocialSet\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\SocialSet\Form.js" />
+    <Content Include="Areas\MesDev\Views\CheckRecord\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\CheckRecord\Index.js" />
+    <Content Include="Areas\MesDev\Views\CheckRecord\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\CheckRecord\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

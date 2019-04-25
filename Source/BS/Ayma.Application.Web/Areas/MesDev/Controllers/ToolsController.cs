@@ -16,7 +16,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         private Mes_ProductOrderHeadIBLL mesProductOrderHead=new Mes_ProductOrderHeadBLL();
         #region 获取数据
         /// <summary>
-        /// 根据仓库编码获取仓库实体信息
+        /// 根据仓库编码或名称获取仓库实体信息
         /// </summary>
         /// <param name="code">仓库编码</param>
         /// <returns></returns>
@@ -52,6 +52,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(entity);
         }
 
+      
         /// <summary>
         /// 获取所有仓库列表
         /// </summary>
@@ -251,6 +252,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(supplyEntity);
         }
         /// <summary>
+        /// 根据名字获取用户实体信息
+        /// </summary>
+        /// <param name="name">名字</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByNameGetUserEntity(string name)
+        {
+            var userEntity = toosIBLL.ByNameGetUserEntity(name);
+            return Success(userEntity);
+        }
+        /// <summary>
         /// 获取供应商列表
         /// </summary>
         /// <returns></returns>
@@ -270,6 +283,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetUserList()
         {
             var userList = toosIBLL.GetUserList();
+            return Success(userList);
+        } 
+        /// <summary>
+        /// 获取用户列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetUserNoSysList()
+        {
+            var userList = toosIBLL.GetUserNoSysList();
             return Success(userList);
         }
         /// <summary>

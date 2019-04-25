@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "考勤管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-12 am-form-item"  data-table="Mes_CheckRecord" >
+        <div class="am-form-item-title">用户编码</div>
+        <input id="C_UserCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_CheckRecord" >
+        <div class="am-form-item-title">用户姓名</div>
+        <input id="C_UserName" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_CheckRecord" >
+        <div class="am-form-item-title">打卡日期</div>
+        <input id="C_ScanDate" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_CheckRecord" >
+        <div class="am-form-item-title">打卡时间</div>
+        <input id="C_ScanTime" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_CheckRecord" >
+        <div class="am-form-item-title">备注</div>
+        <input id="C_Remark" type="text" class="form-control" disabled="disabled" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/CheckRecord/Form.js")

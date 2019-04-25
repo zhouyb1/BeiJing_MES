@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "社保设置";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">用户姓名<font face="宋体">*</font></div>
+        <div id="S_UserName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">用户编码</div>
+        <input id="S_UserCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">工资基数<font face="宋体">*</font></div>
+        <input id="S_Wagebase" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">养老单位比例<font face="宋体">*</font></div>
+        <input id="S_PensionUnitRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">养老个人比例<font face="宋体">*</font></div>
+        <input id="S_PensionPersonRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">失业单位比例<font face="宋体">*</font></div>
+        <input id="S_OutWorkUnitRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">失业个人比例<font face="宋体">*</font>
+        </div>
+        <input id="S_OutWorkPersonRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">医疗单位比例<font face="宋体">*</font></div>
+        <input id="S_MedicalUnitRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">医疗个人比例<font face="宋体">*</font></div>
+        <input id="S_MedicalPresonRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">工伤单位比例<font face="宋体">*</font></div>
+        <input id="S_InJuryUnitRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_SocialSet">
+        <div class="am-form-item-title">生育单位比例<font face="宋体">*</font></div>
+        <input id="S_BearUnitRatio" type="text" value="100" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/SocialSet/Form.js")

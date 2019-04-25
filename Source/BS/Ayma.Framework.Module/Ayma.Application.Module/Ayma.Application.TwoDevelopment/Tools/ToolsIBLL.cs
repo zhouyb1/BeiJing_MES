@@ -133,7 +133,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="code">编码</param>
         /// <returns></returns>
-        Mes_SupplyEntity ByCodeGetSupplyEntity(string code);
+        Mes_SupplyEntity ByCodeGetSupplyEntity(string code); 
+        /// <summary>
+        /// 根据名字获取用户实体信息
+        /// </summary>
+        /// <param name="name">名字</param>
+        /// <returns></returns>
+        UserEntity ByNameGetUserEntity(string name);
         /// <summary>
         /// 获取供应商列表
         /// </summary>
@@ -143,7 +149,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取用户列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<UserEntity> GetUserList();
+        IEnumerable<UserEntity> GetUserList();   
+        /// <summary>
+        /// 获取用户列表(超级管理员除外)
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<UserEntity> GetUserNoSysList();
         /// <summary>
         /// 获取班次列表
         /// </summary>

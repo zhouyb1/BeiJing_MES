@@ -522,6 +522,31 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 根据名字获取用户实体信息
+        /// </summary>
+        /// <param name="name">名字</param>
+        /// <returns></returns>
+        public UserEntity ByNameGetUserEntity(string name)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<UserEntity>(x => x.F_RealName == name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取供应商列表
         /// </summary>
@@ -566,6 +591,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 获取用户列表(超级管理员除外)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserEntity> GetUserNoSysList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<UserEntity>(c => c.F_Account != "System");
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取班次列表
         /// </summary>

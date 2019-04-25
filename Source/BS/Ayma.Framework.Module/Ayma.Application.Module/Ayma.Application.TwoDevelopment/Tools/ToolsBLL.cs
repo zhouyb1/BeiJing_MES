@@ -495,6 +495,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 根据名字获取用户实体信息
+        /// </summary>
+        /// <param name="name">名字</param>
+        /// <returns></returns>
+        public UserEntity ByNameGetUserEntity(string name)
+        {
+            try
+            {
+                return toolsService.ByNameGetUserEntity(name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
         /// <summary>
         /// 获取供应商列表
@@ -527,6 +550,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.GetUserList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取用户列表(超级管理员除外)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<UserEntity> GetUserNoSysList()
+        {
+            try
+            {
+                return toolsService.GetUserNoSysList();
             }
             catch (Exception ex)
             {

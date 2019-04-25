@@ -253,6 +253,14 @@
     <Compile Include="MesDev\Convert\ConvertService.cs" />
     <Compile Include="MesDev\Convert\ConvertBLL.cs" />
     <Compile Include="MesDev\Convert\ConvertIBLL.cs" />
+    <Compile Include="MesDev\SocialSet\Mes_SocialSetEntity.cs" />
+    <Compile Include="MesDev\SocialSet\SocialSetService.cs" />
+    <Compile Include="MesDev\SocialSet\SocialSetBLL.cs" />
+    <Compile Include="MesDev\SocialSet\SocialSetIBLL.cs" />
+    <Compile Include="MesDev\CheckRecord\Mes_CheckRecordEntity.cs" />
+    <Compile Include="MesDev\CheckRecord\CheckRecordService.cs" />
+    <Compile Include="MesDev\CheckRecord\CheckRecordBLL.cs" />
+    <Compile Include="MesDev\CheckRecord\CheckRecordIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
