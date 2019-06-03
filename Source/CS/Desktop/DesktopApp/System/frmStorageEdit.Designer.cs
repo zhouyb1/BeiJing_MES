@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.入库单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料类型 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtMaterInNo = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +50,15 @@
             this.txtKind = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comBasketType = new System.Windows.Forms.ComboBox();
+            this.入库单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料类型 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -77,7 +77,7 @@
             this.备注,
             this.价格});
             this.dataGridView.Location = new System.Drawing.Point(9, 60);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 27;
@@ -85,6 +85,217 @@
             this.dataGridView.Size = new System.Drawing.Size(665, 209);
             this.dataGridView.TabIndex = 60;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            // 
+            // txtMaterInNo
+            // 
+            this.txtMaterInNo.Location = new System.Drawing.Point(83, 21);
+            this.txtMaterInNo.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMaterInNo.Name = "txtMaterInNo";
+            this.txtMaterInNo.ReadOnly = true;
+            this.txtMaterInNo.Size = new System.Drawing.Size(131, 21);
+            this.txtMaterInNo.TabIndex = 1002;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 23);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.TabIndex = 1001;
+            this.label1.Text = "入库单号：";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(31, 295);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 1003;
+            this.label2.Text = "物料编码：";
+            // 
+            // txtGoodsCode
+            // 
+            this.txtGoodsCode.Location = new System.Drawing.Point(98, 292);
+            this.txtGoodsCode.Margin = new System.Windows.Forms.Padding(2);
+            this.txtGoodsCode.Name = "txtGoodsCode";
+            this.txtGoodsCode.Size = new System.Drawing.Size(92, 21);
+            this.txtGoodsCode.TabIndex = 1012;
+            this.txtGoodsCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsCode_KeyDown);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(134, 374);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(2);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(56, 26);
+            this.btnSave.TabIndex = 1018;
+            this.btnSave.Text = "保存";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Visible = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(415, 336);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 12);
+            this.label4.TabIndex = 1009;
+            this.label4.Text = "数量：";
+            // 
+            // btnPeeling
+            // 
+            this.btnPeeling.Location = new System.Drawing.Point(216, 374);
+            this.btnPeeling.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPeeling.Name = "btnPeeling";
+            this.btnPeeling.Size = new System.Drawing.Size(62, 26);
+            this.btnPeeling.TabIndex = 1019;
+            this.btnPeeling.Text = "去框称重";
+            this.btnPeeling.UseVisualStyleBackColor = true;
+            this.btnPeeling.Visible = false;
+            this.btnPeeling.Click += new System.EventHandler(this.btnPeeling_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(224, 295);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 1007;
+            this.label3.Text = "物料名称：";
+            // 
+            // btnWeigh
+            // 
+            this.btnWeigh.Image = global::DesktopApp.Properties.Resources.ok;
+            this.btnWeigh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnWeigh.Location = new System.Drawing.Point(33, 374);
+            this.btnWeigh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnWeigh.Name = "btnWeigh";
+            this.btnWeigh.Size = new System.Drawing.Size(71, 26);
+            this.btnWeigh.TabIndex = 1017;
+            this.btnWeigh.Text = "称重保存";
+            this.btnWeigh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnWeigh.UseVisualStyleBackColor = true;
+            this.btnWeigh.Click += new System.EventHandler(this.btnWeigh_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(224, 332);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 12);
+            this.label6.TabIndex = 1006;
+            this.label6.Text = "入库单价：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(526, 298);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 1008;
+            this.label8.Text = "物料类型：";
+            // 
+            // txtUnit
+            // 
+            this.txtUnit.Location = new System.Drawing.Point(458, 292);
+            this.txtUnit.Margin = new System.Windows.Forms.Padding(2);
+            this.txtUnit.Name = "txtUnit";
+            this.txtUnit.ReadOnly = true;
+            this.txtUnit.Size = new System.Drawing.Size(56, 21);
+            this.txtUnit.TabIndex = 1011;
+            this.txtUnit.TextChanged += new System.EventHandler(this.txtUnit_TextChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(53, 336);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(41, 12);
+            this.label7.TabIndex = 1005;
+            this.label7.Text = "批次：";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(415, 296);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(41, 12);
+            this.label5.TabIndex = 1004;
+            this.label5.Text = "单位：";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // txtQty
+            // 
+            this.txtQty.Location = new System.Drawing.Point(458, 329);
+            this.txtQty.Margin = new System.Windows.Forms.Padding(2);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.Size = new System.Drawing.Size(56, 21);
+            this.txtQty.TabIndex = 1013;
+            // 
+            // txtBatch
+            // 
+            this.txtBatch.Location = new System.Drawing.Point(99, 329);
+            this.txtBatch.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBatch.Name = "txtBatch";
+            this.txtBatch.Size = new System.Drawing.Size(91, 21);
+            this.txtBatch.TabIndex = 1014;
+            // 
+            // txtPrice
+            // 
+            this.txtPrice.Location = new System.Drawing.Point(290, 330);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrice.Name = "txtPrice";
+            this.txtPrice.Size = new System.Drawing.Size(113, 21);
+            this.txtPrice.TabIndex = 1015;
+            this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
+            // 
+            // txtGoodsName
+            // 
+            this.txtGoodsName.Location = new System.Drawing.Point(290, 292);
+            this.txtGoodsName.Margin = new System.Windows.Forms.Padding(2);
+            this.txtGoodsName.Name = "txtGoodsName";
+            this.txtGoodsName.ReadOnly = true;
+            this.txtGoodsName.Size = new System.Drawing.Size(113, 21);
+            this.txtGoodsName.TabIndex = 1010;
+            this.txtGoodsName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsName_KeyDown);
+            // 
+            // txtKind
+            // 
+            this.txtKind.Location = new System.Drawing.Point(592, 295);
+            this.txtKind.Margin = new System.Windows.Forms.Padding(2);
+            this.txtKind.Name = "txtKind";
+            this.txtKind.ReadOnly = true;
+            this.txtKind.Size = new System.Drawing.Size(62, 21);
+            this.txtKind.TabIndex = 1016;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(535, 337);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.TabIndex = 1021;
+            this.label9.Text = "框类型：";
+            // 
+            // comBasketType
+            // 
+            this.comBasketType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comBasketType.FormattingEnabled = true;
+            this.comBasketType.Location = new System.Drawing.Point(592, 335);
+            this.comBasketType.Margin = new System.Windows.Forms.Padding(2);
+            this.comBasketType.Name = "comBasketType";
+            this.comBasketType.Size = new System.Drawing.Size(62, 20);
+            this.comBasketType.TabIndex = 1022;
             // 
             // 入库单号
             // 
@@ -149,219 +360,9 @@
             this.备注.Name = "备注";
             this.备注.ReadOnly = true;
             // 
-            // txtMaterInNo
-            // 
-            this.txtMaterInNo.Location = new System.Drawing.Point(83, 21);
-            this.txtMaterInNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtMaterInNo.Name = "txtMaterInNo";
-            this.txtMaterInNo.ReadOnly = true;
-            this.txtMaterInNo.Size = new System.Drawing.Size(131, 21);
-            this.txtMaterInNo.TabIndex = 1002;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 23);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
-            this.label1.TabIndex = 1001;
-            this.label1.Text = "入库单号：";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 295);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 12);
-            this.label2.TabIndex = 1003;
-            this.label2.Text = "物料编码：";
-            // 
-            // txtGoodsCode
-            // 
-            this.txtGoodsCode.Location = new System.Drawing.Point(98, 292);
-            this.txtGoodsCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtGoodsCode.Name = "txtGoodsCode";
-            this.txtGoodsCode.Size = new System.Drawing.Size(92, 21);
-            this.txtGoodsCode.TabIndex = 1012;
-            this.txtGoodsCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsCode_KeyDown);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(134, 374);
-            this.btnSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(56, 26);
-            this.btnSave.TabIndex = 1018;
-            this.btnSave.Text = "保存";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Visible = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(415, 336);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 12);
-            this.label4.TabIndex = 1009;
-            this.label4.Text = "数量：";
-            // 
-            // btnPeeling
-            // 
-            this.btnPeeling.Location = new System.Drawing.Point(216, 374);
-            this.btnPeeling.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnPeeling.Name = "btnPeeling";
-            this.btnPeeling.Size = new System.Drawing.Size(62, 26);
-            this.btnPeeling.TabIndex = 1019;
-            this.btnPeeling.Text = "去框称重";
-            this.btnPeeling.UseVisualStyleBackColor = true;
-            this.btnPeeling.Visible = false;
-            this.btnPeeling.Click += new System.EventHandler(this.btnPeeling_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(224, 295);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 1007;
-            this.label3.Text = "物料名称：";
-            // 
-            // btnWeigh
-            // 
-            this.btnWeigh.Image = global::DesktopApp.Properties.Resources.ok;
-            this.btnWeigh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnWeigh.Location = new System.Drawing.Point(33, 374);
-            this.btnWeigh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.btnWeigh.Name = "btnWeigh";
-            this.btnWeigh.Size = new System.Drawing.Size(71, 26);
-            this.btnWeigh.TabIndex = 1017;
-            this.btnWeigh.Text = "称重保存";
-            this.btnWeigh.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnWeigh.UseVisualStyleBackColor = true;
-            this.btnWeigh.Click += new System.EventHandler(this.btnWeigh_Click);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(224, 332);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(65, 12);
-            this.label6.TabIndex = 1006;
-            this.label6.Text = "入库单价：";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(526, 298);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
-            this.label8.TabIndex = 1008;
-            this.label8.Text = "物料类型：";
-            // 
-            // txtUnit
-            // 
-            this.txtUnit.Location = new System.Drawing.Point(458, 292);
-            this.txtUnit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtUnit.Name = "txtUnit";
-            this.txtUnit.ReadOnly = true;
-            this.txtUnit.Size = new System.Drawing.Size(56, 21);
-            this.txtUnit.TabIndex = 1011;
-            this.txtUnit.TextChanged += new System.EventHandler(this.txtUnit_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(53, 336);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(41, 12);
-            this.label7.TabIndex = 1005;
-            this.label7.Text = "批次：";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(415, 296);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 12);
-            this.label5.TabIndex = 1004;
-            this.label5.Text = "单位：";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
-            // txtQty
-            // 
-            this.txtQty.Location = new System.Drawing.Point(458, 329);
-            this.txtQty.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(56, 21);
-            this.txtQty.TabIndex = 1013;
-            // 
-            // txtBatch
-            // 
-            this.txtBatch.Location = new System.Drawing.Point(99, 329);
-            this.txtBatch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtBatch.Name = "txtBatch";
-            this.txtBatch.Size = new System.Drawing.Size(91, 21);
-            this.txtBatch.TabIndex = 1014;
-            // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(290, 330);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(113, 21);
-            this.txtPrice.TabIndex = 1015;
-            this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
-            // 
-            // txtGoodsName
-            // 
-            this.txtGoodsName.Location = new System.Drawing.Point(290, 292);
-            this.txtGoodsName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtGoodsName.Name = "txtGoodsName";
-            this.txtGoodsName.ReadOnly = true;
-            this.txtGoodsName.Size = new System.Drawing.Size(113, 21);
-            this.txtGoodsName.TabIndex = 1010;
-            this.txtGoodsName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsName_KeyDown);
-            // 
-            // txtKind
-            // 
-            this.txtKind.Location = new System.Drawing.Point(592, 295);
-            this.txtKind.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.txtKind.Name = "txtKind";
-            this.txtKind.ReadOnly = true;
-            this.txtKind.Size = new System.Drawing.Size(62, 21);
-            this.txtKind.TabIndex = 1016;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(535, 337);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
-            this.label9.TabIndex = 1021;
-            this.label9.Text = "框类型：";
-            // 
-            // comBasketType
-            // 
-            this.comBasketType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comBasketType.FormattingEnabled = true;
-            this.comBasketType.Location = new System.Drawing.Point(592, 335);
-            this.comBasketType.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.comBasketType.Name = "comBasketType";
-            this.comBasketType.Size = new System.Drawing.Size(62, 20);
-            this.comBasketType.TabIndex = 1022;
-            // 
             // 价格
             // 
+            this.价格.DataPropertyName = "M_Price";
             this.价格.HeaderText = "价格";
             this.价格.Name = "价格";
             this.价格.ReadOnly = true;
@@ -394,7 +395,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmStorageEdit";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "物料入库编辑";
@@ -427,6 +428,8 @@
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtGoodsName;
         private System.Windows.Forms.TextBox txtKind;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comBasketType;
         private System.Windows.Forms.DataGridViewTextBoxColumn 入库单号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料编码;
@@ -436,8 +439,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox comBasketType;
         private System.Windows.Forms.DataGridViewTextBoxColumn 价格;
     }
 }

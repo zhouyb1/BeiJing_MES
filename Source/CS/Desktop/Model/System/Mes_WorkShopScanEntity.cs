@@ -6,81 +6,82 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public partial class Mes_InWorkShopTempEntity
+    public partial class Mes_WorkShopScanEntity
     {
         #region 属性\
         /// <summary>
         /// 
         /// </summary>
-        public string ID{ set; get; }
+        public string ID { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_StockCode{ set; get; }
+        public string W_RecordCode { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_StockName{ set; get; }
+        public string W_RecordName { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_WorkShop{ set; get; }
+        public string W_ProceCode { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_WorkShopName{ set; get; }
+        public string W_ProceName { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_OrderNo{ set; get; }
+        public string W_WorkShop { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public int I_Status{ set; get; }
+        public string W_WorkShopName { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_CreateBy{ set; get; }
+        public string W_OrderNo { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public DateTime I_CreateDate{ set; get; }
+        public int W_Status { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_GoodsCode { set; get; }
+        public string W_CreateBy { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_GoodsName{ set; get; }
+        public DateTime W_CreateDate { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_Unit{ set; get; }
+        public string W_GoodsCode { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public decimal I_Qty{ set; get; }
+        public string W_GoodsName { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_Batch{ set; get; }
+        public string W_Unit { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_Remark{ set; get; }
+        public decimal W_Qty { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_Record { set; get; }
+        public string W_Batch { set; get; }
         /// <summary>
         /// 
         /// </summary>
-        public string I_Barcode { set; get; }
+        public Decimal W_Price { set; get; }
+        
         /// <summary>
         /// 
         /// </summary>
-        public decimal I_Price { set; get; }
+        public string W_Remark { set; get; }
         #endregion
     }
 }

@@ -36,7 +36,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public string O_Status { set; get; }
+        public int O_Status { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -44,7 +44,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public string O_CreateDate { set; get; }
+        public DateTime O_CreateDate { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -60,7 +60,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public string O_Qty { set; get; }
+        public decimal O_Qty { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -69,6 +69,18 @@ namespace Model
         /// 
         /// </summary>
         public string O_Remark { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string O_Record { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string O_Barcode { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public decimal O_Price { set; get; }
         #endregion
     }
 }

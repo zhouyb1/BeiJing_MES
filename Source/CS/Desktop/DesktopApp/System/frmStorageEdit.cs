@@ -83,14 +83,17 @@ namespace DesktopApp
             if(M_Status == "2")
             {
                 untCommon.InfoMsg("该单据已经审核，不能再添加！");
+                return;
             }
             if (M_Status == "3")
             {
                 untCommon.InfoMsg("该单据已经完成，不能再添加！");
+                return;
             }
             if (M_Status == "-1")
             {
                 untCommon.InfoMsg("该单据已经删除，不能再添加！");
+                return;
             }
             W_Kind = "入库称重";
             //addWeighStorage();
@@ -252,7 +255,7 @@ namespace DesktopApp
                     if (MesWeightRecordBLL.SaveEntity("", MesWeightRecord) > 0)
                     {
                         untCommon.InfoMsg("称重记录添加成功！");
-                        whether = 1;
+                        whether = 2;
                         //frmParent.loadData();
                         frmStorage.Refresh();
                     }
@@ -283,12 +286,12 @@ namespace DesktopApp
                 var rows = MaterInDetailBLL.GetList_GoodsCode("","");
                 if (checkInput())
                 {
-                    rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,M_MaterInNo);
-                    if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
-                    {
-                        untCommon.InfoMsg("称重记录数据错误！");
-                        return;
-                    }
+                    //rows = MaterInDetailBLL.GetList_GoodsCode(txtGoodsCode.Text,M_MaterInNo);
+                    //if (rows[0].M_GoodsCode == txtGoodsCode.Text && rows[0].M_GoodsName == txtGoodsName.Text && rows[0].M_Qty.ToString() == txtQty.Text)
+                    //{
+                    //    untCommon.InfoMsg("称重记录数据错误！");
+                    //    return;
+                    //}
 
                     MesWeightRecord.P_OrderNo = P_OrderNo;
                     MesWeightRecord.W_Kind = W_Kind;
@@ -311,7 +314,7 @@ namespace DesktopApp
                     MaterInDetail.M_GoodsCode = txtGoodsCode.Text;
                     MaterInDetail.M_GoodsName = txtGoodsName.Text;
                     MaterInDetail.M_Batch = txtBatch.Text;
-                    MaterInDetail.M_Price = txtPrice.Text;
+                    MaterInDetail.M_Price = Convert.ToDecimal(txtPrice.Text);
                     MaterInDetail.M_Qty = decimal.Parse(txtQty.Text) - decimal.Parse(Basket_rows[0].M_Weight.ToString());
                     MaterInDetail.M_Unit = txtUnit.Text;
                     MaterInDetail.M_Kind = Convert.ToString(Goods_rows[0].G_Kind);
@@ -354,6 +357,11 @@ namespace DesktopApp
                     {
                         var MaterInDetai_rows = MaterInDetailBLL.GetList_GoodsCode(MaterInDetail.M_GoodsCode,M_MaterInNo);
                         var rowData = MaterInDetailBLL.GetEntity(MaterInDetai_rows[0].ID);
+                        
+                        //
+
+                        Decimal dPrice = (rowData.M_Price * rowData.M_Qty + MaterInDetail.M_Price * MaterInDetail.M_Qty) / (rowData.M_Qty + MaterInDetail.M_Qty);
+                        rowData.M_Price = dPrice;
                         rowData.M_Qty += MaterInDetail.M_Qty;
                         if (MaterInDetailBLL.SaveEntityTrans(rowData.ID, rowData, "", MesWeightRecord) > 0)//事务
                         {
@@ -420,11 +428,13 @@ namespace DesktopApp
                     txtGoodsCode.Text = Goods_rows[0].G_Code;
                     txtGoodsName.Text = Goods_rows[0].G_Name;
                     txtUnit.Text = Goods_rows[0].G_Unit;
+                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
                     if (Goods_rows[0].G_Kind == 1)
                     {
                         txtKind.Text = "原物料";
                     }
-                    txtPrice.Focus();
+                    txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+                    txtQty.Focus();
                 }
                 else
                 {
@@ -455,6 +465,7 @@ namespace DesktopApp
                     {
                         txtKind.Text = "物料原材料";
                     }
+                    
                 }
                 else
                 {

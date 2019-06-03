@@ -30,5 +30,21 @@ namespace Business.System
                 throw;
             }
         }
+
+        public List<MesWorkShopEntity> GetData(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT W_Code,W_Name,W_Remark,CreateDate,CreateUserName,ModifyDate,ModifyUserName FROM Mes_WorkShop ");
+                strSql.Append(Condit);
+                var rows = db.ExecuteObjects<MesWorkShopEntity>(strSql.ToString());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

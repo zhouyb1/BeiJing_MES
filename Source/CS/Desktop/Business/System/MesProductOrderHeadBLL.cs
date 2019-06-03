@@ -37,7 +37,28 @@ namespace Business.System
                 throw;
             }
         }
-        
+
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <returns></returns>
+        public List<MesProductOrderHeadEntity> GetListAll()
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                var paramList = new List<SqlParameter>();
+                strSql.Append("SELECT * FROM Mes_ProductOrderHead");
+                //strSql.Append(" where P_OrderNo = @P_OrderNo");
+                //paramList.Add(new SqlParameter("@P_OrderNo", string.Format("{0}", OrderNo)));
+                var rows = db.ExecuteObjects<MesProductOrderHeadEntity>(strSql.ToString(), paramList.ToArray());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         /// <summary>
         /// 通过主键获取实体
         /// </summary>

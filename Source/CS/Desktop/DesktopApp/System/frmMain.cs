@@ -43,9 +43,9 @@ namespace DesktopApp
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            loadModule();
-            lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
-            lbUser.Text = "["+User.F_Account + "]" + User.F_RealName;
+            //loadModule();
+            //lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
+            //lbUser.Text = "["+User.F_Account + "]" + User.F_RealName;
         }
 
 
@@ -478,7 +478,7 @@ namespace DesktopApp
 
         private void 肉食处理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmMeatProcessList frmMeatProcess = new frmMeatProcessList(this,User);
+            frmOrgres frmMeatProcess = new frmOrgres(this, User);
             frmMeatProcess.TopLevel = false;
             frmMeatProcess.WindowState = FormWindowState.Maximized;
 
@@ -662,6 +662,24 @@ namespace DesktopApp
         private void panMain_ActiveContentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void 车间出库ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmOutWorkShopList frmInWorkShop = new frmOutWorkShopList(this, User);
+            frmInWorkShop.TopLevel = false;
+            frmInWorkShop.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmInWorkShop.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmInWorkShop.Show(this.panMain);
         }
 
 

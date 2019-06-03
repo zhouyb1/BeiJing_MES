@@ -36,6 +36,26 @@ namespace Business.System
         }
 
         /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <returns></returns>
+        public List<MesStockEntity> GetData(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Stock ");
+                strSql.Append(Condit);
+                var rows = db.ExecuteObjects<MesStockEntity>(strSql.ToString());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// 通过仓库编码或仓库名称获取数据列表
         /// </summary>
         /// <returns></returns>

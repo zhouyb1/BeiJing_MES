@@ -34,5 +34,26 @@ namespace Business.System
                 throw;
             }
         }
+
+
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <returns></returns>
+        public List<MesRecordEntity> GetData(string condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Record");
+                strSql.Append(condit);
+                var rows = db.ExecuteObjects<MesRecordEntity>(strSql.ToString());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

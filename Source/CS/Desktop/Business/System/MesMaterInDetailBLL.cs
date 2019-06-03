@@ -37,7 +37,8 @@ namespace Business.System
       ,[M_Unit]
       ,[M_Qty]
       ,[M_Batch]
-      ,[M_Remark] FROM Mes_MaterInDetail");
+      ,[M_Remark]
+      ,[M_Price] FROM Mes_MaterInDetail");
                 strSql.Append(" WHERE M_MaterInNo = @M_MaterInNo");
                 var paramList = new List<SqlParameter>();
                 paramList.Add(new SqlParameter("@M_MaterInNo", string.Format("{0}", keyValue)));
@@ -70,6 +71,7 @@ namespace Business.System
       ,[M_Unit]
       ,[M_Qty]
       ,[M_Batch]
+,[M_Price]
       ,[M_Remark] FROM Mes_MaterInDetail");
                 strSql.Append(" WHERE M_GoodsCode = @M_GoodsCode and M_MaterInNo=@M_MaterInNo");
                 var paramList = new List<SqlParameter>();
@@ -105,6 +107,7 @@ namespace Business.System
       ,[M_Unit]
       ,[M_Qty]
       ,[M_Batch]
+,[M_Price]
       ,[M_Remark] FROM Mes_MaterInDetail");
                 strSql.Append(" WHERE ID=@ID");
 				var paramList = new List<SqlParameter>();
@@ -268,6 +271,7 @@ namespace Business.System
                     strSql.Append("M_GoodsName=@M_GoodsName,");
                     strSql.Append("M_Unit=@M_Unit,");
                     strSql.Append("M_Qty=@M_Qty,");
+                    strSql.Append("M_Price=@M_Price,");
                     strSql.Append("M_Batch=@M_Batch,");
                     strSql.Append("M_Remark=@M_Remark ");
 

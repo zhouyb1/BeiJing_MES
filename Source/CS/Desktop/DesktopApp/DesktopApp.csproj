@@ -274,11 +274,29 @@
     <Compile Include="System\frmAreaSet.Designer.cs">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmInWorkShopList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmInWorkShopList.Designer.cs">
+      <DependentUpon>frmInWorkShopList.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmMeatProcessList.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System\frmMeatProcessList.Designer.cs">
       <DependentUpon>frmMeatProcessList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmOrgres.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmOrgres.Designer.cs">
+      <DependentUpon>frmOrgres.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmOutWorkShopList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmOutWorkShopList.Designer.cs">
+      <DependentUpon>frmOutWorkShopList.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmPowerSet.cs">
       <SubType>Form</SubType>
@@ -390,6 +408,19 @@
     <Compile Include="System\frmVegetableProcessList.Designer.cs">
       <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmWorkShopScanList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmWorkShopScanList.Designer.cs">
+      <DependentUpon>frmWorkShopScanList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmWorkShopWeightList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmWorkShopWeightList.Designer.cs">
+      <DependentUpon>frmWorkShopWeightList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\Globels.cs" />
     <Compile Include="System\PagerControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -483,8 +514,17 @@
     <EmbeddedResource Include="System\frmAreaSet.resx">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System\frmInWorkShopList.resx">
+      <DependentUpon>frmInWorkShopList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\frmMeatProcessList.resx">
       <DependentUpon>frmMeatProcessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmOrgres.resx">
+      <DependentUpon>frmOrgres.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmOutWorkShopList.resx">
+      <DependentUpon>frmOutWorkShopList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmPowerSet.resx">
       <DependentUpon>frmPowerSet.cs</DependentUpon>
@@ -549,6 +589,12 @@
     </Compile>
     <EmbeddedResource Include="System\frmVegetableProcessList.resx">
       <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmWorkShopScanList.resx">
+      <DependentUpon>frmWorkShopScanList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmWorkShopWeightList.resx">
+      <DependentUpon>frmWorkShopWeightList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\PagerControl.resx">
       <DependentUpon>PagerControl.cs</DependentUpon>

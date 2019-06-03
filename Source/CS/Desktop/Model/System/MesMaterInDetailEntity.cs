@@ -44,7 +44,7 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public string M_Price { set; get; }
+        public decimal M_Price { set; get; }
         /// <summary>
         /// 备注
         /// </summary>
