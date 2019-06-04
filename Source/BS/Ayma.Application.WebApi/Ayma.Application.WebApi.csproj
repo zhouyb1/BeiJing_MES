@@ -156,6 +156,7 @@
   <ItemGroup>
     <Compile Include="Bootstraper.cs" />
     <Compile Include="EncryptHelper.cs" />
+    <Compile Include="Model\CollectData.cs" />
     <Compile Include="Model\WxData.cs" />
     <Compile Include="Model\WxPayDaya.cs" />
     <Compile Include="Modules\BaseApi.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Modules\DataItemApi.cs" />
     <Compile Include="Modules\DataSourceApi.cs" />
     <Compile Include="Modules\DepartmentApi.cs" />
+    <Compile Include="Modules\FaceManager\FaceRecording.cs" />
     <Compile Include="Modules\FormApi.cs" />
     <Compile Include="Modules\Index.cs" />
     <Compile Include="Modules\AM_Crm\Invoice.cs" />
@@ -250,9 +252,7 @@
       <Name>Ayma.Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\ImagesManger\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
