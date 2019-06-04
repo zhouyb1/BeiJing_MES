@@ -17,16 +17,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
-        /// <summary>
-        /// 用户编码
-        /// </summary>
-        [Column("C_USERCODE")]
-        public string C_UserCode { get; set; }
-        /// <summary>
-        /// 用户姓名
-        /// </summary>
-        [Column("C_USERNAME")]
-        public string C_UserName { get; set; }
+        
         /// <summary>
         /// 打卡日期
         /// </summary>
@@ -51,6 +42,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Create()
         {
             this.ID = Guid.NewGuid().ToString();
+            this.C_ScanDate = DateTime.Now;
+            this.C_ScanTime = DateTime.Now;
+            this.C_State = CheckState.成功;
         }
         /// <summary>
         /// 编辑调用
@@ -59,10 +53,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
+            this.C_ScanDate = DateTime.Now;
+            this.C_ScanTime = DateTime.Now;
         }
         #endregion
         #region 扩展字段
+        /// <summary>
+        /// 设备IP
+        /// </summary>
+        /// <returns></returns>
+        [Column("C_IP")]
+        public string C_Ip { get; set; }
+        /// <summary>
+        /// C_DeviceKey
+        /// </summary>
+        /// <returns></returns>
+        [Column("C_DEVICEKEY")]
+        public string C_DeviceKey { get; set; }
+        /// <summary>
+        /// 人员类型
+        /// </summary>
+        [Column("C_TYPE")]
+        public string C_Type { get; set; }
+        /// <summary>
+        /// 用户编码
+        /// </summary>
+        /// <returns></returns>
+        [Column("C_PERSONID")]
+        public string C_PersonId { get; set; }
+        /// <summary>
+        /// 标识记录(0失败，1成功)
+        /// </summary>
+        /// <returns></returns>
+        [Column("C_STATE")]
+        public CheckState? C_State { get; set; }
         #endregion
+    }
+
+    public enum CheckState
+    {
+        成功=1,
+        失败=0
     }
 }
 

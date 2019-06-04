@@ -86,7 +86,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_CheckRecordEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Mes_CheckRecordEntity>(c=>c.ID==keyValue||c.C_PersonId==keyValue);
             }
             catch (Exception ex)
             {
