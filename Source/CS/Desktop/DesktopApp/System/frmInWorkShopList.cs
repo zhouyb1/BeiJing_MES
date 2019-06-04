@@ -263,7 +263,12 @@ namespace DesktopApp
                         nRow = InWorkShopDetailBLL.SaveEntity("", InWorkShopDetailEntity);
 
                     }
+
+                    //更改临时数据状态
+
                     MessageBox.Show("保存成功");
+
+
 
                 }
 

@@ -75,6 +75,11 @@ namespace DesktopApp
             fm.Show();
         }
 
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+        }
+
 
     }
 }

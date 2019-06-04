@@ -52,7 +52,7 @@ namespace DesktopApp
                 string url = "http://" + MesDevice[i].D_IP + ":8090/person/create";
 
                 string postData = "pass="+ 12345678 +"&person={\"id\":" + "\"" + user[i].F_EnCode + "\"," + "\"idcardNum\":" + "\"" + null + "\"," + "\"name\":" + "\"" + txtUserName.Text + "\"" + "}";
-                string strtemp = FaceRecognition.Port(url, postData);
+                string strtemp = FaceRecognition.RequestWithHttps(url, postData);
                 if (!FaceRecognition.json(strtemp))
                 {
                     untCommon.InfoMsg("该IP地址不可用！");

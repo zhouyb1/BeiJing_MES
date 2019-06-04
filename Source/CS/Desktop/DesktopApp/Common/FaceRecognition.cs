@@ -62,6 +62,56 @@ namespace DesktopApp
             }
         }
 
+
+        /// <summary>
+        /// 采用https协议访问网络
+        /// </summary>
+        /// <param name="URL">url</param>
+        /// <param name="strPostdata">发送的数据</param>
+        /// <returns>服务端返回的数据</returns>
+        public static string RequestWithHttps(string strUrl, string strPostdata)
+        {
+            string data = "";
+            HttpWebRequest request = null;
+            HttpWebResponse response = null;
+            StreamReader reader = null;
+            try
+            {
+                Encoding encoding = Encoding.GetEncoding("utf-8");
+                request = (HttpWebRequest)WebRequest.Create(strUrl);
+                request.Timeout = 3000000;
+                request.Method = "post";
+                request.Accept = "text/html, application/xhtml+xml, */*";
+                request.ContentType = "application/x-www-form-urlencoded";
+
+                /*判断是否需要发送数据*/
+                if (!string.IsNullOrEmpty(strPostdata))
+                {
+                    byte[] buffer = encoding.GetBytes(strPostdata);
+                    request.ContentLength = buffer.Length;
+                    request.GetRequestStream().Write(buffer, 0, buffer.Length);
+                }
+
+                response = (HttpWebResponse)request.GetResponse();
+                reader = new StreamReader(response.GetResponseStream(), encoding);
+
+                data = reader.ReadToEnd();
+            }
+            catch (WebException ex)
+            {
+                data = "";
+            }
+            finally
+            {
+                if (response != null)
+                    response.Close();
+                if (reader != null)
+                    reader.Close();
+            }
+
+            return data;
+        }
+
         /// <param name="POSTURL">请求提交的地址 如
         /// <param name="PostData">提交的数据(字符串)</param>
         /// <returns></returns>
