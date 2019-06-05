@@ -76,10 +76,10 @@
       <publishTime>06/04/2019 15:48:09</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WebApi.dll">
-      <publishTime>06/04/2019 17:32:33</publishTime>
+      <publishTime>06/05/2019 09:58:49</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WebApi.pdb">
-      <publishTime>06/04/2019 17:32:33</publishTime>
+      <publishTime>06/05/2019 09:58:49</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.dll">
       <publishTime>06/04/2019 15:48:07</publishTime>
@@ -268,7 +268,7 @@
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>06/04/2019 17:35:04</publishTime>
+      <publishTime>06/05/2019 09:58:52</publishTime>
     </File>
     <File Include="Web.config">
       <publishTime>06/04/2019 15:48:29</publishTime>
