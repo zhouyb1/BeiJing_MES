@@ -23,10 +23,10 @@ namespace Ayma.Application.WebApi.Modules.FaceManager
         /// 人脸识别记录
         /// </summary>
         /// <returns></returns>
-        public Response GetUserInfo (dynamic _)
+        public Response GetUserInfo(dynamic _)
         {
             var reqData = Request.Form;
-            if (reqData.Count==0)
+            if (reqData.Count == 0)
             {
                 return Fail("没有参数");
             }
@@ -35,7 +35,7 @@ namespace Ayma.Application.WebApi.Modules.FaceManager
             var path = reqData["path"].ToString();
             var type = reqData["type"].ToString();
             var deviceKey = reqData["deviceKey"].ToString();
-            
+
             if (string.IsNullOrWhiteSpace(ip))
             {
                 return Fail("ip为空！");
@@ -52,26 +52,15 @@ namespace Ayma.Application.WebApi.Modules.FaceManager
             {
                 return Fail("类型为空！");
             }
-            
-            //查询有无该条人脸识别的数据
-            var entity = checkRecordIbll.GetMes_CheckRecordEntity(personId);
-            if (entity == null)
+            var entity = new Mes_CheckRecordEntity()
             {
-                entity = new Mes_CheckRecordEntity()
-                {
-                    C_Type = type,
-                    C_DeviceKey = deviceKey,
-                    C_PersonId = personId,
-                    C_Ip = ip
-                };
-                checkRecordIbll.SaveEntity("", entity);
-            }
-            else
-            {
-                entity.C_State = CheckState.成功;
-                checkRecordIbll.SaveEntity(entity.ID, entity);
-            }
-            return Success(new { result = 1, success = true });
+                C_Type = type,
+                C_DeviceKey = deviceKey,
+                C_PersonId = personId,
+                C_Ip = ip
+            };
+            checkRecordIbll.SaveEntity("", entity);
+            return SendSuccess(new {result = 1, success = true});
         }
 
         /// <summary>
