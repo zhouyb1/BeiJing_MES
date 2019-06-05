@@ -154,6 +154,17 @@ namespace Ayma.Application.WebApi
             ResParameter res = new ResParameter { code = ResponseCode.fail, info = info, data = new object { } };
             return Response.AsText(res.ToJson()).WithContentType("application/json");
         }
+
+        /// <summary>
+        /// 针对人脸识别
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public Response SendSuccess(object data)
+        {
+            return Response.AsText(data.ToJson()).WithContentType("application/json");
+        }
+
         #endregion
         
         #region 权限验证
