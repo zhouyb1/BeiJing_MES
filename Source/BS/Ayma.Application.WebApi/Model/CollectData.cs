@@ -27,5 +27,7 @@ namespace Ayma.Application.WebApi.Model
         /// 现场照在设备内的保存路径，访问此 url 需设备局域网在线，且发送请求的客户端与设备处于局域网同一网段
         /// </summary>
         public string path { get; set; }
+
+        public DateTime time { get; set; }
     }
 }

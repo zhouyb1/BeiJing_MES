@@ -344,5 +344,25 @@ namespace Ayma.Application.WebApi
                 WriteLog(context,ex);
             }
         }
+        /// <summary>
+        /// 添加接口访问记录
+        /// </summary>
+        public void WriterInfaceLog(NancyContext context,object req)
+        {
+            try
+            {
+                var logMessage = new LogMessage() { OperationTime = DateTime.Now };
+                logMessage.Url = context.Request.Url.Path;
+                logMessage.Class = context.NegotiationContext.ModuleName;
+                logMessage.Ip = Net.Ip;
+                logMessage.Content = req.ToJson();
+                var message = new LogFormat().InfoFormat(logMessage);
+                Logger.Info(message);
+            }
+            catch (Exception ex)
+            {
+                WriteLog(context, ex);
+            }
+        }
     }
 }

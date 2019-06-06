@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.WebApi.Model;
@@ -25,39 +27,21 @@ namespace Ayma.Application.WebApi.Modules.FaceManager
         /// <returns></returns>
         public Response GetUserInfo(dynamic _)
         {
-            var reqData = Request.Form;
-            if (reqData.Count == 0)
+            var reqData = this.GetReq<CollectData>();
+            WriterInfaceLog(Context,reqData);
+            if (reqData == null)
             {
-                return Fail("没有参数");
-            }
-            var ip = reqData["ip"].ToString();
-            var personId = reqData["personId"].ToString();
-            var path = reqData["path"].ToString();
-            var type = reqData["type"].ToString();
-            var deviceKey = reqData["deviceKey"].ToString();
-
-            if (string.IsNullOrWhiteSpace(ip))
-            {
-                return Fail("ip为空！");
-            }
-            if (string.IsNullOrWhiteSpace(personId))
-            {
-                return Fail("personId为空！");
-            }
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                return Fail("照片路径为空！");
-            }
-            if (string.IsNullOrWhiteSpace(type))
-            {
-                return Fail("类型为空！");
+                return SendSuccess(new { result = 0, success = false });
             }
             var entity = new Mes_CheckRecordEntity()
             {
-                C_Type = type,
-                C_DeviceKey = deviceKey,
-                C_PersonId = personId,
-                C_Ip = ip
+                C_Type = reqData.type,
+                C_DeviceKey = reqData.deviceKey,
+                C_PersonId = reqData.personId,
+                C_Ip = reqData.ip,
+                C_ScanDate = reqData.time,
+                C_ScanTime = reqData.time
+               
             };
             checkRecordIbll.SaveEntity("", entity);
             return SendSuccess(new {result = 1, success = true});

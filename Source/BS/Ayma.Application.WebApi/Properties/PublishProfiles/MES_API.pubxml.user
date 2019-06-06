@@ -10,154 +10,154 @@
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Ayma.Application.AppMagager.dll">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.AppMagager.pdb">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Base.dll">
-      <publishTime>06/04/2019 15:48:04</publishTime>
+      <publishTime>06/05/2019 18:43:08</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Base.pdb">
-      <publishTime>06/04/2019 15:48:04</publishTime>
+      <publishTime>06/05/2019 18:43:08</publishTime>
     </File>
     <File Include="bin/Ayma.Application.CRM.dll">
-      <publishTime>06/04/2019 15:48:02</publishTime>
+      <publishTime>06/05/2019 18:43:05</publishTime>
     </File>
     <File Include="bin/Ayma.Application.CRM.pdb">
-      <publishTime>06/04/2019 15:48:02</publishTime>
+      <publishTime>06/05/2019 18:43:05</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.dll">
-      <publishTime>06/04/2019 15:48:11</publishTime>
+      <publishTime>06/06/2019 09:41:24</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.pdb">
-      <publishTime>06/04/2019 15:48:11</publishTime>
+      <publishTime>06/06/2019 09:41:24</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Form.dll">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Form.pdb">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.IM.dll">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.IM.pdb">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.dll">
-      <publishTime>06/04/2019 15:48:12</publishTime>
+      <publishTime>06/06/2019 09:41:26</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.pdb">
-      <publishTime>06/04/2019 15:48:12</publishTime>
+      <publishTime>06/06/2019 09:41:26</publishTime>
     </File>
     <File Include="bin/Ayma.Application.OA.dll">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:05</publishTime>
     </File>
     <File Include="bin/Ayma.Application.OA.pdb">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:05</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Organization.dll">
-      <publishTime>06/04/2019 15:48:03</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Organization.pdb">
-      <publishTime>06/04/2019 15:48:02</publishTime>
+      <publishTime>06/05/2019 18:43:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Report.dll">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Report.pdb">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.dll">
-      <publishTime>06/04/2019 15:48:09</publishTime>
+      <publishTime>06/06/2019 09:41:23</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.pdb">
-      <publishTime>06/04/2019 15:48:09</publishTime>
+      <publishTime>06/06/2019 09:41:23</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WebApi.dll">
-      <publishTime>06/05/2019 09:58:49</publishTime>
+      <publishTime>06/06/2019 09:41:28</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WebApi.pdb">
-      <publishTime>06/05/2019 09:58:49</publishTime>
+      <publishTime>06/06/2019 09:41:28</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.dll">
-      <publishTime>06/04/2019 15:48:07</publishTime>
+      <publishTime>06/05/2019 18:43:11</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.pdb">
-      <publishTime>06/04/2019 15:48:07</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Base.dll">
-      <publishTime>06/04/2019 15:47:53</publishTime>
+      <publishTime>06/05/2019 18:42:55</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Base.pdb">
-      <publishTime>06/04/2019 15:47:53</publishTime>
+      <publishTime>06/05/2019 18:42:55</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Factory.dll">
-      <publishTime>06/04/2019 15:48:01</publishTime>
+      <publishTime>06/05/2019 18:43:03</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Factory.pdb">
-      <publishTime>06/04/2019 15:48:01</publishTime>
+      <publishTime>06/05/2019 18:43:03</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Redis.dll">
-      <publishTime>06/04/2019 15:47:57</publishTime>
+      <publishTime>06/05/2019 18:42:59</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Redis.pdb">
-      <publishTime>06/04/2019 15:47:56</publishTime>
+      <publishTime>06/05/2019 18:42:59</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.dll">
-      <publishTime>06/04/2019 15:47:56</publishTime>
+      <publishTime>06/05/2019 18:42:58</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.MySqlEx.dll">
-      <publishTime>06/04/2019 15:47:58</publishTime>
+      <publishTime>06/05/2019 18:43:01</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.MySqlEx.pdb">
-      <publishTime>06/04/2019 15:47:58</publishTime>
+      <publishTime>06/05/2019 18:43:01</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Oracle.dll">
-      <publishTime>06/04/2019 15:48:00</publishTime>
+      <publishTime>06/05/2019 18:43:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Oracle.pdb">
-      <publishTime>06/04/2019 15:48:00</publishTime>
+      <publishTime>06/05/2019 18:43:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.pdb">
-      <publishTime>06/04/2019 15:47:56</publishTime>
+      <publishTime>06/05/2019 18:42:58</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Repository.dll">
-      <publishTime>06/04/2019 15:48:00</publishTime>
+      <publishTime>06/05/2019 18:43:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Repository.pdb">
-      <publishTime>06/04/2019 15:48:00</publishTime>
+      <publishTime>06/05/2019 18:43:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.SqlServer.dll">
-      <publishTime>06/04/2019 15:47:59</publishTime>
+      <publishTime>06/05/2019 18:43:00</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.SqlServer.pdb">
-      <publishTime>06/04/2019 15:47:59</publishTime>
+      <publishTime>06/05/2019 18:43:00</publishTime>
     </File>
     <File Include="bin/Ayma.Ioc.dll">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:56</publishTime>
     </File>
     <File Include="bin/Ayma.Ioc.pdb">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:56</publishTime>
     </File>
     <File Include="bin/Ayma.Loger.dll">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:57</publishTime>
     </File>
     <File Include="bin/Ayma.Loger.pdb">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:56</publishTime>
     </File>
     <File Include="bin/Ayma.Util.dll">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:57</publishTime>
     </File>
     <File Include="bin/Ayma.Util.Operat.dll">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Util.Operat.pdb">
-      <publishTime>06/04/2019 15:48:08</publishTime>
+      <publishTime>06/05/2019 18:43:10</publishTime>
     </File>
     <File Include="bin/Ayma.Util.pdb">
-      <publishTime>06/04/2019 15:47:54</publishTime>
+      <publishTime>06/05/2019 18:42:57</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>03/06/2019 10:02:03</publishTime>
@@ -262,16 +262,16 @@
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>03/06/2019 10:01:58</publishTime>
+      <publishTime>06/05/2019 18:47:37</publishTime>
     </File>
     <File Include="port.png">
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>06/05/2019 09:58:52</publishTime>
+      <publishTime>06/06/2019 09:41:29</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/04/2019 15:48:29</publishTime>
+      <publishTime>06/05/2019 18:49:57</publishTime>
     </File>
     <File Include="XmlConfig/database.config">
       <publishTime>03/06/2019 10:01:58</publishTime>
