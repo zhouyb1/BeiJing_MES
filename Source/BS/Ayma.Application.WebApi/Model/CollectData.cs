@@ -28,6 +28,6 @@ namespace Ayma.Application.WebApi.Model
         /// </summary>
         public string path { get; set; }
 
-        public DateTime time { get; set; }
+        public string time { get; set; }
     }
 }
