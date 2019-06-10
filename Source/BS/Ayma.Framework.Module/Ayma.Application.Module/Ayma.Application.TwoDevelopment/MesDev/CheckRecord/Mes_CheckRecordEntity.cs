@@ -42,8 +42,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Create()
         {
             this.ID = Guid.NewGuid().ToString();
-            this.C_ScanDate = DateTime.Now;
-            this.C_ScanTime = DateTime.Now;
             this.C_State = CheckState.成功;
         }
         /// <summary>
