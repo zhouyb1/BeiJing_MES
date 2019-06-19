@@ -2,6 +2,7 @@
 using Ayma.Util;
 using System.Collections.Generic;
 using System.Data;
+using Ayma.Application.TwoDevelopment.MesDev;
 
 namespace Ayma.Application.Excel
 {
@@ -72,6 +73,14 @@ namespace Ayma.Application.Excel
         /// <param name="dt">导入数据</param>
         /// <returns></returns>
         string ImportTable(string templateId, string fileId, DataTable dt);
+        /// <summary>
+        /// 数据导入(班次表导入)
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        string ImportClassTable(string fileId, DataTable dt, ref List<Mes_ClassEntity> listData);
 
         /// <summary>
         /// 获取excel导入的错误数据

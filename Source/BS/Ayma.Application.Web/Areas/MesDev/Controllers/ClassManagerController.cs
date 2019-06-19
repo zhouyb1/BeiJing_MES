@@ -17,7 +17,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         private ToolsIBLL toosIBLL = new ToolsBLL();
 
         #region 视图功能
-
+        /// <summary>
+        /// 导入班次表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ImportForm()
+        {
+            return View();
+        }
         /// <summary>
         /// 主页面
         /// </summary>

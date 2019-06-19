@@ -508,6 +508,8 @@
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordForm.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.css" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.js" />
+    <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.css" />
+    <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
@@ -1889,6 +1891,8 @@
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\Form.cshtml" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\HistoryForm.cshtml" />
     <Content Include="Properties\PublishProfiles\Ayma.pubxml.user" />
+    <Content Include="Resource\PhotoFile\0799d30d-5d14-4f15-aafe-be52b9808d52.jpg" />
+    <Content Include="Resource\System\20180814\wu_1ckrbcai66tkv3p1fftkp31jkca.jpg" />
     <Content Include="Views\Home\AdminAccordion\Index.css" />
     <Content Include="Views\Home\AdminAccordion\Index.js" />
     <Content Include="Views\Home\AdminDesktopTemp\Index.js" />
@@ -2256,6 +2260,7 @@
     <Content Include="Areas\MesDev\Views\ProductOrderMake\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

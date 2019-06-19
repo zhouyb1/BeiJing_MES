@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Schema;
 using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.MesDev;
+using Ayma.Application.TwoDevelopment.Tools;
 
 
 namespace Ayma.Application.Excel
@@ -27,7 +29,8 @@ namespace Ayma.Application.Excel
 
         private DataItemIBLL dataItemIBLL = new DataItemBLL();
         private DataSourceIBLL dataSourceIBLL = new DataSourceBLL();
-  
+        private ToolsIBLL toolsIbll = new ToolsBLL();
+
         #region 缓存定义
         private ICache cache = CacheFactory.CaChe();
         private string cacheKey = "ayma_adms_excelError_";       // +公司主键
@@ -204,8 +207,8 @@ namespace Ayma.Application.Excel
         #endregion
 
         #region 扩展方法
-        
-     
+
+
         /// <summary>
         /// excel 数据导入（未导入数据写入缓存）
         /// </summary>
@@ -370,7 +373,103 @@ namespace Ayma.Application.Excel
                 }
             }
         }
-    
+        /// <summary>
+        /// excel 数据导入（班次表导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        public string ImportClassTable(string fileId, DataTable dt, ref List<Mes_ClassEntity> listData)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<Mes_ClassEntity> listModel = new List<Mes_ClassEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var code = dr["编码"].ToString();//编码
+                            var name = dr["名称"].ToString();//名称
+                            var isCode = toolsIbll.IsCode("Mes_Class", "C_Code", code, "");//查询编码重复性
+                            var isName = toolsIbll.IsCode("Mes_Class", "C_Name", name, "");//查询编码重复性
+                            if (isCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "编码" + code + "已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            if (isName)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "名称" + name + "已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var startTime = dr["开始时间（格式 时:分:秒）"].ToString();//开始时间
+                            var endTime = dr["结束时间（格式 时:分:秒）"].ToString();//结束时间
+                            var remark = dr["备注"].ToString();//备注
+
+                            var model = new Mes_ClassEntity()
+                            {
+                                C_Code = code,
+                                C_Name = name,
+                                C_StartTime = startTime,
+                                C_EndTime = endTime,
+                                C_Remark = remark
+
+                            };
+                            listModel.Add(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取excel导入的错误数据
         /// </summary>
