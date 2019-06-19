@@ -17,7 +17,8 @@ namespace Ayma.Application.Web.Areas.MesDev
             context.MapRoute(
                 "MesDev_default",
                 "MesDev/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new string[] { "Ayma.Application.Web.Areas.MesDev" }
             );
         }
     }
