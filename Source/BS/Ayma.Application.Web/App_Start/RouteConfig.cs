@@ -22,7 +22,7 @@ namespace Ayma.Application.Web
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional },
-                namespaces: new string[] { "Ayma.Application.Web" }
+                namespaces: new string[] { "Ayma.Application.Web.Controllers" }
             );
         }
     }
