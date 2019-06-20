@@ -12,6 +12,7 @@ using System.Xml.Schema;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.TwoDevelopment.Tools;
+using Ayma.DataBase.Repository;
 
 
 namespace Ayma.Application.Excel
@@ -405,23 +406,23 @@ namespace Ayma.Application.Excel
                             var code = dr["编码"].ToString();//编码
                             var name = dr["名称"].ToString();//名称
                             var isCode = toolsIbll.IsCode("Mes_Class", "C_Code", code, "");//查询编码重复性
-                            var isName = toolsIbll.IsCode("Mes_Class", "C_Name", name, "");//查询编码重复性
+                            var isName = toolsIbll.IsName("Mes_Class", "C_Name", name, "");//查询名称重复性
                             if (isCode)
                             {
                                 fnum++;
-                                dr["导入错误"] = "编码" + code + "已存在";
+                                dr["导入错误"] = "编码【" + code + "】已存在";
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
                             if (isName)
                             {
                                 fnum++;
-                                dr["导入错误"] = "名称" + name + "已存在";
+                                dr["导入错误"] = "名称【" + name + "】已存在";
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            var startTime = dr["开始时间（格式 时:分:秒）"].ToString();//开始时间
-                            var endTime = dr["结束时间（格式 时:分:秒）"].ToString();//结束时间
+                            var startTime = dr["开始时间（时:分:秒）"].ToString();//开始时间
+                            var endTime = dr["结束时间（时:分:秒）"].ToString();//结束时间
                             var remark = dr["备注"].ToString();//备注
 
                             var model = new Mes_ClassEntity()
@@ -434,6 +435,216 @@ namespace Ayma.Application.Excel
 
                             };
                             listModel.Add(model);
+                            model.Create();
+                            new RepositoryFactory().BaseRepository().Insert(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// excel 数据导入（供应商导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        public string ImportSupplyTable(string fileId, DataTable dt, ref List<Mes_SupplyEntity> listData)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<Mes_SupplyEntity> listModel = new List<Mes_SupplyEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var code = dr["供应商编码"].ToString();//编码
+                            var name = dr["供应商名称"].ToString();//名称
+                            var isCode = toolsIbll.IsCode("Mes_Supply", "S_Code", code, "");//查询编码重复性
+                            var isName = toolsIbll.IsName("Mes_Supply", "S_Name", name, "");//查询名称重复性
+                            if (isCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "供应商编码【" + code + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            if (isName)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "供应商名称【" + name + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var effectTime = dr["资质期限（年-月-日）"].ToDate();//资质期限
+                            var remark = dr["备注"].ToString();//备注
+
+                            var model = new Mes_SupplyEntity()
+                            {
+                                S_Code = code,
+                                S_Name = name,
+                                S_EffectTime = effectTime,
+                                S_Remark = remark
+                            };
+                            listModel.Add(model);
+                            model.Create();
+                            new RepositoryFactory().BaseRepository().Insert(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// excel 数据导入（仓库表导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        public string ImportStockTable(string fileId, DataTable dt, ref List<Mes_StockEntity> listData)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<Mes_StockEntity> listModel = new List<Mes_StockEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var code = dr["仓库编码"].ToString();//编码
+                            var name = dr["仓库名称"].ToString();//名称
+                            var isCode = toolsIbll.IsCode("Mes_Stock", "S_Code", code, "");//查询编码重复性
+                            var isName = toolsIbll.IsName("Mes_Stock", "S_Name", name, "");//查询名称重复性
+                            if (isCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "仓库编码【" + code + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            if (isName)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "仓库名称【" + name + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var type = dr["仓库类型"].ToString();//仓库类型
+                            var dataItemList = dataItemIBLL.GetDetailList("StockType");
+                            DataItemDetailEntity dataItem = dataItemList.Find(t => t.F_ItemName == type);
+                            var stockType = "";
+                            if (dataItem != null)
+                            {
+                                stockType= dataItem.F_ItemValue;
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "仓库类型【" + type + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var person = dr["仓库负责人"].ToString();//仓库负责人
+                            var remark = dr["备注"].ToString();//备注
+
+                            var model = new Mes_StockEntity()
+                            {
+                                S_Code = code,
+                                S_Name = name,
+                                S_Peson = person,
+                                S_Kind = Convert.ToInt32(stockType),
+                                S_Remark = remark
+                            };
+                            listModel.Add(model);
+                            model.Create();
+                            new RepositoryFactory().BaseRepository().Insert(model);
                             snum++;
                         }
                         catch (Exception ex)

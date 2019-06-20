@@ -5,7 +5,7 @@
  * 日 期：2017.04.11
  * 描 述：导入Excel	
  */
-var id = "classimport";
+var id = "stockimport";
 
 var keyVaule = '';
 var bootstrap = function ($, ayma) {
@@ -21,7 +21,7 @@ var bootstrap = function ($, ayma) {
         param['chunks'] = fileInfo[file.id].chunks;
         param['ext'] = file.ext;
         param['templateId'] = id;
-        ayma.httpAsyncPost(top.$.rootUrl + "/Tools/ExecuteImportClassExcel", param, function (res) {
+        ayma.httpAsyncPost(top.$.rootUrl + "/Tools/ExecuteImportStockExcel", param, function (res) {
             var $fileItem = $('#am_form_file_queue_list').find('#am_filequeue_' + file.id);
             $fileItem.find('.am-uploader-progress').remove();
             if (res.code == ayma.httpCode.success) {

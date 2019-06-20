@@ -63,6 +63,20 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //导入仓库表
+            $('#am_import').on('click', function () {
+                ayma.layerForm({
+                    id: 'ImportForm',
+                    title: '导入仓库表',
+                    url: top.$.rootUrl + '/MesDev/StockList/ImportForm?formId=form',
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    btn: null,
+                    callBack: function () {
+                    }
+                });
+            });
         },
         // 初始化列表
         initGird: function () {

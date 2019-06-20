@@ -19,6 +19,7 @@ namespace Ayma.Application.Web.Controllers
         private AnnexesFileIBLL annexesFileIBLL = new AnnexesFileBLL();
         private ToolsIBLL toosIBLL = new ToolsBLL();
         #region 导入
+        #region excel文件导入（班次表）
         /// <summary>
         /// excel文件导入（班次表）
         /// </summary>
@@ -36,7 +37,7 @@ namespace Ayma.Application.Web.Controllers
                 DataTable dt = ExcelHelper.ExcelImport(path);
 
                 List<Mes_ClassEntity> listDataPost = null;//返回前端的商品调价表体数据
-                var res = excelImportIBLL.ImportClassTable(fileId, dt,  ref listDataPost);
+                var res = excelImportIBLL.ImportClassTable(fileId, dt, ref listDataPost);
                 var data = new
                 {
                     Success = res.Split('|')[0],
@@ -49,8 +50,75 @@ namespace Ayma.Application.Web.Controllers
             {
                 return Fail("导入数据失败!");
             }
-        }
-       
+        }  
+        #endregion
+
+        #region excel文件导入（供应商表）
+        /// <summary>
+        /// excel文件导入（供应商表）
+        /// </summary>
+        /// <param name="templateId">模板Id</param>
+        /// <param name="fileId">文件主键</param>
+        /// <param name="chunks">分片数</param>
+        /// <param name="ext">文件扩展名</param>    
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ExecuteImportSupplyExcel(string templateId, string fileId, int chunks, string ext)
+        {
+            string path = annexesFileIBLL.SaveAnnexes(fileId, fileId + "." + ext, chunks);
+            if (!string.IsNullOrEmpty(path))
+            {
+                DataTable dt = ExcelHelper.ExcelImport(path);
+
+                List<Mes_SupplyEntity> listDataPost = null;//返回前端的商品调价表体数据
+                var res = excelImportIBLL.ImportSupplyTable(fileId, dt, ref listDataPost);
+                var data = new
+                {
+                    Success = res.Split('|')[0],
+                    Fail = Convert.ToInt32(res.Split('|')[1]),
+                    Data = listDataPost
+                };
+                return Success(data);
+            }
+            else
+            {
+                return Fail("导入数据失败!");
+            }
+        } 
+        #endregion
+
+        /// <summary>
+        /// excel文件导入（仓库表）
+        /// </summary>
+        /// <param name="templateId">模板Id</param>
+        /// <param name="fileId">文件主键</param>
+        /// <param name="chunks">分片数</param>
+        /// <param name="ext">文件扩展名</param>    
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ExecuteImportStockExcel(string templateId, string fileId, int chunks, string ext)
+        {
+            string path = annexesFileIBLL.SaveAnnexes(fileId, fileId + "." + ext, chunks);
+            if (!string.IsNullOrEmpty(path))
+            {
+                DataTable dt = ExcelHelper.ExcelImport(path);
+
+                List<Mes_StockEntity> listDataPost = null;//返回前端的商品调价表体数据
+                var res = excelImportIBLL.ImportStockTable(fileId, dt, ref listDataPost);
+                var data = new
+                {
+                    Success = res.Split('|')[0],
+                    Fail = Convert.ToInt32(res.Split('|')[1]),
+                    Data = listDataPost
+                };
+                return Success(data);
+            }
+            else
+            {
+                return Fail("导入数据失败!");
+            }
+        } 
+
         #endregion
 
         #region 通用方法 获取数据

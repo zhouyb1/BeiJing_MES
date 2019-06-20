@@ -19,6 +19,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 视图功能
 
         /// <summary>
+        /// 仓库导入页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ImportForm()
+        {
+             return View();
+        } 
+        /// <summary>
         /// 主页面
         /// </summary>
         /// <returns></returns>

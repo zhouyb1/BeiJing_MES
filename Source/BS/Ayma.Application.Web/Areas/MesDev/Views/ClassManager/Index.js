@@ -74,7 +74,6 @@ var bootstrap = function ($, ayma) {
                     maxmin: true,
                     btn: null,
                     callBack: function () {
-
                     }
                 });
             });

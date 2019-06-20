@@ -567,6 +567,10 @@
     <Content Include="Areas\MesDev\Views\ScrapManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\ScrapManager\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\ScrapManager\PostPageForm.js" />
+    <Content Include="Areas\MesDev\Views\StockList\ImportForm.css" />
+    <Content Include="Areas\MesDev\Views\StockList\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\SupplyList\ImportForm.css" />
+    <Content Include="Areas\MesDev\Views\SupplyList\ImportForm.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\html5shiv.min.js" />
@@ -2261,6 +2265,8 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchForm.cshtml" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyList\ImportForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\StockList\ImportForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

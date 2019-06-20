@@ -62,6 +62,20 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //导入供应商表
+            $('#am_import').on('click', function () {
+                ayma.layerForm({
+                    id: 'ImportForm',
+                    title: '导入供应商表',
+                    url: top.$.rootUrl + '/MesDev/SupplyList/ImportForm?formId=form',
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    btn: null,
+                    callBack: function () {
+                    }
+                });
+            });
         },
         // 初始化列表
         initGird: function () {
