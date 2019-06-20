@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Xml.Schema;
+using Ayma.Application.Organization;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.TwoDevelopment.Tools;
@@ -31,6 +32,7 @@ namespace Ayma.Application.Excel
         private DataItemIBLL dataItemIBLL = new DataItemBLL();
         private DataSourceIBLL dataSourceIBLL = new DataSourceBLL();
         private ToolsIBLL toolsIbll = new ToolsBLL();
+        private DepartmentService departmentService = new DepartmentService();
 
         #region 缓存定义
         private ICache cache = CacheFactory.CaChe();
@@ -644,6 +646,190 @@ namespace Ayma.Application.Excel
                             };
                             listModel.Add(model);
                             model.Create();
+                            new RepositoryFactory().BaseRepository().Insert(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// excel 数据导入（用户表导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <param name="companyId">公司IdS</param>
+        /// <returns></returns>
+        public string ImportUserTable(string fileId, DataTable dt, ref List<UserEntity> listData, string companyId)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<UserEntity> listModel = new List<UserEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var enCode = dr["工号"].ToString();//工号
+                            var account = dr["登录账户"].ToString();//登录账户
+                            var isCode = toolsIbll.IsCode("AM_Base_User", "F_EnCode", enCode, "");//查询工号重复性
+                            var isName = toolsIbll.IsCode("AM_Base_User", "F_Account", account, "");//查询账号重复性
+                            if (isCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "工号【" + enCode + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            if (isName)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "登录账户【" + account + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var name = dr["真实姓名"].ToString();//真实姓名
+                            var genderType = dr["性别"].ToString();//性别
+                            var gender = 0;
+                            if (genderType=="男")
+                            {
+                                gender = 1;
+                            }
+                           
+                            var birthday = dr["生日"].ToDate();//生日
+                            var mobile = dr["手机"].ToString();//手机
+                            var telephone = dr["电话"].ToString();//电话
+                            var email = dr["电子邮件"].ToString();//电子邮件
+                            var description = dr["备注"].ToString();//备注
+                            var address = dr["地址"].ToString();//地址
+                            var department = dr["所属部门"].ToString();//所属部门
+                            var list=(List<DepartmentEntity>)departmentService.GetList(companyId);
+                            var departmentEntity=list.Where(c => c.F_FullName == department).FirstOrDefault();
+                            var departmentId = "";
+                            if (departmentEntity!=null)
+                            {
+                                departmentId = departmentEntity.F_DepartmentId;
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "部门【" + department + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                                
+                            }
+                            var kind = dr["员工类型（正式工，临时工，劳务工）"].ToString();//员工类型
+                            var dataItemList = dataItemIBLL.GetDetailList("EmployeeKind");
+                            DataItemDetailEntity dataItem = dataItemList.Find(t => t.F_ItemName == kind);
+                            var kindcode = 0;
+                            if (dataItem != null)
+                            {
+                                kindcode = Convert.ToInt32(dataItem.F_ItemValue);
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "员工类型【" + kind + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var rfidCode = dr["RFID编码"].ToString();//RFID编码
+                            var indate = dr["入职日期"].ToDate();//入职日期
+                            var outdate = dr["离职日期"].ToDate();//离职日期
+                            var cert = dr["身份证"].ToString();//身份证
+                            var nation = dr["民族"].ToString();//民族
+                            var record = dr["学历"].ToString();//学历
+                            var origin = dr["籍贯"].ToString();//籍贯
+                            var status = dr["在职状态（待入职，在职，待离职，离职）"].ToString();//职位状态
+                            var dataItemListStatus = dataItemIBLL.GetDetailList("JobStatus");
+                            DataItemDetailEntity dataItemStatus = dataItemListStatus.Find(t => t.F_ItemName == status);
+                            var statuscode = 0;
+                            if (dataItemStatus != null)
+                            {
+                                statuscode = Convert.ToInt32(dataItemStatus.F_ItemValue);
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "在职状态【" + status + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            var contract = dr["合同到期时间"].ToDate();//合同到期时间
+                            
+                            
+                            var model = new UserEntity()
+                            {
+                               F_EnCode = enCode,
+                               F_Account = account,
+                               F_RealName = name,
+                               F_Gender = gender,
+                               F_Birthday = birthday,
+                               F_Mobile = mobile,
+                               F_Telephone = telephone,
+                               F_Email = email,
+                               F_Description = description,
+                               U_Address = address,
+                               F_DepartmentId = departmentId,
+                               F_Kind = kindcode,
+                               F_RFIDCode = rfidCode,
+                               F_Indate = indate,
+                               F_Outdate = outdate,
+                               F_Cert = cert,
+                               F_Nation = nation,
+                               F_Record = record,
+                               F_Origin = origin,
+                               F_Status = statuscode,
+                               F_Contract = contract,
+                               F_CompanyId = companyId
+                            };
+                            listModel.Add(model);
+                            model.Create();
+                            model.F_Secretkey = Md5Helper.Encrypt(CommonHelper.CreateNo(), 16).ToLower();
+                            model.F_Password = Md5Helper.Encrypt(DESEncrypt.Encrypt(model.F_Password, model.F_Secretkey).ToLower(), 32).ToLower();
                             new RepositoryFactory().BaseRepository().Insert(model);
                             snum++;
                         }

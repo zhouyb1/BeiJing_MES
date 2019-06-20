@@ -17,6 +17,15 @@ namespace Ayma.Application.Web.Areas.AM_OrganizationModule.Controllers
 
         #region 获取视图
         /// <summary>
+        /// 用户导入页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ImportForm()
+        {
+            return View();
+        }
+        /// <summary>
         /// 用户管理主页
         /// </summary>
         /// <returns></returns>

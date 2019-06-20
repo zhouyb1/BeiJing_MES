@@ -94,6 +94,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //导入用户表
+            $('#am_import').on('click', function () {
+                if (!companyId) {
+                    ayma.alert.warning('请选择公司！');
+                    return false;
+                }
+                ayma.layerForm({
+                    id: 'ImportForm',
+                    title: '导入用户表',
+                    url: top.$.rootUrl + '/AM_OrganizationModule/User/ImportForm?companyId=' + companyId + '&formId=form',
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    btn: null,
+                    callBack: function () {
+                    }
+                });
+            });
             // 用户数据导出
             $('#am_export').on('click', function () {
                 location.href = top.$.rootUrl + "/AM_OrganizationModule/User/ExportUserList";

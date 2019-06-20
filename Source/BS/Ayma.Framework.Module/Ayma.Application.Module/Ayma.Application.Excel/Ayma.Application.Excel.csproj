@@ -62,6 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
+      <Project>{e9877a25-801b-4605-ad35-e6306916513c}</Project>
+      <Name>Ayma.Application.Organization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ayma.Cache\Ayma.Cache.Base\Ayma.Cache.Base.csproj">
       <Project>{975f2cb8-605c-4add-b365-b97bf844f0fe}</Project>
       <Name>Ayma.Cache.Base</Name>

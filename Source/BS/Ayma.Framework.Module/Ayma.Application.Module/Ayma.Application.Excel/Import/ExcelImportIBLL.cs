@@ -3,6 +3,7 @@ using Ayma.Util;
 using System.Collections.Generic;
 using System.Data;
 using Ayma.Application.TwoDevelopment.MesDev;
+using Ayma.Application.Organization;
 
 namespace Ayma.Application.Excel
 {
@@ -96,7 +97,16 @@ namespace Ayma.Application.Excel
         /// <param name="dt">导入数据</param>
         /// <param name="listData">返回前端的数据</param>
         /// <returns></returns>
-        string ImportStockTable(string fileId, DataTable dt, ref List<Mes_StockEntity> listData);
+        string ImportStockTable(string fileId, DataTable dt, ref List<Mes_StockEntity> listData); 
+        /// <summary>
+        /// 数据导入(用户表)
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <param name="companyId">公司id</param>
+        /// <returns></returns>
+        string ImportUserTable(string fileId, DataTable dt, ref List<UserEntity> listData, string companyId);
 
         /// <summary>
         /// 获取excel导入的错误数据
