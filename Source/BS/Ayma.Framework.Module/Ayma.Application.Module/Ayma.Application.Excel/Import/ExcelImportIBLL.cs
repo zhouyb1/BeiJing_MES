@@ -107,6 +107,14 @@ namespace Ayma.Application.Excel
         /// <param name="companyId">公司id</param>
         /// <returns></returns>
         string ImportUserTable(string fileId, DataTable dt, ref List<UserEntity> listData, string companyId);
+        /// <summary>
+        /// 数据导入(物料列表导入)
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        string ImportGoodsTable(string fileId, DataTable dt, ref List<Mes_GoodsEntity> listData);
 
         /// <summary>
         /// 获取excel导入的错误数据

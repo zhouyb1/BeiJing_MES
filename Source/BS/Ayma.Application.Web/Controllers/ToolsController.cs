@@ -122,8 +122,11 @@ namespace Ayma.Application.Web.Controllers
         }  
         #endregion
 
+        #region excel文件导入（用户表）
+
+
         /// <summary>
-        /// excel文件导入（用户表）
+        /// excel文件导入（物料表导入）
         /// </summary>
         /// <param name="templateId">模板Id</param>
         /// <param name="fileId">文件主键</param>
@@ -153,7 +156,40 @@ namespace Ayma.Application.Web.Controllers
             {
                 return Fail("导入数据失败!");
             }
-        }  
+        }   
+        #endregion
+
+        /// <summary>
+        /// excel文件导入（物料表导入）
+        /// </summary>
+        /// <param name="templateId">模板Id</param>
+        /// <param name="fileId">文件主键</param>
+        /// <param name="chunks">分片数</param>
+        /// <param name="ext">文件扩展名</param>      
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult ExecuteImportGoodsExcel(string templateId, string fileId, int chunks, string ext)
+        {
+            string path = annexesFileIBLL.SaveAnnexes(fileId, fileId + "." + ext, chunks);
+            if (!string.IsNullOrEmpty(path))
+            {
+                DataTable dt = ExcelHelper.ExcelImport(path);
+
+                List<Mes_GoodsEntity> listDataPost = null;//返回前端的商品调价表体数据
+                var res = excelImportIBLL.ImportGoodsTable(fileId, dt, ref listDataPost);
+                var data = new
+                {
+                    Success = res.Split('|')[0],
+                    Fail = Convert.ToInt32(res.Split('|')[1]),
+                    Data = listDataPost
+                };
+                return Success(data);
+            }
+            else
+            {
+                return Fail("导入数据失败!");
+            }
+        }   
 
         #endregion
 

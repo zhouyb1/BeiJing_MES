@@ -33,7 +33,7 @@ namespace Ayma.Application.Excel
         private DataSourceIBLL dataSourceIBLL = new DataSourceBLL();
         private ToolsIBLL toolsIbll = new ToolsBLL();
         private DepartmentService departmentService = new DepartmentService();
-        private UserIBLL userIbll=new UserBLL();
+        private UserIBLL userIbll = new UserBLL();
 
 
         #region 缓存定义
@@ -524,13 +524,13 @@ namespace Ayma.Application.Excel
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            DateTime? effectTime=null;
-                          
+                            DateTime? effectTime = null;
+
                             if (!dr["资质期限（年-月-日）"].ToString().IsEmpty())
                             {
                                 effectTime = Convert.ToDateTime(dr["资质期限（年-月-日）"]);//资质期限
                             }
-                            
+
                             var remark = dr["备注"].ToString();//备注
 
                             var model = new Mes_SupplyEntity()
@@ -632,7 +632,7 @@ namespace Ayma.Application.Excel
                             var stockType = "";
                             if (dataItem != null)
                             {
-                                stockType= dataItem.F_ItemValue;
+                                stockType = dataItem.F_ItemValue;
                             }
                             else
                             {
@@ -690,7 +690,7 @@ namespace Ayma.Application.Excel
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// excel 数据导入（用户表导入）
         /// </summary>
@@ -725,7 +725,7 @@ namespace Ayma.Application.Excel
                             var account = dr["登录账户"].ToString();//登录账户
                             var isCode = userIbll.GetEntityBy(enCode);//查询工号重复性
                             var isName = userIbll.GetEntityBy(account);//查询账号重复性
-                            if (isCode!=null)
+                            if (isCode != null)
                             {
                                 fnum++;
                                 dr["导入错误"] = "工号【" + enCode + "】已存在";
@@ -742,7 +742,7 @@ namespace Ayma.Application.Excel
                             var name = dr["真实姓名"].ToString();//真实姓名
                             var genderType = dr["性别"].ToString();//性别
                             var gender = 0;
-                            if (genderType=="男")
+                            if (genderType == "男")
                             {
                                 gender = 1;
                             }
@@ -758,10 +758,10 @@ namespace Ayma.Application.Excel
                             var description = dr["备注"].ToString();//备注
                             var address = dr["地址"].ToString();//地址
                             var department = dr["所属部门"].ToString();//所属部门
-                            var list=(List<DepartmentEntity>)departmentService.GetList(companyId);
-                            var departmentEntity=list.Where(c => c.F_FullName == department).FirstOrDefault();
+                            var list = (List<DepartmentEntity>)departmentService.GetList(companyId);
+                            var departmentEntity = list.Where(c => c.F_FullName == department).FirstOrDefault();
                             var departmentId = "";
-                            if (departmentEntity!=null)
+                            if (departmentEntity != null)
                             {
                                 departmentId = departmentEntity.F_DepartmentId;
                             }
@@ -771,7 +771,7 @@ namespace Ayma.Application.Excel
                                 dr["导入错误"] = "部门【" + department + "】不存在";
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
-                                
+
                             }
                             var kind = dr["员工类型(正式工,临时工,劳务工)"].ToString();//员工类型
                             var dataItemList = dataItemIBLL.GetDetailList("EmployeeKind");
@@ -789,17 +789,17 @@ namespace Ayma.Application.Excel
                                 continue;
                             }
                             var rfidCode = dr["RFID编码"].ToString();//RFID编码
-                            DateTime? indate=null;
+                            DateTime? indate = null;
                             if (!dr["入职日期"].ToString().IsEmpty())
                             {
-                                indate=Convert.ToDateTime(dr["入职日期"]);//入职日期
+                                indate = Convert.ToDateTime(dr["入职日期"]);//入职日期
                             }
-                            DateTime? outdate=null;
+                            DateTime? outdate = null;
                             if (!dr["离职日期"].ToString().IsEmpty())
                             {
                                 outdate = Convert.ToDateTime(dr["离职日期"]);//离职日期
                             }
-                            
+
                             var cert = dr["身份证"].ToString();//身份证
                             var nation = dr["民族"].ToString();//民族
                             var record = dr["学历"].ToString();//学历
@@ -819,44 +819,253 @@ namespace Ayma.Application.Excel
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            DateTime? contract=null;
+                            DateTime? contract = null;
                             if (!dr["合同到期时间"].ToString().IsEmpty())
                             {
                                 contract = Convert.ToDateTime(dr["合同到期时间"]);//合同到期时间
                             }
-                            
-                            
-                            
+
+
+
                             var model = new UserEntity()
                             {
-                               F_EnCode = enCode,
-                               F_Account = account,
-                               F_RealName = name,
-                               F_Gender = gender,
-                               F_Birthday = birthday,
-                               F_Mobile = mobile,
-                               F_Telephone = telephone,
-                               F_Email = email,
-                               F_Description = description,
-                               U_Address = address,
-                               F_DepartmentId = departmentId,
-                               F_Kind = kindcode,
-                               F_RFIDCode = rfidCode,
-                               F_Indate = indate,
-                               F_Outdate = outdate,
-                               F_Cert = cert,
-                               F_Nation = nation,
-                               F_Record = record,
-                               F_Origin = origin,
-                               F_Status = statuscode,
-                               F_Contract = contract,
-                               F_CompanyId = companyId
+                                F_EnCode = enCode,
+                                F_Account = account,
+                                F_RealName = name,
+                                F_Gender = gender,
+                                F_Birthday = birthday,
+                                F_Mobile = mobile,
+                                F_Telephone = telephone,
+                                F_Email = email,
+                                F_Description = description,
+                                U_Address = address,
+                                F_DepartmentId = departmentId,
+                                F_Kind = kindcode,
+                                F_RFIDCode = rfidCode,
+                                F_Indate = indate,
+                                F_Outdate = outdate,
+                                F_Cert = cert,
+                                F_Nation = nation,
+                                F_Record = record,
+                                F_Origin = origin,
+                                F_Status = statuscode,
+                                F_Contract = contract,
+                                F_CompanyId = companyId
                             };
                             listModel.Add(model);
                             model.Create();
                             model.F_Secretkey = Md5Helper.Encrypt(CommonHelper.CreateNo(), 16).ToLower();
                             //密码默认：0000
                             model.F_Password = Md5Helper.Encrypt(DESEncrypt.Encrypt("4a7d1ed414474e4033ac29ccb8653d9b", model.F_Secretkey).ToLower(), 32).ToLower();
+                            new RepositoryFactory().BaseRepository().Insert(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// excel 数据导入（物料表导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        public string ImportGoodsTable(string fileId, DataTable dt, ref List<Mes_GoodsEntity> listData)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<Mes_GoodsEntity> listModel = new List<Mes_GoodsEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var code = dr["商品编码"].ToString();//商品编码
+                            var name = dr["商品名称"].ToString();//商品名称
+                            var isCode = toolsIbll.IsCode("Mes_Goods", "G_Code", code, "");//查询编码重复性
+                            var isName = toolsIbll.IsName("Mes_Goods", "G_Name", name, "");//查询名称重复性
+                            if (isCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "商品编码【" + code + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            if (isName)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "商品名称【" + name + "】已存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+
+                            var kind = dr["商品类型(原材料,半成品,成品)"].ToString();//商品类型
+
+                            var dataItemList = dataItemIBLL.GetDetailList("GoodsType");
+                            DataItemDetailEntity dataItem = dataItemList.Find(t => t.F_ItemName == kind);
+                            var kindcode = 1;
+                            if (dataItem != null)
+                            {
+                                kindcode = Convert.ToInt32(dataItem.F_ItemValue);
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "商品类型【" + kind + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            int? period = null;
+                            if (!dr["保质时间(天)"].ToString().IsEmpty())
+                            {
+                                period = Convert.ToInt32(dr["保质时间(天)"]);//保质时间(天)
+                            }
+                            decimal? price = 0;//价格
+                            if (!dr["价格"].ToString().IsEmpty())
+                            {
+                                price = Convert.ToDecimal(dr["价格"]);
+                            }
+
+                            
+                            decimal? unitWeight = 0;//单位重量
+                            if (!dr["单位重量"].ToString().IsEmpty())
+                            {
+                                unitWeight = Convert.ToDecimal(dr["单位重量"]);//单位重量
+                            }
+                            decimal? super = 0;//上限预警单位数量
+                            if (!dr["上限预警单位数量"].ToString().IsEmpty())
+                            {
+                                super = Convert.ToDecimal(dr["上限预警单位数量"]);//上限预警单位数量
+                            }
+                            decimal? lower = 0;//下限预警单位数量
+                            if (!dr["下限预警单位数量"].ToString().IsEmpty())
+                            {
+                                lower = Convert.ToDecimal(dr["下限预警单位数量"]);//下限预警单位数量
+                            }
+                            
+                            var tKind = dr["二级分类(肉食,蔬菜,调料,冷链,面条,糕点)"].ToString();//二级分类
+                            var dataItemtKindList = dataItemIBLL.GetDetailList("GoodsTypeT");
+                            DataItemDetailEntity dataItemtKind = dataItemtKindList.Find(t => t.F_ItemName == tKind);
+                            string tkindcode = null;
+                            if (dataItemtKind != null)
+                            {
+                                tkindcode = dataItemtKind.F_ItemValue.ToString();
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "二级分类【" + kind + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            
+                            var self = dr["是否自制"].ToString();//是否自制
+                            int? selfcode = 0;
+                            if (self=="是")
+                            {
+                                selfcode = 1;
+                            }
+                            else
+                            {
+                                selfcode = 0;
+                            }
+                            var online = dr["是否在用"].ToString();//是否在用
+                            int? onlinecode = 0;
+                            if (online == "是")
+                            {
+                                onlinecode = 1;
+                            }
+                            else
+                            {
+                                onlinecode = 0;
+                            }
+
+                            int? prepareday = null;
+                            if (!dr["备料天数"].ToString().IsEmpty())
+                            {
+                                prepareday = Convert.ToInt32(dr["备料天数"]);//备料天数
+                            }
+                            decimal? otax = null;
+                            if (!dr["销售税率"].ToString().IsEmpty())
+                            {
+                                otax = Convert.ToDecimal(dr["销售税率"]);//销售税率
+                            }
+                            decimal? itax = null;
+                            if (!dr["购进税率"].ToString().IsEmpty())
+                            {
+                                itax = Convert.ToDecimal(dr["购进税率"]);//购进税率
+                            }
+                            var erpcode = dr["ERP中的编码(成品必填)"].ToString();//ERP中的编码(成品必填)
+                            var unitQty = dr["包装规格"].ToString();//包装规格
+                            var unit = dr["单位"].ToString();//单位
+                            var remark = dr["备注"].ToString();//备注
+                            var model = new Mes_GoodsEntity()
+                            {
+                                G_Code = code,
+                                G_Name = name,
+                                G_Kind = (ErpEnums.GkindEnum)kindcode,
+                                G_Period = period,
+                                G_Price = price,
+                                G_UnitWeight = unitWeight,
+                                G_Super = super,
+                                G_Lower = lower,
+                                G_TKind = tkindcode,
+                                G_UnitQty = unitQty,
+                                G_Self = (ErpEnums.YesOrNoEnum)selfcode,
+                                G_Online = (ErpEnums.YesOrNoEnum)onlinecode,
+                                G_Prepareday = prepareday,
+                                G_Otax = otax,
+                                G_Itax = itax,
+                                G_Erpcode = erpcode,
+                                G_Unit = unit,
+                                G_Remark = remark
+                            };
+                            listModel.Add(model);
+                            model.Create();
+
                             new RepositoryFactory().BaseRepository().Insert(model);
                             snum++;
                         }
