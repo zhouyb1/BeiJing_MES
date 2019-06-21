@@ -50,7 +50,13 @@ namespace Ayma.Application.Organization
         /// </summary>
         /// <param name="account">用户账号</param>
         /// <returns></returns>
-        UserEntity GetEntityByAccount(string account);
+        UserEntity GetEntityByAccount(string account); 
+        /// <summary>
+        /// 获取实体,通过工号或账号
+        /// </summary>
+        /// <param name="codeOrAcc">工号或账号</param>
+        /// <returns></returns>
+        UserEntity GetEntityBy(string codeOrAcc);
         /// <summary>
         /// 获取用户数据
         /// </summary>

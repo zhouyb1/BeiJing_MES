@@ -33,6 +33,8 @@ namespace Ayma.Application.Excel
         private DataSourceIBLL dataSourceIBLL = new DataSourceBLL();
         private ToolsIBLL toolsIbll = new ToolsBLL();
         private DepartmentService departmentService = new DepartmentService();
+        private UserIBLL userIbll=new UserBLL();
+
 
         #region 缓存定义
         private ICache cache = CacheFactory.CaChe();
@@ -522,7 +524,13 @@ namespace Ayma.Application.Excel
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            var effectTime = dr["资质期限（年-月-日）"].ToDate();//资质期限
+                            DateTime? effectTime=null;
+                          
+                            if (!dr["资质期限（年-月-日）"].ToString().IsEmpty())
+                            {
+                                effectTime = Convert.ToDateTime(dr["资质期限（年-月-日）"]);//资质期限
+                            }
+                            
                             var remark = dr["备注"].ToString();//备注
 
                             var model = new Mes_SupplyEntity()
@@ -715,16 +723,16 @@ namespace Ayma.Application.Excel
                         {
                             var enCode = dr["工号"].ToString();//工号
                             var account = dr["登录账户"].ToString();//登录账户
-                            var isCode = toolsIbll.IsCode("AM_Base_User", "F_EnCode", enCode, "");//查询工号重复性
-                            var isName = toolsIbll.IsCode("AM_Base_User", "F_Account", account, "");//查询账号重复性
-                            if (isCode)
+                            var isCode = userIbll.GetEntityBy(enCode);//查询工号重复性
+                            var isName = userIbll.GetEntityBy(account);//查询账号重复性
+                            if (isCode!=null)
                             {
                                 fnum++;
                                 dr["导入错误"] = "工号【" + enCode + "】已存在";
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            if (isName)
+                            if (isName != null)
                             {
                                 fnum++;
                                 dr["导入错误"] = "登录账户【" + account + "】已存在";
@@ -738,8 +746,12 @@ namespace Ayma.Application.Excel
                             {
                                 gender = 1;
                             }
-                           
-                            var birthday = dr["生日"].ToDate();//生日
+
+                            DateTime? birthday = null;
+                            if (!dr["生日"].ToString().IsEmpty())
+                            {
+                                birthday = Convert.ToDateTime(dr["生日"]);//生日
+                            }
                             var mobile = dr["手机"].ToString();//手机
                             var telephone = dr["电话"].ToString();//电话
                             var email = dr["电子邮件"].ToString();//电子邮件
@@ -761,7 +773,7 @@ namespace Ayma.Application.Excel
                                 continue;
                                 
                             }
-                            var kind = dr["员工类型（正式工，临时工，劳务工）"].ToString();//员工类型
+                            var kind = dr["员工类型(正式工,临时工,劳务工)"].ToString();//员工类型
                             var dataItemList = dataItemIBLL.GetDetailList("EmployeeKind");
                             DataItemDetailEntity dataItem = dataItemList.Find(t => t.F_ItemName == kind);
                             var kindcode = 0;
@@ -777,13 +789,22 @@ namespace Ayma.Application.Excel
                                 continue;
                             }
                             var rfidCode = dr["RFID编码"].ToString();//RFID编码
-                            var indate = dr["入职日期"].ToDate();//入职日期
-                            var outdate = dr["离职日期"].ToDate();//离职日期
+                            DateTime? indate=null;
+                            if (!dr["入职日期"].ToString().IsEmpty())
+                            {
+                                indate=Convert.ToDateTime(dr["入职日期"]);//入职日期
+                            }
+                            DateTime? outdate=null;
+                            if (!dr["离职日期"].ToString().IsEmpty())
+                            {
+                                outdate = Convert.ToDateTime(dr["离职日期"]);//离职日期
+                            }
+                            
                             var cert = dr["身份证"].ToString();//身份证
                             var nation = dr["民族"].ToString();//民族
                             var record = dr["学历"].ToString();//学历
                             var origin = dr["籍贯"].ToString();//籍贯
-                            var status = dr["在职状态（待入职，在职，待离职，离职）"].ToString();//职位状态
+                            var status = dr["在职状态(待入职,在职,待离职,离职)"].ToString();//在职状态
                             var dataItemListStatus = dataItemIBLL.GetDetailList("JobStatus");
                             DataItemDetailEntity dataItemStatus = dataItemListStatus.Find(t => t.F_ItemName == status);
                             var statuscode = 0;
@@ -798,7 +819,12 @@ namespace Ayma.Application.Excel
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            var contract = dr["合同到期时间"].ToDate();//合同到期时间
+                            DateTime? contract=null;
+                            if (!dr["合同到期时间"].ToString().IsEmpty())
+                            {
+                                contract = Convert.ToDateTime(dr["合同到期时间"]);//合同到期时间
+                            }
+                            
                             
                             
                             var model = new UserEntity()
@@ -829,7 +855,8 @@ namespace Ayma.Application.Excel
                             listModel.Add(model);
                             model.Create();
                             model.F_Secretkey = Md5Helper.Encrypt(CommonHelper.CreateNo(), 16).ToLower();
-                            model.F_Password = Md5Helper.Encrypt(DESEncrypt.Encrypt(model.F_Password, model.F_Secretkey).ToLower(), 32).ToLower();
+                            //密码默认：0000
+                            model.F_Password = Md5Helper.Encrypt(DESEncrypt.Encrypt("4a7d1ed414474e4033ac29ccb8653d9b", model.F_Secretkey).ToLower(), 32).ToLower();
                             new RepositoryFactory().BaseRepository().Insert(model);
                             snum++;
                         }

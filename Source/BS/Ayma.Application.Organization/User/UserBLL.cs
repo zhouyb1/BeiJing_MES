@@ -259,6 +259,30 @@ namespace Ayma.Application.Organization
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取实体,通过工号或账号
+        /// </summary>
+        /// <param name="codeOrAcc">工号或账号</param>
+        /// <returns></returns>
+        public UserEntity GetEntityBy(string codeOrAcc)
+        {
+            try
+            {
+                
+                return userService.GetEntityBy(codeOrAcc);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
         /// <summary>
         /// 获取用户数据

@@ -230,6 +230,29 @@ namespace Ayma.Application.Organization
                 }
             }
         }
+        /// <summary>
+        /// 通过工号或账号获取用户实体
+        /// </summary>
+        /// <param name="codeOrAcc">工号或账号</param>
+        /// <returns></returns>
+        public UserEntity GetEntityBy(string codeOrAcc)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<UserEntity>(t => (t.F_EnCode == codeOrAcc||t.F_Account==codeOrAcc) && t.F_DeleteMark == 0);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 验证数据
