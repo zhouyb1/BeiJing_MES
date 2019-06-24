@@ -115,6 +115,14 @@ namespace Ayma.Application.Excel
         /// <param name="listData">返回前端的数据</param>
         /// <returns></returns>
         string ImportGoodsTable(string fileId, DataTable dt, ref List<Mes_GoodsEntity> listData);
+        /// <summary>
+        /// 数据导入(配方表导入)
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        string ImportBomRecordTable(string fileId, DataTable dt, ref List<Mes_BomRecordEntity> listData);
 
         /// <summary>
         /// 获取excel导入的错误数据

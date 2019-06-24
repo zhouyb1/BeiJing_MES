@@ -34,7 +34,8 @@ namespace Ayma.Application.Excel
         private ToolsIBLL toolsIbll = new ToolsBLL();
         private DepartmentService departmentService = new DepartmentService();
         private UserIBLL userIbll = new UserBLL();
-
+        private ToolsService toolsService = new ToolsService();
+        private BomHeadIBLL bomHeadIBLL = new BomHeadBLL();
 
         #region 缓存定义
         private ICache cache = CacheFactory.CaChe();
@@ -942,7 +943,7 @@ namespace Ayma.Application.Excel
                                 continue;
                             }
 
-                            var kind = dr["商品类型(原材料,半成品,成品)"].ToString();//商品类型
+                            var kind = dr["商品类型(原料,半成品,成品)"].ToString();//商品类型
 
                             var dataItemList = dataItemIBLL.GetDetailList("GoodsType");
                             DataItemDetailEntity dataItem = dataItemList.Find(t => t.F_ItemName == kind);
@@ -969,7 +970,7 @@ namespace Ayma.Application.Excel
                                 price = Convert.ToDecimal(dr["价格"]);
                             }
 
-                            
+
                             decimal? unitWeight = 0;//单位重量
                             if (!dr["单位重量"].ToString().IsEmpty())
                             {
@@ -985,7 +986,7 @@ namespace Ayma.Application.Excel
                             {
                                 lower = Convert.ToDecimal(dr["下限预警单位数量"]);//下限预警单位数量
                             }
-                            
+
                             var tKind = dr["二级分类(肉食,蔬菜,调料,冷链,面条,糕点)"].ToString();//二级分类
                             var dataItemtKindList = dataItemIBLL.GetDetailList("GoodsTypeT");
                             DataItemDetailEntity dataItemtKind = dataItemtKindList.Find(t => t.F_ItemName == tKind);
@@ -1001,10 +1002,10 @@ namespace Ayma.Application.Excel
                                 failDt.Rows.Add(dr.ItemArray);
                                 continue;
                             }
-                            
+
                             var self = dr["是否自制"].ToString();//是否自制
                             int? selfcode = 0;
-                            if (self=="是")
+                            if (self == "是")
                             {
                                 selfcode = 1;
                             }
@@ -1062,6 +1063,203 @@ namespace Ayma.Application.Excel
                                 G_Erpcode = erpcode,
                                 G_Unit = unit,
                                 G_Remark = remark
+                            };
+                            listModel.Add(model);
+                            model.Create();
+
+                            new RepositoryFactory().BaseRepository().Insert(model);
+                            snum++;
+                        }
+                        catch (Exception ex)
+                        {
+                            fnum++;
+                            dr["导入错误"] = "格式有误";
+                            failDt.Rows.Add(dr.ItemArray);
+
+                        }
+                    }
+
+                    // 写入缓存如果有未导入的数据
+                    if (failDt.Rows.Count > 0)
+                    {
+                        string errordt = failDt.ToJson();
+
+                        cache.Write<string>(cacheKey + fileId, errordt, CacheId.excel);
+                    }
+
+                }
+                listData = listModel;
+
+                return snum + "|" + fnum;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// excel 数据导入（配方表导入）
+        /// </summary>
+        /// <param name="fileId">文件ID</param>
+        /// <param name="dt">导入数据</param>
+        /// <param name="listData">返回前端的数据</param>
+        /// <returns></returns>
+        public string ImportBomRecordTable(string fileId, DataTable dt, ref List<Mes_BomRecordEntity> listData)
+        {
+            int snum = 0;
+            int fnum = 0;
+            try
+            {
+                List<Mes_BomRecordEntity> listModel = new List<Mes_BomRecordEntity>();//返回前端的数据
+                if (dt.Rows.Count > 0)
+                {
+                    // 创建一个datatable容器用于保存导入失败的数据
+                    DataTable failDt = new DataTable();
+                    dt.Columns.Add("导入错误", typeof(string));
+                    foreach (DataColumn dc in dt.Columns)
+                    {
+                        failDt.Columns.Add(dc.ColumnName, dc.DataType);
+                    }
+
+                    // 循环遍历导入
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        try
+                        {
+                            var formulaCode = dr["配方编码"].ToString();//配方编码
+                            var formulaName = dr["配方名称"].ToString();//配方名称
+                            #region 物料编码
+                            var goodsCodeTemp = dr["物料编码(见物料表)"].ToString();//物料编码(见物料表)
+                            var goodsList = toolsIbll.GetGoodsList();
+                            var goodsEntity = goodsList.Where(c => c.G_Code == goodsCodeTemp).FirstOrDefault();
+                            string goodsCode = null;
+                            string goodsName = null;
+                            if (goodsEntity != null)
+                            {
+                                goodsCode = goodsEntity.G_Code;
+                                goodsName = toolsIbll.ByCodeGetGoodsEntity(goodsEntity.G_Code).G_Name;
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "物料编码【" + goodsCodeTemp + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            } 
+                            #endregion
+
+                            #region 工艺代码
+                            var recordCodeTemp = dr["工艺代码(见工序表)"].ToString();//工艺代码
+                            var recordList = toolsIbll.GetRecordList();
+                            var listCode = recordList.Where(c => c.R_Record == recordCodeTemp).FirstOrDefault();
+
+                            string recordCode = null;
+                            if (listCode != null)
+                            {
+                                recordCode = listCode.R_Record;//工艺代码
+                            }
+                            else
+                            {
+                                fnum++;
+                                dr["导入错误"] = "工艺代码【" + recordCodeTemp + "】不存在";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            } 
+                            #endregion
+
+                            #region 上级
+                            var parentGoodsCode = dr["上级物料编码"].ToString();//上级 物料编码
+                            string parentId = "0";
+                            if (!parentGoodsCode.IsEmpty())
+                            {
+                                if (parentGoodsCode == goodsCodeTemp)//上级与本级不能相同
+                                {
+                                    fnum++;
+                                    dr["导入错误"] = "上级和本级的物料不能相同！";
+                                    failDt.Rows.Add(dr.ItemArray);
+                                    continue;
+                                }
+                                var bomRecordList = toolsService.GetBomRecordList();//配方列表数据
+
+                                var bomRecord = bomRecordList.Where(c => c.B_GoodsCode == parentGoodsCode).FirstOrDefault();
+
+                                if (bomRecord != null)
+                                {
+                                    parentId = bomRecord.ID;
+                                }
+                                else
+                                {
+                                    fnum++;
+                                    dr["导入错误"] = "上级物料编码【" + parentGoodsCode + "】不存在";
+                                    failDt.Rows.Add(dr.ItemArray);
+                                    continue;
+                                }
+                            } 
+                            #endregion
+
+                            var isExistCode=bomHeadIBLL.ExistCode("", parentId, recordCode, formulaCode, goodsCode);
+                            if (!isExistCode)
+                            {
+                                fnum++;
+                                dr["导入错误"] = "该配方已存在!";
+                                failDt.Rows.Add(dr.ItemArray);
+                                continue;
+                            }
+                            
+                            var qtyTemp = dr["数量"].ToString();//数量
+                            decimal? qty= 0;
+                            if (!qtyTemp.IsEmpty())
+                            {
+                                qty = Convert.ToDecimal(qtyTemp);
+                            }
+
+
+                            var availTemp = dr["是否启用"].ToString();//是否启用
+                            ErpEnums.YesOrNoEnum? avail = null;
+                            if (availTemp=="是")
+                            {
+                                avail = ErpEnums.YesOrNoEnum.Yes;
+                            }
+                            else
+                            {
+                                avail = ErpEnums.YesOrNoEnum.No;
+                                
+                            }
+                            DateTime? startTime = null;
+
+                            if (!dr["开始时间"].ToString().IsEmpty())
+                            {
+                                startTime = Convert.ToDateTime(dr["开始时间"]);//开始时间
+                            }
+                            DateTime? endTime = null;
+
+                            if (!dr["结束时间"].ToString().IsEmpty())
+                            {
+                                endTime = Convert.ToDateTime(dr["结束时间"]);//结束时间
+                            }
+                            var unit = dr["单位"].ToString();//单位
+                            var remark = dr["备注"].ToString();//备注
+                            var model = new Mes_BomRecordEntity()
+                            {
+                                B_RecordCode = recordCode,
+                                B_FormulaCode = formulaCode,
+                                B_FormulaName = formulaName,
+                                B_GoodsCode = goodsCode,
+                                B_GoodsName = goodsName,
+                                B_Unit=unit,
+                                B_Qty=qty,
+                                B_ParentID = parentId,
+                                B_Avail = avail,
+                                B_StartTime = startTime,
+                                B_EndTime = endTime,
+                                B_Remark = remark
                             };
                             listModel.Add(model);
                             model.Create();

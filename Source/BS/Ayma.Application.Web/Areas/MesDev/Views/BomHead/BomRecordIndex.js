@@ -79,6 +79,20 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //导入配方表
+            $('#am_import').on('click', function () {
+                ayma.layerForm({
+                    id: 'ImportForm',
+                    title: '导入配方表',
+                    url: top.$.rootUrl + '/MesDev/BomHead/ImportForm?formId=form',
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    btn: null,
+                    callBack: function () {
+                    }
+                });
+            });
         },
         initGird: function () {
             $('#girdtable').jfGrid({

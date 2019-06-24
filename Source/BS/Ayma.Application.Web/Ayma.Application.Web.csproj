@@ -510,6 +510,8 @@
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordForm.js" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.css" />
     <Content Include="Areas\MesDev\Views\BomHead\BomRecordIndex.js" />
+    <Content Include="Areas\MesDev\Views\BomHead\ImportForm.css" />
+    <Content Include="Areas\MesDev\Views\BomHead\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
@@ -2273,6 +2275,7 @@
     <Content Include="Areas\MesDev\Views\StockList\ImportForm.cshtml" />
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\BomHead\ImportForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
