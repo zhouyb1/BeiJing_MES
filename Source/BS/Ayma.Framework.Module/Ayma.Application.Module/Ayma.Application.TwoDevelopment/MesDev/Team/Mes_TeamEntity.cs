@@ -1,42 +1,53 @@
 ﻿using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Ayma.Application.TwoDevelopment.MesDev
+
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 11:04
-    /// 描 述：门列表
+    /// 日 期：2019-06-27 15:26
+    /// 描 述：班组表
     /// </summary>
-    public partial class Mes_DoorEntity 
+    public partial class Mes_TeamEntity 
     {
         #region 实体成员
         /// <summary>
         /// ID
         /// </summary>
+        /// <returns></returns>
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
-        /// 门编码
+        /// 班组编码
         /// </summary>
-        [Column("D_CODE")]
-        public string D_Code { get; set; }
+        /// <returns></returns>
+        [Column("T_CODE")]
+        public string T_Code { get; set; }
         /// <summary>
-        /// 门名称
+        /// 班组名称
         /// </summary>
-        [Column("D_NAME")]
-        public string D_Name { get; set; }  
+        /// <returns></returns>
+        [Column("T_NAME")]
+        public string T_Name { get; set; }
         /// <summary>
         /// 车间编码
         /// </summary>
-        [Column("D_WORKSHOPCODE")]
-        public string D_WorkShopCode { get; set; }
+        /// <returns></returns>
+        [Column("T_WORKSHOPCODE")]
+        public string T_WorkShopCode { get; set; }
+        /// <summary>
+        /// 负责人
+        /// </summary>
+        /// <returns></returns>
+        [Column("T_USERNAME")]
+        public string T_UserName { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
-        [Column("D_REMARK")]
-        public string D_Remark { get; set; }
+        /// <returns></returns>
+        [Column("T_REMARK")]
+        public string T_Remark { get; set; }
         #endregion
 
         #region 扩展操作
@@ -55,8 +66,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             this.ID = keyValue;
         }
-        #endregion
-        #region 扩展字段
         #endregion
     }
 }

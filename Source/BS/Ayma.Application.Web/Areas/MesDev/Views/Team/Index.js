@@ -1,7 +1,8 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-07 11:04
- * 描  述：门列表
+ * 日  期：2019-06-27 15:26
+ * 描  述：班组表
  */
+var selectedRow;
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -13,18 +14,20 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 300);
+            }, 220, 400);
+           
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
             // 新增
             $('#am_add').on('click', function () {
+                selectedRow = null;
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增门列表',
-                    url: top.$.rootUrl + '/MesDev/DoorList/Form',
-                    width: 600,
+                    title: '新增',
+                    url: top.$.rootUrl + '/MesDev/Team/Form',
+                    width: 700,
                     height: 400,
                     maxmin: true,
                     callBack: function (id) {
@@ -35,12 +38,13 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                selectedRow = $('#girdtable').jfGridGet('rowdata');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑门列表',
-                        url: top.$.rootUrl + '/MesDev/DoorList/Form?keyValue=' + keyValue,
-                        width: 600,
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/Team/Form?keyValue=' + keyValue,
+                        width: 700,
                         height: 400,
                         maxmin: true,
                         callBack: function (id) {
@@ -55,28 +59,27 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/DoorList/DeleteForm', { keyValue: keyValue}, function () {
-                                refreshGirdData();
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Team/DeleteForm', { keyValue: keyValue}, function () {
                             });
                         }
                     });
                 }
             });
         },
-        // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/DoorList/GetPageList',
+                url: top.$.rootUrl + '/MesDev/Team/GetPageList',
                 headData: [
-                    { label: "门编码", name: "D_Code", width: 160, align: "left"},
-                    { label: "门名称", name: "D_Name", width: 160, align: "left"},
-                    { label: "车间编码", name: "D_WorkShopCode", width: 160, align: "left" },
-                    { label: "备注", name: "D_Remark", width: 160, align: "left"},
+                        //{ label: 'ID', name: 'ID', width: 200, align: "left" },
+                        { label: '班组编码', name: 'T_Code', width: 200, align: "left" },
+                        { label: '班组名称', name: 'T_Name', width: 200, align: "left" },
+                        { label: '车间编码', name: 'T_WorkShopCode', width: 200, align: "left" },
+                        { label: '负责人', name: 'T_UserName', width: 200, align: "left" },
+                        { label: '备注', name: 'T_Remark', width: 200, align: "left" },
                 ],
                 mainId:'ID',
-                isPage: true,
-                sidx: "D_Code",
-                sord:"ASC"
+                reloadSelected: true,
+                isPage: true
             });
             page.search();
         },

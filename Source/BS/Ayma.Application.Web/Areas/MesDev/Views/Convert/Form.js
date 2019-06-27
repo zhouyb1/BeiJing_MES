@@ -62,6 +62,28 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
+            //最大转化率 不小于0
+            $("#C_Max").on('blur', function () {
+                var max = $.trim($(this).val()); //去除空格
+                if (max != undefined && max != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(max.toString().replace('.', ''))) {
+                        ayma.alert.error("最大转化率必须是非负数.");
+                        $("#C_Max").val(0);
+                    }
+
+                }
+            });
+            //最小转化率 不小于0
+            $("#C_Min").on('blur', function () {
+                var min = $.trim($(this).val()); //去除空格
+                if (min != undefined && min != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(min.toString().replace('.', ''))) {
+                        ayma.alert.error("最小转化率必须是非负数.");
+                        $("#C_Min").val(0);
+                    }
+
+                }
+            });
             ////编码重复验证
             //$("#C_SecCode").on('blur', function () {
             //    var code = $.trim($(this).val()); //去除空格
@@ -95,6 +117,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
+            return false;
+        }
+        //最大转化率要大于最小转化率
+        if ($("#C_Min").val() > $("#C_Max").val()) {
+            ayma.alert.error("最大转化率要大于最小转化率.");
+          
             return false;
         }
         var postData = {

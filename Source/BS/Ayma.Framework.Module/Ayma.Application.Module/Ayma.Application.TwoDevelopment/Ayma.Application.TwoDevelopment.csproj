@@ -261,6 +261,10 @@
     <Compile Include="MesDev\CheckRecord\CheckRecordService.cs" />
     <Compile Include="MesDev\CheckRecord\CheckRecordBLL.cs" />
     <Compile Include="MesDev\CheckRecord\CheckRecordIBLL.cs" />
+    <Compile Include="MesDev\Team\Mes_TeamEntity.cs" />
+    <Compile Include="MesDev\Team\TeamService.cs" />
+    <Compile Include="MesDev\Team\TeamIBLL.cs" />
+    <Compile Include="MesDev\Team\TeamBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

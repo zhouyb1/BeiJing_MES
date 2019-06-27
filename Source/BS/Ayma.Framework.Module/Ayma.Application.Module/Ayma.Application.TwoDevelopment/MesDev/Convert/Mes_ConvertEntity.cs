@@ -38,6 +38,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("C_SECNAME")]
         public string C_SecName { get; set; }
         /// <summary>
+        /// 最大转化率
+        /// </summary>
+        [Column("C_MAX")]
+        public decimal? C_Max { get; set; }   
+        /// <summary>
+        /// 最小转化率
+        /// </summary>
+        [Column("C_MIN")]
+        public decimal? C_Min { get; set; }
+        /// <summary>
         /// 添加人
         /// </summary>
         [Column("C_CREATEBY")]

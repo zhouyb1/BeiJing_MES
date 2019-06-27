@@ -10,42 +10,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-07 11:04
-    /// 描 述：门列表
+    /// 日 期：2019-06-27 15:26
+    /// 描 述：班组表
     /// </summary>
-    public partial class DoorListService : RepositoryFactory
+    public partial class TeamService : RepositoryFactory
     {
+        #region 构造函数和属性
+
+        private string fieldSql;
+        public TeamService()
+        {
+            fieldSql=@"
+                t.ID,
+                t.T_Code,
+                t.T_Name,
+                t.T_WorkShopCode,
+                t.T_UserName,
+                t.T_Remark
+            ";
+        }
+        #endregion
+
         #region 获取数据
 
         /// <summary>
-        /// 获取页面显示列表数据
+        /// 获取列表数据
         /// </summary>
-        /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_DoorEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_TeamEntity> GetList( string queryJson )
         {
             try
             {
+                //参考写法
+                //var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                //var dp = new DynamicParameters(new { });
+                //dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
-                strSql.Append(@"
-                t.ID,
-                t.D_Code,
-                t.D_Name,
-                t.D_WorkShopCode,
-                t.D_Remark
-                ");
-                strSql.Append("  FROM Mes_Door t ");
-                strSql.Append("  WHERE 1=1 ");
-                var queryParam = queryJson.ToJObject();
-                // 虚拟参数
-                var dp = new DynamicParameters(new { });
-                if (!queryParam["D_Name"].IsEmpty())
-                {
-                    dp.Add("D_Name", "%" + queryParam["D_Name"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.D_Name Like @D_Name ");
-                }
-                return this.BaseRepository().FindList<Mes_DoorEntity>(strSql.ToString(),dp, pagination);
+                strSql.Append(fieldSql);
+                strSql.Append(" FROM Mes_Team t ");
+                return this.BaseRepository().FindList<Mes_TeamEntity>(strSql.ToString());
             }
             catch (Exception ex)
             {
@@ -61,15 +66,43 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_Door表实体数据
+        /// 获取列表分页数据
+        /// <param name="pagination">分页参数</param>
         /// </summary>
-        /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_DoorEntity GetMes_DoorEntity(string keyValue)
+        public IEnumerable<Mes_TeamEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_DoorEntity>(keyValue);
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(fieldSql);
+                strSql.Append(" FROM Mes_Team t ");
+                return this.BaseRepository().FindList<Mes_TeamEntity>(strSql.ToString(), pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_TeamEntity GetEntity(string keyValue)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_TeamEntity>(keyValue);
             }
             catch (Exception ex)
             {
@@ -97,7 +130,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                this.BaseRepository().Delete<Mes_DoorEntity>(t=>t.ID == keyValue);
+                this.BaseRepository().Delete<Mes_TeamEntity>(t=>t.ID == keyValue);
             }
             catch (Exception ex)
             {
@@ -117,7 +150,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_DoorEntity entity)
+        public void SaveEntity(string keyValue, Mes_TeamEntity entity)
         {
             try
             {

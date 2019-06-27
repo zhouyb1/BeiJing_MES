@@ -101,6 +101,8 @@ var bootstrap = function ($, ayma) {
                     { label: "物料名称", name: "C_Name", width: 160, align: "left"},
                     { label: "转换后物料编码", name: "C_SecCode", width: 160, align: "left"},
                     { label: "转换后物料名称", name: "C_SecName", width: 160, align: "left"},
+                    { label: "最大转化率", name: "C_Max", width: 160, align: "left"},
+                    { label: "最小转化率", name: "C_Min", width: 160, align: "left"},
                     { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left"},
                     { label: "修改人", name: "C_UpdateBy", width: 160, align: "left"},
