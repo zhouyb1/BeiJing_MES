@@ -103,6 +103,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("O_UPLOADDATE")]
         public DateTime? O_UploadDate { get; set; }
+        /// <summary>
+        /// 班组编码
+        /// </summary>
+        [Column("O_TEAMCODE")]
+        public string O_TeamCode { get; set; }
+        /// <summary>
+        /// 班组名称
+        /// </summary>
+        [Column("O_TEAMNAME")]
+        public string O_TeamName { get; set; }
         #endregion
 
         #region 扩展操作
@@ -128,6 +138,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+
         #endregion
     }
 }
