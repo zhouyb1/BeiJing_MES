@@ -225,6 +225,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="goodsCode"></param>
         /// <returns></returns>
         Mes_ProductOrderDetailEntity GetOrderGoodsEntity(string goodsCode);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_TeamEntity> GetTeamList(); 
         #endregion
 
         #region 提交数据
