@@ -917,6 +917,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取班组列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_TeamEntity> GetTeamList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_TeamEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

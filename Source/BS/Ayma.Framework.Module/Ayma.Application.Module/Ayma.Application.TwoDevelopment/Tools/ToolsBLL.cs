@@ -872,6 +872,26 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+
+        public IEnumerable<Mes_TeamEntity> GetTeamList()
+        {
+            try
+            {
+                return toolsService.GetTeamList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
