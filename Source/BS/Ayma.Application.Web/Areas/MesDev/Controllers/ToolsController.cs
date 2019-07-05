@@ -213,7 +213,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetTeamList()
         {
-            var teamList =toosIBLL
+            var teamList = toosIBLL.GetTeamList();
+            return Success(teamList);
         }
 
         /// <summary>
