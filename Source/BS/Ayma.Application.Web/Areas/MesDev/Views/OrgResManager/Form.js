@@ -96,6 +96,22 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
+
+            //绑定班组
+            $('#O_TeamCode').select({
+                type: 'default',
+                value: 'T_Code',
+                text: 'T_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
+                // 访问数据接口参数
+                param: {}
+            });
+
             //添加物料
             $('#am_add').on('click', function () {
                 ayma.layerForm({
