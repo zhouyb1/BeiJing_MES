@@ -204,7 +204,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var doorEntity = toosIBLL.ByCodeGetDoorEntity(code);
             return Success(doorEntity);
         }
-        
+
+        /// <summary>
+        /// 获取班组列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetTeamList()
+        {
+            var teamList =toosIBLL
+        }
+
         /// <summary>
         /// 获取工艺列表
         /// </summary>
