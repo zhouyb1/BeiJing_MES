@@ -6,65 +6,57 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-08 17:17
-    /// 描 述：库存查询
+    /// 日 期：2019-07-04 16:14
+    /// 描 述：强制使用记录单据
     /// </summary>
-    public partial class Mes_InventoryEntity 
+    public partial class Mes_CompUseDetailEntity 
     {
         #region 实体成员
         /// <summary>
-        /// ID
+        /// 主键
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
-        public string I_Kind { get; set; }
         /// <summary>
-        /// 仓库编码
+        /// 单号
         /// </summary>
-        [Column("I_STOCKCODE")]
-        public string I_StockCode { get; set; }
+        [Column("C_NO")]
+        public string C_No { get; set; }
         /// <summary>
-        /// 仓库名称
+        /// 物料编码
         /// </summary>
-        [Column("I_STOCKNAME")]
-        public string I_StockName { get; set; }
+        [Column("C_GOODSCODE")]
+        public string C_GoodsCode { get; set; }
         /// <summary>
-        /// 商品编码
+        /// 物料名称
         /// </summary>
-        [Column("I_GOODSCODE")]
-        public string I_GoodsCode { get; set; }
-        /// <summary>
-        /// 商品名称
-        /// </summary>
-        [Column("I_GOODSNAME")]
-        public string I_GoodsName { get; set; }
+        [Column("C_GOODSNAME")]
+        public string C_GoodsName { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
-        [Column("I_UNIT")]
-        public string I_Unit { get; set; }
+        [Column("C_UNIT")]
+        public string C_Unit { get; set; }
         /// <summary>
         /// 数量
         /// </summary>
-        [Column("I_QTY")]
-        public decimal? I_Qty { get; set; }
+        [Column("C_QTY")]
+        public decimal? C_Qty { get; set; }
         /// <summary>
-        /// 批次批次以入库时间（yyyymmdd)
+        /// 批次
         /// </summary>
-        [Column("I_BATCH")]
-        public string I_Batch { get; set; }
+        [Column("C_BATCH")]
+        public string C_Batch { get; set; }
+        /// <summary>
+        /// 价格
+        /// </summary>
+        [Column("C_PRICE")]
+        public decimal? C_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
-        [Column("I_REMARK")]
-        public string I_Remark { get; set; }
-
-        /// <summary>
-        /// 价格 edit 2019年4月15日17:07:31
-        /// </summary>
-        [NotMapped]
-        public decimal? I_Price { get; set; }
-
+        [Column("C_REMARK")]
+        public string C_Remark { get; set; }
         #endregion
 
         #region 扩展操作
@@ -82,9 +74,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
+
         }
-        #endregion
-        #region 扩展字段
         #endregion
     }
 }

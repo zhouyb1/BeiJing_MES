@@ -48,7 +48,11 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 抽检记录单
             /// </summary>
-            Inspect=10007
+            Inspect=10007,
+             /// <summary>
+            /// 强制使用记录单号
+            /// </summary>
+            CompUser=10008
 
         }
         /// <summary>
@@ -217,6 +221,28 @@ namespace Ayma.Application.TwoDevelopment
         /// 退供应商单状态
         /// </summary>
         public enum BackSupplyStatusEnum
+        {
+            /// <summary>
+            /// 单据生成
+            /// </summary>
+            NoAudit = 1,
+            /// <summary>
+            /// 审核通过
+            /// </summary>
+            Audit = 2,
+            /// <summary>
+            /// 单据完成
+            /// </summary>
+            AuditFinish = 3,
+            /// <summary>
+            /// 单据删除
+            /// </summary>
+            IsDelete = -1,
+        }
+        /// <summary>
+        /// 退供应商单状态
+        /// </summary>
+        public enum CompUserStatusEnum
         {
             /// <summary>
             /// 单据生成

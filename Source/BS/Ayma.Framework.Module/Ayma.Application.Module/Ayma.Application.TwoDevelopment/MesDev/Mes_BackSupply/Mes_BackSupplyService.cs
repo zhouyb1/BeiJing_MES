@@ -4,6 +4,7 @@ using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Text;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -71,7 +72,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("B_StockCode", "%" + queryParam["B_StockCode"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.B_StockCode Like @B_StockCode ");
                 }
-                return this.BaseRepository().FindList<Mes_BackSupplyHeadEntity>(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_BackSupplyHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -89,7 +90,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取退供应商物料数据
         /// </summary>
         /// <returns></returns>
-        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword,string stockCode)
+        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode)
         {
             try
             {
@@ -103,10 +104,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_Batch
                 ");
                 strSql.Append("  FROM Mes_Inventory t LEFT JOIN Mes_Goods b ON t.I_GoodsCode=b.G_Code");
-                strSql.Append("  WHERE 1=1 And t.I_StockCode='" + stockCode + "' And b.G_Kind=1");
+                strSql.Append("  WHERE 1=1 And t.I_StockCode=@I_StockCode And b.G_Kind=1");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
-                var dp = new DynamicParameters(new { });
+                var dp = new DynamicParameters();
+                dp.Add("I_StockCode", stockCode);
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
@@ -134,7 +136,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_BackSupplyDetailEntity>(t=>t.B_BackSupplyNo == keyValue );
+                return this.BaseRepository().FindList<Mes_BackSupplyDetailEntity>(t => t.B_BackSupplyNo == keyValue);
             }
             catch (Exception ex)
             {
@@ -174,6 +176,42 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
+        /// 根据入库单Id获取退供应商表头数据
+        /// </summary>
+        /// <param name="materInKeyValue">入库单Id</param>
+        /// <returns></returns>
+        public DataTable GetMes_BackSupplyHeadModel(string materInKeyValue)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                                SELECT  M_StockCode AS B_StockCode ,
+                        M_StockName AS B_StockName
+                FROM    dbo.Mes_MaterInHead
+                WHERE   ID = @ID
+                ");
+                
+                // 虚拟参数
+                var dp = new DynamicParameters();
+                dp.Add("ID", materInKeyValue);
+               
+                return this.BaseRepository().FindTable(strSql.ToString(), dp);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 获取Mes_BackSupplyDetail表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -182,7 +220,45 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_BackSupplyDetailEntity>(t=>t.B_BackSupplyNo == keyValue);
+                return this.BaseRepository().FindEntity<Mes_BackSupplyDetailEntity>(t => t.B_BackSupplyNo == keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根据入库单号 制作退供应商详情
+        /// </summary>
+        /// <param name="materInNo">入库单号</param>
+        /// <returns></returns>
+        public DataTable GetMes_BackSupplyList(string materInNo)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT  M_GoodsCode AS B_GoodsCode ,
+                                M_GoodsName AS B_GoodsName ,
+                                M_Unit AS B_Unit ,
+                                M_Qty AS B_Qty ,
+                                M_Batch AS B_Batch
+                        FROM    dbo.Mes_MaterInDetail
+                        WHERE   M_MaterInNo = @M_MaterInNo
+                ");
+
+                // 虚拟参数
+                var dp = new DynamicParameters();
+                dp.Add("M_MaterInNo", materInNo);
+
+                return this.BaseRepository().FindTable(strSql.ToString(), dp);
             }
             catch (Exception ex)
             {
@@ -238,17 +314,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_BackSupplyHeadEntity entity,List<Mes_BackSupplyDetailEntity> mes_BackSupplyDetailList)
+        public void SaveEntity(string keyValue, Mes_BackSupplyHeadEntity entity, List<Mes_BackSupplyDetailEntity> mes_BackSupplyDetailList)
         {
             var db = this.BaseRepository().BeginTrans();
             try
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_BackSupplyHeadEntityTmp = GetMes_BackSupplyHeadEntity(keyValue); 
+                    var mes_BackSupplyHeadEntityTmp = GetMes_BackSupplyHeadEntity(keyValue);
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_BackSupplyDetailEntity>(t=>t.B_BackSupplyNo == mes_BackSupplyHeadEntityTmp.B_BackSupplyNo);
+                    db.Delete<Mes_BackSupplyDetailEntity>(t => t.B_BackSupplyNo == mes_BackSupplyHeadEntityTmp.B_BackSupplyNo);
                     foreach (Mes_BackSupplyDetailEntity item in mes_BackSupplyDetailList)
                     {
                         item.Create();

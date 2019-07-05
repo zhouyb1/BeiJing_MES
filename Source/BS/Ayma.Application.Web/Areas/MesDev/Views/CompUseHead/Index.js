@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
- * 日  期：2019-01-08 14:58
- * 描  述：入库单制作
+ * 日  期：2019-07-04 16:14
+ * 描  述：强制使用记录单据
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -42,44 +42,34 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
-            $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
+            }, 220, 400);
+            $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 查看详情
-            $('#am_detail').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'form',
-                        title: '查看详情',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
-                        width: 800,
-                        height: 600,
-                        maxmin: true,
-                        btn: null,
-                        callBack: function (id) {
-
-                        }
-                    });
-                }
+            // 新增
+            $('#am_add').on('click', function () {
+                ayma.layerForm({
+                    id: 'form',
+                    title: '新增',
+                    url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm',
+                    width: 900,
+                    height: 700,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
             });
-            // 退供应商
-            $('#am_returnsupply').on('click', function () {
+            // 编辑
+            $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
-                var status = $('#girdtable').jfGridValue('M_Status');
-           
-                if (status!=3) {
-                    ayma.alert.error("单据未完成,不能退供应商.");
-                    return false;
-                }
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'BackSupplyAddForm',
-                        title: '退供应商单',
-                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/AddForm?materInKeyValue=' + keyValue + '&formId=BackSupplyAddForm',
+                        id: 'compUserForm',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue,
                         width: 900,
                         height: 700,
                         maxmin: true,
@@ -89,13 +79,13 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //撤销单据
-            $("#am_cancel").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");
-                if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
+            // 删除
+            $('#am_delete').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_MaterIn_Cancel', type: 2 }, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/CompUseHead/DeleteForm', { keyValue: keyValue}, function () {
                                 refreshGirdData();
                             });
                         }
@@ -106,15 +96,17 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList',
+                url: top.$.rootUrl + '/MesDev/CompUseHead/GetPageList',
                 headData: [
+                    
                     {
-                        label: "状态", name: "M_Status", width: 160, align: "left",
+                        label: "状态", name: "C_Status", width: 160, align: "left",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
-                                code: 'MaterInStatus',
+                                code: 'CompUserStatus',
                                 callback: function (_data) {
+                                    console.log(_data.text)
                                     if (value == 1) {
                                         callback("<span class='label label-default'>" + _data.text + "</span>");
                                     } else if (value == 2) {
@@ -128,23 +120,17 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "物料编码", name: "M_StockCode", width: 160, align: "left" },
-                    { label: "物料名称", name: "M_StockName", width: 160, align: "left" },
-                    { label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
-                    { label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
-                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "M_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "M_UpdateBy", width: 160, align: "left" },
-                    { label: "修改时间", name: "M_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "M_UploadBy", width: 160, align: "left"},
-                    { label: "提交时间", name: "M_UploadDate", width: 160, align: "left"}
+                    { label: "单号", name: "C_No", width: 160, align: "left"},
+                    { label: "车间", name: "C_WorkShop", width: 160, align: "left"},
+                    { label: "订单号", name: "C_OrderNo", width: 160, align: "left"},
+                    { label: "订单时间", name: "C_OrderDate", width: 160, align: "left"},
+                    
+                    { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
+                    { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],
-                mainId: 'ID',
-                isPage: true,
-                sidx: 'M_MaterInNo',
-                sord: 'DESC'
+                mainId:'ID',
+                reloadSelected: true,
+                isPage: true
             });
         },
         search: function (param) {

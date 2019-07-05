@@ -350,6 +350,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
+            foreach (var item in mes_MaterInDetailList)
+            {
+                if (string.IsNullOrEmpty(item.M_Qty.ToString()))
+                {
+                    return Fail("商品【" + item.M_GoodsName + "】入库数量不能为空!");
+                }
+            }
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();

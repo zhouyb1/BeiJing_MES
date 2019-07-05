@@ -18,6 +18,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private Mes_BackSupplyIBLL mes_BackSupplyIBLL = new Mes_BackSupplyBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private InventorySeachIBLL inventorySeachBll=new InventorySeachBLL();
+        private MaterInBillIBLL materInBillIBLL = new MaterInBillBLL();
         #region 视图功能
 
         /// <summary>
@@ -35,6 +37,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Form()
+        {
+            if (Request["keyValue"] == null)
+            {
+                ViewBag.BackSupplyNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString());//自动获取主编码
+            }
+             return View();
+        }
+        /// <summary>
+        /// 添加退供应商数据表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult AddForm()
         {
             if (Request["keyValue"] == null)
             {
@@ -84,6 +99,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+        /// <summary>
+        /// 根据入库单Id获取表单详情
+        /// </summary>
+        /// <param name="materInKeyValue">入库单Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetAddFormData(string materInKeyValue)
+        {
+            var Mes_BackSupplyHeadModel = mes_BackSupplyIBLL.GetMes_BackSupplyHeadModel(materInKeyValue);
+            var MaterInHeadData = materInBillIBLL.GetMes_MaterInHeadEntity(materInKeyValue);
+            var Mes_MaterInDetailData = mes_BackSupplyIBLL.GetMes_BackSupplyList(MaterInHeadData.M_MaterInNo);
+            var jsonData = new
+            {
+                Mes_BackSupplyHeadModel = Mes_BackSupplyHeadModel.Rows[0],
+                Mes_MaterInDetailData = Mes_MaterInDetailData,
+            };
+            return Success(jsonData);
+        } 
         /// <summary>
         /// 获取表单数据
         /// </summary>
@@ -149,10 +183,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             Mes_BackSupplyHeadEntity entity = strEntity.ToObject<Mes_BackSupplyHeadEntity>();
             List<Mes_BackSupplyDetailEntity> mes_BackSupplyDetailList = strmes_BackSupplyDetailList.ToObject<List<Mes_BackSupplyDetailEntity>>();
             foreach (Mes_BackSupplyDetailEntity item in mes_BackSupplyDetailList)
-	        {
+            {
+                var itemEntity=inventorySeachBll.GetEntityBy(item.B_GoodsCode, entity.B_StockCode,item.B_Batch);
+                if (item.B_Qty>itemEntity.I_Qty)
+                {
+                    return Fail("商品【" + item.B_GoodsName + "】的库存数量不足!");
+                }
 	            if (string.IsNullOrEmpty(item.B_Batch))
 	            {
-	                return Fail("'" + item.B_GoodsName + "'的批次号不能为空!");
+                    return Fail("商品【" + item.B_GoodsName + "】的批次不能为空!");
 	            }
 	        }
             if (string.IsNullOrEmpty(keyValue))

@@ -107,6 +107,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 根据入库单Id获取退供应商表头数据
+        /// </summary>
+        /// <param name="materInKeyValue">入库单Id</param>
+        /// <returns></returns>
+        public DataTable GetMes_BackSupplyHeadModel(string materInKeyValue)
+        {
+            try
+            {
+                return mes_BackSupplyService.GetMes_BackSupplyHeadModel(materInKeyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取Mes_BackSupplyDetail表实体数据
@@ -118,6 +141,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 return mes_BackSupplyService.GetMes_BackSupplyDetailEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 根据入库单号 制作退供应商详情
+        /// </summary>
+        /// <param name="materInNo">入库单号</param>
+        /// <returns></returns>
+        public DataTable GetMes_BackSupplyList(string materInNo)
+        {
+            try
+            {
+                return mes_BackSupplyService.GetMes_BackSupplyList(materInNo);
             }
             catch (Exception ex)
             {

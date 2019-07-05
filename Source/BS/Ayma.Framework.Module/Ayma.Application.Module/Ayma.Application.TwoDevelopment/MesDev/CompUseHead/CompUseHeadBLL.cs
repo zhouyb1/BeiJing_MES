@@ -1,17 +1,18 @@
 ﻿using Ayma.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-08 17:17
-    /// 描 述：库存查询
+    /// 日 期：2019-07-04 16:14
+    /// 描 述：强制使用记录单据
     /// </summary>
-    public partial class InventorySeachBLL : InventorySeachIBLL
+    public partial class CompUseHeadBLL : CompUseHeadIBLL
     {
-        private InventorySeachService inventorySeachService = new InventorySeachService();
+        private CompUseHeadService compUseHeadService = new CompUseHeadService();
 
         #region 获取数据
 
@@ -20,11 +21,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InventoryEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_CompUseHeadEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
-                return inventorySeachService.GetPageList(pagination, queryJson);
+                return compUseHeadService.GetPageList(pagination, queryJson);
             }
             catch (Exception ex)
             {
@@ -40,40 +41,38 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_Inventory表实体数据
+        /// 获取Mes_CompUseDetail表数据
+        /// <summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue)
+        {
+            try
+            {
+                return compUseHeadService.GetMes_CompUseDetailList(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取Mes_CompUseHead表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_InventoryEntity GetMes_InventoryEntity(string keyValue)
+        public Mes_CompUseHeadEntity GetMes_CompUseHeadEntity(string keyValue)
         {
             try
             {
-                return inventorySeachService.GetMes_InventoryEntity(keyValue);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
-        /// <summary>
-        /// 获取Mes_Inventory表实体数据 根据商品编码和仓库编码以及批次
-        /// </summary>
-        /// <param name="goodsCode">商品编码</param>
-        /// <param name="stockCode">仓库编码</param>
-        /// <param name="batch">批次</param>
-        /// <returns></returns>
-        public Mes_InventoryEntity GetEntityBy(string goodsCode, string stockCode, string batch)
-        {
-            try
-            {
-                return inventorySeachService.GetEntityBy(goodsCode, stockCode, batch);
+                return compUseHeadService.GetMes_CompUseHeadEntity(keyValue);
             }
             catch (Exception ex)
             {
@@ -88,6 +87,51 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取Mes_CompUseDetail表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_CompUseDetailEntity GetMes_CompUseDetailEntity(string keyValue)
+        {
+            try
+            {
+                return compUseHeadService.GetMes_CompUseDetailEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取强制使用单据物料数据
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode)
+        {
+            try
+            {
+                return compUseHeadService.GetGoodsList(pagination, queryJson, keyword, stockCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 提交数据
@@ -101,7 +145,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                inventorySeachService.DeleteEntity(keyValue);
+                compUseHeadService.DeleteEntity(keyValue);
             }
             catch (Exception ex)
             {
@@ -121,11 +165,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_InventoryEntity entity)
+        public void SaveEntity(string keyValue, Mes_CompUseHeadEntity entity,List<Mes_CompUseDetailEntity> mes_CompUseDetailList)
         {
             try
             {
-                inventorySeachService.SaveEntity(keyValue, entity);
+                compUseHeadService.SaveEntity(keyValue, entity,mes_CompUseDetailList);
             }
             catch (Exception ex)
             {

@@ -157,6 +157,8 @@
     <Compile Include="MesDev\Mes_SocialSetMap.cs" />
     <Compile Include="MesDev\Mes_CheckRecordMap.cs" />
     <Compile Include="MesDev\Mes_TeamMap.cs" />
+    <Compile Include="MesDev\Mes_CompUseHeadMap.cs" />
+    <Compile Include="MesDev\Mes_CompUseDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

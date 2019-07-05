@@ -289,6 +289,7 @@
     <Compile Include="Areas\MesDev\Controllers\SocialSetController.cs" />
     <Compile Include="Areas\MesDev\Controllers\CheckRecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TeamController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\CompUseHeadController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -515,6 +516,7 @@
     <Content Include="Areas\MesDev\Views\BomHead\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
@@ -533,6 +535,7 @@
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupplyQuery\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
@@ -2277,6 +2280,8 @@
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.cshtml" />
     <Content Include="Areas\MesDev\Views\BomHead\ImportForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2467,6 +2472,10 @@
     <Content Include="Areas\MesDev\Views\Team\Index.js" />
     <Content Include="Areas\MesDev\Views\Team\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Team\Form.js" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\Index.js" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

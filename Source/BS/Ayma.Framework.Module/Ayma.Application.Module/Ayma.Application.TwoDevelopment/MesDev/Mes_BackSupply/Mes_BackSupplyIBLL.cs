@@ -36,13 +36,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        Mes_BackSupplyHeadEntity GetMes_BackSupplyHeadEntity(string keyValue);
+        Mes_BackSupplyHeadEntity GetMes_BackSupplyHeadEntity(string keyValue);   
+        /// <summary>
+        /// 根据入库单Id获取退供应商表头数据
+        /// </summary>
+        /// <param name="materInKeyValue">入库单Id</param>
+        /// <returns></returns>
+        DataTable GetMes_BackSupplyHeadModel(string materInKeyValue);
         /// <summary>
         /// 获取Mes_BackSupplyDetail表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        Mes_BackSupplyDetailEntity GetMes_BackSupplyDetailEntity(string keyValue);
+        Mes_BackSupplyDetailEntity GetMes_BackSupplyDetailEntity(string keyValue); 
+        /// <summary>
+        /// 根据入库单号 制作退供应商详情
+        /// </summary>
+        /// <param name="materInNo">入库单号</param>
+        /// <returns></returns>
+        DataTable GetMes_BackSupplyList(string materInNo);
         #endregion
 
         #region 提交数据

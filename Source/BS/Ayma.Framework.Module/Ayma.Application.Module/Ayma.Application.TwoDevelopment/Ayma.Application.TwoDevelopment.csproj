@@ -69,6 +69,8 @@
     <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryBLL.cs" />
     <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryIBLL.cs" />
     <Compile Include="MesDev\Mes_BackSupplyQuery\Mes_BackSupplyQueryService.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyDetailModel.cs" />
+    <Compile Include="MesDev\Mes_BackSupply\Mes_BackSupplyHeadModel.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectBLL.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
@@ -265,6 +267,11 @@
     <Compile Include="MesDev\Team\TeamService.cs" />
     <Compile Include="MesDev\Team\TeamIBLL.cs" />
     <Compile Include="MesDev\Team\TeamBLL.cs" />
+    <Compile Include="MesDev\CompUseHead\Mes_CompUseHeadEntity.cs" />
+    <Compile Include="MesDev\CompUseHead\Mes_CompUseDetailEntity.cs" />
+    <Compile Include="MesDev\CompUseHead\CompUseHeadService.cs" />
+    <Compile Include="MesDev\CompUseHead\CompUseHeadBLL.cs" />
+    <Compile Include="MesDev\CompUseHead\CompUseHeadIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

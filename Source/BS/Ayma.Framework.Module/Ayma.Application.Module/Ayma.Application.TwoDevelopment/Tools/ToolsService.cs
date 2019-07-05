@@ -140,7 +140,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                DateTime startTime = Convert.ToDateTime(DateTime.Now.AddDays(-3).ToString("yyyy-MM-dd"));
+                DateTime startTime = Convert.ToDateTime(DateTime.Now.AddDays(-3000).ToString("yyyy-MM-dd"));
                 return this.BaseRepository()
                           .FindList<Mes_ProductOrderHeadEntity>(t => (t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime)||t.P_OrderNo==orderNo)
                           .OrderByDescending(t => t.P_OrderNo);

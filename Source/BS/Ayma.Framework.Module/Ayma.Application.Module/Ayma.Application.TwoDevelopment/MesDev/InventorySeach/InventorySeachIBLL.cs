@@ -24,6 +24,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         Mes_InventoryEntity GetMes_InventoryEntity(string keyValue);
+
+        /// <summary>
+        /// 获取Mes_Inventory表实体数据 根据商品编码和仓库编码以及批次
+        /// </summary>
+        /// <param name="goodsCode">商品编码</param>
+        /// <param name="stockCode">仓库编码</param>
+        /// <param name="batch">批次</param>
+        /// <returns></returns>
+        Mes_InventoryEntity GetEntityBy(string goodsCode, string stockCode, string batch);
         #endregion
 
         #region 提交数据

@@ -108,6 +108,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取Mes_Inventory表实体数据 根据商品编码和仓库编码以及批次
+        /// </summary>
+        /// <param name="goodsCode">商品编码</param>
+        /// <param name="stockCode">仓库编码</param>
+        /// <param name="batch">批次</param>
+        /// <returns></returns>
+        public Mes_InventoryEntity GetEntityBy(string goodsCode, string stockCode, string batch)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_InventoryEntity>(c=>c.I_GoodsCode==goodsCode&&c.I_StockCode==stockCode&&c.I_Batch==batch);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

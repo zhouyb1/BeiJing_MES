@@ -4,9 +4,9 @@
  */
 var refreshGirdData;
 //上级元素的刷新表格方法
-var parentRefreshGirdData;
+//var parentRefreshGirdData;
 //上级元素的删除表格方法;
-var parentRemoveGridData;
+//var parentRemoveGridData;
 //上级元素的id
 var parentFormId = request('formId');
 //仓库编码
@@ -16,8 +16,6 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
-//批次时间
-var batch = new Date();
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -25,8 +23,8 @@ var bootstrap = function ($, ayma) {
             page.initGird();
             page.bind();
             //获取父级iframe中的刷新商品列表方法
-            parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
-            parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
+            //parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
+            //parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
         },
         bind: function () {
             // 刷新
@@ -77,50 +75,38 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
-                    newArray[i]['M_GoodsName'] = newArray[i]['G_Name'];
-                    newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
-                    newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
-                    row['M_Price'] = newArray[i]['G_Price'];
-                    newArray[i]["M_Qty"] = quantity;
-                    newArray[i]['M_Batch'] = batch.toLocaleDateString().replace(/\//g, "");
-                    newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]['C_GoodsCode'] = newArray[i]['g_code'];
+                    newArray[i]['C_GoodsName'] = newArray[i]['g_name'];
+                    newArray[i]['C_Unit'] = newArray[i]['g_unit'];
+                    newArray['C_Price'] = newArray[i]['g_price'];
+                    newArray[i]["C_Qty"] = quantity;
+                    newArray[i]['C_Batch'] = row['batch'];
+                    newArray[i]["ID"] = newArray[i]['id'];
                     array.push(newArray[i]);
                 }
-                parentRefreshGirdData(array);
+                top.refreshGirdData(array);
 
             });
         },
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/CompUseHead/GetGoodsList?stockCode=' + stockCode,
                 headData: [
-                    { label: "物料编码", name: "ID", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "G_Code", width: 130, align: "left" },
-                    { label: "物料名称", name: "G_Name", width: 130, align: "left" },
-                     {
-                         label: "商品类型", name: "G_Kind", width: 160, align: "left",
-                         formatterAsync: function (callback, value, row) {
-
-                             ayma.clientdata.getAsync('dataItem', {
-                                 key: value,
-                                 code: 'GoodsType',
-                                 callback: function (_data) {
-                                     callback(_data.text);
-                                 }
-                             });
-                         }
-                     },
-                    { label: "保质时间", name: "G_Period", width: 80, align: "left" },
-                    { label: "价格", name: "G_Price", width: 60, align: "left" },
-                    { label: "单位", name: "G_Unit", width: 60, align: "left" }
+                    { label: "物料编码", name: "id", width: 130, align: "left", hidden: true },
+                    { label: "物料编码", name: "g_code", width: 130, align: "left" },
+                    { label: "物料名称", name: "g_name", width: 130, align: "left" },
+                     
+                    { label: "批次", name: "batch", width: 60, align: "left" },
+                    { label: "数量", name: "qty", width: 60, align: "left" },
+                    { label: "价格", name: "g_price", width: 60, align: "left" },
+                    { label: "单位", name: "g_unit", width: 60, align: "left" }
                 ],
-                mainId: 'ID',
+                mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'G_Code',
+                sidx: 'g_code',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
@@ -131,19 +117,17 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
-                        row['M_GoodsCode'] = row['G_Code'];
-                        row['M_GoodsName'] = row['G_Name'];
-                        row['M_Unit'] = row['G_Unit'];
-                        row['M_Kind'] = row['G_Kind'];
-                        row['M_Price'] = row['G_Price'];
-                        row["M_Qty"] = quantity;
-                        row['M_Batch'] = batch.toLocaleDateString().replace(/\//g, "");
-                            //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
-                        row["ID"] = row['ID'];
-                        parentRefreshGirdData([], row);
+                        row['C_GoodsCode'] = row['g_code'];
+                        row['C_GoodsName'] = row['g_name'];
+                        row['C_Unit'] = row['g_unit'];
+                        row['C_Price'] = row['g_price'];
+                        row["C_Qty"] = quantity;
+                        row['C_Batch'] = row['batch'];
+                        row["ID"] = row['id'];
+                        top.refreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
-                        parentRemoveGridData(row);
+                        top.RemoveGridData(row);
                     }
                 },
                 onRenderComplete: function (rows) {
@@ -153,7 +137,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_Code'] == rowslist[j]['M_GoodsCode']) {
+                                if (rows[i]['g_code'] == rowslist[j]['C_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

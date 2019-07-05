@@ -139,7 +139,15 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                     {
-                        label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'label'
+                        label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
+                                    row.M_Batch = 0;
+                                }
+
+                            }
+                        }
                     },
                     {
                         label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'input'
@@ -151,7 +159,7 @@ var bootstrap = function ($, ayma) {
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 2
+                inputCount: 4
             });
         },
         initData: function () {
