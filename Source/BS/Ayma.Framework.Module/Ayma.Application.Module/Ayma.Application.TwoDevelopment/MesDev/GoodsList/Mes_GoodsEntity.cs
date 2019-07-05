@@ -154,6 +154,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+        /// <summary>
+        /// 成品条码
+        /// </summary>
+        [Column("G_BARCODE")]
+        public string G_Barcode { get; set; }
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.Application.TwoDevelopment.MesDev.GoodsInfo;
+using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -872,12 +873,38 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
-
+        /// <summary>
+        /// 获取班组
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Mes_TeamEntity> GetTeamList()
         {
             try
             {
                 return toolsService.GetTeamList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取条码(成品)
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ScanCodeEntity> GetBarCodeList()
+        {
+            try
+            {
+                return toolsService.GetBarCodeList();
             }
             catch (Exception ex)
             {

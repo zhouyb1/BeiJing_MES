@@ -217,6 +217,7 @@
     <Compile Include="Areas\AM_WorkFlowModule\Controllers\WfSystemDemoController.cs" />
     <Compile Include="Areas\AM_WorkFlowModule\AM_WorkFlowModuleAreaRegistration.cs" />
     <Compile Include="Areas\MesDev\Controllers\BackStockManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\GoodsController.cs" />
     <Compile Include="Areas\MesDev\Controllers\HumitureManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventortTrendController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
@@ -581,6 +582,8 @@
     <Content Include="Areas\MesDev\Views\StockList\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\SupplyList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\SupplyList\ImportForm.js" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\html5shiv.min.js" />
@@ -1271,6 +1274,7 @@
     <Content Include="Content\signet\jquery.zsign.css" />
     <Content Include="Content\signet\jquery.zsign.js" />
     <Content Include="Content\signet\signet.gif" />
+    <Content Include="Content\Site.css" />
     <Content Include="Content\ueditor\dialogs\anchor\anchor.html" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.css" />
     <Content Include="Content\ueditor\dialogs\attachment\attachment.html" />
@@ -1907,6 +1911,9 @@
     <Content Include="Properties\PublishProfiles\Ayma.pubxml.user" />
     <Content Include="Resource\PhotoFile\0799d30d-5d14-4f15-aafe-be52b9808d52.jpg" />
     <Content Include="Resource\System\20180814\wu_1ckrbcai66tkv3p1fftkp31jkca.jpg" />
+    <Content Include="ueditor\net\upload\image\20170515\6363046459232100007014778.jpg" />
+    <Content Include="ueditor\upload\image\20170515\6363046532924500002101330.png" />
+    <Content Include="Utility\upload\image\20170515\6363046353629800002195824.jpg" />
     <Content Include="Views\Home\AdminAccordion\Index.css" />
     <Content Include="Views\Home\AdminAccordion\Index.js" />
     <Content Include="Views\Home\AdminDesktopTemp\Index.js" />
@@ -2282,6 +2289,7 @@
     <Content Include="Areas\MesDev\Views\BomHead\ImportForm.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\Goods\GoodsInfo.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

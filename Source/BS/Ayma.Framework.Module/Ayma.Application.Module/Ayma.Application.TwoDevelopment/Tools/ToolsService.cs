@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Ayma.Application.TwoDevelopment.MesDev.GoodsInfo;
+using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
 using System;
@@ -940,6 +941,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取条码
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ScanCodeEntity> GetBarCodeList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_ScanCodeEntity>("select S_Code from Mes_ScanCode ");
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 提交数据

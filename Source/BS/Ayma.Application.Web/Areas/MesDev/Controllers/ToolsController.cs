@@ -403,6 +403,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var data = toosIBLL.GetOrderGoodsEntity(goodsCode);
             return Success(data);
         }
+
+        /// <summary>
+        /// 获取商品条码列表(成品)
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetBarCodeList()
+        {
+            var list = toosIBLL.GetBarCodeList();
+            return Success(list);
+        }
+
         #endregion
 
         #region 提交数据

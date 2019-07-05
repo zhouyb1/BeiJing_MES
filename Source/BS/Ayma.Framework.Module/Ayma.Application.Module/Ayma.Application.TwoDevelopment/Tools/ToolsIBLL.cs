@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography.X509Certificates;
+using Ayma.Application.TwoDevelopment.MesDev.GoodsInfo;
 using Ayma.Util;
 using System.Collections.Generic;
 using System.Data;
@@ -227,10 +228,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         Mes_ProductOrderDetailEntity GetOrderGoodsEntity(string goodsCode);
 
         /// <summary>
-        /// 
+        /// 获取班组
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_TeamEntity> GetTeamList(); 
+        IEnumerable<Mes_TeamEntity> GetTeamList();
+        /// <summary>
+        /// 获取条码(成品)
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_ScanCodeEntity> GetBarCodeList(); 
         #endregion
 
         #region 提交数据

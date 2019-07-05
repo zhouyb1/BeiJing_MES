@@ -20,9 +20,11 @@ var bootstrap = function ($, ayma) {
                 if (value == 3) {
                     $("#div_Erpcode").html("商品erp编码<font face=\"宋体\">*</font>");
                     $("#G_Erpcode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $('#prev_div').css("display", "block");
                 } else {
                     $("#div_Erpcode").html("商品erp编码");
                     $("#G_Erpcode").removeAttr("isvalid").removeAttr("checkexpession");
+                    $('#prev_div').css("display", "none");
                 }
                 if (value == 1) {
                     $("#div_Prepareday").html("备用天数<font face=\"宋体\">*</font>");
@@ -31,6 +33,19 @@ var bootstrap = function ($, ayma) {
                     $("#div_Prepareday").html("备用天数");
                     $("#G_Prepareday").removeAttr("isvalid").removeAttr("checkexpession");
                 }
+            });
+            $('#G_Barcode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Code',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetBarCodeList',
+                // 访问数据接口参数
+                param: {}
             });
             ////商品二级分类类型
             //$("#G_TKind").DataItemSelect({ code: "GoodsTypeT" });
