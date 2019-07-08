@@ -29,6 +29,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult Index()
         {
              return View();
+        }  
+        /// <summary>
+        /// 查询页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SearchIndex()
+        {
+             return View();
+        }  
+        /// <summary>
+        /// 查询页面表单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult SearchForm()
+        {
+             return View();
         }   
         /// <summary>
         /// 添加物料列表

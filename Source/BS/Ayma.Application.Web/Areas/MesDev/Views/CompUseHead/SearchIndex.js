@@ -48,30 +48,18 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 新增
-            $('#am_add').on('click', function () {
-                ayma.layerForm({
-                    id: 'form',
-                    title: '新增',
-                    url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm',
-                    width: 900,
-                    height: 700,
-                    maxmin: true,
-                    callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
-                    }
-                });
-            });
-            // 编辑
+           
+            // 查看详情
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'compUserForm',
-                        title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue,
+                        title: '查看详情',
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/SearchForm?formId=compUserForm&keyValue=' + keyValue,
                         width: 900,
                         height: 700,
+                        btn:null,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -79,37 +67,7 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            // 删除
-            $('#am_delete').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认删除该项！', function (res) {
-                        if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/CompUseHead/DeleteForm', { keyValue: keyValue}, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
-            //审核单据
-            $("#am_auditing").on('click', function () {
-                var keyValue = $("#girdtable").jfGridValue("ID");
-                var status = $("#girdtable").jfGridValue("C_Status");
-                if (status != "1") {
-                    ayma.alert.error("已审核");
-                    return false;
-                }
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认审核该单据！', function (res) {
-                        if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_CompUseHead', field: 'C_Status' }, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
+           
         },
         // 初始化列表
         initGird: function () {

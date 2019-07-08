@@ -517,7 +517,9 @@
     <Content Include="Areas\MesDev\Views\BomHead\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\ClassManager\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
@@ -2290,6 +2292,8 @@
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\Goods\GoodsInfo.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\SearchForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
