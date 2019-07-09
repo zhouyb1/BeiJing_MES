@@ -21,10 +21,12 @@ var bootstrap = function ($, ayma) {
                     $("#div_Erpcode").html("商品erp编码<font face=\"宋体\">*</font>");
                     $("#G_Erpcode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $('#prev_div').css("display", "block");
+                    $("#G_Barcode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                 } else {
                     $("#div_Erpcode").html("商品erp编码");
                     $("#G_Erpcode").removeAttr("isvalid").removeAttr("checkexpession");
                     $('#prev_div').css("display", "none");
+                    $("#G_Barcode").removeAttr("isvalid").removeAttr("checkexpession");
                 }
                 if (value == 1) {
                     $("#div_Prepareday").html("备用天数<font face=\"宋体\">*</font>");
