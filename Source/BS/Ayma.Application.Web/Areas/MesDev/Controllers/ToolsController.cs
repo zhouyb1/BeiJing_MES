@@ -380,6 +380,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 获取配方列表
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
         public ActionResult GetBomList(string goodsCode)
         {
             var data = toosIBLL.GetBomList(goodsCode);
@@ -390,6 +392,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 获取原物料code
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
         public ActionResult GetCode(string goodsCode)
         {
             var data = toosIBLL.GetCode(goodsCode);

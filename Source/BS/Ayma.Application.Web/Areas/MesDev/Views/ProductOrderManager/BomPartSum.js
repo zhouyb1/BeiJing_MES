@@ -1,9 +1,9 @@
-﻿var goodsCode = request('GoodsCode');
+﻿//var goodsCode = request('GoodsCode');
 var orderNo = request('orderNo');
-var orderDate = request('orderDate');
-var qty = request('qty');
+//var orderDate = request('orderDate');
+//var qty = request('qty');
 var acceptClick;
-
+var G_Code="";
 var bootstrap = function ($, ayma) {
     "user strict";
     var page = {
@@ -14,6 +14,7 @@ var bootstrap = function ($, ayma) {
             page.initGrid();
         },
         bind: function () {
+            $('#B_ParentID').select();
             //绑定商品
             $('#P_GoodsCode').select({
                 url: top.$.rootUrl + '/MesDev/Tools/GetOrderGoodsList?orderNo=' + orderNo,
@@ -23,33 +24,36 @@ var bootstrap = function ($, ayma) {
                 maxHeight: 225,
                 param: {},
 
-            }).on('change', function () {
+            }).on('change', function() {
                 var goodsCode = $(this).selectGet();
-                $.get(top.$.rootUrl + '/MesDev/Tools/GetOrderGoodEntity?goodsCode=' + goodsCode, function (res) {
+                $.get(top.$.rootUrl + '/MesDev/Tools/GetOrderGoodEntity?goodsCode=' + goodsCode, function(res) {
                     qty = res.data.P_Qty;
                     $('#B_Qty').val(qty);
                 }, 'json');
-            }).selectSet($('#P_GoodsCode').get(0)._select.dfop.data[0].P_GoodsCode);
-            
-            //$('#B_Qty').val(qty == "" ? 0 : parseInt(qty));
-            $('#P_OrderNo').val(orderNo);
-            $.post(top.$.rootUrl + '/MesDev/Tools/GetCode', { goodsCode: $('#P_GoodsCode').selectGet() }, function (res) {
-                $('#B_ParentID').select({
-                    url: top.$.rootUrl + '/MesDev/Tools/GetBomList',
-                    type: 'default',
-                    value: 'ID',
-                    text: "B_FormulaName",
-                    maxHeight: 225,
-                    param: { goodsCode: res.data.G_Code }
-                });
 
-            }, 'json');
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/GetCode',
+                    data: { goodsCode: $('#P_GoodsCode').selectGet() },
+                    dataType: "json",
+                    success: function(res) {
+                        G_Code = res.data == null ? "" : res.data.G_Code;
+                        $('#B_ParentID').selectRefresh({
+                            url: top.$.rootUrl + '/MesDev/Tools/GetBomList?goodsCode='+G_Code,
+                            type: 'default',
+                            value: 'ID',
+                            text: "B_FormulaName",
+                            maxHeight: 225,
+                            param: {}
+                        });
+                    }
+                });
+            });
+            
             $('#B_ParentID').on('change', function () {
                 var parentId = $(this).selectGet();
                 page.initData(parentId, qty);
-
             });
-
         },
         initGrid: function () {
             $('#girdtable').jfGrid({
