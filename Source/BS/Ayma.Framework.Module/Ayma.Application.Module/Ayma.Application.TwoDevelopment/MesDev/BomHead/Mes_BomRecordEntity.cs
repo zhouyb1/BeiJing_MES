@@ -69,7 +69,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         [NotMapped]
         public decimal? B_Total { get; set; }
-    
+        /// <summary>
+        /// erp餐食编码
+        /// </summary>
+        [NotMapped]
+        public string B_ErpCode { get; set; }
 
         /// <summary>
         /// 添加人

@@ -54,11 +54,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("P_QTY")]
         public decimal? P_Qty { get; set; }
+
         /// <summary>
-        /// 价格 edit 2019年4月15日15:02:59
+        /// erp餐食编码
         /// </summary>
-        [Column("C_PRICE")]
-        public decimal? G_Price { get; set; }
+        [Column("P_ERPCODE")]
+        public string P_ErpCode { get; set; }
+
         #endregion
 
         #region 扩展操作

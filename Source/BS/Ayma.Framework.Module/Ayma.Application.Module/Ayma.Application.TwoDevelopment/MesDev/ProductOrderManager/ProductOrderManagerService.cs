@@ -1,4 +1,5 @@
-﻿using System.Net.Sockets;
+﻿using System.Linq;
+using System.Net.Sockets;
 using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
@@ -272,7 +273,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b.B_Qty ,
                         b.B_RecordCode ,
                         b.B_FormulaCode,
-                        b.B_FormulaName
+                        b.B_FormulaName,
+                       ( SELECT B_GoodsCode FROM dbo.Mes_BomRecord WHERE B_ParentID ='0' )B_ErpCode
                FROM     dbo.Mes_BomRecord  b
                WHERE b.ID=@ID");
             sb.Append(@"
@@ -286,7 +288,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         b1.B_Qty ,
                         b1.B_RecordCode ,
                         b1.B_FormulaCode,
-                        b1.B_FormulaName
+                        b1.B_FormulaName,
+                       ( SELECT B_GoodsCode FROM dbo.Mes_BomRecord WHERE B_ParentID ='0' )B_ErpCode
                FROM     Mes_BomRecord b1 ");
             sb.Append(@"
                         INNER JOIN CTE c ON c.ID = b1.B_ParentID ");
@@ -300,7 +303,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         B_RecordCode ,
                         B_Qty,
                         B_FormulaCode,
-                        B_FormulaName
+                        B_FormulaName,
+                        B_ErpCode
                         ORDER BY B_ParentID asc");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
@@ -317,6 +321,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
+                if (db.FindList<Mes_MaterEntity>(c => c.P_ErpCode == entityList[0].P_ErpCode).Any())
+                {
+                    db.Delete(entityList);
+                }
                 foreach (var item in entityList)
                 {
                     item.Create();
