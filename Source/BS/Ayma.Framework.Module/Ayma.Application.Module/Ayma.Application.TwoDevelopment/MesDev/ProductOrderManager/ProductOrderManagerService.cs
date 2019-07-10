@@ -28,22 +28,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
+//                strSql.Append("SELECT ");
+//                strSql.Append(@"
+//                t.ID,
+//                t.P_OrderNo,
+//                t.P_OrderDate,
+//                t.P_UseDate,
+//                t1.P_GoodsCode,
+//                t1.P_Qty,
+//                t1.P_Unit,
+//                t1.P_GoodsName,
+//                t.P_Status,
+//                t.P_CreateBy,
+//                t.P_CreateDate
+//                ");
+//                strSql.Append("  FROM Mes_ProductOrderHead t ");
+//                strSql.Append("  LEFT JOIN Mes_ProductOrderDetail t1 ON t1.P_OrderNo = t.P_OrderNo ");
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.ID,
-                t.P_OrderNo,
-                t.P_OrderDate,
-                t.P_UseDate,
-                t1.P_GoodsCode,
-                t1.P_Qty,
-                t1.P_Unit,
-                t1.P_GoodsName,
-                t.P_Status,
-                t.P_CreateBy,
-                t.P_CreateDate
-                ");
+                                t.ID,
+                                t.P_OrderNo,
+                                t.P_OrderDate,
+                                t.P_UseDate,
+                                t.P_Status,
+                                t.P_CreateBy,
+                                t.P_CreateDate");
                 strSql.Append("  FROM Mes_ProductOrderHead t ");
-                strSql.Append("  LEFT JOIN Mes_ProductOrderDetail t1 ON t1.P_OrderNo = t.P_OrderNo ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
