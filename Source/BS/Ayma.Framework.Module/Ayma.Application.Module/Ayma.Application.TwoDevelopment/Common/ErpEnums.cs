@@ -22,13 +22,21 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             Requist = 10000,
             /// <summary>
-            /// 成品入库单
+            /// 入库单
             /// </summary>
             MaterIn = 10001,
             /// <summary>
+            /// 成品入库单
+            /// </summary>
+            ProjectMaterIn = 10009,
+            /// <summary>
+            /// 出库单
+            /// </summary>
+            Out = 10002,
+            /// <summary>
             /// 成品出库单
             /// </summary>
-            ProOut = 10002,
+            ProOut = 10010,
             /// <summary>
             /// 报废单
             /// </summary>

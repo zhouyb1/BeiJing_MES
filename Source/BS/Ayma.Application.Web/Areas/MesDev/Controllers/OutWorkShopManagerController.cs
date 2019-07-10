@@ -38,7 +38,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             if (Request["keyValue"] == null)
             {
-                ViewBag.OutNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());//自动获取主编码
+                ViewBag.OutNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString());//自动获取主编码
             }
             return View();
         }
@@ -203,17 +203,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_OutWorkShopHead", "O_OutNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString())))
+                if (toolsIBLL.IsOrderNo("Mes_OutWorkShopHead", "O_OutNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString())))
                 {
                     //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
-                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Out).ToString()); //标志已使用
+                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString());
                 }
                 else
                 {
-                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
+                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString());
                 }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Out).ToString()); //标志已使用
             }
             outWorkShopManagerIBLL.SaveEntity(keyValue, entity, mes_OutWorkShopDetailList);
             return Success("保存成功！");

@@ -181,6 +181,31 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 根据车间名称获取车间实体信息
+        /// </summary>
+        /// <param name="name">车间名称</param>
+        /// <returns></returns>
+        public Mes_WorkShopEntity ByNameGetWorkShopEntity(string name)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_WorkShopEntity>(t => t.W_Name == name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取工艺列表
         /// </summary>

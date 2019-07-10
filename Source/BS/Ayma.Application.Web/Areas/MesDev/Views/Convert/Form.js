@@ -14,11 +14,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            //物料编码
-            $("#C_Code").select({
+            //物料名称
+            $("#C_Name").select({
                 type: 'default',
-                value: 'G_Code',
-                text: 'G_Code',
+                value: 'G_Name',
+                text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -27,22 +27,22 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
                 // 访问数据接口参数
             }).bind("change", function () {
-                var code = $(this).selectGet();
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
+                    data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_Name").val(entity.G_Name);
+                        $("#C_Code").val(entity.G_Code);
                     }
                 });
             });
-            //物料编码
-            $("#C_SecCode").select({
+            //转换后物料名称
+            $("#C_SecName").select({
                 type: 'default',
-                value: 'G_Code',
-                text: 'G_Code',
+                value: 'G_Name',
+                text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -51,14 +51,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
                 // 访问数据接口参数
             }).bind("change", function () {
-                var code = $(this).selectGet();
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
+                    data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_SecName").val(entity.G_Name);
+                        $("#C_SecCode").val(entity.G_Code);
                     }
                 });
             });

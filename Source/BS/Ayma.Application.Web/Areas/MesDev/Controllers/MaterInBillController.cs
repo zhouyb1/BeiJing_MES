@@ -16,7 +16,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class MaterInBillController : MvcControllerBase
     {
         private MaterInBillIBLL materInBillIBLL = new MaterInBillBLL();
-        private ToolsIBLL toolsIBLL=new ToolsBLL();
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
 
         #region 视图功能
 
@@ -27,7 +27,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 表单页
@@ -40,7 +40,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 ViewBag.M_MaterInNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());//自动获取主编码
             }
-             return View();
+            return View();
         }
         /// <summary>
         /// 提交查询页
@@ -60,7 +60,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-       
+
         /// <summary>
         /// 成品入库单表单
         /// </summary>
@@ -70,7 +70,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             if (Request["keyValue"] == null)
             {
-                ViewBag.OrderNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());//自动获取主编码
+                ViewBag.OrderNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString());//自动获取主编码
             }
             return View();
         }
@@ -143,7 +143,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 records = paginationobj.records
             };
             return Success(jsonData);
-        } 
+        }
         /// <summary>
         /// 获取非成品入库商品列表(非成品:原材料/半成品)
         /// </summary>
@@ -253,9 +253,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_MaterInHeadData = materInBillIBLL.GetMes_MaterInHeadEntity( keyValue );
-            var Mes_MaterInDetailData = materInBillIBLL.GetMes_MaterInDetailList( Mes_MaterInHeadData.M_MaterInNo );
-            var jsonData = new {
+            var Mes_MaterInHeadData = materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
+            var Mes_MaterInDetailData = materInBillIBLL.GetMes_MaterInDetailList(Mes_MaterInHeadData.M_MaterInNo);
+            var jsonData = new
+            {
                 Mes_MaterInHeadData = Mes_MaterInHeadData,
                 Mes_MaterInDetailData = Mes_MaterInDetailData,
             };
@@ -269,7 +270,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetOrderNoBy(string keyValue)
         {
-            var Mes_MaterInHeadData = materInBillIBLL.GetMes_MaterInHeadEntity( keyValue );
+            var Mes_MaterInHeadData = materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
 
             return Success(Mes_MaterInHeadData.M_OrderNo);
         }
@@ -316,8 +317,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult PostBill(string orderNo)
         {
             string errMsg = "";
-            int status=materInBillIBLL.PostBill(orderNo,out errMsg);
-            if (status==0)
+            int status = materInBillIBLL.PostBill(orderNo, out errMsg);
+            if (status == 0)
             {
                 return Success("提交成功");
             }
@@ -346,7 +347,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue,  ErpEnums.OrderKindEnum orderKind, string strEntity, string strmes_MaterInDetailList)
+        public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity, string strmes_MaterInDetailList)
         {
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
@@ -359,24 +360,42 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             if (string.IsNullOrEmpty(keyValue))
             {
+                entity.M_OrderKind = orderKind;//单据类型 成品与非成品
+
                 var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString())))
+                if (entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct)
                 {
-                    //若重复 先占用再赋值
+                    if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString())))
+                    {
+                        //若重复 先占用再赋值
+                        codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
+                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
+                    }
+                    else
+                    {
+                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
+                    }
                     codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
-                    entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
                 }
                 else
                 {
-                    entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
+                    if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString())))
+                    {
+                        //若重复 先占用再赋值
+                        codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString()); //标志已使用
+                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString());
+                    }
+                    else
+                    {
+                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString());
+                    }
+                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString()); //标志已使用
                 }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
+
+
             }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                entity.M_OrderKind = orderKind;
-            }
-            materInBillIBLL.SaveEntity(keyValue,entity,mes_MaterInDetailList);
+
+            materInBillIBLL.SaveEntity(keyValue, entity, mes_MaterInDetailList);
             return Success("保存成功！");
         }
         #endregion

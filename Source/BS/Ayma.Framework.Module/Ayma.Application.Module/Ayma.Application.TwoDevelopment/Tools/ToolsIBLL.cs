@@ -28,7 +28,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="code">车间编码</param>
         /// <returns></returns>
-        Mes_WorkShopEntity ByCodeGetWorkShopEntity(string code);
+        Mes_WorkShopEntity ByCodeGetWorkShopEntity(string code); 
+        /// <summary>
+        /// 根据车间名称获取车间实体信息
+        /// </summary>
+        /// <param name="name">车间名称</param>
+        /// <returns></returns>
+        Mes_WorkShopEntity ByNameGetWorkShopEntity(string name);
 
         /// <summary>
         /// 获取配方表树形结构列表

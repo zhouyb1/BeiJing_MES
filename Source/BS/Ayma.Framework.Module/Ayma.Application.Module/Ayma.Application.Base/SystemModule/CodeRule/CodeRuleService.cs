@@ -127,7 +127,7 @@ namespace Ayma.Application.Base.SystemModule
         public CodeRuleEntity GetEntityByCode(string enCode) {
             try
             {
-                return this.BaseRepository().FindEntity<CodeRuleEntity>(t => t.F_EnCode == enCode);
+                return this.BaseRepository().FindEntity<CodeRuleEntity>(t => t.F_EnCode == enCode&&t.F_DeleteMark==0);
             }
             catch (Exception ex)
             {

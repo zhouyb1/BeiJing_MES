@@ -56,11 +56,11 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
-            //车间编码
-            $("#T_WorkShopCode").select({
+            //车间名称
+            $("#T_WorkShopName").select({
                 type: 'default',
-                value: 'W_Code',
-                text: 'W_Code',
+                value: 'W_Name',
+                text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -69,14 +69,14 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
             }).bind("change", function () {
-                var code = $(this).selectGet();
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetWorkShopEntity',
-                    data: { code: code },
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetWorkShopEntity',
+                    data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#T_WorkShopName").val(entity.W_Name);
+                        $("#T_WorkShopCode").val(entity.W_Code);
                     }
                 });
             });

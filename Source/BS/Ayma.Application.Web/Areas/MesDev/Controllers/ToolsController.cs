@@ -123,6 +123,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var workshopEntity = toosIBLL.ByCodeGetWorkShopEntity(code);
             return Success(workshopEntity);
         }
+        /// <summary>
+        /// 根据车间名称获取车间实体信息
+        /// </summary>
+        /// <param name="name">车间名称</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByNameGetWorkShopEntity(string name)
+        {
+            var workshopEntity = toosIBLL.ByNameGetWorkShopEntity(name);
+            return Success(workshopEntity);
+        }
         
         /// <summary>
         /// 根据物料编码获取物料实体信息

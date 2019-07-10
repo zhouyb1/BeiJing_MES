@@ -129,8 +129,8 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "物料编码", name: "M_StockCode", width: 160, align: "left" },
-                    { label: "物料名称", name: "M_StockName", width: 160, align: "left" },
+                    { label: "仓库编码", name: "M_StockCode", width: 160, align: "left" },
+                    { label: "仓库名称", name: "M_StockName", width: 160, align: "left" },
                     { label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
                     { label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "M_Remark", width: 160, align: "left" },
