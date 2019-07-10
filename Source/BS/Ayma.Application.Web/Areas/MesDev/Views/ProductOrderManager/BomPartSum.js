@@ -1,6 +1,6 @@
 ﻿//var goodsCode = request('GoodsCode');
 var orderNo = request('orderNo');
-//var orderDate = request('orderDate');
+var orderDate = request('orderDate');
 //var qty = request('qty');
 var acceptClick;
 var G_Code="";

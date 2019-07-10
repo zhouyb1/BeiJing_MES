@@ -70,8 +70,8 @@ var bootstrap = function ($, ayma) {
                 var p_status = $('#girdtable').jfGridValue('P_Status');
                 var orderNo = $('#girdtable').jfGridValue('P_OrderNo');
                 var orderDate = $('#girdtable').jfGridValue('P_OrderDate');
-                var qty = $('#girdtable').jfGridValue('P_Qty');
-                var code = $('#girdtable').jfGridValue('P_GoodsCode');
+                //var qty = $('#girdtable').jfGridValue('P_Qty');
+                //var code = $('#girdtable').jfGridValue('P_GoodsCode');
                 if (p_status == "0") {
                     ayma.alert.error("订单处于生成计划中！");
                     return false;
@@ -85,7 +85,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '配方物料统计',
-                        url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?orderNo=' + orderNo,
+                        url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?orderNo=' + orderNo + '&orderDate=' + orderDate,
                         width: 800,
                         height: 600,
                         maxmin: true,
