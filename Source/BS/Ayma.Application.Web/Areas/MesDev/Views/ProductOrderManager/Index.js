@@ -119,9 +119,9 @@ var bootstrap = function ($, ayma) {
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "使用时间", name: "P_UseDate", width: 160, align: "left" },
                     { label: "创建人", name: "P_CreateBy", width: 160, align: "left" },
-                    { label: "数量", name: "P_Qty", width: 160, align: "left", hidden: true },
+                    //{ label: "数量", name: "P_Qty", width: 160, align: "left", hidden: true },
                     { label: "创建时间", name: "P_CreateDate", width: 160, align: "left" },
-                    { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left", hidden: true },
+                    //{ label: "物料编码", name: "P_GoodsCode", width: 160, align: "left", hidden: true },
                     {
                         label: "状态",
                         name: "P_Status",

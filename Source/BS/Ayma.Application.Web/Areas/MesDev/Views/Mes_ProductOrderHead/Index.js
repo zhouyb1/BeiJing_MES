@@ -17,9 +17,9 @@ var bootstrap = function ($, ayma) {
             $('#datesearch').amdate({
                 dfdata: [
                     { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '明天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59','d',1) } },
-                    { name: '后月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 2) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59','d',2) } },
-                    { name: '后3天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59','d',3) } }
+                    { name: '明天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 1) } },
+                    { name: '后月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 2) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 2) } },
+                    { name: '后3天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 3) } }
                 ],
                 // 月
                 mShow: false,
@@ -86,7 +86,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/DeleteForm', { keyValue: keyValue}, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/DeleteForm', { keyValue: keyValue }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -111,25 +111,26 @@ var bootstrap = function ($, ayma) {
                         label: "订单时间", name: "P_OrderDate", width: 100, align: "left",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
-                        }    
+                        }
                     },
                     { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left" },
                     { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
-                    { label: "单位", name: "P_Unit", width: 160, align: "left",hidden:true },
                     { label: "数量", name: "P_Qty", width: 100, align: "left", statistics: true, },
+                    //{ label: "单位", name: "P_Unit", width: 160, align: "left" },
+                   
                     {
                         label: "状态", name: "P_Status", width: 160, align: "left",
                         //formatter: function (cellvalue, options, rowObject) {
                         //    return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         //}
                     },
-                    { label: "添加人", name: "P_CreateBy", width: 160, align: "left"},
-                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "P_UpdateBy", width: 100, align: "left"},
-                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left"},
+                    { label: "添加人", name: "P_CreateBy", width: 160, align: "left" },
+                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left" },
+                    { label: "修改人", name: "P_UpdateBy", width: 100, align: "left" },
+                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left" },
 
                 ],
-                mainId:'ID',
+                mainId: 'ID',
                 reloadSelected: true,
                 isPage: true,
                 isStatistics: true,
