@@ -80,7 +80,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="code">物料编码</param>
         /// </summary>
         /// <returns></returns>
-        Mes_GoodsEntity ByCodeGetGoodsEntity(string code);
+        Mes_GoodsEntity ByCodeGetGoodsEntity(string code); 
+        /// <summary>
+        /// 根据物料名称获取物料实体信息
+        /// <param name="name">物料名称</param>
+        /// </summary>
+        /// <returns></returns>
+        Mes_GoodsEntity ByNameGetGoodsEntity(string name);
         /// <summary>
         /// 根据工艺代码获取工序表实体
         /// <param name="code">工艺代码</param>

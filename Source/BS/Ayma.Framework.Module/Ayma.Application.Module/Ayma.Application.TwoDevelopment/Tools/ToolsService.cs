@@ -296,6 +296,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
         }
 
         /// <summary>
+        /// 根据物料名称获取物料实体信息
+        /// <param name="name">物料名称</param>
+        /// </summary>
+        /// <returns></returns>
+        public Mes_GoodsEntity ByNameGetGoodsEntity(string name)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(x => x.G_Name == name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 根据工序代码获取工序表实体
         /// <param name="code">工艺代码</param>
         /// </summary>

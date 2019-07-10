@@ -135,6 +135,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsEntity = toosIBLL.ByCodeGetGoodsEntity(code);
             return Success(goodsEntity);
+        }     
+        /// <summary>
+        /// 根据物料名称获取物料实体信息
+        /// </summary>
+        /// <param name="name">物料名称</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByNameGetGoodsEntity(string name)
+        {
+            var goodsEntity = toosIBLL.ByNameGetGoodsEntity(name);
+            return Success(goodsEntity);
         }
    
         /// <summary>

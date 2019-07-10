@@ -26,6 +26,8 @@ var bootstrap = function ($, ayma) {
             } else {
                 $("#B_RecordCode").removeAttr("disabled");
             }
+            //单位
+            $("#B_Unit").DataItemSelect({ code: "GoodsUnit" });
             //是否有效
             $('#B_Avail').DataItemSelect({ code: 'YesOrNo' });
             // 上级
@@ -67,11 +69,11 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetRecordList'
                
             }).selectSet(recordCode);
-            //物料编码
-            $("#B_GoodsCode").select({
+            //物料名称
+            $("#B_GoodsName").select({
                 type: 'default',
-                value: 'G_Code',
-                text: 'G_Code',
+                value: 'G_Name',
+                text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -80,14 +82,14 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
                 // 访问数据接口参数
             }).bind("change",function() {
-                var code = $(this).selectGet();
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
+                    data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#B_GoodsName").val(entity.G_Name);
+                        $("#B_GoodsCode").val(entity.G_Code);
                     }
                 });
             });
