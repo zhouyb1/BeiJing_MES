@@ -23,7 +23,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
         /// <summary>
         /// 表单页
@@ -32,7 +32,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-             return View();
+            return View();
         }
         #endregion
 
@@ -66,8 +66,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_ConvertData = convertIBLL.GetMes_ConvertEntity( keyValue );
-            var jsonData = new {
+            var Mes_ConvertData = convertIBLL.GetMes_ConvertEntity(keyValue);
+            var jsonData = new
+            {
                 Mes_ConvertData = Mes_ConvertData,
             };
             return Success(jsonData);
@@ -99,12 +100,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_ConvertEntity entity = strEntity.ToObject<Mes_ConvertEntity>();
-            //var recode=convertIBLL.ExistCode(keyValue, entity.C_SecCode);
-            //if (!recode)
-            //{
-            //    return Fail("该编码已存在！");
-            //}
-            convertIBLL.SaveEntity(keyValue,entity);
+            if (entity.C_Code == entity.C_SecCode)
+            {
+                return Fail("该两个编码不能重复！");
+            }
+            var recode = convertIBLL.ExistCode(keyValue, entity.C_Code, entity.C_SecCode);
+            if (!recode)
+            {
+                return Fail("该转换已存在！");
+            }
+            convertIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }
         #endregion

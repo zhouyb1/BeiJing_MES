@@ -186,14 +186,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 检查转换后的编码重复性
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="code">父Id</param>
+        /// <param name="code">原编码</param>
+        /// <param name="convertCode">转换后的编码</param>
         /// <returns></returns>
-        public bool ExistCode(string keyValue, string code)
+        public bool ExistCode(string keyValue, string code, string convertCode)
         {
             try
             {
                 var expression = LinqExtensions.True<Mes_ConvertEntity>();
-                expression = expression.And(t => t.C_SecCode.Trim().ToUpper() == code.Trim().ToUpper());
+                expression = expression.And(t => t.C_SecCode.Trim().ToUpper() == convertCode.Trim().ToUpper()&&t.C_Code==code.Trim().ToUpper());
 
                 if (!string.IsNullOrEmpty(keyValue))
                 {

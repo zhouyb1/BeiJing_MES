@@ -22,7 +22,7 @@ var bootstrap = function ($, ayma) {
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'form',
-                    title: '新增篮子重量类型',
+                    title: '新增容器毛重类型',
                     url: top.$.rootUrl + '/MesDev/BasketList/Form',
                     width: 400,
                     height: 300,
@@ -38,7 +38,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑篮子重量类型',
+                        title: '编辑容器毛重类型',
                         url: top.$.rootUrl + '/MesDev/BasketList/Form?keyValue=' + keyValue,
                         width: 400,
                         height: 300,
@@ -70,7 +70,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "编码", name: "B_BasketCode", width: 160, align: "left"},
                     { label: "名称", name: "B_BasketName", width: 160, align: "left"},
-                    { label: "重量", name: "M_Weight", width: 160, align: "left"},
+                    { label: "毛重", name: "M_Weight", width: 160, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,

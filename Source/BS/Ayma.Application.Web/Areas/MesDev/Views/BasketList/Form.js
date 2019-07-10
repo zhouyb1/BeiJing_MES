@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
  * 日  期：2019-01-18 09:40
- * 描  述：篮子重量列表
+ * 描  述：容器毛重列表
  */
 var acceptClick;
 var keyValue = request('keyValue');

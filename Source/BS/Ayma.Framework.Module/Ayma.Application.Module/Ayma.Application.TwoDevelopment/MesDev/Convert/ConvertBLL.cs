@@ -123,13 +123,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 检查转换后的编码重复性
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="code">转换后的编码</param>
+        /// <param name="code">原编码</param>
+        /// <param name="convertCode">转换后的编码</param>
         /// <returns></returns>
-        public bool ExistCode(string keyValue, string code)
+        public bool ExistCode(string keyValue, string code, string convertCode)
         {
             try
             {
-                return convertService.ExistCode(keyValue, code);
+                return convertService.ExistCode(keyValue, code, convertCode);
             }
             catch (Exception ex)
             {

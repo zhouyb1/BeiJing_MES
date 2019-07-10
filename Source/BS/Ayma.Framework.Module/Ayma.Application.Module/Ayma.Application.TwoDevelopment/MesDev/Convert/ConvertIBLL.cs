@@ -47,9 +47,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         ///检查转换的编码重复性
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="code">转换后的编码</param>
+        /// <param name="code">原编码</param>
+        /// <param name="convertCode">转换后的编码</param>
         /// <returns></returns>
-        bool ExistCode(string keyValue, string code);
+        bool ExistCode(string keyValue, string code,string convertCode);
         #endregion
     }
 }
