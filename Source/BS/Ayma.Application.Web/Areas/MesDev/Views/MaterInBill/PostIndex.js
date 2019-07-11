@@ -69,13 +69,14 @@ var bootstrap = function ($, ayma) {
             // 退供应商
             $('#am_returnsupply').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
-                var status = $('#girdtable').jfGridValue('M_Status');
-           
-                if (status!=3) {
-                    ayma.alert.error("单据未完成,不能退供应商.");
-                    return false;
-                }
+                
                 if (ayma.checkrow(keyValue)) {
+                    var status = $('#girdtable').jfGridValue('M_Status');
+
+                    if (status != 3) {
+                        ayma.alert.error("单据未完成,不能退供应商.");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'BackSupplyAddForm',
                         title: '退供应商单',
