@@ -167,7 +167,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                             P_Unit = c.B_Unit,
                             P_Qty = c.B_Total,
                             P_OrderNo = orderNo,
-                            P_OrderDate = orderDate
+                            P_OrderDate = orderDate,
+                            P_ErpCode = c.B_ErpCode
                         }).ToList();
             productOrderManagerIBLL.SaveBomList(bomList);
             return Success("处理成功！");
