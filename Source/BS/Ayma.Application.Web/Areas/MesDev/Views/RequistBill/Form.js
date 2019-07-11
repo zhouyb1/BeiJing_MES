@@ -148,15 +148,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '库存数量', name: 'R_SQty', width: 100, align: 'left', editType: 'label',hidden:keyValue==""?false:true
                     },
                      {
-                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'input',
-                         editOp: {
-                             callback: function (rownum, row) {
-                                 if (/\D/.test(row.R_Price.toString().replace('.', ''))) { //验证只能为数字
-                                     row.R_Price = 0;
-                                 }
-
-                             }
-                         }
+                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label'
                      },
                     {
                         label: '批次', name: 'R_Batch', width: 100, align: 'left', editType: 'label'
