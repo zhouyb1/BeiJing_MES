@@ -321,9 +321,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                if (db.FindList<Mes_MaterEntity>(c => c.P_ErpCode == entityList[0].P_ErpCode).Any())
+                var erpCode = entityList[0].P_ErpCode;
+                var list = db.FindList<Mes_MaterEntity>(c => c.P_ErpCode == erpCode).ToList();
+                if (list.Any())
                 {
-                    db.Delete(entityList);
+                    db.Delete(list);
                 }
                 foreach (var item in entityList)
                 {
