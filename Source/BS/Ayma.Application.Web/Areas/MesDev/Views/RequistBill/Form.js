@@ -190,6 +190,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 });
+            } else {
+                $("#R_Status").selectSet(1);//新增单据
             }
         },
         search: function (data) {
