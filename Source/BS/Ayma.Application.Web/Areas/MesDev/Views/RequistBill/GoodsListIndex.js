@@ -114,14 +114,14 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "保质时间", name: "g_period", width: 80, align: "left" },
-                    { label: "价格", name: "g_price", width: 60, align: "left" },
+                    { label: "价格", name: "g_price", width: 80, align: "left" },
                     { label: "单位", name: "g_unit", width: 60, align: "left" },
                     { label: "供应商编码", name: "g_supplycode", width: 130, align: "left" },
                     { label: "供应商名称", name: "g_supply", width: 130, align: "left" },
-                    { label: "库存数量", name: "i_qty", width: 60, align: "left" },
+                    { label: "库存数量", name: "i_qty", width: 80, align: "left" },
                     { label: "批次", name: "i_batch", width: 80, align: "left" }
                 ],
-                mainId: 'F_Id',
+                mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
