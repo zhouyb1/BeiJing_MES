@@ -88,6 +88,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        ///根据goodsCode获取List
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public Mes_InventoryEntity GetListByParams(string goodsCode,string batch)
+        {
+            try
+            {
+                return inventorySeachService.GetListByParams(goodsCode, batch);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

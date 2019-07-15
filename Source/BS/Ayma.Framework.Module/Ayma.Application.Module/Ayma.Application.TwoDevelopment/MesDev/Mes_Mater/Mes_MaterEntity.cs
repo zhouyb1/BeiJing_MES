@@ -63,6 +63,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #endregion
 
+        #region 扩展字段
+
+        [NotMapped]
+        public string P_Batch { get; set; }
+
+        [NotMapped]
+        public decimal? P_Price { get; set; }
+
+        #endregion
+
         #region 扩展操作
         /// <summary>
         /// 新增调用

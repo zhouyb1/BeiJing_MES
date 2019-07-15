@@ -138,33 +138,50 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取订单原物料表
+        /// 获取库存物料
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterEntity> GetOrderMaterList(Pagination pagination, string queryJson, string keyword)
+        public IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT Mes_Mater.ID
-                                  ,P_OrderNo
-                                  ,P_OrderDate
-                                  ,P_GoodsCode
-                                  ,P_GoodsName
-                                  ,P_Unit
-                                  ,P_Qty
-                                  ,G_Price
-                              FROM Mes_Mater LEFT JOIN Mes_Goods ON Mes_Mater.P_GoodsCode = Mes_Goods.G_Code ");
-                strSql.Append(" where 1=1");
+//                strSql.Append(@"SELECT  m.ID ,
+//                                        m.P_GoodsCode ,
+//                                        m.P_GoodsName ,
+//                                        s.I_Batch P_Batch ,
+//                                        m.P_Unit ,
+//                                        s.I_Qty P_Qty ,
+//                                        m.P_OrderNo ,
+//                                        m.P_OrderDate ,
+//                                        g.G_Price P_Price
+//                                FROM    dbo.Mes_Inventory s
+//                                        LEFT JOIN dbo.Mes_Goods g ON g.G_Code = s.I_GoodsCode
+//                                        RIGHT JOIN dbo.Mes_Mater m ON m.P_GoodsCode = s.I_GoodsCode
+//                                WHERE   1 = 1 ");
+
+                strSql.Append(@"SELECT  S.ID ,
+                                        S.I_StockCode ,
+                                        S.I_StockName ,
+                                        S.I_Kind ,
+                                        S.I_GoodsCode ,
+                                        S.I_GoodsName ,
+                                        S.I_Unit ,
+                                        S.I_Qty ,                              
+                                        S.I_Batch ,
+                                        G.G_Price I_Price
+                                FROM    dbo.Mes_Inventory S
+                                        LEFT JOIN dbo.Mes_Goods G ON S.I_GoodsCode = G.G_Code where 1 = 1 ");
+
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
                 if (!keyword .IsEmpty())
                 {
                     dp.Add("keyword", "%"+keyword+"%", DbType.String);
-                    strSql.Append(" AND P_GoodsCode+P_GoodsName like @keyword ");
+                    strSql.Append(" AND m.P_GoodsCode+m.P_GoodsName like @keyword ");
                 }
-                return this.BaseRepository().FindList<Mes_MaterEntity>(strSql.ToString(), dp, pagination);
+                return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex) 
             {
@@ -244,6 +261,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.C_CollarNo = entity.C_CollarNo;
+                        item.C_OrderNo = entity.P_OrderNo;
                     }
                     //mes_CollarDetailEntity.Create();
                     //mes_CollarDetailEntity.C_CollarNo = entity.C_CollarNo;

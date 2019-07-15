@@ -32,10 +32,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         IEnumerable<Mes_CollarDetailEntity >GetMes_CollarDetailEntityList(string keyValue);
 
         /// <summary>
-        /// 获取订单原物料表
+        /// 获取库存物料表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_MaterEntity> GetOrderMaterList(Pagination pagination, string queryJson, string keyword);
+        IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword);
         #endregion
 
         #region 提交数据

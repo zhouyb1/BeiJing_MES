@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Linq;
+using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
 using System;
@@ -120,6 +121,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 return this.BaseRepository().FindEntity<Mes_InventoryEntity>(c=>c.I_GoodsCode==goodsCode&&c.I_StockCode==stockCode&&c.I_Batch==batch);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        ///根据goodsCode、批次获取Entity
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public Mes_InventoryEntity GetListByParams(string goodsCode,string batch)
+        {
+            try
+            {
+                return
+                    this.BaseRepository()
+                        .FindEntity<Mes_InventoryEntity>(c => c.I_GoodsCode == goodsCode && c.I_Batch == batch);
             }
             catch (Exception ex)
             {

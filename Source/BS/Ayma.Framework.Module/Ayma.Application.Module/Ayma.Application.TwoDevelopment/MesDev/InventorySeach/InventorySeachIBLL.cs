@@ -33,6 +33,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="batch">批次</param>
         /// <returns></returns>
         Mes_InventoryEntity GetEntityBy(string goodsCode, string stockCode, string batch);
+
+        /// <summary>
+        ///根据goodsCode、批次获取Entity
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+      Mes_InventoryEntity GetListByParams(string goodsCode,string batch);
         #endregion
 
         #region 提交数据
