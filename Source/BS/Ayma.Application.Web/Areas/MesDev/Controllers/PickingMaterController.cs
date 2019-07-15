@@ -18,8 +18,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private PickingMaterIBLL pickingMaterIBLL = new PickingMaterBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
-
-
+        private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
+        private Mes_ProductOrderHeadIBLL orderBll = new Mes_ProductOrderHeadBLL();
         #region 视图功能
 
         /// <summary>
@@ -116,16 +116,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
 
         /// <summary>
-        /// 获取订单原物料列表
+        /// 获取库存料列表
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetOrderMaterList(string pagination, string queryJson, string keyword)
+        public ActionResult GetMaterList(string pagination, string queryJson, string keyword)
         {
-
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data =  pickingMaterIBLL.GetOrderMaterList(paginationobj,queryJson,keyword).ToList();
+            var data =  pickingMaterIBLL.GetMaterList(paginationobj,queryJson,keyword).ToList();
             var jsonData = new
             {
                 rows = data,
@@ -162,11 +161,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_CollarDetailEntity)
         {
+            
             Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
+            //获取订单时间
+            var order = orderBll.GetEntityByNo(entity.P_OrderNo);
+            entity.P_OrderDate = order.P_OrderDate;
             var mes_CollarDetailEntityList = strmes_CollarDetailEntity.ToObject<List<Mes_CollarDetailEntity>>();
             if (mes_CollarDetailEntityList.Any(c=>c.C_Qty<=0))
             {
                 return Fail("数量只能是大于0的实数");
+            }
+            //获取库存
+            var list = from goods in mes_CollarDetailEntityList
+                       let qty = invSeachIbll.GetListByParams(goods.C_GoodsCode,goods.C_Batch).I_Qty
+                where goods.C_Qty > qty
+                select goods;
+            foreach (var s in list)
+            {
+                return Fail(s.C_GoodsName + "库存不足");
             }
             if (string.IsNullOrEmpty(keyValue))
             {
