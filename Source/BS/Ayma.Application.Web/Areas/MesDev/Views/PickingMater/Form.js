@@ -7,6 +7,7 @@ var refreshGirdData;//表格商品添加
 var RemoveGridData;//移除表格
 var parentFormId = request('formId');//父级窗口id
 var keyValue = request('keyValue');
+
 var tmp = new Map();
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -79,7 +80,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
-                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId,
+                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val(),
                     width: 700,
                     height: 500,
                     maxmin: true,
