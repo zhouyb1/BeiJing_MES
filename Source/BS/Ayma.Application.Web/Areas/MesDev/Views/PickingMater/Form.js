@@ -17,7 +17,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.bind();
             page.initData();
         },
-        bind: function() {
+        bind: function () {
             //绑定仓库
             var dfop = {
                 type: 'default',
@@ -58,6 +58,22 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
+
+            //绑定订单号
+            $("#P_OrderNo").select({
+                type: 'default',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+                // 访问数据接口参数
+                param: {}
+            });
+             
             //添加订单原物料
             $('#am_add').on('click', function() {
                 ayma.layerForm({
@@ -92,8 +108,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             }
                         }
-                    }
-                    //{ label: "批次", name: "C_Batch", width: 60, align: "left" }
+                    },
+                    { label: "批次", name: "C_Batch", width: 60, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -132,6 +148,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         var data = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data[0].C_GoodsCode == undefined || data[0].C_GoodsCode == "") {
             ayma.alert.error('请添加物料');
+            return false;
+        }
+
+        if ($("#C_StockName").selectGet() == $("#C_StockToName").selectGet()) {
+            
+            ayma.alert.error('领料仓库与原仓库相同');
             return false;
         }
         var postData = {};
