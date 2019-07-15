@@ -14,8 +14,7 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
-
-//var batch = request('batch');
+var stockCode = request('stockCode');//物料仓库
 
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -83,7 +82,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList',
+                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode='+stockCode,
                 headData: [
                     //{ label: "生产订单号", name: "P_OrderNo", width: 130, align: "left",  },
                     //{ label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
@@ -146,7 +145,10 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            queryJson = param;
+            //queryJson = param;
+            
+            queryJson = param || {};
+            queryJson.stockCode = stockCode;
             param = $("#txt_Keyword").val();
             $('#girdtable').jfGridSet('reload', { param: { keyword: param,  queryJson: JSON.stringify(queryJson) } });
         }
