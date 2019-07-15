@@ -41,7 +41,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockCode").val(entity.S_Code);
+                        $("#C_StockCode").val(entity == null ? "" : entity.S_Code);
                     }
                 });
             });
@@ -55,7 +55,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockToCode").val(entity.S_Code);
+                        $("#C_StockToCode").val(entity==null?"":entity.S_Code);
                     }
                 });
             });
