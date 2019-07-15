@@ -47,7 +47,7 @@ namespace Business.System
 
                 if (string.IsNullOrEmpty(G_Code) && string.IsNullOrEmpty(G_Name))
                 {
-                    strSql.Append("SELECT * FROM Mes_Goods");
+                    strSql.Append("SELECT * FROM Mes_Goods where G_Kind = 1 ");
                     var rows = db.ExecuteObjects<MesGoodsEntity>(strSql.ToString());
                     return rows;
                 }
@@ -55,7 +55,7 @@ namespace Business.System
                 {
                     var paramList = new List<SqlParameter>();
                     strSql.Append("SELECT * FROM Mes_Goods");
-                    strSql.Append(" WHERE 1 = 1");
+                    strSql.Append(" WHERE G_Kind = 1");
                     if (!string.IsNullOrEmpty(G_Code))
                     {
                         strSql.Append(" and G_Code = @G_Code");

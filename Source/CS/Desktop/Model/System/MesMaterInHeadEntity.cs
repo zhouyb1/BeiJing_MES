@@ -13,6 +13,10 @@ namespace Model
         /// </summary>
         public string ID{ set; get; }
         /// <summary>
+        /// 单据类型
+        /// </summary>
+        public int M_OrderKind { set; get; }
+        /// <summary>
         /// 入库单号
         /// </summary>
         public string M_MaterInNo{ set; get; }

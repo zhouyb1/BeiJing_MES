@@ -47,7 +47,7 @@ namespace Business.System
       ,[M_DeleteBy]
       ,[M_DeleteDate]
       ,[M_UploadBy]
-      ,[M_UploadDate] FROM Mes_MaterInHead");
+      ,[M_UploadDate] FROM Mes_MaterInHead where M_status <> -1");
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
                     return rows;
                 }
@@ -72,7 +72,7 @@ namespace Business.System
       ,[M_DeleteDate]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead");
-                    strSql.Append(" WHERE M_MaterInNo LIKE @M_MaterInNo");
+                    strSql.Append(" WHERE M_status <> -1 and M_MaterInNo LIKE @M_MaterInNo");
                     var paramList = new List<SqlParameter>();
                     paramList.Add(new SqlParameter("@M_MaterInNo", string.Format("%{0}%", M_MaterInNo)));
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString(), paramList.ToArray());
@@ -94,7 +94,7 @@ namespace Business.System
              try
              {
                  var strSql = new StringBuilder();
-                 strSql.Append("SELECT top(1)* FROM Mes_MaterInHead");
+                 strSql.Append("SELECT top(1)* FROM Mes_MaterInHead where M_OrderKind = 1");
                  strSql.Append(" order by M_MaterInNo desc");
                  var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
                  return rows;
@@ -167,6 +167,7 @@ namespace Business.System
                 {
 					 strSql.Append("INSERT INTO Mes_MaterInHead(");
                      strSql.Append("ID,");
+                     strSql.Append("M_OrderKind,");
                      strSql.Append("M_MaterInNo,");
                      strSql.Append("M_StockCode,");
                      strSql.Append("M_Kind,");
@@ -186,6 +187,7 @@ namespace Business.System
                      strSql.Append(")");
                      strSql.Append("VALUES(");
                      strSql.Append("@ID,");
+                     strSql.Append("@M_OrderKind,");
                      strSql.Append("@M_MaterInNo,");
                      strSql.Append("@M_StockCode,");
                      strSql.Append("@M_Kind,");
@@ -208,6 +210,7 @@ namespace Business.System
                 else
                 {
 					 strSql.Append("UPDATE Mes_MaterInHead SET ");
+                     strSql.Append("M_MaterInNo=@M_OrderKind,");
                      strSql.Append("M_MaterInNo=@M_MaterInNo,");
                      strSql.Append("M_StockCode=@M_StockCode,");
                      strSql.Append("M_Kind=@M_Kind,");
@@ -227,6 +230,7 @@ namespace Business.System
                      strSql.Append(" WHERE ID=@ID");
                      paramList.Add(new SqlParameter("@ID",keyValue));
                 }
+                paramList.Add(new SqlParameter("@M_OrderKind", entity.M_OrderKind));
                 paramList.Add(new SqlParameter("@M_MaterInNo",entity.M_MaterInNo));
                 paramList.Add(new SqlParameter("@M_StockCode",entity.M_StockCode));
                 paramList.Add(new SqlParameter("@M_Kind", entity.M_Kind));

@@ -125,6 +125,7 @@
     <Compile Include="System\Mes_OutWorkShopHeadEntity.cs" />
     <Compile Include="System\Mes_OutWorkShopTempEntity.cs" />
     <Compile Include="System\Mes_ProceEntity.cs" />
+    <Compile Include="System\Mes_TeamEntity.cs" />
     <Compile Include="System\Mes_WorkShopScanEntity.cs" />
     <Compile Include="System\Mes_WorkShopWeightEntity.cs" />
     <Compile Include="System\SysConfig.cs" />

@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
@@ -19,6 +20,7 @@ namespace DesktopApp
         public frmMain frmMain { get; set; }
         //decimal Period; //保质期
         private SysUser User;
+        string strUnit = "";
 
         public frmOutWorkShopList(frmMain _frmMain, SysUser _User)
         {
@@ -96,7 +98,7 @@ namespace DesktopApp
                 if (e.KeyValue == 13)
                 {
                     string strBarcode = txtBarcode.Text;
-                    string[] strTemp = strBarcode.Split('&');
+                    string[] strTemp = strBarcode.Split('*');
                     txtCode.Text = strTemp[0].ToString();
                     txtPc.Text = strTemp[1].ToString();
                     txtQty.Text = strTemp[2].ToString();
@@ -108,6 +110,7 @@ namespace DesktopApp
                     {
                         txtName.Text = Goods_rows[0].G_Name;
                         txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                        strUnit = Goods_rows[0].G_Unit.ToString();
 
                     }
                 }
@@ -120,13 +123,18 @@ namespace DesktopApp
 
         private void btn_Search_Click(object sender, EventArgs e)
         {
+            Update();
+        }
+
+        private void Update()
+        {
             Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
             var rows = OutWorkShopTempBLL.GetList_OutWorkShopTemp("where O_StockCode = '" + cmbStock.Text + "' and O_WorkShop = '" + cmbWorkShop.Text + "' and O_OrderNo = '" + comOrderNo.Text + "'");
-            if (rows == null || rows.Count < 1)
-            {
-                untCommon.InfoMsg("没有任何数据！");
-                return;
-            }
+            //if (rows == null || rows.Count < 1)
+            //{
+            //    //untCommon.InfoMsg("没有任何数据！");
+            //    return;
+            //}
             dataGridView1.DataSource = rows;
         }
 
@@ -145,7 +153,7 @@ namespace DesktopApp
                 OutWorkShopTempEntity.O_CreateDate = DateTime.Now;
                 OutWorkShopTempEntity.O_GoodsCode = txtCode.Text;
                 OutWorkShopTempEntity.O_GoodsName = txtName.Text;
-                OutWorkShopTempEntity.O_Unit = "";
+                OutWorkShopTempEntity.O_Unit = strUnit;
                 OutWorkShopTempEntity.O_Qty = Convert.ToDecimal(txtQty.Text);
                 OutWorkShopTempEntity.O_Batch = txtPc.Text;
                 OutWorkShopTempEntity.O_Remark = "";
@@ -159,6 +167,10 @@ namespace DesktopApp
                 if (OutWorkShopTempBLL.SaveEntity("", OutWorkShopTempEntity) > 0)
                 {
                     untCommon.InfoMsg("添加成功！");
+                    Update();
+                    cls();
+                    txtBarcode.SelectAll();
+                    txtBarcode.Focus();
                     //frmParent.loadData();
                 }
                 else
@@ -166,6 +178,17 @@ namespace DesktopApp
                     untCommon.InfoMsg("添加失败！");
                 }
             }
+        }
+
+        private void cls()
+        {
+            txtBarcode.Text = "";
+            txtCode.Text = "";
+            txtName.Text = "";
+            txtPc.Text = "";
+            txtQty.Text = "";
+            txtPrice.Text = "";
+
         }
 
         private void btn_upload_Click(object sender, EventArgs e)
@@ -192,7 +215,7 @@ namespace DesktopApp
                     var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
                     if (rowsHead == null || rowsHead.Count < 1)
                     {
-                        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "0001";
+                        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
                     }
                     else
                     {
@@ -205,7 +228,7 @@ namespace DesktopApp
                         }
                         else
                         {
-                            strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "0001";
+                            strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
                         }
 
                     }
@@ -214,9 +237,9 @@ namespace DesktopApp
                     OutWorkShopHeadEntity.O_OrderNo = comOrderNo.Text;
                     OutWorkShopHeadEntity.O_StockCode = cmbStock.Text;
                     OutWorkShopHeadEntity.O_StockName = txtStockName.Text;
-                    OutWorkShopHeadEntity.O_CreateBy = "";
+                    OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
                     OutWorkShopHeadEntity.O_CreateDate = DateTime.Now;
-                    OutWorkShopHeadEntity.O_OrderDate = "";
+                    OutWorkShopHeadEntity.O_OrderDate = txtOrderDate.Text;
                     OutWorkShopHeadEntity.O_Remark = "";
                     OutWorkShopHeadEntity.O_Status = 1;
                     OutWorkShopHeadEntity.O_WorkShop = cmbWorkShop.Text;
@@ -240,7 +263,7 @@ namespace DesktopApp
 
                     }
                     MessageBox.Show("保存成功");
-
+                    DeleteData();
                 }
 
             }
@@ -251,11 +274,84 @@ namespace DesktopApp
             }
         }
 
+        private void DeleteData()
+        {
+            Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
+            OutWorkShopTempBLL.DeleteData("where O_StockCode = '" + cmbStock.Text + "' and O_WorkShop = '" + cmbWorkShop.Text + "' and O_OrderNo = '" + comOrderNo.Text + "'");
+            
+        }
+
         private void cmbProce_SelectedIndexChanged(object sender, EventArgs e)
         {
             Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
             var row = ProceBLL.GetList_Proce("where P_RecordCode = '" + cmbRecord.Text + "' and P_ProNo = '" + cmbProce.Text + "'");
             txtProceName.Text = row[0].P_ProName;
+        }
+
+        private void btn_Weight_Click(object sender, EventArgs e)
+        {
+            if(Open())
+            {
+                Thread.Sleep(100);
+                if (serialPort1.IsOpen)
+                {
+                    byte[] byRead = null;
+                    byRead = new byte[2048];
+                    int nReadLen;
+                    nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+                    string str = System.Text.Encoding.Default.GetString(byRead);
+                    string[] strWeight = str.Split('=');
+                    int nLen = strWeight.Length;
+                    if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 1].ToString() == strWeight[nLen - 2].ToString())
+                    {
+                        
+                    }
+                    else
+                    {
+                        MessageBox.Show("串口没有打开");
+
+                    }
+                    //MessageBox.Show(str);
+                }
+                else
+                {
+                    MessageBox.Show("串口没有打开");
+                }
+
+                Close();
+
+            }
+            else
+            {
+                ;
+            }
+        }
+
+        private bool Open()
+        {
+            try
+            {
+                serialPort1.BaudRate = 1200;
+                serialPort1.Open();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return false;
+            }
+        }
+
+        private void Close()
+        {
+            serialPort1.Close();
+        }
+
+        private void comOrderNo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesProductOrderHeadBLL ProductOrderHeadBLL = new MesProductOrderHeadBLL();
+            var row = ProductOrderHeadBLL.GetList(comOrderNo.Text);
+            txtOrderDate.Text = row[0].P_OrderDate.ToString();
         }
 
 

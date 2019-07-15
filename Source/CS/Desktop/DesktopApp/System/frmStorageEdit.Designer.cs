@@ -28,28 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.txtMaterInNo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtGoodsCode = new System.Windows.Forms.TextBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnPeeling = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnWeigh = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtUnit = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtQty = new System.Windows.Forms.TextBox();
-            this.txtBatch = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.txtGoodsName = new System.Windows.Forms.TextBox();
-            this.txtKind = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.comBasketType = new System.Windows.Forms.ComboBox();
             this.入库单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.物料编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +40,28 @@
             this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtMaterInNo = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnPeeling = new System.Windows.Forms.Button();
+            this.btnWeigh = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtUnit = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtQty = new System.Windows.Forms.TextBox();
+            this.txtBatch = new System.Windows.Forms.TextBox();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.txtKind = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comBasketType = new System.Windows.Forms.ComboBox();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btn_Weight = new System.Windows.Forms.Button();
+            this.comGoods = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,6 +87,76 @@
             this.dataGridView.Size = new System.Drawing.Size(665, 209);
             this.dataGridView.TabIndex = 60;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            // 
+            // 入库单号
+            // 
+            this.入库单号.DataPropertyName = "M_MaterInNo";
+            this.入库单号.HeaderText = "入库单号";
+            this.入库单号.Name = "入库单号";
+            this.入库单号.ReadOnly = true;
+            // 
+            // 生产订单号
+            // 
+            this.生产订单号.DataPropertyName = "M_OrderNo";
+            this.生产订单号.HeaderText = "生产订单号";
+            this.生产订单号.Name = "生产订单号";
+            this.生产订单号.ReadOnly = true;
+            // 
+            // 物料编码
+            // 
+            this.物料编码.DataPropertyName = "M_GoodsCode";
+            this.物料编码.HeaderText = "物料编码";
+            this.物料编码.Name = "物料编码";
+            this.物料编码.ReadOnly = true;
+            // 
+            // 物料名称
+            // 
+            this.物料名称.DataPropertyName = "M_GoodsName";
+            this.物料名称.HeaderText = "物料名称";
+            this.物料名称.Name = "物料名称";
+            this.物料名称.ReadOnly = true;
+            // 
+            // 物料类型
+            // 
+            this.物料类型.DataPropertyName = "M_Kind";
+            this.物料类型.HeaderText = "物料类型";
+            this.物料类型.Name = "物料类型";
+            this.物料类型.ReadOnly = true;
+            // 
+            // 单位
+            // 
+            this.单位.DataPropertyName = "M_Unit";
+            this.单位.HeaderText = "单位";
+            this.单位.Name = "单位";
+            this.单位.ReadOnly = true;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "M_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "M_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            this.批次.ReadOnly = true;
+            // 
+            // 备注
+            // 
+            this.备注.DataPropertyName = "M_Remark";
+            this.备注.HeaderText = "备注";
+            this.备注.Name = "备注";
+            this.备注.ReadOnly = true;
+            // 
+            // 价格
+            // 
+            this.价格.DataPropertyName = "M_Price";
+            this.价格.HeaderText = "价格";
+            this.价格.Name = "价格";
+            this.价格.ReadOnly = true;
             // 
             // txtMaterInNo
             // 
@@ -115,18 +187,9 @@
             this.label2.TabIndex = 1003;
             this.label2.Text = "物料编码：";
             // 
-            // txtGoodsCode
-            // 
-            this.txtGoodsCode.Location = new System.Drawing.Point(98, 292);
-            this.txtGoodsCode.Margin = new System.Windows.Forms.Padding(2);
-            this.txtGoodsCode.Name = "txtGoodsCode";
-            this.txtGoodsCode.Size = new System.Drawing.Size(92, 21);
-            this.txtGoodsCode.TabIndex = 1012;
-            this.txtGoodsCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsCode_KeyDown);
-            // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(134, 374);
+            this.btnSave.Location = new System.Drawing.Point(283, 374);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(56, 26);
@@ -148,7 +211,7 @@
             // 
             // btnPeeling
             // 
-            this.btnPeeling.Location = new System.Drawing.Point(216, 374);
+            this.btnPeeling.Location = new System.Drawing.Point(365, 374);
             this.btnPeeling.Margin = new System.Windows.Forms.Padding(2);
             this.btnPeeling.Name = "btnPeeling";
             this.btnPeeling.Size = new System.Drawing.Size(62, 26);
@@ -157,16 +220,6 @@
             this.btnPeeling.UseVisualStyleBackColor = true;
             this.btnPeeling.Visible = false;
             this.btnPeeling.Click += new System.EventHandler(this.btnPeeling_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(224, 295);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 1007;
-            this.label3.Text = "物料名称：";
             // 
             // btnWeigh
             // 
@@ -258,16 +311,6 @@
             this.txtPrice.TabIndex = 1015;
             this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
             // 
-            // txtGoodsName
-            // 
-            this.txtGoodsName.Location = new System.Drawing.Point(290, 292);
-            this.txtGoodsName.Margin = new System.Windows.Forms.Padding(2);
-            this.txtGoodsName.Name = "txtGoodsName";
-            this.txtGoodsName.ReadOnly = true;
-            this.txtGoodsName.Size = new System.Drawing.Size(113, 21);
-            this.txtGoodsName.TabIndex = 1010;
-            this.txtGoodsName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtGoodsName_KeyDown);
-            // 
             // txtKind
             // 
             this.txtKind.Location = new System.Drawing.Point(592, 295);
@@ -280,12 +323,12 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(535, 337);
+            this.label9.Location = new System.Drawing.Point(526, 336);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 12);
+            this.label9.Size = new System.Drawing.Size(65, 12);
             this.label9.TabIndex = 1021;
-            this.label9.Text = "框类型：";
+            this.label9.Text = "容器类型：";
             // 
             // comBasketType
             // 
@@ -297,89 +340,53 @@
             this.comBasketType.Size = new System.Drawing.Size(62, 20);
             this.comBasketType.TabIndex = 1022;
             // 
-            // 入库单号
+            // btn_Weight
             // 
-            this.入库单号.DataPropertyName = "M_MaterInNo";
-            this.入库单号.HeaderText = "入库单号";
-            this.入库单号.Name = "入库单号";
-            this.入库单号.ReadOnly = true;
+            this.btn_Weight.Image = global::DesktopApp.Properties.Resources.ok;
+            this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Weight.Location = new System.Drawing.Point(119, 374);
+            this.btn_Weight.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_Weight.Name = "btn_Weight";
+            this.btn_Weight.Size = new System.Drawing.Size(61, 26);
+            this.btn_Weight.TabIndex = 1023;
+            this.btn_Weight.Text = "获重";
+            this.btn_Weight.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_Weight.UseVisualStyleBackColor = true;
+            this.btn_Weight.Click += new System.EventHandler(this.btn_Weight_Click);
             // 
-            // 生产订单号
+            // comGoods
             // 
-            this.生产订单号.DataPropertyName = "M_OrderNo";
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            this.生产订单号.ReadOnly = true;
+            this.comGoods.FormattingEnabled = true;
+            this.comGoods.Location = new System.Drawing.Point(101, 292);
+            this.comGoods.Name = "comGoods";
+            this.comGoods.Size = new System.Drawing.Size(302, 20);
+            this.comGoods.TabIndex = 1024;
+            this.comGoods.SelectedIndexChanged += new System.EventHandler(this.comGoods_SelectedIndexChanged);
             // 
-            // 物料编码
+            // checkBox1
             // 
-            this.物料编码.DataPropertyName = "M_GoodsCode";
-            this.物料编码.HeaderText = "物料编码";
-            this.物料编码.Name = "物料编码";
-            this.物料编码.ReadOnly = true;
-            // 
-            // 物料名称
-            // 
-            this.物料名称.DataPropertyName = "M_GoodsName";
-            this.物料名称.HeaderText = "物料名称";
-            this.物料名称.Name = "物料名称";
-            this.物料名称.ReadOnly = true;
-            // 
-            // 物料类型
-            // 
-            this.物料类型.DataPropertyName = "M_Kind";
-            this.物料类型.HeaderText = "物料类型";
-            this.物料类型.Name = "物料类型";
-            this.物料类型.ReadOnly = true;
-            // 
-            // 单位
-            // 
-            this.单位.DataPropertyName = "M_Unit";
-            this.单位.HeaderText = "单位";
-            this.单位.Name = "单位";
-            this.单位.ReadOnly = true;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "M_Qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            // 
-            // 批次
-            // 
-            this.批次.DataPropertyName = "M_Batch";
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            this.批次.ReadOnly = true;
-            // 
-            // 备注
-            // 
-            this.备注.DataPropertyName = "M_Remark";
-            this.备注.HeaderText = "备注";
-            this.备注.Name = "备注";
-            this.备注.ReadOnly = true;
-            // 
-            // 价格
-            // 
-            this.价格.DataPropertyName = "M_Price";
-            this.价格.HeaderText = "价格";
-            this.价格.Name = "价格";
-            this.价格.ReadOnly = true;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(537, 374);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(108, 16);
+            this.checkBox1.TabIndex = 1025;
+            this.checkBox1.Text = "是否减容器重量";
+            this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // frmStorageEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(683, 422);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.comGoods);
+            this.Controls.Add(this.btn_Weight);
             this.Controls.Add(this.comBasketType);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtGoodsCode);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnPeeling);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnWeigh);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
@@ -389,7 +396,6 @@
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.txtBatch);
             this.Controls.Add(this.txtPrice);
-            this.Controls.Add(this.txtGoodsName);
             this.Controls.Add(this.txtKind);
             this.Controls.Add(this.txtMaterInNo);
             this.Controls.Add(this.label1);
@@ -412,11 +418,9 @@
         private System.Windows.Forms.TextBox txtMaterInNo;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtGoodsCode;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnPeeling;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnWeigh;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
@@ -426,7 +430,6 @@
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.TextBox txtBatch;
         private System.Windows.Forms.TextBox txtPrice;
-        private System.Windows.Forms.TextBox txtGoodsName;
         private System.Windows.Forms.TextBox txtKind;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comBasketType;
@@ -440,5 +443,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
         private System.Windows.Forms.DataGridViewTextBoxColumn 价格;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button btn_Weight;
+        private System.Windows.Forms.ComboBox comGoods;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

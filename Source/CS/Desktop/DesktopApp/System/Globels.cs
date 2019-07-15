@@ -8,6 +8,7 @@ namespace DesktopApp
 {
     class Globels
     {
+        public static string strUser = ""; //登录用户
         public static string strOrderNo = "";//订单编号
         public static string strWorkShop = ""; //车间编码
         public static string strWorkShopName = "";

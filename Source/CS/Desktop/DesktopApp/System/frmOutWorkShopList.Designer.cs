@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
@@ -35,14 +36,6 @@
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_upload = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.线边仓 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.txtRecordName = new System.Windows.Forms.TextBox();
@@ -70,6 +63,23 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.txtOrderDate = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.WorkShopName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StockName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreateBy = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CreateDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.线边仓 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +130,7 @@
             // 
             // btn_upload
             // 
-            this.btn_upload.Location = new System.Drawing.Point(548, 102);
+            this.btn_upload.Location = new System.Drawing.Point(548, 97);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(75, 23);
             this.btn_upload.TabIndex = 71;
@@ -133,58 +143,24 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.生产订单号,
+            this.WorkShopName,
+            this.StockName,
+            this.status,
+            this.CreateBy,
+            this.CreateDate,
             this.车间,
             this.线边仓,
             this.工艺代码,
             this.物料,
             this.批次,
             this.数量,
-            this.条码});
+            this.条码,
+            this.ID});
             this.dataGridView1.Location = new System.Drawing.Point(31, 260);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(737, 184);
             this.dataGridView1.TabIndex = 68;
-            // 
-            // 生产订单号
-            // 
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            // 
-            // 车间
-            // 
-            this.车间.HeaderText = "车间";
-            this.车间.Name = "车间";
-            // 
-            // 线边仓
-            // 
-            this.线边仓.HeaderText = "线边仓";
-            this.线边仓.Name = "线边仓";
-            // 
-            // 工艺代码
-            // 
-            this.工艺代码.HeaderText = "工艺代码";
-            this.工艺代码.Name = "工艺代码";
-            // 
-            // 物料
-            // 
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            // 
-            // 批次
-            // 
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            // 
-            // 数量
-            // 
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            // 
-            // 条码
-            // 
-            this.条码.HeaderText = "条码";
-            this.条码.Name = "条码";
             // 
             // txtName
             // 
@@ -205,7 +181,7 @@
             // 
             // txtRecordName
             // 
-            this.txtRecordName.Location = new System.Drawing.Point(388, 84);
+            this.txtRecordName.Location = new System.Drawing.Point(388, 85);
             this.txtRecordName.Name = "txtRecordName";
             this.txtRecordName.Size = new System.Drawing.Size(121, 21);
             this.txtRecordName.TabIndex = 65;
@@ -222,7 +198,7 @@
             // 
             // txtStockName
             // 
-            this.txtStockName.Location = new System.Drawing.Point(388, 57);
+            this.txtStockName.Location = new System.Drawing.Point(388, 59);
             this.txtStockName.Name = "txtStockName";
             this.txtStockName.Size = new System.Drawing.Size(121, 21);
             this.txtStockName.TabIndex = 63;
@@ -239,7 +215,7 @@
             // 
             // txtWorkShopName
             // 
-            this.txtWorkShopName.Location = new System.Drawing.Point(388, 30);
+            this.txtWorkShopName.Location = new System.Drawing.Point(388, 31);
             this.txtWorkShopName.Name = "txtWorkShopName";
             this.txtWorkShopName.Size = new System.Drawing.Size(121, 21);
             this.txtWorkShopName.TabIndex = 61;
@@ -312,7 +288,7 @@
             // 
             // btn_save
             // 
-            this.btn_save.Location = new System.Drawing.Point(548, 64);
+            this.btn_save.Location = new System.Drawing.Point(548, 59);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(75, 23);
             this.btn_save.TabIndex = 51;
@@ -347,6 +323,7 @@
             this.comOrderNo.Name = "comOrderNo";
             this.comOrderNo.Size = new System.Drawing.Size(121, 20);
             this.comOrderNo.TabIndex = 48;
+            this.comOrderNo.SelectedIndexChanged += new System.EventHandler(this.comOrderNo_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -429,9 +406,117 @@
             this.label15.TabIndex = 83;
             this.label15.Text = "价格：";
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
+            // 
+            // txtOrderDate
+            // 
+            this.txtOrderDate.Location = new System.Drawing.Point(388, 8);
+            this.txtOrderDate.Name = "txtOrderDate";
+            this.txtOrderDate.Size = new System.Drawing.Size(121, 21);
+            this.txtOrderDate.TabIndex = 86;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(318, 11);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 12);
+            this.label16.TabIndex = 85;
+            this.label16.Text = "订单时间：";
+            // 
+            // 生产订单号
+            // 
+            this.生产订单号.DataPropertyName = "O_OrderNo";
+            this.生产订单号.HeaderText = "生产订单号";
+            this.生产订单号.Name = "生产订单号";
+            // 
+            // WorkShopName
+            // 
+            this.WorkShopName.DataPropertyName = "O_WorkShopName";
+            this.WorkShopName.HeaderText = "车间名称";
+            this.WorkShopName.Name = "WorkShopName";
+            // 
+            // StockName
+            // 
+            this.StockName.DataPropertyName = "O_StockName";
+            this.StockName.HeaderText = "线边仓名称";
+            this.StockName.Name = "StockName";
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "O_Status";
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            // 
+            // CreateBy
+            // 
+            this.CreateBy.DataPropertyName = "O_CreateBy";
+            this.CreateBy.HeaderText = "添加人";
+            this.CreateBy.Name = "CreateBy";
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.DataPropertyName = "O_CreateDate";
+            this.CreateDate.HeaderText = "添加时间";
+            this.CreateDate.Name = "CreateDate";
+            // 
+            // 车间
+            // 
+            this.车间.DataPropertyName = "O_WorkShop";
+            this.车间.HeaderText = "车间";
+            this.车间.Name = "车间";
+            // 
+            // 线边仓
+            // 
+            this.线边仓.DataPropertyName = "O_StockCode";
+            this.线边仓.HeaderText = "线边仓";
+            this.线边仓.Name = "线边仓";
+            // 
+            // 工艺代码
+            // 
+            this.工艺代码.DataPropertyName = "O_Record";
+            this.工艺代码.HeaderText = "工艺代码";
+            this.工艺代码.Name = "工艺代码";
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "O_GoodsCode";
+            this.物料.HeaderText = "物料";
+            this.物料.Name = "物料";
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "O_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "O_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
+            // 条码
+            // 
+            this.条码.DataPropertyName = "O_Barcode";
+            this.条码.HeaderText = "条码";
+            this.条码.Name = "条码";
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Width = 5;
+            // 
             // frmOutWorkShopList
             // 
             this.ClientSize = new System.Drawing.Size(826, 456);
+            this.Controls.Add(this.txtOrderDate);
+            this.Controls.Add(this.label16);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtProceName);
@@ -505,14 +590,6 @@
         private System.Windows.Forms.ComboBox comOrderNo;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 线边仓;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.TextBox txtPc;
         private System.Windows.Forms.ComboBox cmbProce;
         private System.Windows.Forms.Label label4;
@@ -520,5 +597,22 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label15;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.TextBox txtOrderDate;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn WorkShopName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn StockName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateBy;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CreateDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 线边仓;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
     }
 }

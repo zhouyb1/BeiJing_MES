@@ -26,5 +26,7 @@ namespace Model
         public DateTime O_DeleteDate { set; get; }
         public string O_UploadBy { set; get; }
         public DateTime O_UploadDate { set; get; }
+        public string O_TeamCode { set; get; }
+        public string O_TeamName { set; get; }
     }
 }

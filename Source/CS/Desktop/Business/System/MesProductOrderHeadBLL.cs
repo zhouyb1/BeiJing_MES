@@ -24,13 +24,27 @@ namespace Business.System
         {
             try
             {
-                var strSql = new StringBuilder();
-                var paramList = new List<SqlParameter>();
-				strSql.Append("SELECT * FROM Mes_ProductOrderHead");
-                strSql.Append(" where P_OrderNo = @P_OrderNo");
-                paramList.Add(new SqlParameter("@P_OrderNo", string.Format("{0}", OrderNo)));
-                var rows = db.ExecuteObjects<MesProductOrderHeadEntity>(strSql.ToString(), paramList.ToArray());
-                return rows;
+                if (OrderNo == "")
+                {
+                    var strSql = new StringBuilder();
+                    var paramList = new List<SqlParameter>();
+                    strSql.Append("SELECT * FROM Mes_ProductOrderHead");
+                    //strSql.Append(" where P_OrderNo = @P_OrderNo");
+                    //paramList.Add(new SqlParameter("@P_OrderNo", string.Format("{0}", OrderNo)));
+                    var rows = db.ExecuteObjects<MesProductOrderHeadEntity>(strSql.ToString(), paramList.ToArray());
+                    return rows;
+                }
+                else
+                {
+                    var strSql = new StringBuilder();
+                    var paramList = new List<SqlParameter>();
+                    strSql.Append("SELECT * FROM Mes_ProductOrderHead");
+                    strSql.Append(" where P_OrderNo = @P_OrderNo");
+                    paramList.Add(new SqlParameter("@P_OrderNo", string.Format("{0}", OrderNo)));
+                    var rows = db.ExecuteObjects<MesProductOrderHeadEntity>(strSql.ToString(), paramList.ToArray());
+                    return rows;
+                }
+                //return rows;
             }
             catch (Exception)
             {
@@ -48,7 +62,7 @@ namespace Business.System
             {
                 var strSql = new StringBuilder();
                 var paramList = new List<SqlParameter>();
-                strSql.Append("SELECT * FROM Mes_ProductOrderHead");
+                strSql.Append("SELECT P_OrderNo FROM Mes_ProductOrderHead");
                 //strSql.Append(" where P_OrderNo = @P_OrderNo");
                 //paramList.Add(new SqlParameter("@P_OrderNo", string.Format("{0}", OrderNo)));
                 var rows = db.ExecuteObjects<MesProductOrderHeadEntity>(strSql.ToString(), paramList.ToArray());

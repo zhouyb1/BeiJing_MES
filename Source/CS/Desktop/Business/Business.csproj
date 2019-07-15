@@ -91,6 +91,7 @@
     <Compile Include="System\Mes_OutWorkShopHeadBLL.cs" />
     <Compile Include="System\Mes_OutWorkShopTempBLL.cs" />
     <Compile Include="System\Mes_ProceBLL.cs" />
+    <Compile Include="System\Mes_TeamBLL.cs" />
     <Compile Include="System\Mes_WorkShopScanBLL.cs" />
     <Compile Include="System\Mes_WorkShopWeightBLL.cs" />
     <Compile Include="System\RWDev.cs" />

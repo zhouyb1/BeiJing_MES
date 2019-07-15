@@ -153,9 +153,9 @@ namespace DesktopApp
                     //获取用户选择的文件，并判断文件大小不能超过100K，fileInfo.Length是以字节为单位的
                     FileInfo fileInfo = new FileInfo(fileDialog.FileName);
                     fileInfoLength = fileInfo.Length.ToString();
-                    if (fileInfo.Length > 102400)
+                    if (fileInfo.Length > 204800)
                     {
-                        MessageBox.Show("上传的图片不能大于100K");
+                        MessageBox.Show("上传的图片不能大于200K");
                         return false;
                     }
                     else
@@ -196,37 +196,37 @@ namespace DesktopApp
             {
                 if (file())
                 {
-                    string ID = Guid.NewGuid().ToString("N");//照片名称
-                    SysUser user = new SysUser();
-                    SysUserBLL SysUserBLL = new SysUserBLL();
-                    user = SysUserBLL.getDetail(F_Account);
-                    AMBaseAnnexesFileEntity AMBaseAnnexesFileEntity = new AMBaseAnnexesFileEntity();
-                    AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
-                    AMBaseAnnexesFileEntity.F_Id = ID;
-                    AMBaseAnnexesFileEntity.F_FolderId = Guid.NewGuid().ToString();
-                    AMBaseAnnexesFileEntity.F_FileName = Path.GetFileName(imagefile);//获取文件名和扩展名
-                    AMBaseAnnexesFileEntity.F_FilePath = "D:/fileAnnexes/shop_erp/System/" + DateTime.Now.ToString("yyyyMMdd") + "/" + AMBaseAnnexesFileEntity.F_Id;
-                    AMBaseAnnexesFileEntity.F_FileSize = fileInfoLength;
-                    AMBaseAnnexesFileEntity.F_FileExtensions = Path.GetExtension(imagefile);//获取文件扩展名
-                    AMBaseAnnexesFileEntity.F_FileType = imagefile.Substring(imagefile.LastIndexOf(".") + 1);// Path.GetExtension(imagefile).Substring(0, 1);
-                    //AMBaseAnnexesFileEntity.F_DownloadCount = "";
-                    AMBaseAnnexesFileEntity.F_CreateDate = DateTime.Now;   
-                    AMBaseAnnexesFileEntity.F_CreateUserId = SysUser.F_Account.ToString();
-                    AMBaseAnnexesFileEntity.F_CreateUserName = SysUser.F_RealName.ToString();
+                    //string ID = Guid.NewGuid().ToString("N");//照片名称
+                    //SysUser user = new SysUser();
+                    //SysUserBLL SysUserBLL = new SysUserBLL();
+                    //user = SysUserBLL.getDetail(F_Account);
+                    //AMBaseAnnexesFileEntity AMBaseAnnexesFileEntity = new AMBaseAnnexesFileEntity();
+                    //AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
+                    //AMBaseAnnexesFileEntity.F_Id = ID;
+                    //AMBaseAnnexesFileEntity.F_FolderId = Guid.NewGuid().ToString();
+                    //AMBaseAnnexesFileEntity.F_FileName = Path.GetFileName(imagefile);//获取文件名和扩展名
+                    //AMBaseAnnexesFileEntity.F_FilePath = "D:/fileAnnexes/shop_erp/System/" + DateTime.Now.ToString("yyyyMMdd") + "/" + AMBaseAnnexesFileEntity.F_Id;
+                    //AMBaseAnnexesFileEntity.F_FileSize = fileInfoLength;
+                    //AMBaseAnnexesFileEntity.F_FileExtensions = Path.GetExtension(imagefile);//获取文件扩展名
+                    //AMBaseAnnexesFileEntity.F_FileType = imagefile.Substring(imagefile.LastIndexOf(".") + 1);// Path.GetExtension(imagefile).Substring(0, 1);
+                    ////AMBaseAnnexesFileEntity.F_DownloadCount = "";
+                    //AMBaseAnnexesFileEntity.F_CreateDate = DateTime.Now;   
+                    //AMBaseAnnexesFileEntity.F_CreateUserId = SysUser.F_Account.ToString();
+                    //AMBaseAnnexesFileEntity.F_CreateUserName = SysUser.F_RealName.ToString();
 
-                    user.F_Account = F_Account;
-                    switch (cmb_Image.Text)
-                    {
-                        case "照片1":
-                            user.F_Picture1 = AMBaseAnnexesFileEntity.F_Id;
-                            break;
-                        case "照片2":
-                            user.F_Picture2 = AMBaseAnnexesFileEntity.F_Id;
-                            break;
-                        case "照片3":
-                            user.F_Picture3 = AMBaseAnnexesFileEntity.F_Id;
-                            break;
-                    }
+                    //user.F_Account = F_Account;
+                    //switch (cmb_Image.Text)
+                    //{
+                    //    case "照片1":
+                    //        user.F_Picture1 = AMBaseAnnexesFileEntity.F_Id;
+                    //        break;
+                    //    case "照片2":
+                    //        user.F_Picture2 = AMBaseAnnexesFileEntity.F_Id;
+                    //        break;
+                    //    case "照片3":
+                    //        user.F_Picture3 = AMBaseAnnexesFileEntity.F_Id;
+                    //        break;
+                    //}
 
                     //Computer MyComputer = new Computer();
                     //imagefile = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -234,51 +234,51 @@ namespace DesktopApp
                     //image = Path.GetFileNameWithoutExtension(imagefile);// 没有扩展名的文件名
                     //FaceRecognition.Get_zjdz(imagefile);
                     string urlUpdate = "http://192.168.1.140:7001/pp/"; //+ DateTime.Now.ToString("yyyyMMdd");//
-                    FaceRecognition.HttpUploadFile(urlUpdate, imagefile, ID);
+                    FaceRecognition.Upload(urlUpdate, imagefile);
 
-                    string strBase64 = FaceRecognition.ImageToBase64(imagefile);//照片转base64
+                    //string strBase64 = FaceRecognition.ImageToBase64(imagefile);//照片转base64
 
-                    MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-                    var MesDevice = MesDeviceBLL.GetList_Deparemaent(cmb_Department.Text);
-                    if (MesDevice.Count<1||MesDevice == null)
-                    {
-                        untCommon.InfoMsg("该部门暂无人脸识别设备！");
-                        return;
-                    }
-                    string url = "http://" + MesDevice[0].D_IP + ":8090/face/create";
+                    //MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                    //var MesDevice = MesDeviceBLL.GetList_Deparemaent(cmb_Department.Text);
+                    //if (MesDevice.Count<1||MesDevice == null)
+                    //{
+                    //    untCommon.InfoMsg("该部门暂无人脸识别设备！");
+                    //    return;
+                    //}
+                    //string url = "http://" + MesDevice[0].D_IP + ":8090/face/create";
 
-                    //string postData = "pass=" + 12345678 + "\n" + "&personId=" + user.F_EnCode + "\n" + "&faceId=" + ID + "\n" + "&imgBase64:" + strBase64 + "";
+                    ////string postData = "pass=" + 12345678 + "\n" + "&personId=" + user.F_EnCode + "\n" + "&faceId=" + ID + "\n" + "&imgBase64:" + strBase64 + "";
 
-                    string postData = "pass=" + 12345678 + "&personId=" + user.F_EnCode + "&faceId=" + ID + "&imgBase64=" + strBase64 + "";
-                    string strtemp = FaceRecognition.HttpPost(url, postData);
-                    if (!FaceRecognition.json(strtemp))
-                    {
-                        untCommon.InfoMsg("该IP地址不可用！");
-                        pictureBox1.Image.Dispose();
-                        pictureBox1.Image = null;
-                        return;
-                    }
-                    JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
-                    if (!bool.Parse(joModel["success"].ToString()))
-                    {
-                        untCommon.InfoMsg(joModel["msg"].ToString());
-                        return;
-                    }
-                    else
-                    {
-                        untCommon.InfoMsg("人脸识别注册成功！");
-                        //string urlUpdate = "http://192.168.1.140:7001/pp" + DateTime.Now.ToString("yyyyMMdd");//
-                        //FaceRecognition.UpLoadFile(imagefile, urlUpdate, ID);
-                        if (AMBaseAnnexesFileBLL.SaveEntityTrans(ID, user.F_Account,"", AMBaseAnnexesFileEntity, user) > 0)
-                        {
-                            untCommon.InfoMsg("照片上传成功！");
-                            this.Close();
-                        }
-                        else
-                        {
-                            untCommon.InfoMsg("照片上传失败！");
-                        }
-                    }
+                    //string postData = "pass=" + 12345678 + "&personId=" + user.F_EnCode + "&faceId=" + ID + "&imgBase64=" + strBase64 + "";
+                    //string strtemp = FaceRecognition.HttpPost(url, postData);
+                    //if (!FaceRecognition.json(strtemp))
+                    //{
+                    //    untCommon.InfoMsg("该IP地址不可用！");
+                    //    pictureBox1.Image.Dispose();
+                    //    pictureBox1.Image = null;
+                    //    return;
+                    //}
+                    //JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                    //if (!bool.Parse(joModel["success"].ToString()))
+                    //{
+                    //    untCommon.InfoMsg(joModel["msg"].ToString());
+                    //    return;
+                    //}
+                    //else
+                    //{
+                    //    untCommon.InfoMsg("人脸识别注册成功！");
+                    //    //string urlUpdate = "http://192.168.1.140:7001/pp" + DateTime.Now.ToString("yyyyMMdd");//
+                    //    //FaceRecognition.UpLoadFile(imagefile, urlUpdate, ID);
+                    //    if (AMBaseAnnexesFileBLL.SaveEntityTrans(ID, user.F_Account,"", AMBaseAnnexesFileEntity, user) > 0)
+                    //    {
+                    //        untCommon.InfoMsg("照片上传成功！");
+                    //        this.Close();
+                    //    }
+                    //    else
+                    //    {
+                    //        untCommon.InfoMsg("照片上传失败！");
+                    //    }
+                    //}
                     #region 
                     //if (AMBaseAnnexesFileBLL.SaveEntity("", AMBaseAnnexesFileEntity) > 0)
                     //{
@@ -402,6 +402,20 @@ namespace DesktopApp
             {
                 untCommon.InfoMsg("人脸识别注册成功！");
             }
+        }
+
+        private void cmb_Image_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string strFilepath = "http://192.168.1.140:7001/pp/微信图片_20190610160357.jpg";
+            string strSavepath = System.Windows.Forms.Application.StartupPath;
+
+            FaceRecognition.Download(strFilepath, strSavepath);
+
+        }
+
+        private void btnUploadServer(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -35,7 +35,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtUrl = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,11 +47,11 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.textBox2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.txtUrl);
             this.groupBox1.Location = new System.Drawing.Point(39, 42);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(533, 334);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -60,7 +60,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(347, 96);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(68, 28);
             this.button1.TabIndex = 11;
@@ -81,7 +81,7 @@
             // textBox3
             // 
             this.textBox3.Location = new System.Drawing.Point(131, 134);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(180, 21);
             this.textBox3.TabIndex = 9;
@@ -99,7 +99,7 @@
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(131, 96);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(180, 21);
             this.textBox2.TabIndex = 7;
@@ -114,13 +114,13 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "识别回调url：";
             // 
-            // textBox1
+            // txtUrl
             // 
-            this.textBox1.Location = new System.Drawing.Point(131, 61);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 21);
-            this.textBox1.TabIndex = 5;
+            this.txtUrl.Location = new System.Drawing.Point(131, 61);
+            this.txtUrl.Margin = new System.Windows.Forms.Padding(2);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(180, 21);
+            this.txtUrl.TabIndex = 5;
             // 
             // frmCallbackParameter
             // 
@@ -129,7 +129,7 @@
             this.ClientSize = new System.Drawing.Size(676, 432);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmCallbackParameter";
             this.Text = "回调参数";
             this.groupBox1.ResumeLayout(false);
@@ -147,6 +147,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtUrl;
     }
 }

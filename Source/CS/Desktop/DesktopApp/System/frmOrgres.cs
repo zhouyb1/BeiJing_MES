@@ -50,6 +50,13 @@ namespace DesktopApp
             {
                 cmbRecord.Items.Add(Record_rows[i].R_Record);
             }
+
+            Mes_TeamBLL TeamBLL = new Mes_TeamBLL();
+            var Team_rows = TeamBLL.GetList_Team("");
+            for (int i = 0; i < Record_rows.Count; i++)
+            {
+                cmbRecord.Items.Add(Record_rows[i].R_Record);
+            }
         }
 
         private void comOrderNo_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,6 +197,11 @@ namespace DesktopApp
         {
             if(MessageBox.Show("是否要提交","",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
+                if(cmbTeam.Text == "")
+                {
+                    untCommon.InfoMsg("先选择班组！");
+                    return;
+                }
                 Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
                 Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
 

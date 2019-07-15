@@ -137,6 +137,8 @@ namespace DesktopApp
                                 File.Delete(Application.StartupPath + @"\\loginConfig.lsf");
                         }
 
+                        Globels.strUser = this.txtUser.Text;
+
                         frmMain main = new frmMain(this);
                         main.User = userEntity;
 

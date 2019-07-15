@@ -44,60 +44,60 @@ namespace DesktopApp
             }
         }
 
-        private void txtStockCode_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
-            {
-                MesStockBLL MesStockBLL = new MesStockBLL();
-                var rows = MesStockBLL.GetList(txtStockCode.Text.Trim(), "");
-                if (rows == null || rows.Count < 1)
-                {
-                    untCommon.InfoMsg("输入的仓库编码错误，请重新输入！");
-                    txtStockCode.Focus();
-                    txtStockCode.SelectAll();
-                }
-                else
-                {
-                    txtStockCode.Text = rows[0].S_Code;
-                    txtStockName.Text = rows[0].S_Name;
-                }
-            }
-        }
+        //private void txtStockCode_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
+        //    {
+        //        MesStockBLL MesStockBLL = new MesStockBLL();
+        //        var rows = MesStockBLL.GetList(comStock.Text.Trim(), "");
+        //        if (rows == null || rows.Count < 1)
+        //        {
+        //            untCommon.InfoMsg("输入的仓库编码错误，请重新输入！");
+        //            txtStockCode.Focus();
+        //            txtStockCode.SelectAll();
+        //        }
+        //        else
+        //        {
+        //            txtStockCode.Text = rows[0].S_Code;
+        //            txtStockName.Text = rows[0].S_Name;
+        //        }
+        //    }
+        //}
 
-        private void txtStockName_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
-            {
-                MesStockBLL MesStockBLL = new MesStockBLL();
-                var rows = MesStockBLL.GetList("", txtStockName.Text.Trim());
-                if (rows == null || rows.Count < 1)
-                {
-                    untCommon.InfoMsg("输入的仓库名称错误，请重新输入！");
-                    txtStockName.Focus();
-                    txtStockName.SelectAll();
-                }
-                else
-                {
-                    txtStockCode.Text = rows[0].S_Code;
-                    txtStockName.Text = rows[0].S_Name;
-                }
-            }
-        }
+        //private void txtStockName_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
+        //    {
+        //        MesStockBLL MesStockBLL = new MesStockBLL();
+        //        var rows = MesStockBLL.GetList("", txtStockName.Text.Trim());
+        //        if (rows == null || rows.Count < 1)
+        //        {
+        //            untCommon.InfoMsg("输入的仓库名称错误，请重新输入！");
+        //            txtStockName.Focus();
+        //            txtStockName.SelectAll();
+        //        }
+        //        else
+        //        {
+        //            txtStockCode.Text = rows[0].S_Code;
+        //            txtStockName.Text = rows[0].S_Name;
+        //        }
+        //    }
+        //}
 
-        private void txtOrderNo_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
-            {
-                MesProductOrderHeadBLL MesProductOrderHeadBLL = new MesProductOrderHeadBLL();
-                var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
-                if (rows == null || rows.Count < 1)
-                {
-                    untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
-                    txtOrderNo.Focus();
-                    txtOrderNo.SelectAll();
-                }
-            }
-        }
+        //private void txtOrderNo_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if (e.KeyCode == Keys.Enter)//如果输入的是回车键  
+        //    {
+        //        MesProductOrderHeadBLL MesProductOrderHeadBLL = new MesProductOrderHeadBLL();
+        //        var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
+        //        if (rows == null || rows.Count < 1)
+        //        {
+        //            untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
+        //            txtOrderNo.Focus();
+        //            txtOrderNo.SelectAll();
+        //        }
+        //    }
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -110,17 +110,12 @@ namespace DesktopApp
         /// <returns></returns>
         private bool checkInput()
         {
-            if (string.IsNullOrEmpty(txtStockCode.Text.Trim()))
+            if (string.IsNullOrEmpty(comStock.Text.Trim()))
             {
                 untCommon.InfoMsg("仓库编码不能为空！");
                 return false;
             }
-            if (string.IsNullOrEmpty(txtStockName.Text))
-            {
-                untCommon.InfoMsg("仓库名称不能为空！");
-                return false;
-            }
-            if (string.IsNullOrEmpty(txtOrderNo.Text))
+            if (string.IsNullOrEmpty(comProductNo.Text))
             {
                 untCommon.InfoMsg("生产订单号不能为空！");
                 return false;
@@ -136,15 +131,18 @@ namespace DesktopApp
         {
             try
             {
-                MesProductOrderHeadBLL MesProductOrderHeadBLL = new MesProductOrderHeadBLL();
-                var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
-                if (rows == null || rows.Count < 1)
-                {
-                    untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
-                    txtOrderNo.Focus();
-                    txtOrderNo.SelectAll();
-                    return;
-                }
+                //MesProductOrderHeadBLL MesProductOrderHeadBLL = new MesProductOrderHeadBLL();
+                //var rows = MesProductOrderHeadBLL.GetList(txtOrderNo.Text.Trim());
+                //if (rows == null || rows.Count < 1)
+                //{
+                //    untCommon.InfoMsg("输入的生产订单号错误，请重新输入！");
+                //    txtOrderNo.Focus();
+                //    txtOrderNo.SelectAll();
+                //    return;
+                //}
+
+                string[] strStock = comStock.Text.ToString().Split('$');
+                string[] strProduct = comProductNo.Text.ToString().Split('$');
 
                 MesMaterInHeadBLL MesMaterInHeadBLL = new MesMaterInHeadBLL();
                 if (checkInput())
@@ -152,11 +150,12 @@ namespace DesktopApp
                     MesMaterInHeadEntity MesMaterInHead = new MesMaterInHeadEntity();
 
                     MesMaterInHead.M_MaterInNo = txtMaterInNo.Text;
-                    MesMaterInHead.M_StockCode = txtStockCode.Text;
+                    MesMaterInHead.M_OrderKind = 1;
+                    MesMaterInHead.M_StockCode = strStock[0];
                     MesMaterInHead.M_Kind = "0";
-                    MesMaterInHead.M_StockName = txtStockName.Text;
-                    MesMaterInHead.M_OrderNo = txtOrderNo.Text;
-                    MesMaterInHead.M_OrderDate = DateTime.Parse(dtpOrderDate.Value.ToString());
+                    MesMaterInHead.M_StockName = strStock[1];
+                    MesMaterInHead.M_OrderNo = strProduct[0];
+                    MesMaterInHead.M_OrderDate = DateTime.Parse(strProduct[1].ToString());
                     MesMaterInHead.M_Status = 1;
                     MesMaterInHead.M_CreateBy = txtCreateBy.Text;
                     MesMaterInHead.M_CreateDate = DateTime.Now;
@@ -182,6 +181,30 @@ namespace DesktopApp
             catch (Exception ex)
             {
                 untCommon.ErrorMsg("设备管理添加数据异常：" + ex.Message);
+            }
+        }
+
+        private void frmStorageAdd_Load(object sender, EventArgs e)
+        {
+            comStock.Items.Clear();
+            comProductNo.Items.Clear();
+            MesStockBLL StockBLL = new MesStockBLL();
+            var row = StockBLL.GetData(" where s_Kind = 1");
+            int nCount = row.Count;
+            for(int i = 0; i < nCount; i++)
+            {
+                comStock.Items.Add(row[i].S_Code.ToString() + "$" + row[i].S_Name.ToString());
+
+            }
+
+            MesProductOrderHeadBLL ProductOrderHeadBLL = new MesProductOrderHeadBLL();
+            var Product = ProductOrderHeadBLL.GetList("");
+
+            int nCount2 = Product.Count;
+            for (int i = 0; i < nCount2; i++)
+            {
+                comProductNo.Items.Add(Product[i].P_OrderNo.ToString() + "$" + Product[i].P_OrderDate.ToString());
+
             }
         }
     }

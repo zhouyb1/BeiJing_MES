@@ -14,6 +14,7 @@ using System.Text.RegularExpressions;
 using System.IO.Compression;
 using System.Runtime.InteropServices;
 using System.Windows.Media.Imaging;
+using System.Threading;
 
 namespace DesktopApp
 {
@@ -415,6 +416,218 @@ namespace DesktopApp
             return sReturnString;
 
         }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="address">服务器地址 比如http://localhost:55345/FileSave.aspx </param>
+        /// <param name="fileNamePath">上传的本地文件路径</param>
+        /// <param name="saveName">要保存的文件名称</param>
+        /// <param name="progressBar">滚动态</param>
+        /// <returns></returns>
+        public static int Upload_Request2(string address, string fileNamePath, string saveName)
+        {
+            int returnValue = 0;     // 要上传的文件   
+            FileStream fs = new FileStream(fileNamePath, FileMode.Open, FileAccess.Read);
+            BinaryReader r = new BinaryReader(fs);     //时间戳   
+            string strBoundary = "----------" + DateTime.Now.Ticks.ToString("x");
+            byte[] boundaryBytes = Encoding.ASCII.GetBytes("\r\n--" + strBoundary + "\r\n");     //请求头部信息   
+            StringBuilder sb = new StringBuilder();
+            sb.Append("--");
+            sb.Append(strBoundary);
+            sb.Append("\r\n");
+            sb.Append("Content-Disposition: form-data; name=\"");
+            sb.Append("file");
+            sb.Append("\"; filename=\"");
+            sb.Append(saveName);
+            sb.Append("\";");
+            sb.Append("\r\n");
+            sb.Append("Content-Type: ");
+            sb.Append("application/octet-stream");
+            sb.Append("\r\n");
+            sb.Append("\r\n");
+            string strPostHeader = sb.ToString();
+            byte[] postHeaderBytes = Encoding.UTF8.GetBytes(strPostHeader);     // 根据uri创建HttpWebRequest对象   
+            HttpWebRequest httpReq = (HttpWebRequest)WebRequest.Create(new Uri(address));
+            httpReq.Method = "POST";     //对发送的数据不使用缓存   
+            httpReq.AllowWriteStreamBuffering = false;     //设置获得响应的超时时间（300秒）   
+            httpReq.Timeout = 300000;
+            httpReq.ContentType = "multipart/form-data; boundary=" + strBoundary;
+            long length = fs.Length + postHeaderBytes.Length + boundaryBytes.Length;
+            long fileLength = fs.Length;
+            httpReq.ContentLength = length;
+            try
+            {
+
+                //每次上传4k  
+                int bufferLength = 4096;
+                byte[] buffer = new byte[bufferLength]; //已上传的字节数   
+                long offset = 0;         //开始上传时间   
+                DateTime startTime = DateTime.Now;
+                int size = r.Read(buffer, 0, bufferLength);
+                Stream postStream = httpReq.GetRequestStream();         //发送请求头部消息   
+                postStream.Write(postHeaderBytes, 0, postHeaderBytes.Length);
+                while (size > 0)
+                {
+                    postStream.Write(buffer, 0, size);
+                    offset += size;
+
+                    TimeSpan span = DateTime.Now - startTime;
+                    double second = span.TotalSeconds;
+
+
+                    Application.DoEvents();
+                    size = r.Read(buffer, 0, bufferLength);
+                }
+
+                //添加尾部的时间戳   
+                postStream.Write(boundaryBytes, 0, boundaryBytes.Length);
+                postStream.Close();         //获取服务器端的响应   
+                WebResponse webRespon = httpReq.GetResponse();
+                Stream s = webRespon.GetResponseStream();
+                //读取服务器端返回的消息  
+                StreamReader sr = new StreamReader(s);
+                String sReturnString = sr.ReadLine();
+                s.Close();
+                sr.Close();
+                if (sReturnString == "Success")
+                {
+                    MessageBox.Show("上传成功！");
+                    returnValue = 1;
+                }
+                else if (sReturnString == "Error")
+                {
+                    returnValue = 0;
+                }
+            }
+            catch
+            {
+                returnValue = 0;
+            }
+            finally
+            {
+                fs.Close();
+                r.Close();
+            }
+            return returnValue;
+        }
+
+
+
+
+        /// <summary>
+        /// 下载文件方法
+        /// </summary>
+        /// <param name="serverPath">被下载的文件地址（服务器地址包括文件）</param>
+        /// <param name="filePath">另存放的路径（本地需要存储文件的文件夹地址）</param>
+        public static string Download(string serverPath, string filePath)
+        {
+            string strReturn = "0";
+            WebClient client = new WebClient();
+            string fileName = serverPath.Substring(serverPath.LastIndexOf("/") + 1); ;//被下载的文件名
+            string path = filePath + fileName;//另存为地址
+            try
+            {
+                WebRequest myre = WebRequest.Create(serverPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return strReturn;
+            }
+            try
+            {
+                client.DownloadFile(serverPath, fileName);
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader r = new BinaryReader(fs);
+                byte[] mbyte = r.ReadBytes((int)fs.Length);
+                FileStream fstr = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                fstr.Write(mbyte, 0, (int)fs.Length);
+                fstr.Close();
+                strReturn = "1";
+                return strReturn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return strReturn;
+            }
+        }
+
+
+        /// <summary>
+        /// 上传文件方法
+        /// </summary>
+        /// <param name="serverPath">上传的文件地址（服务器地址包括文件）</param>
+        /// <param name="filePath">另存放的路径（本地需要存储文件的文件夹地址）</param>
+        public static string Upload(string serverPath, string filePath)
+        {
+            string strReturn = "0";
+            WebClient client = new WebClient();
+            //string fileName = serverPath.Substring(serverPath.LastIndexOf("/") + 1); ;//被下载的文件名
+            //string path = filePath + fileName;//另存为地址
+            try
+            {
+                WebRequest myre = WebRequest.Create(serverPath);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return strReturn;
+            }
+            try
+            {
+                client.UploadFile(serverPath, "POST", filePath);
+                strReturn = "1";
+                return strReturn;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error");
+                return strReturn;
+            }
+        }
+
+
+        /// <summary>  
+        /// 从本地上传文件至服务器
+        /// </summary>  
+        /// <param name="src">远程服务器路径（共享文件夹路径）</param>  
+        /// <param name="dst">本地文件夹路径</param>  
+        /// <param name="fileName">上传至服务器上的文件名，包含扩展名</param>  
+        public static void TransportRemoteToServer(string src, string dst, string fileName)
+        {
+            //if (!Directory.Exists(src))
+            //{
+            //    Directory.CreateDirectory(src);
+            //}
+            src = src + fileName;
+            FileStream inFileStream = new FileStream(src, FileMode.OpenOrCreate);    //从远程服务器下载到本地的文件 
+
+            FileStream outFileStream = new FileStream(dst, FileMode.Open);    //远程服务器文件  此处假定远程服务器共享文件夹下确实包含本文件，否则程序报错  
+
+            byte[] buf = new byte[outFileStream.Length];
+
+            int byteCount;
+
+            while ((byteCount = outFileStream.Read(buf, 0, buf.Length)) > 0)
+            {
+
+                inFileStream.Write(buf, 0, byteCount);
+
+            }
+
+            inFileStream.Flush();
+
+            inFileStream.Close();
+
+            outFileStream.Flush();
+
+            outFileStream.Close();
+
+        }
+
 
 
 

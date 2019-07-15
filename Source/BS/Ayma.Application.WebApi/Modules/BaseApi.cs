@@ -197,7 +197,8 @@ namespace Ayma.Application.WebApi
                 "/webapi/orders/cancelorder",
                "/webapi/test/getca",
                "/ayma/api/productorder/syncorder",
-               "/api/facerecording/getuserinfo"
+               "/api/facerecording/getuserinfo",
+               "/getuserinfo"
             };
 
             if (ignoreUrl.Contains(path.ToLower()))// 登录接口，默认页面接口不做权限验证处理

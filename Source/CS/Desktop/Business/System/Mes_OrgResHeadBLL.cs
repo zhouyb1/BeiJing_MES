@@ -67,7 +67,8 @@ namespace Business.System
                     strSql.Append("O_Status,");
                     strSql.Append("O_CreateBy,");
                     strSql.Append("O_CreateDate,");
-
+                    strSql.Append("O_TeamName,");
+                    strSql.Append("O_TeamName,");
                     strSql.Append("O_Remark");
                     strSql.Append(")");
                     strSql.Append(" VALUES (");
@@ -83,7 +84,8 @@ namespace Business.System
 
                     strSql.Append("@O_CreateBy,");
                     strSql.Append("@O_CreateDate,");
-
+                    strSql.Append("@O_TeamCode,");
+                    strSql.Append("@O_TeamName,");
                     strSql.Append("@O_Remark");
                     strSql.Append(")");
                     paramList.Add(new SqlParameter("@ID", Guid.NewGuid().ToString()));
@@ -102,7 +104,8 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@O_Status", entity.O_Status));
                 paramList.Add(new SqlParameter("@O_CreateBy", entity.O_CreateBy));
                 paramList.Add(new SqlParameter("@O_CreateDate", entity.O_CreateDate));
-
+                paramList.Add(new SqlParameter("@O_TeamCode", entity.O_TeamCode));
+                paramList.Add(new SqlParameter("@O_TeamName", entity.O_TeamName));
                 paramList.Add(new SqlParameter("@O_Remark", entity.O_Remark));
                 var result = db.ExecuteNonQuery(strSql.ToString(), paramList.ToArray());
                 return result;

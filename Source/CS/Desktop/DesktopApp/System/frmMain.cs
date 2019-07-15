@@ -43,9 +43,9 @@ namespace DesktopApp
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //loadModule();
-            //lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
-            //lbUser.Text = "["+User.F_Account + "]" + User.F_RealName;
+            loadModule();
+            lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
+            lbUser.Text = "[" + User.F_Account + "]" + User.F_RealName;
         }
 
 

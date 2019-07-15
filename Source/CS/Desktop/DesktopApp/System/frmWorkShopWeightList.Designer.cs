@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cmbGoodsCode = new System.Windows.Forms.ComboBox();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -47,6 +48,8 @@
             this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtUnit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.btn_Weight = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,7 +125,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(328, 122);
+            this.btnSave.Location = new System.Drawing.Point(324, 122);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 124;
@@ -199,11 +202,26 @@
             this.label1.TabIndex = 126;
             this.label1.Text = "转换后物料单位：";
             // 
+            // serialPort1
+            // 
+            this.serialPort1.PortName = "COM4";
+            // 
+            // btn_Weight
+            // 
+            this.btn_Weight.Location = new System.Drawing.Point(324, 92);
+            this.btn_Weight.Name = "btn_Weight";
+            this.btn_Weight.Size = new System.Drawing.Size(75, 23);
+            this.btn_Weight.TabIndex = 128;
+            this.btn_Weight.Text = "获重";
+            this.btn_Weight.UseVisualStyleBackColor = true;
+            this.btn_Weight.Click += new System.EventHandler(this.btn_Weight_Click);
+            // 
             // frmWorkShopWeightList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(532, 343);
+            this.Controls.Add(this.btn_Weight);
             this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView1);
@@ -247,5 +265,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.Label label1;
+        private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.Button btn_Weight;
     }
 }

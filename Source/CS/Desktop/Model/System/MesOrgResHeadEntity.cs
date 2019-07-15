@@ -73,6 +73,14 @@ namespace Model
         /// 提交时间
         /// </summary>
         public DateTime O_UploadDate{ set; get; }
+        /// <summary>
+        /// 班组
+        /// </summary>
+        public string O_TeamCode { set; get; }
+        /// <summary>
+        /// 班组名称
+        /// </summary>
+        public string O_TeamName { set; get; }
         #endregion
     }
 }

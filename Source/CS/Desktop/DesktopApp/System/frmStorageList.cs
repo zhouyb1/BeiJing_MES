@@ -35,11 +35,13 @@ namespace DesktopApp
         {
             try
             {
+
+
                 var rows = MaterInHeadBLL.GetList(keyValue);
 
                 if (rows == null || rows.Count < 1)
                 {
-                    untCommon.InfoMsg("该入库单没有任何数据！");
+                    //untCommon.InfoMsg("该入库单没有任何数据！");
                     return;
                 }
                 dataGridView.DataSource = rows;
@@ -159,11 +161,11 @@ namespace DesktopApp
                         //str = str.Remove(0, str.Length - 9);
                         int lastNumber = int.Parse(str);
                         lastNumber++;
-                        return "I" + DateTime.Now.ToString("yyyyMMdd") + lastNumber.ToString("0000");
+                        return "I" + DateTime.Now.ToString("yyyyMMdd") + lastNumber.ToString("000000");
                     }
                 }
             }
-            return "I" + DateTime.Now.ToString("yyyyMMdd") + "0001";
+            return "I" + DateTime.Now.ToString("yyyyMMdd") + "000001";
         }
 
         private void txtMaterInNo_TextChanged(object sender, EventArgs e)
