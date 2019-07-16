@@ -18,6 +18,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private BackStockManagerIBLL backStockManagerIBLL = new BackStockManagerBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
 
         #region 视图功能
 
@@ -173,6 +174,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
+
+            foreach (var goods in mes_BackStockDetailEntity)
+            {
+                var stock_qty = invSeachIbll.GetListByParams(goods.B_GoodsCode, goods.B_Batch).I_Qty;
+                if (goods.B_Qty>stock_qty)
+                {
+                    return Fail("【" + goods.B_GoodsName + "】" + "库存不足");
+                }
+            }
+            //获取库存
+            var list = from goods in mes_BackStockDetailEntity
+                       let qty = invSeachIbll.GetListByParams(goods.B_GoodsCode, goods.B_Batch).I_Qty
+                       where goods.B_Qty <= qty
+                       select goods;
+           
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();
