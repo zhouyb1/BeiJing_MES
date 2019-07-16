@@ -31,7 +31,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
                 // 访问数据接口参数
-                param: {}
+                param: { S_Kind: 1 }
             }
             $("#C_StockName").select(dfop).on('change', function() {
                 var code = $(this).selectGet();
@@ -154,7 +154,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         if ($("#C_StockName").selectGet() == $("#C_StockToName").selectGet()) {
             
-            ayma.alert.error('领料仓库与原仓库相同');
+            ayma.alert.error('领料仓库与原料仓库相同');
             return false;
         }
         var postData = {};
