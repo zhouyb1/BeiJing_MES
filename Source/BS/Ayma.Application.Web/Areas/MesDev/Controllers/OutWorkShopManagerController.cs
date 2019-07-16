@@ -155,10 +155,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetMaterList(string pagination, string stockCode)
+        public ActionResult GetMaterList(string pagination, string stockCode, string keyword)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var list = outWorkShopManagerIBLL.GetInventoryMaterList(paginationobj,stockCode).ToList();
+            var list = outWorkShopManagerIBLL.GetInventoryMaterList(paginationobj,stockCode,keyword).ToList();
             var jsonData = new
             {
                 rows = list,
