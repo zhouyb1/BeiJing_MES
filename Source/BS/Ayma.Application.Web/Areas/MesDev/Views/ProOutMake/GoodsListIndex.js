@@ -36,12 +36,14 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 200, 350);
-            //搜索
-            $("#btn_Search").on('click', function () {
-                page.search();
-            });
+           
             //输入关键字搜索
-            $("#txt_Keyword").on('keyup', function () {
+            $('#txt_Keyword').bind('keydown', function (event) {
+                if (event.keyCode == "13") {
+                    $('#am_btn_querySearch').click();
+                }
+            });
+            $('#am_btn_querySearch').on('click', function () {
                 page.search();
             });
             //商品类型
