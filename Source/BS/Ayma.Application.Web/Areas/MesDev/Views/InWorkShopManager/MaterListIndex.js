@@ -14,10 +14,8 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
-//批次时间
-var batch = request('batch');
-//仓库编码
-var stockCode = request('stockCode');
+//批次时间 默认当天
+var batch = new Date();
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -31,10 +29,17 @@ var bootstrap = function ($, ayma) {
         bind: function () {
            
             //输入关键字搜索
-            $("#txt_Keyword").on('keyup', function () {
+            //$("#txt_Keyword").on('keyup', function () {
+            //    page.search();
+            //});
+            $('#txt_Keyword').bind('keydown', function (event) {
+                if (event.keyCode == "13") {
+                    $('#am_btn_querySearch').click();
+                }
+            });
+            $('#am_btn_querySearch').on('click', function () {
                 page.search();
             });
-          
             //数量验证
             $("#quantity").on('keyup', function () {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
@@ -45,18 +50,6 @@ var bootstrap = function ($, ayma) {
                 }
                 if (quantity == "0") {
                     return;
-                } else {
-                    var newQty = parseInt(quantity);
-                    ayma.loading(true);
-                    for (var i = 0; i < newArray.length; i++) {
-                        if (newQty > newArray[i]["qty"]) {
-                            ayma.alert.error("其中有输入数量大于库存数量的库存，不能一键设置");
-                            $("#quantity").val("");
-                            ayma.loading(false);
-                            return;
-                        }
-                    }
-                    ayma.loading(false);
                 }
             });
             //全选
@@ -66,9 +59,13 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]['Qty'] = newArray[i]['Qty'];
+                    newArray[i]['I_GoodsCode'] = newArray['G_Code'];
+                    newArray[i]['I_GoodsName'] = newArray['G_Name'];
+                    newArray[i]['I_Unit'] = newArray['G_Unit'];
+                    newArray[i]['I_Price'] = newArray['G_Price'];
+                    newArray[i]['I_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["I_Qty"] = quantity;
-                    newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]["ID"] = newArray['ID'];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -78,20 +75,18 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/InWorkShopManager/GetMaterList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/InWorkShopManager/GetGoodsList',
                 headData: [
-                    { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
-                    { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "单位", name: "I_Unit", width: 60, align: "left" },
-                    { label: "单价", name: "I_Price", width: 60, align: "left" },
-                    { label: "数量", name: "Qty", width: 60, align: "left" },
-                    { label: "批次", name: "I_Batch", width: 80, align: "left" }
+                    { label: "物料编码", name: "G_Code", width: 130, align: "left" },
+                    { label: "物料名称", name: "G_Name", width: 130, align: "left" },
+                    { label: "单位", name: "G_Unit", width: 60, align: "left" },
+                    { label: "单价", name: "G_Price", width: 60, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'I_GoodsCode',
+                sidx: 'G_Code',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
@@ -103,7 +98,11 @@ var bootstrap = function ($, ayma) {
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
                       
-                        row['Qty'] = row['Qty'];
+                        row['I_GoodsCode'] = row['G_Code'];
+                        row['I_GoodsName'] = row['G_Name'];
+                        row['I_Unit'] = row['G_Unit'];
+                        row['I_Price'] = row['G_Price'];
+                        row['I_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                         row["I_Qty"] = quantity;
                         row["ID"] = row['ID'];
                         parentRefreshGirdData([], row);
@@ -119,7 +118,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['I_GoodsCode'] == rowslist[j]['I_GoodsCode']) {
+                                if (rows[i]['G_Code'] == rowslist[j]['I_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
@@ -132,9 +131,9 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            queryJson = param;
-            param = $("#txt_Keyword").val();
-            $('#girdtable').jfGridSet('reload', { param: { keyword: param,  queryJson: JSON.stringify(queryJson) } });
+            queryJson = queryJson || {};
+            queryJson.keyword = $("#txt_Keyword").val();
+            $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(queryJson) } });
         }
     };
     refreshGirdData = function () {

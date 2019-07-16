@@ -102,26 +102,26 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         row.I_Qty = 0;
                                     }
                                 }
-                                if (row.I_Qty > row.Qty) {
-                                    ayma.alert.error("入库数量不能大于库存数量");
-                                    row.I_Qty = 0;
-                                }
+                                
                             }
                         }
                     },
-                     {
-                         label: '价格', name: 'I_Price', width: 60, align: 'left', editType: 'input',
-                         editOp: {
-                             callback: function (rownum, row) {
-                                 if (/\D/.test(row.I_Price.toString().replace('.', ''))) { //验证只能为数字
-                                     row.I_Price = 0;
-                                 }
-
-                             }
-                         }
-                     },
-                    { label: '库存', name: 'Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
-                    { label: "批次", name: "I_Batch", width: 80, align: "left" }
+                    {
+                        label: "批次", name: "I_Batch", width: 80, align: "left", editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.I_Batch.toString().replace('.', ''))) { //验证只能为数字
+                                    row.I_Batch = 0;
+                                }
+                                if (row.I_Batch != undefined && !!row.I_Batch) {
+                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.I_Batch.toString().replace('.', ''))) {
+                                        ayma.alert.error("批次必须是非负数.");
+                                        row.I_Batch = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -135,7 +135,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('#am_add').on('click', function () {
                 ayma.layerForm({
                     id: 'MaterListForm',
-                    title: '添加订单物料',
+                    title: '添加物料',
                     url: top.$.rootUrl + '/MesDev/InWorkShopManager/MaterListIndex?formId=' + parentFormId + '&stockCode=' + stockCode,
                     width: 700,
                     height: 500,
@@ -233,7 +233,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     RemoveGridData = function (row) {
         var rows = $('#Mes_InWorkShopDetail').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["I_GoodsCode"] == row["I_GoodsCode"]) {
+            if (rows[i]["I_GoodsCode"] == row["G_Code"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

@@ -42,7 +42,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj ,string stockCode);
+        IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj ,string stockCode); 
+        /// <summary>
+        /// 获取物料列表(半成品和成品)
+        /// </summary>
+        /// <param name="paginationobj">分页参数</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination paginationobj, string queryJson);
         #endregion
 
         #region 提交数据

@@ -233,6 +233,44 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取物料列表(半成品和成品)
+        /// </summary>
+        /// <param name="paginationobj">分页参数</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination paginationobj, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT  G_Code ,
+                                    G_Name ,
+                                    G_Unit ,
+                                    G_Price
+                            FROM    dbo.Mes_Goods
+                            WHERE   G_Kind !=1 ");
+                var dp = new DynamicParameters(new {});
+                var queryParam = queryJson.ToJObject();
+                if (!queryParam["keyword"].IsEmpty())
+                {
+                    dp.Add("keyword", "%" + queryParam["keyword"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND (G_Code LIKE @keyword OR G_Name LIKE @keyword) ");
+                }
+               return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(),dp, paginationobj);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
 
         #endregion

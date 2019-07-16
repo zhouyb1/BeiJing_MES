@@ -131,6 +131,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取物料列表(半成品和成品)
+        /// </summary>
+        /// <param name="paginationobj">分页参数</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination paginationobj, string queryJson)
+        {
+            try
+            {
+                return inWorkShopManagerService.GetGoodsList(paginationobj, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         #endregion

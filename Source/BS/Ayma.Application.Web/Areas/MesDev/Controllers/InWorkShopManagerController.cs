@@ -166,6 +166,27 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 records = paginationobj.records
             };
             return Success(jsonData);
+        } 
+        /// <summary>
+        /// 获取物料列表(半成品和成品)
+        /// </summary>
+        /// <param name="pagination">分页参数</param>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var list = inWorkShopManagerIBLL.GetGoodsList(paginationobj, queryJson).ToList();
+            var jsonData = new
+            {
+                rows = list,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
 
         #endregion
