@@ -90,6 +90,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         } 
         /// <summary>
+        /// 获取线边仓仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetLineStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind ==4);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 获取成品仓库列表
         /// </summary>
         /// <returns></returns>

@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("S_NAME")]
         public string S_Name { get; set; }
         /// <summary>
-        /// 仓库类型
+        /// 仓库类型 (1原材料库，2半成品，3成品,4线边仓)
         /// </summary>
         [Column("S_KIND")]
         public int? S_Kind { get; set; }

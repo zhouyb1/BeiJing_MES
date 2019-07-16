@@ -19,7 +19,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            //绑定仓库
+            //绑定线边仓仓库
             var dfop = {
                 type: 'default',
                 value: 'S_Name',
@@ -29,7 +29,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
             };

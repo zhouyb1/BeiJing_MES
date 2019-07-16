@@ -50,7 +50,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取非成品仓库列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_StockEntity> GetNoProjStockList();  
+        IEnumerable<Mes_StockEntity> GetNoProjStockList();   
+        /// <summary>
+        /// 获取线边仓仓库列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_StockEntity> GetLineStockList();  
         /// <summary>
         /// 获取成品仓库列表
         /// </summary>
