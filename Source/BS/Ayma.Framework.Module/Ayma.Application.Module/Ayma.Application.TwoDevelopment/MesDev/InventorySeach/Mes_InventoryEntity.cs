@@ -17,6 +17,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
+        [Column("I_KIND")]
         public string I_Kind { get; set; }
         /// <summary>
         /// 仓库编码

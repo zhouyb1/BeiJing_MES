@@ -39,7 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="goodsCode"></param>
         /// <returns></returns>
-      Mes_InventoryEntity GetListByParams(string goodsCode,string batch);
+        Mes_InventoryEntity GetListByParams(string goodsCode, string batch);
         #endregion
 
         #region 提交数据
