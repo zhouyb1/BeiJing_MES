@@ -42,7 +42,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        stockCode  = entity.S_Code;
+                        stockCode = entity == null ? "" : entity.S_Code;
                         $('#S_StockCode').val(stockCode);
                     }
                 });

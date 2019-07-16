@@ -19,31 +19,8 @@ var bootstrap = function($, ayma) {
             page.initData();
         },
         bind: function() {
-            //绑定仓库
+            //绑定线边仓库
             $('#B_StockName').select({
-                text: "s_name",
-                value: "s_name",
-                type: 'default',
-                maxHeight: 200,
-                allowSearch: true,
-                url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
-                param: { code: "StockList", strWhere: "S_Kind =1 " },
-            }).on('change', function() {
-                var code = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: code },
-                    success: function(data) {
-                        var entity = JSON.parse(data).data;
-                        stockCode = entity.S_Code;
-                        $('#B_StockCode').val(stockCode);
-                    }
-                });
-            });
-
-            //绑定线边仓
-            $('#B_StockToName').select({
                 text: "s_name",
                 value: "s_name",
                 type: 'default',
@@ -59,7 +36,30 @@ var bootstrap = function($, ayma) {
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        $('#B_StockToCode').val(entity.S_Code);
+                        stockCode = entity == null ? "" : entity.S_Code;
+                        $('#B_StockCode').val(stockCode);
+                    }
+                });
+            });
+
+            //绑定目标仓库
+            $('#B_StockToName').select({
+                text: "s_name",
+                value: "s_name",
+                type: 'default',
+                maxHeight: 200,
+                allowSearch: true,
+                url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
+                param: { code: "StockList", strWhere: "S_Kind in (1,2) " },
+            }).on('change', function() {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
+                    data: { code: code },
+                    success: function(data) {
+                        var entity = JSON.parse(data).data;
+                        $('#B_StockToCode').val(entity == null ? "" : entity.S_Code);
                     }
                 });
             });
@@ -137,6 +137,10 @@ var bootstrap = function($, ayma) {
     //保存数据
     acceptClick = function(callBack) {
         if (!$('body').Validform()) {
+            return false;
+        }
+        if ($('#B_StockName').selectGet() == $('#B_StockToName').selectGet()) {
+            ayma.alert.error('不能选择同一仓库');
             return false;
         }
         var postData = {};
