@@ -210,7 +210,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj, string stockCode)
+        public IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj, string stockCode, string keyword)
         {
             try
             {
@@ -219,7 +219,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"select m.*,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_StockCode =@stockCode");
                 var dp = new DynamicParameters(new {});
                 dp.Add("@stockCode", stockCode,DbType.String);
-                
+                if (!keyword.IsEmpty())
+                {
+                    dp.Add("keyword", "%" + keyword + "%", DbType.String);
+                    strSql.Append(" AND m.I_GoodsCode+m.I_GoodsName like @keyword ");
+                }
                return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(),dp, paginationobj);
             }
             catch (Exception ex)

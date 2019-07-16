@@ -114,11 +114,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj,string stockCode)
+        public IEnumerable<Mes_InventoryEntity> GetInventoryMaterList(Pagination paginationobj, string stockCode, string keyword)
         {
             try
             {
-                return outWorkShopManagerService.GetInventoryMaterList(paginationobj,stockCode);
+                return outWorkShopManagerService.GetInventoryMaterList(paginationobj,stockCode,keyword);
             }
             catch (Exception ex)
             {
