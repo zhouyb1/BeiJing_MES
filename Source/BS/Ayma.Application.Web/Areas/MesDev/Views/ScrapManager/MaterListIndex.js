@@ -29,7 +29,13 @@ var bootstrap = function ($, ayma) {
         bind: function () {
 
             //输入关键字搜索
-            $("#txt_Keyword").on('keyup', function () {
+            $("#txt_Keyword").on('keydown', function (event) {
+                if (event.keyCode == "13") {
+                    $('#am_btn_querySearch').click();
+                }
+            });
+            //查询
+            $('#am_btn_querySearch').on('click', function () {
                 page.search();
             });
 
