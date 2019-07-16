@@ -22,7 +22,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //绑定仓库
             var dfop = {
                 type: 'default',
-                value: 'S_Name',
+                value: 'S_Code',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -42,7 +42,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function(data) {
                         var entity = JSON.parse(data).data;
-                        stockCode = entity.S_Code;
+                        stockCode = entity == null ? "" : entity.S_Code;
                         $("#O_StockCode").val(stockCode);
                     }
                 });
@@ -133,6 +133,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             //添加物料
             $('#am_add').on('click', function () {
+                var stock = $('#O_StockName').selectGet();
+                if (stock == "") {
+                    ayma.alert.error("请选择仓库");
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加订单物料',
