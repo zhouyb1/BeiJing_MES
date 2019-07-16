@@ -18,7 +18,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private ScrapManagerIBLL scrapManagerIBLL = new ScrapManagerBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
-
+        private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
         #region 视图功能
 
         /// <summary>
@@ -173,6 +173,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (detail.Any(item => item.S_Qty<=0))
             {
                 return Fail("数量只能是大于0的实数");
+            }
+            foreach (var goods in detail)
+            {
+                var stock_qty = invSeachIbll.GetListByParams(goods.S_GoodsCode, goods.S_Batch).I_Qty;
+                if (goods.S_Qty > stock_qty)
+                {
+                    return Fail("【" + goods.S_GoodsName + "】" + "库存不足");
+                }
             }
             if (string.IsNullOrEmpty(keyValue))
             {
