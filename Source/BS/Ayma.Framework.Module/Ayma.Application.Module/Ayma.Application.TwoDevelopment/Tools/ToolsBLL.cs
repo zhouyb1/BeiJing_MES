@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.Organization;
+using Microsoft.JScript;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -118,11 +119,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取仓库列表
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_StockEntity> GetStockList()
+        public IEnumerable<Mes_StockEntity> GetStockList(int S_Kind)
         {
             try
             {
-                return toolsService.GetStockList();
+                return toolsService.GetStockList(S_Kind);
             }
             catch (Exception ex)
             {
