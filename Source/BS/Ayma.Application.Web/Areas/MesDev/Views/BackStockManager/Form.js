@@ -64,11 +64,11 @@ var bootstrap = function($, ayma) {
                 });
             });
 
-            //添加报废物料
+            //添加物料
             $('#am_add').on('click', function() {
                 var stock = $('#B_StockName').selectGet();
                 if (stock == "") {
-                    ayma.alert.error("请选择仓库");
+                    ayma.alert.error("请选择线边仓");
                     return false;
                 }
                 ayma.layerForm({
