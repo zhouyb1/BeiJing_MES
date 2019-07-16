@@ -18,6 +18,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private OutWorkShopManagerIBLL outWorkShopManagerIBLL = new OutWorkShopManagerBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
         #region 视图功能
 
         /// <summary>
@@ -199,6 +200,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (mes_OutWorkShopDetailList.Any(c=>c.O_Qty<=0))
             {
                 return Fail("数量只能是大于0的实数");
+            }
+            foreach (var goods in mes_OutWorkShopDetailList)
+            {
+                var stock_qty = invSeachIbll.GetListByParams(goods.O_GoodsCode, goods.O_Batch).I_Qty;
+                if (goods.O_Qty > stock_qty)
+                {
+                    return Fail("【" + goods.O_GoodsName + "】" + "库存不足");
+                }
             }
             if (string.IsNullOrEmpty(keyValue))
             {
