@@ -296,6 +296,29 @@ using MyDbReportData = DatabaseXmlReportData;
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
+        } 
+        /// <summary>
+        /// 车间入库到线边仓
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string InWorkShop(string doucno)
+        {
+            var sql = @"SELECT  h.I_InNo ,
+                                h.I_OrderNo ,
+                                h.I_OrderDate ,
+                                d.I_GoodsCode ,
+                                d.I_GoodsName ,
+                                d.I_Unit ,
+                                d.I_Qty ,
+                                d.I_Batch,
+                                h.I_StockName
+                        FROM    dbo.Mes_InWorkShopHead h
+                                LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo
+                        WHERE   I_Status = 2 AND h.I_InNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
         }
         /// <summary>
         /// 成品出库
@@ -412,18 +435,24 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
+            SpecialDataFunMap.Add("InWorkShop", InWorkShop);
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
             SpecialDataFunMap.Add("MaterInProject", MaterInProject);
             SpecialDataFunMap.Add("Requist", Requist);
             SpecialDataFunMap.Add("ProductOrder", ProductOrder);
+           
             #endregion
         }
 
         private static string OutWorkShop(HttpRequest Request)
         {
             return OutWorkShop(Request.QueryString["doucno"]);
+        } 
+        private static string InWorkShop(HttpRequest Request)
+        {
+            return InWorkShop(Request.QueryString["doucno"]);
         }
         private static string ProOutMake(HttpRequest Request)
         {

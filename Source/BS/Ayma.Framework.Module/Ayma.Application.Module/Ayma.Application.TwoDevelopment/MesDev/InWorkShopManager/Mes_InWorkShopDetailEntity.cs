@@ -6,36 +6,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-08 17:17
-    /// 描 述：库存查询
+    /// 日 期：2019-03-13 11:57
+    /// 描 述：车间入库到线边仓 表体
     /// </summary>
-    public partial class Mes_InventoryEntity 
+    public partial class Mes_InWorkShopDetailEntity 
     {
         #region 实体成员
         /// <summary>
-        /// ID
+        /// 主键
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
-        [Column("I_KIND")]
-        public string I_Kind { get; set; }
         /// <summary>
-        /// 仓库编码
+        /// 车间入库到线边仓单号
         /// </summary>
-        [Column("I_STOCKCODE")]
-        public string I_StockCode { get; set; }
+        [Column("I_INNO")]
+        public string I_InNo { get; set; }
         /// <summary>
-        /// 仓库名称
-        /// </summary>
-        [Column("I_STOCKNAME")]
-        public string I_StockName { get; set; }
-        /// <summary>
-        /// 商品编码
+        /// 物料编码
         /// </summary>
         [Column("I_GOODSCODE")]
         public string I_GoodsCode { get; set; }
         /// <summary>
-        /// 商品名称
+        /// 物料名称
         /// </summary>
         [Column("I_GOODSNAME")]
         public string I_GoodsName { get; set; }
@@ -48,14 +41,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("I_QTY")]
-        public decimal? I_Qty { get; set; }  
+        public decimal? I_Qty { get; set; }
         /// <summary>
-        /// 数量
-        /// </summary>
-        [NotMapped]
-        public decimal? Qty { get; set; }
-        /// <summary>
-        /// 批次批次以入库时间（yyyymmdd)
+        /// 批次
         /// </summary>
         [Column("I_BATCH")]
         public string I_Batch { get; set; }
@@ -63,7 +51,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 备注
         /// </summary>
         [Column("I_REMARK")]
-        public string I_Remark { get; set; }
+        public string I_Remark { get; set; } 
+        /// <summary>
+        /// 价格
+        /// </summary>
+        [Column("I_PRICE")]
+        public decimal? I_Price { get; set; }
 
         #endregion
 
@@ -83,12 +76,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             this.ID = keyValue;
         }
-        #endregion
-        #region 扩展字段
-        [NotMapped]
-        public decimal? I_Price { get; set; }
-
-
         #endregion
     }
 }

@@ -65,6 +65,8 @@
     <Compile Include="MesDev\Mes_InspectMap.cs" />
     <Compile Include="MesDev\Mes_OrgResDetailMap.cs" />
     <Compile Include="MesDev\Mes_OrgResHeadMap.cs" />
+    <Compile Include="MesDev\Mes_InWorkShopDetailMap.cs" />
+    <Compile Include="MesDev\Mes_InWorkShopHeadMap.cs" />
     <Compile Include="MesDev\Mes_ScrapDetailMap.cs" />
     <Compile Include="MesDev\Mes_ArrangeMap.cs" />
     <Compile Include="MesDev\Mes_HumitureMap.cs" />

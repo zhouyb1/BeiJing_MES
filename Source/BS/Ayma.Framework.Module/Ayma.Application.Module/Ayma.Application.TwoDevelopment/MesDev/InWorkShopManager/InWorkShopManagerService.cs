@@ -11,9 +11,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// <summary>
     /// 创 建：超级管理员
     /// 日 期：2019-03-13 11:57
-    /// 描 述：出库单制作
+    /// 描 述：车间入库到线边仓
     /// </summary>
-    public partial class OutWorkShopManagerService : RepositoryFactory
+    public partial class InWorkShopManagerService : RepositoryFactory
     {
         #region 获取数据
 
@@ -22,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OutWorkShopHeadEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_InWorkShopHeadEntity> GetPageList(Pagination pagination, string queryJson)
         {
             try
             {
@@ -30,19 +30,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.O_Status,
-                t.O_OutNo,
-                t.O_StockCode,
-                t.O_StockName,
-                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShop ,
-                t.O_OrderNo,
-                t.O_OrderDate,
-                t.O_Remark,
-                t.O_CreateBy,
-                t.O_CreateDate
+                t.I_Status,
+                t.I_InNo,
+                t.I_StockCode,
+                t.I_StockName,
+                dbo.GetWorkShopName(t.I_WorkShop) I_WorkShop ,
+                t.I_OrderNo,
+                t.I_OrderDate,
+                t.I_Remark,
+                t.I_CreateBy,
+                t.I_CreateDate
                 ");
-                strSql.Append("  FROM Mes_OutWorkShopHead t ");
-                strSql.Append("  WHERE t.O_Status in (1,2) ");
+                strSql.Append("  FROM Mes_InWorkShopHead t ");
+                strSql.Append("  WHERE t.I_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -50,29 +50,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.O_OrderDate >= @startTime AND t.O_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.I_OrderDate >= @startTime AND t.I_OrderDate <= @endTime ) ");
                 }
-                if (!queryParam["O_OutNo"].IsEmpty())
+                if (!queryParam["I_InNo"].IsEmpty())
                 {
-                    dp.Add("O_OutNo", "%" + queryParam["O_OutNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_OutNo Like @O_OutNo ");
+                    dp.Add("I_InNo", "%" + queryParam["I_InNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_InNo Like @I_InNo ");
                 }
-                if (!queryParam["O_OrderNo"].IsEmpty())
+                if (!queryParam["I_OrderNo"].IsEmpty())
                 {
-                    dp.Add("O_OrderNo", "%" + queryParam["O_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_OrderNo Like @O_OrderNo ");
+                    dp.Add("I_OrderNo", "%" + queryParam["I_OrderNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_OrderNo Like @I_OrderNo ");
                 }
-                if (!queryParam["O_StockName"].IsEmpty())
+                if (!queryParam["I_StockName"].IsEmpty())
                 {
-                    dp.Add("O_StockName", "%" + queryParam["O_StockName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_StockName Like @O_StockName ");
+                    dp.Add("I_StockName", "%" + queryParam["I_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_StockName Like @I_StockName ");
                 }
-                if (!queryParam["O_Status"].IsEmpty())
+                if (!queryParam["I_Status"].IsEmpty())
                 {
-                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_Status Like @O_Status ");
+                    dp.Add("I_Status", "%" + queryParam["I_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_Status Like @I_Status ");
                 }
-                return this.BaseRepository().FindList<Mes_OutWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
             {
@@ -88,10 +88,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 领料单查询
+        /// 车间入库到线边仓查询
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_OutWorkShopHeadEntity> GetPostIndex(Pagination pagination ,string queryJson)
+        public IEnumerable<Mes_InWorkShopHeadEntity> GetSearchIndex(Pagination pagination, string queryJson)
         {
             try
             {
@@ -99,18 +99,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.O_Status,
-                t.O_OutNo,
-                t.O_StockCode,
-                t.O_StockName,
-                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShop ,
-                t.O_OrderNo,
-                t.O_OrderDate,
-                t.O_Remark,
-                t.O_CreateBy,
-                t.O_CreateDate
+                t.I_Status,
+                t.I_InNo,
+                t.I_StockCode,
+                t.I_StockName,
+                dbo.GetWorkShopName(t.I_WorkShop) I_WorkShop ,
+                t.I_OrderNo,
+                t.I_OrderDate,
+                t.I_Remark,
+                t.I_CreateBy,
+                t.I_CreateDate
                 ");
-                strSql.Append("  FROM Mes_OutWorkShopHead t ");
+                strSql.Append("  FROM Mes_InWorkShopHead t ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -119,29 +119,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.O_OrderDate >= @startTime AND t.O_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.I_OrderDate >= @startTime AND t.I_OrderDate <= @endTime ) ");
                 }
-                if (!queryParam["O_OutNo"].IsEmpty())
+                if (!queryParam["I_InNo"].IsEmpty())
                 {
-                    dp.Add("O_OutNo", "%" + queryParam["O_OutNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_OutNo Like @O_OutNo ");
+                    dp.Add("I_InNo", "%" + queryParam["I_InNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_InNo Like @I_InNo ");
                 }
-                if (!queryParam["O_OrderNo"].IsEmpty())
+                if (!queryParam["I_OrderNo"].IsEmpty())
                 {
-                    dp.Add("O_OrderNo", "%" + queryParam["O_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_OrderNo Like @O_OrderNo ");
+                    dp.Add("I_OrderNo", "%" + queryParam["I_OrderNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_OrderNo Like @I_OrderNo ");
                 }
-                if (!queryParam["O_StockName"].IsEmpty())
+                if (!queryParam["I_StockName"].IsEmpty())
                 {
-                    dp.Add("O_StockName", "%" + queryParam["O_StockName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_StockName Like @O_StockName ");
+                    dp.Add("I_StockName", "%" + queryParam["I_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_StockName Like @I_StockName ");
                 }
-                if (!queryParam["O_Status"].IsEmpty())
+                if (!queryParam["I_Status"].IsEmpty())
                 {
-                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_Status Like @O_Status ");
+                    dp.Add("I_Status", "%" + queryParam["I_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_Status Like @I_Status ");
                 }
-                return this.BaseRepository().FindList<Mes_OutWorkShopHeadEntity>(strSql.ToString(), dp, pagination);
+                return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(), dp, pagination);
 
             }
             catch (Exception ex)
@@ -158,15 +158,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_OutWorkShopHead表实体数据
+        /// 获取Mes_InWorkShopHead表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public Mes_OutWorkShopHeadEntity GetMes_OutWorkShopHeadEntity(string keyValue)
+        public Mes_InWorkShopHeadEntity GetMes_InWorkShopHeadEntity(string keyValue)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_OutWorkShopHeadEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Mes_InWorkShopHeadEntity>(keyValue);
             }
             catch (Exception ex)
             {
@@ -182,15 +182,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 获取Mes_OutWorkShopDetail表实体数据
+        /// 获取Mes_InWorkShopDetail表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OutWorkShopDetailEntity> GetMes_OutWorkShopDetailList(string keyValue)
+        public IEnumerable<Mes_InWorkShopDetailEntity> GetMes_InWorkShopDetailList(string keyValue)
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OutWorkShopDetailEntity>(t=>t.O_OutNo == keyValue);
+                return this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(t=>t.I_InNo == keyValue);
             }
             catch (Exception ex)
             {
@@ -216,7 +216,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 //return this.BaseRepository().FindList<Mes_InventoryEntity>(c => c.I_StockCode == stockCode, paginationobj);
                 var strSql = new StringBuilder();
-                strSql.Append(@"select m.*,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_StockCode =@stockCode");
+                strSql.Append(@"select m.*,m.I_Qty as Qty,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_StockCode =@stockCode");
                 var dp = new DynamicParameters(new {});
                 dp.Add("@stockCode", stockCode,DbType.String);
                 
@@ -249,9 +249,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                var mes_OutWorkShopHeadEntity = GetMes_OutWorkShopHeadEntity(keyValue); 
-                db.Delete<Mes_OutWorkShopHeadEntity>(t=>t.ID == keyValue);
-                db.Delete<Mes_OutWorkShopDetailEntity>(t=>t.O_OutNo == mes_OutWorkShopHeadEntity.O_OutNo);
+                var mes_InWorkShopHeadEntity = GetMes_InWorkShopHeadEntity(keyValue); 
+                db.Delete<Mes_InWorkShopHeadEntity>(t=>t.ID == keyValue);
+                db.Delete<Mes_InWorkShopDetailEntity>(t=>t.I_InNo == mes_InWorkShopHeadEntity.I_InNo);
                 db.Commit();
             }
             catch (Exception ex)
@@ -273,34 +273,34 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_OutWorkShopHeadEntity entity, List<Mes_OutWorkShopDetailEntity> mes_OutWorkShopDetailList)
+        public void SaveEntity(string keyValue, Mes_InWorkShopHeadEntity entity, List<Mes_InWorkShopDetailEntity> mes_InWorkShopDetailList)
         {
             var db = this.BaseRepository().BeginTrans();
             try
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_OutWorkShopHeadEntityTmp = GetMes_OutWorkShopHeadEntity(keyValue); 
+                    var mes_InWorkShopHeadEntityTmp = GetMes_InWorkShopHeadEntity(keyValue); 
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_OutWorkShopDetailEntity>(t=>t.O_OutNo == mes_OutWorkShopHeadEntityTmp.O_OutNo);
-                    foreach (var item in mes_OutWorkShopDetailList)
+                    db.Delete<Mes_InWorkShopDetailEntity>(t => t.I_InNo == mes_InWorkShopHeadEntityTmp.I_InNo);
+                    foreach (var item in mes_InWorkShopDetailList)
                     {
                         item.Create();
-                        item.O_OutNo = mes_OutWorkShopHeadEntityTmp.O_OutNo;
+                        item.I_InNo = mes_InWorkShopHeadEntityTmp.I_InNo;
                     }
-                    db.Insert(mes_OutWorkShopDetailList);
+                    db.Insert(mes_InWorkShopDetailList);
                 }
                 else
                 {
                     entity.Create();
                     db.Insert(entity);
-                    foreach (var item in mes_OutWorkShopDetailList)
+                    foreach (var item in mes_InWorkShopDetailList)
                     {
                         item.Create();
-                        item.O_OutNo = entity.O_OutNo;
+                        item.I_InNo = entity.I_InNo;
                     }
-                    db.Insert(mes_OutWorkShopDetailList);
+                    db.Insert(mes_InWorkShopDetailList);
                 }
                 db.Commit();
             }

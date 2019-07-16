@@ -227,6 +227,7 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
     <Compile Include="Areas\MesDev\Controllers\OrgResManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\InWorkShopManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\RequistBillController.cs" />
@@ -554,6 +555,11 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\Index.js" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\MaterListIndex.js" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PostForm.js" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PostOrderIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
@@ -2294,6 +2300,13 @@
     <Content Include="Areas\MesDev\Views\Goods\GoodsInfo.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\MaterListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PostForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PostOrderIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\InWorkShopManager\PrintViewReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2488,6 +2501,7 @@
     <Content Include="Areas\MesDev\Views\CompUseHead\Index.js" />
     <Content Include="Areas\MesDev\Views\CompUseHead\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\Form.js" />
+    <Content Include="Report\grf\InWorkShopReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
