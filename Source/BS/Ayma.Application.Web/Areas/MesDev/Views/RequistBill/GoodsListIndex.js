@@ -122,7 +122,7 @@ var bootstrap = function ($, ayma) {
                     { label: "库存数量", name: "i_qty", width: 80, align: "left" },
                     { label: "批次", name: "i_batch", width: 80, align: "left" }
                 ],
-                mainId: 'ID',
+                mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
@@ -157,7 +157,7 @@ var bootstrap = function ($, ayma) {
                     var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                     for (var i = 0; i < rows.length; i++) {
                         for (var j = 0; j < rowlistlenght; j++) {
-                            if (rows[i]['g_code'] == rowslist[j]['R_GoodsCode']) {
+                            if (rows[i]['g_code'] == rowslist[j]['R_GoodsCode'] && rows[i]['i_batch'] == rowslist[j]['R_Batch']) {
                                 $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                 break;
                             }

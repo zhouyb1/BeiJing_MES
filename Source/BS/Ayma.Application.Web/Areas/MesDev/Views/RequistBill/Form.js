@@ -248,7 +248,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         var rows = $('#Mes_RequistDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["R_GoodsCode"] == row["g_code"]) {
+            if (rows[i]["R_GoodsCode"] == row["g_code"] && rows[i]["R_Batch"] == row["i_batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);
