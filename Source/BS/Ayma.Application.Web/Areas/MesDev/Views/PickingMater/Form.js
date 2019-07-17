@@ -29,9 +29,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockListByParam',
                 // 访问数据接口参数
-                param: { S_Kind: 1 }
+                param: { strWhere: "S_Kind =1" }
             }
             $("#C_StockName").select(dfop).on('change', function() {
                 var code = $(this).selectGet();
