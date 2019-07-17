@@ -69,15 +69,15 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]["C_OrderNo"] = newArray[i]['P_OrderNo'];
-                    newArray[i]["C_OrderDate"] = newArray[i]['P_OrderDate'];
-                    newArray[i]['C_GoodsCode'] = newArray[i]['P_GoodsCode'];
-                    newArray[i]['C_GoodsName'] = newArray[i]['P_GoodsName'];
+                    newArray[i]["C_OrderNo"] = newArray[i]['I_OrderNo'];
+                    newArray[i]["C_OrderDate"] = newArray[i]['I_OrderDate'];
+                    newArray[i]['C_GoodsCode'] = newArray[i]['I_GoodsCode'];
+                    newArray[i]['C_GoodsName'] = newArray[i]['I_GoodsName'];
                     newArray[i]['C_Unit'] = newArray[i]['P_Unit'];
                     newArray[i]["C_Qty"] = quantity;
-                    newArray[i]['C_Batch'] = newArray[i]['P_Batch'];
+                    newArray[i]['C_Batch'] = newArray[i]['I_Batch'];
                     newArray[i]["ID"] = newArray[i]['ID'];
-                    newArray[i]["C_Price"] = newArray[i]['P_Price'];;
+                    newArray[i]["C_Price"] = newArray[i]['I_Price'];;
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -137,7 +137,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['I_GoodsCode'] == rowslist[j]['C_GoodsCode']) {
+                                if (rows[i]['I_GoodsCode'] == rowslist[j]['C_GoodsCode'] && rows[i]["I_Batch"]==rowslist[j]["C_Batch"]) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

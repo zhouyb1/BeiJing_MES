@@ -76,7 +76,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
              
             //添加订单原物料
-            $('#am_add').on('click', function() {
+            $('#am_add').on('click', function () {
+                if ($("#C_StockName").selectGet()=="") {
+                    ayma.alert.error("请选择原料仓库！");
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
@@ -169,8 +173,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     //表格商品添加
     refreshGirdData = function (data, row) {
-        $('#P_OrderNo').val(row.C_OrderNo);
-        $('#P_OrderDate').val(row.C_OrderDate);
+       //$('#P_OrderNo').val(row.C_OrderNo);
+        //$('#P_OrderDate').val(row.C_OrderDate);
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
@@ -196,7 +200,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["M_GoodsCode"] == row["P_GoodsCode"]) {
+            if (rows[i]["C_GoodsCode"] == row["I_GoodsCode"] && rows[i]["C_Batch"] == row["I_Batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);
