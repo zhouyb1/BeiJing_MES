@@ -671,6 +671,14 @@
     <Content Include="Images\time.png" />
     <Content Include="Images\user.png" />
     <Content Include="Images\wrench.png" />
+    <Content Include="Library\BarCode.dll" />
+    <Content Include="Library\BmpLib.dll" />
+    <Content Include="Library\dcrf32wi.dll" />
+    <Content Include="Library\MakeQRBarcode.dll" />
+    <Content Include="Library\Newtonsoft.Json.dll" />
+    <Content Include="Library\PcdLib.dll" />
+    <Content Include="Library\Tools.dll" />
+    <Content Include="Library\ToolsLib.dll" />
     <Content Include="Library\WeifenLuo.WinFormsUI.Docking.dll" />
     <None Include="Images\cancel.png" />
     <Content Include="Images\candle.gif" />
