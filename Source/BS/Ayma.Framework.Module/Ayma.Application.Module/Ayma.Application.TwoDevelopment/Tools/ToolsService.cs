@@ -68,14 +68,43 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         } 
         /// <summary>
-        /// 获取所有仓库列表
+        /// 获所仓库列表
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Mes_StockEntity> GetStockList()
         {
             try
             {
+
                 return this.BaseRepository().FindList<Mes_StockEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据参数获取仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetStockListByParam(string strWhere)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(@"select * from Mes_Stock ");
+                if (!strWhere.IsEmpty())
+                {
+                    sb.Append(" where " + strWhere);
+                }
+                return this.BaseRepository().FindList<Mes_StockEntity>(sb.ToString());
             }
             catch (Exception ex)
             {

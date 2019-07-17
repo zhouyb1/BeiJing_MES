@@ -1,4 +1,5 @@
-﻿using Ayma.Application.TwoDevelopment.MesDev.GoodsInfo;
+﻿using System.Text;
+using Ayma.Application.TwoDevelopment.MesDev.GoodsInfo;
 using Ayma.Util;
 using System;
 using System.Collections.Generic;
@@ -116,14 +117,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //    }
         //}
         /// <summary>
-        /// 获取仓库列表
+        /// 根据参数获取仓库列表
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_StockEntity> GetStockList(int S_Kind)
+        public IEnumerable<Mes_StockEntity> GetStockListByParam(string strWhere)
         {
             try
             {
-                return toolsService.GetStockList(S_Kind);
+                return toolsService.GetStockListByParam(strWhere);
             }
             catch (Exception ex)
             {
