@@ -18,7 +18,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
-        /// 入库单据类型(1=非成品,2=成品)
+        /// 入库单据类型(0=非成品,1=成品)
         /// </summary>
         [Column("M_ORDERKIND")]
         public ErpEnums.OrderKindEnum? M_OrderKind { get; set; }
@@ -97,7 +97,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// M_UploadDate
         /// </summary>
         [Column("M_UPLOADDATE")]
-        public DateTime? M_UploadDate { get; set; }
+        public DateTime? M_UploadDate { get; set; }    
+        /// <summary>
+        /// 是否成品(0非成品 1成品)
+        /// </summary>
+        [Column("M_KIND")]
+        public int? M_Kind { get; set; }
         #endregion
 
         #region 扩展操作

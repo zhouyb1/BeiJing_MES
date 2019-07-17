@@ -164,7 +164,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status = 3 and t.M_Kind=3  ");
+                strSql.Append("  WHERE t.M_Status = 3 and t.M_OrderKind=1  ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -238,7 +238,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status in (1,2) and t.M_OrderKind=2  ");
+                strSql.Append("  WHERE t.M_Status in (1,2) and t.M_OrderKind=1  ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

@@ -89,11 +89,11 @@ namespace Ayma.Application.TwoDevelopment
             /// <summary>
             /// 非成品
             /// </summary>
-            NoProduct = 1,
+            NoProduct = 0,
             /// <summary>
             /// 成品
             /// </summary>
-            IsProduct = 2     
+            IsProduct = 1     
         } 
        
         

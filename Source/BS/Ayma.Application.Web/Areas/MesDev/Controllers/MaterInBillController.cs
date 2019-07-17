@@ -361,7 +361,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (string.IsNullOrEmpty(keyValue))
             {
                 entity.M_OrderKind = orderKind;//单据类型 成品与非成品
-
+                if (entity.M_OrderKind==ErpEnums.OrderKindEnum.NoProduct)
+                {
+                    entity.M_Kind = 0;
+                }
+                else
+                {
+                    entity.M_Kind = 1;
+                    
+                }
                 var codeRulebll = new CodeRuleBLL();
                 if (entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct)
                 {
