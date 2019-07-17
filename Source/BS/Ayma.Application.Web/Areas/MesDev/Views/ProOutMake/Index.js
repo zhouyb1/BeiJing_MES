@@ -110,7 +110,7 @@ var bootstrap = function ($, ayma) {
                     }
                     ayma.layerConfirm('是否确认删除该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: '', type: 3 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_ProOut_Delete', type: 3 }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -128,7 +128,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认提交该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: '', type: 1 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_ProOut_Post', type: 1 }, function () {
                                 refreshGirdData();
                             });
                         }

@@ -19,6 +19,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_ProOutHeadEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        /// 获取页面显示列表数据 单据完成状态
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ProOutHeadEntity> GetSearchPageList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取Mes_ProOutDetail表数据
         /// <summary>
         /// <returns></returns>

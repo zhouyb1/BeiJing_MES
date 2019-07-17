@@ -38,6 +38,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取页面显示列表数据 单据完成状态
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProOutHeadEntity> GetSearchPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return proOutMakeService.GetSearchPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取Mes_ProOutDetail表数据

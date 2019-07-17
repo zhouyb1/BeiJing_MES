@@ -46,7 +46,75 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               ,t.[P_UploadBy]
                               ,t.[P_UploadDate]");
                 strSql.Append("  FROM Mes_ProOutHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE (t.P_Status=1 or t.P_Status=2) ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.P_OrderDate >= @startTime AND t.P_OrderDate <= @endTime ) ");
+                }
+                if (!queryParam["P_OrderDate"].IsEmpty())
+                {
+                    dp.Add("P_OrderDate",queryParam["P_OrderDate"].ToString(), DbType.String);
+                    strSql.Append(" AND t.P_OrderDate = @P_OrderDate ");
+                }
+                if (!queryParam["P_ProOutNo"].IsEmpty())
+                {
+                    dp.Add("P_ProOutNo", "%" + queryParam["P_ProOutNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_ProOutNo Like @P_ProOutNo ");
+                }
+                if (!queryParam["P_Status"].IsEmpty())
+                {
+                    dp.Add("P_Status",queryParam["P_Status"].ToString(), DbType.String);
+                    strSql.Append(" AND t.P_Status = @P_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_ProOutHeadEntity>(strSql.ToString(),dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取页面显示列表数据 单据完成
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProOutHeadEntity> GetSearchPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                               t.[ID]
+                              ,t.[P_ProOutNo]
+                              ,t.[P_StockCode]
+                              ,t.[P_StockName]
+                              ,t.[P_OrderNo]
+                              ,t.[P_OrderDate]
+                              ,t.[P_Status]
+                              ,t.[P_CreateBy]
+                              ,t.[P_CreateDate]
+                              ,t.[P_UpdateBy]
+                              ,t.[P_UpdateDate]
+                              ,t.[P_Remark]
+                              ,t.[P_DeleteBy]
+                              ,t.[P_DeleteDate]
+                              ,t.[P_UploadBy]
+                              ,t.[P_UploadDate]");
+                strSql.Append("  FROM Mes_ProOutHead t ");
+                strSql.Append("  WHERE t.P_Status=3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

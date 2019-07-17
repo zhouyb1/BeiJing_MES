@@ -101,6 +101,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 records = paginationobj.records
             };
             return Success(jsonData);
+        } 
+        /// <summary>
+        /// 获取页面显示列表数据 单据完成状态
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetSearchPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = proOutMakeIBLL.GetSearchPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
         /// <summary>
         /// 获取表单数据

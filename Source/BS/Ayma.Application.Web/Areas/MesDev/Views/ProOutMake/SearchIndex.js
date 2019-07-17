@@ -67,12 +67,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //撤销单据
+            $("#am_cancel").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("P_ProOutNo");
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_ProOut_Cancel', type: 2 }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
 
         },
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ProOutMake/GetPageList',
+                url: top.$.rootUrl + '/MesDev/ProOutMake/GetSearchPageList',
                 headData: [
                     {
                         label: "状态", name: "P_Status", width: 160, align: "left",
