@@ -29,7 +29,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
                 // 访问数据接口参数
-                param: {}
+                //param: {}
             };
             //绑定原仓库
             $('#R_StockName').select(dfop).on('change', function () {

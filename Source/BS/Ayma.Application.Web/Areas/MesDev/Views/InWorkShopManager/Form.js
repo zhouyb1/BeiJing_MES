@@ -208,7 +208,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         return $('#Mes_InWorkShopDetail').jfGridGet('rowdatas');
     }
     //表格商品添加
-    refreshGirdData = function (data, row) {
+    top.refreshGirdData = function (data, row) {
         var rows = $('#Mes_InWorkShopDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
@@ -230,10 +230,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         page.search(filterarray);
     };
     //表格商品删除
-    RemoveGridData = function (row) {
+    top.RemoveGridData = function (row) {
         var rows = $('#Mes_InWorkShopDetail').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["I_GoodsCode"] == row["G_Code"]) {
+            if (rows[i]["I_GoodsCode"] == row["i_goodscode"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

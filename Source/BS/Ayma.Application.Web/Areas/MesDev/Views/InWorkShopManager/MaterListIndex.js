@@ -4,9 +4,9 @@
 
 var refreshGirdData;
 //上级元素的刷新表格方法
-var parentRefreshGirdData;
+//var parentRefreshGirdData;
 //上级元素的删除表格方法;
-var parentRemoveGridData;
+//var parentRemoveGridData;
 //上级元素的id
 var parentFormId = request('formId');
 var newArray = [];
@@ -23,8 +23,8 @@ var bootstrap = function ($, ayma) {
             page.initGird();
             page.bind();
             //获取父级iframe中的刷新商品列表方法
-            parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
-            parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
+            //parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
+            //parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
         },
         bind: function () {
            
@@ -59,16 +59,16 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]['I_GoodsCode'] = newArray['G_Code'];
-                    newArray[i]['I_GoodsName'] = newArray['G_Name'];
-                    newArray[i]['I_Unit'] = newArray['G_Unit'];
-                    newArray[i]['I_Price'] = newArray['G_Price'];
+                    newArray[i]['I_GoodsCode'] = newArray[i].i_goodscode;
+                    newArray[i]['I_GoodsName'] = newArray[i].i_goodsname;
+                    newArray[i]['I_Unit'] = newArray[i].i_unit;
+                    newArray[i]['I_Price'] = newArray[i].i_price;
                     newArray[i]['I_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["I_Qty"] = quantity;
-                    newArray[i]["ID"] = newArray['ID'];
+                    newArray[i]["ID"] = newArray[i].id;
                     array.push(newArray[i]);
                 }
-                parentRefreshGirdData(array);
+                top.refreshGirdData(array);
 
             });
         },
@@ -77,17 +77,17 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/InWorkShopManager/GetGoodsList',
                 headData: [
-                    { label: "物料编码", name: "G_Code", width: 130, align: "left" },
-                    { label: "物料名称", name: "G_Name", width: 130, align: "left" },
-                    { label: "单位", name: "G_Unit", width: 60, align: "left" },
-                    { label: "单价", name: "G_Price", width: 60, align: "left" }
+                    { label: "物料编码", name: "i_goodscode", width: 130, align: "left" },
+                    { label: "物料名称", name: "i_goodsname", width: 130, align: "left" },
+                    { label: "单位", name: "i_unit", width: 60, align: "left" },
+                    { label: "单价", name: "i_price", width: 60, align: "left" }
                 ],
-                mainId: 'ID',
+                mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'G_Code',
-                sord: 'ASC',
+                //sidx: 'g_code',
+                //sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                         return;
@@ -98,17 +98,17 @@ var bootstrap = function ($, ayma) {
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
                       
-                        row['I_GoodsCode'] = row['G_Code'];
-                        row['I_GoodsName'] = row['G_Name'];
-                        row['I_Unit'] = row['G_Unit'];
-                        row['I_Price'] = row['G_Price'];
+                        row['I_GoodsCode'] = row['i_goodscode'];
+                        row['I_GoodsName'] = row['i_goodsname'];
+                        row['I_Unit'] = row['i_unit'];
+                        row['I_Price'] = row['i_price'];
                         row['I_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                         row["I_Qty"] = quantity;
-                        row["ID"] = row['ID'];
-                        parentRefreshGirdData([], row);
+                        row["ID"] = row['id'];
+                        top.refreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
-                        parentRemoveGridData(row);
+                        top.RemoveGridData(row);
                     }
                 },
                 onRenderComplete: function (rows) {
@@ -118,7 +118,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_Code'] == rowslist[j]['I_GoodsCode']) {
+                                if (rows[i]['g_code'] == rowslist[j]['I_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

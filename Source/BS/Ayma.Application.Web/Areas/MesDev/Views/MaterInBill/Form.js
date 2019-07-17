@@ -214,6 +214,7 @@ var bootstrap = function ($, ayma) {
                 }
             }
         }
+      
         //数组过滤
         var filterarray = $.grep(rows, function (item) {
             return item["M_GoodsCode"] != undefined;

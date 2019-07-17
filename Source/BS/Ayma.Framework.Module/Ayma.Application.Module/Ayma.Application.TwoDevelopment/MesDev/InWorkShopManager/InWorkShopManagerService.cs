@@ -240,15 +240,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="paginationobj">分页参数</param>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination paginationobj, string queryJson)
+        public DataTable GetGoodsList(Pagination paginationobj, string queryJson)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT  G_Code ,
-                                    G_Name ,
-                                    G_Unit ,
-                                    G_Price
+                strSql.Append(@"SELECT  G_Code I_GoodsCode,
+                                    G_Name I_GoodsName,
+                                    G_Unit I_Unit,
+                                    G_Price I_Price
                             FROM    dbo.Mes_Goods
                             WHERE   G_Kind !=1 ");
                 var dp = new DynamicParameters(new {});
@@ -258,7 +258,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("keyword", "%" + queryParam["keyword"].ToString() + "%", DbType.String);
                     strSql.Append(" AND (G_Code LIKE @keyword OR G_Name LIKE @keyword) ");
                 }
-               return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(),dp, paginationobj);
+               return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
             }
             catch (Exception ex)
             {

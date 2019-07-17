@@ -1,6 +1,7 @@
 ﻿using Ayma.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -138,7 +139,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="paginationobj">分页参数</param>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination paginationobj, string queryJson)
+        public DataTable GetGoodsList(Pagination paginationobj, string queryJson)
         {
             try
             {

@@ -63,6 +63,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var stockList = toosIBLL.GetStockList(S_Kind);
             return Success(stockList);
+        }
+        /// <summary>
+        /// 获取所有仓库列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetStockList()
+        {
+            var stockList = toosIBLL.GetStockList();
+            return Success(stockList);
         } 
         /// <summary>
         /// 获取非成品仓库列表

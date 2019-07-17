@@ -66,6 +66,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 获取所有仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
         /// <summary>
         /// 获取非成品仓库列表

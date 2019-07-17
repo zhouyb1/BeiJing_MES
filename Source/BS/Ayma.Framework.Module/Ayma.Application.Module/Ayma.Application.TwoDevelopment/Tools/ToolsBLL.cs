@@ -138,6 +138,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         } 
         /// <summary>
+        /// 获取仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetStockList()
+        {
+            try
+            {
+                return toolsService.GetStockList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 获取非成品仓库列表
         /// </summary>
         /// <returns></returns>

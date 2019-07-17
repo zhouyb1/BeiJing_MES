@@ -178,10 +178,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetGoodsList(string pagination, string queryJson)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var list = inWorkShopManagerIBLL.GetGoodsList(paginationobj, queryJson).ToList();
+            var dt = inWorkShopManagerIBLL.GetGoodsList(paginationobj, queryJson);
             var jsonData = new
             {
-                rows = list,
+                rows = dt,
                 total = paginationobj.total,
                 page = paginationobj.page,
                 records = paginationobj.records
