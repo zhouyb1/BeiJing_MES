@@ -175,18 +175,28 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     refreshGirdData = function (data, row) {
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
-            if (!tmp.get(row.row_sign)) {
-                tmp.set(row.row_sign, true);
+            if (!tmp.get(row)) {
+                tmp.set(row, 1);
                 rows.push(row);
             }
 
         } else { //多选 
+
             for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i].row_sign)) {
-                    tmp.set(data[i].row_sign, true);
-                    rows.push(data[i]);
+                if (!tmp.get(data[i])) {
+                    tmp.set(data[i], 1);
+                    var isExist = true;
+                    for (var j = 0; j < rows.length; j++) {
+                        if (data[i].I_GoodsCode == rows[j].C_GoodsCode && data[i].I_Batch == rows[j].C_Batch) {
+                            isExist = false;
+                        }
+                    }
+                    if (isExist) {
+                        rows.push(data[i]);
+                    }
                 }
             }
+            
         }
         //数组过滤
         var filterarray = $.grep(rows, function (item) {
@@ -202,7 +212,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (rows[i]["C_GoodsCode"] == row["I_GoodsCode"] && rows[i]["C_Batch"] == row["I_Batch"]) {
                 rows.splice(i, 1);
                 //tmp.delete(row);
-                tmp.delete(row.row_sign);
+                tmp.delete(row);
                 page.search(rows);
             }
         }

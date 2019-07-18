@@ -78,7 +78,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["ID"] = newArray[i]['ID'];
                     newArray[i]["C_Price"] = newArray[i]['I_Price'];;
                     //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
-                    newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
+                    //newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -106,9 +106,9 @@ var bootstrap = function ($, ayma) {
                 sidx: 'I_GoodsCode',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
-                    if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                        return;
-                    }
+                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
+                    //    return;
+                    //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         //获取一键数量
@@ -123,7 +123,7 @@ var bootstrap = function ($, ayma) {
                         row["ID"] = row['ID'];
                         row["C_Price"] = row["I_Price"];
                         //2019年7月18日14:16:17 行数据唯一标识
-                        row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
+                        //row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
