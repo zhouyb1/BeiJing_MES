@@ -76,7 +76,9 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["S_Qty"] = quantity;
                     newArray[i]['S_Batch'] = newArray[i]["G_Batch"];
                     newArray[i]["S_Price"] = newArray[i]["G_Price"];
-
+                    newArray[i]["ID"] = newArray[i]["G_ID"];
+                    //2019年7月18日14:18:35 行数据唯一标识 防止数据重复添加
+                    newArray[i]["row_sign"] = newArray[i]["G_GoodsCode"] + newArray[i]["G_Batch"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -116,6 +118,9 @@ var bootstrap = function ($, ayma) {
                         row["S_Qty"] = quantity;
                         row['S_Batch'] = row['G_Batch'];
                         row["S_Price"] = row["G_Price"];
+                        row["ID"] = row["G_ID"];
+                        //2019年7月18日14:16:17 行数据唯一标识 防止添加时出现重复数据
+                        row["row_sign"] = row["G_GoodsCode"] + row["G_Batch"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
@@ -129,7 +134,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_GoodsCode'] == rowslist[j]['S_GoodsCode']) {
+                                if (rows[i]['G_GoodsCode'] == rowslist[j]['S_GoodsCode']&&rows[i]["G_Batch"]==rowslist[j]["S_Batch"]) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
