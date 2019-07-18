@@ -20,8 +20,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -31,21 +31,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $("#B_StockCode").select(dfop).on('change', function () {
-                var code = $(this).selectGet();
+            $("#B_StockName").select(dfop).on('change', function () {
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: code },
+                    data: { code: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#B_StockName").val(entity.S_Name);
+                        $("#B_StockCode").val(entity.S_Code);
                     }
                 });
             });
             //添加物料
             $("#am_add").on("click", function () {
-                var stockCode = $("#B_StockCode").selectGet();
+                var stockCode = $("#B_StockCode").val();
                 if (stockCode == "") {
                     ayma.alert.error("请选择仓库");
                     return false;
@@ -86,10 +86,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 if (/\D/.test(row.B_Qty.toString().replace('.', ''))) { //验证只能为数字
                                     row.B_Qty = 0;
                                 }
-
+                                if (row.B_Qty > row.Qty) {
+                                    ayma.alert.error("数量不能大于库存");
+                                    row.B_Qty = 0;
+                                }
                             }
                         }
                     },
+                     {
+                         label: '库存', name: 'Qty', width: 80, align: 'center', editType: 'label'
+                     },
                     {
                         label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
                     },
@@ -171,7 +177,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         var rows = $('#Mes_BackSupplyDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["B_GoodsCode"] == row["i_goodscode"]) {
+            if (rows[i]["B_GoodsCode"] == row["i_goodscode"] && rows[i]["B_Batch"] == row["i_batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

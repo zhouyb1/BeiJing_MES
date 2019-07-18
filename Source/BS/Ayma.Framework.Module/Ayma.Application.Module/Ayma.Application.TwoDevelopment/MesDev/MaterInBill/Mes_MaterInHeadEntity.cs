@@ -49,7 +49,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public DateTime? M_OrderDate { get; set; }
         /// <summary>
         /// 状态（1=单据生成，2=审核通过，3=单据完成，-1=单据删除）
-   
         /// </summary>
         [Column("M_STATUS")]
         public ErpEnums.MaterInStatusEnum M_Status { get; set; }

@@ -180,6 +180,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_BackSupplyDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = mes_BackSupplyIBLL.GetMes_BackSupplyHeadEntity(keyValue);
+                if (entityTemp.B_Status == ErpEnums.BackSupplyStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑.");
+                }
+            }
             Mes_BackSupplyHeadEntity entity = strEntity.ToObject<Mes_BackSupplyHeadEntity>();
             List<Mes_BackSupplyDetailEntity> mes_BackSupplyDetailList = strmes_BackSupplyDetailList.ToObject<List<Mes_BackSupplyDetailEntity>>();
             foreach (Mes_BackSupplyDetailEntity item in mes_BackSupplyDetailList)

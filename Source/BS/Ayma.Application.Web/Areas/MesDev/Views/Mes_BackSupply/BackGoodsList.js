@@ -68,7 +68,9 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['B_GoodsName'] = newArray[i]['i_goodsname'];
                     newArray[i]['B_Unit'] = newArray[i]['i_unit'];
                     newArray[i]['B_Batch'] = newArray[i]['i_batch'];
+                    newArray[i]['Qty'] = newArray[i]['i_qty'];
                     newArray[i]["B_Qty"] = quantity;
+                    //newArray[i]['ID'] = newArray[i]['id'];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -106,8 +108,9 @@ var bootstrap = function ($, ayma) {
                         row['B_GoodsName'] = row['i_goodsname'];
                         row['B_Unit'] = row['i_unit'];
                         row['B_Batch'] = row['i_batch'];
+                        row['Qty'] = row['i_qty'];
                         row["B_Qty"] = quantity;
-                        //row["ID"] = row['ID'];
+                        //row["ID"] = row['id'];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
@@ -118,10 +121,10 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        var rowlistlenght = rowslist[0]["B_GoodsCode"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['i_goodscode'] == rowslist[j]['B_GoodsCode']) { 
+                                if (rows[i]['i_goodscode'] == rowslist[j]['B_GoodsCode'] && rows[i]['i_batch'] == rowslist[j]['B_Batch']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

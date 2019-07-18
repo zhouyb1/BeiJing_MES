@@ -194,6 +194,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_RequistDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = requistBillIBLL.GetMes_RequistHeadEntity(keyValue);
+                if (entityTemp.R_Status == ErpEnums.RequistStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑.");
+                }
+            }
             Mes_RequistHeadEntity entity = strEntity.ToObject<Mes_RequistHeadEntity>();
             List<Mes_RequistDetailEntity> mes_RequistDetailList = strmes_RequistDetailList.ToObject<List<Mes_RequistDetailEntity>>();
             if (string.IsNullOrEmpty(keyValue))

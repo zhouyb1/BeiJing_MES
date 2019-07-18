@@ -349,6 +349,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity, string strmes_MaterInDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp=materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
+                if (entityTemp.M_Status == ErpEnums.MaterInStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑.");
+                }
+            }
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
             foreach (var item in mes_MaterInDetailList)

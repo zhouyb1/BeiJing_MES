@@ -197,6 +197,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_ProOutDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = proOutMakeIBLL.GetMes_ProOutHeadEntity(keyValue);
+                if (entityTemp.P_Status == ErpEnums.ProOutStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑.");
+                }
+            }
             Mes_ProOutHeadEntity entity = strEntity.ToObject<Mes_ProOutHeadEntity>();
             List<Mes_ProOutDetailEntity> mes_ProOutDetailList = strmes_ProOutDetailList.ToObject<List<Mes_ProOutDetailEntity>>();
             if (string.IsNullOrEmpty(keyValue))

@@ -215,6 +215,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_InWorkShopDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = inWorkShopManagerIBLL.GetMes_InWorkShopHeadEntity(keyValue);
+                if (entityTemp.I_Status == ErpEnums.InStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑.");
+                }
+            }
             Mes_InWorkShopHeadEntity entity = strEntity.ToObject<Mes_InWorkShopHeadEntity>();
             var mes_InWorkShopDetailList = strmes_InWorkShopDetailList.ToObject<List<Mes_InWorkShopDetailEntity>>();
             if (string.IsNullOrEmpty(strmes_InWorkShopDetailList))
