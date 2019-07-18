@@ -130,7 +130,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_GoodsCode'] == rowslist[j]['B_GoodsCode']) {
+                                if (rows[i]['G_GoodsCode'] == rowslist[j]['B_GoodsCode'] && rows[i]["G_Batch"] == rowslist[j]["B_Batch"]) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

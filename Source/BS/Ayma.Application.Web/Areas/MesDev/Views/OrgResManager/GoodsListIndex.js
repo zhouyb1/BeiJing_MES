@@ -75,6 +75,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['O_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]["O_Qty"] = quantity;
                     newArray[i]['O_Batch'] = newArray[i]["G_Batch"];
+                    //2019年7月18日14:16:17 行数据唯一标识
+                    newArray[i]["row_sign"] = newArray[i]["G_GoodsCode"] + newArray[i]["G_Batch"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -116,7 +118,8 @@ var bootstrap = function ($, ayma) {
                         row["O_SecQty"] = quantity;
                         row['O_SecBatch'] = row['G_Batch'];
                         row["O_SecPrice"] = row["G_Price"];
-
+                        //2019年7月18日14:16:17 行数据唯一标识
+                        row["row_sign"] = row["G_GoodsCode"] + row["G_Batch"];
                         $.ajax({
                             type:"get",
                             url: '/MesDev/Tools/GetMesConverEntity',
