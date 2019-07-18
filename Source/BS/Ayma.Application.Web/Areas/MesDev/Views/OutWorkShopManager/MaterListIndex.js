@@ -81,6 +81,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['O_Batch'] = newArray[i]["I_Batch"];
                     newArray[i]["ID"] = newArray[i]['ID'];
                     newArray[i]["O_Price"] = newArray[i]["I_Price"];//edit 2019年4月15日17:09:12
+                    //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
+                    newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -123,6 +125,8 @@ var bootstrap = function ($, ayma) {
                         row['O_Batch'] =  row['I_Batch'];
                         row["ID"] = row['ID'];
                         row["O_Price"] = row["I_Price"];//edit 2019年4月15日17:09:12
+                        //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
+                        row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
