@@ -139,7 +139,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     {
-                        label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'input'
+                        label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'label'
                     },
                     {
                         label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'input'
@@ -200,7 +200,16 @@ var bootstrap = function ($, ayma) {
             for (var i = 0; i < data.length; i++) {
                 if (!tmp.get(data[i])) {
                     tmp.set(data[i], 1);
-                    rows.push(data[i]);
+                    var flag = true;
+                    //加个循环判断数组重复
+                    for (var j = 0; j < rows.length; j++) {
+                        if (rows[j].P_GoodsCode == data[i].I_GoodsCode && rows[j].P_Batch == data[i].I_Batch) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        rows.push(data[i]);
+                    }
                 }
             }
         }
@@ -215,7 +224,7 @@ var bootstrap = function ($, ayma) {
         var rows = $('#Mes_ProOutDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["P_GoodsCode"] == row["G_Code"]) {
+            if (rows[i]["P_GoodsCode"] == row["I_GoodsCode"] && rows[i]["P_Batch"] == row["I_Batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

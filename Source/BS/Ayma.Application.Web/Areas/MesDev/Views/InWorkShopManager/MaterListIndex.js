@@ -115,10 +115,10 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        var rowlistlenght = rowslist[0]["I_GoodsCode"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['g_code'] == rowslist[j]['I_GoodsCode']) {
+                                if (rows[i]['i_goodscode'] == rowslist[j]['I_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

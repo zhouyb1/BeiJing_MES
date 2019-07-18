@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
                     newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
-                    newArray[i]['M_GoodsName'] = newArray[i]['G_Code'];
+                    newArray[i]['M_GoodsName'] = newArray[i]['G_Name'];
                     newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]['M_Price'] = newArray[i]['G_Price'];
@@ -111,7 +111,6 @@ var bootstrap = function ($, ayma) {
                                  key: value,
                                  code: 'GoodsType',
                                  callback: function (_data) {
-                                     console.log(_data)
                                      callback(_data.text);
                                  }
                              });

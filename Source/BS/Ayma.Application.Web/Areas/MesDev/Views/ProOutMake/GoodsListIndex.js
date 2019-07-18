@@ -142,7 +142,7 @@ var bootstrap = function ($, ayma) {
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
                                
-                                if (rows[i]['I_GoodsCode'] == rowslist[j]['P_GoodsCode']) {
+                                if (rows[i]['I_GoodsCode'] == rowslist[j]['P_GoodsCode'] && rows[i]['I_Batch'] == rowslist[j]['P_Batch']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

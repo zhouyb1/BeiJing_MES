@@ -13,7 +13,7 @@ var bootstrap = function ($, ayma) {
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
         init: function () {
-$('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
+            $('.am-form-wrap').mCustomScrollbar({ theme: "minimal-dark" });
             page.bind();
             page.initData();
         },
@@ -100,7 +100,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'B_Remark', width: 200, align: 'left',editType: 'input'
+                        label: '备注', name: 'B_Remark', width: 200, align: 'left', editType: 'input'
                     },
                 ],
                 isAutoHeight: true,
@@ -150,6 +150,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             }
         });
     };
+
+
     //表格商品添加
     refreshGirdData = function (data, row) {
         var rows = $('#Mes_BackSupplyDetail').jfGridGet('rowdatas');
@@ -162,7 +164,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             for (var i = 0; i < data.length; i++) {
                 if (!tmp.get(data[i])) {
                     tmp.set(data[i], 1);
-                    rows.push(data[i]);
+                    var flag = true;
+                    //加个循环判断数组重复
+                    for (var j = 0; j < rows.length; j++) {
+                        if (rows[j].B_GoodsCode == data[i].i_goodscode && rows[j].B_Batch == data[i].i_batch) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        rows.push(data[i]);
+                    }
+
                 }
             }
         }
