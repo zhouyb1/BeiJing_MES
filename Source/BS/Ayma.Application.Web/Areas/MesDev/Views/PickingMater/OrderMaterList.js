@@ -69,7 +69,6 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    //newArray[i]["C_OrderNo"] = newArray[i]['I_OrderNo'];
                     newArray[i]["C_OrderDate"] = newArray[i]['I_OrderDate'];
                     newArray[i]['C_GoodsCode'] = newArray[i]['I_GoodsCode'];
                     newArray[i]['C_GoodsName'] = newArray[i]['I_GoodsName'];
@@ -78,9 +77,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['C_Batch'] = newArray[i]['I_Batch'];
                     newArray[i]["ID"] = newArray[i]['ID'];
                     newArray[i]["C_Price"] = newArray[i]['I_Price'];;
-                    //2019年7月18日14:18:35
+                    //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
                     newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
-
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -116,9 +114,6 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
-                        //row['M_Batch'] = batch;
-                        //row['P_OrderDate'] = row['P_OrderDate'];
-                        //row["C_OrderNo"] = row['P_OrderNo'];
                         row["C_OrderDate"] = row['I_OrderDate'];
                         row['C_GoodsCode'] = row['I_GoodsCode'];
                         row['C_GoodsName'] = row['I_GoodsName'];
@@ -127,7 +122,7 @@ var bootstrap = function ($, ayma) {
                         row["C_Qty"] = quantity;
                         row["ID"] = row['ID'];
                         row["C_Price"] = row["I_Price"];
-                        //2019年7月18日14:16:17
+                        //2019年7月18日14:16:17 行数据唯一标识
                         row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
                         parentRefreshGirdData([], row);
                     }

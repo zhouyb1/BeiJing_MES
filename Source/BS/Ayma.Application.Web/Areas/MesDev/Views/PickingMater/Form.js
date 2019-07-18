@@ -173,8 +173,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     //表格商品添加
     refreshGirdData = function (data, row) {
-       //$('#P_OrderNo').val(row.C_OrderNo);
-        //$('#P_OrderDate').val(row.C_OrderDate);
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row.row_sign)) {
