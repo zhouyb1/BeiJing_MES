@@ -69,15 +69,18 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]["C_OrderNo"] = newArray[i]['I_OrderNo'];
+                    //newArray[i]["C_OrderNo"] = newArray[i]['I_OrderNo'];
                     newArray[i]["C_OrderDate"] = newArray[i]['I_OrderDate'];
                     newArray[i]['C_GoodsCode'] = newArray[i]['I_GoodsCode'];
                     newArray[i]['C_GoodsName'] = newArray[i]['I_GoodsName'];
-                    newArray[i]['C_Unit'] = newArray[i]['P_Unit'];
+                    newArray[i]['C_Unit'] = newArray[i]['I_Unit'];
                     newArray[i]["C_Qty"] = quantity;
                     newArray[i]['C_Batch'] = newArray[i]['I_Batch'];
                     newArray[i]["ID"] = newArray[i]['ID'];
                     newArray[i]["C_Price"] = newArray[i]['I_Price'];;
+                    //2019年7月18日14:18:35
+                    newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
+
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -124,6 +127,8 @@ var bootstrap = function ($, ayma) {
                         row["C_Qty"] = quantity;
                         row["ID"] = row['ID'];
                         row["C_Price"] = row["I_Price"];
+                        //2019年7月18日14:16:17
+                        row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

@@ -177,14 +177,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         //$('#P_OrderDate').val(row.C_OrderDate);
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
-            if (!tmp.get(row)) {
-                tmp.set(row, 1);
+            if (!tmp.get(row.row_sign)) {
+                tmp.set(row.row_sign, true);
                 rows.push(row);
             }
-        } else { //多选                  
+
+        } else { //多选 
             for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i])) {
-                    tmp.set(data[i], 1);
+                if (!tmp.get(data[i].row_sign)) {
+                    tmp.set(data[i].row_sign, true);
                     rows.push(data[i]);
                 }
             }
@@ -202,7 +203,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["C_GoodsCode"] == row["I_GoodsCode"] && rows[i]["C_Batch"] == row["I_Batch"]) {
                 rows.splice(i, 1);
-                tmp.delete(row);
+                //tmp.delete(row);
+                tmp.delete(row.row_sign);
                 page.search(rows);
             }
         }
