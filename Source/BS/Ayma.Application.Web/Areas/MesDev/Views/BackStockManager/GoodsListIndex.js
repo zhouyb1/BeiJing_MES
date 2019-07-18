@@ -75,7 +75,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["B_Qty"] = quantity;
                     newArray[i]['B_Batch'] = newArray[i]["G_Batch"];
                     newArray[i]['B_Price'] = newArray[i]["G_Price"];
-
+                    //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
+                    newArray[i]["row_sign"] = newArray[i]["G_GoodsCode"] + newArray[i]["G_Batch"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -114,7 +115,8 @@ var bootstrap = function ($, ayma) {
                         row['B_Unit'] = row['G_Unit'];
                         row["B_Qty"] = quantity;
                         row['B_Batch'] = row['G_Batch'];
-                        row["B_Price"] = row["G_Price"];
+                        //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
+                        row["row_sign"] = row["G_GoodsCode"] + row["G_Batch"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
