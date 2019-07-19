@@ -103,7 +103,7 @@ var bootstrap = function($, ayma) {
                         }
                     },
                     //{ label: "现有数量", name: "B_OldQty", width: 60, align: "left", editType: 'input' },
-                    { label: "批次", name: "B_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "B_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -160,15 +160,23 @@ var bootstrap = function($, ayma) {
     refreshGirdData = function(data, row) {
         var rows = $('#Mes_BackStockDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
-            if (!tmp.get(row.row_sign)) {
-                tmp.set(row.row_sign, true);
+            if (!tmp.get(row)) {
+                tmp.set(row, 1);
                 rows.push(row);
             }
         } else { //多选                  
             for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i].row_sign)) {
-                    tmp.set(data[i].row_sign, true);
-                    rows.push(data[i]);
+                if (!tmp.get(data[i])) {
+                    tmp.set(data[i], 1);
+                    var isExist = true;
+                    for (var j = 0; j < rows.length; j++) {
+                        if (data[i].G_GoodsCode == rows[j].B_GoodsCode && data[i].G_Batch == rows[j].B_Batch) {
+                            isExist = false;
+                        }
+                    }
+                    if (isExist) {
+                        rows.push(data[i]);
+                    }
                 }
             }
         }
@@ -184,7 +192,7 @@ var bootstrap = function($, ayma) {
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["B_GoodsCode"] == row["G_GoodsCode"]&&rows[i]["B_Batch"]==row["G_Batch"]) {
                 rows.splice(i, 1);
-                tmp.delete(row.row_sign);
+                tmp.delete(row);
                 page.search(rows);
             }
         }

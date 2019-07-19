@@ -75,8 +75,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["B_Qty"] = quantity;
                     newArray[i]['B_Batch'] = newArray[i]["G_Batch"];
                     newArray[i]['B_Price'] = newArray[i]["G_Price"];
-                    //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
-                    newArray[i]["row_sign"] = newArray[i]["G_GoodsCode"] + newArray[i]["G_Batch"];
+                    newArray[i]["ID"] = newArray[i]["G_ID"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -93,7 +92,7 @@ var bootstrap = function ($, ayma) {
                     { label: "单价", name: "G_Price", width: 130, align: "left" },
                     { label: "单位", name: "G_Unit", width: 60, align: "left" },
                     { label: "数量", name: "G_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "G_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "G_Batch", width: 80, align: "left" }
                 ],
                 mainId: 'G_ID',
                 isMultiselect: true,         // 是否允许多选
@@ -102,9 +101,9 @@ var bootstrap = function ($, ayma) {
                 sidx: 'G_GoodsCode',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
-                    if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                        return;
-                    }
+                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
+                    //    return;
+                    //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         //获取一键数量
@@ -115,8 +114,7 @@ var bootstrap = function ($, ayma) {
                         row['B_Unit'] = row['G_Unit'];
                         row["B_Qty"] = quantity;
                         row['B_Batch'] = row['G_Batch'];
-                        //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
-                        row["row_sign"] = row["G_GoodsCode"] + row["G_Batch"];
+                        row["ID"] = row["G_ID"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
