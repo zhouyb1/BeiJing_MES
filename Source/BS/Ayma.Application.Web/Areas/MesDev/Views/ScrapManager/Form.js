@@ -148,7 +148,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
                 tmp.set(row, 1);
-                rows.push(row);
+                var rowFlag = true;
+                //加个循环判断数组重复
+                for (var k = 0; k < rows.length; k++) {
+                    if (rows[k].G_GoodsCode == row.S_GoodsCode && rows[k].G_Batch == row.S_Batch) {
+                        rowFlag = false;
+                    }
+                }
+                if (rowFlag) {
+                    rows.push(row);
+                }
             }
         } else { //多选                  
             for (var i = 0; i < data.length; i++) {
