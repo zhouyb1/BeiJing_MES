@@ -60,8 +60,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -71,21 +71,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $("#C_StockCode").select(dfop).on('change', function () {
-                var code = $(this).selectGet();
+            $("#C_StockName").select(dfop).on('change', function () {
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: code },
+                    data: { code: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockName").val(entity.S_Name);
+                        $("#C_StockCode").val(entity.S_Code);
                     }
                 });
             });
             //添加商品
             $("#am_add").on("click", function () {
-                var stockCode = $("#C_StockCode").selectGet();
+                var stockCode = $("#C_StockCode").val();
                 if (stockCode == "") {
                     ayma.alert.error("请选择仓库");
                     return false;
@@ -119,13 +119,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                     
                     {
-                        label: '批次', name: 'C_Batch', width: 120, align: 'left', editType: 'label'
+                        label: '批次', name: 'C_Batch', width: 80, align: 'left', editType: 'label'
                     },
                     {
-                        label: '价格', name: 'C_Price', width: 120, align: 'left', editType: 'label'
+                        label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'C_Qty', width: 80, align: 'left', editType: 'input',
+                        label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '数量', name: 'C_Qty', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.C_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -136,7 +139,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                     {
-                        label: '备注', name: 'C_Remark', width: 200, align: 'left',editType: 'input'
+                        label: '备注', name: 'C_Remark', width: 150, align: 'left',editType: 'input'
                     },
                 ],
                 isAutoHeight: true,
@@ -190,13 +193,31 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
                 tmp.set(row, 1);
-                rows.push(row);
+                var flagRow = true;
+                //加个循环判断数组重复
+                for (var k = 0; k < rows.length; k++) {
+                    if (rows[k].C_GoodsCode == row.g_code && rows[k].C_Batch == row.batch) {
+                        flagRow = false;
+                    }
+                }
+                if (flagRow) {
+                    rows.push(row);
+                }
             }
         } else { //多选                  
             for (var i = 0; i < data.length; i++) {
                 if (!tmp.get(data[i])) {
                     tmp.set(data[i], 1);
-                    rows.push(data[i]);
+                    var flag = true;
+                    //加个循环判断数组重复
+                    for (var j = 0; j < rows.length; j++) {
+                        if (rows[j].C_GoodsCode == data[i].g_code && rows[j].C_Batch == data[i].batch) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        rows.push(data[i]);
+                    }
                 }
             }
         }
@@ -208,10 +229,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     //表格商品删除
     top.RemoveGridData = function (row) {
-        var rows = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
+        var rows = $('#Mes_CompUseDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["C_GoodsCode"] == row["g_code"]) {
+            if (rows[i]["C_GoodsCode"] == row["g_code"] && rows[i]["C_Batch"] == row["batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

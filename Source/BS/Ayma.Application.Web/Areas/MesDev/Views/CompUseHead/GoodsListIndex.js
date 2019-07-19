@@ -78,9 +78,10 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['C_GoodsCode'] = newArray[i]['g_code'];
                     newArray[i]['C_GoodsName'] = newArray[i]['g_name'];
                     newArray[i]['C_Unit'] = newArray[i]['g_unit'];
-                    newArray['C_Price'] = newArray[i]['g_price'];
+                    newArray[i]['C_Price'] = newArray[i]['g_price'];
                     newArray[i]["C_Qty"] = quantity;
-                    newArray[i]['C_Batch'] = row['batch'];
+                    newArray[i]['C_Batch'] = newArray[i]['batch'];
+                    newArray[i]['Qty'] = newArray[i]['qty'];
                     newArray[i]["ID"] = newArray[i]['id'];
                     array.push(newArray[i]);
                 }
@@ -97,7 +98,7 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "g_code", width: 130, align: "left" },
                     { label: "物料名称", name: "g_name", width: 130, align: "left" },
                      
-                    { label: "批次", name: "batch", width: 60, align: "left" },
+                    { label: "批次", name: "batch", width: 80, align: "left" },
                     { label: "数量", name: "qty", width: 60, align: "left" },
                     { label: "价格", name: "g_price", width: 60, align: "left" },
                     { label: "单位", name: "g_unit", width: 60, align: "left" }
@@ -109,9 +110,9 @@ var bootstrap = function ($, ayma) {
                 sidx: 'g_code',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
-                    if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                        return;
-                    }
+                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
+                    //    return;
+                    //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         //获取一键数量
@@ -123,6 +124,7 @@ var bootstrap = function ($, ayma) {
                         row['C_Price'] = row['g_price'];
                         row["C_Qty"] = quantity;
                         row['C_Batch'] = row['batch'];
+                        row['Qty'] = row['qty'];
                         row["ID"] = row['id'];
                         top.refreshGirdData([], row);
                     }
@@ -134,10 +136,10 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        var rowlistlenght = rowslist[0]["C_GoodsCode"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['g_code'] == rowslist[j]['C_GoodsCode']) {
+                                if (rows[i]['g_code'] == rowslist[j]['C_GoodsCode'] && rows[i]['batch'] == rowslist[j]['C_Batch']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
