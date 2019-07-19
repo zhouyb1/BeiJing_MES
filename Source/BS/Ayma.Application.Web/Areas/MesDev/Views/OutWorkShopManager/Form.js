@@ -93,7 +93,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单位", name: "O_Unit", width: 60, align: "left" },
                     { label:"单价", name:"O_Price", width:60, align:"left"},
                     {
-                        label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'numinput' ,
+                        label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'numinput',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (row.O_Qty != undefined && !!row.O_Qty) {
@@ -102,15 +102,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         row.O_Qty = 0;
                                     }
                                 }
-                                if (row.O_Qty > row.I_Qty) {
-                                    ayma.alert.error("出库数量不能大于库存数量");
-                                    row.O_Qty = 0;
-                                }
+                                //if (row.O_Qty > row.I_Qty) {
+                                //    ayma.alert.error("出库数量不能大于库存数量");
+                                //    row.O_Qty = 0;
+                                //}
                             }
                         }
                     },
                      {
-                         label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'input',
+                         label: '价格', name: 'O_Price', width: 60, align: 'left',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.O_Price.toString().replace('.', ''))) { //验证只能为数字
@@ -121,7 +121,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                          }
                      },
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
-                    { label: "批次", name: "O_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "O_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -216,15 +216,23 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     refreshGirdData = function (data, row) {
         var rows = $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
-            if (!tmp.get(row.row_sign)) {
-                tmp.set(row.row_sign, true);
+            if (!tmp.get(row)) {
+                tmp.set(row, 1);
                 rows.push(row);
             }
         } else { //多选                  
             for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i].row_sign)) {
-                    tmp.set(data[i].row_sign, true);
-                    rows.push(data[i]);
+                if (!tmp.get(data[i])) {
+                    tmp.set(data[i], 1);
+                    var isExist = true;
+                    for (var j = 0; j < rows.length; j++) {
+                        if (data[i].I_GoodsCode == rows[j].O_GoodsCode && data[i].I_Batch == rows[j].O_Batch) {
+                            isExist = false;
+                        }
+                    }
+                    if (isExist) {
+                        rows.push(data[i]);
+                    }
                 }
             }
         }
@@ -240,7 +248,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["O_GoodsCode"] == row["I_GoodsCode"]) {
                 rows.splice(i, 1);
-                tmp.delete(row.row_sign);
+                tmp.delete(row);
                 page.search(rows);
             }
         }
