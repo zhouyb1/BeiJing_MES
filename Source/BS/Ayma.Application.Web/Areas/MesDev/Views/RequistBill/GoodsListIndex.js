@@ -129,9 +129,9 @@ var bootstrap = function ($, ayma) {
                 sidx: 'g_code',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
-                    if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                        return;
-                    }
+                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
+                    //    return;
+                    //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         //获取一键数量
