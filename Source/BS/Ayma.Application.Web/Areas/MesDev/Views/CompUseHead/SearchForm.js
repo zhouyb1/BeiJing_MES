@@ -60,8 +60,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Code',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -71,15 +71,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $("#C_StockCode").select(dfop).on('change', function () {
-                var code = $(this).selectGet();
+            $("#C_StockName").select(dfop).on('change', function () {
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: code },
+                    data: { code: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#C_StockName").val(entity.S_Name);
+                        $("#C_StockCode").val(entity.S_Code);
                     }
                 });
             });
@@ -114,9 +114,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                 ],
                 isAutoHeight: true,
-                isEidt: true,
+                isEidt: false,
                 footerrow: true,
-                minheight: 330,
+                minheight: 400,
                 isMultiselect: true,
                 height: 300,
                 inputCount: 2
@@ -143,57 +143,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('#Mes_CompUseDetail').jfGridSet('refreshdata', { rowdatas: data });
         }
     };
-    // 保存数据
-    acceptClick = function (callBack) {
-        if (!$('body').Validform()) {
-            return false;
-        }
-        var postData = {};
-        postData.strEntity = JSON.stringify($('[data-table="Mes_CompUseHead"]').GetFormData());
-        postData.strmes_CompUseDetailList = JSON.stringify($('#Mes_CompUseDetail').jfGridGet('rowdatas'));
-        $.SaveForm(top.$.rootUrl + '/MesDev/CompUseHead/SaveForm?keyValue=' + keyValue, postData, function (res) {
-            // 保存成功后才回调
-            if (!!callBack) {
-                callBack();
-            }
-        });
-    };
-    //表格商品添加
-    top.refreshGirdData = function (data, row) {
-        var rows = $('#Mes_CompUseDetail').jfGridGet('rowdatas');
-        if (data.length == 0) { //单选
-            if (!tmp.get(row)) {
-                tmp.set(row, 1);
-                rows.push(row);
-            }
-        } else { //多选                  
-            for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i])) {
-                    tmp.set(data[i], 1);
-                    rows.push(data[i]);
-                }
-            }
-        }
-        //数组过滤
-        var filterarray = $.grep(rows, function (item) {
-            return item["C_GoodsCode"] != undefined;
-        });
-        page.search(filterarray);
-    };
-    //表格商品删除
-    top.RemoveGridData = function (row) {
-        var rows = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
-
-        for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["C_GoodsCode"] == row["g_code"]) {
-                rows.splice(i, 1);
-                tmp.delete(row);
-                page.search(rows);
-            }
-        }
-    };
-    top.NewGirdData = function () {
-        return $('#Mes_CompUseDetail').jfGridGet('rowdatas');
-    }
+   
+    
     page.init();
 }
