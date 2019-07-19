@@ -97,7 +97,7 @@ var bootstrap = function ($, ayma) {
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "I_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "I_Batch", width: 80, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选

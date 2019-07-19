@@ -114,7 +114,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
-                    { label: "批次", name: "C_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "C_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
