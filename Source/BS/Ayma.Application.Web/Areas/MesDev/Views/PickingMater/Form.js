@@ -173,11 +173,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     //表格商品添加
     refreshGirdData = function (data, row) {
+
         var rows = $('#Mes_CollarDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
                 tmp.set(row, 1);
-                rows.push(row);
+                var rowFlag = true;
+                //加个循环判断数组重复
+                for (var k = 0; k < rows.length; k++) {
+                    if (rows[k].I_GoodsCode == row.C_GoodsCode && rows[k].I_Batch == row.C_Batch) {
+                        rowFlag = false;
+                    }
+                }
+                if (rowFlag) {
+                    rows.push(row);
+                }
             }
 
         } else { //多选 
