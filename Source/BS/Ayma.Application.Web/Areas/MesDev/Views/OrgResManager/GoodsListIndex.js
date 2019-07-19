@@ -15,6 +15,8 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
+//批次
+var batch = new Date();
 //仓库编码
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -75,8 +77,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['O_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]["O_Qty"] = quantity;
                     newArray[i]['O_Batch'] = newArray[i]["G_Batch"];
-                    //2019年7月18日14:16:17 行数据唯一标识
-                    newArray[i]["row_sign"] = newArray[i]["G_GoodsCode"] + newArray[i]["G_Batch"];
+                    newArray[i]["ID"] = newArray[i]["G_ID"];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -93,7 +94,7 @@ var bootstrap = function ($, ayma) {
                     { label: "单价", name: "G_Price", width: 130, align: "left" },
                     { label: "单位", name: "G_Unit", width: 60, align: "left" },
                     { label: "数量", name: "G_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "G_Batch", width: 60, align: "left" }
+                    { label: "批次", name: "G_Batch", width: 80, align: "left" }
                 ],
                 mainId: 'G_ID',
                 isMultiselect: true,         // 是否允许多选
@@ -102,9 +103,9 @@ var bootstrap = function ($, ayma) {
                 sidx: 'G_GoodsCode',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
-                    if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                        return;
-                    }
+                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
+                    //    return;
+                    //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         //获取一键数量
@@ -118,8 +119,8 @@ var bootstrap = function ($, ayma) {
                         row["O_SecQty"] = quantity;
                         row['O_SecBatch'] = row['G_Batch'];
                         row["O_SecPrice"] = row["G_Price"];
-                        //2019年7月18日14:16:17 行数据唯一标识
-                        row["row_sign"] = row["G_GoodsCode"] + row["G_Batch"];
+                        row["ID"] = row["G_ID"];
+
                         $.ajax({
                             type:"get",
                             url: '/MesDev/Tools/GetMesConverEntity',
@@ -134,7 +135,7 @@ var bootstrap = function ($, ayma) {
                                     row['O_Unit'] = result.G_Unit;
                                     row["O_Qty"] = quantity;
                                     row["O_Price"] = result.G_Price;
-                                    row['O_Batch'] = result.G_Batch;
+                                    row['O_Batch'] = result.G_Batch || ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");;
                                 } else {
                                     ayma.alert.error('请选择存在的物料关系');
                                 }

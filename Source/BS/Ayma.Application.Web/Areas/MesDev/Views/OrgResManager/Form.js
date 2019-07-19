@@ -9,6 +9,7 @@ var parentFormId = request('formId');
 var acceptClick;
 var keyValue = request('keyValue');
 var tmp = new Map();
+
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -152,7 +153,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             }
                         },
-                        { label: "批次", name: "O_Batch", width: 60, align: "left", editType: 'input' }
+                        { label: "批次", name: "O_Batch", width: 80, align: "left", editType: 'input' }
                     ]
                 },
                     {
@@ -166,7 +167,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             { label: "单价", name: "O_SecPrice", width: 60, align: "left" },
                             { label: "单位", name: "O_SecUnit", width: 60, align: "left" },
                             { label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'numinput' },
-                            { label: "批次", name: "O_SecBatch", width: 60, align: "left" }
+                            { label: "批次", name: "O_SecBatch", width: 80, align: "left" }
                         ]
                     }
                 ],
@@ -241,15 +242,32 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     refreshGirdData = function (data, row) {
         var rows = $('#Mes_OrgResDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
-            if (!tmp.get(row.row_sign)) {
-                tmp.set(row.row_sign, true);
-                rows.push(row);
+            if (!tmp.get(row)) {
+                tmp.set(row,1);
+                var rowFlag = true;
+                //加个循环判断数组重复
+                for (var k = 0; k < rows.length; k++) {
+                    if (rows[k].G_GoodsCode == row.O_GoodsCode && rows[k].G_Batch == row.O_Batch) {
+                        rowFlag = false;
+                    }
+                }
+                if (rowFlag) {
+                    rows.push(row);
+                }
             }
         } else { //多选                  
             for (var i = 0; i < data.length; i++) {
-                if (!tmp.get(data[i].row_sign)) {
-                    tmp.set(data[i].row_sign, true);
-                    rows.push(data[i]);
+                if (!tmp.get(data[i])) {
+                    tmp.set(data[i], 1);
+                    var isExist = true;
+                    for (var j = 0; j < rows.length; j++) {
+                        if (data[i].G_GoodsCode == rows[j].O_GoodsCode && data[i].G_Batch == rows[j].O_Batch) {
+                            isExist = false;
+                        }
+                    }
+                    if (isExist) {
+                        rows.push(data[i]);
+                    }
                 }
             }
         }
@@ -265,7 +283,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         for (var i = 0; i < rows.length; i++) {
             if (rows[i]["O_GoodsCode"] == row["G_GoodsCode"]) {
                 rows.splice(i, 1);
-                tmp.delete(row.row_sign);
+                tmp.delete(row);
                 page.search(rows);
             }
         }

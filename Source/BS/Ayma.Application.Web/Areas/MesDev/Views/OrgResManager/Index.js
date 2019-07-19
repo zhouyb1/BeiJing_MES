@@ -53,7 +53,7 @@ var bootstrap = function ($, ayma) {
                     id: 'MasterIndexForm',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/OrgResManager/Form?formId=MasterIndexForm',
-                    width: 800,
+                    width: 900,
                     height: 600,
                     maxmin: true,
                     callBack: function (id) {
@@ -69,7 +69,7 @@ var bootstrap = function ($, ayma) {
                         id: 'MasterIndexForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
-                        width: 800,
+                        width: 900,
                         height: 600,
                         maxmin: true,
                         callBack: function (id) {
