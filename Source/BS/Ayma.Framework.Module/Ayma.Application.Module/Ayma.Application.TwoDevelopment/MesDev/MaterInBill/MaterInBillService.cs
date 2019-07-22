@@ -392,7 +392,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status in (1,2) AND t.M_OrderKind=1 ");
+                strSql.Append("  WHERE t.M_Status in (1,2) AND t.M_OrderKind=0 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
