@@ -81,7 +81,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['C_Price'] = newArray[i]['g_price'];
                     newArray[i]["C_Qty"] = quantity;
                     newArray[i]['C_Batch'] = newArray[i]['batch'];
-                    newArray[i]['Qty'] = newArray[i]['qty'];
+                    //newArray[i]['Qty'] = newArray[i]['qty'];
                     newArray[i]["ID"] = newArray[i]['id'];
                     array.push(newArray[i]);
                 }
@@ -124,7 +124,7 @@ var bootstrap = function ($, ayma) {
                         row['C_Price'] = row['g_price'];
                         row["C_Qty"] = quantity;
                         row['C_Batch'] = row['batch'];
-                        row['Qty'] = row['qty'];
+                        //row['Qty'] = row['qty'];
                         row["ID"] = row['id'];
                         top.refreshGirdData([], row);
                     }

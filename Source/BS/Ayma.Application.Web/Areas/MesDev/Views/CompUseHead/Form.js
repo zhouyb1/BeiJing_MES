@@ -124,9 +124,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     {
                         label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label'
                     },
-                    {
-                        label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
-                    },
+                    //{
+                    //    label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
+                    //},
                     {
                         label: '数量', name: 'C_Qty', width: 100, align: 'left', editType: 'input',
                         editOp: {
