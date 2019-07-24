@@ -86,7 +86,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '配方物料统计',
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?orderNo=' + orderNo + '&orderDate=' + orderDate,
-                        width: 800,
+                        width: 850,
                         height: 600,
                         maxmin: true,
                         callBack: function (id) {
