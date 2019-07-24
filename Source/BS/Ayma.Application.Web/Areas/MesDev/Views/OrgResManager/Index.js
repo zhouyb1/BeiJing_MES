@@ -105,7 +105,12 @@ var bootstrap = function ($, ayma) {
             // 删除单据
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $("#girdtable").jfGridValue("O_Status");
                 if (ayma.checkrow(keyValue)) {
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
                     ayma.layerConfirm('是否确认删除该项！', function (res) {
                         if (res) {
                             ayma.deleteForm(top.$.rootUrl + '/MesDev/OrgResManager/DeleteForm', { keyValue: keyValue }, function () {

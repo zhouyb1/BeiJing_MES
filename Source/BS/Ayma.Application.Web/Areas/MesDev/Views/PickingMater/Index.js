@@ -87,7 +87,13 @@ var bootstrap = function ($, ayma) {
             // 删除单据
             $('#am_delete').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
+                var status = $("#girdtable").jfGridValue("P_Status");
+
                 if (ayma.checkrow(orderNo)) {
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
                     ayma.layerConfirm('确认删除单据？', function (res) {
                         if (res) {
                             ayma.deleteForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Delete', type: 3 }, function () {
