@@ -300,7 +300,8 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        }
+        } 
+      
         /// <summary>
         /// 获取配方列表
         /// </summary>
@@ -465,6 +466,32 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <param name="code">工序号或工序名称</param>
+        /// <returns></returns>
+        public Mes_ProceEntity ByGetProceEntity(string record, string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == record && (x.P_ProNo == code || x.P_ProName == code));
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取物料列表
         /// </summary>

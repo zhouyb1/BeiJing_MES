@@ -63,6 +63,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
         /// <summary>
+        /// 根据仓库编码和商品编码获取列表
+        /// </summary>
+        /// <param name="stockCode">仓库编码</param>
+        /// <param name="goodsCode">物料编码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InventoryEntity> GetListByStockAndCode(string stockCode, string goodsCode)
+        {
+            try
+            {
+                return inventorySeachService.GetListByStockAndCode(stockCode, goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取Mes_Inventory表实体数据 根据商品编码和仓库编码以及批次
         /// </summary>
         /// <param name="goodsCode">商品编码</param>

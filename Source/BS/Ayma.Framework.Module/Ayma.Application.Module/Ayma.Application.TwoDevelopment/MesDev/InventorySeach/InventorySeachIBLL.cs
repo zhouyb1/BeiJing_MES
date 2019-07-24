@@ -23,7 +23,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        Mes_InventoryEntity GetMes_InventoryEntity(string keyValue);
+        Mes_InventoryEntity GetMes_InventoryEntity(string keyValue); 
+        /// <summary>
+        /// 根据仓库编码和商品编码获取列表
+        /// </summary>
+        /// <param name="stockCode">仓库编码</param>
+        /// <param name="goodsCode">物料编码</param>
+        /// <returns></returns>
+        IEnumerable<Mes_InventoryEntity> GetListByStockAndCode(string stockCode,string goodsCode);
 
         /// <summary>
         /// 获取Mes_Inventory表实体数据 根据商品编码和仓库编码以及批次

@@ -48,6 +48,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("C_MIN")]
         public decimal? C_Min { get; set; }
         /// <summary>
+        /// 工艺代码
+        /// </summary>
+        [Column("C_RECORDCODE")]
+        public string C_RecordCode { get; set; }  
+        /// <summary>
+        /// 工序号
+        /// </summary>
+        [Column("C_PRONO")]
+        public string C_ProNo { get; set; }    
+        /// <summary>
+        /// 工序名称
+        /// </summary>
+        [Column("C_PRONAME")]
+        public string C_ProName { get; set; }  
+        /// <summary>
         /// 添加人
         /// </summary>
         [Column("C_CREATEBY")]

@@ -62,6 +62,48 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
+            $("#C_ProName").select();//工序名称
+            //工艺代码
+            $("#C_RecordCode").select({
+                type: 'default',
+                value: 'R_Record',
+                text: 'R_Record',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
+                // 访问数据接口参数
+            }).bind("change", function () {
+                var record = $(this).selectGet();
+                //工序名称
+                $("#C_ProName").selectRefresh({
+                    type: 'default',
+                    value: 'P_ProName',
+                    text: 'P_ProName',
+                    // 展开最大高度
+                    maxHeight: 200,
+                    // 是否允许搜索
+                    allowSearch: true,
+                    // 访问数据接口地址
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetProceEntity?code=' + record,
+                    // 访问数据接口参数
+                });
+                $("#C_ProName").bind("change", function () {
+                    var name = $(this).selectGet();
+                    $.ajax({
+                        type: "get",
+                        url: top.$.rootUrl + '/MesDev/Tools/ByGetProceEntity',
+                        data: { record: record, code: name },
+                        success: function (data) {
+                            var entity = JSON.parse(data).data;
+                            $("#C_ProNo").val(entity.P_ProNo);
+                        }
+                    });
+                });
+               
+            });
             //最大转化率 不小于0
             $("#C_Max").on('blur', function () {
                 var max = $.trim($(this).val()); //去除空格

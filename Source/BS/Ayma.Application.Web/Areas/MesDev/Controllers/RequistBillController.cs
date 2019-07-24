@@ -2,9 +2,11 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.Tools;
+using Microsoft.JScript;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -16,7 +18,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class RequistBillController : MvcControllerBase
     {
         private RequistBillIBLL requistBillIBLL = new RequistBillBLL();
-        private ToolsIBLL toolsIBLL=new ToolsBLL();
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private InventorySeachIBLL inventorySearchIbll = new InventorySeachBLL();
         #region 视图功能
 
         /// <summary>
@@ -82,10 +85,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetList(string pagination, string queryJson, string stockCode,string keyword)
+        public ActionResult GetList(string pagination, string queryJson, string stockCode, string keyword)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = requistBillIBLL.GetList(paginationobj, queryJson,stockCode,keyword);
+            var data = requistBillIBLL.GetList(paginationobj, queryJson, stockCode, keyword);
             var jsonData = new
             {
                 rows = data,
@@ -204,6 +207,29 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             Mes_RequistHeadEntity entity = strEntity.ToObject<Mes_RequistHeadEntity>();
             List<Mes_RequistDetailEntity> mes_RequistDetailList = strmes_RequistDetailList.ToObject<List<Mes_RequistDetailEntity>>();
+
+            //foreach (Mes_RequistDetailEntity t in mes_RequistDetailList)
+            //{
+            //    var listInv = inventorySearchIbll.GetListByStockAndCode(entity.R_StockCode, t.R_GoodsCode).ToList();
+            //    if (listInv.Count > 1)
+            //    {
+            //        //获取不同批次的商品中 最小的批次
+            //        var batchMin = mes_RequistDetailList.Min(c => Convert.ToInt32(c.R_Batch));
+            //        //库存实体
+            //        var entityMinTemp = listInv.FirstOrDefault(c => c.I_Batch == batchMin.ToString());
+            //        //明细中的数量
+            //        var entityDetailMinTemp = mes_RequistDetailList.FirstOrDefault(c => c.R_Batch == batchMin.ToString());
+            //        if (entityMinTemp != null && entityDetailMinTemp != null)
+            //        {
+            //            if (entityDetailMinTemp.R_Qty < entityMinTemp.I_Qty)//设置的数量小于库存数量时
+            //            {
+            //                return Fail("");
+            //            }
+            //        }
+
+
+            //    }
+            //}
             if (string.IsNullOrEmpty(keyValue))
             {
                 var codeRulebll = new CodeRuleBLL();

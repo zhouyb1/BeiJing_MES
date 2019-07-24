@@ -248,7 +248,8 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
-        }
+        } 
+       
         /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>
@@ -396,6 +397,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.ByCodeGetProceEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// </summary>
+        /// <param name="record">工艺代码</param>
+        /// <param name="code">工序号</param>
+        /// <returns></returns>
+        public Mes_ProceEntity ByGetProceEntity(string record, string code)
+        {
+            try
+            {
+                return toolsService.ByGetProceEntity(record, code);
             }
             catch (Exception ex)
             {
