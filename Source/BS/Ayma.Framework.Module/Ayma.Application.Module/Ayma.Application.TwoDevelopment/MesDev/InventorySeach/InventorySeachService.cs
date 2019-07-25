@@ -175,6 +175,60 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
+        /// 获取物料价值查询列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<GoodsPriceModel> GetPricePageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var queryParam = queryJson.ToJObject();
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                  SELECT    ord.O_SecGoodsCode ,
+                            ord.O_SecGoodsName ,
+                            ord.O_SecPrice ,
+                            O_Batch
+                  FROM      dbo.Mes_OrgResDetail ord
+                            LEFT JOIN dbo.Mes_OrgResHead h ON ord.O_OrgResNo = h.O_OrgResNo
+                  WHERE     h.O_OrderDate > @startTime
+                            AND h.O_OrderDate < @endTime
+                            ");
+
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["OrderNo"].IsEmpty())
+                {
+                    dp.Add("OrderNo", queryParam["OrderNo"].ToString(), DbType.String);
+                    strSql.Append("AND h.O_OrderNo = @OrderNo");
+                }
+                if (!queryParam["SecGoodsCode"].IsEmpty())
+                {
+                    dp.Add("SecGoodsCode",queryParam["SecGoodsCode"].ToString(), DbType.String);
+                    strSql.Append("AND O_SecGoodsCode=@SecGoodsCode");
+                }
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                }
+                return this.BaseRepository().FindList<GoodsPriceModel>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 获取Mes_Inventory表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>

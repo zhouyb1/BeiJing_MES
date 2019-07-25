@@ -84,6 +84,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取物料价值查询列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<GoodsPriceModel> GetPricePageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return inventorySeachService.GetPricePageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取Mes_Inventory表实体数据

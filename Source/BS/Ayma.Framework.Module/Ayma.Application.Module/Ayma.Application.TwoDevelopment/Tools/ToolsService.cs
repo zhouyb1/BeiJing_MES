@@ -66,7 +66,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 获所仓库列表
         /// </summary>
@@ -139,7 +139,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 获取线边仓仓库列表
         /// </summary>
@@ -148,7 +148,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind ==4);
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == 4);
             }
             catch (Exception ex)
             {
@@ -161,7 +161,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 获取成品仓库列表
         /// </summary>
@@ -216,7 +216,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
             {
                 DateTime startTime = Convert.ToDateTime(DateTime.Now.AddDays(-3000).ToString("yyyy-MM-dd"));
                 return this.BaseRepository()
-                          .FindList<Mes_ProductOrderHeadEntity>(t => (t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime)||t.P_OrderNo==orderNo)
+                          .FindList<Mes_ProductOrderHeadEntity>(t => (t.P_Status == ErpEnums.PStatusEnum.StockOut && t.P_OrderDate >= startTime) || t.P_OrderNo == orderNo)
                           .OrderByDescending(t => t.P_OrderNo);
             }
             catch (Exception ex)
@@ -231,6 +231,33 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 根据订单时间起止获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderListBy(DateTime orderStartDate,
+            DateTime orderEndDate)
+        {
+            try
+            {
+                return this.BaseRepository()
+                          .FindList<Mes_ProductOrderHeadEntity>(t => t.P_OrderDate >= orderStartDate && t.P_OrderDate <= orderEndDate)
+                          .OrderByDescending(t => t.P_OrderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>
@@ -300,8 +327,8 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
-      
+        }
+
         /// <summary>
         /// 获取配方列表
         /// </summary>
@@ -513,7 +540,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 获取成品物料列表
         /// </summary>
@@ -868,7 +895,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="A_ClassCode">班次</param>
         /// <param name="A_Date">日期</param>
         /// <returns></returns>
-        public bool IsExistRecord(string keyValue,string A_F_EnCode, string A_ClassCode, DateTime A_Date)
+        public bool IsExistRecord(string keyValue, string A_F_EnCode, string A_ClassCode, DateTime A_Date)
         {
             try
             {

@@ -29,7 +29,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<PickOrUsedModel> GetUsedPageList(Pagination pagination, string queryJson);
+        IEnumerable<PickOrUsedModel> GetUsedPageList(Pagination pagination, string queryJson); 
+        /// <summary>
+        /// 获取物料价值查询列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<GoodsPriceModel> GetPricePageList(Pagination pagination, string queryJson);
         /// <summary>
         /// 获取Mes_Inventory表实体数据
         /// </summary>

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "物料领用和使用情况查询";
+    ViewBag.Title = "物料价值查询";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
 <div class="am-layout" >
@@ -8,7 +8,7 @@
             <div class="am-layout-tool">
                 <div class="am-layout-tool-left">
                     <div class="am-layout-tool-item">
-                        <div class="am-searchtxt">提交时间</div>
+                        <div class="am-searchtxt">订单时间</div>
                     </div>
                     <div class="am-layout-tool-item">
                         <div id="datesearch"></div>
@@ -16,12 +16,14 @@
                     <div class="am-layout-tool-item">
                         <div id="multiple_condition_query">
                             <div class="am-query-formcontent">
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">仓库编码</div>
-                                    @*<input id="StockCode" type="text" class="form-control"/>*@
-                                    <div id="StockCode" style="width: 200px" class="form-control"></div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">生产订单号</div>
+                                    <div id="OrderNo" style="width: 200px" class="form-control"></div>
                                 </div>
-
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">物料名称</div>
+                                    <div id="SecGoodsCode" style="width: 200px" class="form-control"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -33,10 +35,8 @@
 
                 </div>
             </div>
-            <div style="height: 270px;" class="am-layout-body" id="pickgirdtable"></div>
-       
-            <div style="height: 180px;" class="am-layout-body" id="usedgirdtable"></div>
+            <div  class="am-layout-body" id="girdtable"></div>
         </div>
     </div>
 </div>
-@Html.AppendJsFile("/Areas/MesDev/Views/InventorySeach/PickOrUserIndex.js")
+@Html.AppendJsFile("/Areas/MesDev/Views/InventorySeach/PriceSearchIndex.js")

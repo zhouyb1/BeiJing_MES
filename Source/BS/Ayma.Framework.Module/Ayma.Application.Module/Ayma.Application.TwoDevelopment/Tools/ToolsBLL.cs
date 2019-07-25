@@ -917,6 +917,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 根据订单时间起止获取生产订单号列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_ProductOrderHeadEntity> GetProductOrderListBy(DateTime orderStartDate, DateTime orderEndDate)
+        {
+            try
+            {
+                return toolsService.GetProductOrderListBy(orderStartDate, orderEndDate);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
         /// <summary>
         /// 获取Mes_Convert表实体数据

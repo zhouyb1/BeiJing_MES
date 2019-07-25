@@ -136,6 +136,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(productorderList);
         }
         /// <summary>
+        /// 根据订单时间起止获取生产订单号列表
+        /// </summary>
+        /// <param name="orderStartDate">订单开始时间</param>
+        /// <param name="orderEndDate">订单结束时间</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetProductOrderListBy(DateTime orderStartDate,DateTime orderEndDate)
+        {
+
+            var productorderList = toosIBLL.GetProductOrderListBy(orderStartDate, orderEndDate);
+           
+            return Success(productorderList);
+        }
+        /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>
         /// <param name="code">车间编码</param>

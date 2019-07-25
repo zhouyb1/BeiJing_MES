@@ -33,70 +33,86 @@ var bootstrap = function ($, ayma) {
                 preyShow: false,
                 yShow: false,
                 // 默认
-                dfvalue: '0',
+                dfvalue: '1',
                 selectfn: function (begin, end) {
                     startTime = begin;
                     endTime = end;
+                    //生产订单号
+                    $('#OrderNo').selectRefresh({
+                        type: 'default',
+                        value: 'P_OrderNo',
+                        text: 'P_OrderNo',
+                        // 展开最大高度
+                        maxHeight: 200,
+                        // 是否允许搜索
+                        allowSearch: true,
+                        // 访问数据接口地址
+                        url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderListBy',
+                        // 访问数据接口参数
+                        param: { orderStartDate: startTime, orderEndDate: endTime }
+                    });
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+               
                 page.search(queryJson);
             }, 150, 400);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            
-            //绑定仓库
-            $('#StockCode').select({
+            //生产订单号
+            $('#OrderNo').select({
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Name',
+                value: 'P_OrderNo',
+                text: 'P_OrderNo',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderListBy',
                 // 访问数据接口参数
-                param: {}
+                param: { orderStartDate: startTime, orderEndDate: endTime }
+            });
+            //物料
+            $('#SecGoodsCode').select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: { }
             });
 
         },
         // 初始化列表
         initGird: function () {
-            $('#pickgirdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPickPageList',
+            $('#girdtable').jfGrid({
+                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPricePageList',
                 headData: [
-                    { label: "商品编码", name: "GoodsCode", width: 160, align: "left"},
-                    { label: "商品名称", name: "GoodsName", width: 160, align: "left"},
-                    { label: "领用数量", name: "Qty", width: 160, align: "left"},
-                    { label: "批次", name: "Batch", width: 160, align: "left"},
+                    { label: "商品编码", name: "O_SecGoodsCode", width: 160, align: "left" },
+                    { label: "商品名称", name: "O_SecGoodsName", width: 160, align: "left" },
+                    { label: "价格", name: "O_SecPrice", width: 160, align: "left" },
+                    { label: "批次", name: "O_Batch", width: 160, align: "left" },
                 ],
-                mainId: 'GoodsCode',
+                mainId: 'O_SecGoodsCode',
                 reloadSelected: true,
                 isPage: true
             });
-            $('#usedgirdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/InventorySeach/GetUsedPageList',
-                headData: [
-                    { label: "商品编码", name: "GoodsCode", width: 160, align: "left"},
-                    { label: "商品名称", name: "GoodsName", width: 160, align: "left"},
-                    { label: "使用数量", name: "Qty", width: 160, align: "left"},
-                    { label: "批次", name: "Batch", width: 160, align: "left"},
-                ],
-                mainId: 'GoodsCode',
-                reloadSelected: true,
-                isPage: true
-            });
+           
         },
         search: function (param) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            $('#pickgirdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
-            $('#usedgirdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
+            $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
     refreshGirdData = function () {

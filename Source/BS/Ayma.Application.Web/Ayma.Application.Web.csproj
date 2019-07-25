@@ -527,6 +527,7 @@
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Index.js" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\PriceSearchIndex.js" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PickOrUserIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
@@ -2309,6 +2310,7 @@
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PrintViewReport.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PickOrUserIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\InventorySeach\PriceSearchIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

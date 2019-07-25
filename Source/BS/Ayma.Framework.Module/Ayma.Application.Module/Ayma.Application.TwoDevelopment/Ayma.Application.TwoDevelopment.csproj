@@ -64,6 +64,7 @@
     <Compile Include="MesDev\HumitureManager\HumitureManagerIBLL.cs" />
     <Compile Include="MesDev\HumitureManager\HumitureManagerService.cs" />
     <Compile Include="MesDev\HumitureManager\Mes_HumitureEntity.cs" />
+    <Compile Include="MesDev\InventorySeach\GoodsPriceModel.cs" />
     <Compile Include="MesDev\InventorySeach\PickOrUsedModel.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeBLL.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />

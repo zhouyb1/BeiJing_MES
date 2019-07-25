@@ -67,9 +67,9 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList?orderNo=' + orderNo,
+                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderListBy',
                 // 访问数据接口参数
-                param: {}
+                param: { orderStartDate: getDay(-3), orderEndDate: getDay(0) }
             });
             //单据状态
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
@@ -183,6 +183,25 @@ var bootstrap = function ($, ayma) {
             $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: data });
         }
     };
+    function getDay(day) {
+        var today = new Date();
+        var targetday_milliseconds = today.getTime() + 1000 * 60 * 60 * 24 * day;
+        today.setTime(targetday_milliseconds); //注意，这行是关键代码
+        var tYear = today.getFullYear();
+        var tMonth = today.getMonth();
+        var tDate = today.getDate();
+        tMonth = doHandleMonth(tMonth + 1);
+        tDate = doHandleMonth(tDate);
+        return tYear + "-" + tMonth + "-" + tDate;
+    }
+    function doHandleMonth(month) {
+        var m = month;
+        if (month.toString().length == 1) {
+            m = "0" + month;
+        }
+        return m;
+    }
+
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
