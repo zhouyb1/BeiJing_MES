@@ -38,6 +38,52 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取物料领用情况列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<PickOrUsedModel> GetPickPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return inventorySeachService.GetPickPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取物料使用情况列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<PickOrUsedModel> GetUsedPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return inventorySeachService.GetUsedPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取Mes_Inventory表实体数据

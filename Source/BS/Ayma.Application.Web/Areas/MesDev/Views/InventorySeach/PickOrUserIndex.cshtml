@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "物料领用和使用情况查询";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout" >
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div class="am-searchtxt">提交时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">仓库编码</div>
+                                    @*<input id="StockCode" type="text" class="form-control"/>*@
+                                    <div id="StockCode" style="width: 200px" class="form-control"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+
+                </div>
+            </div>
+            <div style="height: 290px;" class="am-layout-body" id="pickgirdtable"></div>
+       
+            <div style="height: 160px;" class="am-layout-body" id="usedgirdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/InventorySeach/PickOrUserIndex.js")

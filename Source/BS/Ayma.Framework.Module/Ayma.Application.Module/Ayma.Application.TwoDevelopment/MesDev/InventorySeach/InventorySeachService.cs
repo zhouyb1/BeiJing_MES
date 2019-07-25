@@ -86,6 +86,95 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
+        /// 获取物料领用列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<PickOrUsedModel> GetPickPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                var queryParam = queryJson.ToJObject();
+                strSql.AppendFormat(@"
+               --领料到周转仓
+              select a.C_GoodsCode GoodsCode,SUM(a.C_Qty) as Qty,a.C_Batch Batch,a.C_GoodsName GoodsName from dbo.Mes_CollarDetail as a left join Mes_CollarHead as b on a.C_CollarNo = b.C_CollarNo where  M_UploadDate > @startTime and M_UploadDate < @endTime {0}  group by a.C_GoodsCode,a.C_Batch,a.C_GoodsName  
+              UNION ALL
+              --调拨到周转仓
+              select a.R_GoodsCode,SUM(a.R_Qty) as qty,a.R_Batch,a.R_GoodsName from dbo.Mes_RequistDetail as a left join Mes_RequistHead as b on a.R_RequistNo = b.R_RequistNo where  R_UpdateDate >@startTime and R_UpdateDate < @endTime  {1} group by a.R_GoodsCode,a.R_Batch,a.R_GoodsName
+                UNION ALL
+              --车间退料到周转仓
+              select a.O_GoodsCode,SUM(a.O_Qty) as qty,a.O_Batch,a.O_GoodsName from dbo.Mes_OutWorkShopDetail as a left join Mes_OutWorkShopHead as b on a.O_OutNo = b.O_OutNo where  O_Kind = '2' and O_UploadDate > @startTime and O_UploadDate < @endTime {2}  group by a.O_GoodsCode,a.O_Batch,a.O_GoodsName
+                UNION ALL
+              --车间入库到周转仓
+              select a.I_GoodsCode,SUM(a.I_Qty) as qty,a.I_Batch,a.I_GoodsName from dbo.Mes_InWorkShopDetail as a left join dbo.Mes_InWorkShopHead as b on a.I_InNo = b.I_InNo where  I_UploadDate > @startTime and I_UploadDate < @endTime {3}  group by a.I_GoodsCode,a.I_Batch,a.I_GoodsName
+                            ", queryParam["StockCode"].IsEmpty() ? "" : "and b.C_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.R_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.O_StockCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.I_StockCode = " + queryParam["StockCode"].ToString());
+                
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+              
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                }
+                return this.BaseRepository().FindList<PickOrUsedModel>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取物料使用列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<PickOrUsedModel> GetUsedPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var queryParam = queryJson.ToJObject();
+                var strSql = new StringBuilder();
+                strSql.AppendFormat(@"
+                  --周转仓出库到车间
+                  select a.O_GoodsCode GoodsCode,SUM(a.O_Qty) as Qty,a.O_Batch Batch,a.O_GoodsName GoodsName from dbo.Mes_OutWorkShopDetail as a left join Mes_OutWorkShopHead as b on a.O_OutNo = b.O_OutNo where  O_Kind = '1' and O_UploadDate > @startTime and O_UploadDate < @endTime {0}  group by a.O_GoodsCode,a.O_Batch,a.O_GoodsName
+                  UNION ALL
+                  --周转仓报废
+                  select a.S_GoodsCode,SUM(a.S_Qty) as qty,a.S_Batch,a.S_GoodsName from dbo.Mes_ScrapDetail as a left join Mes_ScrapHead as b on a.S_ScrapNo = b.S_ScrapNo where  S_UploadDate > @startTime and S_UploadDate < @endTime {1}  group by a.S_GoodsCode,a.S_Batch,a.S_GoodsName
+                            ", queryParam["StockCode"].IsEmpty() ? "" : "and b.O_StockCode =" + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.S_StockCode = " + queryParam["StockCode"].ToString());
+               
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                }
+                return this.BaseRepository().FindList<PickOrUsedModel>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 获取Mes_Inventory表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>

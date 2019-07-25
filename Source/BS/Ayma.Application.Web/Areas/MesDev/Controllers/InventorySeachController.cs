@@ -24,6 +24,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult Index()
         {
              return View();
+        }/// <summary>
+        /// 物料领用和使用情况页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PickOrUserIndex()
+        {
+             return View();
         }
         /// <summary>
         /// 表单页
@@ -49,6 +57,46 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
             var data = inventorySeachIBLL.GetPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        } 
+        /// <summary>
+        /// 获取物料领用列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPickPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = inventorySeachIBLL.GetPickPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取物料使用列表
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetUsedPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = inventorySeachIBLL.GetUsedPageList(paginationobj, queryJson);
             var jsonData = new
             {
                 rows = data,
