@@ -118,11 +118,17 @@ top.ayma = (function ($) {
             });
         },
         // 检测数据是否选中
-        checkrow: function (id) {
+        checkrow: function (id,isPrint) {
             var isOK = true;
+            
             if (id == undefined || id == "" || id == 'null' || id == 'undefined') {
+                if (isPrint) {
+                    ayma.alert.error('请选择要打印的单据！');
+
+                } else {
+                    ayma.alert.warning('您没有选中任何数据项,请选中后再操作！');
+                }
                 isOK = false;
-                ayma.alert.warning('您没有选中任何数据项,请选中后再操作！');
             }
             return isOK;
         },
