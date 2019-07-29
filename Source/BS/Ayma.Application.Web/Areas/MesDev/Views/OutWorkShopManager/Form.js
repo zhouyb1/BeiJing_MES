@@ -19,10 +19,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            //出库类型
+            $("#O_Kind").DataItemSelect({ code: "O_Kind" });
             //绑定仓库
             var dfop = {
                 type: 'default',
-                value: 'S_Code',
+                value: 'S_Name',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -182,6 +184,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 });
+            } else {
+                $("#O_Kind").selectSet(1);//出库类型默认为：出库
             }
         },
         search: function (data) {

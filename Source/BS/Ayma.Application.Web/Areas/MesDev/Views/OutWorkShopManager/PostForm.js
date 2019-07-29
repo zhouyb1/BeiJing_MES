@@ -9,6 +9,8 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            //出库类型
+            $("#O_Kind").DataItemSelect({ code: "O_Kind" });
             $('#Mes_OutWorkShopDetail').jfGrid({
                 headData: [
                     { label: "物料编码", name: "O_GoodsCode", width: 130, align: "left" },

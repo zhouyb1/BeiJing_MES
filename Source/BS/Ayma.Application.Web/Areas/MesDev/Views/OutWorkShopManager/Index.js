@@ -61,6 +61,7 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
+            $("#O_Kind").DataItemSelect({ code: "O_Kind" });
             // 新增
             $('#am_add').on('click', function () {
                 ayma.layerForm({
@@ -209,7 +210,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/OutWorkShopManager/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "O_Status", width: 160, align: "left",
+                        label: "状态", name: "O_Status", width: 100, align: "left",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -228,9 +229,22 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
+                     {
+                         label: "出库类型", name: "O_Kind", width: 80, align: "left",
+                         formatterAsync: function (callback, value, row) {
+
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 code: 'O_Kind',
+                                 callback: function (_data) {
+                                     callback(_data.text);
+                                 }
+                             });
+                         }
+                     },
                     { label: "出库单号", name: "O_OutNo", width: 160, align: "left"},
-                    { label: "仓库编码", name: "O_StockCode", width: 160, align: "left"},
-                    { label: "仓库名称", name: "O_StockName", width: 160, align: "left" },
+                    { label: "仓库编码", name: "O_StockCode", width: 100, align: "left"},
+                    { label: "仓库名称", name: "O_StockName", width: 100, align: "left" },
                     { label: "调拨车间", name: "O_WorkShop", width: 160, align: "left" },
                     { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left"},
                     { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left"},

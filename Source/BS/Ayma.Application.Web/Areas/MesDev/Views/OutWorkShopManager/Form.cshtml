@@ -8,7 +8,10 @@
         <div class="am-form-item-title">出库单号</div>
         <input id="O_OutNo" type="text" class="form-control" value="@ViewBag.OutNo" disabled="disabled" style="background: #f1efef" />
     </div>
-
+    <div class="col-xs-6 am-form-item" data-table="Mes_OutWorkShopHead">
+        <div class="am-form-item-title">出库类型<font face="宋体">*</font></div>
+        <div id="O_Kind" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_OutWorkShopHead">
         <div class="am-form-item-title">线边仓<font face="宋体">*</font></div>
         <div id="O_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
@@ -33,7 +36,7 @@
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_OutWorkShopHead">
         <div class="am-form-item-title">调拨车间<font face="宋体">*</font></div>
-        <div id="O_WorkShop" type="text" class="form-control" checkexpession="NotNull"></div>
+        <div id="O_WorkShop" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-12 am-form-item" data-table="Mes_RequistHead">
         <div class="am-form-item-title"></div>

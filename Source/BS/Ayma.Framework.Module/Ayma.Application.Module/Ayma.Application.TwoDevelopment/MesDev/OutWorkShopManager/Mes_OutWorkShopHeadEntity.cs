@@ -96,7 +96,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 备注
         /// </summary>
         [Column("O_REMARK")]
-        public string O_Remark { get; set; }
+        public string O_Remark { get; set; } 
+        /// <summary>
+        /// 出库类型 1-出库 2-退库
+        /// </summary>
+        [Column("O_KIND")]
+        public int? O_Kind { get; set; }
         #endregion
 
         #region 扩展操作

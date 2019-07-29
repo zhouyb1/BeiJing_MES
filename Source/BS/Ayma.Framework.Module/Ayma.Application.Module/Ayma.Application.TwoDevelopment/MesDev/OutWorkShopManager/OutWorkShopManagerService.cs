@@ -39,7 +39,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OrderDate,
                 t.O_Remark,
                 t.O_CreateBy,
-                t.O_CreateDate
+                t.O_CreateDate,
+                t.O_Kind
                 ");
                 strSql.Append("  FROM Mes_OutWorkShopHead t ");
                 strSql.Append("  WHERE t.O_Status in (1,2) ");
