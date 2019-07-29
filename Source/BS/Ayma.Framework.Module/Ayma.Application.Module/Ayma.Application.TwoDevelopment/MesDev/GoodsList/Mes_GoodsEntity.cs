@@ -102,7 +102,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 包装规格
         /// </summary>
         [Column("G_UNITQTY")]
-        public string G_UnitQty { get; set; }  
+        public string G_UnitQty { get; set; }   
+        /// <summary>
+        /// 包装单位
+        /// </summary>
+        [Column("G_UNIT2")]
+        public string G_Unit2 { get; set; }  
         /// <summary>
         /// 是否自制(0-否 1-是)
         /// </summary>

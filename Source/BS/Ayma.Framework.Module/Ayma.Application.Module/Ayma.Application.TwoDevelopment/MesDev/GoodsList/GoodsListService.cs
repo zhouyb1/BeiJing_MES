@@ -48,6 +48,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,g.[G_Erpcode]
                       ,g.[G_TKind]
                       ,g.[G_UnitQty]
+                      ,g.[G_Unit2]
                       ,g.[G_Self]
                       ,g.[G_Online]
                       ,g.[G_Prepareday]

@@ -133,6 +133,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "包装规格", name: "g_unitqty", width: 160, align: "left" },
+                    { label: "包装单位", name: "g_unit2", width: 160, align: "left" },
                     { label: "上限预警数量", name: "g_super", width: 160, align: "left" },
                     { label: "下限预警数量", name: "g_lower", width: 160, align: "left" },
                      {

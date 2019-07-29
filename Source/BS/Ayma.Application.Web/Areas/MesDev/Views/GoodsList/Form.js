@@ -67,6 +67,7 @@ var bootstrap = function ($, ayma) {
             });
             //商品单位
             $("#G_Unit").DataItemSelect({ code: "GoodsUnit" });
+            $("#G_Unit2").DataItemSelect({ code: "GoodsUnit" });
             //是否自制
             $("#G_Self").DataItemSelect({ code: "YesOrNo" });
             //是否在用
