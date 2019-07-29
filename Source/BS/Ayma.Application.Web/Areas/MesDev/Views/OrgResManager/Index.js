@@ -76,7 +76,6 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                }
             });
             // 审核单据
             $('#am_auditing').on('click', function () {
