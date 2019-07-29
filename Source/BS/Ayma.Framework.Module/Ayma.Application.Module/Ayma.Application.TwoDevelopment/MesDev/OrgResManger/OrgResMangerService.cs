@@ -44,7 +44,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
-                strSql.Append("  LEFT JOIN Mes_OrgResDetail t1 ON t1.O_OrgResNo = t.O_OrgResNo ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
