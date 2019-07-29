@@ -168,6 +168,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity,string detailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = scrapManagerIBLL.GetMes_ScrapHeadEntity(keyValue);
+                if (entityTemp.S_Status == ErpEnums.ScrapStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑!");
+                }
+            }
             Mes_ScrapHeadEntity entity = strEntity.ToObject<Mes_ScrapHeadEntity>();
             var detail = detailList.ToObject<List<Mes_ScrapDetailEntity>>();
             if (detail.Any(item => item.S_Qty<=0))

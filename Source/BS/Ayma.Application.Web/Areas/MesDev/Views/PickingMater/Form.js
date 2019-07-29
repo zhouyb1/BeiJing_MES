@@ -46,6 +46,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
 
+             dfop = {
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockListByParam',
+                // 访问数据接口参数
+                param: { strWhere: "S_Kind =4" }
+            }
             //绑定目标仓
             $("#C_StockToName").select(dfop).on('change', function() {
                 var code = $(this).selectGet();

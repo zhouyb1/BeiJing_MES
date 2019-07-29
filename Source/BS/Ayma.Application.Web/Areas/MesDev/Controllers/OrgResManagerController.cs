@@ -179,6 +179,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string detailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = orgResMangerIBLL.GetMes_OrgResHeadEntity(keyValue);
+                if (entityTemp.O_Status == ErpEnums.MaterInStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑!");
+                }
+            }
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();
             var mes_OrgResDetailList = detailList.ToObject<List<Mes_OrgResDetailEntity>>();
             if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0))

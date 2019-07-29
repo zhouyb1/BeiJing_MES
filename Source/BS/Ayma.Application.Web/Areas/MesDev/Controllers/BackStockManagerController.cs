@@ -168,6 +168,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_BackStockDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = backStockManagerIBLL.GetMes_BackStockHeadEntity(keyValue);
+                if (entityTemp.B_Status == ErpEnums.ProOutStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑!");
+                }
+            }
             Mes_BackStockHeadEntity entity = strEntity.ToObject<Mes_BackStockHeadEntity>();
             var mes_BackStockDetailEntity = strmes_BackStockDetailList.ToObject<List<Mes_BackStockDetailEntity>>();
             if (mes_BackStockDetailEntity.Any(c=>c.B_Qty<=0))

@@ -161,7 +161,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_CollarDetailEntity)
         {
-            
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = pickingMaterIBLL.GetMes_CollarHeadEntity(keyValue);
+                if (entityTemp.P_Status == ErpEnums.RequistStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑!");
+                }
+            }
             Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
             //获取订单时间
             var order = orderBll.GetEntityByNo(entity.P_OrderNo);

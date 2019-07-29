@@ -195,6 +195,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, string strEntity, string strmes_OutWorkShopDetailList)
         {
+            if (!string.IsNullOrEmpty(keyValue))
+            {
+                var entityTemp = outWorkShopManagerIBLL.GetMes_OutWorkShopHeadEntity(keyValue);
+                if (entityTemp.O_Status == ErpEnums.ProOutStatusEnum.Audit)
+                {
+                    return Fail("该单据已审核,不能编辑!");
+                }
+            }
             Mes_OutWorkShopHeadEntity entity = strEntity.ToObject<Mes_OutWorkShopHeadEntity>();
             var mes_OutWorkShopDetailList = strmes_OutWorkShopDetailList.ToObject<List<Mes_OutWorkShopDetailEntity>>();
             if (mes_OutWorkShopDetailList.Any(c=>c.O_Qty<=0))
