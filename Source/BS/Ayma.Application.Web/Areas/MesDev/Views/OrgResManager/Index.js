@@ -122,7 +122,7 @@ var bootstrap = function ($, ayma) {
             });
 
             //提交单据
-            $('#am_submit').on('click', function () {
+            $('#am_post').on('click', function () {
                 var orderNo = $('#girdtable').jfGridValue('O_OrgResNo');
                 var status = $('#girdtable').jfGridValue('O_Status');
                 if (status == "1") {

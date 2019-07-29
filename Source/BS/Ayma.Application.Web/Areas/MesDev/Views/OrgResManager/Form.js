@@ -52,6 +52,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
+            $('#O_ProCode').select().on('click', function() {
+                var record = $("#O_Record").selectGet();
+                if (!record) {
+                   ayma.alert.warning('请先选择工艺');
+                    return false;
+                }
+            });
             $('#O_Record').select(dfop).on('change', function() {
                 var record = $(this).selectGet();
                 dfop = {
@@ -70,7 +77,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#O_ProCode').selectRefresh(dfop);
 
             });
-            $('#O_ProCode').select();
+            //$('#O_ProCode').select();
 
             var orderNo = "";
             if (!!keyValue) {//根据主键获取生产订单号
