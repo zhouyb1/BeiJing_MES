@@ -151,7 +151,7 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('B_BackStockNo');
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(keyValue,true)) {
                     ayma.layerForm({
                         id: 'SaleOutReport',
                         title: '退库单打印',

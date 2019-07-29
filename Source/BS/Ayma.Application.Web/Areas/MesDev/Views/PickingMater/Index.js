@@ -157,7 +157,7 @@ var bootstrap = function ($, ayma) {
             // 预览打印
             $('#am_printview').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(keyValue,true)) {
 
                     ayma.layerForm({
                         id: 'SaleOutReport',

@@ -153,7 +153,7 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('S_ScrapNo');
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(keyValue,true)) {
                     ayma.layerForm({
                         id: 'SaleOutReport',
                         title: '报废单打印',

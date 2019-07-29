@@ -166,7 +166,7 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('O_OutNo');
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(keyValue,true)) {
                     ayma.layerForm({
                         id: 'SaleOutReport',
                         title: '出库单打印',
@@ -178,8 +178,6 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                } else {
-                    ayma.alert.error("请选择要打印的单据！");
                 }
             });
             // 预览打印
