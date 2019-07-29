@@ -138,7 +138,7 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(keyValue,true)) {
                     ayma.layerForm({
                         id: 'SaleOutReport',
                         title: '领料单打印',
@@ -150,14 +150,12 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                } else {
-                    ayma.alert.error("请选择要打印的单据！");
                 }
             });
             // 预览打印
             $('#am_printview').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
-                if (ayma.checkrow(keyValue,true)) {
+                if (ayma.checkrow(keyValue)) {
 
                     ayma.layerForm({
                         id: 'SaleOutReport',
