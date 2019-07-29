@@ -78,7 +78,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.529167,
-							"Width":3.20146,
+							"Width":3.175,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -155,6 +155,7 @@
 					"Height":0
 				},
 				"GroupFooter":{
+					"Height":0
 				}
 			}
 		]
