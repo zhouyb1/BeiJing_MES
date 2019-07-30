@@ -210,10 +210,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
             //foreach (Mes_RequistDetailEntity t in mes_RequistDetailList)
             //{
+            //    //查询库存
             //    var listInv = inventorySearchIbll.GetListByStockAndCode(entity.R_StockCode, t.R_GoodsCode).ToList();
             //    if (listInv.Count > 1)
             //    {
-            //        //获取不同批次的商品中 最小的批次
+            //        //获取库存里不同批次的商品中 最小的批次
             //        var batchMin = mes_RequistDetailList.Min(c => Convert.ToInt32(c.R_Batch));
             //        //库存实体
             //        var entityMinTemp = listInv.FirstOrDefault(c => c.I_Batch == batchMin.ToString());

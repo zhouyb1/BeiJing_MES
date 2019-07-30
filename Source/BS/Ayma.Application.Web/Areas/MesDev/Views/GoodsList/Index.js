@@ -99,11 +99,11 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/GoodsList/GetPageList',
                 headData: [
-                    { label: "商品编码", name: "g_code", width: 160, align: "left" },
-                    { label: "商品erp编码", name: "g_erpcode", width: 160, align: "left" },
+                    { label: "商品编码", name: "g_code", width: 120, align: "left" },
+                    { label: "商品erp编码", name: "g_erpcode", width: 120, align: "left" },
                     { label: "商品名称", name: "g_name", width: 160, align: "left" },
                     {
-                        label: "商品类型", name: "g_kind", width: 160, align: "left",
+                        label: "商品类型", name: "g_kind", width: 80, align: "left",
                         formatterAsync: function (callback, value, row) {
                            
                             ayma.clientdata.getAsync('dataItem', {
@@ -116,12 +116,12 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     {
-                        label: "商品二级类型", name: "kindname", width: 160, align: "left"
+                        label: "商品二级类型", name: "kindname", width: 80, align: "left"
                     },
-                    { label: "保质时间", name: "g_period", width: 160, align: "left" },
-                    { label: "价格", name: "g_price", width: 160, align: "left" },
+                    { label: "保质时间", name: "g_period", width: 80, align: "left" },
+                    { label: "价格", name: "g_price", width: 100, align: "left" },
                     {
-                        label: "单位", name: "g_unit", width: 160, align: "left",
+                        label: "单位", name: "g_unit", width: 80, align: "left",
                         formatterAsyns:function(callback,value,row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -132,12 +132,12 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "包装规格", name: "g_unitqty", width: 160, align: "left" },
-                    { label: "包装单位", name: "g_unit2", width: 160, align: "left" },
-                    { label: "上限预警数量", name: "g_super", width: 160, align: "left" },
-                    { label: "下限预警数量", name: "g_lower", width: 160, align: "left" },
+                    { label: "包装规格", name: "g_unitqty", width: 80, align: "left" },
+                    { label: "包装单位", name: "g_unit2", width: 80, align: "left" },
+                    { label: "上限预警数量", name: "g_super", width: 100, align: "left" },
+                    { label: "下限预警数量", name: "g_lower", width: 100, align: "left" },
                      {
-                         label: "是否自制", name: "g_self", width: 160, align: "left",
+                         label: "是否自制", name: "g_self", width: 80, align: "left",
                          formatterAsyns: function (callback, value, row) {
                              ayma.clientdata.getAsync('dataItem', {
                                  key: value,
@@ -149,7 +149,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                      {
-                         label: "是否在用", name: "g_online", width: 160, align: "left",
+                         label: "是否在用", name: "g_online", width: 80, align: "left",
                          formatterAsyns: function (callback, value, row) {
                              ayma.clientdata.getAsync('dataItem', {
                                  key: value,
@@ -160,15 +160,15 @@ var bootstrap = function ($, ayma) {
                              });
                          }
                      },
-                     {label: "备料天数", name: "g_prepareday", width: 160, align: "left"},
-                     { label: "单位重量", name: "g_unitweight", width: 160, align: "left" },
-                     { label: "销售税率(%)", name: "g_otax", width: 160, align: "left" },
-                     { label: "购进税率(%)", name: "g_itax", width: 160, align: "left" },
-                    { label: "备注", name: "G_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "g_createby", width: 160, align: "left" },
-                    { label: "添加时间", name: "g_createdate", width: 160, align: "left" },
-                    { label: "修改人", name: "g_updateby", width: 160, align: "left" },
-                    { label: "修改时间", name: "g_updatedate", width: 160, align: "left" }
+                     {label: "备料天数", name: "g_prepareday", width: 80, align: "left"},
+                     { label: "单位重量", name: "g_unitweight", width: 80, align: "left" },
+                     { label: "销售税率(%)", name: "g_otax", width: 100, align: "left" },
+                     { label: "购进税率(%)", name: "g_itax", width: 100, align: "left" },
+                    { label: "备注", name: "G_Remark", width: 100, align: "left" },
+                    { label: "添加人", name: "g_createby", width: 120, align: "left" },
+                    { label: "添加时间", name: "g_createdate", width: 120, align: "left" },
+                    { label: "修改人", name: "g_updateby", width: 120, align: "left" },
+                    { label: "修改时间", name: "g_updatedate", width: 120, align: "left" }
 
                 ],
                 mainId:'ID',
