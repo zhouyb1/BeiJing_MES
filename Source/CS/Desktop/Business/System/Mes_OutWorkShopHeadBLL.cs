@@ -65,6 +65,7 @@ namespace Business.System
                     strSql.Append("O_OrderDate,");
                     strSql.Append("O_Status,");
                     strSql.Append("O_CreateBy,");
+                    strSql.Append("O_Kind,");
                     strSql.Append("O_CreateDate,");
 
                     strSql.Append("O_Remark");
@@ -80,6 +81,7 @@ namespace Business.System
                     strSql.Append("@O_Status,");
 
                     strSql.Append("@O_CreateBy,");
+                    strSql.Append("@O_Kind,");
                     strSql.Append("@O_CreateDate,");
 
                     strSql.Append("@O_Remark");
@@ -104,6 +106,7 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@O_OrderDate", entity.O_OrderDate));
                 paramList.Add(new SqlParameter("@O_Status", entity.O_Status));
                 paramList.Add(new SqlParameter("@O_CreateBy", entity.O_CreateBy));
+                paramList.Add(new SqlParameter("@O_Kind", entity.O_Kind));
                 paramList.Add(new SqlParameter("@O_CreateDate", entity.O_CreateDate));
 
                 paramList.Add(new SqlParameter("@O_Remark", entity.O_Remark));

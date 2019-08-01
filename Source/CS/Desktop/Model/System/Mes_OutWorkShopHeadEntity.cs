@@ -25,5 +25,7 @@ namespace Model
         public string O_UploadBy { set; get; }
         public DateTime O_UploadDate { set; get; }
         public string O_Remark { set; get; }
+
+        public int O_Kind { set; get; }
     }
 }

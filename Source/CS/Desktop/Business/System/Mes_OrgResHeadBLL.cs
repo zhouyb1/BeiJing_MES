@@ -67,7 +67,7 @@ namespace Business.System
                     strSql.Append("O_Status,");
                     strSql.Append("O_CreateBy,");
                     strSql.Append("O_CreateDate,");
-                    strSql.Append("O_TeamName,");
+                    strSql.Append("O_TeamCode,");
                     strSql.Append("O_TeamName,");
                     strSql.Append("O_Remark");
                     strSql.Append(")");

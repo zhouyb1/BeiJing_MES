@@ -34,11 +34,11 @@ namespace DesktopApp
                 if (e.KeyValue == 13)
                 {
                     string strBarcode = txtBarcode.Text;
-                    string[] strTemp = strBarcode.Split('&');
+                    string[] strTemp = strBarcode.Split('*');
                     txtCode.Text = strTemp[0].ToString();
                     txtPc.Text = strTemp[1].ToString();
                     txtQty.Text = strTemp[2].ToString();
-                    txtPrice.Text = strTemp[3].ToString();
+                    //txtPrice.Text = strTemp[3].ToString();
 
                     MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                     var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
@@ -47,7 +47,7 @@ namespace DesktopApp
                     {
                         txtName.Text = Goods_rows[0].G_Name;
                         txtUnit.Text = Goods_rows[0].G_Unit;
-                        //txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                        txtPrice.Text = Goods_rows[0].G_Price.ToString();
 
                     }
                 }
@@ -101,9 +101,9 @@ namespace DesktopApp
         private void Init()
         {
             txtBarcode.Text = "";
-            txtCode.Text = "";
+            //txtCode.Text = "";
             txtName.Text = "";
-            txtPc.Text = "";
+            //txtPc.Text = "";
             txtPrice.Text = "";
             txtQty.Text = "";
             txtUnit.Text = "";

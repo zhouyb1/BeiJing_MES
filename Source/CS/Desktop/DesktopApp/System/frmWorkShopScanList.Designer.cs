@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtPc = new System.Windows.Forms.TextBox();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -36,21 +35,15 @@
             this.label11 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtUnit = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtPc = new System.Windows.Forms.TextBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // txtPc
-            // 
-            this.txtPc.Location = new System.Drawing.Point(86, 91);
-            this.txtPc.Name = "txtPc";
-            this.txtPc.Size = new System.Drawing.Size(121, 21);
-            this.txtPc.TabIndex = 112;
             // 
             // txtBarcode
             // 
@@ -114,13 +107,6 @@
             this.label5.TabIndex = 105;
             this.label5.Text = "数量：";
             // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(86, 66);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(121, 21);
-            this.txtCode.TabIndex = 114;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -175,6 +161,20 @@
             this.label3.TabIndex = 118;
             this.label3.Text = "单位：";
             // 
+            // txtPc
+            // 
+            this.txtPc.Location = new System.Drawing.Point(86, 91);
+            this.txtPc.Name = "txtPc";
+            this.txtPc.Size = new System.Drawing.Size(121, 21);
+            this.txtPc.TabIndex = 112;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(86, 66);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(121, 21);
+            this.txtCode.TabIndex = 114;
+            // 
             // frmWorkShopScanList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -206,7 +206,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtPc;
         private System.Windows.Forms.TextBox txtBarcode;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -214,12 +213,13 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtPc;
+        private System.Windows.Forms.TextBox txtCode;
     }
 }

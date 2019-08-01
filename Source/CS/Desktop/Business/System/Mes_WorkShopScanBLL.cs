@@ -125,5 +125,28 @@ namespace Business.System
                 throw;
             }
         }
+
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns>返回值大于0:删除成功</returns>
+        public int DeleteEntity(string keyValue)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("DELETE Mes_WorkShopScan");
+                strSql.Append(" WHERE ID=@ID");
+                var paramList = new List<SqlParameter>();
+                paramList.Add(new SqlParameter("@ID", keyValue));
+                var result = db.ExecuteNonQuery(strSql.ToString(), paramList.ToArray());
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

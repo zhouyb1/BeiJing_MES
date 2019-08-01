@@ -48,11 +48,20 @@ namespace DesktopApp
                 cmbWorkShop.Items.Add(rows[i].W_Code);
             }
 
+            if (cmbWorkShop.Items.Contains(Globels.strWorkShop))
+            {
+                cmbWorkShop.Text = Globels.strWorkShop;
+            }
+
             MesStockBLL StockBLL = new MesStockBLL();
             var Stock_rows = StockBLL.GetList();
             for (int i = 0; i < Stock_rows.Count; i++)
             {
                 cmbStock.Items.Add(Stock_rows[i].S_Code);
+            }
+            if (cmbStock.Items.Contains(Globels.strStockCode))
+            {
+                cmbStock.Text = Globels.strStockCode;
             }
 
             MesRecordBLL RecordBLL = new MesRecordBLL();
@@ -75,6 +84,20 @@ namespace DesktopApp
             MesStockBLL StockBLL = new MesStockBLL();
             var row = StockBLL.GetData(" where S_Code = '" + cmbStock.Text + "'");
             txtStockName.Text = row[0].S_Name;
+
+            cmbGoodsCode.Items.Clear();
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+            var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "'");
+            for (int i = 0; i < row2.Count; i++)
+            {
+                cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
+
+            }
+            if(row2.Count == 1)
+            {
+                cmbGoodsCode.Text = row2[0].I_GoodsCode;
+            }
+
         }
 
         private void cmbRecord_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,20 +122,25 @@ namespace DesktopApp
                 {
                     string strBarcode = txtBarcode.Text;
                     string[] strTemp = strBarcode.Split('*');
-                    txtCode.Text = strTemp[0].ToString();
-                    txtPc.Text = strTemp[1].ToString();
-                    txtQty.Text = strTemp[2].ToString();
-
-                    MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                    var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
-                    int nLen = Goods_rows.Count;
-                    if (nLen > 0)
+                    string strGoodsCode = strTemp[0].ToString();
+                    if (cmbGoodsCode.Items.Contains(strGoodsCode))
                     {
-                        txtName.Text = Goods_rows[0].G_Name;
-                        txtPrice.Text = Goods_rows[0].G_Price.ToString();
-                        strUnit = Goods_rows[0].G_Unit.ToString();
+                        cmbGoodsCode.Text = strTemp[0].ToString();
+                        //txtPc.Text = strTemp[1].ToString();
+                        txtQty.Text = strTemp[2].ToString();
 
+                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        int nLen = Goods_rows.Count;
+                        if (nLen > 0)
+                        {
+                            txtName.Text = Goods_rows[0].G_Name;
+                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                            strUnit = Goods_rows[0].G_Unit.ToString();
+
+                        }
                     }
+                    
                 }
             }
             catch (Exception ex)
@@ -149,13 +177,13 @@ namespace DesktopApp
                 OutWorkShopTempEntity.O_WorkShopName = txtWorkShopName.Text;
                 OutWorkShopTempEntity.O_OrderNo = comOrderNo.Text;
                 OutWorkShopTempEntity.O_Status = 1;
-                OutWorkShopTempEntity.O_CreateBy = "";
+                OutWorkShopTempEntity.O_CreateBy = Globels.strUser;
                 OutWorkShopTempEntity.O_CreateDate = DateTime.Now;
-                OutWorkShopTempEntity.O_GoodsCode = txtCode.Text;
+                OutWorkShopTempEntity.O_GoodsCode = cmbGoodsCode.Text;
                 OutWorkShopTempEntity.O_GoodsName = txtName.Text;
                 OutWorkShopTempEntity.O_Unit = strUnit;
                 OutWorkShopTempEntity.O_Qty = Convert.ToDecimal(txtQty.Text);
-                OutWorkShopTempEntity.O_Batch = txtPc.Text;
+                OutWorkShopTempEntity.O_Batch = cmbPc.Text;
                 OutWorkShopTempEntity.O_Remark = "";
                 OutWorkShopTempEntity.O_Barcode = txtBarcode.Text;
                 OutWorkShopTempEntity.O_Price = Convert.ToDecimal(txtPrice.Text);
@@ -183,9 +211,9 @@ namespace DesktopApp
         private void cls()
         {
             txtBarcode.Text = "";
-            txtCode.Text = "";
+            //txtCode.Text = "";
             txtName.Text = "";
-            txtPc.Text = "";
+            //txtPc.Text = "";
             txtQty.Text = "";
             txtPrice.Text = "";
 
@@ -222,9 +250,9 @@ namespace DesktopApp
                         string strDate = rowsHead[0].O_OutNo.Substring(2, 8);
                         if (strDate == DateTime.Now.ToString("yyyyMMdd"))
                         {
-                            string strList = rowsHead[0].O_OutNo.Substring(10, 4);
+                            string strList = rowsHead[0].O_OutNo.Substring(10, 6);
                             int nList = Convert.ToInt32(strList) + 1;
-                            strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(4, '0');
+                            strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(6, '0');
                         }
                         else
                         {
@@ -243,6 +271,7 @@ namespace DesktopApp
                     OutWorkShopHeadEntity.O_Remark = "";
                     OutWorkShopHeadEntity.O_Status = 1;
                     OutWorkShopHeadEntity.O_WorkShop = cmbWorkShop.Text;
+                    OutWorkShopHeadEntity.O_Kind = 1;
 
 
 
@@ -264,6 +293,8 @@ namespace DesktopApp
                     }
                     MessageBox.Show("保存成功");
                     DeleteData();
+                    Update();
+
                 }
 
             }
@@ -351,7 +382,39 @@ namespace DesktopApp
         {
             MesProductOrderHeadBLL ProductOrderHeadBLL = new MesProductOrderHeadBLL();
             var row = ProductOrderHeadBLL.GetList(comOrderNo.Text);
+            
             txtOrderDate.Text = row[0].P_OrderDate.ToString();
+        }
+
+        private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cmbPc.Items.Clear();
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+            var row = InventoryBLL.GetData("where I_StockCode = '"+ cmbStock.Text +"' and I_GoodsCode = '"+ cmbGoodsCode.Text +"'");
+            for(int i = 0; i < row.Count; i++)
+            {
+                cmbPc.Items.Add(row[i].I_Batch);
+
+            }
+            if(row.Count == 1)
+            {
+                cmbPc.Text = row[0].I_Batch;
+            }
+
+            
+
+                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
+                int nLen = Goods_rows.Count;
+                if (nLen > 0)
+                {
+                    txtName.Text = Goods_rows[0].G_Name;
+                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                    strUnit = Goods_rows[0].G_Unit.ToString();
+
+                }
+            
+
         }
 
 

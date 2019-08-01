@@ -54,10 +54,13 @@ namespace DesktopApp
         private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-            //MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
-            var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text.Trim(), "");
-            txtName.Text = Goods_rows[0].G_Name;
-            txtUnit.Text = Goods_rows[0].G_Unit;
+            var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + cmbGoodsCode.Text + "'");
+            int nLen = Goods_rows.Count;
+            if (nLen > 0)
+            {
+                txtName.Text = Goods_rows[0].G_Name;
+                txtUnit.Text = Goods_rows[0].G_Unit;
+            }
             txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
         }
 
@@ -72,6 +75,22 @@ namespace DesktopApp
             }
             else
             {
+               if(txtQty.Text == "")
+               {
+                   MessageBox.Show("请先称重");
+                   return;
+               }
+                if(txtRQQty.Text == "")
+                {
+                    MessageBox.Show("请先输入容器重量");
+                    return;
+                }
+                if(IsNumberic(txtRQQty.Text) == false)
+                {
+                    MessageBox.Show("容器重量应该为数字");
+                    return;
+                }
+
                 Mes_WorkShopWeightBLL WorkShopWeightBLL = new Mes_WorkShopWeightBLL();
                 Mes_WorkShopWeightEntity WorkShopWeightEntity = new Mes_WorkShopWeightEntity();
                 WorkShopWeightEntity.W_CreateBy = "";
@@ -86,7 +105,7 @@ namespace DesktopApp
                 WorkShopWeightEntity.W_SecBatch = txtBatch.Text;
                 WorkShopWeightEntity.W_SecGoodsCode = cmbGoodsCode.Text;
                 WorkShopWeightEntity.W_SecGoodsName = txtName.Text;
-                WorkShopWeightEntity.W_SecQty = Convert.ToDecimal(txtQty.Text); ;
+                WorkShopWeightEntity.W_SecQty = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                 WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                 WorkShopWeightEntity.W_Status = 1;
                 WorkShopWeightEntity.W_WorkShopCode = Globels.strWorkShop;
@@ -102,6 +121,21 @@ namespace DesktopApp
 
 
         }
+
+        private bool IsNumberic(string oText)
+        {
+            try
+            {
+                Decimal var1 = Convert.ToDecimal(oText);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
 
         private void btn_Weight_Click(object sender, EventArgs e)
         {

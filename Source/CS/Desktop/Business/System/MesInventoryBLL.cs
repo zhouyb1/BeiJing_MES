@@ -61,6 +61,29 @@ namespace Business.System
         /// <summary>
         /// 通过主键获取实体
         /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns>MesInventory</returns>
+        public List<MesInventoryEntity> GetData(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Inventory ");
+                strSql.Append(Condit);
+                var rows = db.ExecuteObjects<MesInventoryEntity>(strSql.ToString());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        
+
+        /// <summary>
+        /// 通过主键获取实体
+        /// </summary>
 		/// <param name="keyValue">主键</param>
         /// <returns>MesInventory</returns>
 		public MesInventoryEntity GetEntity(string keyValue)

@@ -175,8 +175,46 @@ namespace DesktopApp
             return true;
         }
 
+
+        private string Data(string strTemp)
+        {
+            try
+            {
+                string[] strCode = strTemp.Split(':');
+                string strData = strCode[1].ToString();
+                return strData;
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
+
         private void Init()
         {
+
+            try
+            {
+                if (File.Exists(Application.StartupPath + @"\\WorkShop.txt"))
+                {
+                    using (StreamReader sr = File.OpenText(Application.StartupPath + @"\\WorkShop.txt"))
+                    {
+                        string strTemp = sr.ReadLine();
+                        Globels.strWorkShop = Data(strTemp);
+                        strTemp = sr.ReadLine();
+                        Globels.strTeam = Data(strTemp);
+                        strTemp = sr.ReadLine();
+                        Globels.strStockCode = Data(strTemp);
+                        sr.Close();
+                        
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ÌבÊ¾", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+
             try
             {
                 if (File.Exists(Application.StartupPath + @"\\loginConfig.lsf"))

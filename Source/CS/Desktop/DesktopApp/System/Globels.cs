@@ -16,5 +16,8 @@ namespace DesktopApp
         public static string strRecordName = "";
         public static string strProce = ""; //工序
         public static string strProceName = "";
+
+        public static string strTeam = ""; //班组
+        public static string strStockCode = "";//仓库
     }
 }

@@ -47,7 +47,7 @@ namespace Business.System
 
                 if (string.IsNullOrEmpty(G_Code) && string.IsNullOrEmpty(G_Name))
                 {
-                    strSql.Append("SELECT * FROM Mes_Goods where G_Kind = 1 ");
+                    strSql.Append("SELECT * FROM Mes_Goods where 1 = 1 ");
                     var rows = db.ExecuteObjects<MesGoodsEntity>(strSql.ToString());
                     return rows;
                 }
@@ -55,7 +55,7 @@ namespace Business.System
                 {
                     var paramList = new List<SqlParameter>();
                     strSql.Append("SELECT * FROM Mes_Goods");
-                    strSql.Append(" WHERE G_Kind = 1");
+                    strSql.Append(" WHERE 1 = 1");
                     if (!string.IsNullOrEmpty(G_Code))
                     {
                         strSql.Append(" and G_Code = @G_Code");
@@ -76,6 +76,7 @@ namespace Business.System
             }
         }
 
+        
 
         
         /// <summary>
@@ -93,6 +94,31 @@ namespace Business.System
 				var paramList = new List<SqlParameter>();
                 paramList.Add(new SqlParameter("@ID",keyValue));
                 var rowData = db.ExecuteObject<MesGoodsEntity>(strSql.ToString(),paramList.ToArray());
+                return rowData;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 通过条件获取实体
+        /// </summary>
+        /// <param name="keyValue">条件</param>
+        /// <returns>MesGoods</returns>
+        public List<MesGoodsEntity> GetListCondit(string condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT * FROM Mes_Goods ");
+                strSql.Append(condit);
+                var paramList = new List<SqlParameter>();
+                //paramList.Add(new SqlParameter("@ID", keyValue));
+                //var rowData = db.ExecuteObject<MesGoodsEntity>(strSql.ToString(), paramList.ToArray());
+                var rowData = db.ExecuteObjects<MesGoodsEntity>(strSql.ToString(), paramList.ToArray());
                 return rowData;
             }
             catch (Exception)

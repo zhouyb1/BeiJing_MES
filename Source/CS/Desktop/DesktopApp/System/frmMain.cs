@@ -682,6 +682,24 @@ namespace DesktopApp
             frmInWorkShop.Show(this.panMain);
         }
 
+        private void 补打标签ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            BracodePrintf frmBarcodePrintf = new BracodePrintf(this, User);
+            frmBarcodePrintf.TopLevel = false;
+            frmBarcodePrintf.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmBarcodePrintf.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmBarcodePrintf.Show(this.panMain);
+        }
+
 
     }
 }

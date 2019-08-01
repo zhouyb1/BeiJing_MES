@@ -35,14 +35,6 @@
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_upload = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtRecordName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtWorkShopName = new System.Windows.Forms.TextBox();
@@ -58,17 +50,51 @@
             this.txtProceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.物料2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.生产订单2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工艺代码2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工艺名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加人2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加时间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtTeamName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbTeam = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.txtOrderDate = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工艺代码名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -96,7 +122,7 @@
             // 
             this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
             this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Search.Location = new System.Drawing.Point(499, 67);
+            this.btn_Search.Location = new System.Drawing.Point(499, 21);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 99;
@@ -108,7 +134,7 @@
             // 
             this.btn_upload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(580, 67);
+            this.btn_upload.Location = new System.Drawing.Point(580, 21);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(75, 23);
             this.btn_upload.TabIndex = 98;
@@ -120,71 +146,35 @@
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.选择,
+            this.物料,
+            this.批次,
+            this.数量,
+            this.实用数量,
+            this.价格,
             this.生产订单号,
             this.车间,
             this.工艺代码,
             this.工序,
-            this.物料,
-            this.批次,
-            this.数量,
-            this.价格});
+            this.ID,
+            this.工艺代码名称,
+            this.工序名称,
+            this.车间名称,
+            this.状态,
+            this.添加人,
+            this.添加时间,
+            this.物料名称,
+            this.单位,
+            this.备注});
             this.dataGridView1.Location = new System.Drawing.Point(12, 143);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(683, 184);
             this.dataGridView1.TabIndex = 97;
             // 
-            // 生产订单号
-            // 
-            this.生产订单号.DataPropertyName = "W_OrderNo";
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            // 
-            // 车间
-            // 
-            this.车间.DataPropertyName = "W_WorkShop";
-            this.车间.HeaderText = "车间";
-            this.车间.Name = "车间";
-            // 
-            // 工艺代码
-            // 
-            this.工艺代码.DataPropertyName = "W_RecordCode";
-            this.工艺代码.HeaderText = "工艺代码";
-            this.工艺代码.Name = "工艺代码";
-            // 
-            // 工序
-            // 
-            this.工序.DataPropertyName = "W_ProceCode";
-            this.工序.HeaderText = "工序";
-            this.工序.Name = "工序";
-            // 
-            // 物料
-            // 
-            this.物料.DataPropertyName = "W_GoodsCode";
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            // 
-            // 批次
-            // 
-            this.批次.DataPropertyName = "W_Batch";
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "W_Qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            // 
-            // 价格
-            // 
-            this.价格.DataPropertyName = "W_Price";
-            this.价格.HeaderText = "价格";
-            this.价格.Name = "价格";
-            // 
             // txtRecordName
             // 
-            this.txtRecordName.Location = new System.Drawing.Point(345, 58);
+            this.txtRecordName.Location = new System.Drawing.Point(345, 62);
             this.txtRecordName.Name = "txtRecordName";
             this.txtRecordName.Size = new System.Drawing.Size(121, 21);
             this.txtRecordName.TabIndex = 94;
@@ -201,7 +191,7 @@
             // 
             // txtWorkShopName
             // 
-            this.txtWorkShopName.Location = new System.Drawing.Point(345, 33);
+            this.txtWorkShopName.Location = new System.Drawing.Point(345, 37);
             this.txtWorkShopName.Name = "txtWorkShopName";
             this.txtWorkShopName.Size = new System.Drawing.Size(121, 21);
             this.txtWorkShopName.TabIndex = 92;
@@ -279,7 +269,7 @@
             // 
             this.btnScan.Image = global::DesktopApp.Properties.Resources.home;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnScan.Location = new System.Drawing.Point(499, 107);
+            this.btnScan.Location = new System.Drawing.Point(499, 61);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(75, 23);
             this.btnScan.TabIndex = 116;
@@ -291,7 +281,7 @@
             // 
             this.btn_Weight.Image = global::DesktopApp.Properties.Resources.communication;
             this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Weight.Location = new System.Drawing.Point(580, 107);
+            this.btn_Weight.Location = new System.Drawing.Point(580, 61);
             this.btn_Weight.Name = "btn_Weight";
             this.btn_Weight.Size = new System.Drawing.Size(75, 23);
             this.btn_Weight.TabIndex = 117;
@@ -301,7 +291,7 @@
             // 
             // txtProceName
             // 
-            this.txtProceName.Location = new System.Drawing.Point(345, 87);
+            this.txtProceName.Location = new System.Drawing.Point(345, 88);
             this.txtProceName.Name = "txtProceName";
             this.txtProceName.Size = new System.Drawing.Size(121, 21);
             this.txtProceName.TabIndex = 119;
@@ -320,53 +310,138 @@
             // 
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5,
-            this.dataGridViewTextBoxColumn6,
-            this.dataGridViewTextBoxColumn7});
+            this.选择2,
+            this.物料2,
+            this.批次2,
+            this.数量2,
+            this.生产订单2,
+            this.车间2,
+            this.工艺代码2,
+            this.工艺名称2,
+            this.工序2,
+            this.工序名称2,
+            this.ID2,
+            this.车间名称2,
+            this.状态2,
+            this.添加人2,
+            this.添加时间2,
+            this.物料名称2,
+            this.单位2,
+            this.备注2});
             this.dataGridView2.Location = new System.Drawing.Point(12, 333);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(683, 161);
             this.dataGridView2.TabIndex = 120;
             // 
-            // dataGridViewTextBoxColumn1
+            // 选择2
             // 
-            this.dataGridViewTextBoxColumn1.HeaderText = "生产订单号";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.选择2.HeaderText = "选择2";
+            this.选择2.Name = "选择2";
+            this.选择2.Width = 40;
             // 
-            // dataGridViewTextBoxColumn2
+            // 物料2
             // 
-            this.dataGridViewTextBoxColumn2.HeaderText = "车间";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.物料2.DataPropertyName = "W_SecGoodsCode";
+            this.物料2.HeaderText = "物料";
+            this.物料2.Name = "物料2";
             // 
-            // dataGridViewTextBoxColumn3
+            // 批次2
             // 
-            this.dataGridViewTextBoxColumn3.HeaderText = "工艺代码";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.批次2.DataPropertyName = "W_SecBatch";
+            this.批次2.HeaderText = "批次";
+            this.批次2.Name = "批次2";
             // 
-            // dataGridViewTextBoxColumn4
+            // 数量2
             // 
-            this.dataGridViewTextBoxColumn4.HeaderText = "物料";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.数量2.DataPropertyName = "W_SecQty";
+            this.数量2.HeaderText = "数量";
+            this.数量2.Name = "数量2";
             // 
-            // dataGridViewTextBoxColumn5
+            // 生产订单2
             // 
-            this.dataGridViewTextBoxColumn5.HeaderText = "批次";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.生产订单2.DataPropertyName = "W_OrderNo";
+            this.生产订单2.HeaderText = "生产订单号";
+            this.生产订单2.Name = "生产订单2";
             // 
-            // dataGridViewTextBoxColumn6
+            // 车间2
             // 
-            this.dataGridViewTextBoxColumn6.HeaderText = "数量";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.车间2.DataPropertyName = "W_WorkShopCode";
+            this.车间2.HeaderText = "车间";
+            this.车间2.Name = "车间2";
             // 
-            // dataGridViewTextBoxColumn7
+            // 工艺代码2
             // 
-            this.dataGridViewTextBoxColumn7.HeaderText = "条码";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.工艺代码2.DataPropertyName = "W_RecordCode";
+            this.工艺代码2.HeaderText = "工艺代码";
+            this.工艺代码2.Name = "工艺代码2";
+            // 
+            // 工艺名称2
+            // 
+            this.工艺名称2.DataPropertyName = "W_RecordName";
+            this.工艺名称2.HeaderText = "工艺名称";
+            this.工艺名称2.Name = "工艺名称2";
+            // 
+            // 工序2
+            // 
+            this.工序2.DataPropertyName = "W_ProceCode";
+            this.工序2.HeaderText = "工序";
+            this.工序2.Name = "工序2";
+            // 
+            // 工序名称2
+            // 
+            this.工序名称2.DataPropertyName = "W_ProceName";
+            this.工序名称2.HeaderText = "工序名称";
+            this.工序名称2.Name = "工序名称2";
+            // 
+            // ID2
+            // 
+            this.ID2.DataPropertyName = "ID";
+            this.ID2.HeaderText = "ID";
+            this.ID2.Name = "ID2";
+            this.ID2.Visible = false;
+            // 
+            // 车间名称2
+            // 
+            this.车间名称2.DataPropertyName = "W_WorkShopName";
+            this.车间名称2.HeaderText = "车间名称";
+            this.车间名称2.Name = "车间名称2";
+            // 
+            // 状态2
+            // 
+            this.状态2.DataPropertyName = "W_Status";
+            this.状态2.HeaderText = "状态";
+            this.状态2.Name = "状态2";
+            // 
+            // 添加人2
+            // 
+            this.添加人2.DataPropertyName = "W_CreateBy";
+            this.添加人2.HeaderText = "添加人";
+            this.添加人2.Name = "添加人2";
+            // 
+            // 添加时间2
+            // 
+            this.添加时间2.DataPropertyName = "(W_CreateDate";
+            this.添加时间2.HeaderText = "添加时间";
+            this.添加时间2.Name = "添加时间2";
+            // 
+            // 物料名称2
+            // 
+            this.物料名称2.DataPropertyName = "W_SecGoodsName";
+            this.物料名称2.HeaderText = "物料名称";
+            this.物料名称2.Name = "物料名称2";
+            // 
+            // 单位2
+            // 
+            this.单位2.DataPropertyName = "W_SecUnit";
+            this.单位2.HeaderText = "单位";
+            this.单位2.Name = "单位2";
+            // 
+            // 备注2
+            // 
+            this.备注2.DataPropertyName = "W_Remark";
+            this.备注2.HeaderText = "备注";
+            this.备注2.Name = "备注2";
             // 
             // txtTeamName
             // 
@@ -392,6 +467,7 @@
             this.cmbTeam.Name = "cmbTeam";
             this.cmbTeam.Size = new System.Drawing.Size(121, 20);
             this.cmbTeam.TabIndex = 122;
+            this.cmbTeam.SelectedIndexChanged += new System.EventHandler(this.cmbTeam_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -403,9 +479,185 @@
             this.label8.TabIndex = 121;
             this.label8.Text = "班组：";
             // 
+            // txtOrderDate
+            // 
+            this.txtOrderDate.Location = new System.Drawing.Point(345, 12);
+            this.txtOrderDate.Name = "txtOrderDate";
+            this.txtOrderDate.Size = new System.Drawing.Size(121, 21);
+            this.txtOrderDate.TabIndex = 126;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(275, 15);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(65, 12);
+            this.label9.TabIndex = 125;
+            this.label9.Text = "订单时间：";
+            // 
+            // btnBack
+            // 
+            this.btnBack.Image = global::DesktopApp.Properties.Resources.cancel;
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnBack.Location = new System.Drawing.Point(499, 107);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(75, 23);
+            this.btnBack.TabIndex = 127;
+            this.btnBack.Text = "    退回";
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // 选择
+            // 
+            this.选择.HeaderText = "选择";
+            this.选择.Name = "选择";
+            this.选择.Width = 40;
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "W_GoodsCode";
+            this.物料.HeaderText = "物料";
+            this.物料.Name = "物料";
+            this.物料.ReadOnly = true;
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "W_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            this.批次.ReadOnly = true;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "W_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            // 
+            // 实用数量
+            // 
+            this.实用数量.HeaderText = "实用数量";
+            this.实用数量.Name = "实用数量";
+            // 
+            // 价格
+            // 
+            this.价格.DataPropertyName = "W_Price";
+            this.价格.HeaderText = "价格";
+            this.价格.Name = "价格";
+            this.价格.ReadOnly = true;
+            // 
+            // 生产订单号
+            // 
+            this.生产订单号.DataPropertyName = "W_OrderNo";
+            this.生产订单号.HeaderText = "生产订单号";
+            this.生产订单号.Name = "生产订单号";
+            this.生产订单号.ReadOnly = true;
+            // 
+            // 车间
+            // 
+            this.车间.DataPropertyName = "W_WorkShop";
+            this.车间.HeaderText = "车间";
+            this.车间.Name = "车间";
+            this.车间.ReadOnly = true;
+            // 
+            // 工艺代码
+            // 
+            this.工艺代码.DataPropertyName = "W_RecordCode";
+            this.工艺代码.HeaderText = "工艺代码";
+            this.工艺代码.Name = "工艺代码";
+            this.工艺代码.ReadOnly = true;
+            // 
+            // 工序
+            // 
+            this.工序.DataPropertyName = "W_ProceCode";
+            this.工序.HeaderText = "工序";
+            this.工序.Name = "工序";
+            this.工序.ReadOnly = true;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // 工艺代码名称
+            // 
+            this.工艺代码名称.DataPropertyName = "W_RecordName";
+            this.工艺代码名称.HeaderText = "工艺代码名称";
+            this.工艺代码名称.Name = "工艺代码名称";
+            this.工艺代码名称.ReadOnly = true;
+            this.工艺代码名称.Visible = false;
+            // 
+            // 工序名称
+            // 
+            this.工序名称.DataPropertyName = "W_ProceName";
+            this.工序名称.HeaderText = "工序名称";
+            this.工序名称.Name = "工序名称";
+            this.工序名称.ReadOnly = true;
+            this.工序名称.Visible = false;
+            // 
+            // 车间名称
+            // 
+            this.车间名称.DataPropertyName = "W_WorkShopName";
+            this.车间名称.HeaderText = "车间名称";
+            this.车间名称.Name = "车间名称";
+            this.车间名称.ReadOnly = true;
+            this.车间名称.Visible = false;
+            // 
+            // 状态
+            // 
+            this.状态.DataPropertyName = "W_Status";
+            this.状态.HeaderText = "状态";
+            this.状态.Name = "状态";
+            this.状态.ReadOnly = true;
+            this.状态.Visible = false;
+            // 
+            // 添加人
+            // 
+            this.添加人.DataPropertyName = "W_CreateBy";
+            this.添加人.HeaderText = "添加人";
+            this.添加人.Name = "添加人";
+            this.添加人.ReadOnly = true;
+            this.添加人.Visible = false;
+            // 
+            // 添加时间
+            // 
+            this.添加时间.DataPropertyName = "W_CreateDate";
+            this.添加时间.HeaderText = "添加时间";
+            this.添加时间.Name = "添加时间";
+            this.添加时间.ReadOnly = true;
+            this.添加时间.Visible = false;
+            // 
+            // 物料名称
+            // 
+            this.物料名称.DataPropertyName = "W_GoodsName";
+            this.物料名称.HeaderText = "物料名称";
+            this.物料名称.Name = "物料名称";
+            this.物料名称.ReadOnly = true;
+            // 
+            // 单位
+            // 
+            this.单位.DataPropertyName = "W_Unit";
+            this.单位.HeaderText = "单位";
+            this.单位.Name = "单位";
+            this.单位.ReadOnly = true;
+            // 
+            // 备注
+            // 
+            this.备注.DataPropertyName = "W_Remark";
+            this.备注.HeaderText = "备注";
+            this.备注.Name = "备注";
+            this.备注.ReadOnly = true;
+            // 
             // frmOrgres
             // 
             this.ClientSize = new System.Drawing.Size(775, 504);
+            this.Controls.Add(this.btnBack);
+            this.Controls.Add(this.txtOrderDate);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtTeamName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbTeam);
@@ -463,24 +715,50 @@
         private System.Windows.Forms.TextBox txtProceName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工序;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 价格;
         private System.Windows.Forms.TextBox txtTeamName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbTeam;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtOrderDate;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn 选择2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 批次2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 数量2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 车间2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺名称2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工序2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工序名称2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 车间名称2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 状态2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 添加人2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 添加时间2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料名称2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 单位2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 备注2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn 选择;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 实用数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 价格;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工序;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 工序名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 车间名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 状态;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 添加人;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 添加时间;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
     }
 }
