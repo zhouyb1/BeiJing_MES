@@ -31,11 +31,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.P_RecordCode,
                 t.P_ProNo,
                 t.P_ProName,
                 t.P_WorkShop,
-                t.P_Remark
+                t.P_Remark,
+                t.P_Kind
                 ");
                 strSql.Append("  FROM Mes_Proce t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -47,10 +47,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_Record", "%" + queryParam["P_Record"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_Record Like @P_Record ");
                 }
-                if (!queryParam["P_ProCode"].IsEmpty())
+                if (!queryParam["P_ProNo"].IsEmpty())
                 {
-                    dp.Add("P_ProCode", "%" + queryParam["P_ProCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.P_ProCode Like @P_ProCode ");
+                    dp.Add("P_ProNo", "%" + queryParam["P_ProNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_ProNo Like @P_ProNo ");
                 }
                 if (!queryParam["P_ProName"].IsEmpty())
                 {
@@ -89,11 +89,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.P_RecordCode,
                 t.P_ProNo,
                 t.P_ProName,
                 t.P_WorkShop,
-                t.P_Remark
+                t.P_Remark,
+                t.P_Kind
                 ");
                 strSql.Append("  FROM Mes_Proce t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -134,52 +134,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-        /// <summary>
-        /// 根据工艺代码获取工序列表
-        /// </summary>
-        /// <param name="record">工艺代码</param>
-        /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> GetProceListBy(string record)
-        {
-            try
-            {
-                var strSql = new StringBuilder();
-                strSql.Append("SELECT ");
-                strSql.Append(@"
-                t.ID,
-                t.P_RecordCode,
-                t.P_ProNo,
-                t.P_ProName,
-                t.P_WorkShop,
-                t.P_Remark,
-                t.P_Kind
-                ");
-                strSql.Append("  FROM Mes_Proce t ");
-                strSql.Append("  WHERE P_RecordCode=@P_RecordCode ");
-                
-                // 虚拟参数
-                var dp = new DynamicParameters(new { });
-
-                if (!record.IsEmpty())
-                {
-                    dp.Add("P_RecordCode", record, DbType.String);
-                    strSql.Append(" AND t.P_RecordCode = @P_RecordCode ");
-                }
-                strSql.Append("  ORDER BY P_ProNo ASC ");
-                return this.BaseRepository().FindList<Mes_ProceEntity>(strSql.ToString(),dp);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
+       
 
         /// <summary>
         /// 获取Mes_Proce表实体数据
@@ -298,19 +253,80 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
+
         /// <summary>
-        /// 同一工艺代码 工序号不能重复
+        /// 工艺名称不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="recordCode">工序代码</param>
+        /// <param name="recordName">工艺名称</param>
+        public bool ExistRecordName(string keyValue, string recordName)
+        {
+            try
+            {
+                var expression = LinqExtensions.True<Mes_RecordEntity>();
+                expression = expression.And(t => t.R_Name.Trim().ToUpper() == recordName.Trim().ToUpper());
+
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    expression = expression.And(t => t.ID != keyValue);
+                }
+                return !this.BaseRepository().IQueryable(expression).Any();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 同一工序号不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
         /// <param name="proNo">工艺代码</param>
-        public bool ExistProNo(string keyValue, string recordCode, string proNo)
+        public bool ExistProNo(string keyValue, string proNo)
         {
             try
             {
                 var expression = LinqExtensions.True<Mes_ProceEntity>();
-                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper() && t.P_RecordCode.Trim().ToUpper() == recordCode.Trim().ToUpper());
+                expression = expression.And(t => t.P_ProNo.Trim().ToUpper() == proNo.Trim().ToUpper());
+                
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    expression = expression.And(t => t.ID != keyValue);
+                }
+                return !this.BaseRepository().IQueryable(expression).Any();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 工序名称不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="proName">工序名称</param>
+        public bool ExistProName(string keyValue, string proName)
+        {
+            try
+            {
+                var expression = LinqExtensions.True<Mes_ProceEntity>();
+                expression = expression.And(t => t.P_ProName.Trim().ToUpper() == proName.Trim().ToUpper());
                 
                 if (!string.IsNullOrEmpty(keyValue))
                 {

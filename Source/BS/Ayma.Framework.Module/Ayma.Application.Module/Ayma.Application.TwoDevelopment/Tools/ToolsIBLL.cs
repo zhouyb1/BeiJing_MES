@@ -147,18 +147,16 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_DoorEntity ByCodeGetDoorEntity(string code);
         /// <summary>
-        /// 根据工艺代码获取工序实体
+        /// 获取工序实体
         /// </summary>
-        /// <param name="code">工艺代码</param>
         /// <returns></returns>
-        IEnumerable< Mes_ProceEntity> ByCodeGetProceEntity(string code); 
+        IEnumerable<Mes_ProceEntity> GetProceList(); 
         /// <summary>
-        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// 根据(工序号或工序名称)获取工序实体
         /// </summary>
-        /// <param name="record">工艺代码</param>
         /// <param name="code">工序号</param>
         /// <returns></returns>
-        Mes_ProceEntity ByGetProceEntity(string record,string code);
+        Mes_ProceEntity ByGetProceEntity(string code);
         /// <summary>
         /// 获取门列表
         /// </summary>

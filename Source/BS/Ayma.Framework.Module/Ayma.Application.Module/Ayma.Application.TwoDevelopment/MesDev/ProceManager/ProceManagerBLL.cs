@@ -61,29 +61,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-        /// <summary>
-        /// 根据工艺代码获取工序列表
-        /// </summary>
-        /// <param name="record">工艺代码</param>
-        /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> GetProceListBy(string record)
-        {
-            try
-            {
-                return proceManagerService.GetProceListBy(record);
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowBusinessException(ex);
-                }
-            }
-        }
+        
         /// <summary>
         /// 获取Mes_Proce表实体数据
         /// </summary>
@@ -187,16 +165,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         } 
         /// <summary>
-        /// 同一工艺代码 工序号不能重复
+        /// 工艺名称不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="recordCode">工序号</param>
-        /// <param name="proNo">工艺代码</param>
-        public bool ExistProNo(string keyValue, string recordCode, string proNo)
+        /// <param name="recordName">工艺名称</param>
+        public bool ExistRecordName(string keyValue, string recordName)
         {
             try
             {
-                return proceManagerService.ExistProNo(keyValue, recordCode, proNo);
+                return proceManagerService.ExistRecordName(keyValue, recordName);
             }
             catch (Exception ex)
             {
@@ -210,6 +187,54 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         } 
+        
+        /// <summary>
+        /// 工序名称不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="proName">工序名称</param>
+        public bool ExistProName(string keyValue, string proName)
+        {
+            try
+            {
+                return proceManagerService.ExistProName(keyValue, proName);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 工序号不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="proNo">工艺代码</param>
+        public bool ExistProNo(string keyValue, string proNo)
+        {
+            try
+            {
+                return proceManagerService.ExistProNo(keyValue, proNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }  
         #endregion
     }
 }

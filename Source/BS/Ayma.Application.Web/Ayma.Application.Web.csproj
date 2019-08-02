@@ -570,6 +570,7 @@
     </Content>
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\ProceManager\ProceIndex.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\ProceForm.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchForm.js" />
@@ -2311,6 +2312,7 @@
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PrintViewReport.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PickOrUserIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PriceSearchIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProceManager\ProceIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

@@ -13,11 +13,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
-            //物料编码
-            $("#R_GoodsCode").select({
+            //物料名称
+            $("#B_GoodsName").select({
                 type: 'default',
-                value: 'G_Code',
-                text: 'G_Code',
+                value: 'G_Name',
+                text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -26,14 +26,14 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetProjGoodsList',
                 // 访问数据接口参数
             }).bind("change", function () {
-                var code = $(this).selectGet();
+                var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
-                    data: { code: code },
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
+                    data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#B_GoodsName").val(entity.G_Name);
+                        $("#R_GoodsCode").val(entity.G_Code);
                     }
                 });
             });
@@ -51,6 +51,15 @@ var bootstrap = function ($, ayma) {
                         }
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
+                            $.ajax({
+                                type: "get",
+                                url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetGoodsEntity',
+                                data: { code: data[id].R_GoodsCode },
+                                success: function (data) {
+                                    var entity = JSON.parse(data).data;
+                                    $("#B_GoodsName").selectSet(entity.G_Name);
+                                }
+                            });
                         }
                     }
                 });

@@ -388,15 +388,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //    }
         //}
         /// <summary>
-        /// 工具工艺代码获取工序实体
+        /// 获取工序列表
         /// </summary>
-        /// <param name="code">工艺代码</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> ByCodeGetProceEntity(string code)
+        public IEnumerable<Mes_ProceEntity> GetProceList()
         {
             try
             {
-                return toolsService.ByCodeGetProceEntity(code);
+                return toolsService.GetProceList();
             }
             catch (Exception ex)
             {
@@ -411,16 +410,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
-        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// 根据(工序号或工序名称)获取工序实体
         /// </summary>
-        /// <param name="record">工艺代码</param>
-        /// <param name="code">工序号</param>
+        /// <param name="code">工序号或工序名称</param>
         /// <returns></returns>
-        public Mes_ProceEntity ByGetProceEntity(string record, string code)
+        public Mes_ProceEntity ByGetProceEntity( string code)
         {
             try
             {
-                return toolsService.ByGetProceEntity(record, code);
+                return toolsService.ByGetProceEntity(code);
             }
             catch (Exception ex)
             {

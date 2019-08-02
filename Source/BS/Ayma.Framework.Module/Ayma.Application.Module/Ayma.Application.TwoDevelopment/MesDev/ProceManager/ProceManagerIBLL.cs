@@ -25,12 +25,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_ProceEntity> GetTreeList(string queryJson);
 
-        /// <summary>
-        /// 根据工艺代码获取工序列表
-        /// </summary>
-        /// <param name="record">工艺代码</param>
-        /// <returns></returns>
-        IEnumerable<Mes_ProceEntity> GetProceListBy(string record);
+        
         /// <summary>
         /// 获取Mes_Proce表实体数据
         /// </summary>
@@ -63,19 +58,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <param name="recordCode">工艺代码</param>
         /// <returns></returns>
-
-        bool ExistRecordCode(string keyValue, string recordCode);
+        bool ExistRecordCode(string keyValue, string recordCode); 
         /// <summary>
-        /// 同一工艺代码 工序号不能重复
+        /// 工艺名称不能重复
         /// </summary>
         /// <param name="keyValue">主键</param>
-        /// <param name="recordCode">工艺代码</param>
+        /// <param name="recordName">工艺名称</param>
+        /// <returns></returns>
+        bool ExistRecordName(string keyValue, string recordName);
+        
+        /// <summary>
+        /// 工序名称不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <param name="proName">工序名称</param>
+        /// <returns></returns>
+        bool ExistProName(string keyValue, string proName);
+
+        /// <summary>
+        /// 工序号不能重复
+        /// </summary>
+        /// <param name="keyValue">主键</param>
         /// <param name="proNo">工序号</param>
         /// <returns></returns>
-
-        bool ExistProNo(string keyValue, string recordCode, string proNo);
-
-
+        bool ExistProNo(string keyValue, string proNo); 
         #endregion
 
     }

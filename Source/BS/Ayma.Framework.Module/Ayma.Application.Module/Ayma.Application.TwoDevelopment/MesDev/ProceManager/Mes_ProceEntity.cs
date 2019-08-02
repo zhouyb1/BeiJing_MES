@@ -17,12 +17,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }    
-     
-        /// <summary>
-        /// 工艺代码
-        /// </summary>
-        [Column("P_RECORDCODE")]
-        public string P_RecordCode { get; set; }
+   
         /// <summary>
         /// 工序号
         /// </summary>

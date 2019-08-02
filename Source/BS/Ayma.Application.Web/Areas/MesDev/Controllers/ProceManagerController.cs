@@ -33,7 +33,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult Form()
         {
             return View();
-        } 
+        }  
+        /// <summary>
+        /// 主页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ProceIndex()
+        {
+            return View();
+        }
+       
         /// <summary>
         /// 工序表单
         /// </summary>
@@ -88,18 +98,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
         /// <summary>
-        /// 根据工艺代码获取工序列表
+        /// 获取页面显示列表数据 工序列表
         /// </summary>
-        /// <param name="record">工艺代码</param>
+        /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetProceListBy(string record)
+        public ActionResult GetProceList(string pagination, string queryJson)
         {
-            var data = proceManagerIBLL.GetProceListBy(record);
-
-            return Success(data);
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = proceManagerIBLL.GetPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
+       
         /// <summary>
         /// 获取页面显示树形列表数据
         /// </summary>
@@ -148,15 +166,27 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 提交数据
 
         /// <summary>
-        /// 删除实体数据
+        /// 删除工序实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         [HttpPost]
         [AjaxOnly]
-        public ActionResult DeleteForm(string keyValue)
+        public ActionResult DeleteProceForm(string keyValue)
         {
             proceManagerIBLL.DeleteEntity(keyValue);
+            return Success("删除成功！");
+        }
+        /// <summary>
+        /// 删除工艺实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult DeleteRecordForm(string keyValue)
+        {
+            recordIbll.DeleteEntity(keyValue);
             return Success("删除成功！");
         }
         
@@ -173,11 +203,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string record, string strEntity)
         {
             Mes_ProceEntity entity = strEntity.ToObject<Mes_ProceEntity>();
-            if (!string.IsNullOrEmpty(record) && string.IsNullOrEmpty(keyValue))
+           
+            var resProNo=proceManagerIBLL.ExistProNo(keyValue, entity.P_ProNo);
+            var resProName = proceManagerIBLL.ExistProName(keyValue, entity.P_ProName);
+            if (!resProName)
             {
-                entity.P_RecordCode = record;
+                return Fail("该工序名称已存在！");
             }
-            var resProNo=proceManagerIBLL.ExistProNo(keyValue,entity.P_RecordCode, entity.P_ProNo);
             if (!resProNo)
             {
                 return Fail("该工序号已存在！");
@@ -200,6 +232,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             if (!resCode)
             {
                 return Fail("该工艺代码已存在！");
+            }
+            var resName = proceManagerIBLL.ExistRecordName(keyValue, entity.R_Name);
+            if (!resName)
+            {
+                return Fail("该工艺名称已存在！");
             }
 
             recordIbll.SaveEntity(keyValue, entity);

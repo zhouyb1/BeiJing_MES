@@ -293,28 +293,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         } 
         
         /// <summary>
-        /// 根据工艺代码获取工序实体列表
+        /// 获取工序列表
         /// </summary>
-        /// <param name="code">工艺代码</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult ByCodeGetProceEntity(string code)
+        public ActionResult GetProceList()
         {
-            var proceEntity = toosIBLL.ByCodeGetProceEntity(code);
+            var proceEntity = toosIBLL.GetProceList();
             return Success(proceEntity);
         } 
         /// <summary>
-        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// 根据(工序号或工序名称)获取工序实体
         /// </summary>
-        /// <param name="record">工艺代码</param>
-        /// <param name="code">工序号</param>
+        /// <param name="code">工序号或工序名称</param>
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult ByGetProceEntity(string record,string code)
+        public ActionResult ByGetProceEntity(string code)
         {
-            var proceEntity = toosIBLL.ByGetProceEntity(record,code);
+            var proceEntity = toosIBLL.ByGetProceEntity(code);
             return Success(proceEntity);
         }
         /// <summary>

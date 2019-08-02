@@ -471,15 +471,14 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //    }
         //}
         /// <summary>
-        /// 根据工艺代码获取工序实体
+        /// 获取工序列表
         /// </summary>
-        /// <param name="code">工艺代码</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ProceEntity> ByCodeGetProceEntity(string code)
+        public IEnumerable<Mes_ProceEntity> GetProceList()
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ProceEntity>(x => x.P_RecordCode == code).OrderBy(x => x.P_ProNo);
+                return this.BaseRepository().FindList<Mes_ProceEntity>().OrderBy(x => x.P_ProNo);
             }
             catch (Exception ex)
             {
@@ -495,16 +494,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         }
 
         /// <summary>
-        /// 根据工艺代码和(工序号或工序名称)获取工序实体
+        /// 根据(工序号或工序名称)获取工序实体
         /// </summary>
-        /// <param name="record">工艺代码</param>
         /// <param name="code">工序号或工序名称</param>
         /// <returns></returns>
-        public Mes_ProceEntity ByGetProceEntity(string record, string code)
+        public Mes_ProceEntity ByGetProceEntity( string code)
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_ProceEntity>(x => x.P_RecordCode == record && (x.P_ProNo == code || x.P_ProName == code));
+                return this.BaseRepository().FindEntity<Mes_ProceEntity>(x =>x.P_ProNo == code || x.P_ProName == code);
             }
             catch (Exception ex)
             {
