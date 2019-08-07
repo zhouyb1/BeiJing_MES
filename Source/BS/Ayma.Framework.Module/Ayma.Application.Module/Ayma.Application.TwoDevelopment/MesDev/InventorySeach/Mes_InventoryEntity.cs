@@ -30,6 +30,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("I_STOCKNAME")]
         public string I_StockName { get; set; }
         /// <summary>
+        /// 供应商编码
+        /// </summary>
+        [Column("I_SUPPLYCODE")]
+        public string I_SupplyCode { get; set; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        [Column("I_SUPPLYNAME")]
+        public string I_SupplyName { get; set; }
+        /// <summary>
         /// 商品编码
         /// </summary>
         [Column("I_GOODSCODE")]

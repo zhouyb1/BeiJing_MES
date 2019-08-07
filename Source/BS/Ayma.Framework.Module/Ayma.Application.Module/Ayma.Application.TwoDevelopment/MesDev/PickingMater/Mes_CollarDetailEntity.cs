@@ -28,6 +28,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("C_ORDERNO")]
         public string C_OrderNo { get; set; }
         /// <summary>
+        /// 供应商编码
+        /// </summary>
+        [Column("C_SUPPLYCODE")]
+        public string C_SupplyCode { get; set; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        [Column("C_SUPPLYNAME")]
+        public string C_SupplyName { get; set; }
+        /// <summary>
         /// 物料编码
         /// </summary>
         [Column("C_GOODSCODE")]
