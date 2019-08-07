@@ -339,6 +339,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(supplyEntity);
         }
         /// <summary>
+        /// 根据名称获取供应商实体信息
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByNameGetSupplyEntity(string name)
+        {
+            var supplyEntity = toosIBLL.ByNameGetSupplyEntity(name);
+            return Success(supplyEntity);
+        }
+        /// <summary>
         /// 根据名字获取用户实体信息
         /// </summary>
         /// <param name="name">名字</param>
@@ -359,6 +371,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetSupplyList()
         {
             var supplyList = toosIBLL.GetSupplyList();
+            return Success(supplyList);
+        } 
+        /// <summary>
+        /// 获取资质有效期的供应商列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetEffectSupplyList()
+        {
+            var supplyList = toosIBLL.GetEffectSupplyList();
             return Success(supplyList);
         }
         /// <summary>

@@ -292,6 +292,7 @@
     <Compile Include="Areas\MesDev\Controllers\CheckRecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\TeamController.cs" />
     <Compile Include="Areas\MesDev\Controllers\CompUseHeadController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\InPriceController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -2508,6 +2509,10 @@
     <Content Include="Areas\MesDev\Views\CompUseHead\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\Form.js" />
     <Content Include="Report\grf\InWorkShopReport.grf" />
+    <Content Include="Areas\MesDev\Views\InPrice\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\InPrice\Index.js" />
+    <Content Include="Areas\MesDev\Views\InPrice\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\InPrice\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

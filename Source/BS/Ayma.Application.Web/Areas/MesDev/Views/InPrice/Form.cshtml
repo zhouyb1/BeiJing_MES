@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "原物料入库价格表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">供应商名称<font face="宋体">*</font></div>
+        <div id="P_SupplyName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">供应商编码<font face="宋体">*</font></div>
+        <input id="P_SupplyCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+
+    <div class="col-xs-6 am-form-item" data-table="Mes_InPrice">
+        <div class="am-form-item-title">物料名称<font face="宋体">*</font>
+        </div>
+        <div id="P_GoodsName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_InPrice">
+        <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
+        <input id="P_GoodsCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">供应商价格<font face="宋体">*</font></div>
+        <input id="P_InPrice" type="number" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">税率<font face="宋体">*</font></div>
+        <input id="P_Itax" type="number" class="form-control" isvalid="yes" checkexpession="Money" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">起始批次<font face="宋体">*</font></div>
+        <input id="P_StartBatch" type="number" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
+        <div class="am-form-item-title">终止批次<font face="宋体">*</font></div>
+        <input id="P_EndBatch" type="number" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+  
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/InPrice/Form.js")

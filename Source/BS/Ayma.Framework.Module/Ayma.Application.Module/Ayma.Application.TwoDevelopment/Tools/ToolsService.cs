@@ -696,6 +696,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        } 
+        /// <summary>
+        /// 根据供应商名称获取供应商实体信息
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <returns></returns>
+        public Mes_SupplyEntity ByNameGetSupplyEntity(string name)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(x => x.S_Name == name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
 
         /// <summary>
@@ -731,6 +754,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return this.BaseRepository().FindList<Mes_SupplyEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取资质有效期的供应商列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_SupplyEntity> GetEffectSupplyList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_SupplyEntity>(c=>c.S_EffectTime>=DateTime.Now);
             }
             catch (Exception ex)
             {

@@ -169,6 +169,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_SupplyEntity ByCodeGetSupplyEntity(string code); 
         /// <summary>
+        /// 根据名称获取供应商实体信息
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <returns></returns>
+        Mes_SupplyEntity ByNameGetSupplyEntity(string name); 
+        /// <summary>
         /// 根据名字获取用户实体信息
         /// </summary>
         /// <param name="name">名字</param>
@@ -179,6 +185,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_SupplyEntity> GetSupplyList();
+        /// <summary>
+        /// 获取资质有效期的供应商列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_SupplyEntity> GetEffectSupplyList();
         /// <summary>
         /// 获取用户列表
         /// </summary>

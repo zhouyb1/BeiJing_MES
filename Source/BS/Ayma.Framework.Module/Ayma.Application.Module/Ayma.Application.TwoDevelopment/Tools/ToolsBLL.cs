@@ -613,6 +613,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         } 
         /// <summary>
+        /// 根据名称获取供应商实体信息
+        /// </summary>
+        /// <param name="name">名称</param>
+        /// <returns></returns>
+        public Mes_SupplyEntity ByNameGetSupplyEntity(string name)
+        {
+            try
+            {
+                return toolsService.ByNameGetSupplyEntity(name);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 根据名字获取用户实体信息
         /// </summary>
         /// <param name="name">名字</param>
@@ -644,6 +667,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.GetSupplyList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取资质有效期的供应商列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_SupplyEntity> GetEffectSupplyList()
+        {
+            try
+            {
+                return toolsService.GetEffectSupplyList();
             }
             catch (Exception ex)
             {

@@ -281,6 +281,10 @@
     <Compile Include="MesDev\CompUseHead\CompUseHeadService.cs" />
     <Compile Include="MesDev\CompUseHead\CompUseHeadBLL.cs" />
     <Compile Include="MesDev\CompUseHead\CompUseHeadIBLL.cs" />
+    <Compile Include="MesDev\InPrice\Mes_InPriceEntity.cs" />
+    <Compile Include="MesDev\InPrice\InPriceService.cs" />
+    <Compile Include="MesDev\InPrice\InPriceBLL.cs" />
+    <Compile Include="MesDev\InPrice\InPriceIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
