@@ -163,6 +163,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"SELECT  S.ID ,
                                         S.I_StockCode ,
                                         S.I_StockName ,
+                                        S.I_SupplyCode ,
+                                        S.I_SupplyName ,
                                         S.I_Kind ,
                                         S.I_GoodsCode ,
                                         S.I_GoodsName ,

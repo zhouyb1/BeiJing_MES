@@ -72,6 +72,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["C_OrderDate"] = newArray[i]['I_OrderDate'];
                     newArray[i]['C_GoodsCode'] = newArray[i]['I_GoodsCode'];
                     newArray[i]['C_GoodsName'] = newArray[i]['I_GoodsName'];
+                    newArray[i]['C_SupplyCode'] = newArray[i]['I_SupplyCode'];
+                    newArray[i]['C_SupplyName'] = newArray[i]['I_SupplyName'];
                     newArray[i]['C_Unit'] = newArray[i]['I_Unit'];
                     newArray[i]["C_Qty"] = quantity;
                     newArray[i]['C_Batch'] = newArray[i]['I_Batch'];
@@ -94,6 +96,8 @@ var bootstrap = function ($, ayma) {
                     //{ label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
+                    { label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
+                    { label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
@@ -117,6 +121,8 @@ var bootstrap = function ($, ayma) {
                         row["C_OrderDate"] = row['I_OrderDate'];
                         row['C_GoodsCode'] = row['I_GoodsCode'];
                         row['C_GoodsName'] = row['I_GoodsName'];
+                        row['C_SupplyCode'] = row['I_SupplyCode'];
+                        row['C_SupplyName'] = row['I_SupplyName'];
                         row['C_Unit'] = row['I_Unit'];
                         row['C_Batch'] = row["I_Batch"];
                         row["C_Qty"] = quantity;

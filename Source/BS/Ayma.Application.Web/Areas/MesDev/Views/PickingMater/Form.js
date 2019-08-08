@@ -127,7 +127,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
-                    { label: "批次", name: "C_Batch", width: 80, align: "left" }
+                    { label: "批次", name: "C_Batch", width: 80, align: "left" },
+                    {
+                        label: '供应商编码', name: 'C_SupplyCode', width: 140, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
+                    }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
