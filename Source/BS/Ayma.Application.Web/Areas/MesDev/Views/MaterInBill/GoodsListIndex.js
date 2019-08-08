@@ -83,6 +83,8 @@ var bootstrap = function ($, ayma) {
                     //copy需要更改的地方
                     newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
                     newArray[i]['M_GoodsName'] = newArray[i]['G_Name'];
+                    newArray[i]['M_SupplyCode'] = newArray[i]['G_SupplyCode'];
+                    newArray[i]['M_SupplyName'] = newArray[i]['G_SupplyName'];
                     newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]['M_Price'] = newArray[i]['G_Price'];
@@ -100,9 +102,11 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList?stockCode=' + stockCode,
                 headData: [
-                    { label: "物料编码", name: "ID", width: 130, align: "left", hidden: true },
+                    { label: "主键", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },
                     { label: "物料名称", name: "G_Name", width: 130, align: "left" },
+                    { label: "供应商编码", name: "G_SupplyCode", width: 130, align: "left" },
+                    { label: "供应商名称", name: "G_SupplyName", width: 130, align: "left" },
                      {
                          label: "商品类型", name: "G_Kind", width: 160, align: "left",
                          formatterAsync: function (callback, value, row) {
@@ -137,6 +141,8 @@ var bootstrap = function ($, ayma) {
                         //copy需要更改的地方
                         row['M_GoodsCode'] = row['G_Code'];
                         row['M_GoodsName'] = row['G_Name'];
+                        row['M_SupplyCode'] = row['G_SupplyCode'];
+                        row['M_SupplyName'] = row['G_SupplyName'];
                         row['M_Unit'] = row['G_Unit'];
                         row['M_Kind'] = row['G_Kind'];
                         row['M_Price'] = row['G_Price'];

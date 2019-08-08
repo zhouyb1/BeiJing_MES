@@ -41,8 +41,8 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '新增物料',
                     url: top.$.rootUrl + '/MesDev/GoodsList/Form',
-                    width: 700,
-                    height: 500,
+                    width: 800,
+                    height: 550,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -58,7 +58,7 @@ var bootstrap = function ($, ayma) {
                         title: '编辑物料',
                         url: top.$.rootUrl + '/MesDev/GoodsList/Form?keyValue=' + keyValue,
                         width: 800,
-                        height: 500,
+                        height: 550,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -102,6 +102,7 @@ var bootstrap = function ($, ayma) {
                     { label: "商品编码", name: "g_code", width: 120, align: "left" },
                     { label: "商品erp编码", name: "g_erpcode", width: 120, align: "left" },
                     { label: "商品名称", name: "g_name", width: 160, align: "left" },
+                    { label: "供应商名称", name: "g_supplyname", width: 160, align: "left" },
                     {
                         label: "商品类型", name: "g_kind", width: 80, align: "left",
                         formatterAsync: function (callback, value, row) {

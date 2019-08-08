@@ -33,6 +33,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       g.[ID]
                       ,g.[G_Code]
                       ,g.[G_Name]
+                      ,g.[G_SupplyName]
                       ,g.[G_Kind]
                       ,g.[G_Period]
                       ,g.[G_Price]

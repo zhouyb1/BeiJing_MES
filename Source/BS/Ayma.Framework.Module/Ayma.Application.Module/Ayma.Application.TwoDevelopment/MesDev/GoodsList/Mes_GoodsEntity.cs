@@ -18,6 +18,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
+        /// 供应商编码
+        /// </summary>
+        [Column("G_SUPPLYCODE")]
+        public string G_SupplyCode { get; set; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        [Column("G_SUPPLYNAME")]
+        public string G_SupplyName { get; set; }
+        /// <summary>
         /// 商品编码
         /// </summary>
         [Column("G_CODE")]

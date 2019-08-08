@@ -14,6 +14,30 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            //供应商名称
+            $("#G_SupplyName").select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
+                // 访问数据接口参数
+            }).bind("change", function () {
+                var name = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetSupplyEntity',
+                    data: { name: name },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#G_SupplyCode").val(entity.S_Code);
+                    }
+                });
+            });
             //商品类型
             $("#G_Kind").DataItemSelect({ code: "GoodsType" }).on('change', function () {
                 var value = $(this).selectGet();

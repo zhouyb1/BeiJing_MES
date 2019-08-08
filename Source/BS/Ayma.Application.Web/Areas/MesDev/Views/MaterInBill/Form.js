@@ -69,7 +69,7 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderListBy',
                 // 访问数据接口参数
-                param: { orderStartDate: getDay(-3), orderEndDate: getDay(0) }
+                param: { orderStartDate: getDay(-3000), orderEndDate: getDay(0) }
             });
             //单据状态
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
@@ -100,6 +100,7 @@ var bootstrap = function ($, ayma) {
                     {
                         label: '物料名称', name: 'M_GoodsName', width: 140, align: 'left', editType: 'label'
                     },
+                    
                      {
                          label: "商品类型", name: "M_Kind", width: 100, align: "left",
                          formatterAsync: function (callback, value, row) {
@@ -148,6 +149,12 @@ var bootstrap = function ($, ayma) {
 
                             }
                         }
+                    },
+                    {
+                        label: '供应商编码', name: 'M_SupplyCode', width: 140, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '供应商名称', name: 'M_SupplyName', width: 140, align: 'left', editType: 'label'
                     },
                     {
                         label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'input'

@@ -89,6 +89,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@" SELECT [ID]
                                   ,[G_Code]
                                   ,[G_Name]
+                                  ,[G_SupplyCode]
+                                  ,[G_SupplyName]
                                   ,[G_Kind]
                                   ,[G_Period]
                                   ,[G_Price]
