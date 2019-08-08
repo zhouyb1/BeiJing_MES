@@ -361,9 +361,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
             foreach (var item in mes_MaterInDetailList)
             {
-                if (string.IsNullOrEmpty(item.M_Qty.ToString()))
+                if (string.IsNullOrEmpty(item.M_Qty.ToString())||item.M_Qty==0)
                 {
-                    return Fail("商品【" + item.M_GoodsName + "】入库数量不能为空!");
+                    return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
+                }
+                if (string.IsNullOrEmpty(item.M_Price.ToString()) || item.M_Price == 0)
+                {
+                    return Fail("物料【" + item.M_GoodsName + "】价格不能为空!");
                 }
             }
             if (string.IsNullOrEmpty(keyValue))

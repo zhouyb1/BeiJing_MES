@@ -140,6 +140,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input'
                     },
                     {
+                        label: '供应商编码', name: 'M_SupplyCode', width: 140, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '供应商名称', name: 'M_SupplyName', width: 140, align: 'left', editType: 'label'
+                    },
+                    {
                         label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'input'
                     }
                 ],
@@ -185,7 +191,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
         for (var i = 0; i < rowlist.length; i++) {
             if (rowlist[i]["M_Qty"] == "" || rowlist[i]["M_Qty"] == "0") {
-                ayma.alert.error("数量不能为空");
+                ayma.alert.error("数量不能为空或不能为零");
                 return false;
             }
         }
