@@ -75,7 +75,7 @@
 				"Width":1.79917
 			},
 			{
-				"Name":"Column2"
+				"Name":"M_Batch"
 			}
 		],
 		"ColumnContent":{
@@ -90,7 +90,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.423333,
-							"Width":2.80458,
+							"Width":2.75167,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -114,7 +114,8 @@
 					"DataField":"M_Unit"
 				},
 				{
-					"Column":"Column2"
+					"Column":"M_Batch",
+					"DataField":"M_Batch"
 				}
 			]
 		},
@@ -153,7 +154,7 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"Column2",
+					"Column":"M_Batch",
 					"TextAlign":"MiddleCenter",
 					"Text":"批次"
 				}

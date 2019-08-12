@@ -20,11 +20,29 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 视图功能
 
         /// <summary>
+        /// 毛到净出乘率
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport()
+        {
+             return View();
+        } 
+        /// <summary>
         /// 物料列表导入
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult ImportForm()
+        {
+             return View();
+        }
+        /// <summary>
+        /// 毛到净出成率
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult YieldRateIndex()
         {
              return View();
         }
@@ -50,6 +68,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         #region 获取数据
 
+        /// <summary>
+        /// 获取毛到净出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetYieldRatePageList(string pagination, string queryJson)
+        {
+            var data = goodsListIBLL.GetYieldRatePageList(queryJson);
+           
+            return Success(data);
+        } 
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>

@@ -17,6 +17,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 获取数据
 
         /// <summary>
+        /// 获取毛到净出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetYieldRatePageList(string queryJson)
+        {
+            try
+            {
+                return goodsListService.GetYieldRatePageList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

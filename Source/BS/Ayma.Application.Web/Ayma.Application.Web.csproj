@@ -524,6 +524,7 @@
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
@@ -2314,6 +2315,8 @@
     <Content Include="Areas\MesDev\Views\InventorySeach\PickOrUserIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PriceSearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\ProceManager\ProceIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodsList\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2513,6 +2516,7 @@
     <Content Include="Areas\MesDev\Views\InPrice\Index.js" />
     <Content Include="Areas\MesDev\Views\InPrice\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\InPrice\Form.js" />
+    <Content Include="Report\grf\YieldRateReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2653,7 +2657,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:20472/</IISUrl>
+          <IISUrl>http://localhost:20471/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
