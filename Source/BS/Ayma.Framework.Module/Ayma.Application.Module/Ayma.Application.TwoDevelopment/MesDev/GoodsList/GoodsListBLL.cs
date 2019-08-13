@@ -61,6 +61,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        }
+        /// <summary>
+        /// 获取包装偏差率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetPackingRatePageList(string queryJson)
+        {
+            try
+            {
+                return goodsListService.GetPackingRatePageList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         } 
         /// <summary>
         /// 获取页面显示列表数据

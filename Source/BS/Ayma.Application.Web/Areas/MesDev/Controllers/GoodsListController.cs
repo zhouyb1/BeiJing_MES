@@ -36,6 +36,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult LivingToCookIndex()
         {
              return View();
+        }  
+        /// <summary>
+        /// 包装偏差率
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PackingRateIndex()
+        {
+             return View();
         } 
         /// <summary>
         /// 物料列表导入
@@ -100,6 +109,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetLivingToCookPageList(string pagination, string queryJson)
         {
             var data = goodsListIBLL.GetLivingToCookPageList(queryJson);
+           
+            return Success(data);
+        } 
+        /// <summary>
+        /// 获取包装偏差率出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPackingRatePageList(string pagination, string queryJson)
+        {
+            var data = goodsListIBLL.GetPackingRatePageList(queryJson);
            
             return Success(data);
         } 

@@ -26,6 +26,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         DataTable GetLivingToCookPageList(string queryJson); 
         /// <summary>
+        /// 获取包装偏差率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetPackingRatePageList(string queryJson); 
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

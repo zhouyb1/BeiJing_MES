@@ -490,6 +490,114 @@ using MyDbReportData = DatabaseXmlReportData;
             QueryList.Add(new ReportQueryItem(strSql, "YieldRate"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
+        } /// <summary>
+        /// 包装偏差率打印
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string PackingRate(string name)
+        {
+            var strSql = @"
+ WITH cte AS (
+				 SELECT  o.O_GoodsName ,
+				( SELECT    CONVERT(VARCHAR, C_Min * 100) + '-'
+							+ CONVERT(VARCHAR, C_Max * 100) AS rate
+				  FROM      dbo.Mes_Convert c
+				  WHERE     c.C_ProNo = h.O_ProCode
+				) rate ,
+				( SELECT    b.B_FormulaName
+				  FROM      dbo.Mes_BomRecord b
+				  WHERE     b.B_FormulaCode = h.O_Record
+				) FormulaName ,
+				( CASE WHEN MONTH(O_CreateDate) = 1
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) January ,
+				( CASE WHEN MONTH(O_CreateDate) = 2
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) February ,
+				( CASE WHEN MONTH(O_CreateDate) = 3
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) March ,
+				( CASE WHEN MONTH(O_CreateDate) = 4
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) April ,
+				( CASE WHEN MONTH(O_CreateDate) = 5
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) May ,
+				( CASE WHEN MONTH(O_CreateDate) = 6
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) June ,
+				( CASE WHEN MONTH(O_CreateDate) = 7
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) July ,
+				( CASE WHEN MONTH(O_CreateDate) = 8
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty)* 100))
+					   ELSE 0
+				  END ) August ,
+				( CASE WHEN MONTH(O_CreateDate) = 9
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) September ,
+				( CASE WHEN MONTH(O_CreateDate) = 10
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) October ,
+				( CASE WHEN MONTH(O_CreateDate) = 11
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) November ,
+				( CASE WHEN MONTH(O_CreateDate) = 12
+					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
+							* 100)
+					   ELSE 0
+				  END ) December
+		FROM    dbo.Mes_OrgResDetail o
+				JOIN dbo.Mes_OrgResHead h ON h.O_OrgResNo = o.O_OrgResNo
+				
+		WHERE   h.O_ProCode = '06' AND o.O_GoodsCode IN ( SELECT   g.G_Code
+                               FROM     dbo.Mes_Goods g
+                               WHERE    g.G_TKind = '01' )
+		       
+		GROUP BY O_CreateDate ,
+				O_GoodsName ,
+				h.O_Record ,
+				O_ProCode ) 
+        SELECT *,
+        cte.[January]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'JanDiff',
+        cte.[February]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'FebDiff',
+        cte.[March]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'MarDiff',
+        cte.[April]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'AprDiff',
+        cte.[May]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'MayDiff',
+        cte.[June]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'JunDiff',
+        cte.[July]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'JulyDiff',
+        cte.[August]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'AugDiff',
+        cte.[September]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'SeptDiff',
+        cte.[October]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'OctDiff',
+        cte.November-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'NovDiff',
+        cte.[December]-CONVERT(DECIMAL(10,2),SUBSTRING(cte.rate,1,2))'DecDiff'
+        FROM cte where 1=1
+        ";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(strSql, "YieldRate"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
         }
 
         /// <summary>
@@ -662,10 +770,15 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("ProductOrder", ProductOrder);
             SpecialDataFunMap.Add("YieldRate", YieldRate);
             SpecialDataFunMap.Add("LivingToCook", LivingToCook);
+            SpecialDataFunMap.Add("PackingRate", PackingRate);
            
             #endregion
         }
 
+        private static string PackingRate(HttpRequest Request)
+        {
+            return PackingRate(Request.QueryString["name"]);
+        }  
         private static string LivingToCook(HttpRequest Request)
         {
             return LivingToCook(Request.QueryString["name"]);

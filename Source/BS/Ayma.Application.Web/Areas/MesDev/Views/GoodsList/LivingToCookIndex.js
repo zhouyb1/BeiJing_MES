@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
  * 日  期：2019-01-07 13:55
- * 描  述：物料列表
+ * 描  述：生到熟出成率
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
