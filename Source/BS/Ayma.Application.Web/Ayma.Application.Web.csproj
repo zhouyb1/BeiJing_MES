@@ -524,6 +524,7 @@
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
@@ -2317,6 +2318,7 @@
     <Content Include="Areas\MesDev\Views\ProceManager\ProceIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2517,6 +2519,7 @@
     <Content Include="Areas\MesDev\Views\InPrice\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\InPrice\Form.js" />
     <Content Include="Report\grf\YieldRateReport.grf" />
+    <Content Include="Report\grf\LivingToCookReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

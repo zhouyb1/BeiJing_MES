@@ -40,6 +40,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         } 
         /// <summary>
+        /// 获取生到熟出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetLivingToCookPageList(string queryJson)
+        {
+            try
+            {
+                return goodsListService.GetLivingToCookPageList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

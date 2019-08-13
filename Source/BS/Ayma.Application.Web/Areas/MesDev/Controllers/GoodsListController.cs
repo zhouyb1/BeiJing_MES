@@ -20,11 +20,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 视图功能
 
         /// <summary>
-        /// 毛到净出乘率
+        /// 毛到净出成率
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult PrintReport()
+        {
+             return View();
+        }  
+        /// <summary>
+        /// 生到熟出成率
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult LivingToCookIndex()
         {
              return View();
         } 
@@ -78,6 +87,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetYieldRatePageList(string pagination, string queryJson)
         {
             var data = goodsListIBLL.GetYieldRatePageList(queryJson);
+           
+            return Success(data);
+        } 
+        /// <summary>
+        /// 获取生到熟出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetLivingToCookPageList(string pagination, string queryJson)
+        {
+            var data = goodsListIBLL.GetLivingToCookPageList(queryJson);
            
             return Success(data);
         } 
