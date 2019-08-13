@@ -89,8 +89,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.423333,
-							"Width":2.75167,
+							"Left":-0.370417,
+							"Width":2.72521,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -180,7 +180,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.19125,
+					"Left":6.40292,
 					"Top":1.82563,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -237,9 +237,9 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":2.80458,
+					"Left":2.59292,
 					"Top":2.59292,
-					"Width":3.38667,
+					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"M_OrderNo"
 				},
@@ -312,9 +312,9 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.80458,
+					"Left":2.59292,
 					"Top":1.79917,
-					"Width":3.38667,
+					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"M_OrderNo"
 				}

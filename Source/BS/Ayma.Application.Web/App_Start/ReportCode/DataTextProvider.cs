@@ -378,6 +378,7 @@ using MyDbReportData = DatabaseXmlReportData;
         FROM cte where 1=1
         ";
             ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(strSql, "YieldRate"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
@@ -557,7 +558,7 @@ using MyDbReportData = DatabaseXmlReportData;
 
         private static string YieldRate(HttpRequest Request)
         {
-            return OutWorkShop(Request.QueryString["name"]);
+            return YieldRate(Request.QueryString["name"]);
         }  
         private static string OutWorkShop(HttpRequest Request)
         {
