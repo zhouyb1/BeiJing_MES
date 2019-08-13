@@ -17,6 +17,8 @@ var queryJson;
 var closeWindow;
 //批次
 var batch = new Date();
+//订单
+var orderNo = request('orderNo');
 //仓库编码
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -120,6 +122,7 @@ var bootstrap = function ($, ayma) {
                         row['O_SecBatch'] = row['G_Batch'];
                         row["O_SecPrice"] = row["G_Price"];
                         row["ID"] = row["G_ID"];
+                        //组装前
 
                         $.ajax({
                             type:"get",
@@ -168,7 +171,8 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            queryJson = param;
+            queryJson = param || {};
+            queryJson.orderNo = orderNo;
             param = $("#txt_Keyword").val();
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }

@@ -111,10 +111,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <param name="pagination"></param>
         /// <param name="keyword"></param>
         /// <returns></returns>
-        public ActionResult GetGoodsList(string pagination, string keyword)
+        public ActionResult GetGoodsList(string pagination, string keyword, string queryJson)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = orgResMangerIBLL.GetGoodsList(paginationobj, keyword);
+            var data = orgResMangerIBLL.GetGoodsList(paginationobj, keyword, queryJson);
             var jsonData = new
             {
                 rows = data,

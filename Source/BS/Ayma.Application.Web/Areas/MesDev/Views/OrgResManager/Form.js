@@ -22,7 +22,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
            var  dfop = {
                 type: 'default',
-                value: 'W_Code',
+                value: 'W_Name',
                 text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -35,10 +35,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
            }
             //绑定车间
             $('#O_WorkShopName').select(dfop).on('change', function() {
-                var code = $(this).selectGet();
-                $('#O_WorkShopCode').val(code);
+                var name = $(this).selectGet();
+                //绑定车间编码
+                ayma.httpAsyncGet(top.$.rootUrl + '/MesDev/Tools/ByNameGetWorkShopEntity?name='+name, function(result) {
+                    $('#O_WorkShopCode').val(result.data.W_Code);
+                });
             });
-            //绑定工序
+            //绑定工艺
             dfop= {
                 type: 'default',
                 value: 'R_Record',
@@ -52,30 +55,20 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }
-            $('#O_ProCode').select().on('click', function() {
-                var record = $("#O_Record").selectGet();
-                if (!record) {
-                   ayma.alert.warning('请先选择工艺');
-                    return false;
-                }
-            });
-            $('#O_Record').select(dfop).on('change', function() {
-                var record = $(this).selectGet();
-                dfop = {
-                    type: 'default',
-                    value: 'P_ProNo',
-                    text: 'P_ProNo',
-                    // 展开最大高度
-                    maxHeight: 200,
-                    // 是否允许搜索
-                    allowSearch: true,
-                    // 访问数据接口地址
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetProceEntity',
-                    // 访问数据接口参数
-                    param: { code: record }
-                };
-                $('#O_ProCode').selectRefresh(dfop);
-
+            $('#O_Record').select(dfop);
+            //绑定工序
+            $('#O_ProCode').select({
+                type: 'default',
+                value: 'P_ProNo',
+                text: 'P_ProName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
+                // 访问数据接口参数
+                param: {}
             });
             //$('#O_ProCode').select();
 
@@ -125,7 +118,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId ,
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + "&orderNo=" + $("#O_OrderNo").selectGet(),
                     width: 800,
                     height: 500,
                     maxmin: true,
