@@ -45,11 +45,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword)
+        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             try
             {
-                return orgResMangerService.GetGoodsList(obj, keyword);
+                return orgResMangerService.GetGoodsList(obj, keyword, queryJson);
             }
             catch (Exception ex)
             {

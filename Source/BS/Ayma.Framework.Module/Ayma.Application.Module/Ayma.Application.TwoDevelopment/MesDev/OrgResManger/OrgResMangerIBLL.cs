@@ -31,7 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword);
+        IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword, string queryJson);
         /// <summary>
         /// 获取Mes_OrgResDetail表实体数据
         /// </summary>

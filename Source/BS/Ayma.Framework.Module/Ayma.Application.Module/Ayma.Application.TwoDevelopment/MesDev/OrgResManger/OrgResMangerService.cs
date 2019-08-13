@@ -89,25 +89,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword)
+        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT t.ID G_ID, t.I_StockCode G_StockCode ,
-                                t.I_StockName G_StockName ,
-                                t.I_Batch G_Batch ,
-                                t.I_GoodsCode G_GoodsCode,
-                                t.I_GoodsName G_GoodsName,
-                                t.I_Unit G_Unit ,
-                                g.G_Price ,
-                                t.I_Qty G_Qty 
-                        FROM    dbo.Mes_Inventory t
-                        LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE 1=1 ");
+            sb.Append(@"SELECT  ID G_ID ,
+                                W_Batch G_Batch ,
+                                W_GoodsCode G_GoodsCode ,
+                                W_GoodsName G_GoodsName ,
+                                W_Qty G_Qty ,
+                                W_Price G_Price ,
+                                W_Unit G_Unit ,
+                                W_WorkShop G_WorkShop,
+                                W_WorkShopName G_WorkShopName ,
+                                W_ProceName G_ProceName,
+                                W_ProceCode G_ProceCode
+                        FROM    dbo.Mes_WorkShopScan WHERE 1=1  AND W_OrderNo =@orderNo");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
+            var queryParam = queryJson.ToJObject();
+            dp.Add("orderNo", queryParam["orderNo"].ToString(), DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                sb.Append(" AND I_GoodsName+I_GoodsName like @keyword ");
+                sb.Append(" AND W_GoodsCode+W_GoodsName like @keyword ");
             }
             return this.BaseRepository().FindList<GoodsEntity>(sb.ToString(), dp, obj);
         }
