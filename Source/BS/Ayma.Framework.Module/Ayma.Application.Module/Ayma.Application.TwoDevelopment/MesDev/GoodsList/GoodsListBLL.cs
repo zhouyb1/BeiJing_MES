@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         } 
         /// <summary>
-        /// 获取生到熟出成率
+        /// 获取粗加工出成率
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
@@ -49,6 +49,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 return goodsListService.GetLivingToCookPageList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        } 
+        /// <summary>
+        /// 获取细加工出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetLivingToCookDetail(string queryJson)
+        {
+            try
+            {
+                return goodsListService.GetLivingToCookDetail(queryJson);
             }
             catch (Exception ex)
             {

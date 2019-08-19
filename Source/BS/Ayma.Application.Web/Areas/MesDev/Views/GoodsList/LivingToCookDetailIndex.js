@@ -1,6 +1,6 @@
 ﻿/* * 创建人：超级管理员
  * 日  期：2019-01-07 13:55
- * 描  述：粗加工出成率
+ * 描  述：细加工出成率
  */
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
@@ -24,9 +24,9 @@ var bootstrap = function ($, ayma) {
                 //var name = $("#G_Name").val();
                 //if (ayma.checkrow(name)) {
                 ayma.layerForm({
-                    id: 'LivingToCookReport',
-                    title: '粗加工出成率打印',
-                    url: top.$.rootUrl + '/MesDev/GoodsList/PrintReport?name=' + name + "&report=LivingToCookReport&data=LivingToCook",
+                    id: 'LivingToCookDetailReport',
+                    title: '细加工出成率打印',
+                    url: top.$.rootUrl + '/MesDev/GoodsList/PrintReport?name=' + name + "&report=LivingToCookDetailReport&data=LivingToCookDetail",
                     width: 1000,
                     height: 800,
                     maxmin: true,
@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/GoodsList/GetLivingToCookPageList',
+                url: top.$.rootUrl + '/MesDev/GoodsList/GetLivingToCookDetail',
                 headData: [
                     {
                         label: "项目", name: "项目", width: 120, align: "center", children: [
@@ -51,7 +51,7 @@ var bootstrap = function ($, ayma) {
                         ]
                     },
                     {
-                        label: "粗加工出成率%", name: "粗加工出成率%", width: 100, align: "center", children: [
+                        label: "细加工出成率%", name: "细加工出成率%", width: 100, align: "center", children: [
                                 { label: "指标", name: "rate", width: 100, align: "center" },
                                 { label: "1月", name: "january", width: 80, align: "center" },
                                 { label: "2月", name: "february", width: 80, align: "center" },

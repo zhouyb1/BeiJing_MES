@@ -20,11 +20,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         DataTable GetYieldRatePageList(string queryJson);  
         /// <summary>
-        /// 获取生到熟出成率
+        /// 获取粗加工出成率
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
         DataTable GetLivingToCookPageList(string queryJson); 
+        /// <summary>
+        /// 获取细加工出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetLivingToCookDetail(string queryJson); 
         /// <summary>
         /// 获取包装偏差率
         /// </summary>

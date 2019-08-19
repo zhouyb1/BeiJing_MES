@@ -162,7 +162,7 @@ var bootstrap = function ($, ayma) {
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 400,
+                minheight: 320,
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,

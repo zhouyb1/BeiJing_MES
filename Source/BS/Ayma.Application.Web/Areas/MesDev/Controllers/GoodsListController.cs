@@ -29,11 +29,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
              return View();
         }  
         /// <summary>
-        /// 生到熟出成率
+        /// 粗加工出成率
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public ActionResult LivingToCookIndex()
+        {
+             return View();
+        }
+        /// <summary>
+        /// 细加工出成率
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult LivingToCookDetailIndex()
         {
              return View();
         }  
@@ -100,7 +109,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(data);
         } 
         /// <summary>
-        /// 获取生到熟出成率
+        /// 获取粗加工出成率
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
@@ -109,6 +118,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetLivingToCookPageList(string pagination, string queryJson)
         {
             var data = goodsListIBLL.GetLivingToCookPageList(queryJson);
+           
+            return Success(data);
+        } 
+        /// <summary>
+        /// 获取细加工出成率
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetLivingToCookDetail(string pagination, string queryJson)
+        {
+            var data = goodsListIBLL.GetLivingToCookDetail(queryJson);
            
             return Success(data);
         } 

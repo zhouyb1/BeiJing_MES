@@ -524,6 +524,7 @@
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.css" />
     <Content Include="Areas\MesDev\Views\GoodsList\ImportForm.js" />
+    <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookDetailIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\PackingRateIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.js" />
@@ -2321,6 +2322,7 @@
     <Content Include="Areas\MesDev\Views\GoodsList\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\PackingRateIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookDetailIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2523,6 +2525,7 @@
     <Content Include="Report\grf\YieldRateReport.grf" />
     <Content Include="Report\grf\LivingToCookReport.grf" />
     <Content Include="Report\grf\PackingRateReport.grf" />
+    <Content Include="Report\grf\LivingToCookDetailReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -2663,7 +2666,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>20472</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:20472/</IISUrl>
+          <IISUrl>http://localhost:20473/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
