@@ -47,7 +47,9 @@ var bootstrap = function ($, ayma) {
                     {
                         label: "项目", name: "项目", width: 120, align: "center", children: [
                               { label: "物料名称", name: "o_goodsname", width: 120, align: "center" },
-                              { label: "配方名称", name: "formulaname", width: 120, align: "center" }
+                              { label: "配方名称", name: "formulaname", width: 120, align: "center" },
+                               { label: "原材料库领用数量", name: "requireQty", width: 120, align: "center" },
+                                { label: "产出数量", name: "productQty", width: 120, align: "center" }
                         ]
                     },
                     {
