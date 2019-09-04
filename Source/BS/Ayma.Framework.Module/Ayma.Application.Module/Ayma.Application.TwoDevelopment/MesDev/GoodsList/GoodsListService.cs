@@ -41,6 +41,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 				  FROM      dbo.Mes_BomRecord b
 				  WHERE     b.B_FormulaCode = h.O_Record
 				) FormulaName ,
+                CONVERT(DECIMAL(18,2),SUM(o.O_Qty))requireQty,
+			    CONVERT(DECIMAL(18,2),SUM(o.O_SecQty)) productQty,
 				( CASE WHEN MONTH(O_CreateDate) = 1
 					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
 							* 100)
@@ -178,6 +180,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 				  FROM      dbo.Mes_BomRecord b
 				  WHERE     b.B_FormulaCode = h.O_Record
 				) FormulaName ,
+                CONVERT(DECIMAL(18,2),SUM(o.O_Qty))requireQty,
+			    CONVERT(DECIMAL(18,2),SUM(o.O_SecQty)) productQty,
 				( CASE WHEN MONTH(O_CreateDate) = 1
 					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
 							* 100)
@@ -315,6 +319,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 				  FROM      dbo.Mes_BomRecord b
 				  WHERE     b.B_FormulaCode = h.O_Record
 				) FormulaName ,
+                CONVERT(DECIMAL(18,2),SUM(o.O_Qty))requireQty,
+			    CONVERT(DECIMAL(18,2),SUM(o.O_SecQty)) productQty,
 				( CASE WHEN MONTH(O_CreateDate) = 1
 					   THEN CONVERT(DECIMAL(10, 2), ( SUM(o.O_SecQty) / SUM(o.O_Qty) )
 							* 100)
