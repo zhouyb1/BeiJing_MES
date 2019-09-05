@@ -43,7 +43,7 @@ namespace Model
         /// <summary>
         /// 供应商名称
         /// </summary>
-        public string G_Supply{ set; get; }
+        public string G_SupplyName{ set; get; }
         /// <summary>
         /// 数量
         /// </summary>

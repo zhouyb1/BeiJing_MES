@@ -70,7 +70,7 @@ namespace DesktopApp
             checkBox1.Checked = true;
             comGoods.Items.Clear();
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-            var row = GoodsBLL.GetList("", "");
+            var row = GoodsBLL.GetData(" and G_Kind = 1");
             for (int i = 0; i < row.Count; i++)
             {
                 comGoods.Items.Add(row[i].G_Code + "$" + row[i].G_Name);
@@ -175,19 +175,19 @@ namespace DesktopApp
             {
                 strQty = Convert.ToDecimal(txtQty.Text.Trim());
             }
-            g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 10, 20);
-            g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 10, 40);
+            g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 10, 10);
+            g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 10, 25);
             //if (checkBox1.Checked == true)
-            g.DrawString("    数量：" + strQty.ToString(), fontLiShu3, Brushes.Black, 10, 60);
-            g.DrawString("    批次：" + txtBatch.Text.Trim(), fontLiShu3, Brushes.Black, 10, 80);
-            g.DrawString("    时间：" + DateTime.Now, fontLiShu3, Brushes.Black, 10, 100);
+            g.DrawString("    数量：" + strQty.ToString(), fontLiShu3, Brushes.Black, 10, 40);
+            g.DrawString("    批次：" + txtBatch.Text.Trim(), fontLiShu3, Brushes.Black, 10, 55);
+            g.DrawString("    时间：" + DateTime.Now, fontLiShu3, Brushes.Black, 10, 70);
 
             string str = strGoods[0] + "*" + txtBatch.Text.Trim() + "*" + txtQty.Text.Trim();
 
             prin1.barcodeControl1.Data = str;
             prin1.barcodeControl1.Caption = str;
             Rectangle rect = prin1.barcodeControl1.ClientRectangle;
-            rect = new Rectangle(10, 120, 280, 80);
+            rect = new Rectangle(20, 80, 80, 40);
             prin1.barcodeControl1.Draw(g, rect, GraphicsUnit.Inch, 0.01f, 0, null);
 
 
@@ -324,8 +324,7 @@ namespace DesktopApp
                     MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                     //MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
                     var Goods_rows = GoodsBLL.GetList(strGoods[0], "");
-                    MesBasketBLL BasketBLL = new MesBasketBLL();
-                    var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
+                    
                     string cz = "";//是否存在相同物料
 
                     MaterInDetail.M_MaterInNo = txtMaterInNo.Text;
@@ -336,7 +335,7 @@ namespace DesktopApp
                     
                     if (checkBox1.Checked == true)
                     {
-                        drqQty = decimal.Parse(Basket_rows[0].M_Weight.ToString());
+                        drqQty = decimal.Parse(txtBasketQty.Text);
                         MaterInDetail.M_Qty = decimal.Parse(txtQty.Text) - drqQty;
                      }
                     else
@@ -528,19 +527,32 @@ namespace DesktopApp
                     byte[] byRead = null;
                     byRead = new byte[2048];
                     int nReadLen;
+                    Thread.Sleep(100);
                     nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
                     string str = System.Text.Encoding.Default.GetString(byRead);
                     string[] strWeight = str.Split('=');
                     int nLen = strWeight.Length;
-                    if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 1].ToString() == strWeight[nLen - 2].ToString())
+                    if(nLen > 1)
                     {
-                        txtQty.Text = strWeight[nLen - 1].ToString();
+                        //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
+                        //{
+                            txtQty.Text = strWeight[nLen - 1].ToString();
+                        //}
+                        //else
+                        //{
+                            //MessageBox.Show("串口没有打开");
+
+                        //}
+                        Close();
+                        Thread.Sleep(1000);
                     }
                     else
                     {
-                        MessageBox.Show("串口没有打开");
-
+                        MessageBox.Show(str);
+                        Close();
+                        Thread.Sleep(1000);
                     }
+
                     //MessageBox.Show(str);
                 }
                 else
@@ -561,6 +573,7 @@ namespace DesktopApp
         {
             try
             {
+                serialPort1.PortName = Globels.strCom;
                 serialPort1.BaudRate = 1200;
                 serialPort1.Open();
                 return true;
@@ -606,7 +619,30 @@ namespace DesktopApp
                     txtKind.Text = "原物料";
                 }
                 txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+
+                cmbSupply.Items.Clear();
+                Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
+                var InPrice_row = InPriceBLL.GetList_Mes_Price("where P_GoodsCode = '" + strGoods[0] + "'");
+                if (InPrice_row.Count > 0)
+                {
+                    for (int i = 0; i < InPrice_row.Count; i++)
+                    {
+                        cmbSupply.Items.Add(InPrice_row[i].P_SupplyName);
+                    }
+                    if(InPrice_row.Count == 1)
+                    {
+                        cmbSupply.Text = InPrice_row[0].P_SupplyName;
+                    }
+                }
+                else
+                {
+                    untCommon.InfoMsg("请先维护商品的入库价格");
+                    return;
+                }
+
                 txtQty.Focus();
+
+
             }
             else
             {
@@ -617,6 +653,18 @@ namespace DesktopApp
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comBasketType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesBasketBLL BasketBLL = new MesBasketBLL();
+            var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
+            txtBasketQty.Text = Basket_rows[0].M_Weight.ToString();
+        }
+
+        private void cmbSupply_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

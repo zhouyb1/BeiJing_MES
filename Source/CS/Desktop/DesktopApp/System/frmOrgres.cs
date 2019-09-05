@@ -56,6 +56,20 @@ namespace DesktopApp
                 cmbRecord.Items.Add(Record_rows[i].R_Record);
             }
 
+
+            Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
+            var row = ProceBLL.GetList_Proce(" where 1 = 1 ");
+            for (int i = 0; i < row.Count; i++)
+            {
+                cmbProce.Items.Add(row[i].P_ProNo);
+            }
+            if (cmbProce.Items.Contains(Globels.strProce))
+            {
+                cmbProce.Text = Globels.strProce;
+            }
+            
+
+
             Mes_TeamBLL TeamBLL = new Mes_TeamBLL();
             var Team_rows = TeamBLL.GetList_Team(" where 1 = 1 ");
             for (int i = 0; i < Team_rows.Count; i++)
@@ -84,13 +98,6 @@ namespace DesktopApp
 
         private void cmbRecord_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
-            var row = ProceBLL.GetList_Proce(" where P_RecordCode = '" + cmbRecord.Text + "'");
-            for (int i = 0; i < row.Count; i++)
-            {
-                cmbProce.Items.Add(row[i].P_ProNo);
-            }
-
             MesRecordBLL RecordBLL = new MesRecordBLL();
             var Record_rows = RecordBLL.GetData(" where R_Record = '" + cmbRecord.Text + "'");
             txtRecordName.Text = Record_rows[0].R_Name;
@@ -102,7 +109,7 @@ namespace DesktopApp
         private void cmbProce_SelectedIndexChanged(object sender, EventArgs e)
         {
             Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
-            var row = ProceBLL.GetList_Proce("where P_RecordCode = '" + cmbRecord.Text + "' and P_ProNo = '" + cmbProce.Text + "'");
+            var row = ProceBLL.GetList_Proce("where P_ProNo = '" + cmbProce.Text + "'");
             txtProceName.Text = row[0].P_ProName;
         }
 

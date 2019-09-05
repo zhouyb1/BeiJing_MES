@@ -124,6 +124,7 @@ namespace DesktopApp
 
                 department = user.D_Code;
                 role = user.R_Code;
+
                 F_Account.Text = user.F_Account;
                 F_RealName.Text = user.F_RealName;
                 F_Password.Text = "******";//user.F_Password ;
@@ -132,7 +133,7 @@ namespace DesktopApp
                 cmbImage.Text = "照片1";
 
                 D_Code.Text = department;
-                R_Code.Text = role;
+                R_Code.SelectedValue = role;
 
                 F_Mobile.Text = user.F_Mobile;
                 F_Email.Text = user.F_Email;
@@ -315,7 +316,7 @@ namespace DesktopApp
                     user.D_Code = D_Code.Text;
                     user.F_DepartmentId = rows[0].F_DepartmentId;
 
-                    user.R_Code = R_Code.Text;
+                    user.R_Code = R_Code.SelectedValue.ToString();
                     user.F_Mobile = F_Mobile.Text;
                     user.F_Email = F_Email.Text;
                     user.F_OICQ = F_OICQ.Text;

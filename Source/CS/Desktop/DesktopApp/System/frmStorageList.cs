@@ -29,16 +29,17 @@ namespace DesktopApp
         {
             dataGridView.DataSource = null;
             string MaterInNo = txtMaterInNo.Text.Trim();
-            loadData(MaterInNo);
+            string strCondit = "and M_MaterInNo LIKE '%"+ MaterInNo +"%'";
+            loadData(strCondit);
         }
-        public void loadData(string keyValue = "")
+        public void loadData(string strCondit)
         {
             try
             {
 
 
-                var rows = MaterInHeadBLL.GetList(keyValue);
-
+                //var rows = MaterInHeadBLL.GetList("");
+                var rows = MaterInHeadBLL.GetData(strCondit);
                 if (rows == null || rows.Count < 1)
                 {
                     //untCommon.InfoMsg("该入库单没有任何数据！");
@@ -62,7 +63,14 @@ namespace DesktopApp
         private void frmStorageMake_Load(object sender, EventArgs e)
         {
             dataGridView.AutoGenerateColumns = false;
-            loadData();
+            string strTime = DateTime.Now.ToString("yyyy-MM-dd ");
+            string strStartTime = strTime + "00:00:00";
+            DateTime dt1 = Convert.ToDateTime(strStartTime);
+            string strEndTime = strTime + "23:59:59";
+            DateTime dt2 = Convert.ToDateTime(strEndTime);
+            string strCondit = " and M_CreateDate > '" + dt1 + "' and M_CreateDate < '" + dt2 + "'";
+            //MessageBox.Show(strCondit);
+            loadData(strCondit);
 
         }
 

@@ -285,6 +285,7 @@ FROM    AM_Base_User
         AM_Base_User.F_ModifyDate ,
 		F_Kind,
         F_RFIDCode,
+       AM_Base_User.R_Code,
         F_Group,
         F_Indate,
         F_Outdate,

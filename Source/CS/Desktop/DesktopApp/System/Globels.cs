@@ -19,5 +19,9 @@ namespace DesktopApp
 
         public static string strTeam = ""; //班组
         public static string strStockCode = "";//仓库
+
+        public static string strCom = "COM1"; //串口
+        //public static string strProce = "01"; //工序
+
     }
 }

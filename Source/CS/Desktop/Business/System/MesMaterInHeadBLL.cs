@@ -47,6 +47,75 @@ namespace Business.System
       ,[M_DeleteBy]
       ,[M_DeleteDate]
       ,[M_UploadBy]
+      ,[M_UploadDate] FROM Mes_MaterInHead where M_status <> -1 and  M_Kind = 0");
+                    var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
+                    return rows;
+                }
+                else
+                {
+                    strSql.Append(@"SELECT [ID]
+      ,(CASE M_OrderKind WHEN 1 THEN '半成品'
+					WHEN 2 THEN '成品'
+                    ELSE '' END) M_OrderKind
+      ,[M_MaterInNo]
+      ,[M_StockCode]
+      ,[M_StockName]
+      ,[M_OrderNo]
+      ,[M_OrderDate]
+      , M_Status
+      ,[M_CreateBy]
+      ,[M_CreateDate]
+      ,[M_UpdateBy]
+      ,[M_UpdateDate]
+      ,[M_Remark]
+      ,[M_DeleteBy]
+      ,[M_DeleteDate]
+      ,[M_UploadBy]
+      ,[M_UploadDate] FROM Mes_MaterInHead");
+                    strSql.Append(" WHERE M_status <> -1  and  M_Kind = 0 and M_MaterInNo LIKE @M_MaterInNo");
+                    var paramList = new List<SqlParameter>();
+                    paramList.Add(new SqlParameter("@M_MaterInNo", string.Format("%{0}%", M_MaterInNo)));
+                    var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString(), paramList.ToArray());
+                    return rows;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 获取数据列表
+        /// </summary>
+        /// <returns></returns>
+        public List<MesMaterInHeadEntity> GetData(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+
+                if (string.IsNullOrEmpty(Condit))
+                {
+                    strSql.Append(@"SELECT [ID]
+      ,(CASE M_Kind WHEN 0 THEN '原材料' 
+                    WHEN 1 THEN '半成品'
+					WHEN 2 THEN '成品'
+                    ELSE '' END) M_Kind
+      ,[M_MaterInNo]
+      ,[M_StockCode]
+      ,[M_StockName]
+      ,[M_OrderNo]
+      ,[M_OrderDate]
+      , M_Status
+      ,[M_CreateBy]
+      ,[M_CreateDate]
+      ,[M_UpdateBy]
+      ,[M_UpdateDate]
+      ,[M_Remark]
+      ,[M_DeleteBy]
+      ,[M_DeleteDate]
+      ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead where M_status <> -1");
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
                     return rows;
@@ -72,9 +141,9 @@ namespace Business.System
       ,[M_DeleteDate]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead");
-                    strSql.Append(" WHERE M_status <> -1 and M_MaterInNo LIKE @M_MaterInNo");
+                    strSql.Append(" WHERE M_status <> -1" + Condit);
                     var paramList = new List<SqlParameter>();
-                    paramList.Add(new SqlParameter("@M_MaterInNo", string.Format("%{0}%", M_MaterInNo)));
+                    
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString(), paramList.ToArray());
                     return rows;
                 }

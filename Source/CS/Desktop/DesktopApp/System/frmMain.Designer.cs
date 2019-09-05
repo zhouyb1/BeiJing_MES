@@ -70,8 +70,8 @@
             this.cmsPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.原物料入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.补打标签ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.肉食处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.菜食处理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.车间扫描ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.车间入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间出库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人脸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人员管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -256,14 +256,15 @@
             // 
             // menuStrip
             // 
+            this.menuStrip.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsBaseManager,
             this.cmsUserManager,
             this.原物料入库ToolStripMenuItem,
             this.补打标签ToolStripMenuItem,
-            this.肉食处理ToolStripMenuItem,
-            this.菜食处理ToolStripMenuItem,
+            this.车间扫描ToolStripMenuItem,
+            this.车间入库ToolStripMenuItem,
             this.车间出库ToolStripMenuItem,
             this.人脸ToolStripMenuItem,
             this.rFID管理ToolStripMenuItem,
@@ -272,7 +273,7 @@
             this.cmsOtherManager});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(984, 25);
+            this.menuStrip.Size = new System.Drawing.Size(984, 29);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -286,14 +287,14 @@
             this.cmsArea,
             this.cmsDictionary});
             this.cmsBaseManager.Name = "cmsBaseManager";
-            this.cmsBaseManager.Size = new System.Drawing.Size(68, 21);
+            this.cmsBaseManager.Size = new System.Drawing.Size(86, 25);
             this.cmsBaseManager.Text = "基础信息";
             // 
             // cmsCompany
             // 
             this.cmsCompany.Image = global::DesktopApp.Properties.Resources.house;
             this.cmsCompany.Name = "cmsCompany";
-            this.cmsCompany.Size = new System.Drawing.Size(156, 26);
+            this.cmsCompany.Size = new System.Drawing.Size(148, 26);
             this.cmsCompany.Text = "公司管理";
             this.cmsCompany.Click += new System.EventHandler(this.cmsCompany_Click);
             // 
@@ -301,7 +302,7 @@
             // 
             this.cmsDepartment.Image = global::DesktopApp.Properties.Resources.disable_enable_demo_mode;
             this.cmsDepartment.Name = "cmsDepartment";
-            this.cmsDepartment.Size = new System.Drawing.Size(156, 26);
+            this.cmsDepartment.Size = new System.Drawing.Size(148, 26);
             this.cmsDepartment.Text = "部门管理";
             this.cmsDepartment.Click += new System.EventHandler(this.cmsDepartment_Click);
             // 
@@ -309,20 +310,20 @@
             // 
             this.cmsRole.Image = global::DesktopApp.Properties.Resources.attribution;
             this.cmsRole.Name = "cmsRole";
-            this.cmsRole.Size = new System.Drawing.Size(156, 26);
+            this.cmsRole.Size = new System.Drawing.Size(148, 26);
             this.cmsRole.Text = "角色管理";
             this.cmsRole.Click += new System.EventHandler(this.cmsRole_Click);
             // 
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(153, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(145, 6);
             // 
             // cmsArea
             // 
             this.cmsArea.Image = global::DesktopApp.Properties.Resources.legend;
             this.cmsArea.Name = "cmsArea";
-            this.cmsArea.Size = new System.Drawing.Size(156, 26);
+            this.cmsArea.Size = new System.Drawing.Size(148, 26);
             this.cmsArea.Text = "区域管理";
             this.cmsArea.Click += new System.EventHandler(this.cmsArea_Click);
             // 
@@ -330,7 +331,7 @@
             // 
             this.cmsDictionary.Image = global::DesktopApp.Properties.Resources.education;
             this.cmsDictionary.Name = "cmsDictionary";
-            this.cmsDictionary.Size = new System.Drawing.Size(156, 26);
+            this.cmsDictionary.Size = new System.Drawing.Size(148, 26);
             this.cmsDictionary.Text = "常规信息";
             this.cmsDictionary.Click += new System.EventHandler(this.cmsDictionary_Click);
             // 
@@ -342,14 +343,14 @@
             this.toolStripMenuItem1,
             this.cmsPassword});
             this.cmsUserManager.Name = "cmsUserManager";
-            this.cmsUserManager.Size = new System.Drawing.Size(68, 21);
+            this.cmsUserManager.Size = new System.Drawing.Size(86, 25);
             this.cmsUserManager.Text = "用户管理";
             // 
             // cmsUser
             // 
             this.cmsUser.Image = global::DesktopApp.Properties.Resources.group;
             this.cmsUser.Name = "cmsUser";
-            this.cmsUser.Size = new System.Drawing.Size(156, 26);
+            this.cmsUser.Size = new System.Drawing.Size(148, 26);
             this.cmsUser.Text = "用户管理";
             this.cmsUser.Click += new System.EventHandler(this.cmsUser_Click);
             // 
@@ -357,55 +358,55 @@
             // 
             this.cmsPower.Image = global::DesktopApp.Properties.Resources.wrench;
             this.cmsPower.Name = "cmsPower";
-            this.cmsPower.Size = new System.Drawing.Size(156, 26);
+            this.cmsPower.Size = new System.Drawing.Size(148, 26);
             this.cmsPower.Text = "权限管理";
             this.cmsPower.Click += new System.EventHandler(this.cmsPower_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(153, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(145, 6);
             // 
             // cmsPassword
             // 
             this.cmsPassword.Image = global::DesktopApp.Properties.Resources.lock1;
             this.cmsPassword.Name = "cmsPassword";
-            this.cmsPassword.Size = new System.Drawing.Size(156, 26);
+            this.cmsPassword.Size = new System.Drawing.Size(148, 26);
             this.cmsPassword.Text = "密码修改";
             this.cmsPassword.Click += new System.EventHandler(this.cmsPasswordEdit_Click);
             // 
             // 原物料入库ToolStripMenuItem
             // 
             this.原物料入库ToolStripMenuItem.Name = "原物料入库ToolStripMenuItem";
-            this.原物料入库ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+            this.原物料入库ToolStripMenuItem.Size = new System.Drawing.Size(102, 25);
             this.原物料入库ToolStripMenuItem.Text = "原物料入库";
             this.原物料入库ToolStripMenuItem.Click += new System.EventHandler(this.原物料入库ToolStripMenuItem_Click);
             // 
             // 补打标签ToolStripMenuItem
             // 
             this.补打标签ToolStripMenuItem.Name = "补打标签ToolStripMenuItem";
-            this.补打标签ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.补打标签ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.补打标签ToolStripMenuItem.Text = "补打标签";
             this.补打标签ToolStripMenuItem.Click += new System.EventHandler(this.补打标签ToolStripMenuItem_Click);
             // 
-            // 肉食处理ToolStripMenuItem
+            // 车间扫描ToolStripMenuItem
             // 
-            this.肉食处理ToolStripMenuItem.Name = "肉食处理ToolStripMenuItem";
-            this.肉食处理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.肉食处理ToolStripMenuItem.Text = "车间扫描";
-            this.肉食处理ToolStripMenuItem.Click += new System.EventHandler(this.肉食处理ToolStripMenuItem_Click);
+            this.车间扫描ToolStripMenuItem.Name = "车间扫描ToolStripMenuItem";
+            this.车间扫描ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
+            this.车间扫描ToolStripMenuItem.Text = "车间扫描";
+            this.车间扫描ToolStripMenuItem.Click += new System.EventHandler(this.车间扫描ToolStripMenuItem_Click);
             // 
-            // 菜食处理ToolStripMenuItem
+            // 车间入库ToolStripMenuItem
             // 
-            this.菜食处理ToolStripMenuItem.Name = "菜食处理ToolStripMenuItem";
-            this.菜食处理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.菜食处理ToolStripMenuItem.Text = "车间入库";
-            this.菜食处理ToolStripMenuItem.Click += new System.EventHandler(this.菜食处理ToolStripMenuItem_Click);
+            this.车间入库ToolStripMenuItem.Name = "车间入库ToolStripMenuItem";
+            this.车间入库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
+            this.车间入库ToolStripMenuItem.Text = "车间入库";
+            this.车间入库ToolStripMenuItem.Click += new System.EventHandler(this.车间入库ToolStripMenuItem_Click);
             // 
             // 车间出库ToolStripMenuItem
             // 
             this.车间出库ToolStripMenuItem.Name = "车间出库ToolStripMenuItem";
-            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.车间出库ToolStripMenuItem.Text = "车间出库";
             this.车间出库ToolStripMenuItem.Click += new System.EventHandler(this.车间出库ToolStripMenuItem_Click);
             // 
@@ -420,63 +421,63 @@
             this.用户管理ToolStripMenuItem,
             this.系统配置ToolStripMenuItem});
             this.人脸ToolStripMenuItem.Name = "人脸ToolStripMenuItem";
-            this.人脸ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.人脸ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.人脸ToolStripMenuItem.Text = "人脸识别";
             this.人脸ToolStripMenuItem.Click += new System.EventHandler(this.人脸ToolStripMenuItem_Click_1);
             // 
             // 人员管理ToolStripMenuItem
             // 
             this.人员管理ToolStripMenuItem.Name = "人员管理ToolStripMenuItem";
-            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.人员管理ToolStripMenuItem.Text = "人员管理";
             this.人员管理ToolStripMenuItem.Click += new System.EventHandler(this.人员管理ToolStripMenuItem_Click);
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             this.设备管理ToolStripMenuItem.Click += new System.EventHandler(this.设备管理ToolStripMenuItem_Click);
             // 
             // 照片管理ToolStripMenuItem
             // 
             this.照片管理ToolStripMenuItem.Name = "照片管理ToolStripMenuItem";
-            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.照片管理ToolStripMenuItem.Text = "照片管理";
             this.照片管理ToolStripMenuItem.Click += new System.EventHandler(this.照片管理ToolStripMenuItem_Click);
             // 
             // 记录查询ToolStripMenuItem
             // 
             this.记录查询ToolStripMenuItem.Name = "记录查询ToolStripMenuItem";
-            this.记录查询ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.记录查询ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.记录查询ToolStripMenuItem.Text = "记录查询";
             this.记录查询ToolStripMenuItem.Click += new System.EventHandler(this.记录查询ToolStripMenuItem_Click);
             // 
             // 考勤管理ToolStripMenuItem
             // 
             this.考勤管理ToolStripMenuItem.Name = "考勤管理ToolStripMenuItem";
-            this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.考勤管理ToolStripMenuItem.Text = "考勤管理";
             this.考勤管理ToolStripMenuItem.Click += new System.EventHandler(this.考勤管理ToolStripMenuItem_Click);
             // 
             // 用户管理ToolStripMenuItem
             // 
             this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.用户管理ToolStripMenuItem.Text = "用户管理";
             this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
             // 
             // 系统配置ToolStripMenuItem
             // 
             this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.系统配置ToolStripMenuItem.Text = "系统配置";
             this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
             // rFID管理ToolStripMenuItem
             // 
             this.rFID管理ToolStripMenuItem.Name = "rFID管理ToolStripMenuItem";
-            this.rFID管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 21);
+            this.rFID管理ToolStripMenuItem.Size = new System.Drawing.Size(90, 25);
             this.rFID管理ToolStripMenuItem.Text = "RFID管理";
             // 
             // cmsSystemManager
@@ -485,21 +486,21 @@
             this.cmsLog,
             this.cmsDatabase});
             this.cmsSystemManager.Name = "cmsSystemManager";
-            this.cmsSystemManager.Size = new System.Drawing.Size(72, 21);
+            this.cmsSystemManager.Size = new System.Drawing.Size(91, 25);
             this.cmsSystemManager.Text = " 系统维护";
             // 
             // cmsLog
             // 
             this.cmsLog.Image = global::DesktopApp.Properties.Resources.report;
             this.cmsLog.Name = "cmsLog";
-            this.cmsLog.Size = new System.Drawing.Size(165, 22);
+            this.cmsLog.Size = new System.Drawing.Size(203, 26);
             this.cmsLog.Text = "系统日志";
             // 
             // cmsDatabase
             // 
             this.cmsDatabase.Image = global::DesktopApp.Properties.Resources.database_yellow;
             this.cmsDatabase.Name = "cmsDatabase";
-            this.cmsDatabase.Size = new System.Drawing.Size(165, 22);
+            this.cmsDatabase.Size = new System.Drawing.Size(203, 26);
             this.cmsDatabase.Text = "数据库备份/还原";
             this.cmsDatabase.Click += new System.EventHandler(this.cmsDatabase_Click);
             // 
@@ -509,14 +510,14 @@
             this.btnExit,
             this.btnOutLogin});
             this.cmsExitManager.Name = "cmsExitManager";
-            this.cmsExitManager.Size = new System.Drawing.Size(68, 21);
+            this.cmsExitManager.Size = new System.Drawing.Size(86, 25);
             this.cmsExitManager.Text = "退出系统";
             // 
             // btnExit
             // 
             this.btnExit.Image = global::DesktopApp.Properties.Resources.cancel1;
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(124, 22);
+            this.btnExit.Size = new System.Drawing.Size(148, 26);
             this.btnExit.Text = "退出系统";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -524,7 +525,7 @@
             // 
             this.btnOutLogin.Image = global::DesktopApp.Properties.Resources.undo;
             this.btnOutLogin.Name = "btnOutLogin";
-            this.btnOutLogin.Size = new System.Drawing.Size(124, 22);
+            this.btnOutLogin.Size = new System.Drawing.Size(148, 26);
             this.btnOutLogin.Text = "注销系统";
             this.btnOutLogin.Click += new System.EventHandler(this.btnOutLogin_Click);
             // 
@@ -535,14 +536,14 @@
             this.cmsAbout,
             this.车间设置ToolStripMenuItem});
             this.cmsOtherManager.Name = "cmsOtherManager";
-            this.cmsOtherManager.Size = new System.Drawing.Size(44, 21);
+            this.cmsOtherManager.Size = new System.Drawing.Size(54, 25);
             this.cmsOtherManager.Text = "其他";
             // 
             // cmsSkin
             // 
             this.cmsSkin.Image = global::DesktopApp.Properties.Resources.cog;
             this.cmsSkin.Name = "cmsSkin";
-            this.cmsSkin.Size = new System.Drawing.Size(156, 26);
+            this.cmsSkin.Size = new System.Drawing.Size(148, 26);
             this.cmsSkin.Text = "皮肤设置";
             this.cmsSkin.Click += new System.EventHandler(this.cmsSkinSet_Click);
             // 
@@ -550,7 +551,7 @@
             // 
             this.cmsAbout.Image = global::DesktopApp.Properties.Resources.information;
             this.cmsAbout.Name = "cmsAbout";
-            this.cmsAbout.Size = new System.Drawing.Size(156, 26);
+            this.cmsAbout.Size = new System.Drawing.Size(148, 26);
             this.cmsAbout.Text = "关于";
             this.cmsAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
@@ -558,7 +559,7 @@
             // 
             this.车间设置ToolStripMenuItem.Image = global::DesktopApp.Properties.Resources.config;
             this.车间设置ToolStripMenuItem.Name = "车间设置ToolStripMenuItem";
-            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.车间设置ToolStripMenuItem.Text = "车间设置";
             // 
             // frmMain
@@ -624,8 +625,8 @@
         private System.Windows.Forms.ToolStripMenuItem cmsSkin;
         private System.Windows.Forms.ToolStripMenuItem cmsAbout;
         private System.Windows.Forms.ToolStripMenuItem 原物料入库ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 肉食处理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 菜食处理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 车间扫描ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 车间入库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 人脸ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 人员管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设备管理ToolStripMenuItem;

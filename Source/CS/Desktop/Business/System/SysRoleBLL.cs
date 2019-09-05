@@ -97,7 +97,8 @@ WHERE R_Code='{0}'", key);
             try
             {
                 string sql = @"INSERT INTO [Sys_Role]
-           ([R_Code]
+           ([ID]
+           ,[R_Code]
            ,[R_Name]
            ,[R_Remark]
            ,[R_CreateBy]
@@ -105,7 +106,8 @@ WHERE R_Code='{0}'", key);
            ,[R_UpdateBy]
            ,[R_UpdateDate])
      VALUES
-           (@R_Code
+           (@ID
+           ,@R_Code
            ,@R_Name
            ,@R_Remark
            ,@R_CreateBy
@@ -114,6 +116,7 @@ WHERE R_Code='{0}'", key);
            ,@R_UpdateDate)";
 
                 List<SqlParameter> parameters = new List<SqlParameter>();
+                parameters.Add(new SqlParameter("@ID", Guid.NewGuid().ToString()));
                 parameters.Add(new SqlParameter("@R_Code", role.R_Code));
                 parameters.Add(new SqlParameter("@R_Name", role.R_Name));
 

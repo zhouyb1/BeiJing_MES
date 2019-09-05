@@ -34,27 +34,64 @@ namespace DesktopApp
                 if (e.KeyValue == 13)
                 {
                     string strBarcode = txtBarcode.Text;
-                    string[] strTemp = strBarcode.Split('*');
-                    txtCode.Text = strTemp[0].ToString();
-                    txtPc.Text = strTemp[1].ToString();
-                    txtQty.Text = strTemp[2].ToString();
+                    if (strBarcode.IndexOf('*') > 0)
+                    {
+                        string[] strTemp = strBarcode.Split('*');
+                        txtCode.Text = strTemp[0].ToString();
+                        txtPc.Text = strTemp[1].ToString();
+                        txtQty.Text = strTemp[2].ToString();
+
+                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        int nLen = Goods_rows.Count;
+                        if (nLen > 0)
+                        {
+                            txtName.Text = Goods_rows[0].G_Name;
+                            txtUnit.Text = Goods_rows[0].G_Unit;
+                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
+
+                        }
+                    }
+                    else
+                    {
+                        string[] strTemp = strBarcode.Split(',');
+
+                        txtCode.Text = Resolve(strTemp[0].ToString());
+                        txtPc.Text = Resolve(strTemp[1].ToString());
+                        txtQty.Text = Resolve(strTemp[2].ToString());
+
+                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        int nLen = Goods_rows.Count;
+                        if (nLen > 0)
+                        {
+                            txtName.Text = Goods_rows[0].G_Name;
+                            txtUnit.Text = Goods_rows[0].G_Unit;
+                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
+
+                        }
+                    }
                     //txtPrice.Text = strTemp[3].ToString();
 
-                    MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                    var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
-                    int nLen = Goods_rows.Count;
-                    if (nLen > 0)
-                    {
-                        txtName.Text = Goods_rows[0].G_Name;
-                        txtUnit.Text = Goods_rows[0].G_Unit;
-                        txtPrice.Text = Goods_rows[0].G_Price.ToString();
-
-                    }
+                    
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("请扫描正确的条码");
+            }
+        }
+
+        private string Resolve(string strTemp)
+        {
+            try
+            {
+                string[] str = strTemp.Split(':');
+                return str[1];
+            }
+            catch(Exception ex)
+            {
+                return "";
             }
         }
 

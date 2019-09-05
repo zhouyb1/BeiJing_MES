@@ -47,12 +47,16 @@
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtKind = new System.Windows.Forms.TextBox();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
+            this.cmbSupply = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtBasketQty = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(541, 132);
+            this.checkBox1.Location = new System.Drawing.Point(541, 171);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(108, 16);
             this.checkBox1.TabIndex = 1042;
@@ -64,7 +68,7 @@
             this.comGoods.FormattingEnabled = true;
             this.comGoods.Location = new System.Drawing.Point(105, 50);
             this.comGoods.Name = "comGoods";
-            this.comGoods.Size = new System.Drawing.Size(302, 20);
+            this.comGoods.Size = new System.Drawing.Size(285, 20);
             this.comGoods.TabIndex = 1041;
             this.comGoods.SelectedIndexChanged += new System.EventHandler(this.comGoods_SelectedIndexChanged);
             // 
@@ -86,16 +90,17 @@
             // 
             this.comBasketType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comBasketType.FormattingEnabled = true;
-            this.comBasketType.Location = new System.Drawing.Point(596, 93);
+            this.comBasketType.Location = new System.Drawing.Point(596, 132);
             this.comBasketType.Margin = new System.Windows.Forms.Padding(2);
             this.comBasketType.Name = "comBasketType";
             this.comBasketType.Size = new System.Drawing.Size(62, 20);
             this.comBasketType.TabIndex = 1039;
+            this.comBasketType.SelectedIndexChanged += new System.EventHandler(this.comBasketType_SelectedIndexChanged);
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(530, 94);
+            this.label9.Location = new System.Drawing.Point(530, 133);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(65, 12);
@@ -115,7 +120,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(419, 94);
+            this.label4.Location = new System.Drawing.Point(405, 94);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
@@ -158,11 +163,11 @@
             // 
             // txtUnit
             // 
-            this.txtUnit.Location = new System.Drawing.Point(462, 50);
+            this.txtUnit.Location = new System.Drawing.Point(448, 50);
             this.txtUnit.Margin = new System.Windows.Forms.Padding(2);
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.ReadOnly = true;
-            this.txtUnit.Size = new System.Drawing.Size(56, 21);
+            this.txtUnit.Size = new System.Drawing.Size(70, 21);
             this.txtUnit.TabIndex = 1032;
             // 
             // label7
@@ -178,7 +183,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(419, 54);
+            this.label5.Location = new System.Drawing.Point(405, 54);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(41, 12);
@@ -187,10 +192,10 @@
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(462, 87);
+            this.txtQty.Location = new System.Drawing.Point(448, 87);
             this.txtQty.Margin = new System.Windows.Forms.Padding(2);
             this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(56, 21);
+            this.txtQty.Size = new System.Drawing.Size(70, 21);
             this.txtQty.TabIndex = 1033;
             // 
             // txtBatch
@@ -206,7 +211,7 @@
             this.txtPrice.Location = new System.Drawing.Point(294, 88);
             this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(113, 21);
+            this.txtPrice.Size = new System.Drawing.Size(96, 21);
             this.txtPrice.TabIndex = 1035;
             // 
             // txtKind
@@ -218,11 +223,54 @@
             this.txtKind.Size = new System.Drawing.Size(62, 21);
             this.txtKind.TabIndex = 1036;
             // 
+            // cmbSupply
+            // 
+            this.cmbSupply.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupply.FormattingEnabled = true;
+            this.cmbSupply.Location = new System.Drawing.Point(448, 131);
+            this.cmbSupply.Margin = new System.Windows.Forms.Padding(2);
+            this.cmbSupply.Name = "cmbSupply";
+            this.cmbSupply.Size = new System.Drawing.Size(70, 20);
+            this.cmbSupply.TabIndex = 1046;
+            this.cmbSupply.SelectedIndexChanged += new System.EventHandler(this.cmbSupply_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(398, 134);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 12);
+            this.label10.TabIndex = 1045;
+            this.label10.Text = "供应商：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(530, 93);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(65, 12);
+            this.label3.TabIndex = 1043;
+            this.label3.Text = "容器重量：";
+            // 
+            // txtBasketQty
+            // 
+            this.txtBasketQty.Location = new System.Drawing.Point(596, 90);
+            this.txtBasketQty.Margin = new System.Windows.Forms.Padding(2);
+            this.txtBasketQty.Name = "txtBasketQty";
+            this.txtBasketQty.Size = new System.Drawing.Size(62, 21);
+            this.txtBasketQty.TabIndex = 1044;
+            // 
             // BracodePrintf
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(753, 242);
+            this.Controls.Add(this.cmbSupply);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtBasketQty);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.comGoods);
             this.Controls.Add(this.btn_Weight);
@@ -269,5 +317,9 @@
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtKind;
         private System.IO.Ports.SerialPort serialPort1;
+        private System.Windows.Forms.ComboBox cmbSupply;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtBasketQty;
     }
 }

@@ -120,32 +120,71 @@ namespace DesktopApp
             {
                 if (e.KeyValue == 13)
                 {
-                    string strBarcode = txtBarcode.Text;
-                    string[] strTemp = strBarcode.Split('*');
-                    string strGoodsCode = strTemp[0].ToString();
-                    if (cmbGoodsCode.Items.Contains(strGoodsCode))
-                    {
-                        cmbGoodsCode.Text = strTemp[0].ToString();
-                        //txtPc.Text = strTemp[1].ToString();
-                        txtQty.Text = strTemp[2].ToString();
-
-                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
-                        int nLen = Goods_rows.Count;
-                        if (nLen > 0)
+                   
+                        string strBarcode = txtBarcode.Text;
+                        if (strBarcode.IndexOf('*') > 0)
                         {
-                            txtName.Text = Goods_rows[0].G_Name;
-                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
-                            strUnit = Goods_rows[0].G_Unit.ToString();
+                            string[] strTemp = strBarcode.Split('*');
+                            string strGoodsCode = strTemp[0].ToString();
+                            if (cmbGoodsCode.Items.Contains(strGoodsCode))
+                            {
+                                cmbGoodsCode.Text = strTemp[0].ToString();
+                                //txtPc.Text = strTemp[1].ToString();
+                                txtQty.Text = strTemp[2].ToString();
 
+                                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                                var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                                int nLen = Goods_rows.Count;
+                                if (nLen > 0)
+                                {
+                                    txtName.Text = Goods_rows[0].G_Name;
+                                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                                    strUnit = Goods_rows[0].G_Unit.ToString();
+
+                                }
+                            }
                         }
-                    }
+                        else
+                        {
+                            string[] strTemp = strBarcode.Split(',');
+                            string strGoodsCode = strTemp[0].ToString();
+                            if (cmbGoodsCode.Items.Contains(strGoodsCode))
+                            {
+                                cmbGoodsCode.Text = Resolve(strTemp[0].ToString());
+                                //txtPc.Text = strTemp[1].ToString();
+                                txtQty.Text = Resolve(strTemp[2].ToString());
+
+                                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                                var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                                int nLen = Goods_rows.Count;
+                                if (nLen > 0)
+                                {
+                                    txtName.Text = Goods_rows[0].G_Name;
+                                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                                    strUnit = Goods_rows[0].G_Unit.ToString();
+
+                                }
+                            }
+                        }
                     
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private string Resolve(string strTemp)
+        {
+            try
+            {
+                string[] str = strTemp.Split(':');
+                return str[1];
+            }
+            catch (Exception ex)
+            {
+                return "";
             }
         }
 
@@ -409,8 +448,20 @@ namespace DesktopApp
                 if (nLen > 0)
                 {
                     txtName.Text = Goods_rows[0].G_Name;
-                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                    //txtPrice.Text = Goods_rows[0].G_Price.ToString();
                     strUnit = Goods_rows[0].G_Unit.ToString();
+                    int nKind = Goods_rows[0].G_Kind;
+                    if(nKind == 1)
+                    {
+                        label17.Visible = true;
+                        cmbSupplyName.Visible = true;
+
+
+                    }
+                    else
+                    {
+                        ;
+                    }
 
                 }
             

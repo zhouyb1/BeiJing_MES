@@ -81,6 +81,7 @@
     <Compile Include="System\MesWeightRecordBLL.cs" />
     <Compile Include="System\MesWorkShopBLL.cs" />
     <Compile Include="System\Mes_ConvertBLL.cs" />
+    <Compile Include="System\Mes_InPriceBLL.cs" />
     <Compile Include="System\Mes_InWorkShopDetailBLL.cs" />
     <Compile Include="System\Mes_InWorkShopHeadBLL.cs" />
     <Compile Include="System\Mes_InWorkShopTempBLL.cs" />

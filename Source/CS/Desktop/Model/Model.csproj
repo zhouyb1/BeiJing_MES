@@ -115,6 +115,7 @@
     <Compile Include="System\MesWeightRecordEntity.cs" />
     <Compile Include="System\MesWorkShopEntity.cs" />
     <Compile Include="System\Mes_ConvertEntity.cs" />
+    <Compile Include="System\Mes_InPrice.cs" />
     <Compile Include="System\Mes_InWorkShopDetailEntity.cs" />
     <Compile Include="System\Mes_InWorkShopHeadEntity.cs" />
     <Compile Include="System\Mes_InWorkShopTempEntity.cs" />

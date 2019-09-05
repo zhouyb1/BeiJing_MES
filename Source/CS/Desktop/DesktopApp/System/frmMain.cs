@@ -57,7 +57,7 @@ namespace DesktopApp
             try
             {
                 SysModuleBLL modulebll = new SysModuleBLL();
-                Modules = modulebll.LoadRoleModule(User.F_Account);
+                Modules = modulebll.LoadRoleModule(User.R_Code);
 
                 cmsBaseManager.Visible = false;
                 cmsCompany.Visible = false;
@@ -86,6 +86,18 @@ namespace DesktopApp
                 cmsOtherManager.Visible = false;
                 cmsSkin.Visible = false;
                 cmsAbout.Visible = false;
+
+                原物料入库ToolStripMenuItem.Visible = false;
+                补打标签ToolStripMenuItem.Visible = false; ;
+
+                车间扫描ToolStripMenuItem.Visible = false;;
+                车间入库ToolStripMenuItem.Visible = false;;
+                车间出库ToolStripMenuItem.Visible = false; ;
+                人脸ToolStripMenuItem.Visible = false;;
+                
+                rFID管理ToolStripMenuItem.Visible = false;;
+                
+                车间设置ToolStripMenuItem.Visible = false;
 
                 //cmsDictionary.Visible = true;
 
@@ -211,6 +223,44 @@ namespace DesktopApp
                                 cmsAbout.Visible = true;
                                 break;
                             }
+                        case "10":
+                            {
+                                原物料入库ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                        case "11":
+                            {
+                                补打标签ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                            
+       
+                        case "12":
+                            {
+                                车间扫描ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                        case "13":
+                            {
+                                车间入库ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                        case "14":
+                            {
+                                车间出库ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                        case "15":
+                            {
+                                人脸ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+                        case "16":
+                            {
+                                rFID管理ToolStripMenuItem.Visible = true;
+                                break;
+                            }
+
                     }
                 }
             }
@@ -476,7 +526,7 @@ namespace DesktopApp
             frmStorage.Show(this.panMain);
         }
 
-        private void 肉食处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 车间扫描ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmOrgres frmMeatProcess = new frmOrgres(this, User);
             frmMeatProcess.TopLevel = false;
@@ -494,7 +544,7 @@ namespace DesktopApp
             frmMeatProcess.Show(this.panMain);
         }
 
-        private void 菜食处理ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 车间入库ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //frmVegetableProcessList frmVegetableProcess = new frmVegetableProcessList(this,User);
             //frmVegetableProcess.TopLevel = false;

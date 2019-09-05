@@ -168,7 +168,11 @@ namespace DesktopApp
                     if (MesMaterInHeadBLL.SaveEntity("", MesMaterInHead) > 0)
                     {
                         untCommon.InfoMsg("添加成功！");
-                        frmStorage.loadData();
+                        string strTime = DateTime.Now.ToString("yyyy-MM-dd ");
+                        string strStartTime = strTime + "00:00:00";
+                        string strEndTime = strTime + "23:59:59";
+                        string strCondit = " and M_CreateDate > '" + strStartTime + "' and M_CreateDate < '" + strEndTime + "'";
+                        frmStorage.loadData(strCondit);
                         Close();
                         //frmStorage.Refresh();
                     }

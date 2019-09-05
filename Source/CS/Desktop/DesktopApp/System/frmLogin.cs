@@ -205,6 +205,10 @@ namespace DesktopApp
                         Globels.strTeam = Data(strTemp);
                         strTemp = sr.ReadLine();
                         Globels.strStockCode = Data(strTemp);
+                        strTemp = sr.ReadLine();
+                        Globels.strProce = Data(strTemp);
+                        strTemp = sr.ReadLine();
+                        Globels.strCom = Data(strTemp);
                         sr.Close();
                         
                     }

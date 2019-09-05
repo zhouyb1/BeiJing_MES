@@ -76,6 +76,34 @@ namespace Business.System
             }
         }
 
+
+        /// <summary>
+        /// 输入物料编码或者物料名称获取数据列表
+        /// </summary>
+        /// <returns></returns>
+        public List<MesGoodsEntity> GetData(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+
+
+                    var paramList = new List<SqlParameter>();
+                    strSql.Append("SELECT * FROM Mes_Goods");
+                    strSql.Append(" WHERE 1 = 1");
+                    
+                        strSql.Append(Condit);
+                       
+                    var rows = db.ExecuteObjects<MesGoodsEntity>(strSql.ToString(), paramList.ToArray());
+                    return rows;
+                
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         
 
         
@@ -173,7 +201,7 @@ namespace Business.System
                      strSql.Append("G_Price,");
                      strSql.Append("G_Unit,");
                      strSql.Append("G_SupplyCode,");
-                     strSql.Append("G_Supply,");
+                     strSql.Append("G_SupplyName,");
                      strSql.Append("G_Qty,");
                      strSql.Append("G_Super,");
                      strSql.Append("G_Lower,");
@@ -192,7 +220,7 @@ namespace Business.System
                      strSql.Append("@G_Price,");
                      strSql.Append("@G_Unit,");
                      strSql.Append("@G_SupplyCode,");
-                     strSql.Append("@G_Supply,");
+                     strSql.Append("@G_SupplyName,");
                      strSql.Append("@G_Qty,");
                      strSql.Append("@G_Super,");
                      strSql.Append("@G_Lower,");
@@ -214,7 +242,7 @@ namespace Business.System
                      strSql.Append("G_Price=@G_Price,");
                      strSql.Append("G_Unit=@G_Unit,");
                      strSql.Append("G_SupplyCode=@G_SupplyCode,");
-                     strSql.Append("G_Supply=@G_Supply,");
+                     strSql.Append("G_SupplyName=@G_SupplyName,");
                      strSql.Append("G_Qty=@G_Qty,");
                      strSql.Append("G_Super=@G_Super,");
                      strSql.Append("G_Lower=@G_Lower,");
@@ -233,7 +261,7 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@G_Price",entity.G_Price));
                 paramList.Add(new SqlParameter("@G_Unit",entity.G_Unit));
                 paramList.Add(new SqlParameter("@G_SupplyCode",entity.G_SupplyCode));
-                paramList.Add(new SqlParameter("@G_Supply",entity.G_Supply));
+                paramList.Add(new SqlParameter("@G_Supply",entity.G_SupplyName));
                 paramList.Add(new SqlParameter("@G_Qty",entity.G_Qty));
                 paramList.Add(new SqlParameter("@G_Super",entity.G_Super));
                 paramList.Add(new SqlParameter("@G_Lower",entity.G_Lower));

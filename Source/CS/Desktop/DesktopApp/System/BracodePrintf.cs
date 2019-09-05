@@ -145,6 +145,27 @@ namespace DesktopApp
                     txtKind.Text = "原物料";
                 }
                 txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+
+                cmbSupply.Items.Clear();
+                Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
+                var InPrice_row = InPriceBLL.GetList_Mes_Price("where P_GoodsCode = '" + strGoods[0] + "'");
+                if (InPrice_row.Count > 0)
+                {
+                    for (int i = 0; i < InPrice_row.Count; i++)
+                    {
+                        cmbSupply.Items.Add(InPrice_row[i].P_SupplyCode);
+                    }
+                    if (InPrice_row.Count == 1)
+                    {
+                        cmbSupply.Text = InPrice_row[0].P_SupplyCode;
+                    }
+                }
+                else
+                {
+                    untCommon.InfoMsg("请先维护商品的入库价格");
+                    return;
+                }
+
                 txtQty.Focus();
             }
             else
@@ -159,9 +180,9 @@ namespace DesktopApp
         {
             if (checkBox1.Checked == true)
             {
-                MesBasketBLL BasketBLL = new MesBasketBLL();
-                var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
-                drqQty = decimal.Parse(Basket_rows[0].M_Weight.ToString());
+                //MesBasketBLL BasketBLL = new MesBasketBLL();
+                //var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
+                drqQty = decimal.Parse(txtBasketQty.Text);
             }
 
             Print();
@@ -248,6 +269,18 @@ namespace DesktopApp
             txtQty.Text = "";
             txtUnit.Text = "";
             txtKind.Text = "";
+        }
+
+        private void comBasketType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesBasketBLL BasketBLL = new MesBasketBLL();
+            var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
+            txtBasketQty.Text = Basket_rows[0].M_Weight.ToString();
+        }
+
+        private void cmbSupply_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
 
     }

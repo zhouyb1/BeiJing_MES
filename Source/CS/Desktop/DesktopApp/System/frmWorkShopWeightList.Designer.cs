@@ -67,81 +67,92 @@
             // 
             // cmbGoodsCode
             // 
+            this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbGoodsCode.FormattingEnabled = true;
-            this.cmbGoodsCode.Location = new System.Drawing.Point(133, 21);
+            this.cmbGoodsCode.Location = new System.Drawing.Point(164, 21);
             this.cmbGoodsCode.Name = "cmbGoodsCode";
-            this.cmbGoodsCode.Size = new System.Drawing.Size(121, 20);
+            this.cmbGoodsCode.Size = new System.Drawing.Size(244, 23);
             this.cmbGoodsCode.TabIndex = 123;
             this.cmbGoodsCode.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
             // 
             // txtQty
             // 
-            this.txtQty.Location = new System.Drawing.Point(133, 127);
+            this.txtQty.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtQty.Location = new System.Drawing.Point(164, 124);
             this.txtQty.Name = "txtQty";
-            this.txtQty.Size = new System.Drawing.Size(121, 21);
+            this.txtQty.Size = new System.Drawing.Size(244, 24);
             this.txtQty.TabIndex = 122;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(27, 130);
+            this.label15.Font = new System.Drawing.Font("宋体", 11F);
+            this.label15.Location = new System.Drawing.Point(30, 130);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(101, 12);
+            this.label15.Size = new System.Drawing.Size(127, 15);
             this.label15.TabIndex = 121;
             this.label15.Text = "转换后物料数量：";
             // 
             // txtBatch
             // 
-            this.txtBatch.Location = new System.Drawing.Point(133, 45);
+            this.txtBatch.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtBatch.Location = new System.Drawing.Point(164, 46);
             this.txtBatch.Name = "txtBatch";
-            this.txtBatch.Size = new System.Drawing.Size(121, 21);
+            this.txtBatch.Size = new System.Drawing.Size(244, 24);
             this.txtBatch.TabIndex = 120;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(27, 49);
+            this.label12.Font = new System.Drawing.Font("宋体", 11F);
+            this.label12.Location = new System.Drawing.Point(30, 49);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(101, 12);
+            this.label12.Size = new System.Drawing.Size(127, 15);
             this.label12.TabIndex = 119;
             this.label12.Text = "转换后物料批次：";
             // 
             // txtName
             // 
-            this.txtName.Location = new System.Drawing.Point(133, 75);
+            this.txtName.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtName.Location = new System.Drawing.Point(164, 72);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(121, 21);
+            this.txtName.Size = new System.Drawing.Size(244, 24);
             this.txtName.TabIndex = 118;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 83);
+            this.label9.Font = new System.Drawing.Font("宋体", 11F);
+            this.label9.Location = new System.Drawing.Point(30, 76);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(101, 12);
+            this.label9.Size = new System.Drawing.Size(127, 15);
             this.label9.TabIndex = 117;
             this.label9.Text = "转换后物料名称：";
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(27, 22);
+            this.label8.Font = new System.Drawing.Font("宋体", 11F);
+            this.label8.Location = new System.Drawing.Point(30, 22);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 12);
+            this.label8.Size = new System.Drawing.Size(127, 15);
             this.label8.TabIndex = 116;
             this.label8.Text = "转换后物料编码：";
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(285, 55);
+            this.btnSave.Font = new System.Drawing.Font("宋体", 11F);
+            this.btnSave.Image = global::DesktopApp.Properties.Resources.save_disabled;
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(430, 65);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.Size = new System.Drawing.Size(90, 30);
             this.btnSave.TabIndex = 124;
-            this.btnSave.Text = "保存";
+            this.btnSave.Text = "  保存";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -159,7 +170,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 191);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(633, 225);
+            this.dataGridView1.Size = new System.Drawing.Size(755, 225);
             this.dataGridView1.TabIndex = 125;
             // 
             // 生产订单号
@@ -199,18 +210,20 @@
             // 
             // txtUnit
             // 
-            this.txtUnit.Location = new System.Drawing.Point(133, 100);
+            this.txtUnit.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtUnit.Location = new System.Drawing.Point(164, 98);
             this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(121, 21);
+            this.txtUnit.Size = new System.Drawing.Size(244, 24);
             this.txtUnit.TabIndex = 127;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 108);
+            this.label1.Font = new System.Drawing.Font("宋体", 11F);
+            this.label1.Location = new System.Drawing.Point(30, 103);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.Size = new System.Drawing.Size(127, 15);
             this.label1.TabIndex = 126;
             this.label1.Text = "转换后物料单位：";
             // 
@@ -220,114 +233,129 @@
             // 
             // btn_Weight
             // 
-            this.btn_Weight.Location = new System.Drawing.Point(285, 25);
+            this.btn_Weight.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Weight.Image = global::DesktopApp.Properties.Resources.wrench;
+            this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Weight.Location = new System.Drawing.Point(430, 25);
             this.btn_Weight.Name = "btn_Weight";
-            this.btn_Weight.Size = new System.Drawing.Size(75, 23);
+            this.btn_Weight.Size = new System.Drawing.Size(90, 30);
             this.btn_Weight.TabIndex = 128;
-            this.btn_Weight.Text = "获重";
+            this.btn_Weight.Text = "  获重";
             this.btn_Weight.UseVisualStyleBackColor = true;
             this.btn_Weight.Click += new System.EventHandler(this.btn_Weight_Click);
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(618, 99);
+            this.textBox1.Location = new System.Drawing.Point(651, 99);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(121, 21);
             this.textBox1.TabIndex = 138;
+            this.textBox1.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(512, 107);
+            this.label2.Location = new System.Drawing.Point(545, 107);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(101, 12);
             this.label2.TabIndex = 137;
             this.label2.Text = "转换前物料单位：";
+            this.label2.Visible = false;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(618, 20);
+            this.comboBox1.Location = new System.Drawing.Point(651, 20);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 20);
             this.comboBox1.TabIndex = 136;
+            this.comboBox1.Visible = false;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(618, 126);
+            this.textBox2.Location = new System.Drawing.Point(651, 126);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(121, 21);
             this.textBox2.TabIndex = 135;
+            this.textBox2.Visible = false;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(512, 129);
+            this.label3.Location = new System.Drawing.Point(545, 129);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(101, 12);
             this.label3.TabIndex = 134;
             this.label3.Text = "转换前物料数量：";
+            this.label3.Visible = false;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(618, 44);
+            this.textBox3.Location = new System.Drawing.Point(651, 44);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(121, 21);
             this.textBox3.TabIndex = 133;
+            this.textBox3.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(512, 48);
+            this.label4.Location = new System.Drawing.Point(545, 48);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 12);
             this.label4.TabIndex = 132;
             this.label4.Text = "转换前物料批次：";
+            this.label4.Visible = false;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(618, 74);
+            this.textBox4.Location = new System.Drawing.Point(651, 74);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(121, 21);
             this.textBox4.TabIndex = 131;
+            this.textBox4.Visible = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(512, 82);
+            this.label5.Location = new System.Drawing.Point(545, 82);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(101, 12);
             this.label5.TabIndex = 130;
             this.label5.Text = "转换前物料名称：";
+            this.label5.Visible = false;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(512, 21);
+            this.label6.Location = new System.Drawing.Point(545, 21);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 12);
             this.label6.TabIndex = 129;
             this.label6.Text = "转换前物料编码：";
+            this.label6.Visible = false;
             // 
             // txtRQQty
             // 
-            this.txtRQQty.Location = new System.Drawing.Point(133, 154);
+            this.txtRQQty.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtRQQty.Location = new System.Drawing.Point(164, 150);
             this.txtRQQty.Name = "txtRQQty";
-            this.txtRQQty.Size = new System.Drawing.Size(121, 21);
+            this.txtRQQty.Size = new System.Drawing.Size(244, 24);
             this.txtRQQty.TabIndex = 140;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(63, 157);
+            this.label7.Font = new System.Drawing.Font("宋体", 11F);
+            this.label7.Location = new System.Drawing.Point(75, 157);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
+            this.label7.Size = new System.Drawing.Size(82, 15);
             this.label7.TabIndex = 139;
             this.label7.Text = "容器重量：";
             // 

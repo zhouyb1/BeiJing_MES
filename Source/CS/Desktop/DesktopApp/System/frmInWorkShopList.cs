@@ -156,20 +156,42 @@ namespace DesktopApp
                 if (e.KeyValue == 13)
                 {
                     string strBarcode = txtBarcode.Text;
-                    string[] strTemp = strBarcode.Split('*');
-                    txtCode.Text = strTemp[0].ToString();
-                    txtPc.Text = strTemp[1].ToString();
-                    txtQty.Text = strTemp[2].ToString();
-
-
-                    MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                    var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '"+ txtCode.Text +"'");
-                    int nLen = Goods_rows.Count;
-                    if (nLen > 0)
+                    if (strBarcode.IndexOf('*') > 0)
                     {
-                        txtName.Text = Goods_rows[0].G_Name;
-                        txtPrice.Text = Goods_rows[0].G_Price.ToString();
-                        strUnit = Goods_rows[0].G_Unit.ToString();
+                        string[] strTemp = strBarcode.Split('*');
+                        txtCode.Text = strTemp[0].ToString();
+                        txtPc.Text = strTemp[1].ToString();
+                        txtQty.Text = strTemp[2].ToString();
+
+
+                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                        var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
+                        int nLen = Goods_rows.Count;
+                        if (nLen > 0)
+                        {
+                            txtName.Text = Goods_rows[0].G_Name;
+                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                            strUnit = Goods_rows[0].G_Unit.ToString();
+                        }
+                    }
+                    else
+                    {
+                        string[] strTemp = strBarcode.Split(',');
+
+                        txtCode.Text = Resolve(strTemp[0].ToString());
+                        txtPc.Text = Resolve(strTemp[1].ToString());
+                        txtQty.Text = Resolve(strTemp[2].ToString());
+
+                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        int nLen = Goods_rows.Count;
+                        if (nLen > 0)
+                        {
+                            txtName.Text = Goods_rows[0].G_Name;
+                            strUnit = Goods_rows[0].G_Unit;
+                            txtPrice.Text = Goods_rows[0].G_Price.ToString();
+
+                        }
                     }
                 }
             }
@@ -178,6 +200,19 @@ namespace DesktopApp
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private string Resolve(string strTemp)
+        {
+            try
+            {
+                string[] str = strTemp.Split(':');
+                return str[1];
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
         }
 
         private void cmbWorkShop_SelectedIndexChanged(object sender, EventArgs e)
@@ -230,8 +265,11 @@ namespace DesktopApp
         {
             try
             {
-                if (MessageBox.Show("是否要完工?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                MessageBox.Show("123");
+                if (MessageBox.Show("是否要完工", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                //if (MessageBox.Show("是否要完工?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
+                    MessageBox.Show("456");
                     Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
                     var rows = InWorkShopTempBLL.GetList_InWorkShopTemp("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
                     if (rows == null || rows.Count < 1)
@@ -304,6 +342,10 @@ namespace DesktopApp
 
                     DeleteData();
                     Updata();
+                }
+                else
+                {
+                    MessageBox.Show("789");
                 }
 
             }

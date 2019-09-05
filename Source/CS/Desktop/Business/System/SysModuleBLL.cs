@@ -35,7 +35,7 @@ FROM Sys_Module
     LEFT JOIN Sys_ModulePower
         ON Sys_ModulePower.M_Code = Sys_Module.M_Code
            AND Sys_ModulePower.R_Code = '{0}'
-WHERE Sys_Module.M_Active = 1";
+WHERE Sys_Module.M_Active = 1 order by Sys_Module.M_Code";
 
               
 

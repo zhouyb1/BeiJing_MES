@@ -15,6 +15,7 @@ using System.Windows.Forms;
 using Tag;
 using USC.BmpLib.BMP;
 using USC.PCD;
+using USC.Tools;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace DesktopApp
@@ -31,8 +32,7 @@ namespace DesktopApp
 
         private void frmWorkShopWeightList_Load(object sender, EventArgs e)
         {
-            b2d = new Bmp2Bmp2Data();
-            nfcTag = new NfcTag(new WI());
+            
 
             Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
 
@@ -113,7 +113,8 @@ namespace DesktopApp
                 int nCount = WorkShopWeightBLL.SaveEntity("", WorkShopWeightEntity);
                 if (nCount > 0)
                 {
-                    GetImg("物料" + cmbGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtName.Text.Trim(), txtQty.Text.Trim());
+                    Decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                    GetImg("物料" + cmbGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtName.Text.Trim(), dTemp.ToString());
                     MessageBox.Show("添加成功");
                 }
             }
@@ -147,19 +148,32 @@ namespace DesktopApp
                     byte[] byRead = null;
                     byRead = new byte[2048];
                     int nReadLen;
+                    Thread.Sleep(100);
                     nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
                     string str = System.Text.Encoding.Default.GetString(byRead);
                     string[] strWeight = str.Split('=');
                     int nLen = strWeight.Length;
-                    if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 1].ToString() == strWeight[nLen - 2].ToString())
+                    if (nLen > 1)
                     {
+                        //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
+                        //{
                         txtQty.Text = strWeight[nLen - 1].ToString();
+                        //}
+                        //else
+                        //{
+                        //MessageBox.Show("串口没有打开");
+
+                        //}
+                        Close();
+                        Thread.Sleep(1000);
                     }
                     else
                     {
-                        MessageBox.Show("串口没有打开");
-
+                        MessageBox.Show(str);
+                        Close();
+                        Thread.Sleep(1000);
                     }
+
                     //MessageBox.Show(str);
                 }
                 else
@@ -213,8 +227,11 @@ namespace DesktopApp
         {
             try
             {
+                b2d = new Bmp2Bmp2Data();
+                nfcTag = new NfcTag(new WI());
+
                 string strPath = Application.StartupPath + "\\img\\" + strHZ + ".bmp";
-                strHZ = "物料：" + cmbGoodsCode.Text.Trim() + ",批次：" + txtBatch.Text.Trim() + ",单号：" + Globels.strOrderNo;
+                strHZ = "物料:" + cmbGoodsCode.Text.Trim() + ",批次:" + txtBatch.Text.Trim() + ",数量:" + strQty + ",单号:" + Globels.strOrderNo;
                 int nLen = strHZ.Length;
                 byte[] fileData = Encoding.GetEncoding("GB2312").GetBytes(strHZ);
                 int nLen2 = fileData.Length;
@@ -245,8 +262,8 @@ namespace DesktopApp
 
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
-                g.DrawString("保质期：" + "1", f4, b, 4, 50);//设置位置
-                g.DrawString("负责人：" + "", f4, b, 4, 70);//设置位置
+                g.DrawString("保质期：" + "24小时", f4, b, 4, 50);//设置位置
+                g.DrawString("负责人：" + Globels.strUser, f4, b, 4, 70);//设置位置
                 g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
