@@ -43,7 +43,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-      
+        /// <summary
+        /// 根据编码班组编码获取班组实体信息
+        /// <param name="code">班组编码</param>
+        /// </summary>
+        /// <returns></returns>
+        public Mes_TeamEntity ByCodeGetTeamEntity(string code)
+        {
+            try
+            {
+                return toolsService.ByCodeGetTeamEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取配方表树形数据
         /// </summary>

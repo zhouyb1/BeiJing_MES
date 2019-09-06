@@ -174,7 +174,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("G_BARCODE")]
         public string G_Barcode { get; set; }
-
+        /// <summary>
+        /// 班组编号
+        /// </summary>
+        [Column("G_TeamCode")]
+        public string G_TeamCode { get; set; }
         #endregion
     }
 }

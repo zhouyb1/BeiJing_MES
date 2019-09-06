@@ -18,6 +18,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
     {
         #region 获取数据
         /// <summary>
+        /// 根据班组编码获取班组实体信息
+        /// <param name="code">班组编码</param>
+        /// </summary>
+        /// <returns></returns>
+        Mes_TeamEntity ByCodeGetTeamEntity(string code);
+        /// <summary>
         /// 根据仓库编码获取仓库实体信息
         /// <param name="code">仓库编码</param>
         /// </summary>
@@ -280,7 +286,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取条码(成品)
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_ScanCodeEntity> GetBarCodeList(); 
+        IEnumerable<Mes_ScanCodeEntity> GetBarCodeList();
         #endregion
 
         #region 提交数据

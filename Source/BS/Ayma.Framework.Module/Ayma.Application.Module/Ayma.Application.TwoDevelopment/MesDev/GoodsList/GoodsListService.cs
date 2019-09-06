@@ -16,13 +16,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public partial class GoodsListService : RepositoryFactory
     {
         
-        #region 获取数据
+       # region 获取数据
 
         /// <summary>
         /// 获取毛到净出成率
         /// </summary>
         /// <param name="queryJson">查询参数</param>
-        /// <returns></returns>
+        /// <returns></return
         public DataTable GetYieldRatePageList(string queryJson)
         {
             try
@@ -609,10 +609,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,g.[G_Prepareday]
                       ,g.[G_Otax]
                       ,g.[G_Itax]
+                      ,g.[G_TeamCode]
                       ,k.G_Name KindName
+                       ,c.T_Name T_Name
                 ");
-                strSql.Append("  FROM Mes_Goods g LEFT JOIN dbo.Mes_GoodKind k ON(g.G_TKind=k.G_Code)");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("FROM Mes_Goods g LEFT JOIN dbo.Mes_GoodKind k ON(g.G_TKind=k.G_Code)  left join  Mes_Team c on(g.G_TeamCode=c.T_Code)");
+                strSql.Append("WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
