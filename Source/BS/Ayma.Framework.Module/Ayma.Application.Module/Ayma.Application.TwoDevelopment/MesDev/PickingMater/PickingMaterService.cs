@@ -171,9 +171,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         S.I_Unit ,
                                         S.I_Qty ,                              
                                         S.I_Batch ,
-                                        G.G_Price I_Price
-	                                    ,G.G_TeamCode
-										,c.T_Name
+                                        G.G_Price I_Price,
+										c.T_Name I_TeamName,
+                                        G.G_TeamCode I_TeamCode
                                 FROM    dbo.Mes_Inventory S
                                         LEFT JOIN dbo.Mes_Goods G ON S.I_GoodsCode = G.G_Code LEFT JOIN  Mes_Team c on c.T_Code=G.G_TeamCode where 1 = 1 ");
 

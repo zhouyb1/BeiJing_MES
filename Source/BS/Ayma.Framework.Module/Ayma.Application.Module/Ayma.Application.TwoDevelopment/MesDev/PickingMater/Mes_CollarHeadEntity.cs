@@ -104,6 +104,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("M_UPLOADDATE")]
         public DateTime? M_UploadDate { get; set; }
+
+        /// <summary>
+        /// 班组
+        /// </summary>
+        [Column("C_TEAMCODE")]
+        public string C_TeamCode { get; set; }
+
         #endregion
 
         #region 扩展操作

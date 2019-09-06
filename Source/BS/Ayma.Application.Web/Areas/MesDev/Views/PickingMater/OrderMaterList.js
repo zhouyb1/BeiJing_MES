@@ -104,8 +104,8 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 80, align: "left" },
-                      { label: "班组", name: "T_Name", width: 60, align: "left" },
-                       { label: "班组编号", name: "G_TeamCode", width: 60, align: "left" },
+                    { label: "班组", name: "I_TeamName", width: 60, align: "left" },
+                    { label: "班组编号", name: "I_TeamCode", width: 60, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -131,6 +131,9 @@ var bootstrap = function ($, ayma) {
                         row['C_Batch'] = row["I_Batch"];
                         row["C_Qty"] = quantity;
                         row["ID"] = row['ID'];
+                        row["C_TeamCode"] = row["I_TeamCode"];
+                        row["C_TeamName"] = row["I_TeamName"];
+
                         row["C_Price"] = row["I_Price"];
                         //2019年7月18日14:16:17 行数据唯一标识
                         //row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];

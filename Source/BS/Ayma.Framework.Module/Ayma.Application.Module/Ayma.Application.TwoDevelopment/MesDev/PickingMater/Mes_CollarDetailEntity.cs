@@ -72,6 +72,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("C_PRICE")]
         public decimal? C_Price { get; set; }
+        /// <summary>
+        /// 班组
+        /// </summary>
+        [Column("C_TEAMCODE")]
+        public string C_TeamCode { get; set; }
 
         #endregion
 

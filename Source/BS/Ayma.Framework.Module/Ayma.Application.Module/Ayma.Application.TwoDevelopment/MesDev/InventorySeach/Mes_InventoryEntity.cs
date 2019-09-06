@@ -98,14 +98,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <summary>
         /// 班组
         /// </summary>
-   [Column("T_Name")]
-        public string T_Name { get; set; }
-  
-        /// <summary>
-        /// 班组编号
-        /// </summary>
-        [Column("G_TeamCode")]
-    public string G_TeamCode { get; set; }
+        [NotMapped]
+        public string I_TeamName { get; set; }
+        [NotMapped]
+        public string I_TeamCode { get; set; }
+
         [NotMapped]
         public decimal? I_Price { get; set; }
 

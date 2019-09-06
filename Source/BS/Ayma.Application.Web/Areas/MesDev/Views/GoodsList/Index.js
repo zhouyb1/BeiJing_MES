@@ -165,11 +165,11 @@ var bootstrap = function ($, ayma) {
                      { label: "单位重量", name: "g_unitweight", width: 80, align: "left" },
                      { label: "销售税率(%)", name: "g_otax", width: 100, align: "left" },
                      { label: "购进税率(%)", name: "g_itax", width: 100, align: "left" },
+                     { label: "班组", name: "t_name", width: 120, align: "left" },
                     { label: "备注", name: "G_Remark", width: 100, align: "left" },
                     { label: "添加人", name: "g_createby", width: 120, align: "left" },
                     { label: "添加时间", name: "g_createdate", width: 120, align: "left" },
                     { label: "修改人", name: "g_updateby", width: 120, align: "left" },
-                      { label: "班组", name: "t_name", width: 120, align: "left" },
                     { label: "修改时间", name: "g_updatedate", width: 120, align: "left" }
                      
 
