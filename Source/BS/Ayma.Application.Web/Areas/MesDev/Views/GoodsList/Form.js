@@ -89,6 +89,20 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
+            ////班组的分类
+            $("#G_TeamCode").select({
+                type: 'default',
+                value: 'T_Code',
+                text: 'T_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
+                // 访问数据接口参数
+                param: {}
+            });
             //商品单位
             $("#G_Unit").DataItemSelect({ code: "GoodsUnit" });
             $("#G_Unit2").DataItemSelect({ code: "GoodsUnit" });

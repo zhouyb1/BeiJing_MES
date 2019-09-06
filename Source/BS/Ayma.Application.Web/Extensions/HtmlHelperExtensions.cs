@@ -12,7 +12,7 @@ namespace Ayma.Application.Web
     
     /// 创建人：Ayma
     /// 日 期：2017.03.07
-    /// 描 述：对HtmlHelper类进行扩展
+    /// 描 述：对HtmlHelpeHtmlHelperr类进行扩展
     /// </summary>
     public static class HtmlHelperExtensions
     {

@@ -72,7 +72,34 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-
+                    ////班组的分类
+            $("#G_TeamCode").select({
+                type: 'default',
+                value: 'T_Code',
+                text: 'T_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
+                // 访问数据接口参数
+                param: {}
+            });
+            //绑定班组
+            $("#G_TeamCode").select(dfop).on('change', function () {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetTeamEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entitys = JSON.parse(data).data;
+                        $("#C_Teamcode").val(entitys == null ? "" : entitys.T_Code);
+                    }
+                });
+            });
+           
             //绑定订单号
             $("#P_OrderNo").select({
                 type: 'default',
@@ -97,7 +124,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
-                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val(),
+                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val() + '&C_Teamcode=' + $("#C_Teamcode").val(),
                     width: 700,
                     height: 500,
                     maxmin: true,
@@ -128,6 +155,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
+                       { label: "班组名称", name: "T_Name", width: 80, align: "left" },
+                        { label: "班组编号", name: "G_TeamCode", width: 80, align: "left" },
                     {
                         label: '供应商编码', name: 'C_SupplyCode', width: 140, align: 'left', editType: 'label'
                     },

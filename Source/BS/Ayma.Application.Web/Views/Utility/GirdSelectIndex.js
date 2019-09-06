@@ -11,7 +11,7 @@ var acceptClick;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectItem;
-
+   
     function loadData(_dfop) {
         if (_dfop._loaded) {
             console.log(_dfop._data);

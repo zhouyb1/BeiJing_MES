@@ -27,7 +27,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var stockEntity = toosIBLL.ByCodeGetStockEntity(code);
             return Success(stockEntity);
         }
-       
+        /// <summary>
+        /// 根据班组编码或名称获取班组实体信息
+        /// </summary>
+        /// <param name="code">班组编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetTeamEntity(string code)
+        {
+            var stockEntity = toosIBLL.ByCodeGetTeamEntity(code);
+            return Success(stockEntity);
+        }
         /// <summary>
         /// 获取配方表树形结构列表
         /// </summary>
@@ -245,6 +256,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(goodsKind);
         }
         /// <summary>
+        /// 获取班组列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetTeamList()
+        {
+            var TName = toosIBLL.GetTeamList();
+            return Success(TName);
+        }   
+        /// <summary>
         /// 根据编码获取商品二级分类实体
         /// </summary>
         /// <returns></returns>
@@ -268,17 +290,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(doorEntity);
         }
 
-        /// <summary>
-        /// 获取班组列表
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [AjaxOnly]
-        public ActionResult GetTeamList()
-        {
-            var teamList = toosIBLL.GetTeamList();
-            return Success(teamList);
-        }
 
         /// <summary>
         /// 获取工艺列表

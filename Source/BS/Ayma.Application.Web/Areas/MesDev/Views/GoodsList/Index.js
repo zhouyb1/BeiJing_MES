@@ -119,7 +119,7 @@ var bootstrap = function ($, ayma) {
                     {
                         label: "商品二级类型", name: "kindname", width: 80, align: "left"
                     },
-                    { label: "保质时间", name: "g_period", width: 80, align: "left" },
+                    {    label: "保质时间", name: "g_period", width: 80, align: "left" },
                     { label: "价格", name: "g_price", width: 100, align: "left" },
                     {
                         label: "单位", name: "g_unit", width: 80, align: "left",
@@ -134,7 +134,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "包装规格", name: "g_unitqty", width: 80, align: "left" },
-                    { label: "包装单位", name: "g_unit2", width: 80, align: "left" },
+                    { label: "包装单位", name: "g_unit2", width: 80, align: "left" },  
                     { label: "上限预警数量", name: "g_super", width: 100, align: "left" },
                     { label: "下限预警数量", name: "g_lower", width: 100, align: "left" },
                      {
@@ -169,10 +169,12 @@ var bootstrap = function ($, ayma) {
                     { label: "添加人", name: "g_createby", width: 120, align: "left" },
                     { label: "添加时间", name: "g_createdate", width: 120, align: "left" },
                     { label: "修改人", name: "g_updateby", width: 120, align: "left" },
+                      { label: "班组", name: "t_name", width: 120, align: "left" },
                     { label: "修改时间", name: "g_updatedate", width: 120, align: "left" }
+                     
 
                 ],
-                mainId:'ID',
+                mainId:'ID',    
                 isPage: true
             });
             page.search();

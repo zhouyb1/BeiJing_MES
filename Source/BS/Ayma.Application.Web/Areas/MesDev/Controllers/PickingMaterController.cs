@@ -121,10 +121,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetMaterList(string pagination, string queryJson, string keyword)
+        public ActionResult GetMaterList(string pagination, string queryJson, string keyword, string C_Teamcode)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data =  pickingMaterIBLL.GetMaterList(paginationobj,queryJson,keyword).ToList();
+            var data = pickingMaterIBLL.GetMaterList(paginationobj, queryJson, keyword, C_Teamcode).ToList();
             var jsonData = new
             {
                 rows = data,

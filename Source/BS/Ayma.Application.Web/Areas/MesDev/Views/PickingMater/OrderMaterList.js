@@ -7,6 +7,8 @@ var refreshGirdData;
 var parentRefreshGirdData;
 //上级元素的删除表格方法;
 var parentRemoveGridData;
+//班组的编号
+var C_Teamcode = request('C_Teamcode');
 //上级元素的id
 var parentFormId = request('formId');
 var newArray = [];
@@ -90,7 +92,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode='+stockCode,
+                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode + '&C_Teamcode=' + C_Teamcode,
                 headData: [
                     //{ label: "生产订单号", name: "P_OrderNo", width: 130, align: "left",  },
                     //{ label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
@@ -101,7 +103,9 @@ var bootstrap = function ($, ayma) {
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "I_Batch", width: 80, align: "left" }
+                    { label: "批次", name: "I_Batch", width: 80, align: "left" },
+                      { label: "班组", name: "T_Name", width: 60, align: "left" },
+                       { label: "班组编号", name: "G_TeamCode", width: 60, align: "left" },
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
