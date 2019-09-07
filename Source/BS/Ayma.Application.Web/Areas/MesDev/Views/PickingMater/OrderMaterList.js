@@ -105,7 +105,7 @@ var bootstrap = function ($, ayma) {
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 80, align: "left" },
                     { label: "班组", name: "I_TeamName", width: 60, align: "left" },
-                    { label: "班组编号", name: "I_TeamCode", width: 60, align: "left" }
+                    { label: "班组编号", name: "I_TeamCode", width: 60, align: "left", hidden:true }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
