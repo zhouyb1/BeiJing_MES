@@ -124,7 +124,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
-                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val() + '&C_Teamcode=' + $("#C_Teamcode").val(),
+                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val() + '&C_TeamCode=' + $("#C_TeamCode").selectGet(),
                     width: 700,
                     height: 500,
                     maxmin: true,

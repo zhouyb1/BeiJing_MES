@@ -8,7 +8,7 @@ var parentRefreshGirdData;
 //上级元素的删除表格方法;
 var parentRemoveGridData;
 //班组的编号
-var C_Teamcode = request('C_Teamcode');
+var C_TeamCode = request('C_TeamCode');
 //上级元素的id
 var parentFormId = request('formId');
 var newArray = [];
@@ -92,7 +92,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode + '&C_Teamcode=' + C_Teamcode,
+                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode + '&C_TeamCode=' + C_TeamCode,
                 headData: [
                     //{ label: "生产订单号", name: "P_OrderNo", width: 130, align: "left",  },
                     //{ label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
