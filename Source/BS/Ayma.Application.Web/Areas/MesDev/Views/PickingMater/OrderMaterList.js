@@ -80,7 +80,9 @@ var bootstrap = function ($, ayma) {
                     newArray[i]["C_Qty"] = quantity;
                     newArray[i]['C_Batch'] = newArray[i]['I_Batch'];
                     newArray[i]["ID"] = newArray[i]['ID'];
-                    newArray[i]["C_Price"] = newArray[i]['I_Price'];;
+                    newArray[i]["C_Price"] = newArray[i]['I_Price'];
+                    newArray[i]["C_TeamCode"] = newArray[i]["I_TeamCode"];
+                    newArray[i]["C_TeamName"] = newArray[i]["I_TeamName"];
                     //2019年7月18日14:18:35 行数据唯一标识 防止复选框数据重复添加
                     //newArray[i]["row_sign"] = newArray[i]["I_GoodsCode"] + newArray[i]["I_Batch"];
                     array.push(newArray[i]);
