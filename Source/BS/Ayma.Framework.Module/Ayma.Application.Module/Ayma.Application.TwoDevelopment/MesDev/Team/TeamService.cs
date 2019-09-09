@@ -20,14 +20,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private string fieldSql;
         public TeamService()
         {
-            fieldSql=@"
+            fieldSql= @"
                 t.ID,
                 t.T_Code,
                 t.T_Name,
                 t.T_WorkShopCode,
                 t.T_UserName,
-                t.T_Remark
-            ";
+                t.T_Remark,
+                t.T_StockCode,
+                 dbo.GetStockByCode(t.T_StockCode) as  S_Name 
+                   ";
         }
         #endregion
 

@@ -11,6 +11,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// </summary>
     public partial class Mes_TeamEntity 
     {
+     
         #region 实体成员
         /// <summary>
         /// ID
@@ -42,12 +43,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("T_USERNAME")]
         public string T_UserName { get; set; }
+  
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+        /// <returns></returns>
+        [Column("T_StockCode")]
+        public string T_StockCode { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
         /// <returns></returns>
         [Column("T_REMARK")]
         public string T_Remark { get; set; }
+
         #endregion
 
         #region 扩展操作
@@ -66,6 +75,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             this.ID = keyValue;
         }
+        #endregion
+        #region 扩展字段
+        /// <summary>
+        /// 仓库名称
+        /// </summary>
+        /// <returns></returns>
+    [NotMapped]
+        public string S_Name { get; set; }
         #endregion
     }
 }
