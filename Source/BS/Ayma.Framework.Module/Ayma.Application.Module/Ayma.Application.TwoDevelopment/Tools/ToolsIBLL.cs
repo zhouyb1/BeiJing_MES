@@ -283,6 +283,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         IEnumerable<Mes_TeamEntity> GetTeamList();
         /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<RoleEntity> GetRoleList();
+        /// <summary>
         /// 获取条码(成品)
         /// </summary>
         /// <returns></returns>

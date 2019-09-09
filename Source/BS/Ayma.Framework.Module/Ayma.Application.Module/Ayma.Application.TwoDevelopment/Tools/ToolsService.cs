@@ -1181,7 +1181,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-
+        /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<RoleEntity> GetRoleList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<RoleEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取条码
         /// </summary>
