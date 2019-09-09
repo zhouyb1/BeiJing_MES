@@ -1,4 +1,6 @@
-﻿using Ayma.Util;
+﻿using Ayma.Application.Base.SystemModule;
+using Ayma.Application.TwoDevelopment.Tools;
+using Ayma.Util;
 using System;
 using System.Collections.Generic;
 
@@ -215,6 +217,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
+
                 productOrderManagerService.SaveBomList(entityList);
             }
             catch (Exception ex)

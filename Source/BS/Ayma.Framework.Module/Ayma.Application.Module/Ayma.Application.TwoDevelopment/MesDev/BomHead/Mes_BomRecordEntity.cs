@@ -69,6 +69,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         [NotMapped]
         public decimal? B_Total { get; set; }
+
         /// <summary>
         /// erp餐食编码
         /// </summary>
@@ -80,44 +81,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_CREATEBY")]
         public string B_CreateBy { get; set; }
+
         /// <summary>
         /// 添加时间
         /// </summary>
         [Column("B_CREATEDATE")]
         public DateTime? B_CreateDate { get; set; }
+
         /// <summary>
         /// 修改人
         /// </summary>
         [Column("B_UPDATEBY")]
         public string B_UpdateBy { get; set; }
+
         /// <summary>
         /// 修改时间
         /// </summary>
         [Column("B_UPDATEDATE")]
-        public DateTime? B_UpdateDate { get; set; }    
+        public DateTime? B_UpdateDate { get; set; }
+
         /// <summary>
         /// 是否有效
         /// </summary>
         [Column("B_AVAIL")]
         public ErpEnums.YesOrNoEnum? B_Avail { get; set; }
+
         /// <summary>
         /// 开始时间
         /// </summary>
         [Column("B_STARTTIME")]
-        public DateTime? B_StartTime { get; set; } 
+        public DateTime? B_StartTime { get; set; }
+
         /// <summary>
         /// 结束时间
         /// </summary>
         [Column("B_ENDTIME")]
         public DateTime? B_EndTime { get; set; }
+
         /// <summary>
         /// 备注
         /// </summary>
         [Column("B_REMARK")]
         public string B_Remark { get; set; }
+
         #endregion
 
         #region 扩展操作
+
         /// <summary>
         /// 新增调用
         /// </summary>
@@ -128,6 +138,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.B_CreateDate = DateTime.Now;
             this.B_CreateBy = userInfo.realName;
         }
+
         /// <summary>
         /// 编辑调用
         /// </summary>
@@ -139,6 +150,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.B_UpdateDate = DateTime.Now;
             this.B_UpdateBy = userInfo.realName;
         }
+
+        #endregion
+
+        #region 扩展字段
+
+        [NotMapped]
+        public string G_SupplyCode { get; set; }
+
+        [NotMapped]
+        public string G_SupplyName { get; set; }
+
+        [NotMapped]
+        public decimal? G_Price { get; set; }
+
+        [NotMapped]
+        public string G_TeamCode { get; set; }
+
         #endregion
     }
 }

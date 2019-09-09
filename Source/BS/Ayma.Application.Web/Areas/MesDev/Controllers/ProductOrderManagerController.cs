@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Linq;
+using Ayma.Application.Base.SystemModule;
+using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -15,7 +18,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class ProductOrderManagerController : MvcControllerBase
     {
         private ProductOrderManagerIBLL productOrderManagerIBLL = new ProductOrderManagerBLL();
-
+        private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private PickingMaterIBLL pickingMaterIbll = new PickingMaterBLL();
         #region 视图功能
 
         /// <summary>
@@ -155,22 +159,50 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
         [HttpPost]
         [AjaxOnly]
-        public ActionResult SaveBomData(string strJsonBomList,string orderNo,DateTime orderDate)
+        public ActionResult SaveBomData(string strJsonBomList, string orderNo, DateTime orderDate, string strCollarHead)
         {
-            var bomList = strJsonBomList.ToObject<List<Mes_BomRecordEntity>>()
-                .Select(
-                    c =>
-                        new Mes_MaterEntity
-                        {
-                            P_GoodsCode = c.B_GoodsCode,
-                            P_GoodsName = c.B_GoodsName,
-                            P_Unit = c.B_Unit,
-                            P_Qty = c.B_Total,
-                            P_OrderNo = orderNo,
-                            P_OrderDate = orderDate,
-                            P_ErpCode = c.B_ErpCode
-                        }).ToList();
+            var materList = strJsonBomList.ToObject<List<Mes_BomRecordEntity>>();
+            var bomList = materList.Select(c => new Mes_MaterEntity
+            {
+                P_GoodsCode = c.B_GoodsCode,
+                P_GoodsName = c.B_GoodsName,
+                P_Unit = c.B_Unit,
+                P_Qty = c.B_Total,
+                P_OrderNo = orderNo,
+                P_OrderDate = orderDate,
+                P_ErpCode = c.B_ErpCode
+            }).ToList();
             productOrderManagerIBLL.SaveBomList(bomList);
+
+            var collarHead = strCollarHead.ToObject<Mes_CollarHeadEntity>();//领料单头
+            var codeRulebll = new CodeRuleBLL();
+            if (toolsIBLL.IsOrderNo("Mes_CollarHead", "C_CollarNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString())))
+            {
+                //若重复 先占用再赋值
+                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString()); //标志已使用
+                collarHead.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
+            }
+            else
+            {
+                collarHead.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
+            }
+            var detailList = new List<Mes_CollarDetailEntity>();
+            materList.ForEach(d => detailList.Add(new Mes_CollarDetailEntity()
+            {
+                C_Qty = d.B_Qty,
+                C_Remark = d.B_Remark,
+                C_GoodsCode = d.B_GoodsCode,
+                C_GoodsName = d.B_GoodsName,
+                C_SupplyCode = d.G_SupplyCode,
+                C_SupplyName = d.G_SupplyName,
+                C_TeamCode = collarHead.C_TeamCode,
+                C_Unit = d.B_Unit,
+                C_OrderNo =collarHead.P_OrderNo,
+                C_CollarNo = collarHead.C_CollarNo,
+                C_Price = d.G_Price,
+                C_Batch = DateTime.Now.ToString("yyyyMMdd")
+            }));
+            pickingMaterIbll.SaveEntity("",collarHead,detailList);
             return Success("处理成功！");
         }
 

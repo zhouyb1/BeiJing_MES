@@ -72,11 +72,8 @@ var bootstrap = function ($, ayma) {
                 var orderDate = $('#girdtable').jfGridValue('P_OrderDate');
                 //var qty = $('#girdtable').jfGridValue('P_Qty');
                 //var code = $('#girdtable').jfGridValue('P_GoodsCode');
+               
                 if (p_status == "0") {
-                    ayma.alert.error("订单处于生成计划中！");
-                    return false;
-                }
-                if (p_status == "1") {
                     ayma.alert.error("请先审核订单！");
                     return false;
                 }
@@ -84,11 +81,12 @@ var bootstrap = function ($, ayma) {
                     //打开统计页面BomPartSum 
                     ayma.layerForm({
                         id: 'form',
-                        title: '配方物料统计',
+                        title: '物料统计',
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/BomPartSum?orderNo=' + orderNo + '&orderDate=' + orderDate,
                         width: 850,
                         height: 600,
                         maxmin: true,
+                        btn:["生成领料单","关闭"],
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -115,7 +113,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/ProductOrderManager/GetPageList',
                 headData: [
                     { label: "订单号", name: "P_OrderNo", width: 160, align: "left" },
-                    { label: "站点名称", name: "P_OrderStationName", width: 160, align: "left" },
+                    //{ label: "站点名称", name: "P_OrderStationName", width: 160, align: "left" },
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "使用时间", name: "P_UseDate", width: 160, align: "left" },
                     { label: "创建人", name: "P_CreateBy", width: 160, align: "left" },

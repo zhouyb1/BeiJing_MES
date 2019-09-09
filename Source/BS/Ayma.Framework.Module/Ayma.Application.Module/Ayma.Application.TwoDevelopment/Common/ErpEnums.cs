@@ -64,7 +64,11 @@ namespace Ayma.Application.TwoDevelopment
              /// <summary>
             /// 强制使用记录单号
             /// </summary>
-            CompUser=10008
+            CompUser=10008,
+            /// <summary>
+            /// 领料单
+            /// </summary>
+            PickMater=10012
 
         }
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Net.Sockets;
+using Ayma.Application.TwoDevelopment.Tools;
 using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
@@ -17,6 +18,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// </summary>
     public partial class ProductOrderManagerService : RepositoryFactory
     {
+        private PickingMaterService pickingMaterService = new PickingMaterService();
+        private ToolsService toolsService = new ToolsService();
+
         #region 获取数据
 
         /// <summary>
@@ -294,8 +298,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             sb.Append(@"
                         INNER JOIN CTE c ON c.ID = b1.B_ParentID ");
             sb.Append(" )");
-            sb.Append("SELECT *,SUM(B_Qty *@orderQty) B_Total FROM CTE ");
-            sb.Append(@" GROUP BY  ID ,
+            sb.Append("SELECT CTE.*,SUM(B_Qty *@orderQty) B_Total,g.G_SupplyCode,g.G_SupplyName,G_Price,g.G_TeamCode FROM CTE ");
+            sb.Append("INNER JOIN dbo.Mes_Goods g ON g.G_Code=cte.B_GoodsCode WHERE g.G_Kind=1");
+            sb.Append(@" GROUP BY  cte.ID ,
                         B_ParentID ,
                         B_GoodsCode ,
                         B_GoodsName ,
@@ -304,7 +309,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         B_Qty,
                         B_FormulaCode,
                         B_FormulaName,
-                        B_ErpCode
+                        B_ErpCode,
+                        G_SupplyCode,
+                        G_SupplyName,
+                        G_TeamCode,
+                        G_Price
                         ORDER BY B_ParentID asc");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
@@ -332,6 +341,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     item.Create();
                 }
                 db.Insert(entityList);
+                //生成领料单号
+                //生成领料单
+                pickingMaterService.SaveEntity("",null,null);
                 db.Commit();
             }
             catch (Exception ex)
