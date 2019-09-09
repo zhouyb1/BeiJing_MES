@@ -52,6 +52,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         void SaveEntity(string keyValue, Mes_CollarHeadEntity entity,List<Mes_CollarDetailEntity> mes_CollarDetailEntityList);
+
+        /// <summary>
+        /// 新增实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        void SaveEntity(List<Mes_CollarHeadEntity> headList, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList);
+
         #endregion
 
     }

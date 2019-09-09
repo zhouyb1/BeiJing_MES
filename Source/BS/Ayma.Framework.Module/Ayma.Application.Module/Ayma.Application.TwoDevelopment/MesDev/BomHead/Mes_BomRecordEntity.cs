@@ -167,6 +167,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [NotMapped]
         public string G_TeamCode { get; set; }
 
+        [NotMapped]
+        public string G_TeamName { get; set; }
+
         #endregion
     }
 }

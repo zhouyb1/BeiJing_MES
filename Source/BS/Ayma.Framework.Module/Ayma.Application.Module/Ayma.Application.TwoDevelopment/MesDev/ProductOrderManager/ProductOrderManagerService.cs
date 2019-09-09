@@ -298,7 +298,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             sb.Append(@"
                         INNER JOIN CTE c ON c.ID = b1.B_ParentID ");
             sb.Append(" )");
-            sb.Append("SELECT CTE.*,SUM(B_Qty *@orderQty) B_Total,g.G_SupplyCode,g.G_SupplyName,G_Price,g.G_TeamCode FROM CTE ");
+            sb.Append("SELECT CTE.*,SUM(B_Qty *@orderQty) B_Total,g.G_SupplyCode,g.G_SupplyName,G_Price,g.G_TeamCode,dbo.GetTeamNameByCode(g.G_TeamCode)G_TeamName FROM CTE ");
             sb.Append("INNER JOIN dbo.Mes_Goods g ON g.G_Code=cte.B_GoodsCode WHERE g.G_Kind=1");
             sb.Append(@" GROUP BY  cte.ID ,
                         B_ParentID ,

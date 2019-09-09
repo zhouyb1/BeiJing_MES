@@ -296,7 +296,41 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 新增实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveEntity(List<Mes_CollarHeadEntity> headList, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                foreach (var entity in headList)
+                {
+                    entity.Create();
+                }
+                db.Insert(headList);
+                foreach (var item in mes_CollarDetailEntityList)
+                {
+                    item.Create();
+                }
+                db.Insert(mes_CollarDetailEntityList);
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
     }
