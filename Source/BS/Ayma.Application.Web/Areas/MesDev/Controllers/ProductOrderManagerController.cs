@@ -161,6 +161,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveBomData(string strJsonBomList, string orderNo, DateTime orderDate, string strCollarHead)
         {
+            #region 生成订单物料
             var materList = strJsonBomList.ToObject<List<Mes_BomRecordEntity>>();
             var bomList = materList.Select(c => new Mes_MaterEntity
             {
@@ -172,40 +173,62 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 P_OrderDate = orderDate,
                 P_ErpCode = c.B_ErpCode
             }).ToList();
-            productOrderManagerIBLL.SaveBomList(bomList);
+            productOrderManagerIBLL.SaveBomList(bomList); 
+            #endregion
 
-            var collarHead = strCollarHead.ToObject<Mes_CollarHeadEntity>();//领料单头
-            var codeRulebll = new CodeRuleBLL();
-            if (toolsIBLL.IsOrderNo("Mes_CollarHead", "C_CollarNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString())))
-            {
-                //若重复 先占用再赋值
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString()); //标志已使用
-                collarHead.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
-            }
-            else
-            {
-                collarHead.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
-            }
+            #region 生成领料单
+            Mes_CollarHeadEntity collarHead = null;
+            var collarHeadlist = new List<Mes_CollarHeadEntity>();//领料单表体
             var detailList = new List<Mes_CollarDetailEntity>();
-            materList.ForEach(d => detailList.Add(new Mes_CollarDetailEntity()
+            var teamDic = new Dictionary<string, int>();
+            foreach (Mes_BomRecordEntity item in materList)
             {
-                C_Qty = d.B_Qty,
-                C_Remark = d.B_Remark,
-                C_GoodsCode = d.B_GoodsCode,
-                C_GoodsName = d.B_GoodsName,
-                C_SupplyCode = d.G_SupplyCode,
-                C_SupplyName = d.G_SupplyName,
-                C_TeamCode = collarHead.C_TeamCode,
-                C_Unit = d.B_Unit,
-                C_OrderNo =collarHead.P_OrderNo,
-                C_CollarNo = collarHead.C_CollarNo,
-                C_Price = d.G_Price,
-                C_Batch = DateTime.Now.ToString("yyyyMMdd")
-            }));
-            pickingMaterIbll.SaveEntity("",collarHead,detailList);
+                if ( ! teamDic.ContainsKey(item.G_TeamCode))
+                {
+                    var temp = pickingMaterIbll.GetMes_CollarHeadEntity(item.G_TeamCode);
+                    if (temp == null)
+                    {
+                         collarHead = strCollarHead.ToObject<Mes_CollarHeadEntity>(); //领料单头
+                        var codeRulebll = new CodeRuleBLL();
+                        if (toolsIBLL.IsOrderNo("Mes_CollarHead", "C_CollarNo",
+                            codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString())))
+                        {
+                            //若重复 先占用再赋值
+                            codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString()); //标志已使用
+                            collarHead.C_CollarNo =
+                                codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
+                        }
+                        else
+                        {
+                            collarHead.C_CollarNo =
+                                codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString());
+                        }
+                        codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.PickMater).ToString()); //标志已使用
+                        collarHeadlist.Add(collarHead);
+                    }
+                    teamDic.Add(item.G_TeamCode,1);
+                }
+                detailList.Add(new Mes_CollarDetailEntity()
+                {
+                    C_Qty = item.B_Qty,
+                    C_Remark = item.B_Remark,
+                    C_GoodsCode = item.B_GoodsCode,
+                    C_GoodsName = item.B_GoodsName,
+                    C_SupplyCode = item.G_SupplyCode,
+                    C_SupplyName = item.G_SupplyName,
+                    C_TeamCode = item.G_TeamCode,
+                    C_Unit = item.B_Unit,
+                    C_OrderNo = collarHead.P_OrderNo,
+                    C_CollarNo = collarHead.C_CollarNo,
+                    C_Price = item.G_Price,
+                    C_Batch = DateTime.Now.ToString("yyyyMMdd")
+                });
+            }
+            pickingMaterIbll.SaveEntity(collarHeadlist, detailList);
+            #endregion
+
             return Success("处理成功！");
         }
-
         #endregion
 
     }
