@@ -27,6 +27,11 @@ namespace Ayma.Application.Organization
         [Column("F_ACCOUNT")]
         public string F_Account { get; set; }
         /// <summary>
+        /// 角色ID
+        /// </summary>	
+        [Column("R_Code")]
+        public string R_Code { get; set; }
+        /// <summary>
         /// 登录密码
         /// </summary>		
         [Column("F_PASSWORD")]
@@ -334,6 +339,11 @@ namespace Ayma.Application.Organization
         /// </summary>
         [NotMapped]
         public bool LoginOk { get; set; }
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        [NotMapped]
+        public string F_FullName { get; set; }
         #endregion
     }
 }
