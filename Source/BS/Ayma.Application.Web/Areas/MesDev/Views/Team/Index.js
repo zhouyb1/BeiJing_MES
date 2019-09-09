@@ -75,6 +75,8 @@ var bootstrap = function ($, ayma) {
                         { label: '班组名称', name: 'T_Name', width: 200, align: "left" },
                         { label: '车间编码', name: 'T_WorkShopCode', width: 200, align: "left" },
                         { label: '负责人', name: 'T_UserName', width: 200, align: "left" },
+                         { label: '仓库名称', name: 'S_Name', width: 200, align: "left" },
+                         //{ label: '仓库编号', name: 'T_StockCode', width: 200, align: "left" },
                         { label: '备注', name: 'T_Remark', width: 200, align: "left" },
                 ],
                 mainId:'ID',

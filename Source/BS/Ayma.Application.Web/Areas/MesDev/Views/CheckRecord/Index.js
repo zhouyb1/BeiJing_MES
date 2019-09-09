@@ -97,8 +97,8 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/CheckRecord/GetPageList',
                 headData: [
-                    { label: "用户编码", name: "C_UserCode", width: 160, align: "left"},
-                    { label: "用户姓名", name: "C_UserName", width: 160, align: "left"},
+                    { label: "用户编码", name: "C_PersonId", width: 160, align: "left" },
+                    { label: "用户姓名", name: "F_Account", width: 160, align: "left" },
                     { label: "打卡日期", name: "C_ScanDate", width: 160, align: "left"},
                     {
                         label: "打卡时间", name: "C_ScanTime", width: 160, align: "left",

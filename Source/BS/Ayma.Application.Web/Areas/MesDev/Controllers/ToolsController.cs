@@ -265,7 +265,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var TName = toosIBLL.GetTeamList();
             return Success(TName);
-        }   
+        }
+        /// <summary>
+        /// 获取角色列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetRoleList()
+        {
+            var Role = toosIBLL.GetRoleList();
+            return Success(Role);
+        } 
         /// <summary>
         /// 根据编码获取商品二级分类实体
         /// </summary>

@@ -33,6 +33,20 @@ var bootstrap = function ($, ayma) {
             $('#F_Account').on('blur', function () {
                 $.ExistField(keyValue, 'F_Account', top.$.rootUrl + '/AM_OrganizationModule/User/ExistAccount');
             });
+            ////角色的分类
+            $("#R_Code").select({
+                type: 'default',
+                value: 'F_EnCode',
+                text: 'F_FullName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetRoleList',
+                // 访问数据接口参数
+                param: {}
+            });
         },
         initData: function () {
             if (!!selectedRow) {

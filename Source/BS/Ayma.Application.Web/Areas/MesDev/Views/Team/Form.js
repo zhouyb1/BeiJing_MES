@@ -35,6 +35,7 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+
             //名称重复验证
             $("#T_Name").on('blur', function () {
                 var name = $.trim($(this).val()); //去除空格
@@ -55,6 +56,20 @@ var bootstrap = function ($, ayma) {
                         }
                     }
                 });
+            });
+            ////仓库名称
+            $("#T_StockCode").select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
             });
             //车间名称
             $("#T_WorkShopName").select({

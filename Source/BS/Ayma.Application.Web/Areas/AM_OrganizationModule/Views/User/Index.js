@@ -284,6 +284,8 @@ var bootstrap = function ($, ayma) {
                                 });
                             }
                         },
+                        //{ label: '角色编号', name: 'R_Code', width: 100, align: 'center' },
+                        { label: '角色名称', name: 'F_FullName', width: 100, align: 'center' },
                         {
                             label: "状态", name: "F_EnabledMark", index: "F_EnabledMark", width: 50, align: "center",
                             formatter: function (cellvalue) {
