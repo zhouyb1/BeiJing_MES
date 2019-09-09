@@ -341,9 +341,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     item.Create();
                 }
                 db.Insert(entityList);
-                //生成领料单号
-                //生成领料单
-                pickingMaterService.SaveEntity("",null,null);
                 db.Commit();
             }
             catch (Exception ex)
