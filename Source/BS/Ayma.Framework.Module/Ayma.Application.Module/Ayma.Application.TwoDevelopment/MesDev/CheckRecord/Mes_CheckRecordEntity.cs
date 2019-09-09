@@ -85,6 +85,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("C_STATE")]
         public CheckState? C_State { get; set; }
+        /// <summary>
+        /// 用户姓名
+        /// </summary>
+        /// <returns></returns>
+        [Column("F_Account")]
+        public string F_Account { get; set; }
         #endregion
     }
 
