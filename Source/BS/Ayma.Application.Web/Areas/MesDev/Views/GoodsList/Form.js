@@ -88,7 +88,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetGoodsKind',
                 // 访问数据接口参数
                 param: {}
-            });
+            }); 
             ////班组的分类
             $("#G_TeamCode").select({
                 type: 'default',
@@ -100,6 +100,20 @@ var bootstrap = function ($, ayma) {
                 allowSearch: true,
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
+                // 访问数据接口参数
+                param: {}
+            });
+            ////仓库的分类
+            $("#G_StockCode").select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
                 // 访问数据接口参数
                 param: {}
             });

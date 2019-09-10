@@ -612,6 +612,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,g.[G_TeamCode]
                       ,k.G_Name KindName
                        ,c.T_Name T_Name
+                       ,dbo.GetStockByCode(g.G_StockCode) as S_Name
                 ");
                 strSql.Append("FROM Mes_Goods g LEFT JOIN dbo.Mes_GoodKind k ON(g.G_TKind=k.G_Code)  left join  Mes_Team c on(g.G_TeamCode=c.T_Code)");
                 strSql.Append("WHERE 1=1 ");

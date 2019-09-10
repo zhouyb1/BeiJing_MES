@@ -179,6 +179,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("G_TeamCode")]
         public string G_TeamCode { get; set; }
+        /// <summary>
+        /// 仓库编号
+        /// </summary>
+        [Column("G_StockCode")]
+        public string G_StockCode { get; set; }
         #endregion
     }
 }
