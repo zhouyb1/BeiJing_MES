@@ -97,6 +97,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_REMARK")]
         public string B_Remark { get; set; }
+
+        /// <summary>
+        /// 退库单类型(0=正常，1=次品)
+        /// </summary>
+        [Column("B_KIND")]
+        public int? B_Kind { get; set; }
+
         #endregion
 
         #region 扩展操作
@@ -121,6 +128,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+
         #endregion
     }
 }
