@@ -205,6 +205,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取页面显示明细列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InventoryEntity> GetInventoryList(Pagination pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch)
+        {
+            try
+            {
+                return inventorySeachService.GetInventoryList(pagination, queryJson, I_GoodsName, I_StockName, I_Unit, I_Batch);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+
         #endregion
 
         #region 提交数据

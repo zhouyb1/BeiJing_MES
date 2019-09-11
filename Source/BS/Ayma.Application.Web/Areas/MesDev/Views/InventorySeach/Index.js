@@ -18,24 +18,61 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 查看详情
+            //// 查看详情
+            //$('#am_edit').on('click', function () {
+            //    var keyValue = $('#girdtable').jfGridValue('ID');
+            //    if (ayma.checkrow(keyValue)) {
+            //        ayma.layerForm({
+            //            id: 'form',
+            //            title: '库存查询',
+            //            url: top.$.rootUrl + '/MesDev/InventorySeach/Form?keyValue=' + keyValue,
+            //            width: 700,
+            //            height: 500,
+            //            maxmin: true,
+            //            btn: null,
+            //            callBack: function (id) {
+            //                //return top[id].acceptClick(refreshGirdData);
+            //            }
+            //        });
+            //    }
+            //});
+            //明细
             $('#am_edit').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'form',
-                        title: '库存查询',
-                        url: top.$.rootUrl + '/MesDev/InventorySeach/Form?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
-                        maxmin: true,
-                        btn: null,
-                        callBack: function (id) {
-                            //return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
+                var I_GoodsName = escape($('#girdtable').jfGridValue('I_GoodsName'));//商品名称 转码
+                var I_StockName = escape($('#girdtable').jfGridValue('I_StockName'));
+                var I_Unit = escape($('#girdtable').jfGridValue('I_Unit'));
+                if (ayma.checkrow(I_GoodsName)) {
+                ayma.layerForm({
+                    id: 'OrderMaterListForm',
+                    title: '库存明细',
+                    url: top.$.rootUrl + '/MesDev/InventorySeach/InvertoryList?I_GoodsName=' + I_GoodsName + '&I_StockName=' + I_StockName + '&I_Unit=' + I_Unit,
+                    width: 800,
+                    height: 600,
+                    maxmin: true,
+                    callback: function (id, index) {
+                        return top[id].closeWindow();
+                    }
+                });
                 }
             });
+            ////明细
+            //$('#am_detail').on('click', function () {
+            //    if ($("#C_StockName").selectGet() == "") {
+            //        ayma.alert.error("请选择原料仓库！");
+            //        return false;
+            //    }
+            //    ayma.layerForm({
+            //        id: 'OrderMaterListForm',
+            //        title: '添加订单物料',
+            //        url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val() + '&C_TeamCode=' + $("#C_TeamCode").selectGet(),
+            //        width: 100,
+            //        height: 1000,
+            //        maxmin: true,
+            //        callback: function (id, index) {
+            //            return top[id].closeWindow();
+            //        }
+            //    });
+            //});
         },
         // 初始化列表
         initGird: function () {

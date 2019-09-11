@@ -30,18 +30,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.ID,
-                t.I_StockCode,
-                t.I_StockName,
-                t.I_GoodsCode,
-                t.I_GoodsName,
-                t.I_Unit,
-                t.I_Qty,
-                t.I_Batch,
-                t.I_Remark
+               sum(t.I_Qty) as I_Qty,
+					t.I_StockCode,
+					t.I_GoodsName,
+					t.I_StockName,
+					t.I_GoodsCode,
+					t.I_Unit
                 ");
-                strSql.Append("  FROM Mes_Inventory t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  FROM Mes_Inventory  t   group by t.I_StockCode,t.I_GoodsName,t.I_StockName,t.I_GoodsCode,t.I_Unit ");
+                strSql.Append("  having 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -328,7 +325,77 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取库存物料
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_InventoryEntity> GetInventoryList(Pagination pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                //                strSql.Append(@"SELECT  m.ID ,
+                //                                        m.P_GoodsCode ,
+                //                                        m.P_GoodsName ,
+                //                                        s.I_Batch P_Batch ,
+                //                                        m.P_Unit ,
+                //                                        s.I_Qty P_Qty ,
+                //                                        m.P_OrderNo ,
+                //                                        m.P_OrderDate ,
+                //                                        g.G_Price P_Price
+                //                                FROM    dbo.Mes_Inventory s
+                //                                        LEFT JOIN dbo.Mes_Goods g ON g.G_Code = s.I_GoodsCode
+                //                                        RIGHT JOIN dbo.Mes_Mater m ON m.P_GoodsCode = s.I_GoodsCode
+                //                                WHERE   1 = 1 ");
 
+                strSql.Append(@"SELECT  
+                                t.I_Qty,
+					            t.I_StockCode,
+					            t.I_GoodsName,
+					            t.I_StockName,
+					            t.I_GoodsCode,
+					            t.I_Unit,
+					            t.I_Batch,
+					            t.I_Remark
+                                FROM dbo.Mes_Inventory t where 1=1");
+
+                var queryParam = queryJson.ToJObject();
+                 //虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!I_Batch.IsEmpty())
+                {
+                    dp.Add("I_Batch", "%" + I_Batch + "%", DbType.String);
+                    strSql.Append(" AND t.I_Batch like @I_Batch ");
+                }
+                if (!I_GoodsName.IsEmpty())
+                {
+                    dp.Add("I_GoodsName", I_GoodsName, DbType.String);
+                    strSql.Append(" AND t.I_GoodsName= @I_GoodsName ");
+                }
+                if (!I_StockName.IsEmpty())
+                {
+                    dp.Add("I_StockName", I_StockName, DbType.String);
+                    strSql.Append(" AND t.I_StockName=@I_StockName ");
+                }
+                if (!I_Unit.IsEmpty())
+                {
+                    dp.Add("I_Unit", I_Unit, DbType.String);
+                    strSql.Append(" AND t.I_Unit=@I_Unit ");
+                }
+                return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 提交数据

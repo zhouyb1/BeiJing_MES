@@ -52,6 +52,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
+        /// <summary>
+        /// 明细页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult InvertoryList()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据
@@ -181,6 +190,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success("保存成功！");
         }
         #endregion
-
+        /// <summary>
+        /// 获取库存列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetInventoryList(string pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = inventorySeachIBLL.GetInventoryList(paginationobj, queryJson, I_GoodsName, I_StockName, I_Unit, I_Batch);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
     }
 }

@@ -65,6 +65,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="goodsCode"></param>
         /// <returns></returns>
         Mes_InventoryEntity GetListByParams(string goodsCode, string batch);
+           /// <summary>
+        /// 获取页面显示明细列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_InventoryEntity> GetInventoryList(Pagination pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch); 
         #endregion
 
         #region 提交数据
