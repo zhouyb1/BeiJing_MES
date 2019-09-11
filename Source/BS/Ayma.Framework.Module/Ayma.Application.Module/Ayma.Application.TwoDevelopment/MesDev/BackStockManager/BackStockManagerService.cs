@@ -39,6 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockToName,
                 t.B_Remark,
                 t.B_CreateBy,
+                t.B_Kind,
                 t.B_CreateDate
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t ");
