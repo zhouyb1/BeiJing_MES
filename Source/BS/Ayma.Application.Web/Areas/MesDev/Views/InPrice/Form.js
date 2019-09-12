@@ -37,9 +37,29 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#P_SupplyCode").val(entity.S_Code);
+
+                        var code = $.trim($("#P_SupplyCode").val()); //去除空格
+                        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"><i class="fa fa-info-circle"></i></div>';
+                        $.ajax({
+                            type: "get",
+                            url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                            data: { tables: "Mes_InPrice", field: "P_SupplyCode", code: code, keyValue: keyValue },
+                            success: function (data) {
+                                var isOk = JSON.parse(data).data;
+                                if (isOk) {
+                                    $("#P_SupplyCode").addClass("am-field-error");
+                                    $("#P_SupplyCode").parent().append(html);
+                                    ayma.alert.error("供应商编码重复");
+                                } else {
+                                    $("#P_SupplyCode").removeClass("am-field-error");
+                                    $("#isCode").remove();
+                                }
+                            }
+                        });
                     }
                 });
             });
+            //});
             //物料名称
             $("#P_GoodsName").select({
                 type: 'default',
@@ -61,8 +81,28 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#P_GoodsCode").val(entity.G_Code);
+
+                        var code = $.trim($("#P_GoodsCode").val()); //去除空格
+                        var html = '<div class="am-field-error-info" id="isCode" title="物料编码重复！"><i class="fa fa-info-circle"></i></div>';
+                        $.ajax({
+                            type: "get",
+                            url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+                            data: { tables: "Mes_InPrice", field: "P_GoodsCode", code: code, keyValue: keyValue },
+                            success: function (data) {
+                                var isOk = JSON.parse(data).data;
+                                if (isOk) {
+                                    $("#P_GoodsCode").addClass("am-field-error");
+                                    $("#P_GoodsCode").parent().append(html);
+                                    ayma.alert.error("物料编码重复");
+                                } else {
+                                    $("#P_GoodsCode").removeClass("am-field-error");
+                                    $("#isCode").remove();
+                                }
+                            }
+                        });
                     }
                 });
+
             });
         },
         initData: function () {
