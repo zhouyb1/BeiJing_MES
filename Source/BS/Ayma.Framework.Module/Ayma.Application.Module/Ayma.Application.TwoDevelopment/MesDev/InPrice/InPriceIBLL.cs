@@ -39,7 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        void SaveEntity(string keyValue, Mes_InPriceEntity entity);
+        void SaveEntity(string keyValue, Mes_InPriceEntity entity, Mes_PriceEntity entity2);
         #endregion
 
     }

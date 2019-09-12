@@ -35,28 +35,24 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_GoodsCode,
                 t.P_GoodsName,
                 t.P_InPrice,
-                t.P_Itax,
-                t.P_StartBatch,
-                t.P_EndBatch,
-                t.P_CreateBy,
-                t.P_CreateDate
+                t.P_Itax     
                 ");
                 strSql.Append("  FROM Mes_InPrice t ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
-                {
-                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
-                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.P_CreateDate >= @startTime AND t.P_CreateDate <= @endTime ) ");
-                }
-                if (!queryParam["P_CreateDate"].IsEmpty())
-                {
-                    dp.Add("P_CreateDate", "%" + queryParam["P_CreateDate"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.P_CreateDate Like @P_CreateDate ");
-                }
+                //if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                //{
+                //    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                //    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                //    strSql.Append(" AND ( t.P_CreateDate >= @startTime AND t.P_CreateDate <= @endTime ) ");
+                //}
+                //if (!queryParam["P_CreateDate"].IsEmpty())
+                //{
+                //    dp.Add("P_CreateDate", "%" + queryParam["P_CreateDate"].ToString() + "%", DbType.String);
+                //    strSql.Append(" AND t.P_CreateDate Like @P_CreateDate ");
+                //}
                 if (!queryParam["P_SupplyName"].IsEmpty())
                 {
                     dp.Add("P_SupplyName", "%" + queryParam["P_SupplyName"].ToString() + "%", DbType.String);
@@ -139,19 +135,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_InPriceEntity entity)
+        public void SaveEntity(string keyValue, Mes_InPriceEntity entity, Mes_PriceEntity entity2)
         {
             try
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     entity.Modify(keyValue);
+                    entity2.Create();
                     this.BaseRepository().Update(entity);
+                    this.BaseRepository().Insert(entity2);
                 }
                 else
                 {
                     entity.Create();
+                    entity2.Create();
                     this.BaseRepository().Insert(entity);
+                    this.BaseRepository().Insert(entity2);
                 }
             }
             catch (Exception ex)

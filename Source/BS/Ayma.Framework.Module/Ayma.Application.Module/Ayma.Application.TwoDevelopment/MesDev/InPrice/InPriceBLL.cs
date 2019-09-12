@@ -96,11 +96,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_InPriceEntity entity)
+        public void SaveEntity(string keyValue, Mes_InPriceEntity entity, Mes_PriceEntity entity2)
         {
             try
             {
-                inPriceService.SaveEntity(keyValue, entity);
+                inPriceService.SaveEntity(keyValue, entity, entity2);
             }
             catch (Exception ex)
             {

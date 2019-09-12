@@ -162,6 +162,7 @@
     <Compile Include="MesDev\Mes_CompUseHeadMap.cs" />
     <Compile Include="MesDev\Mes_CompUseDetailMap.cs" />
     <Compile Include="MesDev\Mes_InPriceMap.cs" />
+    <Compile Include="MesDev\Mes_PriceMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -98,35 +98,36 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity)
+        public ActionResult SaveForm(string keyValue, string strEntity, string strEntity2) 
         {
             Mes_InPriceEntity entity = strEntity.ToObject<Mes_InPriceEntity>();
-            if (!string.IsNullOrEmpty(entity.P_StartBatch) && !string.IsNullOrEmpty(entity.P_EndBatch))
-            {
-                if (entity.P_StartBatch.Contains("."))
-                {
-                    return Fail("起始批次不能有小数点.");
-                }
-                if (entity.P_EndBatch.Contains("."))
-                {
-                    return Fail("终止批次不能有小数点.");
-                }
-                if (entity.P_StartBatch.Length != 8)
-                {
-                    return Fail("起始批次必须为8为数字.");
-                }
-                if (entity.P_EndBatch.Length != 8)
-                {
-                    return Fail("终止批次必须为8为数字.");
-                }
-               
-                if (Convert.ToInt32(entity.P_StartBatch) > Convert.ToInt32(entity.P_EndBatch))
-                {
-                    return Fail("起始批次不能大于终止批次.");
-                }
-            }
-            inPriceIBLL.SaveEntity(keyValue, entity);
+            Mes_PriceEntity entity2 = strEntity2.ToObject<Mes_PriceEntity>();
+            inPriceIBLL.SaveEntity(keyValue, entity, entity2);
             return Success("保存成功！");
+            //if (!string.IsNullOrEmpty(entity.P_StartBatch) && !string.IsNullOrEmpty(entity.P_EndBatch))
+            //{
+            //    if (entity.P_StartBatch.Contains("."))
+            //    {
+            //        return Fail("起始批次不能有小数点.");
+            //    }
+            //    if (entity.P_EndBatch.Contains("."))
+            //    {
+            //        return Fail("终止批次不能有小数点.");
+            //    }
+            //    if (entity.P_StartBatch.Length != 8)
+            //    {
+            //        return Fail("起始批次必须为8为数字.");
+            //    }
+            //    if (entity.P_EndBatch.Length != 8)
+            //    {
+            //        return Fail("终止批次必须为8为数字.");
+            //    }
+
+            //    if (Convert.ToInt32(entity.P_StartBatch) > Convert.ToInt32(entity.P_EndBatch))
+            //    {
+            //        return Fail("起始批次不能大于终止批次.");
+            //    }
+            //}
         }
         #endregion
 

@@ -47,26 +47,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("P_ITAX")]
         public decimal? P_Itax { get; set; }
-        /// <summary>
-        /// 添加人
-        /// </summary>
-        [Column("P_CREATEBY")]
-        public string P_CreateBy { get; set; }
-        /// <summary>
-        /// 添加时间
-        /// </summary>
-        [Column("P_CREATEDATE")]
-        public DateTime? P_CreateDate { get; set; }
-        /// <summary>
-        /// 起始批次
-        /// </summary>
-        [Column("P_STARTBATCH")]
-        public string P_StartBatch { get; set; }
-        /// <summary>
-        /// 终止批次
-        /// </summary>
-        [Column("P_ENDBATCH")]
-        public string P_EndBatch { get; set; }
         #endregion
 
         #region 扩展操作
@@ -77,8 +57,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
-            this.P_CreateDate = DateTime.Now;
-            this.P_CreateBy = userInfo.realName;
+            //this.P_CreateDate = DateTime.Now;
+            //this.P_CreateBy = userInfo.realName;
         }
         /// <summary>
         /// 编辑调用
