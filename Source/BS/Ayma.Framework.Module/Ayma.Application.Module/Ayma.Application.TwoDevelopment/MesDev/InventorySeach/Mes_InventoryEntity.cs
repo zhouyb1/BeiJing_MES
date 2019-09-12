@@ -105,8 +105,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         [NotMapped]
         public decimal? I_Price { get; set; }
-
-
+        [NotMapped]
+        public string G_Super { get; set; }
+        [NotMapped]
+        public string G_Lower { get; set; }
+        [NotMapped]
+        public string G_State { get; set; }
         #endregion
     }
 }
