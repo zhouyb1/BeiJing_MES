@@ -50,7 +50,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtUnit = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.txtBatch = new System.Windows.Forms.TextBox();
@@ -66,6 +65,7 @@
             this.txtBasketQty = new System.Windows.Forms.TextBox();
             this.cmbSupply = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -248,12 +248,13 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("宋体", 12F);
-            this.label6.Location = new System.Drawing.Point(211, 332);
+            this.label6.Location = new System.Drawing.Point(211, 331);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(88, 16);
             this.label6.TabIndex = 1006;
             this.label6.Text = "入库单价：";
+            this.label6.Visible = false;
             // 
             // label8
             // 
@@ -276,17 +277,6 @@
             this.txtUnit.Size = new System.Drawing.Size(78, 26);
             this.txtUnit.TabIndex = 1011;
             this.txtUnit.TextChanged += new System.EventHandler(this.txtUnit_TextChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 12F);
-            this.label7.Location = new System.Drawing.Point(47, 335);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(56, 16);
-            this.label7.TabIndex = 1005;
-            this.label7.Text = "批次：";
             // 
             // label5
             // 
@@ -321,12 +311,13 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPrice.Location = new System.Drawing.Point(305, 330);
+            this.txtPrice.Location = new System.Drawing.Point(305, 329);
             this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.ReadOnly = true;
             this.txtPrice.Size = new System.Drawing.Size(76, 26);
             this.txtPrice.TabIndex = 1015;
+            this.txtPrice.Visible = false;
             this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
             // 
             // txtKind
@@ -445,11 +436,23 @@
             this.label10.TabIndex = 1028;
             this.label10.Text = "供应商：";
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("宋体", 12F);
+            this.label11.Location = new System.Drawing.Point(15, 333);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(80, 16);
+            this.label11.TabIndex = 1030;
+            this.label11.Text = "生产批次:";
+            // 
             // frmStorageEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 490);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.cmbSupply);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
@@ -467,7 +470,6 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtUnit);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.txtBatch);
@@ -501,7 +503,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtUnit;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.TextBox txtBatch;
@@ -527,5 +528,6 @@
         private System.Windows.Forms.TextBox txtBasketQty;
         private System.Windows.Forms.ComboBox cmbSupply;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

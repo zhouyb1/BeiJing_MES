@@ -62,23 +62,28 @@
             this.panel1.Controls.Add(this.btnAdd);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1050, 84);
+            this.panel1.Size = new System.Drawing.Size(840, 67);
             this.panel1.TabIndex = 0;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // txtMaterInNo
             // 
-            this.txtMaterInNo.Location = new System.Drawing.Point(182, 31);
+            this.txtMaterInNo.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtMaterInNo.Location = new System.Drawing.Point(132, 21);
+            this.txtMaterInNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtMaterInNo.Name = "txtMaterInNo";
-            this.txtMaterInNo.Size = new System.Drawing.Size(164, 25);
+            this.txtMaterInNo.Size = new System.Drawing.Size(172, 24);
             this.txtMaterInNo.TabIndex = 14;
             this.txtMaterInNo.TextChanged += new System.EventHandler(this.txtMaterInNo_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 38);
+            this.label2.Font = new System.Drawing.Font("宋体", 11F);
+            this.label2.Location = new System.Drawing.Point(46, 26);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
             this.label2.TabIndex = 11;
@@ -87,12 +92,12 @@
             // 
             // btnFind
             // 
+            this.btnFind.Font = new System.Drawing.Font("宋体", 11F);
             this.btnFind.Image = global::DesktopApp.Properties.Resources.search1;
             this.btnFind.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFind.Location = new System.Drawing.Point(429, 31);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFind.Location = new System.Drawing.Point(341, 18);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(70, 29);
+            this.btnFind.Size = new System.Drawing.Size(70, 30);
             this.btnFind.TabIndex = 11;
             this.btnFind.Text = "查询";
             this.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -101,12 +106,12 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.Font = new System.Drawing.Font("宋体", 11F);
             this.btnAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdd.Location = new System.Drawing.Point(545, 31);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Location = new System.Drawing.Point(434, 18);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(70, 29);
+            this.btnAdd.Size = new System.Drawing.Size(70, 30);
             this.btnAdd.TabIndex = 10;
             this.btnAdd.Text = "添加";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,11 +138,12 @@
             this.提交时间,
             this.备注});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView.Location = new System.Drawing.Point(0, 84);
+            this.dataGridView.Location = new System.Drawing.Point(0, 67);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowTemplate.Height = 27;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(1050, 520);
+            this.dataGridView.Size = new System.Drawing.Size(840, 416);
             this.dataGridView.TabIndex = 17;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
@@ -176,6 +182,7 @@
             this.生产订单号.HeaderText = "生产订单号";
             this.生产订单号.Name = "生产订单号";
             this.生产订单号.ReadOnly = true;
+            this.生产订单号.Width = 160;
             // 
             // 订单时间
             // 
@@ -204,6 +211,7 @@
             this.添加时间.HeaderText = "添加时间";
             this.添加时间.Name = "添加时间";
             this.添加时间.ReadOnly = true;
+            this.添加时间.Width = 160;
             // 
             // 修改人
             // 
@@ -218,6 +226,7 @@
             this.修改时间.HeaderText = "修改时间";
             this.修改时间.Name = "修改时间";
             this.修改时间.ReadOnly = true;
+            this.修改时间.Width = 160;
             // 
             // 删除人
             // 
@@ -246,6 +255,7 @@
             this.提交时间.HeaderText = "提交时间";
             this.提交时间.Name = "提交时间";
             this.提交时间.ReadOnly = true;
+            this.提交时间.Width = 160;
             // 
             // 备注
             // 
@@ -256,13 +266,14 @@
             // 
             // frmStorageList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1050, 604);
+            this.ClientSize = new System.Drawing.Size(840, 483);
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmStorageList";
             this.Text = "物料入库";
             this.Load += new System.EventHandler(this.frmStorageMake_Load);

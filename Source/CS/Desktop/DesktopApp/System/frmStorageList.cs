@@ -27,10 +27,18 @@ namespace DesktopApp
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            dataGridView.DataSource = null;
-            string MaterInNo = txtMaterInNo.Text.Trim();
-            string strCondit = "and M_MaterInNo LIKE '%"+ MaterInNo +"%'";
-            loadData(strCondit);
+            if (txtMaterInNo.Text == "")
+            {
+                untCommon.InfoMsg("请输入单据或者部分单据！");
+                return;
+            }
+            else
+            {
+                dataGridView.DataSource = null;
+                string MaterInNo = txtMaterInNo.Text.Trim();
+                string strCondit = "and M_MaterInNo LIKE '%" + MaterInNo + "%'";
+                loadData(strCondit);
+            }
         }
         public void loadData(string strCondit)
         {

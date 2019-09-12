@@ -77,6 +77,7 @@ namespace DesktopApp
             }
 
                 txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
