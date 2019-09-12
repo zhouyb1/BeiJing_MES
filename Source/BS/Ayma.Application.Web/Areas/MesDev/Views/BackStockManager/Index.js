@@ -210,6 +210,22 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
+                    {
+                        label: "单据类型", name: "B_Kind", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'BackToStockKind',
+                                callback: function (_data) {
+                                    if (value == 0) {
+                                        callback("<span class='label label-default'>" + _data.text + "</span>");
+                                    } else {
+                                        callback("<span class='label label-danger'>" + _data.text + "</span>");
+                                    }
+                                }
+                            });
+                        }
+                    },
                     { label: "退仓库单号", name: "B_BackStockNo", width: 160, align: "left"},
                     { label: "仓库编码", name: "B_StockCode", width: 160, align: "left"},
                     { label: "仓库名称", name: "B_StockName", width: 160, align: "left"},

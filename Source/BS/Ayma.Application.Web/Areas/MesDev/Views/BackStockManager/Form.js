@@ -18,7 +18,7 @@ var bootstrap = function($, ayma) {
             page.bind();
             page.initData();
         },
-        bind: function() {
+        bind: function () {
             //绑定线边仓库
             $('#B_StockName').select({
                 text: "s_name",
@@ -41,7 +41,6 @@ var bootstrap = function($, ayma) {
                     }
                 });
             });
-
             //绑定目标仓库
             $('#B_StockToName').select({
                 text: "s_name",
@@ -50,19 +49,71 @@ var bootstrap = function($, ayma) {
                 maxHeight: 200,
                 allowSearch: true,
                 url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
-                param: { code: "StockList", strWhere: "S_Kind in (1,2) " },
-            }).on('change', function() {
+                param: { code: "StockList", strWhere: "S_Kind in (1,2)" },
+            }).on('change', function () {
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
                     url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
                     data: { code: code },
-                    success: function(data) {
+                    success: function (data) {
                         var entity = JSON.parse(data).data;
                         $('#B_StockToCode').val(entity == null ? "" : entity.S_Code);
                     }
                 });
             });
+            //checkbox
+            $("#B_Kind").on("click", function () {
+                if ($(this).is(':checked')) {
+                    $('#B_StockToName').selectRefresh({
+                        text: "s_name",
+                        value: "s_name",
+                        type: 'default',
+                        maxHeight: 200,
+                        allowSearch: true,
+                        url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
+                        param: { code: "StockList", strWhere: "S_Kind = 5" }
+                    });
+                    $('#B_StockToName').selectSet("次品仓");
+                    $("#B_StockToName").select().on('change', function () {
+                        var code = $(this).selectGet();
+                        $.ajax({
+                            type: "get",
+                            url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
+                            data: { code: code },
+                            success: function (data) {
+                                var entity = JSON.parse(data).data;
+                                $('#B_StockToCode').val(entity == null ? "" : entity.S_Code);
+                            }
+                        });
+                    });
+                } else {
+                    $('#B_StockToName').selectRefresh({
+                        text: "s_name",
+                        value: "s_name",
+                        type: 'default',
+                        maxHeight: 200,
+                        allowSearch: true,
+                        url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
+                        param: { code: "StockList", strWhere: "S_Kind in (1,2)" },
+                    });
+                    $("#B_StockToName").select().on('change', function () {
+                        var code = $(this).selectGet();
+                        $.ajax({
+                            type: "get",
+                            url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
+                            data: { code: code },
+                            success: function (data) {
+                                var entity = JSON.parse(data).data;
+                                $('#B_StockToCode').val(entity == null ? "" : entity.S_Code);
+                            }
+                        });
+                    });
+                }
+
+            });
+          
+
 
             //添加物料
             $('#am_add').on('click', function() {
