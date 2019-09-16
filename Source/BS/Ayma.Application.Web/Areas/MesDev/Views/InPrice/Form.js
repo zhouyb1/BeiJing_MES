@@ -2,6 +2,8 @@
  * 日  期：2019-08-06 10:54
  * 描  述：原物料入库价格表
  */
+var SupplyCodestate;//供应商编码重复状态
+var GoodsCodestate;//供应商编码重复状态
 var acceptClick;
 var keyValue = request('keyValue');
 //批次时间
@@ -88,6 +90,9 @@ var bootstrap = function ($, ayma) {
     };
     // 保存数据
     acceptClick = function (callBack) {
+            if (!$('body').Validform()) {
+                return false;
+            }
             var code = $.trim($("#P_SupplyCode").val()); //去除空格
             var code2 = $.trim($("#P_GoodsCode").val()); //去除空格
             var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
@@ -104,20 +109,22 @@ var bootstrap = function ($, ayma) {
                         $("#P_GoodsCode").addClass("am-field-error");
                         $("#P_GoodsCode").parent().append(html);
                         ayma.alert.error("编码重复");
+                        SupplyCodestate = false;
+                        return false
                     } else {
                         $("#P_SupplyCode").removeClass("am-field-error");
                         $("#isCode").remove();
                         $("#P_GoodsCode").removeClass("am-field-error");
                         $("#isCode2").remove();
+                        SupplyCodestate = true;
                     }
                 }
             });
-            if (!$('body').Validform()) {
+            if (SupplyCodestate == false) {
                 return false;
             }
             var postData = {
                 strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
-
             };
             $.SaveForm(top.$.rootUrl + '/MesDev/InPrice/SaveForm?keyValue=' + keyValue, postData, function (res) {
                 // 保存成功后才回调
