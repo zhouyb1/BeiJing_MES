@@ -1225,6 +1225,49 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+        /// <summary>
+        /// 编码重复验证和供应商编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
+        /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
+        /// <returns></returns>
+        public bool IsCodeAndSupplyCode(string tables, string field, string code, string field2, string code2, string keyValue)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("select * from " + tables + " where " + field + "=@Code and "+field2+"=@Code2");
+                var dp = new DynamicParameters(new { });
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    strSql.Append(" AND ID !=@keyValue");
+                    dp.Add("keyValue", keyValue, DbType.String);
+                }
+
+                dp.Add("Code", code, DbType.String);
+                dp.Add("Code2", code2, DbType.String);
+                int count = this.BaseRepository().FindTable(strSql.ToString(), dp).Rows.Count;
+                if (count > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

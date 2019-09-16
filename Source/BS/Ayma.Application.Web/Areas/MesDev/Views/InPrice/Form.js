@@ -40,26 +40,7 @@ var bootstrap = function ($, ayma) {
                         var entity = JSON.parse(data).data;
                         $("#P_SupplyCode").val(entity.S_Code);
 
-                        var code = $.trim($("#P_SupplyCode").val()); //去除空格
-                        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
-                        $.ajax({
-                            type: "get",
-                            url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                            data: { tables: "Mes_InPrice", field: "P_SupplyCode", code: code, keyValue: keyValue },
-                            success: function (data) {
-                                var isOk = JSON.parse(data).data;
-                                if (isOk) {
-                                    $("#P_SupplyCode").addClass("am-field-error");
-                                    $("#P_SupplyCode").parent().append(html);
-                                    ayma.alert.error("供应商编码重复");
-                                    SupplyCodestate = false;
-                                } else {
-                                    $("#P_SupplyCode").removeClass("am-field-error");
-                                    $("#isCode").remove();
-                                    SupplyCodestate = true;
-                                }
-                            }
-                        });
+            
                     }
                 });
             });
@@ -85,34 +66,13 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#P_GoodsCode").val(entity.G_Code);
-
-                        var code = $.trim($("#P_GoodsCode").val()); //去除空格
-                        var html = '<div class="am-field-error-info" id="isCode" title="物料编码重复！"></div>';
-                        $.ajax({
-                            type: "get",
-                            url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                            data: { tables: "Mes_InPrice", field: "P_GoodsCode", code: code, keyValue: keyValue },
-                            success: function (data) {
-                                var isOk = JSON.parse(data).data;
-                                if (isOk) {
-                                    $("#P_GoodsCode").addClass("am-field-error");
-                                    $("#P_GoodsCode").parent().append(html);
-                                    ayma.alert.error("物料编码重复");
-                                    GoodsCodestate = false;
-                                } else {
-                                    $("#P_GoodsCode").removeClass("am-field-error");
-                                    $("#isCode").remove();
-                                    GoodsCodestate = true;
-                                }
-                            }
-                        });
                     }
                 });
 
             });
         },
         initData: function () {
-            if (!!keyValue) {
+            if (!!keyValue) { 
                 $.SetForm(top.$.rootUrl + '/MesDev/InPrice/GetFormData?keyValue=' + keyValue, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
@@ -130,23 +90,49 @@ var bootstrap = function ($, ayma) {
     };
     // 保存数据
     acceptClick = function (callBack) {
-        if (!$('body').Validform()) {
-            return false;
-        }
-        //判断供应商编码以及物料编码是否重复
-        if (GoodsCodestate == false || SupplyCodestate==false) {
-            return false;
-        }
-        var postData = {
-            strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
-
-        };
-        $.SaveForm(top.$.rootUrl + '/MesDev/InPrice/SaveForm?keyValue=' + keyValue, postData, function (res) {
-            // 保存成功后才回调
-            if (!!callBack) {
-                callBack();
+        var code = $.trim($("#P_SupplyCode").val()); //去除空格
+        var code2 = $.trim($("#P_GoodsCode").val()); //去除空格
+        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
+        $.ajax({
+            type: "get",
+            url: top.$.rootUrl + '/MesDev/Tools/IsCodeAndSupplyCode',
+            data: { tables: "Mes_InPrice", field: "P_SupplyCode", code: code, field2: "P_GoodsCode", code2: code2, keyValue: keyValue },
+            async:false,
+            success: function (data) {
+                var isOk = JSON.parse(data).data;
+                if (isOk) {
+                    $("#P_SupplyCode").addClass("am-field-error");
+                    $("#P_SupplyCode").parent().append(html);
+                    $("#P_GoodsCode").addClass("am-field-error");
+                    $("#P_GoodsCode").parent().append(html);
+                    ayma.alert.error("编码重复");
+                    SupplyCodestate = false;
+                    return false
+                } else {
+                    $("#P_SupplyCode").removeClass("am-field-error");
+                    $("#isCode").remove();
+                    $("#P_GoodsCode").removeClass("am-field-error");
+                    $("#isCode2").remove();
+                    SupplyCodestate = true;
+                }
             }
         });
+        if (SupplyCodestate == false) {
+            return false;
+        }
+            if (!$('body').Validform()) {
+                return false;
+            }
+            var postData = {
+                strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
+
+            };
+            $.SaveForm(top.$.rootUrl + '/MesDev/InPrice/SaveForm?keyValue=' + keyValue, postData, function (res) {
+                // 保存成功后才回调
+                if (!!callBack) {
+                    callBack();
+                }
+            })
     };
     page.init();
 }

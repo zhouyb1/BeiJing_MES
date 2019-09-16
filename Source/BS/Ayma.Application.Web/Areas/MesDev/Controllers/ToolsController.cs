@@ -539,7 +539,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var list = toosIBLL.GetBarCodeList();
             return Success(list);
         }
-
+        /// <summary>
+        /// 编码重复验证和供应商编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
+        /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult IsCodeAndSupplyCode(string tables, string field, string code, string field2, string code2, string keyValue)
+        {
+            var isCode = toosIBLL.IsCodeAndSupplyCode(tables, field, code,field2,code2, keyValue);
+            return Success(isCode);
+        }
         #endregion
 
         #region 提交数据

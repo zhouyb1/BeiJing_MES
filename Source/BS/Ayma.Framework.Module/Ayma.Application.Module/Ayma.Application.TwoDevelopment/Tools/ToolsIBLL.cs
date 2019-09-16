@@ -292,6 +292,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_ScanCodeEntity> GetBarCodeList();
+        /// <summary>
+        /// 编码重复验证和供应商编码重复验证
+        /// </summary>
+        /// <param name="tables">表名</param>
+        /// <param name="field">字段名</param>
+        /// <param name="code">编码</param>
+        /// <param name="keyValue">主键Id</param>
+        /// <returns></returns>
+        bool IsCodeAndSupplyCode(string tables, string field, string code, string field2, string code2, string keyValue);
         #endregion
 
         #region 提交数据
