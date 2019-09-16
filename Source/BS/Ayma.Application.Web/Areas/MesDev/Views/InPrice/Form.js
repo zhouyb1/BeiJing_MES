@@ -2,6 +2,8 @@
  * 日  期：2019-08-06 10:54
  * 描  述：原物料入库价格表
  */
+var SupplyCodestate;//供应商编码重复状态
+var GoodsCodestate;//供应商编码重复状态
 var acceptClick;
 var keyValue = request('keyValue');
 //批次时间
@@ -39,7 +41,7 @@ var bootstrap = function ($, ayma) {
                         $("#P_SupplyCode").val(entity.S_Code);
 
                         var code = $.trim($("#P_SupplyCode").val()); //去除空格
-                        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"><i class="fa fa-info-circle"></i></div>';
+                        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
                         $.ajax({
                             type: "get",
                             url: top.$.rootUrl + '/MesDev/Tools/IsCode',
@@ -50,9 +52,11 @@ var bootstrap = function ($, ayma) {
                                     $("#P_SupplyCode").addClass("am-field-error");
                                     $("#P_SupplyCode").parent().append(html);
                                     ayma.alert.error("供应商编码重复");
+                                    SupplyCodestate = false;
                                 } else {
                                     $("#P_SupplyCode").removeClass("am-field-error");
                                     $("#isCode").remove();
+                                    SupplyCodestate = true;
                                 }
                             }
                         });
@@ -83,7 +87,7 @@ var bootstrap = function ($, ayma) {
                         $("#P_GoodsCode").val(entity.G_Code);
 
                         var code = $.trim($("#P_GoodsCode").val()); //去除空格
-                        var html = '<div class="am-field-error-info" id="isCode" title="物料编码重复！"><i class="fa fa-info-circle"></i></div>';
+                        var html = '<div class="am-field-error-info" id="isCode" title="物料编码重复！"></div>';
                         $.ajax({
                             type: "get",
                             url: top.$.rootUrl + '/MesDev/Tools/IsCode',
@@ -94,9 +98,11 @@ var bootstrap = function ($, ayma) {
                                     $("#P_GoodsCode").addClass("am-field-error");
                                     $("#P_GoodsCode").parent().append(html);
                                     ayma.alert.error("物料编码重复");
+                                    GoodsCodestate = false;
                                 } else {
                                     $("#P_GoodsCode").removeClass("am-field-error");
                                     $("#isCode").remove();
+                                    GoodsCodestate = true;
                                 }
                             }
                         });
@@ -125,6 +131,10 @@ var bootstrap = function ($, ayma) {
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
+            return false;
+        }
+        //判断供应商编码以及物料编码是否重复
+        if (GoodsCodestate == false || SupplyCodestate==false) {
             return false;
         }
         var postData = {
