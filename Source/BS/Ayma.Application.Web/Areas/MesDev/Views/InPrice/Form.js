@@ -5,6 +5,7 @@
 var GoodsCodestate;//供应商编码重复状态
 var acceptClick;
 var keyValue = request('keyValue');
+var SupplyCodestate;
 //批次时间
 var batch = new Date();
 var bootstrap = function ($, ayma) {
@@ -109,7 +110,6 @@ var bootstrap = function ($, ayma) {
                         $("#P_GoodsCode").parent().append(html);
                         ayma.alert.error("编码重复");
                         SupplyCodestate = false;
-                        return false
                     } else {
                         $("#P_SupplyCode").removeClass("am-field-error");
                         $("#isCode").remove();
