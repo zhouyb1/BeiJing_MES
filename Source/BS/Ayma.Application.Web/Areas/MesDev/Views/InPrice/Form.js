@@ -90,36 +90,36 @@ var bootstrap = function ($, ayma) {
     };
     // 保存数据
     acceptClick = function (callBack) {
-        var code = $.trim($("#P_SupplyCode").val()); //去除空格
-        var code2 = $.trim($("#P_GoodsCode").val()); //去除空格
-        var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
-        $.ajax({
-            type: "get",
-            url: top.$.rootUrl + '/MesDev/Tools/IsCodeAndSupplyCode',
-            data: { tables: "Mes_InPrice", field: "P_SupplyCode", code: code, field2: "P_GoodsCode", code2: code2, keyValue: keyValue },
-            async:false,
-            success: function (data) {
-                var isOk = JSON.parse(data).data;
-                if (isOk) {
-                    $("#P_SupplyCode").addClass("am-field-error");
-                    $("#P_SupplyCode").parent().append(html);
-                    $("#P_GoodsCode").addClass("am-field-error");
-                    $("#P_GoodsCode").parent().append(html);
-                    ayma.alert.error("编码重复");
-                    SupplyCodestate = false;
-                    return false
-                } else {
-                    $("#P_SupplyCode").removeClass("am-field-error");
-                    $("#isCode").remove();
-                    $("#P_GoodsCode").removeClass("am-field-error");
-                    $("#isCode2").remove();
-                    SupplyCodestate = true;
+            var code = $.trim($("#P_SupplyCode").val()); //去除空格
+            var code2 = $.trim($("#P_GoodsCode").val()); //去除空格
+            var html = '<div class="am-field-error-info" id="isCode" title="供应商编码重复！"></div>';
+            $.ajax({
+                type: "get",
+                url: top.$.rootUrl + '/MesDev/Tools/IsCodeAndSupplyCode',
+                data: { tables: "Mes_InPrice", field: "P_SupplyCode", code: code, field2: "P_GoodsCode", code2: code2, keyValue: keyValue },
+                async:false,
+                success: function (data) {
+                    var isOk = JSON.parse(data).data;
+                    if (isOk) {
+                        $("#P_SupplyCode").addClass("am-field-error");
+                        $("#P_SupplyCode").parent().append(html);
+                        $("#P_GoodsCode").addClass("am-field-error");
+                        $("#P_GoodsCode").parent().append(html);
+                        ayma.alert.error("编码重复");
+                        SupplyCodestate = false;
+                        return false
+                    } else {
+                        $("#P_SupplyCode").removeClass("am-field-error");
+                        $("#isCode").remove();
+                        $("#P_GoodsCode").removeClass("am-field-error");
+                        $("#isCode2").remove();
+                        SupplyCodestate = true;
+                    }
                 }
+            });
+            if (SupplyCodestate == false) {
+                return false;
             }
-        });
-        if (SupplyCodestate == false) {
-            return false;
-        }
             if (!$('body').Validform()) {
                 return false;
             }
