@@ -140,6 +140,8 @@ namespace DesktopApp
 
         private void btn_Weight_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
+            Cursor.Current = Cursors.WaitCursor;
             if (Open())
             {
                 Thread.Sleep(100);
@@ -157,7 +159,7 @@ namespace DesktopApp
                     {
                         //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
                         //{
-                        txtQty.Text = strWeight[nLen - 1].ToString();
+                        txtQty.Text = ZH(strWeight[nLen - 1].ToString());
                         //}
                         //else
                         //{
@@ -165,13 +167,17 @@ namespace DesktopApp
 
                         //}
                         Close();
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
                     }
                     else
                     {
                         MessageBox.Show(str);
                         Close();
-                        Thread.Sleep(1000);
+                        Thread.Sleep(100);
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
                     }
 
                     //MessageBox.Show(str);
@@ -179,15 +185,30 @@ namespace DesktopApp
                 else
                 {
                     MessageBox.Show("串口没有打开");
+                    this.Enabled = true;
+                    Cursor.Current = Cursors.Default;
                 }
 
                 Close();
-
+                this.Enabled = true;
+                Cursor.Current = Cursors.Default;
             }
             else
             {
-                ;
+                this.Enabled = true;
+                Cursor.Current = Cursors.Default;
             }
+        }
+
+        private string ZH(string strTemp)
+        {
+            string strReturn = "";
+            int nLen = strTemp.Length;
+            for (int i = 0; i < nLen; i++)
+            {
+                strReturn = strReturn + strTemp.Substring(nLen - i - 1, 1);
+            }
+            return strReturn;
         }
 
         private bool Open()

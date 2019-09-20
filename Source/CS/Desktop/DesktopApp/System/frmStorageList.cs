@@ -64,8 +64,17 @@ namespace DesktopApp
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var rows = MaterInHeadBLL.GetListMax();
-            frmStorageAdd frmStorageAdd = new frmStorageAdd(this, frmMain.User, GetSerialNumber(rows[0].M_CreateDate));
-            frmStorageAdd.ShowDialog();
+            if (rows.Count > 0)
+            {
+                frmStorageAdd frmStorageAdd = new frmStorageAdd(this, frmMain.User, GetSerialNumber(rows[0].M_CreateDate));
+                frmStorageAdd.ShowDialog();
+            }
+            else
+            {
+
+                frmStorageAdd frmStorageAdd = new frmStorageAdd(this, frmMain.User, GetSerialNumber(DateTime.Now));
+                frmStorageAdd.ShowDialog();
+            }
         }
 
         private void frmStorageMake_Load(object sender, EventArgs e)
@@ -90,7 +99,7 @@ namespace DesktopApp
             }
             //if (MaterInHeadBLL.GetList(dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString())[0].M_Status == 1)
             //{
-            frmStorageEdit frmStorageEdit = new frmStorageEdit(this, frmMain.User, dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["生产订单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["状态"].Value.ToString());
+            frmStorageEdit frmStorageEdit = new frmStorageEdit(this, frmMain.User, dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["生产订单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["状态"].Value.ToString(), dataGridView.Rows[rowindex].Cells["仓库编码"].Value.ToString());
                 frmStorageEdit.ShowDialog();
             //}
             //else
@@ -170,15 +179,19 @@ namespace DesktopApp
                 if (str_serialNumber == DateTime.Now.ToString("yyyyMMdd"))
                 {
                     var rows = MaterInHeadBLL.GetListMax();
-                    if (rows[0].M_MaterInNo != null)
+                    if (rows.Count > 0)
                     {
-                        string str = rows[0].M_MaterInNo;
-                        str = str.Substring(str.Length - 4, 4);
-                        //str = str.Remove(0, str.Length - 9);
-                        int lastNumber = int.Parse(str);
-                        lastNumber++;
-                        return "I" + DateTime.Now.ToString("yyyyMMdd") + lastNumber.ToString("000000");
+                        if (rows[0].M_MaterInNo != null)
+                        {
+                            string str = rows[0].M_MaterInNo;
+                            str = str.Substring(str.Length - 4, 4);
+                            //str = str.Remove(0, str.Length - 9);
+                            int lastNumber = int.Parse(str);
+                            lastNumber++;
+                            return "I" + DateTime.Now.ToString("yyyyMMdd") + lastNumber.ToString("000000");
+                        }
                     }
+
                 }
             }
             return "I" + DateTime.Now.ToString("yyyyMMdd") + "000001";

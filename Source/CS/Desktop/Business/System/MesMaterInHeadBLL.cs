@@ -163,7 +163,7 @@ namespace Business.System
              try
              {
                  var strSql = new StringBuilder();
-                 strSql.Append("SELECT top(1)* FROM Mes_MaterInHead where M_OrderKind = 1");
+                 strSql.Append("SELECT top(1)* FROM Mes_MaterInHead where M_OrderKind = 0");
                  strSql.Append(" order by M_MaterInNo desc");
                  var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
                  return rows;

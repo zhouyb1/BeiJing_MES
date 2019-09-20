@@ -254,7 +254,6 @@
             this.label6.Size = new System.Drawing.Size(88, 16);
             this.label6.TabIndex = 1006;
             this.label6.Text = "入库单价：";
-            this.label6.Visible = false;
             // 
             // label8
             // 
@@ -317,7 +316,6 @@
             this.txtPrice.ReadOnly = true;
             this.txtPrice.Size = new System.Drawing.Size(76, 26);
             this.txtPrice.TabIndex = 1015;
-            this.txtPrice.Visible = false;
             this.txtPrice.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPrice_KeyDown);
             // 
             // txtKind

@@ -44,7 +44,7 @@ namespace DesktopApp
         private void frmMain_Load(object sender, EventArgs e)
         {
             loadModule();
-            lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
+            //lbVer.Text = Tools.ConfigManager.ReadValueByKey(ConfigurationFile.AppConfig, "version");
             lbUser.Text = "[" + User.F_Account + "]" + User.F_RealName;
         }
 
@@ -79,9 +79,9 @@ namespace DesktopApp
                 cmsLog.Visible = false;
                 cmsDatabase.Visible = false;
 
-                cmsExitManager.Visible = false;
-                btnExit.Visible = false;
-                btnOutLogin.Visible = false;
+                //cmsExitManager.Visible = false;
+                //btnExit.Visible = false;
+                //btnOutLogin.Visible = false;
 
                 cmsOtherManager.Visible = false;
                 cmsSkin.Visible = false;
@@ -192,21 +192,21 @@ namespace DesktopApp
                             }
 
 
-                        case "05":
-                            {
-                                cmsExitManager.Visible = true;
-                                break;
-                            }
-                        case "0501":
-                            {
-                                btnExit.Visible = true;
-                                break;
-                            }
-                        case "0502":
-                            {
-                                btnOutLogin.Visible = true;
-                                break;
-                            }
+                        //case "05":
+                        //    {
+                        //        cmsExitManager.Visible = true;
+                        //        break;
+                        //    }
+                        //case "0501":
+                        //    {
+                        //        btnExit.Visible = true;
+                        //        break;
+                        //    }
+                        //case "0502":
+                        //    {
+                        //        btnOutLogin.Visible = true;
+                        //        break;
+                        //    }
 
                         case "06":
                             {
@@ -748,6 +748,11 @@ namespace DesktopApp
             }
 
             frmBarcodePrintf.Show(this.panMain);
+        }
+
+        private void 程序更新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
 

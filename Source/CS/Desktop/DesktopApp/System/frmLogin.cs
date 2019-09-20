@@ -5,6 +5,8 @@ using System.Threading;
 using Business;
 using Model;
 using Tools;
+using System.Diagnostics;
+using System.ComponentModel;
 
 namespace DesktopApp
 {
@@ -236,6 +238,39 @@ namespace DesktopApp
             catch (Exception ex)
             {
                 MessageBox.Show("用户登陆模块出现异常：" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("更新大约需要一分钟时间,是否更新系统,退出系统?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                string strPath = AppDomain.CurrentDomain.BaseDirectory;
+                string yourfilepath = strPath + "\\AutoUpdate.exe";
+                Process p = new Process();
+                p.StartInfo.FileName = yourfilepath;
+                try
+                {
+                    p.Start();
+                    Process current = Process.GetCurrentProcess();
+                    Process[] processes = Process.GetProcessesByName(current.ProcessName);
+                    foreach (Process process in processes)
+                    {
+                        if (process.Id == current.Id)
+                        {
+                            process.Kill();
+                        }
+                    }
+                    Application.Exit();
+                }
+                catch (Win32Exception err)
+                {
+                    MessageBox.Show(err.Message);
+                }
+            }
+            else
+            {
+
             }
         }
 

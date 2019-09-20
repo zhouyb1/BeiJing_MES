@@ -209,6 +209,7 @@ namespace Business.System
                      strSql.Append("G_CreateDate,");
                      strSql.Append("G_UpdateBy,");
                      strSql.Append("G_UpdateDate,");
+                     strSql.Append("G_UpdateDate,");
                      strSql.Append("G_Remark");
                      strSql.Append(")");
                      strSql.Append("VALUES(");
@@ -228,6 +229,7 @@ namespace Business.System
                      strSql.Append("@G_CreateDate,");
                      strSql.Append("@G_UpdateBy,");
                      strSql.Append("@G_UpdateDate,");
+                     strSql.Append("@G_StockCode,");
                      strSql.Append("@G_Remark");
                      strSql.Append(")");
                      paramList.Add(new SqlParameter("@ID",Guid.NewGuid().ToString()));
@@ -250,6 +252,7 @@ namespace Business.System
                      strSql.Append("G_CreateDate=@G_CreateDate,");
                      strSql.Append("G_UpdateBy=@G_UpdateBy,");
                      strSql.Append("G_UpdateDate=@G_UpdateDate,");
+                     strSql.Append("G_UpdateDate=@G_StockCode,");
                      strSql.Append("G_Remark=@G_Remark ");
                      strSql.Append(" WHERE ID=@ID");
                      paramList.Add(new SqlParameter("@ID",keyValue));
@@ -269,6 +272,7 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@G_CreateDate",entity.G_CreateDate));
                 paramList.Add(new SqlParameter("@G_UpdateBy",entity.G_UpdateBy));
                 paramList.Add(new SqlParameter("@G_UpdateDate",entity.G_UpdateDate));
+                paramList.Add(new SqlParameter("@G_StockCode", entity.G_StockCode));
                 paramList.Add(new SqlParameter("@G_Remark",entity.G_Remark));
 				var result = db.ExecuteNonQuery(strSql.ToString(),paramList.ToArray());
                 return result;

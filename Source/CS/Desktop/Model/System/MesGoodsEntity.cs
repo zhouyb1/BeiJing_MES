@@ -76,6 +76,11 @@ namespace Model
         /// 备注
         /// </summary>
         public string G_Remark{ set; get; }
+
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+        public string G_StockCode { set; get; }
         #endregion
     }
 }

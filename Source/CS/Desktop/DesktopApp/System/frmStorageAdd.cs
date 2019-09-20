@@ -150,7 +150,7 @@ namespace DesktopApp
                     MesMaterInHeadEntity MesMaterInHead = new MesMaterInHeadEntity();
 
                     MesMaterInHead.M_MaterInNo = txtMaterInNo.Text;
-                    MesMaterInHead.M_OrderKind = 1;
+                    MesMaterInHead.M_OrderKind = 0;
                     MesMaterInHead.M_StockCode = strStock[0];
                     MesMaterInHead.M_Kind = "0";
                     MesMaterInHead.M_StockName = strStock[1];

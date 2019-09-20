@@ -85,13 +85,12 @@
             this.cmsSystemManager = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsLog = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsDatabase = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsExitManager = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnOutLogin = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsOtherManager = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSkin = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.车间设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.程序更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.更新系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panStatus.SuspendLayout();
             this.panMenu.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -143,7 +142,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
-            this.lbVer.Text = "V1.0.0.1";
+            this.lbVer.Text = "V1.0.0.3";
             // 
             // label3
             // 
@@ -269,8 +268,8 @@
             this.人脸ToolStripMenuItem,
             this.rFID管理ToolStripMenuItem,
             this.cmsSystemManager,
-            this.cmsExitManager,
-            this.cmsOtherManager});
+            this.cmsOtherManager,
+            this.更新系统ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(984, 29);
@@ -504,37 +503,13 @@
             this.cmsDatabase.Text = "数据库备份/还原";
             this.cmsDatabase.Click += new System.EventHandler(this.cmsDatabase_Click);
             // 
-            // cmsExitManager
-            // 
-            this.cmsExitManager.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnExit,
-            this.btnOutLogin});
-            this.cmsExitManager.Name = "cmsExitManager";
-            this.cmsExitManager.Size = new System.Drawing.Size(86, 25);
-            this.cmsExitManager.Text = "退出系统";
-            // 
-            // btnExit
-            // 
-            this.btnExit.Image = global::DesktopApp.Properties.Resources.cancel1;
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(148, 26);
-            this.btnExit.Text = "退出系统";
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // btnOutLogin
-            // 
-            this.btnOutLogin.Image = global::DesktopApp.Properties.Resources.undo;
-            this.btnOutLogin.Name = "btnOutLogin";
-            this.btnOutLogin.Size = new System.Drawing.Size(148, 26);
-            this.btnOutLogin.Text = "注销系统";
-            this.btnOutLogin.Click += new System.EventHandler(this.btnOutLogin_Click);
-            // 
             // cmsOtherManager
             // 
             this.cmsOtherManager.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.cmsSkin,
             this.cmsAbout,
-            this.车间设置ToolStripMenuItem});
+            this.车间设置ToolStripMenuItem,
+            this.程序更新ToolStripMenuItem});
             this.cmsOtherManager.Name = "cmsOtherManager";
             this.cmsOtherManager.Size = new System.Drawing.Size(54, 25);
             this.cmsOtherManager.Text = "其他";
@@ -543,7 +518,7 @@
             // 
             this.cmsSkin.Image = global::DesktopApp.Properties.Resources.cog;
             this.cmsSkin.Name = "cmsSkin";
-            this.cmsSkin.Size = new System.Drawing.Size(148, 26);
+            this.cmsSkin.Size = new System.Drawing.Size(156, 26);
             this.cmsSkin.Text = "皮肤设置";
             this.cmsSkin.Click += new System.EventHandler(this.cmsSkinSet_Click);
             // 
@@ -551,7 +526,7 @@
             // 
             this.cmsAbout.Image = global::DesktopApp.Properties.Resources.information;
             this.cmsAbout.Name = "cmsAbout";
-            this.cmsAbout.Size = new System.Drawing.Size(148, 26);
+            this.cmsAbout.Size = new System.Drawing.Size(156, 26);
             this.cmsAbout.Text = "关于";
             this.cmsAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
@@ -559,8 +534,22 @@
             // 
             this.车间设置ToolStripMenuItem.Image = global::DesktopApp.Properties.Resources.config;
             this.车间设置ToolStripMenuItem.Name = "车间设置ToolStripMenuItem";
-            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
+            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.车间设置ToolStripMenuItem.Text = "车间设置";
+            // 
+            // 程序更新ToolStripMenuItem
+            // 
+            this.程序更新ToolStripMenuItem.Image = global::DesktopApp.Properties.Resources.wrench;
+            this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.程序更新ToolStripMenuItem.Text = "程序更新";
+            this.程序更新ToolStripMenuItem.Click += new System.EventHandler(this.程序更新ToolStripMenuItem_Click);
+            // 
+            // 更新系统ToolStripMenuItem
+            // 
+            this.更新系统ToolStripMenuItem.Name = "更新系统ToolStripMenuItem";
+            this.更新系统ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
+            this.更新系统ToolStripMenuItem.Text = "更新系统";
             // 
             // frmMain
             // 
@@ -618,9 +607,6 @@
         private System.Windows.Forms.ToolStripMenuItem cmsSystemManager;
         private System.Windows.Forms.ToolStripMenuItem cmsLog;
         private System.Windows.Forms.ToolStripMenuItem cmsDatabase;
-        private System.Windows.Forms.ToolStripMenuItem cmsExitManager;
-        private System.Windows.Forms.ToolStripMenuItem btnExit;
-        private System.Windows.Forms.ToolStripMenuItem btnOutLogin;
         private System.Windows.Forms.ToolStripMenuItem cmsOtherManager;
         private System.Windows.Forms.ToolStripMenuItem cmsSkin;
         private System.Windows.Forms.ToolStripMenuItem cmsAbout;
@@ -639,6 +625,8 @@
         private System.Windows.Forms.ToolStripMenuItem rFID管理ToolStripMenuItem;
         private global::System.Windows.Forms.ToolStripMenuItem 补打标签ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 车间设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 更新系统ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 程序更新ToolStripMenuItem;
 
     }
 }

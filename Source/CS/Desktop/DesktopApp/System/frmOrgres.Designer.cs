@@ -557,7 +557,6 @@
             // 
             // 实用数量
             // 
-            this.实用数量.DataPropertyName = "W_Qty";
             this.实用数量.HeaderText = "实用数量";
             this.实用数量.Name = "实用数量";
             // 

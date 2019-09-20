@@ -38,12 +38,13 @@
             this.btnLogin = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.cbRemember = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtPass
             // 
-            this.txtPass.Location = new System.Drawing.Point(101, 136);
+            this.txtPass.Location = new System.Drawing.Point(101, 130);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.Size = new System.Drawing.Size(191, 21);
@@ -53,7 +54,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(31, 139);
+            this.label2.Location = new System.Drawing.Point(31, 133);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 8;
@@ -61,7 +62,7 @@
             // 
             // txtUser
             // 
-            this.txtUser.Location = new System.Drawing.Point(101, 94);
+            this.txtUser.Location = new System.Drawing.Point(101, 91);
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(191, 21);
             this.txtUser.TabIndex = 1;
@@ -69,7 +70,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 97);
+            this.label1.Location = new System.Drawing.Point(31, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 7;
@@ -88,7 +89,7 @@
             // 
             this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(236, 179);
+            this.btnCancel.Location = new System.Drawing.Point(236, 164);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(56, 23);
             this.btnCancel.TabIndex = 4;
@@ -101,7 +102,7 @@
             // 
             this.btnLogin.Image = global::DesktopApp.Properties.Resources.ok;
             this.btnLogin.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnLogin.Location = new System.Drawing.Point(174, 179);
+            this.btnLogin.Location = new System.Drawing.Point(174, 164);
             this.btnLogin.Name = "btnLogin";
             this.btnLogin.Size = new System.Drawing.Size(56, 23);
             this.btnLogin.TabIndex = 3;
@@ -123,18 +124,32 @@
             // cbRemember
             // 
             this.cbRemember.AutoSize = true;
-            this.cbRemember.Location = new System.Drawing.Point(101, 183);
+            this.cbRemember.Location = new System.Drawing.Point(101, 168);
             this.cbRemember.Name = "cbRemember";
             this.cbRemember.Size = new System.Drawing.Size(72, 16);
             this.cbRemember.TabIndex = 9;
             this.cbRemember.Text = "记住密码";
             this.cbRemember.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.Image = global::DesktopApp.Properties.Resources.wrench;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(174, 193);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "更新";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(324, 222);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.cbRemember);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnLogin);
@@ -167,6 +182,7 @@
         private System.Windows.Forms.Button btnCancel;
         private Sunisoft.IrisSkin.SkinEngine skin;
         private System.Windows.Forms.CheckBox cbRemember;
+        private System.Windows.Forms.Button button1;
     }
 }
 
