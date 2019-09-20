@@ -29,7 +29,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetNoProjStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList?S_Kind=1',
                 // 访问数据接口参数
                 param: {}
             };
@@ -79,7 +79,7 @@ var bootstrap = function ($, ayma) {
                 ayma.layerForm({
                     id: 'GoodsListIndexForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId,
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId + '&S_Code=' + $("#M_StockCode").val(),
                     width: 1000,
                     height: 800,
                     maxmin: true,

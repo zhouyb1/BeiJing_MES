@@ -81,9 +81,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetStockList()
+        public ActionResult GetStockList(int S_Kind)
         {
-            var stockList = toosIBLL.GetStockList();
+            var stockList = toosIBLL.GetStockList(S_Kind);
             return Success(stockList);
         }
 

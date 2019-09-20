@@ -83,7 +83,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword, string S_Code)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_Otax]
                                   ,[G_Itax]
                               FROM [dbo].[Mes_Goods] t ");
-                strSql.Append(" where t.G_Kind !=3 ");
+                strSql.Append(" where t.G_Kind !=3 and G_StockCode=" + S_Code);
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
