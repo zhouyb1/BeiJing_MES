@@ -49,10 +49,10 @@ var bootstrap = function ($, ayma) {
                     ayma.alert.error("已审核");
                     return false;
                 }
-                if (p_status == "0") {
-                    ayma.alert.error("处于生产计划中");
-                    return false;
-                }
+                //if (p_status == "0") {
+                //    ayma.alert.error("处于生产计划中");
+                //    return false;
+                //}
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerConfirm('是否确认审核单据', function (res) {
                         if (res) {

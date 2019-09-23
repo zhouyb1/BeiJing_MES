@@ -92,19 +92,19 @@ var bootstrap = function ($, ayma) {
                 $("#C_StockToName").val(stockToName);
             });
             //绑定班组
-            //$("#C_TeamCode").select({
-            //    type: 'default',
-            //    value: 'T_Code',
-            //    text: 'T_Name',
-            //    // 展开最大高度
-            //    maxHeight: 200,
-            //    // 是否允许搜索
-            //    allowSearch: true,
-            //    // 访问数据接口地址
-            //    url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
-            //    // 访问数据接口参数
-            //    param: {}
-            //});
+            $("#C_TeamCode").select({
+                type: 'default',
+                value: 'T_Code',
+                text: 'T_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetTeamList',
+                // 访问数据接口参数
+                param: {}
+            });
         },
         initGrid: function () {
             $('#girdtable').jfGrid({
@@ -120,9 +120,9 @@ var bootstrap = function ($, ayma) {
                 { label: '餐食编码', name: 'B_ErpCode', width: 90, align: 'left', hidden: true },
                 { label: '供应商编码', name: 'G_SupplyCode', width: 90, align: 'left', hidden: true },
                 { label: '供应商', name: 'B_ErpCode', width: 90, align: 'left'},
-                { label: '价格', name: 'G_Price', width: 90, align: 'left' },
-                { label: '班组编码', name: 'G_TeamCode', width: 90, align: 'left',hidden:true },
-                { label: '班组', name: 'G_TeamName', width: 90, align: 'left' }
+                { label: '价格', name: 'G_Price', width: 90, align: 'left' }
+                //{ label: '班组编码', name: 'G_TeamCode', width: 90, align: 'left',hidden:true },
+                //{ label: '班组', name: 'G_TeamName', width: 90, align: 'left' }
 
                 ],
                 isTree: true,

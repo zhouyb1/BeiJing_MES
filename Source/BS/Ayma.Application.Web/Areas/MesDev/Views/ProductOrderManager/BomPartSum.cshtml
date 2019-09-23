@@ -30,6 +30,10 @@
         <div class=" am-form-item-title">领料仓库<font face="宋体">*</font></div>
         <div id="C_StockToCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
+    <div class="col-xs-4 am-form-item" data-table="Mes_CollarHead">
+        <div class=" am-form-item-title">领料班组</div>
+        <div id="C_TeamCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
     <div class="col-xs-4 am-form-item">
         <div class="am-form-item-title">订单数目</div>
         <input id="B_Qty" type="text" class="form-control" disabled="disabled" />
@@ -45,10 +49,7 @@
         <div class="am-form-item-title">领料仓库名称<font face="宋体">*</font></div>
         <input id="C_StockToName" type="text" class="form-control" />
     </div>
-    @*<div class="col-xs-4 am-form-item" data-table="Mes_CollarHead">
-        <div class=" am-form-item-title">领料班组</div>
-        <div id="C_TeamCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
-    </div>*@
+    
 </div>
 
 @Html.AppendJsFile("/Areas/MesDev/Views/ProductOrderManager/BomPartSum.js")
