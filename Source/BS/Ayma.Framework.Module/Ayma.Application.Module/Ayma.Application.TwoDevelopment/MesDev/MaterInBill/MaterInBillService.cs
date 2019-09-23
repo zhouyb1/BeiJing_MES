@@ -95,7 +95,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_SupplyName]
                                   ,[G_Kind]
                                   ,[G_Period]
-                                  ,[G_Price]
                                   ,[G_Unit]
                                   ,[G_UnitWeight]
                                   ,[G_Super]
@@ -113,6 +112,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_Prepareday]
                                   ,[G_Otax]
                                   ,[G_Itax]
+                                  ,(select P_InPrice from Mes_InPrice where P_GoodsCode=t.[G_Code] and P_SupplyCode=t.[G_SupplyCode]) as G_Price
                               FROM [dbo].[Mes_Goods] t ");
                 strSql.Append(" where t.G_Kind !=3 and G_StockCode=" + S_Code);
                 var queryParam = queryJson.ToJObject();

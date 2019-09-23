@@ -367,7 +367,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
                 if (string.IsNullOrEmpty(item.M_Price.ToString()) || item.M_Price == 0)
                 {
-                    return Fail("物料【" + item.M_GoodsName + "】价格不能为空!");
+                    return Fail("物料【" + item.M_GoodsName + "】价格为空请及时维护价格!");
                 }
             }
             if (string.IsNullOrEmpty(keyValue))

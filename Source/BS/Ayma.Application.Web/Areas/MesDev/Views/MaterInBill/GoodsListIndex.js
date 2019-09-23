@@ -120,10 +120,19 @@ var bootstrap = function ($, ayma) {
                                      callback(_data.text);
                                  }
                              });
-                         }
+                         }  
                      },
                     { label: "保质时间", name: "G_Period", width: 80, align: "left" },
-                    { label: "价格", name: "G_Price", width: 60, align: "left" },
+                    {
+                        label: "价格", name: "G_Price", width: 60, align: "left", editType: 'label', editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.G_Price.toString().replace('.', ''))) { //验证只能为数字
+                                    row.G_Price = 0;
+                                }
+
+                            }
+                        }
+                    },
                     { label: "单位", name: "G_Unit", width: 60, align: "left" }
                 ],
                 mainId: 'ID',

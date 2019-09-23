@@ -184,6 +184,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("G_StockCode")]
         public string G_StockCode { get; set; }
+        /// <summary>
+        /// 最新价格
+        /// </summary>
+         [NotMapped]
+        public decimal? M_Price { get; set; }
         #endregion
     }
 }
