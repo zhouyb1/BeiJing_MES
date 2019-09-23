@@ -90,8 +90,9 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]['M_Price'] = newArray[i]['G_Price'];
-                    newArray[i]["M_Qty"] = quantity;
+                    newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
+                    newArray[i]['M_ProdDate'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["ID"] = newArray[i]['ID'];
                     array.push(newArray[i]);
                 }
@@ -150,6 +151,7 @@ var bootstrap = function ($, ayma) {
                         row['M_Kind'] = row['G_Kind'];
                         row['M_Price'] = row['G_Price'];
                         row["M_Qty"] = quantity;
+                        row['M_ProdDate'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                         row['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                             //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
                         row["ID"] = row['ID'];

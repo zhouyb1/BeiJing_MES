@@ -143,8 +143,8 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'M_ProdDate', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
-                                if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
-                                    row.M_Batch = 0;
+                                if (/\D/.test(row.M_ProdDate.toString().replace('.', ''))) { //验证只能为数字
+                                    row.M_ProdDate = 0;
                                 }
 
                             }
