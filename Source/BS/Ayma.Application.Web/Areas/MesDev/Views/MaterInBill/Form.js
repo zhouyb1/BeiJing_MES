@@ -140,7 +140,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },//最新维护的价格
                     {
-                        label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input',
+                        label: '批次', name: 'M_ProdDate', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
