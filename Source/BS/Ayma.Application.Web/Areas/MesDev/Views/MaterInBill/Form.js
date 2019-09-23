@@ -29,7 +29,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList?S_Kind=1',
+                url: top.$.rootUrl + '/MesDev/Tools/GetOriginalStockList',
                 // 访问数据接口参数
                 param: {}
             };

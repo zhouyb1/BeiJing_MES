@@ -51,12 +51,17 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取原料仓库列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_StockEntity> GetStockListByParam(string strWhere); 
+        IEnumerable<Mes_StockEntity> GetStockListByParam(string strWhere);
+        /// <summary>
+        /// 获取原物料仓库列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_StockEntity> GetOriginalStockList();
         /// <summary>
         /// 获取所有仓库列表
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_StockEntity> GetStockList(int S_Kind);
+        IEnumerable<Mes_StockEntity> GetStockList();
         /// <summary>
         /// 获取非成品仓库列表
         /// </summary>

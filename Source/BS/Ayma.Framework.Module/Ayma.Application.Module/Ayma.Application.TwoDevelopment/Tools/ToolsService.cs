@@ -71,11 +71,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取原物料仓库列表
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_StockEntity> GetStockList(int S_Kind)
+        public IEnumerable<Mes_StockEntity> GetOriginalStockList()
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == S_Kind);
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind==1);
             }
             catch (Exception ex)
             {
