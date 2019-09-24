@@ -36,11 +36,14 @@ var bootstrap = function ($, ayma) {
                 var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
+                    cache: false,
+                    async: false,
                     url: top.$.rootUrl + '/MesDev/Tools/ByNameGetSupplyEntity',
                     data: { name: name },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#P_SupplyCode").val(entity.S_Code);  
+                        $("#P_SupplyCode").val(entity.S_Code);
+                        $("#P_GoodsCode").val("");
                     }
                 });
                 $.ajax({
