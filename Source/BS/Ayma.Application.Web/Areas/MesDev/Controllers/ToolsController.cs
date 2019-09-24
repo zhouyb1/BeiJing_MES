@@ -232,6 +232,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsList = toosIBLL.GetGoodsList();
             return Success(goodsList);
+        }
+        /// <summary>
+        /// 根据供应商获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsListBySupplyName(string G_SupplyName)
+        {
+            var goodsList = toosIBLL.GetGoodsListBySupplyName(G_SupplyName);
+            return Success(goodsList);
         } 
         /// <summary>
         /// 获取成品物料列表

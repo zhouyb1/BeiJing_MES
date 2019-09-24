@@ -562,6 +562,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 根据供应商获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsListBySupplyName(string G_SupplyName)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(x => x.G_SupplyName == G_SupplyName);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取成品物料列表
         /// </summary>
         /// <returns></returns>

@@ -130,7 +130,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// 获取物料
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_GoodsEntity> GetGoodsList(); 
+        IEnumerable<Mes_GoodsEntity> GetGoodsList();
+        /// <summary>
+        /// 根据供应商获取物料
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> GetGoodsListBySupplyName(string G_SupplyName); 
         /// <summary>
         /// 获取成品物料
         /// </summary>

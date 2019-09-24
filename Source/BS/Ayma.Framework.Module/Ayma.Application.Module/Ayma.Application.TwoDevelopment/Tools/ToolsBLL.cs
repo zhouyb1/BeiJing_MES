@@ -479,13 +479,35 @@ namespace Ayma.Application.TwoDevelopment.Tools
 
         /// <summary>
         /// 获取物料列表
-        /// </summary>
+        /// </summary>GetGoodsListBySupplyName(string G_SupplyName)
         /// <returns></returns>
         public IEnumerable<Mes_GoodsEntity> GetGoodsList()
         {
             try
             {
                 return toolsService.GetGoodsList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 根据供应商获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsListBySupplyName(string G_SupplyName)
+        {
+            try
+            {
+                return toolsService.GetGoodsListBySupplyName(G_SupplyName);
             }
             catch (Exception ex)
             {
