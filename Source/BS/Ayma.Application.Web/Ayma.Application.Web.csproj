@@ -293,6 +293,8 @@
     <Compile Include="Areas\MesDev\Controllers\TeamController.cs" />
     <Compile Include="Areas\MesDev\Controllers\CompUseHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InPriceController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\MaterialsSumController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\SupplyGoodsCountRepController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -2528,6 +2530,12 @@
     <Content Include="Report\grf\LivingToCookReport.grf" />
     <Content Include="Report\grf\PackingRateReport.grf" />
     <Content Include="Report\grf\LivingToCookDetailReport.grf" />
+    <Content Include="Areas\MesDev\Views\MaterialsSum\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterialsSum\Index.js" />
+    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Index.js" />
+    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

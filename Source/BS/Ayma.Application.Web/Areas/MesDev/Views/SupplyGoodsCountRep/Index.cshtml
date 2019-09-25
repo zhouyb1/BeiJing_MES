@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "供应商进货数据汇总";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout" >
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">供应商名称</div>
+                                    <input id="M_SupplyName" type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="am-layout-tool-item" style="color:#ff0000;font-size: 18px">双击行查看明细</div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" ayma-authorize="yes">
+                        @*<a id="am_detail"  class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;查看详情</a>*@
+                        <a id="am_export" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;导出EXCEL</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!--分tab显示-->
+            <ul id="pageTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#page_sum" data-toggle="tab">汇总</a>
+                </li>
+                <li>
+                    <a href="#page_detail" data-toggle="tab">明细</a>
+                </li>
+            </ul>
+            <div id="pageTabContent" class="tab-content" style="width: 100%;height: 100%">
+                <div class="tab-pane fade in active" id="page_sum" style="width: 100%;height: 100%">
+                    <div class="am-layout-body" id="girdtable_sum"></div>
+                </div>
+                <div class="tab-pane fade" id="page_detail" style="width: 100%;height: 100%">
+                    <div class="am-layout-body" id="girdtable_detail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/SupplyGoodsCountRep/Index.js")

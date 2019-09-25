@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "原物料统计(入库、出库、次品)";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout" >
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">商品编码</div>
+                                    <input id="G_Code" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">商品名称</div>
+                                    <input id="G_Name" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">供应商</div>
+                                    <div id="G_SupplyCode" type="text" class="form-control"></div>
+                                </div>
+                                @*<div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">单据日期(S)</div>
+                                    <input id="G_CreateDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                </div>
+                                <div class="col-xs-6 am-form-item">
+                                    <div class="am-form-item-title">单据日期(E)</div>
+                                    <input id="G_CreateDate1" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <label>
+                            <input id="cksum" type="checkbox" checked="checked" />
+                            汇总
+                        </label>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <label>
+                            <input id="ckdetail" type="checkbox" />
+                            明细
+                        </label>
+                    </div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                        <a id="am_export" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;导出Excel</a>
+                    </div>
+                </div>
+            </div>
+            <!--分tab显示-->
+            <ul id="pageTab" class="nav nav-tabs">
+                <li class="active">
+                    <a href="#page_sum" data-toggle="tab">汇总</a>
+                </li>
+                <li>
+                    <a href="#page_detail" data-toggle="tab">明细</a>
+                </li>
+            </ul>
+            <div id="pageTabContent" class="tab-content" style="width: 100%;height: 100%">
+                <div class="tab-pane fade in active" id="page_sum" style="width: 100%;height: 100%">
+                    <div class="am-layout-body" id="girdtable_sum"></div>
+                </div>
+                <div class="tab-pane fade" id="page_detail" style="width: 100%;height: 100%">
+                    <div class="am-layout-body" id="girdtable_detail"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/MaterialsSum/Index.js")

@@ -576,6 +576,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var isCode = toosIBLL.IsCodeAndSupplyCode(tables, field, code,field2,code2, keyValue);
             return Success(isCode);
         }
+
         #endregion
 
         #region 提交数据
