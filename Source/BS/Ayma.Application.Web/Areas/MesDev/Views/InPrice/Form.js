@@ -36,7 +36,6 @@ var bootstrap = function ($, ayma) {
                 var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
-                    cache: false,
                     async: false,
                     url: top.$.rootUrl + '/MesDev/Tools/ByNameGetSupplyEntity',
                     data: { name: name },
