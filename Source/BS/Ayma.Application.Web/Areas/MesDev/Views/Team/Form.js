@@ -74,7 +74,7 @@ var bootstrap = function ($, ayma) {
             //车间名称
             $("#T_WorkShopName").select({
                 type: 'default',
-                value: 'W_Code',
+                value: 'W_Name',
                 text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
