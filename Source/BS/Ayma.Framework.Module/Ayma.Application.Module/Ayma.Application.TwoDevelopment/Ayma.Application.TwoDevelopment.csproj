@@ -287,6 +287,12 @@
     <Compile Include="MesDev\InPrice\InPriceBLL.cs" />
     <Compile Include="MesDev\InPrice\InPriceIBLL.cs" />
     <Compile Include="MesDev\Mes_PriceEntity\Mes_PriceEntity.cs" />
+    <Compile Include="MesDev\MaterialsSum\MaterialsSumService.cs" />
+    <Compile Include="MesDev\MaterialsSum\MaterialsSumBLL.cs" />
+    <Compile Include="MesDev\MaterialsSum\MaterialsSumIBLL.cs" />
+    <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepService.cs" />
+    <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepBLL.cs" />
+    <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
