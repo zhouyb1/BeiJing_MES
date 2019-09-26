@@ -103,37 +103,26 @@ var bootstrap = function ($, ayma) {
                     { label: "商品编码", name: "I_GoodsCode", width: 160, align: "left"},
                     { label: "商品名称", name: "I_GoodsName", width: 160, align: "left"},
                     { label: "单位", name: "I_Unit", width: 160, align: "left"},
-                    {
-                        label: "数量", name: "I_Qty", width: 160, align: "left",
-                        formatterAsync: function (callback, value, row) {
-                            ayma.clientdata.getAsync('dataItem', {
-                                key: value,
-                                code: 'RequistStatus',
-                                callback: function (_data) {
-                                    if (row.G_Lower != null && row.G_Super != null) {
-                                        if (value < row.G_Lower || value > row.G_Super) {
-                                            callback("<span style='width:150px;height:25px;display:block;text-align:left;line-height:25px;' class='label label-danger'>" + value + "</span>");
-                                        }
-                                        else {
-                                            callback("<span  style='width:150px;height:25px;display:block;text-align:left;line-height:25px;' class='label label-success'>" + value + "</span>");
-                                        }
-                                    }
-                                    else {
-                                        callback(value);
-                                    }
-                                }
-                            });
-                        }
-                    },
-                     {label: "下限预警量", name: "G_Lower", width: 160, align: "left" },
-                     {label: "上限预警量", name: "G_Super", width: 160, align: "left" },
-                     {label: "预警状态", name: "G_State", width: 160, align: "left" },  
-                     { label: "批次", name: "I_Batch", width: 160, align: "left"},
-                     { label: "备注", name: "I_Remark", width: 160, align: "left"},
+                    {label: "数量", name: "I_Qty", width: 160, align: "left"},
+                    {label: "下限预警量", name: "G_Lower", width: 160, align: "left" },
+                    {label: "上限预警量", name: "G_Super", width: 160, align: "left" },
+                    {label: "预警状态", name: "G_State", width: 160, align: "left" },  
+                    { label: "批次", name: "I_Batch", width: 160, align: "left"},
+                    { label: "备注", name: "I_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                onRenderComplete: function (rows) {
+                    for (var i = 0; i < rows.length; i++) {
+                        if (rows[i].G_State == "正常" || rows[i].G_State == "无") {
+                            continue;
+                        }
+                        else {
+                            $("[rownum='rownum_girdtable_" + i + "']").css('background-color', '#d9534f');//预警状态不正常的整行标红
+                        }
+                    }
+                }
             });
             page.search();
         },

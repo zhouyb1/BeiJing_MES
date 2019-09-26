@@ -68,11 +68,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_BATCH")]
         public string M_Batch { get; set; }
         /// <summary>
-        ///产品日期
-        /// </summary>
-        [Column("M_ProdDate")]
-        public string M_ProdDate { get; set; }
-        /// <summary>
         /// 备注
         /// </summary>
         [Column("M_REMARK")]

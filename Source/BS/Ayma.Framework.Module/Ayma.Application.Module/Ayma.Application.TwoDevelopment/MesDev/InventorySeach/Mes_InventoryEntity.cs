@@ -111,6 +111,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string G_Lower { get; set; }
         [NotMapped]
         public string G_State { get; set; }
+        [NotMapped]
+        public string G_Period { get; set; }
+        [NotMapped]
+        public string InventoryDay { get; set; }
+        [NotMapped]
+        public string GoodsState { get; set; }
         #endregion
     }
 }
