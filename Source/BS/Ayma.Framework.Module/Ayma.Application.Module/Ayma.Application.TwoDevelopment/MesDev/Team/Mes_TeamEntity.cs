@@ -81,8 +81,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 仓库名称
         /// </summary>
         /// <returns></returns>
-    [NotMapped]
+        [NotMapped]
         public string S_Name { get; set; }
+        /// <summary>
+        /// 车间名称
+        /// </summary>
+        /// <returns></returns>
+        [NotMapped]
+        public string T_WorkShopName { get; set; }
         #endregion
     }
 }

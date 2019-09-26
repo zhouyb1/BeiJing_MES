@@ -54,10 +54,18 @@ var bootstrap = function ($, ayma) {
                 }
                 if (value == 1) {
                     $("#div_Prepareday").html("备用天数<font face=\"宋体\">*</font>");
+                    $("#div_G_Super").html("上限预警数量<font face=\"宋体\">*</font>");
+                    $("#div_G_Lower").html("下限预警数量<font face=\"宋体\">*</font>");
                     $("#G_Prepareday").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $("#G_Super").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $("#G_Lower").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                 } else {
                     $("#div_Prepareday").html("备用天数");
                     $("#G_Prepareday").removeAttr("isvalid").removeAttr("checkexpession");
+                    $("#div_G_Super").html("上限预警数量");
+                    $("#G_Super").removeAttr("isvalid").removeAttr("checkexpession");
+                    $("#div_G_Lower").html("下限预警数量");
+                    $("#G_Lower").removeAttr("isvalid").removeAttr("checkexpession");
                 }
             });
             $('#G_Barcode').select({
@@ -199,6 +207,17 @@ var bootstrap = function ($, ayma) {
                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
                         ayma.alert.error("保质时间必须是非负数.");
                         $("#G_Period").val(0);
+                    }
+
+                }
+            });
+            //下限预警验证 不小于0
+            $("#G_Lower").on('blur', function () {
+                var period = $.trim($(this).val()); //去除空格
+                if (period != undefined && period != "") {
+                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
+                        ayma.alert.error("下限预警必须是非负数.");
+                        $("#G_Lower").val(0);
                     }
 
                 }

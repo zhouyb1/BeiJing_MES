@@ -110,11 +110,16 @@ var bootstrap = function ($, ayma) {
                                 key: value,
                                 code: 'RequistStatus',
                                 callback: function (_data) {
-                                    if (value < row.G_Lower || value > row.G_Super) {
-                                        callback("<span style='width:150px;height:25px;display:block;text-align:center;line-height:25px;' class='label label-danger'>" + value + "</span>");
-                                    } 
-                                     else {
-                                        callback("<span  style='width:150px;height:25px;display:block;text-align:center;line-height:25px;' class='label label-success'>" + value + "</span>");
+                                    if (row.G_Lower != null && row.G_Super != null) {
+                                        if (value < row.G_Lower || value > row.G_Super) {
+                                            callback("<span style='width:150px;height:25px;display:block;text-align:left;line-height:25px;' class='label label-danger'>" + value + "</span>");
+                                        }
+                                        else {
+                                            callback("<span  style='width:150px;height:25px;display:block;text-align:left;line-height:25px;' class='label label-success'>" + value + "</span>");
+                                        }
+                                    }
+                                    else {
+                                        callback(value);
                                     }
                                 }
                             });
@@ -122,7 +127,7 @@ var bootstrap = function ($, ayma) {
                     },
                      {label: "下限预警量", name: "G_Lower", width: 160, align: "left" },
                      {label: "上限预警量", name: "G_Super", width: 160, align: "left" },
-                     //{label: "预警状态", name: "G_State", width: 160, align: "left" },  
+                     {label: "预警状态", name: "G_State", width: 160, align: "left" },  
                      { label: "批次", name: "I_Batch", width: 160, align: "left"},
                      { label: "备注", name: "I_Remark", width: 160, align: "left"},
                 ],

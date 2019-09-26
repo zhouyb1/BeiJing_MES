@@ -28,7 +28,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.T_UserName,
                 t.T_Remark,
                 t.T_StockCode,
-                 dbo.GetStockByCode(t.T_StockCode) as  S_Name 
+               	(select W_Name from Mes_WorkShop where W_code=t.T_WorkShopCode ) as T_WorkShopName,
+                dbo.GetStockByCode(t.T_StockCode) as  S_Name 
                    ";
         }
         #endregion

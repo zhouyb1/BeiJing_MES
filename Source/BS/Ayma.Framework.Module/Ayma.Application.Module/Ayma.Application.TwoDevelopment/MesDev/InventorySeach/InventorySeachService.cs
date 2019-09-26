@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) as G_Lower,
                      case when sum(t.I_Qty)>(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) and sum(t.I_Qty)<(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '正常' 
 					 when sum(t.I_Qty)<(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '低于下限预警' 
-					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then  '高于上限限预警' else '无' end as G_State
+					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then  '高于上限预警' else '无' end as G_State
                 ");
                 strSql.Append("  FROM Mes_Inventory  t   group by t.I_StockCode,t.I_GoodsName,t.I_StockName,t.I_GoodsCode,t.I_Unit ");
                 strSql.Append("  having 1=1 ");
