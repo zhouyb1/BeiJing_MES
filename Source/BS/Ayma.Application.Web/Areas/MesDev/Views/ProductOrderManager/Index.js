@@ -168,7 +168,9 @@ var bootstrap = function ($, ayma) {
                             { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" }
                         ],
                         mainId: 'ID',
-                        reloadSelected: false
+                        reloadSelected: false,
+                        sidx: "P_OrderDate",
+                        sord: 'ASC',
                     }).jfGridSet("reload");
                 }
             });
