@@ -57,6 +57,16 @@ namespace Ayma.Application.Organization
         [Column("F_HEADICON")]
         public string F_HeadIcon { get; set; }
         /// <summary>
+        /// 班组编号
+        /// </summary>	
+        [Column("F_TeamCode")]
+        public string F_TeamCode { get; set; }
+        /// <summary>
+        /// 班组名称
+        /// </summary>	
+        [Column("F_TeamName")]
+        public string F_TeamName { get; set; }
+        /// <summary>
         /// 快速查询
         /// </summary>	
         [Column("F_QUICKQUERY")]
@@ -111,6 +121,11 @@ namespace Ayma.Application.Organization
         /// </summary>		
         [Column("F_COMPANYID")]
         public string F_CompanyId { get; set; }
+        /// <summary>
+        /// 部门
+        /// </summary>		
+        [Column("D_Code")]
+        public string D_Code { get; set; }
         /// <summary>
         /// 部门主键
         /// </summary>		
