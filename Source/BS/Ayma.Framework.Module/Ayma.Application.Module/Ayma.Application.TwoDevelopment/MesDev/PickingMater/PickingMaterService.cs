@@ -141,7 +141,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取库存物料
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword, string C_Teamcode)
+        public IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
@@ -171,11 +171,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         S.I_Unit ,
                                         S.I_Qty ,                              
                                         S.I_Batch ,
-                                        G.G_Price I_Price,
-										c.T_Name I_TeamName,
-                                        G.G_TeamCode I_TeamCode
-                                FROM    dbo.Mes_Inventory S
-                                        LEFT JOIN dbo.Mes_Goods G ON S.I_GoodsCode = G.G_Code LEFT JOIN  Mes_Team c on c.T_Code=G.G_TeamCode where 1 = 1 ");
+										(select G_Price from Mes_Goods G  where G.G_Code=S.I_GoodsCode ) I_Price 
+                                   FROM    dbo.Mes_Inventory S  where 1 = 1");
 
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -183,12 +180,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!keyword .IsEmpty())
                 {
                     dp.Add("keyword", "%"+keyword+"%", DbType.String);
-                    strSql.Append(" AND m.P_GoodsCode+m.P_GoodsName like @keyword ");
-                }
-                if (!C_Teamcode.IsEmpty())
-                {
-                    dp.Add("C_Teamcode", C_Teamcode , DbType.String);
-                    strSql.Append(" AND G.G_TeamCode=@C_Teamcode ");
+                    strSql.Append(" AND  S.I_GoodsCode + S.I_GoodsName like @keyword ");
                 }
                 if (!queryParam.IsEmpty())
                 {

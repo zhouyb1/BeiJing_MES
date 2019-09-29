@@ -90,11 +90,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <summary>
         /// 获取库存物料表
         /// </summary>
-        public IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword,string C_Teamcode)
+        public IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
-                return pickingMaterService.GetMaterList(pagination, queryJson, keyword, C_Teamcode);
+                return pickingMaterService.GetMaterList(pagination, queryJson, keyword);
             }
             catch (Exception ex)
             {

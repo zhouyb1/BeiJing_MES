@@ -94,7 +94,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode + '&C_TeamCode=' + C_TeamCode,
+                url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode,
                 headData: [
                     //{ label: "生产订单号", name: "P_OrderNo", width: 130, align: "left",  },
                     //{ label: "订单时间", name: "P_OrderDate", width: 80, align: "left" },
@@ -106,8 +106,8 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 80, align: "left" },
-                    { label: "班组", name: "I_TeamName", width: 60, align: "left" },
-                    { label: "班组编号", name: "I_TeamCode", width: 60, align: "left", hidden:true }
+                    //{ label: "班组", name: "I_TeamName", width: 60, align: "left" },
+                    //{ label: "班组编号", name: "I_TeamCode", width: 60, align: "left", hidden:true }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选

@@ -20,24 +20,24 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            $('#girdtable').on('dblclick', function () {
-                var I_GoodsName = escape($('#girdtable').jfGridValue('I_GoodsName'));//商品名称 转码
-                var I_StockName = escape($('#girdtable').jfGridValue('I_StockName'));
-                var I_Unit = escape($('#girdtable').jfGridValue('I_Unit'));
-                if (ayma.checkrow(I_GoodsName)) {
-                    ayma.layerForm({
-                        id: 'OrderMaterListForm',
-                        title: '库存明细',
-                        url: top.$.rootUrl + '/MesDev/InventorySeach/InvertoryList?I_GoodsName=' + I_GoodsName + '&I_StockName=' + I_StockName + '&I_Unit=' + I_Unit,
-                        width: 800,
-                        height: 600,
-                        maxmin: true,
-                        callback: function (id, index) {
-                            return top[id].closeWindow();
-                        }
-                    });
-                }
-            });
+            //$('#girdtable').on('dblclick', function () {
+            //    var I_GoodsName = escape($('#girdtable').jfGridValue('I_GoodsName'));//商品名称 转码
+            //    var I_StockName = escape($('#girdtable').jfGridValue('I_StockName'));
+            //    var I_Unit = escape($('#girdtable').jfGridValue('I_Unit'));
+            //    if (ayma.checkrow(I_GoodsName)) {
+            //        ayma.layerForm({
+            //            id: 'OrderMaterListForm',
+            //            title: '库存明细',
+            //            url: top.$.rootUrl + '/MesDev/InventorySeach/InvertoryList?I_GoodsName=' + I_GoodsName + '&I_StockName=' + I_StockName + '&I_Unit=' + I_Unit,
+            //            width: 800,
+            //            height: 600,
+            //            maxmin: true,
+            //            callback: function (id, index) {
+            //                return top[id].closeWindow();
+            //            }
+            //        });
+            //    }
+            //});
             //明细
             //$('#am_edit').on('click', function () {
             //    var I_GoodsName = escape($('#girdtable').jfGridValue('I_GoodsName'));//商品名称 转码
