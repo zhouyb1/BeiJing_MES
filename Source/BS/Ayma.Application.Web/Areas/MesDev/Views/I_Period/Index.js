@@ -61,7 +61,9 @@ var bootstrap = function ($, ayma) {
                         //{ label: 'I_ProdDate', name: 'I_ProdDate', width: 200, align: "left" },
                         //{ label: '备注', name: 'I_Remark', width: 200, align: "left" },
                 ],
-                mainId:'ID',
+                mainId: 'ID',
+                sidx: "I_Batch",
+                sord: 'DESC',
                 reloadSelected: true,
                 isPage: true,
                 onRenderComplete: function (rows)
