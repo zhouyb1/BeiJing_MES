@@ -72,9 +72,7 @@ var bootstrap = function ($, ayma) {
                     {label: "数量", name: "I_Qty", width: 160, align: "left"},
                     {label: "下限预警量", name: "G_Lower", width: 160, align: "left" },
                     {label: "上限预警量", name: "G_Super", width: 160, align: "left" },
-                    {label: "预警状态", name: "G_State", width: 160, align: "left" },  
-                    {label: "批次", name: "I_Batch", width: 160, align: "left"},
-                    {label: "备注", name: "I_Remark", width: 160, align: "left"},
+                    {label: "预警状态", name: "G_State", width: 160, align: "left" }
                 ],
                 mainId: 'ID',
                 sidx: "I_StockCode",

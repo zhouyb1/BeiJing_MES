@@ -53,11 +53,12 @@ var bootstrap = function ($, ayma) {
                          label: '外局名称', name: 'wj', width: 160, align: 'left', 
                      },
                 ],
+                isPage: true,
+                isStatistics: true,
                 isAutoHeight: true,
                 isEidt: false,
                 footerrow: true,
-                minheight: 400,
-                isStatistics: true,
+                minheight: 400
             });
 
             $("#am_add").on("click", function () {

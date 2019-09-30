@@ -31,6 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     datediff(day,h.M_CreateDate,getdate()) as InventoryDay,
                     case when  datediff(day,h.M_CreateDate,getdate()) >g.G_Period then '产品已过期'
                     when  datediff(day,h.M_CreateDate,getdate())<g.G_Period then '正常'
+                    when datediff(day,h.M_CreateDate,getdate())=g.G_Period then '明天过期'
                     else '无' end as GoodsState
             ";
         }
