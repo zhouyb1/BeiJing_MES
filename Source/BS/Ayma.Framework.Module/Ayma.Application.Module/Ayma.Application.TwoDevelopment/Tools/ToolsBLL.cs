@@ -292,8 +292,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
             }
+        }
+        /// <summary>
+        /// 获取工序号
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_OrgResHeadEntity> ByCodeGetProceEntity(string Code)
+        {
+            try
+            {
+                return toolsService.ByCodeGetProceEntity(Code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         } 
-       
         /// <summary>
         /// 根据车间编码获取车间实体信息
         /// </summary>

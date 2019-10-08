@@ -120,7 +120,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         d.M_Price,
                                         d.M_SupplyName,
                                         d.M_SupplyCode,
-                                        d.M_ProdDate,
+                                        d.M_Batch,
                                         ISNULL(SUM(d.M_Qty),0) In_Qty ,
                                        (SELECT ISNULL(sum(c.C_Qty),0) FROM dbo.Mes_CollarDetail c WHERE c.C_GoodsCode=G_Code) Out_Qty ,
                                        (SELECT ISNULL(SUM(B_Qty),0) FROM dbo.Mes_BackStockHead INNER JOIN dbo.Mes_BackStockDetail ON Mes_BackStockDetail.B_BackStockNo = Mes_BackStockHead.B_BackStockNo WHERE B_Kind=1 AND B_GoodsCode=G_Code) Back_Qty
@@ -159,7 +159,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 //    dp.Add("G_CreateDate1", queryParam["G_CreateDate1"].ToDate(), DbType.DateTime);
                 //    strSql.Append(" AND ( t.G_CreateDate >= @G_CreateDate AND t.G_CreateDate <= @G_CreateDate1 ) ");
                 //}
-                strSql.Append(" GROUP BY G_Code,G_Name ,G_Kind,G_Unit,d.M_ProdDate,t.ID,d.M_SupplyName,d.M_SupplyCode,d.M_Price ");
+                strSql.Append(" GROUP BY G_Code,G_Name ,G_Kind,G_Unit,d.M_Batch,t.ID,d.M_SupplyName,d.M_SupplyCode,d.M_Price ");
                 var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
                 dt.Columns.Add("in_amount", typeof (decimal));
                 dt.Columns.Add("out_amount", typeof (decimal));

@@ -350,7 +350,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-
+        /// <summary>
+        /// 获取工序号
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_OrgResHeadEntity> ByCodeGetProceEntity(string Code)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_OrgResHeadEntity>().Where(t => t.O_Record==Code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取配方列表
         /// </summary>

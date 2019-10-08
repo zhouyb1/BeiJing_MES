@@ -334,8 +334,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var recordList = toosIBLL.GetRecordList();
             return Success(recordList);
+        }
+        /// <summary>
+        /// 获取工序号
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetProceEntity(String Code)
+        {
+            var recordList = toosIBLL.ByCodeGetProceEntity(Code);
+            return Success(recordList);
         } 
-        
         /// <summary>
         /// 获取工序列表
         /// </summary>

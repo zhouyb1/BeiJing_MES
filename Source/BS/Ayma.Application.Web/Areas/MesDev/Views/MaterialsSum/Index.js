@@ -121,7 +121,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "商品编码", name: "g_code", width: 160, align: "left" },
                     { label: "商品名称", name: "g_name", width: 160, align: "left" },
-                    { label: "商品批次", name: "g_batch", width: 160, align: "left" },
+                    { label: "商品批次", name: "m_batch", width: 160, align: "left" },
                     { label: "入库数量", name: "in_qty", width: 160, align: "left" },
                     { label: "入库合计金额", name: "in_amount", width: 160, align: "left" },
                     { label: "出库数量", name: "out_qty", width: 160, align: "left" },

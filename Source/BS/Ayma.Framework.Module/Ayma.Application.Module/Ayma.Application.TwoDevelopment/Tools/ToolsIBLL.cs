@@ -97,7 +97,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_RecordEntity> GetRecordList();
-      
+        /// <summary>
+        /// 获取工序号
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_OrgResHeadEntity> ByCodeGetProceEntity(string Code);
         /// <summary>
         /// 获取工序列表
         /// </summary>
