@@ -83,7 +83,7 @@ namespace DesktopApp
                 SysUser = SysUserBLL.getDetail_F_DepartmentId(rows[i].F_DepartmentId);
                 if (SysUser != null && !string.IsNullOrEmpty(SysUser.ToString()))
                 {
-                    var MesDeviceID = MesDeviceBLL.GetList_Deparemaent(tree);
+                    var MesDeviceID = MesDeviceBLL.GetList_Deparemaent(tree,"");
                     string personId = "";
                     if (string.IsNullOrEmpty(txt_name.Text))
                     {
@@ -177,7 +177,7 @@ namespace DesktopApp
             {
                 string D_Code = dataGridView.SelectedRows[0].Cells["部门"].Value.ToString();
                 MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code);
+                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code,"");
                 cmb_Device.DataSource = MesDevice;
                 cmb_Device.DisplayMember = "D_Name";
                 cmb_Image.Text = "照片1";

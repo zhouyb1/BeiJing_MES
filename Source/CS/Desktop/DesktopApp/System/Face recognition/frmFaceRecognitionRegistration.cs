@@ -39,7 +39,7 @@ namespace DesktopApp
         private void btnSave_Click(object sender, EventArgs e)
         {
             MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-            var MesDevice = MesDeviceBLL.GetList_Deparemaent(cmb_Department.Text);
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text,txtTeam.Text);
             SysUserBLL userbll = new SysUserBLL();
             var user = userbll.getDetail_F_EnCode(F_Account);
             if (MesDevice.Count < 1 || MesDevice == null)
@@ -80,14 +80,12 @@ namespace DesktopApp
            // var rows = AMBaseDepartmentBLL.GetList_ID(user.F_DepartmentId);
 
             List<AMBaseDepartmentEntity> rows = AMBaseDepartmentBLL.GetList_D_Name();
-            cmb_Department.DataSource = rows;
-            cmb_Department.DisplayMember = "F_FullName";
+            txtDepartment.Text = user.D_Code;
             txtUserName.Text = user.F_RealName;
-            cmb_Department.Text = user.D_Code;
-            cmb_Image.Text = "照片1";
+            txtTeam.Text = user.F_TeamName;
 
             MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-            var MesDevice = MesDeviceBLL.GetList_Deparemaent(cmb_Department.Text);
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text,txtTeam.Text);
             if (MesDevice.Count < 1 || MesDevice == null)
             {
                 untCommon.InfoMsg("该部门暂无人脸识别设备！");
@@ -194,8 +192,48 @@ namespace DesktopApp
         {
             try
             {
-                if (file())
+                SysUserBLL userbll = new SysUserBLL();
+                SysUser user = userbll.getDetail(F_Account);
+
+                string strBase64 = FaceRecognition.ImageToBase64(imagefile);//照片转base64
+
+                MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+                var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text, txtTeam.Text);
+                if (MesDevice.Count < 1 || MesDevice == null)
                 {
+                    untCommon.InfoMsg("该部门暂无人脸识别设备！");
+                    return;
+                }
+
+                for (int i = 0; i < MesDevice.Count; i++)
+                {
+                    string url = "http://" + MesDevice[i].D_IP + ":8090/face/update";
+
+                    //string postData = "pass=" + 12345678 + "\n" + "&personId=" + user.F_EnCode + "\n" + "&faceId=" + ID + "\n" + "&imgBase64:" + strBase64 + "";
+
+                    string postData = "pass=" + 12345678 + "&personId=" + user.F_EnCode + "&faceId=" + user.F_EnCode + "&imgBase64=" + strBase64 + "";
+                    string strtemp = FaceRecognition.HttpPost(url, postData);
+                    if (!FaceRecognition.json(strtemp))
+                    {
+                        untCommon.InfoMsg("该IP地址不可用！");
+                        pictureBox1.Image.Dispose();
+                        pictureBox1.Image = null;
+                        return;
+                    }
+                    JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                    if (!bool.Parse(joModel["success"].ToString()))
+                    {
+                        untCommon.InfoMsg(joModel["msg"].ToString());
+                        return;
+                    }
+                    else
+                    {
+                        untCommon.InfoMsg("人脸识别更新成功！");
+                    }
+                }
+
+                //if (file())
+                //{
                     //string ID = Guid.NewGuid().ToString("N");//照片名称
                     //SysUser user = new SysUser();
                     //SysUserBLL SysUserBLL = new SysUserBLL();
@@ -233,8 +271,8 @@ namespace DesktopApp
                     //MyComputer.FileSystem.RenameFile(imagefile, image);//imagefile是所要重命名的文件的全路径，image是目标文件名
                     //image = Path.GetFileNameWithoutExtension(imagefile);// 没有扩展名的文件名
                     //FaceRecognition.Get_zjdz(imagefile);
-                    string urlUpdate = "http://192.168.1.140:7001/pp/"; //+ DateTime.Now.ToString("yyyyMMdd");//
-                    FaceRecognition.Upload(urlUpdate, imagefile);
+                    //string urlUpdate = "http://192.168.1.140:7001/pp/"; //+ DateTime.Now.ToString("yyyyMMdd");//
+                    //FaceRecognition.Upload(urlUpdate, imagefile);
 
                     //string strBase64 = FaceRecognition.ImageToBase64(imagefile);//照片转base64
 
@@ -307,7 +345,7 @@ namespace DesktopApp
                     //    untCommon.InfoMsg("上传失败！");
                     //} 
                     #endregion
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -372,10 +410,48 @@ namespace DesktopApp
         }
         private void btnRegisterImage_Click(object sender, EventArgs e)
         {
-            SysUser user = new SysUser();
+            SysUserBLL userbll = new SysUserBLL();
+            SysUser user = userbll.getDetail(F_Account);
+
+            string strBase64 = FaceRecognition.ImageToBase64(imagefile);//照片转base64
+
+            MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text,txtTeam.Text);
+            if (MesDevice.Count < 1 || MesDevice == null)
+            {
+                untCommon.InfoMsg("该部门暂无人脸识别设备！");
+                return;
+            }
+            for (int i = 0; i < MesDevice.Count; i++)
+            {
+                string url = "http://" + MesDevice[i].D_IP + ":8090/face/create";
+
+                //string postData = "pass=" + 12345678 + "\n" + "&personId=" + user.F_EnCode + "\n" + "&faceId=" + ID + "\n" + "&imgBase64:" + strBase64 + "";
+
+                string postData = "pass=" + 12345678 + "&personId=" + user.F_EnCode + "&faceId=" + user.F_EnCode + "&imgBase64=" + strBase64 + "";
+                string strtemp = FaceRecognition.HttpPost(url, postData);
+                if (!FaceRecognition.json(strtemp))
+                {
+                    untCommon.InfoMsg("该IP地址不可用！");
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                    return;
+                }
+                JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                if (!bool.Parse(joModel["success"].ToString()))
+                {
+                    untCommon.InfoMsg(joModel["msg"].ToString());
+                    return;
+                }
+                else
+                {
+                    untCommon.InfoMsg("人脸识别注册成功！");
+                }
+            }
+            /*SysUser user = new SysUser();
             MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
             SysUserBLL SysUserBLL = new SysUserBLL();
-            var MesDevice = MesDeviceBLL.GetList_Deparemaent(cmb_Department.Text);
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text,txtTeam.Text);
             user = SysUserBLL.getDetail(F_Account);
             if (MesDevice.Count <1)
             {
@@ -401,7 +477,7 @@ namespace DesktopApp
             else
             {
                 untCommon.InfoMsg("人脸识别注册成功！");
-            }
+            }*/
         }
 
         private void cmb_Image_SelectedIndexChanged(object sender, EventArgs e)
@@ -415,7 +491,122 @@ namespace DesktopApp
 
         private void btnUploadServer(object sender, EventArgs e)
         {
+            SysUserBLL userbll = new SysUserBLL();
+            SysUser user = userbll.getDetail(F_Account);
 
+            
+
+            MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text, txtTeam.Text);
+            if (MesDevice.Count < 1 || MesDevice == null)
+            {
+                untCommon.InfoMsg("该部门暂无人脸识别设备！");
+                return;
+            }
+            for (int i = 0; i < MesDevice.Count; i++)
+            {
+                string url = "http://" + MesDevice[i].D_IP + ":8090/face/delete";
+
+                //string postData = "pass=" + 12345678 + "\n" + "&personId=" + user.F_EnCode + "\n" + "&faceId=" + ID + "\n" + "&imgBase64:" + strBase64 + "";
+
+                string postData = "pass=" + 12345678 + "&faceId=" + user.F_EnCode + "";
+                string strtemp = FaceRecognition.HttpPost(url, postData);
+                if (!FaceRecognition.json(strtemp))
+                {
+                    untCommon.InfoMsg("该IP地址不可用！");
+                    pictureBox1.Image.Dispose();
+                    pictureBox1.Image = null;
+                    return;
+                }
+                JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                if (!bool.Parse(joModel["success"].ToString()))
+                {
+                    untCommon.InfoMsg(joModel["msg"].ToString());
+                    return;
+                }
+                else
+                {
+                    untCommon.InfoMsg("人脸图片删除成功！");
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.FileName = "";
+            openFileDialog1.Filter = "(*.Jpg)|*.Jpg|所有文件(*.*)|*.*";
+
+            if (openFileDialog1.ShowDialog(this) == DialogResult.Cancel)
+            {
+                openFileDialog1.Dispose();
+                return;
+            }
+
+            string strPathFile = openFileDialog1.FileName;
+            openFileDialog1.Dispose();
+
+            FileInfo fileInfo = new FileInfo(strPathFile);
+            fileInfoLength = fileInfo.Length.ToString();
+            if (fileInfo.Length > 204800)
+            {
+                MessageBox.Show("上传的图片不能大于200K");
+                return;
+            }
+            else
+            {
+                txtImageFile.Text = strPathFile;
+
+                
+
+                imagename = System.Drawing.Image.FromFile(strPathFile);
+
+                image = Path.GetFileName(strPathFile);//获取文件名和扩展名
+                imagefile = strPathFile;//获取文件路径
+
+                Bitmap myBmp = new Bitmap(imagename);
+
+                pictureBox1.Image = myBmp;
+                //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; //设置picturebox为缩放模式
+                //pictureBox1.Width = myBmp.Width;
+                //pictureBox1.Height = myBmp.Height;
+                return;
+            }
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(txtDepartment.Text, txtTeam.Text);
+            SysUserBLL userbll = new SysUserBLL();
+            var user = userbll.getDetail_F_EnCode(F_Account);
+            if (MesDevice.Count < 1 || MesDevice == null)
+            {
+                untCommon.InfoMsg("该部门暂无人脸识别设备！");
+                return;
+            }
+            for (int i = 0; i < MesDevice.Count; i++)
+            {
+                string url = "http://" + MesDevice[i].D_IP + ":8090/person/delete";
+
+                string postData = "pass=" + 12345678 + "&id=" + user[i].F_EnCode + "";
+                string strtemp = FaceRecognition.RequestWithHttps(url, postData);
+                if (!FaceRecognition.json(strtemp))
+                {
+                    untCommon.InfoMsg("该IP地址不可用！");
+                    return;
+                }
+                JObject joModel = (JObject)JsonConvert.DeserializeObject(strtemp);
+                if (!bool.Parse(joModel["success"].ToString()))
+                {
+                    untCommon.InfoMsg(joModel["msg"].ToString());
+                    return;
+                }
+                else
+                {
+                    untCommon.InfoMsg("人脸识别用户删除成功！");
+                }
+            }
         }
     }
 }

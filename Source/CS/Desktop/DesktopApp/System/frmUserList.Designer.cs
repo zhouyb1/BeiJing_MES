@@ -41,11 +41,18 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.panMain = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.F_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_RealName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StrGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.D_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.所属班组 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.R_Code = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_Mobile = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.用户身份证 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -68,12 +75,6 @@
             this.F_ModifyUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_ModifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_EnabledMark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panTop.SuspendLayout();
             this.panMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -92,19 +93,17 @@
             this.panTop.Controls.Add(this.btnAdd);
             this.panTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panTop.Location = new System.Drawing.Point(0, 0);
-            this.panTop.Margin = new System.Windows.Forms.Padding(4);
             this.panTop.Name = "panTop";
-            this.panTop.Size = new System.Drawing.Size(1119, 62);
+            this.panTop.Size = new System.Drawing.Size(895, 50);
             this.panTop.TabIndex = 0;
             // 
             // btnFaceRecognition
             // 
             this.btnFaceRecognition.Image = global::DesktopApp.Properties.Resources.user;
             this.btnFaceRecognition.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFaceRecognition.Location = new System.Drawing.Point(555, 16);
-            this.btnFaceRecognition.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFaceRecognition.Location = new System.Drawing.Point(444, 13);
             this.btnFaceRecognition.Name = "btnFaceRecognition";
-            this.btnFaceRecognition.Size = new System.Drawing.Size(131, 29);
+            this.btnFaceRecognition.Size = new System.Drawing.Size(105, 23);
             this.btnFaceRecognition.TabIndex = 12;
             this.btnFaceRecognition.Text = "人脸识别注册";
             this.btnFaceRecognition.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -115,10 +114,9 @@
             // 
             this.btnDetail.Image = global::DesktopApp.Properties.Resources.open;
             this.btnDetail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDetail.Location = new System.Drawing.Point(1036, 16);
-            this.btnDetail.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDetail.Location = new System.Drawing.Point(829, 13);
             this.btnDetail.Name = "btnDetail";
-            this.btnDetail.Size = new System.Drawing.Size(70, 29);
+            this.btnDetail.Size = new System.Drawing.Size(56, 23);
             this.btnDetail.TabIndex = 11;
             this.btnDetail.Text = "明细";
             this.btnDetail.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -130,10 +128,9 @@
             // 
             this.btnClose.Image = global::DesktopApp.Properties.Resources.clear;
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(831, 15);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(4);
+            this.btnClose.Location = new System.Drawing.Point(665, 12);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(70, 29);
+            this.btnClose.Size = new System.Drawing.Size(56, 23);
             this.btnClose.TabIndex = 10;
             this.btnClose.Text = "关闭";
             this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -144,10 +141,9 @@
             // 
             this.btnFind.Image = global::DesktopApp.Properties.Resources.search1;
             this.btnFind.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFind.Location = new System.Drawing.Point(261, 16);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFind.Location = new System.Drawing.Point(209, 13);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(70, 29);
+            this.btnFind.Size = new System.Drawing.Size(56, 23);
             this.btnFind.TabIndex = 9;
             this.btnFind.Text = "查询";
             this.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -156,20 +152,18 @@
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(15, 19);
-            this.txtKey.Margin = new System.Windows.Forms.Padding(4);
+            this.txtKey.Location = new System.Drawing.Point(12, 15);
             this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(236, 25);
+            this.txtKey.Size = new System.Drawing.Size(190, 21);
             this.txtKey.TabIndex = 8;
             // 
             // btnDelete
             // 
             this.btnDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(461, 16);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Location = new System.Drawing.Point(369, 13);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(70, 29);
+            this.btnDelete.Size = new System.Drawing.Size(56, 23);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "删除";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -180,10 +174,9 @@
             // 
             this.btnEdit.Image = global::DesktopApp.Properties.Resources.edit1;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(357, 16);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Location = new System.Drawing.Point(286, 13);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(70, 29);
+            this.btnEdit.Size = new System.Drawing.Size(56, 23);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "修改";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -194,10 +187,9 @@
             // 
             this.btnAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdd.Location = new System.Drawing.Point(958, 13);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Location = new System.Drawing.Point(766, 10);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(70, 29);
+            this.btnAdd.Size = new System.Drawing.Size(56, 23);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "添加";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -209,10 +201,9 @@
             // 
             this.panMain.Controls.Add(this.dataGridView);
             this.panMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panMain.Location = new System.Drawing.Point(0, 62);
-            this.panMain.Margin = new System.Windows.Forms.Padding(4);
+            this.panMain.Location = new System.Drawing.Point(0, 50);
             this.panMain.Name = "panMain";
-            this.panMain.Size = new System.Drawing.Size(1119, 539);
+            this.panMain.Size = new System.Drawing.Size(895, 431);
             this.panMain.TabIndex = 2;
             // 
             // dataGridView
@@ -226,6 +217,7 @@
             this.F_Password,
             this.StrGender,
             this.D_Code,
+            this.所属班组,
             this.R_Code,
             this.F_Mobile,
             this.用户身份证,
@@ -250,14 +242,64 @@
             this.F_EnabledMark});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(1119, 539);
+            this.dataGridView.Size = new System.Drawing.Size(895, 431);
             this.dataGridView.TabIndex = 0;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsAdd,
+            this.cmsEdit,
+            this.cmsDetail,
+            this.toolStripMenuItem,
+            this.cmsDelete});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(105, 114);
+            // 
+            // cmsAdd
+            // 
+            this.cmsAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
+            this.cmsAdd.Name = "cmsAdd";
+            this.cmsAdd.Size = new System.Drawing.Size(104, 26);
+            this.cmsAdd.Text = "添加";
+            this.cmsAdd.Visible = false;
+            this.cmsAdd.Click += new System.EventHandler(this.cmsAdd_Click);
+            // 
+            // cmsEdit
+            // 
+            this.cmsEdit.Image = global::DesktopApp.Properties.Resources.edit1;
+            this.cmsEdit.Name = "cmsEdit";
+            this.cmsEdit.Size = new System.Drawing.Size(104, 26);
+            this.cmsEdit.Text = "修改";
+            this.cmsEdit.Click += new System.EventHandler(this.cmsEdit_Click);
+            // 
+            // cmsDetail
+            // 
+            this.cmsDetail.Image = global::DesktopApp.Properties.Resources.open;
+            this.cmsDetail.Name = "cmsDetail";
+            this.cmsDetail.Size = new System.Drawing.Size(104, 26);
+            this.cmsDetail.Text = "明细";
+            this.cmsDetail.Click += new System.EventHandler(this.cmsDetail_Click);
+            // 
+            // toolStripMenuItem
+            // 
+            this.toolStripMenuItem.Name = "toolStripMenuItem";
+            this.toolStripMenuItem.Size = new System.Drawing.Size(101, 6);
+            // 
+            // cmsDelete
+            // 
+            this.cmsDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
+            this.cmsDelete.Name = "cmsDelete";
+            this.cmsDelete.Size = new System.Drawing.Size(104, 26);
+            this.cmsDelete.Text = "删除";
+            this.cmsDelete.Visible = false;
+            this.cmsDelete.Click += new System.EventHandler(this.cmsDelete_Click);
             // 
             // F_Account
             // 
@@ -297,6 +339,13 @@
             this.D_Code.Name = "D_Code";
             this.D_Code.ReadOnly = true;
             this.D_Code.Width = 120;
+            // 
+            // 所属班组
+            // 
+            this.所属班组.DataPropertyName = "F_TeamName";
+            this.所属班组.HeaderText = "所属班组";
+            this.所属班组.Name = "所属班组";
+            this.所属班组.ReadOnly = true;
             // 
             // R_Code
             // 
@@ -465,68 +514,16 @@
             this.F_EnabledMark.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.F_EnabledMark.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAdd,
-            this.cmsEdit,
-            this.cmsDetail,
-            this.toolStripMenuItem,
-            this.cmsDelete});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(113, 114);
-            // 
-            // cmsAdd
-            // 
-            this.cmsAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
-            this.cmsAdd.Name = "cmsAdd";
-            this.cmsAdd.Size = new System.Drawing.Size(112, 26);
-            this.cmsAdd.Text = "添加";
-            this.cmsAdd.Visible = false;
-            this.cmsAdd.Click += new System.EventHandler(this.cmsAdd_Click);
-            // 
-            // cmsEdit
-            // 
-            this.cmsEdit.Image = global::DesktopApp.Properties.Resources.edit1;
-            this.cmsEdit.Name = "cmsEdit";
-            this.cmsEdit.Size = new System.Drawing.Size(112, 26);
-            this.cmsEdit.Text = "修改";
-            this.cmsEdit.Click += new System.EventHandler(this.cmsEdit_Click);
-            // 
-            // cmsDetail
-            // 
-            this.cmsDetail.Image = global::DesktopApp.Properties.Resources.open;
-            this.cmsDetail.Name = "cmsDetail";
-            this.cmsDetail.Size = new System.Drawing.Size(112, 26);
-            this.cmsDetail.Text = "明细";
-            this.cmsDetail.Click += new System.EventHandler(this.cmsDetail_Click);
-            // 
-            // toolStripMenuItem
-            // 
-            this.toolStripMenuItem.Name = "toolStripMenuItem";
-            this.toolStripMenuItem.Size = new System.Drawing.Size(109, 6);
-            // 
-            // cmsDelete
-            // 
-            this.cmsDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
-            this.cmsDelete.Name = "cmsDelete";
-            this.cmsDelete.Size = new System.Drawing.Size(112, 26);
-            this.cmsDelete.Text = "删除";
-            this.cmsDelete.Visible = false;
-            this.cmsDelete.Click += new System.EventHandler(this.cmsDelete_Click);
-            // 
             // frmUserList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(1119, 601);
+            this.ClientSize = new System.Drawing.Size(895, 481);
             this.Controls.Add(this.panMain);
             this.Controls.Add(this.panTop);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmUserList";
             this.Text = "用户管理";
             this.Load += new System.EventHandler(this.frmUserList_Load);
@@ -563,6 +560,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn F_Password;
         private System.Windows.Forms.DataGridViewTextBoxColumn StrGender;
         private System.Windows.Forms.DataGridViewTextBoxColumn D_Code;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 所属班组;
         private System.Windows.Forms.DataGridViewTextBoxColumn R_Code;
         private System.Windows.Forms.DataGridViewTextBoxColumn F_Mobile;
         private System.Windows.Forms.DataGridViewTextBoxColumn 用户身份证;

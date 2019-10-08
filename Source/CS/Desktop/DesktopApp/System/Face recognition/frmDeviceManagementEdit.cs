@@ -48,6 +48,8 @@ namespace DesktopApp
                         MesDevice.D_Department = cmb_Department.Text;
                         MesDevice.D_IP = txt_IP.Text;
                         MesDevice.D_Remark = txt_Remarks.Text;
+                        MesDevice.D_TeamCode = cmbTeam.SelectedValue.ToString();
+                        MesDevice.D_TeamName = cmbTeam.Text.ToString();
 
                         if (MesDeviceBLL.SaveEntity("", MesDevice) > 0)
                         {
@@ -157,6 +159,18 @@ namespace DesktopApp
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cmb_Department_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(cmb_Department.Text == "生产车间")
+            {
+                Mes_TeamBLL TeamBLL = new Mes_TeamBLL();
+                var Teams = TeamBLL.GetList_Team("");
+                cmbTeam.DataSource = Teams;
+                cmbTeam.ValueMember = "T_Code";
+                cmbTeam.DisplayMember = "T_Name";
+            }
         }
     }
 }

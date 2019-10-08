@@ -66,7 +66,7 @@ namespace DesktopApp
             {
                 string D_Code = dataGridView.SelectedRows[0].Cells["部门"].Value.ToString();
                 MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code);
+                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code,"");
                 cmb_Device.DataSource = MesDevice;
                 cmb_Device.DisplayMember = "D_Name";
                 cmb_Image.Text = "照片1";
@@ -262,7 +262,7 @@ namespace DesktopApp
 
                     MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
                     string D_Code = dataGridView.SelectedRows[0].Cells["部门"].Value.ToString();
-                    var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code);
+                    var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code,"");
                     if (MesDevice.Count < 1 || MesDevice == null)
                     {
                         untCommon.InfoMsg("该部门暂无人脸识别设备！");
@@ -410,7 +410,7 @@ namespace DesktopApp
                 MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
                 AMBaseAnnexesFileBLL AMBaseAnnexesFileBLL = new AMBaseAnnexesFileBLL();
                 string D_Code = dataGridView.SelectedRows[0].Cells["部门"].Value.ToString();
-                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code);
+                var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code,"");
                 string F_Account = dataGridView.SelectedRows[0].Cells["账号"].Value.ToString();
                 SysUserBLL SysUserBLL = new SysUserBLL();
                 var rows = SysUserBLL.getDetail(F_Account);
@@ -466,6 +466,11 @@ namespace DesktopApp
         }
 
         private void frmImageQuery_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
 
         }

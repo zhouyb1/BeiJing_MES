@@ -61,15 +61,16 @@ namespace Business.System
         /// 根据部门获取设备数据列表
         /// </summary>
         /// <returns></returns>
-        public List<MesDeviceEntity> GetList_Deparemaent(string D_Department)
+        public List<MesDeviceEntity> GetList_Deparemaent(string D_Department,string D_TeamName)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT * FROM Mes_Device");
-                strSql.Append(" WHERE D_Department LIKE @D_Department");
+                strSql.Append(" WHERE D_Department = @D_Department and D_TeamName = @D_TeamName");
                 var paramList = new List<SqlParameter>();
-                paramList.Add(new SqlParameter("@D_Department", string.Format("%{0}%", D_Department)));
+                paramList.Add(new SqlParameter("@D_Department", string.Format("{0}", D_Department)));
+                paramList.Add(new SqlParameter("@D_TeamName", string.Format("{0}", D_TeamName)));
                 var rows = db.ExecuteObjects<MesDeviceEntity>(strSql.ToString(), paramList.ToArray());
                 return rows;
             }
@@ -141,6 +142,8 @@ namespace Business.System
 					 strSql.Append("INSERT INTO Mes_Device(");
                      strSql.Append("ID,");
                      strSql.Append("D_Department,");
+                     strSql.Append("D_TeamCode,");
+                     strSql.Append("D_TeamName,");
                      strSql.Append("D_Name,");
                      strSql.Append("D_IP,");
                      strSql.Append("D_Remark");
@@ -148,6 +151,8 @@ namespace Business.System
                      strSql.Append("VALUES(");
                      strSql.Append("@ID,");
                      strSql.Append("@D_Department,");
+                     strSql.Append("@D_TeamCode,");
+                     strSql.Append("@D_TeamName,");
                      strSql.Append("@D_Name,");
                      strSql.Append("@D_IP,");
                      strSql.Append("@D_Remark");
@@ -159,6 +164,8 @@ namespace Business.System
 					 strSql.Append("UPDATE Mes_Device SET ");
                      strSql.Append("ID=@ID,");
                      strSql.Append("D_Department=@D_Department,");
+                     strSql.Append("D_TeamCode=@D_TeamCode,");
+                     strSql.Append("D_TeamName=@D_TeamName,");
                      strSql.Append("D_Name=@D_Name,");
                      strSql.Append("D_IP=@D_IP,");
                      strSql.Append("D_Remark=@D_Remark ");
@@ -166,6 +173,8 @@ namespace Business.System
                      paramList.Add(new SqlParameter("@ID",keyValue));
                 }
                 paramList.Add(new SqlParameter("@D_Department",entity.D_Department));
+                paramList.Add(new SqlParameter("@D_TeamCode", entity.D_TeamCode));
+                paramList.Add(new SqlParameter("@D_TeamName", entity.D_TeamName));
                 paramList.Add(new SqlParameter("@D_Name",entity.D_Name));
                 paramList.Add(new SqlParameter("@D_IP",entity.D_IP));
                 paramList.Add(new SqlParameter("@D_Remark", entity.D_Remark));

@@ -77,10 +77,6 @@
             this.人员管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.照片管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.记录查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.考勤管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.系统配置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rFID管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsSystemManager = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsLog = new System.Windows.Forms.ToolStripMenuItem();
@@ -414,11 +410,7 @@
             this.人脸ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.人员管理ToolStripMenuItem,
             this.设备管理ToolStripMenuItem,
-            this.照片管理ToolStripMenuItem,
-            this.记录查询ToolStripMenuItem,
-            this.考勤管理ToolStripMenuItem,
-            this.用户管理ToolStripMenuItem,
-            this.系统配置ToolStripMenuItem});
+            this.照片管理ToolStripMenuItem});
             this.人脸ToolStripMenuItem.Name = "人脸ToolStripMenuItem";
             this.人脸ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.人脸ToolStripMenuItem.Text = "人脸识别";
@@ -427,51 +419,23 @@
             // 人员管理ToolStripMenuItem
             // 
             this.人员管理ToolStripMenuItem.Name = "人员管理ToolStripMenuItem";
-            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.人员管理ToolStripMenuItem.Text = "人员管理";
             this.人员管理ToolStripMenuItem.Click += new System.EventHandler(this.人员管理ToolStripMenuItem_Click);
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             this.设备管理ToolStripMenuItem.Click += new System.EventHandler(this.设备管理ToolStripMenuItem_Click);
             // 
             // 照片管理ToolStripMenuItem
             // 
             this.照片管理ToolStripMenuItem.Name = "照片管理ToolStripMenuItem";
-            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.照片管理ToolStripMenuItem.Text = "照片管理";
             this.照片管理ToolStripMenuItem.Click += new System.EventHandler(this.照片管理ToolStripMenuItem_Click);
-            // 
-            // 记录查询ToolStripMenuItem
-            // 
-            this.记录查询ToolStripMenuItem.Name = "记录查询ToolStripMenuItem";
-            this.记录查询ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.记录查询ToolStripMenuItem.Text = "记录查询";
-            this.记录查询ToolStripMenuItem.Click += new System.EventHandler(this.记录查询ToolStripMenuItem_Click);
-            // 
-            // 考勤管理ToolStripMenuItem
-            // 
-            this.考勤管理ToolStripMenuItem.Name = "考勤管理ToolStripMenuItem";
-            this.考勤管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.考勤管理ToolStripMenuItem.Text = "考勤管理";
-            this.考勤管理ToolStripMenuItem.Click += new System.EventHandler(this.考勤管理ToolStripMenuItem_Click);
-            // 
-            // 用户管理ToolStripMenuItem
-            // 
-            this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.用户管理ToolStripMenuItem.Text = "用户管理";
-            this.用户管理ToolStripMenuItem.Click += new System.EventHandler(this.用户管理ToolStripMenuItem_Click);
-            // 
-            // 系统配置ToolStripMenuItem
-            // 
-            this.系统配置ToolStripMenuItem.Name = "系统配置ToolStripMenuItem";
-            this.系统配置ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
-            this.系统配置ToolStripMenuItem.Text = "系统配置";
-            this.系统配置ToolStripMenuItem.Click += new System.EventHandler(this.系统配置ToolStripMenuItem_Click);
             // 
             // rFID管理ToolStripMenuItem
             // 
@@ -518,7 +482,7 @@
             // 
             this.cmsSkin.Image = global::DesktopApp.Properties.Resources.cog;
             this.cmsSkin.Name = "cmsSkin";
-            this.cmsSkin.Size = new System.Drawing.Size(156, 26);
+            this.cmsSkin.Size = new System.Drawing.Size(148, 26);
             this.cmsSkin.Text = "皮肤设置";
             this.cmsSkin.Click += new System.EventHandler(this.cmsSkinSet_Click);
             // 
@@ -526,7 +490,7 @@
             // 
             this.cmsAbout.Image = global::DesktopApp.Properties.Resources.information;
             this.cmsAbout.Name = "cmsAbout";
-            this.cmsAbout.Size = new System.Drawing.Size(156, 26);
+            this.cmsAbout.Size = new System.Drawing.Size(148, 26);
             this.cmsAbout.Text = "关于";
             this.cmsAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
@@ -534,14 +498,14 @@
             // 
             this.车间设置ToolStripMenuItem.Image = global::DesktopApp.Properties.Resources.config;
             this.车间设置ToolStripMenuItem.Name = "车间设置ToolStripMenuItem";
-            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.车间设置ToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.车间设置ToolStripMenuItem.Text = "车间设置";
             // 
             // 程序更新ToolStripMenuItem
             // 
             this.程序更新ToolStripMenuItem.Image = global::DesktopApp.Properties.Resources.wrench;
             this.程序更新ToolStripMenuItem.Name = "程序更新ToolStripMenuItem";
-            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
+            this.程序更新ToolStripMenuItem.Size = new System.Drawing.Size(148, 26);
             this.程序更新ToolStripMenuItem.Text = "程序更新";
             this.程序更新ToolStripMenuItem.Click += new System.EventHandler(this.程序更新ToolStripMenuItem_Click);
             // 
@@ -616,10 +580,6 @@
         private System.Windows.Forms.ToolStripMenuItem 人脸ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 人员管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设备管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 记录查询ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 考勤管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 系统配置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 照片管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 车间出库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rFID管理ToolStripMenuItem;

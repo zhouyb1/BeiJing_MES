@@ -97,6 +97,7 @@ namespace Business
                     sql = @"SELECT  F_UserId,
         F_Account ,
         F_RealName ,
+F_TeamName,
         '******' F_Password ,
         CASE F_Gender WHEN 1 THEN '男' ELSE '女' END StrGender ,
          AM_Base_Department.F_FullName  D_Code ,
@@ -271,6 +272,8 @@ FROM    AM_Base_User
       ,F_Password
       ,F_Gender
       ,AM_Base_Department.F_FullName  D_Code 
+,F_TeamCode
+,F_TeamName
       ,Sys_Role.R_Name R_Code
       ,F_Mobile
       ,AM_Base_User.F_Email
@@ -285,7 +288,7 @@ FROM    AM_Base_User
         AM_Base_User.F_ModifyDate ,
 		F_Kind,
         F_RFIDCode,
-       AM_Base_User.R_Code,
+       AM_Base_User.R_CSCode,
         F_Group,
         F_Indate,
         F_Outdate,
@@ -476,7 +479,7 @@ WHERE F_Account='{0}'", key);
                 parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
                 parameters.Add(new SqlParameter("@U_Sex", user.F_Gender));
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
-                parameters.Add(new SqlParameter("@R_Code", user.R_Code));
+                parameters.Add(new SqlParameter("@R_CSCode", user.R_CSCode));
                 parameters.Add(new SqlParameter("@U_Active", user.F_EnabledMark));
 
                 if (!string.IsNullOrEmpty(user.F_Mobile))
@@ -595,7 +598,9 @@ WHERE F_Account='{0}'", key);
        [F_RealName] = @U_Name
       ,[F_Gender] = @U_Sex
       ,[D_Code] = @D_Code
-      ,[R_Code] = @R_Code
+,[F_TeamCode] = @F_TeamCode
+,[F_TeamName] = @F_TeamName
+      ,[R_CSCode] = @R_CSCode
       ,[F_Mobile] = @U_Phone
       ,[F_Email] = @U_Email
       ,[F_OICQ] = @U_QQ
@@ -628,7 +633,9 @@ WHERE F_Account='{0}'", key);
                 //parameters.Add(new SqlParameter("@U_Pwd", user.F_Password));
                 parameters.Add(new SqlParameter("@U_Sex", user.F_Gender));
                 parameters.Add(new SqlParameter("@D_Code", user.D_Code));
-                parameters.Add(new SqlParameter("@R_Code", user.R_Code));
+                parameters.Add(new SqlParameter("@F_TeamCode", user.F_TeamCode));
+                parameters.Add(new SqlParameter("@F_TeamName", user.F_TeamName));
+                parameters.Add(new SqlParameter("@R_CSCode", user.R_CSCode));
                 parameters.Add(new SqlParameter("@U_Active", user.F_EnabledMark));
 
                 parameters.Add(new SqlParameter("@F_Kind", user.F_Kind));

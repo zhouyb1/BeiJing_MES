@@ -40,6 +40,7 @@
             this.设备ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.设备名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.部门 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.班组 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IP地址 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.设备状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,18 +55,18 @@
             this.设备ID,
             this.设备名称,
             this.部门,
+            this.班组,
             this.IP地址,
             this.设备状态,
             this.备注});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridView.MultiSelect = false;
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowTemplate.Height = 23;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(1085, 511);
+            this.dataGridView.Size = new System.Drawing.Size(814, 408);
             this.dataGridView.TabIndex = 0;
             this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
             // 
@@ -73,10 +74,9 @@
             // 
             this.panMain.Controls.Add(this.dataGridView);
             this.panMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panMain.Location = new System.Drawing.Point(0, 62);
-            this.panMain.Margin = new System.Windows.Forms.Padding(4);
+            this.panMain.Location = new System.Drawing.Point(0, 50);
             this.panMain.Name = "panMain";
-            this.panMain.Size = new System.Drawing.Size(1085, 511);
+            this.panMain.Size = new System.Drawing.Size(814, 408);
             this.panMain.TabIndex = 4;
             // 
             // panTop
@@ -89,17 +89,17 @@
             this.panTop.Controls.Add(this.btnAdd);
             this.panTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panTop.Location = new System.Drawing.Point(0, 0);
-            this.panTop.Margin = new System.Windows.Forms.Padding(4);
             this.panTop.Name = "panTop";
-            this.panTop.Size = new System.Drawing.Size(1085, 62);
+            this.panTop.Size = new System.Drawing.Size(814, 50);
             this.panTop.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 23);
+            this.label1.Location = new System.Drawing.Point(17, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(82, 15);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "设备名称：";
             // 
@@ -107,10 +107,9 @@
             // 
             this.btnFind.Image = global::DesktopApp.Properties.Resources.search1;
             this.btnFind.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFind.Location = new System.Drawing.Point(322, 16);
-            this.btnFind.Margin = new System.Windows.Forms.Padding(4);
+            this.btnFind.Location = new System.Drawing.Point(242, 13);
             this.btnFind.Name = "btnFind";
-            this.btnFind.Size = new System.Drawing.Size(70, 29);
+            this.btnFind.Size = new System.Drawing.Size(52, 23);
             this.btnFind.TabIndex = 9;
             this.btnFind.Text = "查询";
             this.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -119,20 +118,18 @@
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(112, 20);
-            this.txtKey.Margin = new System.Windows.Forms.Padding(4);
+            this.txtKey.Location = new System.Drawing.Point(84, 16);
             this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(191, 25);
+            this.txtKey.Size = new System.Drawing.Size(144, 21);
             this.txtKey.TabIndex = 8;
             // 
             // btnDelete
             // 
             this.btnDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(598, 16);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDelete.Location = new System.Drawing.Point(448, 13);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(70, 29);
+            this.btnDelete.Size = new System.Drawing.Size(52, 23);
             this.btnDelete.TabIndex = 7;
             this.btnDelete.Text = "删除";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -143,10 +140,9 @@
             // 
             this.btnEdit.Image = global::DesktopApp.Properties.Resources.edit1;
             this.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnEdit.Location = new System.Drawing.Point(506, 16);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(4);
+            this.btnEdit.Location = new System.Drawing.Point(380, 13);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(70, 29);
+            this.btnEdit.Size = new System.Drawing.Size(52, 23);
             this.btnEdit.TabIndex = 6;
             this.btnEdit.Text = "修改";
             this.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -157,10 +153,9 @@
             // 
             this.btnAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
             this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdd.Location = new System.Drawing.Point(414, 16);
-            this.btnAdd.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAdd.Location = new System.Drawing.Point(310, 13);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(70, 29);
+            this.btnAdd.Size = new System.Drawing.Size(52, 23);
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "添加";
             this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -188,6 +183,13 @@
             this.部门.Name = "部门";
             this.部门.ReadOnly = true;
             // 
+            // 班组
+            // 
+            this.班组.DataPropertyName = "D_TeamName";
+            this.班组.HeaderText = "班组";
+            this.班组.Name = "班组";
+            this.班组.ReadOnly = true;
+            // 
             // IP地址
             // 
             this.IP地址.DataPropertyName = "D_IP";
@@ -211,13 +213,14 @@
             // 
             // frmDeviceManagementList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 573);
+            this.ClientSize = new System.Drawing.Size(814, 458);
             this.Controls.Add(this.panMain);
             this.Controls.Add(this.panTop);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmDeviceManagementList";
             this.Text = "设备管理";
             this.Load += new System.EventHandler(this.frmDeviceManagementList_Load);
@@ -243,6 +246,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 设备ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn 设备名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 部门;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 班组;
         private System.Windows.Forms.DataGridViewTextBoxColumn IP地址;
         private System.Windows.Forms.DataGridViewTextBoxColumn 设备状态;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注;

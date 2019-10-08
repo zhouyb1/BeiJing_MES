@@ -17,6 +17,15 @@ namespace Model
         /// </summary>
         public string D_Department{ set; get; }
         /// <summary>
+        /// 
+        /// </summary>
+        public string D_TeamCode { set; get; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public string D_TeamName { set; get; }
+
+        /// <summary>
         /// 设备名称
         /// </summary>
         public string D_Name{ set; get; }

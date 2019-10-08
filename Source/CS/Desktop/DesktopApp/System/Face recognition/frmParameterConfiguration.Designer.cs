@@ -30,14 +30,10 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.网络参数 = new System.Windows.Forms.TabPage();
-            this.基本参数 = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.回调参数 = new System.Windows.Forms.TabPage();
-            this.显示参数 = new System.Windows.Forms.TabPage();
-            this.远程操作 = new System.Windows.Forms.TabPage();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -51,6 +47,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -60,8 +57,9 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(1291, 688);
-            this.splitContainer1.SplitterDistance = 260;
+            this.splitContainer1.Size = new System.Drawing.Size(968, 550);
+            this.splitContainer1.SplitterDistance = 194;
+            this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 0;
             // 
             // dataGridView1
@@ -69,20 +67,11 @@
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 27;
-            this.dataGridView1.Size = new System.Drawing.Size(260, 688);
+            this.dataGridView1.Size = new System.Drawing.Size(194, 550);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox2.Location = new System.Drawing.Point(3, 559);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(1021, 126);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "信息";
             // 
             // groupBox1
             // 
@@ -90,86 +79,57 @@
             this.groupBox1.Controls.Add(this.tabControl1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1027, 688);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Size = new System.Drawing.Size(771, 550);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // tabControl1
+            // groupBox2
             // 
-            this.tabControl1.Controls.Add(this.网络参数);
-            this.tabControl1.Controls.Add(this.基本参数);
-            this.tabControl1.Controls.Add(this.回调参数);
-            this.tabControl1.Controls.Add(this.显示参数);
-            this.tabControl1.Controls.Add(this.远程操作);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(3, 21);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1021, 664);
-            this.tabControl1.TabIndex = 0;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
-            // 
-            // 网络参数
-            // 
-            this.网络参数.Location = new System.Drawing.Point(4, 25);
-            this.网络参数.Name = "网络参数";
-            this.网络参数.Padding = new System.Windows.Forms.Padding(3);
-            this.网络参数.Size = new System.Drawing.Size(1013, 635);
-            this.网络参数.TabIndex = 0;
-            this.网络参数.Tag = "DesktopApp.frmNetworkParameters";
-            this.网络参数.Text = "网络参数";
-            this.网络参数.UseVisualStyleBackColor = true;
-            // 
-            // 基本参数
-            // 
-            this.基本参数.Location = new System.Drawing.Point(4, 25);
-            this.基本参数.Name = "基本参数";
-            this.基本参数.Padding = new System.Windows.Forms.Padding(3);
-            this.基本参数.Size = new System.Drawing.Size(1013, 635);
-            this.基本参数.TabIndex = 1;
-            this.基本参数.Tag = "DesktopApp.frmBasicParameters";
-            this.基本参数.Text = "基本参数";
-            this.基本参数.UseVisualStyleBackColor = true;
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.groupBox2.Location = new System.Drawing.Point(2, 447);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Size = new System.Drawing.Size(767, 101);
+            this.groupBox2.TabIndex = 2;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "信息";
             // 
             // 回调参数
             // 
-            this.回调参数.Location = new System.Drawing.Point(4, 25);
+            this.回调参数.Location = new System.Drawing.Point(4, 22);
+            this.回调参数.Margin = new System.Windows.Forms.Padding(2);
             this.回调参数.Name = "回调参数";
-            this.回调参数.Size = new System.Drawing.Size(1013, 635);
+            this.回调参数.Size = new System.Drawing.Size(759, 506);
             this.回调参数.TabIndex = 2;
             this.回调参数.Tag = "DesktopApp.frmCallbackParameter";
             this.回调参数.Text = "回调参数";
             this.回调参数.UseVisualStyleBackColor = true;
             // 
-            // 显示参数
+            // tabControl1
             // 
-            this.显示参数.Location = new System.Drawing.Point(4, 25);
-            this.显示参数.Name = "显示参数";
-            this.显示参数.Size = new System.Drawing.Size(1013, 635);
-            this.显示参数.TabIndex = 3;
-            this.显示参数.Tag = "DesktopApp.frmDisplayParameter";
-            this.显示参数.Text = "显示参数";
-            this.显示参数.UseVisualStyleBackColor = true;
-            // 
-            // 远程操作
-            // 
-            this.远程操作.Location = new System.Drawing.Point(4, 25);
-            this.远程操作.Name = "远程操作";
-            this.远程操作.Size = new System.Drawing.Size(1013, 635);
-            this.远程操作.TabIndex = 4;
-            this.远程操作.Tag = "DesktopApp.frmRemoteOperation";
-            this.远程操作.Text = "远程操作";
-            this.远程操作.UseVisualStyleBackColor = true;
+            this.tabControl1.Controls.Add(this.回调参数);
+            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControl1.Location = new System.Drawing.Point(2, 16);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(2);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(767, 532);
+            this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // frmParameterConfiguration
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1291, 688);
+            this.ClientSize = new System.Drawing.Size(968, 550);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frmParameterConfiguration";
             this.Text = "参数配置";
             this.Load += new System.EventHandler(this.frmParameterConfiguration_Load);
@@ -191,10 +151,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage 网络参数;
-        private System.Windows.Forms.TabPage 基本参数;
         private System.Windows.Forms.TabPage 回调参数;
-        private System.Windows.Forms.TabPage 显示参数;
-        private System.Windows.Forms.TabPage 远程操作;
     }
 }

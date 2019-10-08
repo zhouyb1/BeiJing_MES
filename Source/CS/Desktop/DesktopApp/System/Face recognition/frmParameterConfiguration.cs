@@ -27,8 +27,8 @@ namespace DesktopApp
         private void frmParameterConfiguration_Load(object sender, EventArgs e)
         {
             //初始打开时就加载frmNetworkParameters  
-            string frmNetworkParameters = "DesktopApp.frmNetworkParameters";
-            GenerateForm(frmNetworkParameters, tabControl1);
+            string frmCallbackParameters = "DesktopApp.frmCallbackParameter";
+            GenerateForm(frmCallbackParameters, tabControl1);
         }   
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

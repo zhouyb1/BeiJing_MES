@@ -30,6 +30,9 @@ namespace DesktopApp
         private string image = "";//照片名
         private string imagefile = "";//照片路径
         private string fileInfoLength = "";//文件大小
+        private string strTeamCode = "";
+        private string strTeamName = "";
+
 
         public frmUserEdit(frmUserList _frmUserList, SysUser _SysUser, string _PrimaryKey, int _OperationType)
         {
@@ -95,6 +98,13 @@ namespace DesktopApp
                 R_Code.DataSource = datas;
                 R_Code.ValueMember = "R_Code";
                 R_Code.DisplayMember = "R_Name";
+
+                Mes_TeamBLL TeamBLL = new Mes_TeamBLL();
+                var Teams = TeamBLL.GetList_Team("");
+                cmbTeam.DataSource = Teams;
+                cmbTeam.ValueMember = "T_Code";
+                cmbTeam.DisplayMember = "T_Name";
+
                 //if (string.IsNullOrEmpty(role))
                 //{
                 //    R_Code.SelectedIndex = 0;
@@ -123,7 +133,8 @@ namespace DesktopApp
 
 
                 department = user.D_Code;
-                role = user.R_Code;
+                strTeamCode = user.F_TeamCode;
+                role = user.R_CSCode;
 
                 F_Account.Text = user.F_Account;
                 F_RealName.Text = user.F_RealName;
@@ -134,6 +145,7 @@ namespace DesktopApp
 
                 D_Code.Text = department;
                 R_Code.SelectedValue = role;
+                cmbTeam.SelectedValue = strTeamCode;
 
                 F_Mobile.Text = user.F_Mobile;
                 F_Email.Text = user.F_Email;
@@ -240,7 +252,7 @@ namespace DesktopApp
                     user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
                     user.D_Code = D_Code.SelectedValue.ToString();
 
-                    user.R_Code = R_Code.SelectedValue.ToString();
+                    user.R_CSCode = R_Code.SelectedValue.ToString();
                     user.F_Mobile = F_Mobile.Text;
                     user.F_Email = F_Email.Text;
                     user.F_OICQ = F_OICQ.Text;
@@ -316,7 +328,9 @@ namespace DesktopApp
                     user.D_Code = D_Code.Text;
                     user.F_DepartmentId = rows[0].F_DepartmentId;
 
-                    user.R_Code = R_Code.SelectedValue.ToString();
+                    user.R_CSCode = R_Code.SelectedValue.ToString();
+                    user.F_TeamCode = cmbTeam.SelectedValue.ToString();
+                    user.F_TeamName = cmbTeam.Text.ToString();
                     user.F_Mobile = F_Mobile.Text;
                     user.F_Email = F_Email.Text;
                     user.F_OICQ = F_OICQ.Text;
@@ -497,7 +511,7 @@ namespace DesktopApp
                         if (SysUserBLL.Edit(user) > 0)
                         {
                             MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
-                            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text);
+                            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text,"");
                             user = SysUserBLL.getDetail(PrimaryKey);
 
                             string url = "http://" + MesDevice[0].D_IP + ":8090/person/create";
@@ -662,7 +676,7 @@ namespace DesktopApp
             SysUser user = new SysUser();
             MesDeviceBLL MesDeviceBLL = new MesDeviceBLL();
             SysUserBLL SysUserBLL = new SysUserBLL();
-            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text);
+            var MesDevice = MesDeviceBLL.GetList_Deparemaent(D_Code.Text,"");
             user = SysUserBLL.getDetail(PrimaryKey);
             string url = "http://" + MesDevice[0].D_IP + ":8090/person/takeImg";
 

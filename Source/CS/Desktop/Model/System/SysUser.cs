@@ -38,7 +38,16 @@ namespace Model
         /// <summary>
         /// 用户角色
         /// </summary>
-        public string R_Code { set; get; }
+        public string R_CSCode { set; get; }
+        /// <summary>
+        /// 班组编码
+        /// </summary>
+        public string F_TeamCode { set; get; }
+        /// <summary>
+        /// 班组名称
+        /// </summary>
+        public string F_TeamName { set; get; }
+
         /// <summary>
         /// 用户手机
         /// </summary>

@@ -320,7 +320,7 @@ namespace Business.System
                      AM_Base_User_paramList.Add(new SqlParameter("@F_ModifyUserName", AMBaseUserEntity.F_ModifyUserName));
                      AM_Base_User_paramList.Add(new SqlParameter("@U_Address", AMBaseUserEntity.U_Address));
                      AM_Base_User_paramList.Add(new SqlParameter("@D_Code", AMBaseUserEntity.D_Code));
-                     AM_Base_User_paramList.Add(new SqlParameter("@R_Code", AMBaseUserEntity.R_Code));
+                     AM_Base_User_paramList.Add(new SqlParameter("@R_CSCode", AMBaseUserEntity.R_CSCode));
                      AM_Base_User_paramList.Add(new SqlParameter("@F_Kind", AMBaseUserEntity.F_Kind));
                      AM_Base_User_paramList.Add(new SqlParameter("@F_RFIDCode", AMBaseUserEntity.F_RFIDCode));
                      AM_Base_User_paramList.Add(new SqlParameter("@F_Group", AMBaseUserEntity.F_Group));

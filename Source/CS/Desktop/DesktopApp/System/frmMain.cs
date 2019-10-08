@@ -57,7 +57,7 @@ namespace DesktopApp
             try
             {
                 SysModuleBLL modulebll = new SysModuleBLL();
-                Modules = modulebll.LoadRoleModule(User.R_Code);
+                Modules = modulebll.LoadRoleModule(User.R_CSCode);
 
                 cmsBaseManager.Visible = false;
                 cmsCompany.Visible = false;
