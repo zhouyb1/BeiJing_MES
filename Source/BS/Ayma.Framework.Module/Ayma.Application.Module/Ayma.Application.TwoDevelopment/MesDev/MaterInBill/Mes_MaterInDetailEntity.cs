@@ -103,6 +103,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string InventoryDay { get; set; }
         [NotMapped]
         public string GoodsState { get; set; }
+        [NotMapped]
+        public string M_StockName { get; set; }
         #endregion
     }
 }
