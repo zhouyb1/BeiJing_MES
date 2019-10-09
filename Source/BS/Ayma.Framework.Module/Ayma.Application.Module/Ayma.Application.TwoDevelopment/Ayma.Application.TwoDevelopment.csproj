@@ -293,9 +293,6 @@
     <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepService.cs" />
     <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepBLL.cs" />
     <Compile Include="MesDev\SupplyGoodsCountRep\SupplyGoodsCountRepIBLL.cs" />
-    <Compile Include="MesDev\I_Period\I_PeriodService.cs" />
-    <Compile Include="MesDev\I_Period\I_PeriodIBLL.cs" />
-    <Compile Include="MesDev\I_Period\I_PeriodBLL.cs" />
     <Compile Include="MesDev\Period\PeriodService.cs" />
     <Compile Include="MesDev\Period\PeriodIBLL.cs" />
     <Compile Include="MesDev\Period\PeriodBLL.cs" />

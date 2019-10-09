@@ -295,7 +295,6 @@
     <Compile Include="Areas\MesDev\Controllers\InPriceController.cs" />
     <Compile Include="Areas\MesDev\Controllers\MaterialsSumController.cs" />
     <Compile Include="Areas\MesDev\Controllers\SupplyGoodsCountRepController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\I_PeriodController.cs" />
     <Compile Include="Areas\MesDev\Controllers\PeriodController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2538,8 +2537,6 @@
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Index.js" />
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.js" />
-    <Content Include="Areas\MesDev\Views\I_Period\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\I_Period\Index.js" />
     <Content Include="Areas\MesDev\Views\Period\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Period\Index.js" />
   </ItemGroup>
