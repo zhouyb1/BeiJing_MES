@@ -25,7 +25,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="supplyCode">供应商编码</param>
         /// <returns></returns>
-        DataTable GetSupplyGoodsDetail(string keyValue);
+        DataTable GetSupplyGoodsDetail(string keyValue,string queryJson);
         #endregion
 
     }

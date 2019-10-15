@@ -45,11 +45,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="supplyCode"></param>
         /// <returns></returns>
-        public DataTable GetSupplyGoodsDetail(string supplyCode)
+        public DataTable GetSupplyGoodsDetail(string supplyCode,string queryJson)
         {
             try
             {
-                return supplyGoodsCountRepService.GetSupplyGoodsDetail(supplyCode);
+                return supplyGoodsCountRepService.GetSupplyGoodsDetail(supplyCode,queryJson);
             }
             catch (Exception ex)
             {

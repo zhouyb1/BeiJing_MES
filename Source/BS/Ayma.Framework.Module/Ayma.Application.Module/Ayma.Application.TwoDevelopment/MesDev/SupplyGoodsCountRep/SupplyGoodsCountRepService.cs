@@ -31,7 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"
                 m.M_SupplyCode ,
                 m.M_SupplyName ,
-                CONVERT(VARCHAR(100),h.M_CreateDate,23) M_CreateDate ,
+                h.M_CreateDate ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty)) In_Qty ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty * M_Price)) In_Amount ,
                 AVG(M_Price) Avg_Price
@@ -99,7 +99,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="supplyCode"></param>
         /// <returns></returns>
-        public DataTable GetSupplyGoodsDetail(string supplyCode )
+        public DataTable GetSupplyGoodsDetail(string supplyCode, string queryJson)
         {
             string sql = @"SELECT   h.M_MaterInNo ,
                                     m.M_SupplyCode ,
@@ -117,6 +117,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE M_SupplyCode  =@supplyCode";
             var dp = new DynamicParameters(new { });
+            var queryParam = queryJson.ToJObject();
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                sql += " AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ";
+            }
             dp.Add("@supplyCode",supplyCode,DbType.String);
             return this.BaseRepository().FindTable(sql, dp);
         }
