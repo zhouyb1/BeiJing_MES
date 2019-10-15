@@ -87,9 +87,10 @@ var bootstrap = function ($, ayma) {
 
         //双击
         doubleClick: function () {
+            var dateParam = { StartTime: startTime, EndTime: endTime };
             $('#girdtable_sum').on('dblclick', function () {
                  supplyCode = $('#girdtable_sum').jfGridValue('m_supplycode');
-                $('#girdtable_detail').jfGridSet('reload', { param: { supplyCode: supplyCode} });
+                 $('#girdtable_detail').jfGridSet('reload', { param: { supplyCode: supplyCode, queryJson: JSON.stringify(dateParam) } });
                 $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
             });
         },
@@ -101,14 +102,16 @@ var bootstrap = function ($, ayma) {
                     //{ label: "ID", name: "ID", width: 160, align: "left"},
                     { label: "供应商编码", name: "m_supplycode", width: 160, align: "left"},
                     { label: "供应商名称", name: "m_supplyname", width: 160, align: "left"},
-                    { label: "数量", name: "in_qty", width: 160, align: "left" },
-                    { label: "单位成本", name: "avg_price", width: 160, align: "left" },
-                    { label: "进货总成本", name: "in_amount", width: 160, align: "left" },
+                    { label: "数量", name: "in_qty", width: 160, align: "left", statistics: true },
+                    { label: "单位成本", name: "avg_price", width: 160, align: "left", statistics: true },
+                    { label: "进货总成本", name: "in_amount", width: 160, align: "left", statistics: true },
                     { label: "添加时间", name: "m_createdate", width: 160, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                isStatistics: true,
+                footerrow: true
             });
 
             //明细
@@ -119,15 +122,17 @@ var bootstrap = function ($, ayma) {
                     { label: "单据编号", name: "m_materinno", width: 160, align: "left" },
                     { label: "物料名称", name: "m_goodsname", width: 160, align: "left" },
                     { label: "基本单位", name: "m_unit", width: 160, align: "left" },
-                    { label: "数量", name: "m_qty", width: 160, align: "left" },
+                    { label: "数量", name: "m_qty", width: 160, align: "left", statistics: true },
                     { label: "单价", name: "m_price", width: 160, align: "left" },
-                    { label: "总价", name: "amount", width: 160, align: "left" },
+                    { label: "总价", name: "amount", width: 160, align: "left", statistics: true },
                     { label: "存货仓库", name: "m_stockname", width: 160, align: "left" },
                     { label: "经办人", name: "m_createby", width: 160, align: "left" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
-                isPage: false
+                isPage: false,
+                isStatistics: true,
+                footerrow: true
             });
         },
         search: function (param) {
