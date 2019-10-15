@@ -64,9 +64,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetSupplyGoodsDetail(string supplyCode)
+        public ActionResult GetSupplyGoodsDetail(string supplyCode,string queryJson)
         {
-            var data = supplyGoodsCountRepIBLL.GetSupplyGoodsDetail(supplyCode);
+            var data = supplyGoodsCountRepIBLL.GetSupplyGoodsDetail(supplyCode,queryJson);
 
             return Success(data);
         }
