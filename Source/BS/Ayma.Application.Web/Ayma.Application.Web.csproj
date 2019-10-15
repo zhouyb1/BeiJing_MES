@@ -2535,8 +2535,6 @@
     <Content Include="Areas\MesDev\Views\MaterialsSum\Index.js" />
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Index.js" />
-    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\Form.js" />
     <Content Include="Areas\MesDev\Views\Period\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Period\Index.js" />
   </ItemGroup>
