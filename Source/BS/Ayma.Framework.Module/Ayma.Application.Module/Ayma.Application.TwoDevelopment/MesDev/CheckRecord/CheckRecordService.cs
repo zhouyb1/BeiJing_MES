@@ -33,9 +33,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_ScanDate,
                 t.C_ScanTime,
                 t.C_Remark,
-                A.F_Account
+                A.F_Account,
+                A.D_Code,
+				A.F_TeamName
                 ");
-                strSql.Append("  FROM Mes_CheckRecord t left join AM_Base_User A on(A.F_UserId=t.C_PersonId) ");
+                strSql.Append("  FROM Mes_CheckRecord t left join AM_Base_User A on(A.F_EnCode=t.C_PersonId) ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数

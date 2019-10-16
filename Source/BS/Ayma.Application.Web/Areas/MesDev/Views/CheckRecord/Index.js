@@ -99,6 +99,8 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "用户编码", name: "C_PersonId", width: 160, align: "left" },
                     { label: "用户姓名", name: "F_Account", width: 160, align: "left" },
+                    { label: "部门名称", name: "D_Code", width: 160, align: "left" },
+                    { label: "班组名称", name: "F_TeamName", width: 160, align: "left" },
                     { label: "打卡日期", name: "C_ScanDate", width: 160, align: "left"},
                     {
                         label: "打卡时间", name: "C_ScanTime", width: 160, align: "left",

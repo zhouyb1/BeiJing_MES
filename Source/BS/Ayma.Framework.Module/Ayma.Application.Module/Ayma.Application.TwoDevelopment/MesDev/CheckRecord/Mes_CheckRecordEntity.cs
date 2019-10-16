@@ -91,6 +91,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("F_Account")]
         public string F_Account { get; set; }
+        /// <summary>
+        /// 用户班组
+        /// </summary>
+        /// <returns></returns>
+        [Column("F_TeamName")]
+        public string F_TeamName { get; set; }
+        /// <summary>
+        /// 用户部门
+        /// </summary>
+        /// <returns></returns>
+        [Column("D_Code")]
+        public string D_Code { get; set; }
         #endregion
     }
 
