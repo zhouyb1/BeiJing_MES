@@ -147,7 +147,7 @@ namespace Ayma.Application.Organization
                 List<UserEntity> list = GetList(companyId);
                 if (!string.IsNullOrEmpty(departmentId))
                 {
-                    list = list.FindAll(t => t.F_DepartmentId.ContainsEx(departmentId));
+                    list = list.FindAll(t => t.D_Code.ContainsEx(departmentId));
                 }
                 if (!string.IsNullOrEmpty(keyword))
                 {

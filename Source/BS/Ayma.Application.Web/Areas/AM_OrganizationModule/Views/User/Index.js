@@ -36,7 +36,7 @@ var bootstrap = function ($, ayma) {
                         departmentId = '';
                     }
                     else {
-                        departmentId = item.value;
+                        departmentId = item.text;
                     }
                     page.search();
                 }
