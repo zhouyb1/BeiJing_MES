@@ -39,7 +39,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderNo,
                 t.C_Remark,
                 t.C_CreateBy,
-                t.C_CreateDate
+                t.C_CreateDate,
+                t.P_OrderDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -62,7 +63,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
-                
+                if (!queryParam["C_StockName"].IsEmpty())
+                {
+                    dp.Add("C_StockName", "%" + queryParam["C_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockName Like @C_StockName ");
+                }
+                if (!queryParam["C_StockToName"].IsEmpty())
+                {
+                    dp.Add("C_StockToName", "%" + queryParam["C_StockToName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockToName Like @C_StockToName ");
+                }
                 return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)

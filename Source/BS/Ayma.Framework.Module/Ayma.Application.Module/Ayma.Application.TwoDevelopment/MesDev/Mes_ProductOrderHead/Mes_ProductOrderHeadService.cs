@@ -66,8 +66,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 if (!queryParam["P_OrderDate"].IsEmpty())
                 {
-                    dp.Add("P_OrderDate", "%" + queryParam["P_OrderDate"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.P_OrderDate Like @P_OrderDate ");
+                    dp.Add("P_OrderDate",queryParam["P_OrderDate"].ToString(), DbType.String);
+                    strSql.Append(" AND t.P_OrderDate=@P_OrderDate ");
+                }
+                if (!queryParam["P_OrderNo"].IsEmpty())
+                {
+                    dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
+                }
+                if (!queryParam["P_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("P_GoodsCode", "%" + queryParam["P_GoodsCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t1.P_GoodsCode Like @P_GoodsCode ");
+                }
+                if (!queryParam["P_GoodsName"].IsEmpty())
+                {
+                    dp.Add("P_GoodsName", "%" + queryParam["P_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t1.P_GoodsName Like @P_GoodsName ");
                 }
                 return this.BaseRepository().FindList<Mes_ProductOrderHeadEntity>(strSql.ToString(),dp, pagination);
             }

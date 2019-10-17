@@ -29,8 +29,8 @@ var bootstrap = function ($, ayma) {
                         { label: '仓库名称', name: 'M_StockName', width: 150, align: "left" },
                         { label: '物料名称', name: 'M_GoodsName', width: 200, align: "left" },
                         { label: '单位', name: 'M_Unit', width: 200, align: "left" },
-                          { label: '保质期/天', name: 'G_Period', width: 150, align: "left" },
-                        { label: '在库时间/天', name: 'InventoryDay', width: 150, align: "left" },
+                          { label: '保质期(天)', name: 'G_Period', width: 150, align: "left" },
+                        { label: '在库时间(天)', name: 'InventoryDay', width: 150, align: "left" },
                         { label: '保质期状态', name: 'GoodsState', width: 150, align: "left"},
                         { label: '批次', name: 'M_Batch', width: 200, align: "left" }
                 ],

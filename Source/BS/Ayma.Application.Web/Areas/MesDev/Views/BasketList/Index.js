@@ -70,7 +70,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "编码", name: "B_BasketCode", width: 160, align: "left"},
                     { label: "名称", name: "B_BasketName", width: 160, align: "left"},
-                    { label: "毛重", name: "M_Weight", width: 160, align: "left"},
+                    { label: "毛重(KG)", name: "M_Weight", width: 160, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,

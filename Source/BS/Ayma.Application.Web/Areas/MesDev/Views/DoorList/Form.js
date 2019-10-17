@@ -57,10 +57,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
             //车间编码
-            $("#D_WorkShopCode").select({
+            $("#D_WorkShopName").select({
                 type: 'default',
-                value: 'W_Code',
-                text: 'W_Code',
+                value: 'W_Name',
+                text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
@@ -76,7 +76,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     data: { code: code },
                     success: function (data) {
                         var entity = JSON.parse(data).data;
-                        $("#D_WorkShopName").val(entity.W_Name);
+                        $("#D_WorkShopCode").val(entity.W_Code);
                     }
                 });
             });

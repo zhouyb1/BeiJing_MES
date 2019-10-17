@@ -42,6 +42,32 @@ var bootstrap = function ($, ayma) {
                 queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
+                  $('#B_StockName').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $('#B_StockToName').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
             //仓库
             $('#B_StockName').select({
                 type: 'default',
@@ -129,7 +155,7 @@ var bootstrap = function ($, ayma) {
                     { label: "退库仓库名称", name: "B_StockToName", width: 160, align: "left" },
                     { label: "备注", name: "B_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "B_CreateBy", width: 160, align: "left" },
-                    { label: "添加时间", name: "B_CreateDate", width: 160, align: "left" }
+                    { label: "添加时间", name: "B_CreateDate", width: 160, align: "left" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

@@ -80,8 +80,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(fieldSql);
-                strSql.Append(" FROM Mes_Team t ");
-                return this.BaseRepository().FindList<Mes_TeamEntity>(strSql.ToString(), pagination);
+                strSql.Append(" FROM Mes_Team t Where 1=1");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["T_Code"].IsEmpty())
+                {
+                    dp.Add("T_Code", "%" + queryParam["T_Code"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.T_Code Like @T_Code ");
+                }
+                if (!queryParam["T_Name"].IsEmpty())
+                {
+                    dp.Add("T_Name", "%" + queryParam["T_Name"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.T_Name Like @T_Name ");
+                }
+                return this.BaseRepository().FindList<Mes_TeamEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {

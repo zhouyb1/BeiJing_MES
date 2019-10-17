@@ -89,19 +89,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 用户姓名
         /// </summary>
         /// <returns></returns>
-        [Column("F_Account")]
+        [NotMapped]
         public string F_Account { get; set; }
         /// <summary>
         /// 用户班组
         /// </summary>
         /// <returns></returns>
-        [Column("F_TeamName")]
+        [NotMapped]
         public string F_TeamName { get; set; }
         /// <summary>
         /// 用户部门
         /// </summary>
         /// <returns></returns>
-        [Column("D_Code")]
+        [NotMapped]
         public string D_Code { get; set; }
         #endregion
     }

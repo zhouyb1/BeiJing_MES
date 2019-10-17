@@ -41,13 +41,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderDate,
                 t.C_Remark,
                 t.C_CreateBy,
-                t.C_CreateDate
+                t.C_CreateDate,
+                t.P_OrderDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
                 strSql.Append("  WHERE t.P_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
+                }
                 if (!queryParam["C_CollarNo"].IsEmpty())
                 {
                     dp.Add("C_CollarNo", "%" + queryParam["C_CollarNo"].ToString() + "%", DbType.String);
@@ -58,22 +65,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
-                if (!queryParam["P_Status"].IsEmpty())
+                if (!queryParam["C_StockName"].IsEmpty())
                 {
-                    dp.Add("P_Status", "%" + queryParam["P_Status"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.P_Status Like @P_Status ");
+                    dp.Add("C_StockName", "%" + queryParam["C_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockName Like @C_StockName ");
                 }
-                if (!queryParam["C_StockToCode"].IsEmpty())
+                if (!queryParam["C_StockToName"].IsEmpty())
                 {
-                    dp.Add("C_StockToCode", "%" + queryParam["C_StockToCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.C_StockToCode Like @C_StockToCode ");
+                    dp.Add("C_StockToName", "%" + queryParam["C_StockToName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockToName Like @C_StockToName ");
                 }
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
-                {
-                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
-                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
-                }
+
                 return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

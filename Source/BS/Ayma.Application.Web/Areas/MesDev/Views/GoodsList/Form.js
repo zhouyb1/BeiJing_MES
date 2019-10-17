@@ -322,6 +322,7 @@ var bootstrap = function ($, ayma) {
         if (!$('body').Validform()) {
             return false;
         }
+        var G_Lower = $("#G_Lower").val();
         var gsuper = $("#G_Super").val();
         if (gsuper != undefined && gsuper != "") {
 
@@ -330,6 +331,11 @@ var bootstrap = function ($, ayma) {
                 $("#G_Super").val(0);
                 return false;
             }
+        }
+        if (G_Lower >= gsuper) {        
+                ayma.alert.error("下限预警数量必须小于上限预警数量.");
+                $("#G_Lower").addClass("am-field-error");
+                return false;
         }
         var postData = {
             strEntity: JSON.stringify($('body').GetFormData())

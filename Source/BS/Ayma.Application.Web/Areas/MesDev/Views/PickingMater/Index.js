@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 300);
+            }, 220, 350);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -214,8 +214,7 @@ var bootstrap = function ($, ayma) {
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true
-            });
-            page.search();
+            }); multiple_condition_query
         },
         search: function (param) {
             param = param || {};

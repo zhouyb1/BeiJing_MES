@@ -55,6 +55,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_OrderNo", "%" + queryParam["P_OrderNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_OrderNo Like @P_OrderNo ");
                 }
+                if (!queryParam["W_Kind"].IsEmpty())
+                {
+                    dp.Add("W_Kind", "%" + queryParam["W_Kind"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.W_Kind Like @W_Kind ");
+                }
+                if (!queryParam["W_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("W_GoodsCode", "%" + queryParam["W_GoodsCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.W_GoodsCode Like @W_GoodsCode ");
+                }
+                if (!queryParam["W_GoodsName"].IsEmpty())
+                {
+                    dp.Add("W_GoodsName", "%" + queryParam["W_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.W_GoodsName Like @W_GoodsName ");
+                }
                 return this.BaseRepository().FindList<Mes_WeightRecordEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

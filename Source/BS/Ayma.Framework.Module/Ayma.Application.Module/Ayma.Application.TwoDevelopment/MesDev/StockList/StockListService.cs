@@ -45,6 +45,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (!queryParam["S_Code"].IsEmpty())
+                {
+                    dp.Add("S_Code", "%" + queryParam["S_Code"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Code Like @S_Code ");
+                }
                 if (!queryParam["S_Name"].IsEmpty())
                 {
                     dp.Add("S_Name", "%" + queryParam["S_Name"].ToString() + "%", DbType.String);

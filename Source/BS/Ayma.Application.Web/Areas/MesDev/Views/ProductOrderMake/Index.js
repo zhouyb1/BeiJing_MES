@@ -158,7 +158,7 @@ var bootstrap = function ($, ayma) {
                     { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
                     { label: "车站名称", name: "P_OrderStationName", width: 160, align: "left" },
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
-                     { label: "添加人", name: "P_CreateBy", width: 160, align: "left" },
+                    { label: "添加人", name: "P_CreateBy", width: 160, align: "left" },
                     { label: "添加时间", name: "P_CreateDate", width: 160, align: "left" },
                     { label: "修改人", name: "P_UpdateBy", width: 160, align: "left" },
                     { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left" }

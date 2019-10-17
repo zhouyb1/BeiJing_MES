@@ -57,6 +57,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+        [NotMapped]
+        public string D_WorkShopName { get; set; }
         #endregion
     }
 }

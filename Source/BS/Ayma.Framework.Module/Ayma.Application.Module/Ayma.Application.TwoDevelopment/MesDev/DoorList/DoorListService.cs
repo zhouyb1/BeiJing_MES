@@ -33,7 +33,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.D_Code,
                 t.D_Name,
                 t.D_WorkShopCode,
-                t.D_Remark
+                t.D_Remark,
+                (select W_Name from Mes_WorkShop w where W_Code=t.D_WorkShopCode) as D_WorkShopName
                 ");
                 strSql.Append("  FROM Mes_Door t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -44,6 +45,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("D_Name", "%" + queryParam["D_Name"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.D_Name Like @D_Name ");
+                }
+                if (!queryParam["D_WorkShopCode"].IsEmpty())
+                {
+                    dp.Add("D_WorkShopCode", "%" + queryParam["D_WorkShopCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.D_WorkShopCode Like @D_WorkShopCode ");
                 }
                 return this.BaseRepository().FindList<Mes_DoorEntity>(strSql.ToString(),dp, pagination);
             }

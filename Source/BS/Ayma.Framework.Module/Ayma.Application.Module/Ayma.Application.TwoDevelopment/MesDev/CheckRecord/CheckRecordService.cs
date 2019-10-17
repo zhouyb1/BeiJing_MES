@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                t.ID,
                 t.C_PersonId,
                 t.C_ScanDate,
                 t.C_ScanTime,
@@ -53,15 +54,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("C_ScanDate", "%" + queryParam["C_ScanDate"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.C_ScanDate Like @C_ScanDate ");
                 }
-                if (!queryParam["C_UserCode"].IsEmpty())
+                if (!queryParam["C_PersonId"].IsEmpty())
                 {
-                    dp.Add("C_UserCode", "%" + queryParam["C_UserCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.C_UserCode Like @C_UserCode ");
+                    dp.Add("C_PersonId", "%" + queryParam["C_PersonId"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_PersonId Like @C_PersonId ");
                 }
                 if (!queryParam["C_UserName"].IsEmpty())
                 {
                     dp.Add("C_UserName", "%" + queryParam["C_UserName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.C_UserName Like @C_UserName ");
+                    strSql.Append(" AND A.F_Account Like @C_UserName ");
+                }
+                if (!queryParam["D_Code"].IsEmpty())
+                {
+                    dp.Add("D_Code", "%" + queryParam["D_Code"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND A.D_Code Like @D_Code ");
+                }
+                if (!queryParam["F_TeamName"].IsEmpty())
+                {
+                    dp.Add("F_TeamName", "%" + queryParam["F_TeamName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND A.F_TeamName Like @F_TeamName ");
                 }
                 return this.BaseRepository().FindList<Mes_CheckRecordEntity>(strSql.ToString(),dp, pagination);
             }
@@ -87,7 +98,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_CheckRecordEntity>(c=>c.ID==keyValue||c.C_PersonId==keyValue);
+                return this.BaseRepository().FindEntity<Mes_CheckRecordEntity>(c=>c.ID==keyValue);
             }
             catch (Exception ex)
             {

@@ -71,6 +71,7 @@ var bootstrap = function ($, ayma) {
                     { label: "门编码", name: "D_Code", width: 160, align: "left"},
                     { label: "门名称", name: "D_Name", width: 160, align: "left"},
                     { label: "车间编码", name: "D_WorkShopCode", width: 160, align: "left" },
+                    { label: "车间名称", name: "D_WorkShopName", width: 160, align: "left" },
                     { label: "备注", name: "D_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',

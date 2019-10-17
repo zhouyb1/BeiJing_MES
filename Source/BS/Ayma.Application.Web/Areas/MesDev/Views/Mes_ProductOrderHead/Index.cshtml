@@ -18,16 +18,19 @@
                             <div class="am-query-formcontent">
                                 <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">订单时间</div>
-                                    <input id="P_OrderDate" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
-
-
-                                    @*<div class="am-form-item-title">销售日期</div>
-                                    <div id="area" class="col-xs-5 am-form-area">
-                                        <input id="F_SaleStartTime" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
-                                    </div>*@
-
-
-
+                                    <input id="P_OrderDate" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">生产单号</div>
+                                    <input id="P_OrderNo" type="text" class="form-control time" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">物料编码</div>
+                                    <input id="P_GoodsCode" type="text" class="form-control time" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">物料名称</div>
+                                    <input id="P_GoodsName" type="text" class="form-control time" />
                                 </div>
                             </div>
                         </div>
