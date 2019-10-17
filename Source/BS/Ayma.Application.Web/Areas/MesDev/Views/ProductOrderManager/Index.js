@@ -73,7 +73,7 @@ var bootstrap = function ($, ayma) {
             //审核
             $('#am_auditing').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
-                var p_status = $('#girdtable').jfGridValue('P_Status');
+                var p_status = $('#girdtable').jfGridValue('temp_status');
                 if (p_status == "2") {
                     ayma.alert.error("已审核");
                     return false;
@@ -96,13 +96,11 @@ var bootstrap = function ($, ayma) {
             //统计
             $('#am_sum').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
-                var p_status = $('#girdtable').jfGridValue('P_Status');
+                var status = $('#girdtable').jfGridValue('temp_status');
                 var orderNo = $('#girdtable').jfGridValue('P_OrderNo');
                 var orderDate = $('#girdtable').jfGridValue('P_OrderDate');
-                //var qty = $('#girdtable').jfGridValue('P_Qty');
-                //var code = $('#girdtable').jfGridValue('P_GoodsCode');
-               
-                if (p_status == "0") {
+              
+                if (status == "0") {
                     ayma.alert.error("请先审核订单！");
                     return false;
                 }
@@ -146,7 +144,7 @@ var bootstrap = function ($, ayma) {
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "使用时间", name: "P_UseDate", width: 160, align: "left" },
                     { label: "创建人", name: "P_CreateBy", width: 160, align: "left" },
-                    //{ label: "数量", name: "P_Qty", width: 160, align: "left", hidden: true },
+                    { label: "临时状态", name: "temp_status", width: 160, align: "left", hidden: true },
                     { label: "创建时间", name: "P_CreateDate", width: 160, align: "left" },
                     //{ label: "物料编码", name: "P_GoodsCode", width: 160, align: "left", hidden: true },
                     {
