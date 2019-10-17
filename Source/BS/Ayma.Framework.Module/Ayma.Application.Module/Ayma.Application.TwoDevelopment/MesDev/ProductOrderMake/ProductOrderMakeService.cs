@@ -98,7 +98,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,t.[P_Status]
                ");
                 strSql.Append("  FROM Mes_ProductOrderHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and t.P_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

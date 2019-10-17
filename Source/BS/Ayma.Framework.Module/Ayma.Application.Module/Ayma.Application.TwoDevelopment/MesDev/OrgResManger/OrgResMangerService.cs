@@ -44,7 +44,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and t.O_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

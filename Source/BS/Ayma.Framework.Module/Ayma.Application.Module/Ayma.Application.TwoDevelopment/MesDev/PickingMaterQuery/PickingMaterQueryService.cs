@@ -43,7 +43,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and t.P_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

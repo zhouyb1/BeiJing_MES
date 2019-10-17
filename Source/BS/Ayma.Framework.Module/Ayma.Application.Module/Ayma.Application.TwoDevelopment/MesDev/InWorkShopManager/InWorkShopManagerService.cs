@@ -111,7 +111,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_CreateDate
                 ");
                 strSql.Append("  FROM Mes_InWorkShopHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and t.I_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

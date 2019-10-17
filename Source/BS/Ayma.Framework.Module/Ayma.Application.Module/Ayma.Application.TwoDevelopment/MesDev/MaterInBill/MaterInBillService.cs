@@ -316,7 +316,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
-                strSql.Append("  WHERE t.M_Status != -1  ");
+                strSql.Append("  WHERE t.M_Status = 3  ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

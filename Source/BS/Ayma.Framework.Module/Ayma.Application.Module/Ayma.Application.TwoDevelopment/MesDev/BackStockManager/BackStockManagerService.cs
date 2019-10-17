@@ -44,7 +44,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t ");
                 strSql.Append("  LEFT JOIN Mes_BackStockDetail t1 ON t1.B_BackStockNo = t.B_BackStockNo ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and t.B_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
