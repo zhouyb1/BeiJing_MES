@@ -71,6 +71,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("P_STATUS")]
         public ErpEnums.PStatusEnum P_Status { get; set; }
 
+        [NotMapped]
+        public string temp_status { get; set; }
+
         #endregion
 
         #region 扩展操作
