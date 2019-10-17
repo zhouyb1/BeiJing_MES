@@ -101,15 +101,17 @@ namespace Ayma.Application.Web.Areas.AM_SystemModule.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue, DatabaseLinkEntity entity)
         {
-            bool res = databaseLinkIBLL.SaveEntity(keyValue, entity);
-            if (res)
+            bool connectSuccess = databaseLinkIBLL.TestConnection(entity.F_DbConnection, entity.F_DbType, keyValue);
+            if (connectSuccess)
             {
-                return Success("保存成功！");
-            }
-            else
-            {
+                bool res = databaseLinkIBLL.SaveEntity(keyValue, entity);
+                if (res)
+                {
+                    return Success("保存成功！");
+                }
                 return Fail("保存失败,连接串信息有误！");
             }
+            return Fail("连接失败,连接串信息有误！");
         }
         /// <summary>
         /// 删除表单数据
