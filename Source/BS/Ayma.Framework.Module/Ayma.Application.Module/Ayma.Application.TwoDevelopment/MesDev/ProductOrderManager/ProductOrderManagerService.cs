@@ -56,6 +56,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.P_OrderDate,
                                 t.P_UseDate,
                                 t.P_Status,
+                                t.P_Status temp_status,
                                 t.P_CreateBy,
                                 t.P_CreateDate");
                 strSql.Append("  FROM Mes_ProductOrderHead t ");
