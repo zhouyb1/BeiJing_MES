@@ -68,7 +68,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     d.C_GoodsName
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
-            WHERE   t.P_Status = 2 AND t.C_CollarNo ='{0}'
+            WHERE   t.C_CollarNo ='{0}'
             ORDER BY M_UploadDate DESC";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Picking"));
@@ -117,7 +117,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.S_Batch
                             FROM    dbo.Mes_ScrapHead h
                                     LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo 
-                            WHERE h.S_Status =2 AND h.S_ScrapNo ='{0}'"; 
+                            WHERE   h.S_ScrapNo ='{0}'"; 
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Scrap"));
 
@@ -140,7 +140,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.B_Unit
                             FROM    dbo.Mes_BackStockHead h
                                     LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo
-                            WHERE   B_Status = 2 AND  h.B_BackStockNo ='{0}'";
+                            WHERE   h.B_BackStockNo ='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strsql, doucno), "BackStock"));
 
@@ -728,7 +728,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 h.O_StockName
                         FROM    dbo.Mes_OutWorkShopHead h
                                 LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo
-                        WHERE   O_Status = 2 AND h.O_OutNo ='{0}'";
+                        WHERE   h.O_OutNo ='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -751,7 +751,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 h.I_StockName
                         FROM    dbo.Mes_InWorkShopHead h
                                 LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo
-                        WHERE   I_Status = 2 AND h.I_InNo ='{0}'";
+                        WHERE   h.I_InNo ='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
