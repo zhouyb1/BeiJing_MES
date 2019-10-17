@@ -41,8 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderDate,
                 t.C_Remark,
                 t.C_CreateBy,
-                t.C_CreateDate,
-                t.P_OrderDate
+                t.C_CreateDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
                 strSql.Append("  WHERE t.P_Status in (1,2) ");
