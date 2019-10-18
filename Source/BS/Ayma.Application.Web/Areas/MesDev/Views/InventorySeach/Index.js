@@ -20,6 +20,20 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
+            //仓库
+            $('#I_StockName').select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
             //$('#girdtable').on('dblclick', function () {
             //    var I_GoodsName = escape($('#girdtable').jfGridValue('I_GoodsName'));//商品名称 转码
             //    var I_StockName = escape($('#girdtable').jfGridValue('I_StockName'));

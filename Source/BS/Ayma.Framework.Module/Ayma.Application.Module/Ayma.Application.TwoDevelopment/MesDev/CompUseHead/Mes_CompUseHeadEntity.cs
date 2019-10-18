@@ -124,6 +124,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+        /// <summary>
+        /// 车间名称
+        /// </summary>
+        [NotMapped]
+        public string C_WorkShopName { get; set; }
         #endregion
     }
 }

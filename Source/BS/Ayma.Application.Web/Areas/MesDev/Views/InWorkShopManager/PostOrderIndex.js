@@ -43,6 +43,20 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
+            $('#I_Status').DataItemSelect({ code: 'ProOutStatus' });
+            $("#I_WorkShop").select({
+                type: 'default',
+                value: 'W_Name',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+                param: {}
+            });
             $('#I_Status').DataItemSelect({ code: 'InXStatus' });
             //绑定仓库
             $('#I_StockName').select({

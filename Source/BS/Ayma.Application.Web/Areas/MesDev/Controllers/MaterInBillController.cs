@@ -131,10 +131,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetProductList(string pagination, string queryJson, string keyword)
+        public ActionResult GetProductList(string pagination, string queryJson, string keyword, string stockCode)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = materInBillIBLL.GetProductGoodsList(paginationobj, queryJson, keyword);
+            var data = materInBillIBLL.GetProductGoodsList(paginationobj, queryJson, keyword, stockCode);
             var jsonData = new
             {
                 rows = data,

@@ -17,6 +17,23 @@ var bootstrap = function ($, ayma) {
                 var M_GoodsName = $('#txt_Keyword').val();
                 page.search({ M_GoodsName: M_GoodsName });
             });
+            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+                page.search(queryJson);
+            }, 150, 500);
+            //仓库
+            $('#M_StockName').select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -27,7 +44,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Period/GetPageList',
                 headData: [
                         { label: '仓库名称', name: 'M_StockName', width: 150, align: "left" },
-                        { label: '物料名称', name: 'M_GoodsName', width: 200, align: "left" },
+                        { label: '商品名称', name: 'M_GoodsName', width: 200, align: "left" },
                         { label: '单位', name: 'M_Unit', width: 200, align: "left" },
                           { label: '保质期(天)', name: 'G_Period', width: 150, align: "left" },
                         { label: '在库时间(天)', name: 'InventoryDay', width: 150, align: "left" },

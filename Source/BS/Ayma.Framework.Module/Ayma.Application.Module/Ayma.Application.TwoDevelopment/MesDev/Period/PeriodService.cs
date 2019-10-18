@@ -98,6 +98,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND M_GoodsName Like @M_GoodsName ");
                 }
+                if (!queryParam["M_StockName"].IsEmpty())
+                {
+                    dp.Add("M_StockName", "%" + queryParam["M_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND M_StockName Like @M_StockName ");
+                }
                 return this.BaseRepository().FindList<Mes_MaterInDetailEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

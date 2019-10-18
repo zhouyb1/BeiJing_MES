@@ -23,7 +23,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetProductGoodsList(Pagination pagination, string queryJson, string keyword)
+        public IEnumerable<Mes_GoodsEntity> GetProductGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode)
         {
             try
             {
@@ -62,6 +62,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
+                }
+                if (!stockCode.IsEmpty())
+                {
+                    dp.Add("stockCode", "%" + stockCode + "%", DbType.String);
+                    strSql.Append(" AND t.stockCode like @stockCode ");
                 }
                 return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(), dp, pagination);
             }
@@ -271,6 +276,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("M_StockName", "%" + queryParam["M_StockName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.M_StockName Like @M_StockName ");
+                }
+                if (!queryParam["M_Status"].IsEmpty())
+                {
+                    dp.Add("M_Status", "%" + queryParam["M_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.M_Status = @M_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_MaterInHeadEntity>(strSql.ToString(), dp, pagination);
             }

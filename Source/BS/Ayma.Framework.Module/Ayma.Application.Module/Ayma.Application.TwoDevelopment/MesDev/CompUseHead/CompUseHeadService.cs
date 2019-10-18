@@ -36,13 +36,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_OrderDate,
                 t.C_Status,
                 t.C_CreateBy,
-                t.C_Remark
+                t.C_Remark,
+                t.C_StockName,
+                t.C_StockCode,
+                s.W_Name as C_WorkShopName
                 ");
-                strSql.Append("  FROM Mes_CompUseHead t ");
-                strSql.Append("  WHERE 1=1 and t.C_Status=3");
+                strSql.Append("  FROM Mes_CompUseHead t left join Mes_WorkShop s on(t.C_WorkShop=s.W_Code) ");
+                strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
+                string State = queryParam["State"].ToString();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (State == "0")
+                {
+                    strSql.Append(" AND (t.C_Status =1 or t.C_Status=2)");
+                }
+                //if (State == "1")
+                //{
+                //    strSql.Append(" AND t.C_Status =3");
+                //}
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
@@ -63,6 +75,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("C_No", "%" + queryParam["C_No"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.C_No Like @C_No ");
+                }
+                if (!queryParam["C_WorkShopName"].IsEmpty())
+                {
+                    dp.Add("C_WorkShopName", "%" + queryParam["C_WorkShopName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.W_Name Like @C_WorkShopName ");
+                }
+                if (!queryParam["C_StockName"].IsEmpty())
+                {
+                    dp.Add("C_StockName", "%" + queryParam["C_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.C_StockName Like @C_StockName ");
                 }
                 return this.BaseRepository().FindList<Mes_CompUseHeadEntity>(strSql.ToString(),dp, pagination);
             }
@@ -162,7 +184,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"
                 t.I_GoodsCode G_Code,
                 t.I_GoodsName G_Name,
-                t.I_Unit Unit,
+                t.I_Unit g_unit,
                 t.I_Qty Qty,
                 t.I_Batch Batch,
                 b.G_Price

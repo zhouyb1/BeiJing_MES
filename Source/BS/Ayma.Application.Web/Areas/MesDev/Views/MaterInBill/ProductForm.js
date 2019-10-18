@@ -8,6 +8,7 @@ var RemoveGridData;
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
+var stockCode;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -75,10 +76,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //添加商品
             $("#am_add").on("click", function () {
                 var batch = $("#M_Batch").val();
+                stockCode = $("#M_StockCode").val();
                 ayma.layerForm({
                     id: 'GoodsProductListIndex',
                     title: '添加成品物料',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsProductListIndex?formId=' + parentFormId + '&batch=' + batch,
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsProductListIndex?formId=' + parentFormId + '&batch=' + batch + '&stockCode=' + stockCode,
                     width: 1000,
                     height: 800,
                     maxmin: true,
@@ -126,15 +128,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                       {
-                          label: '价格', name: 'M_Price', width: 100, align: 'left', editType: 'input',
-                          editOp: {
-                              callback: function (rownum, row) {
-                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
-                                      row.M_Price = 0;
-                                  }
-
-                              }
-                          }
+                          label: '价格', name: 'M_Price', width: 100, align: 'left'
                       },
                     {
                         label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input'

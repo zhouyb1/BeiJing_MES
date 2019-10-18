@@ -71,6 +71,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_Status",queryParam["P_Status"].ToString(), DbType.String);
                     strSql.Append(" AND t.P_Status = @P_Status ");
                 }
+                if (!queryParam["P_StockName"].IsEmpty())
+                {
+                    dp.Add("P_StockName", queryParam["P_StockName"].ToString(), DbType.String);
+                    strSql.Append(" AND t.P_StockName = @P_StockName ");
+                }
                 return this.BaseRepository().FindList<Mes_ProOutHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
@@ -138,6 +143,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("P_Status",queryParam["P_Status"].ToString(), DbType.String);
                     strSql.Append(" AND t.P_Status = @P_Status ");
+                }
+                if (!queryParam["P_StockName"].IsEmpty())
+                {
+                    dp.Add("P_StockName", queryParam["P_StockName"].ToString(), DbType.String);
+                    strSql.Append(" AND t.P_StockName = @P_StockName ");
                 }
                 return this.BaseRepository().FindList<Mes_ProOutHeadEntity>(strSql.ToString(),dp, pagination);
             }

@@ -100,7 +100,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/MaterInBill/GetProductList',
                 headData: [
                     { label: "主键", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },
@@ -177,7 +177,7 @@ var bootstrap = function ($, ayma) {
         search: function (param) {
             queryJson = param;
             param = $("#txt_Keyword").val();
-            $('#girdtable').jfGridSet('reload', { param: { keyword: param, stockCode: stockCode, queryJson: JSON.stringify(queryJson) } });
+            $('#girdtable').jfGridSet('reload', { param: { keyword: param, stockCode:stockCode,queryJson: JSON.stringify(queryJson) } });
         }
     };
     refreshGirdData = function () {

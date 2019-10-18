@@ -43,6 +43,34 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
+            //仓库
+            $('#C_StockName').select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+            //车间
+            $('#C_WorkShopName').select({
+                type: 'default',
+                value: 'W_Name',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+                param: {}
+            });
             $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
@@ -138,10 +166,12 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单号", name: "C_No", width: 160, align: "left"},
-                    { label: "车间", name: "C_WorkShop", width: 160, align: "left"},
+                    { label: "车间编号", name: "C_WorkShop", width: 160, align: "left" },
+                    { label: "车间名称", name: "C_WorkShopName", width: 160, align: "left" },
+                    { label: "仓库编号", name: "C_StockCode", width: 160, align: "left" },
+                    { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
                     { label: "订单号", name: "C_OrderNo", width: 160, align: "left"},
-                    { label: "订单时间", name: "C_OrderDate", width: 160, align: "left"},
-                    
+                    { label: "订单时间", name: "C_OrderDate", width: 160, align: "left"},                    
                     { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],
@@ -154,6 +184,7 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
+            param.State = "0";
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
