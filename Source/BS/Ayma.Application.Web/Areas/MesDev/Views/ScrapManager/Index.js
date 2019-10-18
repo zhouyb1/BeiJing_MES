@@ -57,6 +57,9 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
+            //单据状态
+            $('#S_Status').DataItemSelect({ code: 'ProOutStatus' });
+
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -79,11 +82,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('S_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/ScrapManager/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue,
                         width: 800,
                         height: 500,
                         maxmin: true,

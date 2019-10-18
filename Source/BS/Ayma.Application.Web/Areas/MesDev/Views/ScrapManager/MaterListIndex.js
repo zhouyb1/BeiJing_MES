@@ -77,7 +77,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['S_Batch'] = newArray[i]["G_Batch"];
                     newArray[i]["S_Price"] = newArray[i]["G_Price"];
                     newArray[i]["ID"] = newArray[i]["G_ID"];
-                   
+                    newArray[i]["G_Qty"] = newArray[i]["G_Qty"];
+
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -118,7 +119,7 @@ var bootstrap = function ($, ayma) {
                         row['S_Batch'] = row['G_Batch'];
                         row["S_Price"] = row["G_Price"];
                         row["ID"] = row["G_ID"];
-                       
+                        row["G_Qty"] = row["G_Qty"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

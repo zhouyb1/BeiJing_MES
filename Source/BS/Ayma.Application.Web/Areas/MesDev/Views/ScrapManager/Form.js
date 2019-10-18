@@ -8,6 +8,7 @@ var stockCode;
 var parentFormId = request('formId');
 var acceptClick;
 var keyValue = request('keyValue');
+var status = request('status');
 var tmp = new Map();
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -19,6 +20,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status == "2") {
+                $('#S_StockName').attr('disabled', true);
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',
@@ -35,6 +39,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             };
             //绑定仓库
             $('#S_StockName').select(dfop).on('change', function () {
+                if (status=="1") {
+                    $('#Mes_ScrapDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -87,6 +94,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
+                    { label: "库存", name: "G_Qty", width: 60, align: "left", hidden: keyValue == "" ? false : true },
+
                     { label: "批次", name: "S_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
@@ -123,7 +132,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
-        if (data[0].S_GoodsCode == undefined || data[0].S_GoodsCode=="") {
+        if (data.length==0||data[0].S_GoodsCode == null) {
             ayma.alert.error('请添加物料');
             return false;
         }
@@ -185,7 +194,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     RemoveGridData = function (row) {
         var rows = $('#Mes_ScrapDetail').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["S_GoodsCode"] == row["G_GoodsCode"]) {
+            if (rows[i]["S_GoodsCode"] == row["G_GoodsCode"]&&rows[i]["S_Batch"] == row["G_Batch"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);
