@@ -73,6 +73,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("C_StockToName", "%" + queryParam["C_StockToName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.C_StockToName Like @C_StockToName ");
                 }
+                if (!queryParam["C_StockCode"].IsEmpty())
+                {
+                    dp.Add("C_StockCode", "%" + queryParam["C_StockCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockCode Like @C_StockCode ");
+                }
+                if (!queryParam["C_StockToCode"].IsEmpty())
+                {
+                    dp.Add("C_StockToCode", "%" + queryParam["C_StockToCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockToCode Like @C_StockToCode ");
+                }
                 return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)

@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 550);
+            }, 150, 550);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -60,6 +60,32 @@ var bootstrap = function ($, ayma) {
                         return top[id].acceptClick(refreshGirdData);
                     }
                 });
+            });
+            $('#R_StockCode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $('#R_StockToCode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
             });
             // 编辑
             $('#am_edit').on('click', function () {
