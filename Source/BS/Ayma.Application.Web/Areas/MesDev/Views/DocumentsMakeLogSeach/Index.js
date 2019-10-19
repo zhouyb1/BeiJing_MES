@@ -43,7 +43,6 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 500);
-            //仓库
             $('#F_StockName').select({
                 type: 'default',
                 value: 'S_Name',
