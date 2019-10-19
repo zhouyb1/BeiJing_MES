@@ -8,7 +8,6 @@ var RemoveGridData;
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
-var stockCode;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -76,11 +75,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //添加商品
             $("#am_add").on("click", function () {
                 var batch = $("#M_Batch").val();
-                stockCode = $("#M_StockCode").val();
                 ayma.layerForm({
                     id: 'GoodsProductListIndex',
                     title: '添加成品物料',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsProductListIndex?formId=' + parentFormId + '&batch=' + batch + '&stockCode=' + stockCode,
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsProductListIndex?formId=' + parentFormId + '&batch=' + batch,
                     width: 1000,
                     height: 800,
                     maxmin: true,

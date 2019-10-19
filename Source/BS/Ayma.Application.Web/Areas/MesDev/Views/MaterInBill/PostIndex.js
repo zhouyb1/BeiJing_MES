@@ -54,7 +54,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '查看详情',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
                         width: 800,
                         height: 600,
