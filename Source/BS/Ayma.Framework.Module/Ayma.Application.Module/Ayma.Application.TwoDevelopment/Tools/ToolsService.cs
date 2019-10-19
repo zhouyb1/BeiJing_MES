@@ -1137,7 +1137,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                var entity = this.BaseRepository().FindEntity<MesDev.Mes_ConvertEntity>(c => c.C_SecCode == goodsCode);
+                var entity = this.BaseRepository().FindEntity<MesDev.Mes_ConvertEntity>(c => c.C_SecCode == goodsCode|| c.C_Code==goodsCode);
 
                 return this.BaseRepository().FindEntity<Mes_GoodsEntity>(c => c.G_Code == entity.C_Code);
             }
