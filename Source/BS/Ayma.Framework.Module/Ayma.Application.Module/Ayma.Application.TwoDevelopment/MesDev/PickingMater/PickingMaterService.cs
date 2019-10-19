@@ -277,7 +277,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.C_CollarNo = entity.C_CollarNo;
-                        item.C_OrderNo = entity.P_OrderNo;
+                        item.C_OrderNo = null;
                     }
                     //mes_CollarDetailEntity.Create();
                     //mes_CollarDetailEntity.C_CollarNo = entity.C_CollarNo;
