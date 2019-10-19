@@ -68,11 +68,12 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue,
-                        width: 800,
+                        width: 700,
                         height: 500,
                         maxmin: true,
+                        btn:null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
