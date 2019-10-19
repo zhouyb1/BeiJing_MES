@@ -69,10 +69,10 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'ProOutMake',
-                        title: '查看详情',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/ProOutMake/SearchForm?keyValue=' + keyValue + '&formId=ProOutMake',
-                        width: 950,
-                        height: 700,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {
