@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 250, 400);
             $('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
             //绑定仓库
             $('#O_StockName').select({
@@ -58,7 +58,20 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-
+            $("#O_WorkShop").select({
+                type: 'default',
+                value: 'W_Code',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $("#O_Kind").DataItemSelect({ code: "O_Kind" });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -120,10 +133,23 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
+                        {
+                            label: "出库类型", name: "O_Kind", width: 80, align: "left",
+                            formatterAsync: function (callback, value, row) {
+
+                                ayma.clientdata.getAsync('dataItem', {
+                                    key: value,
+                                    code: 'O_Kind',
+                                    callback: function (_data) {
+                                        callback(_data.text);
+                                    }
+                                });
+                            }
+                        },
                     { label: "出库单号", name: "O_OutNo", width: 160, align: "left" },
                     { label: "仓库编码", name: "O_StockCode", width: 160, align: "left" },
                     { label: "仓库名称", name: "O_StockName", width: 160, align: "left" },
-                    { label: "车间", name: "O_WorkShop", width: 160, align: "left" },
+                    { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
                     { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left" },
                     { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "O_Remark", width: 160, align: "left" },

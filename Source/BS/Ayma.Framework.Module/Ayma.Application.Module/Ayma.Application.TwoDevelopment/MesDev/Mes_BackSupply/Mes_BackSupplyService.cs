@@ -72,6 +72,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("B_StockCode", "%" + queryParam["B_StockCode"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.B_StockCode Like @B_StockCode ");
                 }
+                if (!queryParam["B_StockName"].IsEmpty())
+                {
+                    dp.Add("B_StockName", "%" + queryParam["B_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_StockName Like @B_StockName ");
+                }
+                if (!queryParam["B_Status"].IsEmpty())
+                {
+                    dp.Add("B_Status", "%" + queryParam["B_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_Status Like @B_Status ");
+                }
                 return this.BaseRepository().FindList<Mes_BackSupplyHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)

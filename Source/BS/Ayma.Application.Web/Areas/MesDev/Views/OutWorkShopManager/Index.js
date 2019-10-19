@@ -42,10 +42,10 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 300);
-            $("#B_StockName").select({
+            }, 250, 400);
+            $("#O_StockName").select({
                 type: 'default',
-                value: 'S_Code',
+                value: 'S_Name',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -53,6 +53,19 @@ var bootstrap = function ($, ayma) {
                 allowSearch: true,
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $("#O_WorkShop").select({
+                type: 'default',
+                value: 'W_Code',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -245,7 +258,7 @@ var bootstrap = function ($, ayma) {
                     { label: "出库单号", name: "O_OutNo", width: 160, align: "left"},
                     { label: "仓库编码", name: "O_StockCode", width: 100, align: "left"},
                     { label: "仓库名称", name: "O_StockName", width: 100, align: "left" },
-                    { label: "调拨车间", name: "O_WorkShop", width: 160, align: "left" },
+                    { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
                     { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left"},
                     { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left"},
                     { label: "备注", name: "O_Remark", width: 160, align: "left"},

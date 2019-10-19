@@ -140,6 +140,12 @@ var bootstrap = function ($, ayma) {
             ayma.alert.error('请添加物料');
             return false;
         }
+        for (var i = 0; i < data.length; i++) {
+            if (data[i]["B_Qty"] == "" || data[i]["B_Qty"] == "0") {
+                ayma.alert.error("数量不能为空或不能为零");
+                return false;
+            }
+        }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_BackSupplyHead"]').GetFormData());
         postData.strmes_BackSupplyDetailList = JSON.stringify($('#Mes_BackSupplyDetail').jfGridGet('rowdatas'));

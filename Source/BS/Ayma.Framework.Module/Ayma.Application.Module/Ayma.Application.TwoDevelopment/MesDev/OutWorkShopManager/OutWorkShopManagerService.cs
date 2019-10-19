@@ -34,10 +34,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OutNo,
                 t.O_StockCode,
                 t.O_StockName,
-                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShop ,
+                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShopName ,
                 t.O_OrderNo,
                 t.O_OrderDate,
                 t.O_Remark,
+                t.O_WorkShop,
                 t.O_CreateBy,
                 t.O_CreateDate,
                 t.O_Kind
@@ -73,6 +74,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_Status Like @O_Status ");
                 }
+                if (!queryParam["O_WorkShop"].IsEmpty())
+                {
+                    dp.Add("O_WorkShop", "%" + queryParam["O_WorkShop"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_WorkShop Like @O_WorkShop ");
+                }
+                if (!queryParam["O_Kind"].IsEmpty())
+                {
+                    dp.Add("O_Kind", "%" + queryParam["O_Kind"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_Kind Like @O_Kind ");
+                }
                 return this.BaseRepository().FindList<Mes_OutWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
@@ -104,12 +115,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OutNo,
                 t.O_StockCode,
                 t.O_StockName,
-                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShop ,
+                dbo.GetWorkShopName(t.O_WorkShop) O_WorkShopName ,
                 t.O_OrderNo,
                 t.O_OrderDate,
+                t.O_WorkShop,
                 t.O_Remark,
                 t.O_CreateBy,
-                t.O_CreateDate
+                t.O_CreateDate,
+                t.O_Kind
                 ");
                 strSql.Append("  FROM Mes_OutWorkShopHead t ");
                 strSql.Append("  WHERE 1=1 and t.O_Status=3");
@@ -141,6 +154,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_Status Like @O_Status ");
+                }
+                if (!queryParam["O_WorkShop"].IsEmpty())
+                {
+                    dp.Add("O_WorkShop", "%" + queryParam["O_WorkShop"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_WorkShop Like @O_WorkShop ");
+                }
+                if (!queryParam["O_Kind"].IsEmpty())
+                {
+                    dp.Add("O_Kind", "%" + queryParam["O_Kind"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_Kind Like @O_Kind ");
                 }
                 return this.BaseRepository().FindList<Mes_OutWorkShopHeadEntity>(strSql.ToString(), dp, pagination);
 
