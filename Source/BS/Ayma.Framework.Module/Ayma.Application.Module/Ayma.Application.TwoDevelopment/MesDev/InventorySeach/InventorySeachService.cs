@@ -110,7 +110,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 UNION ALL
               --车间入库到周转仓
               select a.I_GoodsCode,SUM(a.I_Qty) as qty,a.I_Batch,a.I_GoodsName from dbo.Mes_InWorkShopDetail as a left join dbo.Mes_InWorkShopHead as b on a.I_InNo = b.I_InNo where  I_UploadDate > @startTime and I_UploadDate < @endTime {3}  group by a.I_GoodsCode,a.I_Batch,a.I_GoodsName
-                            ", queryParam["StockCode"].IsEmpty() ? "" : "and b.C_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.R_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.O_StockCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.I_StockCode = " + queryParam["StockCode"].ToString());
+                            ", queryParam["StockCode"].IsEmpty() ? "" : "and b.C_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.R_StockToCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.O_StockCode = " + queryParam["StockCode"].ToString(), queryParam["StockCode"].IsEmpty() ? "" : "and b.I_StockCode = " + queryParam["StockCode"].ToString(), queryParam["GoodsCode"].IsEmpty() ? "" : "and  a.C_GoodsCode  = " + queryParam["GoodsCode"].ToString(), queryParam["GoodsCode"].IsEmpty() ? "" : "and   a.R_GoodsCode = " + queryParam["GoodsCode"].ToString(), queryParam["GoodsCode"].IsEmpty() ? "" : "and   a.O_GoodsCode  = " + queryParam["GoodsCode"].ToString(), queryParam["GoodsCode"].IsEmpty() ? "" : "and  a.I_GoodsCode  = " + queryParam["GoodsCode"].ToString());
                 
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -120,6 +120,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                 }
+          
                 return this.BaseRepository().FindList<PickOrUsedModel>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
