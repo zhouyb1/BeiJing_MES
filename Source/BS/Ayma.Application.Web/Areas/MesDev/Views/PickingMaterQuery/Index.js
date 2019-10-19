@@ -81,10 +81,10 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue,
-                        width: 600,
-                        height: 400,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         btn:null,
                         callBack: function (id) {
