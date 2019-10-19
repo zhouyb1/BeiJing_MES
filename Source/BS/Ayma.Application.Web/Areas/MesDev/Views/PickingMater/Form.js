@@ -7,7 +7,7 @@ var refreshGirdData;//表格商品添加
 var RemoveGridData;//移除表格
 var parentFormId = request('formId');//父级窗口id
 var keyValue = request('keyValue');
-
+var status = request('status');
 var tmp = new Map();
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -19,6 +19,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#C_StockName').css('background', '#f1efef');
+                $('#C_StockName').attr('readonly', true);
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',
@@ -33,7 +37,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: { strWhere: "S_Kind =1" }
             }
-            $("#C_StockName").select(dfop).on('change', function() {
+            $("#C_StockName").select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_CollarDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -86,19 +93,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             });
-            ////绑定班组
-            //$("#G_TeamCode").select(dfop).on('change', function () {
-            //    var code = $(this).selectGet();
-            //    $.ajax({
-            //        type: "get",
-            //        url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetTeamEntity',
-            //        data: { code: code },
-            //        success: function (data) {
-            //            var entitys = JSON.parse(data).data;
-            //            $("#C_Teamcode").val(entitys == null ? "" : entitys.T_Code);
-            //        }
-            //    });
-            //});
            
             //绑定订单号
             $("#P_OrderNo").select({
@@ -154,6 +148,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
+                    { label: "库存", name: "StockQty", width: 60, align: "left", hidden: keyValue == "" ? false : true },
+
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
                     { label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
                     { label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
@@ -199,7 +195,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_CollarDetail').jfGridGet('rowdatas');
-        if (data[0].C_GoodsCode == undefined || data[0].C_GoodsCode == "") {
+        if (data.length==0||data[0].C_GoodsCode == null) {
             ayma.alert.error('请添加物料');
             return false;
         }

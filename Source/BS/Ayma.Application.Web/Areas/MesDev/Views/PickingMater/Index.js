@@ -90,11 +90,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('P_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?status='+statu+'&keyValue=' + keyValue,
                         width: 800,
                         height: 600,
                         maxmin: true,
@@ -231,8 +232,8 @@ var bootstrap = function ($, ayma) {
                     { label: "原仓库名称", name: "C_StockName", width: 160, align: "left"},
                     { label: "调拨仓库编码", name: "C_StockToCode", width: 160, align: "left"},
                     { label: "调拨仓库名称", name: "C_StockToName", width: 160, align: "left"},
-                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left"},
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left"},
+                    { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left",hidden:"hidden"},
+                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left", hidden: "hidden" },
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                     { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left"},
