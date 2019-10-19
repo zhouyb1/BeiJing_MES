@@ -79,11 +79,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('M_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MaterInBill',
                         title: '编辑成品入库',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/ProductForm?keyValue=' + keyValue + '&formId=MaterInBill',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/ProductForm?keyValue=' + keyValue + '&formId=MaterInBill'+'&status='+statu,
                         width: 900,
                         height: 700,
                         maxmin: true,

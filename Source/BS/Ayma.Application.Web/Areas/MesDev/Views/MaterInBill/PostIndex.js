@@ -56,7 +56,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '详情',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
-                        width: 800,
+                        width: 700,
                         height: 600,
                         maxmin: true,
                         btn: null,

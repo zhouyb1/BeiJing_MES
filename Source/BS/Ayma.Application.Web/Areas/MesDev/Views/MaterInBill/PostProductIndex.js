@@ -71,7 +71,7 @@ var bootstrap = function ($, ayma) {
                         title: '详情',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/PostProductForm?keyValue=' + keyValue,
                         width: 700,
-                        height: 600,
+                        height: 500,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {

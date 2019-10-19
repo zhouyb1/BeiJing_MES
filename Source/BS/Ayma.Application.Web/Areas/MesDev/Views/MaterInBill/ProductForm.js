@@ -8,6 +8,7 @@ var RemoveGridData;
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
+var status = request('status');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -18,6 +19,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status == 2) {
+                $('#M_StockName').attr('readonly', true);
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',
