@@ -68,23 +68,23 @@ var bootstrap = function ($, ayma) {
                 }
             });
             //全选
-            $("#jfgrid_all_cb_girdtable").on('click', function () {
-                var array = [];
-                //获取一键数量
-                var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
-                for (var i = 0; i < newArray.length; i++) {
-                    //copy需要更改的地方
-                    newArray[i]['O_GoodsCode'] = newArray[i]['G_GoodsCode'];
-                    newArray[i]['O_GoodsName'] = newArray[i]['G_GoodsName'];
-                    newArray[i]['O_Unit'] = newArray[i]['G_Unit'];
-                    newArray[i]["O_Qty"] = quantity;
-                    newArray[i]['O_Batch'] = newArray[i]["G_Batch"];
-                    newArray[i]["ID"] = newArray[i]["G_ID"];
-                    array.push(newArray[i]);
-                }
-                parentRefreshGirdData(array);
+            //$("#jfgrid_all_cb_girdtable").on('click', function () {
+            //    var array = [];
+            //    //获取一键数量
+            //    var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
+            //    for (var i = 0; i < newArray.length; i++) {
+            //        //copy需要更改的地方
+            //        newArray[i]['O_GoodsCode'] = newArray[i]['G_GoodsCode'];
+            //        newArray[i]['O_GoodsName'] = newArray[i]['G_GoodsName'];
+            //        newArray[i]['O_Unit'] = newArray[i]['G_Unit'];
+            //        newArray[i]["O_Qty"] = quantity;
+            //        newArray[i]['O_Batch'] = newArray[i]["G_Batch"];
+            //        newArray[i]["ID"] = newArray[i]["G_ID"];
+            //        array.push(newArray[i]);
+            //    }
+            //    parentRefreshGirdData(array);
 
-            });
+            //});
         },
         // 初始化列表
         initGird: function () {
@@ -133,7 +133,7 @@ var bootstrap = function ($, ayma) {
                             success: function(res) {
                                 var result = res.data;
                                 if (result != null) {
-                                    row['O_GoodsCode'] = result.G_Code;
+                                    row['O_GoodsCode'] = result.G_Code; 
                                     row['O_GoodsName'] = result.G_Name;
                                     row['O_Unit'] = result.G_Unit;
                                     row["O_Qty"] = quantity;
