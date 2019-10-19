@@ -8,6 +8,7 @@ var stockCode;
 var parentFormId = request('formId');
 var acceptClick;
 var keyValue = request('keyValue');
+var status = request('status');
 var tmp = new Map();
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -19,6 +20,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#O_StockName').attr('readonly', 'readonly');
+                $('#O_StockName').css('background', '#f1efef');
+            }
             //出库类型
             $("#O_Kind").DataItemSelect({ code: "O_Kind" });
             //绑定仓库
@@ -36,7 +41,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
             };
             //绑定仓库
-            $('#O_StockName').select(dfop).on('change', function() {
+            $('#O_StockName').select(dfop).on('change', function () {
+                if (status==1) {
+                    $("#Mes_OutWorkShopDetail").jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -137,7 +145,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('#am_add').on('click', function () {
                 var stock = $('#O_StockName').selectGet();
                 if (stock == "") {
-                    ayma.alert.error("请选择仓库");
+                    ayma.alert.error("请选择线边仓");
                     return false;
                 }
                 ayma.layerForm({
@@ -199,7 +207,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
-        if (data.length==0) {
+        if (data.length==0||data[0].O_GoodsCode==null) {
             ayma.alert.error('请添加物料');
             return false;
         }

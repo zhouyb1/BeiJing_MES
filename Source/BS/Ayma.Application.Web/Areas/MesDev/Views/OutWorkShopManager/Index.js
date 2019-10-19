@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 250, 400);
+            }, 220, 450);
             $("#O_StockName").select({
                 type: 'default',
                 value: 'S_Name',
@@ -52,7 +52,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -69,7 +69,7 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-            //$('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
+            $('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -92,11 +92,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?status=' + statu + '&keyValue=' + keyValue,
                         width: 900,
                         height: 700,
                         maxmin: true,
@@ -259,8 +260,8 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "O_StockCode", width: 100, align: "left"},
                     { label: "仓库名称", name: "O_StockName", width: 100, align: "left" },
                     { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
-                    { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left"},
-                    { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left"},
+                    { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left",hidden:true},
+                    { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left",hidden:true},
                     { label: "备注", name: "O_Remark", width: 160, align: "left"},
                     { label: "添加人", name: "O_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "O_CreateDate", width: 160, align: "left"},
