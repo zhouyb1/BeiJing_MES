@@ -202,7 +202,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = proOutMakeIBLL.GetMes_ProOutHeadEntity(keyValue);
                 if (entityTemp.P_Status == ErpEnums.ProOutStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑.");
+                    return Fail("该单据已审核,不能修！");
                 }
             }
             Mes_ProOutHeadEntity entity = strEntity.ToObject<Mes_ProOutHeadEntity>();
