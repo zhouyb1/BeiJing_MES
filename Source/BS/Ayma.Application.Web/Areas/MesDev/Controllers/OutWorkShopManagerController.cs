@@ -200,7 +200,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = outWorkShopManagerIBLL.GetMes_OutWorkShopHeadEntity(keyValue);
                 if (entityTemp.O_Status == ErpEnums.ProOutStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑!");
+                    return Fail("单据已审核，不能修改！");
                 }
             }
             Mes_OutWorkShopHeadEntity entity = strEntity.ToObject<Mes_OutWorkShopHeadEntity>();
