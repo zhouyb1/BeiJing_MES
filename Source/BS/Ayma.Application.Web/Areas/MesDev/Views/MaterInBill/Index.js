@@ -44,6 +44,21 @@ var bootstrap = function ($, ayma) {
                 page.search(queryJson);
             }, 180, 500);
             $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
+
+            $('#M_StockName').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetOriginalStockList',
+                // 访问数据接口参数
+                param: {}
+
+            });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -198,7 +213,7 @@ var bootstrap = function ($, ayma) {
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
                     { label: "仓库编码", name: "M_StockCode", width: 160, align: "left" },
                     { label: "仓库名称", name: "M_StockName", width: 160, align: "left" },
-                    { label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
+                    //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
                     { label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "M_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "M_CreateBy", width: 160, align: "left" },
