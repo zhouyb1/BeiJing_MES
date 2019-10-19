@@ -100,6 +100,7 @@ var bootstrap = function ($, ayma) {
                         width: 700,
                         height: 500,
                         maxmin: true,
+                        btn:null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
