@@ -8,6 +8,7 @@ var RemoveGridData;//移除表格
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
+var status = request('status');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -18,7 +19,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
-
+            if (status==2) {
+                $('#M_StockName').css('background', '#f1efef');
+                $('#M_StockName').attr('readonly', true);
+                $('#M_OrderDate').attr('disabled', 'disabled');
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',
@@ -35,6 +40,9 @@ var bootstrap = function ($, ayma) {
             };
             //绑定仓库
             $('#M_StockName').select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -212,6 +220,11 @@ var bootstrap = function ($, ayma) {
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
+            return false;
+        }
+        var data = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
+        if (data.length==0|| data[0].M_GoodsCode==null) {
+            ayma.alert.error("请添加物料！");
             return false;
         }
         var postData = {};

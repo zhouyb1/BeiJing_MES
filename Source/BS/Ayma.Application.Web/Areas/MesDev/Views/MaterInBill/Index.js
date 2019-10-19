@@ -95,11 +95,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('M_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MaterInBillForm',
                         title: '编辑入库单',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue + '&formId=MaterInBillForm',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?status='+statu+'&keyValue=' + keyValue + '&formId=MaterInBillForm',
                         width: 900,
                         height: 700,
                         maxmin: true,
@@ -214,7 +215,7 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "M_StockCode", width: 160, align: "left" },
                     { label: "仓库名称", name: "M_StockName", width: 160, align: "left" },
                     //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
-                    { label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
+                    //{ label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "M_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "M_CreateBy", width: 160, align: "left" },
                     { label: "添加时间", name: "M_CreateDate", width: 160, align: "left"},
