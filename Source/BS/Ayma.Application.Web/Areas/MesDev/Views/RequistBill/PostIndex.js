@@ -75,46 +75,15 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 新增
-            $('#am_add').on('click', function () {
-                ayma.layerForm({
-                    id: 'RequistBill',
-                    title: '新增调拨单',
-                    url: top.$.rootUrl + '/MesDev/RequistBill/Form?formId=RequistBill',
-                    width: 800,
-                    height: 600,
-                    maxmin: true,
-                    callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
-                    }
-                });
-            });
-            // 编辑
-            $('#am_edit').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'RequistBill',
-                        title: '编辑调拨单',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill',
-                        width: 800,
-                        height: 600,
-                        maxmin: true,
-                        callBack: function (id) {
-                            return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
-                }
-            });
             // 查看详情
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '查看详情',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue,
-                        width: 800,
+                        width: 700,
                         height: 600,
                         maxmin: true,
                         btn: null,
