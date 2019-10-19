@@ -95,7 +95,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
+                        title: '详情',
                         url: top.$.rootUrl + '/MesDev/BackStockManager/PostPageForm?keyValue=' + keyValue,
                         width: 700,
                         height: 400,
