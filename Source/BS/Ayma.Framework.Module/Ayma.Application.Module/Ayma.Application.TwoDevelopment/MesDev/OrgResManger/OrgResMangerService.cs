@@ -44,30 +44,38 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
-                strSql.Append("  WHERE 1=1 and t.O_Status=3");
+                strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (queryParam["type"].IsEmpty())
+                {
+                    strSql.Append(" AND t.O_Status in (1,2)");
+                }
+                if (!queryParam["type"].IsEmpty())
+                {
+                    strSql.Append(" AND t.O_Status =3");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.O_OrderDate >= @startTime AND t.O_OrderDate <= @endTime ) ");
-                }
-                if (!queryParam["O_OrderNo"].IsEmpty())
-                {
-                    dp.Add("O_OrderNo", "%" + queryParam["O_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_OrderNo Like @O_OrderNo ");
+                    strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["O_OrgResNo"].IsEmpty())
                 {
                     dp.Add("O_OrgResNo", "%" + queryParam["O_OrgResNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t1.O_OrgResNo Like @O_OrgResNo ");
+                    strSql.Append(" AND t.O_OrgResNo Like @O_OrgResNo ");
                 }
                 if (!queryParam["O_WorkShopName"].IsEmpty())
                 {
                     dp.Add("O_WorkShopName", "%" + queryParam["O_WorkShopName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_WorkShopName Like @O_WorkShopName ");
+                }
+                if (!queryParam["O_Status"].IsEmpty())
+                {
+                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_Status Like @O_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_OrgResHeadEntity>(strSql.ToString(),dp, pagination);
             }

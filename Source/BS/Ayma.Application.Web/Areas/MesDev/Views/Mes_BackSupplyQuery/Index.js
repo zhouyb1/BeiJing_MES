@@ -121,7 +121,7 @@ var bootstrap = function ($, ayma) {
                     { label: "退供应商单号", name: "B_BackSupplyNo", width: 160, align: "left"},
                     { label: "仓库编码", name: "B_StockCode", width: 160, align: "left"},
                     { label: "仓库名称", name: "B_StockName", width: 160, align: "left"},
-                    { label: "时间", name: "B_OrderDate", width: 160, align: "left"},
+                    //{ label: "订单时间", name: "B_OrderDate", width: 160, align: "left"},
                     { label: "添加人", name: "B_CreateBy", width: 160, align: "left"},
                     { label: "添加时间", name: "B_CreateDate", width: 160, align: "left"},
                     { label: "修改人", name: "B_UpdateBy", width: 160, align: "left"},

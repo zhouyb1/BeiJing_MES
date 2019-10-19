@@ -43,6 +43,21 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
+            $('#O_WorkShopName').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
+
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -195,8 +210,8 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据号", name: "O_OrgResNo", width: 160, align: "left"},
-                    { label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
-                    { label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
+                    //{ label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
+                    //{ label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
                     { label: "工艺代码", name: "O_Record", width: 160, align: "left"},
                     { label: "工序号", name: "O_ProCode", width: 160, align: "left"},
                     { label: "车间编码", name: "O_WorkShopCode", width: 160, align: "left"},

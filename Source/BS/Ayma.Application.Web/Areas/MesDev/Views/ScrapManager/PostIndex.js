@@ -124,7 +124,7 @@ var bootstrap = function ($, ayma) {
                     { label: "报废单号", name: "S_ScrapNo", width: 160, align: "left" },
                     { label: "仓库编码", name: "S_StockCode", width: 160, align: "left" },
                     { label: "仓库名称", name: "S_StockName", width: 160, align: "left" },
-                    { label: "时间", name: "S_OrderDate", width: 160, align: "left" },
+                    //{ label: "订单时间", name: "S_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "S_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "S_CreateBy", width: 160, align: "left" },
                     { label: "添加时间", name: "S_CreateDate", width: 160, align: "left" },

@@ -5,6 +5,7 @@
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
     "use strict";
+    var type;
     var startTime;
     var endTime;
     var page = {
@@ -35,14 +36,29 @@ var bootstrap = function ($, ayma) {
                 // 默认
                 dfvalue: '1',
                 selectfn: function (begin, end) {
+                    type = "report";
                     startTime = begin;
                     endTime = end;
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+                queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
+            $('#O_WorkShopName').select({
+                type: 'default',
+                value: 'W_Name',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+                    param: {}
+        });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -93,8 +109,8 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据号", name: "O_OrgResNo", width: 160, align: "left"},
-                    { label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
-                    { label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
+                    //{ label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
+                    //{ label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
                     { label: "工艺代码", name: "O_Record", width: 160, align: "left"},
                     { label: "工序号", name: "O_ProCode", width: 160, align: "left"},
                     { label: "车间编码", name: "O_WorkShopCode", width: 160, align: "left"},
@@ -112,6 +128,7 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
+            param.type = type;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

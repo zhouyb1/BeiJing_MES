@@ -39,6 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_Remark,
                 t.C_StockName,
                 t.C_StockCode,
+                t.C_CreateDate,
                 s.W_Name as C_WorkShopName
                 ");
                 strSql.Append("  FROM Mes_CompUseHead t left join Mes_WorkShop s on(t.C_WorkShop=s.W_Code) ");
@@ -49,7 +50,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var dp = new DynamicParameters(new { });
                 if (State == "0")
                 {
-                    strSql.Append(" AND (t.C_Status =1 or t.C_Status=2)");
+                    strSql.Append(" AND t.C_Status in(1,2)");
                 }
                 //if (State == "1")
                 //{
@@ -59,7 +60,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.C_OrderDate >= @startTime AND t.C_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["C_OrderDate"].IsEmpty())
                 {

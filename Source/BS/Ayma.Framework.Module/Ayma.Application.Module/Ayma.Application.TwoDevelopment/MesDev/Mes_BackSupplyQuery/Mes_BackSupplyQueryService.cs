@@ -53,7 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["B_OrderDate"].IsEmpty())
                 {
                     dp.Add("B_OrderDate", "%" + queryParam["B_OrderDate"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_OrderDate Like @B_OrderDate ");
+                    strSql.Append(" AND t.B_CreateDate Like @B_CreateDate ");
                 }
                 if (!queryParam["B_BackSupplyNo"].IsEmpty())
                 {

@@ -41,7 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t ");
-                strSql.Append("  WHERE 1=1 and t.S_Status in (1,2)");
+                strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -49,11 +49,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     strSql.Append(" AND t.S_Status in (1,2)");
                 }
+                if (!queryParam["type"].IsEmpty())
+                {
+                    strSql.Append(" AND t.S_Status =3");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.S_OrderDate >= @startTime AND t.S_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.S_CreateDate >= @startTime AND t.S_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["S_ScrapNo"].IsEmpty())
                 {

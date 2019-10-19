@@ -176,7 +176,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {
@@ -250,7 +250,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {
@@ -329,7 +329,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {
@@ -409,7 +409,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {

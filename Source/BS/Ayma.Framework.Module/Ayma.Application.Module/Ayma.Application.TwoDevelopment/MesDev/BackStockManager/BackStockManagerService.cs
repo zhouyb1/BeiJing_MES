@@ -61,7 +61,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.B_OrderDate >= @startTime AND t.B_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.B_CreateDate >= @startTime AND t.B_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["B_StockName"].IsEmpty())
                 {
