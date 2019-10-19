@@ -166,13 +166,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = pickingMaterIBLL.GetMes_CollarHeadEntity(keyValue);
                 if (entityTemp.P_Status == ErpEnums.RequistStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑!");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
             //获取订单时间
-            var order = orderBll.GetEntityByNo(entity.P_OrderNo);
-            entity.P_OrderDate = order.P_OrderDate;
+            //var order = orderBll.GetEntityByNo(entity.P_OrderNo);
+            entity.P_OrderDate = null;
             var mes_CollarDetailEntityList = strmes_CollarDetailEntity.ToObject<List<Mes_CollarDetailEntity>>();
             if (mes_CollarDetailEntityList.Any(c=>c.C_Qty<=0))
             {
@@ -180,12 +180,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             //获取库存
             var list = from goods in mes_CollarDetailEntityList
-                       let qty = invSeachIbll.GetListByParams(goods.C_GoodsCode,goods.C_Batch).I_Qty
+                       let stock = invSeachIbll.GetListByParams(goods.C_GoodsCode,goods.C_Batch)
+                       let qty =stock==null?0:stock.I_Qty
                 where goods.C_Qty > qty
                 select goods;
             foreach (var s in list)
             {
-                return Fail(s.C_GoodsName + "库存不足");
+                return Fail(s.C_GoodsName + "不存在或库存不足");
             }
             if (string.IsNullOrEmpty(keyValue))
             {
