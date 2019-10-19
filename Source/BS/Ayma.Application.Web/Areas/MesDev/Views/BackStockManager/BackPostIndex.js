@@ -98,7 +98,7 @@ var bootstrap = function ($, ayma) {
                         title: '详情',
                         url: top.$.rootUrl + '/MesDev/BackStockManager/PostPageForm?keyValue=' + keyValue,
                         width: 700,
-                        height: 400,
+                        height: 500,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {
