@@ -44,14 +44,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t ");
                 strSql.Append("  LEFT JOIN Mes_BackStockDetail t1 ON t1.B_BackStockNo = t.B_BackStockNo ");
-                strSql.Append("  WHERE 1=1 and t.B_Status=3");
+                strSql.Append("  WHERE 1=1 AND B_Status IN (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (queryParam["type"].IsEmpty())
-                {
-                    strSql.Append(" AND B_Status IN (1,2)  ");
-                }
+               
                 if (!queryParam["B_BackStockNo"].IsEmpty())
                 {
                     dp.Add("B_BackStockNo", queryParam["B_BackStockNo"].ToString(), DbType.String);
@@ -174,7 +171,82 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 返回单据查询页面数据列表
+        /// </summary>
+        /// <param name="pagination"></param>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_BackStockHeadEntity> GetBacStockList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.B_Status,
+                t.B_BackStockNo,
+                t.B_StockCode,
+                t.B_StockName,
+                t.B_StockToCode,
+                t.B_StockToName,
+                t.B_Remark,
+                t.B_CreateBy,
+                t.B_Kind,
+                t.B_CreateDate
+                ");
+                strSql.Append("  FROM Mes_BackStockHead t ");
+                strSql.Append("  LEFT JOIN Mes_BackStockDetail t1 ON t1.B_BackStockNo = t.B_BackStockNo ");
+                strSql.Append("  WHERE 1=1 AND B_Status =3 ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["B_BackStockNo"].IsEmpty())
+                {
+                    dp.Add("B_BackStockNo", queryParam["B_BackStockNo"].ToString(), DbType.String);
+                    strSql.Append(" AND t.B_BackStockNo Like @B_BackStockNo ");
+                }
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.B_CreateDate >= @startTime AND t.B_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["B_StockName"].IsEmpty())
+                {
+                    dp.Add("B_StockName", "%" + queryParam["B_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_StockCode Like @B_StockName ");
+                }
+                if (!queryParam["S_ScrapNo"].IsEmpty())
+                {
+                    dp.Add("S_ScrapNo", "%" + queryParam["S_ScrapNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_BackStockNo Like @S_ScrapNo ");
+                }
+                if (!queryParam["B_StockToName"].IsEmpty())
+                {
+                    dp.Add("B_StockToName", "%" + queryParam["B_StockToName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.B_StockToCode Like @B_StockToName ");
+                }
+                if (!queryParam["B_Status"].IsEmpty())
+                {
+                    dp.Add("B_Status", queryParam["B_Status"].ToString(), DbType.String);
+                    strSql.Append(" AND t.B_Status = @B_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_BackStockHeadEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
         #region 提交数据
