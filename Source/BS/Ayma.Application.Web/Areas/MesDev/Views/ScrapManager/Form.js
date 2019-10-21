@@ -22,7 +22,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             if (status == "2") {
                 $('#S_StockName').attr('readonly', 'readonly');
-                $('#S_StockName').css('background', '#f1efef');
+                $("#S_OrderDate").attr('disabled',true);
             }
             //绑定仓库
             var dfop = {
