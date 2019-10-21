@@ -93,9 +93,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'form',
+                        id: 'BackIndexform',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform',
                         width: 800,
                         height: 600,
                         maxmin: true,

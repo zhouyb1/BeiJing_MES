@@ -85,9 +85,9 @@ var bootstrap = function ($, ayma) {
                 var statu = $('#girdtable').jfGridValue('S_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'form',
+                        id: 'ScrapIndexForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=ScrapIndexForm',
                         width: 800,
                         height: 500,
                         maxmin: true,

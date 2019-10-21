@@ -95,9 +95,9 @@ var bootstrap = function ($, ayma) {
                 var statu = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'form',
+                        id: 'MaterForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?status=' + statu + '&keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=MaterForm',
                         width: 900,
                         height: 700,
                         maxmin: true,
