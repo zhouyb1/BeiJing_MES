@@ -209,6 +209,11 @@ var bootstrap = function($, ayma) {
             ayma.alert.error('不能选择同一仓库');
             return false;
         }
+        var data = $('#Mes_BackStockDetail').jfGridGet('rowdatas');
+        if (data.length==0|| data[0].B_GoodsCode==null) {
+            ayma.alert.error('请添加物料！');
+            return false;
+        }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_BackStockHead"]').GetFormData());
         postData.strmes_BackStockDetailList = JSON.stringify($('#Mes_BackStockDetail').jfGridGet('rowdatas'));
