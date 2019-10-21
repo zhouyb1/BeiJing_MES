@@ -9,6 +9,7 @@ var RemoveGridData;//移除表格
 var tmp = new Map();
 var stockCode;
 var keyValue = request('keyValue');
+var status = request('status');
 var bootstrap = function($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -19,6 +20,12 @@ var bootstrap = function($, ayma) {
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#B_StockName').attr('readonly', true);
+                $('#B_StockToName').attr('readonly', true);
+                $('#B_Remark').attr('readonly', true);
+                $('#B_OrderDate').attr('disabled', true);
+            }
             //绑定线边仓库
             $('#B_StockName').select({
                 text: "s_name",
@@ -28,7 +35,10 @@ var bootstrap = function($, ayma) {
                 allowSearch: true,
                 url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
                 param: { code: "StockList", strWhere: "S_Kind =4 " },
-            }).on('change', function() {
+            }).on('change', function () {
+                if (status==1) {
+                    $("#Mes_BackStockDetail").jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",

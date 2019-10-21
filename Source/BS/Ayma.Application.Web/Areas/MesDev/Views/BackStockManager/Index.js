@@ -91,11 +91,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('B_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'BackIndexform',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform',
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform'+'&status='+statu,
                         width: 800,
                         height: 600,
                         maxmin: true,
