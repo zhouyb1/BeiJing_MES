@@ -78,11 +78,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('B_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'BackSupplyEditForm',
                         title: '编辑退供应商单',
-                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/Form?keyValue=' + keyValue + '&formId=BackSupplyEditForm',
+                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/Form?keyValue=' + keyValue + '&formId=BackSupplyEditForm'+'&status='+statu,
                         width: 900,
                         height: 700,
                         maxmin: true,

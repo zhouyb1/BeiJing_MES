@@ -21,6 +21,8 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             if (status==2) {
                 $('#P_StockName').attr('readonly', true);
+                $('#P_OrderNo').attr('readonly', true);
+                $('#P_OrderDate').attr('disabled', true);
             }
             //绑定仓库
             var dfop = {

@@ -91,11 +91,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('R_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'RequistBill',
                         title: '编辑调拨单',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill',
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu,
                         width: 950,
                         height: 700,
                         maxmin: true,

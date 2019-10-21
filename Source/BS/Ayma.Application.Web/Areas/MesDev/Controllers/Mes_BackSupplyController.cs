@@ -185,7 +185,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = mes_BackSupplyIBLL.GetMes_BackSupplyHeadEntity(keyValue);
                 if (entityTemp.B_Status == ErpEnums.BackSupplyStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑.");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_BackSupplyHeadEntity entity = strEntity.ToObject<Mes_BackSupplyHeadEntity>();

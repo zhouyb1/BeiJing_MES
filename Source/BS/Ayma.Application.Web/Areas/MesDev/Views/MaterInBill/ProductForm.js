@@ -21,6 +21,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             if (status == 2) {
                 $('#M_StockName').attr('readonly', true);
+                $('#M_OrderDate').attr('disabled', true);
+            } else {
+                $('#M_OrderDate').attr('disabled', true);
             }
             //绑定仓库
             var dfop = {
@@ -38,6 +41,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             };
             //绑定仓库
             $('#M_StockName').select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -181,7 +187,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var rowlist = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
-        if (rowlist[0]["ID"] == undefined) {
+        if ( rowlist.length==0||rowlist[0].M_GoodsCode == null) {
             ayma.alert.error("请选择商品");
             return false;
         }

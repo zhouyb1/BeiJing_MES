@@ -354,7 +354,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp=materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
                 if (entityTemp.M_Status == ErpEnums.MaterInStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑.");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();

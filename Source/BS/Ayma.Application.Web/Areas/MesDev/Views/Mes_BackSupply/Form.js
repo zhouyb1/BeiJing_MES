@@ -8,6 +8,7 @@ var RemoveGridData;//移除表格
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
+var status = request('status');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -18,6 +19,10 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#B_StockName').attr('readonly', true);
+                $('#B_OrderDate').attr('disabled', true);
+            }
             var dfop = {
                 type: 'default',
                 value: 'S_Name',
@@ -32,6 +37,9 @@ var bootstrap = function ($, ayma) {
                 param: {}
             }
             $("#B_StockName").select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -136,7 +144,7 @@ var bootstrap = function ($, ayma) {
             return false;
         }
         var data = $('#Mes_BackSupplyDetail').jfGridGet('rowdatas');
-        if (data[0].B_GoodsCode == undefined || data[0].B_GoodsCode == "") {
+        if (data.length == 0 || data[0].B_GoodsCode ==null) {
             ayma.alert.error('请添加物料');
             return false;
         }

@@ -30,7 +30,7 @@
       <publishTime>03/06/2019 10:01:32</publishTime>
     </File>
     <File Include="Areas/AM_AuthorizeModule/Views/DataAuthorize/Index.js">
-      <publishTime>03/06/2019 10:01:32</publishTime>
+      <publishTime>07/25/2019 09:41:39</publishTime>
     </File>
     <File Include="Areas/AM_AuthorizeModule/Views/DataAuthorize/QueryForm.cshtml">
       <publishTime>03/06/2019 10:01:32</publishTime>
@@ -90,7 +90,7 @@
       <publishTime>03/06/2019 10:01:33</publishTime>
     </File>
     <File Include="Areas/AM_CodeGeneratorModule/Views/PluginDemo/Index.cshtml">
-      <publishTime>03/06/2019 10:01:33</publishTime>
+      <publishTime>09/06/2019 22:28:50</publishTime>
     </File>
     <File Include="Areas/AM_CodeGeneratorModule/Views/PluginDemo/index.css">
       <publishTime>03/06/2019 10:01:33</publishTime>
@@ -585,10 +585,10 @@
       <publishTime>03/06/2019 10:01:34</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/Form.cshtml">
-      <publishTime>06/04/2019 09:40:28</publishTime>
+      <publishTime>09/12/2019 17:42:31</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/Form.js">
-      <publishTime>06/04/2019 09:40:28</publishTime>
+      <publishTime>09/12/2019 17:42:31</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/ImportForm.cshtml">
       <publishTime>06/27/2019 14:37:37</publishTime>
@@ -600,10 +600,10 @@
       <publishTime>06/27/2019 14:37:37</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/Index.cshtml">
-      <publishTime>06/27/2019 14:37:37</publishTime>
+      <publishTime>10/16/2019 15:54:10</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/Index.js">
-      <publishTime>06/27/2019 14:37:37</publishTime>
+      <publishTime>10/16/2019 15:54:10</publishTime>
     </File>
     <File Include="Areas/AM_OrganizationModule/Views/User/SelectForm.cshtml">
       <publishTime>03/06/2019 10:01:34</publishTime>
@@ -2157,364 +2157,475 @@
       <publishTime>08/15/2018 21:36:30</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/BackPostIndex.cshtml">
-      <publishTime>03/18/2019 11:42:09</publishTime>
+      <publishTime>10/19/2019 17:43:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/BackPostIndex.js">
-      <publishTime>03/18/2019 12:06:10</publishTime>
+      <publishTime>10/21/2019 10:48:24</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/Form.cshtml">
-      <publishTime>03/15/2019 18:56:40</publishTime>
+      <publishTime>10/21/2019 10:51:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/Form.js">
-      <publishTime>03/27/2019 16:11:59</publishTime>
+      <publishTime>10/21/2019 11:22:53</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/GoodsListIndex.cshtml">
-      <publishTime>03/15/2019 19:13:40</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/GoodsListIndex.js">
-      <publishTime>04/15/2019 16:36:33</publishTime>
+      <publishTime>10/21/2019 10:38:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/Index.cshtml">
-      <publishTime>03/28/2019 09:46:18</publishTime>
+      <publishTime>10/19/2019 17:43:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/Index.js">
-      <publishTime>03/28/2019 11:22:16</publishTime>
+      <publishTime>10/21/2019 11:13:01</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/PostPageForm.cshtml">
-      <publishTime>03/18/2019 11:50:59</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/PostPageForm.js">
-      <publishTime>03/18/2019 12:03:26</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/PrintReport.cshtml">
-      <publishTime>03/28/2019 13:51:39</publishTime>
+      <publishTime>10/16/2019 15:16:07</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BackStockManager/PrintViewReport.cshtml">
-      <publishTime>03/28/2019 13:51:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BasketList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/17/2019 11:00:59</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BasketList/Form.js">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BasketList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BasketList/Index.js">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/17/2019 11:00:59</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/BomRecordForm.cshtml">
-      <publishTime>03/22/2019 11:56:54</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/BomRecordForm.js">
-      <publishTime>03/22/2019 11:56:54</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/BomRecordIndex.cshtml">
-      <publishTime>06/27/2019 14:37:38</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/BomRecordIndex.css">
-      <publishTime>03/07/2019 18:00:33</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/BomRecordIndex.js">
-      <publishTime>06/27/2019 14:37:38</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/Form.cshtml">
-      <publishTime>03/07/2019 18:00:33</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/Form.js">
-      <publishTime>03/07/2019 18:00:33</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/ImportForm.cshtml">
-      <publishTime>06/27/2019 14:37:38</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/ImportForm.css">
-      <publishTime>06/27/2019 14:37:38</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/ImportForm.js">
-      <publishTime>06/27/2019 14:37:38</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/Index.cshtml">
-      <publishTime>03/07/2019 18:00:33</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomHead/Index.js">
-      <publishTime>03/07/2019 18:00:33</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomList/Form.js">
-      <publishTime>03/06/2019 10:01:36</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/BomList/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CheckRecord/Form.cshtml">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/17/2019 11:00:59</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CheckRecord/Form.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CheckRecord/Index.cshtml">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/17/2019 11:00:59</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CheckRecord/Index.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/17/2019 11:00:59</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/Form.cshtml">
-      <publishTime>03/22/2019 11:56:54</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/Form.js">
-      <publishTime>03/22/2019 11:56:54</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/ImportForm.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/ImportForm.css">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/ImportForm.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/Index.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ClassManager/Index.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Form.cshtml">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Form.js">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/GoodsListIndex.cshtml">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/GoodsListIndex.js">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Index.cshtml">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/19/2019 17:43:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Index.js">
-      <publishTime>07/05/2019 16:58:51</publishTime>
+      <publishTime>10/21/2019 13:36:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/CompUseHead/SearchForm.cshtml">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/CompUseHead/SearchForm.js">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/CompUseHead/SearchIndex.cshtml">
+      <publishTime>10/19/2019 17:43:45</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/CompUseHead/SearchIndex.js">
+      <publishTime>10/21/2019 13:36:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Convert/Form.cshtml">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Convert/Form.js">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Convert/Index.cshtml">
-      <publishTime>03/20/2019 11:52:44</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Convert/Index.js">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DocumentsMakeLogSeach/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DocumentsMakeLogSeach/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DocumentsMakeLogSeach/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/21/2019 09:10:11</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DocumentsMakeLogSeach/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/21/2019 09:10:11</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DoorList/Form.cshtml">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DoorList/Form.js">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DoorList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/DoorList/Index.js">
-      <publishTime>06/27/2019 15:52:53</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodKind/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodKind/Form.js">
-      <publishTime>03/14/2019 10:13:36</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodKind/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodKind/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Goods/GoodsInfo.cshtml">
-      <publishTime>07/05/2019 15:53:17</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/Form.cshtml">
-      <publishTime>07/05/2019 16:20:30</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/Form.js">
-      <publishTime>07/05/2019 16:57:14</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/ImportForm.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/ImportForm.css">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/ImportForm.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/Index.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/GoodsList/Index.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/LivingToCookDetailIndex.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/LivingToCookDetailIndex.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/LivingToCookIndex.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/LivingToCookIndex.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/PackingRateIndex.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/PackingRateIndex.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/PrintReport.cshtml">
+      <publishTime>10/16/2019 15:15:53</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/YieldRateIndex.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/GoodsList/YieldRateIndex.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/HumitureManager/Form.cshtml">
-      <publishTime>03/06/2019 17:42:51</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/HumitureManager/Form.js">
-      <publishTime>03/11/2019 17:50:43</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/HumitureManager/Index.cshtml">
-      <publishTime>03/06/2019 14:49:39</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/HumitureManager/Index.js">
-      <publishTime>03/06/2019 19:43:51</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InPrice/Form.cshtml">
+      <publishTime>10/15/2019 15:41:36</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InPrice/Form.js">
+      <publishTime>10/15/2019 15:41:36</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InPrice/Index.cshtml">
+      <publishTime>10/15/2019 15:41:36</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InPrice/Index.js">
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventortTrend/Form.cshtml">
-      <publishTime>03/18/2019 17:37:47</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventortTrend/Form.js">
-      <publishTime>03/18/2019 17:37:47</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventortTrend/Index.cshtml">
-      <publishTime>03/18/2019 17:37:47</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventortTrend/Index.js">
-      <publishTime>03/18/2019 17:37:47</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventoryLSSeach/Form.cshtml">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventoryLSSeach/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventoryLSSeach/Index.cshtml">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventoryLSSeach/Index.js">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventorySeach/Form.cshtml">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventorySeach/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventorySeach/Index.cshtml">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/InventorySeach/Index.js">
-      <publishTime>03/18/2019 17:37:48</publishTime>
+      <publishTime>10/19/2019 09:45:45</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/InvertoryList.cshtml">
+      <publishTime>10/15/2019 15:41:38</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/InvertoryList.js">
+      <publishTime>10/15/2019 15:41:38</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/PickOrUserIndex.cshtml">
+      <publishTime>10/19/2019 17:43:46</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/PickOrUserIndex.js">
+      <publishTime>10/15/2019 15:41:38</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/PriceSearchIndex.cshtml">
+      <publishTime>10/19/2019 09:45:45</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InventorySeach/PriceSearchIndex.js">
+      <publishTime>10/15/2019 15:41:38</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/Form.cshtml">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/Form.js">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/Index.cshtml">
+      <publishTime>10/19/2019 17:43:46</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/Index.js">
+      <publishTime>10/21/2019 10:26:38</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/MaterListIndex.cshtml">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/MaterListIndex.js">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PostForm.cshtml">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PostForm.js">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PostOrderIndex.cshtml">
+      <publishTime>10/19/2019 17:43:46</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PostOrderIndex.js">
+      <publishTime>10/19/2019 21:58:55</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PrintReport.cshtml">
+      <publishTime>10/16/2019 15:17:49</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/InWorkShopManager/PrintViewReport.cshtml">
+      <publishTime>10/15/2019 15:41:37</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/MaterialsSum/Index.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/MaterialsSum/Index.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/Form.cshtml">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/19/2019 14:05:15</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/Form.js">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/21/2019 12:15:04</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/GoodsListIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/GoodsListIndex.js">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/GoodsProductListIndex.cshtml">
-      <publishTime>03/25/2019 09:55:22</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/GoodsProductListIndex.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/19/2019 09:45:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/Index.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 14:06:41</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 13:57:14</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostIndex.cshtml">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostIndex.js">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/19/2019 22:03:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostProductForm.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostProductForm.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostProductIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PostProductIndex.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/19/2019 22:05:11</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/PrintReport.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/16/2019 15:22:09</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductForm.cshtml">
-      <publishTime>03/27/2019 17:19:58</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductForm.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/19/2019 22:10:10</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductIndex.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductIndex.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 22:09:17</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Arrange/Form.cshtml">
-      <publishTime>03/27/2019 17:19:58</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Arrange/Form.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Arrange/Index.cshtml">
-      <publishTime>03/27/2019 17:19:58</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Arrange/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/AddForm.cshtml">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/AddForm.js">
-      <publishTime>07/05/2019 16:58:52</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/BackGoodsList.cshtml">
-      <publishTime>03/15/2019 18:47:50</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/BackGoodsList.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Form.cshtml">
-      <publishTime>03/15/2019 18:47:50</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Form.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 13:16:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Index.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/OrderMaterList.cshtml">
       <publishTime>03/15/2019 18:47:50</publishTime>
@@ -2523,529 +2634,547 @@
       <publishTime>03/15/2019 18:47:50</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/PrintReport.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/16/2019 15:20:53</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupplyQuery/Form.cshtml">
-      <publishTime>03/19/2019 17:02:06</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupplyQuery/Form.js">
-      <publishTime>03/19/2019 17:02:06</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupplyQuery/Index.cshtml">
-      <publishTime>03/27/2019 17:19:58</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupplyQuery/Index.js">
-      <publishTime>03/27/2019 17:19:58</publishTime>
+      <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Inspect/Form.cshtml">
-      <publishTime>03/25/2019 09:55:22</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Inspect/Form.js">
-      <publishTime>03/25/2019 09:55:22</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Inspect/Index.cshtml">
-      <publishTime>03/14/2019 18:21:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Inspect/Index.js">
-      <publishTime>03/20/2019 10:55:41</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/ERPTgoodsList.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/ERPTgoodsList.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductGoods/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/FoodList.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/FoodList.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/17/2019 11:01:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_ProductOrderHead/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:38</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Record/Form.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Record/Form.js">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Record/Index.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Record/Index.js">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Reson/Form.cshtml">
-      <publishTime>03/22/2019 11:56:55</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Reson/Form.js">
-      <publishTime>03/22/2019 11:56:55</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Reson/Index.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_Reson/Index.js">
-      <publishTime>03/20/2019 10:55:41</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MoveRecordList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MoveRecordList/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MoveRecordList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MoveRecordList/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Form.cshtml">
-      <publishTime>07/05/2019 11:01:25</publishTime>
+      <publishTime>10/19/2019 11:30:04</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Form.js">
-      <publishTime>07/05/2019 11:03:48</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/GoodsListIndex.cshtml">
-      <publishTime>03/18/2019 17:04:24</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/GoodsListIndex.js">
-      <publishTime>03/20/2019 19:46:09</publishTime>
+      <publishTime>10/19/2019 12:06:25</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Index.cshtml">
-      <publishTime>03/28/2019 13:59:56</publishTime>
+      <publishTime>10/19/2019 17:44:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Index.js">
-      <publishTime>03/28/2019 14:01:29</publishTime>
+      <publishTime>10/19/2019 17:44:43</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/PrintReport.cshtml">
-      <publishTime>03/28/2019 15:47:27</publishTime>
+      <publishTime>10/16/2019 15:22:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/PrintViewReport.cshtml">
-      <publishTime>03/28/2019 13:59:09</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/SearchForm.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/SearchForm.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/SearchIndex.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/SearchIndex.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/21/2019 13:36:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Form.cshtml">
-      <publishTime>03/27/2019 17:19:59</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Form.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/19/2019 13:46:43</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Index.cshtml">
-      <publishTime>03/28/2019 15:21:01</publishTime>
+      <publishTime>10/19/2019 13:26:54</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Index.js">
-      <publishTime>03/28/2019 15:21:56</publishTime>
+      <publishTime>10/21/2019 10:28:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/MaterListIndex.cshtml">
-      <publishTime>03/13/2019 15:53:23</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/MaterListIndex.js">
-      <publishTime>04/15/2019 17:10:56</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostForm.cshtml">
-      <publishTime>03/14/2019 09:55:46</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostForm.js">
-      <publishTime>06/04/2019 09:40:30</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostOrderIndex.cshtml">
-      <publishTime>03/27/2019 17:19:59</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostOrderIndex.js">
-      <publishTime>03/27/2019 17:19:59</publishTime>
+      <publishTime>10/19/2019 21:50:52</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PrintReport.cshtml">
-      <publishTime>03/28/2019 15:18:18</publishTime>
+      <publishTime>10/16/2019 15:22:57</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PrintViewReport.cshtml">
-      <publishTime>03/28/2019 15:18:27</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/Period/Index.cshtml">
+      <publishTime>10/19/2019 09:45:46</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/Period/Index.js">
+      <publishTime>10/19/2019 09:45:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/Form.cshtml">
-      <publishTime>03/12/2019 21:25:41</publishTime>
+      <publishTime>10/19/2019 10:10:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/Form.js">
-      <publishTime>04/15/2019 12:04:13</publishTime>
+      <publishTime>10/21/2019 10:09:07</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/Index.cshtml">
-      <publishTime>03/27/2019 17:19:59</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/Index.js">
-      <publishTime>03/27/2019 15:23:53</publishTime>
+      <publishTime>10/21/2019 10:16:21</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/OrderMaterList.cshtml">
-      <publishTime>03/12/2019 13:43:07</publishTime>
+      <publishTime>10/15/2019 15:41:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/OrderMaterList.js">
-      <publishTime>04/15/2019 15:24:33</publishTime>
+      <publishTime>10/21/2019 10:03:44</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/PrintReport.cshtml">
-      <publishTime>03/28/2019 15:42:34</publishTime>
+      <publishTime>10/16/2019 15:23:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMater/PrintViewReport.cshtml">
-      <publishTime>03/28/2019 15:42:26</publishTime>
+      <publishTime>10/15/2019 15:41:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMaterQuery/Form.cshtml">
-      <publishTime>03/13/2019 11:12:39</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMaterQuery/Form.js">
-      <publishTime>03/13/2019 11:26:16</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMaterQuery/Index.cshtml">
-      <publishTime>03/27/2019 17:20:00</publishTime>
+      <publishTime>10/19/2019 18:10:00</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PickingMaterQuery/Index.js">
-      <publishTime>03/27/2019 17:20:00</publishTime>
+      <publishTime>10/19/2019 21:52:30</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/Form.cshtml">
-      <publishTime>03/26/2019 10:34:02</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/Form.js">
-      <publishTime>03/26/2019 10:34:02</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/Index.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/Index.js">
-      <publishTime>03/26/2019 10:34:02</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/ProceForm.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProceManager/ProceForm.js">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/ProceManager/ProceIndex.cshtml">
+      <publishTime>10/15/2019 15:41:39</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/ProceManager/ProceIndex.js">
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/GoodsListIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/GoodsListIndex.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/Index.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/17/2019 11:01:01</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/PrintReport.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/16/2019 15:24:56</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchForm.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchForm.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/17/2019 15:05:25</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchIndex.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/BomPartSum.cshtml">
-      <publishTime>03/22/2019 15:40:12</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/BomPartSum.js">
-      <publishTime>03/22/2019 16:28:23</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/Form.cshtml">
-      <publishTime>03/22/2019 16:32:52</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/Form.js">
-      <publishTime>03/22/2019 16:29:53</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/Index.cshtml">
-      <publishTime>03/22/2019 15:46:31</publishTime>
+      <publishTime>10/17/2019 11:01:01</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderManager/Index.js">
-      <publishTime>03/22/2019 15:46:22</publishTime>
+      <publishTime>10/17/2019 16:32:52</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/Form.cshtml">
-      <publishTime>03/27/2019 17:20:00</publishTime>
+      <publishTime>10/19/2019 09:45:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/Form.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/19/2019 22:16:43</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/GoodsListIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/GoodsListIndex.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/Index.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/PrintReport.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/16/2019 15:25:40</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/SearchForm.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/SearchForm.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/SearchIndex.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/19/2019 17:43:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/SearchIndex.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/19/2019 22:12:02</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PurchaseHead/Form.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PurchaseHead/Form.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PurchaseHead/Index.cshtml">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/PurchaseHead/Index.js">
-      <publishTime>03/06/2019 10:01:37</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Record/Form.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Record/Form.js">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Record/Index.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Record/Index.js">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Form.cshtml">
-      <publishTime>03/27/2019 17:20:00</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Form.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/GoodsListIndex.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/GoodsListIndex.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Index.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:48</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Index.js">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/19/2019 17:43:48</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/PostIndex.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/19/2019 17:43:48</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/PostIndex.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/19/2019 22:01:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/PrintReport.cshtml">
-      <publishTime>04/15/2019 14:33:51</publishTime>
+      <publishTime>10/16/2019 15:26:49</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SalaryManager/Form.cshtml">
-      <publishTime>03/11/2019 17:55:28</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SalaryManager/Form.js">
-      <publishTime>03/06/2019 14:31:26</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SalaryManager/Index.cshtml">
-      <publishTime>03/14/2019 10:13:37</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SalaryManager/Index.js">
-      <publishTime>03/20/2019 10:57:59</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScanKindList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScanKindList/Form.js">
-      <publishTime>03/20/2019 21:17:29</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScanKindList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScanKindList/Index.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Form.cshtml">
-      <publishTime>03/14/2019 16:10:17</publishTime>
+      <publishTime>10/18/2019 17:11:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Form.js">
-      <publishTime>03/20/2019 17:51:49</publishTime>
+      <publishTime>10/18/2019 19:57:26</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Index.cshtml">
-      <publishTime>03/27/2019 18:04:41</publishTime>
+      <publishTime>10/18/2019 16:43:08</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Index.js">
-      <publishTime>03/28/2019 15:40:41</publishTime>
+      <publishTime>10/21/2019 10:22:28</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/MaterListIndex.cshtml">
-      <publishTime>03/14/2019 17:18:30</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/MaterListIndex.js">
-      <publishTime>04/15/2019 15:22:42</publishTime>
+      <publishTime>10/18/2019 18:35:22</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PostIndex.cshtml">
-      <publishTime>03/15/2019 11:12:09</publishTime>
+      <publishTime>10/19/2019 17:43:48</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PostIndex.js">
-      <publishTime>03/15/2019 11:13:13</publishTime>
+      <publishTime>10/21/2019 13:36:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PostPageForm.cshtml">
-      <publishTime>03/15/2019 10:28:43</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PostPageForm.js">
-      <publishTime>03/15/2019 10:59:21</publishTime>
+      <publishTime>10/19/2019 21:56:14</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PrintReport.cshtml">
-      <publishTime>03/27/2019 17:56:35</publishTime>
+      <publishTime>10/16/2019 15:28:03</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/PrintViewReport.cshtml">
-      <publishTime>03/27/2019 17:56:35</publishTime>
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SocialSet/Form.cshtml">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SocialSet/Form.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SocialSet/Index.cshtml">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SocialSet/Index.js">
-      <publishTime>06/04/2019 09:40:31</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/Form.js">
-      <publishTime>03/20/2019 21:17:30</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/ImportForm.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/ImportForm.css">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:32</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/ImportForm.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/Index.cshtml">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/17/2019 11:01:01</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/StockList/Index.js">
-      <publishTime>06/27/2019 14:37:39</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/SupplyGoodsCountRep/Index.cshtml">
+      <publishTime>10/15/2019 15:41:35</publishTime>
+    </File>
+    <File Include="Areas/MesDev/Views/SupplyGoodsCountRep/Index.js">
+      <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/Form.cshtml">
-      <publishTime>03/06/2019 14:02:25</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/Form.js">
-      <publishTime>03/20/2019 21:17:30</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/ImportForm.cshtml">
-      <publishTime>06/27/2019 14:37:40</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/ImportForm.css">
-      <publishTime>06/27/2019 14:37:40</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/ImportForm.js">
-      <publishTime>06/27/2019 14:37:40</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/Index.cshtml">
-      <publishTime>06/27/2019 14:37:40</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SupplyList/Index.js">
-      <publishTime>06/27/2019 14:37:40</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SysUsers/Form.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SysUsers/Form.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SysUsers/Index.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/SysUsers/Index.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Team/Form.cshtml">
-      <publishTime>06/27/2019 15:52:54</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Team/Form.js">
-      <publishTime>06/27/2019 15:52:54</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Team/Index.cshtml">
-      <publishTime>06/27/2019 15:52:54</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Team/Index.js">
-      <publishTime>06/27/2019 15:52:54</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/web.config">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WeightRecordList/Form.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WeightRecordList/Form.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WeightRecordList/Index.cshtml">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/17/2019 11:01:01</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WeightRecordList/Index.js">
-      <publishTime>03/06/2019 10:01:38</publishTime>
+      <publishTime>10/15/2019 15:41:33</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WorkShopManager/Form.cshtml">
-      <publishTime>03/06/2019 13:45:30</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WorkShopManager/Form.js">
-      <publishTime>03/20/2019 21:17:30</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WorkShopManager/Index.cshtml">
-      <publishTime>03/06/2019 12:03:41</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/WorkShopManager/Index.js">
-      <publishTime>03/08/2019 16:57:37</publishTime>
+      <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/ShopErpDev/Views/BPRetail/Form.cshtml">
       <publishTime>10/25/2018 19:29:57</publishTime>
@@ -5526,160 +5655,160 @@
       <publishTime>08/16/2018 14:12:14</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>07/08/2019 09:07:33</publishTime>
+      <publishTime>10/21/2019 13:48:08</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>07/08/2019 09:07:33</publishTime>
+      <publishTime>10/21/2019 13:48:08</publishTime>
     </File>
     <File Include="bin/Ayma.Application.AppMagager.dll">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.AppMagager.pdb">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Base.dll">
-      <publishTime>07/05/2019 10:06:42</publishTime>
+      <publishTime>10/21/2019 13:47:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Base.pdb">
-      <publishTime>07/05/2019 10:06:42</publishTime>
+      <publishTime>10/21/2019 13:47:10</publishTime>
     </File>
     <File Include="bin/Ayma.Application.CRM.dll">
-      <publishTime>07/05/2019 11:02:07</publishTime>
+      <publishTime>10/21/2019 13:47:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.CRM.pdb">
-      <publishTime>07/05/2019 11:02:07</publishTime>
+      <publishTime>10/21/2019 13:47:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.dll">
-      <publishTime>07/05/2019 17:01:53</publishTime>
+      <publishTime>10/21/2019 13:47:17</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.pdb">
-      <publishTime>07/05/2019 17:01:53</publishTime>
+      <publishTime>10/21/2019 13:47:17</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Form.dll">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Form.pdb">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Application.IM.dll">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.IM.pdb">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.dll">
-      <publishTime>07/05/2019 17:01:55</publishTime>
+      <publishTime>10/21/2019 13:47:18</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.pdb">
-      <publishTime>07/05/2019 17:01:55</publishTime>
+      <publishTime>10/21/2019 13:47:18</publishTime>
     </File>
     <File Include="bin/Ayma.Application.OA.dll">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.OA.pdb">
-      <publishTime>07/05/2019 11:02:08</publishTime>
+      <publishTime>10/21/2019 13:47:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Organization.dll">
-      <publishTime>07/05/2019 10:06:40</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Organization.pdb">
-      <publishTime>07/05/2019 10:06:40</publishTime>
+      <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Report.dll">
-      <publishTime>07/05/2019 11:02:10</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Report.pdb">
-      <publishTime>07/05/2019 11:02:09</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.dll">
-      <publishTime>07/05/2019 17:01:52</publishTime>
+      <publishTime>10/21/2019 13:47:15</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.pdb">
-      <publishTime>07/05/2019 17:01:52</publishTime>
+      <publishTime>10/21/2019 13:47:15</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Web.dll">
-      <publishTime>07/05/2019 17:01:57</publishTime>
+      <publishTime>10/21/2019 13:47:21</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Web.pdb">
-      <publishTime>07/05/2019 17:01:57</publishTime>
+      <publishTime>10/21/2019 13:47:21</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.dll">
-      <publishTime>07/05/2019 11:02:10</publishTime>
+      <publishTime>10/21/2019 13:47:12</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.pdb">
-      <publishTime>07/05/2019 11:02:10</publishTime>
+      <publishTime>10/21/2019 13:47:12</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Base.dll">
-      <publishTime>07/05/2019 10:06:36</publishTime>
+      <publishTime>10/21/2019 13:46:54</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Base.pdb">
-      <publishTime>07/05/2019 10:06:36</publishTime>
+      <publishTime>10/21/2019 13:46:54</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Factory.dll">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:47:04</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Factory.pdb">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:47:04</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Redis.dll">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:46:59</publishTime>
     </File>
     <File Include="bin/Ayma.Cache.Redis.pdb">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:46:59</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.dll">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:46:58</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.MySqlEx.dll">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.MySqlEx.pdb">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Oracle.dll">
-      <publishTime>07/05/2019 11:02:10</publishTime>
+      <publishTime>10/21/2019 13:47:03</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Oracle.pdb">
-      <publishTime>07/05/2019 11:02:10</publishTime>
+      <publishTime>10/21/2019 13:47:03</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.pdb">
-      <publishTime>07/05/2019 10:06:39</publishTime>
+      <publishTime>10/21/2019 13:46:58</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Repository.dll">
-      <publishTime>07/05/2019 10:06:40</publishTime>
+      <publishTime>10/21/2019 13:47:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.Repository.pdb">
-      <publishTime>07/05/2019 10:06:40</publishTime>
+      <publishTime>10/21/2019 13:47:02</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.SqlServer.dll">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:01</publishTime>
     </File>
     <File Include="bin/Ayma.DataBase.SqlServer.pdb">
-      <publishTime>07/05/2019 11:02:06</publishTime>
+      <publishTime>10/21/2019 13:47:01</publishTime>
     </File>
     <File Include="bin/Ayma.Ioc.dll">
-      <publishTime>07/05/2019 10:06:37</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Ayma.Ioc.pdb">
-      <publishTime>07/05/2019 10:06:37</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Ayma.Loger.dll">
-      <publishTime>07/05/2019 10:06:37</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Ayma.Loger.pdb">
-      <publishTime>07/05/2019 10:06:37</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Ayma.Util.dll">
-      <publishTime>07/05/2019 10:06:38</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Ayma.Util.Operat.dll">
-      <publishTime>07/05/2019 10:06:42</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Util.Operat.pdb">
-      <publishTime>07/05/2019 10:06:42</publishTime>
+      <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Util.pdb">
-      <publishTime>07/05/2019 10:06:38</publishTime>
+      <publishTime>10/21/2019 13:46:56</publishTime>
     </File>
     <File Include="bin/Dapper.dll">
       <publishTime>03/06/2019 10:02:03</publishTime>
@@ -9852,10 +9981,10 @@
       <publishTime>03/15/2019 10:22:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>07/08/2019 09:07:30</publishTime>
+      <publishTime>10/21/2019 13:48:04</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/Ayma.pubxml.user">
-      <publishTime>06/27/2019 15:57:44</publishTime>
+      <publishTime>07/10/2019 16:06:26</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/learunadms6.1.pubxml.user">
       <publishTime>09/19/2018 16:13:11</publishTime>
@@ -9917,20 +10046,32 @@
     <File Include="Report/grf/InventoryQuery.grf">
       <publishTime>12/24/2018 18:49:12</publishTime>
     </File>
+    <File Include="Report/grf/InWorkShopReport.grf">
+      <publishTime>07/16/2019 15:08:36</publishTime>
+    </File>
     <File Include="Report/grf/ListOfRequirements.grf">
       <publishTime>12/24/2018 18:49:12</publishTime>
+    </File>
+    <File Include="Report/grf/LivingToCookDetailReport.grf">
+      <publishTime>09/03/2019 08:43:32</publishTime>
+    </File>
+    <File Include="Report/grf/LivingToCookReport.grf">
+      <publishTime>09/03/2019 08:43:32</publishTime>
     </File>
     <File Include="Report/grf/MaterInProjectReport.grf">
       <publishTime>04/15/2019 14:33:52</publishTime>
     </File>
     <File Include="Report/grf/MaterInReport.grf">
-      <publishTime>04/15/2019 14:33:52</publishTime>
+      <publishTime>08/13/2019 15:58:07</publishTime>
     </File>
     <File Include="Report/grf/OrgResReport.grf">
-      <publishTime>03/28/2019 15:38:34</publishTime>
+      <publishTime>07/29/2019 14:22:04</publishTime>
     </File>
     <File Include="Report/grf/OutWorkShopReport.grf">
       <publishTime>03/28/2019 15:17:23</publishTime>
+    </File>
+    <File Include="Report/grf/PackingRateReport.grf">
+      <publishTime>09/03/2019 08:43:32</publishTime>
     </File>
     <File Include="Report/grf/ProductOrderReport.grf">
       <publishTime>04/15/2019 14:33:52</publishTime>
@@ -9960,7 +10101,7 @@
       <publishTime>09/19/2018 16:13:12</publishTime>
     </File>
     <File Include="Report/grf/ScrapReport.grf">
-      <publishTime>03/28/2019 13:55:13</publishTime>
+      <publishTime>07/29/2019 14:13:51</publishTime>
     </File>
     <File Include="Report/grf/ScrapStock.grf">
       <publishTime>09/21/2018 10:09:52</publishTime>
@@ -9985,6 +10126,9 @@
     </File>
     <File Include="Report/grf/WarehouseInventory.grf">
       <publishTime>12/25/2018 17:54:18</publishTime>
+    </File>
+    <File Include="Report/grf/YieldRateReport.grf">
+      <publishTime>09/03/2019 08:43:32</publishTime>
     </File>
     <File Include="Resource/PhotoFile/0799d30d-5d14-4f15-aafe-be52b9808d52.jpg">
       <publishTime>03/06/2019 10:01:57</publishTime>
@@ -10104,7 +10248,7 @@
       <publishTime>03/06/2019 10:01:57</publishTime>
     </File>
     <File Include="Views/AM_Content/script/am-base.js">
-      <publishTime>03/06/2019 10:01:57</publishTime>
+      <publishTime>07/29/2019 14:43:50</publishTime>
     </File>
     <File Include="Views/AM_Content/script/am-chartshelper.js">
       <publishTime>03/06/2019 10:01:57</publishTime>
@@ -10176,7 +10320,7 @@
       <publishTime>03/06/2019 10:01:57</publishTime>
     </File>
     <File Include="Views/Home/AdminDefault.cshtml">
-      <publishTime>03/06/2019 10:01:57</publishTime>
+      <publishTime>09/06/2019 22:28:50</publishTime>
     </File>
     <File Include="Views/Home/AdminDefault/index.css">
       <publishTime>03/06/2019 10:01:57</publishTime>
@@ -10278,7 +10422,7 @@
       <publishTime>03/06/2019 10:01:57</publishTime>
     </File>
     <File Include="Views/UserCenter/Index.cshtml">
-      <publishTime>03/06/2019 10:01:57</publishTime>
+      <publishTime>09/06/2019 22:28:50</publishTime>
     </File>
     <File Include="Views/UserCenter/Index.css">
       <publishTime>03/06/2019 10:01:57</publishTime>
@@ -10320,7 +10464,7 @@
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="Views/Utility/GirdSelectIndex.js">
-      <publishTime>03/06/2019 10:01:58</publishTime>
+      <publishTime>09/06/2019 22:28:50</publishTime>
     </File>
     <File Include="Views/Utility/Icon.cshtml">
       <publishTime>03/06/2019 10:01:58</publishTime>
@@ -10329,7 +10473,7 @@
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>06/06/2019 11:48:17</publishTime>
+      <publishTime>10/21/2019 13:47:49</publishTime>
     </File>
     <File Include="XmlConfig/database.config">
       <publishTime>03/06/2019 10:01:58</publishTime>
@@ -10344,7 +10488,7 @@
       <publishTime>03/06/2019 10:01:58</publishTime>
     </File>
     <File Include="XmlConfig/system.config">
-      <publishTime>06/27/2019 15:52:54</publishTime>
+      <publishTime>07/10/2019 11:07:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

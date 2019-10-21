@@ -202,7 +202,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = requistBillIBLL.GetMes_RequistHeadEntity(keyValue);
                 if (entityTemp.R_Status == ErpEnums.RequistStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑.");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_RequistHeadEntity entity = strEntity.ToObject<Mes_RequistHeadEntity>();

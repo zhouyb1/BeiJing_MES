@@ -8,6 +8,7 @@ var RemoveGridData;
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
+var status = request('status');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -18,6 +19,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $("#R_StockName").attr('readonly', true);
+                $('#R_StockToName').attr('readonly', true);
+                $('#P_OrderNo').attr('readonly', true);
+                $('#R_StockToName').attr('readonly', true);
+                $('#P_OrderDate').attr('disabled', true);
+            }
             var dfop = {
                 type: 'default',
                 value: 'S_Name',
@@ -33,6 +41,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             };
             //绑定原仓库
             $('#R_StockName').select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_RequistDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var code = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -201,7 +212,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             ayma.alert.error("原仓库与调拨仓库不能一致");
             return false;
         }
-        if (rowlist[0]["ID"] == undefined) {
+        if (rowlist[0]["R_GoodsCode"] == undefined||rowlist.length==0) {
             ayma.alert.error("请选择商品");
             return false;
         }
