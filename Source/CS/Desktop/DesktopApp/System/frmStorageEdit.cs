@@ -525,63 +525,70 @@ namespace DesktopApp
         {
             this.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
-            if (Open())
+            try
             {
-                Thread.Sleep(100);
-                if (serialPort1.IsOpen)
+                if (Open())
                 {
-                    byte[] byRead = null;
-                    byRead = new byte[2048];
-                    int nReadLen;
                     Thread.Sleep(100);
-                    nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
-                    string str = System.Text.Encoding.Default.GetString(byRead);
-                    string[] strWeight = str.Split('=');
-                    int nLen = strWeight.Length;
-                    if(nLen > 1)
+                    if (serialPort1.IsOpen)
                     {
-                        //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
-                        //{
-                        txtQty.Text = ZH(strWeight[nLen - 1].ToString());
-                        //}
-                        //else
-                        //{
+                        byte[] byRead = null;
+                        byRead = new byte[2048];
+                        int nReadLen;
+                        Thread.Sleep(100);
+                        nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+                        string str = System.Text.Encoding.Default.GetString(byRead);
+                        string[] strWeight = str.Split('=');
+                        int nLen = strWeight.Length;
+                        if (nLen > 1)
+                        {
+                            //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
+                            //{
+                            txtQty.Text = ZH(strWeight[nLen - 1].ToString());
+                            //}
+                            //else
+                            //{
                             //MessageBox.Show("串口没有打开");
 
-                        //}
-                        Close();
-                        Thread.Sleep(100);
-                        this.Enabled = true;
-                        Cursor.Current = Cursors.Default;
+                            //}
+                            Close();
+                            Thread.Sleep(100);
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                        else
+                        {
+                            MessageBox.Show(str);
+                            Close();
+                            Thread.Sleep(100);
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+
+                        //MessageBox.Show(str);
                     }
                     else
                     {
-                        MessageBox.Show(str);
-                        Close();
-                        Thread.Sleep(100);
                         this.Enabled = true;
                         Cursor.Current = Cursors.Default;
+                        MessageBox.Show("串口没有打开");
+
                     }
 
-                    //MessageBox.Show(str);
+                    Close();
+                    this.Enabled = true;
+                    Cursor.Current = Cursors.Default;
+
                 }
                 else
                 {
                     this.Enabled = true;
                     Cursor.Current = Cursors.Default;
-                    MessageBox.Show("串口没有打开");
-
                 }
-
-                Close();
-                this.Enabled = true;
-                Cursor.Current = Cursors.Default;
-
             }
-            else
+            catch(Exception ex)
             {
-                this.Enabled = true;
-                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -626,58 +633,65 @@ namespace DesktopApp
 
         private void comGoods_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] strGoods = comGoods.Text.ToString().Split('$');
-            MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-            //MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
-            var Goods_rows = GoodsBLL.GetList(strGoods[0], strGoods[1]);
-            if (Goods_rows == null || Goods_rows.Count < 1 || Goods_rows[0].G_Kind == 2)
+            try
             {
-                untCommon.InfoMsg("输入的物料编码错误，请重新输入！");
-                return;
-            }
-            if (Goods_rows[0].G_Kind == 1)
-            {
-                //txtGoodsCode.Text = Goods_rows[0].G_Code;
-                //txtGoodsName.Text = Goods_rows[0].G_Name;
-                txtUnit.Text = Goods_rows[0].G_Unit;
-                //txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                string[] strGoods = comGoods.Text.ToString().Split('$');
+                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                //MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
+                var Goods_rows = GoodsBLL.GetList(strGoods[0], strGoods[1]);
+                if (Goods_rows == null || Goods_rows.Count < 1 || Goods_rows[0].G_Kind == 2)
+                {
+                    untCommon.InfoMsg("输入的物料编码错误，请重新输入！");
+                    return;
+                }
                 if (Goods_rows[0].G_Kind == 1)
                 {
-                    txtKind.Text = "原物料";
-                }
-                txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+                    //txtGoodsCode.Text = Goods_rows[0].G_Code;
+                    //txtGoodsName.Text = Goods_rows[0].G_Name;
+                    txtUnit.Text = Goods_rows[0].G_Unit;
+                    //txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                    if (Goods_rows[0].G_Kind == 1)
+                    {
+                        txtKind.Text = "原物料";
+                    }
+                    txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
 
-                cmbSupply.Items.Clear();
-                Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
-                var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "'");
-                if (InPrice_row.Count > 0)
-                {
-                    for (int i = 0; i < InPrice_row.Count; i++)
+                    cmbSupply.Items.Clear();
+                    Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
+                    var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "'");
+                    if (InPrice_row.Count > 0)
                     {
-                        cmbSupply.Items.Add(InPrice_row[i].P_SupplyName);
-                        
+                        for (int i = 0; i < InPrice_row.Count; i++)
+                        {
+                            cmbSupply.Items.Add(InPrice_row[i].P_SupplyName);
+
+                        }
+                        if (InPrice_row.Count == 1)
+                        {
+                            cmbSupply.Text = InPrice_row[0].P_SupplyName;
+                            txtPrice.Text = InPrice_row[0].P_InPrice.ToString();
+                        }
                     }
-                    if(InPrice_row.Count == 1)
+                    else
                     {
-                        cmbSupply.Text = InPrice_row[0].P_SupplyName;
-                        txtPrice.Text = InPrice_row[0].P_InPrice.ToString();
+                        untCommon.InfoMsg("请先维护商品的入库价格");
+                        return;
                     }
+
+                    txtQty.Focus();
+
+
                 }
                 else
                 {
-                    untCommon.InfoMsg("请先维护商品的入库价格");
-                    return;
+                    untCommon.InfoMsg("输入的物料编码不是原物料，请重新输入！");
+                    //txtGoodsCode.Text = "";
+                    //txtGoodsCode.Focus();
                 }
-
-                txtQty.Focus();
-
-
             }
-            else
+            catch (Exception Exception)
             {
-                untCommon.InfoMsg("输入的物料编码不是原物料，请重新输入！");
-                //txtGoodsCode.Text = "";
-                //txtGoodsCode.Focus();
+                MessageBox.Show(Exception.ToString());
             }
         }
 
@@ -688,26 +702,40 @@ namespace DesktopApp
 
         private void comBasketType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MesBasketBLL BasketBLL = new MesBasketBLL();
-            var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
-            txtBasketQty.Text = Basket_rows[0].M_Weight.ToString();
+            try
+            {
+                MesBasketBLL BasketBLL = new MesBasketBLL();
+                var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
+                txtBasketQty.Text = Basket_rows[0].M_Weight.ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void cmbSupply_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string[] strGoods = comGoods.Text.ToString().Split('$');
-            Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
-            var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "' and P_SupplyName = '"+ cmbSupply.Text +"'");
-            if (InPrice_row.Count > 0)
+            try
             {
-                
+                string[] strGoods = comGoods.Text.ToString().Split('$');
+                Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
+                var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "' and P_SupplyName = '" + cmbSupply.Text + "'");
+                if (InPrice_row.Count > 0)
+                {
+
                     txtPrice.Text = InPrice_row[0].P_InPrice.ToString();
-                
+
+                }
+                else
+                {
+                    untCommon.InfoMsg("请先维护商品的入库价格");
+                    return;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                untCommon.InfoMsg("请先维护商品的入库价格");
-                return;
+                MessageBox.Show(ex.ToString());
             }
         }
 

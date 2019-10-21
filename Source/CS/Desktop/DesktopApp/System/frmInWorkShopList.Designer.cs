@@ -81,6 +81,7 @@
             this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblTS = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -132,7 +133,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 11F);
-            this.label2.Location = new System.Drawing.Point(21, 111);
+            this.label2.Location = new System.Drawing.Point(21, 131);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
@@ -145,7 +146,7 @@
             this.btnSave.Font = new System.Drawing.Font("宋体", 12F);
             this.btnSave.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(741, 58);
+            this.btnSave.Location = new System.Drawing.Point(762, 58);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(90, 30);
             this.btnSave.TabIndex = 18;
@@ -178,7 +179,7 @@
             // cmbRecord
             // 
             this.cmbRecord.FormattingEnabled = true;
-            this.cmbRecord.Location = new System.Drawing.Point(378, 155);
+            this.cmbRecord.Location = new System.Drawing.Point(378, 172);
             this.cmbRecord.Name = "cmbRecord";
             this.cmbRecord.Size = new System.Drawing.Size(121, 20);
             this.cmbRecord.TabIndex = 23;
@@ -188,7 +189,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(311, 158);
+            this.label3.Location = new System.Drawing.Point(311, 175);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
@@ -200,7 +201,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 11F);
-            this.label4.Location = new System.Drawing.Point(51, 159);
+            this.label4.Location = new System.Drawing.Point(51, 184);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
@@ -211,7 +212,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(415, 131);
+            this.label5.Location = new System.Drawing.Point(415, 158);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 15);
@@ -221,7 +222,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtPrice.Location = new System.Drawing.Point(106, 155);
+            this.txtPrice.Location = new System.Drawing.Point(106, 180);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(246, 24);
             this.txtPrice.TabIndex = 26;
@@ -229,7 +230,7 @@
             // txtQty
             // 
             this.txtQty.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtQty.Location = new System.Drawing.Point(467, 128);
+            this.txtQty.Location = new System.Drawing.Point(467, 155);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(232, 24);
             this.txtQty.TabIndex = 27;
@@ -274,7 +275,7 @@
             // 
             // txtRecordName
             // 
-            this.txtRecordName.Location = new System.Drawing.Point(660, 157);
+            this.txtRecordName.Location = new System.Drawing.Point(660, 152);
             this.txtRecordName.Name = "txtRecordName";
             this.txtRecordName.Size = new System.Drawing.Size(121, 21);
             this.txtRecordName.TabIndex = 33;
@@ -283,7 +284,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(590, 157);
+            this.label10.Location = new System.Drawing.Point(590, 174);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 12);
@@ -294,7 +295,7 @@
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtName.Location = new System.Drawing.Point(467, 108);
+            this.txtName.Location = new System.Drawing.Point(467, 128);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(232, 24);
             this.txtName.TabIndex = 35;
@@ -303,7 +304,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 11F);
-            this.label11.Location = new System.Drawing.Point(385, 111);
+            this.label11.Location = new System.Drawing.Point(385, 131);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(82, 15);
@@ -315,7 +316,7 @@
             this.btnUpload.Font = new System.Drawing.Font("宋体", 12F);
             this.btnUpload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(741, 96);
+            this.btnUpload.Location = new System.Drawing.Point(762, 96);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(90, 30);
             this.btnUpload.TabIndex = 39;
@@ -328,7 +329,7 @@
             this.btnSearch.Font = new System.Drawing.Font("宋体", 12F);
             this.btnSearch.Image = global::DesktopApp.Properties.Resources.search1;
             this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearch.Location = new System.Drawing.Point(741, 20);
+            this.btnSearch.Location = new System.Drawing.Point(762, 20);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(90, 30);
             this.btnSearch.TabIndex = 40;
@@ -340,7 +341,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 11F);
-            this.label13.Location = new System.Drawing.Point(51, 134);
+            this.label13.Location = new System.Drawing.Point(51, 156);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 15);
@@ -350,7 +351,7 @@
             // txtCode
             // 
             this.txtCode.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtCode.Location = new System.Drawing.Point(107, 107);
+            this.txtCode.Location = new System.Drawing.Point(107, 127);
             this.txtCode.Name = "txtCode";
             this.txtCode.Size = new System.Drawing.Size(246, 24);
             this.txtCode.TabIndex = 43;
@@ -358,7 +359,7 @@
             // txtBarcode
             // 
             this.txtBarcode.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtBarcode.Location = new System.Drawing.Point(106, 84);
+            this.txtBarcode.Location = new System.Drawing.Point(106, 101);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(593, 24);
             this.txtBarcode.TabIndex = 45;
@@ -368,7 +369,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("宋体", 11F);
-            this.label14.Location = new System.Drawing.Point(36, 86);
+            this.label14.Location = new System.Drawing.Point(36, 103);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(67, 15);
@@ -378,7 +379,7 @@
             // txtPc
             // 
             this.txtPc.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtPc.Location = new System.Drawing.Point(106, 131);
+            this.txtPc.Location = new System.Drawing.Point(106, 153);
             this.txtPc.Name = "txtPc";
             this.txtPc.Size = new System.Drawing.Size(246, 24);
             this.txtPc.TabIndex = 46;
@@ -386,7 +387,7 @@
             // cmbProce
             // 
             this.cmbProce.FormattingEnabled = true;
-            this.cmbProce.Location = new System.Drawing.Point(378, 181);
+            this.cmbProce.Location = new System.Drawing.Point(378, 198);
             this.cmbProce.Name = "cmbProce";
             this.cmbProce.Size = new System.Drawing.Size(121, 20);
             this.cmbProce.TabIndex = 48;
@@ -396,7 +397,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(320, 184);
+            this.label12.Location = new System.Drawing.Point(320, 201);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 12);
@@ -406,7 +407,7 @@
             // 
             // txtProceName
             // 
-            this.txtProceName.Location = new System.Drawing.Point(660, 184);
+            this.txtProceName.Location = new System.Drawing.Point(660, 179);
             this.txtProceName.Name = "txtProceName";
             this.txtProceName.Size = new System.Drawing.Size(121, 21);
             this.txtProceName.TabIndex = 50;
@@ -415,7 +416,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(590, 187);
+            this.label15.Location = new System.Drawing.Point(590, 204);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(65, 12);
@@ -464,10 +465,10 @@
             this.条码,
             this.ID,
             this.remark});
-            this.dataGridView1.Location = new System.Drawing.Point(31, 205);
+            this.dataGridView1.Location = new System.Drawing.Point(31, 209);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(848, 231);
+            this.dataGridView1.Size = new System.Drawing.Size(821, 231);
             this.dataGridView1.TabIndex = 69;
             // 
             // 生产订单号
@@ -581,9 +582,20 @@
             this.remark.HeaderText = "备注";
             this.remark.Name = "remark";
             // 
+            // lblTS
+            // 
+            this.lblTS.AutoSize = true;
+            this.lblTS.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTS.ForeColor = System.Drawing.Color.Red;
+            this.lblTS.Location = new System.Drawing.Point(38, 446);
+            this.lblTS.Name = "lblTS";
+            this.lblTS.Size = new System.Drawing.Size(0, 16);
+            this.lblTS.TabIndex = 70;
+            // 
             // frmInWorkShopList
             // 
-            this.ClientSize = new System.Drawing.Size(907, 472);
+            this.ClientSize = new System.Drawing.Size(907, 498);
+            this.Controls.Add(this.lblTS);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txtOrderDate);
             this.Controls.Add(this.label16);
@@ -686,5 +698,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn remark;
+        private System.Windows.Forms.Label lblTS;
     }
 }

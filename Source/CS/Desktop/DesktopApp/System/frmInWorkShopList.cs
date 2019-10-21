@@ -33,41 +33,48 @@ namespace DesktopApp
         {
             if (MessageBox.Show("是否保存", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                Mes_InWorkShopTempEntity InWorkShopTempEntity = new Mes_InWorkShopTempEntity();
-                InWorkShopTempEntity.I_StockCode = cmbStock.Text;
-                InWorkShopTempEntity.I_StockName = txtStockName.Text;
-                InWorkShopTempEntity.I_WorkShop = cmbWorkShop.Text;
-                InWorkShopTempEntity.I_WorkShopName = txtWorkShopName.Text;
-                InWorkShopTempEntity.I_OrderNo = comOrderNo.Text;
-                InWorkShopTempEntity.I_Status = 1;
-                InWorkShopTempEntity.I_CreateBy = Globels.strUser;
-                InWorkShopTempEntity.I_CreateDate = DateTime.Now;
-                InWorkShopTempEntity.I_GoodsCode = txtCode.Text;
-                InWorkShopTempEntity.I_GoodsName = txtName.Text;
-                InWorkShopTempEntity.I_Unit = strUnit;
-                InWorkShopTempEntity.I_Qty = Convert.ToDecimal(txtQty.Text);
-                InWorkShopTempEntity.I_Batch = txtPc.Text;
-                InWorkShopTempEntity.I_Remark = "";
-                InWorkShopTempEntity.I_Barcode = txtBarcode.Text;
-                InWorkShopTempEntity.I_Price = Convert.ToDecimal(txtPrice.Text);
-                InWorkShopTempEntity.I_Record = cmbRecord.Text;
-
-                Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
-
-
-                if (InWorkShopTempBLL.SaveEntity("", InWorkShopTempEntity) > 0)
+                try
                 {
-                    untCommon.InfoMsg("添加成功！");
+                    Mes_InWorkShopTempEntity InWorkShopTempEntity = new Mes_InWorkShopTempEntity();
+                    InWorkShopTempEntity.I_StockCode = cmbStock.Text;
+                    InWorkShopTempEntity.I_StockName = txtStockName.Text;
+                    InWorkShopTempEntity.I_WorkShop = cmbWorkShop.Text;
+                    InWorkShopTempEntity.I_WorkShopName = txtWorkShopName.Text;
+                    InWorkShopTempEntity.I_OrderNo = comOrderNo.Text;
+                    InWorkShopTempEntity.I_Status = 1;
+                    InWorkShopTempEntity.I_CreateBy = Globels.strUser;
+                    InWorkShopTempEntity.I_CreateDate = DateTime.Now;
+                    InWorkShopTempEntity.I_GoodsCode = txtCode.Text;
+                    InWorkShopTempEntity.I_GoodsName = txtName.Text;
+                    InWorkShopTempEntity.I_Unit = strUnit;
+                    InWorkShopTempEntity.I_Qty = Convert.ToDecimal(txtQty.Text);
+                    InWorkShopTempEntity.I_Batch = txtPc.Text;
+                    InWorkShopTempEntity.I_Remark = "";
+                    InWorkShopTempEntity.I_Barcode = txtBarcode.Text;
+                    InWorkShopTempEntity.I_Price = Convert.ToDecimal(txtPrice.Text);
+                    InWorkShopTempEntity.I_Record = cmbRecord.Text;
 
-                    Updata();
-                    cls();
-                    txtBarcode.SelectAll();
-                    txtBarcode.Focus();
-                    //frmParent.loadData();
+                    Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
+
+
+                    if (InWorkShopTempBLL.SaveEntity("", InWorkShopTempEntity) > 0)
+                    {
+                        untCommon.InfoMsg("添加成功！");
+
+                        Updata();
+                        cls();
+                        txtBarcode.SelectAll();
+                        txtBarcode.Focus();
+                        //frmParent.loadData();
+                    }
+                    else
+                    {
+                        untCommon.InfoMsg("添加失败！");
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    untCommon.InfoMsg("添加失败！");
+                    ;
                 }
             }
             
@@ -253,11 +260,6 @@ namespace DesktopApp
         {
             Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
             var rows = InWorkShopTempBLL.GetList_InWorkShopTemp("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
-            //if (rows == null || rows.Count < 1)
-            //{
-            //    untCommon.InfoMsg("没有任何数据！");
-            //    return;
-            //}
             dataGridView1.DataSource = rows;
         }
 
@@ -265,16 +267,14 @@ namespace DesktopApp
         {
             try
             {
-                MessageBox.Show("123");
                 if (MessageBox.Show("是否要完工", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
-                //if (MessageBox.Show("是否要完工?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
-                    MessageBox.Show("456");
                     Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
                     var rows = InWorkShopTempBLL.GetList_InWorkShopTemp("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
                     if (rows == null || rows.Count < 1)
                     {
-                        untCommon.InfoMsg("没有任何数据！");
+                        //untCommon.InfoMsg("没有任何数据！");
+                        lblTS.Text = "系统提示：没有任何数据！";
                         return;
                     }
 
@@ -317,8 +317,6 @@ namespace DesktopApp
                     InWorkShopHeadEntity.I_Status = 1;
                     InWorkShopHeadEntity.I_WorkShop = cmbWorkShop.Text;
 
-
-
                     int nRow = InWorkShopHeadBLL.SaveEntity("", InWorkShopHeadEntity);
 
                     for (int i = 0; i < rows.Count; i++)
@@ -331,21 +329,16 @@ namespace DesktopApp
                         InWorkShopDetailEntity.I_Remark = rows[i].I_Remark;
                         InWorkShopDetailEntity.I_Unit = rows[i].I_Unit;
                         InWorkShopDetailEntity.I_Batch = rows[i].I_Batch;
-
                         nRow = InWorkShopDetailBLL.SaveEntity("", InWorkShopDetailEntity);
-
                     }
-
                     //更改临时数据状态
-
                     MessageBox.Show("保存成功");
-
                     DeleteData();
                     Updata();
                 }
                 else
                 {
-                    MessageBox.Show("789");
+
                 }
 
             }

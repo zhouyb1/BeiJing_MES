@@ -86,13 +86,14 @@
             this.cmbPc = new System.Windows.Forms.ComboBox();
             this.cmbSupplyName = new System.Windows.Forms.ComboBox();
             this.label17 = new System.Windows.Forms.Label();
+            this.lblTS = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtBarcode
             // 
             this.txtBarcode.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtBarcode.Location = new System.Drawing.Point(106, 84);
+            this.txtBarcode.Location = new System.Drawing.Point(106, 107);
             this.txtBarcode.Name = "txtBarcode";
             this.txtBarcode.Size = new System.Drawing.Size(534, 24);
             this.txtBarcode.TabIndex = 77;
@@ -102,7 +103,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("宋体", 11F);
-            this.label14.Location = new System.Drawing.Point(50, 87);
+            this.label14.Location = new System.Drawing.Point(50, 110);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(52, 15);
@@ -113,7 +114,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("宋体", 11F);
-            this.label13.Location = new System.Drawing.Point(50, 137);
+            this.label13.Location = new System.Drawing.Point(50, 160);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(52, 15);
@@ -125,7 +126,7 @@
             this.btn_Search.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
             this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Search.Location = new System.Drawing.Point(691, 12);
+            this.btn_Search.Location = new System.Drawing.Point(713, 12);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(90, 30);
             this.btn_Search.TabIndex = 72;
@@ -138,7 +139,7 @@
             this.btn_upload.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_upload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(691, 87);
+            this.btn_upload.Location = new System.Drawing.Point(713, 87);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(90, 30);
             this.btn_upload.TabIndex = 71;
@@ -168,10 +169,10 @@
             this.条码,
             this.ID,
             this.remark});
-            this.dataGridView1.Location = new System.Drawing.Point(23, 202);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 215);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(836, 223);
+            this.dataGridView1.Size = new System.Drawing.Size(780, 223);
             this.dataGridView1.TabIndex = 68;
             // 
             // 生产订单号
@@ -288,7 +289,7 @@
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtName.Location = new System.Drawing.Point(404, 135);
+            this.txtName.Location = new System.Drawing.Point(404, 158);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(236, 24);
             this.txtName.TabIndex = 67;
@@ -297,7 +298,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("宋体", 11F);
-            this.label11.Location = new System.Drawing.Point(317, 138);
+            this.label11.Location = new System.Drawing.Point(317, 161);
             this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(82, 15);
@@ -364,7 +365,7 @@
             // txtQty
             // 
             this.txtQty.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtQty.Location = new System.Drawing.Point(404, 162);
+            this.txtQty.Location = new System.Drawing.Point(404, 185);
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(236, 24);
             this.txtQty.TabIndex = 59;
@@ -373,7 +374,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(347, 165);
+            this.label5.Location = new System.Drawing.Point(347, 188);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 15);
@@ -428,7 +429,7 @@
             this.btn_save.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_save.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_save.Location = new System.Drawing.Point(691, 49);
+            this.btn_save.Location = new System.Drawing.Point(713, 49);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(90, 30);
             this.btn_save.TabIndex = 51;
@@ -484,7 +485,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 11F);
-            this.label2.Location = new System.Drawing.Point(20, 110);
+            this.label2.Location = new System.Drawing.Point(20, 133);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
@@ -534,7 +535,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtPrice.Location = new System.Drawing.Point(106, 161);
+            this.txtPrice.Location = new System.Drawing.Point(106, 184);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(194, 24);
             this.txtPrice.TabIndex = 84;
@@ -543,7 +544,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 11F);
-            this.label15.Location = new System.Drawing.Point(50, 164);
+            this.label15.Location = new System.Drawing.Point(50, 187);
             this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(52, 15);
@@ -577,7 +578,7 @@
             // 
             this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbGoodsCode.FormattingEnabled = true;
-            this.cmbGoodsCode.Location = new System.Drawing.Point(106, 107);
+            this.cmbGoodsCode.Location = new System.Drawing.Point(106, 130);
             this.cmbGoodsCode.Name = "cmbGoodsCode";
             this.cmbGoodsCode.Size = new System.Drawing.Size(194, 23);
             this.cmbGoodsCode.TabIndex = 87;
@@ -587,7 +588,7 @@
             // 
             this.cmbPc.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbPc.FormattingEnabled = true;
-            this.cmbPc.Location = new System.Drawing.Point(106, 135);
+            this.cmbPc.Location = new System.Drawing.Point(106, 158);
             this.cmbPc.Name = "cmbPc";
             this.cmbPc.Size = new System.Drawing.Size(194, 23);
             this.cmbPc.TabIndex = 88;
@@ -596,7 +597,7 @@
             // 
             this.cmbSupplyName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbSupplyName.FormattingEnabled = true;
-            this.cmbSupplyName.Location = new System.Drawing.Point(404, 110);
+            this.cmbSupplyName.Location = new System.Drawing.Point(404, 133);
             this.cmbSupplyName.Name = "cmbSupplyName";
             this.cmbSupplyName.Size = new System.Drawing.Size(236, 23);
             this.cmbSupplyName.TabIndex = 90;
@@ -605,16 +606,27 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("宋体", 11F);
-            this.label17.Location = new System.Drawing.Point(302, 115);
+            this.label17.Location = new System.Drawing.Point(302, 138);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(97, 15);
             this.label17.TabIndex = 89;
             this.label17.Text = "供应商名称：";
             // 
+            // lblTS
+            // 
+            this.lblTS.AutoSize = true;
+            this.lblTS.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTS.ForeColor = System.Drawing.Color.Red;
+            this.lblTS.Location = new System.Drawing.Point(21, 450);
+            this.lblTS.Name = "lblTS";
+            this.lblTS.Size = new System.Drawing.Size(0, 16);
+            this.lblTS.TabIndex = 91;
+            // 
             // frmOutWorkShopList
             // 
-            this.ClientSize = new System.Drawing.Size(888, 456);
+            this.ClientSize = new System.Drawing.Size(888, 474);
+            this.Controls.Add(this.lblTS);
             this.Controls.Add(this.cmbSupplyName);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.cmbPc);
@@ -722,5 +734,6 @@
         private System.Windows.Forms.ComboBox cmbPc;
         private System.Windows.Forms.ComboBox cmbSupplyName;
         private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblTS;
     }
 }

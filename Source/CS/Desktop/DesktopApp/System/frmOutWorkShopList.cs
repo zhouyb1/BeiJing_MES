@@ -209,40 +209,49 @@ namespace DesktopApp
         {
             if(MessageBox.Show("是否保存","",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                Mes_OutWorkShopTempEntity OutWorkShopTempEntity = new Mes_OutWorkShopTempEntity();
-                OutWorkShopTempEntity.O_StockCode = cmbStock.Text;
-                OutWorkShopTempEntity.O_StockName = txtStockName.Text;
-                OutWorkShopTempEntity.O_WorkShop = cmbWorkShop.Text;
-                OutWorkShopTempEntity.O_WorkShopName = txtWorkShopName.Text;
-                OutWorkShopTempEntity.O_OrderNo = comOrderNo.Text;
-                OutWorkShopTempEntity.O_Status = 1;
-                OutWorkShopTempEntity.O_CreateBy = Globels.strUser;
-                OutWorkShopTempEntity.O_CreateDate = DateTime.Now;
-                OutWorkShopTempEntity.O_GoodsCode = cmbGoodsCode.Text;
-                OutWorkShopTempEntity.O_GoodsName = txtName.Text;
-                OutWorkShopTempEntity.O_Unit = strUnit;
-                OutWorkShopTempEntity.O_Qty = Convert.ToDecimal(txtQty.Text);
-                OutWorkShopTempEntity.O_Batch = cmbPc.Text;
-                OutWorkShopTempEntity.O_Remark = "";
-                OutWorkShopTempEntity.O_Barcode = txtBarcode.Text;
-                OutWorkShopTempEntity.O_Price = Convert.ToDecimal(txtPrice.Text);
-                OutWorkShopTempEntity.O_Record = cmbRecord.Text;
-
-                Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
-
-
-                if (OutWorkShopTempBLL.SaveEntity("", OutWorkShopTempEntity) > 0)
+                try
                 {
-                    untCommon.InfoMsg("添加成功！");
-                    Update();
-                    cls();
-                    txtBarcode.SelectAll();
-                    txtBarcode.Focus();
-                    //frmParent.loadData();
+                    Mes_OutWorkShopTempEntity OutWorkShopTempEntity = new Mes_OutWorkShopTempEntity();
+                    OutWorkShopTempEntity.O_StockCode = cmbStock.Text;
+                    OutWorkShopTempEntity.O_StockName = txtStockName.Text;
+                    OutWorkShopTempEntity.O_WorkShop = cmbWorkShop.Text;
+                    OutWorkShopTempEntity.O_WorkShopName = txtWorkShopName.Text;
+                    OutWorkShopTempEntity.O_OrderNo = comOrderNo.Text;
+                    OutWorkShopTempEntity.O_Status = 1;
+                    OutWorkShopTempEntity.O_CreateBy = Globels.strUser;
+                    OutWorkShopTempEntity.O_CreateDate = DateTime.Now;
+                    OutWorkShopTempEntity.O_GoodsCode = cmbGoodsCode.Text;
+                    OutWorkShopTempEntity.O_GoodsName = txtName.Text;
+                    OutWorkShopTempEntity.O_Unit = strUnit;
+                    OutWorkShopTempEntity.O_Qty = Convert.ToDecimal(txtQty.Text);
+                    OutWorkShopTempEntity.O_Batch = cmbPc.Text;
+                    OutWorkShopTempEntity.O_Remark = "";
+                    OutWorkShopTempEntity.O_Barcode = txtBarcode.Text;
+                    OutWorkShopTempEntity.O_Price = Convert.ToDecimal(txtPrice.Text);
+                    OutWorkShopTempEntity.O_Record = cmbRecord.Text;
+
+                    Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
+
+
+                    if (OutWorkShopTempBLL.SaveEntity("", OutWorkShopTempEntity) > 0)
+                    {
+                        untCommon.InfoMsg("添加成功！");
+                        Update();
+                        cls();
+                        txtBarcode.SelectAll();
+                        txtBarcode.Focus();
+                        //frmParent.loadData();
+                    }
+                    else
+                    {
+                        //untCommon.InfoMsg("添加失败！");
+                        lblTS.Text = "添加失败!";
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    untCommon.InfoMsg("添加失败！");
+                    //MessageBox.Show(ex.ToString());
+                    lblTS.Text = "系统提示："+ ex.ToString();
                 }
             }
         }
@@ -268,7 +277,8 @@ namespace DesktopApp
                     var rows = OutWorkShopTempBLL.GetList_OutWorkShopTemp("where O_StockCode = '" + cmbStock.Text + "' and O_WorkShop = '" + cmbWorkShop.Text + "' and O_OrderNo = '" + comOrderNo.Text + "'");
                     if (rows == null || rows.Count < 1)
                     {
-                        untCommon.InfoMsg("没有任何数据！");
+                        //untCommon.InfoMsg("没有任何数据！");
+                        lblTS.Text = "没有任何数据！";
                         return;
                     }
 
@@ -339,8 +349,8 @@ namespace DesktopApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
-
+                //MessageBox.Show(ex.ToString());
+                lblTS.Text = ex.ToString();
             }
         }
 
@@ -378,14 +388,15 @@ namespace DesktopApp
                     }
                     else
                     {
-                        MessageBox.Show("串口没有打开");
-
+                        //MessageBox.Show("串口没有打开");
+                        lblTS.Text = "串口没有打开！";
                     }
                     //MessageBox.Show(str);
                 }
                 else
                 {
-                    MessageBox.Show("串口没有打开");
+                    //MessageBox.Show("串口没有打开");
+                    lblTS.Text = "串口没有打开！";
                 }
 
                 Close();
@@ -407,7 +418,8 @@ namespace DesktopApp
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
+                //MessageBox.Show(ex.ToString());
+                lblTS.Text = "ex.ToString()";
                 return false;
             }
         }
@@ -427,20 +439,22 @@ namespace DesktopApp
 
         private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cmbPc.Items.Clear();
-            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-            var row = InventoryBLL.GetData("where I_StockCode = '"+ cmbStock.Text +"' and I_GoodsCode = '"+ cmbGoodsCode.Text +"'");
-            for(int i = 0; i < row.Count; i++)
+            try
             {
-                cmbPc.Items.Add(row[i].I_Batch);
+                cmbPc.Items.Clear();
+                MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+                var row = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsCode = '" + cmbGoodsCode.Text + "'");
+                for (int i = 0; i < row.Count; i++)
+                {
+                    cmbPc.Items.Add(row[i].I_Batch);
 
-            }
-            if(row.Count == 1)
-            {
-                cmbPc.Text = row[0].I_Batch;
-            }
+                }
+                if (row.Count == 1)
+                {
+                    cmbPc.Text = row[0].I_Batch;
+                }
 
-            
+
 
                 MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                 var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
@@ -451,7 +465,7 @@ namespace DesktopApp
                     //txtPrice.Text = Goods_rows[0].G_Price.ToString();
                     strUnit = Goods_rows[0].G_Unit.ToString();
                     int nKind = Goods_rows[0].G_Kind;
-                    if(nKind == 1)
+                    if (nKind == 1)
                     {
                         label17.Visible = true;
                         cmbSupplyName.Visible = true;
@@ -464,8 +478,13 @@ namespace DesktopApp
                     }
 
                 }
-            
 
+
+            }
+            catch(Exception ex)
+            {
+                lblTS.Text = "ex.ToString()";
+            }
         }
 
 

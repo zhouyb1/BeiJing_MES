@@ -128,22 +128,26 @@ namespace DesktopApp
         {
             if (comOrderNo.Text == "")
             {
-                MessageBox.Show("请先选择订单号");
+                //MessageBox.Show("请先选择订单号");
+                lblTS.Text = "系统提示：请先选择订单号";
                 return;
             }
             if (cmbWorkShop.Text == "")
             {
-                MessageBox.Show("请先选择车间");
+                //MessageBox.Show("请先选择车间");
+                lblTS.Text = "系统提示：请先选择车间";
                 return;
             }
             if (cmbRecord.Text == "")
             {
-                MessageBox.Show("请先选择工艺代码");
+                //MessageBox.Show("请先选择工艺代码");
+                lblTS.Text = "系统提示：请先选择工艺代码";
                 return;
             }
             if (cmbProce.Text == "")
             {
-                MessageBox.Show("请先选择工序");
+                //MessageBox.Show("请先选择工序");
+                lblTS.Text = "系统提示：请先选择工序";
                 return;
             }
             Globels.strOrderNo = comOrderNo.Text;
@@ -164,22 +168,26 @@ namespace DesktopApp
 
             if (comOrderNo.Text == "")
             {
-                MessageBox.Show("请先选择订单号");
+                //MessageBox.Show("请先选择订单号");
+                lblTS.Text = "系统提示：请先选择订单号";
                 return;
             }
             if (cmbWorkShop.Text == "")
             {
-                MessageBox.Show("请先选择车间");
+                //MessageBox.Show("请先选择车间");
+                lblTS.Text = "系统提示：请先选择车间";
                 return;
             }
             if (cmbRecord.Text == "")
             {
-                MessageBox.Show("请先选择工艺代码");
+                //MessageBox.Show("请先选择工艺代码");
+                lblTS.Text = "系统提示：请先选择工艺代码";
                 return;
             }
             if (cmbProce.Text == "")
             {
-                MessageBox.Show("请先选择工序");
+                //MessageBox.Show("请先选择工序");
+                lblTS.Text = "系统提示：请先选择工序";
                 return;
             }
             Globels.strOrderNo = comOrderNo.Text;
@@ -275,7 +283,8 @@ namespace DesktopApp
             }
             catch (Exception ex)
             {
-                untCommon.ErrorMsg("二维码生成异常！：" + ex.Message);
+                //untCommon.ErrorMsg("二维码生成异常！：" + ex.Message);
+                lblTS.Text = "系统提示：" + "二维码生成异常！：" + ex.Message;
             }
         }
 
@@ -323,213 +332,214 @@ namespace DesktopApp
 
         private void btn_upload_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("是否要提交","",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("是否要提交", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
-                if(cmbTeam.Text == "")
+                try
                 {
-                    untCommon.InfoMsg("先选择班组！");
-                    return;
-                }
-                Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
-                Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
-
-                //string strSql = "where W_RecordCode = '" + cmbRecord.Text + "' and W_ProceCode = '" + cmbProce.Text + "' and W_WorkShopCode = '" + cmbWorkShop.Text + "' and W_OrderNo = '" + comOrderNo.Text + "'";
-                //var row2 = WorkShopWeightBL.GetList_WorkShopWeight(strSql);
-                //if (row2 == null || row2.Count < 1)
-                //{
-                //    untCommon.InfoMsg("没有任何数据！");
-                //    return;
-                //}
-
-                List<string> insertList = new List<string>();
-                string strSecGoods = "";
-                string strSecPc = "";
-                string strSecName = "";
-                string strSecUnit = "";
-                Decimal dSecQty = 0;
-                int nLen2 = dataGridView2.Rows.Count;
-                for(int i = 0; i< nLen2; i++)
-                {
-                    object obj = dataGridView2.Rows[i].Cells["选择2"].Value;
-                    if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                    if (cmbTeam.Text == "")
                     {
-                        strSecGoods = dataGridView2.Rows[i].Cells["物料2"].Value.ToString();
-                        strSecPc = dataGridView2.Rows[i].Cells["批次2"].Value.ToString();
-                        strSecName = dataGridView2.Rows[i].Cells["物料名称2"].Value.ToString();
-                        strSecUnit = dataGridView2.Rows[i].Cells["单位2"].Value.ToString();
+                        lblTS.Text = "系统提示：先选择班组";
+                        return;
+                    }
+                    Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
+                    Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
 
-                        string strSecQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
-                        string strTemp = dataGridView2.Rows[i].Cells["物料2"].Value.ToString() + "," + dataGridView2.Rows[i].Cells["批次2"].Value.ToString() + "," + dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
-                        if(insertList.Count > 0)
+                    List<string> insertList = new List<string>();
+                    string strSecGoods = "";
+                    string strSecPc = "";
+                    string strSecName = "";
+                    string strSecUnit = "";
+                    Decimal dSecQty = 0;
+                    int nLen2 = dataGridView2.Rows.Count;
+                    for (int i = 0; i < nLen2; i++)
+                    {
+                        object obj = dataGridView2.Rows[i].Cells["选择2"].Value;
+                        if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
                         {
-                            string[] str = insertList[0].ToString().Split(',');
-                            if (str[0].ToString() == strSecGoods)
+                            strSecGoods = dataGridView2.Rows[i].Cells["物料2"].Value.ToString();
+                            strSecPc = dataGridView2.Rows[i].Cells["批次2"].Value.ToString();
+                            strSecName = dataGridView2.Rows[i].Cells["物料名称2"].Value.ToString();
+                            strSecUnit = dataGridView2.Rows[i].Cells["单位2"].Value.ToString();
+
+                            string strSecQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
+                            string strTemp = dataGridView2.Rows[i].Cells["物料2"].Value.ToString() + "," + dataGridView2.Rows[i].Cells["批次2"].Value.ToString() + "," + dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
+                            if (insertList.Count > 0)
                             {
-                                MessageBox.Show("生成的物料只允许同一物料，同一批次");
-                                return;
-                            }
-                            else
-                            {
-                                if (str[1].ToString() == strSecPc)
+                                string[] str = insertList[0].ToString().Split(',');
+                                if (str[0].ToString() == strSecGoods)
                                 {
-                                    MessageBox.Show("生成的物料只允许同一物料，同一批次");
+                                    //MessageBox.Show("生成的物料只允许同一物料，同一批次");
+                                    lblTS.Text = "系统提示：生成的物料只允许同一物料，同一批次";
                                     return;
                                 }
                                 else
                                 {
-                                    dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                    if (str[1].ToString() == strSecPc)
+                                    {
+                                        //MessageBox.Show("生成的物料只允许同一物料，同一批次");
+                                        lblTS.Text = "系统提示：生成的物料只允许同一物料，同一批次";
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
-                            insertList.Add(strTemp);
+                            else
+                            {
+                                dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                insertList.Add(strTemp);
+                            }
                         }
                     }
-                }
 
-                List<string> Goods = new List<string>();
+                    List<string> Goods = new List<string>();
 
-                int nLen = dataGridView1.Rows.Count;
-                for(int i = 0; i < nLen; i++)
-                {
-                    object obj = dataGridView1.Rows[i].Cells["选择"].Value;
-                    if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                    int nLen = dataGridView1.Rows.Count;
+                    for (int i = 0; i < nLen; i++)
                     {
-                        string strGoods = dataGridView1.Rows[i].Cells["物料"].Value.ToString();
-                        string strQty = dataGridView1.Rows[i].Cells["实用数量"].Value.ToString();
-                        string strYLQty = dataGridView1.Rows[i].Cells["数量"].Value.ToString();
-
-                        string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
-                        string strPrice = dataGridView1.Rows[i].Cells["价格"].Value.ToString();
-                        string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
-                        string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
-                        if (Jud(strGoods, strSecGoods))
+                        object obj = dataGridView1.Rows[i].Cells["选择"].Value;
+                        if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
                         {
-                            bool bRet = false;
-                            for (int j = 0; j < Goods.Count; j++)
+                            string strGoods = dataGridView1.Rows[i].Cells["物料"].Value.ToString();
+                            string strQty = dataGridView1.Rows[i].Cells["实用数量"].Value.ToString();
+                            string strYLQty = dataGridView1.Rows[i].Cells["数量"].Value.ToString();
+
+                            string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
+                            string strPrice = dataGridView1.Rows[i].Cells["价格"].Value.ToString();
+                            string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
+                            string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
+                            if (Jud(strGoods, strSecGoods))
                             {
-                                string strTemp = Goods[j].ToString();
-                                string[] str = strTemp.Split(',');
-                                string strTempGoods = str[0].ToString();
-                                string strTempPc = str[2].ToString();
-                                string strTempQty = str[3].ToString();
-                                if (strTempGoods == strGoods && strTempPc == strPc)
+                                bool bRet = false;
+                                for (int j = 0; j < Goods.Count; j++)
                                 {
-                                    Decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
-                                    Goods[j] = strGoods + "," + dQty.ToString() + "," + strPc + "," + strPrice + "," + strName + "," + strUnit;
-                                    bRet = true;
+                                    string strTemp = Goods[j].ToString();
+                                    string[] str = strTemp.Split(',');
+                                    string strTempGoods = str[0].ToString();
+                                    string strTempPc = str[2].ToString();
+                                    string strTempQty = str[3].ToString();
+                                    if (strTempGoods == strGoods && strTempPc == strPc)
+                                    {
+                                        Decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
+                                        Goods[j] = strGoods + "," + dQty.ToString() + "," + strPc + "," + strPrice + "," + strName + "," + strUnit;
+                                        bRet = true;
+                                    }
+                                }
+                                if (bRet == false)
+                                {
+                                    Goods.Add(strGoods + "," + strQty + "," + strPc + "," + strPrice + "," + strName + "," + strUnit);
                                 }
                             }
-                            if (bRet == false)
+                            else
                             {
-                                Goods.Add(strGoods + "," + strQty + "," + strPc + "," + strPrice + "," + strName + "," + strUnit);
+                                lblTS.Text = "系统提示：选择的物料生成不了下一个物料，请核对";
+                                return;
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("选择的物料生成不了下一个物料，请核对");
-                            return;
-                        }
                     }
-                }
 
-                if(insertList.Count == 0 || Goods.Count == 0)
-                {
-                    MessageBox.Show("请选择物料");
-                    return;
-                }
-                Mes_OrgResHeadBLL OrgResHeadBLL = new Mes_OrgResHeadBLL();
-                Mes_OrgResDetailBLL OrgResDetailBLL = new Mes_OrgResDetailBLL();
-                Mes_OrgResHeadEntity OrgResHeadEntity = new Mes_OrgResHeadEntity();
-                Mes_OrgResDetailEntity OrgResDetailEntity = new Mes_OrgResDetailEntity();
-
-                string strIn_No = "";
-
-                var rowsHead = OrgResHeadBLL.GetList_OrgResHead("where 1 = 1 order by O_OrgResNo DESC");
-                if (rowsHead == null || rowsHead.Count < 1)
-                {
-                    strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                }
-                else
-                {
-                    string strDate = rowsHead[0].O_OrgResNo.Substring(2, 8);
-                    if (strDate == DateTime.Now.ToString("yyyyMMdd"))
+                    if (insertList.Count == 0 || Goods.Count == 0)
                     {
-                        string strList = rowsHead[0].O_OrgResNo.Substring(10, 6);
-                        int nList = Convert.ToInt32(strList) + 1;
-                        string strList2 = nList.ToString();
-                        strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + strList2.PadLeft(6, '0');
+                        lblTS.Text = "系统提示：请选择物料";
+                        return;
                     }
-                    else
+                    Mes_OrgResHeadBLL OrgResHeadBLL = new Mes_OrgResHeadBLL();
+                    Mes_OrgResDetailBLL OrgResDetailBLL = new Mes_OrgResDetailBLL();
+                    Mes_OrgResHeadEntity OrgResHeadEntity = new Mes_OrgResHeadEntity();
+                    Mes_OrgResDetailEntity OrgResDetailEntity = new Mes_OrgResDetailEntity();
+
+                    string strIn_No = "";
+
+                    var rowsHead = OrgResHeadBLL.GetList_OrgResHead("where 1 = 1 order by O_OrgResNo DESC");
+                    if (rowsHead == null || rowsHead.Count < 1)
                     {
                         strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
                     }
-
-                }
-
-                OrgResHeadEntity.O_OrgResNo = strIn_No;
-                OrgResHeadEntity.O_OrderNo = comOrderNo.Text;
-
-                OrgResHeadEntity.O_CreateBy = Globels.strUser;
-                OrgResHeadEntity.O_CreateDate = DateTime.Now;
-                OrgResHeadEntity.O_OrderDate = txtOrderDate.Text;
-                OrgResHeadEntity.O_Remark = "";
-                OrgResHeadEntity.O_Status = 1;
-                OrgResHeadEntity.O_WorkShopCode = cmbWorkShop.Text;
-                OrgResHeadEntity.O_WorkShopName = txtWorkShopName.Text;
-                OrgResHeadEntity.O_Record = cmbRecord.Text;
-                OrgResHeadEntity.O_ProCode = cmbProce.Text;
-                OrgResHeadEntity.O_TeamCode = cmbTeam.Text;
-                OrgResHeadEntity.O_TeamName = txtTeamName.Text;
-
-                int nRow = OrgResHeadBLL.SaveEntity("", OrgResHeadEntity);
-                Decimal dSecPrice = 0;
-                Decimal dTotal = 0;
-                for (int i = 0; i < Goods.Count; i++)
-                {
-                    string[] strTemp = Goods[i].ToString().Split(',');
-                    dTotal = dTotal + (Convert.ToDecimal(strTemp[3].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
-                }
-                dSecPrice = dTotal / dSecQty;
-
-                for (int i = 0; i < Goods.Count; i++)
-                {
-                    OrgResDetailEntity.O_OrgResNo = strIn_No;
-                    OrgResDetailEntity.O_SecGoodsCode = strSecGoods;
-                    OrgResDetailEntity.O_SecGoodsName = strSecName;
-                    OrgResDetailEntity.O_SecPrice = 0;
-                    OrgResDetailEntity.O_SecQty = dSecQty;
-                    OrgResDetailEntity.O_SecUnit = strSecUnit;
-                    OrgResDetailEntity.O_SecBatch = strSecPc;
-
-                    string[] strTemp = Goods[i].ToString().Split(',');
-
-                    string strGoodsCode = strTemp[0].ToString();
-                    Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
-                    var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_SecCode = '" + strGoodsCode + "'");
-                    string strC_GoodsCode = "";
-                    if (Convert_rows.Count > 0)
+                    else
                     {
-                        strC_GoodsCode = Convert_rows[0].C_Code;
+                        string strDate = rowsHead[0].O_OrgResNo.Substring(2, 8);
+                        if (strDate == DateTime.Now.ToString("yyyyMMdd"))
+                        {
+                            string strList = rowsHead[0].O_OrgResNo.Substring(10, 6);
+                            int nList = Convert.ToInt32(strList) + 1;
+                            string strList2 = nList.ToString();
+                            strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + strList2.PadLeft(6, '0');
+                        }
+                        else
+                        {
+                            strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
+                        }
+
                     }
 
-                    OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
-                    OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
-                    OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
-                    OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
-                    OrgResDetailEntity.O_Unit = strTemp[5].ToString();
-                    OrgResDetailEntity.O_Batch = strTemp[2].ToString();
-                    OrgResDetailEntity.O_SecPrice = dSecPrice;
-                    nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
+                    OrgResHeadEntity.O_OrgResNo = strIn_No;
+                    OrgResHeadEntity.O_OrderNo = comOrderNo.Text;
 
+                    OrgResHeadEntity.O_CreateBy = Globels.strUser;
+                    OrgResHeadEntity.O_CreateDate = DateTime.Now;
+                    OrgResHeadEntity.O_OrderDate = txtOrderDate.Text;
+                    OrgResHeadEntity.O_Remark = "";
+                    OrgResHeadEntity.O_Status = 1;
+                    OrgResHeadEntity.O_WorkShopCode = cmbWorkShop.Text;
+                    OrgResHeadEntity.O_WorkShopName = txtWorkShopName.Text;
+                    OrgResHeadEntity.O_Record = cmbRecord.Text;
+                    OrgResHeadEntity.O_ProCode = cmbProce.Text;
+                    OrgResHeadEntity.O_TeamCode = cmbTeam.Text;
+                    OrgResHeadEntity.O_TeamName = txtTeamName.Text;
+
+                    int nRow = OrgResHeadBLL.SaveEntity("", OrgResHeadEntity);
+                    Decimal dSecPrice = 0;
+                    Decimal dTotal = 0;
+                    for (int i = 0; i < Goods.Count; i++)
+                    {
+                        string[] strTemp = Goods[i].ToString().Split(',');
+                        dTotal = dTotal + (Convert.ToDecimal(strTemp[3].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
+                    }
+                    dSecPrice = dTotal / dSecQty;
+
+                    for (int i = 0; i < Goods.Count; i++)
+                    {
+                        OrgResDetailEntity.O_OrgResNo = strIn_No;
+                        OrgResDetailEntity.O_SecGoodsCode = strSecGoods;
+                        OrgResDetailEntity.O_SecGoodsName = strSecName;
+                        OrgResDetailEntity.O_SecPrice = 0;
+                        OrgResDetailEntity.O_SecQty = dSecQty;
+                        OrgResDetailEntity.O_SecUnit = strSecUnit;
+                        OrgResDetailEntity.O_SecBatch = strSecPc;
+
+                        string[] strTemp = Goods[i].ToString().Split(',');
+
+                        string strGoodsCode = strTemp[0].ToString();
+                        Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
+                        var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_SecCode = '" + strGoodsCode + "'");
+                        string strC_GoodsCode = "";
+                        if (Convert_rows.Count > 0)
+                        {
+                            strC_GoodsCode = Convert_rows[0].C_Code;
+                        }
+
+                        OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
+                        OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
+                        OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
+                        OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
+                        OrgResDetailEntity.O_Unit = strTemp[5].ToString();
+                        OrgResDetailEntity.O_Batch = strTemp[2].ToString();
+                        OrgResDetailEntity.O_SecPrice = dSecPrice;
+                        nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
+
+                    }
+                    MessageBox.Show("保存成功");
+                    Delete();
+                    Update();
                 }
-                MessageBox.Show("保存成功");
-
-                Delete();
-                Update();
+                catch(Exception ex)
+                {
+                    lblTS.Text = "系统提示：" + ex.ToString();
+                }
             }
+            
         }
 
         private bool Jud(string strGoods,string strSecGoods)
@@ -642,7 +652,8 @@ namespace DesktopApp
             }
             catch(Exception ex)
             {
-                MessageBox.Show("请选中某一行进行退仓库");
+                //MessageBox.Show("请选中某一行进行退仓库");
+                lblTS.Text = "系统提示：请选中某一行进行退仓库";
             }
         }
 
