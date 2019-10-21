@@ -274,7 +274,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 if (!queryParam["M_Status"].IsEmpty())
                 {
-                    dp.Add("M_Status", "%" + queryParam["M_Status"].ToString() + "%", DbType.String);
+                    dp.Add("M_Status", "%" + queryParam["M_Status"].ToString() + "%", DbType.Int32);
                     strSql.Append(" AND t.M_Status = @M_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_MaterInHeadEntity>(strSql.ToString(), dp, pagination);
