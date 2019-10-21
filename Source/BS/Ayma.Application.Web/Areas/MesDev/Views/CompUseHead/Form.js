@@ -8,6 +8,7 @@ var acceptClick;
 var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
+var status = request('status');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -18,6 +19,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#C_StockName').attr('readonly', true);
+                $('#C_OrderNo').attr('readonly', true);
+                $('#C_OrderDate').attr('disabled', true);
+                $('#C_WorkShop').attr('readonly', true);
+
+            }
             $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             $('#C_WorkShop').select({
                 type: 'default',
@@ -72,6 +80,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
             }
             $("#C_StockName").select(dfop).on('change', function () {
+                if (status==1) {
+                    $('#Mes_CompUseDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
                 var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -175,6 +186,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     // 保存数据
     acceptClick = function (callBack) {
         if (!$('body').Validform()) {
+            return false;
+        }
+        var data = $('#Mes_CompUseDetail').jfGridGet('rowdatas');
+        if (data.length==0||data[0].C_GoodsCode==null) {
+            ayma.alert.error('请添加物料！');
             return false;
         }
         var postData = {};
