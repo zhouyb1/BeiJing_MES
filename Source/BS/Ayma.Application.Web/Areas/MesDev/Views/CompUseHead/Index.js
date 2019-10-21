@@ -185,7 +185,6 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            param.State = "0";
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

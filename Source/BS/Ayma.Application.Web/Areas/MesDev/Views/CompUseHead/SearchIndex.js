@@ -100,7 +100,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/CompUseHead/GetPageList',
+                url: top.$.rootUrl + '/MesDev/CompUseHead/CompUseHeadList',
                 headData: [
                     
                     {
@@ -142,7 +142,6 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            param.State = "1";
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

@@ -20,6 +20,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_CompUseHeadEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        ///     /// <summary>
+        ///  获取强制使用记录单据查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_CompUseHeadEntity> CompUseHeadList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取Mes_CompUseDetail表数据
         /// <summary>
         /// <returns></returns>

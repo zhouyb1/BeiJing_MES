@@ -36,14 +36,14 @@ var bootstrap = function ($, ayma) {
                 // 默认
                 dfvalue: '1',
                 selectfn: function (begin, end) {
-                    type = "report";
+                    //type = "report";
                     startTime = begin;
                     endTime = end;
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
-                queryJson.type = "report";
+                //queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
             $('#O_WorkShopName').select({
@@ -87,7 +87,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/OrgResManager/GetPageList',
+                url: top.$.rootUrl + '/MesDev/OrgResManager/OrgResManagerList',
                 headData: [
                     {
                         label: "状态", name: "O_Status", width: 160, align: "left", formatterAsync: function (callback, value, row) {
@@ -128,7 +128,7 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            param.type = type;
+            //param.type = type;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

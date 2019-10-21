@@ -3,7 +3,6 @@ var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
     var endTime;
-    var type;
     var page = {
         init: function () {
             page.initGird();
@@ -34,12 +33,10 @@ var bootstrap = function ($, ayma) {
                 selectfn: function (begin, end) {
                     startTime = begin;
                     endTime = end;
-                    type = "report";
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
-                queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
             //仓库
@@ -99,7 +96,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/ScrapManager/GetPageList',
+                url: top.$.rootUrl + '/MesDev/ScrapManager/ScrapManagerList',
                 headData: [
                     {
                         label: "状态", name: "S_Status", width: 160, align: "left",
@@ -139,7 +136,6 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = startTime;
             param.EndTime = endTime;
-            param.type = type;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

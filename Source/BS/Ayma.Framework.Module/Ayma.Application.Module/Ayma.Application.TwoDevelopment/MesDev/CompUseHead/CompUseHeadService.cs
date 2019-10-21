@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿    using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
 using System;
@@ -43,19 +43,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 s.W_Name as C_WorkShopName
                 ");
                 strSql.Append("  FROM Mes_CompUseHead t left join Mes_WorkShop s on(t.C_WorkShop=s.W_Code) ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 AND t.C_Status in(1,2) ");
                 var queryParam = queryJson.ToJObject();
-                string State = queryParam["State"].ToString();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (State == "0")
-                {
-                    strSql.Append(" AND t.C_Status in(1,2)");
-                }
-                //if (State == "1")
-                //{
-                //    strSql.Append(" AND t.C_Status =3");
-                //}
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
@@ -101,7 +92,81 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 获取强制使用记录单据查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_CompUseHeadEntity> CompUseHeadList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.C_No,
+                t.C_WorkShop,
+                t.C_OrderNo,
+                t.C_OrderDate,
+                t.C_Status,
+                t.C_CreateBy,
+                t.C_Remark,
+                t.C_StockName,
+                t.C_StockCode,
+                t.C_CreateDate,
+                s.W_Name as C_WorkShopName
+                ");
+                strSql.Append("  FROM Mes_CompUseHead t left join Mes_WorkShop s on(t.C_WorkShop=s.W_Code) ");
+                strSql.Append("  WHERE 1=1 AND t.C_Status in(1,2)");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["C_OrderDate"].IsEmpty())
+                {
+                    dp.Add("C_OrderDate", "%" + queryParam["C_OrderDate"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_OrderDate Like @C_OrderDate ");
+                }
+                if (!queryParam["C_Status"].IsEmpty())
+                {
+                    dp.Add("C_Status", queryParam["C_Status"].ToString(), DbType.String);
+                    strSql.Append(" AND t.C_Status = @C_Status ");
+                }
+                if (!queryParam["C_No"].IsEmpty())
+                {
+                    dp.Add("C_No", "%" + queryParam["C_No"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_No Like @C_No ");
+                }
+                if (!queryParam["C_WorkShopName"].IsEmpty())
+                {
+                    dp.Add("C_WorkShopName", "%" + queryParam["C_WorkShopName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.W_Name Like @C_WorkShopName ");
+                }
+                if (!queryParam["C_StockName"].IsEmpty())
+                {
+                    dp.Add("C_StockName", "%" + queryParam["C_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.C_StockName Like @C_StockName ");
+                }
+                return this.BaseRepository().FindList<Mes_CompUseHeadEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取Mes_CompUseDetail表数据
         /// </summary>

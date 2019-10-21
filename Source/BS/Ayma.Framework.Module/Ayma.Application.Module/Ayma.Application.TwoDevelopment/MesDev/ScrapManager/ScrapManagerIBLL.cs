@@ -20,6 +20,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_ScrapHeadEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        /// 获取报废单查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ScrapHeadEntity> ScrapManagerList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取Mes_ScrapHead表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>

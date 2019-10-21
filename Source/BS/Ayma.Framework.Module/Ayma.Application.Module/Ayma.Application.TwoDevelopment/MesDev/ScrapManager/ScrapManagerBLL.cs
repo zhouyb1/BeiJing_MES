@@ -39,7 +39,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 获取报废单查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ScrapHeadEntity> ScrapManagerList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return scrapManagerService.ScrapManagerList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取Mes_ScrapHead表实体数据
         /// </summary>

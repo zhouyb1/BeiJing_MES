@@ -20,6 +20,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_OrgResHeadEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        /// 获取组装与拆分单据查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_OrgResHeadEntity> OrgResManagerList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取Mes_OrgResHead表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>

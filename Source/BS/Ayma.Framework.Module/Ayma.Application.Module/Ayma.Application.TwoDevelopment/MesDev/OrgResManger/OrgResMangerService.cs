@@ -44,18 +44,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 AND t.O_Status in (1,2)");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (queryParam["type"].IsEmpty())
-                {
-                    strSql.Append(" AND t.O_Status in (1,2)");
-                }
-                if (!queryParam["type"].IsEmpty())
-                {
-                    strSql.Append(" AND t.O_Status =3");
-                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
@@ -91,7 +83,71 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 获取组装与拆分单据查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_OrgResHeadEntity> OrgResManagerList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.O_Status,
+                t.O_OrgResNo,
+                t.O_OrderNo,
+                t.O_OrderDate,
+                t.O_Record,
+                t.O_ProCode,
+                t.O_WorkShopCode,
+                t.O_WorkShopName,
+                t.O_Remark,
+                t.O_CreateBy,
+                t.O_CreateDate
+                ");
+                strSql.Append("  FROM Mes_OrgResHead t ");
+                strSql.Append("  WHERE 1=1 AND t.O_Status =3");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["O_OrgResNo"].IsEmpty())
+                {
+                    dp.Add("O_OrgResNo", "%" + queryParam["O_OrgResNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_OrgResNo Like @O_OrgResNo ");
+                }
+                if (!queryParam["O_WorkShopName"].IsEmpty())
+                {
+                    dp.Add("O_WorkShopName", "%" + queryParam["O_WorkShopName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_WorkShopName Like @O_WorkShopName ");
+                }
+                if (!queryParam["O_Status"].IsEmpty())
+                {
+                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_Status Like @O_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_OrgResHeadEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取仓库物料
         /// </summary>

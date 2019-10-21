@@ -41,18 +41,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 AND t.S_Status in (1,2)");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (queryParam["type"].IsEmpty())
-                {
-                    strSql.Append(" AND t.S_Status in (1,2)");
-                }
-                if (!queryParam["type"].IsEmpty())
-                {
-                    strSql.Append(" AND t.S_Status =3");
-                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
@@ -75,6 +67,69 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     strSql.Append(" AND t.S_Status Like @S_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_ScrapHeadEntity>(strSql.ToString(),dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取报废单查询页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ScrapHeadEntity> ScrapManagerList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.S_Status,
+                t.S_ScrapNo,
+                t.S_StockCode,
+                t.S_StockName,
+                t.S_OrderDate,
+                t.S_Remark,
+                t.S_CreateBy,
+                t.S_CreateDate
+                ");
+                strSql.Append("  FROM Mes_ScrapHead t ");
+                strSql.Append("  WHERE 1=1 AND t.S_Status =3");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.S_CreateDate >= @startTime AND t.S_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["S_ScrapNo"].IsEmpty())
+                {
+                    dp.Add("S_ScrapNo", "%" + queryParam["S_ScrapNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_ScrapNo Like @S_ScrapNo ");
+                }
+                if (!queryParam["S_StockName"].IsEmpty())
+                {
+                    dp.Add("S_StockName", "%" + queryParam["S_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_StockCode Like @S_StockName ");
+                }
+                if (!queryParam["S_Status"].IsEmpty())
+                {
+                    dp.Add("S_Status", "%" + queryParam["S_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Status Like @S_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_ScrapHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
