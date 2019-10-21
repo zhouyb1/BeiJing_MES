@@ -151,7 +151,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["C_StockName"].IsEmpty())
                 {
                     dp.Add("C_StockName", "%" + queryParam["C_StockName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND s.C_StockName Like @C_StockName ");
+                    strSql.Append(" AND t.C_StockName Like @C_StockName ");
                 }
                 return this.BaseRepository().FindList<Mes_CompUseHeadEntity>(strSql.ToString(), dp, pagination);
             }

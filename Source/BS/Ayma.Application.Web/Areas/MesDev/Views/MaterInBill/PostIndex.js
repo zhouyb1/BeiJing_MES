@@ -42,7 +42,20 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
+            }, 180, 300);
+            $('#M_StockName').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',  
+                // 访问数据接口参数
+                    param: {}
+        });
             $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
