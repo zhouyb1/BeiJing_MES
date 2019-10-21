@@ -22,6 +22,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status==2) {
                 $('#C_StockName').css('background', '#f1efef');
                 $('#C_StockName').attr('readonly', true);
+                $("#C_StockToName").css('background', '#f1efef');
+                $('#C_StockToName').attr('readonly', true);
             }
             //绑定仓库
             var dfop = {

@@ -129,7 +129,7 @@ var bootstrap = function ($, ayma) {
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");
                 var status = $("#girdtable").jfGridValue("P_Status");
-                if (status != "1") {
+                if (status == "2") {
                     ayma.alert.error("已审核");
                     return false;
                 }
