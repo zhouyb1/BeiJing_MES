@@ -93,11 +93,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('C_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'compUserForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue+'&status='+statu,
                         width: 900,
                         height: 700,
                         maxmin: true,
