@@ -45,8 +45,8 @@ var bootstrap = function ($, ayma) {
             }, 220, 400);
             $('#O_WorkShopName').select({
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Name',
+                value: 'W_Name',
+                text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
