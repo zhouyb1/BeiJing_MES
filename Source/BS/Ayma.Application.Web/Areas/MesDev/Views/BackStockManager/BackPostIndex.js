@@ -126,7 +126,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/BackStockManager/GetPageList',
+                url: top.$.rootUrl + '/MesDev/BackStockManager/GetBacStockList',
                 headData: [
                     {
                         label: "状态", name: "B_Status", width: 160, align: "left",

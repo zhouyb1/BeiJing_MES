@@ -105,6 +105,25 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [AjaxOnly]
+        public ActionResult GetBacStockList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = backStockManagerIBLL.GetBacStockList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
 
         /// <summary>
         /// 获取物料
