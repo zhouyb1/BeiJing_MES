@@ -71,7 +71,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 if (!queryParam["O_Status"].IsEmpty())
                 {
-                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
+                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.Int32);
                     strSql.Append(" AND t.O_Status Like @O_Status ");
                 }
                 if (!queryParam["O_WorkShop"].IsEmpty())
