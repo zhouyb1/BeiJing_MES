@@ -83,7 +83,10 @@ var bootstrap = function ($, ayma) {
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
             //添加商品
             $("#am_add").on("click", function () {
-
+                if ($("#M_StockCode").val()=="") {
+                    ayma.alert.error("先选择仓库！");
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'GoodsListIndexForm',
                     title: '添加物料',
