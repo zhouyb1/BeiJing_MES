@@ -2289,7 +2289,7 @@
       <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Form.js">
-      <publishTime>10/15/2019 15:41:37</publishTime>
+      <publishTime>10/21/2019 17:08:09</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/GoodsListIndex.cshtml">
       <publishTime>10/15/2019 15:41:37</publishTime>
@@ -2301,7 +2301,7 @@
       <publishTime>10/19/2019 17:43:45</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/Index.js">
-      <publishTime>10/21/2019 13:36:39</publishTime>
+      <publishTime>10/21/2019 17:28:17</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/CompUseHead/SearchForm.cshtml">
       <publishTime>10/15/2019 15:41:37</publishTime>
@@ -2538,7 +2538,7 @@
       <publishTime>10/19/2019 14:05:15</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/Form.js">
-      <publishTime>10/21/2019 12:15:04</publishTime>
+      <publishTime>10/21/2019 15:27:56</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/GoodsListIndex.cshtml">
       <publishTime>10/15/2019 15:41:39</publishTime>
@@ -2583,7 +2583,7 @@
       <publishTime>10/15/2019 15:41:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductForm.js">
-      <publishTime>10/19/2019 22:10:10</publishTime>
+      <publishTime>10/21/2019 16:23:10</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/MaterInBill/ProductIndex.cshtml">
       <publishTime>10/19/2019 17:43:46</publishTime>
@@ -2619,13 +2619,13 @@
       <publishTime>10/15/2019 15:41:36</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Form.js">
-      <publishTime>10/19/2019 13:16:00</publishTime>
+      <publishTime>10/21/2019 16:54:57</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Index.cshtml">
       <publishTime>10/19/2019 17:43:46</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/Index.js">
-      <publishTime>10/19/2019 17:43:46</publishTime>
+      <publishTime>10/21/2019 16:53:24</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/Mes_BackSupply/OrderMaterList.cshtml">
       <publishTime>03/15/2019 18:47:50</publishTime>
@@ -2745,10 +2745,10 @@
       <publishTime>10/19/2019 12:06:25</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Index.cshtml">
-      <publishTime>10/19/2019 17:44:39</publishTime>
+      <publishTime>10/21/2019 17:41:29</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/Index.js">
-      <publishTime>10/19/2019 17:44:43</publishTime>
+      <publishTime>10/21/2019 16:58:49</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OrgResManager/PrintReport.cshtml">
       <publishTime>10/16/2019 15:22:45</publishTime>
@@ -2769,7 +2769,7 @@
       <publishTime>10/21/2019 13:36:39</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Form.cshtml">
-      <publishTime>10/15/2019 15:41:34</publishTime>
+      <publishTime>10/21/2019 15:45:24</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/Form.js">
       <publishTime>10/19/2019 13:46:43</publishTime>
@@ -2787,7 +2787,7 @@
       <publishTime>10/15/2019 15:41:34</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostForm.cshtml">
-      <publishTime>10/15/2019 15:41:34</publishTime>
+      <publishTime>10/21/2019 15:48:40</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/OutWorkShopManager/PostForm.js">
       <publishTime>10/15/2019 15:41:34</publishTime>
@@ -2898,7 +2898,7 @@
       <publishTime>10/15/2019 15:41:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchIndex.cshtml">
-      <publishTime>10/17/2019 15:05:25</publishTime>
+      <publishTime>10/21/2019 16:58:50</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProductOrderMake/SearchIndex.js">
       <publishTime>10/15/2019 15:41:35</publishTime>
@@ -2925,7 +2925,7 @@
       <publishTime>10/19/2019 09:45:47</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/Form.js">
-      <publishTime>10/19/2019 22:16:43</publishTime>
+      <publishTime>10/21/2019 16:42:21</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ProOutMake/GoodsListIndex.cshtml">
       <publishTime>10/15/2019 15:41:33</publishTime>
@@ -2982,7 +2982,7 @@
       <publishTime>10/15/2019 15:41:37</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Form.js">
-      <publishTime>10/15/2019 15:41:37</publishTime>
+      <publishTime>10/21/2019 16:03:17</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/GoodsListIndex.cshtml">
       <publishTime>10/15/2019 15:41:37</publishTime>
@@ -2994,7 +2994,7 @@
       <publishTime>10/19/2019 17:43:48</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/Index.js">
-      <publishTime>10/19/2019 17:43:48</publishTime>
+      <publishTime>10/21/2019 16:00:50</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/RequistBill/PostIndex.cshtml">
       <publishTime>10/19/2019 17:43:48</publishTime>
@@ -3033,7 +3033,7 @@
       <publishTime>10/18/2019 17:11:35</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Form.js">
-      <publishTime>10/18/2019 19:57:26</publishTime>
+      <publishTime>10/21/2019 15:22:51</publishTime>
     </File>
     <File Include="Areas/MesDev/Views/ScrapManager/Index.cshtml">
       <publishTime>10/18/2019 16:43:08</publishTime>
@@ -5655,10 +5655,10 @@
       <publishTime>08/16/2018 14:12:14</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/21/2019 13:48:08</publishTime>
+      <publishTime>10/21/2019 17:42:07</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/21/2019 13:48:08</publishTime>
+      <publishTime>10/21/2019 17:42:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.AppMagager.dll">
       <publishTime>10/21/2019 13:47:07</publishTime>
@@ -5679,10 +5679,10 @@
       <publishTime>10/21/2019 13:47:06</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.dll">
-      <publishTime>10/21/2019 13:47:17</publishTime>
+      <publishTime>10/21/2019 16:56:09</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Excel.pdb">
-      <publishTime>10/21/2019 13:47:17</publishTime>
+      <publishTime>10/21/2019 16:56:09</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Form.dll">
       <publishTime>10/21/2019 13:47:13</publishTime>
@@ -5697,10 +5697,10 @@
       <publishTime>10/21/2019 13:47:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.dll">
-      <publishTime>10/21/2019 13:47:18</publishTime>
+      <publishTime>10/21/2019 16:56:12</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Mapping.pdb">
-      <publishTime>10/21/2019 13:47:18</publishTime>
+      <publishTime>10/21/2019 16:56:12</publishTime>
     </File>
     <File Include="bin/Ayma.Application.OA.dll">
       <publishTime>10/21/2019 13:47:06</publishTime>
@@ -5721,16 +5721,16 @@
       <publishTime>10/21/2019 13:47:13</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.dll">
-      <publishTime>10/21/2019 13:47:15</publishTime>
+      <publishTime>10/21/2019 16:56:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.TwoDevelopment.pdb">
-      <publishTime>10/21/2019 13:47:15</publishTime>
+      <publishTime>10/21/2019 16:56:07</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Web.dll">
-      <publishTime>10/21/2019 13:47:21</publishTime>
+      <publishTime>10/21/2019 16:56:16</publishTime>
     </File>
     <File Include="bin/Ayma.Application.Web.pdb">
-      <publishTime>10/21/2019 13:47:21</publishTime>
+      <publishTime>10/21/2019 16:56:16</publishTime>
     </File>
     <File Include="bin/Ayma.Application.WorkFlow.dll">
       <publishTime>10/21/2019 13:47:12</publishTime>
@@ -9981,10 +9981,10 @@
       <publishTime>03/15/2019 10:22:23</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/21/2019 13:48:04</publishTime>
+      <publishTime>10/21/2019 17:42:04</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/Ayma.pubxml.user">
-      <publishTime>07/10/2019 16:06:26</publishTime>
+      <publishTime>10/21/2019 13:48:40</publishTime>
     </File>
     <File Include="Properties/PublishProfiles/learunadms6.1.pubxml.user">
       <publishTime>09/19/2018 16:13:11</publishTime>
