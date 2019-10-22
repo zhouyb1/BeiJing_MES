@@ -202,21 +202,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     return Fail("商品【" + item.B_GoodsName + "】的批次不能为空!");
 	            }
 	        }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_BackSupplyHead", "B_BackSupplyNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString()); //标志已使用
-                    entity.B_BackSupplyNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString());
-                }
-                else
-                {
-                    entity.B_BackSupplyNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.BackSupply).ToString()); //标志已使用
-            }
             mes_BackSupplyIBLL.SaveEntity(keyValue,entity,mes_BackSupplyDetailList);
             return Success("保存成功！");
         }

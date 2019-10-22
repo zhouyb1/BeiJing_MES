@@ -216,21 +216,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("组装前后的总价值要对等");
             }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_OrgResHead", "O_OrgResNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Org).ToString()); //标志已使用
-                    entity.O_OrgResNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());
-                }
-                else
-                {
-                    entity.O_OrgResNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Org).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Org).ToString()); //标志已使用
-            }
             orgResMangerIBLL.SaveEntity(keyValue, entity, mes_OrgResDetailList);
             return Success("保存成功！");
         }

@@ -207,7 +207,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             Mes_RequistHeadEntity entity = strEntity.ToObject<Mes_RequistHeadEntity>();
             List<Mes_RequistDetailEntity> mes_RequistDetailList = strmes_RequistDetailList.ToObject<List<Mes_RequistDetailEntity>>();
-
+            #region 舍弃
             //foreach (Mes_RequistDetailEntity t in mes_RequistDetailList)
             //{
             //    //查询库存
@@ -230,22 +230,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
 
             //    }
-            //}
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_RequistHead", "R_RequistNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString()); //标志已使用
-                    entity.R_RequistNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString());
-                }
-                else
-                {
-                    entity.R_RequistNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString()); //标志已使用
-            }
+            //} 
+            #endregion
             requistBillIBLL.SaveEntity(keyValue, entity, mes_RequistDetailList);
             return Success("保存成功！");
         }

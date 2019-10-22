@@ -177,21 +177,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
            
             Mes_CompUseHeadEntity entity = strEntity.ToObject<Mes_CompUseHeadEntity>();
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_CompUseHead", "C_No", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString()); //标志已使用
-                    entity.C_No = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString());
-                }
-                else
-                {
-                    entity.C_No = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString()); //标志已使用
-            }
             List<Mes_CompUseDetailEntity> mes_CompUseDetailList = strmes_CompUseDetailList.ToObject<List<Mes_CompUseDetailEntity>>();
             foreach (Mes_CompUseDetailEntity item in mes_CompUseDetailList)
             {

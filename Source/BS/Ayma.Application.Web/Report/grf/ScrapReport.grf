@@ -9,9 +9,10 @@
 	"Printer":{
 	},
 	"DetailGrid":{
+		"CenterView":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.S_ScrapNo ,\r\n        h.S_OrderDate ,\r\n        h.S_Remark ,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Unit ,\r\n        d.S_Qty ,\r\n        d.S_Batch\r\nFROM    dbo.Mes_ScrapHead h\r\n        LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo WHERE h.S_Status =2",
+			"QuerySQL":"SELECT  h.S_ScrapNo ,\r\n        h.S_CreateDate ,\r\n        h.S_Remark ,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Unit ,\r\n        d.S_Qty ,\r\n        d.S_Batch\r\nFROM    dbo.Mes_ScrapHead h\r\n        LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo",
 			"Field":[
 				{
 					"Name":"S_ScrapNo"
@@ -41,30 +42,37 @@
 				},
 				{
 					"Name":"F_RowIndex"
+				},
+				{
+					"Name":"S_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
 		"Column":[
 			{
 				"Name":"S_ScrapNo",
-				"Width":2.16958
+				"Width":0.978958
 			},
 			{
-				"Name":"S_GoodsCode"
+				"Name":"S_GoodsCode",
+				"Width":2.19604
 			},
 			{
-				"Name":"S_GoodsName"
+				"Name":"S_GoodsName",
+				"Width":2.98979
 			},
 			{
 				"Name":"S_Unit",
-				"Width":2.2225
+				"Width":1.00542
 			},
 			{
 				"Name":"S_Qty",
-				"Width":2.59292
+				"Width":1.79917
 			},
 			{
-				"Name":"S_Batch"
+				"Name":"S_Batch",
+				"Width":2.19604
 			}
 		],
 		"ColumnContent":{
@@ -77,8 +85,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.529167,
-							"Width":3.175,
+							"Left":-1.08479,
+							"Width":3.12208,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -87,6 +95,7 @@
 				},
 				{
 					"Column":"S_GoodsCode",
+					"TextAlign":"MiddleCenter",
 					"DataField":"S_GoodsCode"
 				},
 				{
@@ -95,14 +104,17 @@
 				},
 				{
 					"Column":"S_Unit",
+					"TextAlign":"MiddleCenter",
 					"DataField":"S_Unit"
 				},
 				{
 					"Column":"S_Qty",
+					"TextAlign":"MiddleCenter",
 					"DataField":"S_Qty"
 				},
 				{
 					"Column":"S_Batch",
+					"TextAlign":"MiddleCenter",
 					"DataField":"S_Batch"
 				}
 			]
@@ -168,11 +180,11 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Center":"Horizontal",
-					"Left":5.79438,
-					"Top":0.608542,
-					"Width":4.41854,
-					"Height":0.978958,
+					"Center":"Both",
+					"Left":3.86292,
+					"Top":1.69333,
+					"Width":8.30792,
+					"Height":1.00542,
 					"Font":{
 						"Name":"宋体",
 						"Size":217500,
@@ -180,13 +192,13 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"报废单"
+					"Text":"列服公司原材料报废单"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.079375,
-					"Top":2.75167,
+					"Left":0.3175,
+					"Top":3.22792,
 					"Width":1.82563,
 					"Height":0.608542,
 					"Font":{
@@ -199,44 +211,19 @@
 					"Text":"单据号码："
 				},
 				{
-					"Type":"StaticBox",
-					"Name":"StaticBox3",
-					"Left":4.92125,
-					"Top":2.77813,
-					"Width":1.79917,
-					"Height":0.529167,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
-				},
-				{
 					"Type":"FieldBox",
 					"Name":"FieldBox1",
-					"Left":1.71979,
-					"Top":2.75167,
+					"Left":1.95792,
+					"Top":3.22792,
 					"Width":2.98979,
 					"Height":0.608542,
 					"DataField":"S_ScrapNo"
 				},
 				{
-					"Type":"FieldBox",
-					"Name":"FieldBox2",
-					"Left":6.56167,
-					"Top":2.77813,
-					"Width":3.20146,
-					"Height":0.529167,
-					"DataField":"S_OrderDate"
-				},
-				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":10.5569,
-					"Top":2.77813,
+					"Left":6.32354,
+					"Top":3.175,
 					"Width":1.74625,
 					"Height":0.582083,
 					"Font":{
@@ -246,16 +233,16 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"单据日期："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":12.1179,
-					"Top":2.75167,
+					"Left":7.88458,
+					"Top":3.20146,
 					"Width":3.59833,
-					"Height":0.608542,
-					"DataField":"S_OrderDate"
+					"Height":0.555625,
+					"DataField":"S_CreateDate"
 				}
 			]
 		}
@@ -268,8 +255,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.661458,
-					"Top":1.29646,
+					"Left":0.687917,
+					"Top":1.27,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -284,8 +271,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":8.86354,
-					"Top":1.29646,
+					"Left":6.74688,
+					"Top":1.27,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -300,16 +287,16 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":2.64583,
-					"Top":1.29646,
+					"Left":2.67229,
+					"Top":1.27,
 					"Width":4.20688,
 					"Height":0.582083
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":10.8479,
-					"Top":1.29646,
+					"Left":8.46667,
+					"Top":1.24354,
 					"Width":4.20688,
 					"Height":0.582083
 				}

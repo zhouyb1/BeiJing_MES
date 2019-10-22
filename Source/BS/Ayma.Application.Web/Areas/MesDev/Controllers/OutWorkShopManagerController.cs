@@ -211,26 +211,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             foreach (var goods in mes_OutWorkShopDetailList)
             {
-                var stock_qty = invSeachIbll.GetListByParams(goods.O_GoodsCode, goods.O_Batch).I_Qty;
+                var stock_qty = invSeachIbll.GetEntityBy(goods.O_GoodsCode,entity.O_StockCode, goods.O_Batch).I_Qty;
                 if (goods.O_Qty > stock_qty)
                 {
                     return Fail("【" + goods.O_GoodsName + "】" + "库存不足");
                 }
-            }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_OutWorkShopHead", "O_OutNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Out).ToString()); //标志已使用
-                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString());
-                }
-                else
-                {
-                    entity.O_OutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Out).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Out).ToString()); //标志已使用
             }
             outWorkShopManagerIBLL.SaveEntity(keyValue, entity, mes_OutWorkShopDetailList);
             return Success("保存成功！");

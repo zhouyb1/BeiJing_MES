@@ -202,26 +202,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = proOutMakeIBLL.GetMes_ProOutHeadEntity(keyValue);
                 if (entityTemp.P_Status == ErpEnums.ProOutStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能修！");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_ProOutHeadEntity entity = strEntity.ToObject<Mes_ProOutHeadEntity>();
             List<Mes_ProOutDetailEntity> mes_ProOutDetailList = strmes_ProOutDetailList.ToObject<List<Mes_ProOutDetailEntity>>();
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_ProOutHead", "P_ProOutNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
-                    entity.P_ProOutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
-                }
-                else
-                {
-                    entity.P_ProOutNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProOut).ToString()); //标志已使用
-            }
             proOutMakeIBLL.SaveEntity(keyValue,entity,mes_ProOutDetailList);
             return Success("保存成功！");
         }

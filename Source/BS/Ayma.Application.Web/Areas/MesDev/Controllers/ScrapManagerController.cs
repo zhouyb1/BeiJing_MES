@@ -204,26 +204,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             foreach (var goods in detail)
             {
-                var stock_qty = invSeachIbll.GetListByParams(goods.S_GoodsCode, goods.S_Batch).I_Qty;
+                var stock_qty = invSeachIbll.GetEntityBy(goods.S_GoodsCode,entity.S_StockCode, goods.S_Batch).I_Qty;
                 if (goods.S_Qty > stock_qty)
                 {
                     return Fail("【" + goods.S_GoodsName + "】" + "库存不足");
                 }
-            }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_ScrapHead", "S_ScrapNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString()); //标志已使用
-                    entity.S_ScrapNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString());
-                }
-                else
-                {
-                    entity.S_ScrapNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString()); //标志已使用
             }
             scrapManagerIBLL.SaveEntity(keyValue,entity,detail);
             return Success("保存成功！");

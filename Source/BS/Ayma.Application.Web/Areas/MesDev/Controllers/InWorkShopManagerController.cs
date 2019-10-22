@@ -233,21 +233,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_InWorkShopHead", "I_InNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.InX).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.InX).ToString()); //标志已使用
-                    entity.I_InNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.InX).ToString());
-                }
-                else
-                {
-                    entity.I_InNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.InX).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.InX).ToString()); //标志已使用
-            }
             inWorkShopManagerIBLL.SaveEntity(keyValue, entity, mes_InWorkShopDetailList);
             return Success("保存成功！");
         }

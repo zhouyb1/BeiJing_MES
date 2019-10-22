@@ -180,28 +180,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             //获取库存
             var list = from goods in mes_CollarDetailEntityList
-                       let stock = invSeachIbll.GetListByParams(goods.C_GoodsCode,goods.C_Batch)
+                       let stock = invSeachIbll.GetEntityBy(goods.C_GoodsCode,entity.C_StockCode, goods.C_Batch)
                        let qty =stock==null?0:stock.I_Qty
                 where goods.C_Qty > qty
                 select goods;
             foreach (var s in list)
             {
                 return Fail(s.C_GoodsName + "不存在或库存不足");
-            }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_CollarHead", "C_CollarNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
-                    entity.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString());
-                }
-                else
-                {
-                    entity.C_CollarNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Requist).ToString()); //标志已使用
             }
             pickingMaterIBLL.SaveEntity(keyValue, entity, mes_CollarDetailEntityList);
             return Success("保存成功！");

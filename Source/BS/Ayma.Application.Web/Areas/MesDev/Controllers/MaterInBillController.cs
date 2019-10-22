@@ -338,6 +338,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             materInBillIBLL.DeleteEntity(keyValue);
             return Success("删除成功！");
         }
+
         /// <summary>
         /// 保存实体数据（新增、修改）
         /// </summary>
@@ -347,21 +348,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity, string strmes_MaterInDetailList)
+        public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity,
+            string strmes_MaterInDetailList)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
-                var entityTemp=materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
+                var entityTemp = materInBillIBLL.GetMes_MaterInHeadEntity(keyValue);
                 if (entityTemp.M_Status == ErpEnums.MaterInStatusEnum.Audit)
                 {
                     return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_MaterInHeadEntity entity = strEntity.ToObject<Mes_MaterInHeadEntity>();
-            List<Mes_MaterInDetailEntity> mes_MaterInDetailList = strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
+            List<Mes_MaterInDetailEntity> mes_MaterInDetailList =
+                strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
             foreach (var item in mes_MaterInDetailList)
             {
-                if (string.IsNullOrEmpty(item.M_Qty.ToString())||item.M_Qty==0)
+                if (string.IsNullOrEmpty(item.M_Qty.ToString()) || item.M_Qty == 0)
                 {
                     return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
                 }
@@ -370,54 +373,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     return Fail("物料【" + item.M_GoodsName + "】价格为空请及时维护价格!");
                 }
             }
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                entity.M_OrderKind = orderKind;//单据类型 成品与非成品
-                if (entity.M_OrderKind==ErpEnums.OrderKindEnum.NoProduct)
-                {
-                    entity.M_Kind = 0;
-                }
-                else
-                {
-                    entity.M_Kind = 1;
-                    
-                }
-                var codeRulebll = new CodeRuleBLL();
-                if (entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct)
-                {
-                    if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString())))
-                    {
-                        //若重复 先占用再赋值
-                        codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
-                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
-                    }
-                    else
-                    {
-                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString());
-                    }
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.MaterIn).ToString()); //标志已使用
-                }
-                else
-                {
-                    if (toolsIBLL.IsOrderNo("Mes_MaterInHead", "M_MaterInNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString())))
-                    {
-                        //若重复 先占用再赋值
-                        codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString()); //标志已使用
-                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString());
-                    }
-                    else
-                    {
-                        entity.M_MaterInNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString());
-                    }
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.ProjectMaterIn).ToString()); //标志已使用
-                }
-
-
-            }
-
+            entity.M_OrderKind = orderKind; //单据类型 成品与非成品
+            entity.M_Kind = entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct ? 0 : 1;
             materInBillIBLL.SaveEntity(keyValue, entity, mes_MaterInDetailList);
             return Success("保存成功！");
         }
+
         #endregion
 
     }
