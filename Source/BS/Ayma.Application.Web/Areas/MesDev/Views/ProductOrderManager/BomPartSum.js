@@ -147,8 +147,8 @@ var bootstrap = function ($, ayma) {
             return false;
         }
         //var strJsonBomList = JSON.stringify($('#girdtable').jfGridGet('rowdata')[0].jfGrid_ChildRows);
-        var dataSelect = $('#girdtable').jfGridGet('rowdata');
-        if (dataSelect == undefined) {
+        var dataSelect = $('#girdtable').jfGridGet('rowdatas');
+        if (dataSelect.length==0) {
             ayma.alert.error("请选择商品");
             return false;
         }
