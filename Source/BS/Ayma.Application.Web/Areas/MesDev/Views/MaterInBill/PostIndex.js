@@ -45,7 +45,7 @@ var bootstrap = function ($, ayma) {
             }, 180, 300);
             $('#M_StockName').select({
                 type: 'default',
-                value: 'S_Code',
+                value: 'S_Name',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
