@@ -134,6 +134,8 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isPage: true,
                 isStatistics: true,
+                sidx: 'P_OrderDate',
+                sord: 'desc'
             });
         },
         search: function (param) {

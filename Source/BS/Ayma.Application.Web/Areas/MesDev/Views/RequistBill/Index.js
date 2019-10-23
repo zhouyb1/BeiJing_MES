@@ -224,7 +224,7 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'ID',
                 isPage: true,
-                sidx: 'R_RequistNo',
+                sidx: 'R_CreateDate',
                 sord: 'DESC'
             });
         },
