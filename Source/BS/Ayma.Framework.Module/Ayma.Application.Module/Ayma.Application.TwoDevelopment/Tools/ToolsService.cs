@@ -1350,15 +1350,22 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
+                if (string.IsNullOrEmpty(proc))
+                {
+                    var sql = "update Mes_OrgResHead set O_Status = 3 where O_OrgResNo ='"+orderNo+"'";
+                    errMsg = "";
+                    var status = this.BaseRepository().ExecuteBySql(sql, null) == 1 ? 0 : 1;
+                    return status;
+                }
                 UserInfo userinfo = LoginUserInfo.Get();
-                var dp = new DynamicParameters(new { });
+                var dp = new DynamicParameters(new {});
                 dp.Add("@OrderNo", orderNo);
                 dp.Add("@UserName", userinfo.realName);
                 dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
                 dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
                 this.BaseRepository().ExecuteByProc(proc, dp);
-                errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
-                return dp.Get<int>("@errcode");//返回的错误代码 0：成功
+                errMsg = dp.Get<string>("@errtxt"); //存储过程返回的错误消息
+                return dp.Get<int>("@errcode"); //返回的错误代码 0：成功
             }
             catch (Exception ex)
             {
