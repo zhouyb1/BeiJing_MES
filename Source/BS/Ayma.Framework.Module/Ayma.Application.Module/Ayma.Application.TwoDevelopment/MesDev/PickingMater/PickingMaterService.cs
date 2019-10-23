@@ -178,16 +178,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"SELECT  S.ID ,
                                         S.I_StockCode ,
                                         S.I_StockName ,
-                                        S.I_SupplyCode ,
-                                        S.I_SupplyName ,
                                         S.I_Kind ,
                                         S.I_GoodsCode ,
                                         S.I_GoodsName ,
                                         S.I_Unit ,
                                         S.I_Qty ,                              
                                         S.I_Batch ,
-										(select G_Price from Mes_Goods G  where G.G_Code=S.I_GoodsCode ) I_Price 
-                                   FROM    dbo.Mes_Inventory S  where 1 = 1");
+									    G.G_Price I_Price,
+										G.G_SupplyCode I_SupplyCode,
+										G.G_SupplyName I_SupplyName
+                                   FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where 1 = 1");
 
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数

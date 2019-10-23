@@ -107,14 +107,31 @@ var bootstrap = function ($, ayma) {
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'I_GoodsCode',
+                sidx: 'I_GoodsCode,I_Batch',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                     //    return;
-                    //}
+                    //} 
+                
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        //提示用户选择最早批次
+                        var list = $('#girdtable').jfGridGet('rowdatas');
+                        var data = [];
+                        data = list.filter(function (item) {
+                            return item.I_GoodsCode == row['I_GoodsCode']
+                        })
+                        var min = data[0].I_Batch;
+                        var len = data.length;
+                        for (var i = 1; i < len; i++) {
+                            if (data[i].I_Batch < min) {
+                                min = data[i].I_Batch;
+                            }
+                        }
+                        if (row['I_Batch'] > min) {
+                            ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['I_GoodsName'] + '】');
+                        }                   
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
