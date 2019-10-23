@@ -641,6 +641,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    if (entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct)
+                    {
+                        dp.Add("@BillType", "入库单");
+                        dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                        db.ExecuteByProc("sp_GetDoucno", dp);
+                    }
+                    else
+                    {
+                        dp.Add("@BillType", "成品入库单");
+                        dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                        db.ExecuteByProc("sp_GetDoucno", dp);
+                    }
+                    var billNo = dp.Get<string>("@Doucno"); //存储过程返回单号
+                    entity.M_MaterInNo = billNo;
                     entity.Create();
                     db.Insert(entity);
                     foreach (Mes_MaterInDetailEntity item in mes_MaterInDetailList)

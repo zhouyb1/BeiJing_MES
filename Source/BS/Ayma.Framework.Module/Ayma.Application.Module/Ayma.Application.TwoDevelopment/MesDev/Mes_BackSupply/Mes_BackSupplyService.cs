@@ -344,6 +344,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "退供应商单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    db.ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.B_BackSupplyNo = billNo;
                     entity.Create();
                     db.Insert(entity);
                     foreach (Mes_BackSupplyDetailEntity item in mes_BackSupplyDetailList)

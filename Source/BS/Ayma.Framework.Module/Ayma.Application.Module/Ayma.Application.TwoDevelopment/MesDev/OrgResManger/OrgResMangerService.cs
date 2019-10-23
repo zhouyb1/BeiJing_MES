@@ -285,6 +285,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "组装与拆分单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    db.ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.O_OrgResNo = billNo;
                     entity.Create();
                     db.Insert(entity);
                     foreach (var item in mes_OrgResDetailList)

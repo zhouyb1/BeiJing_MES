@@ -321,6 +321,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "成品出库单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    db.ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.O_OutNo = billNo;
                     entity.Create();
                     db.Insert(entity);
                     foreach (var item in mes_OutWorkShopDetailList)

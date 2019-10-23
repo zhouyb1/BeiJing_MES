@@ -385,14 +385,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "调拨单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    db.ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.R_RequistNo = billNo;
                     entity.Create();
                     db.Insert(entity);
                     foreach (Mes_RequistDetailEntity item in mes_RequistDetailList)
                     {
                         item.Create();
                         item.R_RequistNo = entity.R_RequistNo;
-                        db.Insert(item);
                     }
+                    db.Insert(mes_RequistDetailList);
                 }
                 db.Commit();
             }
