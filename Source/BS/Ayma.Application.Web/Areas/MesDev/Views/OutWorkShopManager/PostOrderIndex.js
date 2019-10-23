@@ -159,7 +159,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'O_CreateDate',
+                sord: 'DESC'
             });
         },
         search: function (param) {

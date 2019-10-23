@@ -135,7 +135,7 @@ var bootstrap = function ($, ayma) {
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
-                sidx: 'B_BackSupplyNo',
+                sidx: 'B_CreateDate',
                 sord:'desc'
             });
         },

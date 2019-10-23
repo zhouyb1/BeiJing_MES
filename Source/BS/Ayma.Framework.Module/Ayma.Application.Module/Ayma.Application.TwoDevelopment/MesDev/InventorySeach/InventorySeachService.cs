@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					t.I_Unit,
                     (select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) as G_Super,
 					(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) as G_Lower,
-                     case when sum(t.I_Qty)>(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) and sum(t.I_Qty)<(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '正常' 
+                     case when sum(t.I_Qty)>=(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) and sum(t.I_Qty)<=(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '正常' 
 					 when sum(t.I_Qty)<(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '库存不足' 
 					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then  '高于上限预警' else '无' end as G_State
                 ");

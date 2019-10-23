@@ -32,6 +32,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         G_Code ,
                                         G_Name ,
                                         G_Unit,
+                                        t.G_CreateDate,
                                        (SELECT ISNULL(SUM(M_Qty),0) FROM dbo.Mes_MaterInDetail d WHERE d.M_GoodsCode=G_Code ) In_Qty ,
                                        (SELECT ISNULL(sum(c.C_Qty),0) FROM dbo.Mes_CollarDetail c WHERE c.C_GoodsCode=G_Code) Out_Qty ,
                                        (SELECT ISNULL(SUM(B_Qty),0) FROM dbo.Mes_BackStockHead INNER JOIN dbo.Mes_BackStockDetail ON Mes_BackStockDetail.B_BackStockNo = Mes_BackStockHead.B_BackStockNo WHERE B_Kind=1 AND B_GoodsCode=G_Code) Back_Qty
@@ -62,7 +63,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 //    dp.Add("G_CreateDate1", queryParam["G_CreateDate1"].ToDate(), DbType.DateTime);
                 //    strSql.Append(" AND ( t.G_CreateDate >= @G_CreateDate AND t.G_CreateDate <= @G_CreateDate1 ) ");
                 //}
-                strSql.Append(" GROUP BY t.G_Code,t.G_Name ,t.G_Unit,t.ID");
+                strSql.Append(" GROUP BY t.G_Code,t.G_Name ,t.G_Unit,t.ID,t.G_CreateDate");
                 return this.BaseRepository().FindTable(strSql.ToString(), dp,pagination);
             }
             catch (Exception ex)

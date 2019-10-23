@@ -108,12 +108,15 @@ var bootstrap = function ($, ayma) {
                     { label: "出库数量", name: "out_qty", width: 160, align: "left" },
                     { label: "次品退库数量", name: "back_qty", width: 160, align: "left" },
                     { label: "单位", name: "g_unit", width: 160, align: "left"},
-                    { label: "添加时间", name: "g_creatdate", width: 160, align: "left"}
+                    { label: "添加时间", name: "g_createdate", width: 160, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
                 footerrow: true,
-                isPage: true
+                isPage: true,
+                isStatistics: true,
+                sidx: 'g_createdate',                
+                sord: 'desc'
             });
 
             $('#girdtable_detail').jfGrid({
@@ -135,7 +138,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'g_code,m_batch',
+                sord: 'asc'
             });
         },
         search: function (param) {

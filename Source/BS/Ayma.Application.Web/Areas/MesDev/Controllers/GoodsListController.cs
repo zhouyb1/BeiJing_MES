@@ -257,7 +257,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 {
                     return Fail("下限预警比例必须是非负数.");
                 }
-            }
+            } 
+            if (entity.G_Lower.ToString()!=""&& entity.G_Super.ToString()!="")
+            {
+                if (entity.G_Lower.ToInt() >= entity.G_Super.ToInt())
+                {
+                    return Fail("下限预警数量必须小于上限预警数量");
+                }
+            }       
             if (!string.IsNullOrEmpty(entity.G_UnitWeight.ToString()))
             {
                 var reg = Regex.IsMatch(entity.G_UnitWeight.ToString(), @"^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$");

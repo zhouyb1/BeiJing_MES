@@ -332,23 +332,16 @@ var bootstrap = function ($, ayma) {
         if (!$('body').Validform()) {
             return false;
         }
-        var G_Lower = $("#G_Lower").val();
-        var gsuper = $("#G_Super").val();
-        if (gsuper != undefined && gsuper != "") {
-
-            if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(gsuper.toString().replace('.', ''))) {
-                ayma.alert.error("上限预警数量必须是非负数.");
-                $("#G_Super").val(0);
-                return false;
-            }
-        }
-        if (gsuper != undefined && gsuper != "" && G_Lower != undefined && G_Lower != "") {
-            if (G_Lower >= gsuper) {
-                ayma.alert.error("下限预警数量必须小于上限预警数量.");
-                $("#G_Lower").addClass("am-field-error");
-                return false;
-            }
-        }
+        //var G_Lower = $("#G_Lower").val();
+        //var gsuper = $("#G_Super").val();
+        //if (G_Lower > gsuper) {
+        //    alert(G_Lower);
+        //    alert(gsuper);
+        //    ayma.alert.error("下限预警数量必须小于上限预警数量.");
+        //    $("#G_Lower").addClass("am-field-error");
+        //    return false;
+        //}
+        
         var postData = {
             strEntity: JSON.stringify($('body').GetFormData())
         };

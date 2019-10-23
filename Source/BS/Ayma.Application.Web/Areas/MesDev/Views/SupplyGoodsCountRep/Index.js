@@ -111,7 +111,9 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isPage: true,
                 isStatistics: true,
-                footerrow: true
+                footerrow: true,
+                sidx: 'm_createdate',                 // 排序列
+                sord: 'desc'              // 排序类型
             });
 
             //明细

@@ -104,7 +104,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId: 'O_SecGoodsCode',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: "O_Batch",
+                sord: 'DESC',
             });
            
         },
