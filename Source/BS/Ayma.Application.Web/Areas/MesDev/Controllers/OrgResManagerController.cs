@@ -203,7 +203,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = orgResMangerIBLL.GetMes_OrgResHeadEntity(keyValue);
                 if (entityTemp.O_Status == ErpEnums.MaterInStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑!");
+                    return Fail("该单据已审核,不能修改！");
                 }
             }
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();

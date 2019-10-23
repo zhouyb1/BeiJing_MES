@@ -220,7 +220,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 var entityTemp = inWorkShopManagerIBLL.GetMes_InWorkShopHeadEntity(keyValue);
                 if (entityTemp.I_Status == ErpEnums.InStatusEnum.Audit)
                 {
-                    return Fail("该单据已审核,不能编辑.");
+                    return Fail("该单据已审核,不能编辑！");
                 }
             }
             Mes_InWorkShopHeadEntity entity = strEntity.ToObject<Mes_InWorkShopHeadEntity>();
