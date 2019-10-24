@@ -137,7 +137,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     id: 'MaterListForm',
                     title: '添加物料',
                     url: top.$.rootUrl + '/MesDev/InWorkShopManager/MaterListIndex?formId=' + parentFormId + '&stockCode=' + stockCode,
-                    width: 700,
+                    width: 750,
                     height: 500,
                     maxmin: true,
                     callback: function (id, index) {

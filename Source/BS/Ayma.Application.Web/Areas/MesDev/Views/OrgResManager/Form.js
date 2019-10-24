@@ -115,6 +115,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
             //添加物料
             $('#am_add').on('click', function () {
+                if ($("#O_OrderNo").selectGet() == "") {
+                    ayma.alert.error("请选择订单号！");
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',

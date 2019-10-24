@@ -90,8 +90,8 @@ var bootstrap = function ($, ayma) {
                     id: 'GoodsListIndexForm',
                     title: '添加物料',
                     url: top.$.rootUrl + '/MesDev/ProOutMake/GoodsListIndex?formId=' + parentFormId + '&stockCode=' + stockCode,
-                    width: 1000,
-                    height: 800,
+                    width: 750,
+                    height: 600,
                     maxmin: true,
                     callBack: function (id, index) {
                         return top[id].closeWindow();

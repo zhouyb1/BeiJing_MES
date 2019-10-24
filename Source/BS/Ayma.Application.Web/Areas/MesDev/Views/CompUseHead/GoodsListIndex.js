@@ -102,25 +102,44 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "物料编码", name: "id", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "g_code", width: 130, align: "left" },
-                    { label: "物料名称", name: "g_name", width: 130, align: "left" },
-                     
-                    { label: "批次", name: "batch", width: 80, align: "left" },
+                    { label: "物料名称", name: "g_name", width: 130, align: "left" },                 
                     { label: "数量", name: "qty", width: 60, align: "left" },
                     { label: "价格", name: "g_price", width: 60, align: "left" },
-                    { label: "单位", name: "g_unit", width: 60, align: "left" }
+                    { label: "单位", name: "g_unit", width: 60, align: "left" },
+                    { label: "批次", name: "batch", width: 80, align: "left" }
                 ],
                 mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'g_code',
+                sidx: 'g_code,batch',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                     //    return;
                     //}
+                    var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+
+                        if (!allCheck.is(":checked")) {
+                            //提示用户选择最早批次
+                            var list = $('#girdtable').jfGridGet('rowdatas');
+                            var data = [];
+                            data = list.filter(function (item) {
+                                return item.g_code == row['g_code']
+                            })
+                            var min = data[0].batch;
+                            var len = data.length;
+                            for (var i = 1; i < len; i++) {
+                                if (data[i].batch < min) {
+                                    min = data[i].batch;
+                                }
+                            }
+                            if (row['batch'] > min) {
+                                ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['g_name'] + '】');
+                            }
+                        }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方

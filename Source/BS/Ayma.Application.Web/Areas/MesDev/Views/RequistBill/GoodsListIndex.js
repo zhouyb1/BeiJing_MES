@@ -96,19 +96,19 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/RequistBill/GetList?stockCode=' + stockCode,
                 headData: [
                     { label: "物料编码", name: "id", width: 130, align: "left",hidden:true },
-                    { label: "物料编码", name: "g_code", width: 130, align: "left" },
+                    { label: "物料编码", name: "g_code", width: 80, align: "left" },
                     { label: "物料名称", name: "g_name", width: 130, align: "left" },
                     {
                         label: "商品类型", name: "g_kind", width: 70, align: "left",
                         formatterAsync: function (callback, value, row) {
                             switch (value) {
-                                case "1":
+                                case 1:
                                     callback("<span class='label label-success'>" + "原料" + "</span>");
                                     break;
-                                case "2":
+                                case 2:
                                     callback("<span class='label label-info'>" + "半成品" + "</span>");
                                     break;
-                                case "3":
+                                case 3:
                                     callback("<span class='label label-default'>" + "成品" + "</span>");
                                     break;
                             }
@@ -118,7 +118,7 @@ var bootstrap = function ($, ayma) {
                     { label: "价格", name: "g_price", width: 80, align: "left" },
                     { label: "单位", name: "g_unit", width: 60, align: "left" },
                     { label: "供应商编码", name: "g_supplycode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "g_supply", width: 130, align: "left" },
+                    { label: "供应商名称", name: "g_supplyname", width: 130, align: "left" },
                     { label: "库存数量", name: "i_qty", width: 80, align: "left" },
                     { label: "批次", name: "i_batch", width: 80, align: "left" }
                 ],
@@ -126,14 +126,33 @@ var bootstrap = function ($, ayma) {
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'g_code',
+                sidx: 'g_code,i_batch',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                     //    return;
                     //}
+                    var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        if (!allCheck.is(":checked")) {
+                            //提示用户选择最早批次
+                            var list = $('#girdtable').jfGridGet('rowdatas');
+                            var data = [];
+                            data = list.filter(function (item) {
+                                return item.g_code == row['g_code']
+                            })
+                            var min = data[0].i_batch;
+                            var len = data.length;
+                            for (var i = 1; i < len; i++) {
+                                if (data[i].i_batch < min) {
+                                    min = data[i].i_batch;
+                                }
+                            }
+                            if (row['i_batch'] > min) {
+                                ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['g_name'] + '】');
+                            }
+                        }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
