@@ -73,25 +73,25 @@ var bootstrap = function ($, ayma) {
                 }
             });
             //全选
-            $("#jfgrid_all_cb_girdtable").on('click', function () {
-                var array = [];
-                //获取一键数量
-                var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
-                for (var i = 0; i < newArray.length; i++) {
-                    //copy需要更改的地方
-                    newArray[i]['P_GoodsCode'] = newArray[i]['I_GoodsCode'];
-                    newArray[i]['P_GoodsName'] = newArray[i]['I_GoodsName'];
-                    newArray[i]['P_Unit'] = newArray[i]['I_Unit'];
-                    newArray[i]['I_Qty'] = newArray[i]['I_Qty'];
-                    newArray[i]['P_Price'] = newArray[i]['I_Price'];
-                    newArray[i]["P_Qty"] = quantity;
-                    newArray[i]['P_Batch'] = newArray[i]["I_Batch"];
-                    newArray[i]["ID"] = newArray[i]['ID'];
-                    array.push(newArray[i]);
-                }
-                parentRefreshGirdData(array);
+            //$("#jfgrid_all_cb_girdtable").on('click', function () {
+            //    var array = [];
+            //    //获取一键数量
+            //    var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
+            //    for (var i = 0; i < newArray.length; i++) {
+            //        //copy需要更改的地方
+            //        newArray[i]['P_GoodsCode'] = newArray[i]['I_GoodsCode'];
+            //        newArray[i]['P_GoodsName'] = newArray[i]['I_GoodsName'];
+            //        newArray[i]['P_Unit'] = newArray[i]['I_Unit'];
+            //        newArray[i]['I_Qty'] = newArray[i]['I_Qty'];
+            //        newArray[i]['P_Price'] = newArray[i]['I_Price'];
+            //        newArray[i]["P_Qty"] = quantity;
+            //        newArray[i]['P_Batch'] = newArray[i]["I_Batch"];
+            //        newArray[i]["ID"] = newArray[i]['ID'];
+            //        array.push(newArray[i]);
+            //    }
+            //    parentRefreshGirdData(array);
 
-            });
+            //});
         },
         // 初始化列表
         initGird: function () {
@@ -118,12 +118,18 @@ var bootstrap = function ($, ayma) {
                     var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        if (row['I_Qty'] <= 0) {
+                            isChecked.attr('checked', false);  //移除 checked 状态
+                            ayma.alert.error('库存为负数');
+                        }else{
                         if (!allCheck.is(":checked")) {
                             //提示用户选择最早批次
                             var list = $('#girdtable').jfGridGet('rowdatas');
                             var data = [];
                             data = list.filter(function (item) {
-                                return item.I_GoodsCode == row['I_GoodsCode']
+                                if (item.I_Qty > 0) {
+                                    return item.I_GoodsCode == row['I_GoodsCode'];
+                                }
                             })
                             var min = data[0].I_Batch;
                             var len = data.length;
@@ -136,6 +142,7 @@ var bootstrap = function ($, ayma) {
                                 ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['I_GoodsName'] + '】');
                             }
                         }
+                    }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方

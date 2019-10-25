@@ -111,12 +111,19 @@ var bootstrap = function ($, ayma) {
                     var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        if (row['G_Qty'] <= 0) {
+                            isChecked.attr('checked', false);  //移除 checked 状态
+                            ayma.alert.error('库存为负数');
+                        }
+                        else {
                         if (!allCheck.is(":checked")) {
                             //提示用户选择最早批次
                             var list = $('#girdtable').jfGridGet('rowdatas');
                             var data = [];
                             data = list.filter(function (item) {
-                                return item.G_GoodsCode == row['G_GoodsCode']
+                                if (item.G_Qty > 0) {
+                                    return item.G_GoodsCode == row['G_GoodsCode'];
+                                }
                             })
                             var min = data[0].G_Batch;
                             var len = data.length;
@@ -129,6 +136,7 @@ var bootstrap = function ($, ayma) {
                                 ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['G_GoodsName'] + '】');
                             }
                         }
+                    }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方

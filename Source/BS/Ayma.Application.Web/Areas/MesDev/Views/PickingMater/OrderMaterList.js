@@ -116,8 +116,8 @@ var bootstrap = function ($, ayma) {
                     var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {         
-                        if (row['I_Qty'] < 0) {
-                            isChecked.attr('checked', false)  //移除 checked 状态 
+                        if (row['I_Qty'] <=0) {
+                            isChecked.attr('checked', false); //移除 checked 状态
                             ayma.alert.error('库存为负数');
                         }
                         else { 
