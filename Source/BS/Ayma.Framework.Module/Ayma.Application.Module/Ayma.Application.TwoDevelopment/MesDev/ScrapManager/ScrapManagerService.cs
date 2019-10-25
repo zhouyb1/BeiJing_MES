@@ -208,7 +208,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 g.G_Price ,
                                 t.I_Qty G_Qty 
                         FROM    dbo.Mes_Inventory t
-                        LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE t.I_StockCode =@I_StockCode ");
+                        LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE t.I_Qty <> 0 and t.I_StockCode =@I_StockCode ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             if (!keyword.IsEmpty())

@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_Batch
                 ");
                 strSql.Append("  FROM Mes_Inventory t LEFT JOIN Mes_Goods b ON t.I_GoodsCode=b.G_Code");
-                strSql.Append("  WHERE 1=1 And t.I_StockCode=@I_StockCode And b.G_Kind=1");
+                strSql.Append("  WHERE b.G_Kind=1 and t.I_Qty <> 0 And t.I_StockCode=@I_StockCode ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters();

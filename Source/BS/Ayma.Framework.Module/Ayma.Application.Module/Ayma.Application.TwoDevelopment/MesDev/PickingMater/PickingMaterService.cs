@@ -187,7 +187,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									    G.G_Price I_Price,
 										G.G_SupplyCode I_SupplyCode,
 										G.G_SupplyName I_SupplyName
-                                   FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where 1 = 1");
+                                   FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where 1 = 1 and  S.I_Qty <> 0");
 
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数

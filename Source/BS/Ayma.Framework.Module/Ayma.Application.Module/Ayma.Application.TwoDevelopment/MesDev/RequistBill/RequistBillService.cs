@@ -33,7 +33,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"
                                  SELECT t.I_Qty,t.I_Batch,t1.* FROM dbo.Mes_Inventory t
                                  LEFT JOIN dbo.Mes_Goods t1 ON t.I_GoodsCode=t1.G_Code");
-                strSql.Append("  where I_StockCode='"+stockCode+"'");
+                strSql.Append("  where t.I_Qty <> 0 AND I_StockCode='" + stockCode + "'");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
