@@ -90,7 +90,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [NotMapped]
-        public string F_Account { get; set; }
+        public string F_RealName { get; set; }
         /// <summary>
         /// 用户班组
         /// </summary>
