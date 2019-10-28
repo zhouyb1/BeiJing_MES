@@ -541,6 +541,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
 
         /// <summary>
+        /// 获取成品列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetProductList(string stockCode)
+        {
+            var data = toosIBLL.GetProductList(stockCode);
+            return Success(data);
+        }
+
+        /// <summary>
         /// 获取订单里的商品
         /// </summary>
         /// <returns></returns>
@@ -585,6 +595,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var isCode = toosIBLL.IsCodeAndSupplyCode(tables, field, code,field2,code2, keyValue);
             return Success(isCode);
+        }
+
+        /// <summary>
+        /// 获取成品批次
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        public ActionResult GetProductBatchList(string goodsCode,string stockCode)
+        {
+            var data = toosIBLL.GetProductBatchList(goodsCode, stockCode);
+            return Success(data);
         }
 
         #endregion

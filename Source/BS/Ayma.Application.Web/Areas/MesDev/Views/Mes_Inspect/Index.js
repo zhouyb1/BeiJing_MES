@@ -91,13 +91,50 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+
+            //提交
+            $('#am_post').on('click', function() {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('I_Status');
+                var orderNo = $('#girdtable').jfGridValue('I_InspectNo');
+                if (ayma.checkrow(keyValue)) {
+                    if (status == 2) {
+                        ayma.alert.warning('请勿重复提交！');
+                        return false;
+                    } else {
+                        ayma.layerConfirm('是否确认提交该项！', function(res) {
+                            if (res) {
+                                ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_BackSupply_Post', type: 1 }, function () {
+                                    refreshGirdData();
+                                });
+                            }
+                        });
+                    }
+                }
+            });
         },
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/Mes_Inspect/GetPageList',
                 headData: [
-                    { label: "主键", name: "ID", width: 160, align: "left",hidden:"true" },
+                    { label: "主键", name: "ID", width: 160, align: "left", hidden: "true" },
+                    {
+                        label: "状态", name: "I_Status", width: 160, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'BackSupplyStatus',
+                                callback: function (_data) {
+                                    if (value == 1) {
+                                        callback("<span class='label label-default'>生成抽检单</span>");
+                                    } else  {
+                                        callback("<span class='label label-info'>完成抽检单</span>");
+                                    } 
+                                }
+                            });
+                        }
+                    },
                     { label: "抽检单号", name: "I_InspectNo", width: 160, align: "left"},
                     { label: "抽检时间", name: "I_Date", width: 160, align: "left"},
                     { label: "生产订单号", name: "I_OrderNo", width: 160, align: "left"},

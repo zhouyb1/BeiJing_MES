@@ -107,21 +107,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SaveForm(string keyValue, string strEntity)
         {
             Mes_InspectEntity entity = strEntity.ToObject<Mes_InspectEntity>();
-            if (string.IsNullOrEmpty(keyValue))
-            {
-                var codeRulebll = new CodeRuleBLL();
-                if (toolsIBLL.IsOrderNo("Mes_Inspect", "I_InspectNo", codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString())))
-                {
-                    //若重复 先占用再赋值
-                    codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString()); //标志已使用
-                    entity.I_InspectNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString());
-                }
-                else
-                {
-                    entity.I_InspectNo = codeRulebll.GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString());
-                }
-                codeRulebll.UseRuleSeed(((int)ErpEnums.OrderNoRuleEnum.Inspect).ToString()); //标志已使用
-            }
             mes_InspectIBLL.SaveEntity(keyValue,entity);
             return Success("保存成功！");
         }
