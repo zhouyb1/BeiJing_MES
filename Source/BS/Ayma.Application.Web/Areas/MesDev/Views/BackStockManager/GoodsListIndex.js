@@ -130,8 +130,17 @@ var bootstrap = function ($, ayma) {
                                         min = data[i].G_Batch;
                                     }
                                 }
-                                if (row['G_Batch'] > min) {
-                                    ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['G_GoodsName'] + '】');
+                                for (var i = 0; i < list.length; i++) {
+                                    if (list[i].G_Batch == min && list[i].G_GoodsCode == data[0].G_GoodsCode)
+                                    {
+                                        var minrowid = i;
+                                    }
+                                }
+                                var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
+                                if (!minisChecked.is(":checked")) {
+                                    if (row['G_Batch'] > min) {
+                                        ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['G_GoodsName'] + '】');
+                                    }
                                 }
                             }
                         }

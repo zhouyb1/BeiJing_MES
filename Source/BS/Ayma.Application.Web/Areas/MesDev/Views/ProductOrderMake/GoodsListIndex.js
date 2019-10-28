@@ -132,6 +132,41 @@ var bootstrap = function ($, ayma) {
                     }
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        if (row['i_qty'] <= 0) {
+                            isChecked.attr('checked', false); //移除 checked 状态
+                            ayma.alert.error('库存为负数');
+                        }
+                        else {
+                            if (!allCheck.is(":checked")) {
+                                //提示用户选择最早批次                          
+                                var list = $('#girdtable').jfGridGet('rowdatas');
+                                var data = [];
+                                data = list.filter(function (item) {
+                                    if (item.i_qty > 0) {
+                                        return item.g_code == row['g_code'];
+                                    }
+                                })
+                                var min = data[0].i_batch;
+                                var len = data.length;
+                                for (var i = 1; i < len; i++) {
+                                    if (data[i].i_batch < min) {
+                                        min = data[i].i_batch;
+
+                                    }
+                                }
+                                for (var i = 0; i < list.length; i++) {
+                                    if (list[i].i_batch == min && list[i].g_code == data[0].g_code) {
+                                        var minrowid = i;
+                                    }
+                                }
+                                var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
+                                if (!minisChecked.is(":checked")) {
+                                    if (row['i_batch'] > min) {
+                                        ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['g_name'] + '】');
+                                    }
+                                }
+                            }
+                        }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
