@@ -43,7 +43,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then  '高于上限预警' else '无' end as G_State
                 ");
                 strSql.Append("  FROM Mes_Inventory  t   group by t.I_StockCode,t.I_GoodsName,t.I_StockName,t.I_GoodsCode,t.I_Unit ");
-                strSql.Append("  having 1=1 ");
+                strSql.Append("  having sum(t.I_Qty)!=0 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
