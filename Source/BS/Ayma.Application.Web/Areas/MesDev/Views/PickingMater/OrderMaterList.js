@@ -112,7 +112,7 @@ var bootstrap = function ($, ayma) {
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                     //    return;
-                    //} 
+                    //}
                     var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {         
@@ -129,16 +129,26 @@ var bootstrap = function ($, ayma) {
                                     if (item.I_Qty > 0) {
                                         return item.I_GoodsCode == row['I_GoodsCode'];
                                     }
-                                })
+                                })                         
                                 var min = data[0].I_Batch;
                                 var len = data.length;
                                 for (var i = 1; i < len; i++) {
                                     if (data[i].I_Batch < min) {
                                         min = data[i].I_Batch;
+                                
                                     }
                                 }
-                                if (row['I_Batch'] > min) {
-                                    ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['I_GoodsName'] + '】');
+                                for (var i = 0; i < list.length; i++) {
+                                    if (list[i].I_Batch == min && list[i].I_GoodsCode == data[0].I_GoodsCode)
+                                    {
+                                       var minrowid = i;
+                                    }
+                                }
+                               var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
+                                if (!isCheckeds.is(":checked")) {
+                                    if (row['I_Batch'] > min) {
+                                        ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['I_GoodsName'] + '】');
+                                    }
                                 }
                             }
                         }
