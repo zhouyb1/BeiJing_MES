@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.P_OrderNo ,\r\n        t.P_OrderDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n        d.C_GoodsName,\r\n        t.C_Remark\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   t.P_Status = 3\r\nORDER BY M_UploadDate DESC",
+			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.P_OrderNo ,\r\n        t.P_OrderDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n        d.C_GoodsName,\r\n        t.C_Remark\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
 			"Field":[
 				{
 					"Name":"F_RowIndex",
