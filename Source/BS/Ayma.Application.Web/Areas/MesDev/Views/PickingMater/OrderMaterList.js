@@ -145,7 +145,7 @@ var bootstrap = function ($, ayma) {
                                     }
                                 }
                                var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
-                               if (!minisChecked.is(":checked")) {
+                                if (!minisChecked.is(":checked")) {
                                     if (row['I_Batch'] > min) {
                                         ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['I_GoodsName'] + '】');
                                     }
