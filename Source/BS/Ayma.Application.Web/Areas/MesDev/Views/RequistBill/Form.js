@@ -149,7 +149,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     row.R_Qty = 0;
                                 }
                                 if (row.R_Qty > row.R_SQty) {
-                                    ayma.alert.error("填入数量不能大于库存数量");
+                                    ayma.alert.error("数量不能大于库存数量");
                                     row.R_Qty = 0;                                
                                 }
                             }

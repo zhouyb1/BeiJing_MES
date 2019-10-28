@@ -103,7 +103,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单位", name: "O_Unit", width: 60, align: "left" },
                     { label:"单价", name:"O_Price", width:60, align:"left"},
                     {
-                        label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'numinput',
+                        label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (row.O_Qty != undefined && !!row.O_Qty) {
@@ -112,10 +112,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         row.O_Qty = 0;
                                     }
                                 }
-                                //if (row.O_Qty > row.I_Qty) {
-                                //    ayma.alert.error("出库数量不能大于库存数量");
-                                //    row.O_Qty = 0;
-                                //}
+                                if (row.O_Qty > row.I_Qty) {
+                                    ayma.alert.error("数量不能大于库存数量");
+                                    row.O_Qty = 0;
+                                }
                             }
                         }
                     },

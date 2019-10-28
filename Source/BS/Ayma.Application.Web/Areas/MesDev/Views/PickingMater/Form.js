@@ -138,7 +138,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "物料名称", name: "C_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "C_Unit", width: 60, align: "left" },
                     {
-                        label: "数量", name: "C_Qty", width: 60, align: "left", editType: 'numinput',
+                        label: "数量", name: "C_Qty", width: 60, align: "left", editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (row.C_Qty != undefined && !!row.C_Qty) {
@@ -146,6 +146,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         ayma.alert.error("数量必须是非负数.");
                                         row.C_Qty = 0;
                                     }
+                                }
+                                if (row.C_Qty > row.StockQty) {
+                                    ayma.alert.error("数量不能大于库存数量");
+                                    row.R_Qty = 0;
                                 }
                             }
                         }

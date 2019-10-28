@@ -93,16 +93,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "单价", name: "I_Price", width: 60, align: "left" },
                     {
-                        label: "数量", name: "I_Qty", width: 60, align: "left", editType: 'numinput',
+                        label: "数量", name: "I_Qty", width: 60, align: "left", editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
-                                if (row.I_Qty != undefined && !!row.I_Qty) {
-                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.I_Qty.toString().replace('.', ''))) {
-                                        ayma.alert.error("数量必须是非负数.");
-                                        row.I_Qty = 0;
-                                    }
+                                if (/\D/.test(row.I_Qty.toString().replace('.', ''))) { //验证只能为数字
+                                    row.I_Qty = 0;
                                 }
-                                
+                                //if (row.I_Qty > row.Qty) {
+                                //    ayma.alert.error("数量不能大于库存");
+                                //    row.I_Qty = 0;
+                                //}
                             }
                         }
                     },

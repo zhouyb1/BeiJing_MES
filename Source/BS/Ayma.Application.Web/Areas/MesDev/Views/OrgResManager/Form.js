@@ -144,7 +144,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         { label: "单价", name: "O_Price", width: 60, align: "left" },
                         { label: "单位", name: "O_Unit", width: 60, align: "left" },
                         {
-                            label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'numinput',
+                            label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'input',
                             editOp: {
                                 callback: function (rownum, row) {
                                     if (row.O_Qty != undefined && !!row.O_Qty) {

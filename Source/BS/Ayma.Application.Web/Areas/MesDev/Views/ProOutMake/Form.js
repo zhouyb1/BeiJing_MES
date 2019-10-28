@@ -129,7 +129,7 @@ var bootstrap = function ($, ayma) {
                                     }
                                 }
                                 if (row.P_Qty > row.I_Qty) {
-                                    ayma.alert.error("出库数量不能大于库存数量");
+                                    ayma.alert.error("数量不能大于库存数量");
                                     row.P_Qty = 0;
                                 }
                             }

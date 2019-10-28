@@ -155,14 +155,15 @@ var bootstrap = function($, ayma) {
                     name: "B_Qty",
                     width: 60,
                     align: "left",
-                    editType: 'numinput',
+                    editType: 'input',
                     editOp: {
-                        callback: function(rownum, row) {
-                            if (row.B_Qty != undefined && !!row.B_Qty) {
-                                if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.B_Qty.toString().replace('.', ''))) {
-                                    ayma.alert.error("数量必须是非负数.");
-                                    row.B_Qty = 0;
-                                }
+                        callback: function (rownum, row) {
+                            if (/\D/.test(row.B_Qty.toString().replace('.', ''))) { //验证只能为数字
+                                row.B_Qty = 0;
+                            }
+                            if (row.B_Qty > row.G_Qty) {
+                                ayma.alert.error("数量不能大于库存");
+                                row.B_Qty = 0;
                             }
                         }
                     }
