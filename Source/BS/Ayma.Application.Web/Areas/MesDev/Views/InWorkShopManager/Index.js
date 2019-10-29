@@ -225,7 +225,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/InWorkShopManager/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "I_Status", width: 160, align: "left",
+                        label: "状态", name: "I_Status", width: 90, align: "left",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -244,14 +244,14 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "I_InNo", width: 160, align: "left"},
-                    { label: "仓库编码", name: "I_StockCode", width: 160, align: "left"},
+                    { label: "入库单号", name: "I_InNo", width: 150, align: "left"},
+                    { label: "仓库编码", name: "I_StockCode", width: 80, align: "left"},
                     { label: "仓库名称", name: "I_StockName", width: 160, align: "left" },
                     { label: "调拨车间", name: "I_WorkShop", width: 160, align: "left" },
                     //{ label: "生产订单号", name: "I_OrderNo", width: 160, align: "left"},
                     //{ label: "生产订单时间", name: "I_OrderDate", width: 160, align: "left"},
                     { label: "备注", name: "I_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "I_CreateBy", width: 160, align: "left" },
+                    { label: "添加人", name: "I_CreateBy", width: 90, align: "left" },
                     { label: "添加时间", name: "I_CreateDate", width: 160, align: "left" },
                 ],
                 mainId:'ID',

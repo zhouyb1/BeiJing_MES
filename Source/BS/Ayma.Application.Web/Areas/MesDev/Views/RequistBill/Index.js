@@ -187,7 +187,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/RequistBill/GetPageList',
                 headData: [
                       {
-                          label: "状态", name: "R_Status", width: 160, align: "left",
+                          label: "状态", name: "R_Status", width: 100, align: "left",
                           formatterAsync: function (callback, value, row) {
                               ayma.clientdata.getAsync('dataItem', {
                                   key: value,
@@ -208,18 +208,18 @@ var bootstrap = function ($, ayma) {
                           }
                       },
                     { label: "调拨单号", name: "R_RequistNo", width: 160, align: "left" },
-                    { label: "原仓库编码", name: "R_StockCode", width: 160, align: "left" },
+                    { label: "原仓库编码", name: "R_StockCode", width: 100, align: "left" },
                     { label: "原仓库名称", name: "R_StockName", width: 160, align: "left" },
-                    { label: "调拨仓库编码", name: "R_StockToCode", width: 160, align: "left" },
+                    { label: "调拨仓库编码", name: "R_StockToCode", width: 100, align: "left" },
                     { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "left" },
                     //{ label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
                     //{ label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "R_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "R_CreateBy", width: 160, align: "left" },
+                    { label: "添加人", name: "R_CreateBy", width: 100, align: "left" },
                     { label: "添加时间", name: "R_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "R_UpdateBy", width: 160, align: "left" },
+                    { label: "修改人", name: "R_UpdateBy", width: 100, align: "left" },
                     { label: "修改时间", name: "R_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "R_UploadBy", width: 160, align: "left" },
+                    { label: "提交人", name: "R_UploadBy", width: 100, align: "left" },
                     { label: "提交时间", name: "R_UploadDate", width: 160, align: "left" }
                 ],
                 mainId: 'ID',

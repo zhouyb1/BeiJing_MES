@@ -244,7 +244,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                      {
-                         label: "出库类型", name: "O_Kind", width: 80, align: "left",
+                         label: "出库类型", name: "O_Kind", width: 100, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -263,7 +263,7 @@ var bootstrap = function ($, ayma) {
                     { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left",hidden:true},
                     { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left",hidden:true},
                     { label: "备注", name: "O_Remark", width: 160, align: "left"},
-                    { label: "添加人", name: "O_CreateBy", width: 160, align: "left"},
+                    { label: "添加人", name: "O_CreateBy", width: 90, align: "left"},
                     { label: "添加时间", name: "O_CreateDate", width: 160, align: "left"},
                 ],
                 mainId:'ID',

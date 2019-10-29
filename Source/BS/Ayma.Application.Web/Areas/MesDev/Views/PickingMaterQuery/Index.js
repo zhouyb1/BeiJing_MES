@@ -113,7 +113,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/PickingMaterQuery/GetPageList',
                 headData: [
                       {
-                          label: "状态", name: "P_Status", width: 160, align: "left",
+                          label: "状态", name: "P_Status", width: 100, align: "left",
                           formatterAsync: function (callback, value, row) {
                               ayma.clientdata.getAsync('dataItem', {
                                   key: value,
@@ -134,12 +134,12 @@ var bootstrap = function ($, ayma) {
                       },
                     { label: "领料单号", name: "C_CollarNo", width: 160, align: "left"},
                     //{ label: "生产订单", name: "P_OrderNo", width: 160, align: "left" },
-                    { label: "原仓库编码", name: "C_StockCode", width: 160, align: "left" },
+                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
                     { label: "原仓库名称", name: "C_StockName", width: 160, align: "left" },
-                    { label: "调拨仓库编码", name: "C_StockToCode", width: 160, align: "left" },
+                    { label: "调拨仓库编码", name: "C_StockToCode", width: 100, align: "left" },
                     { label: "调拨仓库名称", name: "C_StockToName", width: 160, align: "left" },
                     //{ label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },                  
-                    { label: "添加人", name: "C_CreateBy", width: 160, align: "left"},
+                    { label: "添加人", name: "C_CreateBy", width: 90, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left" },
                     { label: "备注", name: "C_Remark", width: 160, align: "left" },
                 ],
