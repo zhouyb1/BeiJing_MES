@@ -15,13 +15,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         bind: function () {
             if (!!keyValue) {
-                $('#I_GoodsName').attr('readonly', true);
-                $('#I_StockName').attr('readonly', true);
+                $('#I_GoodsCode').attr('readonly', true);
+                $('#I_StockCode').attr('readonly', true);
                 $('#I_Kind').attr('readonly', true);
                 $('#I_OrderNo').attr('readonly', true);
                 $('#I_Batch').attr('readonly', true);
-                $('#I_GoodsName').attr('readonly', true);
-
             }
             $('#I_GoodsCode').select();
             $('#I_Batch').select();
@@ -46,19 +44,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     maxHeight: 200,
                     allowSearch: true,
                     param: { stockCode: stock }
-                }).on('change', function () {
-                    var goodsCode = $('#I_GoodsCode').selectGet();
-                    $('#I_Batch').selectRefresh({
-                        type: 'default',
-                        url: top.$.rootUrl + '/MesDev/Tools/GetProductBatchList',
-                        value: 'i_batch',
-                        text: 'i_batch',
-                        maxHeight: 200,
-                        allowSearch: true,
-                        param: { goodsCode: goodsCode, stockCode: $('#I_StockCode').selectGet() }
-                    });
                 });
-              
+
+            });
+
+            $('#I_GoodsCode').on('change', function () {
+                var goodsCode = $('#I_GoodsCode').selectGet();
+                $('#I_Batch').selectRefresh({
+                    type: 'default',
+                    url: top.$.rootUrl + '/MesDev/Tools/GetProductBatchList',
+                    value: 'i_batch',
+                    text: 'i_batch',
+                    maxHeight: 200,
+                    allowSearch: true,
+                    param: { goodsCode: goodsCode, stockCode: $('#I_StockCode').selectGet() }
+                });
             });
           
             //不合格原因
