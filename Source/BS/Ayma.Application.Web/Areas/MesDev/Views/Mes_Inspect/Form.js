@@ -20,6 +20,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#I_Kind').attr('readonly', true);
                 $('#I_OrderNo').attr('readonly', true);
                 $('#I_Batch').attr('readonly', true);
+                $('#I_Date').attr('disabled', true);
             }
             $('#I_GoodsCode').select();
             $('#I_Batch').select();
