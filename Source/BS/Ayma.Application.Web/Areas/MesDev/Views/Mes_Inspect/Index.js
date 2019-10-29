@@ -64,7 +64,12 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status =$('#girdtable').jfGridValue('I_Status');
                 if (ayma.checkrow(keyValue)) {
+                    if (status == 2) {
+                        ayma.alert.warning('抽检已完成，请勿重复修改！');
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
