@@ -125,7 +125,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "主键", name: "ID", width: 160, align: "left", hidden: "true" },
                     {
-                        label: "状态", name: "I_Status", width: 160, align: "left",
+                        label: "状态", name: "I_Status", width: 80, align: "left",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -140,16 +140,16 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "抽检单号", name: "I_InspectNo", width: 160, align: "left"},
-                    { label: "生产订单号", name: "I_OrderNo", width: 160, align: "left"},
-                    { label: "仓库", name: "I_StockName", width: 160, align: "left" },
-                    { label: "仓库编码", name: "I_StockCode", width: 160, align: "left" },
-                    { label: "物料名称", name: "I_GoodsName", width: 160, align: "left" },
-                    { label: "物料编码", name: "I_GoodsCode", width: 160, align: "left" }, 
-                    { label: "抽检批次", name: "I_Batch", width: 160, align: "left" },
-                    { label: "抽检数量", name: "I_GoodsQty", width: 100, align: "left" },
+                    { label: "抽检单号", name: "I_InspectNo", width: 130, align: "left"},
+                    { label: "生产订单号", name: "I_OrderNo", width: 140, align: "left"},
+                    { label: "仓库", name: "I_StockName", width: 100, align: "left" },
+                    { label: "仓库编码", name: "I_StockCode", width: 60, align: "left" },
+                    { label: "物料名称", name: "I_GoodsName", width: 100, align: "left" },
+                    { label: "物料编码", name: "I_GoodsCode", width: 80, align: "left" }, 
+                    { label: "抽检批次", name: "I_Batch", width: 80, align: "left" },
+                    { label: "抽检数量", name: "I_GoodsQty", width: 60, align: "left" },
                     {
-                        label: "抽检类型", name: "I_Kind", width: 160, align: "left",
+                        label: "抽检类型", name: "I_Kind", width: 80, align: "left",
                         formatterAsync: function (callback, value, row) {
                             switch (value) {
                                 case 1:
@@ -161,10 +161,10 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    { label: "合格数量", name: "I_QualifiedQty", width: 100, align: "left"},
+                    { label: "合格数量", name: "I_QualifiedQty", width: 60, align: "left"},
                     { label: "不合格原因", name: "I_Reson", width: 120, align: "left" },
-                    { label: "抽检时间", name: "I_Date", width: 120, align: "left" },
-                    { label: "添加人", name: "I_CreateBy", width: 120, align: "left"},
+                    { label: "抽检时间", name: "I_Date", width: 130, align: "left" },
+                    { label: "添加人", name: "I_CreateBy", width: 80, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,
