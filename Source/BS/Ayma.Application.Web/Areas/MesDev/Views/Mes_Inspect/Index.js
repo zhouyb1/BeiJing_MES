@@ -104,7 +104,7 @@ var bootstrap = function ($, ayma) {
                     } else {
                         ayma.layerConfirm('是否确认提交该项！', function(res) {
                             if (res) {
-                                ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_BackSupply_Post', type: 1 }, function () {
+                                ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Inspect_Post', type: 1 }, function () {
                                     refreshGirdData();
                                 });
                             }
@@ -136,9 +136,13 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "抽检单号", name: "I_InspectNo", width: 160, align: "left"},
-                    { label: "抽检时间", name: "I_Date", width: 160, align: "left"},
                     { label: "生产订单号", name: "I_OrderNo", width: 160, align: "left"},
-                   
+                    { label: "仓库", name: "I_StockName", width: 160, align: "left" },
+                    { label: "仓库编码", name: "I_StockCode", width: 160, align: "left" },
+                    { label: "物料名称", name: "I_GoodsName", width: 160, align: "left" },
+                    { label: "物料编码", name: "I_GoodsCode", width: 160, align: "left" }, 
+                    { label: "抽检批次", name: "I_Batch", width: 160, align: "left" },
+                    { label: "抽检数量", name: "I_GoodsQty", width: 100, align: "left" },
                     {
                         label: "抽检类型", name: "I_Kind", width: 160, align: "left",
                         formatterAsync: function (callback, value, row) {
@@ -152,19 +156,15 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    { label: "车间编码", name: "I_Class", width: 160, align: "left"},
-                    { label: "物料编码", name: "I_GoodsCode", width: 160, align: "left"},
-                    { label: "物料名称", name: "I_GoodsName", width: 160, align: "left"},
-                    { label: "抽检数量", name: "I_GoodsQty", width: 100, align: "left"},
                     { label: "合格数量", name: "I_QualifiedQty", width: 100, align: "left"},
-                    { label: "不合格原因", name: "I_Reson", width: 360, align: "left" },
+                    { label: "不合格原因", name: "I_Reson", width: 120, align: "left" },
+                    { label: "抽检时间", name: "I_Date", width: 120, align: "left" },
                     { label: "添加人", name: "I_CreateBy", width: 120, align: "left"},
-                    { label: "添加时间", name: "I_CreateDate", width: 120, align: "left"},
                 ],
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
-                sidx: 'I_InspectNo',
+                sidx: 'I_Date',
                 sord:'desc'
             });
         },

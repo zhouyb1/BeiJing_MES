@@ -14,11 +14,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (!!keyValue) {
+                $('#I_GoodsName').attr('readonly', true);
+                $('#I_StockName').attr('readonly', true);
+                $('#I_Kind').attr('readonly', true);
+                $('#I_OrderNo').attr('readonly', true);
+                $('#I_GoodsName').attr('readonly', true);
+            }
+            $('#I_Batch').select();
+            $('#I_GoodsCode').select();
             //抽检类型
             $('#I_Kind').DataItemSelect({ code: 'InspectType' });
-            $('#I_Batch').select();
             //仓库编码
-            $('#I_StockName').select({
+            $('#I_StockCode').select({
                 text: "s_name",
                 value: "s_code",
                 type: 'default',
@@ -27,9 +35,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
                 param: { code: "StockList", strWhere: "S_Kind = 3" },
             }).on('change', function () {
-                $('#I_StockCode').val($(this).selectGet());
                 var stock = $(this).selectGet();
-                $('#I_GoodsName').select({
+                $('#I_GoodsCode').selectRefresh({
                     type: 'default',
                     url: top.$.rootUrl + '/MesDev/Tools/GetProductList',
                     value: 'i_goodscode',
@@ -38,26 +45,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     allowSearch: true,
                     param: { stockCode: stock }
                 }).on('change', function () {
-                    var goodsCode = $('#I_GoodsName').selectGet();
-                    $('#I_GoodsCode').val(goodsCode);
-
-                    $('#I_Batch').select({
+                    var goodsCode = $('#I_GoodsCode').selectGet();
+                    $('#I_Batch').selectRefresh({
                         type: 'default',
                         url: top.$.rootUrl + '/MesDev/Tools/GetProductBatchList',
                         value: 'i_batch',
                         text: 'i_batch',
                         maxHeight: 200,
                         allowSearch: true,
-                        param: { goodsCode: $('#I_GoodsName').selectGet(), stockCode: $('#I_StockName').selectGet() }
+                        param: { goodsCode: goodsCode, stockCode: $('#I_StockCode').selectGet() }
                     });
                 });
               
             });
-
-            //$('#I_GoodsName').select().on('change', function() {
-            //    var code = $(this).selectGet();
-            //    $('#I_GoodsCode').val(code);
-            //});
             //不合格原因
             $('#I_Reson').select({
                 type: 'default',
@@ -164,8 +164,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             ayma.alert.error('合格数量不能大于抽检数量!');
             return false;
         };
+        var obj = $('body').GetFormData();
+        obj.I_GoodsName = $('#I_GoodsCode').selectGetText();
+        obj.I_GoodsCode = $('#I_GoodsCode').selectGet();
+        obj.I_StockName = $('#I_StockCode').selectGetText();
+        obj.I_Stockode = $('#I_StockCode').selectGetText();
         var postData = {
-            strEntity: JSON.stringify($('body').GetFormData())
+            strEntity: JSON.stringify(obj)
         };
         $.SaveForm(top.$.rootUrl + '/MesDev/Mes_Inspect/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
