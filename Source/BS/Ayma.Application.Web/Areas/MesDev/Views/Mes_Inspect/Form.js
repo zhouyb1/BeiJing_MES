@@ -19,10 +19,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#I_StockName').attr('readonly', true);
                 $('#I_Kind').attr('readonly', true);
                 $('#I_OrderNo').attr('readonly', true);
+                $('#I_Batch').attr('readonly', true);
                 $('#I_GoodsName').attr('readonly', true);
+
             }
-            $('#I_Batch').select();
             $('#I_GoodsCode').select();
+            $('#I_Batch').select();
             //抽检类型
             $('#I_Kind').DataItemSelect({ code: 'InspectType' });
             //仓库编码
@@ -58,6 +60,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
               
             });
+          
             //不合格原因
             $('#I_Reson').select({
                 type: 'default',
