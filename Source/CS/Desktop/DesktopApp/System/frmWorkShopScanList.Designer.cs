@@ -41,8 +41,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtUnit = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtPc = new System.Windows.Forms.TextBox();
-            this.txtCode = new System.Windows.Forms.TextBox();
+            this.cmbGoodsCode = new System.Windows.Forms.ComboBox();
+            this.cmbPc = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txtBarcode
@@ -143,6 +143,7 @@
             this.txtPrice.Font = new System.Drawing.Font("宋体", 12F);
             this.txtPrice.Location = new System.Drawing.Point(147, 155);
             this.txtPrice.Name = "txtPrice";
+            this.txtPrice.ReadOnly = true;
             this.txtPrice.Size = new System.Drawing.Size(207, 26);
             this.txtPrice.TabIndex = 117;
             // 
@@ -176,35 +177,38 @@
             this.label3.TabIndex = 118;
             this.label3.Text = "单位：";
             // 
-            // txtPc
+            // cmbGoodsCode
             // 
-            this.txtPc.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtPc.Location = new System.Drawing.Point(147, 118);
-            this.txtPc.Name = "txtPc";
-            this.txtPc.Size = new System.Drawing.Size(207, 26);
-            this.txtPc.TabIndex = 112;
+            this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbGoodsCode.FormattingEnabled = true;
+            this.cmbGoodsCode.Location = new System.Drawing.Point(147, 78);
+            this.cmbGoodsCode.Name = "cmbGoodsCode";
+            this.cmbGoodsCode.Size = new System.Drawing.Size(207, 23);
+            this.cmbGoodsCode.TabIndex = 120;
+            this.cmbGoodsCode.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
             // 
-            // txtCode
+            // cmbPc
             // 
-            this.txtCode.Font = new System.Drawing.Font("宋体", 12F);
-            this.txtCode.Location = new System.Drawing.Point(147, 75);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(207, 26);
-            this.txtCode.TabIndex = 114;
+            this.cmbPc.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbPc.FormattingEnabled = true;
+            this.cmbPc.Location = new System.Drawing.Point(147, 116);
+            this.cmbPc.Name = "cmbPc";
+            this.cmbPc.Size = new System.Drawing.Size(207, 23);
+            this.cmbPc.TabIndex = 121;
             // 
             // frmWorkShopScanList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 461);
+            this.Controls.Add(this.cmbPc);
+            this.Controls.Add(this.cmbGoodsCode);
             this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtPc);
             this.Controls.Add(this.txtBarcode);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
@@ -236,7 +240,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtPc;
-        private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.ComboBox cmbGoodsCode;
+        private System.Windows.Forms.ComboBox cmbPc;
     }
 }

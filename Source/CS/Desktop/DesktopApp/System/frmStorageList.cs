@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Business;
 using WeifenLuo.WinFormsUI.Docking;
 using Business.System;
+using System.Data.SqlClient;
 
 namespace DesktopApp
 {
@@ -172,7 +173,9 @@ namespace DesktopApp
         /// <returns></returns>
         public string GetSerialNumber(DateTime serialNumber)
         {
-            string str_serialNumber = serialNumber.ToString("yyyyMMdd");
+
+          
+            /*string str_serialNumber = serialNumber.ToString("yyyyMMdd");
             if (str_serialNumber != "0")
             {
                 //如果数据库最大值流水号中日期和生成日期在同一天，则顺序号加1
@@ -194,7 +197,12 @@ namespace DesktopApp
 
                 }
             }
-            return "I" + DateTime.Now.ToString("yyyyMMdd") + "000001";
+            return "I" + DateTime.Now.ToString("yyyyMMdd") + "000001";*/
+
+            string strRetrun = "";
+
+            strRetrun = MaterInHeadBLL.GetDH("入库单");
+            return strRetrun;
         }
 
         private void txtMaterInNo_TextChanged(object sender, EventArgs e)

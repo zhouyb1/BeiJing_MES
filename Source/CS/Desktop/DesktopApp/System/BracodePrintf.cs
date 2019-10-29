@@ -59,40 +59,87 @@ namespace DesktopApp
 
         private void btn_Weight_Click(object sender, EventArgs e)
         {
-            if (Open())
+            this.Enabled = false;
+            Cursor.Current = Cursors.WaitCursor;
+            try
             {
-                Thread.Sleep(100);
-                if (serialPort1.IsOpen)
+                if (Open())
                 {
-                    byte[] byRead = null;
-                    byRead = new byte[2048];
-                    int nReadLen;
-                    nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
-                    string str = System.Text.Encoding.Default.GetString(byRead);
-                    string[] strWeight = str.Split('=');
-                    int nLen = strWeight.Length;
-                    if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 1].ToString() == strWeight[nLen - 2].ToString())
+                    Thread.Sleep(100);
+                    if (serialPort1.IsOpen)
                     {
-                        txtQty.Text = strWeight[nLen - 1].ToString();
+
+
+                        //int nReadLen;
+                        //Thread.Sleep(200);
+                        //nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+
+                        //string str = System.Text.Encoding.Default.GetString(byRead);
+                        Thread.Sleep(100);
+                        byte[] byRead = new byte[serialPort1.ReadBufferSize];
+                        int nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+                        string str = System.Text.Encoding.Default.GetString(byRead);
+                        //MessageBox.Show(str);
+                        //MessageBox.Show(str.Length.ToString());
+                        string[] strWeight = str.Split('=');
+                        int nLen = strWeight.Length;
+                        //MessageBox.Show(nLen.ToString());
+                        if (nLen > 1)
+                        {
+                            //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
+                            //{
+                            char[] arr = strWeight[nLen - 1].Substring(0, 7).ToCharArray();
+                            Array.Reverse(arr);
+                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
+                            ;
+                            //ZH(strWeight[nLen - 1].ToString());
+
+                            //}
+                            //else
+                            //{
+                            //MessageBox.Show("串口没有打开");
+
+                            //}
+                            Close();
+                            Thread.Sleep(100);
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                        else
+                        {
+                            MessageBox.Show(str);
+                            Close();
+                            Thread.Sleep(100);
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+
+                        //MessageBox.Show(str);
                     }
                     else
                     {
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
                         MessageBox.Show("串口没有打开");
 
                     }
-                    //MessageBox.Show(str);
+
+                    Close();
+                    this.Enabled = true;
+                    Cursor.Current = Cursors.Default;
+
                 }
                 else
                 {
-                    MessageBox.Show("串口没有打开");
+                    this.Enabled = true;
+                    Cursor.Current = Cursors.Default;
                 }
-
-                Close();
-
             }
-            else
+            catch (Exception ex)
             {
-                ;
+                this.Enabled = true;
+                Cursor.Current = Cursors.Default;
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -100,6 +147,7 @@ namespace DesktopApp
         {
             try
             {
+
                 serialPort1.BaudRate = 1200;
                 serialPort1.Open();
                 return true;

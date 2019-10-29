@@ -119,6 +119,7 @@
             // 
             // comStock
             // 
+            this.comStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comStock.Font = new System.Drawing.Font("宋体", 11F);
             this.comStock.FormattingEnabled = true;
             this.comStock.Location = new System.Drawing.Point(155, 78);
@@ -128,6 +129,7 @@
             // 
             // comProductNo
             // 
+            this.comProductNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comProductNo.Font = new System.Drawing.Font("宋体", 11F);
             this.comProductNo.FormattingEnabled = true;
             this.comProductNo.Location = new System.Drawing.Point(155, 121);

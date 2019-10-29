@@ -67,6 +67,7 @@
             // 
             // cmbGoodsCode
             // 
+            this.cmbGoodsCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbGoodsCode.FormattingEnabled = true;
             this.cmbGoodsCode.Location = new System.Drawing.Point(164, 21);

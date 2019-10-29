@@ -6,6 +6,7 @@ using Model;
 using DataAccess.SqlServer;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Business.System
 {
@@ -172,6 +173,24 @@ namespace Business.System
              {
                  throw;
              }
+         }
+
+        public string GetDH(string strDJLX)
+         {
+             string strReturn = "";
+            SqlParameter[] parameters = {
+                        new SqlParameter("@BillType", SqlDbType.NVarChar,20), //单据类型
+                        new SqlParameter("@Doucno", SqlDbType.NVarChar,40) 
+                    };
+            parameters[0].Value = strDJLX;
+            parameters[1].Direction = ParameterDirection.Output;
+            CommandType type = CommandType.StoredProcedure;
+            db.ExecuteNonQuery(type, "sp_GetDoucno", parameters);
+            strReturn = parameters[1].Value.ToString();
+
+ 
+             return strReturn;
+
          }
         
         /// <summary>

@@ -177,7 +177,32 @@ namespace Business.System
                 throw;
             }			
 		}
-        
+
+
+        /// <summary>
+        /// 修改实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns>返回值大于0:修改成功</returns>
+        public int UpdateEntity(string GoodsCode, decimal G_Price)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("Update Mes_Goods set G_Price = @G_Price");
+                strSql.Append(" WHERE G_Code=@G_Code");
+                var paramList = new List<SqlParameter>();
+                paramList.Add(new SqlParameter("@G_Price", G_Price));
+                paramList.Add(new SqlParameter("@G_Code", GoodsCode));
+                var result = db.ExecuteNonQuery(strSql.ToString(), paramList.ToArray());
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// 保存实体数据
         /// </summary>

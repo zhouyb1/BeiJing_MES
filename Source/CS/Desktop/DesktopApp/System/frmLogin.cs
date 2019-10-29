@@ -243,7 +243,7 @@ namespace DesktopApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("更新大约需要一分钟时间,是否更新系统,退出系统?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            if (MessageBox.Show("更新大约需要一分钟时间,是否更新系统,退出系统?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 string strPath = AppDomain.CurrentDomain.BaseDirectory;
                 string yourfilepath = strPath + "\\AutoUpdate.exe";

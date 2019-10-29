@@ -46,6 +46,7 @@ namespace DesktopApp
             for (int i = 0; i < rows.Count; i++)
             {
                 cmbWorkShop.Items.Add(rows[i].W_Code);
+                cmbWorkshopName.Items.Add(rows[i].W_Name);
             }
 
             if (cmbWorkShop.Items.Contains(Globels.strWorkShop))
@@ -54,10 +55,11 @@ namespace DesktopApp
             }
 
             MesStockBLL StockBLL = new MesStockBLL();
-            var Stock_rows = StockBLL.GetList();
+            var Stock_rows = StockBLL.GetData(" where S_Kind = '4'");
             for (int i = 0; i < Stock_rows.Count; i++)
             {
                 cmbStock.Items.Add(Stock_rows[i].S_Code);
+                cmbStockName.Items.Add(Stock_rows[i].S_Name);
             }
             if (cmbStock.Items.Contains(Globels.strStockCode))
             {
@@ -76,18 +78,18 @@ namespace DesktopApp
         {
             MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
             var row = WorkShopBLL.GetData(" where W_Code = '" + cmbWorkShop.Text + "'");
-            txtWorkShopName.Text = row[0].W_Name;
+            cmbWorkshopName.Text = row[0].W_Name;
         }
 
         private void cmbStock_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesStockBLL StockBLL = new MesStockBLL();
             var row = StockBLL.GetData(" where S_Code = '" + cmbStock.Text + "'");
-            txtStockName.Text = row[0].S_Name;
+            cmbStockName.Text = row[0].S_Name;
 
             cmbGoodsCode.Items.Clear();
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-            var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "'");
+            var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_Qty > 0 ");
             for (int i = 0; i < row2.Count; i++)
             {
                 cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
@@ -129,7 +131,7 @@ namespace DesktopApp
                             if (cmbGoodsCode.Items.Contains(strGoodsCode))
                             {
                                 cmbGoodsCode.Text = strTemp[0].ToString();
-                                //txtPc.Text = strTemp[1].ToString();
+                                cmbPc.Text = strTemp[1].ToString();
                                 txtQty.Text = strTemp[2].ToString();
 
                                 MesGoodsBLL GoodsBLL = new MesGoodsBLL();
@@ -147,15 +149,17 @@ namespace DesktopApp
                         else
                         {
                             string[] strTemp = strBarcode.Split(',');
-                            string strGoodsCode = strTemp[0].ToString();
+
+
+                            string strGoodsCode = Resolve(strTemp[0].ToString());
                             if (cmbGoodsCode.Items.Contains(strGoodsCode))
                             {
                                 cmbGoodsCode.Text = Resolve(strTemp[0].ToString());
-                                //txtPc.Text = strTemp[1].ToString();
+                                cmbPc.Text = Resolve(strTemp[1].ToString());
                                 txtQty.Text = Resolve(strTemp[2].ToString());
 
                                 MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                                var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                                var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
                                 int nLen = Goods_rows.Count;
                                 if (nLen > 0)
                                 {
@@ -213,9 +217,9 @@ namespace DesktopApp
                 {
                     Mes_OutWorkShopTempEntity OutWorkShopTempEntity = new Mes_OutWorkShopTempEntity();
                     OutWorkShopTempEntity.O_StockCode = cmbStock.Text;
-                    OutWorkShopTempEntity.O_StockName = txtStockName.Text;
+                    OutWorkShopTempEntity.O_StockName = cmbStockName.Text;
                     OutWorkShopTempEntity.O_WorkShop = cmbWorkShop.Text;
-                    OutWorkShopTempEntity.O_WorkShopName = txtWorkShopName.Text;
+                    OutWorkShopTempEntity.O_WorkShopName = cmbWorkshopName.Text;
                     OutWorkShopTempEntity.O_OrderNo = comOrderNo.Text;
                     OutWorkShopTempEntity.O_Status = 1;
                     OutWorkShopTempEntity.O_CreateBy = Globels.strUser;
@@ -271,7 +275,7 @@ namespace DesktopApp
         {
             try
             {
-                if (MessageBox.Show("是否要完工?", "温馨提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+                if (MessageBox.Show("是否要完工?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
                 {
                     Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
                     var rows = OutWorkShopTempBLL.GetList_OutWorkShopTemp("where O_StockCode = '" + cmbStock.Text + "' and O_WorkShop = '" + cmbWorkShop.Text + "' and O_OrderNo = '" + comOrderNo.Text + "'");
@@ -288,8 +292,9 @@ namespace DesktopApp
                     Mes_OutWorkShopDetailEntity OutWorkShopDetailEntity = new Mes_OutWorkShopDetailEntity();
 
                     string strIn_No = "";
-
-                    var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
+                    MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
+                    strIn_No = MaterInHeadBLL.GetDH("线边仓出库到车间单");
+                    /*var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
                     if (rowsHead == null || rowsHead.Count < 1)
                     {
                         strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
@@ -308,12 +313,12 @@ namespace DesktopApp
                             strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
                         }
 
-                    }
+                    }*/
 
                     OutWorkShopHeadEntity.O_OutNo = strIn_No;
                     OutWorkShopHeadEntity.O_OrderNo = comOrderNo.Text;
                     OutWorkShopHeadEntity.O_StockCode = cmbStock.Text;
-                    OutWorkShopHeadEntity.O_StockName = txtStockName.Text;
+                    OutWorkShopHeadEntity.O_StockName = cmbStockName.Text;
                     OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
                     OutWorkShopHeadEntity.O_CreateDate = DateTime.Now;
                     OutWorkShopHeadEntity.O_OrderDate = txtOrderDate.Text;
@@ -443,7 +448,7 @@ namespace DesktopApp
             {
                 cmbPc.Items.Clear();
                 MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-                var row = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsCode = '" + cmbGoodsCode.Text + "'");
+                var row = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsCode = '" + cmbGoodsCode.Text + "' and I_Qty > 0");
                 for (int i = 0; i < row.Count; i++)
                 {
                     cmbPc.Items.Add(row[i].I_Batch);
@@ -462,20 +467,20 @@ namespace DesktopApp
                 if (nLen > 0)
                 {
                     txtName.Text = Goods_rows[0].G_Name;
-                    //txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
                     strUnit = Goods_rows[0].G_Unit.ToString();
-                    int nKind = Goods_rows[0].G_Kind;
-                    if (nKind == 1)
-                    {
-                        label17.Visible = true;
-                        cmbSupplyName.Visible = true;
+                    //int nKind = Goods_rows[0].G_Kind;
+                    //if (nKind == 1)
+                    //{
+                    //    label17.Visible = true;
+                    //    cmbSupplyName.Visible = true;
 
 
-                    }
-                    else
-                    {
-                        ;
-                    }
+                    //}
+                    //else
+                    //{
+                    //    ;
+                    //}
 
                 }
 
@@ -485,6 +490,20 @@ namespace DesktopApp
             {
                 lblTS.Text = "ex.ToString()";
             }
+        }
+
+        private void cmbWorkshopName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
+            var row = WorkShopBLL.GetData(" where W_Name = '" + cmbWorkshopName.Text + "'");
+            cmbWorkShop.Text = row[0].W_Code;
+        }
+
+        private void cmbStockName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesStockBLL StockBLL = new MesStockBLL();
+            var row = StockBLL.GetData(" where S_Name = '" + cmbStockName.Text + "'");
+            cmbStock.Text = row[0].S_Code;
         }
 
 

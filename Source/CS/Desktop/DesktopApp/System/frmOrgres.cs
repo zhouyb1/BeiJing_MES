@@ -52,6 +52,7 @@ namespace DesktopApp
             for (int i = 0; i < rows.Count; i++)
             {
                 cmbWorkShop.Items.Add(rows[i].W_Code);
+                cmbWorkShopName.Items.Add(rows[i].W_Name);
             }
 
             if (cmbWorkShop.Items.Contains(Globels.strWorkShop))
@@ -64,6 +65,7 @@ namespace DesktopApp
             for (int i = 0; i < Record_rows.Count; i++)
             {
                 cmbRecord.Items.Add(Record_rows[i].R_Record);
+                cmbRecordName.Items.Add(Record_rows[i].R_Name);
             }
 
 
@@ -72,6 +74,7 @@ namespace DesktopApp
             for (int i = 0; i < row.Count; i++)
             {
                 cmbProce.Items.Add(row[i].P_ProNo);
+                cmbProceName.Items.Add(row[i].P_ProName);
             }
             if (cmbProce.Items.Contains(Globels.strProce))
             {
@@ -85,6 +88,7 @@ namespace DesktopApp
             for (int i = 0; i < Team_rows.Count; i++)
             {
                 cmbTeam.Items.Add(Team_rows[i].T_Code);
+                cmbTeamName.Items.Add(Team_rows[i].T_Name);
             }
             if (cmbTeam.Items.Contains(Globels.strTeam))
             {
@@ -103,14 +107,14 @@ namespace DesktopApp
         {
             MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
             var row = WorkShopBLL.GetData("where W_Code = '" + cmbWorkShop.Text + "'");
-            txtWorkShopName.Text = row[0].W_Name;
+            cmbWorkShopName.Text = row[0].W_Name;
         }
 
         private void cmbRecord_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesRecordBLL RecordBLL = new MesRecordBLL();
             var Record_rows = RecordBLL.GetData(" where R_Record = '" + cmbRecord.Text + "'");
-            txtRecordName.Text = Record_rows[0].R_Name;
+            cmbRecordName.Text = Record_rows[0].R_Name;
                 //txt .Items.Add(Record_rows[0].R_Name);
             
         }
@@ -120,7 +124,7 @@ namespace DesktopApp
         {
             Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
             var row = ProceBLL.GetList_Proce("where P_ProNo = '" + cmbProce.Text + "'");
-            txtProceName.Text = row[0].P_ProName;
+            cmbProceName.Text = row[0].P_ProName;
         }
 
         
@@ -152,11 +156,11 @@ namespace DesktopApp
             }
             Globels.strOrderNo = comOrderNo.Text;
             Globels.strWorkShop = cmbWorkShop.Text;
-            Globels.strWorkShopName = txtWorkShopName.Text;
+            Globels.strWorkShopName = cmbWorkShopName.Text;
             Globels.strRecord = cmbRecord.Text;
-            Globels.strRecordName = txtRecordName.Text;
+            Globels.strRecordName = cmbRecordName.Text;
             Globels.strProce = cmbProce.Text;
-            Globels.strProceName = txtProceName.Text;
+            Globels.strProceName = cmbProceName.Text;
 
             frmWorkShopScanList frm = new frmWorkShopScanList(frmMain, frmMain.User);
             frm.ShowDialog();
@@ -192,11 +196,11 @@ namespace DesktopApp
             }
             Globels.strOrderNo = comOrderNo.Text;
             Globels.strWorkShop = cmbWorkShop.Text;
-            Globels.strWorkShopName = txtWorkShopName.Text;
+            Globels.strWorkShopName = cmbWorkShopName.Text;
             Globels.strRecord = cmbRecord.Text;
-            Globels.strRecordName = txtRecordName.Text;
+            Globels.strRecordName = cmbRecordName.Text;
             Globels.strProce = cmbProce.Text;
-            Globels.strProceName = txtProceName.Text;
+            Globels.strProceName = cmbProceName.Text;
 
             frmWorkShopWeightList frm = new frmWorkShopWeightList();
             frm.ShowDialog();
@@ -304,7 +308,7 @@ namespace DesktopApp
             Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
             Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
 
-            string strSql = " where W_RecordCode = '" + cmbRecord.Text + "' and W_ProceCode = '" + cmbProce.Text + "' and W_WorkShop = '" + cmbWorkShop.Text + "' and W_OrderNo = '" + comOrderNo.Text + "'";
+            string strSql = " where W_WorkShop = '" + cmbWorkShop.Text + "'";
             var row = WorkShopScanBLL.GetList_WorkShopScan(strSql);
             //if (row == null || row.Count < 1)
             //{
@@ -452,7 +456,10 @@ namespace DesktopApp
 
                     string strIn_No = "";
 
-                    var rowsHead = OrgResHeadBLL.GetList_OrgResHead("where 1 = 1 order by O_OrgResNo DESC");
+                    MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
+                    strIn_No = MaterInHeadBLL.GetDH("组装与拆分单");
+
+                    /*var rowsHead = OrgResHeadBLL.GetList_OrgResHead("where 1 = 1 order by O_OrgResNo DESC");
                     if (rowsHead == null || rowsHead.Count < 1)
                     {
                         strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
@@ -472,7 +479,7 @@ namespace DesktopApp
                             strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
                         }
 
-                    }
+                    }*/
 
                     OrgResHeadEntity.O_OrgResNo = strIn_No;
                     OrgResHeadEntity.O_OrderNo = comOrderNo.Text;
@@ -483,11 +490,11 @@ namespace DesktopApp
                     OrgResHeadEntity.O_Remark = "";
                     OrgResHeadEntity.O_Status = 1;
                     OrgResHeadEntity.O_WorkShopCode = cmbWorkShop.Text;
-                    OrgResHeadEntity.O_WorkShopName = txtWorkShopName.Text;
+                    OrgResHeadEntity.O_WorkShopName = cmbWorkShopName.Text;
                     OrgResHeadEntity.O_Record = cmbRecord.Text;
                     OrgResHeadEntity.O_ProCode = cmbProce.Text;
                     OrgResHeadEntity.O_TeamCode = cmbTeam.Text;
-                    OrgResHeadEntity.O_TeamName = txtTeamName.Text;
+                    OrgResHeadEntity.O_TeamName = cmbTeamName.Text;
 
                     int nRow = OrgResHeadBLL.SaveEntity("", OrgResHeadEntity);
                     Decimal dSecPrice = 0;
@@ -531,6 +538,7 @@ namespace DesktopApp
 
                     }
                     MessageBox.Show("保存成功");
+                    UpdatePrice(strSecGoods, dSecPrice);
                     Delete();
                     Update();
                 }
@@ -553,7 +561,7 @@ namespace DesktopApp
             var Team_rows = TeamBLL.GetList_Team(" where T_Code = '"+ cmbTeam.Text +"'");
             if(Team_rows.Count > 0)
             {
-                txtTeamName.Text = Team_rows[0].T_Name;
+                cmbTeamName.Text = Team_rows[0].T_Name;
             }
         }
 
@@ -579,54 +587,63 @@ namespace DesktopApp
                     var row = OutWorkShopHeadBLL.GetList_OutWorkShopHead(" where O_OrderNo = '" + strOrderNo + "' and O_WorkShop = '" + strWorkShop + "'");
                     if(row.Count > 0)
                     {
-                        string strStockCode = row[0].O_StockCode;
-                        string strStockName = row[0].O_StockName;
-
-                        Mes_OutWorkShopDetailBLL OutWorkShopDetailBLL = new Mes_OutWorkShopDetailBLL();
-                        Mes_OutWorkShopHeadEntity OutWorkShopHeadEntity = new Mes_OutWorkShopHeadEntity();
-                        Mes_OutWorkShopDetailEntity OutWorkShopDetailEntity = new Mes_OutWorkShopDetailEntity();
-
-                        string strIn_No = "";
-
-                        var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
-                        if (rowsHead == null || rowsHead.Count < 1)
+                        try
                         {
-                            strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                        }
-                        else
-                        {
-                            string strDate = rowsHead[0].O_OutNo.Substring(2, 8);
-                            if (strDate == DateTime.Now.ToString("yyyyMMdd"))
-                            {
-                                string strList = rowsHead[0].O_OutNo.Substring(10, 4);
-                                int nList = Convert.ToInt32(strList) + 1;
-                                strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(4, '0');
-                            }
-                            else
-                            {
-                                strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                            }
+                            this.Enabled = false;
+                            Cursor.Current = Cursors.WaitCursor;
 
-                        }
+                            string strStockCode = row[0].O_StockCode;
+                            string strStockName = row[0].O_StockName;
 
-                        OutWorkShopHeadEntity.O_OutNo = strIn_No;
-                        OutWorkShopHeadEntity.O_OrderNo = strOrderNo;
-                        OutWorkShopHeadEntity.O_StockCode = strStockCode;
-                        OutWorkShopHeadEntity.O_StockName = strStockName;
-                        OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
-                        OutWorkShopHeadEntity.O_CreateDate = DateTime.Now;
-                        OutWorkShopHeadEntity.O_OrderDate = txtOrderDate.Text;
-                        OutWorkShopHeadEntity.O_Remark = "";
-                        OutWorkShopHeadEntity.O_Status = 1;
-                        OutWorkShopHeadEntity.O_WorkShop = cmbWorkShop.Text;
-                        OutWorkShopHeadEntity.O_Kind = 2;
+                            Mes_OutWorkShopDetailBLL OutWorkShopDetailBLL = new Mes_OutWorkShopDetailBLL();
+                            Mes_OutWorkShopHeadEntity OutWorkShopHeadEntity = new Mes_OutWorkShopHeadEntity();
+                            Mes_OutWorkShopDetailEntity OutWorkShopDetailEntity = new Mes_OutWorkShopDetailEntity();
+
+                            string strIn_No = "";
 
 
+                            MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
+                            strIn_No = MaterInHeadBLL.GetDH("线边仓出库到车间单");
 
-                        int nRow = OutWorkShopHeadBLL.SaveEntity("", OutWorkShopHeadEntity);
+                            //var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
+                            //if (rowsHead == null || rowsHead.Count < 1)
+                            //{
+                            //    strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
+                            //}
+                            //else
+                            //{
+                            //    string strDate = rowsHead[0].O_OutNo.Substring(2, 8);
+                            //    if (strDate == DateTime.Now.ToString("yyyyMMdd"))
+                            //    {
+                            //        string strList = rowsHead[0].O_OutNo.Substring(10, 4);
+                            //        int nList = Convert.ToInt32(strList) + 1;
+                            //        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(4, '0');
+                            //    }
+                            //    else
+                            //    {
+                            //        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
+                            //    }
 
-                        //for (int i = 0; i < rows.Count; i++)
-                        //{
+                            //}
+
+                            OutWorkShopHeadEntity.O_OutNo = strIn_No;
+                            OutWorkShopHeadEntity.O_OrderNo = strOrderNo;
+                            OutWorkShopHeadEntity.O_StockCode = strStockCode;
+                            OutWorkShopHeadEntity.O_StockName = strStockName;
+                            OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
+                            OutWorkShopHeadEntity.O_CreateDate = DateTime.Now;
+                            OutWorkShopHeadEntity.O_OrderDate = txtOrderDate.Text;
+                            OutWorkShopHeadEntity.O_Remark = "";
+                            OutWorkShopHeadEntity.O_Status = 1;
+                            OutWorkShopHeadEntity.O_WorkShop = cmbWorkShop.Text;
+                            OutWorkShopHeadEntity.O_Kind = 2;
+
+
+
+                            int nRow = OutWorkShopHeadBLL.SaveEntity("", OutWorkShopHeadEntity);
+
+                            //for (int i = 0; i < rows.Count; i++)
+                            //{
                             OutWorkShopDetailEntity.O_GoodsCode = strGoodsCode;
                             OutWorkShopDetailEntity.O_GoodsName = strGoodsName;
                             OutWorkShopDetailEntity.O_OutNo = strIn_No;
@@ -638,13 +655,23 @@ namespace DesktopApp
 
                             nRow = OutWorkShopDetailBLL.SaveEntity("", OutWorkShopDetailEntity);
 
-                        //}
-                        MessageBox.Show("保存成功");
+                            //}
+                            MessageBox.Show("保存成功");
 
-                        GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch);
-                        DeleteData(strId);
+                            GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch);
+                            DeleteData(strId);
 
-                        Search();
+                            Search();
+
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+
+                        }
+                        catch(Exception ex)
+                        {
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
                         
                     }
 
@@ -700,6 +727,13 @@ namespace DesktopApp
             {
                 return false;
             }
+        }
+
+        private void UpdatePrice(string GoodsCode, decimal dPrice)
+        {
+            //修改价格物价加权平局价格
+            MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+            GoodsBLL.UpdateEntity(GoodsCode, dPrice);
         }
 
 
@@ -764,6 +798,37 @@ namespace DesktopApp
             {
                 return false;
             }
+        }
+
+        private void cmbWorkShopName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
+            var row = WorkShopBLL.GetData("where W_Name = '" + cmbWorkShopName.Text + "'");
+            cmbWorkShop.Text = row[0].W_Code;
+        }
+
+        private void cmbTeamName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Mes_TeamBLL TeamBLL = new Mes_TeamBLL();
+            var Team_rows = TeamBLL.GetList_Team(" where T_Name = '" + cmbTeamName.Text + "'");
+            if (Team_rows.Count > 0)
+            {
+                cmbTeam.Text = Team_rows[0].T_Code;
+            }
+        }
+
+        private void cmbRecordName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesRecordBLL RecordBLL = new MesRecordBLL();
+            var Record_rows = RecordBLL.GetData(" where R_Name = '" + cmbRecordName.Text + "'");
+            cmbRecord.Text = Record_rows[0].R_Record;
+        }
+
+        private void cmbProceName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Mes_ProceBLL ProceBLL = new Mes_ProceBLL();
+            var row = ProceBLL.GetList_Proce("where P_ProName = '" + cmbProceName.Text + "'");
+            cmbProce.Text = row[0].P_ProNo;
         }
       
 

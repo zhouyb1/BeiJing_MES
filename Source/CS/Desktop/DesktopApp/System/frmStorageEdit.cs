@@ -178,19 +178,19 @@ namespace DesktopApp
             {
                 strQty = Convert.ToDecimal(txtQty.Text.Trim());
             }
-            g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 10, 10);
-            g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 10, 25);
+            g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 30, 10);
+            g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 30, 25);
             //if (checkBox1.Checked == true)
-            g.DrawString("    数量：" + strQty.ToString(), fontLiShu3, Brushes.Black, 10, 40);
-            g.DrawString("    批次：" + txtBatch.Text.Trim(), fontLiShu3, Brushes.Black, 10, 55);
-            g.DrawString("    时间：" + DateTime.Now, fontLiShu3, Brushes.Black, 10, 70);
+            g.DrawString("    数量：" + strQty.ToString(), fontLiShu3, Brushes.Black, 30, 40);
+            g.DrawString("    批次：" + txtBatch.Text.Trim(), fontLiShu3, Brushes.Black, 30, 55);
+            g.DrawString("    时间：" + DateTime.Now, fontLiShu3, Brushes.Black, 30, 70);
 
             string str = strGoods[0] + "*" + txtBatch.Text.Trim() + "*" + txtQty.Text.Trim();
 
             prin1.barcodeControl1.Data = str;
             prin1.barcodeControl1.Caption = str;
             Rectangle rect = prin1.barcodeControl1.ClientRectangle;
-            rect = new Rectangle(20, 80, 80, 40);
+            rect = new Rectangle(40, 80, 80, 40);
             prin1.barcodeControl1.Draw(g, rect, GraphicsUnit.Inch, 0.01f, 0, null);
 
 
@@ -532,19 +532,32 @@ namespace DesktopApp
                     Thread.Sleep(100);
                     if (serialPort1.IsOpen)
                     {
-                        byte[] byRead = null;
-                        byRead = new byte[2048];
-                        int nReadLen;
+                     
+                    
+                        //int nReadLen;
+                        //Thread.Sleep(200);
+                        //nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+
+                        //string str = System.Text.Encoding.Default.GetString(byRead);
                         Thread.Sleep(100);
-                        nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+                        byte[] byRead = new byte[serialPort1.ReadBufferSize];
+                        int nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
                         string str = System.Text.Encoding.Default.GetString(byRead);
+                        //MessageBox.Show(str);
+                        //MessageBox.Show(str.Length.ToString());
                         string[] strWeight = str.Split('=');
                         int nLen = strWeight.Length;
+                        //MessageBox.Show(nLen.ToString());
                         if (nLen > 1)
                         {
                             //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
                             //{
-                            txtQty.Text = ZH(strWeight[nLen - 1].ToString());
+                            char[] arr = strWeight[nLen - 1].Substring(0,7).ToCharArray();
+                            Array.Reverse(arr);
+                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
+                                ; 
+                                //ZH(strWeight[nLen - 1].ToString());
+
                             //}
                             //else
                             //{
@@ -588,19 +601,39 @@ namespace DesktopApp
             }
             catch(Exception ex)
             {
+                this.Enabled = true;
+                Cursor.Current = Cursors.Default;
                 MessageBox.Show(ex.ToString());
             }
         }
 
         private string ZH(string strTemp)
         {
-            string strReturn = "";
+            strTemp = strTemp.Replace(" ","");
+             string strReturn = "";
+            if (string.IsNullOrEmpty(strTemp))
+                return "0";
+            MessageBox.Show(strTemp);
             int nLen = strTemp.Length;
+            MessageBox.Show(strTemp.Length.ToString());
             for (int i = 0; i < nLen; i++)
             {
-                strReturn = strReturn + strTemp.Substring(nLen - i - 1, 1);
+                strReturn = strReturn + strTemp.Substring(nLen - i - 1);
             }
+            /*char[] datas = strTemp.ToCharArray();
+            StringBuilder sb = new StringBuilder();
+            
+            MessageBox.Show(datas.Length.ToString());
+            for (int i = datas.Length - 1; i >= 0; i--)
+            {
+                sb.Append( datas[i].ToString() );
+
+                
+    
+            }*/
+
             return strReturn;
+               
         }
 
         private bool Open()

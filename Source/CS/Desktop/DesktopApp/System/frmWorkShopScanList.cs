@@ -37,8 +37,8 @@ namespace DesktopApp
                     if (strBarcode.IndexOf('*') > 0)
                     {
                         string[] strTemp = strBarcode.Split('*');
-                        txtCode.Text = strTemp[0].ToString();
-                        txtPc.Text = strTemp[1].ToString();
+                        cmbGoodsCode.Text = strTemp[0].ToString();
+                        cmbPc.Text = strTemp[1].ToString();
                         txtQty.Text = strTemp[2].ToString();
 
                         MesGoodsBLL GoodsBLL = new MesGoodsBLL();
@@ -56,12 +56,13 @@ namespace DesktopApp
                     {
                         string[] strTemp = strBarcode.Split(',');
 
-                        txtCode.Text = Resolve(strTemp[0].ToString());
-                        txtPc.Text = Resolve(strTemp[1].ToString());
+                        cmbGoodsCode.Text = Resolve(strTemp[0].ToString());
+                        cmbPc.Text = Resolve(strTemp[1].ToString());
                         txtQty.Text = Resolve(strTemp[2].ToString());
 
                         MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
+                        //MessageBox.Show(Goods_rows.Count.ToString());
                         int nLen = Goods_rows.Count;
                         if (nLen > 0)
                         {
@@ -103,19 +104,15 @@ namespace DesktopApp
                 Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
                 Mes_WorkShopScanEntity WorkShopScanEntity = new Mes_WorkShopScanEntity();
 
-                WorkShopScanEntity.W_OrderNo = Globels.strOrderNo;
-                WorkShopScanEntity.W_WorkShopName = Globels.strWorkShopName;
-                WorkShopScanEntity.W_RecordName = Globels.strRecordName;
-                WorkShopScanEntity.W_ProceName = Globels.strProceName;
+
                 WorkShopScanEntity.W_GoodsName = txtName.Text;
                 WorkShopScanEntity.W_WorkShop = Globels.strWorkShop;
                 WorkShopScanEntity.W_RecordCode = Globels.strRecord;
-                WorkShopScanEntity.W_ProceCode = Globels.strProce;
-                WorkShopScanEntity.W_GoodsCode = txtCode.Text;
-                WorkShopScanEntity.W_Batch = txtPc.Text;
+
+                WorkShopScanEntity.W_GoodsCode = cmbGoodsCode.Text;
+                WorkShopScanEntity.W_Batch = cmbPc.Text;
                 WorkShopScanEntity.W_Price = Convert.ToDecimal(txtPrice.Text);
-                WorkShopScanEntity.W_CreateBy = "";
-                WorkShopScanEntity.W_CreateDate = DateTime.Now;
+
                 WorkShopScanEntity.W_Status = 1;
                 WorkShopScanEntity.W_Qty = Convert.ToDecimal(txtQty.Text);
                 WorkShopScanEntity.W_Unit = txtUnit.Text;
@@ -132,6 +129,19 @@ namespace DesktopApp
 
         private void frmWorkShopScanList_Load(object sender, EventArgs e)
         {
+            cmbGoodsCode.Items.Clear();
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+            var row2 = InventoryBLL.GetData("where I_StockCode = '" + Globels.strStockCode + "' and I_Qty > 0 ");
+            for (int i = 0; i < row2.Count; i++)
+            {
+                cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
+
+            }
+            if (row2.Count == 1)
+            {
+                cmbGoodsCode.Text = row2[0].I_GoodsCode;
+            }
+
             txtBarcode.Focus();
         }
 
@@ -146,6 +156,56 @@ namespace DesktopApp
             txtUnit.Text = "";
 
             txtBarcode.Focus();
+        }
+
+        private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cmbPc.Items.Clear();
+                MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+                var row = InventoryBLL.GetData("where I_StockCode = '" + Globels.strStockCode + "' and I_GoodsCode = '" + cmbGoodsCode.Text + "'");
+                for (int i = 0; i < row.Count; i++)
+                {
+                    cmbPc.Items.Add(row[i].I_Batch);
+
+                }
+                if (row.Count == 1)
+                {
+                    cmbPc.Text = row[0].I_Batch;
+                }
+
+
+
+                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
+                int nLen = Goods_rows.Count;
+                if (nLen > 0)
+                {
+                    txtName.Text = Goods_rows[0].G_Name;
+                    txtPrice.Text = Goods_rows[0].G_Price.ToString();
+                    txtUnit.Text = Goods_rows[0].G_Unit.ToString();
+                    //int nKind = Goods_rows[0].G_Kind;
+                    //if (nKind == 1)
+                    //{
+                    //    label17.Visible = true;
+                    //    cmbSupplyName.Visible = true;
+
+
+                    //}
+                    //else
+                    //{
+                    //    ;
+                    //}
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                //lblTS.Text = "ex.ToString()";
+            }
         }
     }
 }

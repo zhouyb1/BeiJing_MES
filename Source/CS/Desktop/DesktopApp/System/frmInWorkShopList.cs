@@ -37,9 +37,9 @@ namespace DesktopApp
                 {
                     Mes_InWorkShopTempEntity InWorkShopTempEntity = new Mes_InWorkShopTempEntity();
                     InWorkShopTempEntity.I_StockCode = cmbStock.Text;
-                    InWorkShopTempEntity.I_StockName = txtStockName.Text;
+                    InWorkShopTempEntity.I_StockName = cmbStockName.Text;
                     InWorkShopTempEntity.I_WorkShop = cmbWorkShop.Text;
-                    InWorkShopTempEntity.I_WorkShopName = txtWorkShopName.Text;
+                    InWorkShopTempEntity.I_WorkShopName = cmbWorkshopName.Text;
                     InWorkShopTempEntity.I_OrderNo = comOrderNo.Text;
                     InWorkShopTempEntity.I_Status = 1;
                     InWorkShopTempEntity.I_CreateBy = Globels.strUser;
@@ -106,18 +106,21 @@ namespace DesktopApp
             for (int i = 0; i < rows.Count; i++)
             {
                 cmbWorkShop.Items.Add(rows[i].W_Code);
+                cmbWorkshopName.Items.Add(rows[i].W_Name);
             }
 
             if(cmbWorkShop.Items.Contains(Globels.strWorkShop))
             {
                 cmbWorkShop.Text = Globels.strWorkShop;
+                //cmbStockName.Text =
             }
 
             MesStockBLL StockBLL = new MesStockBLL();
-            var Stock_rows = StockBLL.GetList();
+            var Stock_rows = StockBLL.GetData(" where S_Kind = 4");
             for (int i = 0; i < Stock_rows.Count; i++)
             {
                 cmbStock.Items.Add(Stock_rows[i].S_Code);
+                cmbStockName.Items.Add(Stock_rows[i].S_Name);
             }
             if (cmbStock.Items.Contains(Globels.strStockCode))
             {
@@ -185,12 +188,14 @@ namespace DesktopApp
                     {
                         string[] strTemp = strBarcode.Split(',');
 
+
+                        //MessageBox.Show(strTemp.Length.ToString());
                         txtCode.Text = Resolve(strTemp[0].ToString());
                         txtPc.Text = Resolve(strTemp[1].ToString());
                         txtQty.Text = Resolve(strTemp[2].ToString());
 
                         MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                        var Goods_rows = GoodsBLL.GetList(strTemp[0].ToString(), "");
+                        var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
                         int nLen = Goods_rows.Count;
                         if (nLen > 0)
                         {
@@ -226,14 +231,14 @@ namespace DesktopApp
         {
             MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
             var row = WorkShopBLL.GetData("where W_Code = '"+ cmbWorkShop.Text +"'");
-            txtWorkShopName.Text = row[0].W_Name;
+            cmbWorkshopName.Text = row[0].W_Name;
         }
 
         private void cmbStock_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesStockBLL StockBLL = new MesStockBLL();
             var row = StockBLL.GetData("where S_Code = '" + cmbStock.Text + "'");
-            txtStockName.Text = row[0].S_Name;
+            cmbStockName.Text = row[0].S_Name;
         }
 
         private void cmbRecord_SelectedIndexChanged(object sender, EventArgs e)
@@ -284,8 +289,9 @@ namespace DesktopApp
                     Mes_InWorkShopDetailEntity InWorkShopDetailEntity = new Mes_InWorkShopDetailEntity();
 
                     string strIn_No = "";
-
-                    var rowsHead = InWorkShopHeadBLL.GetList_InWorkShopHead("where 1 = 1 order by I_InNo DESC");
+                    MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
+                    strIn_No = MaterInHeadBLL.GetDH("车间入库到线边仓单");
+                    /*var rowsHead = InWorkShopHeadBLL.GetList_InWorkShopHead("where 1 = 1 order by I_InNo DESC");
                     if (rowsHead == null || rowsHead.Count < 1)
                     {
                         strIn_No = "IW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
@@ -304,12 +310,14 @@ namespace DesktopApp
                             strIn_No = "IW" + DateTime.Now.ToString("yyyyMMdd") + "0001";
                         }
 
-                    }
+                    }*/
+
+
 
                     InWorkShopHeadEntity.I_InNo = strIn_No;
                     InWorkShopHeadEntity.I_OrderNo = comOrderNo.Text;
                     InWorkShopHeadEntity.I_StockCode = cmbStock.Text;
-                    InWorkShopHeadEntity.I_StockName = txtStockName.Text;
+                    InWorkShopHeadEntity.I_StockName = cmbStockName.Text;
                     InWorkShopHeadEntity.I_CreateBy = "";
                     InWorkShopHeadEntity.I_CreateDate = DateTime.Now;
                     InWorkShopHeadEntity.I_OrderDate = txtOrderDate.Text;
@@ -333,6 +341,7 @@ namespace DesktopApp
                     }
                     //更改临时数据状态
                     MessageBox.Show("保存成功");
+                    
                     DeleteData();
                     Updata();
                 }
@@ -351,10 +360,15 @@ namespace DesktopApp
 
         private void DeleteData()
         {
+            //删除临时数据
             Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
             InWorkShopTempBLL.DeleteData("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
 
+            
+
         }
+
+        
 
         private void cmbProce_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -369,6 +383,20 @@ namespace DesktopApp
             MesProductOrderHeadBLL ProductOrderHeadBLL = new MesProductOrderHeadBLL();
             var row = ProductOrderHeadBLL.GetList(comOrderNo.Text);
             txtOrderDate.Text = row[0].P_OrderDate.ToString();
+        }
+
+        private void cmbWorkshopName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesWorkShopBLL WorkShopBLL = new MesWorkShopBLL();
+            var row = WorkShopBLL.GetData("where W_Name = '" + cmbWorkshopName.Text + "'");
+            cmbWorkShop.Text = row[0].W_Code;
+        }
+
+        private void cmbStockName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesStockBLL StockBLL = new MesStockBLL();
+            var row = StockBLL.GetData(" where S_Name = '" + cmbStockName.Text + "'");
+            cmbStock.Text = row[0].S_Code;
         }
         
 

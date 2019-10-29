@@ -101,7 +101,7 @@ namespace DesktopApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("是否要保存?","京铁列服", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            if(MessageBox.Show("是否要保存?","", MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                 addStorage();
             }

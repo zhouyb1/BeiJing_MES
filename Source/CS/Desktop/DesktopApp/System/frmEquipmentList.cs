@@ -168,14 +168,14 @@ namespace DesktopApp
                 }
                 else
                 {
-                    MessageBox.Show("您COM通讯还未配置！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("您COM通讯还未配置！", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frmSerialPortConfig config = new frmSerialPortConfig(this);
                     config.ShowDialog();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("加载COM通讯配置异常：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("加载COM通讯配置异常：" + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

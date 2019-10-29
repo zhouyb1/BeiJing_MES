@@ -35,29 +35,7 @@
             this.btn_Search = new System.Windows.Forms.Button();
             this.btn_upload = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工艺代码名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtRecordName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.txtWorkShopName = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cmbRecord = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -67,7 +45,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnScan = new System.Windows.Forms.Button();
             this.btn_Weight = new System.Windows.Forms.Button();
-            this.txtProceName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
@@ -88,7 +65,6 @@
             this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtTeamName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbTeam = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -96,17 +72,35 @@
             this.label9 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
             this.lblTS = new System.Windows.Forms.Label();
+            this.cmbTeamName = new System.Windows.Forms.ComboBox();
+            this.cmbWorkShopName = new System.Windows.Forms.ComboBox();
+            this.cmbProceName = new System.Windows.Forms.ComboBox();
+            this.cmbRecordName = new System.Windows.Forms.ComboBox();
+            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbProce
             // 
+            this.cmbProce.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProce.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbProce.FormattingEnabled = true;
-            this.cmbProce.Location = new System.Drawing.Point(126, 81);
+            this.cmbProce.Location = new System.Drawing.Point(444, 76);
             this.cmbProce.Name = "cmbProce";
-            this.cmbProce.Size = new System.Drawing.Size(222, 23);
+            this.cmbProce.Size = new System.Drawing.Size(200, 23);
             this.cmbProce.TabIndex = 106;
             this.cmbProce.SelectedIndexChanged += new System.EventHandler(this.cmbProce_SelectedIndexChanged);
             // 
@@ -114,7 +108,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("宋体", 11F);
-            this.label4.Location = new System.Drawing.Point(70, 84);
+            this.label4.Location = new System.Drawing.Point(70, 81);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 15);
@@ -157,213 +151,49 @@
             this.数量,
             this.实用数量,
             this.价格,
-            this.生产订单号,
             this.车间,
-            this.工艺代码,
-            this.工序,
-            this.ID,
-            this.工艺代码名称,
-            this.工序名称,
-            this.车间名称,
             this.状态,
-            this.添加人,
-            this.添加时间,
             this.物料名称,
             this.单位,
-            this.备注});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 133);
+            this.ID,
+            this.备注,
+            this.单号});
+            this.dataGridView1.Location = new System.Drawing.Point(12, 129);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(914, 184);
+            this.dataGridView1.Size = new System.Drawing.Size(914, 158);
             this.dataGridView1.TabIndex = 97;
-            // 
-            // 选择
-            // 
-            this.选择.HeaderText = "选择";
-            this.选择.Name = "选择";
-            this.选择.Width = 40;
-            // 
-            // 物料
-            // 
-            this.物料.DataPropertyName = "W_GoodsCode";
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            this.物料.ReadOnly = true;
-            // 
-            // 批次
-            // 
-            this.批次.DataPropertyName = "W_Batch";
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            this.批次.ReadOnly = true;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "W_Qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            // 
-            // 实用数量
-            // 
-            this.实用数量.HeaderText = "实用数量";
-            this.实用数量.Name = "实用数量";
-            // 
-            // 价格
-            // 
-            this.价格.DataPropertyName = "W_Price";
-            this.价格.HeaderText = "价格";
-            this.价格.Name = "价格";
-            this.价格.ReadOnly = true;
-            // 
-            // 生产订单号
-            // 
-            this.生产订单号.DataPropertyName = "W_OrderNo";
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            this.生产订单号.ReadOnly = true;
-            // 
-            // 车间
-            // 
-            this.车间.DataPropertyName = "W_WorkShop";
-            this.车间.HeaderText = "车间";
-            this.车间.Name = "车间";
-            this.车间.ReadOnly = true;
-            // 
-            // 工艺代码
-            // 
-            this.工艺代码.DataPropertyName = "W_RecordCode";
-            this.工艺代码.HeaderText = "工艺代码";
-            this.工艺代码.Name = "工艺代码";
-            this.工艺代码.ReadOnly = true;
-            // 
-            // 工序
-            // 
-            this.工序.DataPropertyName = "W_ProceCode";
-            this.工序.HeaderText = "工序";
-            this.工序.Name = "工序";
-            this.工序.ReadOnly = true;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            // 
-            // 工艺代码名称
-            // 
-            this.工艺代码名称.DataPropertyName = "W_RecordName";
-            this.工艺代码名称.HeaderText = "工艺代码名称";
-            this.工艺代码名称.Name = "工艺代码名称";
-            this.工艺代码名称.ReadOnly = true;
-            this.工艺代码名称.Visible = false;
-            // 
-            // 工序名称
-            // 
-            this.工序名称.DataPropertyName = "W_ProceName";
-            this.工序名称.HeaderText = "工序名称";
-            this.工序名称.Name = "工序名称";
-            this.工序名称.ReadOnly = true;
-            this.工序名称.Visible = false;
-            // 
-            // 车间名称
-            // 
-            this.车间名称.DataPropertyName = "W_WorkShopName";
-            this.车间名称.HeaderText = "车间名称";
-            this.车间名称.Name = "车间名称";
-            this.车间名称.ReadOnly = true;
-            this.车间名称.Visible = false;
-            // 
-            // 状态
-            // 
-            this.状态.DataPropertyName = "W_Status";
-            this.状态.HeaderText = "状态";
-            this.状态.Name = "状态";
-            this.状态.ReadOnly = true;
-            this.状态.Visible = false;
-            // 
-            // 添加人
-            // 
-            this.添加人.DataPropertyName = "W_CreateBy";
-            this.添加人.HeaderText = "添加人";
-            this.添加人.Name = "添加人";
-            this.添加人.ReadOnly = true;
-            this.添加人.Visible = false;
-            // 
-            // 添加时间
-            // 
-            this.添加时间.DataPropertyName = "W_CreateDate";
-            this.添加时间.HeaderText = "添加时间";
-            this.添加时间.Name = "添加时间";
-            this.添加时间.ReadOnly = true;
-            this.添加时间.Visible = false;
-            // 
-            // 物料名称
-            // 
-            this.物料名称.DataPropertyName = "W_GoodsName";
-            this.物料名称.HeaderText = "物料名称";
-            this.物料名称.Name = "物料名称";
-            this.物料名称.ReadOnly = true;
-            // 
-            // 单位
-            // 
-            this.单位.DataPropertyName = "W_Unit";
-            this.单位.HeaderText = "单位";
-            this.单位.Name = "单位";
-            this.单位.ReadOnly = true;
-            // 
-            // 备注
-            // 
-            this.备注.DataPropertyName = "W_Remark";
-            this.备注.HeaderText = "备注";
-            this.备注.Name = "备注";
-            this.备注.ReadOnly = true;
-            // 
-            // txtRecordName
-            // 
-            this.txtRecordName.Location = new System.Drawing.Point(444, 53);
-            this.txtRecordName.Name = "txtRecordName";
-            this.txtRecordName.Size = new System.Drawing.Size(200, 21);
-            this.txtRecordName.TabIndex = 94;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("宋体", 11F);
-            this.label10.Location = new System.Drawing.Point(360, 53);
+            this.label10.Location = new System.Drawing.Point(360, 51);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(82, 15);
             this.label10.TabIndex = 93;
-            this.label10.Text = "工艺名称：";
-            // 
-            // txtWorkShopName
-            // 
-            this.txtWorkShopName.Location = new System.Drawing.Point(444, 28);
-            this.txtWorkShopName.Name = "txtWorkShopName";
-            this.txtWorkShopName.Size = new System.Drawing.Size(200, 21);
-            this.txtWorkShopName.TabIndex = 92;
+            this.label10.Text = "工艺编码：";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 11F);
-            this.label7.Location = new System.Drawing.Point(360, 27);
+            this.label7.Location = new System.Drawing.Point(360, 26);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 15);
             this.label7.TabIndex = 91;
-            this.label7.Text = "车间名称：";
+            this.label7.Text = "车间编码：";
             // 
             // cmbRecord
             // 
+            this.cmbRecord.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRecord.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbRecord.FormattingEnabled = true;
-            this.cmbRecord.Location = new System.Drawing.Point(126, 55);
+            this.cmbRecord.Location = new System.Drawing.Point(444, 51);
             this.cmbRecord.Name = "cmbRecord";
-            this.cmbRecord.Size = new System.Drawing.Size(222, 23);
+            this.cmbRecord.Size = new System.Drawing.Size(200, 23);
             this.cmbRecord.TabIndex = 88;
             this.cmbRecord.SelectedIndexChanged += new System.EventHandler(this.cmbRecord_SelectedIndexChanged);
             // 
@@ -371,7 +201,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("宋体", 11F);
-            this.label3.Location = new System.Drawing.Point(40, 58);
+            this.label3.Location = new System.Drawing.Point(40, 56);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(82, 15);
@@ -380,11 +210,12 @@
             // 
             // cmbWorkShop
             // 
+            this.cmbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWorkShop.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkShop.FormattingEnabled = true;
-            this.cmbWorkShop.Location = new System.Drawing.Point(126, 29);
+            this.cmbWorkShop.Location = new System.Drawing.Point(444, 26);
             this.cmbWorkShop.Name = "cmbWorkShop";
-            this.cmbWorkShop.Size = new System.Drawing.Size(222, 23);
+            this.cmbWorkShop.Size = new System.Drawing.Size(200, 23);
             this.cmbWorkShop.TabIndex = 86;
             this.cmbWorkShop.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShop_SelectedIndexChanged);
             // 
@@ -392,7 +223,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 11F);
-            this.label1.Location = new System.Drawing.Point(70, 32);
+            this.label1.Location = new System.Drawing.Point(70, 31);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -402,6 +233,7 @@
             // 
             // comOrderNo
             // 
+            this.comOrderNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comOrderNo.Font = new System.Drawing.Font("宋体", 11F);
             this.comOrderNo.FormattingEnabled = true;
             this.comOrderNo.Location = new System.Drawing.Point(126, 3);
@@ -427,12 +259,13 @@
             this.btnScan.Font = new System.Drawing.Font("宋体", 11F);
             this.btnScan.Image = global::DesktopApp.Properties.Resources.home;
             this.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnScan.Location = new System.Drawing.Point(664, 49);
+            this.btnScan.Location = new System.Drawing.Point(773, 90);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(90, 30);
             this.btnScan.TabIndex = 116;
             this.btnScan.Text = "扫描";
             this.btnScan.UseVisualStyleBackColor = true;
+            this.btnScan.Visible = false;
             this.btnScan.Click += new System.EventHandler(this.btnScan_Click);
             // 
             // btn_Weight
@@ -448,23 +281,16 @@
             this.btn_Weight.UseVisualStyleBackColor = true;
             this.btn_Weight.Click += new System.EventHandler(this.btn_Weight_Click);
             // 
-            // txtProceName
-            // 
-            this.txtProceName.Location = new System.Drawing.Point(444, 79);
-            this.txtProceName.Name = "txtProceName";
-            this.txtProceName.Size = new System.Drawing.Size(200, 21);
-            this.txtProceName.TabIndex = 119;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 11F);
-            this.label2.Location = new System.Drawing.Point(360, 82);
+            this.label2.Location = new System.Drawing.Point(360, 79);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
             this.label2.TabIndex = 118;
-            this.label2.Text = "工序名称：";
+            this.label2.Text = "工序编码：";
             // 
             // dataGridView2
             // 
@@ -488,7 +314,7 @@
             this.物料名称2,
             this.单位2,
             this.备注2});
-            this.dataGridView2.Location = new System.Drawing.Point(12, 323);
+            this.dataGridView2.Location = new System.Drawing.Point(12, 287);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(914, 161);
@@ -603,31 +429,25 @@
             this.备注2.HeaderText = "备注";
             this.备注2.Name = "备注2";
             // 
-            // txtTeamName
-            // 
-            this.txtTeamName.Location = new System.Drawing.Point(444, 105);
-            this.txtTeamName.Name = "txtTeamName";
-            this.txtTeamName.Size = new System.Drawing.Size(200, 21);
-            this.txtTeamName.TabIndex = 124;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(360, 109);
+            this.label5.Location = new System.Drawing.Point(360, 105);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 15);
             this.label5.TabIndex = 123;
-            this.label5.Text = "班组名称：";
+            this.label5.Text = "班组编码：";
             // 
             // cmbTeam
             // 
+            this.cmbTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTeam.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbTeam.FormattingEnabled = true;
-            this.cmbTeam.Location = new System.Drawing.Point(126, 108);
+            this.cmbTeam.Location = new System.Drawing.Point(444, 102);
             this.cmbTeam.Name = "cmbTeam";
-            this.cmbTeam.Size = new System.Drawing.Size(222, 23);
+            this.cmbTeam.Size = new System.Drawing.Size(200, 23);
             this.cmbTeam.TabIndex = 122;
             this.cmbTeam.SelectedIndexChanged += new System.EventHandler(this.cmbTeam_SelectedIndexChanged);
             // 
@@ -635,7 +455,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("宋体", 11F);
-            this.label8.Location = new System.Drawing.Point(70, 111);
+            this.label8.Location = new System.Drawing.Point(70, 107);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 15);
@@ -665,7 +485,7 @@
             this.btnBack.Font = new System.Drawing.Font("宋体", 11F);
             this.btnBack.Image = global::DesktopApp.Properties.Resources.cancel;
             this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBack.Location = new System.Drawing.Point(664, 95);
+            this.btnBack.Location = new System.Drawing.Point(664, 49);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(90, 30);
             this.btnBack.TabIndex = 127;
@@ -678,24 +498,161 @@
             this.lblTS.AutoSize = true;
             this.lblTS.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTS.ForeColor = System.Drawing.Color.Red;
-            this.lblTS.Location = new System.Drawing.Point(34, 490);
+            this.lblTS.Location = new System.Drawing.Point(34, 453);
             this.lblTS.Name = "lblTS";
             this.lblTS.Size = new System.Drawing.Size(0, 16);
             this.lblTS.TabIndex = 128;
             // 
+            // cmbTeamName
+            // 
+            this.cmbTeamName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTeamName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbTeamName.FormattingEnabled = true;
+            this.cmbTeamName.Location = new System.Drawing.Point(126, 104);
+            this.cmbTeamName.Name = "cmbTeamName";
+            this.cmbTeamName.Size = new System.Drawing.Size(222, 23);
+            this.cmbTeamName.TabIndex = 130;
+            this.cmbTeamName.SelectedIndexChanged += new System.EventHandler(this.cmbTeamName_SelectedIndexChanged);
+            // 
+            // cmbWorkShopName
+            // 
+            this.cmbWorkShopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkShopName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbWorkShopName.FormattingEnabled = true;
+            this.cmbWorkShopName.Location = new System.Drawing.Point(126, 28);
+            this.cmbWorkShopName.Name = "cmbWorkShopName";
+            this.cmbWorkShopName.Size = new System.Drawing.Size(222, 23);
+            this.cmbWorkShopName.TabIndex = 129;
+            this.cmbWorkShopName.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShopName_SelectedIndexChanged);
+            // 
+            // cmbProceName
+            // 
+            this.cmbProceName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbProceName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbProceName.FormattingEnabled = true;
+            this.cmbProceName.Location = new System.Drawing.Point(126, 78);
+            this.cmbProceName.Name = "cmbProceName";
+            this.cmbProceName.Size = new System.Drawing.Size(222, 23);
+            this.cmbProceName.TabIndex = 132;
+            this.cmbProceName.SelectedIndexChanged += new System.EventHandler(this.cmbProceName_SelectedIndexChanged);
+            // 
+            // cmbRecordName
+            // 
+            this.cmbRecordName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRecordName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbRecordName.FormattingEnabled = true;
+            this.cmbRecordName.Location = new System.Drawing.Point(126, 53);
+            this.cmbRecordName.Name = "cmbRecordName";
+            this.cmbRecordName.Size = new System.Drawing.Size(222, 23);
+            this.cmbRecordName.TabIndex = 131;
+            this.cmbRecordName.SelectedIndexChanged += new System.EventHandler(this.cmbRecordName_SelectedIndexChanged);
+            // 
+            // 选择
+            // 
+            this.选择.HeaderText = "选择";
+            this.选择.Name = "选择";
+            this.选择.Width = 40;
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "W_GoodsCode";
+            this.物料.HeaderText = "物料";
+            this.物料.Name = "物料";
+            this.物料.ReadOnly = true;
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "W_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            this.批次.ReadOnly = true;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "W_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            // 
+            // 实用数量
+            // 
+            this.实用数量.HeaderText = "实用数量";
+            this.实用数量.Name = "实用数量";
+            // 
+            // 价格
+            // 
+            this.价格.DataPropertyName = "W_Price";
+            this.价格.HeaderText = "价格";
+            this.价格.Name = "价格";
+            this.价格.ReadOnly = true;
+            // 
+            // 车间
+            // 
+            this.车间.DataPropertyName = "W_WorkShop";
+            this.车间.HeaderText = "车间";
+            this.车间.Name = "车间";
+            this.车间.ReadOnly = true;
+            // 
+            // 状态
+            // 
+            this.状态.DataPropertyName = "W_Status";
+            this.状态.HeaderText = "状态";
+            this.状态.Name = "状态";
+            this.状态.ReadOnly = true;
+            this.状态.Visible = false;
+            this.状态.Width = 60;
+            // 
+            // 物料名称
+            // 
+            this.物料名称.DataPropertyName = "W_GoodsName";
+            this.物料名称.HeaderText = "物料名称";
+            this.物料名称.Name = "物料名称";
+            this.物料名称.ReadOnly = true;
+            // 
+            // 单位
+            // 
+            this.单位.DataPropertyName = "W_Unit";
+            this.单位.HeaderText = "单位";
+            this.单位.Name = "单位";
+            this.单位.ReadOnly = true;
+            this.单位.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            // 
+            // 备注
+            // 
+            this.备注.DataPropertyName = "W_Remark";
+            this.备注.HeaderText = "备注";
+            this.备注.Name = "备注";
+            this.备注.ReadOnly = true;
+            // 
+            // 单号
+            // 
+            this.单号.DataPropertyName = "W_RecordCode";
+            this.单号.HeaderText = "单号";
+            this.单号.Name = "单号";
+            // 
             // frmOrgres
             // 
             this.ClientSize = new System.Drawing.Size(950, 541);
+            this.Controls.Add(this.cmbProceName);
+            this.Controls.Add(this.cmbRecordName);
+            this.Controls.Add(this.cmbTeamName);
+            this.Controls.Add(this.cmbWorkShopName);
             this.Controls.Add(this.lblTS);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.txtOrderDate);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtTeamName);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.cmbTeam);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.dataGridView2);
-            this.Controls.Add(this.txtProceName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_Weight);
             this.Controls.Add(this.btnScan);
@@ -704,9 +661,7 @@
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.btn_upload);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.txtRecordName);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.txtWorkShopName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cmbRecord);
             this.Controls.Add(this.label3);
@@ -732,9 +687,7 @@
         private System.Windows.Forms.Button btn_Search;
         private System.Windows.Forms.Button btn_upload;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.TextBox txtRecordName;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox txtWorkShopName;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cmbRecord;
         private System.Windows.Forms.Label label3;
@@ -744,10 +697,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnScan;
         private System.Windows.Forms.Button btn_Weight;
-        private System.Windows.Forms.TextBox txtProceName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.TextBox txtTeamName;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cmbTeam;
         private System.Windows.Forms.Label label8;
@@ -772,26 +723,23 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料名称2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 单位2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注2;
+        private System.Windows.Forms.Label lblTS;
+        private System.Windows.Forms.ComboBox cmbTeamName;
+        private System.Windows.Forms.ComboBox cmbWorkShopName;
+        private System.Windows.Forms.ComboBox cmbProceName;
+        private System.Windows.Forms.ComboBox cmbRecordName;
         private System.Windows.Forms.DataGridViewCheckBoxColumn 选择;
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
         private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 实用数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 价格;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工序;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工序名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 车间名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 状态;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 添加人;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 添加时间;
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料名称;
         private System.Windows.Forms.DataGridViewTextBoxColumn 单位;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
-        private System.Windows.Forms.Label lblTS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 单号;
     }
 }

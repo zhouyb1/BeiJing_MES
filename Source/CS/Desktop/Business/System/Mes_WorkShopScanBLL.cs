@@ -57,15 +57,8 @@ namespace Business.System
                     strSql.Append("INSERT INTO Mes_WorkShopScan(");
                     strSql.Append("ID,");
                     strSql.Append("W_RecordCode,");
-                    strSql.Append("W_RecordName,");
-                    strSql.Append("W_ProceCode,");
-                    strSql.Append("W_ProceName,");
                     strSql.Append("W_WorkShop,");
-                    strSql.Append("W_WorkShopName,");
-                    strSql.Append("W_OrderNo,");
                     strSql.Append("W_Status,");
-                    strSql.Append("W_CreateBy,");
-                    strSql.Append("W_CreateDate,");
                     strSql.Append("W_GoodsCode,");
                     strSql.Append("W_GoodsName,");
                     strSql.Append("W_Unit,");
@@ -77,15 +70,8 @@ namespace Business.System
                     strSql.Append(" VALUES (");
                     strSql.Append("@ID,");
                     strSql.Append("@W_RecordCode,");
-                    strSql.Append("@W_RecordName,");
-                    strSql.Append("@W_ProceCode,");
-                    strSql.Append("@W_ProceName,");
                     strSql.Append("@W_WorkShop,");
-                    strSql.Append("@W_WorkShopName,");
-                    strSql.Append("@W_OrderNo,");
                     strSql.Append("@W_Status,");
-                    strSql.Append("@W_CreateBy,");
-                    strSql.Append("@W_CreateDate,");
                     strSql.Append("@W_GoodsCode,");
                     strSql.Append("@W_GoodsName,");
                     strSql.Append("@W_Unit,");
@@ -101,15 +87,8 @@ namespace Business.System
                     
                 }
                 paramList.Add(new SqlParameter("@W_RecordCode", entity.W_RecordCode));
-                paramList.Add(new SqlParameter("@W_RecordName", entity.W_RecordName));
-                paramList.Add(new SqlParameter("@W_ProceCode", entity.W_ProceCode));
-                paramList.Add(new SqlParameter("@W_ProceName", entity.W_ProceName));
                 paramList.Add(new SqlParameter("@W_WorkShop", entity.W_WorkShop));
-                paramList.Add(new SqlParameter("@W_WorkShopName", entity.W_WorkShopName));
-                paramList.Add(new SqlParameter("@W_OrderNo", entity.W_OrderNo));
                 paramList.Add(new SqlParameter("@W_Status", entity.W_Status));
-                paramList.Add(new SqlParameter("@W_CreateBy", entity.W_CreateBy));
-                paramList.Add(new SqlParameter("@W_CreateDate", entity.W_CreateDate));
                 paramList.Add(new SqlParameter("@W_GoodsCode", entity.W_GoodsCode));
                 paramList.Add(new SqlParameter("@W_GoodsName", entity.W_GoodsName));
                 paramList.Add(new SqlParameter("@W_Unit", entity.W_Unit));

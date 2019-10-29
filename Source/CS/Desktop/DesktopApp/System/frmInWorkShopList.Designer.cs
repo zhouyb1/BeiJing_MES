@@ -41,10 +41,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtQty = new System.Windows.Forms.TextBox();
-            this.txtWorkShopName = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtStockName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtRecordName = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -60,7 +56,6 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtProceName = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
-            this.txtOrderDate = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -82,16 +77,22 @@
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTS = new System.Windows.Forms.Label();
+            this.txtOrderDate = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbWorkshopName = new System.Windows.Forms.ComboBox();
+            this.cmbStockName = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbStock
             // 
+            this.cmbStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStock.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbStock.FormattingEnabled = true;
-            this.cmbStock.Location = new System.Drawing.Point(106, 59);
+            this.cmbStock.Location = new System.Drawing.Point(467, 58);
             this.cmbStock.Name = "cmbStock";
-            this.cmbStock.Size = new System.Drawing.Size(246, 23);
+            this.cmbStock.Size = new System.Drawing.Size(232, 23);
             this.cmbStock.TabIndex = 17;
             this.cmbStock.SelectedIndexChanged += new System.EventHandler(this.cmbStock_SelectedIndexChanged);
             // 
@@ -109,11 +110,12 @@
             // 
             // comOrderNo
             // 
+            this.comOrderNo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comOrderNo.Font = new System.Drawing.Font("宋体", 11F);
             this.comOrderNo.FormattingEnabled = true;
             this.comOrderNo.Location = new System.Drawing.Point(106, 7);
             this.comOrderNo.Name = "comOrderNo";
-            this.comOrderNo.Size = new System.Drawing.Size(246, 23);
+            this.comOrderNo.Size = new System.Drawing.Size(232, 23);
             this.comOrderNo.TabIndex = 15;
             this.comOrderNo.SelectedIndexChanged += new System.EventHandler(this.comOrderNo_SelectedIndexChanged);
             // 
@@ -156,11 +158,12 @@
             // 
             // cmbWorkShop
             // 
+            this.cmbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWorkShop.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkShop.FormattingEnabled = true;
-            this.cmbWorkShop.Location = new System.Drawing.Point(106, 33);
+            this.cmbWorkShop.Location = new System.Drawing.Point(467, 32);
             this.cmbWorkShop.Name = "cmbWorkShop";
-            this.cmbWorkShop.Size = new System.Drawing.Size(246, 23);
+            this.cmbWorkShop.Size = new System.Drawing.Size(232, 23);
             this.cmbWorkShop.TabIndex = 20;
             this.cmbWorkShop.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShop_SelectedIndexChanged);
             // 
@@ -224,6 +227,7 @@
             this.txtPrice.Font = new System.Drawing.Font("宋体", 11F);
             this.txtPrice.Location = new System.Drawing.Point(106, 180);
             this.txtPrice.Name = "txtPrice";
+            this.txtPrice.ReadOnly = true;
             this.txtPrice.Size = new System.Drawing.Size(246, 24);
             this.txtPrice.TabIndex = 26;
             // 
@@ -234,44 +238,6 @@
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(232, 24);
             this.txtQty.TabIndex = 27;
-            // 
-            // txtWorkShopName
-            // 
-            this.txtWorkShopName.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtWorkShopName.Location = new System.Drawing.Point(467, 32);
-            this.txtWorkShopName.Name = "txtWorkShopName";
-            this.txtWorkShopName.Size = new System.Drawing.Size(232, 24);
-            this.txtWorkShopName.TabIndex = 29;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("宋体", 11F);
-            this.label7.Location = new System.Drawing.Point(385, 31);
-            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 15);
-            this.label7.TabIndex = 28;
-            this.label7.Text = "车间名称：";
-            // 
-            // txtStockName
-            // 
-            this.txtStockName.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtStockName.Location = new System.Drawing.Point(467, 57);
-            this.txtStockName.Name = "txtStockName";
-            this.txtStockName.Size = new System.Drawing.Size(232, 24);
-            this.txtStockName.TabIndex = 31;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("宋体", 11F);
-            this.label9.Location = new System.Drawing.Point(385, 58);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 15);
-            this.label9.TabIndex = 30;
-            this.label9.Text = "仓库名称：";
             // 
             // txtRecordName
             // 
@@ -423,14 +389,6 @@
             this.label15.TabIndex = 49;
             this.label15.Text = "工序名称：";
             this.label15.Visible = false;
-            // 
-            // txtOrderDate
-            // 
-            this.txtOrderDate.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtOrderDate.Location = new System.Drawing.Point(467, 6);
-            this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.Size = new System.Drawing.Size(232, 24);
-            this.txtOrderDate.TabIndex = 52;
             // 
             // label16
             // 
@@ -592,9 +550,63 @@
             this.lblTS.Size = new System.Drawing.Size(0, 16);
             this.lblTS.TabIndex = 70;
             // 
+            // txtOrderDate
+            // 
+            this.txtOrderDate.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtOrderDate.Location = new System.Drawing.Point(467, 6);
+            this.txtOrderDate.Name = "txtOrderDate";
+            this.txtOrderDate.Size = new System.Drawing.Size(232, 24);
+            this.txtOrderDate.TabIndex = 52;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("宋体", 11F);
+            this.label7.Location = new System.Drawing.Point(385, 31);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 15);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "车间编码：";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("宋体", 11F);
+            this.label9.Location = new System.Drawing.Point(385, 58);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "仓库编码：";
+            // 
+            // cmbWorkshopName
+            // 
+            this.cmbWorkshopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkshopName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbWorkshopName.FormattingEnabled = true;
+            this.cmbWorkshopName.Location = new System.Drawing.Point(106, 32);
+            this.cmbWorkshopName.Name = "cmbWorkshopName";
+            this.cmbWorkshopName.Size = new System.Drawing.Size(232, 23);
+            this.cmbWorkshopName.TabIndex = 72;
+            this.cmbWorkshopName.SelectedIndexChanged += new System.EventHandler(this.cmbWorkshopName_SelectedIndexChanged);
+            // 
+            // cmbStockName
+            // 
+            this.cmbStockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbStockName.FormattingEnabled = true;
+            this.cmbStockName.Location = new System.Drawing.Point(106, 58);
+            this.cmbStockName.Name = "cmbStockName";
+            this.cmbStockName.Size = new System.Drawing.Size(232, 23);
+            this.cmbStockName.TabIndex = 71;
+            this.cmbStockName.SelectedIndexChanged += new System.EventHandler(this.cmbStockName_SelectedIndexChanged);
+            // 
             // frmInWorkShopList
             // 
             this.ClientSize = new System.Drawing.Size(907, 498);
+            this.Controls.Add(this.cmbWorkshopName);
+            this.Controls.Add(this.cmbStockName);
             this.Controls.Add(this.lblTS);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.txtOrderDate);
@@ -614,9 +626,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.txtRecordName);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.txtStockName);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txtWorkShopName);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.txtPrice);
@@ -658,10 +668,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtQty;
-        private System.Windows.Forms.TextBox txtWorkShopName;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txtStockName;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtRecordName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtName;
@@ -677,7 +683,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtProceName;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox txtOrderDate;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
@@ -699,5 +704,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn remark;
         private System.Windows.Forms.Label lblTS;
+        private System.Windows.Forms.TextBox txtOrderDate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbWorkshopName;
+        private System.Windows.Forms.ComboBox cmbStockName;
     }
 }

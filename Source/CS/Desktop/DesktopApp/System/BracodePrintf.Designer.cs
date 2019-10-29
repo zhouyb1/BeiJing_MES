@@ -66,6 +66,7 @@
             // 
             // comGoods
             // 
+            this.comGoods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comGoods.Font = new System.Drawing.Font("宋体", 11F);
             this.comGoods.FormattingEnabled = true;
             this.comGoods.Location = new System.Drawing.Point(116, 50);
