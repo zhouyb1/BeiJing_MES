@@ -315,6 +315,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="keyValue">主键Id</param>
         /// <returns></returns>
         bool IsCodeAndSupplyCode(string tables, string field, string code, string field2, string code2, string keyValue);
+
+        /// <summary>
+        /// 获取成品批次列表
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        DataTable GetProductBatchList(string goodsCode, string stockCode);
         #endregion
 
         #region 提交数据
@@ -340,6 +347,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="proc">存储过程</param>
         /// <param name="errMsg">错误信息</param>
         int PostOrCancelOrDeleteMaterInBill(string orderNo, string proc, out string errMsg);
+
+        /// <summary>
+        /// 获取成品列表
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        DataTable GetProductList(string stockCode);
 
         #endregion
 

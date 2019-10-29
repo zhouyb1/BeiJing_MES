@@ -1235,6 +1235,31 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+
+        /// <summary>
+        /// 获取成品批次列表
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public DataTable GetProductBatchList(string goodsCode, string stockCode)
+        {
+            try
+            {
+                return toolsService.GetProductBatchList(goodsCode,stockCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
@@ -1313,6 +1338,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取成品列表
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        public DataTable GetProductList(string stockCode)
+        {
+         try
+            {
+                return toolsService.GetProductList(stockCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         #endregion
     }
 }

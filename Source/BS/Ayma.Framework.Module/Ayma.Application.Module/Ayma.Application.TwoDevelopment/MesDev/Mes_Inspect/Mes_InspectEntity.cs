@@ -38,10 +38,27 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("I_KIND")]
         public int? I_Kind { get; set; }
         /// <summary>
-        /// 车间
+        /// 仓库
         /// </summary>
-        [Column("I_CLASS")]
-        public string I_Class { get; set; }
+        [Column("I_STOCKNAME")]
+        public string I_StockName { get; set; }
+
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+        [Column("I_STOCKCODE")]
+        public string I_StockCode { get; set; }
+
+        /// <summary>
+        /// 批次
+        /// </summary>
+        [Column("I_BATCH")]
+        public string I_Batch { get; set; }
+        /// <summary>
+        /// 状态(1=生成抽检；2=完成抽检)
+        /// </summary>
+        [Column("I_STATUS")]
+        public int? I_Status { get; set; }
         /// <summary>
         /// 物料编码
         /// </summary>
@@ -89,6 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.I_CreateDate = DateTime.Now;
             this.I_CreateBy = userInfo.realName;
+            this.I_Status = 1;
         }
         /// <summary>
         /// 编辑调用

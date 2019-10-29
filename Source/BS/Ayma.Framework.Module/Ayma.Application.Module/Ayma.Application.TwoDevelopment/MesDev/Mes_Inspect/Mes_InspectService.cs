@@ -34,11 +34,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_Date,
                 t.I_OrderNo,
                 t.I_Kind,
-                t.I_Class,
+                t.I_StockCode,
+                t.I_StockName,
+                t.I_Status,
                 t.I_GoodsCode,
                 t.I_GoodsName,
                 t.I_GoodsQty,
                 t.I_QualifiedQty,
+                t.I_Batch,
                 r.R_Name AS I_Reson,
                 t.I_CreateBy,
                 t.I_CreateDate
@@ -152,6 +155,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    entity.Create();
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "抽检单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    this.BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.I_InspectNo = billNo;
                     entity.Create();
                     this.BaseRepository().Insert(entity);
                 }

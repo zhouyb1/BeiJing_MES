@@ -1311,6 +1311,20 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
 
+        /// <summary>
+        /// 获取成品批次列表
+        /// </summary>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public DataTable GetProductBatchList(string goodsCode,string stockCode)
+        {
+            var sql = "select I_Batch from Mes_Inventory where I_StockCode =@I_StockCode and I_GoodsCode =@I_GoodsCode ";
+            var dp = new DynamicParameters(new {});
+            dp.Add("@I_StockCode",stockCode,DbType.String);
+            dp.Add("@I_GoodsCode", goodsCode, DbType.String);
+            return this.BaseRepository().FindTable(sql, dp);
+        }
+
         #endregion
 
         #region 提交数据
@@ -1410,6 +1424,19 @@ namespace Ayma.Application.TwoDevelopment.Tools
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取成品列表
+        /// </summary>
+        /// <param name="stockCode"></param>
+        /// <returns></returns>
+        public DataTable GetProductList(string stockCode)
+        {
+            var sql = "select distinct I_GoodsCode,I_GoodsName from Mes_Inventory where I_StockCode =@stockCode";
+            var dp = new DynamicParameters(new { });
+            dp.Add("@stockCode",stockCode,DbType.String);
+            return this.BaseRepository().FindTable(sql, dp);
         }
         #endregion
     }
