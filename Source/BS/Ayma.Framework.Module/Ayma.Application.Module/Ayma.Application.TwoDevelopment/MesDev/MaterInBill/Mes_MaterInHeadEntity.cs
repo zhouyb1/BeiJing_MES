@@ -53,6 +53,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_STATUS")]
         public ErpEnums.MaterInStatusEnum M_Status { get; set; }
         /// <summary>
+        /// 供应商
+        /// </summary>
+        [Column("M_SUPPLYNAME")]
+        public string M_SupplyName { get; set; }
+        /// <summary>
+        /// 供应商编码
+        /// </summary>
+        [Column("M_SUPPLYCODE")]
+        public string M_SupplyCode { get; set; }        /// <summary>
         /// 添加人
         /// </summary>
         [Column("M_CREATEBY")]

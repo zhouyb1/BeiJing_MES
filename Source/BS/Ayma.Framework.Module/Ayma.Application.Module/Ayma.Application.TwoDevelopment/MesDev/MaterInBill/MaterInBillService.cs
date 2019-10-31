@@ -83,7 +83,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword, string S_Code)
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_Itax]
                                   ,(select P_InPrice from Mes_InPrice where P_GoodsCode=t.[G_Code] and P_SupplyCode=t.[G_SupplyCode]) as G_Price
                               FROM [dbo].[Mes_Goods] t ");
-                strSql.Append(" where t.G_Kind !=3 and G_StockCode=" + S_Code);
+                strSql.Append(" where t.G_Kind !=3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -122,6 +122,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
+                }
+                if (!queryParam["G_StockCode"].IsEmpty())
+                {
+                    dp.Add("@G_StockCode", "%" + queryParam["G_StockCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" and t.G_StockCode like @G_StockCode ");
+                }
+                if (!queryParam["G_SupplyCode"].IsEmpty())
+                {
+                    dp.Add("@G_SupplyCode", "%" + queryParam["G_SupplyCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" and t.G_SupplyCode like @G_SupplyCode ");
                 }
                 return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(), dp, pagination);
             }
@@ -390,6 +400,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_OrderNo,
                 t.M_OrderDate,
                 t.M_Status,
+                t.M_SupplyName,
+                t.M_SupplyCode,
                 t.M_CreateBy,
                 t.M_CreateDate,
                 t.M_UpdateBy,

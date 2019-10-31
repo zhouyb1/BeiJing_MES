@@ -55,6 +55,19 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+
+            $("#M_SupplyCode").select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
+                // 访问数据接口参数
+            });
             var orderNo = "";
             if (!!keyValue) {//根据主键获取生产订单号
                 $.ajax({
@@ -85,20 +98,33 @@ var bootstrap = function ($, ayma) {
             //添加商品
             $("#am_add").on("click", function () {
                 if ($("#M_StockCode").val()=="") {
-                    ayma.alert.error("先选择仓库！");
+                    ayma.alert.error("请选择仓库！");
                     return false;
                 }
-                ayma.layerForm({
-                    id: 'GoodsListIndexForm',
-                    title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId + '&S_Code=' + $("#M_StockCode").val(),
-                    width: 950,
-                    height: 600,
-                    maxmin: true,
-                    callBack: function (id, index) {
-                        return top[id].closeWindow();
+                if ($('#M_SupplyCode').selectGet()=="") {
+                    ayma.alert.error("请选择供应商！");
+                    return false;
+                }
+                var code = $('#M_SupplyCode').selectGet();
+                ayma.httpAsync('get', top.$.rootUrl + '/MesDev/Tools/ByCodeGetSupplyEntity', { code: code }, function (res) {
+                    if (res.S_EffectTime < ayma.getDate('yyyy-MM-dd 00:00:00',"",null)) {
+                        ayma.alert.error("供应商资质过期！");
+                        return false;
                     }
+                    ayma.layerForm({
+                        id: 'GoodsListIndexForm',
+                        title: '添加物料',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId + '&S_Code=' + $("#M_StockCode").val() + "&supplyCode=" + $("#M_SupplyCode").selectGet(),
+                        width: 950,
+                        height: 600,
+                        maxmin: true,
+                        callBack: function (id, index) {
+                            return top[id].closeWindow();
+                        }
+                    });
+                    return true;
                 });
+               
             });
             $('#Mes_MaterInDetail').jfGrid({
                 headData: [
@@ -232,7 +258,9 @@ var bootstrap = function ($, ayma) {
             return false;
         }
         var postData = {};
-        postData.strEntity = JSON.stringify($('[data-table="Mes_MaterInHead"]').GetFormData());
+        var obj = $('[data-table="Mes_MaterInHead"]').GetFormData();
+        obj.M_SupplyName = $('#M_SupplyCode').selectGetText();
+        postData.strEntity = JSON.stringify(obj);
         postData.strmes_MaterInDetailList = JSON.stringify($('#Mes_MaterInDetail').jfGridGet('rowdatas'));
         $.SaveForm(top.$.rootUrl + '/MesDev/MaterInBill/SaveForm?orderKind=0&keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调

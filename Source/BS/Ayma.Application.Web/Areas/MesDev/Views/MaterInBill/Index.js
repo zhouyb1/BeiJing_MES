@@ -212,6 +212,8 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
+                    { label: "供应商", name: "M_SupplyName", width: 160, align: "left" },
+                    { label: "供应商编码", name: "M_SupplyCode", width: 160, align: "left",hidden:true},
                     { label: "仓库编码", name: "M_StockCode", width: 90, align: "left" },
                     { label: "仓库名称", name: "M_StockName", width: 160, align: "left" },
                     //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },

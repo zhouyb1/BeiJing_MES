@@ -9,11 +9,11 @@ var parentRefreshGirdData;
 var parentRemoveGridData;
 //上级元素的id
 var parentFormId = request('formId');
-//仓库编码
-var stockCode = request('stockCode');
 var newArray = [];
 //仓库的编码
 var S_Code = request('S_Code');
+//供应商编码
+var supplyCode = request('supplyCode');
 //查询数据
 var queryJson;
 //关闭窗口
@@ -102,7 +102,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList?stockCode=' + stockCode + '&S_Code=' + S_Code,
+                url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList',
                 headData: [
                     { label: "主键", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },
@@ -179,9 +179,12 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            queryJson = param;
+            queryJson = param || {};
+            queryJson.G_SupplyCode = supplyCode;
+            queryJson.G_StockCode = S_Code;
             param = $("#txt_Keyword").val();
-            $('#girdtable').jfGridSet('reload', { param: { keyword: param, stockCode: stockCode, queryJson: JSON.stringify(queryJson) } });
+           
+            $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }
     };
     refreshGirdData = function () {

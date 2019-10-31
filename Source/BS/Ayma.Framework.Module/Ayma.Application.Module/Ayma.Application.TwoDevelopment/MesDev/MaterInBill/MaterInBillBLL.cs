@@ -45,11 +45,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword, string S_Code)
+        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
-                return materInBillService.GetGoodsList(pagination, queryJson, keyword, S_Code);
+                return materInBillService.GetGoodsList(pagination, queryJson, keyword);
             }
             catch (Exception ex)
             {
