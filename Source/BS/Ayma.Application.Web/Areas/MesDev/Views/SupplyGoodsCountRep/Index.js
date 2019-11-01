@@ -121,7 +121,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/SupplyGoodsCountRep/GetSupplyGoodsDetail',
                 headData: [
                     { label: "单据日期", name: "m_createdate", width: 160, align: "left" },
-                    { label: "单据编号", name: "m_materinno", width: 160, align: "left" },
+                    { label: "入库单据", name: "m_materinno", width: 160, align: "left" },
                     { label: "物料名称", name: "m_goodsname", width: 160, align: "left" },
                     { label: "基本单位", name: "m_unit", width: 160, align: "left" },
                     { label: "数量", name: "m_qty", width: 160, align: "left", statistics: true },
