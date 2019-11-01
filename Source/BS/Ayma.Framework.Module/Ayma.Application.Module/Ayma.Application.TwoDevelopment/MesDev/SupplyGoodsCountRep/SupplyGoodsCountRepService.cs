@@ -29,8 +29,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                m.M_SupplyCode ,
-                m.M_SupplyName ,
+                h.M_SupplyCode ,
+                h.M_SupplyName ,
                 h.M_CreateDate ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty)) In_Qty ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty * M_Price)) In_Amount ,
@@ -54,7 +54,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     strSql.Append(" AND m.M_SupplyName Like @M_SupplyName ");
                 }
 
-                strSql.Append(" GROUP BY h.M_CreateDate,m.M_SupplyCode,m.M_SupplyName");
+                strSql.Append(" GROUP BY h.M_CreateDate,h.M_SupplyCode,h.M_SupplyName");
                 return this.BaseRepository().FindTable(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
@@ -115,7 +115,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     h.M_CreateDate ,
                                     h.M_CreateBy 
                             FROM    dbo.Mes_MaterInHead h
-                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE M_SupplyCode  =@supplyCode";
+                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode";
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
