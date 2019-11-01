@@ -23,8 +23,12 @@
         <div id="G_Kind" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Goods">
+        <div class="am-form-item-title">商品二级分类<font face="宋体">*</font></div>
+        <div id="G_TKind" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>  
+    <div class="col-xs-6 am-form-item" data-table="Mes_Goods" id="prev_G_Erpcode" style="display: none">
         <div id="div_Erpcode" class="am-form-item-title">商品erp编码</div>
-        <input id="G_Erpcode" type="text" class="form-control"  />
+        <input id="G_Erpcode" type="text" class="form-control" />
     </div>   
     <div id="prev_G_Name" class="col-xs-6 am-form-item" data-table="Mes_Goods" style="display: none">
         <div class="am-form-item-title">供应商名称<font face="宋体">*</font></div>
@@ -34,10 +38,6 @@
         <div class="am-form-item-title">供应商编码<font face="宋体">*</font></div>
         <input id="G_SupplyCode" type="text" class="form-control" disabled="disabled"/>
     </div> 
-    <div class="col-xs-6 am-form-item" data-table="Mes_Goods">
-        <div class="am-form-item-title">商品二级分类<font face="宋体">*</font></div>
-        <div id="G_TKind" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
-    </div>  
     <div class="col-xs-6 am-form-item" data-table="Mes_Goods">
         <div class="am-form-item-title">保质时间(天)<font face="宋体">*</font></div>
         <input id="G_Period" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />

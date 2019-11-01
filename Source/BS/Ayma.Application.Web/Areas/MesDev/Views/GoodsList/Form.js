@@ -46,11 +46,13 @@ var bootstrap = function ($, ayma) {
                     $("#G_Erpcode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $('#prev_div').css("display", "block");
                     $("#G_Barcode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $('#prev_G_Erpcode').css("display", "block");
                 } else {
                     $("#div_Erpcode").html("商品erp编码");
                     $("#G_Erpcode").removeAttr("isvalid").removeAttr("checkexpession");
                     $('#prev_div').css("display", "none");
                     $("#G_Barcode").removeAttr("isvalid").removeAttr("checkexpession");
+                    $('#prev_G_Erpcode').css("display", "none");
                 }
                 if (value == 1) {
                     $("#div_Prepareday").html("备用天数<font face=\"宋体\">*</font>");
@@ -71,8 +73,7 @@ var bootstrap = function ($, ayma) {
                     $("#G_Super").removeAttr("isvalid").removeAttr("checkexpession");
                     $("#div_G_Lower").html("下限预警数量");
                     $("#G_Lower").removeAttr("isvalid").removeAttr("checkexpession");
-                    $('#prev_G_Name').css("display", "none");
-                    
+                    $('#prev_G_Name').css("display", "none");              
                     $("#G_SupplyName").removeAttr("isvalid").removeAttr("checkexpession");
                     $('#prev_G_Code').css("display", "none");
                     $("#G_SupplyCode").removeAttr("isvalid").removeAttr("checkexpession");
