@@ -48,10 +48,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
                 }
-                if (!queryParam["M_SupplyName"].IsEmpty())
+                if (!queryParam["M_SupplyCode"].IsEmpty())
                 {
-                    dp.Add("M_SupplyName", "%" + queryParam["M_SupplyName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND m.M_SupplyName Like @M_SupplyName ");
+                    dp.Add("M_SupplyCode", "%" + queryParam["M_SupplyCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND h.M_SupplyCode Like @M_SupplyCode ");
                 }
 
                 strSql.Append(" GROUP BY h.M_CreateDate,h.M_SupplyCode,h.M_SupplyName");
