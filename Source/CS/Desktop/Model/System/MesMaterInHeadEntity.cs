@@ -29,6 +29,14 @@ namespace Model
         /// </summary>
         public string M_StockName{ set; get; }
         /// <summary>
+        /// 供应商
+        /// </summary>
+        public string M_SupplyCode { set; get; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        public string M_SupplyName { set; get; }
+        /// <summary>
         /// 物料类型
         /// </summary>
         public string M_Kind { set; get; }

@@ -830,6 +830,59 @@ namespace DesktopApp
             var row = ProceBLL.GetList_Proce("where P_ProName = '" + cmbProceName.Text + "'");
             cmbProce.Text = row[0].P_ProNo;
         }
+
+        private void btnPrintf_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strOrderNo = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["生产订单2"].Value.ToString();
+                string strWorkShop = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["车间2"].Value.ToString();
+                string strGoodsCode = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料2"].Value.ToString();
+                string strBatch = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["批次2"].Value.ToString();
+                string strQty = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["数量2"].Value.ToString();
+                //string strPrice = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["价格2"].Value.ToString();
+                string strGoodsName = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料名称2"].Value.ToString();
+                string strUnit = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["单位2"].Value.ToString();
+                string strId = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["Id2"].Value.ToString();
+
+                //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
+
+                if (MessageBox.Show("物料是否要补写?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        this.Enabled = false;
+                        Cursor.Current = Cursors.WaitCursor;
+
+                        GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch);
+                        DeleteData(strId);
+
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("请选中某一行进行退仓库");
+                lblTS.Text = "系统提示：请选中某一行进行补写";
+            }
+        }
+
+        private void btnResolve_Click(object sender, EventArgs e)
+        {
+            frmResolve frm = new frmResolve();
+            frm.ShowDialog();
+            frm.Dispose();
+        }
+
+
       
 
         

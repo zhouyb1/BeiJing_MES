@@ -755,6 +755,24 @@ namespace DesktopApp
 
         }
 
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            frmScrap frmBarcodePrintf = new frmScrap();
+            frmBarcodePrintf.TopLevel = false;
+            frmBarcodePrintf.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmBarcodePrintf.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmBarcodePrintf.Show(this.panMain);
+        }
+
 
     }
 }

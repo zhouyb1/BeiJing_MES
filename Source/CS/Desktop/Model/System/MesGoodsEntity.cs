@@ -27,7 +27,7 @@ namespace Model
         /// <summary>
         /// 保质时间
         /// </summary>
-        public decimal G_Period { set; get; }
+        public int G_Period { set; get; }
         /// <summary>
         /// 价格
         /// </summary>

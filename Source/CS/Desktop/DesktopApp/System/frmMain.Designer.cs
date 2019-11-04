@@ -70,9 +70,10 @@
             this.cmsPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.原物料入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.补打标签ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.车间出库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间扫描ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.车间出库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.人脸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人员管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +104,7 @@
             this.panStatus.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panStatus.Location = new System.Drawing.Point(0, 536);
             this.panStatus.Name = "panStatus";
-            this.panStatus.Size = new System.Drawing.Size(984, 26);
+            this.panStatus.Size = new System.Drawing.Size(995, 26);
             this.panStatus.TabIndex = 1;
             // 
             // lbDateTime
@@ -111,7 +112,7 @@
             this.lbDateTime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbDateTime.AutoSize = true;
             this.lbDateTime.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbDateTime.Location = new System.Drawing.Point(491, 7);
+            this.lbDateTime.Location = new System.Drawing.Point(496, 7);
             this.lbDateTime.Name = "lbDateTime";
             this.lbDateTime.Size = new System.Drawing.Size(138, 12);
             this.lbDateTime.TabIndex = 7;
@@ -122,7 +123,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.Image = global::DesktopApp.Properties.Resources.time;
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(413, 4);
+            this.label4.Location = new System.Drawing.Point(418, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 16);
             this.label4.TabIndex = 6;
@@ -134,7 +135,7 @@
             this.lbVer.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbVer.Location = new System.Drawing.Point(911, 7);
+            this.lbVer.Location = new System.Drawing.Point(922, 7);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
@@ -146,7 +147,7 @@
             this.label3.AutoSize = true;
             this.label3.Image = global::DesktopApp.Properties.Resources.ver;
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Location = new System.Drawing.Point(833, 7);
+            this.label3.Location = new System.Drawing.Point(844, 7);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 12);
             this.label3.TabIndex = 4;
@@ -190,7 +191,7 @@
             this.panMain.Location = new System.Drawing.Point(0, 30);
             this.panMain.Name = "panMain";
             this.panMain.RightToLeftLayout = true;
-            this.panMain.Size = new System.Drawing.Size(984, 506);
+            this.panMain.Size = new System.Drawing.Size(995, 506);
             dockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight;
             dockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight;
             autoHideStripSkin1.DockStripGradient = dockPanelGradient1;
@@ -246,7 +247,7 @@
             this.panMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.panMenu.Location = new System.Drawing.Point(0, 0);
             this.panMenu.Name = "panMenu";
-            this.panMenu.Size = new System.Drawing.Size(984, 30);
+            this.panMenu.Size = new System.Drawing.Size(995, 30);
             this.panMenu.TabIndex = 0;
             // 
             // menuStrip
@@ -258,9 +259,10 @@
             this.cmsUserManager,
             this.原物料入库ToolStripMenuItem,
             this.补打标签ToolStripMenuItem,
+            this.车间出库ToolStripMenuItem,
             this.车间扫描ToolStripMenuItem,
             this.车间入库ToolStripMenuItem,
-            this.车间出库ToolStripMenuItem,
+            this.toolStripMenuItem2,
             this.人脸ToolStripMenuItem,
             this.rFID管理ToolStripMenuItem,
             this.cmsSystemManager,
@@ -268,7 +270,7 @@
             this.更新系统ToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(984, 29);
+            this.menuStrip.Size = new System.Drawing.Size(995, 29);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -384,6 +386,13 @@
             this.补打标签ToolStripMenuItem.Text = "补打标签";
             this.补打标签ToolStripMenuItem.Click += new System.EventHandler(this.补打标签ToolStripMenuItem_Click);
             // 
+            // 车间出库ToolStripMenuItem
+            // 
+            this.车间出库ToolStripMenuItem.Name = "车间出库ToolStripMenuItem";
+            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
+            this.车间出库ToolStripMenuItem.Text = "车间出库";
+            this.车间出库ToolStripMenuItem.Click += new System.EventHandler(this.车间出库ToolStripMenuItem_Click);
+            // 
             // 车间扫描ToolStripMenuItem
             // 
             this.车间扫描ToolStripMenuItem.Name = "车间扫描ToolStripMenuItem";
@@ -398,12 +407,12 @@
             this.车间入库ToolStripMenuItem.Text = "车间入库";
             this.车间入库ToolStripMenuItem.Click += new System.EventHandler(this.车间入库ToolStripMenuItem_Click);
             // 
-            // 车间出库ToolStripMenuItem
+            // toolStripMenuItem2
             // 
-            this.车间出库ToolStripMenuItem.Name = "车间出库ToolStripMenuItem";
-            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
-            this.车间出库ToolStripMenuItem.Text = "车间出库";
-            this.车间出库ToolStripMenuItem.Click += new System.EventHandler(this.车间出库ToolStripMenuItem_Click);
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 25);
+            this.toolStripMenuItem2.Text = "仓库报废";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // 人脸ToolStripMenuItem
             // 
@@ -419,21 +428,21 @@
             // 人员管理ToolStripMenuItem
             // 
             this.人员管理ToolStripMenuItem.Name = "人员管理ToolStripMenuItem";
-            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.人员管理ToolStripMenuItem.Text = "人员管理";
             this.人员管理ToolStripMenuItem.Click += new System.EventHandler(this.人员管理ToolStripMenuItem_Click);
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             this.设备管理ToolStripMenuItem.Click += new System.EventHandler(this.设备管理ToolStripMenuItem_Click);
             // 
             // 照片管理ToolStripMenuItem
             // 
             this.照片管理ToolStripMenuItem.Name = "照片管理ToolStripMenuItem";
-            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
+            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
             this.照片管理ToolStripMenuItem.Text = "照片管理";
             this.照片管理ToolStripMenuItem.Click += new System.EventHandler(this.照片管理ToolStripMenuItem_Click);
             // 
@@ -519,7 +528,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(984, 562);
+            this.ClientSize = new System.Drawing.Size(995, 562);
             this.Controls.Add(this.panMain);
             this.Controls.Add(this.panStatus);
             this.Controls.Add(this.panMenu);
@@ -587,6 +596,7 @@
         private System.Windows.Forms.ToolStripMenuItem 车间设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 更新系统ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 程序更新ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
 
     }
 }

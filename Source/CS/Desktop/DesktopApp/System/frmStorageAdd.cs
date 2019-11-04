@@ -146,6 +146,7 @@ namespace DesktopApp
 
                 string[] strStock = comStock.Text.ToString().Split('$');
                 string[] strProduct = comProductNo.Text.ToString().Split('$');
+                string[] strSupply = cmbSupply.Text.ToString().Split('$');
 
                 MesMaterInHeadBLL MesMaterInHeadBLL = new MesMaterInHeadBLL();
                 if (checkInput())
@@ -157,6 +158,8 @@ namespace DesktopApp
                     MesMaterInHead.M_StockCode = strStock[0];
                     MesMaterInHead.M_Kind = "0";
                     MesMaterInHead.M_StockName = strStock[1];
+                    MesMaterInHead.M_SupplyCode = strSupply[0];
+                    MesMaterInHead.M_SupplyName = strSupply[1];
                     MesMaterInHead.M_OrderNo = strProduct[0];
                     MesMaterInHead.M_OrderDate = DateTime.Parse(strProduct[1].ToString());
                     MesMaterInHead.M_Status = 1;
@@ -208,10 +211,20 @@ namespace DesktopApp
             var Product = ProductOrderHeadBLL.GetList("");
 
             int nCount2 = Product.Count;
-            for (int i = 0; i < nCount2; i++)
+            for (int j = 0; j < nCount2; j++)
             {
-                comProductNo.Items.Add(Product[i].P_OrderNo.ToString() + "$" + Product[i].P_OrderDate.ToString());
+                comProductNo.Items.Add(Product[j].P_OrderNo.ToString() + "$" + Product[j].P_OrderDate.ToString());
 
+            }
+
+            string strCondit = " where S_EffectTime > '"+ DateTime.Now +"'";
+
+            MesSupplyBLL SupplyBLL = new MesSupplyBLL();
+            var Supply = SupplyBLL.GetList(strCondit);
+            int nCount3 = Supply.Count;
+            for(int k = 0; k < nCount3; k++)
+            {
+                cmbSupply.Items.Add(Supply[k].S_Code + "$" + Supply[k].S_Name);
             }
         }
     }

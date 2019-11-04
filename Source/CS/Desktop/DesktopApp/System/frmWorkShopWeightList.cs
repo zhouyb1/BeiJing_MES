@@ -25,6 +25,7 @@ namespace DesktopApp
         NfcTag nfcTag;
         Bmp2Bmp2Data b2d;
         Bmp2BmpProduct bp;
+        string strBZQ; //保质期
         public frmWorkShopWeightList()
         {
             InitializeComponent();
@@ -62,6 +63,8 @@ namespace DesktopApp
                 txtUnit.Text = Goods_rows[0].G_Unit;
             }
             txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+            int dd = Goods_rows[0].G_Period * 24;
+            strBZQ = dd.ToString();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -120,7 +123,7 @@ namespace DesktopApp
                     if (nCount > 0)
                     {
                         Decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
-                        GetImg("物料" + cmbGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtName.Text.Trim(), dTemp.ToString());
+                        GetImg("物料" + cmbGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtName.Text.Trim(), dTemp.ToString(), strBZQ);
                         MessageBox.Show("添加成功");
                     }
 
@@ -298,7 +301,7 @@ namespace DesktopApp
         /// <param name="strHZ"></param>
         /// <param name="strGoodsName"></param>
         /// <param name="strQty"></param>
-        public void GetImg(string strHZ, string strGoodsName, string strQty)
+        public void GetImg(string strHZ, string strGoodsName, string strQty,string strBZQ)
         {
             try
             {
@@ -337,7 +340,7 @@ namespace DesktopApp
 
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
-                g.DrawString("保质期：" + "24小时", f4, b, 4, 50);//设置位置
+                g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strUser, f4, b, 4, 70);//设置位置
                 g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
 

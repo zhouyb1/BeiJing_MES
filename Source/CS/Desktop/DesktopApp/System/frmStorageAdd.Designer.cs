@@ -37,6 +37,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comStock = new System.Windows.Forms.ComboBox();
             this.comProductNo = new System.Windows.Forms.ComboBox();
+            this.cmbSupply = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSave
@@ -44,7 +46,7 @@
             this.btnSave.Font = new System.Drawing.Font("宋体", 11F);
             this.btnSave.Image = global::DesktopApp.Properties.Resources.save;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(252, 223);
+            this.btnSave.Location = new System.Drawing.Point(259, 269);
             this.btnSave.Margin = new System.Windows.Forms.Padding(2);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(70, 30);
@@ -56,7 +58,7 @@
             // txtCreateBy
             // 
             this.txtCreateBy.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtCreateBy.Location = new System.Drawing.Point(155, 164);
+            this.txtCreateBy.Location = new System.Drawing.Point(155, 207);
             this.txtCreateBy.Margin = new System.Windows.Forms.Padding(2);
             this.txtCreateBy.Name = "txtCreateBy";
             this.txtCreateBy.ReadOnly = true;
@@ -67,7 +69,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(90, 165);
+            this.label5.Location = new System.Drawing.Point(90, 210);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
@@ -137,11 +139,34 @@
             this.comProductNo.Size = new System.Drawing.Size(177, 23);
             this.comProductNo.TabIndex = 1005;
             // 
+            // cmbSupply
+            // 
+            this.cmbSupply.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSupply.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbSupply.FormattingEnabled = true;
+            this.cmbSupply.Location = new System.Drawing.Point(155, 169);
+            this.cmbSupply.Name = "cmbSupply";
+            this.cmbSupply.Size = new System.Drawing.Size(177, 23);
+            this.cmbSupply.TabIndex = 1007;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 11F);
+            this.label3.Location = new System.Drawing.Point(90, 172);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(67, 15);
+            this.label3.TabIndex = 1006;
+            this.label3.Text = "供应商：";
+            // 
             // frmStorageAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(429, 327);
+            this.Controls.Add(this.cmbSupply);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.comProductNo);
             this.Controls.Add(this.comStock);
             this.Controls.Add(this.txtMaterInNo);
@@ -173,5 +198,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comStock;
         private System.Windows.Forms.ComboBox comProductNo;
+        private System.Windows.Forms.ComboBox cmbSupply;
+        private System.Windows.Forms.Label label3;
     }
 }

@@ -106,7 +106,7 @@
             this.label8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label8.Size = new System.Drawing.Size(67, 15);
             this.label8.TabIndex = 16;
-            this.label8.Text = "线边仓：";
+            this.label8.Text = "日耗库：";
             // 
             // comOrderNo
             // 
