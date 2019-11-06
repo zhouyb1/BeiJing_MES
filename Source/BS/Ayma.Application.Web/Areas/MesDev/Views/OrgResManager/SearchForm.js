@@ -33,10 +33,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
            }
             //绑定车间
-            $('#O_WorkShopName').select(dfop).on('change', function() {
-                var code = $(this).selectGet();
-                $('#O_WorkShopCode').val(code);
-            });
+            //$('#O_WorkShopName').select(dfop).on('change', function() {
+            //    var code = $(this).selectGet();
+            //    $('#O_WorkShopCode').val(code);
+            //});
             //绑定工序
             dfop= {
                 type: 'default',
@@ -69,7 +69,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#O_ProCode').selectRefresh(dfop);
 
             });
-            $('#O_ProCode').select();
             var orderNo = "";
             if (!!keyValue) {//根据主键获取生产订单号
                 $.ajax({

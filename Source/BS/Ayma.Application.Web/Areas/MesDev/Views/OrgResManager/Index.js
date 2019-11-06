@@ -93,6 +93,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MasterIndexForm',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
+                        width: 900,
+                        height: 600,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 审核单据
             $('#am_auditing').on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");

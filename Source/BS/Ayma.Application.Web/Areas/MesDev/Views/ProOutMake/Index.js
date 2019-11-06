@@ -93,7 +93,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-
+            //双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'ProOutMakeForm',
+                        title: '编辑成品出库单',
+                        url: top.$.rootUrl + '/MesDev/ProOutMake/Form?keyValue=' + keyValue + '&formId=ProOutMakeForm',
+                        width: 950,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //审核单据
             $("#am_audit").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");

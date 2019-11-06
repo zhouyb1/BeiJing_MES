@@ -106,6 +106,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('P_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=form',
+                        width: 800,
+                        height: 600,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除单据
             $('#am_delete').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("C_CollarNo");

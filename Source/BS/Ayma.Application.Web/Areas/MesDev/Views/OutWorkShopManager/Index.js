@@ -98,8 +98,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MaterForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=MaterForm',
-                        width: 900,
-                        height: 700,
+                        width: 700,
+                        height: 500,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -107,6 +107,7 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
             $('#girdtable').on('dblclick', function() {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {

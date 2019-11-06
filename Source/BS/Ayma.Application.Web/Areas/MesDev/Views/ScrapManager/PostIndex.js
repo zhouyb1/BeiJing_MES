@@ -77,6 +77,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '详情',
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue,
+                        width: 700,
+                        height: 500,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 撤销单据
             $('#am_cancle').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("S_ScrapNo");

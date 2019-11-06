@@ -93,6 +93,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '详情',
+                        url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue,
+                        width: 700,
+                        height: 500,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("C_CollarNo");
@@ -133,7 +151,7 @@ var bootstrap = function ($, ayma) {
                           }
                       },
                     { label: "领料单号", name: "C_CollarNo", width: 160, align: "left"},
-                    //{ label: "生产订单", name: "P_OrderNo", width: 160, align: "left" },
+                    { label: "生产订单", name: "P_OrderNo", width: 160, align: "left" },
                     { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
                     { label: "原仓库名称", name: "C_StockName", width: 160, align: "left" },
                     { label: "调拨仓库编码", name: "C_StockToCode", width: 100, align: "left" },

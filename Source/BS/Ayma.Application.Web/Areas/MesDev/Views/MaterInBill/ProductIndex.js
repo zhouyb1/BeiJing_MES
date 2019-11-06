@@ -94,6 +94,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('M_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MaterInBill',
+                        title: '编辑成品入库',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/ProductForm?keyValue=' + keyValue + '&formId=MaterInBill' + '&status=' + statu,
+                        width: 900,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");

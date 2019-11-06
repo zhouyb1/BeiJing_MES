@@ -106,6 +106,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('R_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'RequistBill',
+                        title: '编辑调拨单',
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu,
+                        width: 950,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //审核单据
             $("#am_auditing").on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");

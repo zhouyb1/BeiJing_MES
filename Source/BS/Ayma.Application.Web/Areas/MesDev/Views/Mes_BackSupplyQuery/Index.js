@@ -77,6 +77,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '查看详情',
+                        url: top.$.rootUrl + '/MesDev/Mes_BackSupplyQuery/Form?keyValue=' + keyValue,
+                        width: 900,
+                        height: 700,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                        }
+                    });
+                }
+            });
+            //撤销
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("B_BackSupplyNo");

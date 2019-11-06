@@ -97,6 +97,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('S_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'ScrapIndexForm',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=ScrapIndexForm',
+                        width: 800,
+                        height: 500,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 审核单据
             $('#am_auditing').on('click', function () {
                 var keyValue = $("#girdtable").jfGridValue("ID");

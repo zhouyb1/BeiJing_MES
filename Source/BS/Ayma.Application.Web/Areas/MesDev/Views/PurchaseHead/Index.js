@@ -79,6 +79,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑采购单',
+                        url: top.$.rootUrl + '/MesDev/PurchaseHead/Form?keyValue=' + keyValue,
+                        width: 950,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

@@ -79,6 +79,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '详情',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue,
+                        width: 700,
+                        height: 600,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+
+                        }
+                    });
+                }
+            });
             // 退供应商
             $('#am_returnsupply').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

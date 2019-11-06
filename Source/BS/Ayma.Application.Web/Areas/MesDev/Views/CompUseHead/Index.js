@@ -108,6 +108,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('C_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'compUserForm',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue + '&status=' + statu,
+                        width: 900,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

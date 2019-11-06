@@ -82,7 +82,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-           
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MasterIndexForm',
+                        title: '详情',
+                        url: top.$.rootUrl + '/MesDev/OrgResManager/SearchForm?keyValue=' + keyValue + "&formId=MasterIndexForm",
+                        width: 800,
+                        height: 600,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
         },
         // 初始化列表
         initGird: function () {

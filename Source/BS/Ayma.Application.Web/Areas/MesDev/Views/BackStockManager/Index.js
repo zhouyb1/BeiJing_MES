@@ -106,7 +106,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('B_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'BackIndexform',
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform' + '&status=' + statu,
+                        width: 800,
+                        height: 600,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //审核单据
             $('#am_auditing').on('click', function() {
                 var keyValue = $('#girdtable').jfGridValue('ID');

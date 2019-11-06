@@ -110,6 +110,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('M_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'MaterInBillForm',
+                        title: '编辑入库单',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=MaterInBillForm',
+                        width: 900,
+                        height: 700,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //删除单据
             $("#am_delete").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("M_MaterInNo");

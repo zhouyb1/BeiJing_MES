@@ -65,6 +65,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'ProductOrderMake',
+                        title: '查看详情',
+                        url: top.$.rootUrl + '/MesDev/ProductOrderMake/SearchForm?keyValue=' + keyValue + '&formId=ProductOrderMake',
+                        width: 950,
+                        height: 650,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                        }
+                    });
+                }
+            });
         },
         // 初始化列表
         initGird: function () {
