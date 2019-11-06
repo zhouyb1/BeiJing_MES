@@ -33,13 +33,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        void DeleteEntity(string keyValue);
+        void DeleteEntity(List<Mes_InPriceEntity> list);
         /// <summary>
         /// 保存实体数据（新增、修改）
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         void SaveEntity(string keyValue, Mes_InPriceEntity entity, Mes_PriceEntity entity2);
+
+        /// <summary>
+        /// 批量保存
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="entityList"></param>
+        /// <param name="entityList2"></param>
+        void SaveEntity(List<Mes_InPriceEntity> entityList, List<Mes_PriceEntity> entityList2);
+
         #endregion
 
     }

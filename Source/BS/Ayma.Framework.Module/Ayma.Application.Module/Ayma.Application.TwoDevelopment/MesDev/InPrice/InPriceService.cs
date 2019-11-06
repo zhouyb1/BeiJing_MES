@@ -111,11 +111,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void DeleteEntity(string keyValue)
+        public void DeleteEntity(List<Mes_InPriceEntity>list )
         {
             try
             {
-                this.BaseRepository().Delete<Mes_InPriceEntity>(t=>t.ID == keyValue);
+                this.BaseRepository().Delete(list);
             }
             catch (Exception ex)
             {
@@ -166,7 +166,39 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 批量保存
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="entityList"></param>
+        /// <param name="entityList2"></param>
+        public void SaveEntity( List<Mes_InPriceEntity> entityList, List<Mes_PriceEntity> entityList2)
+        {
+            try
+            {
+                foreach (var item in entityList)
+                {
+                    item.Modify(item.ID);
+                }
+                foreach (var item1 in entityList2)
+                {
+                    item1.Create();
+                }
+                this.BaseRepository().Update(entityList);
+                this.BaseRepository().Insert(entityList2);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
     }

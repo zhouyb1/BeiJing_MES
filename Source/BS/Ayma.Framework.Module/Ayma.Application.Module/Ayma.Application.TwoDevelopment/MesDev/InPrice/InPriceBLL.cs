@@ -72,11 +72,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void DeleteEntity(string keyValue)
+        public void DeleteEntity(List<Mes_InPriceEntity> list)
         {
             try
             {
-                inPriceService.DeleteEntity(keyValue);
+                inPriceService.DeleteEntity(list);
             }
             catch (Exception ex)
             {
@@ -101,6 +101,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 inPriceService.SaveEntity(keyValue, entity, entity2);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 批量保存
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="entityList"></param>
+        /// <param name="entityList2"></param>
+        public void SaveEntity(List<Mes_InPriceEntity> entityList, List<Mes_PriceEntity> entityList2)
+        {
+            try
+            {
+                inPriceService.SaveEntity(entityList, entityList2);
             }
             catch (Exception ex)
             {
