@@ -85,9 +85,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpPost]
         [AjaxOnly]
-        public ActionResult DeleteForm(string keyValue)
+        public ActionResult DeleteForm(List<Mes_InPriceEntity> strEntity)
         {
-            inPriceIBLL.DeleteEntity(keyValue);
+            inPriceIBLL.DeleteEntity(strEntity);
             return Success("删除成功！");
         }
         /// <summary>
@@ -128,6 +128,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             //        return Fail("起始批次不能大于终止批次.");
             //    }
             //}
+        }
+
+        /// <summary>
+        /// 批量保存
+        /// </summary>
+        /// <param name="keyValue"></param>
+        /// <param name="strEntity"></param>
+        /// <param name="strEntity2"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult Save(string keyValue, string strEntity, string strEntity2)
+        {
+            var  entityList = strEntity.ToObject<List<Mes_InPriceEntity>>();
+            var  entityList2  = strEntity2.ToObject<List<Mes_PriceEntity>>();
+            inPriceIBLL.SaveEntity(entityList, entityList2);
+            return Success("保存成功！");
         }
         #endregion
 
