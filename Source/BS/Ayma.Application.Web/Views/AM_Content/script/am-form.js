@@ -152,6 +152,25 @@
             }
         });
     };
+    $.SaveIndex = function (url, param, callback, isNotClosed) {
+        ayma.loading(true, '正在保存数据');
+        ayma.httpAsyncPost(url, param, function (res) {
+            ayma.loading(false);
+            if (res.code == ayma.httpCode.success) {
+                if (!!callback) {
+                    callback(res);
+                }
+                ayma.alert.success(res.info);
+                if (!isNotClosed) {
+                    ayma.layerClose(window.name);
+                }
+            }
+            else {
+                ayma.alert.error(res.info);
+                ayma.httpErrorLog(res.info);
+            }
+        });
+    };
     $.PostForm = function (url, param) {
         param['__RequestVerificationToken'] = $.amToken;
         ayma.loading(true, '正在提交数据');
