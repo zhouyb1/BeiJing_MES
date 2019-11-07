@@ -127,6 +127,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public void SaveEntity(string keyValue, Mes_WorkShopEntity entity)
         {
+            var db = this.BaseRepository().BeginTrans();
             try
             {
                 if (!string.IsNullOrEmpty(keyValue))
@@ -136,9 +137,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@codeType", "车间编码");
+                    dp.Add("@code", "", DbType.String, ParameterDirection.Output);
+                    dp.Add("@goodsSecNo", "");
+                    db.ExecuteByProc("sp_GetCode", dp);
+                    var W_Code = dp.Get<string>("@code"); //存储过程返回编号
+                    entity.W_Code = W_Code;
                     entity.Create();
-                    this.BaseRepository().Insert(entity);
+                    db.Insert(entity);
                 }
+                db.Commit();
             }
             catch (Exception ex)
             {

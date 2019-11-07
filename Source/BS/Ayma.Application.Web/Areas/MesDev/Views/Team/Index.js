@@ -82,7 +82,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: "T_Code",
+                sord: "asc"
             });
             page.search();
         },

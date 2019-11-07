@@ -79,7 +79,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'Id',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: "W_Code",
+                sord: "asc"
             });
             page.search();
         },

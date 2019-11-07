@@ -176,7 +176,9 @@ var bootstrap = function ($, ayma) {
 
                 ],
                 mainId:'ID',    
-                isPage: true
+                isPage: true,
+                sidx: "g_code",
+                sord: "ASC"
             });
             page.search();
         },

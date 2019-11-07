@@ -104,8 +104,8 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 isPage: true,
-                sidx: "S_CreateBy",
-                sord: "DESC"
+                sidx: "S_Code",
+                sord: "ASC"
             });
             page.search();
         },
