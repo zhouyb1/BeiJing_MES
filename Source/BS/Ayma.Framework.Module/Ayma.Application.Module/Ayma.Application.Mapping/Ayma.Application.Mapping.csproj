@@ -163,6 +163,7 @@
     <Compile Include="MesDev\Mes_CompUseDetailMap.cs" />
     <Compile Include="MesDev\Mes_InPriceMap.cs" />
     <Compile Include="MesDev\Mes_PriceMap.cs" />
+    <Compile Include="MesDev\Mes_CustomerMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

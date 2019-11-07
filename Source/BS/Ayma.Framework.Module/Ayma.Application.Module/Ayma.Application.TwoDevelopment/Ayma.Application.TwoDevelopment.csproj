@@ -296,6 +296,10 @@
     <Compile Include="MesDev\Period\PeriodService.cs" />
     <Compile Include="MesDev\Period\PeriodIBLL.cs" />
     <Compile Include="MesDev\Period\PeriodBLL.cs" />
+    <Compile Include="MesDev\Custom\Mes_CustomerEntity.cs" />
+    <Compile Include="MesDev\Custom\CustomService.cs" />
+    <Compile Include="MesDev\Custom\CustomIBLL.cs" />
+    <Compile Include="MesDev\Custom\CustomBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

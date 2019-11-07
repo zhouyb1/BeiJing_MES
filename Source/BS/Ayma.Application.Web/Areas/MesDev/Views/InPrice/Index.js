@@ -79,7 +79,7 @@ var bootstrap = function ($, ayma) {
             //    }
             //});
 
-            $('#am_save').on('click', function() {
+            $('#am_edit').on('click', function () {
                 var arr = [];
                var rowdatas= $('#girdtable').jfGridGet('rowdata');
                if (rowdatas==null || rowdatas.length==0) {
