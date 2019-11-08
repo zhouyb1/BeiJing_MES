@@ -367,7 +367,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					            t.I_Remark,
 	                            (select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode)* t.I_Qty as OneMoney,
 								(select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode) as Price
-                                FROM dbo.Mes_Inventory t where 1=1");
+                                FROM dbo.Mes_Inventory t where t.I_Qty!=0");
 
                 var queryParam = queryJson.ToJObject();
                  //虚拟参数
