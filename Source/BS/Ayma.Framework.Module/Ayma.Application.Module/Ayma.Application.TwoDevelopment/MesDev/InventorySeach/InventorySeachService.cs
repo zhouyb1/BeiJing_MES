@@ -36,6 +36,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					t.I_StockName,
 					t.I_GoodsCode,
 					t.I_Unit,
+                    (select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode) as Price,
+                    (select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode)* sum(t.I_Qty) as AllMoney,
                     (select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) as G_Super,
 					(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) as G_Lower,
                      case when sum(t.I_Qty)>=(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode ) and sum(t.I_Qty)<=(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode ) then '正常' 
@@ -362,7 +364,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 					            t.I_GoodsCode,
 					            t.I_Unit,
 					            t.I_Batch,
-					            t.I_Remark
+					            t.I_Remark,
+	                            (select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode)* t.I_Qty as OneMoney,
+								(select m.P_Inprice from Mes_InPrice m where m.P_GoodsCode=t.I_GoodsCode) as Price
                                 FROM dbo.Mes_Inventory t where 1=1");
 
                 var queryParam = queryJson.ToJObject();

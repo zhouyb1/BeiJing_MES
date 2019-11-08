@@ -96,6 +96,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #endregion
         #region 扩展字段
         /// <summary>
+        /// 总金额
+        /// </summary>
+        [NotMapped]
+        public decimal? AllMoney { get; set; }
+        /// <summary>
+        /// 单个金额
+        /// </summary>
+        [NotMapped]
+        public decimal? OneMoney { get; set; }
+        /// <summary>
         /// 班组
         /// </summary>
         [NotMapped]
@@ -106,9 +116,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [NotMapped]
         public decimal? I_Price { get; set; }
         [NotMapped]
-        public string G_Super { get; set; }
+        public decimal? G_Super { get; set; }
         [NotMapped]
-        public string G_Lower { get; set; }
+        public decimal? G_Lower { get; set; }
         [NotMapped]
         public string G_State { get; set; }
         [NotMapped]
@@ -117,6 +127,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string InventoryDay { get; set; }
         [NotMapped]
         public string GoodsState { get; set; }
+        [NotMapped]
+        public decimal? Price { get; set; }
         #endregion
     }
 }
