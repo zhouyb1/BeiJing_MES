@@ -167,7 +167,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                      {
-                         label: '价格', name: 'M_Price', width: 60, align: 'left', editType: 'label',
+                         label: '价格', name: 'M_Price', width: 80, align: 'left', editType: 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
@@ -181,8 +181,8 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
-                                if (/\D/.test(row.M_ProdDate.toString().replace('.', ''))) { //验证只能为数字
-                                    row.M_ProdDate = 0;
+                                if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
+                                    row.M_Batch = 0;
                                 }
 
                             }
