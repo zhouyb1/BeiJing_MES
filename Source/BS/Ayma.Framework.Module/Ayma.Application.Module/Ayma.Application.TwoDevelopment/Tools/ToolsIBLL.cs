@@ -18,6 +18,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
     {
         #region 获取数据
         /// <summary>
+        /// 根据部门编码获取部门实体信息
+        /// <param name="code">仓库编码</param>
+        /// </summary>
+        /// <returns></returns>
+        DepartmentEntity ByCodeGetDepartmentEntity(string code);
+        /// <summary>
         /// 根据班组编码获取班组实体信息
         /// <param name="code">班组编码</param>
         /// </summary>
@@ -41,7 +47,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="name">车间名称</param>
         /// <returns></returns>
         Mes_WorkShopEntity ByNameGetWorkShopEntity(string name);
-
+        /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<DepartmentEntity> GetDepartmentList();
         /// <summary>
         /// 获取配方表树形结构列表
         /// </summary>
@@ -57,6 +67,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_StockEntity> GetOriginalStockList();
+        /// <summary>
+        /// 获取原物料仓库和半成品列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_StockEntity> GetOtherStockList();
         /// <summary>
         /// 获取所有仓库列表
         /// </summary>

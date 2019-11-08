@@ -22,6 +22,30 @@ namespace Ayma.Application.TwoDevelopment.Tools
 
         #region 获取数据
         /// <summary>
+        /// 根据部门编码获取部门实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        public DepartmentEntity ByCodeGetDepartmentEntity(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<DepartmentEntity>(x => x.F_EnCode == code || x.F_FullName == code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 根据仓库编码获取仓库实体信息
         /// </summary>
         /// <param name="code">物料编码</param>
@@ -68,6 +92,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<DepartmentEntity> GetDepartmentList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<DepartmentEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取原物料仓库列表
         /// </summary>
         /// <returns></returns>
@@ -76,6 +122,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind==1);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取原物料仓库和半成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetOtherStockList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == 1||c.S_Kind==2);
             }
             catch (Exception ex)
             {

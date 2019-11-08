@@ -21,6 +21,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
 
         #region 获取数据
         /// <summary>
+        /// 根据部门编码获取部门实体信息
+        /// <param name="code">仓库编码</param>
+        /// </summary>
+        /// <returns></returns>
+        public DepartmentEntity ByCodeGetDepartmentEntity(string code)
+        {
+            try
+            {
+                return toolsService.ByCodeGetDepartmentEntity(code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据仓库编码获取仓库实体信息
         /// <param name="code">仓库编码</param>
         /// </summary>
@@ -161,6 +184,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<DepartmentEntity> GetDepartmentList()
+        {
+            try
+            {
+                return toolsService.GetDepartmentList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取原物料仓库列表
         /// </summary>
         /// <returns></returns>
@@ -169,6 +214,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             try
             {
                 return toolsService.GetOriginalStockList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取原物料仓库和半成品仓库列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_StockEntity> GetOtherStockList()
+        {
+            try
+            {
+                return toolsService.GetOtherStockList();
             }
             catch (Exception ex)
             {
