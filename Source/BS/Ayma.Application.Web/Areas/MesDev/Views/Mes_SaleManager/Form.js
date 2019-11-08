@@ -18,10 +18,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            if (status == 2) {
-                $('#S_StockCode').attr('readonly', true);
-                $("#S_CostomCode").readonly('readonly', true);
-            }
+            //if (status == 2) {
+            //    $('#S_StockCode').attr('readonly', true);
+            //    $("#S_CostomCode").readonly('readonly', true);
+            //}
             $('#S_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' }).on('change', function() {
                 if (status == 1) {
                     $("#Mes_SaleDetail").jfGridSet('refreshdata', { rowdatas: [] });

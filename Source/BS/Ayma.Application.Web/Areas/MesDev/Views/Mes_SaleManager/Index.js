@@ -171,15 +171,14 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //打印
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('S_SaleNo');
-                if (ayma.checkrow(keyValue, true)) {
+                if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'SaleReport',
-                        title: '销售单打印',
-                        url: top.$.rootUrl + '/MesDev/Mes_SaleManager/PrintReport?keyValue=' + keyValue + "&report=CollacReport&data=Picking",
+                        id: 'SaleManager',
+                        title: '原物料销售单打印',
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=SaleManager&data=Mes_SaleManager",
                         width: 1000,
                         height: 800,
                         maxmin: true,
@@ -187,6 +186,8 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
                 }
             });
             // 预览打印

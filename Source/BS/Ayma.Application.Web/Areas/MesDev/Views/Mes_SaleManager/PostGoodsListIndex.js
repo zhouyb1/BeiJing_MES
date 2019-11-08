@@ -53,7 +53,7 @@ var bootstrap = function ($, ayma) {
             });
             
             //撤销单据
-            $("#am_cancel").on('click', function () {
+            $("#am_cancle").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("S_SaleNo");
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认撤销该单据！', function (res) {

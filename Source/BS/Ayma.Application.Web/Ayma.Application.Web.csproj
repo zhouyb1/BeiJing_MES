@@ -2365,6 +2365,8 @@
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ExpendManager\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_SaleManager\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

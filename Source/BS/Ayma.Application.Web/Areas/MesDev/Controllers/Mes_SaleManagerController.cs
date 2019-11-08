@@ -28,7 +28,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 打印页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PrintReport()
+        {
+            return View();
+        }
         /// <summary>
         /// 物料列表页面
         /// </summary>

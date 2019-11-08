@@ -179,7 +179,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'OtherOutHeadReport',
                         title: '其它出库单打印',
-                        url: top.$.rootUrl + '/MesDev/ProOutMake/PrintReport?keyValue=' + keyValue + "&report=OtherOutHeadReport&data=Mes_OtherOutHead",
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=OtherOutHeadReport&data=Mes_OtherOutHead",
                         width: 1000,
                         height: 800,
                         maxmin: true,
