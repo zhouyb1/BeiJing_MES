@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "其它入库单";
+    Layout = "~/Views/Shared/_GirdForm.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
+    <div class="am-form-item-title">单据号码</div>
+        <input id="O_OtherInNo" type="text" placeholder="系统自动生成" disabled="disabled" class="form-control" />
+</div>
+<div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
+    <div class="am-form-item-title">仓库编码<font face="宋体">*</font></div>
+    <input id="O_StockCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" disabled="disabled" style="background: #f1efef" />
+</div>
+<div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
+    <div class="am-form-item-title">仓库名称<font face="宋体">*</font></div>
+    <div id="O_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"> </div>
+</div>
+<div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
+    <div class="am-form-item-title">单据状态<font face="宋体">*</font></div>
+    <div id="O_Status" type="text" class="form-control" disabled="disabled">
+    </div>
+</div>
+    <div class="col-xs-6 am-form-item"  data-table="Mes_OtherInHead">
+    <div class="am-form-item-title">备注</div>
+    <input id="O_Remark" type="text" class="form-control" />
+</div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead" style="display:none">
+        <div class="am-form-item-title">月结</div>
+        <input id="MonthBalance" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 am-form-item" data-table="Mes_OtherInHead">
+    <div class="am-form-item-title"></div>
+    <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;添加物料</a>
+</div>
+    <div class="col-xs-12 am-form-item am-form-item-grid">
+        <div id="Mes_OtherInDetail"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/OtherWarehouseReceipt/Form.js")
