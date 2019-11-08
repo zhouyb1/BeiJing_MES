@@ -124,7 +124,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'SaleOutReport',
                         title: '其它入库单打印',
-                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/PrintReport?keyValue=' + keyValue + "&report=OtherWarehouseReport&data=OtherWarehouse",
+                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/PrintReport?keyValue=' + keyValue + "&report=OtherWarehouseReport&data=OtherWarehouseReceipt",
                         width: 1000,
                         height: 800,
                         maxmin: true,

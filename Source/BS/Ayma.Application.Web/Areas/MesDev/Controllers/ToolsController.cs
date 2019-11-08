@@ -76,6 +76,28 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(stockList);
         }
         /// <summary>
+        /// 获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetDepartmentList()
+        {
+            var Department = toosIBLL.GetDepartmentList();
+            return Success(Department);
+        }
+        /// <summary>
+        /// 根据参数获取部门列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByCodeGetDepartmentEntity(string code)
+        {
+            var Department = toosIBLL.ByCodeGetDepartmentEntity(code);
+            return Success(Department);
+        }
+        /// <summary>
         /// 获取原物料仓库列表
         /// </summary>
         /// <returns></returns>
@@ -97,7 +119,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var stockList = toosIBLL.GetStockList();
             return Success(stockList);
         }
-
+        /// <summary>
+        /// 获取原料和半成品列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetOtherStockList()
+        {
+            var stockList = toosIBLL.GetOtherStockList();
+            return Success(stockList);
+        }
 
         /// <summary>
         /// 获取非成品仓库列表

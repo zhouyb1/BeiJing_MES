@@ -561,6 +561,9 @@
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\PostGoodsIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
@@ -2356,6 +2359,10 @@
     <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

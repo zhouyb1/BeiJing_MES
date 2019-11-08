@@ -46,7 +46,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("O_QTY")]
-        public double? O_Qty { get; set; }
+        public decimal O_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -58,7 +58,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("O_PRICE")]
-        public double? O_Price { get; set; }
+        public decimal O_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

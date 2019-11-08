@@ -70,6 +70,7 @@
     <Compile Include="MesDev\Mes_InWorkShopHeadMap.cs" />
     <Compile Include="MesDev\Mes_OtherInDetailMap.cs" />
     <Compile Include="MesDev\Mes_OtherInHeadMap.cs" />
+    <Compile Include="MesDev\Mes_OtherOutDetailMap.cs" />
     <Compile Include="MesDev\Mes_ScrapDetailMap.cs" />
     <Compile Include="MesDev\Mes_ArrangeMap.cs" />
     <Compile Include="MesDev\Mes_HumitureMap.cs" />
