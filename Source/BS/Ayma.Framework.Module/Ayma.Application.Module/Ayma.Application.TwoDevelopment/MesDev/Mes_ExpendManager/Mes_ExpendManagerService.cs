@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.E_UpdateDate
                 ");
                 strSql.Append("  FROM Mes_ExpendHead t ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 and E_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -68,6 +68,71 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     strSql.Append(" AND t.E_Status Like @E_Status ");
                 }
                 return this.BaseRepository().FindList<Mes_ExpendHeadEntity>(strSql.ToString(),dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 报表：获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ExpendHeadEntity> GetPostGoodsList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.E_Status,
+                t.E_ExpendNo,
+                t.E_StockName,
+                t.E_StockCode,
+                t.MonthBalance,
+                t.E_Remark,
+                t.E_CreateDate,
+                t.E_CreateBy,
+                t.E_UpdateBy,
+                t.E_UpdateDate
+                ");
+                strSql.Append("  FROM Mes_ExpendHead t ");
+                strSql.Append("  WHERE 1=1 and E_Status = 3 ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.E_CreateDate >= @startTime AND t.E_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["MonthBalance"].IsEmpty())
+                {
+                    dp.Add("MonthBalance", "%" + queryParam["MonthBalance"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.MonthBalance Like @MonthBalance ");
+                }
+                if (!queryParam["E_StockCode"].IsEmpty())
+                {
+                    dp.Add("E_StockCode", queryParam["E_StockCode"].ToString(), DbType.String);
+                    strSql.Append(" AND t.E_StockCode = @E_StockCode ");
+                }
+                if (!queryParam["E_Status"].IsEmpty())
+                {
+                    dp.Add("E_Status", "%" + queryParam["E_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.E_Status Like @E_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_ExpendHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -165,6 +230,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(" AND S.I_StockCode =@stockCode ");
             }
             return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
+        }
+
+        /// <summary>
+        /// 报表：单据详情
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ExpendDetailEntity> GetDetail(string expendNo)
+        {
+            StringBuilder sql = new StringBuilder();
+            sql.Append(@"select h.E_GoodsCode,
+                                h.E_GoodsName,
+                                h.CreateBy,
+                                h.CreateDate,
+                                h.E_ExpendNo,
+                                h.UpdateBy,
+                                h.UpdateDate,
+                                h.E_Batch,
+                                h.E_Unit, 
+                                h.MonthBalance 
+                         from Mes_ExpendHead h 
+                         left join Mes_ExpendDetail d on d.E_ExpendNo = h.E_ExpendNo
+                         where E_ExpendNo = @E_ExpendNo ");
+            var dp = new DynamicParameters(new {});
+            dp.Add("@E_ExpendNo", expendNo, DbType.String);
+            return this.BaseRepository().FindList<Mes_ExpendDetailEntity>(sql.ToString(), dp);
         }
 
         #endregion

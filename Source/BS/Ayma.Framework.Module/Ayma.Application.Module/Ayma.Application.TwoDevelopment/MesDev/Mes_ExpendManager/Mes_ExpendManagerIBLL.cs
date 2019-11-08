@@ -37,6 +37,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="stockCode"></param>
         /// <returns></returns>
         IEnumerable<Mes_InventoryEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword);
+
+        /// <summary>
+        /// 报表：获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_ExpendHeadEntity> GetPostGoodsList(Pagination pagination, string queryJson);
+
+        /// <summary>
+        /// 报表：单据详情
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        IEnumerable<Mes_ExpendDetailEntity> GetDetail(string expendNo);
         #endregion
 
         #region 提交数据

@@ -80,6 +80,7 @@
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectService.cs" />
     <Compile Include="MesDev\Mes_OtherInDetail\Mes_OtherInDetailEntity.cs" />
+    <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutDetailEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
@@ -319,10 +320,10 @@
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerService.cs" />
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerBLL.cs" />
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerIBLL.cs" />
-    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadEntity.cs" />
-    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadService.cs" />
-    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadIBLL.cs" />
-    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadBLL.cs" />
+    <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadEntity.cs" />
+    <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadService.cs" />
+    <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadIBLL.cs" />
+    <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

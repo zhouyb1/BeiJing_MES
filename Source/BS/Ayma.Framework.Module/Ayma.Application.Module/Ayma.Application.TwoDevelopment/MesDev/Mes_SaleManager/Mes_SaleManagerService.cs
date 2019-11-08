@@ -209,7 +209,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.MonthBalance
                                 ");
                 strSql.Append("  FROM Mes_SaleHead t ");
-                strSql.Append("  WHERE 1=1 AND S_Status in (1,2) ");
+                strSql.Append("  WHERE 1=1 AND S_Status = 3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });

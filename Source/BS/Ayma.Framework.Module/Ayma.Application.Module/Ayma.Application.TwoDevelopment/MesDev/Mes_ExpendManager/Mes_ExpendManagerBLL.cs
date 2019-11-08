@@ -111,6 +111,54 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 报表：获取页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ExpendHeadEntity> GetPostGoodsList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return mes_ExpendManagerService.GetPostGoodsList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 报表：单据详情
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_ExpendDetailEntity> GetDetail(string expendNo)
+        {
+            try
+            {
+                return mes_ExpendManagerService.GetDetail(expendNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
