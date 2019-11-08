@@ -348,8 +348,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity,
-            string strmes_MaterInDetailList)
+        public ActionResult SaveForm(string keyValue, ErpEnums.OrderKindEnum orderKind, string strEntity,string strmes_MaterInDetailList)
         {
             if (!string.IsNullOrEmpty(keyValue))
             {
