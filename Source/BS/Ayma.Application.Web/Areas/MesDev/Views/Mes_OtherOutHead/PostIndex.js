@@ -95,6 +95,7 @@ var bootstrap = function ($, ayma) {
                         width: 900,
                         height: 650,
                         maxmin: true,
+                        btn: null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -112,89 +113,30 @@ var bootstrap = function ($, ayma) {
                         width: 900,
                         height: 650,
                         maxmin: true,
+                        btn: null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
                 }
             });
-            //删除单据
-            $("#am_delete").on('click', function () {
+            //撤销单据
+            $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("O_OtherOutNo");
                 if (ayma.checkrow(orderNo)) {
-                    var status = $("#girdtable").jfGridValue("O_Status");
-                    if (status == "2") {
-                        ayma.alert.error("已审核不能删除");
-                        return false;
-                    }
-                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OtherOut_Delete', type: 3 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OtherOut_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }
                     });
-                }
-            });
-            //审核单据
-            $("#am_audit").on('click', function () {
-                var keyValue = $("#girdtable").jfGridValue("ID");
-                var status = $("#girdtable").jfGridValue("O_Status");
-                if (status != "1") {
-                    ayma.alert.error("已审核");
-                    return false;
-                }
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerConfirm('是否确认审核该单据！', function (res) {
-                        if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/AuditingBill', { keyValue: keyValue, tables: 'Mes_OtherOutHead', field: 'O_Status' }, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
-            //提交单据
-            $("#am_post").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("O_OtherOutNo");
-                var status = $("#girdtable").jfGridValue("O_Status");
-                if (status == "1") {
-                    ayma.alert.error("未审核");
-                    return false;
-                }
-                if (ayma.checkrow(orderNo)) {
-                    ayma.layerConfirm('是否确认提交该单据！', function (res) {
-                        if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OtherOut_Post', type: 1 }, function () {
-                                refreshGirdData();
-                            });
-                        }
-                    });
-                }
-            });
-            // 快速打印
-            $('#am_print').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('O_OtherOutNo');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'OtherOutHeadReport',
-                        title: '其它出库单打印',
-                        url: top.$.rootUrl + '/MesDev/ProOutMake/PrintReport?keyValue=' + keyValue + "&report=OtherOutHeadReport&data=Mes_OtherOutHead",
-                        width: 1000,
-                        height: 800,
-                        maxmin: true,
-                        callBack: function (id) {
-                            return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
-                } else {
-                    ayma.alert.error("请选择要打印的单据！");
                 }
             });
         },
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/GetPageList',
+                url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/GetPostPageList',
                 headData: [
                                  {
                                      label: "状态", name: "O_Status", width: 100, align: "left",
@@ -225,10 +167,12 @@ var bootstrap = function ($, ayma) {
                         { label: '添加时间', name: 'O_CreateDate', width: 150, align: "left" },
                         { label: '修改人', name: 'O_UpdateBy', width: 150, align: "left" },
                         { label: '修改时间', name: 'O_UpdateDate', width: 150, align: "left" },
+                        { label: '提交人', name: 'O_UploadBy', width: 150, align: "left" },
+                        { label: '提交时间', name: 'O_UploadDate', width: 150, align: "left" },
                         { label: '备注', name: 'O_Remark', width: 150, align: "left" },
                         { label: '月结', name: 'MonthBalance', width: 200, align: "left" },
                 ],
-                mainId:'ID',
+                mainId: 'ID',
                 reloadSelected: true,
                 isPage: true,
                 sidx: 'O_CreateDate',

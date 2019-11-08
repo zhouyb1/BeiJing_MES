@@ -24,6 +24,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_OtherOutHeadEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        /// 获取查询列表分页数据
+        /// </summary>
+        /// <param name="pagination">分页参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_OtherOutHeadEntity> GetPostPageList(Pagination pagination, string queryJson);
+        /// <summary>
         /// 获取实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>

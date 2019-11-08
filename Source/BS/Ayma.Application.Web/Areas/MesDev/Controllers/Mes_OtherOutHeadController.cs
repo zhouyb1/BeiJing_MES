@@ -38,6 +38,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
+            /// <summary>
+            /// 查询页
+            /// </summary>
+            /// <returns></returns>
+            [HttpGet]
+            public ActionResult PostIndex()
+            {
+                return View();
+            }
         /// <summary>
         /// 表单页
         /// </summary>
@@ -82,6 +91,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
             var data = mes_OtherOutHeadIBLL.GetPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取查询列表分页数据
+        /// </summary>
+        /// <param name="pagination">分页参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPostPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = mes_OtherOutHeadIBLL.GetPostPageList(paginationobj, queryJson);
             var jsonData = new
             {
                 rows = data,

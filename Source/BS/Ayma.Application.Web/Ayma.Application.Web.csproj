@@ -564,6 +564,7 @@
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\FoodList.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductOrderHead\Form.js" />
@@ -2363,6 +2364,7 @@
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\GoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_OtherOutHead\PostIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

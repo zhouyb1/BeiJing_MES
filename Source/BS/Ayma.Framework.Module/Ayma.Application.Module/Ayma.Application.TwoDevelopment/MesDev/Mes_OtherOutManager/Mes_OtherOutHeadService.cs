@@ -127,6 +127,57 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取查询列表分页数据
+        /// <param name="pagination">分页参数</param>
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_OtherOutHeadEntity> GetPostPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(fieldSql);
+                strSql.Append(" FROM Mes_OtherOutHead t where t.O_Status =3");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["O_StockName"].IsEmpty())
+                {
+                    dp.Add("O_StockName", "%" + queryParam["O_StockName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_StockName Like @O_StockName ");
+                }
+                if (!queryParam["O_ProOutNo"].IsEmpty())
+                {
+                    dp.Add("O_ProOutNo", "%" + queryParam["O_ProOutNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_ProOutNo Like @O_ProOutNo ");
+                }
+                if (!queryParam["O_Status"].IsEmpty())
+                {
+                    dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_Status Like @O_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_OtherOutHeadEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 获取实体数据
