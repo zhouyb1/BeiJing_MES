@@ -43,7 +43,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 500);
+            }, 220, 300);
             $('#E_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' });
 
             // 刷新
@@ -53,11 +53,11 @@ var bootstrap = function ($, ayma) {
 
             //撤销单据
             $("#am_cancel").on('click', function () {
-                var orderNo = $("#girdtable").jfGridValue("S_SaleNo");
+                var orderNo = $("#girdtable").jfGridValue("E_ExpendNo");
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认撤销该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Sale_Cancel', type: 2 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Expend_Cancel', type: 2 }, function () {
                                 refreshGirdData();
                             });
                         }
@@ -113,7 +113,7 @@ var bootstrap = function ($, ayma) {
                     $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
                     $subgridTable = $("#" + subgridTableId);
                     $subgridTable.jfGrid({
-                        url: top.$.rootUrl + '/MesDev/Mes_SaleManager/GetDetailList?SaleNo=' + orderNo,
+                        url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/GetDetailList?expendNo=' + orderNo,
                         headData: [
 
                             { label: "物料名称", name: "E_GoodsName", width: 130, align: "left" },
