@@ -152,36 +152,42 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //// 删除
-            //$('#am_delete').on('click', function () {
-            //    var keyValue = $('#girdtable').jfGridValue('ID');
-            //    if (ayma.checkrow(keyValue)) {
-            //        ayma.layerConfirm('是否确认删除该项！', function (res) {
-            //            if (res) {
-            //                ayma.deleteForm(top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/DeleteForm', { keyValue: keyValue}, function () {
-            //                });
-            //            }
-            //        });
-            //    }
-            //});
-            ////删除单据
-            //$("#am_delete").on('click', function () {
-            //    var orderNo = $("#girdtable").jfGridValue("O_OtherInNo");
-            //    if (ayma.checkrow(orderNo)) {
-            //        var status = $("#girdtable").jfGridValue("O_Status");
-            //        if (status == "2") {
-            //            ayma.alert.error("已审核不能删除");
-            //            return false;
-            //        }
-            //        ayma.layerConfirm('是否确认删除该单据！', function (res) {
-            //            if (res) {
-            //                ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_MaterIn_Delete', type: 3 }, function () {
-            //                    refreshGirdData();
-            //                });
-            //            }
-            //        });
-            //    }
-            //});
+            //删除单据
+            $("#am_delete").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("O_OtherInNo");
+                if (ayma.checkrow(orderNo)) {
+                    var status = $("#girdtable").jfGridValue("O_Status");
+                    if (status == "2") {
+                        ayma.alert.error("已审核不能删除");
+                        return false;
+                    }
+                    ayma.layerConfirm('是否确认删除该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_OtherIn_Delete', type: 3 }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
+            //提交单据
+            $("#am_post").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("O_OtherInNo");
+                var status = $("#girdtable").jfGridValue("O_Status");
+                if (status == "1") {
+                    ayma.alert.error("未审核");
+                    return false;
+                }
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认提交该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteMaterInBill', { orderNo: orderNo, proc: 'sp_OtherIn_Post', type: 1 }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
+                }
+            });
         },
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
