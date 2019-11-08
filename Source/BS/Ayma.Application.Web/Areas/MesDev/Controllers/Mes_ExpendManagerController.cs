@@ -47,6 +47,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 获取已提交单据数据
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        public ActionResult PostGoodsIndex(string expendNo)
+        {
+            return View();
+        }
 
         #region 获取数据
 
@@ -105,6 +114,41 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
+        /// <summary>
+        /// 报表：单据详情
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetDetailList(string expendNo)
+        {
+            var list = mes_ExpendManagerIBLL.GetDetail(expendNo);
+            return Success(list);
+        }
+
+        /// <summary>
+        /// 报表：获取已提交单据列表
+        /// </summary>
+        /// <param name="expendNo"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPostGoodsList(string pagination,string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = mes_ExpendManagerIBLL.GetPostGoodsList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+
         #endregion
 
         #region 提交数据

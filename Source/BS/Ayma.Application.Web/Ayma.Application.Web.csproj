@@ -223,6 +223,7 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_ArrangeController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_BackSupplyQueryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_InspectController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_OtherOutHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
@@ -557,6 +558,7 @@
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\BackGoodsList.js" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.js" />
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\Mes_ExpendManager\PostGoodsIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Inspect\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ProductGoods\ERPTgoodsList.js" />
@@ -569,6 +571,8 @@
     <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\PostGoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Form.js" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Index.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Form.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.js" />
@@ -579,6 +583,10 @@
     <Content Include="Areas\MesDev\Views\InWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PostOrderIndex.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Form.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Index.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
@@ -2340,6 +2348,14 @@
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\PostGoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\PostPageForm.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_ExpendManager\PostGoodsIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
