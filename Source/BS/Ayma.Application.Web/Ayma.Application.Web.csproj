@@ -226,6 +226,7 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductOrderHeadController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_RecordController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ResonController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\MonthBalanceController.cs" />
     <Compile Include="Areas\MesDev\Controllers\OrgResManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InWorkShopManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ProceManagerController.cs" />
@@ -563,6 +564,8 @@
     <Content Include="Areas\MesDev\Views\Mes_Record\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_Reson\Form.js" />
     <Content Include="Areas\MesDev\Views\Mes_Reson\Index.js" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Form.js" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Index.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Form.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.js" />
@@ -1939,6 +1942,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\MonthBalance\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

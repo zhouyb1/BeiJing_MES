@@ -94,6 +94,10 @@
     <Compile Include="MesDev\Mes_Reson\Mes_ResonIBLL.cs" />
     <Compile Include="MesDev\Mes_Reson\Mes_ResonService.cs" />
     <Compile Include="MesDev\Model\YieldRateModel.cs" />
+    <Compile Include="MesDev\MonthBalance\Mes_MonthBalanceEntity.cs" />
+    <Compile Include="MesDev\MonthBalance\MonthBalanceBLL.cs" />
+    <Compile Include="MesDev\MonthBalance\MonthBalanceIBLL.cs" />
+    <Compile Include="MesDev\MonthBalance\MonthBalanceService.cs" />
     <Compile Include="MesDev\OrgResManger\Mes_OrgResDetailEntity.cs" />
     <Compile Include="MesDev\OrgResManger\Mes_OrgResHeadEntity.cs" />
     <Compile Include="MesDev\OrgResManger\OrgResMangerBLL.cs" />

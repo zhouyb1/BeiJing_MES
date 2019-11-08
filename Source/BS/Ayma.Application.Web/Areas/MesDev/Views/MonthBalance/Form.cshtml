@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "财务月结";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    @*<div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">主键</div>
+        <input id="ID" type="text" class="form-control"  />
+    </div>*@
+    <div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">月结日期</div>
+        <input id="M_Months" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    @*<div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">月结时间</div>
+        <input id="M_MonthBalanceTime" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">月结人</div>
+        <input id="M_MonthBalanceBy" type="text" class="form-control"  />
+    </div>
+    <div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">状态 1月结，2反月结</div>
+        <input id="M_Status" type="text" class="form-control"  />
+    </div>*@
+    <div class="col-xs-12 am-form-item"  data-table="Mes_MonthBalance" >
+        <div class="am-form-item-title">备注</div>
+        <input id="M_Remark" type="text" class="form-control"  />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/MonthBalance/Form.js")
