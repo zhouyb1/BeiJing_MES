@@ -319,6 +319,10 @@
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerService.cs" />
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerBLL.cs" />
     <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerIBLL.cs" />
+    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadEntity.cs" />
+    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadService.cs" />
+    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadIBLL.cs" />
+    <Compile Include="MesDev\Mes_OtherOutHead\Mes_OtherOutHeadBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
