@@ -149,28 +149,7 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             Cakes = 6
         }
-        /// <summary>
-        /// 其他入库单状态
-        /// </summary>
-        public enum OtherInStatusEnum
-        {
-            /// <summary>
-            /// 单据生成
-            /// </summary>
-            NoAudit = 1,
-            /// <summary>
-            /// 审核通过
-            /// </summary>
-            Audit = 2,
-            /// <summary>
-            /// 单据完成
-            /// </summary>
-            AuditFinish = 3,
-            /// <summary>
-            /// 单据删除
-            /// </summary>
-            IsDelete = -1,          
-        }
+       
         /// <summary>
         /// 生成订单状态
         /// </summary>
@@ -211,7 +190,28 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             IsDelete= -1,         
         }
-
+        /// <summary>
+        /// 其它入库单状态
+        /// </summary>
+        public enum OtherInStatusEnum
+        {
+            /// <summary>
+            /// 单据生成
+            /// </summary>
+            NoAudit = 1,
+            /// <summary>
+            /// 审核通过
+            /// </summary>
+            Audit = 2,
+            /// <summary>
+            /// 单据完成
+            /// </summary>
+            AuditFinish = 3,
+            /// <summary>
+            /// 单据删除
+            /// </summary>
+            IsDelete = -1,
+        }
         /// <summary>
         /// 原材料销售单据状态
         /// </summary>
