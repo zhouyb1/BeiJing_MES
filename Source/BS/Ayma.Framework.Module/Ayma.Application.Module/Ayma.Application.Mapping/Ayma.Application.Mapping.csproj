@@ -169,6 +169,7 @@
     <Compile Include="MesDev\Mes_SaleDetailMap.cs" />
     <Compile Include="MesDev\Mes_ExpendHeadMap.cs" />
     <Compile Include="MesDev\Mes_ExpendDetailMap.cs" />
+    <Compile Include="MesDev\Mes_OtherOutHeadMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
