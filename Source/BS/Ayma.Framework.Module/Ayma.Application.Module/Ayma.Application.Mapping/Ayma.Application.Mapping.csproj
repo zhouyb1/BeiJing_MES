@@ -165,8 +165,10 @@
     <Compile Include="MesDev\Mes_InPriceMap.cs" />
     <Compile Include="MesDev\Mes_PriceMap.cs" />
     <Compile Include="MesDev\Mes_CustomerMap.cs" />
-    <Compile Include="MesDev\Mes_OtherInHeadMap.cs" />
-    <Compile Include="MesDev\Mes_OtherInDetailMap.cs" />
+    <Compile Include="MesDev\Mes_SaleHeadMap.cs" />
+    <Compile Include="MesDev\Mes_SaleDetailMap.cs" />
+    <Compile Include="MesDev\Mes_ExpendHeadMap.cs" />
+    <Compile Include="MesDev\Mes_ExpendDetailMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -79,6 +79,7 @@
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectEntity.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectIBLL.cs" />
     <Compile Include="MesDev\Mes_Inspect\Mes_InspectService.cs" />
+    <Compile Include="MesDev\Mes_OtherInDetail\Mes_OtherInDetailEntity.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\ERPFoodListModel.cs" />
     <Compile Include="MesDev\Mes_ProductGoods\ERPTgoodsListModel.cs" />
     <Compile Include="MesDev\Mes_ProductOrderHead\Mes_ProductOrderDetailEntity.cs" />
@@ -108,6 +109,10 @@
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerBLL.cs" />
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerIBLL.cs" />
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerService.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\Mes_OtherInHeadEntity.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptBLL.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptIBLL.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptService.cs" />
     <Compile Include="MesDev\PickingMaterQuery\Mes_CollarViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -304,11 +309,16 @@
     <Compile Include="MesDev\Custom\CustomService.cs" />
     <Compile Include="MesDev\Custom\CustomIBLL.cs" />
     <Compile Include="MesDev\Custom\CustomBLL.cs" />
-    <Compile Include="MesDev\OtherWarehouseReceipt\Mes_OtherInHeadEntity.cs" />
-    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptService.cs" />
-    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptIBLL.cs" />
-    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptBLL.cs" />
-    <Compile Include="MesDev\Mes_OtherInDetail\Mes_OtherInDetailEntity.cs" />
+    <Compile Include="MesDev\Mes_SaleManager\Mes_SaleHeadEntity.cs" />
+    <Compile Include="MesDev\Mes_SaleManager\Mes_SaleDetailEntity.cs" />
+    <Compile Include="MesDev\Mes_SaleManager\Mes_SaleManagerService.cs" />
+    <Compile Include="MesDev\Mes_SaleManager\Mes_SaleManagerBLL.cs" />
+    <Compile Include="MesDev\Mes_SaleManager\Mes_SaleManagerIBLL.cs" />
+    <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendHeadEntity.cs" />
+    <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendDetailEntity.cs" />
+    <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerService.cs" />
+    <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerBLL.cs" />
+    <Compile Include="MesDev\Mes_ExpendManager\Mes_ExpendManagerIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

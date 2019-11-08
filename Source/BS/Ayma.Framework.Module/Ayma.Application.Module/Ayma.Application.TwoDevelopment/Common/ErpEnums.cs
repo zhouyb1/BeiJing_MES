@@ -189,10 +189,34 @@ namespace Ayma.Application.TwoDevelopment
             /// </summary>
             IsDelete= -1,         
         }
+
         /// <summary>
-        /// 其它入库单状态
+        /// 原材料销售单据状态
         /// </summary>
-        public enum OtherInStatusEnum
+        public enum SaleOutStatusEnum
+        {
+            /// <summary>
+            /// 单据生成
+            /// </summary>
+            NoAudit = 1,
+            /// <summary>
+            /// 审核通过
+            /// </summary>
+            Audit = 2,
+            /// <summary>
+            /// 单据完成
+            /// </summary>
+            AuditFinish = 3,
+            /// <summary>
+            /// 单据删除
+            /// </summary>
+            IsDelete = -1,
+        }
+
+        /// <summary>
+        /// 消耗单单状态
+        /// </summary>
+        public enum ExpendStatus
         {
             /// <summary>
             /// 单据生成
