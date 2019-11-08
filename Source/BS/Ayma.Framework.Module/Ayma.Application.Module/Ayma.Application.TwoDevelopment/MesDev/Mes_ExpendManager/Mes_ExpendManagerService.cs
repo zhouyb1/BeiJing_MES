@@ -240,19 +240,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public IEnumerable<Mes_ExpendDetailEntity> GetDetail(string expendNo)
         {
             StringBuilder sql = new StringBuilder();
-            sql.Append(@"select h.E_GoodsCode,
-                                h.E_GoodsName,
-                                h.CreateBy,
-                                h.CreateDate,
+            sql.Append(@"select d.E_GoodsCode,
+                                d.E_GoodsName,
                                 h.E_ExpendNo,
-                                h.UpdateBy,
-                                h.UpdateDate,
-                                h.E_Batch,
-                                h.E_Unit, 
+                                d.E_Batch,
+                                d.E_Unit,
+                                d.E_Qty,
+                                d.E_Price,
                                 h.MonthBalance 
                          from Mes_ExpendHead h 
                          left join Mes_ExpendDetail d on d.E_ExpendNo = h.E_ExpendNo
-                         where E_ExpendNo = @E_ExpendNo ");
+                         where h.E_ExpendNo = @E_ExpendNo ");
             var dp = new DynamicParameters(new {});
             dp.Add("@E_ExpendNo", expendNo, DbType.String);
             return this.BaseRepository().FindList<Mes_ExpendDetailEntity>(sql.ToString(), dp);
