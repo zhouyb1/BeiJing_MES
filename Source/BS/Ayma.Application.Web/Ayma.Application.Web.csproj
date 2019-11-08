@@ -297,6 +297,7 @@
     <Compile Include="Areas\MesDev\Controllers\SupplyGoodsCountRepController.cs" />
     <Compile Include="Areas\MesDev\Controllers\PeriodController.cs" />
     <Compile Include="Areas\MesDev\Controllers\CustomController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\OtherWarehouseReceiptController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -572,6 +573,8 @@
     <Content Include="Areas\MesDev\Views\InWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\PostOrderIndex.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\GoodsListIndex.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\MaterListIndex.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostForm.js" />
     <Content Include="Areas\MesDev\Views\OutWorkShopManager\PostOrderIndex.js" />
@@ -1929,9 +1932,17 @@
     <Content Include="Content\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\Form.cshtml" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\HistoryForm.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Properties\PublishProfiles\Ayma.pubxml.user" />
     <Content Include="Resource\PhotoFile\0799d30d-5d14-4f15-aafe-be52b9808d52.jpg" />
     <Content Include="Resource\System\20180814\wu_1ckrbcai66tkv3p1fftkp31jkca.jpg" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PostIndex.cshtml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="ueditor\net\upload\image\20170515\6363046459232100007014778.jpg" />
     <Content Include="ueditor\upload\image\20170515\6363046532924500002101330.png" />
     <Content Include="Utility\upload\image\20170515\6363046353629800002195824.jpg" />
@@ -2329,6 +2340,13 @@
     <Content Include="Areas\MesDev\Views\GoodsList\PackingRateIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookDetailIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\InvertoryList.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\GoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\MesDev\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\PrintReport.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
@@ -2542,6 +2560,11 @@
     <Content Include="Areas\MesDev\Views\Custom\Index.js" />
     <Content Include="Areas\MesDev\Views\Custom\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Custom\Form.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Index.js" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\OtherWarehouseReceipt\Form.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
