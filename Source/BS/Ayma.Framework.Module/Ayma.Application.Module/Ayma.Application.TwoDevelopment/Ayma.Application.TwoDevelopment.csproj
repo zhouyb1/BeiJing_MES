@@ -300,6 +300,11 @@
     <Compile Include="MesDev\Custom\CustomService.cs" />
     <Compile Include="MesDev\Custom\CustomIBLL.cs" />
     <Compile Include="MesDev\Custom\CustomBLL.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\Mes_OtherInHeadEntity.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptService.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptIBLL.cs" />
+    <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptBLL.cs" />
+    <Compile Include="MesDev\Mes_OtherInDetail\Mes_OtherInDetailEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
