@@ -188,6 +188,7 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
+                    { label: "税率", name: "M_GoodsItax", width: 130, align: "left" },
                     {
                         label: '供应商编码', name: 'M_SupplyCode', width: 140, align: 'left', editType: 'label'
                     },

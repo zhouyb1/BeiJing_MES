@@ -90,6 +90,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]['M_Price'] = newArray[i]['G_Price'];
+                    newArray[i]['M_GoodsItax'] = newArray[i]['G_Itax'];
                     newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["ID"] = newArray[i]['ID'];
@@ -123,8 +124,8 @@ var bootstrap = function ($, ayma) {
                          }  
                      },
                     { label: "保质时间", name: "G_Period", width: 80, align: "left" },
-                    {
-                        label: "价格", name: "G_Price", width: 60, align: "left" },
+                    { label: "价格", name: "G_Price", width: 60, align: "left" },
+                    { label: "税率", name: "G_Itax", width: 130, align: "left"},
                     { label: "单位", name: "G_Unit", width: 60, align: "left" }
                 ],
                 mainId: 'ID',
@@ -146,6 +147,7 @@ var bootstrap = function ($, ayma) {
                         row['M_GoodsName'] = row['G_Name'];
                         row['M_SupplyCode'] = row['G_SupplyCode'];
                         row['M_SupplyName'] = row['G_SupplyName'];
+                        row['M_GoodsItax'] = row['G_Itax'];
                         row['M_Unit'] = row['G_Unit'];
                         row['M_Kind'] = row['G_Kind'];
                         row['M_Price'] = row['G_Price'];

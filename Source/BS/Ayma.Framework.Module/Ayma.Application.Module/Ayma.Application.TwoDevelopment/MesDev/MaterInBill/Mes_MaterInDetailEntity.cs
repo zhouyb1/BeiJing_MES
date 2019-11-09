@@ -53,6 +53,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_GOODSNAME")]
         public string M_GoodsName { get; set; }
         /// <summary>
+        /// 物料税率
+        /// </summary>
+        [Column("M_GOODSITAX")]
+        public decimal? M_GoodsItax { get; set; }
+        /// <summary>
         /// 单位
         /// </summary>
         [Column("M_UNIT")]
