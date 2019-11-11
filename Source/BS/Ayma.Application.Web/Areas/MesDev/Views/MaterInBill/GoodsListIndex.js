@@ -85,8 +85,6 @@ var bootstrap = function ($, ayma) {
                     //copy需要更改的地方
                     newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
                     newArray[i]['M_GoodsName'] = newArray[i]['G_Name'];
-                    newArray[i]['M_SupplyCode'] = newArray[i]['G_SupplyCode'];
-                    newArray[i]['M_SupplyName'] = newArray[i]['G_SupplyName'];
                     newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
                     newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
                     newArray[i]['M_Price'] = newArray[i]['G_Price'];
