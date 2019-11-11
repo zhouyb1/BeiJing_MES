@@ -65,10 +65,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("S_Status", "%" + queryParam["S_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.S_Status Like @S_Status ");
                 }
-                if (!queryParam["S_StockCode"].IsEmpty())
+                if (!queryParam["S_CostomCode"].IsEmpty())
                 {
-                    dp.Add("S_StockCode", queryParam["S_StockCode"].ToString(), DbType.String);
-                    strSql.Append(" AND t.S_StockCode = @S_StockCode ");
+                    dp.Add("S_CostomCode", "%" + queryParam["S_CostomCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_CostomCode Like @S_CostomCode ");
                 }
                 if (!queryParam["S_StockCode"].IsEmpty())
                 {
