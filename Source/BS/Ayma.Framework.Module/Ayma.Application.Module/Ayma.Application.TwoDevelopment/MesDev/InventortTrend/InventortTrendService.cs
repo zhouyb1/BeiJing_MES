@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_GoodsName,
                 t.I_Unit,
                 t.I_Batch,
-                t.I_Period,
+                (select G_Period from Mes_Goods t where G_Code=I_GoodsCode) as I_Period,
                 t.I_OrderNo,
                 t.I_QtyOld,
                 t.I_QtyNew,
