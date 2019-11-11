@@ -133,14 +133,13 @@ var bootstrap = function ($, ayma) {
                      },
 
                     {
-                        label: '物料编码', name: 'M_GoodsCode', width: 140, align: 'left', editType: 'label'
+                        label: '物料编码', name: 'M_GoodsCode', width: 90, align: 'left', editType: 'label'
                     },
                     {
-                        label: '物料名称', name: 'M_GoodsName', width: 140, align: 'left', editType: 'label'
+                        label: '物料名称', name: 'M_GoodsName', width: 110, align: 'left', editType: 'label'
                     },
-                    
                      {
-                         label: "商品类型", name: "M_Kind", width: 100, align: "left",
+                         label: "商品类型", name: "M_Kind", width: 80, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -167,7 +166,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                      {
-                         label: '价格', name: 'M_Price', width: 80, align: 'left', editType: 'label',
+                         label: '价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
@@ -188,16 +187,11 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    { label: "税率", name: "M_GoodsItax", width: 130, align: "left" },
+                    { label: "税率", name: "M_GoodsItax", width: 60, align: "left" },
+                   
                     {
-                        label: '供应商编码', name: 'M_SupplyCode', width: 140, align: 'left', editType: 'label'
-                    },
-                    {
-                        label: '供应商名称', name: 'M_SupplyName', width: 140, align: 'left', editType: 'label'
-                    },
-                    {
-                        label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'input'
-                    },
+                        label: '备注', name: 'M_Remark', width: 130, align: 'left', editType: 'input'
+                    }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
