@@ -878,7 +878,7 @@
                                 value = parseFloat(num).toFixed(node.numbercount);
                             } 
                         }
-                        var $input = $('<input  type="text" class="form-control"/>').val(value || '');
+                        var $input = $('<input  type="text" class="form-control" placeholder="请输入"/>').val(value || '');
                         $input.css({ 'text-align': node.align });
                         $input.on('input propertychange', function () {
                             var _$input = $(this);
