@@ -157,7 +157,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    s.I_Batch ,
                                    s.I_Qty ,
                                    s.I_Kind,
-                                   g.G_Price I_Price,
+                                   --g.G_Price I_Price,
                                    s.I_Unit,
 								   g.G_SupplyCode I_SupplyCode,
 								   g.G_SupplyName I_SupplyName
