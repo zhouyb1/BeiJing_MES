@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'E_Batch', width: 160, align: 'center', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'E_Remark', width: 200, align: 'left', editType: 'input'
+                        label: '备注', name: 'E_Remark', width: 200, align: 'left', editType: 'label'
                     },
                 ],
                 isAutoHeight: true,
