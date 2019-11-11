@@ -134,6 +134,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "班组编码");
+                    dp.Add("@code", "", DbType.String, ParameterDirection.Output);
+                    this.BaseRepository().ExecuteByProc("sp_GetCode", dp);
+                    var code = dp.Get<string>("@code");//存储过程返回单号
+                    entity.C_Code = code;
                     entity.Create();
                     this.BaseRepository().Insert(entity);
                 }
