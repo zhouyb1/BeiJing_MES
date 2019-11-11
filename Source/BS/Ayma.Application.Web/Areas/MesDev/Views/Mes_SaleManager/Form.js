@@ -18,10 +18,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            //if (status == 2) {
-            //    $('#S_StockCode').attr('readonly', true);
-            //    $("#S_CostomCode").readonly('readonly', true);
-            //}
+            if (status == 2) {
+                $('#S_StockCode').attr('readonly', true);
+                $("#S_CostomCode").attr('readonly', true);
+            }
             $('#S_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' }).on('change', function() {
                 if (status == 1) {
                     $("#Mes_SaleDetail").jfGridSet('refreshdata', { rowdatas: [] });
@@ -78,7 +78,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                      {
-                         label: '库存', name: 'StockQty', width: 80, align: 'center', editType: 'label'
+                         label: '库存', name: 'StockQty', width: 80, align: 'center', editType: 'label',hidden:keyValue==""?false:true
                      },
                     {
                         label: '批次', name: 'S_Batch', width: 160, align: 'center', editType: 'label'
@@ -126,8 +126,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         }
         var postData = {};
         var head = $('[data-table="Mes_SaleHead"]').GetFormData();
-        head.S_StockName = $('#S_StockName').selectGetText();
-        head.S_CostomName = $('#S_CostomName').selectGetText();
+        head.S_StockName = $('#S_StockCode').selectGetText();
+        head.S_CostomName = $('#S_CostomCode').selectGetText();
         postData.strEntity = JSON.stringify(head);
         postData.strmes_SaleDetailEntity = JSON.stringify(data);
         $.SaveForm(top.$.rootUrl + '/MesDev/Mes_SaleManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
