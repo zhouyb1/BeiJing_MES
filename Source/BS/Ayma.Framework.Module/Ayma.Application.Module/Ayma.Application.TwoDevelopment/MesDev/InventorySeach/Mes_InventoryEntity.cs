@@ -129,6 +129,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string GoodsState { get; set; }
         [NotMapped]
         public decimal? Price { get; set; }
+        /// <summary>
+        /// 销售税率
+        /// </summary>
+        [NotMapped]
+        public decimal? I_Otax { get; set; }
+
         #endregion
     }
 }
