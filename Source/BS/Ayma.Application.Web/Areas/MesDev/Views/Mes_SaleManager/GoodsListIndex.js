@@ -134,6 +134,7 @@ var bootstrap = function ($, ayma) {
                         row['S_Batch'] = row["I_Batch"];
                         row["S_Qty"] = quantity;
                         row["ID"] = row['ID'];
+                        row["S_Otax"] = row['I_Otax'];
                         row["StockQty"] = row["I_Qty"];
                         parentRefreshGirdData([], row);
                     }

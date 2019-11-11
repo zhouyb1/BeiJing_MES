@@ -75,6 +75,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     },
                     {
+                        label: '销售税率', name: 'S_Otax', width: 160, align: 'center', editType: 'label'
+                    },
+                    {
                         label: '单位', name: 'S_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
