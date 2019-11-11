@@ -15,26 +15,26 @@ var bootstrap = function ($, ayma) {
         },
         bind: function () {
             //客户名称验证
-            $("#C_Name").on('blur', function () {
-                var code = $.trim($(this).val()); //去除空格
-                var html = '<div class="am-field-error-info" id="isCode" title="客户名称重复！"><i class="fa fa-info-circle"></i></div>';
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/IsCode',
-                    data: { tables: "Mes_Customer", field: "C_Name", code: code, keyValue: keyValue },
-                    success: function (data) {
-                        var isOk = JSON.parse(data).data;
-                        if (isOk) {
-                            $("#C_Name").addClass("am-field-error");
-                            $("#C_Name").parent().append(html);
-                            ayma.alert.error("编码重复");
-                        } else {
-                            $("#C_Name").removeClass("am-field-error");
-                            $("#isCode").remove();
-                        }
-                    }
-                });
-            });
+            //$("#C_Name").on('blur', function () {
+            //    var code = $.trim($(this).val()); //去除空格
+            //    var html = '<div class="am-field-error-info" id="isCode" title="该客户名称已存在！"><i class="fa fa-info-circle"></i></div>';
+            //    $.ajax({
+            //        type: "get",
+            //        url: top.$.rootUrl + '/MesDev/Tools/IsCode',
+            //        data: { tables: "Mes_Customer", field: "C_Name", code: code, keyValue: keyValue },
+            //        success: function (data) {
+            //            var isOk = JSON.parse(data).data;
+            //            if (isOk) {
+            //                $("#C_Name").addClass("am-field-error");
+            //                $("#C_Name").parent().append(html);
+            //                ayma.alert.error("该客户名称已存在");
+            //            } else {
+            //                $("#C_Name").removeClass("am-field-error");
+            //                $("#isCode").remove();
+            //            }
+            //        }
+            //    });
+            //});
         },
         initData: function () {
             if (!!keyValue) {

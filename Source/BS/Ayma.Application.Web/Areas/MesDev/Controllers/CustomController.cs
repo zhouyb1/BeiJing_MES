@@ -1,6 +1,10 @@
-﻿using Ayma.Application.TwoDevelopment.MesDev;
-using Ayma.Util;
+﻿using Ayma.Util;
+using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
+using System.Collections.Generic;
+using Ayma.Application.Base.SystemModule;
+using Ayma.Application.TwoDevelopment;
+using Ayma.Application.TwoDevelopment.Tools;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -12,7 +16,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class CustomController : MvcControllerBase
     {
         private CustomIBLL customIBLL = new CustomBLL();
-
+        private ToolsIBLL toosIBLL = new ToolsBLL();
         #region 视图功能
 
         /// <summary>
@@ -109,8 +113,13 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AjaxOnly]
-        public ActionResult SaveForm(string keyValue,Mes_CustomerEntity entity)
+        public ActionResult SaveForm(string keyValue, Mes_CustomerEntity entity)
         {
+            var resCode = toosIBLL.IsCode("Mes_Customer", "C_Name", entity.C_Name, keyValue);
+            if (resCode)
+            {
+                return Fail("该客户名称已存在！");
+            }
             customIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
         }
