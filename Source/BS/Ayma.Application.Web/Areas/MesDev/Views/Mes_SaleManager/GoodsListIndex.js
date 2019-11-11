@@ -135,7 +135,6 @@ var bootstrap = function ($, ayma) {
                         row["S_Qty"] = quantity;
                         row["ID"] = row['ID'];
                         row["StockQty"] = row["I_Qty"];
-                        row["S_Price"] = row["I_Price"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

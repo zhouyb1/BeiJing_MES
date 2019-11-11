@@ -199,6 +199,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
+            if (detail.Any(item=>item.S_Price==null||item.S_Price<=0))
+            {
+                return Fail("请设置正确格式的价格");
+            }
             foreach (var goods in detail)
             {
                 var stock_qty = invSeachIbll.GetEntityBy(goods.S_GoodsCode, entity.S_StockCode, goods.S_Batch).I_Qty;

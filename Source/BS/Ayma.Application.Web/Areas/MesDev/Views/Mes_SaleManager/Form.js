@@ -61,6 +61,20 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '物料名称', name: 'S_GoodsName', width: 160, align: 'center', editType: 'label'
                     },
                     {
+                        label: '价格(含税)', name: 'S_Price', width: 70, align: 'center', editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.S_Price.toString().replace('.', ''))) { //验证只能为数字
+                                    row.S_Price = 0;
+                                }
+                                if (row.S_Price<0) {
+                                    ayma.alert.error("价格不能为0或负数");
+                                    row.S_Qty = 0;
+                                }
+                            }
+                        }
+                    },
+                    {
                         label: '单位', name: 'S_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
