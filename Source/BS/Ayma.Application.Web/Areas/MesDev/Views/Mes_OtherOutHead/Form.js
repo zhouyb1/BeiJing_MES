@@ -19,6 +19,10 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            if (status == 2) {
+                $('#O_StockName').attr('readonly', true);
+                $("#O_DepartName").attr('readonly', true);
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',

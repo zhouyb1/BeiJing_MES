@@ -76,6 +76,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(stockList);
         }
         /// <summary>
+        /// 获取客户列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetCustomerList()
+        {
+            var Customer = toosIBLL.GetCustomerList();
+            return Success(Customer);
+        }
+        /// <summary>
         /// 获取部门列表
         /// </summary>
         /// <returns></returns>

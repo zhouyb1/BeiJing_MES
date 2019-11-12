@@ -92,6 +92,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取客户列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_CustomerEntity> GetCustomerList()
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_CustomerEntity>();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取部门列表
         /// </summary>
         /// <returns></returns>

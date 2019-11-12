@@ -22,12 +22,40 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#S_StockCode').attr('readonly', true);
                 $("#S_CostomCode").attr('readonly', true);
             }
-            $('#S_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' }).on('change', function() {
+            //绑定仓库
+            var dfop = {
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetOtherStockList',
+                // 访问数据接口参数
+                param: {}
+            };
+            //绑定仓库
+            $('#S_StockCode').select(dfop).on('change', function () {
                 if (status == 1) {
-                    $("#Mes_SaleDetail").jfGridSet('refreshdata', { rowdatas: [] });
+                    $('#Mes_SaleDetail').jfGridSet('refreshdata', { rowdatas: [] });
                 }
             });
-            $('#S_CostomCode').DataSourceSelect({ code: 'CustomerList', value: 'c_code', text: 'c_name' }); 
+            //绑定客户
+            $("#S_CostomCode").select({
+                type: 'default',
+                value: 'C_Code',
+                text: 'C_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetCustomerList',
+                // 访问数据接口参数
+                param: {}
+            });
             //添加物料
             $("#am_add").on("click", function () {
                 var stockCode = $("#S_StockCode").selectGet();

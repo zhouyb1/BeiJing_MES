@@ -48,6 +48,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         Mes_WorkShopEntity ByNameGetWorkShopEntity(string name);
         /// <summary>
+        /// 获取客户列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_CustomerEntity> GetCustomerList();
+        /// <summary>
         /// 获取部门列表
         /// </summary>
         /// <returns></returns>

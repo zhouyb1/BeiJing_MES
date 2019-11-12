@@ -86,12 +86,13 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                 var status = $('#girdtable').jfGridValue('O_Status');
                 selectedRow = $('#girdtable').jfGridGet('rowdata');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'OtherHead',
                         title: '编辑其它出库单',
-                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?keyValue=' + keyValue + '&formId=OtherHead',
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?status=' + status + '&keyValue=' + keyValue + '&formId=OtherHead',
                         width: 900,
                         height: 650,
                         maxmin: true,

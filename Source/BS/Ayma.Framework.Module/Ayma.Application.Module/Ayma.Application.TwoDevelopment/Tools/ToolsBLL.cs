@@ -184,6 +184,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 获取客户    列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_CustomerEntity> GetCustomerList()
+        {
+            try
+            {
+                return toolsService.GetCustomerList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取部门列表
         /// </summary>
         /// <returns></returns>

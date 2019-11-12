@@ -82,13 +82,13 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
-                var statu = $('#girdtable').jfGridValue('O_Status');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 selectedRow = $('#girdtable').jfGridGet('rowdata');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/Form?keyValue=' + keyValue + '&status=' + statu + '&formId=form',
+                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/Form?keyValue=' + keyValue + '&status=' + status + '&formId=form',
                         width: 900,
                         height: 600,
                         maxmin: true,
