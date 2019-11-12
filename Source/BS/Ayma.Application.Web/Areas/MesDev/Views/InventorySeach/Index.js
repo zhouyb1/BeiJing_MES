@@ -130,7 +130,7 @@ var bootstrap = function ($, ayma) {
                     mainId: 'ID',
                     isPage: true,
                     sidx: "I_Batch",
-                    sord: 'DESC',
+                    sord: 'ASC',
                     reloadSelected: false,
                 }).jfGridSet("reload");
             }
