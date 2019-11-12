@@ -6,8 +6,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-08 17:27
-    /// 描 述：历史库存查询
+    /// 日 期：2019-11-12 09:16
+    /// 描 述：库存快照
     /// </summary>
     public partial class Mes_InventoryLSEntity 
     {
@@ -17,11 +17,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
-        /// <summary>
-        /// 商品类型
-        /// </summary>
-        [Column("I_KIND")]
-        public string I_Kind { get; set; }
         /// <summary>
         /// 库存时间
         /// </summary>
@@ -53,11 +48,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("I_UNIT")]
         public string I_Unit { get; set; }
         /// <summary>
-        /// 旧的库存数量
-        /// </summary>
-        [Column("I_OLDQTY")]
-        public decimal? I_OldQty { get; set; }
-        /// <summary>
         /// 数量
         /// </summary>
         [Column("I_QTY")]
@@ -68,25 +58,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("I_BATCH")]
         public string I_Batch { get; set; }
         /// <summary>
-        /// 操作类型：提交、撤销、删除
+        /// 保质期
         /// </summary>
-        [Column("I_OPERATIONTYPE")]
-        public string I_OperationType { get; set; }
+        [Column("I_PERIOD")]
+        public string I_Period { get; set; }
         /// <summary>
-        /// 操作单号
+        /// 备注
         /// </summary>
-        [Column("I_OPERATIONORDERNO")]
-        public string I_OperationOrderNo { get; set; }
-        /// <summary>
-        /// 操作人
-        /// </summary>
-        [Column("I_OPERATIONBY")]
-        public string I_OperationBy { get; set; }
-        /// <summary>
-        /// 操作时间
-        /// </summary>
-        [Column("I_OPERATIONDATE")]
-        public DateTime? I_OperationDate { get; set; }
+        [Column("I_REMARK")]
+        public string I_Remark { get; set; }
         #endregion
 
         #region 扩展操作

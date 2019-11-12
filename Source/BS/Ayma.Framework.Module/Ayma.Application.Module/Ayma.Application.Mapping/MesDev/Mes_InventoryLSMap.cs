@@ -5,8 +5,8 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-01-08 17:27
-    /// 描 述：历史库存查询
+    /// 日 期：2019-11-12 09:16
+    /// 描 述：库存快照
     /// </summary>
     public partial class Mes_InventoryLSMap : EntityTypeConfiguration<Mes_InventoryLSEntity>
     {

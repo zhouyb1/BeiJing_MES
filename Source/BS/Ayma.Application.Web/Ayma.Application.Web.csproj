@@ -270,7 +270,6 @@
     <Compile Include="Areas\MesDev\Controllers\WeightRecordListController.cs" />
     <Compile Include="Areas\MesDev\Controllers\MaterInBillController.cs" />
     <Compile Include="Areas\MesDev\Controllers\InventorySeachController.cs" />
-    <Compile Include="Areas\MesDev\Controllers\InventoryLSSeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\DocumentsMakeLogSeachController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ProductGoodsController.cs" />
     <Compile Include="Areas\MesDev\Controllers\ScanKindListController.cs" />
@@ -302,6 +301,7 @@
     <Compile Include="Areas\MesDev\Controllers\CustomController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_SaleManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_ExpendManagerController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\StockHistoryController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -2451,10 +2451,6 @@
     <Content Include="Areas\MesDev\Views\InventorySeach\Index.js" />
     <Content Include="Areas\MesDev\Views\InventorySeach\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\InventorySeach\Form.js" />
-    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Index.cshtml" />
-    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Index.js" />
-    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.cshtml" />
-    <Content Include="Areas\MesDev\Views\InventoryLSSeach\Form.js" />
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Index.js" />
     <Content Include="Areas\MesDev\Views\DocumentsMakeLogSeach\Form.cshtml" />
@@ -2588,6 +2584,8 @@
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\Form.js" />
+    <Content Include="Areas\MesDev\Views\StockHistory\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\StockHistory\Index.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

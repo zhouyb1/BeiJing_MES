@@ -187,10 +187,6 @@
     <Compile Include="MesDev\InventorySeach\InventorySeachService.cs" />
     <Compile Include="MesDev\InventorySeach\InventorySeachBLL.cs" />
     <Compile Include="MesDev\InventorySeach\InventorySeachIBLL.cs" />
-    <Compile Include="MesDev\InventoryLSSeach\Mes_InventoryLSEntity.cs" />
-    <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachService.cs" />
-    <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachBLL.cs" />
-    <Compile Include="MesDev\InventoryLSSeach\InventoryLSSeachIBLL.cs" />
     <Compile Include="MesDev\DocumentsMakeLogSeach\T_DocumentsMakeLogEntity.cs" />
     <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachService.cs" />
     <Compile Include="MesDev\DocumentsMakeLogSeach\DocumentsMakeLogSeachBLL.cs" />
@@ -324,6 +320,10 @@
     <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadService.cs" />
     <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadIBLL.cs" />
     <Compile Include="MesDev\Mes_OtherOutManager\Mes_OtherOutHeadBLL.cs" />
+    <Compile Include="MesDev\StockHistory\Mes_InventoryLSEntity.cs" />
+    <Compile Include="MesDev\StockHistory\StockHistoryService.cs" />
+    <Compile Include="MesDev\StockHistory\StockHistoryBLL.cs" />
+    <Compile Include="MesDev\StockHistory\StockHistoryIBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
