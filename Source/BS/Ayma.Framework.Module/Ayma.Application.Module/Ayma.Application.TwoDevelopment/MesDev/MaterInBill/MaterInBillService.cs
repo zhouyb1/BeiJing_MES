@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using System.Data.SqlClient;
+using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
 using System;
@@ -532,6 +533,72 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        }
+
+        /// <summary>
+        /// 获取原物料入库列表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterInSum()
+        {
+        //    var dp = new DynamicParameters(new { });
+        //    dp.Add("@tableName", "Mes_MaterInDetail");
+        //    dp.Add("@groupColumn", "M_SupplyName");
+        //    dp.Add("@row2column", "M_GoodsName");
+        //    dp.Add("@row2columnValue", "M_Qty");
+        //    dp.Add("@sql_where", "where M_SupplyName is not null");
+            //var dt= this.BaseRepository().ExecuteByProc<DataTable>("sp_GetPivot", dp);
+            var sqlConnection = this.BaseRepository().getDbConnection() as SqlConnection;
+            if (sqlConnection != null)
+            {
+                var command = sqlConnection.CreateCommand();
+                command.CommandText = "sp_GetPivot";
+                command.CommandType=CommandType.StoredProcedure;
+                command.Parameters.Add("@tableName", SqlDbType.VarChar).Value = "Mes_MaterInDetail";
+                command.Parameters.Add("@groupColumn", SqlDbType.VarChar).Value = "M_SupplyName";
+                command.Parameters.Add("@row2column", SqlDbType.VarChar).Value = "M_GoodsName";
+                command.Parameters.Add("@row2columnValue", SqlDbType.VarChar).Value = "M_Qty";
+                command.Parameters.Add("@sql_where", SqlDbType.VarChar).Value = "where M_SupplyName is not null";
+                SqlDataAdapter sda = new SqlDataAdapter(command);
+
+                var ds = new DataSet();
+                sda.Fill(ds);
+                var dt = ds.Tables[0];
+                this.BaseRepository().getDbConnection().Close();
+                return dt;
+
+            }
+            return new DataTable();
+        }
+
+        /// <summary>
+        /// 渲染前端表头
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ColumnModel> GetPageTitle()
+        {
+            string sql = @"SELECT DISTINCT
+                                    d.M_GoodsName
+                            FROM    dbo.Mes_MaterInHead h
+                                    LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
+                            WHERE   M_OrderKind = 0";
+          var columns=  this.BaseRepository().FindList<Mes_MaterInDetailEntity>(sql);
+
+            List<ColumnModel> cmList = new List<ColumnModel>();
+          
+            foreach (var col in columns)
+            {
+                ColumnModel cm1 = new ColumnModel();
+                cm1.name = col.M_GoodsName;
+                cm1.label = col.M_GoodsName;
+                cm1.width = 130;
+                cm1.align = "left";
+                cm1.sort = false;
+                cm1.statistics = false;
+                cm1.children = null;
+                cmList.Add(cm1);
+            }
+            return cmList;
         }
 
         #endregion

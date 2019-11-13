@@ -106,11 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("M_UPLOADDATE")]
         public DateTime? M_UploadDate { get; set; }    
-        /// <summary>
-        /// 是否成品(0非成品 1成品)
-        /// </summary>
-        [Column("M_KIND")]
-        public int? M_Kind { get; set; }
+        
         #endregion
 
         #region 扩展操作

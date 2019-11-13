@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using System.Data;
+using Ayma.Util;
 using System;
 using System.Collections.Generic;
 
@@ -214,6 +215,54 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 return materInBillService.GetMes_MaterInDetailEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 获取原物料入库列表详情
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterInDetailSum()
+        {
+            try
+            {
+                return materInBillService.GetMaterInSum();
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }  
+        }
+
+
+        /// <summary>
+        /// 渲染前端表头
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<ColumnModel> GetPageTitle()
+        {
+            try
+            {
+                return materInBillService.GetPageTitle();
             }
             catch (Exception ex)
             {

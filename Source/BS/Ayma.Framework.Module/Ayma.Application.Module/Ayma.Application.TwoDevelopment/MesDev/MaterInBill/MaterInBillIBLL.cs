@@ -1,4 +1,6 @@
-﻿using Ayma.Util;
+﻿using System.Data;
+using System.Security.Cryptography.X509Certificates;
+using Ayma.Util;
 using System.Collections.Generic;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -66,6 +68,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         Mes_MaterInDetailEntity GetMes_MaterInDetailEntity(string keyValue);
+        /// <summary>
+        /// 原物料入库详细列表
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetMaterInDetailSum();
+
+        /// <summary>
+        /// 渲染前端表头
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<ColumnModel> GetPageTitle();
         #endregion
 
         #region 提交数据
