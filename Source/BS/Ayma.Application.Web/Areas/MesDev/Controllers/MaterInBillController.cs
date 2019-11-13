@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using System.ComponentModel.DataAnnotations;
+using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
@@ -122,6 +123,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
         #endregion
 
+        /// <summary>
+        /// 原物料入库列表详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult MaterInSumIndex()
+        {
+            return View();
+        }
+
         #region 获取数据
         /// <summary>
         /// 获取成品入库商品列表
@@ -165,6 +176,31 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
+        /// <summary>
+        /// 获取原物料入库列表详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterInDetail(string queryJson)
+        {
+            var dt = materInBillIBLL.GetMaterInDetailSum();
+            return Success(dt);
+        }
+
+        /// <summary>
+        /// 渲染表头
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult GetPageTitle(string queryJson)
+        {
+            var headList = materInBillIBLL.GetPageTitle();
+            return Success(headList);
+        }
+
         /// <summary>
         /// 获取已提交的成品入库
         /// </summary>
@@ -373,7 +409,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
             }
             entity.M_OrderKind = orderKind; //单据类型 成品与非成品
-            entity.M_Kind = entity.M_OrderKind == ErpEnums.OrderKindEnum.NoProduct ? 0 : 1;
             materInBillIBLL.SaveEntity(keyValue, entity, mes_MaterInDetailList);
             return Success("保存成功！");
         }
