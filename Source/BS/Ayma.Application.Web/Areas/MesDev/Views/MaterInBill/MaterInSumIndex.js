@@ -16,26 +16,17 @@ var bootstrap = function ($, ayma) {
                 page.search();
             });
             $('#girdtable').jfGrid({});
-        },
-        search: function (param) {
 
 
-            param = param || {};
-            //param.StartTime = startTime;
-            //param.EndTime = endTime;
-            //jsonquery = param;
-
-            var postData = {code:"鸭脖"};
-            postData.queryJson = JSON.stringify(param);
-
-
+            var postData = {};
+            postData.queryJson = JSON.stringify({ code: "9527" });
 
             $.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {
 
                 $('#girdtable').jfGridSet("unload", {
                     url: top.$.rootUrl + '/MesDev/MaterInBill/GetMaterInDetail',
                     headData: res.data,
-                    mainId: 'm_supplyname',
+                    mainId: 'M_SupplyName',
                     reloadSelected: true,
                     isPage: false,
                     footerrow: false,
@@ -44,22 +35,26 @@ var bootstrap = function ($, ayma) {
 
                 $('#girdtable').jfGridSet('reload', { param: postData });
             });
+        },
+        search: function () {
 
-            //alert('test');
-            //$.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', "{'name':'xiaom'}", function (res) {
+            
+            //var postData = {};
+            //postData.queryJson = JSON.stringify({code:"9527"});
+
+            //$.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {
 
             //    $('#girdtable').jfGridSet("unload", {
             //        url: top.$.rootUrl + '/MesDev/MaterInBill/GetMaterInDetail',
             //        headData: res.data,
-            //        mainId: 'm_supplyname',
+            //        mainId: 'M_SupplyName',
             //        reloadSelected: true,
             //        isPage: false,
             //        footerrow: false,
             //        isStatistics: false
             //    });
 
-                //var s = "12";
-                //$('#girdtable').jfGridSet('reload', { param: param });
+            //    //$('#girdtable').jfGridSet('reload', { param: postData });
             //});
         }
     };

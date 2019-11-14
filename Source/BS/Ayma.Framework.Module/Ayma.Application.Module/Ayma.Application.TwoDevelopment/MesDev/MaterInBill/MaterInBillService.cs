@@ -578,14 +578,28 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public IEnumerable<ColumnModel> GetPageTitle()
         {
             string sql = @"SELECT DISTINCT
-                                    d.M_GoodsName
-                            FROM    dbo.Mes_MaterInHead h
-                                    LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
-                            WHERE   M_OrderKind = 0";
+       d.M_GoodsName
+FROM dbo.Mes_MaterInHead h
+    LEFT JOIN dbo.Mes_MaterInDetail d
+        ON d.M_MaterInNo = h.M_MaterInNo
+WHERE M_OrderKind = 0 AND d.M_GoodsName IS NOT NULL";
+
           var columns=  this.BaseRepository().FindList<Mes_MaterInDetailEntity>(sql);
 
-            List<ColumnModel> cmList = new List<ColumnModel>();
+
           
+            List<ColumnModel> cmList = new List<ColumnModel>();
+
+            ColumnModel cm = new ColumnModel();
+            cm.name = "M_SupplyName";
+            cm.label = "供应商名称";
+            cm.width = 250;
+            cm.align = "left";
+            cm.sort = false;
+            cm.statistics = false;
+            cm.children = null;
+            cmList.Add(cm);
+
             foreach (var col in columns)
             {
                 ColumnModel cm1 = new ColumnModel();
@@ -598,6 +612,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 cm1.children = null;
                 cmList.Add(cm1);
             }
+            return cmList;
             return cmList;
         }
 
