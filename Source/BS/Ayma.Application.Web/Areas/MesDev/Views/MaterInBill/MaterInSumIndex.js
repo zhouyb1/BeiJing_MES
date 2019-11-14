@@ -13,7 +13,7 @@ var bootstrap = function ($, ayma) {
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
-                page.search();
+                //page.search();
             });
             $('#girdtable').jfGrid({});
 
@@ -35,27 +35,6 @@ var bootstrap = function ($, ayma) {
 
                 $('#girdtable').jfGridSet('reload', { param: postData });
             });
-        },
-        search: function () {
-
-            
-            //var postData = {};
-            //postData.queryJson = JSON.stringify({code:"9527"});
-
-            //$.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {
-
-            //    $('#girdtable').jfGridSet("unload", {
-            //        url: top.$.rootUrl + '/MesDev/MaterInBill/GetMaterInDetail',
-            //        headData: res.data,
-            //        mainId: 'M_SupplyName',
-            //        reloadSelected: true,
-            //        isPage: false,
-            //        footerrow: false,
-            //        isStatistics: false
-            //    });
-
-            //    //$('#girdtable').jfGridSet('reload', { param: postData });
-            //});
         }
     };
     refreshGirdData = function () {
