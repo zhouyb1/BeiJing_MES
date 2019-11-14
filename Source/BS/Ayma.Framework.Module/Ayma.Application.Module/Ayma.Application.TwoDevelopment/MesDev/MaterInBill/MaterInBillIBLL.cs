@@ -72,13 +72,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 原物料入库详细列表
         /// </summary>
         /// <returns></returns>
-        DataTable GetMaterInDetailSum();
+        DataTable GetMaterInDetailSum(string queryJson);
 
         /// <summary>
         /// 渲染前端表头
         /// </summary>
         /// <returns></returns>
-        IEnumerable<ColumnModel> GetPageTitle();
+        IEnumerable<ColumnModel> GetPageTitle(string queryJson);
         #endregion
 
         #region 提交数据

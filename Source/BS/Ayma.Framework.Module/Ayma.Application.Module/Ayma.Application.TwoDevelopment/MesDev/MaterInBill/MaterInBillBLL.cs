@@ -233,11 +233,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取原物料入库列表详情
         /// </summary>
         /// <returns></returns>
-        public DataTable GetMaterInDetailSum()
+        public DataTable GetMaterInDetailSum(string queryJson)
         {
             try
             {
-                return materInBillService.GetMaterInSum();
+                return materInBillService.GetMaterInSum(queryJson);
 
             }
             catch (Exception ex)
@@ -258,11 +258,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 渲染前端表头
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ColumnModel> GetPageTitle()
+        public IEnumerable<ColumnModel> GetPageTitle(string queryJson)
         {
             try
             {
-                return materInBillService.GetPageTitle();
+                return materInBillService.GetPageTitle(queryJson);
             }
             catch (Exception ex)
             {

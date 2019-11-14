@@ -1,4 +1,5 @@
 ﻿using System.Data.SqlClient;
+using System.Linq;
 using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
@@ -539,81 +540,197 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取原物料入库列表
         /// </summary>
         /// <returns></returns>
-        public DataTable GetMaterInSum()
+        public DataTable GetMaterInSum(string queryJson)
         {
-        //    var dp = new DynamicParameters(new { });
-        //    dp.Add("@tableName", "Mes_MaterInDetail");
-        //    dp.Add("@groupColumn", "M_SupplyName");
-        //    dp.Add("@row2column", "M_GoodsName");
-        //    dp.Add("@row2columnValue", "M_Qty");
-        //    dp.Add("@sql_where", "where M_SupplyName is not null");
-            //var dt= this.BaseRepository().ExecuteByProc<DataTable>("sp_GetPivot", dp);
-            var sqlConnection = this.BaseRepository().getDbConnection() as SqlConnection;
-            if (sqlConnection != null)
+            try
             {
-                var command = sqlConnection.CreateCommand();
-                command.CommandText = "sp_GetPivot";
-                command.CommandType=CommandType.StoredProcedure;
-                command.Parameters.Add("@tableName", SqlDbType.VarChar).Value = "Mes_MaterInDetail";
-                command.Parameters.Add("@groupColumn", SqlDbType.VarChar).Value = "M_SupplyName";
-                command.Parameters.Add("@row2column", SqlDbType.VarChar).Value = "M_GoodsName";
-                command.Parameters.Add("@row2columnValue", SqlDbType.VarChar).Value = "M_Qty";
-                command.Parameters.Add("@sql_where", SqlDbType.VarChar).Value = "where M_SupplyName is not null";
-                SqlDataAdapter sda = new SqlDataAdapter(command);
+                var sqlHead = @"SELECT DISTINCT
+                               d.M_GoodsName
+                              FROM dbo.Mes_MaterInHead h
+                              LEFT JOIN dbo.Mes_MaterInDetail d
+                              ON d.M_MaterInNo = h.M_MaterInNo
+                WHERE M_OrderKind = 0 and d.M_GoodsName is not null {0} GROUP BY M_GoodsName";
 
-                var ds = new DataSet();
-                sda.Fill(ds);
-                var dt = ds.Tables[0];
-                this.BaseRepository().getDbConnection().Close();
+
+                var sqlData = @"SELECT  M_SupplyName ,
+                                    {0}
+                                    0 合计数量 ,
+                                    0 合计金额
+                            FROM    ( SELECT    d.M_SupplyName ,
+                                                d.M_Qty ,
+                                                d.M_Price,
+                                                d.M_GoodsName
+                                      FROM      dbo.Mes_MaterInHead h
+                                                LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
+                                      WHERE     h.M_OrderKind = 0  AND d.M_SupplyName IS NOT NULL {2}
+                                               
+                                    ) dt PIVOT( SUM(M_Qty) FOR M_GoodsName IN ({1})) pvt";
+                var queryParam = queryJson.ToJObject();
+                var dp = new DynamicParameters(new {});
+                var sqlParm = new StringBuilder();
+
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    sqlParm.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+                }
+                var rowHeads =
+                    this.BaseRepository()
+                        .FindList<Mes_MaterInDetailEntity>(string.Format(sqlHead, sqlParm.ToString()), dp)
+                        .ToList();
+
+                if (!rowHeads.Any())
+                {
+                    return new DataTable();
+                }
+                var dtColumns = new StringBuilder();
+                List<string> goodsList = new List<string>();
+                foreach (var row in rowHeads)
+                {
+                    dtColumns.Append(string.Format("ROUND([{0}],2) {0}_Qty ,", row.M_GoodsName));
+                    dtColumns.Append(string.Format("ROUND([{0}]*M_Price,2) {0}_Amount ,", row.M_GoodsName));
+                    goodsList.Add(string.Format("[{0}]", row.M_GoodsName));
+                }
+
+                var dt= this.BaseRepository() .FindTable( string.Format(sqlData, dtColumns.ToString(), string.Join(",", goodsList), sqlParm.ToString()), dp);
                 return dt;
-
             }
-            return new DataTable();
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+            //var sqlConnection = this.BaseRepository().getDbConnection() as SqlConnection;
+            //if (sqlConnection != null)
+            //{
+            //    var command = sqlConnection.CreateCommand();
+            //    command.CommandText = "sp_GetPivot";
+            //    command.CommandType=CommandType.StoredProcedure;
+            //    command.Parameters.Add("@tableName", SqlDbType.VarChar).Value = "Mes_MaterInDetail";
+            //    command.Parameters.Add("@groupColumn", SqlDbType.VarChar).Value = "M_SupplyName";
+            //    command.Parameters.Add("@row2column", SqlDbType.VarChar).Value = "M_GoodsName";
+            //    command.Parameters.Add("@row2columnValue", SqlDbType.VarChar).Value = "M_Qty";
+            //    command.Parameters.Add("@sql_where", SqlDbType.VarChar).Value = "where M_SupplyName is not null";
+            //    SqlDataAdapter sda = new SqlDataAdapter(command);
+            //    var ds = new DataSet();
+            //    sda.Fill(ds);
+            //    var dt = ds.Tables[0];
+            //    this.BaseRepository().getDbConnection().Close();
+            //    return dt;
+
+
         }
 
         /// <summary>
         /// 渲染前端表头
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<ColumnModel> GetPageTitle()
+        public IEnumerable<ColumnModel> GetPageTitle(string queryJson)
         {
-            string sql = @"SELECT DISTINCT
-       d.M_GoodsName
-FROM dbo.Mes_MaterInHead h
-    LEFT JOIN dbo.Mes_MaterInDetail d
-        ON d.M_MaterInNo = h.M_MaterInNo
-WHERE M_OrderKind = 0 AND d.M_GoodsName IS NOT NULL";
-
-          var columns=  this.BaseRepository().FindList<Mes_MaterInDetailEntity>(sql);
-
-
-          
+           try
+           {
+              StringBuilder sql = new StringBuilder();
+             sql.Append(@"SELECT DISTINCT
+                               d.M_GoodsName
+                              FROM dbo.Mes_MaterInHead h
+                              LEFT JOIN dbo.Mes_MaterInDetail d
+                              ON d.M_MaterInNo = h.M_MaterInNo
+                WHERE M_OrderKind = 0 AND d.M_GoodsName IS NOT NULL ");
+            var queryParam = queryJson.ToJObject();
+            // 虚拟参数
+            var dp = new DynamicParameters(new { });
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                sql.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+            }
+            var columnsHead = this.BaseRepository().FindList<Mes_MaterInDetailEntity>(sql.ToString(),dp);
             List<ColumnModel> cmList = new List<ColumnModel>();
 
             ColumnModel cm = new ColumnModel();
             cm.name = "M_SupplyName";
             cm.label = "供应商名称";
-            cm.width = 250;
+            cm.width = 130;
             cm.align = "left";
             cm.sort = false;
             cm.statistics = false;
             cm.children = null;
             cmList.Add(cm);
-
-            foreach (var col in columns)
+            ColumnModel cm1 = new ColumnModel();
+            cm1.name = "M_Price";
+            cm1.label = "单价";
+            cm1.width = 80;
+            cm1.align = "center";
+            cm1.sort = false;
+            cm1.statistics = false;
+            cm1.children = null;
+            cmList.Add(cm1);
+            foreach (var col in columnsHead)
             {
-                ColumnModel cm1 = new ColumnModel();
-                cm1.name = col.M_GoodsName;
-                cm1.label = col.M_GoodsName;
-                cm1.width = 130;
-                cm1.align = "left";
-                cm1.sort = false;
-                cm1.statistics = false;
-                cm1.children = null;
-                cmList.Add(cm1);
+                ColumnModel cm_head = new ColumnModel();
+                cm_head.name = col.M_GoodsName;
+                cm_head.label = col.M_GoodsName;
+                cm_head.width = 130;
+                cm_head.align = "center";
+                cm_head.sort = false;
+                cm_head.statistics = false;
+                cm_head.children = new List<ColumnModel>();
+
+                ColumnModel c_qty = new ColumnModel();
+                c_qty.name = col.M_GoodsName;
+                c_qty.label = "数量";
+                c_qty.width = 90;
+                c_qty.align = "center";
+                c_qty.sort = false;
+                c_qty.statistics = false;
+                c_qty.children = null;
+
+                ColumnModel c_amount = new ColumnModel();
+                c_amount.name = col.M_GoodsName + "_Amount";
+                c_amount.label = "金额(元)";
+                c_amount.width = 100;
+                c_amount.align = "center";
+                c_amount.sort = false;
+                c_amount.statistics = false;
+                c_amount.children = null;
+
+                cm_head.children.Add(c_qty);
+                cm_head.children.Add(c_amount);
+                cmList.Add(cm_head);
+            }
+            foreach (var cl in cmList)
+            {
+                cl.name = cl.name.ToLower();
+                if (cl.children != null)
+                {
+                    foreach (var ccl in cl.children)
+                    {
+                        ccl.name = ccl.name.ToLower();
+                    }
+                }
             }
             return cmList;
-            return cmList;
+        }
+
+    catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
         }
 
         #endregion
