@@ -15,7 +15,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private MaterialsSumService materialsSumService = new MaterialsSumService();
 
         #region 获取数据
+        /// <summary>
+        /// 获取选取的时间原物料库存详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialDetailListByDate(pagination, queryJson, M_GoodsCode, M_Batch, ToDate);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
 
+        }
+        /// <summary>
+        /// 获取期初期末显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialSumListByDate(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialSumListByDate(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>

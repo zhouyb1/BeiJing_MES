@@ -1,0 +1,138 @@
+﻿/* * 创建人：超级管理员
+ * 日  期：2019-09-16 10:59
+ * 描  述：原物料统计(入库、出库、次品)
+ */
+var refreshSubGirdData;
+var $subgridTable;//子列表
+var refreshGirdData;
+var bootstrap = function ($, ayma) {
+    "use strict";
+    var startTime;
+    var endTime;
+    var tabTitle = "汇总";
+    var data;
+    var page = {
+        init: function () {
+            page.initGird();
+            page.bind();
+            page.search();
+        },
+        bind: function () {
+            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+                page.search(queryJson);
+            }, 180, 500);
+            // 刷新
+            $('#am_refresh').on('click', function() {
+                location.reload();
+            });
+            //绑定供应商
+            $("#G_SupplyCode").select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
+                // 访问数据接口参数
+                param: {}
+            });
+            //导出excel
+            $('#am_export').on('click', function () {
+                var tableName = "";
+                var fileName = "";
+                if (tabTitle == "汇总") {
+                    tableName = "girdtable_sum";
+                    fileName = "原物料汇总";
+                } else {
+                    tableName = "girdtable_detail";
+                    fileName = "原物料明细";
+                }
+
+
+                ayma.layerForm({
+                    id: "ExcelExportForm",
+                    title: '导出Excel数据',
+                    url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+                    width: 500,
+                    height: 380,
+                    callBack: function (id) {
+                        return top[id].acceptClick();
+                    },
+                    btn: ['导出Excel', '关闭']
+                });
+            });
+        },
+        // 初始化列表
+        initGird: function () {
+            $('#girdtable_sum').jfGrid({
+                url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSumListByDate',
+                headData: [
+                    { label: "商品编码", name: "m_goodscode", width: 160, align: "left" },
+                    { label: "商品名称", name: "m_goodsname", width: 160, align: "left" },
+                    { label: "入库数量", name: "inventoryquantity", width: 160, align: "left" },        
+                    { label: "出库数量", name: "delivery", width: 160, align: "left" },
+                    { label: "期初库存", name: "initialinventory", width: 160, align: "left" },                 
+                    { label: "期初金额", name: "initialamount", width: 160, align: "left" },
+                    { label: "期末库存", name: "endinginventory", width: 160, align: "left" },
+                    { label: "期末金额", name: "finalamount", width: 160, align: "left" },
+                    { label: "价格", name: "price", width: 160, align: "left" },
+                    { label: "批次", name: "m_batch", width: 160, align: "left" }         
+                ],
+                mainId:'ID',
+                reloadSelected: true,
+                footerrow: true,
+                isPage: true,
+                isStatistics: true,
+                sidx: 'm_goodscode',                
+                sord: 'desc',
+                isSubGrid: true,
+                subGridRowExpanded: function (subgridId, row) {
+                    var M_GoodsCode = row.m_goodscode;
+                    var ToDate = $("#Date").val();
+                    var M_Batch = row.m_batch;
+                    var subgridTableId = subgridId + "_t";
+                    $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
+                    $subgridTable = $("#" + subgridTableId);
+                    $subgridTable.jfGrid({
+                        url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialDetailListByDate?M_GoodsCode=' + M_GoodsCode + '&M_Batch=' + M_Batch + '&ToDate=' + ToDate,
+                        headData: [
+                      { label: "单据号", name: "M_MaterInNo", width: 160, align: "left" },
+                      { label: "供应商编码", name: "M_SupplyCode", width: 80, align: "left" },
+                      { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
+                      { label: "商品编码", name: "M_GoodsCode", width: 80, align: "left" },
+                      { label: "商品名称", name: "M_GoodsName", width: 160, align: "left" },
+                      { label: "数量", name: "M_Qty", width: 160, align: "left" },
+                      { label: "批次", name: "M_Batch", width: 90, align: "left" },
+                      { label: "商品税率", name: "M_GoodsItax", width: 160, align: "left" },
+                      { label: "备注", name: "M_Remark", width: 90, align: "left" },               
+                        ],
+                        mainId: 'ID',
+                        isPage: true,
+                        sidx: "M_MaterInNo",
+                        sord: 'ASC',
+                        reloadSelected: false,
+                    }).jfGridSet("reload");
+                }
+            });
+        },
+        search: function (param) {
+            param = param || {};
+            param.StartTime = startTime;
+            param.EndTime = endTime;
+            param.data = $("#Date").val();
+                $('#girdtable_sum').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
+
+        }
+    };
+    refreshGirdData = function () {
+        page.search();
+    };
+    //子列表刷新
+    refreshSubGirdData = function () {
+        $subgridTable.jfGridSet("reload");
+    };
+    page.init();
+}

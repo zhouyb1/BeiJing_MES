@@ -17,7 +17,101 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public partial class MaterialsSumService : RepositoryFactory
     {
         #region 获取数据
+        /// <summary>
+        /// 获取选取的时间原物料库存详细
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select * from Mes_MaterInDetail m 
+                            where m.M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@ToDate and M_CreateDate<=@AfterDate)
+                             and m.M_GoodsCode=@M_GoodsCode
+                             and M_Batch=@M_Batch
+                             ");
 
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime date = queryParam["data"].ToDate();
+                DateTime AfterDate = ToDate.AddDays(1).Date;
+                dp.Add("ToDate", ToDate, DbType.DateTime);
+                dp.Add("AfterDate", AfterDate, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                dp.Add("M_Batch", M_Batch, DbType.String);
+                return this.BaseRepository().FindList<Mes_MaterInDetailEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取期初期末页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialSumListByDate(Pagination pagination, string queryJson)
+       {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"	select M_GoodsCode,
+                                    M_GoodsName,
+                                    sum(M_Qty) Inventoryquantity,
+                                    M_Batch,
+                                    (select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate) as Initialinventory
+									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode)as Price,
+									(select G_Price from Mes_Goods where G_Code=M_GoodsCode)*(select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate) Initialamount
+									,(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) delivery
+									,((select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate)+sum(M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) as Endinginventory
+									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode)*((select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate)+sum(M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) as finalamount
+									from Mes_MaterInDetail where M_MaterInNo in(select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@date and M_CreateDate<=@AfterDate) and  M_Kind=1
+									 ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime date = queryParam["data"].ToDate();
+                DateTime LSDate = date.AddDays(-1).Date;
+                DateTime AfterDate = date.AddDays(1).Date;
+                dp.Add("LSDate", LSDate, DbType.DateTime);
+                dp.Add("date", date, DbType.DateTime);
+                dp.Add("AfterDate", AfterDate, DbType.DateTime);
+                if (!queryParam["M_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("M_GoodsCode", "%" + queryParam["M_GoodsCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND M_GoodsCode Like @M_GoodsCode ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND M_GoodsName Like @M_GoodsName ");
+                }
+                strSql.Append("Group by M_GoodsCode,M_GoodsName,M_Batch ");
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>

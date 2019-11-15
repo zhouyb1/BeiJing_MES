@@ -544,6 +544,7 @@
     <Content Include="Areas\MesDev\Views\InventorySeach\InvertoryList.js" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PriceSearchIndex.js" />
     <Content Include="Areas\MesDev\Views\InventorySeach\PickOrUserIndex.js" />
+    <Content Include="Areas\MesDev\Views\MaterialsSum\MoneyIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\GoodsProductListIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\MaterInSumIndex.js" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PostProductForm.js" />
@@ -2369,6 +2370,7 @@
     <Content Include="Areas\MesDev\Views\Mes_ExpendManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\MaterInSumIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterialsSum\MoneyIndex.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

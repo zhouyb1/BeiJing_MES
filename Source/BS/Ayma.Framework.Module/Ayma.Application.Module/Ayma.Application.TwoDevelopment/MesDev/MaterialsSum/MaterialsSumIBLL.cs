@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using Ayma.Util;
 using System.Collections.Generic;
-
+using System;
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
@@ -12,6 +12,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public interface MaterialsSumIBLL
     {
         #region 获取数据
+        /// <summary>
+        /// 获取选取的时间原物料库存详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate);
+        /// <summary>
+        /// 获取期初期末页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialSumListByDate(Pagination pagination, string queryJson);
 
         /// <summary>
         /// 获取页面显示列表数据

@@ -2,6 +2,8 @@
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System;
+
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -25,11 +27,57 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
-        
+        /// <summary>
+        /// 报表页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult MoneyIndex()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据
-
+        /// <summary>
+        /// 获取选取的时间原物料库存详细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialDetailListByDate(string pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialDetailListByDate(paginationobj, queryJson, M_GoodsCode, M_Batch, ToDate);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取期初期末页面显示列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialSumListByDate(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialSumListByDate(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
