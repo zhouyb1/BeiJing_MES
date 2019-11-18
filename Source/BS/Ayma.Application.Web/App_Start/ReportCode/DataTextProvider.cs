@@ -199,6 +199,33 @@ using MyDbReportData = DatabaseXmlReportData;
 
         }
         /// <summary>
+        /// 其它入库单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string Other(string doucno)
+        {
+            var strSql = @" 
+                            SELECT  h.O_OtherInNo ,
+                                    h.O_StockName ,
+                                    h.O_CreateDate ,
+                                    h.O_CreateBy ,
+		                            h.MonthBalance,
+                                    d.O_GoodsCode ,
+                                    d.O_GoodsName ,
+                                    d.O_Qty ,
+                                    d.O_Unit,
+		                            d.O_Remark,
+		                            d.O_Batch
+                            FROM    dbo.Mes_OtherInHead h
+                                    LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)
+                            WHERE   h.O_OtherInNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Other"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
         /// 成品入库单打印
         /// </summary>
         /// <param name="doucno"></param>
@@ -875,6 +902,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
+            SpecialDataFunMap.Add("Other", Other);
             SpecialDataFunMap.Add("MaterInProject", MaterInProject);
             SpecialDataFunMap.Add("Requist", Requist);
             SpecialDataFunMap.Add("ProductOrder", ProductOrder);
@@ -941,6 +969,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string MaterIn(HttpRequest Request)
         {
             return MaterIn(Request.QueryString["doucno"]);
+        }
+        private static string Other(HttpRequest Request)
+        {
+            return Other(Request.QueryString["doucno"]);
         }
         private static string MaterInProject(HttpRequest Request)
         {
