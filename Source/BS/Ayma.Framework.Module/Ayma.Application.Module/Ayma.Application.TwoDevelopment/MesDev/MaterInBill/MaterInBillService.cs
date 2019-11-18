@@ -590,6 +590,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dtColumns.Append(string.Format("SUM(ROUND([{0}],2)) {0}_Qty ,", row.M_GoodsName));
                     dtColumns.Append(string.Format("SUM(ROUND([{0}]*M_Price,2)) {0}_Amount ,", row.M_GoodsName));
+                    dtColumns.Append(string.Format("(select min(M_Unit) from Mes_MaterInDetail where M_GoodsName ='"+row.M_GoodsName+"') {0}_Unit ,", row.M_GoodsName));
                     goodsList.Add(string.Format("[{0}]", row.M_GoodsName));
                 }
 
@@ -693,6 +694,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 c_qty.statistics = false;
                 c_qty.children = null;
 
+                ColumnModel c_unit = new ColumnModel();
+                c_unit.name = col.M_GoodsName + "_Unit";
+                c_unit.label = "单位";
+                c_unit.width = 80;
+                c_unit.align = "center";
+                c_unit.sort = false;
+                c_unit.statistics = false;
+                c_unit.children = null;
+
                 ColumnModel c_amount = new ColumnModel();
                 c_amount.name = col.M_GoodsName + "_Amount";
                 c_amount.label = "金额(元)";
@@ -703,6 +713,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 c_amount.children = null;
 
                 cm_head.children.Add(c_qty);
+                cm_head.children.Add(c_unit);
                 cm_head.children.Add(c_amount);
                 cmList.Add(cm_head);
             }

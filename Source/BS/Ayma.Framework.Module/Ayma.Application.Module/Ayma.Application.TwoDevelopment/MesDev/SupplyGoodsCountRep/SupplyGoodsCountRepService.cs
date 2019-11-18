@@ -31,7 +31,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"
                 h.M_SupplyCode ,
                 h.M_SupplyName ,
-                h.M_CreateDate ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty)) In_Qty ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty * M_Price)) In_Amount ,
                 AVG(M_Price) Avg_Price
@@ -54,7 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     strSql.Append(" AND h.M_SupplyCode Like @M_SupplyCode ");
                 }
 
-                strSql.Append(" GROUP BY h.M_CreateDate,h.M_SupplyCode,h.M_SupplyName");
+                strSql.Append(" GROUP BY h.M_SupplyCode,h.M_SupplyName");
                 return this.BaseRepository().FindTable(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
