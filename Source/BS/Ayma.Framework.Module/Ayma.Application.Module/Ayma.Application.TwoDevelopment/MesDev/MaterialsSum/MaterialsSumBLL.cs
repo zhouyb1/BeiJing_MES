@@ -20,11 +20,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate)
+        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
         {
             try
             {
-                return materialsSumService.GetMaterialDetailListByDate(pagination, queryJson, M_GoodsCode, M_Batch, ToDate);
+                return materialsSumService.GetMaterialDetailListByDate(pagination, queryJson, M_GoodsCode);
             }
             catch (Exception ex)
             {
