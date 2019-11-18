@@ -27,7 +27,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 var strSql = new StringBuilder();
                 strSql.Append(@"
-                            select * from Mes_MaterInDetail m 
+                            select m.*,t.M_CreateDate from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
                             where m.M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@ToDate and M_CreateDate<=@AfterDate)
                              and m.M_GoodsCode=@M_GoodsCode
                              and M_Batch=@M_Batch
@@ -66,38 +66,37 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"	select M_GoodsCode,
-                                    M_GoodsName,
-                                    sum(M_Qty) Inventoryquantity,
-                                    M_Batch,
-                                    (select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate) as Initialinventory
-									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode)as Price,
-									(select G_Price from Mes_Goods where G_Code=M_GoodsCode)*(select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate) Initialamount
-									,(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) delivery
-									,((select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate)+sum(M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) as Endinginventory
-									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode)*((select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=@LSDate)+sum(M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@date and C_CreateDate<=@AfterDate ) and C_GoodsCode=M_GoodsCode and C_Batch=M_Batch) as finalamount
-									from Mes_MaterInDetail where M_MaterInNo in(select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@date and M_CreateDate<=@AfterDate) and  M_Kind=1
+                strSql.Append(@"    select 
+									convert(datetime,convert(varchar(10),t.M_CreateDate,120)) as M_CreateDate
+									,m.M_GoodsCode,m.M_GoodsName,sum(m.M_Qty) as Inventoryquantity
+									,m.M_Batch
+									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode) as Price
+                                    ,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail b where  b.B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead h where (h.B_CreateDate>=convert(datetime,convert(varchar(10),t.M_CreateDate,120)) and h.B_CreateDate<=DATEADD(day, 1, convert(datetime,convert(varchar(10),t.M_CreateDate,120))) and B_Kind=1))  AND B_GoodsCode=m.M_GoodsCode) as Back_Qty
+                                    ,(select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=m.M_Batch and I_Date=DATEADD(day, -1, convert(datetime,convert(varchar(10),t.M_CreateDate,120)))) as Initialinventory
+									,(select G_Price from Mes_Goods where G_Code=m.M_GoodsCode)*(select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=DATEADD(day, -1, convert(datetime,convert(varchar(10),t.M_CreateDate,120)))) Initialamount
+									,(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime ) and C_GoodsCode=m.M_GoodsCode and C_Batch=m.M_Batch) delivery
+							        ,((select I_Qty from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and I_Batch=M_Batch and I_Date=DATEADD(day, -1, convert(datetime,convert(varchar(10),t.M_CreateDate,120))))+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode and C_Batch=m.M_Batch) as Endinginventory
+								   ,(select G_Price from Mes_Goods where G_Code=m.M_GoodsCode)*((select I_Qty from Mes_InventoryLS where I_GoodsCode=m.M_GoodsCode and I_Batch=m.M_Batch and I_Date=DATEADD(day, -1, convert(datetime,convert(varchar(10),t.M_CreateDate,120))))+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime ) and C_GoodsCode=m.M_GoodsCode and C_Batch=m.M_Batch) as finalamount
+									from Mes_MaterInHead t left join Mes_MaterInDetail m on (t.M_MaterInNo=m.M_MaterInNo)  where (t.M_CreateDate>=@StartTime and t.M_CreateDate<=@EndTime) and  m.M_Kind=1
 									 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                DateTime date = queryParam["data"].ToDate();
-                DateTime LSDate = date.AddDays(-1).Date;
-                DateTime AfterDate = date.AddDays(1).Date;
-                dp.Add("LSDate", LSDate, DbType.DateTime);
-                dp.Add("date", date, DbType.DateTime);
-                dp.Add("AfterDate", AfterDate, DbType.DateTime);
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
                 if (!queryParam["M_GoodsCode"].IsEmpty())
                 {
                     dp.Add("M_GoodsCode", "%" + queryParam["M_GoodsCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND M_GoodsCode Like @M_GoodsCode ");
+                    strSql.Append(" AND m.M_GoodsCode Like @M_GoodsCode ");
                 }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND M_GoodsName Like @M_GoodsName ");
+                    strSql.Append(" AND m.M_GoodsName Like @M_GoodsName ");
                 }
-                strSql.Append("Group by M_GoodsCode,M_GoodsName,M_Batch ");
+                strSql.Append("   Group by m.M_GoodsCode,m.M_GoodsName ,convert(datetime,convert(varchar(10),t.M_CreateDate,120)),m.M_Batch");
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
