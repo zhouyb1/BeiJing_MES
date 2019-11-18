@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     h.M_CreateDate ,
                                     h.M_CreateBy 
                             FROM    dbo.Mes_MaterInHead h
-                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode";
+                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode order by M_CreateDate desc";
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
