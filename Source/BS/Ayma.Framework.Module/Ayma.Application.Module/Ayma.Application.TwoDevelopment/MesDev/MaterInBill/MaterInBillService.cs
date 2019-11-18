@@ -564,7 +564,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                                 LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
                                       WHERE     h.M_OrderKind = 0  AND d.M_SupplyName IS NOT NULL {2}
                                                
-                                    ) dt PIVOT( SUM(M_Qty) FOR M_GoodsName IN ({1})) pvt";
+                                    ) dt PIVOT( SUM(M_Qty) FOR M_GoodsName IN ({1})) pvt GROUP BY M_SupplyName ";
                 var queryParam = queryJson.ToJObject();
                 var dp = new DynamicParameters(new {});
                 var sqlParm = new StringBuilder();
@@ -588,8 +588,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 List<string> goodsList = new List<string>();
                 foreach (var row in rowHeads)
                 {
-                    dtColumns.Append(string.Format("ROUND([{0}],2) {0}_Qty ,", row.M_GoodsName));
-                    dtColumns.Append(string.Format("ROUND([{0}]*M_Price,2) {0}_Amount ,", row.M_GoodsName));
+                    dtColumns.Append(string.Format("SUM(ROUND([{0}],2)) {0}_Qty ,", row.M_GoodsName));
+                    dtColumns.Append(string.Format("SUM(ROUND([{0}]*M_Price,2)) {0}_Amount ,", row.M_GoodsName));
                     goodsList.Add(string.Format("[{0}]", row.M_GoodsName));
                 }
 
@@ -664,15 +664,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             cm.statistics = false;
             cm.children = null;
             cmList.Add(cm);
-            ColumnModel cm1 = new ColumnModel();
-            cm1.name = "M_Price";
-            cm1.label = "单价";
-            cm1.width = 80;
-            cm1.align = "center";
-            cm1.sort = false;
-            cm1.statistics = false;
-            cm1.children = null;
-            cmList.Add(cm1);
+            //ColumnModel cm1 = new ColumnModel();
+            //cm1.name = "M_Price";
+            //cm1.label = "单价";
+            //cm1.width = 80;
+            //cm1.align = "center";
+            //cm1.sort = false;
+            //cm1.statistics = false;
+            //cm1.children = null;
+            //cmList.Add(cm1);
             foreach (var col in columnsHead)
             {
                 ColumnModel cm_head = new ColumnModel();
@@ -685,7 +685,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 cm_head.children = new List<ColumnModel>();
 
                 ColumnModel c_qty = new ColumnModel();
-                c_qty.name = col.M_GoodsName;
+                c_qty.name = col.M_GoodsName+"_Qty";
                 c_qty.label = "数量";
                 c_qty.width = 90;
                 c_qty.align = "center";
