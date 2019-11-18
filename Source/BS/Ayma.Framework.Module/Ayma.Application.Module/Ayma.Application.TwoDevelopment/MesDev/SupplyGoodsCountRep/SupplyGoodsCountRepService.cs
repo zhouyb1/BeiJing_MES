@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 ");
                 strSql.Append("  FROM Mes_MaterInHead h ");
                 strSql.Append("  LEFT JOIN Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo ");
-                strSql.Append("  WHERE 1=1 ");
+                strSql.Append("  WHERE 1=1 AND h.M_Status =3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     h.M_CreateDate ,
                                     h.M_CreateBy 
                             FROM    dbo.Mes_MaterInHead h
-                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode order by M_CreateDate desc";
+                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode AND h.M_Status =3  ";
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
@@ -122,6 +122,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                 dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                 sql += " AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ";
+                sql += "ORDER BY h.M_CreateDate desc";
             }
             dp.Add("@supplyCode",supplyCode,DbType.String);
             return this.BaseRepository().FindTable(sql, dp);
