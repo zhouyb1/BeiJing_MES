@@ -19,6 +19,33 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         bind: function () {
+            // 时间搜索框
+            $('#datesearch').amdate({
+                dfdata: [
+                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
+                ],
+                // 月
+                mShow: false,
+                premShow: false,
+                // 季度
+                jShow: false,
+                prejShow: false,
+                // 年
+                ysShow: false,
+                yxShow: false,
+                preyShow: false,
+                yShow: false,
+                // 默认
+                dfvalue: '1',
+                selectfn: function (begin, end) {
+                    startTime = begin;
+                    endTime = end;
+                    page.search();
+                }
+            });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
@@ -78,7 +105,7 @@ var bootstrap = function ($, ayma) {
             var dateParam = { StartTime: startTime, EndTime: endTime };
             $('#girdtable_sum').on('dblclick', function () {
                 var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
-                var ToDate = $("#Date").val();
+                var ToDate = $('#girdtable_sum').jfGridValue('m_createdate');
                 var M_Batch = $('#girdtable_sum').jfGridValue('m_batch')
                 $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode,ToDate:ToDate,M_Batch:M_Batch,queryJson: JSON.stringify(dateParam) } });
                 $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
@@ -93,12 +120,13 @@ var bootstrap = function ($, ayma) {
                     { label: "商品名称", name: "m_goodsname", width: 160, align: "left" },
                     { label: "入库数量", name: "inventoryquantity", width: 160, align: "left" },        
                     { label: "出库数量", name: "delivery", width: 160, align: "left" },
+                    { label: "次品退库数量", name: "back_qty", width: 160, align: "left" },
                     { label: "期初库存", name: "initialinventory", width: 160, align: "left" },                 
                     { label: "期初金额", name: "initialamount", width: 160, align: "left" },
                     { label: "期末库存", name: "endinginventory", width: 160, align: "left" },
                     { label: "期末金额", name: "finalamount", width: 160, align: "left" },
                     { label: "单价", name: "price", width: 160, align: "left" },
-                    { label: "批次", name: "m_batch", width: 160, align: "left" }         
+                    { label: "入库时间", name: "m_createdate", width: 160, align: "left",hidden:true}    
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -149,6 +177,7 @@ var bootstrap = function ($, ayma) {
                                { label: "批次", name: "M_Batch", width: 90, align: "left" },
                                { label: "商品税率", name: "M_GoodsItax", width: 160, align: "left" },
                                { label: "备注", name: "M_Remark", width: 90, align: "left" },
+                               { label: "入库时间", name: "M_CreateDate", width: 160, align: "left" }
                 ],
                 mainId: 'ID',
                 isPage: true,
