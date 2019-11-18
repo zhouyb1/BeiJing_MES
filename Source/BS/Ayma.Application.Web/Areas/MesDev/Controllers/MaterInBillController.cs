@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
@@ -186,6 +188,46 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetMaterInDetail(string queryJson)
         {
             var dt = materInBillIBLL.GetMaterInDetailSum(queryJson);
+            if (dt.Rows.Count > 0)
+            {
+                //计算合计列
+                if (true)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        decimal everysum_qty = 0;
+                        decimal everysum_amount = 0;
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+
+                            if (dt.Columns[j].ColumnName.IndexOf("_qty") > 0)
+                            {
+                                if (dt.Rows[i][j] == DBNull.Value)
+                                {
+                                    everysum_qty += 0;
+                                }
+                                else
+                                {
+                                    everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                }
+                            }
+                            if (dt.Columns[j].ColumnName.IndexOf("_amount") > 0)
+                            {
+                                if (dt.Rows[i][j] == DBNull.Value)
+                                {
+                                    everysum_amount += 0;
+                                }
+                                else
+                                {
+                                    everysum_amount += decimal.Parse(dt.Rows[i][j].ToString());
+                                }
+                            }
+                        }
+                        dt.Rows[i]["allqty"] = Math.Round(everysum_qty, 2);
+                        dt.Rows[i]["allamount"] = Math.Round(everysum_amount, 2);
+                    }
+                }
+            }
             return Success(dt);
         }
 
