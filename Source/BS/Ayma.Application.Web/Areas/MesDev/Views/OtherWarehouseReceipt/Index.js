@@ -122,9 +122,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('O_OtherInNo');
                 if (ayma.checkrow(keyValue, true)) {
                     ayma.layerForm({
-                        id: 'SaleOutReport',
+                        id: 'OtherReport',
                         title: '其它入库单打印',
-                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/PrintReport?keyValue=' + keyValue + "&report=SaleOutReport&data=Mes_OtherInHead",
+                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/PrintReport?keyValue=' + keyValue + "&report=OtherReport&data=Other",
                         width: 1000,
                         height: 800,
                         maxmin: true,
@@ -214,15 +214,15 @@ var bootstrap = function ($, ayma) {
                                         });
                                     }
                                 },
+                        { label: '是否月结', name: 'MonthBalance', width: 150, align: "left" },
                         { label: '单号', name: 'O_OtherInNo', width: 200, align: "left" },
-                        { label: '仓库编码', name: 'O_StockCode', width: 150, align: "left" },
+                        { label: '仓库编码', name: 'O_StockCode', width: 100, align: "left" },
                         { label: '仓库名称', name: 'O_StockName', width: 150, align: "left" },
                         { label: '添加人', name: 'O_CreateBy', width: 150, align: "left" },
                         { label: '创建时间', name: 'O_CreateDate', width: 150, align: "left" },
                         { label: '修改人', name: 'O_UpdateBy', width: 150, align: "left" },
                         { label: '修改时间', name: 'O_UpdateDate', width: 150, align: "left" },
-                        { label: '备注', name: 'O_Remark', width: 150, align: "left" },
-                        { label: '月结', name: 'MonthBalance', width: 150, align: "left" },
+                        { label: '备注', name: 'O_Remark', width: 150, align: "left" },      
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -230,7 +230,6 @@ var bootstrap = function ($, ayma) {
                 sidx: "O_CreateDate",
                 sord: "DESC"
             });
-            page.search();
         },
         search: function (param) {
             param = param || {};
