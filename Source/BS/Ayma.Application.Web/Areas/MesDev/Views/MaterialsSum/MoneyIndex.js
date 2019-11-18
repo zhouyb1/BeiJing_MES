@@ -133,7 +133,7 @@ var bootstrap = function ($, ayma) {
                 footerrow: true,
                 isPage: true,
                 isStatistics: true,
-                sidx: 'm_goodscode',                
+                sidx: 'm_createdate',
                 sord: 'desc',
                 //isSubGrid: true,
                 //subGridRowExpanded: function (subgridId, row) {
