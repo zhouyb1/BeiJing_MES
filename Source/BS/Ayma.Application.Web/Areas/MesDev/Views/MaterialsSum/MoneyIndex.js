@@ -16,7 +16,6 @@ var bootstrap = function ($, ayma) {
             page.initGird();
             page.bind();
             page.doubleClick();
-            page.search();
         },
         bind: function () {
             // 时间搜索框
@@ -45,6 +44,13 @@ var bootstrap = function ($, ayma) {
                     endTime = end;
                     page.search();
                 }
+            });
+            //双击  
+            $('#girdtable_sum').on('dblclick', function () {
+                var dateParam = { StartTime: startTime, EndTime: endTime };
+                var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
+                $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+                $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
@@ -100,17 +106,6 @@ var bootstrap = function ($, ayma) {
                 });
             });
         },
-        //双击
-        doubleClick: function () {
-            var dateParam = { StartTime: startTime, EndTime: endTime };
-            $('#girdtable_sum').on('dblclick', function () {
-                var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
-                var ToDate = $('#girdtable_sum').jfGridValue('m_createdate');
-                var M_Batch = $('#girdtable_sum').jfGridValue('m_batch')
-                $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode,ToDate:ToDate,M_Batch:M_Batch,queryJson: JSON.stringify(dateParam) } });
-                $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
-            });
-        },
         // 初始化列表
         initGird: function () {
             $('#girdtable_sum').jfGrid({
@@ -126,43 +121,15 @@ var bootstrap = function ($, ayma) {
                     { label: "期末库存", name: "endinginventory", width: 160, align: "left",statistics: true },
                     { label: "期末金额", name: "finalamount", width: 160, align: "left",statistics: true },
                     { label: "单价", name: "price", width: 160, align: "left" },
-                    { label: "入库时间", name: "m_createdate", width: 160, align: "left",hidden:true}    
+                    //{ label: "入库时间", name: "m_createdate", width: 160, align: "left",hidden:true}    
                 ],
                 mainId:'ID',
                 reloadSelected: true,
                 footerrow: true,
                 isPage: true,
                 isStatistics: true,
-                sidx: 'm_createdate',
+                sidx: 'm_goodscode',
                 sord: 'desc',
-                //isSubGrid: true,
-                //subGridRowExpanded: function (subgridId, row) {
-                //    var M_GoodsCode = row.m_goodscode;
-                //    var ToDate = $("#Date").val();
-                //    var M_Batch = row.m_batch;
-                //    var subgridTableId = subgridId + "_t";
-                //    $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
-                //    $subgridTable = $("#" + subgridTableId);
-                //    $subgridTable.jfGrid({
-                //        url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialDetailListByDate?M_GoodsCode=' + M_GoodsCode + '&M_Batch=' + M_Batch + '&ToDate=' + ToDate,
-                //        headData: [
-                //      { label: "单据号", name: "M_MaterInNo", width: 160, align: "left" },
-                //      { label: "供应商编码", name: "M_SupplyCode", width: 80, align: "left" },
-                //      { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
-                //      { label: "商品编码", name: "M_GoodsCode", width: 80, align: "left" },
-                //      { label: "商品名称", name: "M_GoodsName", width: 160, align: "left" },
-                //      { label: "数量", name: "M_Qty", width: 160, align: "left" },
-                //      { label: "批次", name: "M_Batch", width: 90, align: "left" },
-                //      { label: "商品税率", name: "M_GoodsItax", width: 160, align: "left" },
-                //      { label: "备注", name: "M_Remark", width: 90, align: "left" },               
-                //        ],
-                //        mainId: 'ID',
-                //        isPage: true,
-                //        sidx: "M_MaterInNo",
-                //        sord: 'ASC',
-                //        reloadSelected: false,
-                //    }).jfGridSet("reload");
-                //}
             });
             //明细
             $('#girdtable_detail').jfGrid({

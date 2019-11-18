@@ -45,10 +45,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetMaterialDetailListByDate(string pagination, string queryJson, string M_GoodsCode, string M_Batch, DateTime ToDate)
+        public ActionResult GetMaterialDetailListByDate(string pagination, string queryJson, string M_GoodsCode)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = materialsSumIBLL.GetMaterialDetailListByDate(paginationobj, queryJson, M_GoodsCode, M_Batch, ToDate);
+            var data = materialsSumIBLL.GetMaterialDetailListByDate(paginationobj, queryJson, M_GoodsCode);
             var jsonData = new
             {
                 rows = data,
