@@ -121,16 +121,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT  t.ID ,
-                                        G_Code ,
-                                        G_Name ,
-                                        G_Unit,
-                                        t.G_CreateDate,
-                                       (SELECT ISNULL(SUM(M_Qty),0) FROM dbo.Mes_MaterInDetail d WHERE d.M_GoodsCode=G_Code ) In_Qty ,
-                                       (SELECT ISNULL(sum(c.C_Qty),0) FROM dbo.Mes_CollarDetail c WHERE c.C_GoodsCode=G_Code) Out_Qty ,
-                                       (SELECT ISNULL(SUM(B_Qty),0) FROM dbo.Mes_BackStockHead INNER JOIN dbo.Mes_BackStockDetail ON Mes_BackStockDetail.B_BackStockNo = Mes_BackStockHead.B_BackStockNo WHERE B_Kind=1 AND B_GoodsCode=G_Code) Back_Qty
-                                FROM    dbo.Mes_Goods t ");
-                strSql.Append("  WHERE  t.G_Kind=1 ");
+                strSql.Append(@"SELECT 
+                                        g.G_Name,
+                                        g.G_Code,
+                                        g.G_Unit,
+                                        ( SELECT ISNULL(SUM(md.M_Qty), 0)FROM dbo.Mes_MaterInHead mh LEFT JOIN dbo.Mes_MaterInDetail md ON mh.M_MaterInNo = md.M_MaterInNo WHERE mh.M_OrderKind = 0 AND mh.M_Status = 3 AND md.M_GoodsCode = g.G_Code AND mh.M_CreateDate>=@startTime  AND mh.M_CreateDate<=@endTime) In_Qty,
+                                        ( SELECT ISNULL(SUM(bd.B_Qty),0) FROM dbo.Mes_BackStockHead bh LEFT JOIN dbo.Mes_BackStockDetail bd ON bd.B_BackStockNo = bh.B_BackStockNo WHERE bd.B_GoodsCode=g.G_Code AND bh.B_Status=3 AND B_Kind=1 and bh.B_CreateDate>=@startTime  AND bh.B_CreateDate<=@endTime) Back_Qty,
+                                        ( SELECT ISNULL(SUM(cd.C_Qty),0) FROM dbo.Mes_CollarHead ch LEFT JOIN dbo.Mes_CollarDetail cd ON cd.C_CollarNo = ch.C_CollarNo WHERE ch.P_Status=3   AND cd.C_GoodsCode=g.G_Code and ch.C_CreateDate>=@startTime  AND ch.C_CreateDate<=@endTime)Out_Qty
+       
+                                FROM    dbo.Mes_Goods g WHERE G_Kind=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -138,25 +137,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.G_CreateDate >= @startTime AND t.G_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["G_Code"].IsEmpty())
                 {
                     dp.Add("G_Code", "%" + queryParam["G_Code"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Code Like @G_Code ");
+                    strSql.Append(" AND g.G_Code Like @G_Code ");
                 }
                 if (!queryParam["G_Name"].IsEmpty())
                 {
                     dp.Add("G_Name", "%" + queryParam["G_Name"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.G_Name Like @G_Name ");
+                    strSql.Append(" AND g.G_Name Like @G_Name ");
                 }
-                //if (!queryParam["G_CreateDate"].IsEmpty() && !queryParam["G_CreateDate1"].IsEmpty())
-                //{
-                //    dp.Add("G_CreateDate", queryParam["G_CreateDate"].ToDate(), DbType.DateTime);
-                //    dp.Add("G_CreateDate1", queryParam["G_CreateDate1"].ToDate(), DbType.DateTime);
-                //    strSql.Append(" AND ( t.G_CreateDate >= @G_CreateDate AND t.G_CreateDate <= @G_CreateDate1 ) ");
-                //}
-                strSql.Append(" GROUP BY t.G_Code,t.G_Name ,t.G_Unit,t.ID,t.G_CreateDate");
+              
+                strSql.Append(" GROUP BY g.G_Code,g.G_Name ,g.G_Unit");
                 return this.BaseRepository().FindTable(strSql.ToString(), dp,pagination);
             }
             catch (Exception ex)
