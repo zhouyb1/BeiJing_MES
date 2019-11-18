@@ -185,7 +185,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetMaterInDetail(string queryJson)
         {
-            var dt = materInBillIBLL.GetMaterInDetailSum();
+            var dt = materInBillIBLL.GetMaterInDetailSum(queryJson);
             return Success(dt);
         }
 
@@ -197,7 +197,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetPageTitle(string queryJson)
         {
-            var headList = materInBillIBLL.GetPageTitle();
+            var headList = materInBillIBLL.GetPageTitle(queryJson);
             return Success(headList);
         }
 

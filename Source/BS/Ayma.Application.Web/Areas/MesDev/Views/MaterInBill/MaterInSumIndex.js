@@ -10,6 +10,10 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
+            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+                page.search(queryJson);
+            }, 320, 500);
+
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -17,10 +21,30 @@ var bootstrap = function ($, ayma) {
             });
             $('#girdtable').jfGrid({});
 
+           
+            //var postData = {};
+            //postData.queryJson = JSON.stringify({ code: "9527" });
 
+            //$.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {
+
+            //    $('#girdtable').jfGridSet("unload", {
+            //        url: top.$.rootUrl + '/MesDev/MaterInBill/GetMaterInDetail',
+            //        headData: res.data,
+            //        mainId: 'M_SupplyName',
+            //        reloadSelected: true,
+            //        isPage: false,
+            //        footerrow: false,
+            //        isStatistics: false
+            //    });
+
+            //    $('#girdtable').jfGridSet('reload', { param: postData });
+            //});
+        },
+        search: function(param) {
+            param = param || {};
+            
             var postData = {};
-            postData.queryJson = JSON.stringify({ code: "9527" });
-
+            postData.queryJson = JSON.stringify(param);
             $.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {
 
                 $('#girdtable').jfGridSet("unload", {
