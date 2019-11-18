@@ -198,9 +198,7 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                } else {
-                    ayma.alert.error("请选择要打印的单据！");
-                }
+                } 
             });
         },
         // 初始化列表

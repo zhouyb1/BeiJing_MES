@@ -1,18 +1,16 @@
 ﻿@{
-    ViewBag.Title = "其它入库单";
+    ViewBag.Title = "入库和成品入库";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 
 <script src="~/Content/gridreport/CreateControl.js" type="text/javascript"></script>
 <script src="~/Content/gridreport/GRInstall.js" type="text/javascript"></script>
-
 <script type="text/javascript">
     Install_InsertReport();
     var Installed = Install_Detect();
     if (Installed) {
         CreateReport("Report");
     }
-
     var Report = request('report');
     var dataURL = request('data');
     var doucno = request('keyValue');
