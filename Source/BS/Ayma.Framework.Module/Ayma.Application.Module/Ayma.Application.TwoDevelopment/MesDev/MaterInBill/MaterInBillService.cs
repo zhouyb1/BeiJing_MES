@@ -549,7 +549,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               FROM dbo.Mes_MaterInHead h
                               LEFT JOIN dbo.Mes_MaterInDetail d
                               ON d.M_MaterInNo = h.M_MaterInNo
-                WHERE M_OrderKind = 0 and d.M_GoodsName is not null {0} GROUP BY M_GoodsName";
+                WHERE M_OrderKind = 0  and M_Status =3 {0} GROUP BY M_GoodsName";
 
 
                 var sqlData = @"SELECT  M_SupplyName ,
@@ -562,7 +562,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                                 d.M_GoodsName
                                       FROM      dbo.Mes_MaterInHead h
                                                 LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
-                                      WHERE     h.M_OrderKind = 0  AND d.M_SupplyName IS NOT NULL {2}
+                                      WHERE     h.M_OrderKind = 0  AND d.M_SupplyName IS NOT NULL and M_Status=3 {2}
                                                
                                     ) dt PIVOT( SUM(M_Qty) FOR M_GoodsName IN ({1})) pvt GROUP BY M_SupplyName ";
                 var queryParam = queryJson.ToJObject();
