@@ -12,11 +12,11 @@
                             <div class="am-query-formcontent">
                                 <div class="col-xs-6 am-form-item">
                                     <div class="am-form-item-title">入库时间(S)</div>
-                                    <input id="StartTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                    <input id="StartTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd") 00:00:00" isvalid="yes" checkexpession="NotNull" />
                                 </div>
                                 <div class="col-xs-6 am-form-item">
                                     <div class="am-form-item-title">入库时间(E)</div>
-                                    <input id="EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                    <input id="EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd") 23:59:59" isvalid="yes" checkexpession="NotNull" />
                                 </div>
                             </div>
                         </div>
