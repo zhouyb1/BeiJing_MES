@@ -197,22 +197,61 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT  t.ID ,
-                                        G_Code ,
-                                        G_Name ,
-                                        G_Kind,
-                                        G_Unit,
-                                        d.M_Price,
-                                        d.M_SupplyName,
-                                        d.M_SupplyCode,
-                                        d.M_Batch,
-                                        ISNULL(SUM(d.M_Qty),0) In_Qty ,
-                                       (SELECT ISNULL(sum(c.C_Qty),0) FROM dbo.Mes_CollarDetail c WHERE c.C_GoodsCode=G_Code) Out_Qty ,
-                                       (SELECT ISNULL(SUM(B_Qty),0) FROM dbo.Mes_BackStockHead INNER JOIN dbo.Mes_BackStockDetail ON Mes_BackStockDetail.B_BackStockNo = Mes_BackStockHead.B_BackStockNo WHERE B_Kind=1 AND B_GoodsCode=G_Code) Back_Qty
-                                FROM    dbo.Mes_Goods t
-                                        LEFT JOIN dbo.Mes_MaterInDetail d ON t.g_code = d.M_GoodsCode ");
+//                strSql.Append(@"SELECT  t.ID ,
+//                                        G_Code ,
+//                                        G_Name ,
+//                                        G_Kind,
+//                                        G_Unit,
+//                                        d.M_Price,
+//                                        d.M_SupplyName,
+//                                        d.M_SupplyCode,
+//                                        d.M_Batch,
+//                                        ISNULL(SUM(d.M_Qty),0) In_Qty ,
+//                                       (SELECT ISNULL(sum(c.C_Qty),0) FROM dbo.Mes_CollarDetail c WHERE c.C_GoodsCode=G_Code) Out_Qty ,
+//                                       (SELECT ISNULL(SUM(B_Qty),0) FROM dbo.Mes_BackStockHead INNER JOIN dbo.Mes_BackStockDetail ON Mes_BackStockDetail.B_BackStockNo = Mes_BackStockHead.B_BackStockNo WHERE B_Kind=1 AND B_GoodsCode=G_Code) Back_Qty
+//                                FROM    dbo.Mes_Goods t
+//                                        LEFT JOIN dbo.Mes_MaterInDetail d ON t.g_code = d.M_GoodsCode ");
 
-                strSql.Append("  WHERE  t.G_Kind=1 ");
+//                strSql.Append("  WHERE  t.G_Kind=1 ");
+                strSql.Append(@"SELECT  t.G_SupplyName ,
+                                        dt1.In_Qty ,
+                                        dt1.M_Batch ,
+                                        dt2.Back_Qty ,
+                                        dt3.Out_Qty ,
+                                        t.G_Name ,
+                                        t.G_Code ,
+                                        t.G_Price ,
+                                        t.G_Unit
+                                FROM    dbo.Mes_Goods t
+                                        LEFT JOIN ( SELECT  ISNULL(md.M_Qty, 0) In_Qty ,
+                                                            md.M_Price ,
+                                                            md.M_Batch ,
+                                                            mh.M_SupplyName ,
+                                                            md.M_GoodsCode
+                                                    FROM    dbo.Mes_MaterInHead mh
+                                                            LEFT JOIN dbo.Mes_MaterInDetail md ON md.M_MaterInNo = mh.M_MaterInNo
+                                                    WHERE   mh.M_OrderKind = 0
+                                                            AND mh.M_Status = 3
+                                                            AND mh.M_CreateDate >= @startTime
+                                                            AND mh.M_CreateDate <= @endTime
+                                                  ) dt1 ON dt1.M_GoodsCode = t.G_Code
+                                        LEFT JOIN ( SELECT  ISNULL(bd.B_Qty, 0) Back_Qty ,
+                                                            bd.B_Price ,
+                                                            bd.B_GoodsCode
+                                                    FROM    dbo.Mes_BackStockHead bh
+                                                            LEFT JOIN dbo.Mes_BackStockDetail bd ON bh.B_BackStockNo = bd.B_BackStockNo
+                                                    WHERE   bh.B_Status = 3 AND bh.B_Kind=1
+                                                            AND bh.B_CreateDate >= @startTime
+                                                            AND bh.b_CreateDate <= @endTime
+                                                  ) dt2 ON dt2.b_GoodsCode = t.G_Code
+                                        LEFT JOIN ( SELECT  ISNULL(cd.C_Qty, 0) Out_Qty ,
+                                                            cd.C_GoodsCode
+                                                    FROM    dbo.Mes_CollarHead ch
+                                                            LEFT JOIN dbo.Mes_CollarDetail cd ON ch.C_CollarNo = cd.C_CollarNo
+                                                    WHERE   ch.P_Status = 3
+                                                            AND ch.C_CreateDate >= @startTime
+                                                            AND ch.C_CreateDate <= @endTime
+                                                  ) dt3 ON dt3.c_GoodsCode = t.G_Code   WHERE G_Kind=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -220,7 +259,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.G_CreateDate >= @startTime AND t.G_CreateDate <= @endTime ) ");
                 }
                 if (!queryParam["G_Code"].IsEmpty())
                 {
@@ -235,25 +273,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["G_SupplyCode"].IsEmpty())
                 {
                     dp.Add("G_SupplyCode", "%" + queryParam["G_SupplyCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND d.M_SupplyCode Like @G_SupplyCode ");
+                    strSql.Append(" AND t.G_SupplyCode Like @G_SupplyCode ");
 
                 }
-                //if (!queryParam["G_CreateDate"].IsEmpty() && !queryParam["G_CreateDate1"].IsEmpty())
-                //{
-                //    dp.Add("G_CreateDate", queryParam["G_CreateDate"].ToDate(), DbType.DateTime);
-                //    dp.Add("G_CreateDate1", queryParam["G_CreateDate1"].ToDate(), DbType.DateTime);
-                //    strSql.Append(" AND ( t.G_CreateDate >= @G_CreateDate AND t.G_CreateDate <= @G_CreateDate1 ) ");
-                //}
-                strSql.Append(" GROUP BY G_Code,G_Name ,G_Kind,G_Unit,d.M_Batch,t.ID,d.M_SupplyName,d.M_SupplyCode,d.M_Price ");
+               
+                //strSql.Append(" GROUP BY G_Code,G_Name ,G_Unit,d.M_Batch,t.ID,d.M_SupplyName,d.M_SupplyCode,d.M_Price ");
                 var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
                 dt.Columns.Add("in_amount", typeof (decimal));
                 dt.Columns.Add("out_amount", typeof (decimal));
                 dt.Columns.Add("back_amount", typeof (decimal));
                 foreach (DataRow dr in dt.Rows)
                 {
-                    dr["in_amount"] = dr["m_price"].ToDouble(2) * dr["in_qty"].ToDouble(2);
-                    dr["out_amount"] = dr["m_price"].ToDouble(2) * dr["out_qty"].ToDouble(2);
-                    dr["back_amount"] = dr["m_price"].ToDouble(2) * dr["back_qty"].ToDouble(2);
+                    dr["in_amount"] = dr["g_price"].ToDouble(2) * dr["in_qty"].ToDouble(2);
+                    dr["out_amount"] = dr["g_price"].ToDouble(2) * dr["out_qty"].ToDouble(2);
+                    dr["back_amount"] = dr["g_price"].ToDouble(2) * dr["back_qty"].ToDouble(2);
                 }
                 return dt;
             }
