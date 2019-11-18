@@ -97,7 +97,7 @@ var bootstrap = function ($, ayma) {
                     { label: "期初金额", name: "initialamount", width: 160, align: "left" },
                     { label: "期末库存", name: "endinginventory", width: 160, align: "left" },
                     { label: "期末金额", name: "finalamount", width: 160, align: "left" },
-                    { label: "价格", name: "price", width: 160, align: "left" },
+                    { label: "单价", name: "price", width: 160, align: "left" },
                     { label: "批次", name: "m_batch", width: 160, align: "left" }         
                 ],
                 mainId:'ID',
