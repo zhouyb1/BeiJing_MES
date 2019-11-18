@@ -43,6 +43,14 @@ var bootstrap = function ($, ayma) {
                     page.search();
                 }
             });
+            //双击
+            $('#girdtable_sum').on('dblclick', function() {
+                var dateParam = { StartTime: startTime, EndTime: endTime };
+                supplyCode = $('#girdtable_sum').jfGridValue('m_supplycode');
+                $('#girdtable_detail').jfGridSet('reload', { param: { supplyCode: supplyCode, queryJson: JSON.stringify(dateParam) } });
+                $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
+            });
+            
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
@@ -99,15 +107,7 @@ var bootstrap = function ($, ayma) {
             });
         },
 
-        //双击
-        doubleClick: function () {
-            var dateParam = { StartTime: startTime, EndTime: endTime };
-            $('#girdtable_sum').on('dblclick', function () {
-                 supplyCode = $('#girdtable_sum').jfGridValue('m_supplycode');
-                 $('#girdtable_detail').jfGridSet('reload', { param: { supplyCode: supplyCode, queryJson: JSON.stringify(dateParam) } });
-                $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
-            });
-        },
+       
         // 初始化列表
         initGird: function () {
             $('#girdtable_sum').AuthorizeJfGrid({
