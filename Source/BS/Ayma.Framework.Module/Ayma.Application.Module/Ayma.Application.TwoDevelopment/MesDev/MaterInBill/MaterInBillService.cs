@@ -717,6 +717,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 cm_head.children.Add(c_amount);
                 cmList.Add(cm_head);
             }
+
             foreach (var cl in cmList)
             {
                 cl.name = cl.name.ToLower();

@@ -33,7 +33,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 h.M_SupplyName ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty)) In_Qty ,
                 CONVERT(DECIMAL(16,2),SUM(m.M_Qty * M_Price)) In_Amount ,
-                AVG(M_Price) Avg_Price
+                CONVERT(DECIMAL(16,2),SUM(m.M_Qty * M_Price)/SUM(m.M_Qty)) Avg_Price
                 ");
                 strSql.Append("  FROM Mes_MaterInHead h ");
                 strSql.Append("  LEFT JOIN Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo ");
