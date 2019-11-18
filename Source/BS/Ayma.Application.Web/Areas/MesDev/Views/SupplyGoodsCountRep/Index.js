@@ -119,14 +119,13 @@ var bootstrap = function ($, ayma) {
                     { label: "数量", name: "in_qty", width: 160, align: "left", statistics: true },
                     { label: "单位成本", name: "avg_price", width: 160, align: "left", statistics: true },
                     { label: "进货总成本", name: "in_amount", width: 160, align: "left", statistics: true },
-                    { label: "添加时间", name: "m_createdate", width: 160, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
                 isStatistics: true,
                 footerrow: true,
-                sidx: 'm_createdate',                 // 排序列
+                sidx: 'm_supplycode',                 // 排序列
                 sord: 'desc'              // 排序类型
             });
 
