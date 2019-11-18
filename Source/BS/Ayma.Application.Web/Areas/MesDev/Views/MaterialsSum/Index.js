@@ -115,7 +115,7 @@ var bootstrap = function ($, ayma) {
                 footerrow: true,
                 isPage: true,
                 isStatistics: true,
-                sidx: 'g_createdate',                
+                sidx: 'g_code',
                 sord: 'desc'
             });
 
