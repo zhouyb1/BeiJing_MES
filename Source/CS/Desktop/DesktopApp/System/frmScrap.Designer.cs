@@ -37,6 +37,7 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cmbStock = new System.Windows.Forms.ComboBox();
             this.cmbStockName = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,7 +57,6 @@
             this.btn_Save = new System.Windows.Forms.Button();
             this.btn_Upload = new System.Windows.Forms.Button();
             this.lblTS = new System.Windows.Forms.Label();
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -123,21 +123,28 @@
             // 
             this.columnHeader6.Text = "单位";
             // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "价格";
+            this.columnHeader8.Width = 160;
+            // 
             // cmbStock
             // 
+            this.cmbStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStock.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbStock.FormattingEnabled = true;
-            this.cmbStock.Location = new System.Drawing.Point(121, 32);
+            this.cmbStock.Location = new System.Drawing.Point(422, 32);
             this.cmbStock.Name = "cmbStock";
-            this.cmbStock.Size = new System.Drawing.Size(172, 23);
+            this.cmbStock.Size = new System.Drawing.Size(161, 23);
             this.cmbStock.TabIndex = 2;
             this.cmbStock.SelectedIndexChanged += new System.EventHandler(this.cmbStock_SelectedIndexChanged);
             // 
             // cmbStockName
             // 
+            this.cmbStockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbStockName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbStockName.FormattingEnabled = true;
-            this.cmbStockName.Location = new System.Drawing.Point(422, 35);
+            this.cmbStockName.Location = new System.Drawing.Point(121, 32);
             this.cmbStockName.Name = "cmbStockName";
             this.cmbStockName.Size = new System.Drawing.Size(161, 23);
             this.cmbStockName.TabIndex = 4;
@@ -155,9 +162,10 @@
             // 
             // cmbGoodsName
             // 
+            this.cmbGoodsName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGoodsName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbGoodsName.FormattingEnabled = true;
-            this.cmbGoodsName.Location = new System.Drawing.Point(422, 61);
+            this.cmbGoodsName.Location = new System.Drawing.Point(121, 58);
             this.cmbGoodsName.Name = "cmbGoodsName";
             this.cmbGoodsName.Size = new System.Drawing.Size(161, 23);
             this.cmbGoodsName.TabIndex = 8;
@@ -175,11 +183,12 @@
             // 
             // cmbGoodsCode
             // 
+            this.cmbGoodsCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbGoodsCode.FormattingEnabled = true;
-            this.cmbGoodsCode.Location = new System.Drawing.Point(121, 58);
+            this.cmbGoodsCode.Location = new System.Drawing.Point(422, 58);
             this.cmbGoodsCode.Name = "cmbGoodsCode";
-            this.cmbGoodsCode.Size = new System.Drawing.Size(172, 23);
+            this.cmbGoodsCode.Size = new System.Drawing.Size(161, 23);
             this.cmbGoodsCode.TabIndex = 6;
             this.cmbGoodsCode.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
             // 
@@ -205,11 +214,12 @@
             // 
             // cmbBatch
             // 
+            this.cmbBatch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBatch.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbBatch.FormattingEnabled = true;
             this.cmbBatch.Location = new System.Drawing.Point(121, 84);
             this.cmbBatch.Name = "cmbBatch";
-            this.cmbBatch.Size = new System.Drawing.Size(172, 23);
+            this.cmbBatch.Size = new System.Drawing.Size(161, 23);
             this.cmbBatch.TabIndex = 10;
             this.cmbBatch.SelectedIndexChanged += new System.EventHandler(this.cmbBatch_SelectedIndexChanged);
             // 
@@ -229,7 +239,7 @@
             this.txtQty.Location = new System.Drawing.Point(121, 115);
             this.txtQty.Name = "txtQty";
             this.txtQty.ReadOnly = true;
-            this.txtQty.Size = new System.Drawing.Size(172, 24);
+            this.txtQty.Size = new System.Drawing.Size(161, 24);
             this.txtQty.TabIndex = 12;
             // 
             // txtUnit
@@ -316,11 +326,6 @@
             this.lblTS.Name = "lblTS";
             this.lblTS.Size = new System.Drawing.Size(0, 16);
             this.lblTS.TabIndex = 132;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "价格";
-            this.columnHeader8.Width = 160;
             // 
             // frmScrap
             // 

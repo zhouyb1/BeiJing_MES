@@ -240,6 +240,7 @@ namespace Business.System
                     strSql.Append("M_GoodsCode,");
                     strSql.Append("M_Kind,");
                     strSql.Append("M_GoodsName,");
+                    strSql.Append("M_GoodsItax,");
                     strSql.Append("M_Unit,");
                     strSql.Append("M_Qty,");
                     strSql.Append("M_Batch,");
@@ -253,6 +254,7 @@ namespace Business.System
                     strSql.Append("@M_GoodsCode,");
                     strSql.Append("@M_Kind,");
                     strSql.Append("@M_GoodsName,");
+                    strSql.Append("@M_GoodsItax,");
                     strSql.Append("@M_Unit,");
                     strSql.Append("@M_Qty,");
                     strSql.Append("@M_Batch,");
@@ -283,6 +285,7 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@M_GoodsCode", entity.M_GoodsCode));
                 paramList.Add(new SqlParameter("@M_Kind", entity.M_Kind));
                 paramList.Add(new SqlParameter("@M_GoodsName", entity.M_GoodsName));
+                paramList.Add(new SqlParameter("@M_GoodsItax", entity.M_GoodsItax));
                 paramList.Add(new SqlParameter("@M_Unit", entity.M_Unit));
                 paramList.Add(new SqlParameter("@M_Qty", entity.M_Qty));
                 paramList.Add(new SqlParameter("@M_Batch", entity.M_Batch));

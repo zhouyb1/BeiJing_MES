@@ -50,6 +50,8 @@
             this.提交人 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.提交时间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.备注 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.供应商 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.供应商名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -136,7 +138,9 @@
             this.删除时间,
             this.提交人,
             this.提交时间,
-            this.备注});
+            this.备注,
+            this.供应商,
+            this.供应商名称});
             this.dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView.Location = new System.Drawing.Point(0, 67);
             this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
@@ -155,6 +159,7 @@
             this.入库单号.HeaderText = "入库单号";
             this.入库单号.Name = "入库单号";
             this.入库单号.ReadOnly = true;
+            this.入库单号.Width = 140;
             // 
             // 仓库编码
             // 
@@ -162,6 +167,7 @@
             this.仓库编码.HeaderText = "仓库编码";
             this.仓库编码.Name = "仓库编码";
             this.仓库编码.ReadOnly = true;
+            this.仓库编码.Width = 80;
             // 
             // 仓库名称
             // 
@@ -264,6 +270,18 @@
             this.备注.Name = "备注";
             this.备注.ReadOnly = true;
             // 
+            // 供应商
+            // 
+            this.供应商.DataPropertyName = "M_SupplyCode";
+            this.供应商.HeaderText = "供应商";
+            this.供应商.Name = "供应商";
+            // 
+            // 供应商名称
+            // 
+            this.供应商名称.DataPropertyName = "M_SupplyName";
+            this.供应商名称.HeaderText = "供应商名称";
+            this.供应商名称.Name = "供应商名称";
+            // 
             // frmStorageList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -308,6 +326,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 提交人;
         private System.Windows.Forms.DataGridViewTextBoxColumn 提交时间;
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 供应商;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 供应商名称;
 
     }
 }

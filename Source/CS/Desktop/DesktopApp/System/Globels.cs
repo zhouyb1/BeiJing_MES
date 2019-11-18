@@ -11,6 +11,7 @@ namespace DesktopApp
 {
     class Globels
     {
+        public static string strSupplyCode = ""; //供应商编码
         public static string strUser = ""; //登录用户
         public static string strOrderNo = "";//订单编号
         public static string strWorkShop = ""; //车间编码

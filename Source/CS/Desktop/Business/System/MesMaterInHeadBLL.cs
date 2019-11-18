@@ -47,6 +47,8 @@ namespace Business.System
       ,[M_Remark]
       ,[M_DeleteBy]
       ,[M_DeleteDate]
+    ,[M_SupplyCode]
+    ,[M_SupplyName]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead where M_status <> -1 and  M_Kind = 0");
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
@@ -71,6 +73,8 @@ namespace Business.System
       ,[M_Remark]
       ,[M_DeleteBy]
       ,[M_DeleteDate]
+    ,[M_SupplyCode]
+    ,[M_SupplyName]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead");
                     strSql.Append(" WHERE M_status <> -1  and  M_Kind = 0 and M_MaterInNo LIKE @M_MaterInNo");
@@ -116,6 +120,8 @@ namespace Business.System
       ,[M_Remark]
       ,[M_DeleteBy]
       ,[M_DeleteDate]
+,[M_SupplyCode]
+    ,[M_SupplyName]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead where M_status <> -1");
                     var rows = db.ExecuteObjects<MesMaterInHeadEntity>(strSql.ToString());
@@ -140,6 +146,8 @@ namespace Business.System
       ,[M_Remark]
       ,[M_DeleteBy]
       ,[M_DeleteDate]
+,[M_SupplyCode]
+    ,[M_SupplyName]
       ,[M_UploadBy]
       ,[M_UploadDate] FROM Mes_MaterInHead");
                     strSql.Append(" WHERE M_status <> -1" + Condit);
@@ -260,6 +268,8 @@ namespace Business.System
                      strSql.Append("M_StockCode,");
                      strSql.Append("M_Kind,");
                      strSql.Append("M_StockName,");
+                     strSql.Append("M_SupplyCode,");
+                     strSql.Append("M_SupplyName,");
                      strSql.Append("M_OrderNo,");
                      strSql.Append("M_OrderDate,");
                      strSql.Append("M_Status,");
@@ -280,6 +290,8 @@ namespace Business.System
                      strSql.Append("@M_StockCode,");
                      strSql.Append("@M_Kind,");
                      strSql.Append("@M_StockName,");
+                     strSql.Append("@M_SupplyCode,");
+                     strSql.Append("@M_SupplyName,");
                      strSql.Append("@M_OrderNo,");
                      strSql.Append("@M_OrderDate,");
                      strSql.Append("@M_Status,");
@@ -323,6 +335,8 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@M_StockCode",entity.M_StockCode));
                 paramList.Add(new SqlParameter("@M_Kind", entity.M_Kind));
                 paramList.Add(new SqlParameter("@M_StockName",entity.M_StockName));
+                paramList.Add(new SqlParameter("@M_SupplyCode", entity.M_SupplyCode));
+                paramList.Add(new SqlParameter("@M_SupplyName", entity.M_SupplyName));
                 paramList.Add(new SqlParameter("@M_OrderNo",entity.M_OrderNo));
                 paramList.Add(new SqlParameter("@M_OrderDate",entity.M_OrderDate));
                 paramList.Add(new SqlParameter("@M_Status", entity.M_Status));

@@ -29,6 +29,10 @@ namespace Model
         /// </summary>
         public string M_GoodsName{ set; get; }
         /// <summary>
+        /// 税率
+        /// </summary>
+        public decimal M_GoodsItax { set; get; }
+        /// <summary>
         /// 单位
         /// </summary>
         public string M_Unit{ set; get; }

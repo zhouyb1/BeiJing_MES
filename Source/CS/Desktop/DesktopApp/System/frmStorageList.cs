@@ -100,6 +100,7 @@ namespace DesktopApp
             }
             //if (MaterInHeadBLL.GetList(dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString())[0].M_Status == 1)
             //{
+            Globels.strSupplyCode = dataGridView.Rows[rowindex].Cells["供应商"].Value.ToString();
             frmStorageEdit frmStorageEdit = new frmStorageEdit(this, frmMain.User, dataGridView.Rows[rowindex].Cells["入库单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["生产订单号"].Value.ToString(), dataGridView.Rows[rowindex].Cells["状态"].Value.ToString(), dataGridView.Rows[rowindex].Cells["仓库编码"].Value.ToString());
                 frmStorageEdit.ShowDialog();
             //}

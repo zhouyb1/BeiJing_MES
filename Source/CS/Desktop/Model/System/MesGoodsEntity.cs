@@ -35,7 +35,11 @@ namespace Model
         /// <summary>
         /// 单位
         /// </summary>
-        public string G_Unit{ set; get; }
+        public string G_Unit { set; get; }
+        /// <summary>
+        /// 购进税率
+        /// </summary>
+        public decimal G_Itax { set; get; }
         /// <summary>
         /// 供应商编码
         /// </summary>

@@ -53,11 +53,13 @@ namespace DesktopApp
             for (int i = 0; i < row2.Count; i++)
             {
                 cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
+                //cmbGoodsName.Items.Add(row2[i].I_GoodsName);
 
             }
             if (row2.Count == 1)
             {
                 cmbGoodsCode.Text = row2[0].I_GoodsCode;
+                //cmbGoodsName.Text = row2[0].I_GoodsName;
             }
         }
 
@@ -73,11 +75,12 @@ namespace DesktopApp
             for (int i = 0; i < row2.Count; i++)
             {
                 cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
-
+                cmbGoodsName.Items.Add(row2[i].I_GoodsName);
             }
             if (row2.Count == 1)
             {
                 cmbGoodsCode.Text = row2[0].I_GoodsCode;
+                cmbGoodsName.Text = row2[0].I_GoodsName;
             }
         }
 
@@ -155,11 +158,11 @@ namespace DesktopApp
 
 
                 MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                var Goods_rows = GoodsBLL.GetList(cmbGoodsCode.Text, "");
+                var Goods_rows = GoodsBLL.GetList("",cmbGoodsName.Text);
                 int nLen = Goods_rows.Count;
                 if (nLen > 0)
                 {
-                    cmbGoodsName.Text = Goods_rows[0].G_Name;
+                    cmbGoodsCode.Text = Goods_rows[0].G_Code;
 
                     txtUnit.Text = Goods_rows[0].G_Unit.ToString();
                     //int nKind = Goods_rows[0].G_Kind;

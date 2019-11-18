@@ -63,8 +63,6 @@
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtBasketQty = new System.Windows.Forms.TextBox();
-            this.cmbSupply = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -385,7 +383,7 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Font = new System.Drawing.Font("宋体", 12F);
-            this.checkBox1.Location = new System.Drawing.Point(767, 378);
+            this.checkBox1.Location = new System.Drawing.Point(560, 335);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(139, 20);
             this.checkBox1.TabIndex = 1025;
@@ -412,29 +410,6 @@
             this.txtBasketQty.Size = new System.Drawing.Size(78, 26);
             this.txtBasketQty.TabIndex = 1027;
             // 
-            // cmbSupply
-            // 
-            this.cmbSupply.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSupply.Font = new System.Drawing.Font("宋体", 12F);
-            this.cmbSupply.FormattingEnabled = true;
-            this.cmbSupply.Location = new System.Drawing.Point(649, 332);
-            this.cmbSupply.Margin = new System.Windows.Forms.Padding(2);
-            this.cmbSupply.Name = "cmbSupply";
-            this.cmbSupply.Size = new System.Drawing.Size(101, 24);
-            this.cmbSupply.TabIndex = 1029;
-            this.cmbSupply.SelectedIndexChanged += new System.EventHandler(this.cmbSupply_SelectedIndexChanged);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("宋体", 12F);
-            this.label10.Location = new System.Drawing.Point(573, 335);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(72, 16);
-            this.label10.TabIndex = 1028;
-            this.label10.Text = "供应商：";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
@@ -452,8 +427,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 490);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.cmbSupply);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtBasketQty);
             this.Controls.Add(this.checkBox1);
@@ -525,8 +498,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtBasketQty;
-        private System.Windows.Forms.ComboBox cmbSupply;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
     }
 }

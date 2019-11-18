@@ -22,6 +22,7 @@ namespace DesktopApp
         private string P_OrderNo = "";//生产订单号
         private string M_Status = "";//单据状态
         private string M_StockCode = ""; //仓库
+        private decimal Itox = 0;
         private SysUser User;
         private frmStorageList frmStorage;
         private string W_Kind;//称重类型
@@ -335,6 +336,7 @@ namespace DesktopApp
                     MaterInDetail.M_GoodsName = strGoods[1];
                     MaterInDetail.M_Batch = txtBatch.Text;
                     MaterInDetail.M_Price = Convert.ToDecimal(txtPrice.Text);
+                    MaterInDetail.M_GoodsItax = Itox;
                     
                     if (checkBox1.Checked == true)
                     {
@@ -681,7 +683,8 @@ namespace DesktopApp
                 {
                     //txtGoodsCode.Text = Goods_rows[0].G_Code;
                     //txtGoodsName.Text = Goods_rows[0].G_Name;
-                    txtUnit.Text = Goods_rows[0].G_Unit;
+                    txtUnit.Text = Goods_rows[0].G_Unit.ToString();
+                    Itox = Goods_rows[0].G_Itax;
                     //txtPrice.Text = Goods_rows[0].G_Price.ToString();
                     if (Goods_rows[0].G_Kind == 1)
                     {
@@ -689,21 +692,14 @@ namespace DesktopApp
                     }
                     txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
 
-                    cmbSupply.Items.Clear();
+
                     Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
-                    var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "'");
+                    var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "' and P_SupplyCode = '"+ Globels.strSupplyCode +"'");
                     if (InPrice_row.Count > 0)
                     {
-                        for (int i = 0; i < InPrice_row.Count; i++)
-                        {
-                            cmbSupply.Items.Add(InPrice_row[i].P_SupplyName);
-
-                        }
-                        if (InPrice_row.Count == 1)
-                        {
-                            cmbSupply.Text = InPrice_row[0].P_SupplyName;
+                        
                             txtPrice.Text = InPrice_row[0].P_InPrice.ToString();
-                        }
+                        
                     }
                     else
                     {
@@ -747,30 +743,7 @@ namespace DesktopApp
             }
         }
 
-        private void cmbSupply_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string[] strGoods = comGoods.Text.ToString().Split('$');
-                Mes_InPriceBLL InPriceBLL = new Mes_InPriceBLL();
-                var InPrice_row = InPriceBLL.GetList_Mes_Price(" where P_GoodsCode = '" + strGoods[0] + "' and P_SupplyName = '" + cmbSupply.Text + "'");
-                if (InPrice_row.Count > 0)
-                {
-
-                    txtPrice.Text = InPrice_row[0].P_InPrice.ToString();
-
-                }
-                else
-                {
-                    untCommon.InfoMsg("请先维护商品的入库价格");
-                    return;
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
+        
 
      
     }

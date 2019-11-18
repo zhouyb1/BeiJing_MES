@@ -26,6 +26,11 @@ namespace Model.Dto
         /// <summary>
         /// 
         /// </summary>
+        public string D_TeamName { set; get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
         public string D_IP{ set; get; }
 
         /// <summary>
