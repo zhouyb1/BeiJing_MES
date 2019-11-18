@@ -554,8 +554,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                 var sqlData = @"SELECT  M_SupplyName ,
                                     {0}
-                                    0 合计数量 ,
-                                    0 合计金额
+                                    0 AllQty ,
+                                    0 AllAmount
                             FROM    ( SELECT    d.M_SupplyName ,
                                                 d.M_Qty ,
                                                 d.M_Price,
@@ -665,15 +665,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             cm.statistics = false;
             cm.children = null;
             cmList.Add(cm);
-            //ColumnModel cm1 = new ColumnModel();
-            //cm1.name = "M_Price";
-            //cm1.label = "单价";
-            //cm1.width = 80;
-            //cm1.align = "center";
-            //cm1.sort = false;
-            //cm1.statistics = false;
-            //cm1.children = null;
-            //cmList.Add(cm1);
+           
             foreach (var col in columnsHead)
             {
                 ColumnModel cm_head = new ColumnModel();
@@ -717,7 +709,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 cm_head.children.Add(c_amount);
                 cmList.Add(cm_head);
             }
+            ColumnModel allqty = new ColumnModel();
+            allqty.name = "AllQty";
+            allqty.label = "合计数量";
+            allqty.width = 80;
+            allqty.align = "left";
+            allqty.sort = false;
+            allqty.statistics = false;
+            allqty.children = null;
+            cmList.Add(allqty);
 
+            ColumnModel allAmount = new ColumnModel();
+            allAmount.name = "AllAmount";
+            allAmount.label = "合计金额(元)";
+            allAmount.width = 120;
+            allAmount.align = "left";
+            allAmount.sort = false;
+            allAmount.statistics = false;
+            allAmount.children = null;
+            cmList.Add(allAmount);
             foreach (var cl in cmList)
             {
                 cl.name = cl.name.ToLower();
