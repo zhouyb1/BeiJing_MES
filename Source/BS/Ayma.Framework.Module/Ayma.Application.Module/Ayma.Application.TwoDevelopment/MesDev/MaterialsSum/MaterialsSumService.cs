@@ -70,11 +70,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,sum(m.M_Qty) as Inventoryquantity
 									,(select G_Price from Mes_Goods where G_Code=M_GoodsCode) as Price
 								    ,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail b where  b.B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead h where (h.B_CreateDate>=@StartTime and h.B_CreateDate<=@EndTime and B_Kind=1))  AND B_GoodsCode=m.M_GoodsCode) as Back_Qty
-									,(select sum(I_Qty) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode  and I_Date=@StartTime) as Initialinventory
-									,(select G_Price from Mes_Goods where G_Code=m.M_GoodsCode)*(select sum(I_Qty) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode  and I_Date=@StartTime) Initialamount
+									,(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode  and I_Date=@Time) as Initialinventory
+									,(select G_Price from Mes_Goods where G_Code=m.M_GoodsCode)*(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode  and I_Date=@Time) Initialamount
 									,(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode) delivery
-						      	    ,((select sum(I_Qty) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and  I_Date=@StartTime)+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode)  as Endinginventory
-								    ,((select sum(I_Qty) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and  I_Date=@StartTime)+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode)*(select G_Price from Mes_Goods where G_Code=M_GoodsCode) finalamount																	
+						      	    ,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and  I_Date=@Time)+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode)  as Endinginventory
+								    ,(((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=M_GoodsCode and  I_Date=@Time)+sum(m.M_Qty))-(select sum(C_Qty) from Mes_CollarDetail where  C_CollarNo in(select C_CollarNo from Mes_CollarHead  where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=m.M_GoodsCode))*(select G_Price from Mes_Goods where G_Code=M_GoodsCode) as finalamount																	
 									from Mes_MaterInHead t left join Mes_MaterInDetail m on (t.M_MaterInNo=m.M_MaterInNo)  where (t.M_CreateDate>=@StartTime and t.M_CreateDate<=@EndTime) and  m.M_Kind=1							
 									 ");
                 var queryParam = queryJson.ToJObject();
@@ -82,8 +82,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var dp = new DynamicParameters(new { });
                 DateTime StartTime = queryParam["StartTime"].ToDate();
                 DateTime EndTime = queryParam["EndTime"].ToDate();
+                string Time = StartTime.AddDays(-1).ToShortDateString();
                 dp.Add("StartTime", StartTime, DbType.DateTime);
                 dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("Time", Time, DbType.DateTime);
                 if (!queryParam["M_GoodsCode"].IsEmpty())
                 {
                     dp.Add("M_GoodsCode", "%" + queryParam["M_GoodsCode"].ToString() + "%", DbType.String);
