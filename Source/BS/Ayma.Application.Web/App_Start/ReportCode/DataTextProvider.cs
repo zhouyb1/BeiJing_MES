@@ -806,7 +806,32 @@ using MyDbReportData = DatabaseXmlReportData;
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "ProOutMake"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
-
+        /// <summary>
+        /// 其它出库
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string OtherOut(string doucno)
+        {
+            var sql = @"SELECT  h.O_OtherOutNo ,
+                                h.O_StockName ,
+                                h.O_DepartName ,
+                                h.O_CreateBy ,
+		                        h.O_CreateDate,
+		                        h.MonthBalance,
+                                d.O_GoodsCode ,
+                                d.O_GoodsName ,
+                                d.O_Qty ,
+                                d.O_Unit,
+		                        d.O_Remark,
+		                        d.O_Batch
+                        FROM    dbo.Mes_OtherOutHead h
+                                LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo
+                        WHERE    h.O_OtherOutNo ='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OtherOut"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
         #endregion
 
         #region 根据 HTTP 请求中的参数生成报表数据，主要是为例子报表自动分配合适的数据生成函数
@@ -903,6 +928,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
             SpecialDataFunMap.Add("Other", Other);
+            SpecialDataFunMap.Add("OtherOut", OtherOut);
             SpecialDataFunMap.Add("MaterInProject", MaterInProject);
             SpecialDataFunMap.Add("Requist", Requist);
             SpecialDataFunMap.Add("ProductOrder", ProductOrder);
@@ -973,6 +999,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string Other(HttpRequest Request)
         {
             return Other(Request.QueryString["doucno"]);
+        }
+        private static string OtherOut(HttpRequest Request)
+        {
+            return OtherOut(Request.QueryString["doucno"]);
         }
         private static string MaterInProject(HttpRequest Request)
         {

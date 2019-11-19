@@ -2591,6 +2591,7 @@
     <Content Include="Areas\MesDev\Views\StockHistory\Index.cshtml" />
     <Content Include="Areas\MesDev\Views\StockHistory\Index.js" />
     <Content Include="Report\grf\OtherReport.grf" />
+    <Content Include="Report\grf\OtherOutReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

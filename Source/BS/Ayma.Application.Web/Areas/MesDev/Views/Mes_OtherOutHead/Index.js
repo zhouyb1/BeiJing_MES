@@ -178,9 +178,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('O_OtherOutNo');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'OtherOutHeadReport',
+                        id: 'OtherOutReport',
                         title: '其它出库单打印',
-                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=OtherOutHeadReport&data=Mes_OtherOutHead",
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=OtherOutReport&data=OtherOut",
                         width: 1000,
                         height: 800,
                         maxmin: true,
