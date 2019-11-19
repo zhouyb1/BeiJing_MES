@@ -176,9 +176,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('S_SaleNo');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'SaleManager',
+                        id: 'SaleManagerReport',
                         title: '原物料销售单打印',
-                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=SaleManager&data=Mes_SaleManager",
+                        url: top.$.rootUrl + '/MesDev/Mes_SaleManager/PrintReport?keyValue=' + keyValue + "&report=SaleManagerReport&data=SaleManager",
                         width: 1000,
                         height: 800,
                         maxmin: true,
@@ -186,8 +186,6 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                } else {
-                    ayma.alert.error("请选择要打印的单据！");
                 }
             });
             // 预览打印

@@ -172,6 +172,36 @@ using MyDbReportData = DatabaseXmlReportData;
 
         }
         /// <summary>
+        /// 原物料销售单制作打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string SaleManager(string doucno)
+        {
+            var strSql = @"                             
+                        SELECT  h.S_SaleNo ,
+                                h.S_StockName ,
+                                h.S_CostomName ,
+                                h.S_CreateBy ,
+		                        h.S_CreateDate,
+		                        h.MonthBalance,
+                                d.S_GoodsCode ,
+                                d.S_GoodsName ,
+                                d.S_Qty ,
+                                d.S_Unit,
+		                        d.S_Remark,
+		                        d.S_Batch,
+		                        d.S_Otax,
+		                        d.S_Price
+                        FROM    dbo.Mes_SaleHead h
+                                LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo
+                            WHERE   h.S_SaleNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "SaleManager"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
         /// 入库单打印
         /// </summary>
         /// <param name="doucno"></param>
@@ -195,6 +225,34 @@ using MyDbReportData = DatabaseXmlReportData;
                             WHERE   h.M_MaterInNo='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterIn"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 日耗品消耗单打印
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string ExpendManager(string doucno)
+        {
+            var strSql = @" 
+                            SELECT  h.E_ExpendNo ,
+                                    h.E_StockName ,
+                                    h.E_CreateBy ,
+                                    h.E_CreateDate ,
+		                            h.MonthBalance,
+                                    d.E_GoodsCode ,
+                                    d.E_GoodsName ,
+                                    d.E_Unit ,
+                                    d.E_Qty,
+		                            d.E_Batch,
+		                            d.E_Price,
+		                            d.E_Remark
+                            FROM    dbo.Mes_ExpendHead h
+                                    LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo
+                            WHERE   h.E_ExpendNo='{0}'";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "ExpendManager"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
@@ -922,12 +980,14 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("Scrap", Scrap);
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
+            SpecialDataFunMap.Add("SaleManager", SaleManager);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
             SpecialDataFunMap.Add("InWorkShop", InWorkShop);
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
             SpecialDataFunMap.Add("Other", Other);
+            SpecialDataFunMap.Add("ExpendManager", ExpendManager);
             SpecialDataFunMap.Add("OtherOut", OtherOut);
             SpecialDataFunMap.Add("MaterInProject", MaterInProject);
             SpecialDataFunMap.Add("Requist", Requist);
@@ -978,7 +1038,10 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             return OrgRes(Request.QueryString["doucno"]);
         }
-
+        private static string SaleManager(HttpRequest Request)
+        {
+            return SaleManager(Request.QueryString["doucno"]);
+        }
         private static string Scrap(HttpRequest Request)
         {
             return Scrap(Request.QueryString["doucno"]);
@@ -999,6 +1062,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string Other(HttpRequest Request)
         {
             return Other(Request.QueryString["doucno"]);
+        }
+        private static string ExpendManager(HttpRequest Request)
+        {
+            return ExpendManager(Request.QueryString["doucno"]);
         }
         private static string OtherOut(HttpRequest Request)
         {

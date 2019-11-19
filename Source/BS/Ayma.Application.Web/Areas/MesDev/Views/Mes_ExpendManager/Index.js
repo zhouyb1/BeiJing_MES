@@ -160,9 +160,9 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable').jfGridValue('E_ExpendNo');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
-                        id: 'ExpendManager',
+                        id: 'ExpendManagerReport',
                         title: '消耗单打印',
-                        url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/PrintReport?keyValue=' + keyValue + "&report=ExpendManager&data=Mes_ExpendManager",
+                        url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/PrintReport?keyValue=' + keyValue + "&report=ExpendManagerReport&data=ExpendManager",
                         width: 1000,
                         height: 800,
                         maxmin: true,
