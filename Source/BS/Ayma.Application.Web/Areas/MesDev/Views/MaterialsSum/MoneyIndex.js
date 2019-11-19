@@ -50,6 +50,9 @@ var bootstrap = function ($, ayma) {
                 var dateParam = { StartTime: startTime, EndTime: endTime };
                 var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
                 $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+                $('#girdtable_Outbounddetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+                $('#girdtable_withdrawingdetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+                $('#girdtable_materialssales').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
                 $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
@@ -87,12 +90,23 @@ var bootstrap = function ($, ayma) {
                 if (tabTitle == "汇总") {
                     tableName = "girdtable_sum";
                     fileName = "原物料出入库汇总";
-                } else {
-                    tableName = "girdtable_detail";
-                    fileName = "原物料出入库明细";
                 }
-
-
+                else if (tabTitle == "入库明细") {
+                    tableName = "girdtable_detail";
+                    fileName = "原物料入库明细";
+                }
+                else if (tabTitle == "出库明细") {
+                    tableName = "girdtable_Outbounddetails";
+                    fileName = "原物料出库明细";
+                }
+                else if (tabTitle == "退库明细") {
+                    tableName = "girdtable_withdrawingdetails";
+                    fileName = "原物料退库明细";
+                }
+                else if (tabTitle == "原物料销售明细") {
+                    tableName = "girdtable_withdrawingdetails";
+                    fileName = "原物料销售明细";
+                }
                 ayma.layerForm({
                     id: "ExcelExportForm",
                     title: '导出Excel数据',
@@ -137,26 +151,111 @@ var bootstrap = function ($, ayma) {
                 sidx: 'm_goodscode',
                 sord: 'desc',
             });
-            //明细
+            //入库明细
             $('#girdtable_detail').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialDetailListByDate',
                 headData: [
-                               { label: "单据号", name: "M_MaterInNo", width: 160, align: "left" },
-                               { label: "供应商编码", name: "M_SupplyCode", width: 80, align: "left" },
-                               { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
-                               { label: "商品编码", name: "M_GoodsCode", width: 80, align: "left" },
-                               { label: "商品名称", name: "M_GoodsName", width: 160, align: "left" },
-                               { label: "数量", name: "M_Qty", width: 160, align: "left",statistics: true },
-                               { label: "批次", name: "M_Batch", width: 90, align: "left" },
-                               { label: "商品税率", name: "M_GoodsItax", width: 160, align: "left" },
-                               { label: "备注", name: "M_Remark", width: 90, align: "left" },
-                               { label: "入库时间", name: "M_CreateDate", width: 160, align: "left" }
+                               { label: "入库单号", name: "m_materinno", width: 150, align: "left" },
+                               { label: "供应商编码", name: "m_supplycode", width: 80, align: "left" },
+                               { label: "供应商名称", name: "m_supplyname", width: 150, align: "left" },
+                               { label: "商品编码", name: "m_goodscode", width: 80, align: "left" },
+                               { label: "商品名称", name: "m_goodsname", width: 150, align: "left" },
+                               { label: "仓库名称", name: "m_stockname", width: 150, align: "left" },
+                               { label: "入库数量", name: "m_qty", width: 80, align: "left", statistics: true },
+                               { label: "批次", name: "m_batch", width: 80, align: "left" },
+                               { label: "商品税率", name: "m_goodsitax", width: 80, align: "left" },
+                               { label: "备注", name: "m_remark", width: 80, align: "left" },
+                               { label: "入库时间", name: "m_createdate", width: 150, align: "left" },
+                               { label: "添加人", name: "m_createby", width: 80, align: "left" },
                 ],
                 mainId: 'ID',
                 footerrow: true,
                 isPage: true,
                 isStatistics: true,
-                sidx: "M_Qty",
+                sidx: "m_qty",
+                sord: 'ASC',
+                reloadSelected: false,
+            });
+            //出库明细
+            $('#girdtable_Outbounddetails').jfGrid({
+                url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialOutDetailListByDate',
+                headData: [
+                               { label: "领料单号", name: "c_collarno", width: 145, align: "left" },
+                               //{ label: "原仓库编码", name: "c_stockcode", width: 80, align: "left" },
+                               { label: "原仓库名称", name: "c_stockname", width: 140, align: "left" },
+                               //{ label: "领料仓库编码", name: "c_stocktocode", width: 80, align: "left" },
+                               { label: "领料仓库名称", name: "c_stocktoname", width: 140, align: "left" },
+                               { label: "出库数量", name: "c_qty", width: 80, align: "left", statistics: true },    
+                               //{ label: "供应商编码", name: "c_supplycode", width: 160, align: "left" },
+                               { label: "供应商名称", name: "c_supplyname", width: 140, align: "left" },
+                               { label: "商品编码", name: "c_goodscode", width: 80, align: "left" },
+                               { label: "商品名称", name: "c_goodsname", width: 145, align: "left" },
+                               { label: "单位", name: "c_unit", width: 80, align: "left" },
+                               { label: "批次", name: "c_batch", width: 80, align: "left" },
+                               { label: "价格", name: "c_price", width: 70, align: "left" },
+                               { label: "备注", name: "c_remark", width: 80, align: "left" },
+                               { label: "出库时间", name: "c_createdate", width: 140, align: "left" },
+                               { label: "添加人", name: "c_createby", width: 80, align: "left" },
+                ],
+                mainId: 'ID',
+                footerrow: true,
+                isPage: true,
+                isStatistics: true,
+                sidx: "c_qty",
+                sord: 'ASC',
+                reloadSelected: false,
+            });
+            //退库明细
+            $('#girdtable_withdrawingdetails').jfGrid({
+                url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialBackDetailListByDate',
+                headData: [
+                               { label: "退库单号", name: "b_backstockno", width: 130, align: "left" },
+                               { label: "仓库编码", name: "b_stockcode", width: 80, align: "left" },
+                               { label: "仓库名称", name: "b_stockname", width: 130, align: "left" },
+                               { label: "退料仓库编码", name: "b_stocktocode", width: 80, align: "left" },
+                               { label: "退料仓库名称", name: "b_stocktoname", width: 130, align: "left" },
+                               { label: "退库数量", name: "b_qty", width: 80, align: "left", statistics: true },               
+                               { label: "商品编码", name: "b_goodscode", width: 80, align: "left" },
+                               { label: "商品名称", name: "b_goodsname", width: 80, align: "left" },
+                               { label: "单位", name: "b_unit", width: 80, align: "left" },
+                               { label: "批次", name: "b_batch", width: 80, align: "left" },
+                               { label: "价格", name: "b_price", width: 80, align: "left" },
+                               { label: "备注", name: "b_remark", width: 80, align: "left" },
+                               { label: "退库时间", name: "b_createdate", width: 130, align: "left" },
+                               { label: "添加人", name: "b_createby", width: 80, align: "left" },
+                ],
+                mainId: 'ID',
+                footerrow: true,
+                isPage: true,
+                isStatistics: true,
+                sidx: "b_qty",
+                sord: 'ASC',
+                reloadSelected: false,
+            });
+            //原物料销售明细
+            $('#girdtable_materialssales').jfGrid({
+                url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSaleDetailListByDate',
+                headData: [
+                               { label: "销售单号", name: "s_saleno", width: 130, align: "left" },
+                               { label: "仓库编码", name: "s_stockcode", width: 80, align: "left" },
+                               { label: "仓库名称", name: "s_stockname", width: 130, align: "left" },
+                               { label: "销售数量", name: "s_qty", width: 80, align: "left", statistics: true },
+                               { label: "商品编码", name: "s_goodscode", width: 80, align: "left" },
+                               { label: "商品名称", name: "s_goodsname", width: 80, align: "left" },
+                               { label: "税率", name: "s_otax", width: 80, align: "left" },
+                               { label: "单位", name: "s_unit", width: 80, align: "left" },
+                               { label: "批次", name: "s_batch", width: 80, align: "left" },
+                               { label: "价格", name: "s_price", width: 80, align: "left" },
+                               { label: "备注", name: "s_remark", width: 80, align: "left" },
+                               { label: "销售时间", name: "s_createdate", width: 130, align: "left" },
+                               { label: "添加人", name: "s_createby", width: 130, align: "left" },
+                              
+                ],
+                mainId: 'ID',
+                footerrow: true,
+                isPage: true,
+                isStatistics: true,
+                sidx: "s_qty",
                 sord: 'ASC',
                 reloadSelected: false,
             });

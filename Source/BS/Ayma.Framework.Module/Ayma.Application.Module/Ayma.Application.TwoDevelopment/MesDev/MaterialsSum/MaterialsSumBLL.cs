@@ -16,15 +16,84 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #region 获取数据
         /// <summary>
-        /// 获取选取的时间原物料库存详细
+        /// 获取选取的时间原物料入库详细
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        public DataTable GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
         {
             try
             {
                 return materialsSumService.GetMaterialDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料出库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialOutDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料退库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialBackDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialBackDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料销售详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialSaleDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialSaleDetailListByDate(pagination, queryJson, M_GoodsCode);
             }
             catch (Exception ex)
             {

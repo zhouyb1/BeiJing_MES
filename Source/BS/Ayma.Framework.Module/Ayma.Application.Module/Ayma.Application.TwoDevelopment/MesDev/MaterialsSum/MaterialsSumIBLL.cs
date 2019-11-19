@@ -13,11 +13,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     {
         #region 获取数据
         /// <summary>
-        /// 获取选取的时间原物料库存详细
+        /// 获取选取的时间原物料入库详细
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        DataTable GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料出库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料退库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialBackDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料销售详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialSaleDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
         /// <summary>
         /// 获取期初期末页面显示列表数据
         /// </summary>

@@ -77,7 +77,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("C_TEAMCODE")]
         public string C_TeamCode { get; set; }
-
+        [NotMapped]
+        public DateTime C_CreateDate { get; set; }
         #endregion
 
         #region 扩展操作

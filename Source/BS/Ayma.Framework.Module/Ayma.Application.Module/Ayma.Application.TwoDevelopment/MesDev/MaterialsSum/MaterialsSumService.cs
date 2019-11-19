@@ -18,18 +18,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     {
         #region 获取数据
         /// <summary>
-        /// 获取选取的时间原物料库存详细
+        /// 获取选取的时间原物料入库详细
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterInDetailEntity> GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        public DataTable GetMaterialDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
         {
             try
             {
                 var strSql = new StringBuilder();
                 strSql.Append(@"
-                            select m.*,t.M_CreateDate from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
-                            where m.M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime)
+                             select  m.M_MaterInNo
+							        ,m.M_SupplyCode
+									,m.M_SupplyName
+									,m.M_GoodsCode
+									,m.M_GoodsName
+									,m.M_Qty
+									,m.M_Batch
+									,m.M_GoodsItax
+									,m.M_Remark  
+									,t.M_StockName    
+									,t.M_CreateDate
+                                    ,t.M_CreateBy     
+									 from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
+                            where m.M_MaterInNo in (select b.M_MaterInNo from Mes_MaterInHead b where b.M_CreateDate>=@StartTime and b.M_CreateDate<=@EndTime and b.M_Status=3)
                              and m.M_GoodsCode=@M_GoodsCode
+
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -40,7 +53,164 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("StartTime", StartTime, DbType.DateTime);
                 dp.Add("EndTime", EndTime, DbType.DateTime);
                 dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
-                return this.BaseRepository().FindList<Mes_MaterInDetailEntity>(strSql.ToString(), dp, pagination);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取选取的时间原物料出库详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                             select                    
+                            t.C_StockCode
+						   ,t.C_StockName
+                           ,t.C_StockToCode
+						   ,t.C_StockToName
+						   ,t.C_CreateDate
+						   ,m.C_CollarNo
+						   ,m.C_SupplyCode
+						   ,m.C_SupplyName
+						   ,m.C_GoodsCode
+						   ,m.C_GoodsName
+						   ,m.C_Unit
+						   ,m.C_Qty
+						   ,m.C_Batch
+						   ,m.C_Price
+						   ,m.C_Remark
+                           ,t.C_CreateBy  
+                            from  Mes_CollarDetail m left join Mes_CollarHead t on (m.C_CollarNo=t.C_CollarNo) 
+                            where m.C_CollarNo in (select C_CollarNo from Mes_CollarHead where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime and P_Status=3)
+                             and m.C_GoodsCode=@M_GoodsCode
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取选取的时间原物料退库详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialBackDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.B_StockCode,
+                            t.B_StockName,
+                            t.B_StockToCode,
+                            t.B_StockToName,
+                            t.B_CreateDate,
+                            m.B_BackStockNo,
+                            m.B_GoodsCode,
+                            m.B_GoodsName,
+                            m.B_Unit,
+                            m.B_Qty,
+                            m.B_Batch,
+                            m.B_Price,
+                            m.B_Remark,
+                            t.B_CreateBy  
+                            from Mes_BackStockDetail m left join Mes_BackStockHead t on(m.B_BackStockNo=t.B_BackStockNo) where B_GoodsCode=@M_GoodsCode and m.B_BackStockNo 
+                            in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取选取的时间原物料销售详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialSaleDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.S_StockCode,
+                            t.S_StockName,
+                            t.S_CostomCode,
+                            t.S_CostomName,
+                            t.S_CreateDate,
+                            t.S_CreateBy,
+                            m.S_SaleNo,
+                            m.S_GoodsCode,
+                            m.S_GoodsName,
+                            m.S_Otax,
+                            m.S_Unit,
+                            m.S_Qty,
+                            m.S_Price,
+                            m.S_Batch,
+                            m.S_Remark
+                             from Mes_SaleDetail m left join Mes_SaleHead t on(m.S_SaleNo=t.S_SaleNo) where S_GoodsCode=@M_GoodsCode and m.S_SaleNo 
+                             in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
