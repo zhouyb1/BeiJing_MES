@@ -120,7 +120,6 @@ var bootstrap = function ($, ayma) {
                     { label: "期末库存", name: "endinginventory", width: 160, align: "left",statistics: true },
                     { label: "期末金额", name: "finalamount", width: 160, align: "left",statistics: true },
                     { label: "单价", name: "price", width: 160, align: "left" },
-                    { label: "历史库存数量", name: "inventoryls", width: 160, align: "left" },
                     { label: "次品退库数量", name: "back_qty", width: 160, align: "left", statistics: true },
                     { label: "退库数量", name: "withdrawingnumber", width: 160, align: "left" },
                     { label: "原物料销售数", name: "materialssales", width: 160, align: "left" },
