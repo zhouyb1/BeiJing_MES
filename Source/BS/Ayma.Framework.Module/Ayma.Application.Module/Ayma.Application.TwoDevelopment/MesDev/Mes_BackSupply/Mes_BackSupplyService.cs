@@ -105,17 +105,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT ");
-                strSql.Append(@"
-                t.I_GoodsCode,
-                t.I_GoodsName,
-                t.I_Unit,
-                t.I_Qty,
-                t.I_Batch
-                ");
-                strSql.Append("  FROM Mes_Inventory t LEFT JOIN Mes_Goods b ON t.I_GoodsCode=b.G_Code");
-                strSql.Append("  WHERE b.G_Kind=1 and t.I_Qty <> 0 And t.I_StockCode=@I_StockCode ");
-                var queryParam = queryJson.ToJObject();
+                strSql.Append(@" SELECT t.I_GoodsCode ,
+                                        t.I_GoodsName ,
+                                        t.I_Unit ,
+                                        t.I_Batch ,
+                                        t.I_Qty,
+                                        p.P_InPrice I_Price
+                                FROM    dbo.Mes_Inventory t
+                                        LEFT JOIN dbo.Mes_InPrice p ON p.P_GoodsCode = t.I_GoodsCode ");
+
+                strSql.Append("  WHERE t.I_Kind = 1 and t.I_Qty <> 0 And t.I_StockCode=@I_StockCode ");
                 // 虚拟参数
                 var dp = new DynamicParameters();
                 dp.Add("I_StockCode", stockCode);
