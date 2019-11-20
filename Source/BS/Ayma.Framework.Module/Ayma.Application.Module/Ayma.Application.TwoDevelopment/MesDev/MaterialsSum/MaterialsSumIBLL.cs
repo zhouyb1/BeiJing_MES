@@ -37,6 +37,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         DataTable GetMaterialSaleDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
         /// <summary>
+        /// 获取选取的时间原物料报废详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialScrapDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料其他入库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialOtherDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料其它出库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialOtherOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
+        /// 获取选取的时间原物料退供应商详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        DataTable GetMaterialBackSupplyDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode);
+        /// <summary>
         /// <summary>
         /// 获取期初期末页面显示列表数据
         /// </summary>

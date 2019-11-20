@@ -116,6 +116,82 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
         /// <summary>
+        /// 获取选取的时间原物料报废详细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialScrapDetailListByDate(string pagination, string queryJson, string M_GoodsCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialScrapDetailListByDate(paginationobj, queryJson, M_GoodsCode);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取选取的时间原物料其他入库详细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialOtherDetailListByDate(string pagination, string queryJson, string M_GoodsCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialOtherDetailListByDate(paginationobj, queryJson, M_GoodsCode);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取选取的时间原物料其他出库详细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialOtherOutDetailListByDate(string pagination, string queryJson, string M_GoodsCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialOtherOutDetailListByDate(paginationobj, queryJson, M_GoodsCode);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取选取的时间原物料退供应商详细
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialBackSupplyDetailListByDate(string pagination, string queryJson, string M_GoodsCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = materialsSumIBLL.GetMaterialBackSupplyDetailListByDate(paginationobj, queryJson, M_GoodsCode);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
         /// 获取期初期末页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

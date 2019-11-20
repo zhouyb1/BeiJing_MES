@@ -225,6 +225,201 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
         /// <summary>
+        /// 获取选取的时间原物料报废详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialScrapDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.S_StockCode,
+                            t.S_StockName,
+                            t.S_CreateDate,
+                            t.S_CreateBy,
+                            m.S_ScrapNo,
+                            m.S_GoodsCode,
+                            m.S_GoodsName,
+                            m.S_Unit,
+                            m.S_Qty,
+                            m.S_Price,
+                            m.S_Batch,
+                            m.S_Remark
+                             from Mes_ScrapDetail m left join Mes_ScrapHead t on(m.S_ScrapNo=t.S_ScrapNo) where S_GoodsCode=@M_GoodsCode and m.S_ScrapNo 
+                             in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// 获取选取的时间原物料其它入库详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialOtherDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.O_StockCode,
+                            t.O_StockName,
+                            t.O_CreateDate,
+                            t.O_CreateBy,
+                            m.O_OtherInNo,
+                            m.O_GoodsCode,
+                            m.O_GoodsName,
+                            m.O_Unit,
+                            m.O_Qty,
+                            m.O_Price,
+                            m.O_Batch,
+                            m.O_Remark
+                             from Mes_OtherInDetail m left join Mes_OtherInHead t on(m.O_OtherInNo=t.O_OtherInNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherInNo 
+                             in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// 获取选取的时间原物料其它出库详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialOtherOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.O_StockCode,
+                            t.O_StockName,
+                            t.O_DepartCode,
+                            t.O_DepartName,
+                            t.O_CreateDate,
+                            t.O_CreateBy,
+                            m.O_OtherOutNo,
+                            m.O_GoodsCode,
+                            m.O_GoodsName,
+                            m.O_Unit,
+                            m.O_Qty,
+                            m.O_Price,
+                            m.O_Batch,
+                            m.O_Remark
+                             from Mes_OtherOutDetail m left join Mes_OtherOutHead t on(m.O_OtherOutNo=t.O_OtherOutNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherOutNo 
+                             in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// 获取选取的时间原物料退供应商详细
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetMaterialBackSupplyDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append(@"
+                            select  
+                            t.B_StockCode,
+                            t.B_StockName,
+                            t.B_CreateDate,
+                            m.B_BackSupplyNo,
+                            m.B_GoodsCode,
+                            m.B_GoodsName,
+                            m.B_Unit,
+                            m.B_Qty,
+                            m.B_Batch,
+                            m.B_Price,
+                            m.B_Remark,
+                            t.B_CreateBy  
+                            from Mes_BackSupplyDetail m left join Mes_BackSupplyHead t on(m.B_BackSupplyNo=t.B_BackSupplyNo) where B_GoodsCode=@M_GoodsCode and m.B_BackSupplyNo 
+                            in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
+                             ");
+
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("M_GoodsCode", M_GoodsCode, DbType.String);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取期初期末页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

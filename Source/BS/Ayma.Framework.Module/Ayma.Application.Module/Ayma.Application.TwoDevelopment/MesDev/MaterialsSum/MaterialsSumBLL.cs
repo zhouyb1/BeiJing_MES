@@ -108,6 +108,98 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
 
         }
+        /// 获取选取的时间原物料报废详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialScrapDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialScrapDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料其它入库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialOtherDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialOtherDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料其他出库详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialOtherOutDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialOtherOutDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
+        /// 获取选取的时间原物料退供应商详细
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable GetMaterialBackSupplyDetailListByDate(Pagination pagination, string queryJson, string M_GoodsCode)
+        {
+            try
+            {
+                return materialsSumService.GetMaterialBackSupplyDetailListByDate(pagination, queryJson, M_GoodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
         /// <summary>
         /// 获取期初期末显示列表数据
         /// </summary>
