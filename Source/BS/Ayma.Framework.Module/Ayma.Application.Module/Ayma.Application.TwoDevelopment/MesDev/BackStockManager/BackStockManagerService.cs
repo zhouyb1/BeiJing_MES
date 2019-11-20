@@ -108,7 +108,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.I_GoodsCode G_GoodsCode,
                                 t.I_GoodsName G_GoodsName,
                                 t.I_Unit G_Unit ,
-                                g.G_Price ,
+                                g.G_Price G_Price,
                                 t.I_Qty G_Qty 
                         FROM    dbo.Mes_Inventory t
                         LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE t.I_Qty <> 0 AND t.I_StockCode =@I_StockCode ");

@@ -34,6 +34,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,m.M_GoodsName
 									,m.M_Qty
 									,m.M_Batch
+                                    ,m.M_Price
 									,m.M_GoodsItax
 									,m.M_Remark  
 									,t.M_StockName    

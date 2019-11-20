@@ -127,7 +127,7 @@ var bootstrap = function ($, ayma) {
                     }
                     ayma.layerConfirm('确认删除单据？', function (res) {
                         if (res) {
-                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Delete', type: 3 }, function () {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Sale_Delete', type: 3 }, function () {
                                 refreshGirdData();
                             });
                         }
