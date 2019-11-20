@@ -84,6 +84,9 @@ var bootstrap = function ($, ayma) {
                     {
                         label: '物料名称', name: 'B_GoodsName', width: 160, align: 'center', editType: 'label'
                     },
+                     {
+                         label: '单价(不含税)', name: 'B_Price', width: 80, align: 'center', editType: 'label'
+                     },
                     {
                         label: '单位', name: 'B_Unit', width: 70, align: 'center', editType: 'label'
                     },
@@ -102,7 +105,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                      {
-                         label: '库存', name: 'Qty', width: 80, align: 'center', editType: 'label'
+                         label: '库存', name: 'Qty', width: 80, align: 'center', editType: 'label',hidden:keyValue==""?false:true
                      },
                     {
                         label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
