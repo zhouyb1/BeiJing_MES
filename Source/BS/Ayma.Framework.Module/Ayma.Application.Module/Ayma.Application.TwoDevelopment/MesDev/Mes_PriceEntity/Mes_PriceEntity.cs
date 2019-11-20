@@ -49,12 +49,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("P_INPRICE")]
         public decimal? P_InPrice { get; set; }
         /// <summary>
-        /// 税率
-        /// </summary>
-        /// <returns></returns>
-        [Column("P_ITAX")]
-        public decimal? P_Itax { get; set; }
-        /// <summary>
         /// 添加人
         /// </summary>
         /// <returns></returns>

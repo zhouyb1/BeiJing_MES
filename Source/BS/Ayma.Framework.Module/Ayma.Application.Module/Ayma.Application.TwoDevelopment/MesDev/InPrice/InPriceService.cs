@@ -34,8 +34,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_SupplyName,
                 t.P_GoodsCode,
                 t.P_GoodsName,
-                t.P_InPrice,
-                t.P_Itax     
+                t.P_InPrice 
                 ");
                 strSql.Append("  FROM Mes_InPrice t ");
                 strSql.Append("  WHERE 1=1 ");

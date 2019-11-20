@@ -150,17 +150,6 @@ var bootstrap = function ($, ayma) {
                             
                         }
                     },
-                    {
-                        label: "税率", name: "P_Itax", width: 160, align: "left", editType: 'input',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_Itax = 0;
-                                }
-
-                            }
-                        }
-                    },
                     //{ label: "起始批次", name: "P_StartBatch", width: 160, align: "left" },
                     //{ label: "终止批次", name: "P_EndBatch", width: 160, align: "left" },
                     //{ label: "添加人", name: "P_CreateBy", width: 160, align: "left"},
