@@ -42,10 +42,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_QTY")]
         public decimal? B_Qty { get; set; }
-        /// 价格
-        /// </summary>
-        [Column("B_Price")]
-        public string B_Price { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
