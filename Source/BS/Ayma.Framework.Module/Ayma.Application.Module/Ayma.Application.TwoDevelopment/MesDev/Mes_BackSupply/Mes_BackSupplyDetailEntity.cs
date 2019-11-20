@@ -47,6 +47,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_BATCH")]
         public string B_Batch { get; set; }
+
+        /// <summary>
+        /// 单价(不含税)
+        /// </summary>
+        [Column("B_PRICE")]
+        public decimal? B_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
