@@ -61,10 +61,12 @@ var bootstrap = function ($, ayma) {
                     $("#G_Prepareday").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#G_Super").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#G_Lower").attr("isvalid", "yes").attr("checkexpession", "NotNull");
-                    $('#prev_G_Name').css("display", "block");
+                    $('#prev_G_Name').css("display", "block"); 
                     $("#G_SupplyName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $('#prev_G_Code').css("display", "block");
                     $("#G_SupplyCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $('#prev_G_StockCode').css("display", "block"); 
+                    $("#G_StockCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     
                 } else {
                     $("#div_Prepareday").html("备用天数");
@@ -77,6 +79,8 @@ var bootstrap = function ($, ayma) {
                     $("#G_SupplyName").removeAttr("isvalid").removeAttr("checkexpession");
                     $('#prev_G_Code').css("display", "none");
                     $("#G_SupplyCode").removeAttr("isvalid").removeAttr("checkexpession");
+                    $('#prev_G_StockCode').css("display", "none");
+                    $("#G_StockCode").removeAttr("isvalid").removeAttr("checkexpession");
                 }
             });
             $('#G_Barcode').select({
