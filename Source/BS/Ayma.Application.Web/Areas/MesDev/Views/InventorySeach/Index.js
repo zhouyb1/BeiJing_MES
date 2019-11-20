@@ -80,6 +80,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     {label: "仓库编码", name: "I_StockCode", width: 120, align: "left"},
                     { label: "仓库名称", name: "I_StockName", width: 130, align: "left" },
+                    //{ label: "仓库类型", name: "I_Kind", width: 130, align: "left" },
                     { label: "商品编码", name: "I_GoodsCode", width: 130, align: "left" },
                     { label: "商品名称", name: "I_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "I_Unit", width: 130, align: "left" },
