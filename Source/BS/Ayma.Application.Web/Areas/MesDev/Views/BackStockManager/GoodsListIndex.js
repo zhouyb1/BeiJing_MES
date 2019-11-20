@@ -151,6 +151,7 @@ var bootstrap = function ($, ayma) {
                         row['B_GoodsName'] = row['G_GoodsName'];
                         row['B_Unit'] = row['G_Unit'];
                         row["B_Qty"] = quantity;
+                        row["B_Price"] = row['G_Price'];;
                         row['B_Batch'] = row['G_Batch'];
                         row["ID"] = row["G_ID"];
                         row["G_Qty"] = row["G_Qty"];
