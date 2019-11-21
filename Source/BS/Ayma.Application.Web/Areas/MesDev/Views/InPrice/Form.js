@@ -19,7 +19,7 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
-            $('#P_GoodsName').select();
+            //$('#P_GoodsName').select();
             //供应商名称
             $("#P_SupplyName").select({
                 type: 'default',
@@ -42,53 +42,28 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#P_SupplyCode").val(entity.S_Code);
-                        $("#P_GoodsCode").val("");
+                        //$("#P_GoodsCode").val("");
                     }
                 });
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',//先查所有的物料
-                    data: { G_SupplyName: $('#P_SupplyName').selectGet() },
-                    dataType: "json",
-                    success: function (res) {
-                        G_SupplyName = $('#P_SupplyName').selectGet();
-                        $('#P_GoodsName').selectRefresh({
-                            url: top.$.rootUrl + '/MesDev/Tools/GetGoodsListBySupplyName?G_SupplyName=' + G_SupplyName,//根据供应商查物料
-                            type: 'default',
-                            value: 'G_Name',
-                            text: "G_Name",
-                            maxHeight: 225,
-                            param: {}
-                        });
-                    }
-                });
+                //$.ajax({
+                //    type: "get",
+                //    url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',//先查所有的物料
+                //    data: { G_SupplyName: $('#P_SupplyName').selectGet() },
+                //    dataType: "json",
+                //    success: function (res) {
+                //        G_SupplyName = $('#P_SupplyName').selectGet();
+                //        $('#P_GoodsName').selectRefresh({
+                //            url: top.$.rootUrl + '/MesDev/Tools/GetGoodsListBySupplyName?G_SupplyName=' + G_SupplyName,//根据供应商查物料
+                //            type: 'default',
+                //            value: 'G_Name',
+                //            text: "G_Name",
+                //            maxHeight: 225,
+                //            param: {}
+                //        });
+                //    }
+                //});
             });
-            $('#P_GoodsName').on('change', function () {
-                var name = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
-                    data: { name: name },
-                    success: function (data) {
-                        var entity = JSON.parse(data).data;
-                        $("#P_GoodsCode").val(entity.G_Code);
-                    }
-                });
-            });
-            //});
-            ////物料名称
-            //$("#P_GoodsName").select({
-            //    type: 'default',
-            //    value: 'G_Name',
-            //    text: 'G_Name',
-            //    // 展开最大高度
-            //    maxHeight: 200,
-            //    // 是否允许搜索
-            //    allowSearch: true,
-            //    // 访问数据接口地址
-            //    url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
-            //    // 访问数据接口参数
-            //}).bind("change", function () {
+            //$('#P_GoodsName').on('change', function () {
             //    var name = $(this).selectGet();
             //    $.ajax({
             //        type: "get",
@@ -99,8 +74,32 @@ var bootstrap = function ($, ayma) {
             //            $("#P_GoodsCode").val(entity.G_Code);
             //        }
             //    });
-
             //});
+            //物料名称
+            $("#P_GoodsName").select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+            }).bind("change", function () {
+                var name = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByNameGetGoodsEntity',
+                    data: { name: name },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#P_GoodsCode").val(entity.G_Code);
+                    }
+                });
+
+            });
         },
         initData: function () {
             if (!!keyValue) { 

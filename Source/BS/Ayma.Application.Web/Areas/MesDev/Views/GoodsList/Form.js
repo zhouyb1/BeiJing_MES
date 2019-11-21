@@ -61,10 +61,10 @@ var bootstrap = function ($, ayma) {
                     $("#G_Prepareday").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#G_Super").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#G_Lower").attr("isvalid", "yes").attr("checkexpession", "NotNull");
-                    $('#prev_G_Name').css("display", "block"); 
-                    $("#G_SupplyName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
-                    $('#prev_G_Code').css("display", "block");
-                    $("#G_SupplyCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    //$('#prev_G_Name').css("display", "block"); 
+                    //$("#G_SupplyName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    //$('#prev_G_Code').css("display", "block");
+                    //$("#G_SupplyCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $('#prev_G_StockCode').css("display", "block"); 
                     $("#G_StockCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     
@@ -75,10 +75,10 @@ var bootstrap = function ($, ayma) {
                     $("#G_Super").removeAttr("isvalid").removeAttr("checkexpession");
                     $("#div_G_Lower").html("下限预警数量");
                     $("#G_Lower").removeAttr("isvalid").removeAttr("checkexpession");
-                    $('#prev_G_Name').css("display", "none");              
-                    $("#G_SupplyName").removeAttr("isvalid").removeAttr("checkexpession");
-                    $('#prev_G_Code').css("display", "none");
-                    $("#G_SupplyCode").removeAttr("isvalid").removeAttr("checkexpession");
+                    //$('#prev_G_Name').css("display", "none");              
+                    //$("#G_SupplyName").removeAttr("isvalid").removeAttr("checkexpession");
+                    //$('#prev_G_Code').css("display", "none");
+                    //$("#G_SupplyCode").removeAttr("isvalid").removeAttr("checkexpession");
                     $('#prev_G_StockCode').css("display", "none");
                     $("#G_StockCode").removeAttr("isvalid").removeAttr("checkexpession");
                 }
