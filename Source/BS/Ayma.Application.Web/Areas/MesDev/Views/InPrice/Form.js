@@ -100,6 +100,16 @@ var bootstrap = function ($, ayma) {
                 });
 
             });
+            //物料价格 不小于0
+            $("#P_InPrice").on('blur', function () {
+                var period = $.trim($(this).val()); //去除空格
+                if (period != undefined && period != "") {
+                    if (!/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/.test(period.toString().replace('.', ''))) {
+                        ayma.alert.error("物料价格必须是非负数.");
+                        $("#P_InPrice").val(1);
+                    }
+                }
+            });
         },
         initData: function () {
             if (!!keyValue) { 
