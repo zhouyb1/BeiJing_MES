@@ -39,7 +39,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,m.M_Remark  
 									,t.M_StockName    
 									,t.M_CreateDate
-                                    ,t.M_CreateBy     
+                                    ,t.M_CreateBy    
+                                    ,(m.M_Qty*m.M_Price) as amount
 									 from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
                             where m.M_MaterInNo in (select b.M_MaterInNo from Mes_MaterInHead b where b.M_CreateDate>=@StartTime and b.M_CreateDate<=@EndTime and b.M_Status=3)
                              and m.M_GoodsCode=@M_GoodsCode
@@ -94,7 +95,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 						   ,m.C_Batch
 						   ,m.C_Price
 						   ,m.C_Remark
-                           ,t.C_CreateBy  
+                           ,t.C_CreateBy
+                           ,(m.C_Qty*m.C_Price) as amount 
                             from  Mes_CollarDetail m left join Mes_CollarHead t on (m.C_CollarNo=t.C_CollarNo) 
                             where m.C_CollarNo in (select C_CollarNo from Mes_CollarHead where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime and P_Status=3)
                              and m.C_GoodsCode=@M_GoodsCode
@@ -146,7 +148,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.B_Batch,
                             m.B_Price,
                             m.B_Remark,
-                            t.B_CreateBy  
+                            t.B_CreateBy
+                           ,(m.B_Qty*m.B_Price) as amount   
                             from Mes_BackStockDetail m left join Mes_BackStockHead t on(m.B_BackStockNo=t.B_BackStockNo) where B_GoodsCode=@M_GoodsCode and m.B_BackStockNo 
                             in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
                              ");
@@ -199,6 +202,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.S_Price,
                             m.S_Batch,
                             m.S_Remark
+                           ,(m.S_Qty*m.S_Price) as amount   
                              from Mes_SaleDetail m left join Mes_SaleHead t on(m.S_SaleNo=t.S_SaleNo) where S_GoodsCode=@M_GoodsCode and m.S_SaleNo 
                              in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
                              ");
@@ -248,6 +252,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.S_Price,
                             m.S_Batch,
                             m.S_Remark
+                           ,(m.S_Qty*m.S_Price) as amount   
                              from Mes_ScrapDetail m left join Mes_ScrapHead t on(m.S_ScrapNo=t.S_ScrapNo) where S_GoodsCode=@M_GoodsCode and m.S_ScrapNo 
                              in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
                              ");
@@ -296,6 +301,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.O_Price,
                             m.O_Batch,
                             m.O_Remark
+                           ,(m.O_Qty*m.O_Price) as amount   
                              from Mes_OtherInDetail m left join Mes_OtherInHead t on(m.O_OtherInNo=t.O_OtherInNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherInNo 
                              in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
                              ");
@@ -346,6 +352,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.O_Price,
                             m.O_Batch,
                             m.O_Remark
+                           ,(m.O_Qty*m.O_Price) as amount
                              from Mes_OtherOutDetail m left join Mes_OtherOutHead t on(m.O_OtherOutNo=t.O_OtherOutNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherOutNo 
                              in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
                              ");
@@ -393,7 +400,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.B_Batch,
                             m.B_Price,
                             m.B_Remark,
-                            t.B_CreateBy  
+                            t.B_CreateBy 
+                           ,(m.B_Qty*m.B_Price) as amount 
                             from Mes_BackSupplyDetail m left join Mes_BackSupplyHead t on(m.B_BackSupplyNo=t.B_BackSupplyNo) where B_GoodsCode=@M_GoodsCode and m.B_BackSupplyNo 
                             in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
                              ");
