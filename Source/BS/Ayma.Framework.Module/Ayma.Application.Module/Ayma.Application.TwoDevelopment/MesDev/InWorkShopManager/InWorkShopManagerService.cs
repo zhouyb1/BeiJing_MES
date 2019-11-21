@@ -255,18 +255,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT  G_Code I_GoodsCode,
+                strSql.Append(@"SELECT DISTINCT G_Code I_GoodsCode,
                                     G_Name I_GoodsName,
                                     G_Unit I_Unit,
                                     G_Price I_Price
-                            FROM    dbo.Mes_Goods
-                            WHERE   G_Kind !=1 ");
+                            FROM    dbo.Mes_Goods g 
+                                    LEFT JOIN dbo.Mes_InPrice p ON p.P_GoodsCode = g.G_Code 
+                            WHERE  G_Kind=1 ");
                 var dp = new DynamicParameters(new {});
                 var queryParam = queryJson.ToJObject();
                 if (!queryParam["keyword"].IsEmpty())
                 {
                     dp.Add("keyword", "%" + queryParam["keyword"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND (G_Code LIKE @keyword OR G_Name LIKE @keyword) ");
+                    strSql.Append(" AND (G_Code+G_Name LIKE @keyword) ");
                 }
                return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
             }
