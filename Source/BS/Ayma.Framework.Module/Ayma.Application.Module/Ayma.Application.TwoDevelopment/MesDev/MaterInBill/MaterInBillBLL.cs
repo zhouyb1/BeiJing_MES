@@ -46,7 +46,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
+        public DataTable GetGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {

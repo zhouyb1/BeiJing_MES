@@ -83,15 +83,15 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
-                    newArray[i]['M_GoodsCode'] = newArray[i]['G_Code'];
-                    newArray[i]['M_GoodsName'] = newArray[i]['G_Name'];
-                    newArray[i]['M_Kind'] = newArray[i]['G_Kind'];
-                    newArray[i]['M_Unit'] = newArray[i]['G_Unit'];
-                    newArray[i]['M_Price'] = newArray[i]['G_Price'];
-                    newArray[i]['M_GoodsItax'] = newArray[i]['G_Itax'];
+                    newArray[i]['M_GoodsCode'] = newArray[i]['p_goodscode'];
+                    newArray[i]['M_GoodsName'] = newArray[i]['p_goodsname'];
+                    newArray[i]['M_Kind'] = newArray[i]['g_kind'];
+                    newArray[i]['M_Unit'] = newArray[i]['g_unit'];
+                    newArray[i]['M_Price'] = newArray[i]['p_inprice'];
+                    newArray[i]['M_GoodsItax'] = newArray[i]['g_itax'];
                     newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
-                    newArray[i]["ID"] = newArray[i]['ID'];
+                    newArray[i]["ID"] = newArray[i]['id'];
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -103,13 +103,13 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList',
                 headData: [
-                    { label: "主键", name: "ID", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "G_Code", width: 130, align: "left" },
-                    { label: "物料名称", name: "G_Name", width: 130, align: "left" },
-                    { label: "供应商编码", name: "G_SupplyCode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "G_SupplyName", width: 130, align: "left" },
+                    { label: "主键", name: "id", width: 130, align: "left",hidden:true},
+                    { label: "物料编码", name: "p_goodscode", width: 130, align: "left" },
+                    { label: "物料名称", name: "p_goodsname", width: 130, align: "left" },
+                    { label: "供应商编码", name: "p_supplycode", width: 130, align: "left" },
+                    { label: "供应商名称", name: "p_supplyname", width: 130, align: "left" },
                      {
-                         label: "商品类型", name: "G_Kind", width: 160, align: "left",
+                         label: "商品类型", name: "g_kind", width: 160, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -121,16 +121,16 @@ var bootstrap = function ($, ayma) {
                              });
                          }  
                      },
-                    { label: "保质时间", name: "G_Period", width: 80, align: "left" },
-                    { label: "价格", name: "G_Price", width: 60, align: "left" },
-                    { label: "税率", name: "G_Itax", width: 130, align: "left"},
-                    { label: "单位", name: "G_Unit", width: 60, align: "left" }
+                    { label: "保质时间", name: "g_period", width: 80, align: "left" },
+                    { label: "价格", name: "p_inprice", width: 60, align: "left" },
+                    { label: "税率", name: "g_itax", width: 130, align: "left" },
+                    { label: "单位", name: "g_unit", width: 60, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'G_Code',
+                sidx: 'p_goodscode',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
@@ -141,18 +141,18 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
-                        row['M_GoodsCode'] = row['G_Code'];
-                        row['M_GoodsName'] = row['G_Name'];
-                        row['M_SupplyCode'] = row['G_SupplyCode'];
-                        row['M_SupplyName'] = row['G_SupplyName'];
-                        row['M_GoodsItax'] = row['G_Itax'];
-                        row['M_Unit'] = row['G_Unit'];
-                        row['M_Kind'] = row['G_Kind'];
-                        row['M_Price'] = row['G_Price'];
+                        row['M_GoodsCode'] = row['p_goodscode'];
+                        row['M_GoodsName'] = row['p_goodsname'];
+                        row['M_SupplyCode'] = row['p_supplycode'];
+                        row['M_SupplyName'] = row['p_supplyname'];
+                        row['M_GoodsItax'] = row['g_itax'];
+                        row['M_Unit'] = row['g_unit'];
+                        row['M_Kind'] = row['g_kind'];
+                        row['M_Price'] = row['p_inprice'];
                         row["M_Qty"] = quantity;
                         row['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                             //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
-                        row["ID"] = row['ID'];
+                        row["ID"] = row['id'];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
@@ -163,10 +163,10 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        var rowlistlenght = rowslist[0]["id"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_Code'] == rowslist[j]['M_GoodsCode']) {
+                                if (rows[i]['p_goodscode'] == rowslist[j]['M_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }

@@ -273,7 +273,7 @@ var bootstrap = function ($, ayma) {
                 var flagRow = true;
                 //加个循环判断数组重复
                 for (var k = 0; k < rows.length; k++) {
-                    if (rows[k].M_GoodsCode == row.G_Code) {
+                    if (rows[k].M_GoodsCode == row.p_goodscode) {
                         flagRow = false;
                     }
                 }
@@ -288,7 +288,7 @@ var bootstrap = function ($, ayma) {
                     var flag = true;
                     //加个循环判断数组重复
                     for (var j = 0; j < rows.length; j++) {
-                        if (rows[j].M_GoodsCode == data[i].G_Code) {
+                        if (rows[j].M_GoodsCode == data[i].p_goodscode) {
                             flag = false;
                         }
                     }
@@ -310,7 +310,7 @@ var bootstrap = function ($, ayma) {
         var rows = $('#Mes_MaterInDetail').jfGridGet('rowdatas');
 
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["M_GoodsCode"] == row["G_Code"]) {
+            if (rows[i]["M_GoodsCode"] == row["p_goodscode"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

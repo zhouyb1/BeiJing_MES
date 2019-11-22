@@ -85,57 +85,35 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <param name="keyword">编码/名称搜索</param>
         /// <returns></returns>
-        public IEnumerable<Mes_GoodsEntity> GetGoodsList(Pagination pagination, string queryJson, string keyword)
+        public DataTable GetGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@" SELECT [ID]
-                                  ,[G_Code]
-                                  ,[G_Name]
-                                  ,[G_SupplyCode]
-                                  ,[G_SupplyName]
-                                  ,[G_Kind]
-                                  ,[G_Period]
-                                  ,[G_Unit]
-                                  ,[G_UnitWeight]
-                                  ,[G_Super]
-                                  ,[G_Lower]
-                                  ,[G_CreateBy]
-                                  ,[G_CreateDate]
-                                  ,[G_UpdateBy]
-                                  ,[G_UpdateDate]
-                                  ,[G_Remark]
-                                  ,[G_Erpcode]
-                                  ,[G_TKind]
-                                  ,[G_UnitQty]
-                                  ,[G_Self]
-                                  ,[G_Online]
-                                  ,[G_Prepareday]
-                                  ,[G_Otax]
-                                  ,[G_Itax]
-                                  ,(select P_InPrice from Mes_InPrice where P_GoodsCode=t.[G_Code] and P_SupplyCode=t.[G_SupplyCode]) as G_Price
-                              FROM [dbo].[Mes_Goods] t ");
-                strSql.Append(" where t.G_Kind !=3 ");
+                strSql.Append(@" select 
+                                t.ID,
+                                t.P_SupplyCode,
+                                t.P_SupplyName,
+                                t.P_GoodsCode,
+                                t.P_GoodsName,
+                                t.P_InPrice,
+                                m.G_Unit,
+                                m.G_Kind,
+                                m.G_Period,
+                                m.G_Itax
+                                from Mes_InPrice t left join Mes_Goods m on(t.P_GoodsCode=m.G_Code) ");
+                strSql.Append(" where G_Kind=1 and t.P_SupplyCode=@G_SupplyCode and m.G_StockCode=@G_StockCode");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                dp.Add("@G_StockCode",queryParam["G_StockCode"].ToString() , DbType.String);
+                dp.Add("@G_SupplyCode",queryParam["G_SupplyCode"].ToString(), DbType.String);
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
                 }
-                if (!queryParam["G_StockCode"].IsEmpty())
-                {
-                    dp.Add("@G_StockCode", "%" + queryParam["G_StockCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" and t.G_StockCode like @G_StockCode ");
-                }
-                if (!queryParam["G_SupplyCode"].IsEmpty())
-                {
-                    dp.Add("@G_SupplyCode", "%" + queryParam["G_SupplyCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" and t.G_SupplyCode like @G_SupplyCode ");
-                }
-                return this.BaseRepository().FindList<Mes_GoodsEntity>(strSql.ToString(), dp, pagination);
+                return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
