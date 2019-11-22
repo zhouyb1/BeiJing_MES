@@ -100,16 +100,16 @@ var bootstrap = function ($, ayma) {
                 });
 
             });
-            //物料价格 不小于0
-            $("#P_InPrice").on('blur', function () {
-                var period = $.trim($(this).val()); //去除空格
-                if (period != undefined && period != "") {
-                    if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
-                        ayma.alert.error("物料价格必须是非负数.");
-                        $("#P_InPrice").val(1);
-                    }
-                }
-            });
+            ////物料价格 不小于0
+            //$("#P_InPrice").on('blur', function () {
+            //    var period = $.trim($(this).val()); //去除空格
+            //    if (period != undefined && period != "") {
+            //        if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
+            //            ayma.alert.error("物料价格必须是非负数.");
+            //            $("#P_InPrice").val(1);
+            //        }
+            //    }
+            //});
         },
         initData: function () {
             if (!!keyValue) { 
@@ -161,6 +161,15 @@ var bootstrap = function ($, ayma) {
             });
             if (SupplyCodestate == false) {
                 return false;
+            }
+        //物料价格 不小于0
+            var period = $.trim($("#P_InPrice").val()); //去除空格
+            if (period != undefined && period != "") {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
+                    ayma.alert.error("物料价格必须是非负数.");
+                    $("#P_InPrice").val(1);
+                    return false;
+                }
             }
             var postData = {
                 strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
