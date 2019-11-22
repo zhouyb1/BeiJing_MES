@@ -32,9 +32,9 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockListByParam',
                 // 访问数据接口参数
-                param: {}
+                param: {strWhere:'S_Kind = 1 '}
             }
             $("#B_StockName").select(dfop).on('change', function () {
                 if (status==1) {
