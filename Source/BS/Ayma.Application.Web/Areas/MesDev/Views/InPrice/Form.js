@@ -85,7 +85,7 @@ var bootstrap = function ($, ayma) {
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
                 // 访问数据接口参数
             }).bind("change", function () {
                 var name = $(this).selectGet();
@@ -104,7 +104,7 @@ var bootstrap = function ($, ayma) {
             $("#P_InPrice").on('blur', function () {
                 var period = $.trim($(this).val()); //去除空格
                 if (period != undefined && period != "") {
-                    if (!/^([1-9]\d*(\.\d*[1-9])?)|(0\.\d*[1-9])$/.test(period.toString().replace('.', ''))) {
+                    if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
                         ayma.alert.error("物料价格必须是非负数.");
                         $("#P_InPrice").val(1);
                     }

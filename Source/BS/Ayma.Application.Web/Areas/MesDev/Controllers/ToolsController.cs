@@ -299,6 +299,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(goodsList);
         }
         /// <summary>
+        /// 获取原物料列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetMaterialGoodsList()
+        {
+            var goodsList = toosIBLL.GetMaterialGoodsList();
+            return Success(goodsList);
+        }
+        /// <summary>
         /// 获取不合格原因列表
         /// </summary>
         /// <returns></returns>

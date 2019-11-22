@@ -653,7 +653,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
-
+        /// <summary>
+        /// 获取原物料物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetMaterialGoodsList()
+        {
+            try
+            {
+                return toolsService.GetMaterialGoodsList();
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取不合格原因列表
         /// </summary>

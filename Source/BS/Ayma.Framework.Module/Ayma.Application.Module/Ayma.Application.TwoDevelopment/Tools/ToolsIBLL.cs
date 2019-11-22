@@ -166,6 +166,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         IEnumerable<Mes_GoodsEntity> GetProjGoodsList();
         /// <summary>
+        /// 获取原物料物料
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> GetMaterialGoodsList();
+        /// <summary>
         /// 获取不合格原因实体
         /// </summary>
         /// <returns></returns>
