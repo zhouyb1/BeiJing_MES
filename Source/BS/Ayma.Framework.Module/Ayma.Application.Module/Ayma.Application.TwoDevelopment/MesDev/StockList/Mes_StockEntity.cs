@@ -62,6 +62,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("S_REMARK")]
         public string S_Remark { get; set; }
+        /// 状态
+        /// </summary>
+        [Column("S_BAD")]
+        public string S_Bad { get; set; }
         #endregion
 
         #region 扩展操作
