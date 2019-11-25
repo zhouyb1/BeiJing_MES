@@ -138,6 +138,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("@codeType", "班次编码");
                     dp.Add("@goodsSecNo", "");
                     dp.Add("@code", "", DbType.String, ParameterDirection.Output);
+                    dp.Add("@stockType", "");
                     this.BaseRepository().ExecuteByProc("sp_GetCode", dp);
                     var code = dp.Get<string>("@code");//存储过程返回单号
                     entity.C_Code = code;

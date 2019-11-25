@@ -139,6 +139,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("@codeType", "门编码");
                     dp.Add("@code", "", DbType.String, ParameterDirection.Output);
                     dp.Add("@goodsSecNo", "");
+                    dp.Add("@stockType", "");
                     db.ExecuteByProc("sp_GetCode", dp);
                     var D_Code = dp.Get<string>("@code"); //存储过程返回编号
                     entity.D_Code = D_Code;

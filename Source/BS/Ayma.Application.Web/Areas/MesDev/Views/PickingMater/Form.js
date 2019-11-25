@@ -54,7 +54,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-
              dfop = {
                 type: 'default',
                 value: 'S_Name',

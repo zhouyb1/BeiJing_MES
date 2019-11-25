@@ -137,6 +137,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("@codeType", "不合格原因编码");
                     dp.Add("@code", "", DbType.String, ParameterDirection.Output);
                     dp.Add("@goodsSecNo", "");
+                    dp.Add("@stockType", "");
                     db.ExecuteByProc("sp_GetCode", dp);
                     var R_Code = dp.Get<string>("@code"); //存储过程返回编号
                     entity.R_Code = R_Code;
