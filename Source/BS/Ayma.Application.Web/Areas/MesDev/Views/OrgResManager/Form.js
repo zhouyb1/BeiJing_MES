@@ -118,7 +118,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId ,
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&workShop=' + $('#O_WorkShopCode').val(),
                     width: 800,
                     height: 500,
                     maxmin: true,
@@ -165,7 +165,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             { label: "物料编码", name: "O_SecGoodsCode", width: 130, align: "left", },
                             { label: "物料名称", name: "O_SecGoodsName", width: 130, align: "left" },
                             { label: "单价", name: "O_SecPrice", width: 60, align: "left" },
-                            { label: "单位", name: "O_SecUnit", width: 60, align: "left" },
                             { label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'numinput' },
                             { label: "批次", name: "O_SecBatch", width: 80, align: "left" }
                         ]
@@ -214,19 +213,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             strEntity: JSON.stringify($('[data-table="Mes_OrgResHead"]').GetFormData()),
             detailList: JSON.stringify(data)
         };
-        for (var i = 0,j=data.length;i<j;i++) {
-            if (data[i].O_Batch == "" || data[i].O_Batch == null) {
-                ayma.alert.error('请输入批次(组装前)');
-                return false;
-            }
-            if (data[i].O_SecQty * data[i].O_SecPrice != data[i].O_Qty * data[i].O_Price) {
-                ayma.alert.error('组装前后的总价值要对等');
-                return false;
-            }
-        }
-        //验证组装前后的总价是否相等
-        
-
+       
         $.SaveForm(top.$.rootUrl + '/MesDev/OrgResManager/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
@@ -247,7 +234,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 var rowFlag = true;
                 //加个循环判断数组重复
                 for (var k = 0; k < rows.length; k++) {
-                    if (rows[k].G_GoodsCode == row.O_GoodsCode && rows[k].G_Batch == row.O_Batch) {
+                    if (rows[k].O_GoodsCode == row.O_GoodsCode && rows[k].O_Batch == row.O_Batch) {
                         rowFlag = false;
                     }
                 }
@@ -261,7 +248,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     tmp.set(data[i], 1);
                     var isExist = true;
                     for (var j = 0; j < rows.length; j++) {
-                        if (data[i].G_GoodsCode == rows[j].O_GoodsCode && data[i].G_Batch == rows[j].O_Batch) {
+                        if (data[i].O_GoodsCode == rows[j].O_GoodsCode && data[i].O_Batch == rows[j].O_Batch) {
                             isExist = false;
                         }
                     }
@@ -281,7 +268,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     RemoveGridData = function (row) {
         var rows = $('#Mes_OrgResDetail').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["O_GoodsCode"] == row["G_GoodsCode"]) {
+            if (rows[i]["O_GoodsCode"] == row["w_goodscode"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
                 page.search(rows);

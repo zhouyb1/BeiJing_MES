@@ -1,8 +1,7 @@
 ﻿/* * 创建人：Yabo,Zhou
- * 描  述：报废物料列表
+ * 描  述：组装物料列表
  */
-//仓库编码
-var stockCode = request('stockCode');
+var workShop = request('workShop');
 var refreshGirdData;
 //上级元素的刷新表格方法
 var parentRefreshGirdData;
@@ -91,18 +90,42 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
                 headData: [
-                    { label: "物料编码", name: "G_GoodsCode", width: 130, align: "left", },
-                    { label: "物料名称", name: "G_GoodsName", width: 130, align: "left" },
-                    { label: "单价", name: "G_Price", width: 130, align: "left" },
-                    { label: "单位", name: "G_Unit", width: 60, align: "left" },
-                    { label: "数量", name: "G_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "G_Batch", width: 80, align: "left" }
+                   {
+                       label: "扫描后",
+                       name: "B",
+                       width: 160,
+                       align: "center",
+                       children: [
+                           { label: "物料编码", name: "w_goodscode", width: 130, align: "left", },
+                           { label: "物料名称", name: "w_goodsname", width: 130, align: "left" },
+                           { label: "单价", name: "w_price", width: 60, align: "left" },
+                           { label: "单位", name: "w_unit", width: 60, align: "left" },
+                           {
+                               label: "数量", name: "w_qty", width: 60, align: "left", editType: 'input',
+                           },
+                           { label: "批次", name: "w_batch", width: 80, align: "left", editType: 'input' }
+                       ]
+                   },
+                    {
+                        label: "称重后",
+                        name: "B",
+                        width: 160,
+                        align: "center",
+                        children: [
+                           { label: "物料编码", name: "w_secgoodscode", width: 130, align: "left", },
+                           { label: "物料名称", name: "w_secgoodsname", width: 130, align: "left" },
+                           {
+                               label: "数量", name: "w_secqty", width: 60, align: "left", editType: 'input',
+                           },
+                           { label: "批次", name: "w_secbatch", width: 80, align: "left", editType: 'input' }
+                        ]
+                    }
                 ],
-                mainId: 'G_ID',
+                mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'G_GoodsCode,G_Batch',
+                sidx: 'W_Batch',
                 sord: 'ASC',
                 onSelectRow: function (rowdata, row, rowid) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
@@ -121,19 +144,19 @@ var bootstrap = function ($, ayma) {
                             var list = $('#girdtable').jfGridGet('rowdatas');
                             var data = [];
                             data = list.filter(function (item) {
-                                if (item.G_Qty > 0) {
-                                    return item.G_GoodsCode == row['G_GoodsCode'];
+                                if (item.w_qty > 0) {
+                                    return item.w_goodscode == row['w_goodscode'];
                                 }
                             })
-                            var min = data[0].G_Batch;
+                            var min = data[0].w_batch;
                             var len = data.length;
                             for (var i = 1; i < len; i++) {
-                                if (data[i].G_Batch < min) {
-                                    min = data[i].G_Batch;
+                                if (data[i].w_batch < min) {
+                                    min = data[i].w_batch;
                                 }
                             }
                             for (var i = 0; i < list.length; i++) {
-                                if (list[i].G_Batch == min && list[i].G_GoodsCode == data[0].G_GoodsCode)
+                                if (list[i].w_batch == min && list[i].w_goodscode == data[0].w_goodscode)
                                 {
                                     var minrowid = i;
                                 }
@@ -141,45 +164,50 @@ var bootstrap = function ($, ayma) {
                             var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
                             if (!minisChecked.is(":checked")) {
                                 if (row['G_Batch'] > min) {
-                                    ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['G_GoodsName'] + '】');
+                                    ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['w_goodscode'] + '】');
                                 }
                             }
                         }
                     }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
-                        //copy需要更改的地方
-
-                        //产出物料
-                        row['O_SecGoodsCode'] = row['G_GoodsCode'];
-                        row['O_SecGoodsName'] = row['G_GoodsName'];
-                        row['O_SecUnit'] = row['G_Unit'];
+                        //copy需要更改的地方 
+                        //称重前
+                        row['O_GoodsCode'] = row['w_goodscode'];
+                        row['O_GoodsName'] = row['w_goodsname'];
+                        row['O_Unit'] = row['w_unit'];
+                        row["O_Qty"] = quantity;
+                        row["O_Price"] = row['w_price'];
+                        row['O_Batch'] = row['w_batch'];
+                        //称重后
+                        row['O_SecGoodsCode'] = row['w_secgoodscode'];
+                        row['O_SecGoodsName'] = row['w_secgoodsname'];
+                        row['O_SecUnit'] = row['w_secunit'];
                         row["O_SecQty"] = quantity;
-                        row['O_SecBatch'] = row['G_Batch'];
-                        row["O_SecPrice"] = row["G_Price"];
-                        row["ID"] = row["G_ID"];
-                        //组装前
-
-                        $.ajax({
-                            type:"get",
-                            url: '/MesDev/Tools/GetMesConverEntity',
-                            async: false,
-                            data: { goodsCode: row['G_GoodsCode'] },
-                            dataType:'JSON',
-                            success: function(res) {
-                                var result = res.data;
-                                if (result != null) {
-                                    row['O_GoodsCode'] = result.G_Code; 
-                                    row['O_GoodsName'] = result.G_Name;
-                                    row['O_Unit'] = result.G_Unit;
-                                    row["O_Qty"] = quantity;
-                                    row["O_Price"] = result.G_Price;
-                                    row['O_Batch'] = result.G_Batch || ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");;
-                                } else {
-                                    ayma.alert.error('请选择存在的物料关系');
-                                }
-                            }
-                        });
+                        row['O_SecBatch'] = row['w_secbatch'];
+                        row["ID"] = row["id"];
+                        //组装前注释
+                        
+                        //$.ajax({
+                        //    type:"get",
+                        //    url: '/MesDev/Tools/GetMesConverEntity',
+                        //    async: false,
+                        //    data: { goodsCode: row['G_GoodsCode'] },
+                        //    dataType:'JSON',
+                        //    success: function(res) {
+                        //        var result = res.data;
+                        //        if (result != null) {
+                        //            row['O_GoodsCode'] = result.G_Code; 
+                        //            row['O_GoodsName'] = result.G_Name;
+                        //            row['O_Unit'] = result.G_Unit;
+                        //            row["O_Qty"] = quantity;
+                        //            row["O_Price"] = result.G_Price;
+                        //            row['O_Batch'] = result.G_Batch || ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");;
+                        //        } else {
+                        //            ayma.alert.error('请选择存在的物料关系');
+                        //        }
+                        //    }
+                        //});
                         
                         parentRefreshGirdData([], row);
                     }
@@ -194,7 +222,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_GoodsCode'] == rowslist[j]['O_GoodsCode']) {
+                                if (rows[i]['w_goodscode'] == rowslist[j]['O_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
@@ -208,8 +236,8 @@ var bootstrap = function ($, ayma) {
         },
         search: function (param) {
             queryJson = param || {};
-            queryJson.orderNo = orderNo;
             param = $("#txt_Keyword").val();
+            queryJson.workShop = workShop;
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }
     };
