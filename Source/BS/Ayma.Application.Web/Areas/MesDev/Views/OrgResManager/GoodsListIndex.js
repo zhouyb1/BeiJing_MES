@@ -17,8 +17,8 @@ var queryJson;
 var closeWindow;
 //批次
 var batch = new Date();
-//订单
-var orderNo = request('orderNo');
+
+//var orderNo = request('orderNo');
 //仓库编码
 var bootstrap = function ($, ayma) {
     "use strict";

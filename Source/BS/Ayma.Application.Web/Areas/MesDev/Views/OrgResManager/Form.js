@@ -72,31 +72,31 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             //$('#O_ProCode').select();
 
-            var orderNo = "";
-            if (!!keyValue) {//根据主键获取生产订单号
-                $.ajax({
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GetOrderNoBy?keyValue=' + keyValue,
-                    type: "GET",
-                    dataType: "json",
-                    async: false,
-                    success: function (data) {
-                        orderNo = data.info;
-                    }
-                });
-            }
-            $('#O_OrderNo').select({
-                type: 'default',
-                value: 'P_OrderNo',
-                text: 'P_OrderNo',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList?orderNo=' + orderNo,
-                // 访问数据接口参数
-                param: {}
-            });
+            //var orderNo = "";
+            //if (!!keyValue) {//根据主键获取生产订单号
+            //    $.ajax({
+            //        url: top.$.rootUrl + '/MesDev/OrgResManager/GetOrderNoBy?keyValue=' + keyValue,
+            //        type: "GET",
+            //        dataType: "json",
+            //        async: false,
+            //        success: function (data) {
+            //            orderNo = data.info;
+            //        }
+            //    });
+            //}
+            //$('#O_OrderNo').select({
+            //    type: 'default',
+            //    value: 'P_OrderNo',
+            //    text: 'P_OrderNo',
+            //    // 展开最大高度
+            //    maxHeight: 200,
+            //    // 是否允许搜索
+            //    allowSearch: true,
+            //    // 访问数据接口地址
+            //    url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList?orderNo=' + orderNo,
+            //    // 访问数据接口参数
+            //    param: {}
+            //});
 
             //绑定班组
             $('#O_TeamCode').select({
@@ -115,14 +115,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
             //添加物料
             $('#am_add').on('click', function () {
-                if ($("#O_OrderNo").selectGet() == "") {
-                    ayma.alert.error("请选择订单号！");
-                    return false;
-                }
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + "&orderNo=" + $("#O_OrderNo").selectGet(),
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId ,
                     width: 800,
                     height: 500,
                     maxmin: true,

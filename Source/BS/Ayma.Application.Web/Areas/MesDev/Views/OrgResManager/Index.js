@@ -158,7 +158,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(orderNo)) {
                     ayma.layerConfirm('是否确认提交该单据！', function (res) {
                         if (res) {
-                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: '', type: 1 }, function () {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OrgRes_Post', type: 1 }, function () {
                                 refreshGirdData();
                             });
                         }
