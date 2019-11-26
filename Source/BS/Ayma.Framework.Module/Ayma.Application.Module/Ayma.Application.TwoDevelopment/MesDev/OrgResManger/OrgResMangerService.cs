@@ -153,31 +153,35 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword, string queryJson)
+        public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT  ID G_ID ,
-                                W_Batch G_Batch ,
-                                W_GoodsCode G_GoodsCode ,
-                                W_GoodsName G_GoodsName ,
-                                W_Qty G_Qty ,
-                                W_Price G_Price ,
-                                W_Unit G_Unit ,
-                                W_WorkShop G_WorkShop,
-                                W_WorkShopName G_WorkShopName ,
-                                W_ProceName G_ProceName,
-                                W_ProceCode G_ProceCode
-                        FROM    dbo.Mes_WorkShopScan WHERE 1=1 AND W_Qty <> 0 ");
+            sb.Append(@"SELECT  s.ID ,
+                                s.W_Batch ,
+                                s.W_GoodsCode ,
+                                s.W_GoodsName ,
+                                s.W_Qty ,
+                                s.W_Price ,
+                                s.W_Unit ,
+                                s.W_WorkShop ,
+                                s.W_WorkShopName ,
+                                w.W_SecGoodsCode ,
+                                w.W_SecGoodsName ,
+                                w.W_SecQty ,
+                                w.W_SecBatch ,
+                                w.W_SecUnit
+                         FROM    dbo.Mes_WorkShopWeight w  LEFT JOIN dbo.Mes_WorkShopScan s ON s.W_WorkShop =w.W_WorkShopCode WHERE w.W_WorkShopCode=@workShop  ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
-            //dp.Add("orderNo", queryParam["orderNo"].ToString(), DbType.String);
+            dp.Add("workShop", queryParam["workShop"].ToString(), DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                sb.Append(" AND W_GoodsCode+W_GoodsName like @keyword ");
+                sb.Append(" AND s.W_GoodsCode+s.W_GoodsName like @keyword ");
             }
-            return this.BaseRepository().FindList<GoodsEntity>(sb.ToString(), dp, obj);
+           //this.BaseRepository().FindList<GoodsEntity>(sb.ToString(), dp, obj);
+            return BaseRepository().FindTable(sb.ToString(), dp, obj);
         }
         /// <summary>
         /// 获取Mes_OrgResHead表实体数据

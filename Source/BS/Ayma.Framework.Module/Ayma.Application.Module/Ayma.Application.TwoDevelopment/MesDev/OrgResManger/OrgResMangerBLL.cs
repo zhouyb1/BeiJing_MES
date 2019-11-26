@@ -1,4 +1,5 @@
-﻿using Ayma.Application.TwoDevelopment.MesDev.ScrapManager;
+﻿using System.Data;
+using Ayma.Application.TwoDevelopment.MesDev.ScrapManager;
 using Ayma.Util;
 using System;
 using System.Collections.Generic;
@@ -67,7 +68,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public IEnumerable<GoodsEntity> GetGoodsList(Pagination obj, string keyword, string queryJson)
+        public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             try
             {
