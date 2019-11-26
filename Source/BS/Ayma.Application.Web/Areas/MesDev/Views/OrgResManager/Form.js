@@ -145,7 +145,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 callback: function (rownum, row) {
                                     if (row.O_Qty != undefined && !!row.O_Qty) {
                                         if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.O_Qty.toString().replace('.', ''))) {
-                                            ayma.alert.error("数量必须是非负数.");
+                                            ayma.alert.error("数量必须是非负数");
                                             row.O_Qty = 0;
                                         }
                                       
@@ -165,7 +165,20 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             { label: "物料编码", name: "O_SecGoodsCode", width: 130, align: "left", },
                             { label: "物料名称", name: "O_SecGoodsName", width: 130, align: "left" },
                             { label: "单价", name: "O_SecPrice", width: 60, align: "left" },
-                            { label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'numinput' },
+                            {
+                                label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'numinput' ,
+                                editOp: {
+                                    callback: function (rownum, row) {
+                                        if (row.O_SecQty != undefined && !!row.O_SecQty) {
+                                            if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.O_SecQty.toString().replace('.', ''))) {
+                                                ayma.alert.error("数量必须是非负数");
+                                                row.O_SecQty = 0;
+                                            }
+
+                                        }
+                                    }
+                                }
+                            },
                             { label: "批次", name: "O_SecBatch", width: 80, align: "left" }
                         ]
                     }
