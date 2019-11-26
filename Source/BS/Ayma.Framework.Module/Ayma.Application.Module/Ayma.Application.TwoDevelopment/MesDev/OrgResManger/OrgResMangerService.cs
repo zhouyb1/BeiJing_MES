@@ -167,11 +167,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 W_WorkShopName G_WorkShopName ,
                                 W_ProceName G_ProceName,
                                 W_ProceCode G_ProceCode
-                        FROM    dbo.Mes_WorkShopScan WHERE 1=1 AND W_Qty <> 0 AND W_OrderNo =@orderNo");
+                        FROM    dbo.Mes_WorkShopScan WHERE 1=1 AND W_Qty <> 0 ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
-            dp.Add("orderNo", queryParam["orderNo"].ToString(), DbType.String);
+            //dp.Add("orderNo", queryParam["orderNo"].ToString(), DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
