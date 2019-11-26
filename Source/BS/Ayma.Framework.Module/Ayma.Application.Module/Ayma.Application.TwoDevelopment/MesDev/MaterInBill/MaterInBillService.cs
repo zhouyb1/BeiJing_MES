@@ -846,7 +846,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.M_MaterInNo = mes_MaterInHeadEntityTmp.M_MaterInNo;
-                        item.M_OrderNo = entity.M_OrderNo;
+                        item.M_OrderNo = null;
                         db.Insert(item);
                     }
                 }
@@ -873,7 +873,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.M_MaterInNo = entity.M_MaterInNo;
-                        item.M_OrderNo = entity.M_OrderNo;
+                        item.M_OrderNo = null;
                         //item.M_Kind = entity.M_Kind;
                         db.Insert(item);
                     }
