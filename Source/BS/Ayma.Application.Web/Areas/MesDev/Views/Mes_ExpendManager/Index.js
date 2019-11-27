@@ -45,7 +45,7 @@ var bootstrap = function ($, ayma) {
             }, 220, 600);
             $('#E_Status').DataItemSelect({ code: 'ProOutStatus' });
             $('#E_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' })
-            $('#MonthBalance').DataItemSelect({ code: 'MonthBalance' });
+            //$('#MonthBalance').DataItemSelect({ code: 'MonthBalance' });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();

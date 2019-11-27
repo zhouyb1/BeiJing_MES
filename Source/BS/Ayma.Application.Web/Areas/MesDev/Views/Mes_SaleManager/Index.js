@@ -45,7 +45,7 @@ var bootstrap = function ($, ayma) {
                 page.search(queryJson);
             }, 220, 600);
             $('#S_Status').DataItemSelect({ code: 'ProOutStatus' }); 
-            $('#MonthBalance').DataItemSelect({ code: 'MonthBalance' });
+            //$('#MonthBalance').DataItemSelect({ code: 'MonthBalance' });
             $('#S_CostomCode').DataSourceSelect({ code: 'CustomerList',value: 'c_code', text: 'c_name' });
 
             $('#S_StockCode').select({
