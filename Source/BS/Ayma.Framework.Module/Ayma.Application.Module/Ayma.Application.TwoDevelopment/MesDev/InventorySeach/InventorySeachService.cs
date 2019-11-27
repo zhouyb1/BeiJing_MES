@@ -30,22 +30,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-               sum(t.I_Qty) as I_Qty,
+                sum(t.I_Qty) as I_Qty,
 					t.I_StockCode,
-					t.I_GoodsName,
+					t.I_GoodsName,	
 					t.I_StockName,
 					t.I_GoodsCode,
 					t.I_Unit,
-					t.I_Kind,
+					(select S_Kind from Mes_Stock where S_Code=t.I_StockCode) as S_Kind,
                     (select G_Price from Mes_Goods m where G_Code=t.I_GoodsCode) as Price,
                     (select G_Price from Mes_Goods m where G_Code=t.I_GoodsCode)* sum(t.I_Qty) as AllMoney,
-                    (select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1) as G_Super,
-					(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1) as G_Lower,
-                     case when sum(t.I_Qty)>=(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1 ) and sum(t.I_Qty)<=(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1) then '正常' 
-					 when sum(t.I_Qty)<(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1) then '库存不足' 
-					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and t.I_Kind=1) then  '高于上限预警' else '无' end as G_State
+                    (select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1) as G_Super,
+					(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1) as G_Lower,
+                     case when sum(t.I_Qty)>=(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1 ) and sum(t.I_Qty)<=(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1) then '正常' 
+					 when sum(t.I_Qty)<(select G_Lower from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1) then '库存不足' 
+					 when  sum(t.I_Qty)>(select G_Super from Mes_Goods a where a.G_Code=t.I_GoodsCode and (select S_Kind from Mes_Stock where S_Code=t.I_StockCode)=1) then  '高于上限预警' else '无' end as G_State
                 ");
-                strSql.Append("    FROM Mes_Inventory  t   group by t.I_StockCode,t.I_GoodsName,t.I_StockName,t.I_GoodsCode,t.I_Unit,t.I_Kind ");
+                strSql.Append("   FROM Mes_Inventory  t   group by t.I_StockCode,t.I_GoodsName,t.I_StockName,t.I_GoodsCode,t.I_Unit");
                 strSql.Append("  having sum(t.I_Qty)!=0 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数

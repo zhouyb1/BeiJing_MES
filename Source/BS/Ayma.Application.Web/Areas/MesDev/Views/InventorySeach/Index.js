@@ -78,18 +78,29 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/InventorySeach/GetPageList',
                 headData: [
-                    {label: "仓库编码", name: "I_StockCode", width: 120, align: "left"},
-                    { label: "仓库名称", name: "I_StockName", width: 130, align: "left" },
-                    //{ label: "仓库类型", name: "I_Kind", width: 130, align: "left" },
-                    { label: "商品编码", name: "I_GoodsCode", width: 130, align: "left" },
-                    { label: "商品名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "单位", name: "I_Unit", width: 130, align: "left" },
-                    { label: "数量", name: "I_Qty", width: 130, align: "left" },
-                    { label: "物料价格", name: "Price", width: 130, align: "left" },
-                    { label: "总金额", name: "AllMoney", width: 130, align: "left" },
-                    { label: "下限预警量", name: "G_Lower", width: 130, align: "left" },
-                    { label: "上限预警量", name: "G_Super", width: 130, align: "left" },
-                    { label: "预警状态", name: "G_State", width: 130, align: "left" }
+                    {label: "仓库编码", name: "I_StockCode", width: 114, align: "left"},
+                    { label: "仓库名称", name: "I_StockName", width: 114, align: "left" },
+                    {
+                        label: "仓库类型", name: "S_Kind", width: 115, align: "left",
+                        formatterAsync: function (callback, value, row) {
+                            ayma.clientdata.getAsync('dataItem', {
+                                key: value,
+                                code: 'StockType',
+                                callback: function (_data) {
+                                    callback(_data.text);
+                                }
+                            });
+                        }
+                    },
+                    { label: "商品编码", name: "I_GoodsCode", width: 114, align: "left" },
+                    { label: "商品名称", name: "I_GoodsName", width: 114, align: "left" },
+                    { label: "单位", name: "I_Unit", width: 114, align: "left" },
+                    { label: "数量", name: "I_Qty", width: 114, align: "left" },
+                    { label: "物料价格", name: "Price", width: 114, align: "left" },
+                    { label: "总金额", name: "AllMoney", width: 114, align: "left" },
+                    { label: "下限预警量", name: "G_Lower", width: 114, align: "left" },
+                    { label: "上限预警量", name: "G_Super", width: 114, align: "left" },
+                    { label: "预警状态", name: "G_State", width: 114, align: "left" }
                 ],
                 mainId: 'ID',
                 sidx: "I_StockCode",
