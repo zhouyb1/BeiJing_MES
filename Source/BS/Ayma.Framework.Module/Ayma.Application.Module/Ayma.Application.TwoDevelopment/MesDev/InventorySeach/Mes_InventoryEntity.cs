@@ -134,7 +134,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [NotMapped]
         public decimal? I_Otax { get; set; }
-
+        [NotMapped]
+        public string S_Kind { get; set; }
         #endregion
     }
 }
