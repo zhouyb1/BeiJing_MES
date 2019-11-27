@@ -148,7 +148,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '供应商名称', name: 'M_SupplyName', width: 140, align: 'left', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'input'
+                        label: '备注', name: 'M_Remark', width: 160, align: 'left', editType: 'label'
                     }
                 ],
                 isAutoHeight: false,

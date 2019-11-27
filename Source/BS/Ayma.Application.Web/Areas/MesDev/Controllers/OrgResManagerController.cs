@@ -208,7 +208,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();
             var mes_OrgResDetailList = detailList.ToObject<List<Mes_OrgResDetailEntity>>();
-            if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0))
+            if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0||c.O_SecQty<=0))
             {
                 return Fail("数量只能是大于0的实数");
             }

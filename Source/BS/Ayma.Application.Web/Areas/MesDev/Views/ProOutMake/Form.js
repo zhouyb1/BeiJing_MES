@@ -100,20 +100,14 @@ var bootstrap = function ($, ayma) {
             });
             $('#Mes_ProOutDetail').jfGrid({
                 headData: [
-                    //{
-                    //    label: '出库单号', name: 'P_ProOutNo', width: 160, align: 'left',editType: 'input'
-                    //},
-                    //{
-                    //    label: '生产订单号', name: 'P_OrderNo', width: 160, align: 'left',editType: 'input'
-                    //},
                     {
-                        label: '物料编码', name: 'P_GoodsCode', width: 130, align: 'left', editType: 'input'
+                        label: '物料编码', name: 'P_GoodsCode', width: 130, align: 'left', editType: 'label'
                     },
                     {
-                        label: '物料名称', name: 'P_GoodsName', width: 130, align: 'left', editType: 'input'
+                        label: '物料名称', name: 'P_GoodsName', width: 130, align: 'left', editType: 'label'
                     },
                     {
-                        label: '单位', name: 'P_Unit', width: 100, align: 'left', editType: 'input'
+                        label: '单位', name: 'P_Unit', width: 100, align: 'left', editType: 'label'
                     },
                     {
                         label: '数量', name: 'P_Qty', width: 100, align: 'left', editType: 'input',
@@ -124,7 +118,7 @@ var bootstrap = function ($, ayma) {
                                 //}
                                 if (row.P_Qty != undefined && !!row.P_Qty) {
                                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.P_Qty.toString().replace('.', ''))) {
-                                        ayma.alert.error("数量必须是非负数.");
+                                        ayma.alert.error("数量必须是非负数");
                                         row.P_Qty = 0;
                                     }
                                 }
@@ -137,7 +131,7 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
                     {
-                        label: '价格', name: 'P_Price', width: 60, align: 'left', editType: 'input',
+                        label: '价格', name: 'P_Price', width: 60, align: 'left', editType: 'label',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
@@ -151,7 +145,7 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'input'
+                        label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'label'
                     },
                 ],
                 isAutoHeight: false,
