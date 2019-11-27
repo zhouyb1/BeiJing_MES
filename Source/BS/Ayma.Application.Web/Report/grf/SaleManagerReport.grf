@@ -63,6 +63,9 @@
 		},
 		"Column":[
 			{
+				"Name":"Column1"
+			},
+			{
 				"Name":"S_GoodsCode"
 			},
 			{
@@ -87,6 +90,20 @@
 		"ColumnContent":{
 			"Height":0.79375,
 			"ColumnContentCell":[
+				{
+					"Column":"Column1",
+					"FreeCell":true,
+					"Control":[
+						{
+							"Type":"SystemVarBox",
+							"Name":"SystemVarBox1",
+							"Dock":"Fill",
+							"Center":"Horizontal",
+							"TextAlign":"MiddleCenter",
+							"SystemVar":"RowNo"
+						}
+					]
+				},
 				{
 					"Column":"S_GoodsCode",
 					"TextAlign":"MiddleCenter",
@@ -127,6 +144,12 @@
 		"ColumnTitle":{
 			"Height":0.79375,
 			"ColumnTitleCell":[
+				{
+					"GroupTitle":false,
+					"Column":"Column1",
+					"TextAlign":"MiddleCenter",
+					"Text":"序号"
+				},
 				{
 					"GroupTitle":false,
 					"Column":"S_GoodsCode",
@@ -191,7 +214,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":7.19667,
+					"Left":6.95854,
 					"Top":1.905,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -207,8 +230,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":1.19063,
-					"Top":1.85208,
+					"Left":0.555625,
+					"Top":1.87854,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -223,7 +246,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":8.78417,
+					"Left":8.54604,
 					"Top":1.905,
 					"Width":2.61938,
 					"Height":0.608542,
@@ -231,34 +254,9 @@
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":11.5888,
-					"Top":2.59292,
-					"Width":2.01083,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"是否月结："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox4",
-					"Left":13.5996,
-					"Top":2.59292,
-					"Width":2.98979,
-					"Height":0.608542,
-					"DataField":"MonthBalance"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":1.19063,
-					"Top":2.67229,
+					"Left":0.555625,
+					"Top":2.69875,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -273,7 +271,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":7.19667,
+					"Left":6.95854,
 					"Top":2.67229,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -289,8 +287,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":3.175,
-					"Top":2.67229,
+					"Left":2.54,
+					"Top":2.69875,
 					"Width":3.81,
 					"Height":0.608542,
 					"DataField":"S_CreateDate"
@@ -298,7 +296,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":8.75771,
+					"Left":8.51958,
 					"Top":2.67229,
 					"Width":2.64583,
 					"Height":0.608542,
@@ -308,7 +306,7 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Left":6.58813,
-					"Top":0.291042,
+					"Top":0.211667,
 					"Width":4.60375,
 					"Height":0.79375,
 					"Font":{
@@ -323,8 +321,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":3.175,
-					"Top":1.87854,
+					"Left":2.54,
+					"Top":1.905,
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"S_SaleNo"
@@ -332,8 +330,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":11.5888,
-					"Top":1.93146,
+					"Left":11.5623,
+					"Top":1.905,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -348,8 +346,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":12.991,
-					"Top":1.93146,
+					"Left":12.9646,
+					"Top":1.905,
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"S_CostomName"
@@ -364,8 +362,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":2.2225,
-					"Top":0.926042,
+					"Left":0.740833,
+					"Top":0.820208,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -380,8 +378,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":10.4246,
-					"Top":0.926042,
+					"Left":7.54063,
+					"Top":0.740833,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -396,8 +394,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":4.23333,
-					"Top":0.926042,
+					"Left":2.75167,
+					"Top":0.820208,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"S_Remark"
@@ -405,8 +403,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":12.409,
-					"Top":0.926042,
+					"Left":9.525,
+					"Top":0.740833,
 					"Width":4.20688,
 					"Height":0.582083
 				}

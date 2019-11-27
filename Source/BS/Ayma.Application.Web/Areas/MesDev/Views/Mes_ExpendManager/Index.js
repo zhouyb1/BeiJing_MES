@@ -162,7 +162,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'ExpendManagerReport',
                         title: '消耗单打印',
-                        url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/PrintReport?keyValue=' + keyValue + "&report=ExpendManagerReport&data=ExpendManager",
+                        url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/PrintReport?keyValue=' + keyValue + "&report=MesExpendManagerReport&data=ExpendManager",
                         width: 1000,
                         height: 800,
                         maxmin: true,

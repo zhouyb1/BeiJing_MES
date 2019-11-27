@@ -2593,7 +2593,7 @@
     <Content Include="Report\grf\OtherReport.grf" />
     <Content Include="Report\grf\OtherOutReport.grf" />
     <Content Include="Report\grf\SaleManagerReport.grf" />
-    <Content Include="Report\grf\ExpendManagerReport.grf" />
+    <Content Include="Report\grf\MesExpendManagerReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

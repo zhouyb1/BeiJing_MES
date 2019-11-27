@@ -56,6 +56,9 @@
 		},
 		"Column":[
 			{
+				"Name":"Column1"
+			},
+			{
 				"Name":"E_GoodsCode"
 			},
 			{
@@ -71,13 +74,26 @@
 				"Name":"E_Batch"
 			},
 			{
-				"Name":"E_Price",
-				"Width":2.98979
+				"Name":"E_Price"
 			}
 		],
 		"ColumnContent":{
 			"Height":0.79375,
 			"ColumnContentCell":[
+				{
+					"Column":"Column1",
+					"FreeCell":true,
+					"Control":[
+						{
+							"Type":"SystemVarBox",
+							"Name":"SystemVarBox1",
+							"Dock":"Fill",
+							"Center":"Horizontal",
+							"TextAlign":"MiddleCenter",
+							"SystemVar":"RowNo"
+						}
+					]
+				},
 				{
 					"Column":"E_GoodsCode",
 					"TextAlign":"MiddleCenter",
@@ -113,6 +129,12 @@
 		"ColumnTitle":{
 			"Height":0.79375,
 			"ColumnTitleCell":[
+				{
+					"GroupTitle":false,
+					"Column":"Column1",
+					"TextAlign":"MiddleCenter",
+					"Text":"序号"
+				},
 				{
 					"GroupTitle":false,
 					"Column":"E_GoodsCode",
@@ -171,8 +193,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":7.69938,
-					"Top":1.93146,
+					"Left":10.3981,
+					"Top":1.87854,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -187,7 +209,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":1.69333,
+					"Left":2.01083,
 					"Top":1.87854,
 					"Width":1.79917,
 					"Height":0.635,
@@ -203,8 +225,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":9.28688,
-					"Top":1.93146,
+					"Left":11.9856,
+					"Top":1.87854,
 					"Width":2.61938,
 					"Height":0.608542,
 					"DataField":"E_StockName"
@@ -212,7 +234,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":1.69333,
+					"Left":2.01083,
 					"Top":2.69875,
 					"Width":1.79917,
 					"Height":0.608542,
@@ -228,8 +250,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":7.69938,
-					"Top":2.69875,
+					"Left":10.3981,
+					"Top":2.64583,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -244,7 +266,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":3.67771,
+					"Left":3.99521,
 					"Top":2.69875,
 					"Width":3.81,
 					"Height":0.608542,
@@ -253,8 +275,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":9.26042,
-					"Top":2.69875,
+					"Left":11.9592,
+					"Top":2.64583,
 					"Width":2.64583,
 					"Height":0.608542,
 					"DataField":"E_CreateBy"
@@ -262,8 +284,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
-					"Left":5.00063,
-					"Top":0.211667,
+					"Left":6.40292,
 					"Width":5.3975,
 					"Height":0.79375,
 					"Font":{
@@ -278,36 +299,11 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":3.67771,
+					"Left":3.99521,
 					"Top":1.905,
 					"Width":3.73063,
 					"Height":0.608542,
 					"DataField":"E_ExpendNo"
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"StaticBox8",
-					"Left":12.065,
-					"Top":2.67229,
-					"Width":1.74625,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"是否月结："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox8",
-					"Left":13.5996,
-					"Top":2.67229,
-					"Width":2.59292,
-					"Height":0.608542,
-					"DataField":"MonthBalance"
 				}
 			]
 		}
@@ -319,7 +315,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.582083,
+					"Left":1.87854,
 					"Top":0.926042,
 					"Width":1.98438,
 					"Height":0.582083,
@@ -335,8 +331,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":8.78417,
-					"Top":0.926042,
+					"Left":9.525,
+					"Top":0.978958,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -351,7 +347,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":2.59292,
+					"Left":3.88938,
 					"Top":0.926042,
 					"Width":4.20688,
 					"Height":0.582083,
@@ -360,8 +356,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":10.7685,
-					"Top":0.926042,
+					"Left":11.5094,
+					"Top":0.978958,
 					"Width":4.20688,
 					"Height":0.582083
 				}

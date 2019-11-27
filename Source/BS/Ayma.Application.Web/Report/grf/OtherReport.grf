@@ -82,28 +82,34 @@
 							"Name":"SystemVarBox1",
 							"Dock":"Fill",
 							"Center":"Horizontal",
+							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
 						}
 					]
 				},
 				{
 					"Column":"O_GoodsCode",
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_GoodsCode"
 				},
 				{
 					"Column":"O_GoodsName",
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_GoodsName"
 				},
 				{
 					"Column":"O_Qty",
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_Unit"
 				},
 				{
 					"Column":"O_Unit",
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_Qty"
 				},
 				{
 					"Column":"O_Batch",
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_Batch"
 				}
 			]
@@ -169,8 +175,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.40292,
-					"Top":1.82563,
+					"Left":9.55146,
+					"Top":1.74625,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -185,8 +191,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.608542,
-					"Top":1.77271,
+					"Left":1.74625,
+					"Top":1.85208,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -201,42 +207,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":7.99042,
-					"Top":1.82563,
+					"Left":11.139,
+					"Top":1.74625,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"O_StockName"
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":0.608542,
-					"Top":2.59292,
-					"Width":1.98438,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"是否月结："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox4",
-					"Left":2.59292,
-					"Top":2.59292,
-					"Width":3.41313,
-					"Height":0.608542,
-					"DataField":"MonthBalance"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":6.19125,
-					"Top":2.59292,
+					"Left":1.74625,
+					"Top":2.80458,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -251,8 +232,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":12.0121,
-					"Top":2.59292,
+					"Left":9.47208,
+					"Top":2.69875,
 					"Width":1.37583,
 					"Height":0.608542,
 					"Font":{
@@ -267,8 +248,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":7.99042,
-					"Top":2.59292,
+					"Left":3.54542,
+					"Top":2.80458,
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"O_CreateDate"
@@ -276,8 +257,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.3879,
-					"Top":2.59292,
+					"Left":10.8479,
+					"Top":2.69875,
 					"Width":3.62479,
 					"Height":0.608542,
 					"DataField":"O_CreateBy"
@@ -285,7 +266,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
-					"Left":5.3975,
+					"Left":6.19125,
 					"Top":0.211667,
 					"Width":4.60375,
 					"Height":0.79375,
@@ -301,8 +282,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.59292,
-					"Top":1.79917,
+					"Left":3.73063,
+					"Top":1.87854,
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"O_OtherInNo"
@@ -317,8 +298,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.185208,
-					"Top":0.740833,
+					"Left":1.85208,
+					"Top":0.899583,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -333,8 +314,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":8.38729,
-					"Top":0.740833,
+					"Left":8.54604,
+					"Top":0.926042,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -349,8 +330,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":2.19604,
-					"Top":0.740833,
+					"Left":3.86292,
+					"Top":0.899583,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"O_Remark"
@@ -358,8 +339,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":10.3717,
-					"Top":0.740833,
+					"Left":10.5304,
+					"Top":0.926042,
 					"Width":4.20688,
 					"Height":0.582083
 				}
