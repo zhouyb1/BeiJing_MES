@@ -101,15 +101,17 @@ var bootstrap = function ($, ayma) {
                         }
                     });
                 }
-            });    // 编辑
+            });
+            // 编辑
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 selectedRow = $('#girdtable').jfGridGet('rowdata');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'OtherHead',
                         title: '编辑其它出库单',
-                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?keyValue=' + keyValue + '&formId=OtherHead',
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?status=' + status + '&keyValue=' + keyValue + '&formId=OtherHead',
                         width: 900,
                         height: 650,
                         maxmin: true,

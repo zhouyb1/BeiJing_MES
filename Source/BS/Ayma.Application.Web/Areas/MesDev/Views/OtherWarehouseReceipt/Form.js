@@ -55,15 +55,11 @@ var bootstrap = function ($, ayma) {
             });
             //添加商品
             $("#am_add").on("click", function () {
-                if ($("#O_StockCode").val() == "") {
-                    ayma.alert.error("请选择仓库！");
-                    return false;
-                }
                 var code = $('#M_SupplyCode').selectGet();
                     ayma.layerForm({
                         id: 'GoodsListIndexForm',
                         title: '添加物料',
-                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/GoodsListIndex?formId=' + parentFormId + '&O_StockCode=' + $("#O_StockCode").val(),
+                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/GoodsListIndex?formId=' + parentFormId,
                         width: 750,
                         height: 600,
                         maxmin: true,
