@@ -22,9 +22,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status==2) {
                 $("#R_StockName").attr('readonly', true);
                 $('#R_StockToName').attr('readonly', true);
-                $('#P_OrderNo').attr('readonly', true);
                 $('#R_StockToName').attr('readonly', true);
-                $('#P_OrderDate').attr('disabled', true);
             }
             var dfop = {
                 type: 'default',
@@ -93,21 +91,20 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             }
             //生产订单号
-            $('#P_OrderNo').select({
-                type: 'default',
-                value: 'P_OrderNo',
-                text: 'P_OrderNo',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
-                // 访问数据接口参数
-                param: { orderNo: orderNo }
-            });
+            //$('#P_OrderNo').select({
+            //    type: 'default',
+            //    value: 'P_OrderNo',
+            //    text: 'P_OrderNo',
+            //    // 展开最大高度
+            //    maxHeight: 200,
+            //    // 是否允许搜索
+            //    allowSearch: true,
+            //    // 访问数据接口地址
+            //    url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+            //    // 访问数据接口参数
+            //    param: { orderNo: orderNo }
+            //});
             //单据状态
-            $("#R_Status").DataItemSelect({ code: 'RequistStatus' });
             //添加商品
             $("#am_add").on("click", function () {
                 var stockCode = $('#R_StockCode').val();
