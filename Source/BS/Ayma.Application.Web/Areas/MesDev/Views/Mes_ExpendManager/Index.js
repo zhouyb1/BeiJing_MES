@@ -140,8 +140,9 @@ var bootstrap = function ($, ayma) {
             // 删除
             $('#am_delete').on('click', function () {
                 var status = $("#girdtable").jfGridValue("E_Status");
+                var orderNo = $("#girdtable").jfGridValue("E_ExpendNo");
                 var keyValue = $("#girdtable").jfGridValue("ID");
-                if (ayma.checkrow(keyValue)) {
+                if (ayma.checkrow(orderNo)) {
                     if (status == 2) {
                         ayma.alert.error("已审核的不能删除");
                         return false;
