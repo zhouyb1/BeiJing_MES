@@ -222,8 +222,8 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.M_Unit,
                                     d.M_Qty,
                                     d.M_Batch,
-                                    (d.M_Qty*g.G_Price) Amount,
-                                    g.G_Price,
+                                    (d.M_Qty*d.M_Price) Amount,
+                                    d.M_Price,
                                     d.M_Remark
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
