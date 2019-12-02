@@ -212,9 +212,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.9525,
+					"Left":0.608542,
 					"Top":1.48167,
-					"Width":1.00542,
+					"Width":0.978958,
 					"Height":0.582083,
 					"TextAlign":"TopRight",
 					"Text":"单号:"
@@ -222,7 +222,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox1",
-					"Left":1.95792,
+					"Left":1.69333,
 					"Top":1.48167,
 					"Width":2.59292,
 					"Height":0.582083,
@@ -231,7 +231,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":6.82625,
+					"Left":9.60438,
 					"Top":1.48167,
 					"Width":2.01083,
 					"Height":0.582083,
@@ -241,7 +241,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":8.44021,
+					"Left":11.2183,
 					"Top":1.48167,
 					"Width":2.59292,
 					"Height":0.582083,
@@ -271,9 +271,9 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":2.06375,
+					"Left":2.40771,
 					"Top":1.48167,
-					"Width":3.01625,
+					"Width":2.98979,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
 					"DataField":"B_BackSupplyNo"
@@ -281,7 +281,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":6.85271,
+					"Left":9.63083,
 					"Top":2.38125,
 					"Width":1.34938,
 					"Height":0.582083,
@@ -291,7 +291,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":8.38729,
+					"Left":11.1654,
 					"Top":2.40771,
 					"Width":4.02167,
 					"Height":0.582083,
@@ -318,8 +318,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":11.0067,
-					"Top":0.211667,
+					"Left":9.73667,
+					"Top":0.185208,
 					"Width":2.59292,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
@@ -329,17 +329,17 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
 					"Left":0.211667,
-					"Top":1.00542,
+					"Top":1.19063,
 					"Width":2.59292,
-					"Height":0.582083,
+					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"Text":"收货人签名:"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":11.0067,
-					"Top":1.19063,
+					"Left":9.73667,
+					"Top":1.16417,
 					"Width":2.59292,
 					"Height":0.608542,
 					"TextAlign":"TopLeft",
@@ -348,7 +348,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":1.79917,
+					"Left":2.01083,
 					"Top":0.211667,
 					"Width":3.99521,
 					"Height":0.582083,

@@ -170,7 +170,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":5.3975,
+			"Height":4.39208,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -314,8 +314,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":8.54604,
-					"Top":0.926042,
+					"Left":9.65729,
+					"Top":0.873125,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -339,8 +339,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":10.5304,
-					"Top":0.926042,
+					"Left":11.6417,
+					"Top":0.873125,
 					"Width":4.20688,
 					"Height":0.582083
 				}

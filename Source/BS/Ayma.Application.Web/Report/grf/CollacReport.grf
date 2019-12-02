@@ -201,7 +201,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":11.721,
+					"Left":11.5888,
 					"Top":1.79917,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -217,7 +217,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":6.40292,
+					"Left":6.48229,
 					"Top":1.79917,
 					"Width":1.5875,
 					"Height":0.608542,
@@ -249,7 +249,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":7.99042,
+					"Left":8.06979,
 					"Top":1.79917,
 					"Width":3.41313,
 					"Height":0.608542,
@@ -258,7 +258,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":13.1233,
+					"Left":12.991,
 					"Top":1.79917,
 					"Width":3.59833,
 					"Height":0.608542,
@@ -267,7 +267,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.767292,
+					"Left":0.608542,
 					"Top":2.69875,
 					"Width":1.79917,
 					"Height":0.608542,
@@ -283,7 +283,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":6.24417,
+					"Left":11.6681,
 					"Top":2.75167,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -299,17 +299,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.56646,
+					"Left":2.40771,
 					"Top":2.69875,
-					"Width":3.41313,
+					"Width":3.38667,
 					"Height":0.608542,
 					"DataField":"C_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":7.64646,
-					"Top":2.75167,
+					"Left":13.0704,
+					"Top":2.80458,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"C_CreateBy"
@@ -398,8 +398,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
-					"Left":8.65188,
-					"Top":1.87854,
+					"Left":11.4565,
+					"Top":1.79917,
 					"Width":2.01083,
 					"Height":0.396875,
 					"Font":{
@@ -414,8 +414,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":10.6627,
-					"Top":1.87854,
+					"Left":13.4673,
+					"Top":1.79917,
 					"Width":3.38667,
 					"Height":0.396875
 				}

@@ -56,15 +56,15 @@
 			},
 			{
 				"Name":"S_GoodsName",
-				"Width":2.98979
+				"Width":2.59292
 			},
 			{
 				"Name":"S_Unit",
-				"Width":1.00542
+				"Width":2.01083
 			},
 			{
 				"Name":"S_Qty",
-				"Width":1.79917
+				"Width":2.19604
 			},
 			{
 				"Name":"S_Batch",
@@ -82,7 +82,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-1.08479,
-							"Width":3.09563,
+							"Width":3.06917,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -218,7 +218,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":5.55625,
+					"Left":6.95854,
 					"Top":2.96333,
 					"Width":1.74625,
 					"Height":0.582083,
@@ -234,7 +234,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":7.11729,
+					"Left":8.51958,
 					"Top":2.98979,
 					"Width":3.59833,
 					"Height":0.555625,
@@ -276,9 +276,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.687917,
-					"Top":1.27,
-					"Width":1.98438,
+					"Left":0.9525,
+					"Top":1.29646,
+					"Width":1.77271,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -292,8 +292,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":6.74688,
-					"Top":1.27,
+					"Left":7.54063,
+					"Top":1.24354,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -308,17 +308,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":2.67229,
-					"Top":1.27,
-					"Width":4.20688,
+					"Left":2.93688,
+					"Top":1.29646,
+					"Width":3.43958,
 					"Height":0.582083,
 					"DataField":"S_Remark"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":8.46667,
-					"Top":1.24354,
+					"Left":9.26042,
+					"Top":1.21708,
 					"Width":4.20688,
 					"Height":0.582083
 				}

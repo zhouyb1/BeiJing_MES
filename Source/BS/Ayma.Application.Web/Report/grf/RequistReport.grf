@@ -174,8 +174,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":11.4035,
-					"Top":2.01083,
+					"Left":10.9008,
+					"Top":1.98438,
 					"Width":1.40229,
 					"Height":0.582083,
 					"Font":{
@@ -190,10 +190,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.449792,
-					"Top":2.93688,
-					"Width":1.61396,
-					"Height":0.582083,
+					"Left":0.396875,
+					"Top":2.98979,
+					"Width":1.79917,
+					"Height":0.423333,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -222,17 +222,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":2.06375,
-					"Top":2.93688,
-					"Width":3.38667,
-					"Height":0.582083,
+					"Left":2.19604,
+					"Top":2.98979,
+					"Width":3.41313,
+					"Height":0.608542,
 					"DataField":"R_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":12.8058,
-					"Top":2.01083,
+					"Left":12.3031,
+					"Top":1.98438,
 					"Width":3.59833,
 					"Height":0.582083,
 					"DataField":"R_StockName"
@@ -257,7 +257,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.09021,
+					"Left":2.19604,
 					"Top":2.01083,
 					"Width":3.59833,
 					"Height":0.582083,
@@ -284,15 +284,15 @@
 					"Name":"FieldBox10",
 					"Left":7.51417,
 					"Top":1.85208,
-					"Width":3.59833,
+					"Width":3.09563,
 					"Height":0.79375,
 					"DataField":"R_StockToName"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
-					"Left":5.79438,
-					"Top":2.98979,
+					"Left":10.9273,
+					"Top":2.96333,
 					"Width":1.79917,
 					"Height":0.423333,
 					"Font":{
@@ -307,8 +307,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox11",
-					"Left":7.40833,
-					"Top":2.80458,
+					"Left":12.5413,
+					"Top":2.77813,
 					"Width":3.59833,
 					"Height":0.79375,
 					"DataField":"R_CreateBy"
@@ -339,8 +339,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":8.86354,
-					"Top":1.29646,
+					"Left":10.9273,
+					"Top":1.27,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -364,8 +364,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":10.8479,
-					"Top":1.29646,
+					"Left":12.9117,
+					"Top":1.27,
 					"Width":4.20688,
 					"Height":0.582083
 				}

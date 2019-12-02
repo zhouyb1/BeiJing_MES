@@ -168,7 +168,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.93208,
+					"Left":8.20208,
 					"Top":1.66688,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -225,7 +225,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":8.33438,
+					"Left":9.76313,
 					"Top":1.66688,
 					"Width":3.59833,
 					"Height":0.608542,
@@ -260,7 +260,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":6.79979,
+					"Left":8.22854,
 					"Top":2.75167,
 					"Width":1.5875,
 					"Height":0.608542,
@@ -276,7 +276,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":8.38729,
+					"Left":9.81604,
 					"Top":2.75167,
 					"Width":3.41313,
 					"Height":0.608542,
@@ -292,8 +292,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.396875,
-					"Top":1.29646,
+					"Left":0.608542,
+					"Top":1.27,
 					"Width":2.01083,
 					"Height":0.582083,
 					"Font":{
@@ -308,8 +308,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":8.86354,
-					"Top":1.29646,
+					"Left":8.255,
+					"Top":1.27,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -324,8 +324,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":2.64583,
-					"Top":1.29646,
+					"Left":2.8575,
+					"Top":1.27,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"O_Remark"
@@ -333,8 +333,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":10.8479,
-					"Top":1.29646,
+					"Left":10.2394,
+					"Top":1.27,
 					"Width":4.20688,
 					"Height":0.582083
 				}

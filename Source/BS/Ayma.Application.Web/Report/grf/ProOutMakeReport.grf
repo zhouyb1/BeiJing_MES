@@ -171,8 +171,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.77333,
-					"Top":1.77271,
+					"Left":7.19667,
+					"Top":1.79917,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -187,7 +187,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.449792,
+					"Left":0.582083,
 					"Top":2.67229,
 					"Width":1.61396,
 					"Height":0.608542,
@@ -219,17 +219,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":2.06375,
+					"Left":2.40771,
 					"Top":2.67229,
-					"Width":3.14854,
+					"Width":2.98979,
 					"Height":0.608542,
 					"DataField":"P_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":7.96396,
-					"Top":1.77271,
+					"Left":8.81062,
+					"Top":1.79917,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"P_StockName"
@@ -263,8 +263,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":6.6675,
-					"Top":2.64583,
+					"Left":7.17021,
+					"Top":2.67229,
 					"Width":1.61396,
 					"Height":0.608542,
 					"Font":{
@@ -279,8 +279,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":8.28146,
-					"Top":2.64583,
+					"Left":8.81062,
+					"Top":2.67229,
 					"Width":3.38667,
 					"Height":0.608542,
 					"DataField":"P_CreateBy"
@@ -295,7 +295,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.396875,
+					"Left":0.47625,
 					"Top":1.29646,
 					"Width":2.01083,
 					"Height":0.582083,
@@ -311,8 +311,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":8.86354,
-					"Top":1.29646,
+					"Left":7.27604,
+					"Top":1.27,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -327,7 +327,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":2.64583,
+					"Left":2.72521,
 					"Top":1.29646,
 					"Width":4.20688,
 					"Height":0.582083,
@@ -336,8 +336,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":10.8479,
-					"Top":1.29646,
+					"Left":9.26042,
+					"Top":1.27,
 					"Width":4.20688,
 					"Height":0.582083
 				}
