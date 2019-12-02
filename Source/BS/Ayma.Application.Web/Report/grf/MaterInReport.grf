@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.6.6.2",
+	"Version":"6.5.0.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -64,7 +64,7 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":5.3975
+				"Width":3.81
 			},
 			{
 				"Name":"C_Qty",
@@ -90,7 +90,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.370417,
-							"Width":2.72521,
+							"Width":2.69875,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -180,10 +180,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.40292,
-					"Top":1.82563,
+					"Left":6.0325,
+					"Top":2.43417,
 					"Width":1.40229,
-					"Height":0.608542,
+					"Height":0.555625,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -196,9 +196,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.608542,
-					"Top":1.77271,
-					"Width":1.79917,
+					"Left":0.238125,
+					"Top":2.38125,
+					"Width":1.77271,
 					"Height":0.635,
 					"Font":{
 						"Name":"宋体",
@@ -212,58 +212,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":7.99042,
-					"Top":1.82563,
-					"Width":3.59833,
+					"Left":7.43479,
+					"Top":2.40771,
+					"Width":2.96333,
 					"Height":0.608542,
 					"DataField":"M_StockName"
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":0.608542,
-					"Top":2.59292,
-					"Width":1.98438,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"生产订单号："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox4",
-					"Left":2.59292,
-					"Top":2.59292,
-					"Width":3.41313,
-					"Height":0.608542,
-					"DataField":"M_OrderNo"
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"StaticBox6",
-					"Left":6.19125,
-					"Top":2.59292,
-					"Width":1.79917,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":12.0121,
-					"Top":2.59292,
+					"Left":10.9538,
+					"Top":2.40771,
 					"Width":1.37583,
 					"Height":0.608542,
 					"Font":{
@@ -277,18 +236,9 @@
 				},
 				{
 					"Type":"FieldBox",
-					"Name":"FieldBox5",
-					"Left":7.99042,
-					"Top":2.59292,
-					"Width":3.20146,
-					"Height":0.608542,
-					"DataField":"M_OrderDate"
-				},
-				{
-					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.3879,
-					"Top":2.59292,
+					"Left":12.3296,
+					"Top":2.40771,
 					"Width":3.62479,
 					"Height":0.608542,
 					"DataField":"M_CreateBy"
@@ -312,11 +262,11 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.59292,
-					"Top":1.79917,
-					"Width":3.41313,
-					"Height":0.608542,
-					"DataField":"M_OrderNo"
+					"Left":2.01083,
+					"Top":2.40771,
+					"Width":3.59833,
+					"Height":0.582083,
+					"DataField":"M_MaterInNo"
 				}
 			]
 		}
@@ -328,10 +278,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":0.608542,
+					"Left":0.211667,
 					"Top":1.00542,
-					"Width":1.98438,
-					"Height":0.396875,
+					"Width":1.79917,
+					"Height":0.58,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -344,10 +294,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
-					"Left":7.80521,
+					"Left":10.3981,
 					"Top":1.00542,
-					"Width":1.98438,
-					"Height":0.396875,
+					"Width":2.01083,
+					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -360,18 +310,18 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":2.64583,
-					"Top":1.87854,
-					"Width":3.41313,
-					"Height":0.396875
+					"Left":12.409,
+					"Top":1.00542,
+					"Width":3.38667,
+					"Height":0.582083
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":2.40771,
+					"Left":2.01083,
 					"Top":1.00542,
 					"Width":3.38667,
-					"Height":0.396875,
+					"Height":0.58,
 					"DataField":"M_Remark"
 				}
 			]
