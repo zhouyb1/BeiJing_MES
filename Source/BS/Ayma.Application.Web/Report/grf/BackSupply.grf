@@ -251,19 +251,19 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox4",
-					"Left":0.820208,
+					"Left":0.608542,
 					"Top":2.38125,
-					"Width":0.978958,
+					"Width":1.98438,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
-					"Text":"日期:"
+					"Text":"单据时间:"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":1.79917,
-					"Top":2.38125,
-					"Width":4.02167,
+					"Left":2.40771,
+					"Top":2.40771,
+					"Width":3.78354,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
 					"DataField":"B_CreateDate"

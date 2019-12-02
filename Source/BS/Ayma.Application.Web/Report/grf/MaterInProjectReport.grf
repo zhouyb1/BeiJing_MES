@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.6.6.2",
+	"Version":"6.5.0.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -11,20 +11,13 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_OrderNo ,\r\n        h.M_OrderDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        d.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\nWHERE   h.M_Status = 2",
+			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_CreateDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        h.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\nWHERE   h.M_Status = 2",
 			"Field":[
 				{
 					"Name":"M_MaterInNo"
 				},
 				{
 					"Name":"M_StockName"
-				},
-				{
-					"Name":"M_OrderNo"
-				},
-				{
-					"Name":"M_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"M_CreateBy"
@@ -50,6 +43,10 @@
 				},
 				{
 					"Name":"M_Remark"
+				},
+				{
+					"Name":"M_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
@@ -64,7 +61,7 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":5.3975
+				"Width":3.01625
 			},
 			{
 				"Name":"C_Qty",
@@ -90,7 +87,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.423333,
-							"Width":2.80458,
+							"Width":2.77813,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -180,8 +177,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.19125,
-					"Top":1.82563,
+					"Left":6.37646,
+					"Top":1.79917,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -212,42 +209,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":7.99042,
-					"Top":1.82563,
+					"Left":8.17563,
+					"Top":1.79917,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"M_StockName"
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":0.608542,
-					"Top":2.59292,
-					"Width":1.98438,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"生产订单号："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox4",
-					"Left":2.80458,
-					"Top":2.59292,
-					"Width":3.38667,
-					"Height":0.608542,
-					"DataField":"M_OrderNo"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":6.19125,
-					"Top":2.59292,
+					"Left":0.740833,
+					"Top":2.72521,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -257,13 +229,13 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":12.0121,
-					"Top":2.59292,
+					"Left":6.56167,
+					"Top":2.72521,
 					"Width":1.37583,
 					"Height":0.608542,
 					"Font":{
@@ -278,17 +250,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":7.99042,
-					"Top":2.59292,
+					"Left":2.54,
+					"Top":2.72521,
 					"Width":3.20146,
 					"Height":0.608542,
-					"DataField":"M_OrderDate"
+					"DataField":"M_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.3879,
-					"Top":2.59292,
+					"Left":7.9375,
+					"Top":2.72521,
 					"Width":3.62479,
 					"Height":0.608542,
 					"DataField":"M_CreateBy"
@@ -315,8 +287,7 @@
 					"Left":2.80458,
 					"Top":1.79917,
 					"Width":3.38667,
-					"Height":0.608542,
-					"DataField":"M_OrderNo"
+					"Height":0.608542
 				}
 			]
 		}

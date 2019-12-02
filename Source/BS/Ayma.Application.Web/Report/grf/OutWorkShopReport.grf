@@ -11,17 +11,10 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OutNo ,\r\n        h.O_OrderNo ,\r\n        h.O_OrderDate ,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Unit ,\r\n        d.O_Qty ,\r\n        d.O_Batch ,\r\n        h.O_StockName\r\nFROM    dbo.Mes_OutWorkShopHead h\r\n        LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo\r\nWHERE   O_Status = 2",
+			"QuerySQL":"SELECT  h.O_OutNo ,\r\n        h.O_CreateBy ,\r\n        h.O_CreateDate ,\r\nh.O_Remark,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Unit ,\r\n        d.O_Qty ,\r\n        d.O_Batch ,\r\n        h.O_StockName\r\nFROM    dbo.Mes_OutWorkShopHead h\r\n        LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo\r\nWHERE   O_Status = 2",
 			"Field":[
 				{
 					"Name":"O_OutNo"
-				},
-				{
-					"Name":"O_OrderNo"
-				},
-				{
-					"Name":"O_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"O_GoodsCode"
@@ -41,6 +34,16 @@
 				},
 				{
 					"Name":"O_StockName"
+				},
+				{
+					"Name":"O_CreateBy"
+				},
+				{
+					"Name":"O_CreateDate",
+					"Type":"DateTime"
+				},
+				{
+					"Name":"O_Remark"
 				}
 			]
 		},
@@ -165,8 +168,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":11.8798,
-					"Top":2.54,
+					"Left":6.93208,
+					"Top":1.66688,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -181,8 +184,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":6.21771,
-					"Top":2.54,
+					"Left":0.608542,
+					"Top":2.77813,
 					"Width":1.5875,
 					"Height":0.608542,
 					"Font":{
@@ -192,13 +195,13 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单号："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.423333,
-					"Top":2.51354,
+					"Left":0.687917,
+					"Top":1.71979,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -213,17 +216,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":7.80521,
-					"Top":2.54,
+					"Left":2.19604,
+					"Top":2.77813,
 					"Width":3.41313,
 					"Height":0.608542,
-					"DataField":"O_OrderNo"
+					"DataField":"O_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":13.2821,
-					"Top":2.54,
+					"Left":8.33438,
+					"Top":1.66688,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"O_StockName"
@@ -248,11 +251,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.09021,
-					"Top":2.51354,
+					"Left":2.35479,
+					"Top":1.71979,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"O_OutNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox9",
+					"Left":6.79979,
+					"Top":2.75167,
+					"Width":1.5875,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制作人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox10",
+					"Left":8.38729,
+					"Top":2.75167,
+					"Width":3.41313,
+					"Height":0.608542,
+					"DataField":"O_CreateBy"
 				}
 			]
 		}
@@ -299,7 +327,8 @@
 					"Left":2.64583,
 					"Top":1.29646,
 					"Width":4.20688,
-					"Height":0.582083
+					"Height":0.582083,
+					"DataField":"O_Remark"
 				},
 				{
 					"Type":"FieldBox",

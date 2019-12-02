@@ -283,7 +283,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",

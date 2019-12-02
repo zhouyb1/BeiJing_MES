@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.6.6.2",
+	"Version":"6.5.0.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -11,17 +11,10 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.R_RequistNo ,\r\n        h.P_OrderNo ,\r\n        h.P_OrderDate ,\r\n        h.R_StockName,\r\n        h.R_StockToName,\r\n        h.R_Remark,\r\n        d.R_GoodsCode ,\r\n        d.R_GoodsName ,\r\n        d.R_Unit ,\r\n        d.R_Qty ,\r\n        d.R_Batch \r\nFROM    dbo.Mes_RequistHead h\r\n        LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo\r\nWHERE   h.R_Status = 2",
+			"QuerySQL":"SELECT  h.R_RequistNo ,\r\n        h.R_CreateBy,\r\n        h.R_CreateDate ,\r\nh.R_Remark,\r\n        h.R_StockName,\r\n        h.R_StockToName,\r\n        h.R_Remark,\r\n        d.R_GoodsCode ,\r\n        d.R_GoodsName ,\r\n        d.R_Unit ,\r\n        d.R_Qty ,\r\n        d.R_Batch \r\nFROM    dbo.Mes_RequistHead h\r\n        LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo\r\nWHERE   h.R_Status = 2",
 			"Field":[
 				{
 					"Name":"R_RequistNo"
-				},
-				{
-					"Name":"P_OrderNo"
-				},
-				{
-					"Name":"P_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"R_StockName"
@@ -47,6 +40,13 @@
 				},
 				{
 					"Name":"R_Batch"
+				},
+				{
+					"Name":"R_CreateBy"
+				},
+				{
+					"Name":"R_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
@@ -190,8 +190,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":5.79438,
-					"Top":2.01083,
+					"Left":0.449792,
+					"Top":2.93688,
 					"Width":1.61396,
 					"Height":0.582083,
 					"Font":{
@@ -201,7 +201,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单号："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
@@ -222,11 +222,11 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":7.40833,
-					"Top":2.01083,
+					"Left":2.06375,
+					"Top":2.93688,
 					"Width":3.38667,
 					"Height":0.582083,
-					"DataField":"P_OrderNo"
+					"DataField":"R_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
@@ -266,8 +266,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":0.396875,
-					"Top":2.98979,
+					"Left":5.715,
+					"Top":2.03729,
 					"Width":1.79917,
 					"Height":0.423333,
 					"Font":{
@@ -282,8 +282,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":2.19604,
-					"Top":2.80458,
+					"Left":7.51417,
+					"Top":1.85208,
 					"Width":3.59833,
 					"Height":0.79375,
 					"DataField":"R_StockToName"
@@ -302,7 +302,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"制作人："
 				},
 				{
 					"Type":"FieldBox",
@@ -311,7 +311,7 @@
 					"Top":2.80458,
 					"Width":3.59833,
 					"Height":0.79375,
-					"DataField":"P_OrderDate"
+					"DataField":"R_CreateBy"
 				}
 			]
 		}
@@ -358,7 +358,8 @@
 					"Left":2.64583,
 					"Top":1.29646,
 					"Width":4.20688,
-					"Height":0.582083
+					"Height":0.582083,
+					"DataField":"R_Remark"
 				},
 				{
 					"Type":"FieldBox",

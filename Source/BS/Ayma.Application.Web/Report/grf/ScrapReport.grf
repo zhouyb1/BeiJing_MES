@@ -12,14 +12,10 @@
 		"CenterView":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.S_ScrapNo ,\r\n        h.S_CreateDate ,\r\n        h.S_Remark ,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Unit ,\r\n        d.S_Qty ,\r\n        d.S_Batch\r\nFROM    dbo.Mes_ScrapHead h\r\n        LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo",
+			"QuerySQL":"SELECT  h.S_ScrapNo ,\r\n        h.S_CreateDate ,\r\n        h.S_Remark ,\r\nh.S_CreateBy,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Unit ,\r\n        d.S_Qty ,\r\n        d.S_Batch\r\nFROM    dbo.Mes_ScrapHead h\r\n        LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo",
 			"Field":[
 				{
 					"Name":"S_ScrapNo"
-				},
-				{
-					"Name":"S_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"S_Remark"
@@ -41,11 +37,11 @@
 					"Name":"S_Batch"
 				},
 				{
-					"Name":"F_RowIndex"
-				},
-				{
 					"Name":"S_CreateDate",
 					"Type":"DateTime"
+				},
+				{
+					"Name":"S_CreateBy"
 				}
 			]
 		},
@@ -86,7 +82,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-1.08479,
-							"Width":3.12208,
+							"Width":3.09563,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -181,9 +177,9 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
 					"Center":"Both",
-					"Left":3.86292,
+					"Left":3.81,
 					"Top":1.69333,
-					"Width":8.30792,
+					"Width":8.38729,
 					"Height":1.00542,
 					"Font":{
 						"Name":"宋体",
@@ -197,8 +193,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.3175,
-					"Top":3.22792,
+					"Left":0.423333,
+					"Top":2.93688,
 					"Width":1.82563,
 					"Height":0.608542,
 					"Font":{
@@ -213,8 +209,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox1",
-					"Left":1.95792,
-					"Top":3.22792,
+					"Left":2.06375,
+					"Top":2.93688,
 					"Width":2.98979,
 					"Height":0.608542,
 					"DataField":"S_ScrapNo"
@@ -222,8 +218,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":6.32354,
-					"Top":3.175,
+					"Left":5.55625,
+					"Top":2.96333,
 					"Width":1.74625,
 					"Height":0.582083,
 					"Font":{
@@ -238,11 +234,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":7.88458,
-					"Top":3.20146,
+					"Left":7.11729,
+					"Top":2.98979,
 					"Width":3.59833,
 					"Height":0.555625,
 					"DataField":"S_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox8",
+					"Left":0.449792,
+					"Top":3.65125,
+					"Width":1.74625,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制作人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox7",
+					"Left":2.01083,
+					"Top":3.67771,
+					"Width":3.59833,
+					"Height":0.555625,
+					"DataField":"S_CreateBy"
 				}
 			]
 		}
@@ -290,7 +311,8 @@
 					"Left":2.67229,
 					"Top":1.27,
 					"Width":4.20688,
-					"Height":0.582083
+					"Height":0.582083,
+					"DataField":"S_Remark"
 				},
 				{
 					"Type":"FieldBox",

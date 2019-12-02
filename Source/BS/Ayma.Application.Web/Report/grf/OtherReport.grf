@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OtherInNo ,\r\n        h.O_StockName ,\r\n        h.O_CreateDate ,\r\n        h.O_CreateBy ,\r\n\t\th.MonthBalance,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Qty ,\r\n        d.O_Unit,\r\n\t\td.O_Remark,\r\n\t\td.O_Batch\r\nFROM    dbo.Mes_OtherInHead h\r\n        LEFT JOIN dbo.Mes_OtherInDetail d ON h.O_OtherInNo = d.O_OtherInNo\r\nWHERE   O_Status = 2",
+			"QuerySQL":"SELECT  h.O_OtherInNo ,\r\n        h.O_StockName ,\r\n        h.O_CreateDate ,\r\n        h.O_CreateBy ,\r\n\t\th.MonthBalance,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Qty ,\r\n        d.O_Unit,\r\n\t\th.O_Remark,\r\n\t\td.O_Batch\r\nFROM    dbo.Mes_OtherInHead h\r\n        LEFT JOIN dbo.Mes_OtherInDetail d ON h.O_OtherInNo = d.O_OtherInNo\r\nWHERE   O_Status = 2",
 			"Field":[
 				{
 					"Name":"O_OtherInNo"
@@ -227,7 +227,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",

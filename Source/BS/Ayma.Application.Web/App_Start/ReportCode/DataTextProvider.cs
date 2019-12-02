@@ -59,8 +59,9 @@ using MyDbReportData = DatabaseXmlReportData;
                     t.C_CollarNo ,
                     t.C_StockName ,
                     t.C_StockToName ,
-                    t.P_OrderNo ,
-                    t.P_OrderDate ,
+                    t.C_CreateBy,
+                    t.C_CreateDate,
+                    t.C_Remark,
                     t.C_CreateBy,
                     d.C_Unit,
                     d.C_Qty,
@@ -111,8 +112,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string Scrap(string doucno)
         {
             string sql = @"SELECT   h.S_ScrapNo ,
-                                    h.S_OrderDate ,
-                                    h.S_Remark ,
+                                    h.S_CreateDate,
+                                    h.S_CreateBy,
+                                    h.S_Remark,
                                     d.S_GoodsCode ,
                                     d.S_GoodsName ,
                                     d.S_Unit ,
@@ -134,7 +136,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string BackStock(string doucno)
         {
             var strsql = @"SELECT  h.B_BackStockNo ,
-                                    h.B_OrderDate ,
+                                    h.B_CreateDate,
+                                    h.B_CreateBy,
+                                    h.B_Remark,
                                     h.B_StockName ,
                                     h.B_StockToName ,
                                     d.B_GoodsCode ,
@@ -158,7 +162,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string OrgRes(string doucno)
         {
             var strSql = @"    SELECT  h.O_OrgResNo ,
-                                    h.O_OrderNo,
+                                    h.O_CreateDate,
+                                    h.O_CreateBy,
+                                    h.O_Remark,
                                     h.O_WorkShopName,
                                     d.O_GoodsName ,
                                     d.O_Qty,
@@ -192,7 +198,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 d.S_GoodsName ,
                                 d.S_Qty ,
                                 d.S_Unit,
-		                        d.S_Remark,
+		                        h.S_Remark,
 		                        d.S_Batch,
 		                        d.S_Otax,
 		                        d.S_Price
@@ -213,8 +219,8 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @" SELECT  h.M_MaterInNo ,
                                     h.M_StockName ,
-                                    h.M_OrderNo ,
-                                    h.M_OrderDate ,
+                                    h.M_CreateDate,
+                                    h.M_CreateBy,
                                     h.M_CreateBy ,
                                     d.M_GoodsCode ,
                                     d.M_GoodsName ,
@@ -224,7 +230,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.M_Batch,
                                     (d.M_Qty*d.M_Price) Amount,
                                     d.M_Price,
-                                    d.M_Remark
+                                    h.M_Remark
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
                                     LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode
@@ -253,7 +259,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.E_Qty,
 		                            d.E_Batch,
 		                            d.E_Price,
-		                            d.E_Remark
+		                            h.E_Remark
                             FROM    dbo.Mes_ExpendHead h
                                     LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo
                             WHERE   h.E_ExpendNo='{0}' and h.E_Status=2";
@@ -279,7 +285,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.O_GoodsName ,
                                     d.O_Qty ,
                                     d.O_Unit,
-		                            d.O_Remark,
+		                            h.O_Remark,
 		                            d.O_Batch
                             FROM    dbo.Mes_OtherInHead h
                                     LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)
@@ -298,16 +304,16 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @" SELECT  h.M_MaterInNo ,
                                     h.M_StockName ,
-                                    h.M_OrderNo ,
-                                    h.M_OrderDate ,
+                                    h.M_CreateDate,
+                                    h.M_CreateBy,
+                                    h.M_Remark,
                                     h.M_CreateBy ,
                                     d.M_GoodsCode ,
                                     d.M_GoodsName ,
                                     d.M_Kind,
                                     d.M_Unit,
                                     d.M_Qty,
-                                    d.M_Batch,
-                                    d.M_Remark
+                                    d.M_Batch
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
                             WHERE   h.M_MaterInNo='{0}' and h.M_Status=2";
@@ -324,11 +330,11 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string Requist(string doucno)
         {
             var strSql = @" SELECT  h.R_RequistNo ,
-                                    h.P_OrderNo ,
-                                    h.P_OrderDate ,
+                                    h.R_CreateDate,
+                                    h.R_CreateBy,
+                                    h.R_Remark,
                                     h.R_StockName,
                                     h.R_StockToName,
-                                    h.R_Remark,
                                     d.R_GoodsCode ,
                                     d.R_GoodsName ,
                                     d.R_Unit ,
@@ -350,7 +356,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string ProductOrder(string doucno)
         {
             var strSql = @"SELECT   h.P_OrderNo ,
-                                    h.P_OrderDate ,
+                                    h.P_CreateDate ,
+                                     h.P_CreateBy,
+                                    h.P_Remark,
                                     h.P_OrderStationName,
                                     d.P_GoodsCode ,
                                     d.P_GoodsName ,
@@ -809,8 +817,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string OutWorkShop(string doucno)
         {
             var sql = @"SELECT  h.O_OutNo ,
-                                h.O_OrderNo ,
-                                h.O_OrderDate ,
+                                h.O_CreateDate,
+                                h.O_CreateBy,
+                                h.O_Remark,
                                 d.O_GoodsCode ,
                                 d.O_GoodsName ,
                                 d.O_Unit ,
@@ -832,8 +841,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string InWorkShop(string doucno)
         {
             var sql = @"SELECT  h.I_InNo ,
-                                h.I_OrderNo ,
-                                h.I_OrderDate ,
+                               h.I_CreateDate,
+                               h.I_CreateBy,
+                               h.I_Remark,
                                 d.I_GoodsCode ,
                                 d.I_GoodsName ,
                                 d.I_Unit ,
@@ -855,8 +865,9 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string ProOutMake(string doucno)
         {
             var sql = @"SELECT  h.P_ProOutNo ,
-                                h.P_OrderNo ,
-                                h.P_OrderDate ,
+                                h.P_CreateDate,
+                                h.P_CreateBy,
+                                h.P_Remark,
                                 d.P_GoodsCode ,
                                 d.P_GoodsName ,
                                 d.P_Unit ,

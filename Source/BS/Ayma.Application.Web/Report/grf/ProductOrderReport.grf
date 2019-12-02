@@ -1,5 +1,5 @@
 ﻿{
-	"Version":"6.6.6.2",
+	"Version":"6.5.0.0",
 	"Font":{
 		"Name":"宋体",
 		"Size":105000,
@@ -11,14 +11,10 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.P_OrderNo ,\r\n        h.P_OrderDate ,\r\n        h.P_OrderStationName,\r\n        d.P_GoodsCode ,\r\n        d.P_GoodsName ,\r\n        d.P_Qty ,\r\n        d.P_Unit \r\nFROM    dbo.Mes_ProductOrderHead h\r\n        LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo\r\nWHERE   h.P_Status = 2",
+			"QuerySQL":"SELECT  h.P_OrderNo ,\r\n        h.P_CreateDate ,\r\nh.P_CreateBy,\r\n        h.P_OrderStationName,\r\n        d.P_GoodsCode ,\r\n        d.P_GoodsName ,\r\n        d.P_Qty ,\r\n        d.P_Unit \r\nFROM    dbo.Mes_ProductOrderHead h\r\n        LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo\r\nWHERE   h.P_Status = 2",
 			"Field":[
 				{
 					"Name":"P_OrderNo"
-				},
-				{
-					"Name":"P_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"P_OrderStationName"
@@ -35,6 +31,13 @@
 				},
 				{
 					"Name":"P_Unit"
+				},
+				{
+					"Name":"P_CreateDate",
+					"Type":"DateTime"
+				},
+				{
+					"Name":"P_CreateBy"
 				}
 			]
 		},
@@ -49,7 +52,7 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":5.79438
+				"Width":3.20146
 			},
 			{
 				"Name":"C_Qty",
@@ -193,8 +196,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":10.795,
-					"Top":2.19604,
+					"Left":0.3175,
+					"Top":3.01625,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -204,16 +207,16 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"订单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":12.409,
-					"Top":2.19604,
+					"Left":1.93146,
+					"Top":3.01625,
 					"Width":3.20146,
 					"Height":0.608542,
-					"DataField":"P_OrderDate"
+					"DataField":"P_CreateDate"
 				},
 				{
 					"Type":"StaticBox",
@@ -239,6 +242,31 @@
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"P_OrderNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.95313,
+					"Top":2.98979,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制作人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox9",
+					"Left":7.56708,
+					"Top":2.98979,
+					"Width":3.20146,
+					"Height":0.608542,
+					"DataField":"P_CreateBy"
 				}
 			]
 		}
@@ -249,11 +277,11 @@
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox10",
-					"Left":0.608542,
-					"Top":1.19063,
+					"Name":"StaticBox12",
+					"Left":0.449792,
+					"Top":0.9525,
 					"Width":1.98438,
-					"Height":0.396875,
+					"Height":0.555625,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -265,11 +293,11 @@
 				},
 				{
 					"Type":"FieldBox",
-					"Name":"FieldBox8",
-					"Left":2.64583,
-					"Top":1.87854,
+					"Name":"FieldBox10",
+					"Left":2.48708,
+					"Top":0.9525,
 					"Width":3.41313,
-					"Height":0.396875
+					"Height":0.555625
 				}
 			]
 		}

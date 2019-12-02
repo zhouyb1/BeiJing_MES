@@ -11,14 +11,10 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.B_BackStockNo ,\r\n        h.B_OrderDate ,\r\n        h.B_StockName ,\r\n        h.B_StockToName ,\r\n        d.B_GoodsCode ,\r\n        d.B_GoodsName ,\r\n        d.B_Qty ,\r\n        d.B_Unit\r\nFROM    dbo.Mes_BackStockHead h\r\n        LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo\r\nWHERE   B_Status = 2",
+			"QuerySQL":"SELECT  h.B_BackStockNo ,\r\n        h.B_StockName ,\r\n         h.B_StockToName ,\r\n          h.B_Remark,\r\n      h.B_CreateDate,\r\n         d.B_GoodsCode ,\r\n         d.B_GoodsName ,\r\n         d.B_Qty ,\r\n         d.B_Unit\r\nFROM    dbo.Mes_BackStockHead h\r\n        LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo\r\nWHERE   B_Status = 2",
 			"Field":[
 				{
 					"Name":"B_BackStockNo"
-				},
-				{
-					"Name":"B_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"B_StockName"
@@ -38,6 +34,13 @@
 				},
 				{
 					"Name":"B_Unit"
+				},
+				{
+					"Name":"B_Remark"
+				},
+				{
+					"Name":"B_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
@@ -61,10 +64,6 @@
 			{
 				"Name":"B_Unit",
 				"Width":1.00542
-			},
-			{
-				"Name":"B_OrderDate",
-				"Width":2.59292
 			}
 		],
 		"ColumnContent":{
@@ -79,8 +78,8 @@
 							"Center":"Horizontal",
 							"Left":-0.926042,
 							"Top":-0.0264583,
-							"Width":2.80458,
-							"Height":0.608542,
+							"Width":2.75167,
+							"Height":0.555625,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
 						}
@@ -104,11 +103,6 @@
 					"Column":"B_Unit",
 					"TextAlign":"MiddleCenter",
 					"DataField":"B_Unit"
-				},
-				{
-					"Column":"B_OrderDate",
-					"TextAlign":"MiddleCenter",
-					"DataField":"B_OrderDate"
 				}
 			]
 		},
@@ -146,12 +140,6 @@
 					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"Text":"单位"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"B_OrderDate",
-					"TextAlign":"MiddleCenter",
-					"Text":"订单日期"
 				}
 			]
 		},
@@ -175,8 +163,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":9.94833,
-					"Top":2.75167,
+					"Left":0.47625,
+					"Top":2.46063,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -191,8 +179,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":4.63021,
-					"Top":2.75167,
+					"Left":5.84729,
+					"Top":2.43417,
 					"Width":1.74625,
 					"Height":0.608542,
 					"Font":{
@@ -207,9 +195,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":-0.370417,
-					"Top":2.77813,
-					"Width":1.79917,
+					"Left":0.582083,
+					"Top":1.50813,
+					"Width":1.71979,
 					"Height":0.635,
 					"Font":{
 						"Name":"宋体",
@@ -223,8 +211,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":6.21771,
-					"Top":2.75167,
+					"Left":7.43479,
+					"Top":2.43417,
 					"Width":3.57188,
 					"Height":0.608542,
 					"DataField":"B_StockName"
@@ -232,8 +220,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":11.3506,
-					"Top":2.75167,
+					"Left":1.87854,
+					"Top":2.46063,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"B_StockToName"
@@ -258,11 +246,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":1.29646,
-					"Top":2.77813,
+					"Left":2.2225,
+					"Top":1.50813,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"B_BackStockNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox9",
+					"Left":6.00604,
+					"Top":1.37583,
+					"Width":1.71979,
+					"Height":0.635,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox10",
+					"Left":7.64646,
+					"Top":1.37583,
+					"Width":3.59833,
+					"Height":0.608542,
+					"DataField":"B_CreateDate"
 				}
 			]
 		}
@@ -309,7 +322,8 @@
 					"Left":2.16958,
 					"Top":0.740833,
 					"Width":4.20688,
-					"Height":0.582083
+					"Height":0.582083,
+					"DataField":"B_Remark"
 				},
 				{
 					"Type":"FieldBox",
