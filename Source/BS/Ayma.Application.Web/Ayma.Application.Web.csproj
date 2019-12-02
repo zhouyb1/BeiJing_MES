@@ -2534,7 +2534,6 @@
     <Content Include="Areas\MesDev\Views\Convert\Index.js" />
     <Content Include="Areas\MesDev\Views\Convert\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Convert\Form.js" />
-    <Content Include="Report\grf\CollacReport.grf" />
     <Content Include="Report\grf\BackStockReport.grf" />
     <Content Include="Report\grf\ScrapReport.grf" />
     <Content Include="Report\grf\OutWorkShopReport.grf" />
@@ -2594,6 +2593,7 @@
     <Content Include="Report\grf\OtherOutReport.grf" />
     <Content Include="Report\grf\SaleManagerReport.grf" />
     <Content Include="Report\grf\MesExpendManagerReport.grf" />
+    <Content Include="Report\grf\CollacReport.grf" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">

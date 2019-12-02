@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.E_ExpendNo ,\r\n        h.E_StockName ,\r\n        h.E_CreateBy ,\r\n        h.E_CreateDate ,\r\n\t\th.MonthBalance,\r\n        d.E_GoodsCode ,\r\n        d.E_GoodsName ,\r\n        d.E_Unit ,\r\n        d.E_Qty,\r\n\t\td.E_Batch,\r\n\t\td.E_Price,\r\n\t\td.E_Remark\r\nFROM    dbo.Mes_ExpendHead h\r\n        LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo\r\nWHERE   E_Status = 2",
+			"QuerySQL":"SELECT  h.E_ExpendNo ,\r\n        h.E_StockName ,\r\n        h.E_CreateBy ,\r\n        h.E_CreateDate ,\r\n\t\th.MonthBalance,\r\n        d.E_GoodsCode ,\r\n        d.E_GoodsName ,\r\n        d.E_Unit ,\r\n        d.E_Qty,\r\n\t\td.E_Batch,\r\n\t\td.E_Price,\r\n\t\th.E_Remark\r\nFROM    dbo.Mes_ExpendHead h\r\n        LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo\r\nWHERE   E_Status = 2",
 			"Field":[
 				{
 					"Name":"E_ExpendNo"

@@ -11,12 +11,8 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.P_OrderNo ,\r\n        t.P_OrderDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n        d.C_GoodsName,\r\n        t.C_Remark\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
+			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
 			"Field":[
-				{
-					"Name":"F_RowIndex",
-					"Type":"Integer"
-				},
 				{
 					"Name":"C_GoodsCode"
 				},
@@ -28,13 +24,6 @@
 				},
 				{
 					"Name":"C_StockToName"
-				},
-				{
-					"Name":"P_OrderNo"
-				},
-				{
-					"Name":"P_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"C_Unit"
@@ -55,6 +44,18 @@
 				},
 				{
 					"Name":"C_Remark"
+				},
+				{
+					"Name":"C_Price",
+					"Type":"Float"
+				},
+				{
+					"Name":"aoumnt",
+					"Type":"Float"
+				},
+				{
+					"Name":"C_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
@@ -71,6 +72,12 @@
 			},
 			{
 				"Name":"C_Qty"
+			},
+			{
+				"Name":"Column2"
+			},
+			{
+				"Name":"Column3"
 			},
 			{
 				"Name":"C_Unit"
@@ -111,6 +118,16 @@
 					"DataField":"C_Qty"
 				},
 				{
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Price"
+				},
+				{
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"DataField":"aoumnt"
+				},
+				{
 					"Column":"C_Unit",
 					"TextAlign":"MiddleCenter",
 					"DataField":"C_Unit"
@@ -146,6 +163,18 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"Text":"单价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"Text":"总金额"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"C_Unit",
 					"TextAlign":"MiddleCenter",
 					"Text":"单位"
@@ -172,7 +201,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":12.409,
+					"Left":11.721,
 					"Top":1.79917,
 					"Width":1.40229,
 					"Height":0.608542,
@@ -229,7 +258,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":13.8113,
+					"Left":13.1233,
 					"Top":1.79917,
 					"Width":3.59833,
 					"Height":0.608542,
@@ -237,34 +266,9 @@
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox4",
-					"Left":0.608542,
-					"Top":2.59292,
-					"Width":1.79917,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"生产订单："
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox4",
-					"Left":2.40771,
-					"Top":2.59292,
-					"Width":3.38667,
-					"Height":0.608542,
-					"DataField":"P_OrderNo"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":6.19125,
-					"Top":2.59292,
+					"Left":0.767292,
+					"Top":2.69875,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -279,8 +283,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":12.409,
-					"Top":2.59292,
+					"Left":6.24417,
+					"Top":2.75167,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -295,19 +299,20 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":7.99042,
-					"Top":2.59292,
+					"Left":2.56646,
+					"Top":2.69875,
 					"Width":3.41313,
 					"Height":0.608542,
-					"DataField":"P_OrderDate"
+					"DataField":"C_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.8113,
-					"Top":2.59292,
+					"Left":7.64646,
+					"Top":2.75167,
 					"Width":3.59833,
-					"Height":0.608542
+					"Height":0.608542,
+					"DataField":"C_CreateBy"
 				},
 				{
 					"Type":"StaticBox",

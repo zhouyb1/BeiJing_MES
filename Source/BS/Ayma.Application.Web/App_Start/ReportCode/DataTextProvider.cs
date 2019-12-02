@@ -55,17 +55,19 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string Picking(string doucno)
         {
             string sql = @"SELECT  
-                    t.P_Status ,
-                    t.C_CollarNo ,
-                    t.C_StockName ,
-                    t.C_StockToName ,
-                    t.P_OrderNo ,
-                    t.P_OrderDate ,
-                    t.C_CreateBy,
-                    d.C_Unit,
-                    d.C_Qty,
-                    d.C_GoodsCode,
-                    d.C_GoodsName
+                        t.P_Status ,
+                        t.C_CollarNo ,
+                        t.C_StockName ,
+                        t.C_StockToName ,
+                        t.C_CreateDate ,
+                        t.C_CreateBy,
+                        d.C_Unit,
+                        d.C_Qty,
+                        d.C_GoodsCode,
+                        d.C_GoodsName,
+                        t.C_Remark,
+		                d.C_Price,
+		                (d.C_Price*d.C_Qty) as aoumnt
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
             WHERE   t.C_CollarNo ='{0}'
@@ -247,7 +249,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.E_Qty,
 		                            d.E_Batch,
 		                            d.E_Price,
-		                            d.E_Remark
+		                            h.E_Remark
                             FROM    dbo.Mes_ExpendHead h
                                     LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo
                             WHERE   h.E_ExpendNo='{0}'";
