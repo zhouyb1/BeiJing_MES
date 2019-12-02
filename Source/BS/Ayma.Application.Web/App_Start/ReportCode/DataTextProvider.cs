@@ -221,10 +221,13 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.M_Unit,
                                     d.M_Qty,
                                     d.M_Batch,
+                                    (d.M_Qty*g.G_Price) Amount,
+                                    g.G_Price,
                                     d.M_Remark
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
-                            WHERE   h.M_MaterInNo='{0}'";
+                                    LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode
+                            WHERE  h.M_Status =2 and h.M_MaterInNo='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterIn"));
             return MyDbReportData.TextFromMultiSQL(QueryList);

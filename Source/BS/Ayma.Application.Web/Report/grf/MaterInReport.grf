@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_OrderNo ,\r\n        h.M_OrderDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        d.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\nWHERE   h.M_Status = 2",
+			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_OrderNo ,\r\n        h.M_OrderDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n         (d.M_Qty*g.G_Price) Amount,\r\n        g.G_Price,\r\n        d.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\n        LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode\r\nWHERE   h.M_Status = 2",
 			"Field":[
 				{
 					"Name":"M_MaterInNo"
@@ -50,21 +50,29 @@
 				},
 				{
 					"Name":"M_Remark"
+				},
+				{
+					"Name":"Amount",
+					"Type":"Float"
+				},
+				{
+					"Name":"G_Price",
+					"Type":"Float"
 				}
 			]
 		},
 		"Column":[
 			{
 				"Name":"Column1",
-				"Width":1.98438
+				"Width":0.767292
 			},
 			{
 				"Name":"C_GoodsCode",
-				"Width":3.38667
+				"Width":2.38125
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":3.81
+				"Width":2.98979
 			},
 			{
 				"Name":"C_Qty",
@@ -72,10 +80,19 @@
 			},
 			{
 				"Name":"C_Unit",
-				"Width":1.79917
+				"Width":1.42875
 			},
 			{
-				"Name":"M_Batch"
+				"Name":"M_Batch",
+				"Width":2.2225
+			},
+			{
+				"Name":"G_Price",
+				"Width":1.5875
+			},
+			{
+				"Name":"Amount",
+				"Width":2.2225
 			}
 		],
 		"ColumnContent":{
@@ -89,8 +106,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.370417,
-							"Width":2.69875,
+							"Left":-0.9525,
+							"Width":2.64583,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -107,15 +124,28 @@
 				},
 				{
 					"Column":"C_Qty",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_Qty"
 				},
 				{
 					"Column":"C_Unit",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_Unit"
 				},
 				{
 					"Column":"M_Batch",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_Batch"
+				},
+				{
+					"Column":"G_Price",
+					"TextAlign":"MiddleCenter",
+					"DataField":"Amount"
+				},
+				{
+					"Column":"Amount",
+					"TextAlign":"MiddleCenter",
+					"DataField":"Amount"
 				}
 			]
 		},
@@ -157,6 +187,18 @@
 					"Column":"M_Batch",
 					"TextAlign":"MiddleCenter",
 					"Text":"批次"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"G_Price",
+					"TextAlign":"MiddleCenter",
+					"Text":"单价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Amount",
+					"TextAlign":"MiddleCenter",
+					"Text":"金额/元"
 				}
 			]
 		},
