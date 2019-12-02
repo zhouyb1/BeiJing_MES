@@ -55,22 +55,20 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string Picking(string doucno)
         {
             string sql = @"SELECT  
-                        t.P_Status ,
-                        t.C_CollarNo ,
-                        t.C_StockName ,
-                        t.C_StockToName ,
-                        t.C_CreateDate ,
-                        t.C_CreateBy,
-                        d.C_Unit,
-                        d.C_Qty,
-                        d.C_GoodsCode,
-                        d.C_GoodsName,
-                        t.C_Remark,
-		                d.C_Price,
-		                (d.C_Price*d.C_Qty) as aoumnt
+                    t.P_Status ,
+                    t.C_CollarNo ,
+                    t.C_StockName ,
+                    t.C_StockToName ,
+                    t.P_OrderNo ,
+                    t.P_OrderDate ,
+                    t.C_CreateBy,
+                    d.C_Unit,
+                    d.C_Qty,
+                    d.C_GoodsCode,
+                    d.C_GoodsName
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
-            WHERE   t.C_CollarNo ='{0}'
+            WHERE   t.C_CollarNo ='{0}' and t.P_Status=2
             ORDER BY M_UploadDate DESC";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Picking"));
@@ -85,18 +83,21 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string BackSupply(string doucno)
         {
             string sql = @"SELECT  
-                    a.B_BackSupplyNo ,
-                    a.B_StockName ,
-                    a.B_OrderDate ,
-                    b.B_GoodsCode ,
-                    b.B_GoodsName ,
-                    b.B_Unit ,
+                    a.B_BackSupplyNo,
+                    a.B_StockName,
+                    a.B_CreateDate,
+                    a.B_CreateBy,
+                    a.B_Remark,
+                    b.B_GoodsCode,
+                    b.B_GoodsName,
+                    b.B_Unit,
                     b.B_Qty,
-                    b.B_Batch,
-                    b.B_Remark
+                    b.B_Batch
+                    ,(select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode) as Price,
+                    ((select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode)*b.B_Qty) as aumount
             FROM    dbo.Mes_BackSupplyHead a
                     LEFT JOIN dbo.Mes_BackSupplyDetail b ON a.B_BackSupplyNo=b.B_BackSupplyNo
-            WHERE   a.B_BackSupplyNo ='{0}'";
+            WHERE   a.B_BackSupplyNo ='{0}' and a.B_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "BackSupply"));
 
@@ -109,7 +110,7 @@ using MyDbReportData = DatabaseXmlReportData;
         /// <returns></returns>
         public static string Scrap(string doucno)
         {
-            string sql = @"SELECT  h.S_ScrapNo ,
+            string sql = @"SELECT   h.S_ScrapNo ,
                                     h.S_OrderDate ,
                                     h.S_Remark ,
                                     d.S_GoodsCode ,
@@ -119,7 +120,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.S_Batch
                             FROM    dbo.Mes_ScrapHead h
                                     LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo 
-                            WHERE   h.S_ScrapNo ='{0}'"; 
+                            WHERE   h.S_ScrapNo ='{0}'and h.S_Status=2"; 
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Scrap"));
 
@@ -142,7 +143,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.B_Unit
                             FROM    dbo.Mes_BackStockHead h
                                     LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo
-                            WHERE   h.B_BackStockNo ='{0}'";
+                            WHERE   h.B_BackStockNo ='{0}' and h.B_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strsql, doucno), "BackStock"));
 
@@ -167,7 +168,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.O_SecUnit
                             FROM    dbo.Mes_OrgResHead h
                                     LEFT JOIN dbo.Mes_OrgResDetail D ON h.O_OrgResNo = d.O_OrgResNo
-                            WHERE   1=1 AND h.O_OrgResNo ='{0}'";
+                            WHERE   1=1 AND h.O_OrgResNo ='{0}'and h.O_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -197,7 +198,7 @@ using MyDbReportData = DatabaseXmlReportData;
 		                        d.S_Price
                         FROM    dbo.Mes_SaleHead h
                                 LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo
-                            WHERE   h.S_SaleNo='{0}'";
+                            WHERE   h.S_SaleNo='{0}' and h.S_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "SaleManager"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -252,10 +253,10 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.E_Qty,
 		                            d.E_Batch,
 		                            d.E_Price,
-		                            h.E_Remark
+		                            d.E_Remark
                             FROM    dbo.Mes_ExpendHead h
                                     LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo
-                            WHERE   h.E_ExpendNo='{0}'";
+                            WHERE   h.E_ExpendNo='{0}' and h.E_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "ExpendManager"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -282,7 +283,7 @@ using MyDbReportData = DatabaseXmlReportData;
 		                            d.O_Batch
                             FROM    dbo.Mes_OtherInHead h
                                     LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)
-                            WHERE   h.O_OtherInNo='{0}'";
+                            WHERE   h.O_OtherInNo='{0}' and h.O_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Other"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -309,7 +310,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.M_Remark
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
-                            WHERE   h.M_MaterInNo='{0}'";
+                            WHERE   h.M_MaterInNo='{0}' and h.M_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterInProject"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -335,7 +336,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.R_Batch 
                             FROM    dbo.Mes_RequistHead h
                                     LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo
-                            WHERE   h.R_RequistNo='{0}'";
+                            WHERE   h.R_RequistNo='{0}' and h.R_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Requist"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -357,7 +358,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.P_Unit 
                             FROM    dbo.Mes_ProductOrderHead h
                                     LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo
-                            WHERE   h.P_OrderNo='{0}'";
+                            WHERE   h.P_OrderNo='{0}' and h.P_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "ProductOrder"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -818,7 +819,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 h.O_StockName
                         FROM    dbo.Mes_OutWorkShopHead h
                                 LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo
-                        WHERE   h.O_OutNo ='{0}'";
+                        WHERE   h.O_OutNo ='{0}' and h.O_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -841,7 +842,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 h.I_StockName
                         FROM    dbo.Mes_InWorkShopHead h
                                 LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo
-                        WHERE   h.I_InNo ='{0}'";
+                        WHERE   h.I_InNo ='{0}' and h.I_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -884,13 +885,15 @@ using MyDbReportData = DatabaseXmlReportData;
 		                        h.MonthBalance,
                                 d.O_GoodsCode ,
                                 d.O_GoodsName ,
-                                d.O_Qty ,
+                                d.O_Qty,
                                 d.O_Unit,
-		                        d.O_Remark,
-		                        d.O_Batch
+		                        h.O_Remark,
+		                        d.O_Batch,
+		                        d.O_Price,
+		                        (d.O_Price*d.O_Qty) as aoumout
                         FROM    dbo.Mes_OtherOutHead h
                                 LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo
-                        WHERE    h.O_OtherOutNo ='{0}'";
+                        WHERE    h.O_OtherOutNo ='{0}' and h.O_Status=2";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OtherOut"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
