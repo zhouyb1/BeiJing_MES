@@ -11,17 +11,13 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"select a.B_BackSupplyNo,a.B_StockName,a.B_OrderDate,b.B_GoodsCode,b.B_GoodsName,b.B_Unit,\r\nb.B_Qty,b.B_Batch,b.B_Remark\r\nfrom dbo.Mes_BackSupplyHead a left join dbo.Mes_BackSupplyDetail b \r\non a.B_BackSupplyNo=b.B_BackSupplyNo where a.B_BackSupplyNo='{0}'",
+			"QuerySQL":"select a.B_BackSupplyNo,a.B_StockName,a.B_CreateDate,a.B_CreateBy,a.B_Remark,b.B_GoodsCode,b.B_GoodsName,b.B_Unit,\r\nb.B_Qty,b.B_Batch,(select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode) as Price,((select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode)*b.B_Qty) as aumount\r\nfrom dbo.Mes_BackSupplyHead a left join dbo.Mes_BackSupplyDetail b \r\non a.B_BackSupplyNo=b.B_BackSupplyNo where a.B_BackSupplyNo='{0}'",
 			"Field":[
 				{
 					"Name":"B_BackSupplyNo"
 				},
 				{
 					"Name":"B_StockName"
-				},
-				{
-					"Name":"B_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"B_GoodsCode"
@@ -41,6 +37,21 @@
 				},
 				{
 					"Name":"B_Remark"
+				},
+				{
+					"Name":"aumount",
+					"Type":"Float"
+				},
+				{
+					"Name":"Price",
+					"Type":"Float"
+				},
+				{
+					"Name":"B_CreateDate",
+					"Type":"DateTime"
+				},
+				{
+					"Name":"B_CreateBy"
 				}
 			]
 		},
@@ -55,10 +66,17 @@
 				"Name":"B_GoodsName"
 			},
 			{
-				"Name":"B_Unit"
+				"Name":"B_Unit",
+				"Width":2.80458
 			},
 			{
 				"Name":"B_Qty"
+			},
+			{
+				"Name":"Column2"
+			},
+			{
+				"Name":"Column3"
 			},
 			{
 				"Name":"B_Batch"
@@ -101,6 +119,16 @@
 					"DataField":"B_Qty"
 				},
 				{
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"DataField":"Price"
+				},
+				{
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"DataField":"aumount"
+				},
+				{
 					"Column":"B_Batch",
 					"TextAlign":"MiddleCenter",
 					"DataField":"B_Batch"
@@ -141,6 +169,18 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"Text":"单价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"Text":"总金额"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"B_Batch",
 					"TextAlign":"MiddleCenter",
 					"Text":"批次"
@@ -157,7 +197,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
 					"Left":5.60917,
-					"Top":0.79375,
+					"Top":0.396875,
 					"Width":3.99521,
 					"Height":1.00542,
 					"Font":{
@@ -172,8 +212,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.079375,
-					"Top":2.40771,
+					"Left":0.9525,
+					"Top":1.48167,
 					"Width":1.00542,
 					"Height":0.582083,
 					"TextAlign":"TopRight",
@@ -182,8 +222,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox1",
-					"Left":1.08479,
-					"Top":2.40771,
+					"Left":1.95792,
+					"Top":1.48167,
 					"Width":2.59292,
 					"Height":0.582083,
 					"TextAlign":"TopLeft"
@@ -191,8 +231,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":5.95313,
-					"Top":2.40771,
+					"Left":6.82625,
+					"Top":1.48167,
 					"Width":2.01083,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
@@ -201,8 +241,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":7.56708,
-					"Top":2.40771,
+					"Left":8.44021,
+					"Top":1.48167,
 					"Width":2.59292,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
@@ -211,8 +251,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox4",
-					"Left":10.9802,
-					"Top":2.40771,
+					"Left":0.820208,
+					"Top":2.38125,
 					"Width":0.978958,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
@@ -221,22 +261,42 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":11.9592,
-					"Top":2.40771,
+					"Left":1.79917,
+					"Top":2.38125,
 					"Width":4.02167,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
-					"DataField":"B_OrderDate"
+					"DataField":"B_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":1.08479,
-					"Top":2.40771,
-					"Width":2.98979,
+					"Left":2.06375,
+					"Top":1.48167,
+					"Width":3.01625,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
 					"DataField":"B_BackSupplyNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox9",
+					"Left":6.85271,
+					"Top":2.38125,
+					"Width":1.34938,
+					"Height":0.582083,
+					"TextAlign":"TopLeft",
+					"Text":"制作人:"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox5",
+					"Left":8.38729,
+					"Top":2.40771,
+					"Width":4.02167,
+					"Height":0.582083,
+					"TextAlign":"TopLeft",
+					"DataField":"B_CreateBy"
 				}
 			]
 		}
@@ -253,7 +313,7 @@
 					"Width":1.37583,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
-					"Text":"制表人:"
+					"Text":"备注:"
 				},
 				{
 					"Type":"StaticBox",
@@ -264,6 +324,36 @@
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
 					"Text":"审核人:"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox7",
+					"Left":0.211667,
+					"Top":1.00542,
+					"Width":2.59292,
+					"Height":0.582083,
+					"TextAlign":"TopLeft",
+					"Text":"收货人签名:"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox8",
+					"Left":11.0067,
+					"Top":1.19063,
+					"Width":2.59292,
+					"Height":0.608542,
+					"TextAlign":"TopLeft",
+					"Text":"采购部签名:"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox6",
+					"Left":1.79917,
+					"Top":0.211667,
+					"Width":3.99521,
+					"Height":0.582083,
+					"TextAlign":"TopLeft",
+					"DataField":"B_Remark"
 				}
 			]
 		}

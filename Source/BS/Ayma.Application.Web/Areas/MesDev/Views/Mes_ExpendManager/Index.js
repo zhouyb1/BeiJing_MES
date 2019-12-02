@@ -159,11 +159,6 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('E_ExpendNo');
-                var status = $("#girdtable").jfGridValue("E_Status");
-                if (status != "2") {
-                    ayma.alert.error("单据未审核");
-                    return false;
-                }
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'ExpendManagerReport',

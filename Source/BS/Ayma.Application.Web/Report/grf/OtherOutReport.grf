@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OtherOutNo ,\r\n        h.O_StockName ,\r\n        h.O_DepartName ,\r\n        h.O_CreateBy ,\r\n\t\th.O_CreateDate,\r\n\t\th.MonthBalance,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Qty ,\r\n        d.O_Unit,\r\n\t\td.O_Remark,\r\n\t\td.O_Batch\r\nFROM    dbo.Mes_OtherOutHead h\r\n        LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo\r\nWHERE   O_Status = 2",
+			"QuerySQL":"SELECT  h.O_OtherOutNo ,\r\n        h.O_StockName ,\r\n        h.O_DepartName ,\r\n        h.O_CreateBy ,\r\n\t\th.O_CreateDate,\r\n\t\th.MonthBalance,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Qty,\r\n        d.O_Unit,\r\n\t\th.O_Remark,\r\n\t\td.O_Batch,\r\n\t\td.O_Price,\r\n\t\t(d.O_Price*d.O_Qty) as aoumout\r\nFROM    dbo.Mes_OtherOutHead h\r\n        LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo\r\nWHERE   O_Status = 2",
 			"Field":[
 				{
 					"Name":"O_OtherOutNo"
@@ -50,6 +50,14 @@
 				},
 				{
 					"Name":"O_Batch"
+				},
+				{
+					"Name":"O_Price",
+					"Type":"Float"
+				},
+				{
+					"Name":"aoumout",
+					"Type":"Float"
 				}
 			]
 		},
@@ -65,6 +73,12 @@
 			},
 			{
 				"Name":"O_Qty"
+			},
+			{
+				"Name":"Column2"
+			},
+			{
+				"Name":"Column3"
 			},
 			{
 				"Name":"O_Unit",
@@ -104,6 +118,16 @@
 					"Column":"O_Qty",
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_Unit"
+				},
+				{
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"DataField":"O_Price"
+				},
+				{
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"DataField":"aoumout"
 				},
 				{
 					"Column":"O_Unit",
@@ -146,6 +170,18 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"Text":"单价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"Text":"总金额"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"O_Unit",
 					"TextAlign":"MiddleCenter",
 					"Text":"数量"
@@ -179,7 +215,7 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":6.69396,
+					"Left":9.68375,
 					"Top":0.396875,
 					"Width":4.60375,
 					"Height":0.79375,
@@ -323,6 +359,7 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":4.39208,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -370,6 +407,54 @@
 					"Name":"FieldBox9",
 					"Left":10.8744,
 					"Top":1.19063,
+					"Width":4.20688,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox10",
+					"Left":0.423333,
+					"Top":2.32833,
+					"Width":1.98438,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"领料人签名："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":2.40771,
+					"Top":2.32833,
+					"Width":4.20688,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":8.89,
+					"Top":2.38125,
+					"Width":1.98438,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"库管员签名："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox12",
+					"Left":10.8744,
+					"Top":2.38125,
 					"Width":4.20688,
 					"Height":0.582083
 				}
