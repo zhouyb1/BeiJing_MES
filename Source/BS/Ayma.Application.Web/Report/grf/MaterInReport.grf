@@ -104,7 +104,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.899583,
-							"Width":2.54,
+							"Width":2.51354,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -113,10 +113,12 @@
 				},
 				{
 					"Column":"C_GoodsCode",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_GoodsCode"
 				},
 				{
 					"Column":"C_GoodsName",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_GoodsName"
 				},
 				{
@@ -136,7 +138,7 @@
 				},
 				{
 					"Column":"M_Price",
-					"TextAlign":"MiddleRight",
+					"TextAlign":"MiddleCenter",
 					"DataField":"M_Price"
 				},
 				{
