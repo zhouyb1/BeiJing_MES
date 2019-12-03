@@ -11,20 +11,13 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_OrderNo ,\r\n        h.M_OrderDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n         (d.M_Qty*g.G_Price) Amount,\r\n        d.M_Price,\r\n        h.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\n        LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode\r\nWHERE   h.M_Status = 2",
+			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_CreateDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n         (d.M_Qty*g.G_Price) Amount,\r\n        d.M_Price,\r\n        h.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\n        LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode\r\nWHERE   h.M_Status = 2",
 			"Field":[
 				{
 					"Name":"M_MaterInNo"
 				},
 				{
 					"Name":"M_StockName"
-				},
-				{
-					"Name":"M_OrderNo"
-				},
-				{
-					"Name":"M_OrderDate",
-					"Type":"DateTime"
 				},
 				{
 					"Name":"M_CreateBy"
@@ -58,6 +51,10 @@
 				{
 					"Name":"M_Price",
 					"Type":"Float"
+				},
+				{
+					"Name":"M_CreateDate",
+					"Type":"DateTime"
 				}
 			]
 		},
@@ -107,7 +104,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.899583,
-							"Width":2.56646,
+							"Width":2.54,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -139,7 +136,8 @@
 				},
 				{
 					"Column":"M_Price",
-					"TextAlign":"MiddleCenter"
+					"TextAlign":"MiddleRight",
+					"DataField":"M_Price"
 				},
 				{
 					"Column":"Amount",
@@ -221,8 +219,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.0325,
-					"Top":2.43417,
+					"Left":9.8425,
+					"Top":1.64042,
 					"Width":1.40229,
 					"Height":0.555625,
 					"Font":{
@@ -237,8 +235,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.238125,
-					"Top":2.38125,
+					"Left":0.502708,
+					"Top":1.5875,
 					"Width":1.77271,
 					"Height":0.635,
 					"Font":{
@@ -253,8 +251,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":7.43479,
-					"Top":2.40771,
+					"Left":11.2448,
+					"Top":1.61396,
 					"Width":2.96333,
 					"Height":0.608542,
 					"DataField":"M_StockName"
@@ -262,8 +260,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":10.9538,
-					"Top":2.40771,
+					"Left":9.8425,
+					"Top":2.64583,
 					"Width":1.37583,
 					"Height":0.608542,
 					"Font":{
@@ -278,8 +276,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":12.3296,
-					"Top":2.40771,
+					"Left":11.2183,
+					"Top":2.64583,
 					"Width":3.62479,
 					"Height":0.608542,
 					"DataField":"M_CreateBy"
@@ -303,11 +301,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.01083,
-					"Top":2.40771,
+					"Left":2.27542,
+					"Top":1.61396,
 					"Width":3.59833,
 					"Height":0.582083,
 					"DataField":"M_MaterInNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":0.502708,
+					"Top":2.61938,
+					"Width":1.69333,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox10",
+					"Left":2.19604,
+					"Top":2.61938,
+					"Width":3.59833,
+					"Height":0.608542,
+					"DataField":"M_CreateDate"
 				}
 			]
 		}
@@ -315,12 +338,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":5.60917,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":0.211667,
-					"Top":1.00542,
+					"Left":0.47625,
+					"Top":0.502708,
 					"Width":1.79917,
 					"Height":0.58,
 					"Font":{
@@ -335,8 +359,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
-					"Left":10.3981,
-					"Top":1.00542,
+					"Left":10.0806,
+					"Top":0.555625,
 					"Width":2.01083,
 					"Height":0.582083,
 					"Font":{
@@ -351,19 +375,91 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":12.409,
-					"Top":1.00542,
+					"Left":12.0915,
+					"Top":0.555625,
 					"Width":3.38667,
 					"Height":0.582083
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":2.01083,
-					"Top":1.00542,
+					"Left":2.27542,
+					"Top":0.502708,
 					"Width":3.38667,
 					"Height":0.58,
 					"DataField":"M_Remark"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":0.47625,
+					"Top":1.5875,
+					"Width":2.01083,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"送货人签名："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":2.48708,
+					"Top":1.5875,
+					"Width":3.38667,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox13",
+					"Left":10.0806,
+					"Top":1.71979,
+					"Width":2.01083,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"品控签名："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox12",
+					"Left":12.0915,
+					"Top":1.71979,
+					"Width":3.38667,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox14",
+					"Left":0.47625,
+					"Top":2.67229,
+					"Width":2.01083,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"库管员签名："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox13",
+					"Left":2.48708,
+					"Top":2.67229,
+					"Width":3.38667,
+					"Height":0.582083
 				}
 			]
 		}

@@ -221,7 +221,6 @@ using MyDbReportData = DatabaseXmlReportData;
                                     h.M_StockName ,
                                     h.M_CreateDate,
                                     h.M_CreateBy,
-                                    h.M_CreateBy ,
                                     d.M_GoodsCode ,
                                     d.M_GoodsName ,
                                     d.M_Kind,
@@ -357,7 +356,7 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @"SELECT   h.P_OrderNo ,
                                     h.P_CreateDate ,
-                                     h.P_CreateBy,
+                                    h.P_CreateBy,
                                     h.P_Remark,
                                     h.P_OrderStationName,
                                     d.P_GoodsCode ,
