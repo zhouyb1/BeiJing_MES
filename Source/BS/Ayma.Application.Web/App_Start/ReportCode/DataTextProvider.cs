@@ -201,7 +201,11 @@ using MyDbReportData = DatabaseXmlReportData;
 		                        h.S_Remark,
 		                        d.S_Batch,
 		                        d.S_Otax,
-		                        d.S_Price
+		                        d.S_Price,
+		                        (d.S_Price*d.S_Qty) as Notaxamount,
+		                        (d.S_Price*(1+(d.S_Otax/100))) as Taxprice,
+		                        ((d.S_Price*(1+(d.S_Otax/100)))* d.S_Qty)  as Taxamount,
+		                        ((d.S_Price*(1+(d.S_Otax/100)))* d.S_Qty)-(d.S_Price*d.S_Qty) as tax
                         FROM    dbo.Mes_SaleHead h
                                 LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo
                             WHERE   h.S_SaleNo='{0}' and h.S_Status=2";

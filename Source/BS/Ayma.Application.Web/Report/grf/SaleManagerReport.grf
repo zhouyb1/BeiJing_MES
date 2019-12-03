@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.S_SaleNo ,\r\n        h.S_StockName ,\r\n        h.S_CostomName ,\r\n        h.S_CreateBy ,\r\n\t\th.S_CreateDate,\r\n\t\th.MonthBalance,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Qty ,\r\n        d.S_Unit,\r\n\t\th.S_Remark,\r\n\t\td.S_Batch,\r\n\t\td.S_Otax,\r\n\t\td.S_Price\r\nFROM    dbo.Mes_SaleHead h\r\n        LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo\r\nWHERE   S_Status = 2",
+			"QuerySQL":"SELECT  h.S_SaleNo ,\r\n        h.S_StockName ,\r\n        h.S_CostomName ,\r\n        h.S_CreateBy ,\r\n\t\th.S_CreateDate,\r\n\t\th.MonthBalance,\r\n        d.S_GoodsCode ,\r\n        d.S_GoodsName ,\r\n        d.S_Qty ,\r\n        d.S_Unit,\r\n\t\th.S_Remark,\r\n\t\td.S_Batch,\r\n\t\td.S_Otax,\r\n\t\td.S_Price,\r\n\t\t(d.S_Price*d.S_Qty) as Notaxamount,\r\n\t\t(d.S_Price*(1+(d.S_Otax/100))) as Taxprice,\r\n\t\t((d.S_Price*(1+(d.S_Otax/100)))* d.S_Qty)  as Taxamount,\r\n\t\t((d.S_Price*(1+(d.S_Otax/100)))* d.S_Qty)-(d.S_Price*d.S_Qty) as tax\r\nFROM    dbo.Mes_SaleHead h\r\n        LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo\r\nWHERE   S_Status = 2",
 			"Field":[
 				{
 					"Name":"S_SaleNo"
@@ -58,86 +58,171 @@
 				{
 					"Name":"S_Price",
 					"Type":"Float"
+				},
+				{
+					"Name":"Notaxamount",
+					"Type":"Float"
+				},
+				{
+					"Name":"Taxprice",
+					"Type":"Float"
+				},
+				{
+					"Name":"Taxamount",
+					"Type":"Float"
+				},
+				{
+					"Name":"tax",
+					"Type":"Float"
 				}
 			]
 		},
 		"Column":[
 			{
-				"Name":"Column1"
+				"Name":"S_GoodsCode",
+				"Width":3.2
 			},
 			{
-				"Name":"S_GoodsCode"
-			},
-			{
-				"Name":"S_GoodsName"
-			},
-			{
-				"Name":"S_Qty"
+				"Name":"S_GoodsName",
+				"Width":4.39208
 			},
 			{
 				"Name":"S_Unit"
 			},
 			{
-				"Name":"S_Batch"
+				"Name":"S_Qty"
 			},
 			{
 				"Name":"S_Otax"
 			},
 			{
-				"Name":"S_Price"
+				"Name":"Column2"
+			},
+			{
+				"Name":"Column3"
+			},
+			{
+				"Name":"Column4"
+			},
+			{
+				"Name":"Column5"
+			},
+			{
+				"Name":"Column6"
 			}
 		],
 		"ColumnContent":{
 			"Height":0.79375,
 			"ColumnContentCell":[
 				{
-					"Column":"Column1",
-					"FreeCell":true,
-					"Control":[
-						{
-							"Type":"SystemVarBox",
-							"Name":"SystemVarBox1",
-							"Dock":"Fill",
-							"Center":"Horizontal",
-							"TextAlign":"MiddleCenter",
-							"SystemVar":"RowNo"
-						}
-					]
-				},
-				{
 					"Column":"S_GoodsCode",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"DataField":"S_GoodsCode"
 				},
 				{
 					"Column":"S_GoodsName",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"DataField":"S_GoodsName"
 				},
 				{
-					"Column":"S_Qty",
-					"TextAlign":"MiddleCenter",
-					"DataField":"S_Qty"
-				},
-				{
 					"Column":"S_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"DataField":"S_Unit"
 				},
 				{
-					"Column":"S_Batch",
+					"Column":"S_Qty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
-					"DataField":"S_Batch"
+					"DataField":"S_Qty"
 				},
 				{
 					"Column":"S_Otax",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"DataField":"S_Otax"
 				},
 				{
-					"Column":"S_Price",
+					"Column":"Column2",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
-					"DataField":"S_Price"
+					"DataField":"Taxprice"
+				},
+				{
+					"Column":"Column3",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"DataField":"Notaxamount"
+				},
+				{
+					"Column":"Column4",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"DataField":"tax"
+				},
+				{
+					"Column":"Column5",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"DataField":"Taxamount"
+				},
+				{
+					"Column":"Column6",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"DataField":"S_Batch"
 				}
 			]
 		},
@@ -146,51 +231,123 @@
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
-					"Column":"Column1",
-					"TextAlign":"MiddleCenter",
-					"Text":"序号"
-				},
-				{
-					"GroupTitle":false,
 					"Column":"S_GoodsCode",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"物料编码"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"S_GoodsName",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"物料名称"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"S_Qty",
-					"TextAlign":"MiddleCenter",
-					"Text":"数量"
-				},
-				{
-					"GroupTitle":false,
 					"Column":"S_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"单位"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"S_Batch",
+					"Column":"S_Qty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
-					"Text":"批次"
+					"Text":"数量"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"S_Otax",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"税率"
 				},
 				{
 					"GroupTitle":false,
-					"Column":"S_Price",
+					"Column":"Column2",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
-					"Text":"价格"
+					"Text":"含税单价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column3",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"无税金额"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column4",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"税额"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column5",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"含税金额"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column6",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"批次"
 				}
 			]
 		},
@@ -201,11 +358,70 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0
+					"Height":1.00542,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox13",
+							"Top":0.211667,
+							"Width":1.40229,
+							"Height":0.582083,
+							"TextAlign":"MiddleCenter",
+							"Text":"总计"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox1",
+							"Left":5.79438,
+							"Top":0.211667,
+							"Width":2.40771,
+							"Height":0.582083,
+							"DataField":"S_Qty"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox2",
+							"Left":10.3981,
+							"Top":0.211667,
+							"Width":2.80458,
+							"Height":0.582083,
+							"DataField":"Notaxamount"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox3",
+							"Left":11.8004,
+							"Top":0.211667,
+							"Width":2.98979,
+							"Height":0.582083,
+							"DataField":"tax"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox4",
+							"Left":13.2027,
+							"Top":0.211667,
+							"Width":2.80458,
+							"Height":0.582083,
+							"DataField":"Taxamount"
+						},
+						{
+							"Type":"Line",
+							"Name":"Line1",
+							"Left":1.5875,
+							"Height":1.00542
+						}
+					]
 				}
 			}
 		]
 	},
+	"Parameter":[
+		{
+			"Name":"counts",
+			"DataType":"Integer"
+		}
+	],
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
@@ -272,7 +488,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
 					"Left":11.5358,
-					"Top":2.77813,
+					"Top":2.72521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -297,7 +513,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
 					"Left":13.0969,
-					"Top":2.77813,
+					"Top":2.72521,
 					"Width":2.64583,
 					"Height":0.608542,
 					"DataField":"S_CreateBy"
@@ -351,6 +567,31 @@
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"S_CostomName"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox14",
+					"Left":7.01146,
+					"Top":2.72521,
+					"Width":1.37583,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"经手人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox14",
+					"Left":8.59896,
+					"Top":2.59292,
+					"Width":2.59292,
+					"Height":0.820208,
+					"DataField":"S_CreateBy"
 				}
 			]
 		}
@@ -358,12 +599,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":4.20688,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
-					"Left":0.661458,
-					"Top":0.820208,
+					"Left":6.985,
+					"Top":1.93146,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -378,8 +620,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":11.5094,
-					"Top":0.846667,
+					"Left":0.582083,
+					"Top":0.714375,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -394,8 +636,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":2.67229,
-					"Top":0.820208,
+					"Left":8.99583,
+					"Top":1.93146,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"S_Remark"
@@ -403,8 +645,80 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":13.4938,
-					"Top":0.846667,
+					"Left":2.56646,
+					"Top":0.714375,
+					"Width":4.20688,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox10",
+					"Left":6.95854,
+					"Top":0.635,
+					"Width":1.98438,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"库管员："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":8.94292,
+					"Top":0.635,
+					"Width":4.20688,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":11.6152,
+					"Top":0.687917,
+					"Width":1.98438,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"收款人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox12",
+					"Left":13.5996,
+					"Top":0.687917,
+					"Width":4.20688,
+					"Height":0.582083
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":0.582083,
+					"Top":1.93146,
+					"Width":1.98438,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"收货人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox13",
+					"Left":2.56646,
+					"Top":1.93146,
 					"Width":4.20688,
 					"Height":0.582083
 				}
