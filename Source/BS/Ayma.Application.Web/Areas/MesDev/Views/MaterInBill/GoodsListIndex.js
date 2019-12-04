@@ -138,6 +138,11 @@ var bootstrap = function ($, ayma) {
                     //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
+                        if (row['p_inprice'] == null)
+                        {
+                            isChecked.attr('checked', false);
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为空请及时维护价格！');
+                        }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方

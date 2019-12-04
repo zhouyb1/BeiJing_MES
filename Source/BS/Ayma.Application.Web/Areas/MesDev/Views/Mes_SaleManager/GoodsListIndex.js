@@ -70,8 +70,8 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
+                    //{ label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
+                    //{ label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "税率", name: "I_Otax", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
@@ -92,6 +92,11 @@ var bootstrap = function ($, ayma) {
                         if (row['I_Qty'] <= 0) {
                             isChecked.attr('checked', false); //移除 checked 状态
                             ayma.alert.error('库存为负数');
+                        }
+                        else if (row['I_Price']==null)
+                        {
+                            isChecked.attr('checked', false);
+                            ayma.alert.error('物料【' + row['I_GoodsName'] + '】销售价格为空请及时维护价格！');
                         }
                         else {
                             if (!allCheck.is(":checked")) {
