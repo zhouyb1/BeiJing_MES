@@ -441,14 +441,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 strmes_MaterInDetailList.ToObject<List<Mes_MaterInDetailEntity>>();
             foreach (var item in mes_MaterInDetailList)
             {
-                if (string.IsNullOrEmpty(item.M_Qty.ToString()) || item.M_Qty == 0)
-                {
-                    return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
-                }
                 if (string.IsNullOrEmpty(item.M_Price.ToString()) || item.M_Price == 0)
                 {
                     return Fail("物料【" + item.M_GoodsName + "】价格为空请及时维护价格!");
                 }
+                if (string.IsNullOrEmpty(item.M_Qty.ToString()) || item.M_Qty == 0)
+                {
+                    return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
+                }  
             }
             entity.M_OrderKind = orderKind; //单据类型 成品与非成品
             materInBillIBLL.SaveEntity(keyValue, entity, mes_MaterInDetailList);

@@ -158,7 +158,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    s.I_Qty ,
                                    s.I_Kind,
                                    g.G_Otax I_Otax,
-                                   --g.G_Price I_Price,
+                                   (select O_SalePrice from Mes_OutPrice where O_GoodsCode=s.I_GoodsCode) as I_Price,
                                    s.I_Unit,
 								   g.G_SupplyCode I_SupplyCode,
 								   g.G_SupplyName I_SupplyName

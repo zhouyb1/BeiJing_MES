@@ -61,6 +61,32 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+            //物料名称
+            $("#P_GoodsName").select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
+                // 访问数据接口参数
+            });
+            //供应商名称
+            $("#P_SupplyName").select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
+                // 访问数据接口参数
+            });
             // 保存
             //$('#am_edit').on('click', function () {
             //    var keyValue = $('#girdtable').jfGridValue('ID');

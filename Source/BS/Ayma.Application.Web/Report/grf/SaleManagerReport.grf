@@ -605,7 +605,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
 					"Left":6.985,
-					"Top":1.93146,
+					"Top":1.74625,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -637,7 +637,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
 					"Left":8.99583,
-					"Top":1.93146,
+					"Top":1.74625,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"S_Remark"
@@ -654,9 +654,9 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
 					"Left":6.95854,
-					"Top":0.635,
+					"Top":0.79375,
 					"Width":1.98438,
-					"Height":0.582083,
+					"Height":0.396875,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -669,10 +669,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox11",
-					"Left":8.94292,
-					"Top":0.635,
-					"Width":4.20688,
-					"Height":0.582083
+					"Left":8.81062,
+					"Top":0.79375,
+					"Width":4.18042,
+					"Height":0.608542
 				},
 				{
 					"Type":"StaticBox",
@@ -702,7 +702,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox12",
 					"Left":0.582083,
-					"Top":1.93146,
+					"Top":1.74625,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -718,7 +718,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox13",
 					"Left":2.56646,
-					"Top":1.93146,
+					"Top":1.74625,
 					"Width":4.20688,
 					"Height":0.582083
 				}

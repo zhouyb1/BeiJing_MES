@@ -133,6 +133,7 @@ var bootstrap = function ($, ayma) {
                         row['S_GoodsCode_SupplyName'] = row['I_SupplyName'];
                         row['S_Unit'] = row['I_Unit'];
                         row['S_Batch'] = row["I_Batch"];
+                        row['S_Price'] = row["I_Price"];
                         row["S_Qty"] = quantity;
                         row["ID"] = row['ID'];
                         row["S_Otax"] = row['I_Otax'];

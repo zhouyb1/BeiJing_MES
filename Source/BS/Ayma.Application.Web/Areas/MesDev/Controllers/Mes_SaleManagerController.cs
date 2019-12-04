@@ -195,13 +195,22 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             Mes_SaleHeadEntity entity = strEntity.ToObject<Mes_SaleHeadEntity>();
             var detail = strmes_SaleDetailEntity.ToObject<List<Mes_SaleDetailEntity>>();
-            if (detail.Any(item => item.S_Qty <= 0))
+            //if (detail.Any(item => item.S_Qty <= 0))
+            //{
+            //    return Fail("数量只能是大于0的实数");
+            //}
+            List<Mes_SaleDetailEntity> mes_SaleDetailList =
+              strmes_SaleDetailEntity.ToObject<List<Mes_SaleDetailEntity>>();
+            foreach (var item in mes_SaleDetailList)
             {
-                return Fail("数量只能是大于0的实数");
-            }
-            if (detail.Any(item=>item.S_Price==null||item.S_Price<=0))
-            {
-                return Fail("请设置正确格式的价格");
+                if (string.IsNullOrEmpty(item.S_Qty.ToString()) || item.S_Qty <= 0)
+                {
+                    return Fail("数量只能是大于0的实数!");
+                }
+                if (string.IsNullOrEmpty(item.S_Price.ToString()) || item.S_Price == 0)
+                {
+                    return Fail("物料【" + item.S_GoodsName + "】价格为空请及时维护价格!");
+                }
             }
             foreach (var goods in detail)
             {

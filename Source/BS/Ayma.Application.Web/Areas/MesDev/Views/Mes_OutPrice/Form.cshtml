@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "原物料售卖价格表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item" data-table="Mes_OutPrice">
+        <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
+        <div id="O_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_OutPrice">
+        <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
+        <input id="O_GoodsCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_OutPrice">
+        <div class="am-form-item-title">售卖价格<font face="宋体">*</font></div>
+        <input id="O_SalePrice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_OutPrice">
+        <div class="am-form-item-title">备注</div>
+        <input id="O_Remark" type="text" class="form-control" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_OutPrice/Form.js")

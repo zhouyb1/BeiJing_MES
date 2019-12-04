@@ -325,6 +325,10 @@
     <Compile Include="MesDev\StockHistory\StockHistoryService.cs" />
     <Compile Include="MesDev\StockHistory\StockHistoryBLL.cs" />
     <Compile Include="MesDev\StockHistory\StockHistoryIBLL.cs" />
+    <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceEntity.cs" />
+    <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceService.cs" />
+    <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceIBLL.cs" />
+    <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
