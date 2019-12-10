@@ -165,7 +165,7 @@ var bootstrap = function ($, ayma) {
         //物料价格 不小于0
             var period = $.trim($("#P_InPrice").val()); //去除空格
             if (period != undefined && period != "") {
-                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString())) {
                     ayma.alert.error("物料价格必须是非负数.");
                     $("#P_InPrice").val(1);
                     return false;
@@ -174,7 +174,7 @@ var bootstrap = function ($, ayma) {
         //税率 不小于0
             var itax = $.trim($("#P_Itax").val()); //去除空格
             if (itax != undefined && itax != "") {
-                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString().replace('.', ''))) {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString())) {
                     ayma.alert.error("购进税率必须是非负数.");
                     $("#P_Itax").val(1);
                     return false;
