@@ -164,7 +164,7 @@ var bootstrap = function ($, ayma) {
                     {label: "备料天数", name: "g_prepareday", width: 80, align: "left"},
                     { label: "单位重量", name: "g_unitweight", width: 80, align: "left" },
                     { label: "销售税率(%)", name: "g_otax", width: 100, align: "left" },
-                    { label: "购进税率(%)", name: "g_itax", width: 100, align: "left" },
+                    //{ label: "购进税率(%)", name: "g_itax", width: 100, align: "left" },
                     //{ label: "领料班组", name: "t_name", width: 120, align: "left" },
                     { label: "入库仓库", name: "s_name", width: 120, align: "left" },
                     { label: "备注", name: "g_remark", width: 100, align: "left" },

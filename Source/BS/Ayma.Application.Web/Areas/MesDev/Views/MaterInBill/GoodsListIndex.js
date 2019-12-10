@@ -88,7 +88,7 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['M_Kind'] = newArray[i]['g_kind'];
                     newArray[i]['M_Unit'] = newArray[i]['g_unit'];
                     newArray[i]['M_Price'] = newArray[i]['p_inprice'];
-                    newArray[i]['M_GoodsItax'] = newArray[i]['g_itax'];
+                    newArray[i]['M_GoodsItax'] = newArray[i]['p_itax'];
                     newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["ID"] = newArray[i]['id'];
@@ -123,7 +123,7 @@ var bootstrap = function ($, ayma) {
                      },
                     { label: "保质时间", name: "g_period", width: 80, align: "left" },
                     { label: "价格", name: "p_inprice", width: 60, align: "left" },
-                    { label: "税率", name: "g_itax", width: 130, align: "left" },
+                    { label: "税率", name: "p_itax", width: 130, align: "left" },
                     { label: "单位", name: "g_unit", width: 60, align: "left" }
                 ],
                 mainId: 'ID',
@@ -138,10 +138,15 @@ var bootstrap = function ($, ayma) {
                     //}
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
-                        if (row['p_inprice'] == null)
+                        if (row['p_inprice'] == 0)
                         {
                             isChecked.attr('checked', false);
-                            ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为空请及时维护价格！');
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为0请及时维护价格！');
+                        }
+                        if (row['p_itax'] == 0)
+                        {
+                            isChecked.attr('checked', false);
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
                         }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
@@ -150,7 +155,7 @@ var bootstrap = function ($, ayma) {
                         row['M_GoodsName'] = row['p_goodsname'];
                         row['M_SupplyCode'] = row['p_supplycode'];
                         row['M_SupplyName'] = row['p_supplyname'];
-                        row['M_GoodsItax'] = row['g_itax'];
+                        row['M_GoodsItax'] = row['p_itax'];
                         row['M_Unit'] = row['g_unit'];
                         row['M_Kind'] = row['g_kind'];
                         row['M_Price'] = row['p_inprice'];

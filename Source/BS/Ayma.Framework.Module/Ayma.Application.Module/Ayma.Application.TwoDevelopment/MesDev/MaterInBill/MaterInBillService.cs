@@ -97,10 +97,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.P_GoodsCode,
                                 t.P_GoodsName,
                                 t.P_InPrice,
+                                t.P_Itax,
                                 m.G_Unit,
                                 m.G_Kind,
-                                m.G_Period,
-                                m.G_Itax
+                                m.G_Period
                                 from Mes_InPrice t left join Mes_Goods m on(t.P_GoodsCode=m.G_Code) ");
                 strSql.Append(" where G_Kind=1 and t.P_SupplyCode=@G_SupplyCode and m.G_StockCode=@G_StockCode");
                 var queryParam = queryJson.ToJObject();

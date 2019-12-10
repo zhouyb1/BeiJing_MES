@@ -171,6 +171,15 @@ var bootstrap = function ($, ayma) {
                     return false;
                 }
             }
+        //税率 不小于0
+            var itax = $.trim($("#P_Itax").val()); //去除空格
+            if (itax != undefined && itax != "") {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString().replace('.', ''))) {
+                    ayma.alert.error("购进税率必须是非负数.");
+                    $("#P_Itax").val(1);
+                    return false;
+                }
+            }
             var postData = {
                 strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
             };

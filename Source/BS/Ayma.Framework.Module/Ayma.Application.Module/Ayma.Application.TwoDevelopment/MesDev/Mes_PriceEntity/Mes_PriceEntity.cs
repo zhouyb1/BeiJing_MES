@@ -60,6 +60,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("P_CREATEDATE")]
         public DateTime? P_CreateDate { get; set; }
+        /// <summary>
+        /// 购进税率
+        /// </summary>
+        /// <returns></returns>
+        [Column("P_ITAX")]
+        public decimal? P_Itax { get; set; }
         #endregion
 
         #region 扩展操作
