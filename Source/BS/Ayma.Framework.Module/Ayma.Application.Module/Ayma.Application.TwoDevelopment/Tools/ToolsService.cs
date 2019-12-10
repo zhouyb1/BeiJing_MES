@@ -815,7 +815,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_DoorEntity>(x => x.D_Code == code);
+                return this.BaseRepository().FindEntity<Mes_DoorEntity>(x => x.D_Code == code||x.D_Name==code);
             }
             catch (Exception ex)
             {

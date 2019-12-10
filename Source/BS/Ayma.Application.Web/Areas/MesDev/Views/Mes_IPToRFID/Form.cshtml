@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "IP与RFID对应表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">RFID编码</div>
+        <input id="I_RFIDCode" type="text" class="form-control" placeholder="系统自动生产" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">IP地址<font face="宋体">*</font></div>
+        <input id="I_IP" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">门名称<font face="宋体">*</font></div>
+        <div id="I_DoorName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">门编码<font face="宋体">*</font></div>
+        <input id="I_DoorCode" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">状态<font face="宋体">*</font></div>
+        <div id="I_Status" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" ></div>
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">备注</div>
+        <input id="I_Remark" type="text" class="form-control" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_IPToRFID/Form.js")

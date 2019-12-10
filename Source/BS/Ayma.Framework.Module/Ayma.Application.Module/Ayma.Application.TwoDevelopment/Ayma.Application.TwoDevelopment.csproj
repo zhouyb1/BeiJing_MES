@@ -329,6 +329,10 @@
     <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceService.cs" />
     <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceIBLL.cs" />
     <Compile Include="MesDev\Mes_OutPrice\Mes_OutPriceBLL.cs" />
+    <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDEntity.cs" />
+    <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDService.cs" />
+    <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDIBLL.cs" />
+    <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

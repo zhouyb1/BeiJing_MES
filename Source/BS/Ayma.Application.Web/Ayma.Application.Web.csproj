@@ -303,6 +303,7 @@
     <Compile Include="Areas\MesDev\Controllers\Mes_ExpendManagerController.cs" />
     <Compile Include="Areas\MesDev\Controllers\StockHistoryController.cs" />
     <Compile Include="Areas\MesDev\Controllers\Mes_OutPriceController.cs" />
+    <Compile Include="Areas\MesDev\Controllers\Mes_IPToRFIDController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\AM_OrganizationModule\Views\User\ImportForm.css" />
@@ -2599,6 +2600,10 @@
     <Content Include="Areas\MesDev\Views\Mes_OutPrice\Index.js" />
     <Content Include="Areas\MesDev\Views\Mes_OutPrice\Form.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_OutPrice\Form.js" />
+    <Content Include="Areas\MesDev\Views\Mes_IPToRFID\Index.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_IPToRFID\Index.js" />
+    <Content Include="Areas\MesDev\Views\Mes_IPToRFID\Form.cshtml" />
+    <Content Include="Areas\MesDev\Views\Mes_IPToRFID\Form.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
