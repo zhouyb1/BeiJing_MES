@@ -3,6 +3,17 @@
  * 描  述：领料单
  */
 var refreshGirdData;
+
+function js_method(code, moduleId) {
+    var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+    var queryJson = {};
+    queryJson.I_StockCode = code;
+    module.F_UrlAddress = top.$.rootUrl + module.F_UrlAddress + '?queryJson=' + JSON.stringify(queryJson);
+    top.ayma.frameTab.open(module);
+    //module.F_UrlAddress = module.F_UrlAddress.substring(module.F_UrlAddress.indexOf("?"), 0);
+}
+
+
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -252,16 +263,22 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "领料单号", name: "C_CollarNo", width: 160, align: "left"},
-                    { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left"},
-                    { label: "原仓库名称", name: "C_StockName", width: 160, align: "left"},
-                    { label: "调拨仓库编码", name: "C_StockToCode", width: 90, align: "left"},
-                    { label: "调拨仓库名称", name: "C_StockToName", width: 160, align: "left"},
+                    { label: "领料仓编码", name: "C_StockCode", width: 90, align: "left"},
+                    { label: "领料仓", name: "C_StockName", width: 160, align: "left" },
+                    { label: "调拨仓编码", name: "C_StockToCode", width: 90, align: "left"},
+                    { label: "调拨仓", name: "C_StockToName", width: 160, align: "left"},
                     { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left",hidden:"hidden"},
                     { label: "订单时间", name: "P_OrderDate", width: 160, align: "left", hidden: "hidden" },
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                     { label: "添加人", name: "C_CreateBy", width: 90, align: "left"},
                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left"},
                 ],
+                onRenderComplete: function (rows) {
+                    var lengh = rows.length;
+                    for (var i = 0; i < lengh; i++) {
+                        $("[colname='C_StockCode']").html("<a href =# style=text-decoration:underline onclick=js_method('"+rows[i].C_StockCode+"','6470af9c-c0be-4455-b8cc-164b9865bb24')>"+rows[i].C_StockCode+"</a>");
+                    }
+                },
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
@@ -274,10 +291,12 @@ var bootstrap = function ($, ayma) {
             param.StartTime = startTime;
             param.EndTime = endTime;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
-        }
-    };
+        },
+};
     refreshGirdData = function () {
         page.search();
     };
+    
     page.init();
 }
+

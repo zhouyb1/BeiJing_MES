@@ -5,6 +5,8 @@
 var refreshSubGirdData;
 var $subgridTable;//子列表
 var refreshGirdData;
+var stockCode = request('queryJson');
+alert(stockCode);
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -76,7 +78,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPageList',
+                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPageList?queryJson='+stockCode,
                 headData: [
                     {label: "仓库编码", name: "I_StockCode", width: 114, align: "left"},
                     { label: "仓库名称", name: "I_StockName", width: 114, align: "left" },
