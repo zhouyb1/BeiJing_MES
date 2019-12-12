@@ -5,8 +5,8 @@
 var refreshSubGirdData;
 var $subgridTable;//子列表
 var refreshGirdData;
-var stockCode = request('queryJson');
-alert(stockCode);
+var queryJson = JSON.parse(decodeURIComponent(request('queryJson')));
+alert(queryJson.I_StockCode);
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {

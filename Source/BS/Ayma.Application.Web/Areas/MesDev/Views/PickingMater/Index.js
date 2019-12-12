@@ -3,16 +3,7 @@
  * 描  述：领料单
  */
 var refreshGirdData;
-
-function js_method(code, moduleId) {
-    var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
-    var queryJson = {};
-    queryJson.I_StockCode = code;
-    module.F_UrlAddress = top.$.rootUrl + module.F_UrlAddress + '?queryJson=' + JSON.stringify(queryJson);
-    top.ayma.frameTab.open(module);
-    //module.F_UrlAddress = module.F_UrlAddress.substring(module.F_UrlAddress.indexOf("?"), 0);
-}
-
+var js_method;
 
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -276,6 +267,7 @@ var bootstrap = function ($, ayma) {
                 onRenderComplete: function (rows) {
                     var lengh = rows.length;
                     for (var i = 0; i < lengh; i++) {
+
                         $("[colname='C_StockCode']").html("<a href =# style=text-decoration:underline onclick=js_method('"+rows[i].C_StockCode+"','6470af9c-c0be-4455-b8cc-164b9865bb24')>"+rows[i].C_StockCode+"</a>");
                     }
                 },
@@ -292,7 +284,16 @@ var bootstrap = function ($, ayma) {
             param.EndTime = endTime;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         },
-};
+    };
+     js_method=function(code, moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        var queryJson = {};
+        queryJson.I_StockCode = code;
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?queryJson=' + encodeURIComponent(JSON.stringify(queryJson));
+       
+        top.ayma.frameTab.open(module);
+        //module.F_UrlAddress = module.F_UrlAddress.substring(module.F_UrlAddress.indexOf("?"), 0);
+    }
     refreshGirdData = function () {
         page.search();
     };
