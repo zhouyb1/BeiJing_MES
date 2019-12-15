@@ -87,6 +87,7 @@
             this.lblTS = new System.Windows.Forms.Label();
             this.cmbWorkshopName = new System.Windows.Forms.ComboBox();
             this.cmbStockName = new System.Windows.Forms.ComboBox();
+            this.btn_Delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -139,7 +140,7 @@
             this.btn_upload.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_upload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(713, 87);
+            this.btn_upload.Location = new System.Drawing.Point(713, 117);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(90, 30);
             this.btn_upload.TabIndex = 71;
@@ -638,9 +639,23 @@
             this.cmbStockName.TabIndex = 92;
             this.cmbStockName.SelectedIndexChanged += new System.EventHandler(this.cmbStockName_SelectedIndexChanged);
             // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Delete.Image = global::DesktopApp.Properties.Resources.delete;
+            this.btn_Delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Delete.Location = new System.Drawing.Point(713, 84);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(90, 30);
+            this.btn_Delete.TabIndex = 94;
+            this.btn_Delete.Text = "删除";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
             // frmOutWorkShopList
             // 
             this.ClientSize = new System.Drawing.Size(888, 474);
+            this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.cmbWorkshopName);
             this.Controls.Add(this.cmbStockName);
             this.Controls.Add(this.lblTS);
@@ -750,5 +765,6 @@
         private System.Windows.Forms.Label lblTS;
         private System.Windows.Forms.ComboBox cmbWorkshopName;
         private System.Windows.Forms.ComboBox cmbStockName;
+        private System.Windows.Forms.Button btn_Delete;
     }
 }

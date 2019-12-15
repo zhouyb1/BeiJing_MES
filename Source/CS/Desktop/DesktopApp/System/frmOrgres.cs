@@ -538,7 +538,7 @@ namespace DesktopApp
 
                     }
                     MessageBox.Show("保存成功");
-                    UpdatePrice(strSecGoods, dSecPrice);
+                    //UpdatePrice(strSecGoods, dSecPrice);  已经在存储过程中处理
                     Delete();
                     Update();
                 }
@@ -569,7 +569,7 @@ namespace DesktopApp
         {
             try
             {
-                string strOrderNo = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["生产订单号"].Value.ToString();
+                //string strOrderNo = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["生产订单号"].Value.ToString();
                 string strWorkShop = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["车间"].Value.ToString();
                 string strGoodsCode = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料"].Value.ToString();
                 string strBatch = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["批次"].Value.ToString();
@@ -578,22 +578,20 @@ namespace DesktopApp
                 string strGoodsName = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料名称"].Value.ToString();
                 string strUnit = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["单位"].Value.ToString();
                 string strId = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["Id"].Value.ToString();
-
+                string strStockCode = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["仓库编码"].Value.ToString();
+                string strStockName = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["仓库名称"].Value.ToString();
                 //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
 
                 if (MessageBox.Show("物料是否要退回仓库?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
                     Mes_OutWorkShopHeadBLL OutWorkShopHeadBLL = new Mes_OutWorkShopHeadBLL();
-                    var row = OutWorkShopHeadBLL.GetList_OutWorkShopHead(" where O_OrderNo = '" + strOrderNo + "' and O_WorkShop = '" + strWorkShop + "'");
-                    if(row.Count > 0)
-                    {
+
                         try
                         {
                             this.Enabled = false;
                             Cursor.Current = Cursors.WaitCursor;
 
-                            string strStockCode = row[0].O_StockCode;
-                            string strStockName = row[0].O_StockName;
+                            
 
                             Mes_OutWorkShopDetailBLL OutWorkShopDetailBLL = new Mes_OutWorkShopDetailBLL();
                             Mes_OutWorkShopHeadEntity OutWorkShopHeadEntity = new Mes_OutWorkShopHeadEntity();
@@ -627,7 +625,7 @@ namespace DesktopApp
                             //}
 
                             OutWorkShopHeadEntity.O_OutNo = strIn_No;
-                            OutWorkShopHeadEntity.O_OrderNo = strOrderNo;
+                            OutWorkShopHeadEntity.O_OrderNo = "";
                             OutWorkShopHeadEntity.O_StockCode = strStockCode;
                             OutWorkShopHeadEntity.O_StockName = strStockName;
                             OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
@@ -673,7 +671,7 @@ namespace DesktopApp
                             Cursor.Current = Cursors.Default;
                         }
                         
-                    }
+                    
 
                 }
             }

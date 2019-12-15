@@ -37,10 +37,6 @@ namespace Model
         /// </summary>
         public string M_SupplyName { set; get; }
         /// <summary>
-        /// 物料类型
-        /// </summary>
-        public string M_Kind { set; get; }
-        /// <summary>
         /// 生产订单号
         /// </summary>
         public string M_OrderNo{ set; get; }

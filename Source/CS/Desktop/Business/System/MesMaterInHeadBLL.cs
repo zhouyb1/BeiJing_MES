@@ -266,7 +266,6 @@ namespace Business.System
                      strSql.Append("M_OrderKind,");
                      strSql.Append("M_MaterInNo,");
                      strSql.Append("M_StockCode,");
-                     strSql.Append("M_Kind,");
                      strSql.Append("M_StockName,");
                      strSql.Append("M_SupplyCode,");
                      strSql.Append("M_SupplyName,");
@@ -288,7 +287,6 @@ namespace Business.System
                      strSql.Append("@M_OrderKind,");
                      strSql.Append("@M_MaterInNo,");
                      strSql.Append("@M_StockCode,");
-                     strSql.Append("@M_Kind,");
                      strSql.Append("@M_StockName,");
                      strSql.Append("@M_SupplyCode,");
                      strSql.Append("@M_SupplyName,");
@@ -313,7 +311,6 @@ namespace Business.System
                      strSql.Append("M_MaterInNo=@M_OrderKind,");
                      strSql.Append("M_MaterInNo=@M_MaterInNo,");
                      strSql.Append("M_StockCode=@M_StockCode,");
-                     strSql.Append("M_Kind=@M_Kind,");
                      strSql.Append("M_StockName=@M_StockName,");
                      strSql.Append("M_OrderNo=@M_OrderNo,");
                      strSql.Append("M_OrderDate=@M_OrderDate,");
@@ -333,7 +330,6 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@M_OrderKind", entity.M_OrderKind));
                 paramList.Add(new SqlParameter("@M_MaterInNo",entity.M_MaterInNo));
                 paramList.Add(new SqlParameter("@M_StockCode",entity.M_StockCode));
-                paramList.Add(new SqlParameter("@M_Kind", entity.M_Kind));
                 paramList.Add(new SqlParameter("@M_StockName",entity.M_StockName));
                 paramList.Add(new SqlParameter("@M_SupplyCode", entity.M_SupplyCode));
                 paramList.Add(new SqlParameter("@M_SupplyName", entity.M_SupplyName));

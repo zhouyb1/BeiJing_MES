@@ -57,6 +57,9 @@ namespace Model
         /// 
         /// </summary>
         public string W_Remark { set; get; }
+
+        public string W_ProceCode { set; get; }
+        public string W_ProceName { set; get; }
         #endregion
     }
 }

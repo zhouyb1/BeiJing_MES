@@ -156,7 +156,7 @@ namespace DesktopApp
                     MesMaterInHead.M_MaterInNo = txtMaterInNo.Text;
                     MesMaterInHead.M_OrderKind = 0;
                     MesMaterInHead.M_StockCode = strStock[0];
-                    MesMaterInHead.M_Kind = "0";
+                    //MesMaterInHead.M_Kind = "0";
                     MesMaterInHead.M_StockName = strStock[1];
                     MesMaterInHead.M_SupplyCode = strSupply[0];
                     MesMaterInHead.M_SupplyName = strSupply[1];

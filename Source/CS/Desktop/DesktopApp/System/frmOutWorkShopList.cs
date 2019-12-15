@@ -506,6 +506,31 @@ namespace DesktopApp
             cmbStock.Text = row[0].S_Code;
         }
 
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("是否要删除?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
+            {
+                Delete();
+                Update();
+            }
+        }
+
+        private void Delete()
+        {
+            try
+            {
+                string strID = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["ID"].Value.ToString();
+                Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();
+                string strSql = " where ID = '" + strID + "'";
+                OutWorkShopTempBLL.DeleteData(strSql);
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("请选中某一行进行退仓库");
+                lblTS.Text = "系统提示：请选中某一行进行退仓库";
+            }
+        }
+
 
     }
 }
