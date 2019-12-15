@@ -5,8 +5,8 @@
 var refreshSubGirdData;
 var $subgridTable;//子列表
 var refreshGirdData;
-var queryJson = JSON.parse(decodeURIComponent(request('queryJson')));
-alert(queryJson.I_StockCode);
+var stock = decodeURIComponent(request('stock'));
+var goodsCode = decodeURIComponent(request('goodsCode'));
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -20,7 +20,7 @@ var bootstrap = function ($, ayma) {
             }, 220, 500);
             // 刷新
             $('#am_refresh').on('click', function () {
-                location.reload();
+                location.href = location.pathname;
             });
             //仓库
             $('#I_StockName').select({
@@ -78,7 +78,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPageList?queryJson='+stockCode,
+                url: top.$.rootUrl + '/MesDev/InventorySeach/GetPageList?stock=' + stock + '&goodsCode=' + goodsCode,
                 headData: [
                     {label: "仓库编码", name: "I_StockCode", width: 114, align: "left"},
                     { label: "仓库名称", name: "I_StockName", width: 114, align: "left" },

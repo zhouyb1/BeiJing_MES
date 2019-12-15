@@ -4,6 +4,7 @@
  */
 var acceptClick;
 var keyValue = request('keyValue');
+var type = request('type');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -14,6 +15,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+
+            if (type=="view") {
+                $("#S_Name").attr('disabled', true);
+                $("#S_EffectTime").attr('disabled', true);
+                $("#S_Remark").attr('disabled', true);
+            }
             //编码重复验证
             $("#S_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格

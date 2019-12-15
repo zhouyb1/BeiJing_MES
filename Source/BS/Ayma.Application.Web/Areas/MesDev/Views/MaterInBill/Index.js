@@ -3,6 +3,8 @@
  * 描  述：入库单制作
  */
 var refreshGirdData;
+var js_method;
+var js_method_stock;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -242,6 +244,14 @@ var bootstrap = function ($, ayma) {
                     //{ label: "提交人", name: "M_UploadBy", width: 160, align: "left"},
                     //{ label: "提交时间", name: "M_UploadDate", width: 160, align: "left"},
                 ],
+                onRenderComplete: function (rows) {
+                    var lengh = rows.length;
+                    for (var i = 0; i < lengh; i++) {
+                        $("[rownum='rownum_girdtable_" + i + "'][colname='M_SupplyName']").html("<a href =# style=text-decoration:underline title='点击查询供应商资料' onclick=js_method('" + rows[i].M_SupplyCode + "')>" + rows[i].M_SupplyName + "</ a>");
+                        $("[rownum='rownum_girdtable_" + i + "'][colname='M_StockName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + rows[i].M_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].M_StockName + "</ a>");
+
+                    }
+                },
                 mainId: 'ID',
                 isPage: true,
                 sidx: 'M_CreateDate',
@@ -255,6 +265,23 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
+    js_method = function (code) {
+        ayma.layerForm({
+            id: 'MaterInBillForm',
+            title: '供应商资料',
+            url: top.$.rootUrl + '/MesDev/SupplyList/Form?keyValue=' + code+'&type=view',
+            width: 600,
+            height: 400,
+            btn: null,
+            maxmin: true,
+        });
+    };
+    js_method_stock = function(code,moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?stock=' + encodeURIComponent(code);
+        top.ayma.frameTab.openNew(module);
+        
+    }
     refreshGirdData = function () {
         page.search();
     };

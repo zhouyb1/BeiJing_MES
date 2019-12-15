@@ -3,6 +3,7 @@
  * 描  述：成品出库单制作
  */
 var refreshGirdData;
+var js_method;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -223,6 +224,13 @@ var bootstrap = function ($, ayma) {
                     { label: "提交人", name: "P_UploadBy", width: 100, align: "left" },
                     { label: "提交时间", name: "P_UploadDate", width: 160, align: "left" }
                 ],
+                onRenderComplete: function (rows) {
+                    var lengh = rows.length;
+                    for (var i = 0; i < lengh; i++) {
+
+                        $("[colname='P_StockName']").html("<a href =# style=text-decoration:underline  title='点击查询库存' onclick=js_method('" + rows[i].P_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].P_StockName + "</a>");
+                    }
+                },
                 mainId: 'ID',
                 reloadSelected: true,
                 isPage: true,
@@ -237,6 +245,11 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
+    js_method = function (code, moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?stock=' + encodeURIComponent(code);
+        top.ayma.frameTab.openNew(module);
+    }
     refreshGirdData = function () {
         page.search();
     };

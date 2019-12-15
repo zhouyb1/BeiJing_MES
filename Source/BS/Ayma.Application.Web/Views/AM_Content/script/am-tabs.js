@@ -74,9 +74,64 @@
                 }
             }
             else {
-                ayma.frameTab.focus(module.F_ModuleId);
             }
         },
+        //解决iframe src缓存
+        openNew: function (module, notAllowClosed) {
+            var $tabsUl = $('#am_frame_tabs_ul');
+            var $frameMain = $('#am_frame_main');
+
+            if (iframeIdList[module.F_ModuleId] == undefined || iframeIdList[module.F_ModuleId] == null) {
+                // 隐藏之前的tab和窗口
+                if (ayma.frameTab.iframeId != '') {
+                    $tabsUl.find('#am_tab_' + ayma.frameTab.iframeId).removeClass('active');
+                    $frameMain.find('#am_iframe_' + ayma.frameTab.iframeId).removeClass('active');
+                    iframeIdList[ayma.frameTab.iframeId] = 0;
+                }
+                var parentId = ayma.frameTab.iframeId;
+                ayma.frameTab.iframeId = module.F_ModuleId;
+                iframeIdList[ayma.frameTab.iframeId] = 1;
+
+                 //打开一个功能模块tab_iframe页面
+                var $tabItem = $('<li class="am-frame-tabItem active" id="am_tab_' + module.F_ModuleId + '" parent-id="' + parentId + '"  ><span><i class="' + module.F_Icon + '"></i>&nbsp;' + module.F_FullName + '</span></li>');
+                if (!notAllowClosed) {
+                    $tabItem.append('<span class="reomve" title="关闭窗口"></span>');
+                }
+                var $iframe = $('<iframe class="am-frame-iframe active" id="am_iframe_' + module.F_ModuleId + '" frameborder="0" src="' + $.rootUrl + module.F_UrlAddress + '"></iframe>');
+                $tabsUl.append($tabItem);
+                $frameMain.append($iframe);
+
+                $(".am-frame-tabs-wrap").mCustomScrollbar("update");
+                $(".am-frame-tabs-wrap").mCustomScrollbar("scrollTo", $tabItem);
+
+                //绑定一个点击事件
+                $tabItem.on('click', function() {
+                    var id = $(this).attr('id').replace('am_tab_', '');
+                    ayma.frameTab.focus(id);
+                });
+                $tabItem.find('.reomve').on('click', function() {
+                    var id = $(this).parent().attr('id').replace('am_tab_', '');
+                    ayma.frameTab.close(id);
+                    return false;
+                });
+
+                if (!!ayma.frameTab.opencallback) {
+                    ayma.frameTab.opencallback();
+                }
+                if (!notAllowClosed) {
+                    $.ajax({
+                        url: top.$.rootUrl + "/Home/VisitModule",
+                        data: { moduleName: module.F_FullName, moduleUrl: module.F_UrlAddress },
+                        type: "post",
+                        dataType: "text"
+                    });
+                }
+            } else {
+                ayma.frameTab.close(module.F_ModuleId);
+                ayma.frameTab.open(module);
+            }
+        },
+
         focus: function (moduleId) {
             if (iframeIdList[moduleId] == 0) {
                 // 定位焦点tab页

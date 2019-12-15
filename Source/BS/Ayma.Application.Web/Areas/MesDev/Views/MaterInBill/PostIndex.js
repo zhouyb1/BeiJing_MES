@@ -3,6 +3,7 @@
  * 描  述：入库单制作
  */
 var refreshGirdData;
+
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -186,6 +187,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
+    
     refreshGirdData = function () {
         page.search();
     };

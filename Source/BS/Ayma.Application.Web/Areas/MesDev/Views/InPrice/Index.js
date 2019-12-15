@@ -3,6 +3,7 @@
  * 描  述：原物料入库价格表
  */
 var refreshGirdData;
+var js_method;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -190,6 +191,12 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                 ],
+                onRenderComplete: function (rows) {
+                    var lengh = rows.length;
+                    for (var i = 0; i < lengh; i++) {
+                        $("[rownum='rownum_girdtable_" + i + "'][colname='P_GoodsName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method('" + rows[i].P_GoodsCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].P_GoodsName + "</ a>");
+                    }
+                },
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
@@ -203,6 +210,12 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
+    js_method = function (code, moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?goodsCode=' + encodeURIComponent(code);
+        top.ayma.frameTab.openNew(module);
+
+    }
     refreshGirdData = function () {
         page.search();
     };
