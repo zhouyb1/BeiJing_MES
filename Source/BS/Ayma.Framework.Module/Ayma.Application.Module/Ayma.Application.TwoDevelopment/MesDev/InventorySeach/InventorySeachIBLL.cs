@@ -17,7 +17,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<Mes_InventoryEntity> GetPageList(Pagination pagination, string queryJson); 
+        IEnumerable<Mes_InventoryEntity> GetPageList(Pagination pagination, string queryJson,string stock,string goodsCode); 
         /// <summary>
         /// 获取物料领用列表
         /// </summary>

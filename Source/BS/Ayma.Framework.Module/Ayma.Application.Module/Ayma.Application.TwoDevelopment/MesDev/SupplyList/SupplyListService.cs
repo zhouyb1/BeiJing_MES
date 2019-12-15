@@ -78,7 +78,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Mes_SupplyEntity>(c=>c.ID==keyValue|| c.S_Code==keyValue);
             }
             catch (Exception ex)
             {

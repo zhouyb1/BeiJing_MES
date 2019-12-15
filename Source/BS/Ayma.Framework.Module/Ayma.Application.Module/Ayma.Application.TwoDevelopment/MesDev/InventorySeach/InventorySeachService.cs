@@ -23,7 +23,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InventoryEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_InventoryEntity> GetPageList(Pagination pagination, string queryJson, string stock, string goodsCode)
         {
             try
             {
@@ -50,6 +50,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+
+                if (!string.IsNullOrWhiteSpace(stock))
+                {
+                    dp.Add("I_StockCode", "%" + stock + "%", DbType.String);
+                    strSql.Append(" AND t.I_StockCode Like @I_StockCode ");
+                }
+                if (!string.IsNullOrWhiteSpace(goodsCode))
+                {
+                    dp.Add("I_GoodsCode", "%" + goodsCode + "%", DbType.String);
+                    strSql.Append(" AND t.I_GoodsCode Like @I_GoodsCode ");
+                }
                 if (!queryParam["I_StockCode"].IsEmpty())
                 {
                     dp.Add("I_StockCode", "%" + queryParam["I_StockCode"].ToString() + "%", DbType.String);
