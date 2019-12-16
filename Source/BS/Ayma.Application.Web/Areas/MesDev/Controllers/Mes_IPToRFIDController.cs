@@ -109,15 +109,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult SaveForm(string keyValue,Mes_IPToRFIDEntity entity)
         {
-            var IsCode = Tools.IsCode("MES_IPToRFID", "I_DoorCode", entity.I_DoorCode, "");
-            if (IsCode == true)
+            if (keyValue.IsEmpty())
             {
-                return Fail("【" + entity.I_DoorName + "】已存在!");
-            }
-            var IsIP = Tools.IsCode("MES_IPToRFID", "I_IP", entity.I_IP, "");
-            if (IsIP == true)
-            {
-                return Fail("【" + entity.I_IP + "】该IP地址已存在!");
+                var IsCode = Tools.IsCode("MES_IPToRFID", "I_DoorCode", entity.I_DoorCode, "");
+                if (IsCode == true)
+                {
+                    return Fail("【" + entity.I_DoorName + "】已存在!");
+                }
+                var IsIP = Tools.IsCode("MES_IPToRFID", "I_IP", entity.I_IP, "");
+                if (IsIP == true)
+                {
+                    return Fail("【" + entity.I_IP + "】该IP地址已存在!");
+                }
             }
             mes_IPToRFIDIBLL.SaveEntity(keyValue, entity);
             return Success("保存成功！");
