@@ -13,6 +13,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            //编辑禁用
+            if (keyValue)
+            {
+                $("#I_DoorName").attr('disabled', 'disabled');
+            }
             //状态
             $("#I_Status").DataItemSelect({ code: 'IPToRFID' });
             //绑定门
