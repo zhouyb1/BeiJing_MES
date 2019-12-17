@@ -528,6 +528,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var sqlData = @"SELECT  *,0 allamount,0 tax,0 taxAmount
                                         
                                 FROM    ( SELECT    h.M_SupplyName,
+                                                    h.M_SupplyCode,
                                                     k.G_Name,
                                                     (m.M_Price*M_Qty) amount
                                           FROM      dbo.Mes_MaterInHead h
@@ -635,6 +636,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var columnsHead = this.BaseRepository().FindList<Mes_GoodKindEntity>(sql.ToString());
                 List<ColumnModel> cmList = new List<ColumnModel>();
 
+                ColumnModel cm4 = new ColumnModel();
+                cm4.name = "m_supplycode";
+                cm4.label = "供应商编码";
+                cm4.width = 80;
+                cm4.align = "center";
+                cm4.sort = false;
+                cm4.statistics = false;
+                cm4.children = null;
+                cmList.Add(cm4);
                 ColumnModel cm = new ColumnModel();
                 cm.name = "m_supplyname";
                 cm.label = "供应商名称";
@@ -721,6 +731,45 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     INNER JOIN dbo.Mes_GoodKind k ON k.G_Code = g.G_TKind
                     WHERE h.M_Status=3 GROUP BY k.G_Name,h.M_SupplyName ";
             var dt = this.BaseRepository().FindTable(sql);
+            return dt;
+        }
+
+        /// <summary>
+        /// 供应商存货明细
+        /// </summary>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public DataTable GetSupplyGoodsList(string queryJson)
+        {
+            var sql = @"SELECT  
+                                h.M_SupplyName ,
+                                d.M_GoodsCode ,
+                                d.M_GoodsName ,
+                                d.M_Unit ,
+                                MAX(d.M_Price) M_Price,
+                                SUM(d.M_Price * M_Qty) amount, 
+                                SUM(M_Qty)
+                        FROM    dbo.Mes_MaterInHead h
+                                LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
+                        WHERE   h.M_Status = 3
+                                AND d.M_Kind = 1 {0}
+                        GROUP BY
+                                h.M_SupplyName,
+                                h.M_MaterInNo, 
+                                M_GoodsCode ,
+                                M_GoodsName ,
+                                M_Unit  ";
+
+            var queryParam = queryJson.ToJObject();
+            var dp = new DynamicParameters(new { });
+            var sqlParam = new StringBuilder();
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                sqlParam.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+            }
+            var dt = this.BaseRepository().FindTable(string.Format(sql, sqlParam.ToString()));
             return dt;
         }
 

@@ -79,6 +79,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         IEnumerable<ColumnModel> GetPageTitle(string queryJson);
+
+        /// <summary>
+        /// 供应商存货明细
+        /// </summary>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        DataTable GetSupplyGoodsList(string queryJson);
         #endregion
 
         #region 提交数据

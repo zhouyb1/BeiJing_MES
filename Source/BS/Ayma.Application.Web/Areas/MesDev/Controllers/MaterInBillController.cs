@@ -188,46 +188,63 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetMaterInDetail(string queryJson)
         {
             var dt = materInBillIBLL.GetMaterInDetailSum(queryJson);
-            if (dt.Rows.Count > 0)
-            {
-                //计算合计列
-                if (true)
-                {
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        decimal everysum_qty = 0;
-                        decimal everysum_amount = 0;
-                        for (int j = 0; j < dt.Columns.Count; j++)
-                        {
+            #region 舍去
+            //if (dt.Rows.Count > 0)
+            //{
+            //    //计算合计列
+            //    if (true)
+            //    {
+            //        for (int i = 0; i < dt.Rows.Count; i++)
+            //        {
+            //            decimal everysum_qty = 0;
+            //            decimal everysum_amount = 0;
 
-                            if (dt.Columns[j].ColumnName.IndexOf("_qty") > 0)
-                            {
-                                if (dt.Rows[i][j] == DBNull.Value)
-                                {
-                                    everysum_qty += 0;
-                                }
-                                else
-                                {
-                                    everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
-                                }
-                            }
-                            if (dt.Columns[j].ColumnName.IndexOf("_amount") > 0)
-                            {
-                                if (dt.Rows[i][j] == DBNull.Value)
-                                {
-                                    everysum_amount += 0;
-                                }
-                                else
-                                {
-                                    everysum_amount += decimal.Parse(dt.Rows[i][j].ToString());
-                                }
-                            }
-                        }
-                        dt.Rows[i]["allqty"] = Math.Round(everysum_qty, 2);
-                        dt.Rows[i]["allamount"] = Math.Round(everysum_amount, 2);
-                    }
-                }
-            }
+
+
+            //            for (int j = 0; j < dt.Columns.Count; j++)
+            //            {
+
+            //                if (dt.Columns[j].ColumnName.IndexOf("_qty") > 0)
+            //                {
+            //                    if (dt.Rows[i][j] == DBNull.Value)
+            //                    {
+            //                        everysum_qty += 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+            //                    }
+            //                }
+            //                if (dt.Columns[j].ColumnName.IndexOf("_") > 0)
+            //                {
+            //                    if (dt.Rows[i][j] == DBNull.Value)
+            //                    {
+            //                        everysum_qty += 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+            //                    }
+            //                }
+            //                if (dt.Columns[j].ColumnName.IndexOf("_amount") > 0)
+            //                {
+            //                    if (dt.Rows[i][j] == DBNull.Value)
+            //                    {
+            //                        everysum_amount += 0;
+            //                    }
+            //                    else
+            //                    {
+            //                        everysum_amount += decimal.Parse(dt.Rows[i][j].ToString());
+            //                    }
+            //                }
+
+            //                dt.Rows[i]["allqty"] = Math.Round(everysum_qty, 2);
+            //                dt.Rows[i]["allamount"] = Math.Round(everysum_amount, 2);
+            //            }
+            //        }
+            //    }
+            //} 
+            #endregion
             return Success(dt);
         }
 
@@ -241,6 +258,39 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var headList = materInBillIBLL.GetPageTitle(queryJson);
             return Success(headList);
+        }
+
+        /// <summary>
+        /// 获取供应商存货明细
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetSupplayGoodsList(string queryJson)
+        {
+            var dt = materInBillIBLL.GetSupplyGoodsList(queryJson);
+            if (true)
+            {
+                if (dt.Rows.Count > 0)
+                {
+                    var supplyName = dt.Rows[0]["m_supplyname"].ToString();
+                    for (var i = 0; i < dt.Rows.Count; i++)
+                    {
+                        var newSupplyName = dt.Rows[i]["m_supplyname"].ToString();
+                        if (supplyName != newSupplyName)
+                        {
+                            var dr = dt.NewRow();
+                            dr["smallcount"] = "小计";
+                            dt.Rows.InsertAt(dr, i);
+
+                            supplyName = newSupplyName;
+                            i++;
+                        }
+                    }
+                    var endRow = dt.NewRow();
+                    endRow["smallcount"] = "小计";
+                    dt.Rows.InsertAt(endRow, dt.Rows.Count);
+                }
+            }
+            return Success(dt);
         }
 
         /// <summary>

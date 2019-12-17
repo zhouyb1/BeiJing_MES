@@ -277,6 +277,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 供应商存货明细
+        /// </summary>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public DataTable GetSupplyGoodsList(string queryJson)
+        {
+            try
+            {
+                return materInBillService.GetSupplyGoodsList(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
