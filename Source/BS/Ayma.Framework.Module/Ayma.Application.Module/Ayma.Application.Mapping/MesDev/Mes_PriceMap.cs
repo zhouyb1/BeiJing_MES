@@ -5,8 +5,8 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-09-12 14:05
-    /// 描 述：价格表
+    /// 日 期：2019-12-17 12:37
+    /// 描 述：变价记录表
     /// </summary>
     public partial class Mes_PriceMap : EntityTypeConfiguration<Mes_PriceEntity>
     {
