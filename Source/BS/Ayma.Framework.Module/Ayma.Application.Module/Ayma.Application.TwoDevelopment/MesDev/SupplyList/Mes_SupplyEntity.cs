@@ -57,6 +57,66 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("S_REMARK")]
         public string S_Remark { get; set; }
+        /// <summary>
+        /// 联系人
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_PERSON")]
+        public string S_Person { get; set; }
+        /// <summary>
+        /// 联系电话
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_TELEPHONE")]
+        public string S_Telephone { get; set; }
+        /// <summary>
+        /// 法人
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_CORP")]
+        public string S_Corp { get; set; }
+        /// <summary>
+        /// 地址
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_ADDRESS")]
+        public string S_Address { get; set; }
+        /// <summary>
+        /// 税号
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_TAXCODE")]
+        public string S_TaxCode { get; set; }
+        /// <summary>
+        /// 资质1
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_EFFECT1")]
+        public string S_Effect1 { get; set; }
+        /// <summary>
+        /// 资质2
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_EFFECT2")]
+        public string S_Effect2 { get; set; }
+        /// <summary>
+        /// 资质3
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_EFFECT3")]
+        public string S_Effect3 { get; set; }
+        /// <summary>
+        /// 资质4
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_EFFECT4")]
+        public string S_Effect4 { get; set; }
+        /// <summary>
+        /// 资质5
+        /// </summary>
+        /// <returns></returns>
+        [Column("S_EFFECT5")]
+        public string S_Effect5 { get; set; }
         #endregion
 
         #region 扩展操作

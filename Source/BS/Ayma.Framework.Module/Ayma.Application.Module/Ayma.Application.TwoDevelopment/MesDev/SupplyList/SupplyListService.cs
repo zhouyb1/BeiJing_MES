@@ -37,7 +37,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_CreateDate,
                 t.S_UpdateBy,
                 t.S_UpdateDate,
-                t.S_Remark
+                t.S_Remark,
+                t.S_Person,
+                t.S_Telephone,
+                t.S_Corp,
+                t.S_Address,
+                t.S_TaxCode,
+                t.S_Effect1,
+                t.S_Effect2,
+                t.S_Effect3,
+                t.S_Effect4,
+                t.S_Effect5
                 ");
                 strSql.Append("  FROM Mes_Supply t ");
                 strSql.Append("  WHERE 1=1 ");
