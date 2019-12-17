@@ -60,6 +60,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
         /// <summary>
+        /// 获取供应商供应的物料列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetPriceBySupply(string pagination, string P_SupplyCode)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = inPriceIBLL.GetPriceBySupply(paginationobj, P_SupplyCode);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
         /// 获取表单数据
         /// </summary>
         /// <returns></returns>
@@ -88,6 +108,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult DeleteForm(List<Mes_InPriceEntity> strEntity)
         {
             inPriceIBLL.DeleteEntity(strEntity);
+            return Success("删除成功！");
+        }
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult DeleteEntity(string keyValue)
+        {
+            inPriceIBLL.DeleteEntity(keyValue);
             return Success("删除成功！");
         }
         /// <summary>

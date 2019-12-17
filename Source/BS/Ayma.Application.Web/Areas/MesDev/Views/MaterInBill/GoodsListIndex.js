@@ -104,12 +104,12 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetGoodsList',
                 headData: [
                     { label: "主键", name: "id", width: 130, align: "left",hidden:true},
-                    { label: "物料编码", name: "p_goodscode", width: 130, align: "left" },
-                    { label: "物料名称", name: "p_goodsname", width: 130, align: "left" },
-                    { label: "供应商编码", name: "p_supplycode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "p_supplyname", width: 130, align: "left" },
+                    { label: "物料编码", name: "p_goodscode", width: 80, align: "left" },
+                    { label: "物料名称", name: "p_goodsname", width: 80, align: "left" },
+                    { label: "供应商编码", name: "p_supplycode", width: 80, align: "left" },
+                    { label: "供应商名称", name: "p_supplyname", width: 80, align: "left" },
                      {
-                         label: "商品类型", name: "g_kind", width: 160, align: "left",
+                         label: "商品类型", name: "g_kind", width: 80, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -122,9 +122,21 @@ var bootstrap = function ($, ayma) {
                          }  
                      },
                     { label: "保质时间", name: "g_period", width: 80, align: "left" },
-                    { label: "价格", name: "p_inprice", width: 60, align: "left" },
-                    { label: "税率", name: "p_itax", width: 130, align: "left" },
-                    { label: "单位", name: "g_unit", width: 60, align: "left" }
+                    {
+                        label: "开始时间", name: "p_startdate", width: 80, align: "left",
+                        formatter: function (value, row, dfop) {
+                            return row.p_startdate.substr(0, 10);
+                        }
+                    },
+                    {
+                        label: "到期时间", name: "p_enddate", width: 80, align: "left",
+                        formatter: function (value, row, dfop) {
+                            return row.p_enddate.substr(0, 10);
+                        }
+                    },
+                    { label: "价格", name: "p_inprice", width: 80, align: "left" },
+                    { label: "税率", name: "p_itax", width: 80, align: "left" },
+                    { label: "单位", name: "g_unit", width: 80, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -136,6 +148,11 @@ var bootstrap = function ($, ayma) {
                     //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
                     //    return;
                     //}
+                    var now = new Date();
+                    var year = now.getFullYear(); //得到年份
+                    var month = now.getMonth() + 1;//得到月份
+                    var date = now.getDate();//得到日期
+                    var time = year + '-' + month + '-' + date
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
                         if (row['p_inprice'] == 0)
@@ -147,6 +164,10 @@ var bootstrap = function ($, ayma) {
                         {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
+                        }
+                        if (row['p_enddate'] == null || row['p_enddate'].substr(0, 10) < time) {
+                            isChecked.attr('checked', false);
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】有效期已到请及时维护！');
                         }
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();

@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "变价记录表";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">主键<font face="宋体">*</font></div>
+        <input id="ID" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">供应商编码<font face="宋体">*</font></div>
+        <input id="P_SupplyCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">供应商名称<font face="宋体">*</font></div>
+        <input id="P_SupplyName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
+        <input id="P_GoodsCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
+        <input id="P_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">价格<font face="宋体">*</font></div>
+        <input id="P_InPrice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">添加人<font face="宋体">*</font></div>
+        <input id="P_CreateBy" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">添加时间<font face="宋体">*</font></div>
+        <input id="P_CreateDate" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">P_Itax<font face="宋体">*</font></div>
+        <input id="P_Itax" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">起始时间<font face="宋体">*</font></div>
+        <input id="P_StartDate" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">结束时间<font face="宋体">*</font></div>
+        <input id="P_EndDate" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_Price/Form.js")

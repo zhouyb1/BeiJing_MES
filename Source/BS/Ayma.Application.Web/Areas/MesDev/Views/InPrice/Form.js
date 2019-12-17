@@ -19,6 +19,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            //编辑禁用
+            if (keyValue) {
+                $("#P_SupplyName").attr('disabled', 'disabled'); 
+                $("#P_GoodsName").attr('disabled', 'disabled');
+            }
             //$('#P_GoodsName').select();
             //供应商名称
             $("#P_SupplyName").select({
@@ -177,6 +182,16 @@ var bootstrap = function ($, ayma) {
                 if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString())) {
                     ayma.alert.error("购进税率必须是非负数.");
                     $("#P_Itax").val(1);
+                    return false;
+                }
+            }
+        //到期时间 不小于开始时间
+            var StartDate = $.trim($("#P_StartDate").val()); //去除空格
+            var EndDate = $.trim($("#P_EndDate").val()); //去除空格
+            if (StartDate != undefined && StartDate != "" && EndDate != undefined && EndDate != "") {
+                if (EndDate.toString("yyyy-mm-dd") <= StartDate.toString("yyyy-mm-dd"))
+                {
+                    ayma.alert.error("到期时间只能大于开始时间.");
                     return false;
                 }
             }

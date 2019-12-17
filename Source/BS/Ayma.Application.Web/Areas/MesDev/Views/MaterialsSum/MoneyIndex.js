@@ -5,6 +5,15 @@
 var refreshSubGirdData;
 var $subgridTable;//子列表
 var refreshGirdData;
+var warehousingdetail;
+var rkmx;
+var ckmx;
+var tkmx;
+var ywlxsmx;
+var bfslmx;
+var qtrkmx;
+var qtckmx;
+var tgysmx;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -15,7 +24,7 @@ var bootstrap = function ($, ayma) {
         init: function () {
             page.initGird();
             page.bind();
-            page.doubleClick();
+            //page.doubleClick();
         },
         bind: function () {
             // 时间搜索框
@@ -46,19 +55,19 @@ var bootstrap = function ($, ayma) {
                 }
             });
             //双击  
-            $('#girdtable_sum').on('dblclick', function () {
-                var dateParam = { StartTime: startTime, EndTime: endTime };
-                var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
-                $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_Outbounddetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_withdrawingdetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_materialssales').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_scrapnumber').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_other').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_otherout').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#girdtable_supplierback').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
-                $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
-            });
+            //$('#girdtable_sum').on('dblclick', function () {
+            //    var dateParam = { StartTime: startTime, EndTime: endTime };
+            //    var M_GoodsCode = $('#girdtable_sum').jfGridValue('m_goodscode');
+            //    $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_Outbounddetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_withdrawingdetails').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_materialssales').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_scrapnumber').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_other').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_otherout').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#girdtable_supplierback').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
+            //    $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
+            //});
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
@@ -145,25 +154,119 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_sum').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSumListByDate',
                 headData: [
-                    { label: "商品编码", name: "m_goodscode", width: 130, align: "left" },
-                    { label: "商品名称", name: "m_goodsname", width: 130, align: "left" },
-                    { label: "入库数量", name: "inventoryquantity", width: 90, align: "left", statistics: true },
-                    { label: "出库数量", name: "delivery", width: 90, align: "left", statistics: true },
-                    { label: "期初库存", name: "initialinventory", width: 90, align: "left", statistics: true },
-                    { label: "期初金额", name: "initialamount", width: 90, align: "left", statistics: true },
-                    { label: "期末库存", name: "endinginventory", width: 90, align: "left", statistics: true },
-                    { label: "期末金额", name: "finalamount", width: 160, align: "left", statistics: true },
-                    { label: "加权平均价", name: "price", width: 90, align: "left" },
-                    { label: "次品退库数量", name: "back_qty", width: 90, align: "left", statistics: true },
-                    { label: "退库数量", name: "withdrawingnumber", width: 90, align: "left" },
-                    { label: "原物料销售数", name: "materialssales", width: 90, align: "left" },
-                    { label: "报废数量", name: "scrapist", width: 90, align: "left" },
-                    { label: "其它入库数量", name: "otherwarehouse", width: 90, align: "left" },
-                    { label: "其它出库数量", name: "otheroutbound", width: 90, align: "left" },
-                    { label: "退供应商数量", name: "supplierback", width: 90, align: "left" },
+                    { label: "商品编码", name: "m_goodscode", width: 130, align: "center" },
+                    { label: "商品名称", name: "m_goodsname", width: 130, align: "center" },
+                    //{ label: "供应商名称", name: "m_supplyname", width: 130, align: "center" },
+                    { label: "单位", name: "m_unit", width: 130, align: "center" },
+                    { label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true },
+                    { label: "出库数量", name: "delivery", width: 90, align: "center", statistics: true },
+                    {
+                        label: "期初库存", name: "期初库存", width: 90, align: "center", children: [
+                         { label: "数量", name: "initialinventory", width: 90, align: "center", statistics: true },
+                         { label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true },
+                          { label: "期初金额", name: "initialamount", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    //{ label: "期初金额", name: "initialamount", width: 90, align: "center", statistics: true },
+                    {
+                        label: "期末库存", name: "期末库存", width: 90, align: "center",
+                        children: [
+                         { label: "数量", name: "endinginventory", width: 90, align: "center", statistics: true },
+                         { label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true },
+                         { label: "期末金额", name: "finalamount", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    //{ label: "期末金额", name: "finalamount", width: 160, align: "center", statistics: true },
+                    //{ label: "加权平均价", name: "price", width: 90, align: "center" },
+                    {
+                        label: "次品退库", name: "次品退库", width: 90, align: "center", children: [
+                         { label: "数量", name: "back_qty", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    {
+                        label: "退回仓库", name: "退回仓库", width: 90, align: "center", children: [
+                            { label: "数量", name: "withdrawingnumber", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    {
+                        label: "原物料销售", name: "原物料销售", width: 90, align: "center", children: [
+                            { label: "数量", name: "materialssales", width: 90, align: "center", statistics: true },
+                            {
+                                label: "销售单价(元)", name: "outprice", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop)
+                                {
+                                    if (row.outprice == null) {
+                                        return 0;
+                                    }
+                                    else {
+                                        return row.outprice;
+                                    }
+                                }
+                            },
+                            {
+                                label: "金额(元)", name: "outamount", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                    return row.materialssales * row.outprice;
+                                }
+                            },
+                        ]
+                    },
+                    {
+                        label: "报废单据", name: "报废单据", width: 90, align: "center", children: [
+                              { label: "数量", name: "scrapist", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    {
+                        label: "其它入库", name: "其它入库", width: 90, align: "center", children: [
+                                { label: "数量", name: "otherwarehouse", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    {
+                        label: "其它出库", name: "其它出库", width: 90, align: "center", children: [
+                                  { label: "数量", name: "otheroutbound", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                    {
+                        label: "退供应商", name: "退供应商", width: 90, align: "center", children: [
+                                    { label: "数量", name: "supplierback", width: 90, align: "center", statistics: true },
+                        ]
+                    },
+                   {
+                        label: "开始时间", name: "startTime", width: 130, align: "center", formatter: function (value, row, dfop) {
+                                                 return startTime;
+                                             }
+                                         },
+                        {
+                            label: "结束时间", name: "end", width: 130, align: "center",
+                            formatter: function (value, row, dfop) {
+                                return endTime;
+                            }
+                        },
                     //{ label: "入库时间", name: "m_createdate", width: 160, align: "left",hidden:true}    
-                ],
-                mainId:'ID',
+                ],        
+                onRenderComplete: function (rows)
+                {
+                    //var list = $('#girdtable_sum').jfGridGet('rowdatas');
+                    //var data = [];inet
+                    //data = list;
+                    //for (var i = 0; i < data.length; i++) {
+                    //    alert(data[i].end);
+                    //}
+                    var StartTime = encodeURIComponent(startTime);
+                    var EndTime = encodeURIComponent(endTime);
+                    var lengh = rows.length;
+                    for (var i = 0; i < lengh; i++) {
+                        //var a = $("[rownum='rownum_girdtable_sum_" + i + "'][colname='end']").text();
+                        //var time = encodeURIComponent(a);
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='inventoryquantity']").html("<a href =# style=text-decoration:underline title='点击查询入库明细' onclick=rkmx('" + rows[i].m_goodscode + "','入库明细')>" + rows[i].inventoryquantity + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='delivery']").html("<a href =# style=text-decoration:underline title='点击查询出库明细' onclick=rkmx('" + rows[i].m_goodscode + "','出库明细')>" + rows[i].delivery + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='withdrawingnumber']").html("<a href =# style=text-decoration:underline title='点击查询退库明细' onclick=rkmx('" + rows[i].m_goodscode + "','退库明细')>" + rows[i].withdrawingnumber + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='materialssales']").html("<a href =# style=text-decoration:underline title='点击查询原物料销售明细' onclick=rkmx('" + rows[i].m_goodscode + "','原物料销售明细')>" + rows[i].materialssales + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='scrapist']").html("<a href =# style=text-decoration:underline title='点击查询报废数量明细' onclick=rkmx('" + rows[i].m_goodscode + "','报废数量明细')>" + rows[i].scrapist + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otherwarehouse']").html("<a href =# style=text-decoration:underline title='点击查询其它入库明细' onclick=rkmx('" + rows[i].m_goodscode + "','其它入库明细')>" + rows[i].otherwarehouse + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otheroutbound']").html("<a href =# style=text-decoration:underline title='点击查询其它出库明细' onclick=rkmx('" + rows[i].m_goodscode + "','其它出库明细')>" + rows[i].otheroutbound + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='supplierback']").html("<a href =# style=text-decoration:underline title='点击查询退供应商明细' onclick=rkmx('" + rows[i].m_goodscode + "','退供应商明细')>" + rows[i].supplierback + "</ a>");
+                    }
+                },
+                mainId: 'ID',
                 reloadSelected: true,
                 footerrow: true,
                 isPage: true,
@@ -411,5 +514,51 @@ var bootstrap = function ($, ayma) {
     refreshSubGirdData = function () {
         $subgridTable.jfGridSet("reload");
     };
+    warehousingdetail = function (startTime,endTime,moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/MaterInBill/PostIndex?startTime=' + startTime + '&endTime=' + endTime;
+        top.ayma.frameTab.openNew(module);       
+    }
+    //rkmx = function (m_goodscode)
+    // {
+    //     var dateParam = { StartTime: startTime, EndTime: endTime };
+    //     $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+    //     $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
+    //}
+    rkmx = function (m_goodscode,type) {
+        var dateParam = { StartTime: startTime, EndTime: endTime };
+        if (type == '入库明细') {
+            $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
+        }
+        if (type == '出库明细') {
+            $('#girdtable_Outbounddetails').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_Outbounddetails"]').tab('show'); // 通过名字选择
+        } 
+        if (type == '退库明细') {
+            $('#girdtable_withdrawingdetails').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_withdrawingdetails"]').tab('show'); // 通过名字选择
+        }
+        if (type == '原物料销售明细') {
+            $('#girdtable_materialssales').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_materialssales"]').tab('show'); // 通过名字选择
+        }
+        if (type == '报废数量明细') {
+            $('#girdtable_scrapnumber').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_scrapnumber"]').tab('show'); // 通过名字选择
+        }
+        if (type == '其它入库明细') {
+            $('#girdtable_other').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_other"]').tab('show'); // 通过名字选择
+        }
+        if (type == '其它出库明细') {
+            $('#girdtable_otherout').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_otherout"]').tab('show'); // 通过名字选择
+        }
+        if (type == '退供应商明细') {
+            $('#girdtable_supplierback').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
+            $('#pageTab a[href="#page_supplierback"]').tab('show'); // 通过名字选择
+        }
+    }
     page.init();
 }

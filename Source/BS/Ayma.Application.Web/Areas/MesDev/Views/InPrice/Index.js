@@ -3,7 +3,11 @@
  * 描  述：原物料入库价格表
  */
 var refreshGirdData;
+var $subgridTable;//子列表
+var recordDel;//删除子列表
+var recordEdit;//编辑子列表
 var js_method;
+var refreshSubGirdData;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -161,46 +165,75 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/InPrice/GetPageList',
                 headData: [
-                    { label: "供应商编码", name: "P_SupplyCode", width: 160, align: "left"},
-                    { label: "供应商名称", name: "P_SupplyName", width: 160, align: "left"},
-                    { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left"},
-                    { label: "物料名称", name: "P_GoodsName", width: 160, align: "left"},
-                    {
-                        label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left", editType: 'input', editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_InPrice = 0;
-                                }
-
-                            }
-                        },formatter: function() {
-                            
-                        }
-                    },
-                    {
-                        label: "购进税率(%)", name: "P_Itax", width: 160, align: "left", editType: 'input',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_Itax = 0;
-                                }
-
-                            }
-                        }, formatter: function () {
-
-                        }
-                    },
+                    { label: "供应商编码", name: "P_SupplyCode", width: 200, align: "left" },
+                    { label: "供应商名称", name: "P_SupplyName", width: 200, align: "left"},
                 ],
-                onRenderComplete: function (rows) {
-                    var lengh = rows.length;
-                    for (var i = 0; i < lengh; i++) {
-                        $("[rownum='rownum_girdtable_" + i + "'][colname='P_GoodsName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method('" + rows[i].P_GoodsCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].P_GoodsName + "</ a>");
-                    }
-                },
                 mainId:'ID',
                 reloadSelected: true,
                 isPage: true,
-                isMultiselect:true
+                isSubGrid: true,
+                subGridRowExpanded: function (subgridId, row) {
+                    var P_SupplyCode = row.P_SupplyCode;
+                    var subgridTableId = subgridId + "_t";
+                    $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
+                    $subgridTable = $("#" + subgridTableId);
+                    $subgridTable.jfGrid({
+                        url: top.$.rootUrl + '/MesDev/InPrice/GetPriceBySupply?P_SupplyCode=' + P_SupplyCode,
+                        headData: [
+                    { label: "ID", name: "ID", width: 160, align: "left" ,hidden:true},
+                    { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left"},
+                    { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
+                    { label: "开始时间", name: "P_StartDate", width: 160, align: "left" },
+                    { label: "到期时间", name: "P_EndDate", width: 160, align: "left" },
+                    {
+                        label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left"
+                    },
+                    {
+                        label: "购进税率(%)", name: "P_Itax", width: 160, align: "left"
+                        //, editType: 'type',
+                        //editOp: {
+                        //    callback: function (rownum, row) {
+                        //        if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
+                        //            row.P_Itax = 0;
+                        //        }
+
+                        //    }
+                        //}, formatter: function () {
+
+                        //}
+                    },
+                       {
+                           label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
+                           formatter: function (value, grid, rows) {
+                               var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordDel('" + grid.ID + "')\">删除</a>";
+                               return result;
+                           }
+                       },
+                         {
+                             label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
+                             formatter: function (value, grid, rows) {
+                                 var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordEdit('" + grid.ID + "')\">编辑</a>";
+                                 return result;
+                             }
+                         },
+                        ],
+                        onRenderComplete: function (rows) {
+                            var lengh = rows.length;
+                            var list = $('#girdtable').jfGridGet('rowdatas');
+                            var data = [];
+                            for (var j = 0; j < list.length; j++) {
+                                for (var i = 0; i < lengh; i++) {
+                                    $("[rownum='rownum_jfgrid_chlidgird_content_girdtable_rownum_girdtable_" + j + "_t_" + i + "'][colname='P_GoodsName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method('" + rows[i].P_GoodsCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].P_GoodsName + "</ a>");
+                                }
+                            }       
+                        },
+                        mainId: 'ID',
+                        isPage: true,
+                        sidx: "P_GoodsCode",
+                        sord: 'ASC',
+                        reloadSelected: false,
+                    }).jfGridSet("reload");
+                }
             });
         },
         search: function (param) {
@@ -219,7 +252,33 @@ var bootstrap = function ($, ayma) {
     refreshGirdData = function () {
         page.search();
     };
+    recordDel = function (keyValue) {
+        ayma.layerConfirm('是否确认删除该项！', function (res) {
+            if (res) {
+                ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteEntity', { keyValue: keyValue }, function () {
+                    refreshSubGirdData();
+                });
+            }
+        });
+    }
+    recordEdit = function (keyValue) {
+        if (ayma.checkrow(keyValue)) {
+            ayma.layerForm({
+                id: 'form',
+                title: '编辑原物料入库价格',
+                url: top.$.rootUrl + '/MesDev/InPrice/Form?keyValue=' + keyValue,
+                width: 700,
+                height: 500,
+                maxmin: true,
+                callBack: function (id) {
+                    return top[id].acceptClick(refreshSubGirdData);
+                }
+            });
+        }
 
-
+    }
+    refreshSubGirdData = function () {
+        $subgridTable.jfGridSet("reload");
+    };
     page.init();
 }
