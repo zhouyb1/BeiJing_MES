@@ -441,6 +441,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append(@"   	 select 
 									 m.M_GoodsCode 
 									,m.M_GoodsName
+                                    ,m.M_Unit
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=m.M_GoodsCode) as outPrice
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=m.M_GoodsCode)*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=M_GoodsCode and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as outamount
 			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=M_GoodsCode and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))as withdrawingnumber
 									,(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=M_GoodsCode and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as materialssales 
 									,(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=M_GoodsCode and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as scrapist  
@@ -491,7 +494,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND m.M_GoodsName Like @M_GoodsName ");
                 }
-                strSql.Append("Group by m.M_GoodsCode,m.M_GoodsName  ");
+                strSql.Append("Group by m.M_GoodsCode,m.M_GoodsName ,m.M_Unit");
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
