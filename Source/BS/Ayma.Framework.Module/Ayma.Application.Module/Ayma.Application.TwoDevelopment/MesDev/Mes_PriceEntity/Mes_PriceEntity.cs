@@ -61,11 +61,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("P_CREATEDATE")]
         public DateTime? P_CreateDate { get; set; }
         /// <summary>
-        /// 购进税率
+        /// P_Itax
         /// </summary>
         /// <returns></returns>
         [Column("P_ITAX")]
         public decimal? P_Itax { get; set; }
+        /// <summary>
+        /// 起始时间
+        /// </summary>
+        /// <returns></returns>
+        [Column("P_STARTDATE")]
+        public DateTime? P_StartDate { get; set; }
+        /// <summary>
+        /// 结束时间
+        /// </summary>
+        /// <returns></returns>
+        [Column("P_ENDDATE")]
+        public DateTime? P_EndDate { get; set; }
         #endregion
 
         #region 扩展操作
