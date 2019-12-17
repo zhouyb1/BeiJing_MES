@@ -522,27 +522,45 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                var sqlHead = @"SELECT DISTINCT
-                               d.M_GoodsName
-                              FROM dbo.Mes_MaterInHead h
-                              LEFT JOIN dbo.Mes_MaterInDetail d
-                              ON d.M_MaterInNo = h.M_MaterInNo
-                WHERE M_OrderKind = 0  and M_Status =3 {0} GROUP BY M_GoodsName";
+                var sqlHead = @"SELECT G_Name FROM dbo.Mes_GoodKind ";
 
 
-                var sqlData = @"SELECT  M_SupplyName ,
-                                    {0}
-                                    0 AllQty ,
-                                    0 AllAmount
-                            FROM    ( SELECT    d.M_SupplyName ,
-                                                d.M_Qty ,
-                                                d.M_Price,
-                                                d.M_GoodsName
-                                      FROM      dbo.Mes_MaterInHead h
-                                                LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
-                                      WHERE     h.M_OrderKind = 0  AND d.M_SupplyName IS NOT NULL and M_Status=3 {2}
-                                               
-                                    ) dt PIVOT( SUM(M_Qty) FOR M_GoodsName IN ({1})) pvt GROUP BY M_SupplyName ";
+                var sqlData = @"SELECT  *,0 allamount,0 tax,0 taxAmount
+                                        
+                                FROM    ( SELECT    h.M_SupplyName,
+                                                    k.G_Name,
+                                                    (m.M_Price*M_Qty) amount
+                                          FROM      dbo.Mes_MaterInHead h
+                                                    INNER JOIN Mes_MaterInDetail m ON m.M_MaterInNo=h.M_MaterInNo
+                                                    INNER JOIN dbo.Mes_Goods g ON g.G_Code = m.M_GoodsCode
+                                                    INNER JOIN dbo.Mes_GoodKind k ON k.G_Code = g.G_TKind
+                                          WHERE     M_Status = 3  {0} ) tempDt pivot (sum(amount) for G_Name in  ({1})) as pt";
+
+                var sqlTax = @"SELECT  *
+                                        
+                                FROM    ( SELECT    h.M_SupplyName,
+                                                    k.G_Name,
+                                                    (m.M_Price*M_Qty*M_GoodsItax) tax
+                                          FROM      dbo.Mes_MaterInHead h
+                                                    INNER JOIN Mes_MaterInDetail m ON m.M_MaterInNo=h.M_MaterInNo
+                                                    INNER JOIN dbo.Mes_Goods g ON g.G_Code = m.M_GoodsCode
+                                                    INNER JOIN dbo.Mes_GoodKind k ON k.G_Code = g.G_TKind
+                                          WHERE     M_Status = 3  {0} ) tempDt pivot (sum(tax) for G_Name in  ({1})) as pt";
+
+
+                var sqlTaxAmount = @"SELECT  *
+                                        
+                                FROM    ( SELECT    h.M_SupplyName,
+                                                    k.G_Name,
+                                                    (m.M_Price*M_Qty*(1+M_GoodsItax)) taxAmount
+                                          FROM      dbo.Mes_MaterInHead h
+                                                    INNER JOIN Mes_MaterInDetail m ON m.M_MaterInNo=h.M_MaterInNo
+                                                    INNER JOIN dbo.Mes_Goods g ON g.G_Code = m.M_GoodsCode
+                                                    INNER JOIN dbo.Mes_GoodKind k ON k.G_Code = g.G_TKind
+                                          WHERE     M_Status = 3  {0} ) tempDt pivot (sum(taxAmount) for G_Name in  ({1})) as pt";
+
+
+                
                 var queryParam = queryJson.ToJObject();
                 var dp = new DynamicParameters(new {});
                 var sqlParm = new StringBuilder();
@@ -553,10 +571,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     sqlParm.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
                 }
-                var rowHeads =
-                    this.BaseRepository()
-                        .FindList<Mes_MaterInDetailEntity>(string.Format(sqlHead, sqlParm.ToString()), dp)
-                        .ToList();
+                var rowHeads = this.BaseRepository().FindList<Mes_GoodKindEntity>(sqlHead).ToList();
 
                 if (!rowHeads.Any())
                 {
@@ -566,13 +581,28 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 List<string> goodsList = new List<string>();
                 foreach (var row in rowHeads)
                 {
-                    dtColumns.Append(string.Format("SUM(ROUND([{0}],2)) {0}_Qty ,", row.M_GoodsName));
-                    dtColumns.Append(string.Format("SUM(ROUND([{0}]*M_Price,2)) {0}_Amount ,", row.M_GoodsName));
-                    dtColumns.Append(string.Format("(select min(M_Unit) from Mes_MaterInDetail where M_GoodsName ='"+row.M_GoodsName+"') {0}_Unit ,", row.M_GoodsName));
-                    goodsList.Add(string.Format("[{0}]", row.M_GoodsName));
+                    goodsList.Add(string.Format("[{0}]", row.G_Name));
+                }
+                var dt= this.BaseRepository() .FindTable( string.Format(sqlData,sqlParm.ToString(), string.Join(",", goodsList)), dp);
+                var dtTax = this.BaseRepository().FindTable(string.Format(sqlTax, sqlParm.ToString(), string.Join(",", goodsList)), dp);
+                var dtTaxAlmount = this.BaseRepository().FindTable(string.Format(sqlTaxAmount, sqlParm.ToString(), string.Join(",", goodsList)), dp);
+                for (var i = 0; i < dt.Rows.Count; i++)
+                {
+                    var arr = dt.Rows[i].ItemArray;
+                    dt.Rows[i]["allamount"] = arr.Sum(c => c.ToInt());
                 }
 
-                var dt= this.BaseRepository() .FindTable( string.Format(sqlData, dtColumns.ToString(), string.Join(",", goodsList), sqlParm.ToString()), dp);
+                for (var i = 0; i < dtTax.Rows.Count; i++)
+                {
+                    var arr = dtTax.Rows[i].ItemArray;
+                    dt.Rows[i]["tax"] = arr.Sum(c => c.ToInt());
+                }
+
+                 for (var i = 0; i < dtTaxAlmount.Rows.Count; i++)
+                {
+                    var arr = dtTaxAlmount.Rows[i].ItemArray;
+                    dt.Rows[i]["taxamount"] = arr.Sum(c => c.ToInt());
+                }
                 return dt;
             }
             catch (Exception ex)
@@ -586,25 +616,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-            //var sqlConnection = this.BaseRepository().getDbConnection() as SqlConnection;
-            //if (sqlConnection != null)
-            //{
-            //    var command = sqlConnection.CreateCommand();
-            //    command.CommandText = "sp_GetPivot";
-            //    command.CommandType=CommandType.StoredProcedure;
-            //    command.Parameters.Add("@tableName", SqlDbType.VarChar).Value = "Mes_MaterInDetail";
-            //    command.Parameters.Add("@groupColumn", SqlDbType.VarChar).Value = "M_SupplyName";
-            //    command.Parameters.Add("@row2column", SqlDbType.VarChar).Value = "M_GoodsName";
-            //    command.Parameters.Add("@row2columnValue", SqlDbType.VarChar).Value = "M_Qty";
-            //    command.Parameters.Add("@sql_where", SqlDbType.VarChar).Value = "where M_SupplyName is not null";
-            //    SqlDataAdapter sda = new SqlDataAdapter(command);
-            //    var ds = new DataSet();
-            //    sda.Fill(ds);
-            //    var dt = ds.Tables[0];
-            //    this.BaseRepository().getDbConnection().Close();
-            //    return dt;
-
-
+           
         }
 
         /// <summary>
@@ -613,114 +625,71 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public IEnumerable<ColumnModel> GetPageTitle(string queryJson)
         {
-           try
-           {
-              StringBuilder sql = new StringBuilder();
-             sql.Append(@"SELECT DISTINCT
-                               d.M_GoodsName
-                              FROM dbo.Mes_MaterInHead h
-                              LEFT JOIN dbo.Mes_MaterInDetail d
-                              ON d.M_MaterInNo = h.M_MaterInNo
-                WHERE M_OrderKind = 0 AND d.M_GoodsName IS NOT NULL ");
-            var queryParam = queryJson.ToJObject();
-            // 虚拟参数
-            var dp = new DynamicParameters(new { });
-            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            try
             {
-                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
-                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                sql.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
-            }
-            var columnsHead = this.BaseRepository().FindList<Mes_MaterInDetailEntity>(sql.ToString(),dp);
-            List<ColumnModel> cmList = new List<ColumnModel>();
+                StringBuilder sql = new StringBuilder();
+                sql.Append(@"SELECT G_Name FROM dbo.Mes_GoodKind ");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                
+                var columnsHead = this.BaseRepository().FindList<Mes_GoodKindEntity>(sql.ToString());
+                List<ColumnModel> cmList = new List<ColumnModel>();
 
-            ColumnModel cm = new ColumnModel();
-            cm.name = "M_SupplyName";
-            cm.label = "供应商名称";
-            cm.width = 130;
-            cm.align = "left";
-            cm.sort = false;
-            cm.statistics = false;
-            cm.children = null;
-            cmList.Add(cm);
-           
-            foreach (var col in columnsHead)
-            {
-                ColumnModel cm_head = new ColumnModel();
-                cm_head.name = col.M_GoodsName;
-                cm_head.label = col.M_GoodsName;
-                cm_head.width = 130;
-                cm_head.align = "center";
-                cm_head.sort = false;
-                cm_head.statistics = false;
-                cm_head.children = new List<ColumnModel>();
-
-                ColumnModel c_qty = new ColumnModel();
-                c_qty.name = col.M_GoodsName+"_Qty";
-                c_qty.label = "数量";
-                c_qty.width = 90;
-                c_qty.align = "center";
-                c_qty.sort = false;
-                c_qty.statistics = false;
-                c_qty.children = null;
-
-                ColumnModel c_unit = new ColumnModel();
-                c_unit.name = col.M_GoodsName + "_Unit";
-                c_unit.label = "单位";
-                c_unit.width = 80;
-                c_unit.align = "center";
-                c_unit.sort = false;
-                c_unit.statistics = false;
-                c_unit.children = null;
-
-                ColumnModel c_amount = new ColumnModel();
-                c_amount.name = col.M_GoodsName + "_Amount";
-                c_amount.label = "金额(元)";
-                c_amount.width = 100;
-                c_amount.align = "center";
-                c_amount.sort = false;
-                c_amount.statistics = false;
-                c_amount.children = null;
-
-                cm_head.children.Add(c_qty);
-                cm_head.children.Add(c_unit);
-                cm_head.children.Add(c_amount);
-                cmList.Add(cm_head);
-            }
-            ColumnModel allqty = new ColumnModel();
-            allqty.name = "AllQty";
-            allqty.label = "合计数量";
-            allqty.width = 80;
-            allqty.align = "left";
-            allqty.sort = false;
-            allqty.statistics = false;
-            allqty.children = null;
-            cmList.Add(allqty);
-
-            ColumnModel allAmount = new ColumnModel();
-            allAmount.name = "AllAmount";
-            allAmount.label = "合计金额(元)";
-            allAmount.width = 120;
-            allAmount.align = "left";
-            allAmount.sort = false;
-            allAmount.statistics = false;
-            allAmount.children = null;
-            cmList.Add(allAmount);
-            foreach (var cl in cmList)
-            {
-                cl.name = cl.name.ToLower();
-                if (cl.children != null)
+                ColumnModel cm = new ColumnModel();
+                cm.name = "m_supplyname";
+                cm.label = "供应商名称";
+                cm.width = 130;
+                cm.align = "left";
+                cm.sort = false;
+                cm.statistics = false;
+                cm.children = null;
+                cmList.Add(cm);
+                
+                foreach (var col in columnsHead)
                 {
-                    foreach (var ccl in cl.children)
-                    {
-                        ccl.name = ccl.name.ToLower();
-                    }
+                    ColumnModel cm_head = new ColumnModel();
+                    cm_head.name = col.G_Name;
+                    cm_head.label = col.G_Name;
+                    cm_head.width = 90;
+                    cm_head.align = "center";
+                    cm_head.sort = false;
+                    cm_head.statistics = false;
+                    cm_head.children = null;
+                    cmList.Add(cm_head);
                 }
-            }
-            return cmList;
-        }
 
-    catch (Exception ex)
+                ColumnModel cm1 = new ColumnModel();
+                cm1.name = "allamount";
+                cm1.label = "进货金额(元)";
+                cm1.width = 100;
+                cm1.align = "center";
+                cm1.sort = false;
+                cm1.statistics = false;
+                cm1.children = null;
+                cmList.Add(cm1);
+                ColumnModel cm2 = new ColumnModel();
+                cm2.name = "tax";
+                cm2.label = "合计税额(元)";
+                cm2.width = 100;
+                cm2.align = "center";
+                cm2.sort = false;
+                cm2.statistics = false;
+                cm2.children = null;
+                cmList.Add(cm2);
+                 ColumnModel cm3 = new ColumnModel();
+                cm3.name = "taxamount";
+                cm3.label = "价税合计(元)";
+                cm3.width = 100;
+                cm3.align = "center";
+                cm3.sort = false;
+                cm3.statistics = false;
+                cm3.children = null;
+                cmList.Add(cm3);
+
+                return cmList;
+            }
+
+            catch (Exception ex)
             {
                 if (ex is ExceptionEx)
                 {
@@ -733,7 +702,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取物料的合计税额，价税合计
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetTaxAndAmount()
+        {
+            string sql = @"SELECT   
+                    k.G_Name,
+                    h.M_SupplyName,
+                    SUM(d.M_Qty)qty,
+                    SUM(d.M_Price*M_Qty) amount
+                    SUM(d.M_Price*M_Qty*G_Itax) tax,
+                    SUM(d.M_Price*M_Qty*(1+G_Itax))taxAmount
+          FROM      dbo.Mes_MaterInHead h
+                    LEFT JOIN Mes_MaterInDetail d ON d.M_MaterInNo= h.M_MaterInNo
+                    INNER JOIN dbo.Mes_Goods g ON g.G_Code = d.M_GoodsCode
+                    INNER JOIN dbo.Mes_GoodKind k ON k.G_Code = g.G_TKind
+                    WHERE h.M_Status=3 GROUP BY k.G_Name,h.M_SupplyName ";
+            var dt = this.BaseRepository().FindTable(sql);
+            return dt;
+        }
+
         #endregion
+
+
 
         #region 提交数据
         /// <summary>
