@@ -743,20 +743,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public DataTable GetSupplyGoodsList(string queryJson)
         {
-            var sql = @"SELECT  
+            var sql = @"SELECT  h.M_MaterInNo,
+                                h.M_SupplyCode,
                                 h.M_SupplyName ,
                                 d.M_GoodsCode ,
                                 d.M_GoodsName ,
                                 d.M_Unit ,
                                 MAX(d.M_Price) M_Price,
-                                SUM(d.M_Price * M_Qty) amount, 
-                                SUM(M_Qty)
+                                SUM(d.M_Price * M_Qty) row_amount, 
+                                SUM(M_Qty) row_qty
                         FROM    dbo.Mes_MaterInHead h
                                 LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
                         WHERE   h.M_Status = 3
                                 AND d.M_Kind = 1 {0}
                         GROUP BY
                                 h.M_SupplyName,
+                                h.M_SupplyCode,
                                 h.M_MaterInNo, 
                                 M_GoodsCode ,
                                 M_GoodsName ,
@@ -771,7 +773,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                 sqlParam.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
             }
-            var dt = this.BaseRepository().FindTable(string.Format(sql, sqlParam.ToString()));
+            var dt = this.BaseRepository().FindTable(string.Format(sql, sqlParam.ToString()),dp);
             return dt;
         }
 

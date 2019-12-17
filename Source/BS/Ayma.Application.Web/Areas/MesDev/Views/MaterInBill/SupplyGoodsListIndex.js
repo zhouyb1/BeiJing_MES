@@ -48,17 +48,18 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetSupplayGoodsList',
+                url: top.$.rootUrl + '/MesDev/MaterInBill/GetSupplyGoodsList',
                 headData: [
-                    { label: "入库单号", name: "M_MaterInNo", width: 120, align: "left" },
-                    { label: "供应商编号", name: "M_SupplyCode", width: 80, align: "center" },
-                    { label: "供应商名称", name: "M_SupplyName", width: 120, align: "left" },
+                    { label: "入库单号", name: "m_materinno", width: 120, align: "left" },
+                    { label: "供应商编号", name: "m_supplycode", width: 80, align: "center" },
+                    { label: "供应商名称", name: "m_supplyname", width: 170, align: "left" },
                     { label: "物料编码", name: "", width: 90, align: "left" },
-                    { label: "物料名称", name: "M_GoodsName", width: 120, align: "left" },
-                    { label: "单位", name: "M_Unit", width: 80, align: "center" },
-                    { label: "数量", name: "M_Qty", width: 80, align: "center" },
-                    { label: "价格", name: "M_Price", width: 160, align: "center" },
-                    { label: "添加时间", name: "M_CreateDate", width: 130, align: "left" },
+                    { label: "物料名称", name: "m_goodsname", width: 120, align: "left" },
+                    { label: "单位", name: "m_unit", width: 80, align: "center" },
+                    { label: "数量", name: "row_qty", width: 80, align: "center" },
+                    { label: "价格", name: "m_price", width: 160, align: "center" },
+                    { label: "进货金额(元)", name: "row_amount", width: 100, align: "center" },
+                   
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

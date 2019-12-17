@@ -123,6 +123,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+
+        /// <summary>
+        /// 供应商存货明细
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult SupplyGoodsListIndex()
+        {
+            return View();
+        }
+
         #endregion
 
         /// <summary>
@@ -264,33 +274,74 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 获取供应商存货明细
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetSupplayGoodsList(string queryJson)
+        public ActionResult GetSupplyGoodsList(string pagination,string queryJson)
         {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
             var dt = materInBillIBLL.GetSupplyGoodsList(queryJson);
-            if (true)
-            {
-                if (dt.Rows.Count > 0)
-                {
-                    var supplyName = dt.Rows[0]["m_supplyname"].ToString();
-                    for (var i = 0; i < dt.Rows.Count; i++)
-                    {
-                        var newSupplyName = dt.Rows[i]["m_supplyname"].ToString();
-                        if (supplyName != newSupplyName)
-                        {
-                            var dr = dt.NewRow();
-                            dr["smallcount"] = "小计";
-                            dt.Rows.InsertAt(dr, i);
 
-                            supplyName = newSupplyName;
-                            i++;
+            if (dt.Rows.Count > 0)
+            {
+                //insert统计行
+                var supplyName = dt.Rows[0]["m_supplyname"].ToString();
+                for (var i = 0; i < dt.Rows.Count; i++)
+                {
+                    var newSupplyName = dt.Rows[i]["m_supplyname"].ToString();
+                    if (supplyName != newSupplyName)
+                    {
+                        var dr = dt.NewRow();
+                        dr["m_supplyname"] = "【" + supplyName + "】小计";
+                        dt.Rows.InsertAt(dr, i);
+
+                        supplyName = newSupplyName;
+                        i++;
+                    }
+                }
+                var endRow = dt.NewRow();
+                endRow["m_supplyname"] = "【" + supplyName + "】小计";
+                dt.Rows.InsertAt(endRow, dt.Rows.Count);
+                //计算小计行
+                for (var j = 0; j < dt.Columns.Count; j++)
+                {
+                    if (dt.Columns[j].ColumnName.LastIndexOf("_qty") > 0 ||
+                        dt.Columns[j].ColumnName.LastIndexOf("_amount") > 0)
+                    {
+                        decimal total_qty = 0;
+                        decimal total_amount = 0;
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            string classname = dt.Rows[i]["m_supplyname"].ToString();
+                            if (classname.LastIndexOf("小计") > 0)
+                            {
+                                dt.Rows[i][j] = Math.Round(total_qty, 2);
+                                total_qty = 0;
+                            }
+                            else
+                            {
+                                if (dt.Rows[i][j] == DBNull.Value)
+                                {
+                                    total_qty += 0;
+                                    total_amount += 0;
+                                }
+                                else
+                                {
+                                    total_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                    total_amount += decimal.Parse(dt.Rows[i][j].ToString());
+                                }
+
+                            }
+
                         }
                     }
-                    var endRow = dt.NewRow();
-                    endRow["smallcount"] = "小计";
-                    dt.Rows.InsertAt(endRow, dt.Rows.Count);
                 }
             }
-            return Success(dt);
+            var jsonData = new
+            {
+                rows = dt,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
 
         /// <summary>
