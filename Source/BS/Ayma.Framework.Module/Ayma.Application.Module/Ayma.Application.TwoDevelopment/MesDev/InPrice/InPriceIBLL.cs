@@ -19,6 +19,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<Mes_InPriceEntity> GetPageList(Pagination pagination, string queryJson);
         /// <summary>
+        /// 获取供应商供应的物料列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode);
+        /// <summary>
         /// 获取Mes_InPrice表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -34,6 +40,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         void DeleteEntity(List<Mes_InPriceEntity> list);
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        void DeleteEntity(string keyValue);
         /// <summary>
         /// 保存实体数据（新增、修改）
         /// </summary>

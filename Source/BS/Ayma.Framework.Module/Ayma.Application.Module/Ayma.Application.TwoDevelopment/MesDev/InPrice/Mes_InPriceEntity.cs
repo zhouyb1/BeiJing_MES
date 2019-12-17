@@ -48,7 +48,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("P_ITAX")]
         public decimal? P_Itax { get; set; }
-
+        /// <summary>
+        /// 开始时间
+        /// </summary>
+        [Column("P_STARTDATE")]
+        public DateTime? P_StartDate { get; set; }
+        /// <summary>
+        /// 到期时间
+        /// </summary>
+        [Column("P_ENDDATE")]
+        public DateTime? P_EndDate { get; set; }
         #endregion
 
         #region 扩展操作

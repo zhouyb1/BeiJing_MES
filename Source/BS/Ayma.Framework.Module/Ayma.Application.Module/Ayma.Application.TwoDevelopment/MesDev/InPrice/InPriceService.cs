@@ -29,13 +29,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.ID,
                 t.P_SupplyCode,
-                t.P_SupplyName,
-                t.P_GoodsCode,
-                t.P_GoodsName,
-                t.P_InPrice,
-                t.P_Itax
+                t.P_SupplyName
                 ");
                 strSql.Append("  FROM Mes_InPrice t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -63,7 +58,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_GoodsName", "%" + queryParam["P_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_GoodsName Like @P_GoodsName ");
                 }
+                strSql.Append(" group by t.P_SupplyCode,t.P_SupplyName ");
                 return this.BaseRepository().FindList<Mes_InPriceEntity>(strSql.ToString(),dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取供应商供应的物料列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.P_SupplyCode,
+                t.P_SupplyName,
+                t.P_GoodsCode,
+                t.P_GoodsName,
+                t.P_InPrice,
+                t.P_Itax,
+                t.P_StartDate,
+                t.P_EndDate
+                ");
+                strSql.Append("  FROM Mes_InPrice t ");
+                strSql.Append("  WHERE 1=1 ");
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!P_SupplyCode.IsEmpty())
+                {
+                    dp.Add("P_SupplyCode", "%" + P_SupplyCode.ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_SupplyCode Like @P_SupplyCode ");
+                }
+                return this.BaseRepository().FindList<Mes_InPriceEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -129,7 +170,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteEntity(string keyValue)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                db.Delete<Mes_InPriceEntity>(t => t.ID == keyValue);
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 保存实体数据（新增、修改）
         /// </summary>

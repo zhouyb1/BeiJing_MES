@@ -40,6 +40,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
+        /// 获取供应商供应的物料列表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode)
+        {
+            try
+            {
+                return inPriceService.GetPriceBySupply(pagination, P_SupplyCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 获取Mes_InPrice表实体数据
         /// </summary>
         /// <param name="keyValue">主键</param>
@@ -90,7 +114,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteEntity(string keyValue)
+        {
+            try
+            {
+                inPriceService.DeleteEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 保存实体数据（新增、修改）
         /// </summary>
