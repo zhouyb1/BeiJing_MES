@@ -98,6 +98,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.P_GoodsName,
                                 t.P_InPrice,
                                 t.P_Itax,
+                                t.P_StartDate,  
+                                t.P_EndDate,
                                 m.G_Unit,
                                 m.G_Kind,
                                 m.G_Period
