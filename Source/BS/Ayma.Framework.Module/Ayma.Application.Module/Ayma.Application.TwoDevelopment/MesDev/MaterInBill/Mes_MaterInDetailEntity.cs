@@ -82,6 +82,46 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("M_PRICE")]
         public decimal? M_Price { get; set; }
+
+        ///新增字段  2019年12月18日15:20:23
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+         [Column("M_STOCKCODE")]
+        public string M_StockCode { get; set; }
+         /// <summary>
+         /// 仓库
+         /// </summary>
+         [Column("M_STOCKNAME")]
+         public string M_StockName { get; set; }
+         /// <summary>
+         /// 包装单位
+         /// </summary>
+         [Column("M_UNIT2")]
+         public string M_Unit2 { get; set; }
+         /// <summary>
+         /// 包装规格
+         /// </summary>
+         [Column("M_UNITQTY")]
+         public string M_UnitQty { get; set; }
+         /// <summary>
+         /// 包装数量
+         /// </summary>
+         [Column("M_QTY2")]
+         public decimal ? M_Qty2 { get; set; }
+         /// <summary>
+         /// 入库税率
+         /// </summary>
+         [Column("M_TAX")]
+         public decimal? M_Tax { get; set; }
+         /// <summary>
+         /// 含税价
+         /// </summary>
+         [Column("M_TAXPRICE")]
+         public decimal? M_TaxPrice { get; set; }
+
+
+
         #endregion
 
         #region 扩展操作
@@ -108,8 +148,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string InventoryDay { get; set; }
         [NotMapped]
         public string GoodsState { get; set; }
-        [NotMapped]
-        public string M_StockName { get; set; }
+       
          [NotMapped]
         public DateTime M_CreateDate { get; set; }
         #endregion
