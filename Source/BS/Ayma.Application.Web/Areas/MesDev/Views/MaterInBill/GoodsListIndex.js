@@ -160,11 +160,11 @@ var bootstrap = function ($, ayma) {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为0请及时维护价格！');
                         }
-                        if (row['p_itax'] == 0)
-                        {
-                            isChecked.attr('checked', false);
-                            ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
-                        }
+                        //if (row['p_itax'] == 0)
+                        //{
+                        //    isChecked.attr('checked', false);
+                        //    ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
+                        //}
                         if (row['p_enddate'] == null || row['p_enddate'].substr(0, 10) < time) {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】有效期已到请及时维护！');
