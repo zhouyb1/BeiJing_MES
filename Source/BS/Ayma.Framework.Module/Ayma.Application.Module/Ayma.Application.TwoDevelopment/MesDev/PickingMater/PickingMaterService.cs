@@ -186,7 +186,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         S.I_Batch ,
 									    G.G_Price I_Price,
 										G.G_SupplyCode I_SupplyCode,
-										G.G_SupplyName I_SupplyName
+										G.G_SupplyName I_SupplyName,
+										G.G_UnitQty,
+										G.G_Unit2,
+										G.G_Unit,
+                                        @stockCode as 'C_StockCode', 
+                                        (select S_Name from Mes_Stock where S_Code=@stockCode) as C_StockName
                                    FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where 1 = 1 and  S.I_Qty <> 0");
 
                 var queryParam = queryJson.ToJObject();

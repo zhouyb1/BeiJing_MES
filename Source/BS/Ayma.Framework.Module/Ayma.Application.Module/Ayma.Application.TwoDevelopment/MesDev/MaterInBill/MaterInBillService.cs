@@ -100,9 +100,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.P_Itax,
                                 t.P_StartDate,  
                                 t.P_EndDate,
+								t.P_TaxPrice,
                                 m.G_Unit,
                                 m.G_Kind,
-                                m.G_Period
+                                m.G_Period,
+								m.G_UnitQty,
+								m.G_Unit2,
+                                @G_StockCode as 'G_StockCode',
+                               (select S_Name from Mes_Stock where S_Code=@G_StockCode) as G_StockName
                                 from Mes_InPrice t left join Mes_Goods m on(t.P_GoodsCode=m.G_Code) ");
                 strSql.Append(" where G_Kind=1 and t.P_SupplyCode=@G_SupplyCode and m.G_StockCode=@G_StockCode");
                 var queryParam = queryJson.ToJObject();

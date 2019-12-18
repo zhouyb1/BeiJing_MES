@@ -135,9 +135,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_CreateDate,
                 t.P_Itax,
                 t.P_StartDate,
-                t.P_EndDate
-                FROM Mes_Price t where 1=1 and t.P_SupplyCode=" + P_SupplyCode + "and t.P_GoodsCode="+P_GoodsCode);
-                return this.BaseRepository().FindList<Mes_PriceEntity>(strSql.ToString(), pagination);
+                t.P_EndDate,
+                t.P_TaxPrice
+                FROM Mes_Price t where 1=1 ");
+                var dp = new DynamicParameters(new { });
+                // 虚拟参数
+                if (!string.IsNullOrWhiteSpace(P_SupplyCode))
+                {
+                    dp.Add("P_SupplyCode", "%" + P_SupplyCode + "%", DbType.String);
+                    strSql.Append(" AND t.P_SupplyCode Like @P_SupplyCode ");
+                }
+                if (!string.IsNullOrWhiteSpace(P_GoodsCode))
+                {
+                    dp.Add("P_GoodsCode", "%" + P_GoodsCode, DbType.String);
+                    strSql.Append(" AND t.P_GoodsCode Like @P_GoodsCode");
+                }
+                return this.BaseRepository().FindList<Mes_PriceEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {

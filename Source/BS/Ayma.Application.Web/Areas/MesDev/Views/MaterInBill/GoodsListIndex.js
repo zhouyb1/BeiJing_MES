@@ -83,15 +83,21 @@ var bootstrap = function ($, ayma) {
                 var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
+                    newArray[i]["M_Unit2"] = newArray[i]['g_unit2'];
+                    newArray[i]["M_UnitQty"] = newArray[i]['g_unitQty'];
+                    newArray[i]["M_StockCode"] = newArray[i]['c_stockcode'];
+                    newArray[i]["M_StockName"] = newArray[i]['c_stockName'];
+                    newArray[i]["M_TaxPrice"] = newArray[i]['p_taxprice'];
                     newArray[i]['M_GoodsCode'] = newArray[i]['p_goodscode'];
                     newArray[i]['M_GoodsName'] = newArray[i]['p_goodsname'];
                     newArray[i]['M_Kind'] = newArray[i]['g_kind'];
                     newArray[i]['M_Unit'] = newArray[i]['g_unit'];
                     newArray[i]['M_Price'] = newArray[i]['p_inprice'];
-                    newArray[i]['M_GoodsItax'] = newArray[i]['p_itax'];
+                    newArray[i]['M_Tax'] = newArray[i]['p_itax'];
                     newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["ID"] = newArray[i]['id'];
+                    newArray[i]["M_Qty2"] = quantity;
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -134,8 +140,14 @@ var bootstrap = function ($, ayma) {
                             return row.p_enddate.substr(0, 10);
                         }
                     },
-                    { label: "价格", name: "p_inprice", width: 80, align: "left" },
-                    { label: "税率", name: "p_itax", width: 80, align: "left" },
+                   { label: "价格", name: "p_inprice", width: 80, align: "left" },
+                   { label: "含税价格", name: "p_taxprice", width: 100, align: "left" },
+                   { label: "包装单位", name: "g_unit2", width: 60, align: "left" },
+                   { label: "包装规格", name: "g_unitqty", width: 60, align: "left" },
+                    //{ label: "包装数量", name: "G_Qty2", width: 60, align: "left" },
+                    { label: "原仓库编码", name: "g_stockcode", width: 100, align: "left" },
+                    { label: "原仓库名称", name: "g_stockname", width: 100, align: "left" },
+                    { label: "入库税率", name: "p_itax", width: 80, align: "left" },
                     { label: "单位", name: "g_unit", width: 80, align: "left" }
                 ],
                 mainId: 'ID',
@@ -160,11 +172,11 @@ var bootstrap = function ($, ayma) {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为0请及时维护价格！');
                         }
-                        //if (row['p_itax'] == 0)
-                        //{
-                        //    isChecked.attr('checked', false);
-                        //    ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
-                        //}
+                        if (row['p_itax'] == 0)
+                        {
+                            isChecked.attr('checked', false);
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
+                        }
                         if (row['p_enddate'] == null || row['p_enddate'].substr(0, 10) < time) {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】有效期已到请及时维护！');
@@ -172,15 +184,21 @@ var bootstrap = function ($, ayma) {
                         //获取一键数量
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
+                        row["M_Unit2"] = row['g_unit2'];
+                        row["M_UnitQty"] = row['g_unitqty'];
+                        row["M_StockCode"] = row['g_stockcode'];
+                        row["M_StockName"] = row['g_stockname'];
+                        row["M_TaxPrice"] = row['p_taxprice'];
                         row['M_GoodsCode'] = row['p_goodscode'];
                         row['M_GoodsName'] = row['p_goodsname'];
                         row['M_SupplyCode'] = row['p_supplycode'];
                         row['M_SupplyName'] = row['p_supplyname'];
-                        row['M_GoodsItax'] = row['p_itax'];
+                        row['M_Tax'] = row['p_itax'];
                         row['M_Unit'] = row['g_unit'];
                         row['M_Kind'] = row['g_kind'];
                         row['M_Price'] = row['p_inprice'];
                         row["M_Qty"] = quantity;
+                        row["M_Qty2"] = quantity;
                         row['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                             //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
                         row["ID"] = row['id'];

@@ -99,6 +99,11 @@ var bootstrap = function ($, ayma) {
                     { label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
+                    { label: "包装单位", name: "G_Unit2", width: 60, align: "left" },
+                    { label: "包装规格", name: "G_UnitQty", width: 60, align: "left" },
+                    //{ label: "包装数量", name: "G_Qty2", width: 60, align: "left" },
+                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
+                    { label: "原仓库名称", name: "C_StockName", width: 100, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 80, align: "left" },
                    
@@ -156,6 +161,10 @@ var bootstrap = function ($, ayma) {
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
                         row["C_OrderDate"] = row['I_OrderDate'];
+                        row["C_Unit2"] = row['G_Unit2'];
+                        row["C_UnitQty"] = row['G_UnitQty'];
+                        row["C_StockCode"] = row['C_StockCode'];
+                        row["C_StockName"] = row['C_StockName'];
                         row['C_GoodsCode'] = row['I_GoodsCode'];
                         row['C_GoodsName'] = row['I_GoodsName'];
                         row['C_SupplyCode'] = row['I_SupplyCode'];
@@ -163,6 +172,7 @@ var bootstrap = function ($, ayma) {
                         row['C_Unit'] = row['I_Unit'];
                         row['C_Batch'] = row["I_Batch"];
                         row["C_Qty"] = quantity;
+                        row["C_Qty2"] = quantity;
                         row["ID"] = row['ID'];
                         row["C_TeamCode"] = row["I_TeamCode"];
                         row["C_TeamName"] = row["I_TeamName"];

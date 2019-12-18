@@ -93,7 +93,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_InPrice,
                 t.P_Itax,
                 t.P_StartDate,
-                t.P_EndDate
+                t.P_EndDate,
+                t.P_TaxPrice
                 ");
                 strSql.Append("  FROM Mes_InPrice t ");
                 strSql.Append("  WHERE 1=1 ");

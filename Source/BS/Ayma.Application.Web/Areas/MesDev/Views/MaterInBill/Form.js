@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             };
             //绑定仓库
             $('#M_StockName').select(dfop).on('change', function () {
-                if (status==1) {
+                if (status == "" || status == 1) {
                     $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: [] });
                 }
                 var code = $(this).selectGet();
@@ -68,6 +68,11 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
                 // 访问数据接口参数
+            });
+            $('#M_SupplyCode').on('change', function () {
+                if (status == "" || status == 1) {
+                    $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                }
             });
             var orderNo = "";
             if (!!keyValue) {//根据主键获取生产订单号
@@ -167,6 +172,23 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                      {
+                         label: "包装数量", name: "M_Qty2", width: 60, align: "left", editType: 'input',
+                         editOp: {
+                             callback: function (rownum, row) {
+                                 if (row.M_Qty2 != undefined && !!row.M_Qty2) {
+                                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.M_Qty2.toString().replace('.', ''))) {
+                                         ayma.alert.error("包装数量必须是非负数.");
+                                         row.M_Qty2 = 0;
+                                     }
+                                 }
+                                 if (row.M_Qty2 > row.M_Qty) {
+                                     ayma.alert.error("包装数量不能大于领料数量");
+                                     row.M_Qty2 = 0;
+                                 }
+                             }
+                         }
+                     },
+                     {
                          label: '价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
                          editOp: {
                              callback: function (rownum, row) {
@@ -188,8 +210,12 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    { label: "税率", name: "M_GoodsItax", width: 60, align: "left" },
-                   
+                    { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
+                    { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
+                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
+                    { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
+                    { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },
+                    { label: "仓库名称", name: "M_StockName", width: 100, align: "left" },
                     {
                         label: '备注', name: 'M_Remark', width: 130, align: 'left', editType: 'input'
                     }

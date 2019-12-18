@@ -40,7 +40,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: { strWhere: "S_Kind =1" }
             }
             $("#C_StockName").select(dfop).on('change', function () {
-                if (status==1) {
+                if (status == "" || status==1) {
                     $('#Mes_CollarDetail').jfGridSet('refreshdata', { rowdatas: [] });
                 }
                 var code = $(this).selectGet();
@@ -119,7 +119,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
-                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val(),
+                    url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val()+ '&C_StockName=' + $("#C_StockName").selectGet(),
                     width: 880,
                     height: 550,
                     maxmin: true,
@@ -132,12 +132,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
                     { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "C_GoodsCode", width: 130, align: "left"},
-                    { label: "单价", name: "C_Price", width: 130, align: "left" },
-                    { label: "物料名称", name: "C_GoodsName", width: 130, align: "left" },
-                    { label: "单位", name: "C_Unit", width: 60, align: "left" },
+                    { label: "物料编码", name: "C_GoodsCode", width: 100, align: "left"},
+                    { label: "单价", name: "C_Price", width: 40, align: "left" },
+                    { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
+                    { label: "单位", name: "C_Unit", width: 40, align: "left" },
                     {
-                        label: "数量", name: "C_Qty", width: 60, align: "left", editType: 'input',
+                        label: "领料数量", name: "C_Qty", width: 60, align: "left", editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (row.C_Qty != undefined && !!row.C_Qty) {
@@ -148,22 +148,43 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                                 if (row.C_Qty > row.StockQty) {
                                     ayma.alert.error("数量不能大于库存数量");
-                                    row.R_Qty = 0;
+                                    row.C_Qty = 0;
                                 }
                             }
                         }
                     },
-                    { label: "库存", name: "StockQty", width: 60, align: "left", hidden: keyValue == "" ? false : true },
+                   {
+                       label: "包装数量", name: "C_Qty2", width: 60, align: "left", editType: 'input',
+                       editOp: {
+                           callback: function (rownum, row) {
+                               if (row.C_Qty2 != undefined && !!row.C_Qty2) {
+                                   if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.C_Qty2.toString().replace('.', ''))) {
+                                       ayma.alert.error("包装数量必须是非负数.");
+                                       row.C_Qty2 = 0;
+                                   }
+                               }
+                               if (row.C_Qty2 > row.C_Qty) {
+                                   ayma.alert.error("包装数量不能大于领料数量");
+                                   row.C_Qty2 = 0;
+                               }
+                           }
+                       }
+                   },
+                    { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
 
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
-                    { label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
-                    { label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
+                    //{ label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
+                    //{ label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
                     {
-                        label: '供应商编码', name: 'C_SupplyCode', width: 140, align: 'left', editType: 'label'
+                        label: '供应商编码', name: 'C_SupplyCode', width: 80, align: 'left', editType: 'label'
                     },
                     {
                         label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
-                    }
+                    },
+                    { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
+                    { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
+                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
+                    { label: "原仓库名称", name: "C_StockName", width: 100, align: "left" },
                 ],
                 isAutoHeight: false,
                 footerrow: true,

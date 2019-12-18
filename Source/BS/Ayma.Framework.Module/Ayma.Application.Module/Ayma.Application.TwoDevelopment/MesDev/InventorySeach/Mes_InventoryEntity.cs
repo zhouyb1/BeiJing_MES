@@ -136,6 +136,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public decimal? I_Otax { get; set; }
         [NotMapped]
         public string S_Kind { get; set; }
+        [NotMapped]
+        public string C_StockName { get; set; }
+        [NotMapped]
+        public string C_StockCode { get; set; }
+        [NotMapped]
+        public string G_Qty2 { get; set; }
+        [NotMapped]
+        public string G_UnitQty { get; set; }
+        [NotMapped]
+        public string G_Unit2 { get; set; }
         #endregion
     }
 }
