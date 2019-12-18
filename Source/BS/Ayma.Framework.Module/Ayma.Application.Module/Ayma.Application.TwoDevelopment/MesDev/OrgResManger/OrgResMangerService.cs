@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_WorkShopCode,
                 t.O_WorkShopName,
                 t.O_Remark,
-                t.O_CreateBy,
+               dbo.GetUserNameById (t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
