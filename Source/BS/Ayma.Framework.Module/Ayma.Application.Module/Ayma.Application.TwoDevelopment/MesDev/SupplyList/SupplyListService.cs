@@ -64,6 +64,26 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("S_Code", "%" + queryParam["S_Code"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.S_Code Like @S_Code ");
                 }
+                if (!queryParam["S_Person"].IsEmpty())
+                {
+                    dp.Add("S_Person", "%" + queryParam["S_Person"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Person Like @S_Person ");
+                }
+                if (!queryParam["S_Telephone"].IsEmpty())
+                {
+                    dp.Add("S_Telephone", "%" + queryParam["S_Telephone"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Telephone Like @S_Telephone ");
+                }
+                if (!queryParam["S_Corp"].IsEmpty())
+                {
+                    dp.Add("S_Corp", "%" + queryParam["S_Corp"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Corp Like @S_Corp ");
+                }
+                if (!queryParam["S_Address"].IsEmpty())
+                {
+                    dp.Add("S_Address", "%" + queryParam["S_Address"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Address Like @S_Address ");
+                }
                 return this.BaseRepository().FindList<Mes_SupplyEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)

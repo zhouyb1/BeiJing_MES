@@ -74,9 +74,24 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT ");
-                strSql.Append(fieldSql);
-                strSql.Append(" FROM Mes_Customer t where 1=1");
+                strSql.Append(@"SELECT 
+                t.ID,
+                t.C_Code,
+                t.C_Name,
+                t.C_CreateBy,
+                t.C_CreateDate,
+                t.S_Person,
+                t.S_Telephone,
+                t.S_Corp,
+                t.S_Address,
+                t.S_TaxCode,
+                t.S_Effect1,
+                t.S_Effect2,
+                t.S_Effect3,
+                t.S_Effect4,
+                t.S_Effect5
+                ");
+               strSql.Append(" FROM Mes_Customer t where 1=1");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -84,6 +99,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("C_Name", "%" + queryParam["C_Name"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.C_Name Like @C_Name ");
+                }
+                if (!queryParam["S_Person"].IsEmpty())
+                {
+                    dp.Add("S_Person", "%" + queryParam["S_Person"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Person Like @S_Person ");
+                }
+                if (!queryParam["S_Telephone"].IsEmpty())
+                {
+                    dp.Add("S_Telephone", "%" + queryParam["S_Telephone"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Telephone Like @S_Telephone ");
+                }
+                if (!queryParam["S_Corp"].IsEmpty())
+                {
+                    dp.Add("S_Corp", "%" + queryParam["S_Corp"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Corp Like @S_Corp ");
+                }
+                if (!queryParam["S_Address"].IsEmpty())
+                {
+                    dp.Add("S_Address", "%" + queryParam["S_Address"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.S_Address Like @S_Address ");
+                }
+                if (!queryParam["C_Code"].IsEmpty())
+                {
+                    dp.Add("C_Code", "%" + queryParam["C_Code"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_Code Like @C_Code ");
                 }
                 return this.BaseRepository().FindList<Mes_CustomerEntity>(strSql.ToString(), dp, pagination);
             }

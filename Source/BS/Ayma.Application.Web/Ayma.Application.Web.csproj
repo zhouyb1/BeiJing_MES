@@ -2376,6 +2376,7 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\MaterInSumIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterialsSum\MoneyIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\SupplyGoodsListIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterialsSum\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

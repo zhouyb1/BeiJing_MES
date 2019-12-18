@@ -6,14 +6,7 @@ var refreshSubGirdData;
 var $subgridTable;//子列表
 var refreshGirdData;
 var warehousingdetail;
-var rkmx;
-var ckmx;
-var tkmx;
-var ywlxsmx;
-var bfslmx;
-var qtrkmx;
-var qtckmx;
-var tgysmx;
+var Detaile;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -117,7 +110,7 @@ var bootstrap = function ($, ayma) {
                     fileName = "原物料退库明细";
                 }
                 else if (tabTitle == "原物料销售明细") {
-                    tableName = "girdtable_withdrawingdetails";
+                    tableName = "girdtable_materialssales";
                     fileName = "原物料销售明细";
                 }
                 else if (tabTitle == "报废数量明细") {
@@ -148,6 +141,71 @@ var bootstrap = function ($, ayma) {
                     btn: ['导出Excel', '关闭']
                 });
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+             
+
+            });
+            //打印
+            //$('#am_print').on('click', function () {
+            //    if (tabTitle == "汇总") {
+            //        var keyValue = $('#girdtable').jfGridValue('I_InNo');
+            //        ayma.layerForm({
+            //            id: 'SaleInReport',
+            //            title: '入库单打印',
+            //            url: top.$.rootUrl + '/MesDev/InWorkShopManager/PrintReport?keyValue=' + keyValue + "&report=InWorkShopReport&data=InWorkShop",
+            //            width: 1000,
+            //            height: 800,
+            //            maxmin: true,
+            //            callBack: function (id) {
+            //                return top[id].acceptClick(refreshGirdData);
+            //            }
+            //        });
+            //    }
+            //    else if (tabTitle == "入库明细") {
+            //        tableName = "girdtable_detail";
+            //        fileName = "原物料入库明细";
+            //    }
+            //    else if (tabTitle == "出库明细") {
+            //        tableName = "girdtable_Outbounddetails";
+            //        fileName = "原物料出库明细";
+            //    }
+            //    else if (tabTitle == "退库明细") {
+            //        tableName = "girdtable_withdrawingdetails";
+            //        fileName = "原物料退库明细";
+            //    }
+            //    else if (tabTitle == "原物料销售明细") {
+            //        tableName = "girdtable_materialssales";
+            //        fileName = "原物料销售明细";
+            //    }
+            //    else if (tabTitle == "报废数量明细") {
+            //        tableName = "girdtable_scrapnumber";
+            //        fileName = "报废数量明细";
+            //    }
+            //    else if (tabTitle == "其它入库明细") {
+            //        tableName = "girdtable_other";
+            //        fileName = "其它入库明细";
+            //    }
+            //    else if (tabTitle == "其它出库明细") {
+            //        tableName = "girdtable_otherout";
+            //        fileName = "其它出库明细";
+            //    }
+            //    else {
+            //        tableName = "girdtable_supplierback";
+            //        fileName = "退供应商明细";
+            //    }
+            //    ayma.layerForm({
+            //        id: "ExcelExportForm",
+            //        title: '导出Excel数据',
+            //        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+            //        width: 500,
+            //        height: 380,
+            //        callBack: function (id) {
+            //            return top[id].acceptClick();
+            //        },
+            //        btn: ['导出Excel', '关闭']
+            //    });
+            //});
         },
         // 初始化列表
         initGird: function () {
@@ -210,7 +268,7 @@ var bootstrap = function ($, ayma) {
                         ]
                     },
                     {
-                        label: "报废单据", name: "报废单据", width: 90, align: "center", children: [
+                        label: "报废物料", name: "报废单据", width: 90, align: "center", children: [
                               { label: "数量", name: "scrapist", width: 90, align: "center", statistics: true },
                         ]
                     },
@@ -256,14 +314,14 @@ var bootstrap = function ($, ayma) {
                     for (var i = 0; i < lengh; i++) {
                         //var a = $("[rownum='rownum_girdtable_sum_" + i + "'][colname='end']").text();
                         //var time = encodeURIComponent(a);
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='inventoryquantity']").html("<a href =# style=text-decoration:underline title='点击查询入库明细' onclick=rkmx('" + rows[i].m_goodscode + "','入库明细')>" + rows[i].inventoryquantity + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='delivery']").html("<a href =# style=text-decoration:underline title='点击查询出库明细' onclick=rkmx('" + rows[i].m_goodscode + "','出库明细')>" + rows[i].delivery + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='withdrawingnumber']").html("<a href =# style=text-decoration:underline title='点击查询退库明细' onclick=rkmx('" + rows[i].m_goodscode + "','退库明细')>" + rows[i].withdrawingnumber + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='materialssales']").html("<a href =# style=text-decoration:underline title='点击查询原物料销售明细' onclick=rkmx('" + rows[i].m_goodscode + "','原物料销售明细')>" + rows[i].materialssales + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='scrapist']").html("<a href =# style=text-decoration:underline title='点击查询报废数量明细' onclick=rkmx('" + rows[i].m_goodscode + "','报废数量明细')>" + rows[i].scrapist + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otherwarehouse']").html("<a href =# style=text-decoration:underline title='点击查询其它入库明细' onclick=rkmx('" + rows[i].m_goodscode + "','其它入库明细')>" + rows[i].otherwarehouse + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otheroutbound']").html("<a href =# style=text-decoration:underline title='点击查询其它出库明细' onclick=rkmx('" + rows[i].m_goodscode + "','其它出库明细')>" + rows[i].otheroutbound + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='supplierback']").html("<a href =# style=text-decoration:underline title='点击查询退供应商明细' onclick=rkmx('" + rows[i].m_goodscode + "','退供应商明细')>" + rows[i].supplierback + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='inventoryquantity']").html("<a href =# style=text-decoration:underline title='点击查询入库明细' onclick=Detaile('" + rows[i].m_goodscode + "','入库明细')>" + rows[i].inventoryquantity + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='delivery']").html("<a href =# style=text-decoration:underline title='点击查询出库明细' onclick=Detaile('" + rows[i].m_goodscode + "','出库明细')>" + rows[i].delivery + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='withdrawingnumber']").html("<a href =# style=text-decoration:underline title='点击查询退库明细' onclick=Detaile('" + rows[i].m_goodscode + "','退库明细')>" + rows[i].withdrawingnumber + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='materialssales']").html("<a href =# style=text-decoration:underline title='点击查询原物料销售明细' onclick=Detaile('" + rows[i].m_goodscode + "','原物料销售明细')>" + rows[i].materialssales + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='scrapist']").html("<a href =# style=text-decoration:underline title='点击查询报废数量明细' onclick=Detaile('" + rows[i].m_goodscode + "','报废数量明细')>" + rows[i].scrapist + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otherwarehouse']").html("<a href =# style=text-decoration:underline title='点击查询其它入库明细' onclick=Detaile('" + rows[i].m_goodscode + "','其它入库明细')>" + rows[i].otherwarehouse + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otheroutbound']").html("<a href =# style=text-decoration:underline title='点击查询其它出库明细' onclick=Detaile('" + rows[i].m_goodscode + "','其它出库明细')>" + rows[i].otheroutbound + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='supplierback']").html("<a href =# style=text-decoration:underline title='点击查询退供应商明细' onclick=Detaile('" + rows[i].m_goodscode + "','退供应商明细')>" + rows[i].supplierback + "</ a>");
                     }
                 },
                 mainId: 'ID',
@@ -525,7 +583,7 @@ var bootstrap = function ($, ayma) {
     //     $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });
     //     $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
     //}
-    rkmx = function (m_goodscode,type) {
+    Detaile = function (m_goodscode, type) {
         var dateParam = { StartTime: startTime, EndTime: endTime };
         if (type == '入库明细') {
             $('#girdtable_detail').jfGridSet('reload', { param: { M_GoodsCode: m_goodscode, queryJson: JSON.stringify(dateParam) } });

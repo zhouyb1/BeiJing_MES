@@ -12,11 +12,9 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
-            // 查询
-            $('#btn_Search').on('click', function () {
-                var C_Name = $('#txt_Keyword').val();
-                page.search({ C_Name: C_Name });
-            });
+            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+                page.search(queryJson);
+            }, 180, 600);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -74,6 +72,16 @@ var bootstrap = function ($, ayma) {
                 headData: [
                         { label: '客户编码', name: 'C_Code', width: 200, align: "left" },
                         { label: '客户名称', name: 'C_Name', width: 200, align: "left" },
+                        { label: '联系人', name: 'S_Person', width: 200, align: "left" },
+                        { label: '联系电话', name: 'S_Telephone', width: 200, align: "left" },
+                        { label: '法人', name: 'S_Corp', width: 200, align: "left" },
+                        { label: '地址', name: 'S_Address', width: 200, align: "left" },
+                        { label: '税号', name: 'S_TaxCode', width: 200, align: "left" },
+                        { label: '资质1', name: 'S_Effect1', width: 200, align: "left" },
+                        { label: '资质2', name: 'S_Effect2', width: 200, align: "left" },
+                        { label: '资质3', name: 'S_Effect3', width: 200, align: "left" },
+                        { label: '资质4', name: 'S_Effect4', width: 200, align: "left" },
+                        { label: '资质5', name: 'S_Effect5', width: 200, align: "left" },
                         { label: '添加人', name: 'C_CreateBy', width: 200, align: "left" },
                         { label: '添加时间', name: 'C_CreateDate', width: 200, align: "left" },
                 ],

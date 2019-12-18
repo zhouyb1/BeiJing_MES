@@ -26,6 +26,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult Index()
         {
              return View();
+        }   /// <summary>
+        /// 打印页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport()
+        {
+            return View();
         }
         /// <summary>
         /// 报表页面

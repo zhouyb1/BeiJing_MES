@@ -442,6 +442,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									 m.M_GoodsCode 
 									,m.M_GoodsName
                                     ,m.M_Unit
+                                    ,@StartTime as 'startTime'
+                                    ,@EndTime as 'endTime'
                                     ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=m.M_GoodsCode) as outPrice
                                     ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=m.M_GoodsCode)*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=M_GoodsCode and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as outamount
 			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=M_GoodsCode and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))as withdrawingnumber

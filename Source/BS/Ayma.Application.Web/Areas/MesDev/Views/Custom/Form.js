@@ -55,6 +55,22 @@ var bootstrap = function ($, ayma) {
         if (!$('#form').Validform()) {
             return false;
         }
+        //电话号码验证
+        var phone = $.trim($("#S_Telephone").val()); //去除空格
+        if (phone != undefined && phone != "") {
+            if (!/^(1[34578]\d{9}$)/.test(phone.toString()) && !/^(([0-9]{3,4}[-])?[0-9]{7,8}$)/.test(phone.toString())) {
+                ayma.alert.error("请输入正确的手机号码或正确的座机号");
+                return false;
+            }
+        }
+        //纳税人识别号
+        var tax = $.trim($("#S_TaxCode").val()); //去除空格  
+        if (tax != undefined && tax != "") {
+            if (checkTaxId(tax) == false) {
+                ayma.alert.error("纳税人识别号格式错误");
+                return false;
+            }
+        }
         var postData = $('#form').GetFormData();
         $.SaveForm(top.$.rootUrl + '/MesDev/Custom/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
@@ -63,5 +79,16 @@ var bootstrap = function ($, ayma) {
             }
         });
     };
+    function checkTaxId(taxId) {
+        var regArr = [/^[\da-z]{10,15}$/i, /^\d{6}[\da-z]{10,12}$/i, /^[a-z]\d{6}[\da-z]{9,11}$/i, /^[a-z]{2}\d{6}[\da-z]{8,10}$/i, /^\d{14}[\dx][\da-z]{4,5}$/i, /^\d{17}[\dx][\da-z]{1,2}$/i, /^[a-z]\d{14}[\dx][\da-z]{3,4}$/i, /^[a-z]\d{17}[\dx][\da-z]{0,1}$/i, /^[\d]{6}[\da-z]{13,14}$/i],
+            i, j = regArr.length;
+        for (var i = 0; i < j; i++) {
+            if (regArr[i].test(taxId)) {
+                return true;
+            }
+        }
+        //纳税人识别号格式错误
+        return false;
+    }
     page.init();
 }

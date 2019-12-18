@@ -112,7 +112,7 @@ var bootstrap = function ($, ayma) {
 
             $('#am_edit').on('click', function () {
                 var arr = [];
-               var rowdatas= $('#girdtable').jfGridGet('rowdata');
+                var rowdatas = $subgridTable.jfGridGet('rowdata');
                if (rowdatas==null || rowdatas.length==0) {
                    ayma.alert.warning('请勾选任意一行！');
                    return false;
@@ -129,10 +129,10 @@ var bootstrap = function ($, ayma) {
                 $.SaveIndex(top.$.rootUrl + '/MesDev/InPrice/Save', postData, function (res) {
                     // 保存成功后才回调
                     if (res.code == 200) {
-                        page.search();
+                        refreshSubGirdData();
                     } else {
                         ayma.alert.error(res.info);
-                        page.search();
+                        refreshSubGirdData();
                     }
                 });
             });
@@ -186,21 +186,31 @@ var bootstrap = function ($, ayma) {
                     { label: "开始时间", name: "P_StartDate", width: 160, align: "left" },
                     { label: "到期时间", name: "P_EndDate", width: 160, align: "left" },
                     {
-                        label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left"
+                        label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left", editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_InPrice = 0;
+                                }
+
+                            }
+                        }, formatter: function () {
+
+                        }
                     },
                     {
                         label: "购进税率(%)", name: "P_Itax", width: 160, align: "left"
-                        //, editType: 'type',
-                        //editOp: {
-                        //    callback: function (rownum, row) {
-                        //        if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
-                        //            row.P_Itax = 0;
-                        //        }
+                        , editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_Itax = 0;
+                                }
 
-                        //    }
-                        //}, formatter: function () {
+                            }
+                        }, formatter: function () {
 
-                        //}
+                        }
                     },
                        {
                            label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
@@ -231,6 +241,7 @@ var bootstrap = function ($, ayma) {
                         isPage: true,
                         sidx: "P_GoodsCode",
                         sord: 'ASC',
+                        isMultiselect:true,
                         reloadSelected: false,
                     }).jfGridSet("reload");
                 }
