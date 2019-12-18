@@ -591,8 +591,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var dtTaxAlmount = this.BaseRepository().FindTable(string.Format(sqlTaxAmount, sqlParm.ToString(), string.Join(",", goodsList)), dp);
                 for (var i = 0; i < dt.Rows.Count; i++)
                 {
-                    var arr = dt.Rows[i].ItemArray;
-                    dt.Rows[i]["allamount"] = arr.Sum(c => c.ToInt());
+                    var list = dt.Rows[i].ItemArray.ToList();
+                    list.RemoveAt(1);
+                    var array = list.ToArray();
+                    dt.Rows[i]["allamount"] = array.Sum(c => c.ToInt());
                 }
 
                 for (var i = 0; i < dtTax.Rows.Count; i++)
