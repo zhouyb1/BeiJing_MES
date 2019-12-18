@@ -106,19 +106,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 m.G_Period,
 								m.G_UnitQty,
 								m.G_Unit2,
-                                @G_StockCode as 'G_StockCode',
-                               (select S_Name from Mes_Stock where S_Code=@G_StockCode) as G_StockName
+                                m.G_StockCode as 'G_StockCode',
+                              (select S_Name from Mes_Stock where S_Code=m.G_StockCode) as G_StockName
                                 from Mes_InPrice t left join Mes_Goods m on(t.P_GoodsCode=m.G_Code) ");
-                strSql.Append(" where G_Kind=1 and t.P_SupplyCode=@G_SupplyCode and m.G_StockCode=@G_StockCode");
+                strSql.Append(" where G_Kind=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                dp.Add("@G_StockCode",queryParam["G_StockCode"].ToString() , DbType.String);
-                dp.Add("@G_SupplyCode",queryParam["G_SupplyCode"].ToString(), DbType.String);
+            
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
+                }
+                if (!queryParam["G_SupplyCode"].IsEmpty())
+                {
+                    dp.Add("G_SupplyCode", "%" + queryParam["G_SupplyCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_SupplyCode Like @G_SupplyCode ");
                 }
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }

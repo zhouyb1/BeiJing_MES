@@ -103,7 +103,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
          /// 包装规格
          /// </summary>
          [Column("M_UNITQTY")]
-         public string M_UnitQty { get; set; }
+         public decimal? M_UnitQty { get; set; }
          /// <summary>
          /// 包装数量
          /// </summary>

@@ -11,7 +11,7 @@ var parentRemoveGridData;
 var parentFormId = request('formId');
 var newArray = [];
 //仓库的编码
-var S_Code = request('S_Code');
+//var S_Code = request('S_Code');
 //供应商编码
 var supplyCode = request('supplyCode');
 //查询数据
@@ -84,7 +84,7 @@ var bootstrap = function ($, ayma) {
                 for (var i = 0; i < newArray.length; i++) {
                     //copy需要更改的地方
                     newArray[i]["M_Unit2"] = newArray[i]['g_unit2'];
-                    newArray[i]["M_UnitQty"] = newArray[i]['g_unitQty'];
+                    newArray[i]["M_UnitQty"] = newArray[i]['g_unitqty'];
                     newArray[i]["M_StockCode"] = newArray[i]['c_stockcode'];
                     newArray[i]["M_StockName"] = newArray[i]['c_stockName'];
                     newArray[i]["M_TaxPrice"] = newArray[i]['p_taxprice'];
@@ -94,10 +94,8 @@ var bootstrap = function ($, ayma) {
                     newArray[i]['M_Unit'] = newArray[i]['g_unit'];
                     newArray[i]['M_Price'] = newArray[i]['p_inprice'];
                     newArray[i]['M_Tax'] = newArray[i]['p_itax'];
-                    newArray[i]["M_Qty"] = quantity; 
                     newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                     newArray[i]["ID"] = newArray[i]['id'];
-                    newArray[i]["M_Qty2"] = quantity;
                     array.push(newArray[i]);
                 }
                 parentRefreshGirdData(array);
@@ -197,8 +195,6 @@ var bootstrap = function ($, ayma) {
                         row['M_Unit'] = row['g_unit'];
                         row['M_Kind'] = row['g_kind'];
                         row['M_Price'] = row['p_inprice'];
-                        row["M_Qty"] = quantity;
-                        row["M_Qty2"] = quantity;
                         row['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                             //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
                         row["ID"] = row['id'];
@@ -230,7 +226,6 @@ var bootstrap = function ($, ayma) {
         search: function (param) {
             queryJson = param || {};
             queryJson.G_SupplyCode = supplyCode;
-            queryJson.G_StockCode = S_Code;
             param = $("#txt_Keyword").val();
            
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });

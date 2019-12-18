@@ -50,7 +50,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("C_UNITQTY")]
-        public string C_UnitQty { get; set; }
+        public decimal?  C_UnitQty { get; set; }
         /// <summary>
         /// 包装数量
         /// </summary>

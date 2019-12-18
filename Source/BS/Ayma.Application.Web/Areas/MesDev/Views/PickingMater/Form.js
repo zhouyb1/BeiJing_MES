@@ -112,10 +112,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
              
             //添加订单原物料
             $('#am_add').on('click', function () {
-                if ($("#C_StockName").selectGet()=="") {
-                    ayma.alert.error("请选择原料仓库！");
-                    return false;
-                }
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
@@ -150,6 +146,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     ayma.alert.error("数量不能大于库存数量");
                                     row.C_Qty = 0;
                                 }
+                                row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                             }
                         }
                     },
@@ -163,13 +160,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                        row.C_Qty2 = 0;
                                    }
                                }
-                               if (row.C_Qty2 > row.C_Qty) {
-                                   ayma.alert.error("包装数量不能大于领料数量");
-                                   row.C_Qty2 = 0;
+                               row.C_Qty = row.C_Qty2 * row.C_UnitQty;
+                               if (row.C_Qty > row.StockQty) {
+                                   ayma.alert.error("数量不能大于库存数量");
+                                   row.C_Qty = 0;
                                }
                            }
                        }
                    },
+                    { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
                     { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
 
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
@@ -182,7 +181,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
                     },
                     { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
-                    { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
                     { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
                     { label: "原仓库名称", name: "C_StockName", width: 100, align: "left" },
                 ],

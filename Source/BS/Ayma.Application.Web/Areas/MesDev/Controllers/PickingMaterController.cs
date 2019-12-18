@@ -29,7 +29,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-             return View();
+            return View();
         }
 
         /// <summary>
@@ -106,9 +106,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_CollarHeadData = pickingMaterIBLL.GetMes_CollarHeadEntity( keyValue );
-            var Mes_CollarDetailData = pickingMaterIBLL.GetMes_CollarDetailEntityList( Mes_CollarHeadData.C_CollarNo );
-            var jsonData = new {
+            var Mes_CollarHeadData = pickingMaterIBLL.GetMes_CollarHeadEntity(keyValue);
+            var Mes_CollarDetailData = pickingMaterIBLL.GetMes_CollarDetailEntityList(Mes_CollarHeadData.C_CollarNo);
+            var jsonData = new
+            {
                 Mes_CollarHeadData = Mes_CollarHeadData,
                 Mes_CollarDetailData = Mes_CollarDetailData,
             };
@@ -182,16 +183,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("包装数量只能是大于0的实数");
             }
-            //获取库存
-            var list = from goods in mes_CollarDetailEntityList
-                       let stock = invSeachIbll.GetEntityBy(goods.C_GoodsCode,entity.C_StockCode, goods.C_Batch)
-                       let qty =stock==null?0:stock.I_Qty
-                where goods.C_Qty > qty
-                select goods;
-            foreach (var s in list)
+            foreach (var goods in mes_CollarDetailEntityList)
             {
-                return Fail(s.C_GoodsName + "不存在或库存不足");
+               var stock= invSeachIbll.GetEntityBy(goods.C_GoodsCode, goods.C_StockCode, goods.C_Batch);
+               if (goods.C_Qty>stock.I_Qty)
+               {
+                   return Fail(goods.C_GoodsName + "不存在或库存不足");
+               }
             }
+
             pickingMaterIBLL.SaveEntity(keyValue, entity, mes_CollarDetailEntityList);
             return Success("保存成功！");
         }

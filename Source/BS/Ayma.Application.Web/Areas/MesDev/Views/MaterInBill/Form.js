@@ -12,8 +12,10 @@ var status = request('status');
 var inputFocus;
 var bootstrap = function ($, ayma) {
     "use strict";
+   
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
+
         init: function () {
             $('.am-form-wrap').mCustomScrollbar({ theme: "minimal-dark" });
             page.bind();
@@ -103,10 +105,6 @@ var bootstrap = function ($, ayma) {
             $("#M_Status").DataItemSelect({ code: 'MaterInStatus' });
             //添加商品
             $("#am_add").on("click", function () {
-                if ($("#M_StockCode").val()=="") {
-                    ayma.alert.error("请选择仓库！");
-                    return false;
-                }
                 if ($('#M_SupplyCode').selectGet()=="") {
                     ayma.alert.error("请选择供应商！");
                     return false;
@@ -167,9 +165,9 @@ var bootstrap = function ($, ayma) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
                                      row.M_Qty = 0;
                                  }
-
+                                 row.M_Qty2 = row.M_Qty /row.M_UnitQty;                             
                              }
-                         }
+                         }, 
                      },
                      {
                          label: "包装数量", name: "M_Qty2", width: 60, align: "left", editType: 'input',
@@ -181,13 +179,11 @@ var bootstrap = function ($, ayma) {
                                          row.M_Qty2 = 0;
                                      }
                                  }
-                                 if (row.M_Qty2 > row.M_Qty) {
-                                     ayma.alert.error("包装数量不能大于领料数量");
-                                     row.M_Qty2 = 0;
-                                 }
+                                 row.M_Qty = row.M_Qty2 * row.M_UnitQty;
                              }
                          }
                      },
+                      { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
                      {
                          label: '价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
                          editOp: {
@@ -212,14 +208,19 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
                     { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
-                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
-                    { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
+                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },        
                     { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },
                     { label: "仓库名称", name: "M_StockName", width: 100, align: "left" },
                     {
                         label: '备注', name: 'M_Remark', width: 130, align: 'left', editType: 'input'
                     }
                 ],
+                onRenderComplete: function (rows) {
+
+                    for (var i = 0; i < rows.length; i++) {
+                        $("[rownum='rownum_Mes_MaterInDetail_" + i + "'][colname='M_StockName']").css('back-groundcolor', 'red')
+                    }
+                },
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 320,
@@ -246,6 +247,7 @@ var bootstrap = function ($, ayma) {
                 $("#M_Status").selectSet(1);//新增时默认为单据生成
             }
         },
+       
         search: function (data) {
             data = data || {};
             $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: data });
@@ -353,5 +355,8 @@ var bootstrap = function ($, ayma) {
     inputFocus = function () {
         $('#Mes_MaterInDetail').jfGridInputFocus(3);
     }
+ 
+   
     page.init();
+   
 }

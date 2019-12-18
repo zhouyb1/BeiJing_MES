@@ -190,9 +190,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 										G.G_UnitQty,
 										G.G_Unit2,
 										G.G_Unit,
-                                        @stockCode as 'C_StockCode', 
-                                        (select S_Name from Mes_Stock where S_Code=@stockCode) as C_StockName
-                                   FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where 1 = 1 and  S.I_Qty <> 0");
+                                        G.G_StockCode as C_StockCode, 
+                                        (select S_Name from Mes_Stock where S_Code=G.G_StockCode) as C_StockName
+                                   FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where  S.I_Kind=1 and  S.I_Qty <> 0 ");
 
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -201,11 +201,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("keyword", "%"+keyword+"%", DbType.String);
                     strSql.Append(" AND  S.I_GoodsCode + S.I_GoodsName like @keyword ");
-                }
-                if (!queryParam.IsEmpty())
-                {
-                    dp.Add("stockCode",queryParam["stockCode"].ToString(), DbType.String);
-                    strSql.Append(" AND S.I_StockCode =@stockCode ");
                 }
                 return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
             }
