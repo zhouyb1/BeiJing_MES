@@ -62,7 +62,7 @@ var bootstrap = function ($, ayma) {
                     height: 400,
                     maxmin: true,
                     callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
+                        return top[id].acceptClick(refreshSubGirdData);
                     }
                 });
             });
@@ -212,6 +212,9 @@ var bootstrap = function ($, ayma) {
 
                         }
                     },
+                           {
+                               label: "供应商价格(含税)", name: "P_TaxPrice", width: 160, align: "left"
+                           },
                        {
                            label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
                            formatter: function (value, grid, rows) {

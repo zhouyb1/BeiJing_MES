@@ -43,11 +43,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("P_GOODSNAME")]
         public string P_GoodsName { get; set; }
         /// <summary>
-        /// 价格
+        /// 价格(不含税)
         /// </summary>
         /// <returns></returns>
         [Column("P_INPRICE")]
         public decimal? P_InPrice { get; set; }
+        /// <summary>
+        /// 供应商价格(含税)
+        /// </summary>
+        [Column("P_TAXPRICE")]
+        public decimal? P_TaxPrice { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -90,6 +95,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.P_CreateDate = DateTime.Now;
             this.P_CreateBy = userInfo.realName;
+            this.P_TaxPrice = this.P_InPrice * (1 + (this.P_Itax / 100));
         }
         /// <summary>
         /// 编辑调用
@@ -98,6 +104,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
+            this.P_TaxPrice = this.P_InPrice * (1 + (this.P_Itax / 100));
         }
         #endregion
     }

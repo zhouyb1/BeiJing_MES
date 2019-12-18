@@ -549,6 +549,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 if (string.IsNullOrEmpty(item.M_Qty.ToString()) || item.M_Qty == 0)
                 {
                     return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
+                }
+                if (string.IsNullOrEmpty(item.M_Qty2.ToString()) || item.M_Qty2 == 0)
+                {
+                    return Fail("物料【" + item.M_GoodsName + "】入库数量不能为空!");
                 }  
             }
             entity.M_OrderKind = orderKind; //单据类型 成品与非成品

@@ -176,7 +176,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var mes_CollarDetailEntityList = strmes_CollarDetailEntity.ToObject<List<Mes_CollarDetailEntity>>();
             if (mes_CollarDetailEntityList.Any(c=>c.C_Qty<=0))
             {
-                return Fail("数量只能是大于0的实数");
+                return Fail("领料数量只能是大于0的实数");
+            }
+            if (mes_CollarDetailEntityList.Any(c => c.C_Qty2 <= 0))
+            {
+                return Fail("包装数量只能是大于0的实数");
             }
             //获取库存
             var list = from goods in mes_CollarDetailEntityList
