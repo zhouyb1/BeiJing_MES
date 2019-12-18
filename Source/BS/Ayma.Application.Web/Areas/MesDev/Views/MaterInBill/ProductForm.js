@@ -9,6 +9,7 @@ var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
 var status = request('status');
+var inputFocus;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -123,7 +124,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'M_Unit', width: 60, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
+                        label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'numinput',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -170,6 +171,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
+                        inputFocus();
                     }
                 });
             } else {
@@ -179,6 +181,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         search: function (data) {
             data = data || {};
             $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: data });
+            inputFocus();
         }
     };
     // 保存数据
@@ -261,6 +264,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     top.NewGirdData = function () {
         return $('#Mes_MaterInDetail').jfGridGet('rowdatas');
+    }
+    //input获取上下左右键操控焦点
+    inputFocus = function () {
+        $('#Mes_MaterInDetail').jfGridInputFocus(3);
     }
     page.init();
 }

@@ -267,8 +267,7 @@ var bootstrap = function ($, ayma) {
                 onRenderComplete: function (rows) {
                     var lengh = rows.length;
                     for (var i = 0; i < lengh; i++) {
-
-                        $("[colname='C_StockName']").html("<a href =# style=text-decoration:underline  title='点击查询库存' onclick=js_method('" + rows[i].C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].C_StockName + "</a>");
+                        $("[rownum='rownum_girdtable_" + i + "'][colname='C_StockName']").html("<a href =# style=text-decoration:underline  title='点击查询库存' onclick=js_method('" + rows[i].C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].C_StockName + "</a>");
                     }
                 },
                 mainId:'ID',
