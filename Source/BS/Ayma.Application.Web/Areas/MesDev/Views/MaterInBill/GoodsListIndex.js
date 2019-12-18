@@ -129,13 +129,17 @@ var bootstrap = function ($, ayma) {
                     {
                         label: "开始时间", name: "p_startdate", width: 80, align: "left",
                         formatter: function (value, row, dfop) {
-                            return row.p_startdate.substr(0, 10);
+                            if (row.p_startdate != null) {
+                                return row.p_startdate.substr(0, 10);
+                            }
                         }
                     },
                     {
                         label: "到期时间", name: "p_enddate", width: 80, align: "left",
                         formatter: function (value, row, dfop) {
-                            return row.p_enddate.substr(0, 10);
+                            if (row.p_enddate != null) {
+                                return row.p_enddate.substr(0, 10);
+                            }
                         }
                     },
                    { label: "价格", name: "p_inprice", width: 80, align: "left" },

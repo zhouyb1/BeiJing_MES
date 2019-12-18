@@ -161,18 +161,16 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "仓库编码", name: "M_StockCode", width: 90, align: "left" },
-                    { label: "仓库名称", name: "M_StockName", width: 160, align: "left" },
+                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },                 
                     //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
-                    //{ label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },
-                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
+                    //{ label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },                   
                     { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },
                     { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
                     { label: "修改人", name: "M_UpdateBy", width: 90, align: "left" },
                     { label: "修改时间", name: "M_UpdateDate", width: 160, align: "left" },
                     { label: "提交人", name: "M_UploadBy", width: 90, align: "left"},
-                    { label: "提交时间", name: "M_UploadDate", width: 160, align: "left"}
+                    { label: "提交时间", name: "M_UploadDate", width: 160, align: "left" },
+                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
                 ],
                 mainId: 'ID',
                 isPage: true,
