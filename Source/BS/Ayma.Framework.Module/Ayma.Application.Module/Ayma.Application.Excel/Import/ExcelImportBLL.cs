@@ -1040,7 +1040,7 @@ namespace Ayma.Application.Excel
                                 itax = Convert.ToDecimal(dr["购进税率"]);//购进税率
                             }
                             var erpcode = dr["ERP中的编码(成品必填)"].ToString();//ERP中的编码(成品必填)
-                            var unitQty = dr["包装规格"].ToString();//包装规格
+                            var unitQty = dr["包装规格"].ToDecimal();//包装规格
                             var unit = dr["单位"].ToString();//单位
                             var remark = dr["备注"].ToString();//备注
                             var model = new Mes_GoodsEntity()

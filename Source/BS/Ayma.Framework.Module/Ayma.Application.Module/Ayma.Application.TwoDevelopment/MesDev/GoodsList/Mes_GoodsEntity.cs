@@ -112,7 +112,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 包装规格
         /// </summary>
         [Column("G_UNITQTY")]
-        public string G_UnitQty { get; set; }   
+        public decimal? G_UnitQty { get; set; }   
         /// <summary>
         /// 包装单位
         /// </summary>

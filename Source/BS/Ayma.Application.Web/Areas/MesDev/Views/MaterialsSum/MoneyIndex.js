@@ -60,7 +60,7 @@ var bootstrap = function ($, ayma) {
             //    $('#girdtable_otherout').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
             //    $('#girdtable_supplierback').jfGridSet('reload', { param: { M_GoodsCode: M_GoodsCode, queryJson: JSON.stringify(dateParam) } });
             //    $('#pageTab a[href="#page_detail"]').tab('show'); // 通过名字选择
-            //});
+            //}); 
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
@@ -74,6 +74,19 @@ var bootstrap = function ($, ayma) {
                 // 获取前一个激活的标签页的名称
                 //var previousTab = $(e.relatedTarget).text();
                 tabTitle = activeTab;
+            });
+            //原物料名称
+            $("#M_GoodsName").select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
+                // 访问数据接口参数
             });
             //绑定供应商
             $("#G_SupplyCode").select({
