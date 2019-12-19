@@ -119,7 +119,7 @@ var bootstrap = function ($, ayma) {
                         id: 'GoodsListIndexForm',
                         title: '添加物料',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/GoodsListIndex?formId=' + parentFormId + '&S_Code=' + $("#M_StockCode").val() + "&supplyCode=" + $("#M_SupplyCode").selectGet(),
-                        width: 950,
+                        width: 1000,
                         height: 600,
                         maxmin: true,
                         callBack: function (id, index) {
