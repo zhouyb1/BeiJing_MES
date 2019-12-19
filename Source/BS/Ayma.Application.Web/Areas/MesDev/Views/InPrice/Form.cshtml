@@ -21,9 +21,13 @@
         <div class="am-form-item-title">物料编码<font face="宋体">*</font></div>
         <input id="P_GoodsCode" type="text" class="form-control" disabled="disabled" />
     </div>
-    <div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
-        <div class="am-form-item-title">供应商价格<font face="宋体">*</font></div>
-        <input id="P_InPrice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    <div class="col-xs-6 am-form-item" data-table="Mes_InPrice">
+        <div class="am-form-item-title">价格(含税)<font face="宋体">*</font></div>
+        <input id="P_TaxPrice" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_InPrice" div id="InPrice">
+        <div class="am-form-item-title">价格(不含税)</div>
+        <input id="P_InPrice" type="text" class="form-control" />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_InPrice">
         <div class="am-form-item-title">购进税率(%)<font face="宋体">*</font></div>

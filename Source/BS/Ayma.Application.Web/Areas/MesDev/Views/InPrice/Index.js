@@ -186,11 +186,11 @@ var bootstrap = function ($, ayma) {
                     { label: "开始时间", name: "P_StartDate", width: 160, align: "left" },
                     { label: "到期时间", name: "P_EndDate", width: 160, align: "left" },
                     {
-                        label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left", editType: 'input',
+                        label: "供应商价格(含税)", name: "P_TaxPrice", width: 160, align: "left" , editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
-                                if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_InPrice = 0;
+                                if (/\D/.test(row.P_TaxPrice.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_TaxPrice = 0;
                                 }
 
                             }
@@ -213,7 +213,16 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                            {
-                               label: "供应商价格(含税)", name: "P_TaxPrice", width: 160, align: "left"
+                               label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left"
+                                  , editType: 'input',
+                               editOp: {
+                                   callback: function (rownum, row) {
+                                       if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
+                                           row.P_InPrice = 0;
+                                       }
+
+                                   }
+                               }
                            },
                        {
                            label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,

@@ -22,7 +22,10 @@ var bootstrap = function ($, ayma) {
             //编辑禁用
             if (keyValue) {
                 $("#P_SupplyName").attr('disabled', 'disabled'); 
-                $("#P_GoodsName").attr('disabled', 'disabled');
+                $("#P_GoodsName").attr('disabled', 'disabled');    
+            }
+            if (!keyValue) {
+                $("#InPrice").css('display', 'none');
             }
             //$('#P_GoodsName').select();
             //供应商名称
