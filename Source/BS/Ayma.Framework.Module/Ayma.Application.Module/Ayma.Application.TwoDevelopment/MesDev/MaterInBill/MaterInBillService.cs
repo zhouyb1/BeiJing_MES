@@ -106,7 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 m.G_Period,
 								m.G_UnitQty,
 								m.G_Unit2,
-                                m.G_StockCode as 'G_StockCode',
+                                m.G_StockCode as G_StockCode,
                               (select S_Name from Mes_Stock where S_Code=m.G_StockCode) as G_StockName
                                 from Mes_InPrice t left join Mes_Goods m on(t.P_GoodsCode=m.G_Code) ");
                 strSql.Append(" where G_Kind=1 ");
