@@ -14,6 +14,11 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            $('#S_Effect1').Uploader();
+            $('#S_Effect2').Uploader();
+            $('#S_Effect3').Uploader();
+            $('#S_Effect4').Uploader();
+            $('#S_Effect5').Uploader();
             //客户名称验证
             //$("#C_Name").on('blur', function () {
             //    var code = $.trim($(this).val()); //去除空格
@@ -44,6 +49,11 @@ var bootstrap = function ($, ayma) {
                         }
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
+                            $('#S_Effect1').UploaderSet(data[id].S_Effect1);
+                            $('#S_Effect2').UploaderSet(data[id].S_Effect2);
+                            $('#S_Effect3').UploaderSet(data[id].S_Effect3);
+                            $('#S_Effect4').UploaderSet(data[id].S_Effect4);
+                            $('#S_Effect5').UploaderSet(data[id].S_Effect5);
                         }
                     }
                 });

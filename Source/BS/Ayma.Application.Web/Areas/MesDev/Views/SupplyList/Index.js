@@ -24,7 +24,7 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '新增供应商',
                     url: top.$.rootUrl + '/MesDev/SupplyList/Form',
-                    width: 600,
+                    width: 800,
                     height: 400,
                     maxmin: true,
                     callBack: function (id) {
@@ -40,7 +40,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑供应商',
                         url: top.$.rootUrl + '/MesDev/SupplyList/Form?keyValue=' + keyValue,
-                        width: 600,
+                        width: 800,
                         height: 400,
                         maxmin: true,
                         callBack: function (id) {
