@@ -240,7 +240,7 @@ var bootstrap = function ($, ayma) {
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
-                        inputFocus();
+                        //inputFocus();
                     }
                 });
             } else {
@@ -251,7 +251,7 @@ var bootstrap = function ($, ayma) {
         search: function (data) {
             data = data || {};
             $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: data });
-            inputFocus();
+            //inputFocus();
         }
     };
     function getDay(day) {
