@@ -185,7 +185,7 @@ var bootstrap = function ($, ayma) {
                      },
                       { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
                      {
-                         label: '价格', name: 'M_Price', width: 40, align: 'left', editType: 'label',
+                         label: '不含税价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字

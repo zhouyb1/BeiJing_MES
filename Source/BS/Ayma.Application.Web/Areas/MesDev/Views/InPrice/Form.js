@@ -170,14 +170,31 @@ var bootstrap = function ($, ayma) {
             if (SupplyCodestate == false) {
                 return false;
             }
-        //物料价格 不小于0
+        //不含税 不小于0
             var period = $.trim($("#P_InPrice").val()); //去除空格
             if (period != undefined && period != "") {
                 if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString())) {
-                    ayma.alert.error("物料价格必须是非负数.");
+                    ayma.alert.error("不含税价格必须是非负数.");
                     $("#P_InPrice").val(1);
                     return false;
                 }
+            }
+        //含税价格 不小于0
+            var P_TaxPrice = $.trim($("#P_TaxPrice").val()); //去除空格
+            if (P_TaxPrice != undefined && P_TaxPrice != "") {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(P_TaxPrice.toString())) {
+                    ayma.alert.error("含税价格必须是非负数.");
+                    $("#P_TaxPrice").val(1);
+                    return false;
+                }
+            }
+
+        //不含税价格 小于 含税价格
+            if (parseFloat(period) > parseFloat(P_TaxPrice))
+            {
+                ayma.alert.error("不含税价格不能大于含税价格.");
+                $("#P_InPrice").val(P_TaxPrice);
+                return false;
             }
         //税率 不小于0
             var itax = $.trim($("#P_Itax").val()); //去除空格

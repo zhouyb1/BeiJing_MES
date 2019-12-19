@@ -166,7 +166,8 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/InPrice/GetPageList',
                 headData: [
                     { label: "供应商编码", name: "P_SupplyCode", width: 200, align: "left" },
-                    { label: "供应商名称", name: "P_SupplyName", width: 200, align: "left"},
+                    { label: "供应商名称", name: "P_SupplyName", width: 200, align: "left" },
+                    { label: "资质到期时间", name: "S_EffectTime", width: 200, align: "left" },
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -180,7 +181,9 @@ var bootstrap = function ($, ayma) {
                     $subgridTable.jfGrid({
                         url: top.$.rootUrl + '/MesDev/InPrice/GetPriceBySupply?P_SupplyCode=' + P_SupplyCode,
                         headData: [
-                    { label: "ID", name: "ID", width: 160, align: "left" ,hidden:true},
+                    { label: "ID", name: "ID", width: 160, align: "left", hidden: true },
+                    { label: "供应商编码", name: "P_SupplyCode", width: 200, align: "left", hidden: true },
+                    { label: "供应商名称", name: "P_SupplyName", width: 200, align: "left", hidden: true },
                     { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left"},
                     { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
                     { label: "开始时间", name: "P_StartDate", width: 160, align: "left" },
@@ -220,7 +223,10 @@ var bootstrap = function ($, ayma) {
                                        if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
                                            row.P_InPrice = 0;
                                        }
-
+                                       if (row.P_InPrice > row.P_TaxPrice) { //验证只能为数字
+                                           row.P_InPrice = row.P_TaxPrice;
+                                           ayma.alert.error("不含税价格不能大于含税价格");
+                                       }
                                    }
                                }
                            },

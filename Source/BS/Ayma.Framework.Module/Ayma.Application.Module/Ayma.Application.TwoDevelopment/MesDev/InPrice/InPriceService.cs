@@ -30,7 +30,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.P_SupplyCode,
-                t.P_SupplyName
+                t.P_SupplyName,
+                (select S_EffectTime from Mes_SuppLy where S_Code=t.P_SupplyCode) as S_EffectTime
                 ");
                 strSql.Append("  FROM Mes_InPrice t ");
                 strSql.Append("  WHERE 1=1 ");

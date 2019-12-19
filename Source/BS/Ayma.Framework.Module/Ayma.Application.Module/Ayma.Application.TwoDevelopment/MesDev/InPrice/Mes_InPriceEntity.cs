@@ -87,6 +87,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
         #endregion
         #region 扩展字段
+        [NotMapped]
+        public DateTime? S_EffectTime { get; set; }//供应商资质到期时间
         #endregion
     }
 }

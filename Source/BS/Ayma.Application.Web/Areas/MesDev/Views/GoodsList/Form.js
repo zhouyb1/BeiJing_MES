@@ -226,6 +226,17 @@ var bootstrap = function ($, ayma) {
 
                 }
             });
+            //包装规格 只能为数字
+            $("#G_UnitQty").on('blur', function () {
+                var G_UnitQty = $.trim($(this).val()); //去除空格
+                if (G_UnitQty != undefined && G_UnitQty != "") {
+                    if (! /^\d*\.{0,1}\d{0,1}$/.test(G_UnitQty.toString().replace('.', ''))) {
+                        ayma.alert.error("包装规格只能为数字或小数.");
+                        $("#G_UnitQty").val(1);
+                    }
+
+                }
+            });
             //下限预警验证 不小于0
             $("#G_Lower").on('blur', function () {
                 var period = $.trim($(this).val()); //去除空格
