@@ -195,7 +195,10 @@ var bootstrap = function ($, ayma) {
                                 if (/\D/.test(row.P_TaxPrice.toString().replace('.', ''))) { //验证只能为数字
                                     row.P_TaxPrice = 0;
                                 }
-
+                                if (row.P_TaxPrice == 0) { //验证只能为数字
+                                    row.P_TaxPrice = "";
+                                    ayma.alert.error("含税价格不能为0且只能为数字");
+                                }
                             }
                         }, formatter: function () {
 
@@ -209,7 +212,10 @@ var bootstrap = function ($, ayma) {
                                 if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
                                     row.P_Itax = 0;
                                 }
-
+                                if (row.P_Itax == 0) { //验证只能为数字
+                                    row.P_Itax = "";
+                                    ayma.alert.error("税率不能为0且只能为数字");
+                                }
                             }
                         }, formatter: function () {
 
@@ -222,6 +228,10 @@ var bootstrap = function ($, ayma) {
                                    callback: function (rownum, row) {
                                        if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字
                                            row.P_InPrice = 0;
+                                       }
+                                       if (row.P_InPrice ==0) { //验证只能为数字
+                                           row.P_InPrice = "";
+                                           ayma.alert.error("不含税价格不能为0且只能为数字");
                                        }
                                        if (row.P_InPrice > row.P_TaxPrice) { //验证只能为数字
                                            row.P_InPrice = row.P_TaxPrice;
