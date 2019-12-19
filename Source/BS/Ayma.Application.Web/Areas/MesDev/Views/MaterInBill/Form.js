@@ -10,7 +10,6 @@ var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
 var status = request('status');
-var inputFocus;
 var bootstrap = function ($, ayma) {
     "use strict";
    
@@ -240,7 +239,6 @@ var bootstrap = function ($, ayma) {
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
                         }
-                        //inputFocus();
                     }
                 });
             } else {
@@ -251,7 +249,6 @@ var bootstrap = function ($, ayma) {
         search: function (data) {
             data = data || {};
             $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: data });
-            //inputFocus();
         }
     };
     function getDay(day) {
@@ -351,11 +348,6 @@ var bootstrap = function ($, ayma) {
     top.NewGirdData = function () {
         return $('#Mes_MaterInDetail').jfGridGet('rowdatas');
     }
-    //input获取上下左右键操控焦点
-    inputFocus = function () {
-        $('#Mes_MaterInDetail').jfGridInputFocus(3);
-    }
- 
     js_method_stock = function (code, moduleId) {
         var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
         module.F_UrlAddress = '/MesDev/InventorySeach/Index?stock=' + encodeURIComponent(code);

@@ -119,7 +119,8 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isMultiselect: true,
                 footerrow: true,
-                minheight: 400
+                minheight: 400,
+                inputCount:2
             });
         },
         initData: function () {

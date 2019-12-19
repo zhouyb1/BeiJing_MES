@@ -82,19 +82,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             }
-            $('#O_OrderNo').select({
-                type: 'default',
-                value: 'P_OrderNo',
-                text: 'P_OrderNo',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
-                // 访问数据接口参数
-                param: { orderNo: orderNo }
-            });
+            //$('#O_OrderNo').select({
+            //    type: 'default',
+            //    value: 'P_OrderNo',
+            //    text: 'P_OrderNo',
+            //    // 展开最大高度
+            //    maxHeight: 200,
+            //    // 是否允许搜索
+            //    allowSearch: true,
+            //    // 访问数据接口地址
+            //    url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
+            //    // 访问数据接口参数
+            //    param: { orderNo: orderNo }
+            //});
 
             $('#Mes_OutWorkShopDetail').jfGrid({
                 headData: [
@@ -139,7 +139,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 2
+                inputCount: 1
             });
             //添加物料
             $('#am_add').on('click', function () {

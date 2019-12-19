@@ -129,7 +129,7 @@ var bootstrap = function ($, ayma) {
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 4
+                inputCount: 3
             });
         },
         initData: function () {

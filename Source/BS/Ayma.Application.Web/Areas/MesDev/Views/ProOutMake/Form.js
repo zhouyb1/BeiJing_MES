@@ -145,7 +145,7 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'P_Batch', width: 100, align: 'left', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'label'
+                        label: '备注', name: 'P_Remark', width: 100, align: 'left', editType: 'input'
                     },
                 ],
                 isAutoHeight: false,

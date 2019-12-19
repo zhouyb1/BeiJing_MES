@@ -124,7 +124,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'M_Unit', width: 60, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'numinput',
+                        label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -158,7 +158,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 3
+                inputCount: 2
             });
         },
         initData: function () {

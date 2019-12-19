@@ -136,7 +136,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'R_Unit', width: 60, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'R_Qty', width: 100, align: 'left', editType: 'numinput',
+                        label: '数量', name: 'R_Qty', width: 100, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.R_Qty.toString().replace('.', ''))) { //验证只能为数字

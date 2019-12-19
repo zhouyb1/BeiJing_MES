@@ -137,7 +137,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 reloadSelected: true,
                 isMultiselect: true,
                 footerrow: true,
-                minheight: 400
+                minheight: 400,
+                inputCount:2
             });
         },
         initData: function () {

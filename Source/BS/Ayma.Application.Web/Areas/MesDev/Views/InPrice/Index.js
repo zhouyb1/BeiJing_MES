@@ -246,6 +246,7 @@ var bootstrap = function ($, ayma) {
                         sord: 'ASC',
                         isMultiselect:true,
                         reloadSelected: false,
+                        inputCount:2
                     }).jfGridSet("reload");
                 }
             });
