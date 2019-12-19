@@ -21,6 +21,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $("#S_EffectTime").attr('disabled', true);
                 $("#S_Remark").attr('disabled', true);
             }
+            $('#S_Effect1').Uploader();
+            $('#S_Effect2').Uploader();
+            $('#S_Effect3').Uploader();
+            $('#S_Effect4').Uploader();
+            $('#S_Effect5').Uploader();
             //编码重复验证
             $("#S_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
@@ -72,6 +77,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
+                            $('#S_Effect1').UploaderSet(data[id].S_Effect1);
+                            $('#S_Effect2').UploaderSet(data[id].S_Effect2);
+                            $('#S_Effect3').UploaderSet(data[id].S_Effect3);
+                            $('#S_Effect4').UploaderSet(data[id].S_Effect4);
+                            $('#S_Effect5').UploaderSet(data[id].S_Effect5);
                         }
                     }
                 });
