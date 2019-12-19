@@ -117,8 +117,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',
                     url: top.$.rootUrl + '/MesDev/PickingMater/OrderMaterList?formId=' + parentFormId + '&stockCode=' + $("#C_StockCode").val()+ '&C_StockName=' + $("#C_StockName").selectGet(),
-                    width: 1200,
-                    height: 550,
+                    width: 1000,
+                    height: 600,
                     maxmin: true,
                     callback: function(id, index) {
                         return top[id].closeWindow();
