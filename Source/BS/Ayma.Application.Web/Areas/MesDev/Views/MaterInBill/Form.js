@@ -2,6 +2,7 @@
  * 日  期：2019-01-08 14:58
  * 描  述：入库单制作
  */
+var js_method_stock;
 var acceptClick;
 var refreshGirdData;//表格商品添加
 var RemoveGridData;//移除表格
@@ -143,7 +144,7 @@ var bootstrap = function ($, ayma) {
                         label: '物料名称', name: 'M_GoodsName', width: 110, align: 'left', editType: 'label'
                     },
                      {
-                         label: "商品类型", name: "M_Kind", width: 80, align: "left",
+                         label: "商品类型", name: "M_Kind", width: 60, align: "left",
                          formatterAsync: function (callback, value, row) {
 
                              ayma.clientdata.getAsync('dataItem', {
@@ -156,10 +157,10 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                     {
-                        label: '单位', name: 'M_Unit', width: 60, align: 'left', editType: 'label'
+                        label: '单位', name: 'M_Unit', width: 40, align: 'left', editType: 'label'
                     },
                      {
-                         label: '数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
+                         label: '数量', name: 'M_Qty', width: 40, align: 'left', editType: 'input',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -185,7 +186,7 @@ var bootstrap = function ($, ayma) {
                      },
                       { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
                      {
-                         label: '价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
+                         label: '价格', name: 'M_Price', width: 40, align: 'left', editType: 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
@@ -196,7 +197,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },//最新维护的价格
                     {
-                        label: '批次', name: 'M_Batch', width: 100, align: 'left', editType: 'input',
+                        label: '批次', name: 'M_Batch', width: 80, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
@@ -206,21 +207,20 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
+                    { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },
+                    {
+                        label: "仓库名称", name: "M_StockName", width: 100, align: "left",
+                        formatter: function (value, row, dfop) {
+                            return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.M_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.M_StockName + "</ a>";                                                             
+                        }
+                    },
                     { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
                     { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
-                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },        
-                    { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },
-                    { label: "仓库名称", name: "M_StockName", width: 100, align: "left" },
+                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" }, 
                     {
                         label: '备注', name: 'M_Remark', width: 130, align: 'left', editType: 'input'
                     }
                 ],
-                onRenderComplete: function (rows) {
-
-                    for (var i = 0; i < rows.length; i++) {
-                        $("[rownum='rownum_Mes_MaterInDetail_" + i + "'][colname='M_StockName']").css('back-groundcolor', 'red')
-                    }
-                },
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 320,
@@ -356,7 +356,13 @@ var bootstrap = function ($, ayma) {
         $('#Mes_MaterInDetail').jfGridInputFocus(3);
     }
  
-   
+    js_method_stock = function (code, moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?stock=' + encodeURIComponent(code);
+        top.ayma.frameTab.openNew(module);
+        var index = window.parent.layer.getFrameIndex(window.name);
+        window.parent.layer.close(index);//关闭layer
+    }
     page.init();
    
 }

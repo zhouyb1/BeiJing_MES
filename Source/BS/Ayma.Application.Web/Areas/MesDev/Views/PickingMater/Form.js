@@ -2,6 +2,7 @@
  * 日  期：2019-03-11 19:22
  * 描  述：领料单
  */
+var js_method_stock;
 var acceptClick;
 var refreshGirdData;//表格商品添加
 var RemoveGridData;//移除表格
@@ -128,7 +129,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
                     { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "C_GoodsCode", width: 100, align: "left"},
+                    { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left"},
                     { label: "单价", name: "C_Price", width: 40, align: "left" },
                     { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
                     { label: "单位", name: "C_Unit", width: 40, align: "left" },
@@ -170,8 +171,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                    },
                     { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
                     { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
-
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
+                    { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
+                    {
+                        label: "原仓库名称", name: "C_StockName", width: 90, align: "left",
+                        formatter: function (value, row, dfop) {
+                            return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.C_StockName + "</ a>";
+                        }
+                    },
                     //{ label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
                     //{ label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
                     {
@@ -181,8 +188,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
                     },
                     { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
-                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
-                    { label: "原仓库名称", name: "C_StockName", width: 100, align: "left" },
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -297,6 +302,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
     top.NewGirdData = function () {
         return $('#Mes_CollarDetail').jfGridGet('rowdatas');
+    }
+    js_method_stock = function (code, moduleId) {
+        var module = top.ayma.clientdata.get(['modulesMap', moduleId]);
+        module.F_UrlAddress = '/MesDev/InventorySeach/Index?stock=' + encodeURIComponent(code);
+        top.ayma.frameTab.openNew(module);
+        var index = window.parent.layer.getFrameIndex(window.name);
+        window.parent.layer.close(index);//关闭layer
     }
     page.init();
 }
