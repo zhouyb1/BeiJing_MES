@@ -199,6 +199,7 @@ var bootstrap = function ($, ayma) {
                         row['M_Unit'] = row['g_unit'];
                         row['M_Kind'] = row['g_kind'];
                         row['M_Price'] = row['p_inprice'];
+                        row["M_Qty"] = quantity;
                         row['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
                             //batch.getFullYear().toString() + (batch.getMonth() + 1).toString() + batch.getDate().toString();
                         row["ID"] = row['id'];
