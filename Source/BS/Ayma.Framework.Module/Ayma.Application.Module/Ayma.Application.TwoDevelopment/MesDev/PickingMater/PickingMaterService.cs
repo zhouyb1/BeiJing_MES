@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderNo,
                 t.P_OrderDate,
                 t.C_Remark,
-                dbo.GetUserNameById (t.C_CreateBy) C_CreateBy ,
+                t.C_CreateBy,
                 t.C_CreateDate
                 ");
                 strSql.Append("  FROM Mes_CollarHead t ");
