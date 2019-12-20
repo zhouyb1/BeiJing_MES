@@ -75,18 +75,18 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 详情
+            // 编辑
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '详情',
-                        url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=form',
+                        width: 800,
+                        height: 600,
                         maxmin: true,
-                        btn:null,
+                        btn: null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -99,10 +99,10 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '详情',
-                        url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
+                        title: '编辑',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=form',
+                        width: 800,
+                        height: 600,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {

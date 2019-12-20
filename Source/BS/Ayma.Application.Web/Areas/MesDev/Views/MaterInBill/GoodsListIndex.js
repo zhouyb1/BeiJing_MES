@@ -142,7 +142,7 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                   { label: "价格", name: "p_inprice", width: 80, align: "left" },
+                   { label: "不含税价格", name: "p_inprice", width: 80, align: "left" },
                    { label: "含税价格", name: "p_taxprice", width: 100, align: "left" },
                    { label: "包装单位", name: "g_unit2", width: 60, align: "left" },
                    { label: "包装规格", name: "g_unitqty", width: 60, align: "left" },
@@ -172,12 +172,11 @@ var bootstrap = function ($, ayma) {
                         if (row['p_inprice'] == 0)
                         {
                             isChecked.attr('checked', false);
-                            ayma.alert.error('物料【' + row['p_goodsname'] + '】价格为0请及时维护价格！');
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】不含税价格为0请及时维护价格！');
                         }
-                        if (row['p_itax'] == 0)
-                        {
+                        if (row['p_taxprice'] == 0) {
                             isChecked.attr('checked', false);
-                            ayma.alert.error('物料【' + row['p_goodsname'] + '】税率为0请及时维护税率！');
+                            ayma.alert.error('物料【' + row['p_goodsname'] + '】含税价格为0请及时维护价格！');
                         }
                         if (row['p_enddate'] == null || row['p_enddate'].substr(0, 10) < time) {
                             isChecked.attr('checked', false);

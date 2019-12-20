@@ -170,6 +170,20 @@ var bootstrap = function ($, ayma) {
             if (SupplyCodestate == false) {
                 return false;
             }
+        //含税价格 不小于0
+            var P_TaxPrice = $.trim($("#P_TaxPrice").val()); //去除空格
+            if (P_TaxPrice != undefined && P_TaxPrice != "") {
+                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(P_TaxPrice.toString())) {
+                    ayma.alert.error("含税价格必须是非负数.");
+                    $("#P_TaxPrice").val(1);
+                    return false;
+                }
+                if (P_TaxPrice == 0) {
+                    ayma.alert.error("含税价格不能为0.");
+                    $("#P_TaxPrice").val(1);
+                    return false;
+                }
+            }
         //不含税 不小于0
             var period = $.trim($("#P_InPrice").val()); //去除空格
             if (period != undefined && period != "") {
@@ -182,20 +196,6 @@ var bootstrap = function ($, ayma) {
                 {
                     ayma.alert.error("不含税价格不能为0.");
                     $("#P_InPrice").val(1);
-                    return false;
-                }
-            }
-        //含税价格 不小于0
-            var P_TaxPrice = $.trim($("#P_TaxPrice").val()); //去除空格
-            if (P_TaxPrice != undefined && P_TaxPrice != "") {
-                if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(P_TaxPrice.toString())) {
-                    ayma.alert.error("含税价格必须是非负数.");
-                    $("#P_TaxPrice").val(1);
-                    return false;
-                }
-                if (P_TaxPrice == 0) {
-                    ayma.alert.error("含税价格不能为0.");
-                    $("#P_TaxPrice").val(1);
                     return false;
                 }
             }
@@ -212,11 +212,6 @@ var bootstrap = function ($, ayma) {
             if (itax != undefined && itax != "") {
                 if (!/^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(itax.toString())) {
                     ayma.alert.error("购进税率必须是非负数.");
-                    $("#P_Itax").val(1);
-                    return false;
-                }
-                if (itax == 0) {
-                    ayma.alert.error("税率不能为0.");
                     $("#P_Itax").val(1);
                     return false;
                 }
