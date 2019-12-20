@@ -127,58 +127,71 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             $('#Mes_CollarDetail').jfGrid({
                 headData: [
-                    { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
-                    { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
-                    { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left"},
-                    { label: "单价", name: "C_Price", width: 40, align: "left" },
-                    { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
-                    { label: "单位", name: "C_Unit", width: 40, align: "left" },
-                    {
-                        label: "领料数量", name: "C_Qty", width: 60, align: "left", editType: 'input',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (row.C_Qty != undefined && !!row.C_Qty) {
-                                    if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.C_Qty.toString().replace('.', ''))) {
-                                        ayma.alert.error("数量必须是非负数.");
-                                        row.C_Qty = 0;
-                                    }
-                                }
-                                if (row.C_Qty > row.StockQty) {
-                                    ayma.alert.error("数量不能大于库存数量");
+                { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
+                { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
+                { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
+                { label: "单价", name: "C_Price", width: 40, align: "left" },
+                { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
+                { label: "单位", name: "C_Unit", width: 40, align: "left" },
+                {
+                    label: "领料数量",
+                    name: "C_Qty",
+                    width: 60,
+                    align: "left",
+                    editType: 'input',
+                    editOp: {
+                        callback: function(rownum, row) {
+                            if (row.C_Qty != undefined && !!row.C_Qty) {
+                                if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.C_Qty.toString().replace('.', ''))) {
+                                    ayma.alert.error("数量必须是非负数.");
                                     row.C_Qty = 0;
                                 }
-                                row.C_Qty2 = row.C_Qty / row.C_UnitQty;
+                            }
+                            if (row.C_Qty > row.StockQty) {
+                                ayma.alert.error("数量不能大于库存数量");
+                                row.C_Qty = 0;
+                            }
+                            row.C_Qty2 = row.C_Qty / row.C_UnitQty;
+                        }
+                    }
+                },
+                {
+                    label: "包装数量",
+                    name: "C_Qty2",
+                    width: 60,
+                    align: "left",
+                    editType: 'input',
+                    editOp: {
+                        callback: function(rownum, row) {
+                            if (row.C_Qty2 != undefined && !!row.C_Qty2) {
+                                if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.C_Qty2.toString().replace('.', ''))) {
+                                    ayma.alert.error("包装数量必须是非负数.");
+                                    row.C_Qty2 = 0;
+                                }
+                            }
+                            row.C_Qty = row.C_Qty2 * row.C_UnitQty;
+                            if (row.C_Qty > row.StockQty) {
+                                ayma.alert.error("数量不能大于库存数量");
+                                row.C_Qty = 0;
                             }
                         }
-                    },
-                   {
-                       label: "包装数量", name: "C_Qty2", width: 60, align: "left", editType: 'input',
-                       editOp: {
-                           callback: function (rownum, row) {
-                               if (row.C_Qty2 != undefined && !!row.C_Qty2) {
-                                   if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.C_Qty2.toString().replace('.', ''))) {
-                                       ayma.alert.error("包装数量必须是非负数.");
-                                       row.C_Qty2 = 0;
-                                   }
-                               }
-                               row.C_Qty = row.C_Qty2 * row.C_UnitQty;
-                               if (row.C_Qty > row.StockQty) {
-                                   ayma.alert.error("数量不能大于库存数量");
-                                   row.C_Qty = 0;
-                               }
-                           }
-                       }
-                   },
-                    { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
-                    { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
-                    { label: "批次", name: "C_Batch", width: 80, align: "left" },
-                    { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
-                    {
-                        label: "原仓库名称", name: "C_StockName", width: 90, align: "left",
-                        formatter: function (value, row, dfop) {
+                    }
+                },
+                { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
+                { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
+                { label: "批次", name: "C_Batch", width: 80, align: "left" },
+                { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
+                {
+                    label: "原仓库名称",
+                    name: "C_StockName",
+                    width: 90,
+                    align: "left",
+                    formatter: function(value, row, dfop) {
+                        if (row != null && row.C_StockName != undefined) {
                             return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.C_StockName + "</ a>";
                         }
-                    },
+                    }
+                  },
                     //{ label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
                     //{ label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
                     {
