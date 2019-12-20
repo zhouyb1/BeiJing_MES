@@ -212,9 +212,9 @@ var bootstrap = function ($, ayma) {
                                 if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
                                     row.P_Itax = 0;
                                 }
-                                if (row.P_Itax == 0) { //验证只能为数字
-                                    row.P_Itax = "";
-                                    ayma.alert.error("税率不能为0且只能为数字");
+                                if (row.P_Itax == "")
+                                {
+                                    row.P_Itax = 0;
                                 }
                             }
                         }, formatter: function () {
