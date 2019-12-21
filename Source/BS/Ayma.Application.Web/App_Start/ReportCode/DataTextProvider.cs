@@ -66,7 +66,9 @@ using MyDbReportData = DatabaseXmlReportData;
                     d.C_Unit,
                     d.C_Qty,
                     d.C_GoodsCode,
-                    d.C_GoodsName
+                    d.C_GoodsName,
+                    d.C_Price,
+		           (d.C_Price*d.C_Qty) as aoumnt
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
             WHERE   t.C_CollarNo ='{0}' and t.P_Status=2

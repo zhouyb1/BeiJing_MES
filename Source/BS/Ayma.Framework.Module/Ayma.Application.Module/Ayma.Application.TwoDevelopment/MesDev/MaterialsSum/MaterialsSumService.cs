@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     ,m.M_Price
 									,m.M_GoodsItax
 									,m.M_Remark  
-									,t.M_StockName    
+									,m.M_StockName    
 									,t.M_CreateDate
                                     ,t.M_CreateBy    
                                     ,(m.M_Qty*m.M_Price) as amount
@@ -80,11 +80,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append(@"
                              select                    
-                            t.C_StockCode
-						   ,t.C_StockName
-                           ,t.C_StockToCode
+                           t.C_StockToCode
 						   ,t.C_StockToName
 						   ,t.C_CreateDate
+                           ,m.C_StockCode
+						   ,m.C_StockName
 						   ,m.C_CollarNo
 						   ,m.C_SupplyCode
 						   ,m.C_SupplyName
