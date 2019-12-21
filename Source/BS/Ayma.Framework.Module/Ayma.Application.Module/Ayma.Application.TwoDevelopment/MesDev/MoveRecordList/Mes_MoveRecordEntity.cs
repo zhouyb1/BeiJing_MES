@@ -48,6 +48,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_DOORNAME")]
         public string M_DoorName { get; set; }
         /// <summary>
+        /// 进出状态
+        /// </summary>
+        [Column("M_STATUS")]
+        public string M_Status { get; set; }
+        /// <summary>
         /// 记录时间
         /// </summary>
         [Column("M_DATE")]

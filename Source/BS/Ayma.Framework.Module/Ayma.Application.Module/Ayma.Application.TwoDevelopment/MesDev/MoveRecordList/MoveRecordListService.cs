@@ -29,15 +29,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
-                t.ID,
+                 t.ID,
                 t.M_UserCode,
-                t.M_UserName,
                 t.M_IP,
                 t.M_RFIDCode,
                 t.M_DoorCode,
                 t.M_DoorName,
                 t.M_Date,
-                t.M_Remark
+                t.M_Remark,
+				t.M_Status,
+				(select F_RealName from AM_Base_User where F_EnCode= t.M_UserCode) as M_UserName
                 ");
                 strSql.Append("  FROM Mes_MoveRecord t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -52,7 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["M_UserName"].IsEmpty())
                 {
                     dp.Add("M_UserName", "%" + queryParam["M_UserName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.M_UserName Like @M_UserName ");
+                    strSql.Append(" AND (select F_RealName from AM_Base_User where F_EnCode= t.M_UserCode) Like @M_UserName ");
                 }
                 if (!queryParam["M_DoorName"].IsEmpty())
                 {
