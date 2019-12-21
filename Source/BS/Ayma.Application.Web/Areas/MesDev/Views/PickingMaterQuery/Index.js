@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=form',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=""',
                         width: 800,
                         height: 600,
                         maxmin: true,
@@ -100,7 +100,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=form',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/Form?keyValue=' + keyValue + '&formId=""',
                         width: 800,
                         height: 600,
                         maxmin: true,

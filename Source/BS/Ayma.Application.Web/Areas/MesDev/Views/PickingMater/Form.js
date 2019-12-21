@@ -188,7 +188,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     align: "left",
                     formatter: function(value, row, dfop) {
                         if (row != null && row.C_StockName != undefined) {
-                            return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.C_StockName + "</ a>";
+                            if (parentFormId == "") {
+                                return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.C_StockName + "</ a>";
+                            } else {
+                                return row.C_StockName;
+                            }
                         }
                     }
                   },
