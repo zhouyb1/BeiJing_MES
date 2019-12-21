@@ -202,6 +202,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("keyword", "%"+keyword+"%", DbType.String);
                     strSql.Append(" AND  S.I_GoodsCode + S.I_GoodsName like @keyword ");
                 }
+                if (!queryParam["stockCode"].IsEmpty())
+                {
+                    dp.Add("stockCode", "%" + queryParam["stockCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND  S.I_StockCode like @stockCode ");
+                }
                 return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex) 
