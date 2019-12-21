@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
+			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n\t\td.C_Unit2,\r\n\t\td.C_UnitQty,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
 			"Field":[
 				{
 					"Name":"C_GoodsCode"
@@ -56,31 +56,47 @@
 				{
 					"Name":"C_CreateDate",
 					"Type":"DateTime"
+				},
+				{
+					"Name":"C_Unit2"
+				},
+				{
+					"Name":"C_UnitQty",
+					"Type":"Float"
 				}
 			]
 		},
 		"Column":[
 			{
 				"Name":"Column1",
-				"Width":2.98979
+				"Width":1.98438
 			},
 			{
-				"Name":"C_GoodsCode"
-			},
-			{
-				"Name":"C_GoodsName"
+				"Name":"C_GoodsName",
+				"Width":6.58813
 			},
 			{
 				"Name":"C_Qty"
 			},
 			{
-				"Name":"Column2"
+				"Name":"Column2",
+				"Width":2.59292
 			},
 			{
-				"Name":"Column3"
+				"Name":"C_Unit",
+				"Width":2.40771
 			},
 			{
-				"Name":"C_Unit"
+				"Name":"Column4",
+				"Width":3.01625
+			},
+			{
+				"Name":"Column5",
+				"Width":2.59292
+			},
+			{
+				"Name":"Column3",
+				"Width":3.62479
 			}
 		],
 		"ColumnContent":{
@@ -94,18 +110,13 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":0.079375,
-							"Width":2.80458,
+							"Left":-0.423333,
+							"Width":2.77813,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
 						}
 					]
-				},
-				{
-					"Column":"C_GoodsCode",
-					"TextAlign":"MiddleCenter",
-					"DataField":"C_GoodsCode"
 				},
 				{
 					"Column":"C_GoodsName",
@@ -123,14 +134,24 @@
 					"DataField":"C_Price"
 				},
 				{
-					"Column":"Column3",
-					"TextAlign":"MiddleCenter",
-					"DataField":"aoumnt"
-				},
-				{
 					"Column":"C_Unit",
 					"TextAlign":"MiddleCenter",
 					"DataField":"C_Unit"
+				},
+				{
+					"Column":"Column4",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_UnitQty"
+				},
+				{
+					"Column":"Column5",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Unit2"
+				},
+				{
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"DataField":"aoumnt"
 				}
 			]
 		},
@@ -142,12 +163,6 @@
 					"Column":"Column1",
 					"TextAlign":"MiddleCenter",
 					"Text":"序号"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"C_GoodsCode",
-					"TextAlign":"MiddleCenter",
-					"Text":"物料编码"
 				},
 				{
 					"GroupTitle":false,
@@ -169,15 +184,27 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"Column3",
-					"TextAlign":"MiddleCenter",
-					"Text":"总金额"
-				},
-				{
-					"GroupTitle":false,
 					"Column":"C_Unit",
 					"TextAlign":"MiddleCenter",
 					"Text":"单位"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column4",
+					"TextAlign":"MiddleCenter",
+					"Text":"包装规格"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column5",
+					"TextAlign":"MiddleCenter",
+					"Text":"包装单位"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column3",
+					"TextAlign":"MiddleCenter",
+					"Text":"总金额"
 				}
 			]
 		},
@@ -188,7 +215,34 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0
+					"Height":1.00542,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox15",
+							"Top":0.211667,
+							"Width":1.19063,
+							"Height":0.582083,
+							"TextAlign":"MiddleCenter",
+							"Text":"总计"
+						},
+						{
+							"Type":"Line",
+							"Name":"Line1",
+							"Left":1.19063,
+							"Height":1.00542
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox1",
+							"Center":"Vertical",
+							"Left":13.9965,
+							"Top":0.291042,
+							"Width":2.40771,
+							"Height":0.396875,
+							"DataField":"aoumnt"
+						}
+					]
 				}
 			}
 		]
@@ -283,8 +337,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":11.6681,
-					"Top":2.75167,
+					"Left":11.6417,
+					"Top":2.69875,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -308,8 +362,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.0704,
-					"Top":2.80458,
+					"Left":12.9646,
+					"Top":2.69875,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"C_CreateBy"
@@ -338,6 +392,31 @@
 					"Width":3.38667,
 					"Height":0.608542,
 					"DataField":"C_CollarNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":6.53521,
+					"Top":2.64583,
+					"Width":1.40229,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"经手人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":7.9375,
+					"Top":2.69875,
+					"Width":3.59833,
+					"Height":0.608542,
+					"DataField":"C_CreateBy"
 				}
 			]
 		}
@@ -360,7 +439,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据备注："
+					"Text":"库房主管："
 				},
 				{
 					"Type":"StaticBox",
@@ -398,8 +477,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
-					"Left":11.4565,
-					"Top":1.79917,
+					"Left":6.24417,
+					"Top":1.85208,
 					"Width":2.01083,
 					"Height":0.396875,
 					"Font":{
@@ -414,10 +493,60 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":13.4673,
-					"Top":1.79917,
+					"Left":8.255,
+					"Top":1.85208,
 					"Width":3.38667,
 					"Height":0.396875
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox13",
+					"Left":6.24417,
+					"Top":1.05833,
+					"Width":1.98438,
+					"Height":0.396875,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"库管员："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox12",
+					"Left":8.22854,
+					"Top":1.05833,
+					"Width":3.41313,
+					"Height":0.396875,
+					"DataField":"C_Remark"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox14",
+					"Left":11.7475,
+					"Top":1.79917,
+					"Width":1.98438,
+					"Height":0.396875,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据备注："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox13",
+					"Left":13.7319,
+					"Top":1.79917,
+					"Width":3.41313,
+					"Height":0.396875,
+					"DataField":"C_Remark"
 				}
 			]
 		}

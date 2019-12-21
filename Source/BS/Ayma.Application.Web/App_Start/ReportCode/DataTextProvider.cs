@@ -64,6 +64,8 @@ using MyDbReportData = DatabaseXmlReportData;
                     t.C_Remark,
                     t.C_CreateBy,
                     d.C_Unit,
+                    d.C_Unit2,
+		            d.C_UnitQty,
                     d.C_Qty,
                     d.C_GoodsCode,
                     d.C_GoodsName,
