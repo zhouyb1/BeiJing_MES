@@ -66,6 +66,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('id');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑物料',
+                        url: top.$.rootUrl + '/MesDev/GoodsList/Form?keyValue=' + keyValue,
+                        width: 800,
+                        height: 550,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('id');
