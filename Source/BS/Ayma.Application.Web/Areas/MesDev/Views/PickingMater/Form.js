@@ -148,11 +148,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             }
                             if (row.C_Qty > row.StockQty) {
-                                ayma.alert.error("数量不能大于库存数量");
+                                ayma.alert.error("领料数量不能大于库存数量");
                                 row.C_Qty = 0;
                             }
                             row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                         }
+                    },
+                    formatter: function (value, row, dfop) {
+                            if (row.C_StockName == "蔬菜库") {
+                                return row.C_Qty = row.StockQty;
+                            }       
                     }
                 },
                 {
@@ -171,9 +176,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                             row.C_Qty = row.C_Qty2 * row.C_UnitQty;
                             if (row.C_Qty > row.StockQty) {
-                                ayma.alert.error("数量不能大于库存数量");
-                                row.C_Qty = 0;
+                                ayma.alert.error("领料数量不能大于库存数量");
+                                row.C_Qty2 = 0;
                             }
+                        }
+                    },
+                    formatter: function (value, row, dfop) {
+                        if (row.C_StockName == "蔬菜库") {
+                            return row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                         }
                     }
                 },
@@ -192,6 +202,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.C_StockCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + row.C_StockName + "</ a>";
                             } else {
                                 return row.C_StockName;
+                            }
+                            if (row.C_StockName == "蔬菜库")
+                            {
+                               return row.C_Qty = row.StockQty;
                             }
                         }
                     }
