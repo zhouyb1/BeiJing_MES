@@ -29,12 +29,32 @@ var bootstrap = function ($, ayma) {
             parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
         },
         bind: function () {
-           
+            $('#C_StockCode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetStockListByParam',
+                // 访问数据接口参数
+                param: { strWhere: "S_Kind =1" }
+            }).on('change', function () {
+                var queryJson = {};
+                queryJson.stockCode = $(this).selectGet();
+                page.search(queryJson);
+            });
+            
             //输入关键字搜索
-            $("#txt_Keyword").on('keydown', function (event) {
-                if (event.keyCode == "13") {
-                    $('#am_btn_querySearch').click();
-                }
+            //$("#txt_Keyword").on('keydown', function (event) {
+            //    if (event.keyCode == "13") {
+            //        $('#am_btn_querySearch').click();
+            //    } 
+            //});
+            $("#txt_Keyword").on('keyup', function (event) {
+                page.search();
             });
             //查询
             $('#am_btn_querySearch').on('click', function () {
@@ -206,10 +226,7 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            //queryJson = param;
-            
             queryJson = param || {};
-            queryJson.stockCode = stockCode;
             param = $("#txt_Keyword").val();
             $('#girdtable').jfGridSet('reload', { param: { keyword: param,  queryJson: JSON.stringify(queryJson) } });
         }

@@ -186,6 +186,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             foreach (var goods in mes_CollarDetailEntityList)
             {
                var stock= invSeachIbll.GetEntityBy(goods.C_GoodsCode, goods.C_StockCode, goods.C_Batch);
+               if (stock==null)
+               {
+                   return Fail("[" + goods.C_GoodsName + "]" + "库存不存在！");
+               }
                if (goods.C_Qty>stock.I_Qty)
                {
                    return Fail(goods.C_GoodsName + "不存在或库存不足");

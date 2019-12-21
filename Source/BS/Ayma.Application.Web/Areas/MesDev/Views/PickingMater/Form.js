@@ -113,6 +113,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
              
             //添加订单原物料
             $('#am_add').on('click', function () {
+                if ($('#C_StockToName').selectGet()=="") {
+                    ayma.alert.error('请先选择领料仓库！');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'OrderMaterListForm',
                     title: '添加订单物料',

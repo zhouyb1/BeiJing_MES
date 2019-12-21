@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "订单物料列表";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
@@ -11,10 +10,15 @@
                 <div class="am-layout-tool-left">
                     <div class="am-layout-tool-item">
                         <input id="txt_Keyword" type="text" class="form-control" placeholder="物料编码/物料名称" style="width: 230px;" />
-                        <a id="am_btn_querySearch" class="btn btn-primary">&nbsp;查&nbsp;&nbsp;询</a>
+                        @*<a id="am_btn_querySearch" class="btn btn-primary">&nbsp;查&nbsp;&nbsp;询</a>*@
                     </div>
                     <div class="am-layout-tool-item">
-                        <label class="text text-info" style="color: red">Tip：请优先选择最早的批次</label>
+                        <label class="text text-info" style="color: red">Tip：优先选择最早的批次</label>
+                    </div>
+
+                    <div class="am-layout-tool-item">
+                        <div class="am-form-item-title" style="width: 110px; left: -90px;margin-top: 15px;margin-left: 90px">原料仓：</div>&nbsp;
+                        <div type="text" id="C_StockCode" class="form-control" style="margin-top:4px ;width:150px;margin-left: 90px"></div>
                     </div>
                 </div>
                 <div class="am-layout-tool-right">
