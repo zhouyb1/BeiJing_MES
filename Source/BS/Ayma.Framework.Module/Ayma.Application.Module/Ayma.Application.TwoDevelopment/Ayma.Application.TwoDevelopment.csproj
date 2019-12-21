@@ -99,6 +99,9 @@
     <Compile Include="MesDev\Mes_Reson\Mes_ResonEntity.cs" />
     <Compile Include="MesDev\Mes_Reson\Mes_ResonIBLL.cs" />
     <Compile Include="MesDev\Mes_Reson\Mes_ResonService.cs" />
+    <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanIBLL.cs" />
+    <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanBLL.cs" />
+    <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanService.cs" />
     <Compile Include="MesDev\Model\YieldRateModel.cs" />
     <Compile Include="MesDev\MonthBalance\Mes_MonthBalanceEntity.cs" />
     <Compile Include="MesDev\MonthBalance\MonthBalanceBLL.cs" />
@@ -336,6 +339,7 @@
     <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDService.cs" />
     <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDIBLL.cs" />
     <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDBLL.cs" />
+    <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

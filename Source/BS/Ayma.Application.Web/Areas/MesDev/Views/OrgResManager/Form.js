@@ -41,21 +41,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     $('#O_WorkShopCode').val(result.data.W_Code);
                 });
             });
-            //绑定工艺
-            dfop= {
-                type: 'default',
-                value: 'R_Record',
-                text: 'R_Name',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
-                // 访问数据接口参数
-                param: {}
-            }
-            $('#O_Record').select(dfop);
             //绑定工序
             $('#O_ProCode').select({
                 type: 'default',
@@ -115,12 +100,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
             //添加物料
             $('#am_add').on('click', function () {
+
+                if ($('#O_WorkShopName').selectGet()=="") {
+                    ayma.alert.warning('请先选择车间');
+                    return false;
+                }
+                if ($('#O_ProCode').selectGet()) {
+                    ayma.alert.warning('请先选择工序');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&workShop=' + $('#O_WorkShopCode').val(),
-                    width: 800,
-                    height: 500,
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&workShop=' + $('#O_WorkShopCode').val() + '&proNo=' + $('#O_ProCode').selectGet(),
+                    width: 900,
+                    height: 700,
                     maxmin: true,
                     callback: function (id, index) {
                         return top[id].closeWindow();
@@ -135,21 +129,25 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     width: 160,
                     align: "center",
                     children: [
-                        { label: "物料编码", name: "O_GoodsCode", width: 130, align: "left", },
-                        { label: "物料名称", name: "O_GoodsName", width: 130, align: "left" },
-                        { label: "单价", name: "O_Price", width: 60, align: "left" },
-                        { label: "单位", name: "O_Unit", width: 60, align: "left" },
+                        { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center", },
+                        { label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
                         {
-                            label: "数量", name: "O_Qty", width: 60, align: "left", editType: 'input',
+                            label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input',
                             editOp: {
                                 callback: function (rownum, row) {
                                     if (/\D/.test(row.O_Qty.toString().replace('.', ''))) { //验证只能为数字
                                         row.O_Qty = 0;
                                     }
+                                    if (row.O_Qty >row.stockQty) {
+                                        ayma.alert.error('不能大于库存数量');
+                                        row.O_Qty = 0;
+                                    }
                                 }
                             }
                         },
-                        { label: "批次", name: "O_Batch", width: 80, align: "left", editType: 'input' }
+                        { label: "单位", name: "O_Unit", width: 60, align: "center" },
+                        { label: "单价", name: "O_Price", width: 60, align: "center" },
+                        { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' }
                     ]
                 },
                     {
@@ -158,10 +156,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         width: 160,
                         align: "center",
                         children: [
-                            { label: "物料编码", name: "O_SecGoodsCode", width: 130, align: "left", },
-                            { label: "物料名称", name: "O_SecGoodsName", width: 130, align: "left" },
+                            { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
+                            { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                             {
-                                label: "数量", name: "O_SecQty", width: 60, align: "left", editType: 'input',
+                                label: "数量", name: "O_SecQty", width: 80, align: "cnetr", editType: 'input',
                                 editOp: {
                                     callback: function (rownum, row) {
                                         if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
@@ -170,7 +168,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     }
                                 }
                             },
-                            { label: "批次", name: "O_SecBatch", width: 80, align: "left" }
+                             { label: "单价", name: "W_SecPrice", width: 80, align: "center" },
+                            { label: "批次", name: "O_SecBatch", width: 80, align: "center" }
                         ]
                     }
                 ],

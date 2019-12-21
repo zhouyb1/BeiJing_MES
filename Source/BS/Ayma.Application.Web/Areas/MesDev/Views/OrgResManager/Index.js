@@ -43,6 +43,22 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
+
+            //绑定工序
+            $('#O_ProCode').select({
+                type: 'default',
+                value: 'P_ProNo',
+                text: 'P_ProName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
+                // 访问数据接口参数
+                param: {}
+            });
+
             $('#O_WorkShopName').select({
                 type: 'default',
                 value: 'W_Name',
@@ -69,7 +85,7 @@ var bootstrap = function ($, ayma) {
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/OrgResManager/Form?formId=MasterIndexForm',
                     width: 900,
-                    height: 600,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -85,7 +101,7 @@ var bootstrap = function ($, ayma) {
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
                         width: 900,
-                        height: 600,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -226,16 +242,13 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据号", name: "O_OrgResNo", width: 160, align: "left"},
-                    //{ label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
-                    //{ label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
-                    { label: "工艺代码", name: "O_Record", width: 90, align: "left"},
-                    { label: "工序号", name: "O_ProCode", width: 90, align: "left"},
-                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "left"},
-                    { label: "车间名称", name: "O_WorkShopName", width: 160, align: "left"},
-                    { label: "备注", name: "O_Remark", width: 160, align: "left"},
-                    { label: "添加人", name: "O_CreateBy", width: 90, align: "left"},
-                    { label: "添加时间", name: "O_CreateDate", width: 160, align: "left"},
+                    { label: "单据号", name: "O_OrgResNo", width: 150, align: "center"},
+                    { label: "工序号", name: "O_ProCode", width: 90, align: "center"},
+                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "center" },
+                    { label: "车间名称", name: "O_WorkShopName", width: 160, align: "center" },
+                    { label: "备注", name: "O_Remark", width: 150, align: "left"},
+                    { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
+                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center" },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

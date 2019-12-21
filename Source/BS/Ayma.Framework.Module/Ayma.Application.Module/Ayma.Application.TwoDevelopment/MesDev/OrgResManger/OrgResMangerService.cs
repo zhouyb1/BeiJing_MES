@@ -16,6 +16,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// </summary>
     public partial class OrgResMangerService : RepositoryFactory
     {
+        private Mes_WorkShopScanIBLL workShopScanIbll =new Mes_WorkShopScanBLL();
+
         #region 获取数据
 
         /// <summary>
@@ -33,14 +35,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.ID,
                 t.O_Status,
                 t.O_OrgResNo,
-                t.O_OrderNo,
-                t.O_OrderDate,
-                t.O_Record,
-                t.O_ProCode,
+                dbo.GetProNamekByCode(O_ProCode) O_ProCode,
                 t.O_WorkShopCode,
                 t.O_WorkShopName,
                 t.O_Remark,
-               dbo.GetUserNameById (t.O_CreateBy) O_CreateBy,
+                 dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
@@ -68,6 +67,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_Status Like @O_Status ");
+                }
+                if (!queryParam["O_ProCode"].IsEmpty())
+                {
+                    dp.Add("O_ProCode", "%" + queryParam["O_ProCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_ProCode Like @O_ProCode ");
                 }
                 return this.BaseRepository().FindList<Mes_OrgResHeadEntity>(strSql.ToString(),dp, pagination);
             }
@@ -105,7 +109,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_WorkShopCode,
                 t.O_WorkShopName,
                 t.O_Remark,
-                t.O_CreateBy,
+                dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t ");
@@ -156,31 +160,41 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT  s.ID ,
-                                s.W_Batch ,
+            sb.Append(@"SELECT  s.ID,
                                 s.W_GoodsCode ,
                                 s.W_GoodsName ,
-                                s.W_Qty ,
-                                s.W_Price ,
-                                s.W_Unit ,
-                                s.W_WorkShop ,
-                                s.W_WorkShopName ,
-                                w.W_SecGoodsCode ,
-                                w.W_SecGoodsName ,
-                                w.W_SecQty ,
-                                w.W_SecBatch ,
-                                w.W_SecUnit
-                         FROM    dbo.Mes_WorkShopWeight w  LEFT JOIN dbo.Mes_WorkShopScan s ON s.W_WorkShop =w.W_WorkShopCode WHERE w.W_WorkShopCode=@workShop  ");
+                                c.C_SecCode ,
+                                c.C_SecName,
+                                s.W_Unit,
+                                s.W_Batch,
+                                s.W_Qty,
+                                s.W_Price,
+                                s.W_WorkShop,
+                                s.W_WorkShopName,
+                                g.G_Price w_secprice
+                        FROM    dbo.Mes_WorkShopScan s
+                                INNER JOIN dbo.Mes_Convert c ON c.C_Code = s.W_GoodsCode
+                                INNER JOIN mes_goods g ON g.G_Code =c.C_Code
+                        WHERE   1=1  ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
-            dp.Add("workShop", queryParam["workShop"].ToString(), DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
                 sb.Append(" AND s.W_GoodsCode+s.W_GoodsName like @keyword ");
             }
-           //this.BaseRepository().FindList<GoodsEntity>(sb.ToString(), dp, obj);
+            if (!queryParam["queryParam"].IsEmpty())
+            {
+                dp.Add("workShop", "%" + queryParam["workShop"].ToString() + "%", DbType.String);
+                sb.Append(" AND s.W_WorkShop like @workShop ");
+            }
+            if (!queryParam["proNo"].IsEmpty())
+            {
+                dp.Add("proNo", "%" + queryParam["proNo"].ToString() + "%", DbType.String);
+                sb.Append(" AND c.C_ProNo like @proNo ");
+            }
+
             return BaseRepository().FindTable(sb.ToString(), dp, obj);
         }
         /// <summary>
@@ -289,6 +303,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
+                   
                     var dp = new DynamicParameters(new { });
                     dp.Add("@BillType", "组装与拆分单");
                     dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
@@ -301,6 +316,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.O_OrgResNo = entity.O_OrgResNo;
+                        //获取车间扫描表实体
+                        var workShop = workShopScanIbll.GetMes_WorkShopScanEntity(item.O_GoodsCode);
+                        //删除或更细车间扫描表里的物料数据
+                        if (item.O_Qty == workShop.W_Qty)
+                        {
+                            db.Delete(workShop.W_GoodsCode);
+                        }
+                        else
+                        {
+                            workShop.W_Qty = workShop.W_Qty + (-1 * item.O_Qty);
+                            db.Update(workShop);
+                        }
                     }
                     db.Insert(mes_OrgResDetailList);
                 }
