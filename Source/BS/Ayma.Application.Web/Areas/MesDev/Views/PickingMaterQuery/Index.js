@@ -111,6 +111,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('C_CollarNo');
+                var status = $("#girdtable").jfGridValue("P_Status");
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '领料单打印',
+                        url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport?keyValue=' + keyValue + "&report=CollacReport&data=Picking",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("C_CollarNo");

@@ -104,7 +104,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.899583,
-							"Width":2.51354,
+							"Width":2.48708,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -330,7 +330,7 @@
 					"Name":"FieldBox10",
 					"Left":2.19604,
 					"Top":2.61938,
-					"Width":3.59833,
+					"Width":5.00063,
 					"Height":0.608542,
 					"DataField":"M_CreateDate"
 				}

@@ -71,7 +71,7 @@ using MyDbReportData = DatabaseXmlReportData;
 		           (d.C_Price*d.C_Qty) as aoumnt
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
-            WHERE   t.C_CollarNo ='{0}' and t.P_Status=2
+            WHERE   t.C_CollarNo ='{0}'
             ORDER BY M_UploadDate DESC";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Picking"));
@@ -239,7 +239,7 @@ using MyDbReportData = DatabaseXmlReportData;
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
                                     LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode
-                            WHERE  h.M_Status =2 and h.M_MaterInNo='{0}'";
+                            WHERE   h.M_MaterInNo='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "MaterIn"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
