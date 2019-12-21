@@ -253,7 +253,7 @@
 					"Top":1.79917,
 					"Width":3.41313,
 					"Height":0.608542,
-					"DataField":"C_StockName"
+					"DataField":"C_StockToName"
 				},
 				{
 					"Type":"FieldBox",
@@ -262,7 +262,7 @@
 					"Top":1.79917,
 					"Width":3.59833,
 					"Height":0.608542,
-					"DataField":"C_StockToName"
+					"DataField":"C_StockName"
 				},
 				{
 					"Type":"StaticBox",
