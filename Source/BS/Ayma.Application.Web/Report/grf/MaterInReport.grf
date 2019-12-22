@@ -103,8 +103,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.740833,
-							"Width":2.38125,
+							"Left":-0.687917,
+							"Width":2.35479,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -229,9 +229,10 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
 							"Center":"Vertical",
-							"Left":13.8113,
-							"Width":2.38125,
+							"Left":13.3879,
+							"Width":2.40771,
 							"Height":0.608542,
+							"TextAlign":"MiddleCenter",
 							"DataField":"Amount"
 						}
 					]

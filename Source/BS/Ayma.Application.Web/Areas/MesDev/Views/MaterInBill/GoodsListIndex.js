@@ -169,12 +169,12 @@ var bootstrap = function ($, ayma) {
                     var time = year + '-' + month + '-' + date
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
-                        if (row['p_inprice'] == 0)
+                        if (row['p_inprice'] == 0 || row['p_inprice']==null)
                         {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】不含税价格为0请及时维护价格！');
                         }
-                        if (row['p_taxprice'] == 0) {
+                        if (row['p_taxprice'] == 0 || row['p_taxprice']==null) {
                             isChecked.attr('checked', false);
                             ayma.alert.error('物料【' + row['p_goodsname'] + '】含税价格为0请及时维护价格！');
                         }

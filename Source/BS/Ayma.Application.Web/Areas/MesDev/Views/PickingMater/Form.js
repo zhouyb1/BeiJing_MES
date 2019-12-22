@@ -153,7 +153,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                             if (row.C_Qty > row.StockQty) {
                                 ayma.alert.error("领料数量不能大于库存数量");
-                                row.C_Qty = 0;
+                                row.C_Qty = row.StockQty;
                             }
                             row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                         }
@@ -181,7 +181,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             row.C_Qty = row.C_Qty2 * row.C_UnitQty;
                             if (row.C_Qty > row.StockQty) {
                                 ayma.alert.error("领料数量不能大于库存数量");
-                                row.C_Qty2 = 0;
+                                row.C_Qty = row.StockQty;
+                                row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                             }
                         }
                     },
