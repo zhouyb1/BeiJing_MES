@@ -111,7 +111,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.423333,
-							"Width":2.77813,
+							"Width":2.75167,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -215,14 +215,15 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":1.00542,
+					"Height":0.79375,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox15",
-							"Top":0.211667,
+							"Center":"Vertical",
+							"Top":0.079375,
 							"Width":1.19063,
-							"Height":0.582083,
+							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"Text":"总计"
 						},
@@ -237,7 +238,7 @@
 							"Name":"SummaryBox1",
 							"Center":"Vertical",
 							"Left":13.9965,
-							"Top":0.291042,
+							"Top":0.185208,
 							"Width":2.40771,
 							"Height":0.396875,
 							"DataField":"aoumnt"

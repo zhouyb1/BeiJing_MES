@@ -104,7 +104,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.740833,
-							"Width":2.43417,
+							"Width":2.40771,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -208,14 +208,15 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":1.00542,
+					"Height":0.79375,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox15",
-							"Top":0.211667,
+							"Center":"Vertical",
+							"Top":0.079375,
 							"Width":1.19063,
-							"Height":0.582083,
+							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"Text":"总计"
 						},
@@ -228,10 +229,11 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
+							"Center":"Vertical",
 							"Left":13.8113,
-							"Top":0.211667,
+							"Top":0.079375,
 							"Width":2.38125,
-							"Height":0.582083,
+							"Height":0.608542,
 							"DataField":"Amount"
 						}
 					]
