@@ -146,8 +146,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             }
                         },
-                        { label: "单位", name: "O_Unit", width: 60, align: "center" },
                         { label: "单价", name: "O_Price", width: 60, align: "center" },
+                        { label: "单位", name: "O_Unit", width: 60, align: "center" },
                         { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' }
                     ]
                 },
@@ -170,8 +170,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             },
                              { label: "单价", name: "W_SecPrice", width: 80, align: "center" },
-                              { label: "单位", name: "O_Unit", width: 80, align: "center" },
-                            { label: "批次", name: "O_SecBatch", width: 80, align: "center" }
+                             { label: "单位", name: "O_Unit", width: 80, align: "center" },
+                             { label: "批次", name: "O_SecBatch", width: 80, align: "center" }
                         ]
                     }
                 ],
