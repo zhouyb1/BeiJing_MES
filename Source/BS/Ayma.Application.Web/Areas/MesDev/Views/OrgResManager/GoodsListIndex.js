@@ -114,7 +114,8 @@ var bootstrap = function ($, ayma) {
                         children: [
                            { label: "物料编码", name: "c_seccode", width: 90, align: "center", },
                            { label: "物料名称", name: "c_secname", width: 120, align: "center" },
-                           { label: "单价", name: "w_secprice", width: 60, align: "left" }
+                           { label: "单价", name: "w_secprice", width: 60, align: "left" },
+                           { label: "单位", name: "w_unit", width: 60, align: "left" },
                         ]
                     }
                 ],
