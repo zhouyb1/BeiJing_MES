@@ -215,13 +215,11 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox15",
-							"Center":"Vertical",
-							"Top":0.079375,
 							"Width":1.19063,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
@@ -238,7 +236,7 @@
 							"Name":"SummaryBox1",
 							"Center":"Vertical",
 							"Left":13.9965,
-							"Top":0.185208,
+							"Top":0.079375,
 							"Width":2.40771,
 							"Height":0.396875,
 							"DataField":"aoumnt"
