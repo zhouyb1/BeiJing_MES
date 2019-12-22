@@ -170,8 +170,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 s.W_Qty,
                                 s.W_Price,
                                 s.W_WorkShop,
-                                s.W_WorkShopName,
-                                g.G_Price w_secprice
+                                s.W_WorkShopName
                         FROM    dbo.Mes_WorkShopScan s
                                 INNER JOIN dbo.Mes_Convert c ON c.C_Code = s.W_GoodsCode
                                 INNER JOIN mes_goods g ON g.G_Code =c.C_Code
