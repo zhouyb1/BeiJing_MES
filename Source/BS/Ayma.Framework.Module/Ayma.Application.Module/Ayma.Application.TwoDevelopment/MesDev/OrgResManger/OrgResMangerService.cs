@@ -184,7 +184,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
                 sb.Append(" AND s.W_GoodsCode+s.W_GoodsName like @keyword ");
             }
-            if (!queryParam["queryParam"].IsEmpty())
+            if (!queryParam["workShop"].IsEmpty())
             {
                 dp.Add("workShop", "%" + queryParam["workShop"].ToString() + "%", DbType.String);
                 sb.Append(" AND s.W_WorkShop like @workShop ");
