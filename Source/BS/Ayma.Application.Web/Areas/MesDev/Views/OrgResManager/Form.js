@@ -101,14 +101,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //添加物料
             $('#am_add').on('click', function () {
 
+                if ($('#O_ProCode').selectGet()=="") {
+                    ayma.alert.warning('请先选择工序');
+                    return false;
+                }
                 if ($('#O_WorkShopName').selectGet()=="") {
                     ayma.alert.warning('请先选择车间');
                     return false;
                 }
-                if ($('#O_ProCode').selectGet()) {
-                    ayma.alert.warning('请先选择工序');
-                    return false;
-                }
+               
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
