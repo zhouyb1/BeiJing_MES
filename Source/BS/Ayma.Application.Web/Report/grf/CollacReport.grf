@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockName ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n\t\td.C_Unit2,\r\n\t\td.C_UnitQty,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
+			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        t.C_CreateBy,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n   d.C_Unit2,\r\nd.C_UnitQty,\r\nd.C_Qty2,\r\nd.C_StockName,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Remark as Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
 			"Field":[
 				{
 					"Name":"C_GoodsCode"
@@ -63,6 +63,13 @@
 				{
 					"Name":"C_UnitQty",
 					"Type":"Float"
+				},
+				{
+					"Name":"C_Qty2",
+					"Type":"Float"
+				},
+				{
+					"Name":"Remark"
 				}
 			]
 		},
@@ -76,22 +83,29 @@
 				"Width":6.58813
 			},
 			{
+				"Name":"Column7",
+				"Width":3.99521
+			},
+			{
+				"Name":"Column4",
+				"Width":1.79917
+			},
+			{
+				"Name":"Column5",
+				"Width":1.98438
+			},
+			{
+				"Name":"Column6"
+			},
+			{
+				"Name":"C_Unit",
+				"Width":1.79917
+			},
+			{
 				"Name":"C_Qty"
 			},
 			{
 				"Name":"Column2",
-				"Width":2.59292
-			},
-			{
-				"Name":"C_Unit",
-				"Width":2.40771
-			},
-			{
-				"Name":"Column4",
-				"Width":3.01625
-			},
-			{
-				"Name":"Column5",
 				"Width":2.59292
 			},
 			{
@@ -100,7 +114,7 @@
 			}
 		],
 		"ColumnContent":{
-			"Height":0.608542,
+			"Height":0.79375,
 			"ColumnContentCell":[
 				{
 					"Column":"Column1",
@@ -111,7 +125,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.370417,
-							"Width":2.72521,
+							"Width":2.69875,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -124,19 +138,10 @@
 					"DataField":"C_GoodsName"
 				},
 				{
-					"Column":"C_Qty",
+					"Column":"Column7",
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
-					"DataField":"C_Qty"
-				},
-				{
-					"Column":"Column2",
-					"TextAlign":"MiddleCenter",
-					"DataField":"C_Price"
-				},
-				{
-					"Column":"C_Unit",
-					"TextAlign":"MiddleCenter",
-					"DataField":"C_Unit"
+					"DataField":"C_StockName"
 				},
 				{
 					"Column":"Column4",
@@ -149,6 +154,26 @@
 					"DataField":"C_Unit2"
 				},
 				{
+					"Column":"Column6",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Qty2"
+				},
+				{
+					"Column":"C_Unit",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Unit"
+				},
+				{
+					"Column":"C_Qty",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Qty"
+				},
+				{
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"DataField":"C_Price"
+				},
+				{
 					"Column":"Column3",
 					"TextAlign":"MiddleCenter",
 					"DataField":"aoumnt"
@@ -156,7 +181,7 @@
 			]
 		},
 		"ColumnTitle":{
-			"Height":0.608542,
+			"Height":1.00542,
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
@@ -172,6 +197,39 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column7",
+					"TextAlign":"MiddleCenter",
+					"Text":"发货仓库"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column4",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"包装规格"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column5",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"包装单位"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column6",
+					"TextAlign":"MiddleCenter",
+					"Text":"包装数量"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"C_Unit",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"基本单位"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"C_Qty",
 					"TextAlign":"MiddleCenter",
 					"Text":"数量"
@@ -181,24 +239,6 @@
 					"Column":"Column2",
 					"TextAlign":"MiddleCenter",
 					"Text":"单价"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"C_Unit",
-					"TextAlign":"MiddleCenter",
-					"Text":"单位"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"Column4",
-					"TextAlign":"MiddleCenter",
-					"Text":"包装规格"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"Column5",
-					"TextAlign":"MiddleCenter",
-					"Text":"包装单位"
 				},
 				{
 					"GroupTitle":false,
@@ -228,7 +268,7 @@
 						{
 							"Type":"Line",
 							"Name":"Line1",
-							"Left":1.19063,
+							"Left":1.00542,
 							"Height":1.00542
 						},
 						{
@@ -254,22 +294,6 @@
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox1",
-					"Left":11.5888,
-					"Top":1.79917,
-					"Width":1.40229,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"仓库："
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox2",
 					"Left":6.48229,
 					"Top":1.79917,
@@ -282,7 +306,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"领料仓："
+					"Text":"收货仓库："
 				},
 				{
 					"Type":"StaticBox",
@@ -308,15 +332,6 @@
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"C_StockToName"
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox3",
-					"Left":12.991,
-					"Top":1.79917,
-					"Width":3.59833,
-					"Height":0.608542,
-					"DataField":"C_StockName"
 				},
 				{
 					"Type":"StaticBox",
@@ -466,15 +481,6 @@
 					"Height":0.396875
 				},
 				{
-					"Type":"FieldBox",
-					"Name":"FieldBox9",
-					"Left":2.64583,
-					"Top":1.08479,
-					"Width":3.41313,
-					"Height":0.396875,
-					"DataField":"C_Remark"
-				},
-				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
 					"Left":6.24417,
@@ -547,6 +553,22 @@
 					"Width":3.41313,
 					"Height":0.396875,
 					"DataField":"C_Remark"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox16",
+					"Left":2.59292,
+					"Top":1.00542,
+					"Width":2.01083,
+					"Height":0.396875,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"谷学春"
 				}
 			]
 		}
