@@ -113,20 +113,16 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/PickingMater/GetMaterList?stockCode=' + stockCode,
                 headData: [
-                    { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
-                    { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
-                    { label: "价格", name: "I_Price", width: 60, align: "left" },
-                    { label: "单位", name: "I_Unit", width: 60, align: "left" },
-                    { label: "包装单位", name: "G_Unit2", width: 60, align: "left" },
-                    { label: "包装规格", name: "G_UnitQty", width: 60, align: "left" },
-                    //{ label: "包装数量", name: "G_Qty2", width: 60, align: "left" },
-                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "left" },
-                    { label: "原仓库名称", name: "C_StockName", width: 100, align: "left" },
-                    { label: "数量", name: "I_Qty", width: 60, align: "left" },
-                    { label: "批次", name: "I_Batch", width: 80, align: "left" },
-                   
+                    { label: "物料编码", name: "I_GoodsCode", width: 100, align: "center", },
+                    { label: "物料名称", name: "I_GoodsName", width: 130, align: "center" },
+                    { label: "批次", name: "I_Batch", width: 90, align: "center" },
+                    { label: "库存", name: "I_Qty", width: 60, align: "center" },
+                    { label: "价格", name: "I_Price", width: 60, align: "cneter" },
+                    { label: "单位", name: "I_Unit", width: 60, align: "center" },
+                    { label: "包装单位", name: "G_Unit2", width: 60, align: "center" },
+                    { label: "包装规格", name: "G_UnitQty", width: 60, align: "center" },
+                    { label: "原仓库编码", name: "C_StockCode", width: 100, align: "center" },
+                    { label: "原仓库名称", name: "C_StockName", width: 130, align: "center" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -187,8 +183,6 @@ var bootstrap = function ($, ayma) {
                         row["C_StockName"] = row['C_StockName'];
                         row['C_GoodsCode'] = row['I_GoodsCode'];
                         row['C_GoodsName'] = row['I_GoodsName'];
-                        row['C_SupplyCode'] = row['I_SupplyCode'];
-                        row['C_SupplyName'] = row['I_SupplyName'];
                         row['C_Unit'] = row['I_Unit'];
                         row['C_Batch'] = row["I_Batch"];
                         row["C_Qty"] = quantity;

@@ -161,20 +161,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-//                strSql.Append(@"SELECT  m.ID ,
-//                                        m.P_GoodsCode ,
-//                                        m.P_GoodsName ,
-//                                        s.I_Batch P_Batch ,
-//                                        m.P_Unit ,
-//                                        s.I_Qty P_Qty ,
-//                                        m.P_OrderNo ,
-//                                        m.P_OrderDate ,
-//                                        g.G_Price P_Price
-//                                FROM    dbo.Mes_Inventory s
-//                                        LEFT JOIN dbo.Mes_Goods g ON g.G_Code = s.I_GoodsCode
-//                                        RIGHT JOIN dbo.Mes_Mater m ON m.P_GoodsCode = s.I_GoodsCode
-//                                WHERE   1 = 1 ");
-
                 strSql.Append(@"SELECT  S.ID ,
                                         S.I_StockCode ,
                                         S.I_StockName ,
@@ -184,8 +170,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         S.I_Unit ,
                                         S.I_Qty ,                              
                                         S.I_Batch ,
-                                        S.I_SupplyCode I_SupplyCode,
-										S.I_SupplyName I_SupplyName,
 									    G.G_Price I_Price,
 										G.G_UnitQty,
 										G.G_Unit2,

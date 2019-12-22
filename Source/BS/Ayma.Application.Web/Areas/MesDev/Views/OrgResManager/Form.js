@@ -102,11 +102,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('#am_add').on('click', function () {
 
                 if ($('#O_ProCode').selectGet()=="") {
-                    ayma.alert.warning('请先选择工序');
+                    ayma.alert.error('请先选择工序');
                     return false;
                 }
                 if ($('#O_WorkShopName').selectGet()=="") {
-                    ayma.alert.warning('请先选择车间');
+                    ayma.alert.error('请先选择车间');
                     return false;
                 }
                
