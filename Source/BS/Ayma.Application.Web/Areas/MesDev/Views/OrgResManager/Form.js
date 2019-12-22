@@ -142,7 +142,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     if (row.O_Qty >row.stockQty) {
                                         ayma.alert.error('不能大于库存数量');
                                         row.O_Qty = 0;
-                                    }
+                                    } 
                                 }
                             }
                         },
@@ -160,16 +160,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
                             { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                             {
-                                label: "数量", name: "O_SecQty", width: 80, align: "cnetr", editType: 'input',
+                                label: "数量", name: "O_SecQty", width: 80, align: "center", editType: 'input',
                                 editOp: {
                                     callback: function (rownum, row) {
                                         if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
                                             row.O_SecQty = 0;
+                                        } else {
+                                            row.O_SecPrice = (row.O_Qty * row.O_Price / row.O_SecQty).toFixed(2);
                                         }
                                     }
                                 }
                             },
-                             { label: "单价", name: "W_SecPrice", width: 80, align: "center" },
+                             { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
                              { label: "单位", name: "O_Unit", width: 80, align: "center" },
                              { label: "批次", name: "O_SecBatch", width: 80, align: "center" }
                         ]

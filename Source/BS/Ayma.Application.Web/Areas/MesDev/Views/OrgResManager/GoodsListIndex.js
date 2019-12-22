@@ -182,9 +182,6 @@ var bootstrap = function ($, ayma) {
                         row['O_SecUnit'] = row['w_unit'];
                         row["O_SecQty"] = quantity;
                         row['O_SecBatch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
-                        row['W_SecPrice'] = row["w_secprice"];
-                        row["StockQty"] = row["I_Qty"];
-
                         row["ID"] = row["id"];
                        
                         parentRefreshGirdData([], row);
