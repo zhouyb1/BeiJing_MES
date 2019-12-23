@@ -317,21 +317,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     {
                         item.Create();
                         item.O_OrgResNo = entity.O_OrgResNo;
-                        //获取车间扫描表实体
-                        var dbContext = new RepositoryFactory().BaseRepository();
-                        var workShop = dbContext.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.O_GoodsCode);
-                        //删除或更细车间扫描表里的物料数据
-                        if (item.O_Qty == workShop.W_Qty)
-                        {
-                            db.Delete(workShop.W_GoodsCode);
-                        }
-                        else
-                        {
-                            workShop.W_Qty = workShop.W_Qty + (-1 * item.O_Qty);
-                            db.Update(workShop);
-                        }
+                        ////获取车间扫描表实体
+                        //var dbContext = new RepositoryFactory().BaseRepository();
+                        //var workShop = dbContext.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.O_GoodsCode);
+                        ////删除或更细车间扫描表里的物料数据
+                        //if (item.O_Qty == workShop.W_Qty)
+                        //{
+                        //    db.Delete(workShop.W_GoodsCode);
+                        //}
+                        //else
+                        //{
+                        //    db.ExecuteBySql("update Mes_WorkShopScan set W_QTY='" + item.O_Qty + "'" +
+                        //                    " where  W_GoodsCode ='" + item.O_GoodsCode + "'");
+                        //}
                     }
-                    //var dbContext = new RepositoryFactory().BaseRepository();
                     db.Insert(mes_OrgResDetailList);
                 }
                 db.Commit();
