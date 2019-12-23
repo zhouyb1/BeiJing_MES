@@ -88,6 +88,19 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
                 // 访问数据接口参数
             });
+            //原物料仓库
+            $("#S_Name").select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetOriginalStockList',
+                // 访问数据接口参数
+            });
             //绑定供应商
             $("#G_SupplyCode").select({
                 type: 'default',
@@ -225,10 +238,11 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_sum').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSumListByDate',
                 headData: [
-                    { label: "商品编码", name: "m_goodscode", width: 130, align: "center" },
-                    { label: "商品名称", name: "m_goodsname", width: 130, align: "center" },
+                    { label: "商品编码", name: "g_code", width: 130, align: "center" },
+                    { label: "商品名称", name: "g_name", width: 130, align: "center" },
+                    { label: "仓库名称", name: "s_name", width: 130, align: "center" },
                     //{ label: "供应商名称", name: "m_supplyname", width: 130, align: "center" },
-                    { label: "单位", name: "m_unit", width: 130, align: "center" },
+                    { label: "单位", name: "g_unit", width: 130, align: "center" },
                     { label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true },
                     { label: "出库数量", name: "delivery", width: 90, align: "center", statistics: true },
                     {
@@ -327,14 +341,14 @@ var bootstrap = function ($, ayma) {
                     for (var i = 0; i < lengh; i++) {
                         //var a = $("[rownum='rownum_girdtable_sum_" + i + "'][colname='end']").text();
                         //var time = encodeURIComponent(a);
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='inventoryquantity']").html("<a href =# style=text-decoration:underline title='点击查询入库明细' onclick=Detaile('" + rows[i].m_goodscode + "','入库明细')>" + rows[i].inventoryquantity + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='delivery']").html("<a href =# style=text-decoration:underline title='点击查询出库明细' onclick=Detaile('" + rows[i].m_goodscode + "','出库明细')>" + rows[i].delivery + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='withdrawingnumber']").html("<a href =# style=text-decoration:underline title='点击查询退库明细' onclick=Detaile('" + rows[i].m_goodscode + "','退库明细')>" + rows[i].withdrawingnumber + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='materialssales']").html("<a href =# style=text-decoration:underline title='点击查询原物料销售明细' onclick=Detaile('" + rows[i].m_goodscode + "','原物料销售明细')>" + rows[i].materialssales + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='scrapist']").html("<a href =# style=text-decoration:underline title='点击查询报废数量明细' onclick=Detaile('" + rows[i].m_goodscode + "','报废数量明细')>" + rows[i].scrapist + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otherwarehouse']").html("<a href =# style=text-decoration:underline title='点击查询其它入库明细' onclick=Detaile('" + rows[i].m_goodscode + "','其它入库明细')>" + rows[i].otherwarehouse + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otheroutbound']").html("<a href =# style=text-decoration:underline title='点击查询其它出库明细' onclick=Detaile('" + rows[i].m_goodscode + "','其它出库明细')>" + rows[i].otheroutbound + "</ a>");
-                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='supplierback']").html("<a href =# style=text-decoration:underline title='点击查询退供应商明细' onclick=Detaile('" + rows[i].m_goodscode + "','退供应商明细')>" + rows[i].supplierback + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='inventoryquantity']").html("<a href =# style=text-decoration:underline title='点击查询入库明细' onclick=Detaile('" + rows[i].g_code + "','入库明细')>" + rows[i].inventoryquantity + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='delivery']").html("<a href =# style=text-decoration:underline title='点击查询出库明细' onclick=Detaile('" + rows[i].g_code + "','出库明细')>" + rows[i].delivery + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='withdrawingnumber']").html("<a href =# style=text-decoration:underline title='点击查询退库明细' onclick=Detaile('" + rows[i].g_code + "','退库明细')>" + rows[i].withdrawingnumber + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='materialssales']").html("<a href =# style=text-decoration:underline title='点击查询原物料销售明细' onclick=Detaile('" + rows[i].g_code + "','原物料销售明细')>" + rows[i].materialssales + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='scrapist']").html("<a href =# style=text-decoration:underline title='点击查询报废数量明细' onclick=Detaile('" + rows[i].g_code + "','报废数量明细')>" + rows[i].scrapist + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otherwarehouse']").html("<a href =# style=text-decoration:underline title='点击查询其它入库明细' onclick=Detaile('" + rows[i].g_code + "','其它入库明细')>" + rows[i].otherwarehouse + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='otheroutbound']").html("<a href =# style=text-decoration:underline title='点击查询其它出库明细' onclick=Detaile('" + rows[i].g_code + "','其它出库明细')>" + rows[i].otheroutbound + "</ a>");
+                        $("[rownum='rownum_girdtable_sum_" + i + "'][colname='supplierback']").html("<a href =# style=text-decoration:underline title='点击查询退供应商明细' onclick=Detaile('" + rows[i].g_code + "','退供应商明细')>" + rows[i].supplierback + "</ a>");
                     }
                 },
                 mainId: 'ID',
@@ -342,7 +356,7 @@ var bootstrap = function ($, ayma) {
                 footerrow: true,
                 isPage: true,
                 isStatistics: true,
-                sidx: 'm_goodscode',
+                sidx: 'g_code',
                 sord: 'desc',
             });
             //入库明细

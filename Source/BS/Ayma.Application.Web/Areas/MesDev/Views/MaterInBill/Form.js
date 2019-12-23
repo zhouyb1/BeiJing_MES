@@ -184,6 +184,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                       { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
+                      { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
                      {
                          label: '不含税价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
                          editOp: {
@@ -195,7 +196,9 @@ var bootstrap = function ($, ayma) {
                              }
                          }
                      },//最新维护的价格
-                    {
+                    { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
+                    { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
+                   {
                         label: '批次', name: 'M_Batch', width: 80, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
@@ -205,8 +208,7 @@ var bootstrap = function ($, ayma) {
 
                             }
                         }
-                    },
-                    { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },
+                    }, 
                     {
                         label: "仓库名称", name: "M_StockName", width: 100, align: "left",
                         formatter: function (value, row, dfop) {                                                                         
@@ -218,9 +220,7 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
-                    { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
-                    { label: "包装单位", name: "M_Unit2", width: 60, align: "left" }, 
+                    { label: "仓库编码", name: "M_StockCode", width: 100, align: "left" },           
                     {
                         label: '备注', name: 'M_Remark', width: 130, align: 'left', editType: 'input'
                     }
