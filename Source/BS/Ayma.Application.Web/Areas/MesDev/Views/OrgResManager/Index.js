@@ -242,13 +242,13 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据号", name: "O_OrgResNo", width: 150, align: "center"},
-                    { label: "工序号", name: "O_ProCode", width: 90, align: "center"},
-                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "center" },
+                    { label: "单据号", name: "O_OrgResNo", width: 150, align: "center", sort: true },
+                    { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
                     { label: "车间名称", name: "O_WorkShopName", width: 160, align: "center" },
-                    { label: "备注", name: "O_Remark", width: 150, align: "left"},
+                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "" },
+                    { label: "备注", name: "O_Remark", width: 150, align: "center"},
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center" },
+                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center", sort: true },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

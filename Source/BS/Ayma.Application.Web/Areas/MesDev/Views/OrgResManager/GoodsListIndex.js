@@ -91,7 +91,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
                 headData: [
                    {
-                       label: "物料转换前",
+                       label: "转换的前物料",
                        name: "B",
                        width: 160,
                        align: "center",
@@ -107,7 +107,7 @@ var bootstrap = function ($, ayma) {
                        ]
                    },
                     {
-                        label: "物料转换后",
+                        label: "转换后的物料",
                         name: "B",
                         width: 160,
                         align: "center",
@@ -132,7 +132,7 @@ var bootstrap = function ($, ayma) {
                     var allCheck = $("#jfgrid_all_cb_girdtable");
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
-                        if (row['G_Qty'] <= 0) {
+                        if (row['w_qty'] <= 0) {
                             isChecked.attr('checked', false); //移除 checked 状态
                             ayma.alert.error('库存为负数');
                         } else {
@@ -175,7 +175,7 @@ var bootstrap = function ($, ayma) {
                         row["O_Qty"] = quantity;
                         row["O_Price"] = row['w_price'];
                         row['O_Batch'] = row['w_batch'];
-                        row["stockQty"] = row["W_Qty"];
+                        row["StockQty"] = row["w_qty"];
                         //组装后
                         row['O_SecGoodsCode'] = row['c_seccode'];
                         row['O_SecGoodsName'] = row['c_secname'];
