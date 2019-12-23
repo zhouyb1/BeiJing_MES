@@ -1,4 +1,5 @@
-﻿using Ayma.Application.TwoDevelopment.MesDev.ScrapManager;
+﻿using System.Linq;
+using Ayma.Application.TwoDevelopment.MesDev.ScrapManager;
 using Dapper;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
@@ -311,12 +312,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     entity.O_OrgResNo = billNo;
                     entity.Create();
                     db.Insert(entity);
+
                     foreach (var item in mes_OrgResDetailList)
                     {
                         item.Create();
                         item.O_OrgResNo = entity.O_OrgResNo;
                         //获取车间扫描表实体
-                        var workShop = workShopScanIbll.GetMes_WorkShopScanEntity(item.O_GoodsCode);
+                        var dbContext = new RepositoryFactory().BaseRepository();
+                        var workShop = dbContext.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.O_GoodsCode);
                         //删除或更细车间扫描表里的物料数据
                         if (item.O_Qty == workShop.W_Qty)
                         {
@@ -328,6 +331,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             db.Update(workShop);
                         }
                     }
+                    //var dbContext = new RepositoryFactory().BaseRepository();
                     db.Insert(mes_OrgResDetailList);
                 }
                 db.Commit();
