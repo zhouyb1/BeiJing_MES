@@ -98,8 +98,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MaterForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=MaterForm',
-                        width: 700,
-                        height: 500,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -115,8 +115,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OutWorkShopManager/Form?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
@@ -261,8 +261,6 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "O_StockCode", width: 100, align: "left"},
                     { label: "仓库名称", name: "O_StockName", width: 100, align: "left" },
                     { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
-                    { label: "生产订单号", name: "O_OrderNo", width: 160, align: "left",hidden:true},
-                    { label: "生产订单时间", name: "O_OrderDate", width: 160, align: "left",hidden:true},
                     { label: "备注", name: "O_Remark", width: 160, align: "left"},
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "left"},
                     { label: "添加时间", name: "O_CreateDate", width: 160, align: "left"},
