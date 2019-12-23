@@ -145,6 +145,9 @@
             var _height = 28;
             for (var i = 0; i < len; i++) {
                 var cell = chs[i];
+                if (cell.hidden) {
+                    continue;
+                }
                 cell.height = 28;
                 cell.parent = parentCell;
                 var $cell = $('<div class="jfgrid-head-cell jfgrid-heed-rownum_' + level + '" path="' + path + '.' + i + '" >' + (cell.label || "") + '</div>');
