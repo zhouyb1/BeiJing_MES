@@ -45,7 +45,10 @@ namespace DesktopApp
                 var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '"+ strGoodsCode +"'");
                 for (int j = 0; j < Convert_rows.Count; j++)
                 {
-                    cmbGoodsCode.Items.Add(Convert_rows[j].C_SecCode);
+                    if (!cmbGoodsName.Items.Contains(Convert_rows[j].C_SecName))
+                    {
+                        cmbGoodsName.Items.Add(Convert_rows[j].C_SecName);
+                    }
                 }
             }
 
@@ -55,21 +58,69 @@ namespace DesktopApp
         private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-            var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + cmbGoodsCode.Text + "'");
+            var Goods_rows = GoodsBLL.GetListCondit("where G_Name = '" + cmbGoodsName.Text + "'");
             int nLen = Goods_rows.Count;
             if (nLen > 0)
             {
-                txtName.Text = Goods_rows[0].G_Name;
+                txtCode.Text = Goods_rows[0].G_Code;
                 txtUnit.Text = Goods_rows[0].G_Unit;
             }
             txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
             int dd = Goods_rows[0].G_Period * 24;
             strBZQ = dd.ToString();
+
+            //ShowYWL(txtCode.Text);
+        }
+
+        private void ShowYWL(string strCode)
+        {
+            Mes_YWLBLL YWLBL = new Mes_YWLBLL();
+
+
+            string strSql = "select a.C_Code,a.C_Name,b.W_Batch, b.W_Qty from Mes_Convert as a left join Mes_WorkShopScan as b on a.C_Code = b.W_GoodsCode where C_SecCode = '" + strCode + "'";
+            var row = YWLBL.GetList_Mes_YWL(strSql);
+            //if (row == null || row.Count < 1)
+            //{
+            //    untCommon.InfoMsg("没有任何数据！");
+            //    return;
+            //}
+            dataGridView1.DataSource = row;
+            int nLen = dataGridView1.Rows.Count;
+            for (int i = 0; i < nLen; i++)
+            {
+                dataGridView1.Rows[i].Cells["使用数量"].Value = "0";
+            }
+            //listView1.Items.Clear();
+            //Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
+            //var Conv_row = ConvertBLL.GetList_Mes_Convert(" where C_SecCode = '" + strCode + "'");
+            //int nLen = Conv_row.Count;
+            //this.listView1.BeginUpdate();
+            //for (int i = 0; i < nLen; i++)
+            //{
+            //    ListViewItem lvi = new ListViewItem(Conv_row[i].C_Code);
+            //    lvi.SubItems.Add(Conv_row[i].C_Name);
+
+            //    Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
+            //    var Work_row = WorkShopScanBLL.GetList_WorkShopScan(" where W_WorkShop = '" + Globels.strWorkShop + "' and W_GoodsCode = '" + Conv_row[i].C_Code + "' and W_Qty > 0 order by W_GoodsCode,W_Batch");
+            //    int nLen2 = Work_row.Count;
+            //    for (int j = 0; j < nLen2; j++ )
+            //    {
+            //        lvi.SubItems.Add(Work_row[j].W_Batch);
+            //        lvi.SubItems.Add(Work_row[j].W_Qty.ToString());
+            //        lvi.SubItems.Add("0");
+            //        this.listView1.Items.Add(lvi);
+            //    }
+                    
+
+
+            //}
+
+            //this.listView1.EndUpdate();
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cmbGoodsCode.Text == "")
+            if (cmbGoodsName.Text == "")
             {
                 MessageBox.Show("请先选择物料");
 
@@ -112,8 +163,8 @@ namespace DesktopApp
                     WorkShopWeightEntity.W_RecordCode = Globels.strRecord;
                     WorkShopWeightEntity.W_Remark = "";
                     WorkShopWeightEntity.W_SecBatch = txtBatch.Text;
-                    WorkShopWeightEntity.W_SecGoodsCode = cmbGoodsCode.Text;
-                    WorkShopWeightEntity.W_SecGoodsName = txtName.Text;
+                    WorkShopWeightEntity.W_SecGoodsCode = txtCode.Text;
+                    WorkShopWeightEntity.W_SecGoodsName = cmbGoodsName.Text;
                     WorkShopWeightEntity.W_SecQty = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                     WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                     WorkShopWeightEntity.W_Status = 1;
@@ -122,9 +173,11 @@ namespace DesktopApp
                     int nCount = WorkShopWeightBLL.SaveEntity("", WorkShopWeightEntity);
                     if (nCount > 0)
                     {
+                        string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                         Decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
-                        GetImg("物料" + cmbGoodsCode.Text.Trim() + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtName.Text.Trim(), dTemp.ToString(), strBZQ);
+                        GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo,cmbGoodsName.Text, dTemp.ToString(), strBZQ,Barcode);
                         MessageBox.Show("添加成功");
+                        SaveBarcode(Barcode, txtCode.Text, cmbGoodsName.Text, dTemp, Globels.strWorkShop);
                     }
 
                     this.Enabled = true;
@@ -138,6 +191,32 @@ namespace DesktopApp
             }
 
 
+
+        }
+        /// <summary>
+        /// 保存标签条码
+        /// </summary>
+        /// <param name="B_Barcode"></param>
+        /// <param name="B_Code"></param>
+        /// <param name="B_Name"></param>
+        /// <param name="B_Qty"></param>
+        /// <param name="B_WorkShopCode"></param>
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        {
+            Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
+            Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+            BarcodeEntity.B_Barcode = B_Barcode;
+            BarcodeEntity.B_Code = B_Code;
+            BarcodeEntity.B_Name = B_Name;
+            BarcodeEntity.B_Qty = B_Qty;
+            BarcodeEntity.B_WorkShopCode = B_WorkShopCode;
+            DateTime dt = DateTime.Now;
+            BarcodeEntity.B_Ptime = dt;
+            BarcodeEntity.B_Itime = dt;
+            BarcodeEntity.B_Otime = dt;
+            BarcodeEntity.B_Utime = dt;
+            BarcodeEntity.B_Status = 1;
+            BarcodeBLL.SaveEntity("",BarcodeEntity);
 
         }
 
@@ -301,7 +380,7 @@ namespace DesktopApp
         /// <param name="strHZ"></param>
         /// <param name="strGoodsName"></param>
         /// <param name="strQty"></param>
-        public void GetImg(string strHZ, string strGoodsName, string strQty,string strBZQ)
+        public void GetImg(string strHZ, string strGoodsName, string strQty,string strBZQ,string strBarcode)
         {
             try
             {
@@ -309,11 +388,11 @@ namespace DesktopApp
                 nfcTag = new NfcTag(new WI());
 
                 string strPath = Application.StartupPath + "\\img\\" + strHZ + ".bmp";
-                strHZ = "物料:" + cmbGoodsCode.Text.Trim() + ",批次:" + txtBatch.Text.Trim() + ",数量:" + strQty + ",单号:" + Globels.strOrderNo;
+                strHZ = "物料:" + txtCode.Text.Trim() + ",批次:" + txtBatch.Text.Trim() + ",数量:" + strQty + ",单号:" + Globels.strOrderNo + "," + strBarcode;
                 int nLen = strHZ.Length;
                 byte[] fileData = Encoding.GetEncoding("GB2312").GetBytes(strHZ);
                 int nLen2 = fileData.Length;
-
+                //MessageBox.Show(strHZ);
                 Barcode.Make(fileData, nLen2, 0, 0, 0, strPath, 2);
                 Thread.Sleep(100);
                 FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
@@ -341,7 +420,73 @@ namespace DesktopApp
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
-                g.DrawString("负责人：" + Globels.strUser, f4, b, 4, 70);//设置位置
+                g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
+                g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
+
+                g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
+
+                image.Save(strPath, ImageFormat.Jpeg);//自己创建一个文件夹，放入生成的图片（根目录下）
+
+                //二维码图片nfc写入
+                bp = new Bmp2BmpProduct(new TagViewSize((EnumTagViewSizeID)(0x21), 0x00),
+                        new Bitmap(image)
+                        );
+                b2d.ImageYuLan(bp);
+
+                byte[] _nfcTagBmpData = b2d.GetDataToSend(bp);
+                int _nfcTagBmpDataLength = b2d.SendLength;
+
+                nfcTag.SendBmp2NfcTag(_nfcTagBmpData, _nfcTagBmpDataLength);
+
+                //MessageBox.Show("OK");
+            }
+            catch (Exception ex)
+            {
+                untCommon.ErrorMsg("二维码生成异常！：" + ex.Message);
+            }
+        }
+
+        public void GetImg2(string strHZ, string strGoodsName, string strQty, string strBZQ)
+        {
+            try
+            {
+                b2d = new Bmp2Bmp2Data();
+                nfcTag = new NfcTag(new WI());
+
+                string strPath = Application.StartupPath + "\\img\\" + strHZ + ".bmp";
+                strHZ = "物料:" + "0200075" + ",批次:" + "20191219" + ",数量:" + "100" + ",单号:" + Globels.strOrderNo;
+                int nLen = strHZ.Length;
+                byte[] fileData = Encoding.GetEncoding("GB2312").GetBytes(strHZ);
+                int nLen2 = fileData.Length;
+                //MessageBox.Show(strHZ);
+                Barcode.Make(fileData, nLen2, 0, 0, 0, strPath, 2);
+                Thread.Sleep(100);
+                FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                Byte[] mybyte = new byte[fs.Length];
+                fs.Read(mybyte, 0, mybyte.Length);
+                fs.Close();
+
+                MemoryStream ms = new MemoryStream(mybyte);
+                Bitmap myimge = new Bitmap(ms);
+
+                Bitmap image = new Bitmap(296, 128);//初始化大小
+                Graphics g = Graphics.FromImage(image);
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;//设置图片质量
+
+                g.Clear(Color.White);
+                g.DrawImage(myimge, 190, 15, 80, 80);
+                Font f1 = new Font("Arial ", 40);//, System.Drawing.FontStyle.Bold);//设置字体样式，大小
+                Font f2 = new Font("Arial ", 30);//, System.Drawing.FontStyle.Bold);//设置字体样式，大小
+                Font f3 = new Font("Arial ", 12);//, System.Drawing.FontStyle.Bold);//设置字体样式，大小
+                Font f4 = new Font("Arial ", 10);//, System.Drawing.FontStyle.Bold);//设置字体样式，大小
+                Brush b = new SolidBrush(Color.Black);
+                Brush r = new SolidBrush(Color.White);
+                //g.DrawString(strHZ, f3, b, 15, 60);//设置位置
+
+                g.DrawString("名称：" + "香葱末", f4, b, 4, 10);//设置位置
+                g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
+                g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
+                g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
                 g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
@@ -377,5 +522,26 @@ namespace DesktopApp
 
             nfcTag.SendBmp2NfcTag(_nfcTagBmpData, _nfcTagBmpDataLength);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            GetImg2("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtCode.Text.Trim(), "100", "72");
+        }
+
+        private void listView1_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            
+        }
+
+        private void btn_Conver_Click(object sender, EventArgs e)
+        {
+            int nLen = dataGridView1.Rows.Count;
+            for(int i = 0 ; i < nLen; i++)
+            {
+
+            }
+        }
+
+
     }
 }

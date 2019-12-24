@@ -138,7 +138,7 @@ namespace DesktopApp
                             if (File.Exists(Application.StartupPath + @"\\loginConfig.lsf"))
                                 File.Delete(Application.StartupPath + @"\\loginConfig.lsf");
                         }
-
+                        Globels.strName = userEntity.F_RealName;
                         Globels.strUser = this.txtUser.Text;
 
                         frmMain main = new frmMain(this);

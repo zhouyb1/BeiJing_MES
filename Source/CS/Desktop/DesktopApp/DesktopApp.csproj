@@ -59,6 +59,9 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>u=3687959894,2688075904m=26p=0_1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BarCode">
       <HintPath>Library\BarCode.dll</HintPath>
@@ -281,6 +284,12 @@
     </Compile>
     <Compile Include="System\frmAreaSet.Designer.cs">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmInventory.Designer.cs">
+      <DependentUpon>frmInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmInWorkShopList.cs">
       <SubType>Form</SubType>
@@ -537,6 +546,9 @@
     <EmbeddedResource Include="System\frmAreaSet.resx">
       <DependentUpon>frmAreaSet.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System\frmInventory.resx">
+      <DependentUpon>frmInventory.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\frmInWorkShopList.resx">
       <DependentUpon>frmInWorkShopList.cs</DependentUpon>
     </EmbeddedResource>
@@ -707,6 +719,7 @@
     <Content Include="Library\Tools.dll" />
     <Content Include="Library\ToolsLib.dll" />
     <Content Include="Library\WeifenLuo.WinFormsUI.Docking.dll" />
+    <Content Include="u=3687959894,2688075904m=26p=0_1.ico" />
     <None Include="Images\cancel.png" />
     <Content Include="Images\candle.gif" />
     <Content Include="Images\clear.png" />

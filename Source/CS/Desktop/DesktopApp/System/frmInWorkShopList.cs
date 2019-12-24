@@ -18,7 +18,7 @@ namespace DesktopApp
         public frmMain frmMain { get; set; }
         //decimal Period; //保质期
         private SysUser User;
-
+        string m_strBarcode = "";
         string strUnit = "";
 
         public frmInWorkShopList(frmMain _frmMain, SysUser _User)
@@ -61,8 +61,9 @@ namespace DesktopApp
                     {
                         untCommon.InfoMsg("添加成功！");
 
-                        Updata();
+                        UpdataNew();
                         cls();
+                        UpdateBarcode(m_strBarcode);
                         txtBarcode.SelectAll();
                         txtBarcode.Focus();
                         //frmParent.loadData();
@@ -89,6 +90,26 @@ namespace DesktopApp
             txtQty.Text = "";
             txtPrice.Text = "";
 
+        }
+        /// <summary>
+        /// 更新标签状态
+        /// </summary>
+        private void UpdateBarcode(string strBarcode)
+        {
+            string strSql = "update Mes_Barcode set B_Status = '2' where B_Barcode = '" + strBarcode + "'";
+            Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+            BarcodeBLL.Update(strSql);
+        }
+
+
+        /// <summary>
+        /// 更新标签状态
+        /// </summary>
+        private void UpdateBarcode2(string strBarcode)
+        {
+            string strSql = "update Mes_Barcode set B_Status = '1' where B_Barcode = '" + strBarcode + "'";
+            Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+            BarcodeBLL.Update(strSql);
         }
 
         private void frmInWorkShop_Load(object sender, EventArgs e)
@@ -193,6 +214,21 @@ namespace DesktopApp
                         txtCode.Text = Resolve(strTemp[0].ToString());
                         txtPc.Text = Resolve(strTemp[1].ToString());
                         txtQty.Text = Resolve(strTemp[2].ToString());
+                        m_strBarcode = strTemp[4].ToString();
+                        Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+                        var Barcode_rows = BarcodeBLL.GetList_Mes_Barcode("select * from Mes_Barcode where B_Status = 1 and B_Barcode = '" + m_strBarcode + "'");
+                        if(Barcode_rows.Count > 0)
+                        {
+                            
+                        }
+                        else
+                        {
+                            MessageBox.Show("此标签已经入库， 或者状态不对");
+                            txtBarcode.Text = "";
+                            txtBarcode.Focus();
+                            txtBarcode.SelectAll();
+                            return;
+                        }
 
                         MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                         var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
@@ -239,6 +275,8 @@ namespace DesktopApp
             MesStockBLL StockBLL = new MesStockBLL();
             var row = StockBLL.GetData("where S_Code = '" + cmbStock.Text + "'");
             cmbStockName.Text = row[0].S_Name;
+
+            UpdataNew();
         }
 
         private void cmbRecord_SelectedIndexChanged(object sender, EventArgs e)
@@ -258,10 +296,10 @@ namespace DesktopApp
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            Updata();
+            UpdataNew();
         }
 
-        private void Updata()
+        private void UpdataNew()
         {
             Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
             var rows = InWorkShopTempBLL.GetList_InWorkShopTemp("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
@@ -338,12 +376,15 @@ namespace DesktopApp
                         InWorkShopDetailEntity.I_Unit = rows[i].I_Unit;
                         InWorkShopDetailEntity.I_Batch = rows[i].I_Batch;
                         nRow = InWorkShopDetailBLL.SaveEntity("", InWorkShopDetailEntity);
+
+                        
                     }
                     //更改临时数据状态
+                    Upload(strIn_No);
                     MessageBox.Show("保存成功");
-                    
+                    lblTS.Text = "";
                     DeleteData();
-                    Updata();
+                    UpdataNew();
                 }
                 else
                 {
@@ -356,6 +397,16 @@ namespace DesktopApp
                 MessageBox.Show(ex.ToString());
 
             }
+        }
+
+        /// <summary>
+        /// 审核，提交单据 以前在网页端
+        /// </summary>
+        private void Upload(string strDH)
+        {
+            Mes_InWorkShopHeadBLL InWorkShopHeadBLL = new Mes_InWorkShopHeadBLL();
+            InWorkShopHeadBLL.SH(strDH);
+            InWorkShopHeadBLL.UPLOAD(strDH, Globels.strUser);
         }
 
         private void DeleteData()
@@ -397,6 +448,8 @@ namespace DesktopApp
             MesStockBLL StockBLL = new MesStockBLL();
             var row = StockBLL.GetData(" where S_Name = '" + cmbStockName.Text + "'");
             cmbStock.Text = row[0].S_Code;
+
+
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -404,7 +457,10 @@ namespace DesktopApp
             if (MessageBox.Show("是否要删除?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {
                 Delete();
-                Update();
+
+                UpdataNew();
+                //MessageBox.Show("");
+                lblTS.Text = "系统提示：删除成功";
             }
         }
 
@@ -414,9 +470,12 @@ namespace DesktopApp
             try
             {
                 string strID = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["ID"].Value.ToString();
+                string strBarcode = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["条码"].Value.ToString();
                 Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
                 string strSql = " where ID = '" + strID + "'";
                 InWorkShopTempBLL.DeleteData(strSql);
+                string[] str = strBarcode.Split(',');
+                UpdateBarcode2(str[4]);
             }
             catch (Exception ex)
             {

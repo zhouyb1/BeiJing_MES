@@ -88,16 +88,26 @@ namespace DesktopApp
             cmbStockName.Text = row[0].S_Name;
 
             cmbGoodsCode.Items.Clear();
+            cmbGoodsName.Items.Clear();
+
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
             var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_Qty > 0 ");
             for (int i = 0; i < row2.Count; i++)
             {
-                cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
+                if (!cmbGoodsCode.Items.Contains(row2[i].I_GoodsCode))
+                {
+                    cmbGoodsCode.Items.Add(row2[i].I_GoodsCode);
+                }
+                if (!cmbGoodsName.Items.Contains(row2[i].I_GoodsName))
+                {
+                    cmbGoodsName.Items.Add(row2[i].I_GoodsName);
+                }
 
             }
             if(row2.Count == 1)
             {
                 cmbGoodsCode.Text = row2[0].I_GoodsCode;
+                cmbGoodsName.Text = row2[0].I_GoodsName;
             }
 
         }
@@ -343,9 +353,11 @@ namespace DesktopApp
                         OutWorkShopDetailEntity.O_Batch = rows[i].O_Batch;
 
                         nRow = OutWorkShopDetailBLL.SaveEntity("", OutWorkShopDetailEntity);
-
+                        
                     }
+                    Upload(strIn_No);
                     MessageBox.Show("保存成功");
+                    lblTS.Text = "";
                     DeleteData();
                     Update();
 
@@ -357,6 +369,15 @@ namespace DesktopApp
                 //MessageBox.Show(ex.ToString());
                 lblTS.Text = ex.ToString();
             }
+        }
+        /// <summary>
+        /// 审核，提交单据 以前在网页端
+        /// </summary>
+        private void Upload(string strDH)
+        {
+            Mes_OutWorkShopHeadBLL OutWorkShopHeadBLL = new Mes_OutWorkShopHeadBLL();
+            OutWorkShopHeadBLL.SH(strDH);
+            OutWorkShopHeadBLL.UPLOAD(strDH, Globels.strUser);
         }
 
         private void DeleteData()
@@ -528,6 +549,26 @@ namespace DesktopApp
             {
                 //MessageBox.Show("请选中某一行进行退仓库");
                 lblTS.Text = "系统提示：请选中某一行进行退仓库";
+            }
+        }
+
+        private void cmbGoodsName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+            var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsName = '" + cmbGoodsName.Text + "' and I_Qty > 0 ");
+
+            cmbGoodsCode.Text = row2[0].I_GoodsCode;
+        }
+
+        private void cmbPc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+            var row = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsCode = '" + cmbGoodsCode.Text + "' and I_Batch = '" + cmbPc.Text + "' and I_Qty > 0");
+            
+            if (row.Count > 0)
+            {
+                txtStockQty.Text = row[0].I_Qty.ToString();
+                //txt .Text = row[0].I_Batch;
             }
         }
 

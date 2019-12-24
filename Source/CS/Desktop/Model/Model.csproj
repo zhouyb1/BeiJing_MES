@@ -114,6 +114,7 @@
     <Compile Include="System\MesSupplyEntity.cs" />
     <Compile Include="System\MesWeightRecordEntity.cs" />
     <Compile Include="System\MesWorkShopEntity.cs" />
+    <Compile Include="System\Mes_BarcodeEntity.cs" />
     <Compile Include="System\Mes_ConvertEntity.cs" />
     <Compile Include="System\Mes_InPrice.cs" />
     <Compile Include="System\Mes_InWorkShopDetailEntity.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="System\Mes_TeamEntity.cs" />
     <Compile Include="System\Mes_WorkShopScanEntity.cs" />
     <Compile Include="System\Mes_WorkShopWeightEntity.cs" />
+    <Compile Include="System\Mes_YWL.cs" />
     <Compile Include="System\SysConfig.cs" />
     <Compile Include="System\SysDictionary.cs" />
     <Compile Include="System\SysLog.cs" />

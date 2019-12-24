@@ -118,6 +118,7 @@
             this.comOrderNo.Name = "comOrderNo";
             this.comOrderNo.Size = new System.Drawing.Size(232, 23);
             this.comOrderNo.TabIndex = 15;
+            this.comOrderNo.Visible = false;
             this.comOrderNo.SelectedIndexChanged += new System.EventHandler(this.comOrderNo_SelectedIndexChanged);
             // 
             // label6
@@ -131,6 +132,7 @@
             this.label6.Size = new System.Drawing.Size(97, 15);
             this.label6.TabIndex = 13;
             this.label6.Text = "生产订单号：";
+            this.label6.Visible = false;
             // 
             // label2
             // 
@@ -401,6 +403,7 @@
             this.label16.Size = new System.Drawing.Size(82, 15);
             this.label16.TabIndex = 51;
             this.label16.Text = "订单时间：";
+            this.label16.Visible = false;
             // 
             // dataGridView1
             // 
@@ -558,6 +561,7 @@
             this.txtOrderDate.Name = "txtOrderDate";
             this.txtOrderDate.Size = new System.Drawing.Size(232, 24);
             this.txtOrderDate.TabIndex = 52;
+            this.txtOrderDate.Visible = false;
             // 
             // label7
             // 
@@ -659,7 +663,7 @@
             this.Controls.Add(this.label2);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Name = "frmInWorkShopList";
-            this.Text = "车间入库到线边仓";
+            this.Text = "车间入库到日耗库";
             this.Load += new System.EventHandler(this.frmInWorkShop_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

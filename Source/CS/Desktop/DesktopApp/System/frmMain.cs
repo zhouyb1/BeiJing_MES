@@ -757,6 +757,11 @@ namespace DesktopApp
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
+            
+        }
+
+        private void 报废单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
             frmScrap frmBarcodePrintf = new frmScrap();
             frmBarcodePrintf.TopLevel = false;
             frmBarcodePrintf.WindowState = FormWindowState.Maximized;
@@ -771,6 +776,34 @@ namespace DesktopApp
             }
 
             frmBarcodePrintf.Show(this.panMain);
+        }
+
+        private void 领料单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 出成率制作ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void 库存查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmInventory frmInventory = new frmInventory();
+            frmInventory.TopLevel = false;
+            frmInventory.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmInventory.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmInventory.Show(this.panMain);
         }
 
 

@@ -48,8 +48,16 @@ namespace DesktopApp
                         MesDevice.D_Department = cmb_Department.Text;
                         MesDevice.D_IP = txt_IP.Text;
                         MesDevice.D_Remark = txt_Remarks.Text;
+                        if(cmbTeam.Text == "")
+                        {
+                            MesDevice.D_TeamCode = "";
+                            MesDevice.D_TeamName = "";
+                        }
+                        else
+                        { 
                         MesDevice.D_TeamCode = cmbTeam.SelectedValue.ToString();
                         MesDevice.D_TeamName = cmbTeam.Text.ToString();
+                    }
 
                         if (MesDeviceBLL.SaveEntity("", MesDevice) > 0)
                         {
@@ -69,7 +77,16 @@ namespace DesktopApp
                         MesDevice.D_Department = cmb_Department.Text;
                         MesDevice.D_IP = txt_IP.Text;
                         MesDevice.D_Remark = txt_Remarks.Text;
-
+                        if (cmbTeam.Text == "")
+                        {
+                            MesDevice.D_TeamCode = "";
+                            MesDevice.D_TeamName = "";
+                        }
+                        else
+                        {
+                            MesDevice.D_TeamCode = cmbTeam.SelectedValue.ToString();
+                            MesDevice.D_TeamName = cmbTeam.Text.ToString();
+                        }
                         if (MesDeviceBLL.SaveEntity(ID, MesDevice) > 0)
                         {
                             untCommon.InfoMsg("设备管理信息修改成功！");

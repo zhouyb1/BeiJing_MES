@@ -1,4 +1,5 @@
 ﻿using Business.System;
+using Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -94,13 +95,14 @@ namespace DesktopApp
                 {
                     lblTS.Text = "补写标签的数量不能大于原来标签数量";
                 }
-
-                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text);
-
+                string Barcode = txtCode.Text + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
+                SaveBarcode(Barcode,txtCode.Text,txtName.Text,dQty,Globels.strWorkShop);
                 MessageBox.Show("请拿开第一张卡，放置第二张卡");
 
-                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text);
-
+                 Barcode = txtCode + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
+                SaveBarcode(Barcode, txtCode.Text, txtName.Text, dNextQty, Globels.strWorkShop);
             }
             catch(Exception ex)
             {
@@ -111,12 +113,35 @@ namespace DesktopApp
         }
 
         /// <summary>
+        /// 保存标签条码
+        /// </summary>
+        /// <param name="B_Barcode"></param>
+        /// <param name="B_Code"></param>
+        /// <param name="B_Name"></param>
+        /// <param name="B_Qty"></param>
+        /// <param name="B_WorkShopCode"></param>
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        {
+            Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
+            Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+            BarcodeEntity.B_Barcode = B_Barcode;
+            BarcodeEntity.B_Code = B_Code;
+            BarcodeEntity.B_Name = B_Name;
+            BarcodeEntity.B_Qty = B_Qty;
+            BarcodeEntity.B_WorkShopCode = B_WorkShopCode;
+            BarcodeEntity.B_Ptime = DateTime.Now;
+            BarcodeEntity.B_Status = 1;
+            BarcodeBLL.SaveEntity("", BarcodeEntity);
+
+        }
+
+        /// <summary>
         /// 二维码生成
         /// </summary>
         /// <param name="strHZ"></param>
         /// <param name="strGoodsName"></param>
         /// <param name="strQty"></param>
-        public void GetImg(string strHZ, string strGoodsName, string strQty, string strGoodsCode, string strBatch)
+        public void GetImg(string strHZ, string strGoodsName, string strQty, string strGoodsCode, string strBatch,string strBarcode)
         {
             try
             {
@@ -125,7 +150,7 @@ namespace DesktopApp
 
                 string strPath = Application.StartupPath + "\\img\\" + strHZ + ".bmp";
 
-                strHZ = "物料:" + strGoodsCode + ",批次:" + strBatch + ",数量:" + strQty + ",单号:" + Globels.strOrderNo;
+                strHZ = "物料:" + strGoodsCode + ",批次:" + strBatch + ",数量:" + strQty + ",单号:" + Globels.strOrderNo + "," + strBarcode;
                 int nLen = strHZ.Length;
                 byte[] fileData = Encoding.GetEncoding("GB2312").GetBytes(strHZ);
                 int nLen2 = fileData.Length;

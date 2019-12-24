@@ -24,7 +24,7 @@ namespace Business.System
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT * FROM Mes_WorkShopScan ");
+                strSql.Append("SELECT W_GoodsCode,W_GoodsName,W_Batch,W_Qty,W_Price,W_WorkShop,W_Status,W_Unit,ID,W_Remark,W_RecordCode,W_StockCode,W_StockName FROM Mes_WorkShopScan ");
                 strSql.Append(condit);
                 var paramList = new List<SqlParameter>();
                 //paramList.Add(new SqlParameter("@B_BasketName", string.Format("{0}", B_BasketName)));

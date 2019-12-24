@@ -35,7 +35,7 @@ namespace Business
                     };
                     return userEntity;
                 }
-                userEntity.LoginOk = false;
+                //userEntity.LoginOk = false;
                 if (userEntity.F_EnabledMark)
                 {
                     U_Pwd = Md5Helper.Encrypt(U_Pwd, 32);

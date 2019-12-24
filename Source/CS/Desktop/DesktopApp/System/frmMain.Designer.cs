@@ -74,6 +74,10 @@
             this.车间扫描ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.报废单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.领料单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.出成率制作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.库存查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人脸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人员管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,6 +92,7 @@
             this.车间设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.程序更新ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.更新系统ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Inventory = new System.Windows.Forms.ToolStripMenuItem();
             this.panStatus.SuspendLayout();
             this.panMenu.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -112,7 +117,7 @@
             this.lbDateTime.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.lbDateTime.AutoSize = true;
             this.lbDateTime.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbDateTime.Location = new System.Drawing.Point(496, 7);
+            this.lbDateTime.Location = new System.Drawing.Point(494, 7);
             this.lbDateTime.Name = "lbDateTime";
             this.lbDateTime.Size = new System.Drawing.Size(138, 12);
             this.lbDateTime.TabIndex = 7;
@@ -123,7 +128,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.Image = global::DesktopApp.Properties.Resources.time;
             this.label4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label4.Location = new System.Drawing.Point(418, 4);
+            this.label4.Location = new System.Drawing.Point(416, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 16);
             this.label4.TabIndex = 6;
@@ -135,11 +140,11 @@
             this.lbVer.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.lbVer.AutoSize = true;
             this.lbVer.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lbVer.Location = new System.Drawing.Point(922, 7);
+            this.lbVer.Location = new System.Drawing.Point(919, 7);
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
-            this.lbVer.Text = "V1.0.0.3";
+            this.lbVer.Text = "V1.0.0.6";
             // 
             // label3
             // 
@@ -147,7 +152,7 @@
             this.label3.AutoSize = true;
             this.label3.Image = global::DesktopApp.Properties.Resources.ver;
             this.label3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label3.Location = new System.Drawing.Point(844, 7);
+            this.label3.Location = new System.Drawing.Point(841, 7);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 12);
             this.label3.TabIndex = 4;
@@ -267,7 +272,8 @@
             this.rFID管理ToolStripMenuItem,
             this.cmsSystemManager,
             this.cmsOtherManager,
-            this.更新系统ToolStripMenuItem});
+            this.更新系统ToolStripMenuItem,
+            this.Inventory});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(995, 29);
@@ -389,30 +395,63 @@
             // 车间出库ToolStripMenuItem
             // 
             this.车间出库ToolStripMenuItem.Name = "车间出库ToolStripMenuItem";
-            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
-            this.车间出库ToolStripMenuItem.Text = "车间出库";
+            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(118, 25);
+            this.车间出库ToolStripMenuItem.Text = "日耗库到车间";
             this.车间出库ToolStripMenuItem.Click += new System.EventHandler(this.车间出库ToolStripMenuItem_Click);
             // 
             // 车间扫描ToolStripMenuItem
             // 
             this.车间扫描ToolStripMenuItem.Name = "车间扫描ToolStripMenuItem";
             this.车间扫描ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
-            this.车间扫描ToolStripMenuItem.Text = "车间扫描";
+            this.车间扫描ToolStripMenuItem.Text = "车间称重";
             this.车间扫描ToolStripMenuItem.Click += new System.EventHandler(this.车间扫描ToolStripMenuItem_Click);
             // 
             // 车间入库ToolStripMenuItem
             // 
             this.车间入库ToolStripMenuItem.Name = "车间入库ToolStripMenuItem";
-            this.车间入库ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
-            this.车间入库ToolStripMenuItem.Text = "车间入库";
+            this.车间入库ToolStripMenuItem.Size = new System.Drawing.Size(118, 25);
+            this.车间入库ToolStripMenuItem.Text = "车间到日耗库";
             this.车间入库ToolStripMenuItem.Click += new System.EventHandler(this.车间入库ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
+            this.toolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.报废单ToolStripMenuItem,
+            this.领料单ToolStripMenuItem,
+            this.出成率制作ToolStripMenuItem,
+            this.库存查询ToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 25);
-            this.toolStripMenuItem2.Text = "仓库报废";
+            this.toolStripMenuItem2.Text = "车间单据";
             this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
+            // 
+            // 报废单ToolStripMenuItem
+            // 
+            this.报废单ToolStripMenuItem.Name = "报废单ToolStripMenuItem";
+            this.报废单ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.报废单ToolStripMenuItem.Text = "报废单制作";
+            this.报废单ToolStripMenuItem.Click += new System.EventHandler(this.报废单ToolStripMenuItem_Click);
+            // 
+            // 领料单ToolStripMenuItem
+            // 
+            this.领料单ToolStripMenuItem.Name = "领料单ToolStripMenuItem";
+            this.领料单ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.领料单ToolStripMenuItem.Text = "领料单制作";
+            this.领料单ToolStripMenuItem.Click += new System.EventHandler(this.领料单ToolStripMenuItem_Click);
+            // 
+            // 出成率制作ToolStripMenuItem
+            // 
+            this.出成率制作ToolStripMenuItem.Name = "出成率制作ToolStripMenuItem";
+            this.出成率制作ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.出成率制作ToolStripMenuItem.Text = "出成率计算";
+            this.出成率制作ToolStripMenuItem.Click += new System.EventHandler(this.出成率制作ToolStripMenuItem_Click);
+            // 
+            // 库存查询ToolStripMenuItem
+            // 
+            this.库存查询ToolStripMenuItem.Name = "库存查询ToolStripMenuItem";
+            this.库存查询ToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.库存查询ToolStripMenuItem.Text = "库存查询";
+            this.库存查询ToolStripMenuItem.Click += new System.EventHandler(this.库存查询ToolStripMenuItem_Click);
             // 
             // 人脸ToolStripMenuItem
             // 
@@ -524,6 +563,12 @@
             this.更新系统ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.更新系统ToolStripMenuItem.Text = "更新系统";
             // 
+            // Inventory
+            // 
+            this.Inventory.Name = "Inventory";
+            this.Inventory.Size = new System.Drawing.Size(86, 25);
+            this.Inventory.Text = "库存查询";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -597,6 +642,11 @@
         private System.Windows.Forms.ToolStripMenuItem 更新系统ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 程序更新ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem Inventory;
+        private System.Windows.Forms.ToolStripMenuItem 领料单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 出成率制作ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 报废单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 库存查询ToolStripMenuItem;
 
     }
 }

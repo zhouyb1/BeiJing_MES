@@ -80,6 +80,7 @@
     <Compile Include="System\MesSupplyBLL.cs" />
     <Compile Include="System\MesWeightRecordBLL.cs" />
     <Compile Include="System\MesWorkShopBLL.cs" />
+    <Compile Include="System\Mes_BarcodeBLL.cs" />
     <Compile Include="System\Mes_ConvertBLL.cs" />
     <Compile Include="System\Mes_InPriceBLL.cs" />
     <Compile Include="System\Mes_InWorkShopDetailBLL.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="System\Mes_TeamBLL.cs" />
     <Compile Include="System\Mes_WorkShopScanBLL.cs" />
     <Compile Include="System\Mes_WorkShopWeightBLL.cs" />
+    <Compile Include="System\Mes_YWLBLL.cs" />
     <Compile Include="System\RWDev.cs" />
     <Compile Include="System\SysCompanyBLL.cs" />
     <Compile Include="System\SysDepartmentBLL.cs" />

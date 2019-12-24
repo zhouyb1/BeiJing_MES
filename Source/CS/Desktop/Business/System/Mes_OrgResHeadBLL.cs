@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,43 @@ namespace Business.System
         }
 
 
+        /// <summary>
+        /// 审核单据
+        /// </summary>
+        public int SH(string strDH)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append("update Mes_OrgResHead set O_Status = '2' where O_OrgResNo = '" + strDH + "'");
+            var result = db.ExecuteNonQuery(strSql.ToString());
+            return result;
+        }
 
+        /// <summary>
+        /// 调用存储过程，提交单据
+        /// </summary>
+        /// <param name="strDJLX"></param>
+        /// <returns></returns>
+        public string UPLOAD(string strDH, string strName)
+        {
+            string strReturn = "";
+            SqlParameter[] parameters = {
+                        new SqlParameter("@OrderNo", SqlDbType.NVarChar,50), //单据
+                        new SqlParameter("@UserName", SqlDbType.NVarChar,50), //用户
+                        new SqlParameter("@errcode", SqlDbType.Int,40), 
+                        new SqlParameter("@errtxt", SqlDbType.NVarChar,128) 
+                    };
+            parameters[0].Value = strDH;
+            parameters[1].Value = strName;
+            parameters[2].Direction = ParameterDirection.Output;
+            parameters[3].Direction = ParameterDirection.Output;
+            CommandType type = CommandType.StoredProcedure;
+            db.ExecuteNonQuery(type, "sp_OrgRes_Post", parameters);
+            strReturn = parameters[3].Value.ToString();
+
+
+            return strReturn;
+
+        }
 
         /// <summary>
         /// 保存实体数据

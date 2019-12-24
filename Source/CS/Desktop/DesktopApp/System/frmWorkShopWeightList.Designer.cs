@@ -29,23 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.cmbGoodsCode = new System.Windows.Forms.ComboBox();
+            this.cmbGoodsName = new System.Windows.Forms.ComboBox();
             this.txtQty = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.txtBatch = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtCode = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工艺代码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtUnit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
@@ -62,19 +54,27 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtRQQty = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btn_Conver = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.使用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
-            // cmbGoodsCode
+            // cmbGoodsName
             // 
-            this.cmbGoodsCode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGoodsCode.Font = new System.Drawing.Font("宋体", 11F);
-            this.cmbGoodsCode.FormattingEnabled = true;
-            this.cmbGoodsCode.Location = new System.Drawing.Point(164, 21);
-            this.cmbGoodsCode.Name = "cmbGoodsCode";
-            this.cmbGoodsCode.Size = new System.Drawing.Size(244, 23);
-            this.cmbGoodsCode.TabIndex = 123;
-            this.cmbGoodsCode.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
+            this.cmbGoodsName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbGoodsName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbGoodsName.FormattingEnabled = true;
+            this.cmbGoodsName.Location = new System.Drawing.Point(164, 21);
+            this.cmbGoodsName.Name = "cmbGoodsName";
+            this.cmbGoodsName.Size = new System.Drawing.Size(244, 23);
+            this.cmbGoodsName.TabIndex = 123;
+            this.cmbGoodsName.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
             // 
             // txtQty
             // 
@@ -114,13 +114,13 @@
             this.label12.TabIndex = 119;
             this.label12.Text = "转换后物料批次：";
             // 
-            // txtName
+            // txtCode
             // 
-            this.txtName.Font = new System.Drawing.Font("宋体", 11F);
-            this.txtName.Location = new System.Drawing.Point(164, 72);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(244, 24);
-            this.txtName.TabIndex = 118;
+            this.txtCode.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtCode.Location = new System.Drawing.Point(164, 72);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(244, 24);
+            this.txtCode.TabIndex = 118;
             // 
             // label9
             // 
@@ -131,7 +131,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(127, 15);
             this.label9.TabIndex = 117;
-            this.label9.Text = "转换后物料名称：";
+            this.label9.Text = "转换后物料编码：";
             // 
             // label8
             // 
@@ -142,7 +142,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(127, 15);
             this.label8.TabIndex = 116;
-            this.label8.Text = "转换后物料编码：";
+            this.label8.Text = "转换后物料名称：";
             // 
             // btnSave
             // 
@@ -156,58 +156,6 @@
             this.btnSave.Text = "  保存";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.生产订单号,
-            this.车间,
-            this.工艺代码,
-            this.物料,
-            this.批次,
-            this.数量,
-            this.条码});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 191);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(755, 225);
-            this.dataGridView1.TabIndex = 125;
-            // 
-            // 生产订单号
-            // 
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            // 
-            // 车间
-            // 
-            this.车间.HeaderText = "车间";
-            this.车间.Name = "车间";
-            // 
-            // 工艺代码
-            // 
-            this.工艺代码.HeaderText = "工艺代码";
-            this.工艺代码.Name = "工艺代码";
-            // 
-            // 物料
-            // 
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            // 
-            // 批次
-            // 
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            // 
-            // 数量
-            // 
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            // 
-            // 条码
-            // 
-            this.条码.HeaderText = "条码";
-            this.条码.Name = "条码";
             // 
             // txtUnit
             // 
@@ -360,11 +308,86 @@
             this.label7.TabIndex = 139;
             this.label7.Text = "容器重量：";
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("宋体", 11F);
+            this.button1.Image = global::DesktopApp.Properties.Resources.save_disabled;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(662, 157);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(90, 30);
+            this.button1.TabIndex = 141;
+            this.button1.Text = " 写码";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btn_Conver
+            // 
+            this.btn_Conver.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Conver.Image = global::DesktopApp.Properties.Resources.save_disabled;
+            this.btn_Conver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Conver.Location = new System.Drawing.Point(430, 107);
+            this.btn_Conver.Name = "btn_Conver";
+            this.btn_Conver.Size = new System.Drawing.Size(90, 30);
+            this.btn_Conver.TabIndex = 142;
+            this.btn_Conver.Text = "  转换";
+            this.btn_Conver.UseVisualStyleBackColor = true;
+            this.btn_Conver.Click += new System.EventHandler(this.btn_Conver_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.物料,
+            this.名称,
+            this.批次,
+            this.数量,
+            this.使用数量});
+            this.dataGridView1.Location = new System.Drawing.Point(45, 378);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(739, 45);
+            this.dataGridView1.TabIndex = 143;
+            this.dataGridView1.Visible = false;
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "C_Code";
+            this.物料.HeaderText = "物料";
+            this.物料.Name = "物料";
+            // 
+            // 名称
+            // 
+            this.名称.DataPropertyName = "C_Name";
+            this.名称.HeaderText = "名称";
+            this.名称.Name = "名称";
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "W_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "W_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
+            // 使用数量
+            // 
+            this.使用数量.HeaderText = "使用数量";
+            this.使用数量.Name = "使用数量";
+            // 
             // frmWorkShopWeightList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 435);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.btn_Conver);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.txtRQQty);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
@@ -380,14 +403,13 @@
             this.Controls.Add(this.btn_Weight);
             this.Controls.Add(this.txtUnit);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.cmbGoodsCode);
+            this.Controls.Add(this.cmbGoodsName);
             this.Controls.Add(this.txtQty);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.txtBatch);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.txtName);
+            this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -402,23 +424,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox cmbGoodsCode;
+        private System.Windows.Forms.ComboBox cmbGoodsName;
         private System.Windows.Forms.TextBox txtQty;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtBatch;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.TextBox txtCode;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 工艺代码;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.Label label1;
         private System.IO.Ports.SerialPort serialPort1;
@@ -435,5 +449,13 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtRQQty;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Conver;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 名称;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
+        private System.Windows.Forms.DataGridViewTextBoxColumn 使用数量;
     }
 }
