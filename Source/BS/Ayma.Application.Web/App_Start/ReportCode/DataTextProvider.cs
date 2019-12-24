@@ -173,12 +173,17 @@ using MyDbReportData = DatabaseXmlReportData;
                                     h.O_CreateBy,
                                     h.O_Remark,
                                     h.O_WorkShopName,
+                                    dbo.GetProNamekByCode(O_ProCode) O_ProCode,
                                     d.O_GoodsName ,
                                     d.O_Qty,
                                     d.O_Unit,
+                                    d.O_Price,
+                                    d.O_Price*d.O_Qty O_Amount,
                                     d.O_SecGoodsName ,
                                     d.O_SecQty ,
-                                    d.O_SecUnit
+                                    d.O_SecUnit,
+                                    d.O_SecPrice,
+                                    d.O_SecQty*d.O_SecPrice O_SecAmount
                             FROM    dbo.Mes_OrgResHead h
                                     LEFT JOIN dbo.Mes_OrgResDetail D ON h.O_OrgResNo = d.O_OrgResNo
                             WHERE   1=1 AND h.O_OrgResNo ='{0}'and h.O_Status=2";

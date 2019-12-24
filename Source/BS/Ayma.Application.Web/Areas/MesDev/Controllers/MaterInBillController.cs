@@ -32,6 +32,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
+
+        public ActionResult MaterRateIndex()
+        {
+            return View();
+        }
+
         /// <summary>
         /// 表单页
         /// </summary>
@@ -342,6 +348,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 records = paginationobj.records
             };
             return Success(jsonData);
+        }
+
+        public ActionResult GetTree(string parentCode)
+        {
+            var data = materInBillIBLL.GetTree(parentCode);
+            return Success(data);
         }
 
         /// <summary>
