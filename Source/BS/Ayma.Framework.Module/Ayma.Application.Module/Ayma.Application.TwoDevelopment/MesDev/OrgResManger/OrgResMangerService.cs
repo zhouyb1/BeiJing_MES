@@ -290,10 +290,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_OrgResHeadEntityTmp = GetMes_OrgResHeadEntity(keyValue); 
+                    var mes_OrgResHeadEntityTmp = GetMes_OrgResHeadEntity(keyValue);
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == mes_OrgResHeadEntityTmp.O_OrgResNo);
+                    db.Delete<Mes_OrgResDetailEntity>(t => t.O_OrgResNo == mes_OrgResHeadEntityTmp.O_OrgResNo);
                     foreach (var item in mes_OrgResDetailList)
                     {
                         item.Create();
@@ -303,33 +303,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
-                   
-                    var dp = new DynamicParameters(new { });
+
+                    var dp = new DynamicParameters(new {});
                     dp.Add("@BillType", "组装与拆分单");
                     dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
                     db.ExecuteByProc("sp_GetDoucno", dp);
-                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    var billNo = dp.Get<string>("@Doucno"); //存储过程返回单号
+
                     entity.O_OrgResNo = billNo;
                     entity.Create();
                     db.Insert(entity);
 
+                    var list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
                     foreach (var item in mes_OrgResDetailList)
                     {
                         item.Create();
                         item.O_OrgResNo = entity.O_OrgResNo;
-                        ////获取车间扫描表实体
-                        //var dbContext = new RepositoryFactory().BaseRepository();
-                        //var workShop = dbContext.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.O_GoodsCode);
-                        ////删除或更细车间扫描表里的物料数据
-                        //if (item.O_Qty == workShop.W_Qty)
-                        //{
-                        //    db.Delete(workShop.W_GoodsCode);
-                        //}
-                        //else
-                        //{
-                        //    db.ExecuteBySql("update Mes_WorkShopScan set W_QTY='" + item.O_Qty + "'" +
-                        //                    " where  W_GoodsCode ='" + item.O_GoodsCode + "'");
-                        //}
+                    }
+                    foreach (var item in list)
+                    {
+                        var dr = db.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.Key);
+                        var num = mes_OrgResDetailList.Where(c => c.O_GoodsCode == item.Key).Sum(c => c.O_Qty);
+                        dr.W_Qty -= num;
+                        db.Update(dr);
                     }
                     db.Insert(mes_OrgResDetailList);
                 }
