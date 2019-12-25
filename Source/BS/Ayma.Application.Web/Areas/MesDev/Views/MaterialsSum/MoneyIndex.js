@@ -160,7 +160,7 @@ var bootstrap = function ($, ayma) {
                     title: '导出Excel数据',
                     url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
                     width: 500,
-                    height: 380,
+                    height: 400,
                     callBack: function (id) {
                         return top[id].acceptClick();
                     },

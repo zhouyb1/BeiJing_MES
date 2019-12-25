@@ -106,11 +106,21 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-            //$('#girdtable').on('click', function ()
-            //{
-            //    alert($("#G_SupplyCode").selectGet());
-          
-            //});
+            $('#am_export').on('click', function () {
+                var tableName = "girdtable";
+                var fileName = "库存明细统计";
+                ayma.layerForm({
+                    id: "ExcelExportForm",
+                    title: '导出Excel数据',
+                    url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+                    width: 500,
+                    height: 380,
+                    callBack: function (id) {
+                        return top[id].acceptClick();
+                    },
+                    btn: ['导出Excel', '关闭']
+                });
+            });
             $('#girdtable').on('dblclick', function ()
             {
                 var keyValue = $('#girdtable').jfGridValue('F_OrderNo');
