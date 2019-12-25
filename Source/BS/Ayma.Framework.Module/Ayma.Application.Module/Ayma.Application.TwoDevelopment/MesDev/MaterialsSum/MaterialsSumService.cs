@@ -76,11 +76,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            SELECT RH.M_CreateDate F_CreateDate,
                            RH.M_MaterInNo F_OrderNo,
                            RD.M_GoodsCode F_GoodsCode,
-                           G.G_Name F_GoodsName,
-                           G.G_Unit F_Unit,
+                           RD.M_GoodsName F_GoodsName,
+                           RD.M_Unit F_Unit,
                            G.G_Price as G_Price,
                            RD.M_TaxPrice F_InPrice,
-						   '从【'+ RD.M_SupplyName+'】购进【'+ G.G_Name+'】制单:'+ RH.M_CreateBy as F_Remark,
+						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ RH.M_CreateBy as F_Remark,
                            'R' F_Status,
                            SUM(RD.M_Qty) F_InQty
                     FROM Mes_MaterInHead RH
@@ -111,23 +111,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                   strSql.Append(@"
                          GROUP BY RH.M_CreateDate,
-                             RH.M_MaterInNo,
-                             M_GoodsCode,
-                             G.G_Name,
-                             G.G_Unit,
-                             M_TaxPrice,
-                            G.G_Price,
-                            RD.M_SupplyName,
-						   RH.M_CreateBy
+                                RH.M_MaterInNo,
+                                RD.M_GoodsCode,
+                                RD.M_GoodsName,
+                                M_TaxPrice,
+                                G.G_Price,
+                                RD.M_SupplyName,
+						        RH.M_CreateBy,
+						        RD.M_Unit
               ");
 
                 strSql2.Append(@"
                       SELECT CH.C_CreateDate F_CreateDate,
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
-                           G.G_Name F_GoodsName,
+                           CD.C_GoodsName F_GoodsName,
                            G.G_Price as G_Price,
-                           G.G_Unit F_Unit,
+                           CD.C_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
                          '从【'+  CD.C_StockName+'】调拨【'+ CH.C_StockToName+'】制单:'+ CH.C_CreateBy as F_Remark,
@@ -162,14 +162,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
                              CH.C_CreateDate,
-                             C_GoodsCode,
-                             G.G_Name,
-                             G.G_Unit,
-                             C_Price,
+                             CD.C_GoodsCode,
+                             CD.C_GoodsName,
+                             CD.C_Price,
                              G.G_Price,
                              CD.C_StockName,
 							 CH.C_StockToName,
-							 CH.C_CreateBy
+							 CH.C_CreateBy,
+					 	     CD.C_Unit
             ");
                 strSql3.Append(@"
                 select isnull(sum(I_Qty),0) as IntervoryQty
