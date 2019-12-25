@@ -126,7 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            G.G_Name F_GoodsName,
-                            G.G_Price as G_Price,
+                           G.G_Price as G_Price,
                            G.G_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
