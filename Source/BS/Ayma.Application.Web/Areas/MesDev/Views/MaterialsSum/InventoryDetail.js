@@ -130,10 +130,13 @@ var bootstrap = function ($, ayma) {
                     module.F_UrlAddress = '/MesDev/MaterInBill/PostIndex?keyValue=' + encodeURIComponent(keyValue);
                     top.ayma.frameTab.openNew(module);
                 }
-                else {
+                if (statu == "C") {
                     var module = top.ayma.clientdata.get(['modulesMap', '00e1077b-7ecc-4bea-b9df-9a56e285e4ff']);
                     module.F_UrlAddress = '/MesDev/PickingMaterQuery/Index?keyValue=' + encodeURIComponent(keyValue);
                     top.ayma.frameTab.openNew(module);
+                }
+                else {
+
                 }
             });
         },
@@ -147,7 +150,7 @@ var bootstrap = function ($, ayma) {
                     { label: "商品名称", name: "F_GoodsName", width: 130, align: "center" },
                     { label: "单位", name: "F_Unit", width: 50, align: "center" },
                     { label: "单据编号", name: "F_OrderNo", width: 130, align: "center" },
-                     { label: "出入状态", name: "F_Status", width: 130, align: "center",hidden:true},
+                     { label: "出入状态", name: "F_Status", width: 130, align: "center",},
                     {
                         label: "收入", name: "收入", width: 90, align: "center", children: [
                          {
