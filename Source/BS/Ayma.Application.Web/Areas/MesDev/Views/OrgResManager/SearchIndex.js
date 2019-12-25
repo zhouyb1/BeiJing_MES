@@ -125,16 +125,13 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据号", name: "O_OrgResNo", width: 160, align: "left"},
-                    //{ label: "订单号", name: "O_OrderNo", width: 160, align: "left"},
-                    //{ label: "订单时间", name: "O_OrderDate", width: 160, align: "left"},
-                    { label: "工艺代码", name: "O_Record", width: 90, align: "left"},
-                    { label: "工序号", name: "O_ProCode", width: 90, align: "left"},
-                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "left"},
-                    { label: "车间名称", name: "O_WorkShopName", width: 160, align: "left"},
-                    { label: "备注", name: "O_Remark", width: 160, align: "left"},
-                    { label: "添加人", name: "O_CreateBy", width: 90, align: "left"},
-                    { label: "添加时间", name: "O_CreateDate", width: 160, align: "left"},
+                    { label: "单据号", name: "O_OrgResNo", width: 160, align: "center" },
+                    { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
+                    { label: "车间名称", name: "O_WorkShopName", width: 120, align: "center" },
+                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "center" },
+                    { label: "备注", name: "O_Remark", width: 160, align: "center" },
+                    { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
+                    { label: "添加时间", name: "O_CreateDate", width: 160, align: "center"}
                 ],
                 mainId:'ID',
                 reloadSelected: true,

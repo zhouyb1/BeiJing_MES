@@ -350,11 +350,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
 
-        public ActionResult GetTree(string parentCode)
-        {
-            var data = materInBillIBLL.GetTree(parentCode);
-            return Success(data);
-        }
+     
 
         /// <summary>
         /// 获取已提交的成品入库
