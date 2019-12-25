@@ -12,6 +12,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel
         public string F_OrderNo { get; set; }
         public string F_GoodsCode { get; set; }
         public string F_GoodsName { get; set; }
+        public string F_Remark { get; set; }
         public string F_Unit { get; set; }
 
         public string F_Status { get; set; }

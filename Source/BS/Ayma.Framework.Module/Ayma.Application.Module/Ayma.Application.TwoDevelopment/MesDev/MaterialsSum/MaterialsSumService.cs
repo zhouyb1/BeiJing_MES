@@ -80,6 +80,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            G.G_Unit F_Unit,
                            G.G_Price as G_Price,
                            RD.M_TaxPrice F_InPrice,
+						   '从【'+ RD.M_SupplyName+'】购进【'+ G.G_Name+'】制单:'+ RH.M_CreateBy as F_Remark,
                            'R' F_Status,
                            SUM(RD.M_Qty) F_InQty
                     FROM Mes_MaterInHead RH
@@ -115,7 +116,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                              G.G_Name,
                              G.G_Unit,
                              M_TaxPrice,
-                            G.G_Price 
+                            G.G_Price,
+                            RD.M_SupplyName,
+						   RH.M_CreateBy
               ");
 
                 strSql2.Append(@"
@@ -127,6 +130,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            G.G_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
+                         '从【'+  CD.C_StockName+'】调拨【'+ CH.C_StockToName+'】制单:'+ CH.C_CreateBy as F_Remark,
                            SUM(CD.C_Qty) F_OutQty
                     FROM Mes_CollarHead CH
                         LEFT JOIN Mes_CollarDetail CD
@@ -162,7 +166,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                              G.G_Name,
                              G.G_Unit,
                              C_Price,
-                             G.G_Price
+                             G.G_Price,
+                             CD.C_StockName,
+							 CH.C_StockToName,
+							 CH.C_CreateBy
             ");
                 strSql3.Append(@"
                 select isnull(sum(I_Qty),0) as IntervoryQty
