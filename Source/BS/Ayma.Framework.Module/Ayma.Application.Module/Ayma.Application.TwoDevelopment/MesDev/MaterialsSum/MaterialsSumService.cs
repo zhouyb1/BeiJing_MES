@@ -183,7 +183,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                     strSql3.Append(" ,@time as F_CreateDate");
                 }
-                strSql3.Append(@",'上期结存' as F_GoodsCode 
+                strSql3.Append(@",'上期结存' as F_Remark 
                              from  Mes_InventoryLS s            	");
                 if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
                 {
