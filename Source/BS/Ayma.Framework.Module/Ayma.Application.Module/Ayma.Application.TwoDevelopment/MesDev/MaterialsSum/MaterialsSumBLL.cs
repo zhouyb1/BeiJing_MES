@@ -2,6 +2,7 @@
 using Ayma.Util;
 using System;
 using System.Collections.Generic;
+using Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -15,6 +16,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private MaterialsSumService materialsSumService = new MaterialsSumService();
 
         #region 获取数据
+        /// <summary>
+        /// 获取库存明细表数据
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public List<InventoryViewModel> GetInventoryDetail(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return materialsSumService.GetInventoryDetail(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+
+        }
         /// <summary>
         /// 获取选取的时间原物料入库详细
         /// </summary>

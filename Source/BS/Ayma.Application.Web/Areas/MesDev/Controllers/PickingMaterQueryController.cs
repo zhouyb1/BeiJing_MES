@@ -45,10 +45,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetPageList(string pagination, string queryJson)
+        public ActionResult GetPageList(string pagination, string queryJson, string C_CollarNo)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = pickingMaterQueryIBLL.GetPageList(paginationobj, queryJson);
+            var data = pickingMaterQueryIBLL.GetPageList(paginationobj, queryJson,C_CollarNo);
             var jsonData = new
             {
                 rows = data,

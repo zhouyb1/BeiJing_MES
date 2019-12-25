@@ -22,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_CollarHeadEntity> GetPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_CollarHeadEntity> GetPageList(Pagination pagination, string queryJson, string C_CollarNo)
         {
             try
             {
@@ -47,6 +47,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (!string.IsNullOrWhiteSpace(C_CollarNo) && queryParam["C_StockToCode"].IsEmpty())
+                {
+                    dp.Add("C_CollarNo", "%" + C_CollarNo + "%", DbType.String);
+                    strSql.Append(" AND t.C_CollarNo Like @C_CollarNo ");
+                }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);

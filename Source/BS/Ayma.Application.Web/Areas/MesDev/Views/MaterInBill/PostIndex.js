@@ -3,7 +3,7 @@
  * 描  述：入库单制作
  */
 var refreshGirdData;
-
+var M_MaterInNo = decodeURIComponent(request('keyValue'));
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
@@ -44,7 +44,7 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 300);
-            $('#M_StockName').select({
+            $('#S_Name').select({
                 type: 'default',
                 value: 'S_Name',
                 text: 'S_Name',
@@ -52,15 +52,15 @@ var bootstrap = function ($, ayma) {
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',  
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
                 // 访问数据接口参数
-                    param: {}
-        });
+                param: {}
+            });
             $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
-                location.reload();
+                location.href = location.pathname;
             });
             // 查看详情
             $('#am_detail').on('click', function () {
@@ -156,7 +156,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList',
+                url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList?M_MaterInNo=' + M_MaterInNo,
                 headData: [
                     {
                         label: "状态", name: "M_Status", width: 90, align: "left",
@@ -178,7 +178,8 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },                 
+                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
+                    { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
                     //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
                     //{ label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },                   
                     { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },

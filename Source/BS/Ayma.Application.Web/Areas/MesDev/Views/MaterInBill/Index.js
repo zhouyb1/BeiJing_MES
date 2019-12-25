@@ -81,16 +81,16 @@ var bootstrap = function ($, ayma) {
                     });
                 
             });
-            $('#M_StockCode').select({
+            $('#S_Name').select({
                 type: 'default',
-                value: 'S_Code',
+                value: 'S_Name',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址 
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
                 // 访问数据接口参数
                 param: {}
             });

@@ -115,11 +115,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson, string M_MaterInNo)
         {
             try
             {
-                return materInBillService.GetPostPageList(pagination, queryJson);
+                return materInBillService.GetPostPageList(pagination, queryJson,M_MaterInNo);
             }
             catch (Exception ex)
             {

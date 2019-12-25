@@ -297,7 +297,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson)
+        public IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson, string M_MaterInNo)
         {
             try
             {
@@ -309,6 +309,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_StockCode,
                 t.M_StockName,
                 t.M_OrderNo,
+                t.M_SupplyName,
                 t.M_OrderDate,
                 t.M_Status,
                 dbo.GetUserNameById(t.M_CreateBy) M_CreateBy,
@@ -332,30 +333,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
                 }
+                if (!string.IsNullOrWhiteSpace(M_MaterInNo) && queryParam["M_MaterInNo"].IsEmpty() && queryParam["S_Name"].IsEmpty())
+                {
+                    dp.Add("M_MaterInNo", "%" + M_MaterInNo + "%", DbType.String);
+                    strSql.Append(" AND t.M_MaterInNo Like @M_MaterInNo ");
+                }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {
                     dp.Add("M_MaterInNo", "%" + queryParam["M_MaterInNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.M_MaterInNo Like @M_MaterInNo ");
                 }
-                if (!queryParam["M_OrderNo"].IsEmpty())
+                  if (!queryParam["S_Name"].IsEmpty())
                 {
-                    dp.Add("M_OrderNo", "%" + queryParam["M_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.M_OrderNo Like @M_OrderNo ");
-                }
-                if (!queryParam["M_StockCode"].IsEmpty())
-                {
-                    dp.Add("M_StockCode", "%" + queryParam["M_StockCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.M_StockCode Like @M_StockCode ");
-                }
-                if (!queryParam["M_StockName"].IsEmpty())
-                {
-                    dp.Add("M_StockName", "%" + queryParam["M_StockName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.M_StockName Like @M_StockName ");
-                }
-                if (!queryParam["M_Status"].IsEmpty())
-                {
-                    dp.Add("M_Status", queryParam["M_Status"].ToString(), DbType.Int32);
-                    strSql.Append(" AND t.M_Status = @M_Status ");
+                    dp.Add("S_Name", "%" + queryParam["S_Name"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.M_SupplyName Like @S_Name ");
                 }
                 return this.BaseRepository().FindList<Mes_MaterInHeadEntity>(strSql.ToString(), dp, pagination);
             }
@@ -413,6 +404,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["S_Name"].IsEmpty())
+                {
+                    dp.Add("S_Name", "%" + queryParam["S_Name"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.M_SupplyName Like @S_Name ");
                 }
                 if (!queryParam["M_MaterInNo"].IsEmpty())
                 {

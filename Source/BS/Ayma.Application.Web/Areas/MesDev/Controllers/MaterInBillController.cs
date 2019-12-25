@@ -399,10 +399,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetPostPageList(string pagination, string queryJson)
+        public ActionResult GetPostPageList(string pagination, string queryJson, string M_MaterInNo)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = materInBillIBLL.GetPostPageList(paginationobj, queryJson);
+            var data = materInBillIBLL.GetPostPageList(paginationobj, queryJson,M_MaterInNo);
             var jsonData = new
             {
                 rows = data,

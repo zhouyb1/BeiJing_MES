@@ -3,7 +3,7 @@ using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using System;
-
+using Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -26,7 +26,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult Index()
         {
              return View();
-        }   /// <summary>
+        }
+        /// <summary>
+        /// 库存明细页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult  InventoryDetail()
+        {
+            return View();
+        }
+        /// <summary>
         /// 打印页面
         /// </summary>
         /// <returns></returns>
@@ -47,6 +57,34 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #endregion
 
         #region 获取数据
+        /// <summary>
+        /// 获取库存明细表数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetInventoryDetail(string pagination, string queryJson)
+        {
+            var queryParam = queryJson.ToJObject();
+             List<InventoryViewModel> data ;
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            if ((!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty()) || !queryParam["g_stockcode"].IsEmpty())
+            {   
+                data = materialsSumIBLL.GetInventoryDetail(paginationobj, queryJson); 
+            }
+            else
+            {
+                return Fail("请选择库存商品!");
+            }
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };  
+            return Success(jsonData);
+        }
         /// <summary>
         /// 获取选取的时间原物料入库详细
         /// </summary>

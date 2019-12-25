@@ -51,12 +51,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
 
-                if (!string.IsNullOrWhiteSpace(stock))
+                if (!string.IsNullOrWhiteSpace(stock) && queryParam["I_StockCode"].IsEmpty() && queryParam["I_StockName"].IsEmpty() && queryParam["I_GoodsCode"].IsEmpty() && queryParam["I_GoodsName"].IsEmpty())
                 {
                     dp.Add("I_StockCode", "%" + stock + "%", DbType.String);
                     strSql.Append(" AND t.I_StockCode Like @I_StockCode ");
                 }
-                if (!string.IsNullOrWhiteSpace(goodsCode))
+                if (!string.IsNullOrWhiteSpace(goodsCode) && queryParam["I_StockCode"].IsEmpty() && queryParam["I_StockName"].IsEmpty() && queryParam["I_GoodsCode"].IsEmpty() && queryParam["I_GoodsName"].IsEmpty())
                 {
                     dp.Add("I_GoodsCode", "%" + goodsCode + "%", DbType.String);
                     strSql.Append(" AND t.I_GoodsCode Like @I_GoodsCode ");

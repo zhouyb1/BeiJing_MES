@@ -167,71 +167,19 @@ var bootstrap = function ($, ayma) {
                     btn: ['导出Excel', '关闭']
                 });
             });
+            $('#girdtable_sum').on('dblclick', function () {
+                var g_code = $('#girdtable_sum').jfGridValue('g_code');
+                var g_stockcode = $('#girdtable_sum').jfGridValue('g_stockcode');
+
+                var module = top.ayma.clientdata.get(['modulesMap', '6c1dfb3e-9f16-40db-9d72-4fe5d604b06f']);
+                module.F_UrlAddress = '/MesDev/MaterialsSum/InventoryDetail?g_code=' + encodeURIComponent(g_code) + '&g_stockcode=' + encodeURIComponent(g_stockcode) + '&startTime=' + encodeURIComponent(startTime) + '&endTime=' + encodeURIComponent(endTime);
+                    top.ayma.frameTab.openNew(module);
+            });
             // 快速打印
             $('#am_print').on('click', function () {
              
 
-            });
-            //打印
-            //$('#am_print').on('click', function () {
-            //    if (tabTitle == "汇总") {
-            //        var keyValue = $('#girdtable').jfGridValue('I_InNo');
-            //        ayma.layerForm({
-            //            id: 'SaleInReport',
-            //            title: '入库单打印',
-            //            url: top.$.rootUrl + '/MesDev/InWorkShopManager/PrintReport?keyValue=' + keyValue + "&report=InWorkShopReport&data=InWorkShop",
-            //            width: 1000,
-            //            height: 800,
-            //            maxmin: true,
-            //            callBack: function (id) {
-            //                return top[id].acceptClick(refreshGirdData);
-            //            }
-            //        });
-            //    }
-            //    else if (tabTitle == "入库明细") {
-            //        tableName = "girdtable_detail";
-            //        fileName = "原物料入库明细";
-            //    }
-            //    else if (tabTitle == "出库明细") {
-            //        tableName = "girdtable_Outbounddetails";
-            //        fileName = "原物料出库明细";
-            //    }
-            //    else if (tabTitle == "退库明细") {
-            //        tableName = "girdtable_withdrawingdetails";
-            //        fileName = "原物料退库明细";
-            //    }
-            //    else if (tabTitle == "原物料销售明细") {
-            //        tableName = "girdtable_materialssales";
-            //        fileName = "原物料销售明细";
-            //    }
-            //    else if (tabTitle == "报废数量明细") {
-            //        tableName = "girdtable_scrapnumber";
-            //        fileName = "报废数量明细";
-            //    }
-            //    else if (tabTitle == "其它入库明细") {
-            //        tableName = "girdtable_other";
-            //        fileName = "其它入库明细";
-            //    }
-            //    else if (tabTitle == "其它出库明细") {
-            //        tableName = "girdtable_otherout";
-            //        fileName = "其它出库明细";
-            //    }
-            //    else {
-            //        tableName = "girdtable_supplierback";
-            //        fileName = "退供应商明细";
-            //    }
-            //    ayma.layerForm({
-            //        id: "ExcelExportForm",
-            //        title: '导出Excel数据',
-            //        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
-            //        width: 500,
-            //        height: 380,
-            //        callBack: function (id) {
-            //            return top[id].acceptClick();
-            //        },
-            //        btn: ['导出Excel', '关闭']
-            //    });
-            //});
+            });        
         },
         // 初始化列表
         initGird: function () {
@@ -241,6 +189,7 @@ var bootstrap = function ($, ayma) {
                     { label: "商品编码", name: "g_code", width: 130, align: "center" },
                     { label: "商品名称", name: "g_name", width: 130, align: "center" },
                     { label: "仓库名称", name: "s_name", width: 130, align: "center" },
+                    { label: "仓库编码", name: "g_stockcode", width: 130, align: "center" },
                     //{ label: "供应商名称", name: "m_supplyname", width: 130, align: "center" },
                     { label: "单位", name: "g_unit", width: 130, align: "center" },
                     { label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true },

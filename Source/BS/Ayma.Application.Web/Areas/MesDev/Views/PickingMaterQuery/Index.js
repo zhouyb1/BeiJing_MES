@@ -2,6 +2,7 @@
  * 日  期：2019-03-13 10:06
  * 描  述：领料单查询
  */
+var C_CollarNo = decodeURIComponent(request('keyValue'));
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -73,7 +74,7 @@ var bootstrap = function ($, ayma) {
             });
             // 刷新
             $('#am_refresh').on('click', function () {
-                location.reload();
+                location.href = location.pathname;
             });
             // 编辑
             $('#am_detail').on('click', function () {
@@ -146,7 +147,7 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMaterQuery/GetPageList',
+                url: top.$.rootUrl + '/MesDev/PickingMaterQuery/GetPageList?C_CollarNo=' + C_CollarNo,
                 headData: [
                       {
                           label: "状态", name: "P_Status", width: 100, align: "left",

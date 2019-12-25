@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "原物料统计(入库、出库、次品)";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout">
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div class="am-searchtxt"></div>
+                        @*请选择时间： <input id="Date" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd 00:00:00'})" value="@DateTime.Now.ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />*@
+                        <div class="am-searchtxt">创建时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">仓库名称</div>
+                                    <div id="S_Code" type="text" class="form-control"></div>
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">商品名称</div>
+                                    <div id="G_Code" type="text" class="form-control"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="am-layout-tool-item"><label class="label label-info" style="color: #ff0000;font-size:10px">请先选择条件</label></div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                        <a id="am_export" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;导出Excel</a>
+                        @*<a id="am_print" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;打印 </a>*@
+                    </div>
+                </div>
+            </div>
+            <div class="am-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/MaterialsSum/InventoryDetail.js")
+@*@Html.AppendJsFile("/Views/AM_Content/plugin/formselect/am-formselect.js")*@

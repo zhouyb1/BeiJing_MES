@@ -44,7 +44,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson);
+        IEnumerable<Mes_MaterInHeadEntity> GetPostPageList(Pagination pagination, string queryJson, string M_MaterInNo);
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
