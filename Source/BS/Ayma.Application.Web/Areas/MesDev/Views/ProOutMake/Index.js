@@ -192,7 +192,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/ProOutMake/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "P_Status", width: 100, align: "left",
+                        label: "状态", name: "P_Status", width: 100, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -211,18 +211,18 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "出库单号", name: "P_ProOutNo", width: 160, align: "left" },
-                    { label: "仓库编码", name: "P_StockCode", width: 100, align: "left" },
-                    { label: "仓库名称", name: "P_StockName", width: 160, align: "left" },
+                    { label: "出库单号", name: "P_ProOutNo", width: 160, align: "center" },
+                    { label: "仓库编码", name: "P_StockCode", width: 90, align: "center" },
+                    { label: "仓库名称", name: "P_StockName", width: 160, align: "center" },
                     //{ label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
                     //{ label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "P_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "P_CreateBy", width: 100, align: "left" },
-                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "P_UpdateBy", width: 100, align: "left" },
-                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "P_UploadBy", width: 100, align: "left" },
-                    { label: "提交时间", name: "P_UploadDate", width: 160, align: "left" }
+                    { label: "添加人", name: "P_CreateBy", width: 100, align: "center" },
+                    { label: "添加时间", name: "P_CreateDate", width: 160, align: "center" },
+                    { label: "修改人", name: "P_UpdateBy", width: 100, align: "center" },
+                    { label: "修改时间", name: "P_UpdateDate", width: 160, align: "center" },
+                    { label: "提交人", name: "P_UploadBy", width: 100, align: "center" },
+                    { label: "提交时间", name: "P_UploadDate", width: 160, align: "center" }
                 ],
                 onRenderComplete: function (rows) {
                     var lengh = rows.length;
