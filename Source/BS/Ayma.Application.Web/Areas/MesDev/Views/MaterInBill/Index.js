@@ -44,7 +44,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 500);
+            }, 180, 350);
             $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
 
             $('#M_StockName').select({
@@ -214,7 +214,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "M_Status", width: 90, align: "left",
+                        label: "状态", name: "M_Status", width: 100, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -234,16 +234,16 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
-                    { label: "供应商编码", name: "M_SupplyCode", width: 160, align: "left", hidden: true },
-                    { label: "仓库编码", name: "M_StockCode", width: 90, align: "left" ,hidden:true},
-                    { label: "仓库名称", name: "M_StockName", width: 160, align: "left", hidden: true },                 
-                    { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },
-                    { label: "添加时间", name: "M_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "M_UpdateBy", width: 90, align: "left" },
-                    { label: "修改时间", name: "M_UpdateDate", width: 160, align: "left" },
-                    { label: "备注", name: "M_Remark", width: 160, align: "left" },               
+                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "center", sort: true },
+                    { label: "供应商名称", name: "M_SupplyName", width: 160, align: "center" },
+                    { label: "供应商编码", name: "M_SupplyCode", width: 90, align: "center", hidden: true },
+                    { label: "仓库编码", name: "M_StockCode", width: 90, align: "center" ,hidden:true},
+                    { label: "仓库名称", name: "M_StockName", width: 160, align: "center", hidden: true },
+                    { label: "添加人", name: "M_CreateBy", width: 100, align: "center" },
+                    { label: "添加时间", name: "M_CreateDate", width: 160, align: "center", sort: true },
+                    { label: "修改人", name: "M_UpdateBy", width: 100, align: "center" },
+                    { label: "修改时间", name: "M_UpdateDate", width: 160, align: "center" },
+                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
                 ],
                 onRenderComplete: function (rows) {
                     var lengh = rows.length;
