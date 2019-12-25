@@ -146,11 +146,24 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetInventoryDetail',
                 headData: [
                     { label: "日期", name: "F_CreateDate", width: 130, align: "center" },
-                    { label: "商品编码", name: "F_GoodsCode", width: 130, align: "center" },
-                    { label: "商品名称", name: "F_GoodsName", width: 130, align: "center" },
+                    { label: "商品编码", name: "F_GoodsCode", width: 115, align: "center" },
+                    { label: "商品名称", name: "F_GoodsName", width: 115, align: "center" },
                     { label: "单位", name: "F_Unit", width: 50, align: "center" },
                     { label: "单据编号", name: "F_OrderNo", width: 130, align: "center" },
-                     { label: "出入状态", name: "F_Status", width: 130, align: "center",},
+                     {
+                         label: "出入状态", name: "F_Status", width: 55, align: "center",
+                         formatter: function (value, row, dfop) {
+                             if (row.F_Status!=null&&row.F_Status!=undefined)
+                             {            
+                             if (row.F_Status == "R") {
+                                 return "入库";
+                             }
+                             else {
+                                 return "调拨";
+                             }
+                             }
+                         }
+                     },
                     {
                         label: "收入", name: "收入", width: 90, align: "center", children: [
                          {
