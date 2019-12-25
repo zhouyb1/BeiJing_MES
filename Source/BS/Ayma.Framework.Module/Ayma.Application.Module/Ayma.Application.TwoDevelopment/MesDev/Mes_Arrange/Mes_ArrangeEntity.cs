@@ -103,7 +103,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
             this.A_CreateDate = DateTime.Now;
-            this.A_CreateBy = userInfo.realName;
+            this.A_CreateBy = userInfo.userId;
         }
         /// <summary>
         /// 编辑调用
@@ -114,7 +114,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = keyValue;
             var userInfo = LoginUserInfo.Get();
             this.A_UpdateDate = DateTime.Now;
-            this.A_UpdateBy = userInfo.realName;
+            this.A_UpdateBy = userInfo.userId;
         }
         #endregion
         #region 扩展字段

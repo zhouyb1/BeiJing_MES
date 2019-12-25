@@ -118,7 +118,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             var userInfo = LoginUserInfo.Get();
             this.C_CreateDate = DateTime.Now;
-            this.C_CreateBy = userInfo.realName;
+            this.C_CreateBy = userInfo.userId;
             this.ID = Guid.NewGuid().ToString();
         }
         /// <summary>

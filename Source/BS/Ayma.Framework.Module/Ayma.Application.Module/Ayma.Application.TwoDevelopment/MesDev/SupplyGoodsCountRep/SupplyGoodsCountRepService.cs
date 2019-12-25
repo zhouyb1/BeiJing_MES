@@ -112,7 +112,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     m.M_Unit ,
                                     m.M_Qty*m.M_Price Amount,
                                     h.M_CreateDate ,
-                                    h.M_CreateBy 
+                                    dbo.GetUserNameById(h.M_CreateBy) M_CreateBy
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode AND h.M_Status =3  ";
             var dp = new DynamicParameters(new { });

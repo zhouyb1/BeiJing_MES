@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_StockName,
                 t.S_OrderDate,
                 t.S_Remark,
-                t.S_CreateBy,
+                dbo.GetUserNameById(t.S_CreateBy) S_CreateBy,
                 t.S_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t ");
@@ -100,7 +100,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_StockName,
                 t.S_OrderDate,
                 t.S_Remark,
-                t.S_CreateBy,
+                dbo.GetUserNameById(t.S_CreateBy) S_CreateBy ,
                 t.S_CreateDate
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t ");

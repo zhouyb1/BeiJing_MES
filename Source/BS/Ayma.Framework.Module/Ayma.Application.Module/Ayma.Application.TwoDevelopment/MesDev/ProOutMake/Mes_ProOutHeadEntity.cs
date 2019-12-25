@@ -104,7 +104,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.P_Status = ErpEnums.ProOutStatusEnum.NoAudit;
             this.P_CreateDate = DateTime.Now;
-            this.P_CreateBy = userInfo.realName;
+            this.P_CreateBy = userInfo.userId;
         }
         /// <summary>
         /// 编辑调用
@@ -115,7 +115,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = keyValue;
             var userInfo = LoginUserInfo.Get();
             this.P_UpdateDate = DateTime.Now;
-            this.P_UpdateBy = userInfo.realName;
+            this.P_UpdateBy = userInfo.userId;
         }
         #endregion
         #region 扩展字段

@@ -94,7 +94,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
             this.P_CreateDate = DateTime.Now;
-            this.P_CreateBy = userInfo.realName;
+            this.P_CreateBy = userInfo.userId;
             this.P_TaxPrice = this.P_InPrice * (1 + (this.P_Itax / 100));
         }
         /// <summary>

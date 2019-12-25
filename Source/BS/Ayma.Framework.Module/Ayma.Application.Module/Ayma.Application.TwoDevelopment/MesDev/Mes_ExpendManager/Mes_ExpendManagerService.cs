@@ -37,8 +37,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.MonthBalance,
                 t.E_Remark,
                 t.E_CreateDate,
-                t.E_CreateBy,
-                t.E_UpdateBy,
+                dbo.GetUserNameById(t.E_CreateBy) E_CreateBy,
+                dbo.GetUserNameById(t.E_UpdateBy) E_UpdateBy,
                 t.E_UpdateDate
                 ");
                 strSql.Append("  FROM Mes_ExpendHead t ");
@@ -102,8 +102,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.MonthBalance,
                 t.E_Remark,
                 t.E_CreateDate,
-                t.E_CreateBy,
-                t.E_UpdateBy,
+                dbo.GetUserNameById(t.E_CreateBy) E_CreateBy,
+                dbo.GetUserNameById(t.E_UpdateBy) E_UpdateBy,
                 t.E_UpdateDate
                 ");
                 strSql.Append("  FROM Mes_ExpendHead t ");

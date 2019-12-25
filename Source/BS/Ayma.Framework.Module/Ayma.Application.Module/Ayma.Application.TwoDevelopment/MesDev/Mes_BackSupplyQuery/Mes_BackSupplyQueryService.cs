@@ -35,13 +35,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockName,
                 t.B_OrderDate,
                 t.B_Status,
-                t.B_CreateBy,
+                dbo.GetUserNameById(t.B_CreateBy) B_CreateBy,
                 t.B_CreateDate,
-                t.B_UpdateBy,
+                dbo.GetUserNameById(t.B_UpdateBy) B_UpdateBy,
                 t.B_UpdateDate,
-                t.B_DeleteBy,
+                dbo.GetUserNameById(t.B_DeleteBy) B_DeleteBy,
                 t.B_DeleteDate,
-                t.B_UploadBy,
+                dbo.GetUserNameById(t.B_UploadBy) B_UploadBy,
                 t.B_UploadDate,
                 t.B_Remark
                 ");

@@ -38,9 +38,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.S_CostomName,
                                 t.S_CostomCode,
                                 t.S_Remark,
-                                t.S_CreateBy,
+                                dbo.GetUserNameById(t.S_CreateBy) S_CreateBy,
                                 t.S_CreateDate,
-                                t.S_UpdateBy,
+                                dbo.GetUserNameById(t.S_UpdateBy) S_UpdateBy,
                                 t.S_UpdateDate,
                                 t.MonthBalance
                                 ");
@@ -203,9 +203,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.S_CostomName,
                                 t.S_CostomCode,
                                 t.S_Remark,
-                                t.S_CreateBy,
+                                dbo.GetUserNameById(t.S_CreateBy) S_CreateBy,
                                 t.S_CreateDate,
-                                t.S_UpdateBy,
+                                dbo.GetUserNameById(t.S_UpdateBy) S_UpdateBy,
                                 t.S_UpdateDate,
                                 t.MonthBalance
                                 ");

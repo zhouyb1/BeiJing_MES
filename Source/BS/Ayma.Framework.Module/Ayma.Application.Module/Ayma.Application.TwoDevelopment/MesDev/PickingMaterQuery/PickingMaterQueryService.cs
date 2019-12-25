@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_CollarNo,
                 t.P_OrderNo,
                 t.C_Remark,
-                t.C_CreateBy,
+                dbo.GetUserNameById(t.C_CreateBy) C_CreateBy,
                 t.C_CreateDate,
                 t.P_OrderDate
                 ");

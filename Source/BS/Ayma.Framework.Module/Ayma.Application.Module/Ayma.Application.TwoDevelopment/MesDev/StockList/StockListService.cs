@@ -34,9 +34,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.S_Name,
                 t.S_Kind,
                 t.S_Peson,
-                t.S_CreateBy,
+                dbo.GetUserNameById(t.S_CreateBy) S_CreateBy,
                 t.S_CreateDate,
-                t.S_UpdateBy,
+                dbo.GetUserNameById(t.S_UpdateBy) S_UpdateBy,
                 t.S_UpdateDate,
                 t.S_Remark
                 ");

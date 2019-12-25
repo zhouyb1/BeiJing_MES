@@ -120,7 +120,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Create()
         {
             this.P_Status = ErpEnums.RequistStatusEnum.NoAudit;
-            this.C_CreateBy = LoginUserInfo.Get().realName;
+            this.C_CreateBy = LoginUserInfo.Get().userId;
             this.C_CreateDate = DateTime.Now;
             this.ID = Guid.NewGuid().ToString();
         }

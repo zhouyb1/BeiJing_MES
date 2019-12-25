@@ -41,8 +41,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.A_ClassCode,
                 t.A_Avail,
                 t.A_CreateDate,
-                t.A_CreateBy,
-                t.A_UpdateBy,
+                dbo.GetUserNameById(t.A_CreateBy) A_CreateBy,
+                dbo.GetUserNameById(t.A_UpdateBy) A_UpdateBy,
                 t.A_UpdateDate,
                 t.A_Remark
                 ");

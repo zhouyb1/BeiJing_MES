@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_OrderNo,
                 t.I_OrderDate,
                 t.I_Remark,
-                t.I_CreateBy,
+                dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
                 strSql.Append("  FROM Mes_InWorkShopHead t left join Mes_WorkShop s on(t.I_WorkShop=s.W_Code)");
@@ -112,7 +112,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_OrderNo,
                 t.I_OrderDate,
                 t.I_Remark,
-                t.I_CreateBy,
+               dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
                 strSql.Append("  FROM Mes_InWorkShopHead t left join Mes_WorkShop s on(t.I_WorkShop=s.W_Code)");

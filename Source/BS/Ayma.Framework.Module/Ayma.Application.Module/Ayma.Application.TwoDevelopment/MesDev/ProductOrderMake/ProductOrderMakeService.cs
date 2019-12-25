@@ -90,9 +90,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,t.[P_OrderDate]
                       ,t.[P_OrderStationID]
                       ,t.[P_OrderStationName]
-                      ,t.[P_CreateBy]
+                      ,dbo.GetUserNameById(t.[P_CreateBy]) P_CreateBy
                       ,t.[P_CreateDate]
-                      ,t.[P_UpdateBy]
+                      ,dbo.GetUserNameById(t.[P_UpdateBy]) P_UpdateBy
                       ,t.[P_UpdateDate]
                       ,t.[P_UseDate]
                       ,t.[P_Status]

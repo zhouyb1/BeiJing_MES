@@ -595,7 +595,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                       ,g.[G_UnitWeight]
                       ,g.[G_Super]
                       ,g.[G_Lower]
-                      ,g.[G_CreateBy]
+                      ,dbo.GetUserNameById(g.[G_CreateBy]) G_CreateBy
                       ,g.[G_CreateDate]
                       ,g.[G_UpdateBy]
                       ,g.[G_UpdateDate]

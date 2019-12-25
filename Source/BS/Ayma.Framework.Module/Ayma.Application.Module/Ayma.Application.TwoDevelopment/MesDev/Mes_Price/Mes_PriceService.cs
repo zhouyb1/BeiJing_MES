@@ -20,14 +20,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private string fieldSql;
         public Mes_PriceService()
         {
-            fieldSql=@"
+            fieldSql= @"
                 t.ID,
                 t.P_SupplyCode,
                 t.P_SupplyName,
                 t.P_GoodsCode,
                 t.P_GoodsName,
                 t.P_InPrice,
-                t.P_CreateBy,
+                dbo.GetUserNameById(t.P_CreateBy) P_CreateBy,
                 t.P_CreateDate,
                 t.P_Itax,
                 t.P_StartDate,
@@ -131,7 +131,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_GoodsCode,
                 t.P_GoodsName,
                 t.P_InPrice,
-                t.P_CreateBy,
+                dbo.GetUserNameById(t.P_CreateBy) P_CreateBy,
                 t.P_CreateDate,
                 t.P_Itax,
                 t.P_StartDate,

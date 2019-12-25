@@ -78,7 +78,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.ID,
                 t.C_Code,
                 t.C_Name,
-                t.C_CreateBy,
+                dbo.GetUserNameById(t.C_CreateBy) C_CreateBy,
                 t.C_CreateDate,
                 t.S_Person,
                 t.S_Telephone,

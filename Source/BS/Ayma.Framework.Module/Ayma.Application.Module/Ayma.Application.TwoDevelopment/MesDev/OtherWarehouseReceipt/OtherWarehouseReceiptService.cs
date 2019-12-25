@@ -20,20 +20,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private string fieldSql;
         public OtherWarehouseReceiptService()
         {
-            fieldSql=@"
+            fieldSql= @"
                 t.ID,
                 t.O_OtherInNo,
                 t.O_StockCode,
                 t.O_StockName,
                 t.O_OrderDate,
                 t.O_Status,
-                t.O_CreateBy,
+                dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate,
-                t.O_UpdateBy,
+                dbo.GetUserNameById(t.O_UpdateBy) O_UpdateBy,
                 t.O_UpdateDate,
-                t.O_DeleteBy,
+                dbo.GetUserNameById(t.O_DeleteBy) O_DeleteBy,
                 t.O_DeleteDate,
-                t.O_UploadBy,
+                dbo.GetUserNameById(t.O_UploadBy) O_UploadBy,
                 t.O_UploadDate,
                 t.O_Remark,
                 t.MonthBalance

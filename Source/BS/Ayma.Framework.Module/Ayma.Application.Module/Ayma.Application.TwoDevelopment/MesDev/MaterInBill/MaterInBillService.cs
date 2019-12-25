@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_UnitWeight]
                                   ,[G_Super]
                                   ,[G_Lower]
-                                  ,[G_CreateBy]
+                                  ,dbo.GetUserNameById([G_CreateBy])G_CreateBy
                                   ,[G_CreateDate]
                                   ,[G_UpdateBy]
                                   ,[G_UpdateDate]
@@ -158,14 +158,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_OrderNo,
                 t.M_OrderDate,
                 t.M_Status,
-                t.M_CreateBy,
+                dbo.GetUserNameById(t.M_CreateBy) M_CreateBy,
                 t.M_CreateDate,
-                t.M_UpdateBy,
+                dbo.GetUserNameById(t.M_UpdateBy) M_UpdateBy,
                 t.M_UpdateDate,
                 t.M_Remark,
                 t.M_DeleteBy,
                 t.M_DeleteDate,
-                t.M_UploadBy,
+                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
@@ -232,14 +232,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_OrderNo,
                 t.M_OrderDate,
                 t.M_Status,
-                t.M_CreateBy,
+                dbo.GetUserNameById(t.M_CreateBy) M_CreateBy,
                 t.M_CreateDate,
-                t.M_UpdateBy,
+                dbo.GetUserNameById(t.M_UpdateBy) M_CreateBy,
                 t.M_UpdateDate,
                 t.M_Remark,
                 t.M_DeleteBy,
                 t.M_DeleteDate,
-                t.M_UploadBy,
+                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
@@ -311,14 +311,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_OrderNo,
                 t.M_OrderDate,
                 t.M_Status,
-                t.M_CreateBy,
+                dbo.GetUserNameById(t.M_CreateBy) M_CreateBy,
                 t.M_CreateDate,
-                t.M_UpdateBy,
+                dbo.GetUserNameById(t.M_UpdateBy) M_UpdateBy,
                 t.M_UpdateDate,
                 t.M_Remark,
                 t.M_DeleteBy,
                 t.M_DeleteDate,
-                t.M_UploadBy,
+                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");
@@ -393,14 +393,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_Status,
                 t.M_SupplyName,
                 t.M_SupplyCode,
-                t.M_CreateBy,
+                dbo.GetUserNameById(t.M_CreateBy) M_CreateBy,
                 t.M_CreateDate,
-                t.M_UpdateBy,
+                dbo.GetUserNameById(t.M_UpdateBy) M_UpdateBy,
                 t.M_UpdateDate,
                 t.M_Remark,
                 t.M_DeleteBy,
                 t.M_DeleteDate,
-                t.M_UploadBy,
+                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t ");

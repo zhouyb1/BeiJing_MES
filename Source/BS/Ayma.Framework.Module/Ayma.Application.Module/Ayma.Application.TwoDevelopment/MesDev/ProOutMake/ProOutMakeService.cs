@@ -36,14 +36,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               ,t.[P_OrderNo]
                               ,t.[P_OrderDate]
                               ,t.[P_Status]
-                              ,t.[P_CreateBy]
+                              ,dbo.GetUserNameById(t.[P_CreateBy]) P_CreateBy
                               ,t.[P_CreateDate]
                               ,t.[P_UpdateBy]
                               ,t.[P_UpdateDate]
                               ,t.[P_Remark]
                               ,t.[P_DeleteBy]
                               ,t.[P_DeleteDate]
-                              ,t.[P_UploadBy]
+                              ,dbo.GetUserNameById(t.[P_UploadBy]) P_UploadBy
                               ,t.[P_UploadDate]");
                 strSql.Append("  FROM Mes_ProOutHead t ");
                 strSql.Append("  WHERE (t.P_Status=1 or t.P_Status=2) ");
@@ -109,14 +109,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               ,t.[P_OrderNo]
                               ,t.[P_OrderDate]
                               ,t.[P_Status]
-                              ,t.[P_CreateBy]
+                              ,dbo.GetUserNameById(t.[P_CreateBy])P_CreateBy
                               ,t.[P_CreateDate]
-                              ,t.[P_UpdateBy]
+                              ,dbo.GetUserNameById(t.[P_UpdateBy])P_UpdateBy
                               ,t.[P_UpdateDate]
                               ,t.[P_Remark]
                               ,t.[P_DeleteBy]
                               ,t.[P_DeleteDate]
-                              ,t.[P_UploadBy]
+                              ,dbo.GetUserNameById(t.[P_UploadBy])P_UploadBy
                               ,t.[P_UploadDate]");
                 strSql.Append("  FROM Mes_ProOutHead t ");
                 strSql.Append("  WHERE t.P_Status=3 ");

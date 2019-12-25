@@ -119,7 +119,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.M_Status = ErpEnums.MaterInStatusEnum.NoAudit;
             this.M_CreateDate = DateTime.Now;
-            this.M_CreateBy = userInfo.realName;
+            this.M_CreateBy = userInfo.userId;
         }
         /// <summary>
         /// 编辑调用
@@ -130,7 +130,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
             this.M_UpdateDate = DateTime.Now;
-            this.M_UpdateBy = userInfo.realName;
+            this.M_UpdateBy = userInfo.userId;
         }
         #endregion
         #region 扩展字段

@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockToCode,
                 t.B_StockToName,
                 t.B_Remark,
-                t.B_CreateBy,
+                dbo.GetUserNameById(t.B_CreateBy) B_CreateBy,
                 t.B_Kind,
                 t.B_CreateDate
                 ");
@@ -191,7 +191,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockToCode,
                 t.B_StockToName,
                 t.B_Remark,
-                t.B_CreateBy,
+                dbo.GetUserNameById(t.B_CreateBy) B_CreateBy,
                 t.B_Kind,
                 t.B_CreateDate
                 ");

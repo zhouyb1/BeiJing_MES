@@ -43,7 +43,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_QualifiedQty,
                 t.I_Batch,
                 r.R_Name AS I_Reson,
-                t.I_CreateBy,
+                dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
                 strSql.Append("  FROM Mes_Inspect t LEFT JOIN Mes_Reson r ON t.I_Reson=r.R_Code");

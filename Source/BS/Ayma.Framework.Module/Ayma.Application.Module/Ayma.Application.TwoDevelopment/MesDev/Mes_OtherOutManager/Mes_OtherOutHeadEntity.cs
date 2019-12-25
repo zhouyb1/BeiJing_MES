@@ -126,7 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.O_Status = ErpEnums.OtherInStatusEnum.NoAudit;
             this.O_CreateDate = DateTime.Now;
-            this.O_CreateBy = userInfo.realName;
+            this.O_CreateBy = userInfo.userId;
         }
         /// <summary>
         /// 编辑调用
@@ -137,7 +137,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
             this.O_UpdateDate = DateTime.Now;
-            this.O_UpdateBy = userInfo.realName;
+            this.O_UpdateBy = userInfo.userId;
         }
         #endregion
     }

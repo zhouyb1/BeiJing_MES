@@ -106,7 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OrderNo,
                 t.O_OrderDate,
                 t.O_Record,
-                t.O_ProCode,
+                dbo.GetProNamekByCode(O_ProCode) O_ProCode,
                 t.O_WorkShopCode,
                 t.O_WorkShopName,
                 t.O_Remark,

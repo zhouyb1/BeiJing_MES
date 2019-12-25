@@ -39,7 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OrderDate,
                 t.O_Remark,
                 t.O_WorkShop,
-                t.O_CreateBy,
+                dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate,
                 t.O_Kind
                 ");
@@ -120,7 +120,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OrderDate,
                 t.O_WorkShop,
                 t.O_Remark,
-                t.O_CreateBy,
+                dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate,
                 t.O_Kind
                 ");

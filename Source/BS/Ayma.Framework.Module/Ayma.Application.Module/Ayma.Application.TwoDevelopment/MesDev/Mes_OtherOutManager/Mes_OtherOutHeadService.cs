@@ -20,7 +20,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private string fieldSql;
         public Mes_OtherOutHeadService()
         {
-            fieldSql=@"
+            fieldSql= @"
                 t.ID,
                 t.O_OtherOutNo,
                 t.O_StockCode,
@@ -30,11 +30,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_Status,
                 t.O_CreateBy,
                 t.O_CreateDate,
-                t.O_UpdateBy,
+                dbo.GetUserNameById(t.O_UpdateBy) O_UpdateBy,
                 t.O_UpdateDate,
-                t.O_DeleteBy,
+                dbo.GetUserNameById(t.O_DeleteBy) O_DeleteBy,
                 t.O_DeleteDate,
-                t.O_UploadBy,
+                dbo.GetUserNameById(t.O_UploadBy) O_UploadBy,
                 t.O_UploadDate,
                 t.O_Remark,
                 t.MonthBalance

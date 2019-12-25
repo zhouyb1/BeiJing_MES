@@ -40,9 +40,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_ProName,
                 t.C_Max,
                 t.C_Min,
-                t.C_CreateBy,
+                dbo.GetUserNameById(t.C_CreateBy) C_CreateBy,
                 t.C_CreateDate,
-                t.C_UpdateBy,
+                dbo.GetUserNameById(t.C_UpdateBy) C_UpdateBy,
                 t.C_UpdateDate,
                 t.C_Remark
                 ");

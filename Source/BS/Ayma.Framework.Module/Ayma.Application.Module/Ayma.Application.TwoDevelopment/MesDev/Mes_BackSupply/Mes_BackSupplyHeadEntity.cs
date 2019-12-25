@@ -99,7 +99,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.B_Status = ErpEnums.BackSupplyStatusEnum.NoAudit;
             this.B_CreateDate = DateTime.Now;
-            this.B_CreateBy = userInfo.realName;
+            this.B_CreateBy = userInfo.userId;
         }
         /// <summary>
         /// 编辑调用
@@ -110,7 +110,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var userInfo = LoginUserInfo.Get();
             this.ID = keyValue;
             this.B_UpdateDate = DateTime.Now;
-            this.B_UpdateBy = userInfo.realName;
+            this.B_UpdateBy = userInfo.userId;
         }
         /// <summary>
         /// 删除调用
@@ -122,7 +122,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = keyValue;
             this.B_Status = ErpEnums.BackSupplyStatusEnum.IsDelete;
             this.B_DeleteDate = DateTime.Now;
-            this.B_DeleteBy = userInfo.realName;
+            this.B_DeleteBy = userInfo.userId;
         }
         #endregion
         #region 扩展字段

@@ -98,14 +98,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderNo,
                 t.P_OrderDate,
                 t.R_Status,
-                t.R_CreateBy,
+                dbo.GetUserNameById(t.R_CreateBy) R_CreateBy,
                 t.R_CreateDate,
-                t.R_UpdateBy,
+                dbo.GetUserNameById(t.R_UpdateBy) R_UpdateBy,
                 t.R_UpdateDate,
                 t.R_Remark,
                 t.R_DeleteBy,
                 t.R_DeleteDate,
-                t.R_UploadBy,
+                dbo.GetUserNameById(t.R_UploadBy) R_UploadBy,
                 t.R_UploadDate
                 ");
                 strSql.Append("  FROM Mes_RequistHead t ");
@@ -185,14 +185,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderNo,
                 t.P_OrderDate,
                 t.R_Status,
-                t.R_CreateBy,
+                dbo.GetUserNameById(t.R_CreateBy) R_CreateBy,
                 t.R_CreateDate,
-                t.R_UpdateBy,
+                dbo.GetUserNameById(t.R_UpdateBy) R_UpdateBy,
                 t.R_UpdateDate,
                 t.R_Remark,
                 t.R_DeleteBy,
                 t.R_DeleteDate,
-                t.R_UploadBy,
+                dbo.GetUserNameById(t.R_UploadBy) R_UploadBy,
                 t.R_UploadDate
                 ");
                 strSql.Append("  FROM Mes_RequistHead t ");
