@@ -260,7 +260,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     G_Unit I_Unit,
                                     G_Price I_Price
                             FROM    dbo.Mes_Goods g 
-                                    LEFT JOIN dbo.Mes_InPrice p ON p.P_GoodsCode = g.G_Code 
                             WHERE  G_Kind in (1,2) ");
                 var dp = new DynamicParameters(new {});
                 var queryParam = queryJson.ToJObject();
