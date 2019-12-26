@@ -142,7 +142,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 isMultiselect: true,
                 height: 280,
-                inputCount: 3,
+                inputCount: 2,
 
             });
 
