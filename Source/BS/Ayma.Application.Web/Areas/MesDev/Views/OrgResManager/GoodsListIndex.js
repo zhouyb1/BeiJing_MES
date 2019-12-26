@@ -101,9 +101,9 @@ var bootstrap = function ($, ayma) {
                            { label: "单价", name: "w_price", width: 60, align: "center" },
                            { label: "单位", name: "w_unit", width: 60, align: "center" },
                            {
-                               label: "数量", name: "w_qty", width: 90, align: "center", editType: 'label',
+                               label: "数量", name: "w_qty", width: 90, align: "center", 
                            },
-                           { label: "批次", name: "w_batch", width: 90, align: "center", editType: 'label' }
+                           { label: "批次", name: "w_batch", width: 90, align: "center",}
                        ]
                    },
                     {
