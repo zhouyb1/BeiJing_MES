@@ -53,11 +53,12 @@ var bootstrap = function ($, ayma) {
             $('#am_edit').on('click', function () {
                 selectedRow = $('#girdtable').jfGridGet('rowdata');
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var B_ParentID = $('#girdtable').jfGridValue('B_ParentID');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'BomRecordForm',
                         title: '编辑配方',
-                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm',
+                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?B_ParentID=' + B_ParentID,
                         width: 700,
                         height: 500,
                         callBack: function (id) {
@@ -98,9 +99,9 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordTreeList',
                 headData: [
-                           { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },
-                           { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left" },
                            { label: "配方名称", name: "B_FormulaName", width: 160, align: "left" },
+                           { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left" },
+                           { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },      
                            { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left" },
                            { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
                            { label: '单位', name: 'B_Unit', width: 100, align: 'left' },

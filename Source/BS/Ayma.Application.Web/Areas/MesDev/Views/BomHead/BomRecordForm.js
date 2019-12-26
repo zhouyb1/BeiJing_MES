@@ -8,7 +8,7 @@
 var parentId = request('parentId');
 var recordCode = request('recordCode');//工艺代码
 var selectedRow = top.BomRecordIndexSelectedRow();
-
+var B_ParentID = request('B_ParentID');
 var keyValue = '';
 var acceptClick;
 var bootstrap = function ($, ayma) {
@@ -19,13 +19,29 @@ var bootstrap = function ($, ayma) {
             page.bind();
             page.initData();
         },
-        bind: function () {
-           
+        bind: function () {          
             if (parentId != '' && parentId!=undefined) {
                 $("#B_RecordCode").attr("disabled", "disabled");
+                $("#B_FormulaCode").removeAttr("isvalid").removeAttr("checkexpession");
+                $("#div_FormulaCode").html("配方编码");
+                $("#B_FormulaName").removeAttr("isvalid").removeAttr("checkexpession");
+                $("#div_FormulaName").html("配方名称");
+                $("#B_Code").css("display", "none");
+                $("#B_Name").css("display", "none");
             } else {
                 $("#B_RecordCode").removeAttr("disabled");
+                $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                $("#div_FormulaCode").html("配方编码<font face=\"宋体\">*</font>");
+                $("#B_FormulaName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                $("#div_FormulaName").html("配方名称<font face=\"宋体\">*</font>");
+                $("#B_Code").css("display", "block");
+                $("#B_Name").css("display", "block ");
             }
+            //if (B_ParentID != '' && B_ParentID != undefined) {
+            //    $("#B_RecordCode").attr("disabled", "disabled");
+            //} else {
+            //    $("#B_RecordCode").removeAttr("disabled");
+            //}
             //单位
             $("#B_Unit").DataItemSelect({ code: "GoodsUnit" });
             //是否有效
@@ -40,6 +56,23 @@ var bootstrap = function ($, ayma) {
             //上级改变事件
             $('#B_ParentID').bind("change", function() {
                 var value = $(this).selectGet();
+                if (value != "") {                  
+                    $("#B_FormulaCode").removeAttr("isvalid").removeAttr("checkexpession");
+                    $("#div_FormulaCode").html("配方编码");
+                    $("#B_FormulaName").removeAttr("isvalid").removeAttr("checkexpession");
+                    $("#div_FormulaName").html("配方名称");
+                    $("#B_Code").css("display", "none");
+                    $("#B_Name").css("display", "none");
+                }
+                else {
+                    $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $("#div_FormulaCode").html("配方编码<font face=\"宋体\">*</font>");
+                    $("#B_FormulaName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                    $("#div_FormulaName").html("配方名称<font face=\"宋体\">*</font>");
+                    $("#B_Code").css("display", "block");
+                    $("#B_Name").css("display", "block ");
+
+                }
                 if (value != '' && value != undefined) {
                     $.ajax({
                         type: "get",
