@@ -226,6 +226,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     }
     //表格商品添加
     refreshGirdData = function (data, row) {
+
         var rows = $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
         if (data.length == 0) { //单选
             if (!tmp.get(row)) {
@@ -241,7 +242,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     rows.push(row);
                 }
             }
-        } else { //多选                  
+
+        } else { //多选 
+
             for (var i = 0; i < data.length; i++) {
                 if (!tmp.get(data[i])) {
                     tmp.set(data[i], 1);
@@ -256,6 +259,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 }
             }
+
         }
         //数组过滤
         var filterarray = $.grep(rows, function (item) {
@@ -266,14 +270,19 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     //表格商品删除
     RemoveGridData = function (row) {
         var rows = $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
+
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["O_GoodsCode"] == row["I_GoodsCode"]) {
+            if (rows[i]["O_GoodsCode"] == row["I_GoodsCode"] && rows[i]["O_Batch"] == row["I_Batch"]) {
                 rows.splice(i, 1);
+                //tmp.delete(row);
                 tmp.delete(row);
                 page.search(rows);
             }
         }
     };
+    top.NewGirdData = function () {
+        return $('#Mes_OutWorkShopDetail').jfGridGet('rowdatas');
+    }
   
     page.init();
 }
