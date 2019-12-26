@@ -117,7 +117,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                    strSql.Append(" AND t.G_Code+t.G_Name like @keyword ");
+                    strSql.Append(" AND m.G_Code+m.G_Name like @keyword ");
                 }
                 if (!queryParam["G_SupplyCode"].IsEmpty())
                 {
