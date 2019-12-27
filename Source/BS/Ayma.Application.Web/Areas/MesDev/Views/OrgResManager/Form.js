@@ -44,7 +44,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
              
             });
-            //绑定工序
+
+           //绑定工序
             $('#O_ProCode').select({
                 type: 'default',
                 value: 'P_ProNo',
@@ -114,6 +115,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                           align: "center",
                           children: [
                               { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
+                             
                               { label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
                               { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue==""?false:true },
                               {
@@ -132,7 +134,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               },
                               { label: "单价", name: "O_Price", width: 60, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
-                              { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' }
+                              { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' },
+                              { label: "O_SecGoodsCode", name: "O_SecGoodsCode", width: 90, align: "center",hidden:true }
                           ]
                       },
                 ],
@@ -252,6 +255,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     top.NewGirdData = function () {
         return $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
     }
+
     //表格商品添加
     refreshGirdData = function (data, row) {
         var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
@@ -259,15 +263,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (!tmp.get(row)) {
                 tmp.set(row,1);
                 var rowFlag = true;
-                //加个循环判断数组重复
-                //for (var k = 0; k < rows.length; k++) {
-                //    if (rows[k].O_GoodsCode == row.O_GoodsCode && rows[k].O_Batch == row.O_Batch) {
-                //        rowFlag = false;
-                //    }
-                //}
-                //if (rowFlag) {
-                //    rows.push(row);
-                //}
                 rows.push(row);
             }
         } else { //多选                  
@@ -329,25 +324,129 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         });
         page.search(filterarray1, filterarray2);
     };
+
     //表格商品删除
     RemoveGridData = function (row) {
+
+        ////组装前
+        //row['O_GoodsCode'] = row['w_goodscode'];
+        //row['O_GoodsName'] = row['w_goodsname'];
+        //row['O_Unit'] = row['w_unit'];
+        //row["O_Qty"] = quantity;
+        //row["O_Price"] = row['w_price'];
+        //row['O_Batch'] = row['w_batch'];
+        //row["StockQty"] = row["w_qty"];
+
+        ////组装后
+        //row['O_SecGoodsCode'] = row['c_seccode'];
+        //row['O_SecGoodsName'] = row['c_secname'];
+        //row['O_SecUnit'] = row['w_unit'];
+        //row["O_SecQty"] = quantity;
+        //row['O_SecBatch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
+        //row["ID"] = row["id"];
+
         var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i]["O_GoodsCode"] == row["w_goodscode"]) {
+            if (rows[i]["O_GoodsCode"] == row["O_GoodsCode"]) {
                 rows.splice(i, 1);
                 tmp.delete(row);
-                page.search(rows);
+                //page.search(rows);
             }
         }
 
         var row_d= $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
         for (var i = 0; i < row_d.length; i++) {
-            if (row_d[i]["O_SecGoodsCode"] == row["c_seccode"]) {
+            if (row_d[i]["O_SecGoodsCode"] == row["O_GoodsCode"]) {
                 row_d.splice(i, 1);
                 tmp_d.delete(row);
-                page.search(row_d);
+                //page.search(row_d);
             }
         }
+
+        //page.search(rows,row_d);
     };
+
+
+
+
+
+
+    //获取处理前物料
+    top.GetGoodsListHead = function () {
+        var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
+        return rows;
+    };
+
+    //获取处理后物料
+    top.GetGoodsListDetails = function () {
+        var rows = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
+        return rows;
+    };
+
+    //刷新处理前物料列表
+    top.FormRefreshGirdDataHead = function (data) {
+
+        var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
+        rows.push(data);
+
+        var filterarray = $.grep(rows, function (item) {
+            return item["O_GoodsCode"] != undefined;
+        });
+
+        $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: filterarray });
+    };
+
+    //刷新处理后物料列表
+    top.FormRefreshGirdDataDetails = function (data) {
+
+        var rows = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
+        rows.push(data);
+
+        var filterarray = $.grep(rows, function (item) {
+            return item["O_SecGoodsCode"] != undefined;
+        });
+
+        $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: filterarray });
+    };
+
+
+    //移除处理前物料列表
+    top.FormRemoveGirdDataHead = function (data) {
+
+
+        var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].O_GoodsCode == data.O_GoodsCode && rows[i].O_Batch == data.O_Batch) {
+                rows.splice(i, 1);
+                break;
+            }
+        }
+
+        var filterarray = $.grep(rows, function (item) {
+            return item["O_GoodsCode"] != undefined;
+        });
+
+        $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: filterarray });
+
+    };
+
+    //移除处理后物料列表
+    top.FormRemoveGirdDataDetails = function (data) {
+
+        var rows = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
+        for (var i = 0; i < rows.length; i++) {
+            if (rows[i].O_SecGoodsCode == data.O_SecGoodsCode && rows[i].O_SecBatch == data.O_SecBatch) {
+                rows.splice(i, 1);
+                break;
+            }
+        }
+
+        var filterarray = $.grep(rows, function (item) {
+            return item["O_SecGoodsCode"] != undefined;
+        });
+
+        $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: filterarray });
+    };
+
     page.init();
 }

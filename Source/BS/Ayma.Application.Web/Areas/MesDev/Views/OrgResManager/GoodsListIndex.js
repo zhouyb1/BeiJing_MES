@@ -15,19 +15,35 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
-//批次
-var batch = new Date();
+
+
+
+//处理前物料列表
+var goodsOutList = [];
+//处理后物料列表
+var goodsSecList = [];
 
 //仓库编码
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
         init: function () {
+            var rows;
+            rows = top.GetGoodsListHead();
+            for (var i = 0; i < rows.length; i++) {
+                goodsOutList.push({ O_GoodsCode: rows[i].O_GoodsCode, O_Batch: ayma.formatDate(rows[i].O_Batch, "yyyy-MM-dd").toString().replace(/-/g, ""), O_SecGoodsCode: rows[i].O_SecGoodsCode });
+            }
+            rows = top.GetGoodsListDetails();
+            for (var i = 0; i < rows.length; i++) {
+                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: ayma.formatDate(rows[i].rows[i].O_SecBatch, "yyyy-MM-dd").toString().replace(/-/g, "") });
+            }
+
+
             page.initGird();
             page.bind();
             //获取父级iframe中的刷新商品列表方法
-            parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
-            parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
+            //parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
+            //parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
         },
         bind: function () {
 
@@ -125,71 +141,95 @@ var bootstrap = function ($, ayma) {
                 isPage: true,
                 sidx: 'w_batch',
                 sord: 'ASC',
-                onSelectRow: function (rowdata, row, rowid) {
-                    //if ($("input[role='checkbox']:checked").eq(0).attr("id")) {
-                    //    return;
-                    //}
-                    var allCheck = $("#jfgrid_all_cb_girdtable");
+                onSelectRow: function (rowobj, rowdata, rowid) {
+
+
+                    //批次
+                    var batch = new Date();
+                    var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
-                    if (isChecked.is(":checked")) {
-                        if (row['w_qty'] <= 0) {
-                            isChecked.attr('checked', false); //移除 checked 状态
-                            ayma.alert.error('库存为负数');
-                        } else {
-                            if (!allCheck.is(":checked")) {
-                                //提示用户选择最早批次
-                                var list = $('#girdtable').jfGridGet('rowdatas');
-                                var data = [];
-                                data = list.filter(function(item) {
-                                    if (item.w_qty > 0) {
-                                        return item.w_goodscode == row['w_goodscode'];
-                                    }
-                                })
-                                var min = data[0].w_batch;
-                                var len = data.length;
-                                for (var i = 1; i < len; i++) {
-                                    if (data[i].w_batch < min) {
-                                        min = data[i].w_batch;
-                                    }
-                                }
-                                for (var i = 0; i < list.length; i++) {
-                                    if (list[i].w_batch == min && list[i].w_goodscode == data[0].w_goodscode) {
-                                        var minrowid = i;
-                                    }
-                                }
-                                var minisChecked = $("[rownum='rownum_girdtable_" + minrowid + "']").find("input[role='checkbox']");
-                                if (!minisChecked.is(":checked")) {
-                                    if (row['O_Batch'] > min) {
-                                        ayma.alert.error('请优先使用最早批次为' + min + '的【' + row['w_goodscode'] + '】');
-                                    }
+
+                    var row = {};
+                    row.ID = rowdata.id;
+                    row.O_GoodsCode = rowdata.w_goodscode;
+                    row.O_GoodsName = rowdata.w_goodsname;
+                    row.O_Unit = rowdata.w_unit;
+                    row.O_Qty = quantity;
+                    row.O_Price = rowdata.w_price;
+                    row.O_Batch = rowdata.w_batch;
+                    row.StockQty = rowdata.w_qty;
+
+                    row.O_SecGoodsCode = rowdata.c_seccode;
+                    row.O_SecGoodsName = rowdata.c_secname;
+                    row.O_SecUnit = rowdata.w_unit;
+                    row.O_SecQty = rowdata.quantity;
+                    row.O_SecBatch = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
+
+
+                    if (!isChecked.is(":checked")) {
+                        //移除
+                        var ismove = false;
+                        for (var i = 0; i < goodsOutList.length; i++) {
+                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch) {
+                                ismove = true;
+                                goodsOutList.splice(i, 1);
+                                break;
+                            }
+                        }
+                        if (ismove) {
+                            top.FormRemoveGirdDataHead(row);
+                        }
+                  
+
+                        ismove = true;
+                        for (var i = 0; i < goodsOutList.length; i++) {
+                            if (goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
+                                ismove = false;
+                                break;
+                            }
+                        }
+                        if (ismove) {
+                            for (var i = 0; i < goodsSecList.length; i++) {
+                                if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
+                                    goodsSecList[i].O_SecBatch == row.O_SecBatch) {
+                                    goodsSecList.splice(i, 1);
+                                    top.FormRemoveGirdDataDetails(row);
+                                    break;
                                 }
                             }
                         }
-                        //获取一键数量
-                        var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
-                        //copy需要更改的地方 
-                        //组装前
-                        row['O_GoodsCode'] = row['w_goodscode'];
-                        row['O_GoodsName'] = row['w_goodsname'];
-                        row['O_Unit'] = row['w_unit'];
-                        row["O_Qty"] = quantity;
-                        row["O_Price"] = row['w_price'];
-                        row['O_Batch'] = row['w_batch'];
-                        row["StockQty"] = row["w_qty"];
-                        //组装后
-                        row['O_SecGoodsCode'] = row['c_seccode'];
-                        row['O_SecGoodsName'] = row['c_secname'];
-                        row['O_SecUnit'] = row['w_unit'];
-                        row["O_SecQty"] = quantity;
-                        row['O_SecBatch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
-                        row["ID"] = row["id"];
-                       
-                        parentRefreshGirdData([], row);
-                    }
-                    if (!isChecked.is(":checked")) {
-                        parentRemoveGridData(row);
+
+                    } else {
+                        //新增
+
+                        //判断是否已经添加过
+                        var isadd = true;
+                        for (var i = 0; i < goodsOutList.length; i++) {
+                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch) {
+                                isadd = false;
+                                break;;
+                            }
+                        }
+                        if (isadd) {
+                            top.FormRefreshGirdDataHead(row);
+                            goodsOutList.push({ O_GoodsCode: row.O_GoodsCode, O_Batch: row.O_Batch ,O_SecGoodsCode:row.O_SecGoodsCode});
+                        }
+
+
+                        isadd = true;
+                        for (var i = 0; i < goodsSecList.length; i++) {
+                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode && goodsSecList[i].O_SecBatch == row.O_SecBatch) {
+                                isadd = false;
+                                break;
+                            }
+                        }
+                        if (isadd) {
+                            top.FormRefreshGirdDataDetails(row);
+                            goodsSecList.push({ O_SecGoodsCode: row.O_SecGoodsCode, O_SecBatch: row.O_SecBatch });
+                        }
                     }
                 },
+
                 onRenderComplete: function (rows) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
