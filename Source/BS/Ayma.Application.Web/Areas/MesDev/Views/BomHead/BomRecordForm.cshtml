@@ -2,46 +2,48 @@
     ViewBag.Title = "配方管理";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
-<div class="am-form-wrap" id="form">
+<div class="am-form-wrap" id="form" data-table="Mes_BomHead">
     <div class="col-xs-12 am-form-item">
         <div class="am-form-item-title">上级</div>
         <div id="B_ParentID"></div>
     </div>
-    <div class="col-xs-6 am-form-item" data-table="B_BusinessCategory">
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">工艺代码<font face="宋体">*</font></div>
         <div id="B_RecordCode" isvalid="yes" checkexpession="NotNull"></div>
 
     </div>
-   
-    <div class="col-xs-6 am-form-item" id="B_Code" >
+
+    <div class="col-xs-6 am-form-item" id="B_Code" data-table="Mes_BomHead">
         <div class="am-form-item-title" id="div_FormulaCode">配方编码<font face="宋体">*</font></div>
         <input id="B_FormulaCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-    <div class="col-xs-6 am-form-item" id="B_Name">
+    <div class="col-xs-6 am-form-item" id="B_Name" data-table="Mes_BomHead">
         <div class="am-form-item-title" id="div_FormulaName">配方名称<font face="宋体">*</font></div>
         <input id="B_FormulaName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-    
-    <div class="col-xs-6 am-form-item">
+
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
         <div id="B_GoodsName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
-    <div class="col-xs-6 am-form-item">
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">物料编码</div>
         <input id="B_GoodsCode" type="text" class="form-control" disabled="disabled" />
     </div>
 
-   
-    <div class="col-xs-6 am-form-item">
+
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">数量<font face="宋体">*</font></div>
         <input id="B_Qty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-    <div class="col-xs-6 am-form-item">
-        <div class="am-form-item-title">单位<font face="宋体">*</font>
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
+        <div class="am-form-item-title" id="b_unit">
+            单位<font face="宋体">*</font>
         </div>
         <div id="B_Unit" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input id="B_Unit1" type="text" class="form-control" disabled="disabled" />
     </div>
-    <div class="col-xs-6 am-form-item">
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">是否有效<font face="宋体">*</font></div>
         <div id="B_Avail" isvalid="yes" checkexpession="NotNull"></div>
     </div>
@@ -53,8 +55,8 @@
         <div class="am-form-item-title">截止时间</div>
         <input id="B_EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ onpicked: function () { $('#B_EndTime').trigger('change'); } })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" />
     </div>
-   
-    <div class="col-xs-6 am-form-item">
+
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">备注</div>
         <input id="B_Remark" type="text" class="form-control" />
     </div>

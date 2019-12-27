@@ -20,8 +20,13 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {          
-            if (parentId != '' && parentId!=undefined) {
+            if (parentId != '' && parentId != undefined) {
                 $("#B_RecordCode").attr("disabled", "disabled");
+                $("#B_Unit").css("display", "none");
+                $("#B_Unit1").css("display", "block");
+                $("#B_Unit1").attr("value", "g");
+                $("#B_Unit").removeAttr("isvalid").removeAttr("checkexpession");
+                $("#b_unit").html("单位");
                 $("#B_FormulaCode").removeAttr("isvalid").removeAttr("checkexpession");
                 $("#div_FormulaCode").html("配方编码");
                 $("#B_FormulaName").removeAttr("isvalid").removeAttr("checkexpession");
@@ -30,6 +35,8 @@ var bootstrap = function ($, ayma) {
                 $("#B_Name").css("display", "none");
             } else {
                 $("#B_RecordCode").removeAttr("disabled");
+                $("#B_Unit").css("display", "block");
+                $("#B_Unit1").css("display", "none");
                 $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                 $("#div_FormulaCode").html("配方编码<font face=\"宋体\">*</font>");
                 $("#B_FormulaName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -56,7 +63,12 @@ var bootstrap = function ($, ayma) {
             //上级改变事件
             $('#B_ParentID').bind("change", function() {
                 var value = $(this).selectGet();
-                if (value != "") {                  
+                if (value != "") {
+                    $("#B_Unit").css("display", "none");
+                    $("#B_Unit1").css("display", "block");
+                    $("#B_Unit1").attr("value", "g");
+                    $("#B_Unit").removeAttr("isvalid").removeAttr("checkexpession");
+                    $("#b_unit").html("单位");
                     $("#B_FormulaCode").removeAttr("isvalid").removeAttr("checkexpession");
                     $("#div_FormulaCode").html("配方编码");
                     $("#B_FormulaName").removeAttr("isvalid").removeAttr("checkexpession");
@@ -65,6 +77,8 @@ var bootstrap = function ($, ayma) {
                     $("#B_Name").css("display", "none");
                 }
                 else {
+                    $("#B_Unit").css("display", "block");
+                    $("#B_Unit1").css("display", "none");
                     $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#div_FormulaCode").html("配方编码<font face=\"宋体\">*</font>");
                     $("#B_FormulaName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -166,10 +180,14 @@ var bootstrap = function ($, ayma) {
         if (postData["B_ParentID"] == '' || postData["B_ParentID"] == '&nbsp;') {
             postData["B_ParentID"] = '0';
         }
+        if (postData["B_Unit"] == '' || postData["B_Unit"] == '&nbsp;') {
+            postData["B_Unit"] = 'g';
+        }
         else if (postData["B_ParentID"] == keyValue) {
             ayma.alert.error('上级不能是自己本身');
             return false;
         }
+
         $.SaveForm(top.$.rootUrl + '/MesDev/BomHead/SaveBomRecordForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
