@@ -212,8 +212,8 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["id"] == undefined ? 0 : rowslist.length;
-                        for (var i = 0; i < rows.length; i++) {
+                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        for (var i = 0; i < rowlistlenght; i++) {
                             for (var j = 0; j < rowslist.length; j++) {
                                 if (rows[i]['p_goodscode'] == rowslist[j]['M_GoodsCode']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
