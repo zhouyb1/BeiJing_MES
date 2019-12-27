@@ -31,14 +31,12 @@ var bootstrap = function ($, ayma) {
             var rows;
             rows = top.GetGoodsListHead();
             for (var i = 0; i < rows.length; i++) {
-                goodsOutList.push({ O_GoodsCode: rows[i].O_GoodsCode, O_Batch: ayma.formatDate(rows[i].O_Batch, "yyyy-MM-dd").toString().replace(/-/g, ""), O_SecGoodsCode: rows[i].O_SecGoodsCode });
+                goodsOutList.push({ O_GoodsCode: rows[i].O_GoodsCode, O_Batch:rows[i].O_Batch, O_SecGoodsCode: rows[i].O_SecGoodsCode });
             }
             rows = top.GetGoodsListDetails();
             for (var i = 0; i < rows.length; i++) {
-                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: ayma.formatDate(rows[i].O_SecBatch, "yyyy-MM-dd").toString().replace(/-/g, "") });
+                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: rows[i].O_SecBatch });
             }
-
-
             page.initGird();
             page.bind();
             //获取父级iframe中的刷新商品列表方法

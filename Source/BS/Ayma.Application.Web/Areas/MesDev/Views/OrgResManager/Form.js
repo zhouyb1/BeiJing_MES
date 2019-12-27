@@ -204,6 +204,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: data[id] });
+                            var arr = [];
+                            for (var i = 0; i < data[id].length; i++) {
+                                if (!arr.includes(data[id][i].O_SecGoodsCode)) {
+                                    arr.push(data[id][i].O_SecGoodsCode);
+                                } else {
+                                    data[id].splice(i, 1);
+                                    i--;
+                                }
+                            }
                             $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: data[id] });
 
                         }
