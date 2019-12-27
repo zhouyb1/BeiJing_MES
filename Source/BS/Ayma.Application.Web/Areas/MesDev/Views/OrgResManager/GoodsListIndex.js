@@ -35,7 +35,7 @@ var bootstrap = function ($, ayma) {
             }
             rows = top.GetGoodsListDetails();
             for (var i = 0; i < rows.length; i++) {
-                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: ayma.formatDate(rows[i].rows[i].O_SecBatch, "yyyy-MM-dd").toString().replace(/-/g, "") });
+                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: ayma.formatDate(rows[i].O_SecBatch, "yyyy-MM-dd").toString().replace(/-/g, "") });
             }
 
 

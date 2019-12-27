@@ -208,20 +208,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
             Mes_OrgResHeadEntity entity = strEntity.ToObject<Mes_OrgResHeadEntity>();
             var mes_OrgResDetailList = detailList.ToObject<List<Mes_OrgResDetailEntity>>();
-            if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0||c.O_SecQty<=0))
-            {
-                return Fail("数量只能是大于0的实数");
-            }
-            var  list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
-            foreach (var item in list)
-            {
-                var useNum = mes_OrgResDetailList.Where(c => c.O_GoodsCode == item.Key).ToList().Sum(c => c.O_Qty);
-                var stock = new Mes_WorkShopScanBLL().GetMes_WorkShopScanEntity(item.Key);
-                if (useNum>stock.W_Qty)
-                {
-                    return Fail("【"+stock.W_GoodsName+"】当前使用数量大于库存");
-                }
-            }
+            //if (mes_OrgResDetailList.Any(c=>c.O_Qty<=0||c.O_SecQty<=0))
+            //{
+            //    return Fail("数量只能是大于0的实数");
+            //}
+            //var  list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
+            //foreach (var item in list)
+            //{
+            //    var useNum = mes_OrgResDetailList.Where(c => c.O_GoodsCode == item.Key).ToList().Sum(c => c.O_Qty);
+            //    var stock = new Mes_WorkShopScanBLL().GetMes_WorkShopScanEntity(item.Key,item,);
+            //    if (useNum>stock.W_Qty)
+            //    {
+            //        return Fail("【"+stock.W_GoodsName+"】当前使用数量大于库存");
+            //    }
+            //}
             orgResMangerIBLL.SaveEntity(keyValue, entity, mes_OrgResDetailList);
             return Success("保存成功！");
         }
