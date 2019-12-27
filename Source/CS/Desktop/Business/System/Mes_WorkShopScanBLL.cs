@@ -38,6 +38,29 @@ namespace Business.System
         }
 
 
+        /// <summary>
+        /// 查询数据
+        /// </summary>
+        /// <returns></returns>
+        public List<Mes_WorkShopScanEntity> GetList_WorkShopScan2(string condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                //strSql.Append("SELECT W_GoodsCode,W_GoodsName,W_Batch,W_Qty,W_Price,W_WorkShop,W_Status,W_Unit,ID,W_Remark,W_RecordCode,W_StockCode,W_StockName FROM Mes_WorkShopScan ");
+                strSql.Append(condit);
+                var paramList = new List<SqlParameter>();
+                //paramList.Add(new SqlParameter("@B_BasketName", string.Format("{0}", B_BasketName)));
+                var rows = db.ExecuteObjects<Mes_WorkShopScanEntity>(strSql.ToString(), paramList.ToArray());
+                return rows;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
 
 
         /// <summary>

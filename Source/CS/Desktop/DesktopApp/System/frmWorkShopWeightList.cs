@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -55,6 +56,28 @@ namespace DesktopApp
 
         }
 
+        private void txtRQQty_GotFocus(object sender, EventArgs e)
+        {
+            ShowInputPanel();
+        }
+        //显示屏幕键盘
+        public static int ShowInputPanel()
+        {
+            try
+            {
+                dynamic file = "C:\\Program Files\\Common Files\\microsoft shared\\ink\\TabTip.exe";
+                if (!System.IO.File.Exists(file))
+                    return -1;
+                Process.Start(file);
+                //return SetUnDock(); //不知SetUnDock()是什么，所以直接注释返回1
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 255;
+            }
+        }
+
         private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
@@ -64,10 +87,11 @@ namespace DesktopApp
             {
                 txtCode.Text = Goods_rows[0].G_Code;
                 txtUnit.Text = Goods_rows[0].G_Unit;
+                int dd = Goods_rows[0].G_Period * 24;
+                strBZQ = dd.ToString();
             }
             txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
-            int dd = Goods_rows[0].G_Period * 24;
-            strBZQ = dd.ToString();
+            
 
             //ShowYWL(txtCode.Text);
         }
@@ -149,7 +173,7 @@ namespace DesktopApp
                 {
                     this.Enabled = false;
                     Cursor.Current = Cursors.WaitCursor;
-                    
+                    string strBarcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
 
                     Mes_WorkShopWeightBLL WorkShopWeightBLL = new Mes_WorkShopWeightBLL();
                     Mes_WorkShopWeightEntity WorkShopWeightEntity = new Mes_WorkShopWeightEntity();
@@ -169,13 +193,14 @@ namespace DesktopApp
                     WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                     WorkShopWeightEntity.W_Status = 1;
                     WorkShopWeightEntity.W_WorkShopCode = Globels.strWorkShop;
+                    WorkShopWeightEntity.W_Remark = strBarcode;
 
                     int nCount = WorkShopWeightBLL.SaveEntity("", WorkShopWeightEntity);
                     if (nCount > 0)
                     {
                         string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                         Decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
-                        GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo,cmbGoodsName.Text, dTemp.ToString(), strBZQ,Barcode);
+                        GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, cmbGoodsName.Text, dTemp.ToString(), strBZQ, strBarcode);
                         MessageBox.Show("添加成功");
                         SaveBarcode(Barcode, txtCode.Text, cmbGoodsName.Text, dTemp, Globels.strWorkShop);
                     }
@@ -421,7 +446,7 @@ namespace DesktopApp
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
-                g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
+                //g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
 
@@ -539,6 +564,32 @@ namespace DesktopApp
             for(int i = 0 ; i < nLen; i++)
             {
 
+            }
+        }
+
+        private void txtRQQty_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                txtSJ.Text = dSJ.ToString();
+            }
+            catch
+            {
+                ;
+            }
+        }
+
+        private void txtQty_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                txtSJ.Text = dSJ.ToString();
+            }
+            catch
+            {
+                ;
             }
         }
 

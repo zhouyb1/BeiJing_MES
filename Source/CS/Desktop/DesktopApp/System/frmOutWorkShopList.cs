@@ -5,8 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -221,6 +223,33 @@ namespace DesktopApp
 
         private void btn_save_Click(object sender, EventArgs e)
         {
+            if(cmbGoodsCode.Text == "" || cmbGoodsName.Text == "" || cmbPc.Text == "" || txtName.Text == "")
+            {
+                lblTS.Text = "物料或者批次不能为空!";
+                return;
+            }
+
+            if (txtQty.Text == "")
+            {
+                lblTS.Text = "数量不能为空!";
+                return;
+            }
+
+            try
+            {
+                if(Convert.ToDecimal(txtQty.Text) > Convert.ToDecimal(txtStockQty.Text))
+                {
+                    lblTS.Text = "不能超过库存数量!";
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                lblTS.Text = "数量只能为数字!";
+                return;
+            }
+
+
             if(MessageBox.Show("是否保存","",MessageBoxButtons.YesNo,MessageBoxIcon.Question,MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                 try
@@ -570,8 +599,60 @@ namespace DesktopApp
                 txtStockQty.Text = row[0].I_Qty.ToString();
                 //txt .Text = row[0].I_Batch;
             }
+
+            txtQty.Focus();
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtQty_GotFocus(object sender, EventArgs e)
+        {
+            ShowInputPanel();
+        }
+
+        private const Int32 WM_SYSCOMMAND = 274;
+        private const UInt32 SC_CLOSE = 61536;
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PostMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PostMessage(IntPtr hWnd, int Msg, uint wParam, uint lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        private static extern int RegisterWindowMessage(string lpString);
+
+        //显示屏幕键盘
+        public static int ShowInputPanel()
+        {
+            try
+            {
+                dynamic file = "C:\\Program Files\\Common Files\\microsoft shared\\ink\\TabTip.exe";
+                if (!System.IO.File.Exists(file))
+                    return -1;
+                Process.Start(file);
+                //return SetUnDock(); //不知SetUnDock()是什么，所以直接注释返回1
+                return 1;
+            }
+            catch (Exception)
+            {
+                return 255;
+            }
+        }
+
+        //隐藏屏幕键盘
+        public static void HideInputPanel()
+        {
+            IntPtr TouchhWnd = new IntPtr(0);
+            TouchhWnd = FindWindow("IPTip_Main_Window", null);
+            if (TouchhWnd == IntPtr.Zero)
+                return;
+            PostMessage(TouchhWnd, WM_SYSCOMMAND, SC_CLOSE, 0);
+        }
 
     }
 }

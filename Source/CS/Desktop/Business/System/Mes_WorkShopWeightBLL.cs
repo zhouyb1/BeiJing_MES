@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -37,6 +38,27 @@ namespace Business.System
             }
         }
 
+
+        public DataSet GetList_WorkShop(string condit)
+        {
+            try
+            {
+                DataSet ds = new DataSet();
+                var strSql = new StringBuilder();
+                //strSql.Append("SELECT  W_RecordCode,W_RecordName,W_SecGoodsCode,W_SecGoodsName,W_SecQty,W_SecUnit,W_CreateDate,W_WorkShopCode,W_ProceCode,W_ProceName,W_SecBatch,W_CreateBy,W_WorkShopName,W_Status,W_Remark,W_OrderNo,ID FROM Mes_WorkShopWeight ");
+                strSql.Append(condit);
+                var paramList = new List<SqlParameter>();
+                //paramList.Add(new SqlParameter("@B_BasketName", string.Format("{0}", B_BasketName)));
+                //var rows = db.ExecuteObjects<Mes_WorkShopWeightEntity>(strSql.ToString(), paramList.ToArray());
+                //return rows;
+                ds = db.ExecuteDataSet(condit);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
 
 

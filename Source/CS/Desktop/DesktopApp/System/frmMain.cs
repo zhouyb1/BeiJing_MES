@@ -806,6 +806,24 @@ namespace DesktopApp
             frmInventory.Show(this.panMain);
         }
 
+        private void 车间库存查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmWorkShopInventory frmInventory = new frmWorkShopInventory();
+            frmInventory.TopLevel = false;
+            frmInventory.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmInventory.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmInventory.Show(this.panMain);
+        }
+
 
     }
 }

@@ -39,20 +39,20 @@ namespace DesktopApp
         private void btn_Search_Click(object sender, EventArgs e)
         {
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-            var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_Qty > 0 ");
+            DataSet ds = InventoryBLL.GetData2("select SUM(I_Qty) as qty,I_GoodsCode,I_GoodsName,I_Unit from Mes_Inventory where I_StockCode = '" + cmbStock.Text + "' and I_Qty > 0 group by I_GoodsCode,I_GoodsName,I_Unit");
             this.listView1.Items.Clear();
             Thread.Sleep(100);
             this.listView1.BeginUpdate();
-            int nLen = row2.Count;
+            int nLen = ds.Tables[0].Rows.Count;
             for (int i = 0; i < nLen; i++)
             {
                 ListViewItem lvi = new ListViewItem(cmbStock.Text);
                 lvi.SubItems.Add(cmbStockName.Text);
-                lvi.SubItems.Add(row2[i].I_GoodsCode);
-                lvi.SubItems.Add(row2[i].I_GoodsName);
-                lvi.SubItems.Add(row2[i].I_Batch);
-                lvi.SubItems.Add(row2[i].I_Qty.ToString());
-                lvi.SubItems.Add(row2[i].I_Unit);
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["I_GoodsCode"].ToString());
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["I_GoodsName"].ToString());
+                
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["qty"].ToString());
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["I_Unit"].ToString());
                 this.listView1.Items.Add(lvi);
             }
 

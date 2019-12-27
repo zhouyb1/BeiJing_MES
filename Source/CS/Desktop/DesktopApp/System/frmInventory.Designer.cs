@@ -38,9 +38,8 @@
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // btn_Search
@@ -52,7 +51,7 @@
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(90, 30);
             this.btn_Search.TabIndex = 134;
-            this.btn_Search.Text = "保存";
+            this.btn_Search.Text = "查询";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -105,7 +104,6 @@
             this.columnHeader7,
             this.columnHeader2,
             this.columnHeader3,
-            this.columnHeader4,
             this.columnHeader5,
             this.columnHeader6});
             this.listView1.Font = new System.Drawing.Font("宋体", 11F);
@@ -137,19 +135,14 @@
             this.columnHeader3.Text = "物料名称";
             this.columnHeader3.Width = 180;
             // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "批次";
-            this.columnHeader4.Width = 80;
-            // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "单位";
-            // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "数量";
             this.columnHeader5.Width = 100;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "单位";
             // 
             // frmInventory
             // 
@@ -183,7 +176,6 @@
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.ColumnHeader columnHeader6;
     }

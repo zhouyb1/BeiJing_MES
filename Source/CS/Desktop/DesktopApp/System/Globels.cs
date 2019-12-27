@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,9 +24,16 @@ namespace DesktopApp
         public static string strProceName = "";
 
         public static string strTeam = ""; //班组
+        public static string strTeamName = ""; //班组
         public static string strStockCode = "";//仓库
 
         public static string strCom = "COM1"; //串口
+
+        public static string strGoodsMessase = ""; //物料转换的时候用到
+        public static string strID = "";      //物料转换完要删除数据的ID
+
+        
+
         //public static string strProce = "01"; //工序
     //    public class BaseClass
     //    {

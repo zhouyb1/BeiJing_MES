@@ -30,6 +30,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbProce = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btn_Search = new System.Windows.Forms.Button();
@@ -95,6 +97,8 @@
             this.cmbRecord = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.btn_Delete = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -104,9 +108,9 @@
             this.cmbProce.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProce.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbProce.FormattingEnabled = true;
-            this.cmbProce.Location = new System.Drawing.Point(391, 32);
+            this.cmbProce.Location = new System.Drawing.Point(354, 32);
             this.cmbProce.Name = "cmbProce";
-            this.cmbProce.Size = new System.Drawing.Size(200, 23);
+            this.cmbProce.Size = new System.Drawing.Size(169, 23);
             this.cmbProce.TabIndex = 106;
             this.cmbProce.SelectedIndexChanged += new System.EventHandler(this.cmbProce_SelectedIndexChanged);
             // 
@@ -126,7 +130,7 @@
             this.btn_Search.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
             this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Search.Location = new System.Drawing.Point(598, 8);
+            this.btn_Search.Location = new System.Drawing.Point(679, 8);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(80, 30);
             this.btn_Search.TabIndex = 99;
@@ -139,12 +143,13 @@
             this.btn_upload.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_upload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(761, 8);
+            this.btn_upload.Location = new System.Drawing.Point(836, 182);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(80, 30);
             this.btn_upload.TabIndex = 98;
             this.btn_upload.Text = "提交";
             this.btn_upload.UseVisualStyleBackColor = true;
+            this.btn_upload.Visible = false;
             this.btn_upload.Click += new System.EventHandler(this.btn_upload_Click);
             // 
             // dataGridView1
@@ -280,7 +285,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("宋体", 11F);
-            this.label7.Location = new System.Drawing.Point(307, 6);
+            this.label7.Location = new System.Drawing.Point(270, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(82, 15);
@@ -290,11 +295,12 @@
             // cmbWorkShop
             // 
             this.cmbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkShop.Enabled = false;
             this.cmbWorkShop.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkShop.FormattingEnabled = true;
-            this.cmbWorkShop.Location = new System.Drawing.Point(391, 6);
+            this.cmbWorkShop.Location = new System.Drawing.Point(354, 6);
             this.cmbWorkShop.Name = "cmbWorkShop";
-            this.cmbWorkShop.Size = new System.Drawing.Size(200, 23);
+            this.cmbWorkShop.Size = new System.Drawing.Size(169, 23);
             this.cmbWorkShop.TabIndex = 86;
             this.cmbWorkShop.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShop_SelectedIndexChanged);
             // 
@@ -329,7 +335,7 @@
             this.btn_Weight.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Weight.Image = global::DesktopApp.Properties.Resources.communication;
             this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Weight.Location = new System.Drawing.Point(680, 8);
+            this.btn_Weight.Location = new System.Drawing.Point(767, 8);
             this.btn_Weight.Name = "btn_Weight";
             this.btn_Weight.Size = new System.Drawing.Size(80, 30);
             this.btn_Weight.TabIndex = 117;
@@ -341,7 +347,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("宋体", 11F);
-            this.label2.Location = new System.Drawing.Point(307, 35);
+            this.label2.Location = new System.Drawing.Point(270, 35);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(82, 15);
@@ -355,6 +361,7 @@
             this.dataGridView2.AllowUserToOrderColumns = true;
             this.dataGridView2.AllowUserToResizeColumns = false;
             this.dataGridView2.AllowUserToResizeRows = false;
+            this.dataGridView2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.选择2,
@@ -375,8 +382,17 @@
             this.备注2,
             this.生产订单2,
             this.ID2});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView2.Location = new System.Drawing.Point(55, 89);
             this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersWidth = 20;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(883, 345);
             this.dataGridView2.TabIndex = 120;
@@ -385,9 +401,14 @@
             // 
             // 选择2
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.选择2.DefaultCellStyle = dataGridViewCellStyle1;
+            this.选择2.FillWeight = 40F;
             this.选择2.HeaderText = "选择2";
             this.选择2.Name = "选择2";
-            this.选择2.Width = 45;
+            this.选择2.Width = 60;
             // 
             // Column1
             // 
@@ -408,6 +429,7 @@
             this.物料2.DataPropertyName = "W_SecGoodsCode";
             this.物料2.HeaderText = "物料";
             this.物料2.Name = "物料2";
+            this.物料2.Visible = false;
             this.物料2.Width = 80;
             // 
             // 物料名称2
@@ -422,7 +444,6 @@
             this.数量2.DataPropertyName = "W_SecQty";
             this.数量2.HeaderText = "称重数量";
             this.数量2.Name = "数量2";
-            this.数量2.Width = 80;
             // 
             // 单位2
             // 
@@ -438,13 +459,14 @@
             this.添加时间2.FillWeight = 140F;
             this.添加时间2.HeaderText = "称重时间";
             this.添加时间2.Name = "添加时间2";
-            this.添加时间2.Width = 140;
+            this.添加时间2.Width = 180;
             // 
             // 车间2
             // 
             this.车间2.DataPropertyName = "W_WorkShopCode";
             this.车间2.HeaderText = "车间";
             this.车间2.Name = "车间2";
+            this.车间2.Visible = false;
             this.车间2.Width = 60;
             // 
             // 工序2
@@ -452,6 +474,7 @@
             this.工序2.DataPropertyName = "W_ProceCode";
             this.工序2.HeaderText = "工序";
             this.工序2.Name = "工序2";
+            this.工序2.Visible = false;
             this.工序2.Width = 60;
             // 
             // 工序名称2
@@ -459,6 +482,7 @@
             this.工序名称2.DataPropertyName = "W_ProceName";
             this.工序名称2.HeaderText = "工序名称";
             this.工序名称2.Name = "工序名称2";
+            this.工序名称2.Visible = false;
             this.工序名称2.Width = 80;
             // 
             // 批次2
@@ -472,6 +496,7 @@
             this.添加人2.DataPropertyName = "W_CreateBy";
             this.添加人2.HeaderText = "添加人";
             this.添加人2.Name = "添加人2";
+            this.添加人2.Visible = false;
             this.添加人2.Width = 70;
             // 
             // 车间名称2
@@ -479,24 +504,28 @@
             this.车间名称2.DataPropertyName = "W_WorkShopName";
             this.车间名称2.HeaderText = "车间名称";
             this.车间名称2.Name = "车间名称2";
+            this.车间名称2.Visible = false;
             // 
             // 状态2
             // 
             this.状态2.DataPropertyName = "W_Status";
             this.状态2.HeaderText = "状态";
             this.状态2.Name = "状态2";
+            this.状态2.Visible = false;
             // 
             // 备注2
             // 
             this.备注2.DataPropertyName = "W_Remark";
             this.备注2.HeaderText = "备注";
             this.备注2.Name = "备注2";
+            this.备注2.Visible = false;
             // 
             // 生产订单2
             // 
             this.生产订单2.DataPropertyName = "W_OrderNo";
             this.生产订单2.HeaderText = "生产订单号";
             this.生产订单2.Name = "生产订单2";
+            this.生产订单2.Visible = false;
             // 
             // ID2
             // 
@@ -509,7 +538,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("宋体", 11F);
-            this.label5.Location = new System.Drawing.Point(307, 61);
+            this.label5.Location = new System.Drawing.Point(270, 61);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 15);
@@ -519,11 +548,12 @@
             // cmbTeam
             // 
             this.cmbTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTeam.Enabled = false;
             this.cmbTeam.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbTeam.FormattingEnabled = true;
-            this.cmbTeam.Location = new System.Drawing.Point(391, 58);
+            this.cmbTeam.Location = new System.Drawing.Point(354, 58);
             this.cmbTeam.Name = "cmbTeam";
-            this.cmbTeam.Size = new System.Drawing.Size(200, 23);
+            this.cmbTeam.Size = new System.Drawing.Size(169, 23);
             this.cmbTeam.TabIndex = 122;
             this.cmbTeam.SelectedIndexChanged += new System.EventHandler(this.cmbTeam_SelectedIndexChanged);
             // 
@@ -543,11 +573,11 @@
             this.btnBack.Font = new System.Drawing.Font("宋体", 11F);
             this.btnBack.Image = global::DesktopApp.Properties.Resources.prev;
             this.btnBack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnBack.Location = new System.Drawing.Point(844, 8);
+            this.btnBack.Location = new System.Drawing.Point(854, 8);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(80, 30);
             this.btnBack.TabIndex = 127;
-            this.btnBack.Text = "退回";
+            this.btnBack.Text = "原料退回";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -564,22 +594,24 @@
             // cmbTeamName
             // 
             this.cmbTeamName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTeamName.Enabled = false;
             this.cmbTeamName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbTeamName.FormattingEnabled = true;
             this.cmbTeamName.Location = new System.Drawing.Point(77, 60);
             this.cmbTeamName.Name = "cmbTeamName";
-            this.cmbTeamName.Size = new System.Drawing.Size(222, 23);
+            this.cmbTeamName.Size = new System.Drawing.Size(188, 23);
             this.cmbTeamName.TabIndex = 130;
             this.cmbTeamName.SelectedIndexChanged += new System.EventHandler(this.cmbTeamName_SelectedIndexChanged);
             // 
             // cmbWorkShopName
             // 
             this.cmbWorkShopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkShopName.Enabled = false;
             this.cmbWorkShopName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkShopName.FormattingEnabled = true;
             this.cmbWorkShopName.Location = new System.Drawing.Point(77, 8);
             this.cmbWorkShopName.Name = "cmbWorkShopName";
-            this.cmbWorkShopName.Size = new System.Drawing.Size(222, 23);
+            this.cmbWorkShopName.Size = new System.Drawing.Size(188, 23);
             this.cmbWorkShopName.TabIndex = 129;
             this.cmbWorkShopName.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShopName_SelectedIndexChanged);
             // 
@@ -590,7 +622,7 @@
             this.cmbProceName.FormattingEnabled = true;
             this.cmbProceName.Location = new System.Drawing.Point(77, 34);
             this.cmbProceName.Name = "cmbProceName";
-            this.cmbProceName.Size = new System.Drawing.Size(222, 23);
+            this.cmbProceName.Size = new System.Drawing.Size(188, 23);
             this.cmbProceName.TabIndex = 132;
             this.cmbProceName.SelectedIndexChanged += new System.EventHandler(this.cmbProceName_SelectedIndexChanged);
             // 
@@ -599,7 +631,7 @@
             this.btnPrintf.Font = new System.Drawing.Font("宋体", 11F);
             this.btnPrintf.Image = global::DesktopApp.Properties.Resources.camera_lens;
             this.btnPrintf.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPrintf.Location = new System.Drawing.Point(680, 48);
+            this.btnPrintf.Location = new System.Drawing.Point(767, 48);
             this.btnPrintf.Name = "btnPrintf";
             this.btnPrintf.Size = new System.Drawing.Size(80, 30);
             this.btnPrintf.TabIndex = 133;
@@ -612,7 +644,7 @@
             this.btnResolve.Font = new System.Drawing.Font("宋体", 11F);
             this.btnResolve.Image = global::DesktopApp.Properties.Resources.discuss;
             this.btnResolve.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnResolve.Location = new System.Drawing.Point(761, 48);
+            this.btnResolve.Location = new System.Drawing.Point(854, 48);
             this.btnResolve.Name = "btnResolve";
             this.btnResolve.Size = new System.Drawing.Size(80, 30);
             this.btnResolve.TabIndex = 134;
@@ -721,24 +753,48 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(27, 104);
             this.label12.TabIndex = 136;
-            this.label12.Text = "转换后物料";
+            this.label12.Text = "称重后物料";
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("宋体", 11F);
             this.button1.Image = global::DesktopApp.Properties.Resources.ok;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(598, 48);
+            this.button1.Location = new System.Drawing.Point(679, 48);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 30);
             this.button1.TabIndex = 137;
-            this.button1.Text = "转后查询";
+            this.button1.Text = "物料转换";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Delete.Image = global::DesktopApp.Properties.Resources.delete;
+            this.btn_Delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Delete.Location = new System.Drawing.Point(584, 48);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(80, 30);
+            this.btn_Delete.TabIndex = 138;
+            this.btn_Delete.Text = "删除";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(584, 14);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(80, 24);
+            this.comboBox1.TabIndex = 139;
             // 
             // frmOrgres
             // 
             this.ClientSize = new System.Drawing.Size(950, 541);
+            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btn_Delete);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btnResolve);
@@ -830,6 +886,9 @@
         private System.Windows.Forms.ComboBox cmbRecordName;
         private System.Windows.Forms.ComboBox cmbRecord;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.DataGridViewCheckBoxColumn 选择2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -848,6 +907,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 备注2;
         private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID2;
-        private System.Windows.Forms.Button button1;
     }
 }

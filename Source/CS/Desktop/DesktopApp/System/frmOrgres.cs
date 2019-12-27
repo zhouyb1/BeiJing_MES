@@ -94,6 +94,18 @@ namespace DesktopApp
             {
                 cmbTeam.Text = Globels.strTeam;
             }
+
+            string strSql = "Select distinct W_SecGoodsName from Mes_WorkShopWeight where W_WorkShopCode = '"+ cmbWorkShop.Text +"'";
+            Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
+            DataSet ds = WorkShopWeightBL.GetList_WorkShop(strSql);
+            int nLen = ds.Tables[0].Rows.Count;
+            comboBox1.Items.Clear();
+            comboBox1.Items.Add("");
+            for (int i = 0; i < nLen;i++ )
+            {
+                comboBox1.Items.Add(ds.Tables[0].Rows[i]["W_SecGoodsName"].ToString());
+            }
+                Search();
         }
 
         private void comOrderNo_SelectedIndexChanged(object sender, EventArgs e)
@@ -215,7 +227,7 @@ namespace DesktopApp
 
         private void Search()
         {
-            Update();
+            UpdateGoods();
         }
 
         /// <summary>
@@ -266,7 +278,7 @@ namespace DesktopApp
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + "24小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
-                g.DrawString("订单：" + comOrderNo.Text, f4, b, 4, 90);//设置位置
+                //g.DrawString("订单：" + comOrderNo.Text, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
 
@@ -303,28 +315,36 @@ namespace DesktopApp
             nfcTag.SendBmp2NfcTag(_nfcTagBmpData, _nfcTagBmpDataLength);
         }
 
-        private void Update()
+        private void UpdateGoods()
         {
-            Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
+            //Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
             Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
 
-            string strSql = " where W_WorkShop = '" + cmbWorkShop.Text + "'";
-            var row = WorkShopScanBLL.GetList_WorkShopScan(strSql);
-            //if (row == null || row.Count < 1)
+            //string strSql = " where W_WorkShop = '" + cmbWorkShop.Text + "'";
+            //var row = WorkShopScanBLL.GetList_WorkShopScan(strSql);
+            ////if (row == null || row.Count < 1)
+            ////{
+            ////    untCommon.InfoMsg("没有任何数据！");
+            ////    return;
+            ////}
+            //dataGridView1.DataSource = row;
+            //int nLen = dataGridView1.Rows.Count;
+            //for (int i = 0; i < nLen; i++ )
             //{
-            //    untCommon.InfoMsg("没有任何数据！");
-            //    return;
+            //    dataGridView1.Rows[i].Cells["实用数量"].Value = dataGridView1.Rows[i].Cells["数量"].Value;
             //}
-            dataGridView1.DataSource = row;
-            int nLen = dataGridView1.Rows.Count;
-            for (int i = 0; i < nLen; i++ )
+
+
+
+            string strSql = "";
+            if (comboBox1.Text == "")
             {
-                dataGridView1.Rows[i].Cells["实用数量"].Value = dataGridView1.Rows[i].Cells["数量"].Value;
+                strSql = " where W_RecordCode = '" + cmbRecord.Text + "' and W_ProceCode = '" + cmbProce.Text + "' and W_WorkShopCode = '" + cmbWorkShop.Text + "' and W_OrderNo = '" + comOrderNo.Text + "' order by W_CreateDate desc";
             }
-
-
-
-            strSql = " where W_RecordCode = '" + cmbRecord.Text + "' and W_ProceCode = '" + cmbProce.Text + "' and W_WorkShopCode = '" + cmbWorkShop.Text + "' and W_OrderNo = '" + comOrderNo.Text + "' order by W_CreateDate desc";
+            else
+            {
+                strSql = " where W_RecordCode = '" + cmbRecord.Text + "' and W_ProceCode = '" + cmbProce.Text + "' and W_WorkShopCode = '" + cmbWorkShop.Text + "' and W_OrderNo = '" + comOrderNo.Text + "' and W_SecGoodsName = '"+ comboBox1.Text+"' order by W_CreateDate desc";
+            }
             var row2 = WorkShopWeightBL.GetList_WorkShopWeight(strSql);
             //if (row2 == null || row2.Count < 1)
             //{
@@ -476,28 +496,6 @@ namespace DesktopApp
                     MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
                     strIn_No = MaterInHeadBLL.GetDH("组装与拆分单");
 
-                    /*var rowsHead = OrgResHeadBLL.GetList_OrgResHead("where 1 = 1 order by O_OrgResNo DESC");
-                    if (rowsHead == null || rowsHead.Count < 1)
-                    {
-                        strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                    }
-                    else
-                    {
-                        string strDate = rowsHead[0].O_OrgResNo.Substring(2, 8);
-                        if (strDate == DateTime.Now.ToString("yyyyMMdd"))
-                        {
-                            string strList = rowsHead[0].O_OrgResNo.Substring(10, 6);
-                            int nList = Convert.ToInt32(strList) + 1;
-                            string strList2 = nList.ToString();
-                            strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + strList2.PadLeft(6, '0');
-                        }
-                        else
-                        {
-                            strIn_No = "OR" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                        }
-
-                    }*/
-
                     OrgResHeadEntity.O_OrgResNo = strIn_No;
                     OrgResHeadEntity.O_OrderNo = comOrderNo.Text;
 
@@ -560,7 +558,7 @@ namespace DesktopApp
                     lblTS.Text = "";
                     //UpdatePrice(strSecGoods, dSecPrice);  已经在存储过程中处理
                     Delete();
-                    Update();
+                    UpdateGoods();
                 }
                 catch(Exception ex)
                 {
@@ -640,121 +638,15 @@ namespace DesktopApp
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-            try
-            {
-                //string strOrderNo = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["生产订单号"].Value.ToString();
-                string strWorkShop = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["车间"].Value.ToString();
-                string strGoodsCode = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料"].Value.ToString();
-                string strBatch = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["批次"].Value.ToString();
-                string strQty = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["数量"].Value.ToString();
-                string strPrice = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["价格"].Value.ToString();
-                string strGoodsName = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["物料名称"].Value.ToString();
-                string strUnit = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["单位"].Value.ToString();
-                string strId = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["Id"].Value.ToString();
-                string strStockCode = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["仓库编码"].Value.ToString();
-                string strStockName = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["仓库名称"].Value.ToString();
-                //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
-
-                if (MessageBox.Show("物料是否要退回仓库?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
-                {
-                    Mes_OutWorkShopHeadBLL OutWorkShopHeadBLL = new Mes_OutWorkShopHeadBLL();
-
-                        try
-                        {
-                            this.Enabled = false;
-                            Cursor.Current = Cursors.WaitCursor;
-
-                            
-
-                            Mes_OutWorkShopDetailBLL OutWorkShopDetailBLL = new Mes_OutWorkShopDetailBLL();
-                            Mes_OutWorkShopHeadEntity OutWorkShopHeadEntity = new Mes_OutWorkShopHeadEntity();
-                            Mes_OutWorkShopDetailEntity OutWorkShopDetailEntity = new Mes_OutWorkShopDetailEntity();
-
-                            string strIn_No = "";
+            Globels.strWorkShop = cmbWorkShop.Text;
+            Globels.strWorkShopName = cmbWorkShopName.Text;
+            frmBackStock frm = new frmBackStock();
+            frm.ShowDialog();
+            frm.Dispose();
 
 
-                            MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
-                            strIn_No = MaterInHeadBLL.GetDH("线边仓出库到车间单");
+            //Globels.strWorkShop = cmbWorkShop.Text;
 
-                            //var rowsHead = OutWorkShopHeadBLL.GetList_OutWorkShopHead("where 1 = 1 order by O_OutNo DESC");
-                            //if (rowsHead == null || rowsHead.Count < 1)
-                            //{
-                            //    strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                            //}
-                            //else
-                            //{
-                            //    string strDate = rowsHead[0].O_OutNo.Substring(2, 8);
-                            //    if (strDate == DateTime.Now.ToString("yyyyMMdd"))
-                            //    {
-                            //        string strList = rowsHead[0].O_OutNo.Substring(10, 4);
-                            //        int nList = Convert.ToInt32(strList) + 1;
-                            //        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(4, '0');
-                            //    }
-                            //    else
-                            //    {
-                            //        strIn_No = "OW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                            //    }
-
-                            //}
-
-                            OutWorkShopHeadEntity.O_OutNo = strIn_No;
-                            OutWorkShopHeadEntity.O_OrderNo = "";
-                            OutWorkShopHeadEntity.O_StockCode = strStockCode;
-                            OutWorkShopHeadEntity.O_StockName = strStockName;
-                            OutWorkShopHeadEntity.O_CreateBy = Globels.strUser;
-                            OutWorkShopHeadEntity.O_CreateDate = DateTime.Now;
-                            OutWorkShopHeadEntity.O_OrderDate = txtOrderDate.Text;
-                            OutWorkShopHeadEntity.O_Remark = "";
-                            OutWorkShopHeadEntity.O_Status = 1;
-                            OutWorkShopHeadEntity.O_WorkShop = cmbWorkShop.Text;
-                            OutWorkShopHeadEntity.O_Kind = 2;
-
-
-
-                            int nRow = OutWorkShopHeadBLL.SaveEntity("", OutWorkShopHeadEntity);
-
-                            //for (int i = 0; i < rows.Count; i++)
-                            //{
-                            OutWorkShopDetailEntity.O_GoodsCode = strGoodsCode;
-                            OutWorkShopDetailEntity.O_GoodsName = strGoodsName;
-                            OutWorkShopDetailEntity.O_OutNo = strIn_No;
-                            OutWorkShopDetailEntity.O_Price = Convert.ToDecimal(strPrice);
-                            OutWorkShopDetailEntity.O_Qty = Convert.ToDecimal(strQty);
-                            OutWorkShopDetailEntity.O_Remark = "";
-                            OutWorkShopDetailEntity.O_Unit = strUnit;
-                            OutWorkShopDetailEntity.O_Batch = strBatch;
-
-                            nRow = OutWorkShopDetailBLL.SaveEntity("", OutWorkShopDetailEntity);
-
-                            //}
-                            MessageBox.Show("保存成功");
-
-                            string Barcode = strGoodsCode + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                            GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch, Barcode);
-                            SaveBarcode(Barcode, strGoodsCode, strGoodsName, OutWorkShopDetailEntity.O_Qty, OutWorkShopHeadEntity.O_WorkShop);
-                            DeleteData(strId);
-
-                            Search();
-
-                            this.Enabled = true;
-                            Cursor.Current = Cursors.Default;
-
-                        }
-                        catch(Exception ex)
-                        {
-                            this.Enabled = true;
-                            Cursor.Current = Cursors.Default;
-                        }
-                        
-                    
-
-                }
-            }
-            catch(Exception ex)
-            {
-                //MessageBox.Show("请选中某一行进行退仓库");
-                lblTS.Text = "系统提示：请选中某一行进行退仓库";
-            }
         }
 
         /// <summary>
@@ -774,7 +666,11 @@ namespace DesktopApp
             BarcodeEntity.B_Name = B_Name;
             BarcodeEntity.B_Qty = B_Qty;
             BarcodeEntity.B_WorkShopCode = B_WorkShopCode;
-            BarcodeEntity.B_Ptime = DateTime.Now;
+            DateTime dt = DateTime.Now;
+            BarcodeEntity.B_Ptime = dt;
+            BarcodeEntity.B_Itime = dt;
+            BarcodeEntity.B_Otime = dt;
+            BarcodeEntity.B_Utime = dt;
             BarcodeEntity.B_Status = 1;
             BarcodeBLL.SaveEntity("", BarcodeEntity);
 
@@ -849,6 +745,32 @@ namespace DesktopApp
                 }
             }
             catch(Exception ex)
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// 删除ESL标签条码
+        /// </summary>
+        /// <param name="strId"></param>
+        /// <returns></returns>
+        private bool DeleteBarcode(string strBarcode)
+        {
+            try
+            {
+                string strSql = "delete from Mes_Barcode where B_Barcode = '" + strBarcode + "'";
+                Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+                int nRow = BarcodeBLL.Update(strSql);
+                if (nRow > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception ex)
             {
                 return false;
             }
@@ -943,7 +865,7 @@ namespace DesktopApp
                 string strGoodsName = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["物料名称2"].Value.ToString();
                 string strUnit = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["单位2"].Value.ToString();
                 string strId = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["Id2"].Value.ToString();
-
+                string strBarcode = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["备注2"].Value.ToString();
                 //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
 
                 if (MessageBox.Show("物料是否要补写?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
@@ -952,10 +874,10 @@ namespace DesktopApp
                     {
                         this.Enabled = false;
                         Cursor.Current = Cursors.WaitCursor;
-                        string strBarcode = strGoodsCode + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                        
                         GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch,strBarcode);
                         //DeleteData(strId);
-                        SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDecimal(strQty), strWorkShop);
+                        //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDecimal(strQty), strWorkShop);
                         this.Enabled = true;
                         Cursor.Current = Cursors.Default;
 
@@ -994,8 +916,125 @@ namespace DesktopApp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
+            Mes_WorkShopWeightBLL WorkShopWeightBL = new Mes_WorkShopWeightBLL();
 
+            List<string> insertList = new List<string>();
+            string strID = "";
+            string strSecGoods = "";
+            string strSecPc = "";
+            string strSecName = "";
+            string strSecUnit = "";
+            Decimal dSecQty = 0;
+            int nLen2 = dataGridView2.Rows.Count;
+            for (int i = 0; i < nLen2; i++)
+            {
+                object obj = dataGridView2.Rows[i].Cells["选择2"].Value;
+                if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                {
+                    if (strID == "")
+                    {
+                        strID = dataGridView2.Rows[i].Cells["ID2"].Value.ToString();
+                    }
+                    else
+                    {
+                        strID = strID + "," + dataGridView2.Rows[i].Cells["ID2"].Value.ToString();
+                    }
+                    strSecGoods = dataGridView2.Rows[i].Cells["物料2"].Value.ToString();
+                    strSecPc = dataGridView2.Rows[i].Cells["批次2"].Value.ToString();
+                    strSecName = dataGridView2.Rows[i].Cells["物料名称2"].Value.ToString();
+                    strSecUnit = dataGridView2.Rows[i].Cells["单位2"].Value.ToString();
+
+                    string strSecQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
+                    string strTemp = dataGridView2.Rows[i].Cells["物料2"].Value.ToString() +"," + dataGridView2.Rows[i].Cells["批次2"].Value.ToString() + "," + dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
+                    if (insertList.Count > 0)
+                    {
+                        string[] str = insertList[0].ToString().Split(',');
+                        if (str[0].ToString() == strSecGoods)
+                        {
+
+                            if (str[1].ToString() == strSecPc)
+                            {
+                                dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+
+                            }
+                            else
+                            {
+                                lblTS.Text = "系统提示：生成的物料只允许同一物料，同一批次";
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            lblTS.Text = "系统提示：生成的物料只允许同一物料，同一批次";
+                            return;
+
+                        }
+                    }
+                    else
+                    {
+                        dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                        insertList.Add(strTemp);
+                    }
+                }
+            }
+            Globels.strGoodsMessase = strSecGoods + "," + strSecName + "," + strSecPc + "," + dSecQty + "," + strSecUnit ;
+            Globels.strID = strID;
+
+            Globels.strWorkShop = cmbWorkShop.Text;
+            Globels.strWorkShopName = cmbWorkShopName.Text;
+            Globels.strProce = cmbProce.Text;
+            Globels.strTeam = cmbTeam.Text;
+            Globels.strTeamName = cmbTeamName.Text;
+
+            frmGoodsConvet frm = new frmGoodsConvet();
+            frm.ShowDialog();
+            frm.Dispose();
+
+            UpdateGoods();
         }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+
+
+                
+                string strId = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["Id2"].Value.ToString();
+                string strBarcode = dataGridView2.Rows[dataGridView2.SelectedCells[0].RowIndex].Cells["备注2"].Value.ToString();
+                //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
+
+                if (MessageBox.Show("物料是否要删除?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                {
+                    try
+                    {
+                        this.Enabled = false;
+                        Cursor.Current = Cursors.WaitCursor;
+                        DeleteWeightData(strId);
+                        DeleteBarcode(strBarcode);
+
+                        UpdateGoods();
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("请选中某一行进行退仓库");
+                lblTS.Text = "系统提示：请选中某一行进行补写";
+            }
+        }
+
+     
 
 
       

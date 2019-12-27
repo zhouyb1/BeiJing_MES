@@ -95,12 +95,12 @@ namespace DesktopApp
                 {
                     lblTS.Text = "补写标签的数量不能大于原来标签数量";
                 }
-                string Barcode = txtCode.Text + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                 GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
                 SaveBarcode(Barcode,txtCode.Text,txtName.Text,dQty,Globels.strWorkShop);
                 MessageBox.Show("请拿开第一张卡，放置第二张卡");
 
-                 Barcode = txtCode + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                 Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                 GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
                 SaveBarcode(Barcode, txtCode.Text, txtName.Text, dNextQty, Globels.strWorkShop);
             }
@@ -129,7 +129,12 @@ namespace DesktopApp
             BarcodeEntity.B_Name = B_Name;
             BarcodeEntity.B_Qty = B_Qty;
             BarcodeEntity.B_WorkShopCode = B_WorkShopCode;
-            BarcodeEntity.B_Ptime = DateTime.Now;
+            DateTime dt = DateTime.Now;
+            BarcodeEntity.B_Ptime = dt;
+            BarcodeEntity.B_Itime = dt;
+            BarcodeEntity.B_Otime = dt;
+            BarcodeEntity.B_Utime = dt;
+
             BarcodeEntity.B_Status = 1;
             BarcodeBLL.SaveEntity("", BarcodeEntity);
 

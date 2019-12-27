@@ -243,17 +243,35 @@
     <Compile Include="System\frmAbout.Designer.cs">
       <DependentUpon>frmAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmBackStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmBackStock.Designer.cs">
+      <DependentUpon>frmBackStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmBackup.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System\frmBackup.designer.cs">
       <DependentUpon>frmBackup.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmColler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmColler.Designer.cs">
+      <DependentUpon>frmColler.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmEquipmentEdit.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="System\frmEquipmentEdit.Designer.cs">
       <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\frmGoodsConvet.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmGoodsConvet.Designer.cs">
+      <DependentUpon>frmGoodsConvet.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmInspectList.cs">
       <SubType>Form</SubType>
@@ -437,6 +455,12 @@
     <Compile Include="System\frmVegetableProcessList.Designer.cs">
       <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmWorkShopInventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmWorkShopInventory.Designer.cs">
+      <DependentUpon>frmWorkShopInventory.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmWorkShopScanList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -525,11 +549,17 @@
     <EmbeddedResource Include="System\frmAreaEdit.resx">
       <DependentUpon>frmAreaEdit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="System\frmBackStock.resx">
+      <DependentUpon>frmBackStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="System\frmBackup.resx">
       <DependentUpon>frmBackup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmEquipmentEdit.resx">
       <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmGoodsConvet.resx">
+      <DependentUpon>frmGoodsConvet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmInspectList.resx">
       <DependentUpon>frmInspectList.cs</DependentUpon>
@@ -630,6 +660,9 @@
     </Compile>
     <EmbeddedResource Include="System\frmVegetableProcessList.resx">
       <DependentUpon>frmVegetableProcessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmWorkShopInventory.resx">
+      <DependentUpon>frmWorkShopInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmWorkShopScanList.resx">
       <DependentUpon>frmWorkShopScanList.cs</DependentUpon>

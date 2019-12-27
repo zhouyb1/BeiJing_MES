@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtBarcode = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -172,6 +173,14 @@
             this.条码,
             this.ID,
             this.remark});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(23, 201);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
@@ -183,12 +192,14 @@
             this.生产订单号.DataPropertyName = "O_OrderNo";
             this.生产订单号.HeaderText = "生产订单号";
             this.生产订单号.Name = "生产订单号";
+            this.生产订单号.Visible = false;
             // 
             // 车间
             // 
             this.车间.DataPropertyName = "O_WorkShop";
             this.车间.HeaderText = "车间";
             this.车间.Name = "车间";
+            this.车间.Visible = false;
             this.车间.Width = 60;
             // 
             // WorkShopName
@@ -200,13 +211,14 @@
             // 线边仓
             // 
             this.线边仓.DataPropertyName = "O_StockCode";
-            this.线边仓.HeaderText = "线边仓";
+            this.线边仓.HeaderText = "日耗库";
             this.线边仓.Name = "线边仓";
+            this.线边仓.Visible = false;
             // 
             // StockName
             // 
             this.StockName.DataPropertyName = "O_StockName";
-            this.StockName.HeaderText = "线边仓名称";
+            this.StockName.HeaderText = "日耗库名称";
             this.StockName.Name = "StockName";
             // 
             // 物料
@@ -226,12 +238,14 @@
             this.批次.DataPropertyName = "O_Batch";
             this.批次.HeaderText = "批次";
             this.批次.Name = "批次";
+            this.批次.Visible = false;
             // 
             // Price
             // 
             this.Price.DataPropertyName = "O_Price";
             this.Price.HeaderText = "价格";
             this.Price.Name = "Price";
+            this.Price.Visible = false;
             // 
             // unit
             // 
@@ -244,12 +258,14 @@
             this.status.DataPropertyName = "O_Status";
             this.status.HeaderText = "状态";
             this.status.Name = "status";
+            this.status.Visible = false;
             // 
             // CreateBy
             // 
             this.CreateBy.DataPropertyName = "O_CreateBy";
             this.CreateBy.HeaderText = "添加人";
             this.CreateBy.Name = "CreateBy";
+            this.CreateBy.Visible = false;
             // 
             // CreateDate
             // 
@@ -262,6 +278,7 @@
             this.工艺代码.DataPropertyName = "O_Record";
             this.工艺代码.HeaderText = "工艺代码";
             this.工艺代码.Name = "工艺代码";
+            this.工艺代码.Visible = false;
             // 
             // 数量
             // 
@@ -274,6 +291,7 @@
             this.条码.DataPropertyName = "O_Barcode";
             this.条码.HeaderText = "条码";
             this.条码.Name = "条码";
+            this.条码.Visible = false;
             // 
             // ID
             // 
@@ -288,6 +306,7 @@
             this.remark.DataPropertyName = "O_Remark";
             this.remark.HeaderText = "备注";
             this.remark.Name = "remark";
+            this.remark.Visible = false;
             // 
             // txtName
             // 
@@ -356,6 +375,7 @@
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(196, 24);
             this.txtQty.TabIndex = 59;
+            this.txtQty.GotFocus += new System.EventHandler(this.txtQty_GotFocus);
             // 
             // label5
             // 
@@ -392,6 +412,7 @@
             // cmbWorkShop
             // 
             this.cmbWorkShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkShop.Enabled = false;
             this.cmbWorkShop.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkShop.FormattingEnabled = true;
             this.cmbWorkShop.Location = new System.Drawing.Point(404, 33);
@@ -428,6 +449,7 @@
             // cmbStock
             // 
             this.cmbStock.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStock.Enabled = false;
             this.cmbStock.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbStock.FormattingEnabled = true;
             this.cmbStock.Location = new System.Drawing.Point(404, 59);
@@ -626,6 +648,7 @@
             // cmbWorkshopName
             // 
             this.cmbWorkshopName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbWorkshopName.Enabled = false;
             this.cmbWorkshopName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbWorkshopName.FormattingEnabled = true;
             this.cmbWorkshopName.Location = new System.Drawing.Point(106, 33);
@@ -637,6 +660,7 @@
             // cmbStockName
             // 
             this.cmbStockName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbStockName.Enabled = false;
             this.cmbStockName.Font = new System.Drawing.Font("宋体", 11F);
             this.cmbStockName.FormattingEnabled = true;
             this.cmbStockName.Location = new System.Drawing.Point(106, 59);
@@ -768,6 +792,16 @@
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.TextBox txtOrderDate;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cmbGoodsCode;
+        private System.Windows.Forms.ComboBox cmbPc;
+        private System.Windows.Forms.ComboBox cmbGoodsName;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label lblTS;
+        private System.Windows.Forms.ComboBox cmbWorkshopName;
+        private System.Windows.Forms.ComboBox cmbStockName;
+        private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.TextBox txtStockQty;
+        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
         private System.Windows.Forms.DataGridViewTextBoxColumn WorkShopName;
@@ -786,15 +820,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn remark;
-        private System.Windows.Forms.ComboBox cmbGoodsCode;
-        private System.Windows.Forms.ComboBox cmbPc;
-        private System.Windows.Forms.ComboBox cmbGoodsName;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label lblTS;
-        private System.Windows.Forms.ComboBox cmbWorkshopName;
-        private System.Windows.Forms.ComboBox cmbStockName;
-        private System.Windows.Forms.Button btn_Delete;
-        private System.Windows.Forms.TextBox txtStockQty;
-        private System.Windows.Forms.Label label18;
     }
 }

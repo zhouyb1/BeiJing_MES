@@ -62,6 +62,8 @@
             this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.使用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.txtSJ = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,6 +85,7 @@
             this.txtQty.Name = "txtQty";
             this.txtQty.Size = new System.Drawing.Size(244, 24);
             this.txtQty.TabIndex = 122;
+            this.txtQty.TextChanged += new System.EventHandler(this.txtQty_TextChanged);
             // 
             // label15
             // 
@@ -146,12 +149,12 @@
             // 
             // btnSave
             // 
-            this.btnSave.Font = new System.Drawing.Font("宋体", 11F);
+            this.btnSave.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(430, 65);
+            this.btnSave.Location = new System.Drawing.Point(430, 138);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(90, 30);
+            this.btnSave.Size = new System.Drawing.Size(157, 63);
             this.btnSave.TabIndex = 124;
             this.btnSave.Text = "  保存";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -182,12 +185,12 @@
             // 
             // btn_Weight
             // 
-            this.btn_Weight.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Weight.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_Weight.Image = global::DesktopApp.Properties.Resources.wrench;
             this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Weight.Location = new System.Drawing.Point(430, 25);
             this.btn_Weight.Name = "btn_Weight";
-            this.btn_Weight.Size = new System.Drawing.Size(90, 30);
+            this.btn_Weight.Size = new System.Drawing.Size(157, 66);
             this.btn_Weight.TabIndex = 128;
             this.btn_Weight.Text = "  获重";
             this.btn_Weight.UseVisualStyleBackColor = true;
@@ -296,6 +299,8 @@
             this.txtRQQty.Name = "txtRQQty";
             this.txtRQQty.Size = new System.Drawing.Size(244, 24);
             this.txtRQQty.TabIndex = 140;
+            this.txtRQQty.TextChanged += new System.EventHandler(this.txtRQQty_TextChanged);
+            this.txtRQQty.GotFocus += new System.EventHandler(this.txtRQQty_GotFocus);
             // 
             // label7
             // 
@@ -327,12 +332,13 @@
             this.btn_Conver.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Conver.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btn_Conver.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Conver.Location = new System.Drawing.Point(430, 107);
+            this.btn_Conver.Location = new System.Drawing.Point(662, 193);
             this.btn_Conver.Name = "btn_Conver";
             this.btn_Conver.Size = new System.Drawing.Size(90, 30);
             this.btn_Conver.TabIndex = 142;
             this.btn_Conver.Text = "  转换";
             this.btn_Conver.UseVisualStyleBackColor = true;
+            this.btn_Conver.Visible = false;
             this.btn_Conver.Click += new System.EventHandler(this.btn_Conver_Click);
             // 
             // dataGridView1
@@ -380,11 +386,33 @@
             this.使用数量.HeaderText = "使用数量";
             this.使用数量.Name = "使用数量";
             // 
+            // txtSJ
+            // 
+            this.txtSJ.Font = new System.Drawing.Font("宋体", 11F);
+            this.txtSJ.Location = new System.Drawing.Point(164, 177);
+            this.txtSJ.Name = "txtSJ";
+            this.txtSJ.ReadOnly = true;
+            this.txtSJ.Size = new System.Drawing.Size(244, 24);
+            this.txtSJ.TabIndex = 145;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("宋体", 11F);
+            this.label10.Location = new System.Drawing.Point(30, 183);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(127, 15);
+            this.label10.TabIndex = 144;
+            this.label10.Text = "转换后实际数量：";
+            // 
             // frmWorkShopWeightList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 435);
+            this.Controls.Add(this.txtSJ);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_Conver);
             this.Controls.Add(this.button1);
@@ -457,5 +485,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 使用数量;
+        private System.Windows.Forms.TextBox txtSJ;
+        private System.Windows.Forms.Label label10;
     }
 }

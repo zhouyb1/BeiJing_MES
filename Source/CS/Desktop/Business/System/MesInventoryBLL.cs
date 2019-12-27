@@ -6,6 +6,7 @@ using Model;
 using DataAccess.SqlServer;
 using System.Text;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Business.System
 {
@@ -79,6 +80,27 @@ namespace Business.System
             }
         }
 
+
+        /// <summary>
+        /// 通过主键获取实体
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns>MesInventory</returns>
+        public DataSet GetData2(string Condit)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                //strSql.Append("SELECT * FROM Mes_Inventory ");
+                strSql.Append(Condit);
+                DataSet ds = db.ExecuteDataSet(Condit);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         
 
         /// <summary>
