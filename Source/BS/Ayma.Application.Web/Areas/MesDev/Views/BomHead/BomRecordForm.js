@@ -187,7 +187,6 @@ var bootstrap = function ($, ayma) {
             ayma.alert.error('上级不能是自己本身');
             return false;
         }
-
         $.SaveForm(top.$.rootUrl + '/MesDev/BomHead/SaveBomRecordForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
