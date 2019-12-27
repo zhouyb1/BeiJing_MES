@@ -102,7 +102,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'MaterInBillForm',
                         title: '编辑入库单',
-                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?status='+statu+'&keyValue=' + keyValue + '&formId=MaterInBillForm',
+                        url: top.$.rootUrl + '/MesDev/MaterInBill/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=MaterInBillForm',
                         width: 900,
                         height: 700,
                         maxmin: true,
