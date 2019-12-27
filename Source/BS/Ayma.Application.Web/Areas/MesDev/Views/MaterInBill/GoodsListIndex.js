@@ -77,30 +77,30 @@ var bootstrap = function ($, ayma) {
                 }
             });
             //全选
-            $("#jfgrid_all_cb_girdtable").on('click', function () {
-                var array = [];
-                //获取一键数量
-                var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
-                for (var i = 0; i < newArray.length; i++) {
-                    //copy需要更改的地方
-                    newArray[i]["M_Unit2"] = newArray[i]['g_unit2'];
-                    newArray[i]["M_UnitQty"] = newArray[i]['g_unitqty'];
-                    newArray[i]["M_StockCode"] = newArray[i]['c_stockcode'];
-                    newArray[i]["M_StockName"] = newArray[i]['c_stockName'];
-                    newArray[i]["M_TaxPrice"] = newArray[i]['p_taxprice'];
-                    newArray[i]['M_GoodsCode'] = newArray[i]['p_goodscode'];
-                    newArray[i]['M_GoodsName'] = newArray[i]['p_goodsname'];
-                    newArray[i]['M_Kind'] = newArray[i]['g_kind'];
-                    newArray[i]['M_Unit'] = newArray[i]['g_unit'];
-                    newArray[i]['M_Price'] = newArray[i]['p_inprice'];
-                    newArray[i]['M_Tax'] = newArray[i]['p_itax'];
-                    newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
-                    newArray[i]["ID"] = newArray[i]['id'];
-                    array.push(newArray[i]);
-                }
-                parentRefreshGirdData(array);
+            //$("#jfgrid_all_cb_girdtable").on('click', function () {
+            //    var array = [];
+            //    //获取一键数量
+            //    var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
+            //    for (var i = 0; i < newArray.length; i++) {
+            //        //copy需要更改的地方
+            //        newArray[i]["M_Unit2"] = newArray[i]['g_unit2'];
+            //        newArray[i]["M_UnitQty"] = newArray[i]['g_unitqty'];
+            //        newArray[i]["M_StockCode"] = newArray[i]['c_stockcode'];
+            //        newArray[i]["M_StockName"] = newArray[i]['c_stockName'];
+            //        newArray[i]["M_TaxPrice"] = newArray[i]['p_taxprice'];
+            //        newArray[i]['M_GoodsCode'] = newArray[i]['p_goodscode'];
+            //        newArray[i]['M_GoodsName'] = newArray[i]['p_goodsname'];
+            //        newArray[i]['M_Kind'] = newArray[i]['g_kind'];
+            //        newArray[i]['M_Unit'] = newArray[i]['g_unit'];
+            //        newArray[i]['M_Price'] = newArray[i]['p_inprice'];
+            //        newArray[i]['M_Tax'] = newArray[i]['p_itax'];
+            //        newArray[i]['M_Batch'] = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
+            //        newArray[i]["ID"] = newArray[i]['id'];
+            //        array.push(newArray[i]);
+            //    }
+            //    parentRefreshGirdData(array);
 
-            });
+            //});
         },
         // 初始化列表
         initGird: function () {
