@@ -67,6 +67,24 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                selectedRow = $('#girdtable').jfGridGet('rowdata');
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var B_ParentID = $('#girdtable').jfGridValue('B_ParentID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'BomRecordForm',
+                        title: '编辑配方',
+                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?B_ParentID=' + B_ParentID,
+                        width: 700,
+                        height: 500,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
