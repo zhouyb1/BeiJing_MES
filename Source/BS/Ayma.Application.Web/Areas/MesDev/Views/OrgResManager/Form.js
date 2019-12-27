@@ -342,7 +342,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         var row_d= $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
         for (var i = 0; i < row_d.length; i++) {
-            if (row_d[i]["O_SecGoodsCode"] == row["w_secgoodscode"]) {
+            if (row_d[i]["O_SecGoodsCode"] == row["c_seccode"]) {
                 row_d.splice(i, 1);
                 tmp_d.delete(row);
                 page.search(row_d);
