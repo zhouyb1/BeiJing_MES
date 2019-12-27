@@ -175,7 +175,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         FROM    dbo.Mes_WorkShopScan s
                                 INNER JOIN dbo.Mes_Convert c ON c.C_Code = s.W_GoodsCode
                                 INNER JOIN mes_goods g ON g.G_Code =c.C_Code
-                        WHERE   1=1  ");
+                        WHERE   1=1  and s.W_Qty> 0 ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();

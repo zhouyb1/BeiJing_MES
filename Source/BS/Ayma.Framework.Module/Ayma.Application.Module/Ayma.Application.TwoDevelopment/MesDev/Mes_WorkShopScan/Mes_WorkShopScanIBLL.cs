@@ -26,7 +26,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_WorkShopScan表list实体数据
         /// </summary>
         /// <returns></returns>
-        Mes_WorkShopScanEntity GetMes_WorkShopScanEntity(string goodsCode);
+        Mes_WorkShopScanEntity GetMes_WorkShopScanEntity(string goodsCode,string batch);
         #endregion
 
         #region 提交数据

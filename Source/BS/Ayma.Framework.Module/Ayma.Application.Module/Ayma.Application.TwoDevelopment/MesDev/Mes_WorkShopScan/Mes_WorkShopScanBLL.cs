@@ -47,11 +47,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_WorkShopScan表实体数据
         /// </summary>
         /// <returns></returns>
-        public Mes_WorkShopScanEntity GetMes_WorkShopScanEntity(string goodsCode)
+        public Mes_WorkShopScanEntity GetMes_WorkShopScanEntity(string goodsCode,string batch)
         {
             try
             {
-                return mes_WorkShopScanService.GetMes_WorkShopScanEntity(goodsCode);
+                return mes_WorkShopScanService.GetMes_WorkShopScanEntity(goodsCode,batch);
             }
             catch (Exception ex)
             {
