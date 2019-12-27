@@ -17,16 +17,6 @@
         <div class="am-form-item-title">仓库编码</div>
         <input id="I_StockCode" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
     </div>
-
-    <div class="col-xs-6 am-form-item" data-table="Mes_InWorkShopHead">
-        <div class="am-form-item-title">生产订单号<font face="宋体">*</font></div>
-        <input id="I_OrderNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
-       
-    </div>
-    <div class="col-xs-6 am-form-item" data-table="Mes_InWorkShopHead">
-        <div class="am-form-item-title">生产订单时间<font face="宋体">*</font></div>
-        <input id="I_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" isvalid="yes" checkexpession="NotNull" />
-    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_InWorkShopHead">
         <div class="am-form-item-title">备注</div>
         <input id="I_Remark" type="text" class="form-control" />
