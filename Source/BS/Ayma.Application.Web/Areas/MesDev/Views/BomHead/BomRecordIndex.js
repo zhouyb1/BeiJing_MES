@@ -106,6 +106,8 @@ var bootstrap = function ($, ayma) {
                            { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
                            { label: '单位', name: 'B_Unit', width: 100, align: 'left' },
                            { label: '数量', name: 'B_Qty', width: 160, align: 'left' },
+                           { label: "领料后仓库编码", name: "B_StockCode", width: 160, align: "left" },
+                           { label: "领料后仓库名称", name: "B_StockName", width: 160, align: "left" }, 
                            {
                                label: "是否有效", name: "B_Avail", width: 160, align: "left",
                                formatterAsync: function (callback, value, row) {

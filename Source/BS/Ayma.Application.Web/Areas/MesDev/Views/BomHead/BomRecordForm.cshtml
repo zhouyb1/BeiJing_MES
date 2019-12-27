@@ -21,7 +21,10 @@
         <div class="am-form-item-title" id="div_FormulaName">配方名称<font face="宋体">*</font></div>
         <input id="B_FormulaName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
     </div>
-
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
+        <div class="am-form-item-title">是否有效<font face="宋体">*</font></div>
+        <div id="B_Avail" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
         <div id="B_GoodsName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
@@ -30,8 +33,14 @@
         <div class="am-form-item-title">物料编码</div>
         <input id="B_GoodsCode" type="text" class="form-control" disabled="disabled" />
     </div>
-
-
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead" id="StockName" style="display:none">
+        <div class="am-form-item-title">领料后仓库名称<font face="宋体" >*</font></div>
+        <div id="B_StockName" class="form-control"></div>
+    </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead" id="StockCode" style="display:none">
+        <div class="am-form-item-title">领料后仓库编码</div>
+        <input id="B_StockCode" type="text" class="form-control" disabled="disabled" />
+    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">数量<font face="宋体">*</font></div>
         <input id="B_Qty" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
@@ -42,10 +51,6 @@
         </div>
         <div id="B_Unit" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
         <input id="B_Unit1" type="text" class="form-control" disabled="disabled" />
-    </div>
-    <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
-        <div class="am-form-item-title">是否有效<font face="宋体">*</font></div>
-        <div id="B_Avail" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_BomHead">
         <div class="am-form-item-title">开始时间</div>

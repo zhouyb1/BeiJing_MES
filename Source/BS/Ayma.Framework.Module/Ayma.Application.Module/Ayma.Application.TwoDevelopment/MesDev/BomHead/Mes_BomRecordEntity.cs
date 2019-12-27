@@ -56,6 +56,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string B_GoodsName { get; set; }
 
         /// <summary>
+        /// 仓库名称
+        /// </summary>
+        [Column("B_STOCKNAME")]
+        public string B_StockName { get; set; }
+
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+        [Column("B_STOCKCODE")]
+        public string B_StockCode { get; set; }
+
+        /// <summary>
         /// 单位
         /// </summary>
         [Column("B_UNIT")]

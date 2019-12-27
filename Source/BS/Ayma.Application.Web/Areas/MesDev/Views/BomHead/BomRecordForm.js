@@ -11,6 +11,7 @@ var selectedRow = top.BomRecordIndexSelectedRow();
 var B_ParentID = request('B_ParentID');
 var keyValue = '';
 var acceptClick;
+var G_Kind;
 var bootstrap = function ($, ayma) {
     "use strict";
 
@@ -137,6 +138,42 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#B_GoodsCode").val(entity.G_Code);
+                        G_Kind = entity.G_Kind;
+                        if (G_Kind == 1) {
+                            $("#StockName").css("display", "block");
+                            $("#StockCode").css("display", "block");
+                            $("#B_StockName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                        }
+                        else {
+                            $("#StockName").css("display", "none");
+                            $("#StockCode").css("display", "none");
+                            $("#B_StockName").removeAttr("isvalid").removeAttr("checkexpession");
+                        }
+                    }
+                });
+
+            });
+            //仓库名称
+            $("#B_StockName").select({
+                type: 'default',
+                value: 'S_Name',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
+                // 访问数据接口参数
+            }).bind("change", function () {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#B_StockCode").val(entity == null ? "" : entity.S_Code);
                     }
                 });
             });

@@ -40,6 +40,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_Avail,
                 t.B_StartTime,
                 t.B_EndTime,
+                t.B_StockName,
+                t.B_StockCode,
                 t.B_Unit
                 ");
                 strSql.Append("  FROM Mes_BomHead t ");
@@ -156,6 +158,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                           ,t.[B_UpdateDate]
                           ,t.[B_Avail]
                           ,t.[B_StartTime]
+                          ,t.[B_StockName]
+                          ,t.[B_StockCode]
                           ,t.[B_EndTime]
                           ,t.[B_Remark]
                         ");
