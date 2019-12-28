@@ -62,19 +62,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-            //工艺代码
-            $("#C_RecordCode").select({
-                type: 'default',
-                value: 'R_Record',
-                text: 'R_Record',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
-                // 访问数据接口参数
-            });
             //工序名称
             $("#C_ProName").select({
                 type: 'default',

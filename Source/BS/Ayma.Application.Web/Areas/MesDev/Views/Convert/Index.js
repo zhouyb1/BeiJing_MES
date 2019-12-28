@@ -101,7 +101,6 @@ var bootstrap = function ($, ayma) {
                     { label: "物料名称", name: "C_Name", width: 160, align: "left"},
                     { label: "转换后物料编码", name: "C_SecCode", width: 120, align: "left" },
                     { label: "转换后物料名称", name: "C_SecName", width: 160, align: "left" },
-                    { label: "工艺代码", name: "C_RecordCode", width: 100, align: "left" },
                     { label: "工序号", name: "C_ProNo", width: 100, align: "left" },
                     { label: "工序名称", name: "C_ProName", width: 120, align: "left" },
                     { label: "最大转化率", name: "C_Max", width: 100, align: "left"},
