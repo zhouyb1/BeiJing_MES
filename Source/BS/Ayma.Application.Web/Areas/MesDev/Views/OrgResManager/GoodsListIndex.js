@@ -1,7 +1,7 @@
 ﻿/* * 创建人：Yabo,Zhou
  * 描  述：组装物料列表
  */
-var workShop = request('workShop');
+var stock = request('stock');
 var proNo = request('proNo');
 var refreshGirdData;
 //上级元素的刷新表格方法
@@ -115,7 +115,7 @@ var bootstrap = function ($, ayma) {
                            { label: "单价", name: "w_price", width: 60, align: "center" },
                            { label: "单位", name: "w_unit", width: 60, align: "center" },
                            {
-                               label: "数量", name: "w_qty", width: 90, align: "center", 
+                               label: "库存", name: "w_qty", width: 90, align: "center", 
                            },
                            { label: "批次", name: "w_batch", width: 90, align: "center",}
                        ]
@@ -128,7 +128,7 @@ var bootstrap = function ($, ayma) {
                         children: [
                            { label: "物料编码", name: "c_seccode", width: 90, align: "center", },
                            { label: "物料名称", name: "c_secname", width: 120, align: "center" },
-                           { label: "单价", name: "w_secprice", width: 60, align: "center" },
+                           //{ label: "单价", name: "w_secprice", width: 60, align: "center" },
                            { label: "单位", name: "w_unit", width: 60, align: "center" },
                         ]
                     }
@@ -250,7 +250,7 @@ var bootstrap = function ($, ayma) {
         search: function (param) {
             queryJson = param || {};
             param = $("#txt_Keyword").val();
-            queryJson.workShop = workShop;
+            queryJson.stock = stock;
             queryJson.proNo = proNo;
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }

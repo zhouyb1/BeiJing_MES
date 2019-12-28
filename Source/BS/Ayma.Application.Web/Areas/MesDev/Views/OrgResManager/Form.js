@@ -20,30 +20,29 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-           var  dfop = {
+            $("#O_StockName").select({
                 type: 'default',
-                value: 'W_Name',
-                text: 'W_Name',
+                value: 'S_Name',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
-           }
-            //绑定车间
-           $('#O_WorkShopName').select(dfop).on('change', function () {
-               $("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-               $("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+            }).on('change', function() {
+                $("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
+                $("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+
                 var name = $(this).selectGet();
-                //绑定车间编码
-                ayma.httpAsyncGet(top.$.rootUrl + '/MesDev/Tools/ByNameGetWorkShopEntity?name=' + name, function(result) {
-                    $('#O_WorkShopCode').val(result.data.W_Code);
+                //绑定仓库编码
+                ayma.httpAsyncGet(top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity?code=' + name, function (result) {
+                    $('#O_StockCode').val(result.data.S_Code);
                 });
-             
             });
+         
 
            //绑定工序
             $('#O_ProCode').select({
@@ -88,15 +87,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     ayma.alert.error('请先选择工序');
                     return false;
                 }
-                if ($('#O_WorkShopName').selectGet()=="") {
-                    ayma.alert.error('请先选择车间');
+                if ($('#O_StockName').selectGet()=="") {
+                    ayma.alert.error('请先选择日耗库');
                     return false;
                 }
-               
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&workShop=' + $('#O_WorkShopCode').val() + '&proNo=' + $('#O_ProCode').selectGet(),
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&stock=' + $('#O_StockCode').val() + '&proNo=' + $('#O_ProCode').selectGet(),
                     width: 900,
                     height: 700,
                     maxmin: true,
@@ -203,7 +201,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $.SetForm(top.$.rootUrl + '/MesDev/OrgResManager/GetFormData?keyValue=' + keyValue, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
-                            $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: data[id] });
+                            var tempArr = [];
+                            tempArr = tempArr.concat(data[id]);
+                            $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: tempArr });
                             var arr = [];
                             for (var i = 0; i < data[id].length; i++) {
                                 if (!arr.includes(data[id][i].O_SecGoodsCode)) {
