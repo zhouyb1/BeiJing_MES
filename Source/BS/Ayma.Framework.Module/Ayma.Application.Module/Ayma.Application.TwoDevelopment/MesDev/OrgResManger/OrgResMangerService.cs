@@ -37,8 +37,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_Status,
                 t.O_OrgResNo,
                 dbo.GetProNamekByCode(O_ProCode) O_ProCode,
-                t.O_WorkShopCode,
-                t.O_WorkShopName,
+                t.O_StockCode,
+                t.O_StockName,
                 t.O_Remark,
                  dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
@@ -59,10 +59,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("O_OrgResNo", "%" + queryParam["O_OrgResNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_OrgResNo Like @O_OrgResNo ");
                 }
-                if (!queryParam["O_WorkShopName"].IsEmpty())
+                if (!queryParam["O_StockCode"].IsEmpty())
                 {
-                    dp.Add("O_WorkShopName", "%" + queryParam["O_WorkShopName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_WorkShopName Like @O_WorkShopName ");
+                    dp.Add("O_StockCode", "%" + queryParam["O_StockCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_StockCode Like @O_StockCode ");
                 }
                 if (!queryParam["O_Status"].IsEmpty())
                 {
@@ -161,33 +161,34 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT  s.ID,
-                                s.W_GoodsCode ,
-                                s.W_GoodsName ,
-                                c.C_SecCode ,
-                                c.C_SecName,
-                                s.W_Unit,
-                                s.W_Batch,
-                                s.W_Qty,
-                                s.W_Price,
-                                s.W_WorkShop,
-                                s.W_WorkShopName
-                        FROM    dbo.Mes_WorkShopScan s
-                                INNER JOIN dbo.Mes_Convert c ON c.C_Code = s.W_GoodsCode
-                                INNER JOIN mes_goods g ON g.G_Code =c.C_Code
-                        WHERE   1=1  and s.W_Qty> 0 ");
+            sb.Append(@"SELECT  i.ID,
+                                i.I_GoodsCode W_GoodsCode, --组装前的物料
+                                i.I_GoodsName W_GoodsName,
+                                i.I_Batch W_Batch,
+                                i.I_Qty W_Qty,
+                                i.I_StockCode,
+                                i.I_StockName,
+                                (SELECT G_Price FROM dbo.Mes_Goods WHERE G_Code = i.I_GoodsCode) W_Price,
+                                i.I_Unit W_Unit,
+                                c.C_SecCode C_SecCode, --组装后的物料
+                                c.C_SecName C_SecName,
+                                c.C_ProNo
+                        FROM    dbo.Mes_Convert c
+                                LEFT JOIN dbo.Mes_Inventory i ON i.I_GoodsCode =c.C_Code   
+                                LEFT JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode   
+                                WHERE s.S_Kind = 4  and i.I_Qty > 0 ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                sb.Append(" AND s.W_GoodsCode+s.W_GoodsName like @keyword ");
+                sb.Append(" AND i.I_GoodsCode+i.I_GoodsName like @keyword ");
             }
-            if (!queryParam["workShop"].IsEmpty())
+            if (!queryParam["stock"].IsEmpty())
             {
-                dp.Add("workShop", "%" + queryParam["workShop"].ToString() + "%", DbType.String);
-                sb.Append(" AND s.W_WorkShop like @workShop ");
+                dp.Add("stock", "%" + queryParam["stock"].ToString() + "%", DbType.String);
+                sb.Append(" AND i.I_StockCode like @stock ");
             }
             if (!queryParam["proNo"].IsEmpty())
             {

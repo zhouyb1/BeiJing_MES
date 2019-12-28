@@ -113,6 +113,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("O_TEAMNAME")]
         public string O_TeamName { get; set; }
+        /// <summary>
+        /// 仓库
+        /// </summary>
+        [Column("O_StockName")]
+        public string O_StockName { get; set; }
+        /// <summary>
+        /// 仓库编码
+        /// </summary>
+        [Column("O_StockCode")]
+        public string O_StockCode { get; set; }
         #endregion
 
         #region 扩展操作
