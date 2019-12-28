@@ -130,7 +130,7 @@
             this.btn_Search.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
             this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_Search.Location = new System.Drawing.Point(713, 12);
+            this.btn_Search.Location = new System.Drawing.Point(713, 9);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(90, 30);
             this.btn_Search.TabIndex = 72;
@@ -143,7 +143,7 @@
             this.btn_upload.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_upload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btn_upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_upload.Location = new System.Drawing.Point(713, 117);
+            this.btn_upload.Location = new System.Drawing.Point(713, 85);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(90, 30);
             this.btn_upload.TabIndex = 71;
@@ -438,7 +438,7 @@
             this.btn_save.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_save.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btn_save.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btn_save.Location = new System.Drawing.Point(713, 49);
+            this.btn_save.Location = new System.Drawing.Point(713, 46);
             this.btn_save.Name = "btn_save";
             this.btn_save.Size = new System.Drawing.Size(90, 30);
             this.btn_save.TabIndex = 51;
@@ -674,7 +674,7 @@
             this.btn_Delete.Font = new System.Drawing.Font("宋体", 11F);
             this.btn_Delete.Image = global::DesktopApp.Properties.Resources.delete;
             this.btn_Delete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Delete.Location = new System.Drawing.Point(713, 84);
+            this.btn_Delete.Location = new System.Drawing.Point(713, 140);
             this.btn_Delete.Name = "btn_Delete";
             this.btn_Delete.Size = new System.Drawing.Size(90, 30);
             this.btn_Delete.TabIndex = 94;

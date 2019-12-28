@@ -144,7 +144,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
-            this.lbVer.Text = "V1.0.1.1";
+            this.lbVer.Text = "V1.0.1.2";
             // 
             // label3
             // 

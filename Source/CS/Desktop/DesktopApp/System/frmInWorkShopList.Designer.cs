@@ -285,7 +285,7 @@
             this.btnUpload.Font = new System.Drawing.Font("宋体", 12F);
             this.btnUpload.Image = global::DesktopApp.Properties.Resources.ok;
             this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(762, 134);
+            this.btnUpload.Location = new System.Drawing.Point(762, 96);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(90, 30);
             this.btnUpload.TabIndex = 39;
@@ -612,7 +612,7 @@
             this.btnDelete.Font = new System.Drawing.Font("宋体", 12F);
             this.btnDelete.Image = global::DesktopApp.Properties.Resources.delete;
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(762, 95);
+            this.btnDelete.Location = new System.Drawing.Point(762, 174);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(90, 30);
             this.btnDelete.TabIndex = 73;
