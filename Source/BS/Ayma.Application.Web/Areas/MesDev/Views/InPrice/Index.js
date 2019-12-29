@@ -266,7 +266,7 @@ var bootstrap = function ($, ayma) {
                         sidx: "P_GoodsCode",
                         sord: 'ASC',
                         isMultiselect:true,
-                        reloadSelected: false,
+                        reloadSelected: true,
                         inputCount:3
                     }).jfGridSet("reload");
                 }

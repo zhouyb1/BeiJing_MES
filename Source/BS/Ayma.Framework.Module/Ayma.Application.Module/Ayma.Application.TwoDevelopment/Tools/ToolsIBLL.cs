@@ -18,6 +18,12 @@ namespace Ayma.Application.TwoDevelopment.Tools
     {
         #region 获取数据
         /// <summary>
+        /// 根据物料编码获取包装规格数
+        /// <param name="code">物料编码</param>
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_SpecsEntity> ByGoodsCodeGetUnit(string code);
+        /// <summary>
         /// 根据部门编码获取部门实体信息
         /// <param name="code">仓库编码</param>
         /// </summary>

@@ -176,6 +176,7 @@
     <Compile Include="MesDev\Mes_OutPriceMap.cs" />
     <Compile Include="MesDev\Mes_IPToRFIDMap.cs" />
     <Compile Include="MesDev\Mes_WorkShopScanMap.cs" />
+    <Compile Include="MesDev\Mes_SpecsMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

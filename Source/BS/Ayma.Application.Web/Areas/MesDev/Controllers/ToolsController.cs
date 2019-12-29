@@ -16,6 +16,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         private Mes_ProductOrderHeadIBLL mesProductOrderHead=new Mes_ProductOrderHeadBLL();
         #region 获取数据
         /// <summary>
+        /// 根据物料编码获取包装规格数
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByGoodsCodeGetUnit(string code)
+        {
+            var Unit = toosIBLL.ByGoodsCodeGetUnit(code);
+            return Success(Unit);
+        }
+        /// <summary>
         /// 根据仓库编码或名称获取仓库实体信息
         /// </summary>
         /// <param name="code">仓库编码</param>

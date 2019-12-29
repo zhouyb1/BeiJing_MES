@@ -135,7 +135,7 @@ var bootstrap = function ($, ayma) {
                         isPage: true,
                         sidx: "P_GoodsCode,P_CreateDate",
                         sord: 'ASC',
-                        reloadSelected: false,
+                        reloadSelected: true,
                     }).jfGridSet("reload");
                 }
             });

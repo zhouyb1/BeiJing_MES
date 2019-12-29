@@ -341,6 +341,10 @@
     <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDIBLL.cs" />
     <Compile Include="MesDev\Mes_IPToRFID\Mes_IPToRFIDBLL.cs" />
     <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanEntity.cs" />
+    <Compile Include="MesDev\Mes_Specs\Mes_SpecsEntity.cs" />
+    <Compile Include="MesDev\Mes_Specs\Mes_SpecsService.cs" />
+    <Compile Include="MesDev\Mes_Specs\Mes_SpecsIBLL.cs" />
+    <Compile Include="MesDev\Mes_Specs\Mes_SpecsBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">

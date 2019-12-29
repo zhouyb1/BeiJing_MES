@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "物料包装数";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="am-form-wrap" id="form">
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">物料名称<font face="宋体">*</font></div>
+        <div id="S_GoodsName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">物料编码</div>
+        <input id="S_GoodsCode" type="text" class="form-control" disabled="disabled" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">包装规格数<font face="宋体">*</font></div>
+        <input id="S_UnitQty" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 am-form-item">
+        <div class="am-form-item-title">备注</div>
+        <input id="S_Remark" type="text" class="form-control"/>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/Mes_Specs/Form.js")
