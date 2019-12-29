@@ -53,7 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_QTY")]
-        public decimal? P_Qty { get; set; }
+        public double? P_Qty { get; set; }
 
         /// <summary>
         /// erp餐食编码
@@ -69,7 +69,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string P_Batch { get; set; }
 
         [NotMapped]
-        public decimal? P_Price { get; set; }
+        public double? P_Price { get; set; }
 
         #endregion
 

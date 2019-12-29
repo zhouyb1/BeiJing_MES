@@ -73,12 +73,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 抽检数量
         /// </summary>
         [Column("I_GOODSQTY")]
-        public decimal? I_GoodsQty { get; set; }
+        public double? I_GoodsQty { get; set; }
         /// <summary>
         /// 合格数量
         /// </summary>
         [Column("I_QUALIFIEDQTY")]
-        public decimal? I_QualifiedQty { get; set; }
+        public double? I_QualifiedQty { get; set; }
         /// <summary>
         /// 不合格原因
         /// </summary>

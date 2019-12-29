@@ -47,12 +47,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_INPRICE")]
-        public decimal? P_InPrice { get; set; }
+        public double? P_InPrice { get; set; }
         /// <summary>
         /// 供应商价格(含税)
         /// </summary>
         [Column("P_TAXPRICE")]
-        public decimal? P_TaxPrice { get; set; }
+        public double? P_TaxPrice { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -70,7 +70,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_ITAX")]
-        public decimal? P_Itax { get; set; }
+        public double? P_Itax { get; set; }
         /// <summary>
         /// 起始时间
         /// </summary>
@@ -95,7 +95,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.ID = Guid.NewGuid().ToString();
             this.P_CreateDate = DateTime.Now;
             this.P_CreateBy = userInfo.userId;
-            this.P_TaxPrice = this.P_InPrice * (1 + (this.P_Itax / 100));
         }
         /// <summary>
         /// 编辑调用
@@ -104,7 +103,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
-            this.P_TaxPrice = this.P_InPrice * (1 + (this.P_Itax / 100));
         }
         #endregion
     }

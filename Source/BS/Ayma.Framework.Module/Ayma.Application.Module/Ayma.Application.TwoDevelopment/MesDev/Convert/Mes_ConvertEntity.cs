@@ -41,12 +41,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 最大转化率
         /// </summary>
         [Column("C_MAX")]
-        public decimal? C_Max { get; set; }   
+        public double? C_Max { get; set; }   
         /// <summary>
         /// 最小转化率
         /// </summary>
         [Column("C_MIN")]
-        public decimal? C_Min { get; set; }
+        public double? C_Min { get; set; }
         /// <summary>
         /// 工艺代码
         /// </summary>

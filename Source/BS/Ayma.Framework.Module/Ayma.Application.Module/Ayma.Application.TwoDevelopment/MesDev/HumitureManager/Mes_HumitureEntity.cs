@@ -36,12 +36,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 上限值
         /// </summary>
         [Column("H_UP")]
-        public decimal? H_Up { get; set; }
+        public double? H_Up { get; set; }
         /// <summary>
         /// 下限值
         /// </summary>
         [Column("H_DOWN")]
-        public decimal? H_Down { get; set; }
+        public double? H_Down { get; set; }
         /// <summary>
         /// 地址
         /// </summary>

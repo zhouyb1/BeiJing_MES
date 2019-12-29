@@ -31,47 +31,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 工资基数
         /// </summary>
         [Column("S_WAGEBASE")]
-        public decimal? S_Wagebase { get; set; }
+        public double? S_Wagebase { get; set; }
         /// <summary>
         /// 养老单位比例
         /// </summary>
         [Column("S_PENSIONUNITRATIO")]
-        public decimal? S_PensionUnitRatio { get; set; }
+        public double? S_PensionUnitRatio { get; set; }
         /// <summary>
         /// 养老个人比例
         /// </summary>
         [Column("S_PENSIONPERSONRATIO")]
-        public decimal? S_PensionPersonRatio { get; set; }
+        public double? S_PensionPersonRatio { get; set; }
         /// <summary>
         /// 失业单位比例
         /// </summary>
         [Column("S_OUTWORKUNITRATIO")]
-        public decimal? S_OutWorkUnitRatio { get; set; }
+        public double? S_OutWorkUnitRatio { get; set; }
         /// <summary>
         /// 失业个人比例
         /// </summary>
         [Column("S_OUTWORKPERSONRATIO")]
-        public decimal? S_OutWorkPersonRatio { get; set; }
+        public double? S_OutWorkPersonRatio { get; set; }
         /// <summary>
         /// 医疗单位比例
         /// </summary>
         [Column("S_MEDICALUNITRATIO")]
-        public decimal? S_MedicalUnitRatio { get; set; }
+        public double? S_MedicalUnitRatio { get; set; }
         /// <summary>
         /// 医疗个人比例
         /// </summary>
         [Column("S_MEDICALPRESONRATIO")]
-        public decimal? S_MedicalPresonRatio { get; set; }
+        public double? S_MedicalPresonRatio { get; set; }
         /// <summary>
         /// 工伤单位比例
         /// </summary>
         [Column("S_INJURYUNITRATIO")]
-        public decimal? S_InJuryUnitRatio { get; set; }
+        public double? S_InJuryUnitRatio { get; set; }
         /// <summary>
         /// 生育单位比例
         /// </summary>
         [Column("S_BEARUNITRATIO")]
-        public decimal? S_BearUnitRatio { get; set; }
+        public double? S_BearUnitRatio { get; set; }
         #endregion
 
         #region 扩展操作

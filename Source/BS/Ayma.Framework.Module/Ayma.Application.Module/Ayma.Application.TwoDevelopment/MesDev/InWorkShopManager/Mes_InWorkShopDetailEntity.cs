@@ -41,7 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("I_QTY")]
-        public decimal? I_Qty { get; set; }
+        public double? I_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -56,7 +56,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("I_PRICE")]
-        public decimal? I_Price { get; set; }
+        public double? I_Price { get; set; }
 
         #endregion
 

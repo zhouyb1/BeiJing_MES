@@ -31,7 +31,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// M_Weight
         /// </summary>
         [Column("M_WEIGHT")]
-        public decimal? M_Weight { get; set; }
+        public double? M_Weight { get; set; }
         #endregion
 
         #region 扩展操作

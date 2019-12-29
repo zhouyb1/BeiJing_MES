@@ -36,7 +36,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 税率
         /// </summary>
         [Column("S_OTAX")]
-        public decimal? S_Otax { get; set; }
+        public double? S_Otax { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -46,7 +46,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("S_QTY")]
-        public decimal? S_Qty { get; set; }
+        public double? S_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -56,7 +56,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("S_PRICE")]
-        public decimal? S_Price { get; set; }
+        public double? S_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

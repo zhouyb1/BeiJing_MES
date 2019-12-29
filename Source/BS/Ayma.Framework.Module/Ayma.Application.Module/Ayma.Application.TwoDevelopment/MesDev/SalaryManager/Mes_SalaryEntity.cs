@@ -36,7 +36,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 金额
         /// </summary>
         [Column("S_PAY")]
-        public decimal? S_Pay { get; set; }
+        public double? S_Pay { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

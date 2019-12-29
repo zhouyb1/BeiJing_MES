@@ -35,7 +35,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("O_SALEPRICE")]
-        public decimal? O_SalePrice { get; set; }
+        public double? O_SalePrice { get; set; }
+        /// <summary>
+        /// 售卖税率
+        /// </summary>
+        /// <returns></returns>
+        [Column("O_OTAX")]
+        public double? O_Otax { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

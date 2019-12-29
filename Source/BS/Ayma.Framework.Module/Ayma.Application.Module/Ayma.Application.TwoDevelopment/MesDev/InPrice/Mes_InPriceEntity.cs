@@ -41,18 +41,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 供应商价格(含税)
         /// </summary>
         [Column("P_TAXPRICE")]
-        public decimal? P_TaxPrice { get; set; }
+        public double? P_TaxPrice { get; set; }
         /// <summary>
         /// 供应商价格(不含税)
         /// </summary>
         [Column("P_INPRICE")]
-        public decimal? P_InPrice { get; set; }
+        public double? P_InPrice { get; set; }
         /// <summary>
         /// 购进税率
         /// </summary>
         /// <returns></returns>
         [Column("P_ITAX")]
-        public decimal? P_Itax { get; set; }
+        public double? P_Itax { get; set; }
         /// <summary>
         /// 开始时间
         /// </summary>

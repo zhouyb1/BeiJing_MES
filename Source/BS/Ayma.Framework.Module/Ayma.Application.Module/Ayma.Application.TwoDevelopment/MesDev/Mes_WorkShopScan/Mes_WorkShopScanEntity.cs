@@ -101,7 +101,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("W_QTY")]
-        public decimal? W_Qty { get; set; }
+        public double? W_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -113,7 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("W_PRICE")]
-        public decimal? W_Price { get; set; }
+        public double? W_Price { get; set; }
         /// <summary>
         /// W_Remark
         /// </summary>

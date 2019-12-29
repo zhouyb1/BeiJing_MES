@@ -41,7 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("O_QTY")]
-        public decimal? O_Qty { get; set; }
+        public double? O_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -51,7 +51,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("O_PRICE")]
-        public decimal? O_Price { get; set; }
+        public double? O_Price { get; set; }
         /// <summary>
         /// 物料编码
         /// </summary>
@@ -71,7 +71,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("O_SECQTY")]
-        public decimal? O_SecQty { get; set; }
+        public double? O_SecQty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -81,7 +81,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("O_SECPRICE")]
-        public decimal? O_SecPrice { get; set; }
+        public double? O_SecPrice { get; set; }
         #endregion
 
         #region 扩展操作

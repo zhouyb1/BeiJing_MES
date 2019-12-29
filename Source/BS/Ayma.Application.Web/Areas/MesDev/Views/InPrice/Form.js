@@ -220,10 +220,15 @@ var bootstrap = function ($, ayma) {
             var StartDate = $.trim($("#P_StartDate").val()); //去除空格
             var EndDate = $.trim($("#P_EndDate").val()); //去除空格
             if (StartDate != undefined && StartDate != "" && EndDate != undefined && EndDate != "") {
-                if (EndDate.toString("yyyy-mm-dd") <= StartDate.toString("yyyy-mm-dd"))
-                {
+                if (EndDate.toString("yyyy-mm-dd") <= StartDate.toString("yyyy-mm-dd")) {
                     ayma.alert.error("到期时间只能大于开始时间.");
+                    $("#P_StartDate").addClass("am-field-error");
+                    $("#P_EndDate").addClass("am-field-error");
                     return false;
+                }
+                else {
+                    $("#P_StartDate").removeClass("am-field-error");
+                    $("#P_EndDate").removeClass("am-field-error");
                 }
             }
             var postData = {

@@ -51,7 +51,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("W_QTY")]
-        public decimal? W_Qty { get; set; }
+        public double? W_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>

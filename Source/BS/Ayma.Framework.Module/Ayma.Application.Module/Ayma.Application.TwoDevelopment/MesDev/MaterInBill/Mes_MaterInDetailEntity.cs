@@ -56,7 +56,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 物料税率
         /// </summary>
         [Column("M_GOODSITAX")]
-        public decimal? M_GoodsItax { get; set; }
+        public double? M_GoodsItax { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -66,7 +66,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("M_QTY")]
-        public decimal? M_Qty { get; set; }
+        public double? M_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -81,7 +81,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("M_PRICE")]
-        public decimal? M_Price { get; set; }
+        public double? M_Price { get; set; }
 
         ///新增字段  2019年12月18日15:20:23
         /// <summary>
@@ -103,22 +103,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
          /// 包装规格
          /// </summary>
          [Column("M_UNITQTY")]
-         public decimal? M_UnitQty { get; set; }
+         public double? M_UnitQty { get; set; }
          /// <summary>
          /// 包装数量
          /// </summary>
          [Column("M_QTY2")]
-         public decimal ? M_Qty2 { get; set; }
+         public double? M_Qty2 { get; set; }
          /// <summary>
          /// 入库税率
          /// </summary>
          [Column("M_TAX")]
-         public decimal? M_Tax { get; set; }
+         public double? M_Tax { get; set; }
          /// <summary>
          /// 含税价
          /// </summary>
          [Column("M_TAXPRICE")]
-         public decimal? M_TaxPrice { get; set; }
+         public double? M_TaxPrice { get; set; }
 
 
 

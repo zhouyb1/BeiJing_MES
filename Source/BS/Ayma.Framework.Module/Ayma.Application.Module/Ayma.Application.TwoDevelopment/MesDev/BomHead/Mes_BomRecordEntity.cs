@@ -77,10 +77,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("B_QTY")]
-        public decimal? B_Qty { get; set; }
+        public double? B_Qty { get; set; }
 
         [NotMapped]
-        public decimal? B_Total { get; set; }
+        public double? B_Total { get; set; }
 
         /// <summary>
         /// erp餐食编码
@@ -174,7 +174,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string G_SupplyName { get; set; }
 
         [NotMapped]
-        public decimal? G_Price { get; set; }
+        public double? G_Price { get; set; }
 
         [NotMapped]
         public string G_TeamCode { get; set; }

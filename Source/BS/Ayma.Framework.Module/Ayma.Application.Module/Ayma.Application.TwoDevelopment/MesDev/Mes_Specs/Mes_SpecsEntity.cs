@@ -35,7 +35,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("S_UNITQTY")]
-        public decimal? S_UnitQty { get; set; }
+        public double? S_UnitQty { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

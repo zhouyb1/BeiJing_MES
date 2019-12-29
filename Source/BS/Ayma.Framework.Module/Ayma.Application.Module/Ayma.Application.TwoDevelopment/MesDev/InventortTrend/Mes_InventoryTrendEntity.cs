@@ -66,17 +66,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 初始数量
         /// </summary>
         [Column("I_QTYOLD")]
-        public decimal? I_QtyOld { get; set; }
+        public double? I_QtyOld { get; set; }
         /// <summary>
         /// 新数量
         /// </summary>
         [Column("I_QTYNEW")]
-        public decimal? I_QtyNew { get; set; }
+        public double? I_QtyNew { get; set; }
         /// <summary>
         /// 移动数量
         /// </summary>
         [Column("I_QTYTREND")]
-        public decimal? I_QtyTrend { get; set; }
+        public double? I_QtyTrend { get; set; }
         /// <summary>
         /// 备注
         /// </summary>
