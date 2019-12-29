@@ -46,19 +46,22 @@ var bootstrap = function ($, ayma) {
                 //queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
+
+            //绑定日耗库
             $('#O_WorkShopName').select({
                 type: 'default',
-                value: 'W_Name',
-                text: 'W_Name',
+                value: 'S_Code',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
-                    param: {}
-        });
+                param: {}
+            });
+
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -96,6 +99,19 @@ var bootstrap = function ($, ayma) {
                         btn: null,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+            //撤销单据
+            $("#am_cancel").on('click', function () {
+                var orderNo = $("#girdtable").jfGridValue("O_OrgResNo");
+                if (ayma.checkrow(orderNo)) {
+                    ayma.layerConfirm('是否确认撤销该单据！', function (res) {
+                        if (res) {
+                            ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_OrgRes_CancelNew', type: 2 }, function () {
+                                refreshGirdData();
+                            });
                         }
                     });
                 }
