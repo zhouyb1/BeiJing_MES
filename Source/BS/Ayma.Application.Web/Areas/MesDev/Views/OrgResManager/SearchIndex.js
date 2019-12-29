@@ -143,8 +143,8 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "单据号", name: "O_OrgResNo", width: 160, align: "center" },
                     { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
-                    { label: "车间名称", name: "O_WorkShopName", width: 120, align: "center" },
-                    { label: "车间编码", name: "O_WorkShopCode", width: 90, align: "center" },
+                    { label: "日耗仓名称", name: "O_StockName", width: 120, align: "center" },
+                    { label: "日耗仓编码", name: "O_StockCode", width: 90, align: "center" },
                     { label: "备注", name: "O_Remark", width: 160, align: "center" },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
                     { label: "添加时间", name: "O_CreateDate", width: 160, align: "center"}
