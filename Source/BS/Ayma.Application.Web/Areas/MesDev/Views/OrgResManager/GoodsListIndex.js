@@ -201,7 +201,7 @@ var bootstrap = function ($, ayma) {
                         //新增
 
                         //判断是否已经添加过
-                        var isadd = true;
+                        var isadd = true; //修改 head部分不判断，点一条copy一条过去
                         for (var i = 0; i < goodsOutList.length; i++) {
                             if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch) {
                                 isadd = false;
