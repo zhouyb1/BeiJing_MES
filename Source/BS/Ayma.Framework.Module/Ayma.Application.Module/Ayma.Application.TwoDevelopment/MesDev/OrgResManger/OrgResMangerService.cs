@@ -107,8 +107,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_OrderDate,
                 t.O_Record,
                 dbo.GetProNamekByCode(O_ProCode) O_ProCode,
-                t.O_WorkShopCode,
-                t.O_WorkShopName,
+                t.O_StockCode,
+                t.O_StockName,
                 t.O_Remark,
                 dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
@@ -131,8 +131,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 if (!queryParam["O_WorkShopName"].IsEmpty())
                 {
-                    dp.Add("O_WorkShopName", "%" + queryParam["O_WorkShopName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.O_WorkShopName Like @O_WorkShopName ");
+                    dp.Add("O_StockCode", "%" + queryParam["O_StockCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_StockCode Like @O_StockCode ");
                 }
                 if (!queryParam["O_Status"].IsEmpty())
                 {
