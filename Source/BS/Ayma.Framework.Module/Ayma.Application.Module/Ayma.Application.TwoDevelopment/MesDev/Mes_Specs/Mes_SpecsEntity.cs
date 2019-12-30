@@ -43,7 +43,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("S_REMARK")]
         public string S_Remark { get; set; }
         #endregion
-
+        [NotMapped]
+        public string F_ItemName { get; set; }
+        [NotMapped]
+        public string F_ItemValue { get; set; }
         #region 扩展操作
         /// <summary>
         /// 新增调用

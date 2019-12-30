@@ -30,7 +30,16 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_SpecsEntity>(x =>x.S_GoodsCode==code);
+                StringBuilder strSql = new StringBuilder();
+                strSql.Append(@"select
+                t.ID,
+                t.S_GoodsCode,
+                t.S_GoodsName as F_ItemName,
+                t.S_UnitQty as F_ItemValue,
+                t.S_Remark
+                FROM Mes_Specs t    
+                        ");
+                return this.BaseRepository().FindList<Mes_SpecsEntity>(strSql.ToString());
             }
             catch (Exception ex)
             {

@@ -13,6 +13,7 @@ var start = decodeURIComponent(request('startTime'));
 var end = decodeURIComponent(request('endTime'));
 var bootstrap = function ($, ayma) {
     "use strict";
+    var jsonquery = {};
     var startTime;
     var endTime;
     var tabTitle = "汇总";
@@ -121,6 +122,11 @@ var bootstrap = function ($, ayma) {
                     btn: ['导出Excel', '关闭']
                 });
             });
+            // 导出
+            //$('#am_export').on('click', function () {
+            //    var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export?queryJson=' + JSON.stringify(jsonquery);
+            //    window.location.href = url;
+            //});
             $('#girdtable').on('dblclick', function ()
             {
                 var keyValue = $('#girdtable').jfGridValue('F_OrderNo');
@@ -245,6 +251,7 @@ var bootstrap = function ($, ayma) {
             param.g_stockcode = g_stockcode;
             param.start = start;
             param.end = end;
+            jsonquery = param;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
             $('#pageTab a[href="#page_sum"]').tab('show'); // 通过名字选择
         }

@@ -183,7 +183,21 @@ var bootstrap = function ($, ayma) {
                              }
                          }
                      },
-                      { label: "包装规格", name: "M_UnitQty", width: 60, align: "left" },
+                      {
+                          label: "包装规格", name: "M_UnitQty", width: 60, align: "left", editType: 'select', editOp: {
+                              width: 400,
+                              height: 400,
+                              colData: [
+                                 { label: '物料名称', name: 'F_ItemName', width: 100, align: 'left' },
+                                 { label: '包装数', name: 'F_ItemValue', width: 100, align: 'left', },
+                              ],
+                              url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
+                              param: { code: "1" },
+                              callback: function (selectdata, rownum, row) {
+                                  row.M_UnitQty = selectdata.F_ItemValue;
+                              }
+                          }
+                      },
                       { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
                      {
                          label: '不含税价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
