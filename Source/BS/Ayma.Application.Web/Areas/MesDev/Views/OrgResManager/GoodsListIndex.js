@@ -35,7 +35,7 @@ var bootstrap = function ($, ayma) {
             }
             rows = top.GetGoodsListDetails();
             for (var i = 0; i < rows.length; i++) {
-                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: rows[i].O_SecBatch });
+                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: rows[i].O_SecBatch ,O_Batch:rows[i].O_Batch});
             }
             page.initGird();
             page.bind();
@@ -179,22 +179,33 @@ var bootstrap = function ($, ayma) {
                         }
                   
 
-                        ismove = true;
-                        for (var i = 0; i < goodsOutList.length; i++) {
-                            if (goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
-                                ismove = false;
+                        //ismove = true;
+                        //for (var i = 0; i < goodsOutList.length; i++) {
+                        //    if (goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
+                        //        ismove = false;
+                        //        break;
+                        //    }
+                        //}
+                        //if (ismove) {
+                        //    for (var i = 0; i < goodsSecList.length; i++) {
+                        //        if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
+                        //            goodsSecList[i].O_SecBatch == row.O_SecBatch) {
+                        //            goodsSecList.splice(i, 1);
+                        //            top.FormRemoveGirdDataDetails(row);
+                        //            break;
+                        //        }
+                        //    }
+                        //}
+                        for (var i = 0; i < goodsSecList.length; i++) {
+                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
+                                goodsSecList[i].O_SecBatch == row.O_SecBatch && goodsSecList[i].O_Batch==row.O_Batch) {
+                                goodsSecList.splice(i, 1);
+                                ismove = true;
                                 break;
                             }
                         }
                         if (ismove) {
-                            for (var i = 0; i < goodsSecList.length; i++) {
-                                if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
-                                    goodsSecList[i].O_SecBatch == row.O_SecBatch) {
-                                    goodsSecList.splice(i, 1);
-                                    top.FormRemoveGirdDataDetails(row);
-                                    break;
-                                }
-                            }
+                            top.FormRemoveGirdDataDetails(row);
                         }
 
                     } else {
@@ -203,9 +214,9 @@ var bootstrap = function ($, ayma) {
                         //判断是否已经添加过
                         var isadd = true; //修改 head部分不判断，点一条copy一条过去
                         for (var i = 0; i < goodsOutList.length; i++) {
-                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch) {
+                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch&&goodsOutList[i].O_SecGoodsCode==row.O_SecGoodsCode) {
                                 isadd = false;
-                                break;;
+                                break;
                             }
                         }
                         if (isadd) {
@@ -216,14 +227,14 @@ var bootstrap = function ($, ayma) {
 
                         isadd = true;
                         for (var i = 0; i < goodsSecList.length; i++) {
-                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode && goodsSecList[i].O_SecBatch == row.O_SecBatch) {
+                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode && goodsSecList[i].O_SecBatch == row.O_SecBatch&&goodsSecList[i].O_Batch==row.O_Batch) {
                                 isadd = false;
                                 break;
                             }
                         }
                         if (isadd) {
                             top.FormRefreshGirdDataDetails(row);
-                            goodsSecList.push({ O_SecGoodsCode: row.O_SecGoodsCode, O_SecBatch: row.O_SecBatch });
+                            goodsSecList.push({ O_SecGoodsCode: row.O_SecGoodsCode, O_SecBatch: row.O_SecBatch,O_Batch:row.O_Batch });
                         }
                     }
                 },

@@ -205,14 +205,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             tempArr = tempArr.concat(data[id]);
                             $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: tempArr });
                             var arr = [];
-                            for (var i = 0; i < data[id].length; i++) {
-                                if (!arr.includes(data[id][i].O_SecGoodsCode)) {
-                                    arr.push(data[id][i].O_SecGoodsCode);
-                                } else {
-                                    data[id].splice(i, 1);
-                                    i--;
-                                }
-                            }
+                            //for (var i = 0; i < data[id].length; i++) {
+                            //    if (!arr.includes(data[id][i].O_SecGoodsCode)) {
+                            //        arr.push(data[id][i].O_SecGoodsCode);
+                            //    } else {
+                            //        data[id].splice(i, 1);
+                            //        i--;
+                            //    }
+                            //}
                             $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: data[id] });
 
                         }
@@ -425,7 +425,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         var rows = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i].O_GoodsCode == data.O_GoodsCode && rows[i].O_Batch == data.O_Batch) {
+            if (rows[i].O_GoodsCode == data.O_GoodsCode && rows[i].O_Batch == data.O_Batch&& rows[i].O_SecGoodsCode==data.O_SecGoodsCode) {
                 rows.splice(i, 1);
                 break;
             }
@@ -444,7 +444,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         var rows = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
         for (var i = 0; i < rows.length; i++) {
-            if (rows[i].O_SecGoodsCode == data.O_SecGoodsCode && rows[i].O_SecBatch == data.O_SecBatch) {
+            if (rows[i].O_SecGoodsCode == data.O_SecGoodsCode && rows[i].O_SecBatch == data.O_SecBatch&& rows[i].O_Batch==data.O_Batch) {
                 rows.splice(i, 1);
                 break;
             }
