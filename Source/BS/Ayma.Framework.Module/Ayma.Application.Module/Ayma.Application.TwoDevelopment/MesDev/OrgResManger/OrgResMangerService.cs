@@ -315,19 +315,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     entity.Create();
                     db.Insert(entity);
 
-                    var list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
+                    //var list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
                     foreach (var item in mes_OrgResDetailList)
                     {
                         item.Create();
                         item.O_OrgResNo = entity.O_OrgResNo;
                     }
-                    foreach (var item in list)
-                    {
-                        var dr = db.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.Key);
-                        var num = mes_OrgResDetailList.Where(c => c.O_GoodsCode == item.Key).Sum(c => c.O_Qty);
-                        dr.W_Qty -= num;
-                        db.Update(dr);
-                    }
+                    //foreach (var item in list)
+                    //{
+                    //    var dr = db.FindEntity<Mes_WorkShopScanEntity>(c => c.W_GoodsCode == item.Key);
+                    //    var num = mes_OrgResDetailList.Where(c => c.O_GoodsCode == item.Key).Sum(c => c.O_Qty);
+                    //    dr.W_Qty -= num;
+                    //    db.Update(dr);
+                    //}
                     db.Insert(mes_OrgResDetailList);
                 }
                 db.Commit();
