@@ -72,8 +72,8 @@ using MyDbReportData = DatabaseXmlReportData;
 		d.C_Remark as Remark,
 		d.C_Price,
 		(d.C_Price*d.C_Qty) as aoumnt,
-		'1'+d.C_Unit2+'='+convert(varchar(50),CONVERT (decimal(18, 0),d.C_Qty2))+d.C_Unit as Packingspecification,
-		convert(varchar(50), CONVERT (decimal(18, 0),d.C_Qty/d.C_Qty2))+d.C_Unit2+convert(varchar(50),CONVERT (decimal(18, 0),d.C_Qty%d.C_Qty2))+d.C_Unit as Auxiliarynumber
+		'1'+d.C_Unit2+'='+convert(varchar(50),d.C_UnitQty)+d.C_Unit as Packingspecification,
+	    convert(varchar(50),cast(d.C_Qty/d.C_UnitQty as int))+d.C_Unit2+convert(varchar(50),convert(decimal(18,1),convert(decimal(18,3),d.C_Qty)%convert(decimal(18,3),d.C_UnitQty)))+d.C_Unit as Auxiliarynumber
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
             WHERE   t.C_CollarNo ='{0}'
@@ -258,8 +258,8 @@ using MyDbReportData = DatabaseXmlReportData;
 		(d.M_TaxPrice*d.M_Qty) as Taxamount,
 		(d.M_Price*d.M_Qty) as Notaxamount,
         h.M_Remark,
-		'1'+d.M_Unit2+'='+convert(varchar(50),CONVERT (decimal(18, 0),d.M_Qty2))+d.M_Unit as Packingspecification,
-		convert(varchar(50), CONVERT (decimal(18, 0),d.M_Qty/d.M_Qty2))+d.M_Unit2+convert(varchar(50),CONVERT (decimal(18, 0),d.M_Qty%d.M_Qty2))+d.M_Unit as Auxiliarynumber
+		'1'+d.M_Unit2+'='+convert(varchar(50),d.M_UnitQty)+d.M_Unit as Packingspecification,
+		convert(varchar(50),cast(d.M_Qty/d.M_UnitQty as int))+d.M_Unit2+convert(varchar(50),convert(decimal(18,1),convert(decimal(18,3),d.M_Qty)%convert(decimal(18,3),d.M_UnitQty)))+d.M_Unit as Auxiliarynumber
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )
                                     LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode
