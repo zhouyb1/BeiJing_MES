@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Ayma.Cache.Base;
+using Ayma.Cache.Factory;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -160,6 +162,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
         {
+            ICache redisCache = CacheFactory.CaChe();
+            var userId = LoginUserInfo.Get().userId;
+            var key = userId + "_stock";
+            var stock = redisCache.Read<string>(key);
             StringBuilder sb = new StringBuilder();
             sb.Append(@"SELECT  i.ID,
                                 i.I_GoodsCode W_GoodsCode, --组装前的物料
@@ -185,9 +191,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
                 sb.Append(" AND i.I_GoodsCode+i.I_GoodsName like @keyword ");
             }
-            if (!queryParam["stock"].IsEmpty())
+            if (!stock.IsEmpty())
             {
-                dp.Add("stock", "%" + queryParam["stock"].ToString() + "%", DbType.String);
+                dp.Add("stock", "%" + stock + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
             if (!queryParam["proNo"].IsEmpty())
