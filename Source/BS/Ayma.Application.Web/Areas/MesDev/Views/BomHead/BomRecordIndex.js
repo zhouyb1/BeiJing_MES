@@ -117,17 +117,19 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordTreeList',
                 headData: [
-                           { label: "配方名称", name: "B_FormulaName", width: 160, align: "left" },
-                           { label: "配方编码", name: "B_FormulaCode", width: 160, align: "left" },
-                           { label: "工艺代码", name: "B_RecordCode", width: 160, align: "left" },      
-                           { label: "物料编码", name: "B_GoodsCode", width: 160, align: "left" },
-                           { label: "物料名称", name: "B_GoodsName", width: 160, align: "left" },
-                           { label: '单位', name: 'B_Unit', width: 100, align: 'left' },
-                           { label: '数量', name: 'B_Qty', width: 160, align: 'left' },
-                           { label: "领料后仓库编码", name: "B_StockCode", width: 160, align: "left" },
-                           { label: "领料后仓库名称", name: "B_StockName", width: 160, align: "left" }, 
+                           { label: "配方名称", name: "B_FormulaName", width: 100, align: "left" },
+                           { label: "配方编码", name: "B_FormulaCode", width: 100, align: "left" },
+                           { label: "工艺代码", name: "B_RecordCode", width: 100, align: "left" },
+                           { label: "物料编码", name: "B_GoodsCode", width: 100, align: "left" },
+                           { label: "物料名称", name: "B_GoodsName", width: 100, align: "left" },
+                           { label: '单位', name: 'B_Unit', width: 60, align: 'left' },
+                           { label: '数量', name: 'B_Qty', width: 60, align: 'left' },
+                           { label: "领料后仓库编码", name: "B_StockCode", width: 120, align: "left" },
+                           { label: "领料后仓库名称", name: "B_StockName", width: 120, align: "left" },
+                           { label: "工序编码", name: "B_ProceCode", width: 100, align: "left" },
+                           { label: "工序名称", name: "B_ProceName", width: 100, align: "left" },
                            {
-                               label: "是否有效", name: "B_Avail", width: 160, align: "left",
+                               label: "是否有效", name: "B_Avail", width: 100, align: "left",
                                formatterAsync: function (callback, value, row) {
                                    ayma.clientdata.getAsync('dataItem', {
                                        key: value,
@@ -142,13 +144,13 @@ var bootstrap = function ($, ayma) {
                                    });
                                }
                            },
-                           { label: '开始时间', name: 'B_StartTime', width: 160, align: 'left' },
-                           { label: '结束时间', name: 'B_EndTime', width: 160, align: 'left' },
-                           { label: '备注', name: 'B_Remark', width: 160, align: 'left' },
-                           { label: "添加人", name: "B_CreateBy", width: 160, align: "left" },
-                           { label: "添加时间", name: "B_CreateDate", width: 160, align: "left" },
-                           { label: "修改人", name: "B_UpdateBy", width: 160, align: "left" },
-                           { label: "修改时间", name: "B_UpdateDate", width: 160, align: "left" },
+                           { label: '开始时间', name: 'B_StartTime', width: 125, align: 'left' },
+                           { label: '结束时间', name: 'B_EndTime', width: 125, align: 'left' },
+                           { label: '备注', name: 'B_Remark', width: 100, align: 'left' },
+                           { label: "添加人", name: "B_CreateBy", width: 100, align: "left" },
+                           { label: "添加时间", name: "B_CreateDate", width: 100, align: "left" },
+                           { label: "修改人", name: "B_UpdateBy", width: 100, align: "left" },
+                           { label: "修改时间", name: "B_UpdateDate", width: 100, align: "left" },
 
                 ],
                 isTree: true,

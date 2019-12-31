@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_EndTime,
                 t.B_StockName,
                 t.B_StockCode,
-                t.B_Unit
+                t.B_Unit,
                 ");
                 strSql.Append("  FROM Mes_BomHead t ");
                 strSql.Append("  WHERE 1=1 ");
@@ -162,6 +162,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                           ,t.[B_StockCode]
                           ,t.[B_EndTime]
                           ,t.[B_Remark]
+                          ,t.[B_ProceName]
+                          ,t.[B_ProceCode]
                         ");
                 strSql.Append("  FROM [dbo].[Mes_BomRecord] t ");
                 strSql.Append("  WHERE 1=1 ");

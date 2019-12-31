@@ -48,6 +48,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("B_GOODSNAME")]
         public string B_GoodsName { get; set; }
         /// <summary>
+        /// 工序编码
+        /// </summary>
+        [Column("B_PROCECODE")]
+        public string B_ProceCode { get; set; }
+        /// <summary>
+        /// 工序名称
+        /// </summary>
+        [Column("B_PROCENAME")]
+        public string B_ProceName { get; set; }
+        /// <summary>
         /// 是否生效
         /// </summary>
         [Column("B_AVAIL")]

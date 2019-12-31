@@ -23,6 +23,9 @@ var bootstrap = function ($, ayma) {
         bind: function () {          
             if (parentId != '' && parentId != undefined) {
                 $("#B_RecordCode").attr("disabled", "disabled");
+                $("#ProceName").css("display", "block");
+                $("#ProceCode").css("display", "block");
+                $("#B_ProceName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                 $("#B_Unit").css("display", "none");
                 $("#B_Unit1").css("display", "block");
                 $("#B_Unit1").attr("value", "g");
@@ -36,6 +39,9 @@ var bootstrap = function ($, ayma) {
                 $("#B_Name").css("display", "none");
             } else {
                 $("#B_RecordCode").removeAttr("disabled");
+                $("#ProceName").css("display", "none");
+                $("#ProceCode").css("display", "none");
+                $("#B_ProceName").removeAttr("isvalid").removeAttr("checkexpession");
                 $("#B_Unit").css("display", "block");
                 $("#B_Unit1").css("display", "none");
                 $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -65,6 +71,9 @@ var bootstrap = function ($, ayma) {
             $('#B_ParentID').bind("change", function() {
                 var value = $(this).selectGet();
                 if (value != "") {
+                    $("#ProceName").css("display", "block");
+                    $("#ProceCode").css("display", "block");
+                    $("#B_ProceName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#B_Unit").css("display", "none");
                     $("#B_Unit1").css("display", "block");
                     $("#B_Unit1").attr("value", "g");
@@ -78,6 +87,9 @@ var bootstrap = function ($, ayma) {
                     $("#B_Name").css("display", "none");
                 }
                 else {
+                    $("#ProceName").css("display", "none");
+                    $("#ProceCode").css("display", "none");
+                    $("#B_ProceName").removeAttr("isvalid").removeAttr("checkexpession");
                     $("#B_Unit").css("display", "block");
                     $("#B_Unit1").css("display", "none");
                     $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -174,6 +186,30 @@ var bootstrap = function ($, ayma) {
                     success: function (data) {
                         var entity = JSON.parse(data).data;
                         $("#B_StockCode").val(entity == null ? "" : entity.S_Code);
+                    }
+                });
+            });
+            //工序名称
+            $("#B_ProceName").select({
+                type: 'default',
+                value: 'P_ProName',
+                text: 'P_ProName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
+                // 访问数据接口参数
+            }).bind("change", function () {
+                var code = $(this).selectGet();
+                $.ajax({
+                    type: "get",
+                    url: top.$.rootUrl + '/MesDev/Tools/ByGetProceEntity',
+                    data: { code: code },
+                    success: function (data) {
+                        var entity = JSON.parse(data).data;
+                        $("#B_ProceCode").val(entity == null ? "" : entity.P_ProNo);
                     }
                 });
             });

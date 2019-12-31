@@ -66,6 +66,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_STOCKCODE")]
         public string B_StockCode { get; set; }
+        /// <summary>
+        /// 工序编码
+        /// </summary>
+        [Column("B_PROCECODE")]
+        public string B_ProceCode { get; set; }
+        /// <summary>
+        /// 工序名称
+        /// </summary>
+        [Column("B_PROCENAME")]
+        public string B_ProceName { get; set; }     
 
         /// <summary>
         /// 单位
