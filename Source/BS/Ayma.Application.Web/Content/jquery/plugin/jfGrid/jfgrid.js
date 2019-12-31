@@ -1021,7 +1021,6 @@
                         var $label = $('<div class="form-select" >' + (value || '') + '<i class="fa fa-ellipsis-h"></i></div>');
                         $label.css({ 'text-align': node.align });
                         $label.find('.fa-ellipsis-h')[0]._node = node;
-                        var st =node.editOp.param
                         $label.find('.fa-ellipsis-h').on('click', function () {
                             var _node = $(this)[0]._node;
                             $.jfGrid.layer({
