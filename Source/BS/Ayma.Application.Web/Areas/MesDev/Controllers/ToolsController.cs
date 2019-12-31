@@ -6,6 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.TwoDevelopment.Tools;
+using Ayma.Cache.Base;
+using Ayma.Cache.Factory;
+using Ayma.Util;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -13,7 +16,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public class ToolsController : MvcControllerBase
     {
         private ToolsIBLL toosIBLL = new ToolsBLL();
-        private Mes_ProductOrderHeadIBLL mesProductOrderHead=new Mes_ProductOrderHeadBLL();
+        private Mes_ProductOrderHeadIBLL mesProductOrderHead = new Mes_ProductOrderHeadBLL();
         #region 获取数据
         /// <summary>
         /// 根据物料编码获取包装规格数
@@ -36,6 +39,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult ByCodeGetStockEntity(string code)
         {
             var stockEntity = toosIBLL.ByCodeGetStockEntity(code);
+
+            ICache redisCache = CacheFactory.CaChe();
+            var userId = LoginUserInfo.Get().userId;
+            var key = userId + "_stock";
+            redisCache.Write(key, stockEntity.S_Code);
             return Success(stockEntity);
         }
         /// <summary>
@@ -74,7 +82,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(entity);
         }
 
-      
+
         /// <summary>
         /// 根据参数获取仓库列表
         /// </summary>
@@ -163,7 +171,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var stockList = toosIBLL.GetNoProjStockList();
             return Success(stockList);
-        }  
+        }
         /// <summary>
         /// 获取线边仓仓库列表
         /// </summary>
@@ -174,7 +182,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var stockList = toosIBLL.GetLineStockList();
             return Success(stockList);
-        } 
+        }
         /// <summary>
         /// 获取成品仓库列表
         /// </summary>
@@ -206,9 +214,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetProductOrderList(string orderNo)
         {
-            
+
             var productorderList = toosIBLL.GetProductOrderList(orderNo);
-           
+
             return Success(productorderList);
         }
         /// <summary>
@@ -219,11 +227,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetProductOrderListBy(DateTime orderStartDate,DateTime orderEndDate)
+        public ActionResult GetProductOrderListBy(DateTime orderStartDate, DateTime orderEndDate)
         {
 
             var productorderList = toosIBLL.GetProductOrderListBy(orderStartDate, orderEndDate);
-           
+
             return Success(productorderList);
         }
         /// <summary>
@@ -250,7 +258,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var workshopEntity = toosIBLL.ByNameGetWorkShopEntity(name);
             return Success(workshopEntity);
         }
-        
+
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
@@ -262,7 +270,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsEntity = toosIBLL.ByCodeGetGoodsEntity(code);
             return Success(goodsEntity);
-        }     
+        }
         /// <summary>
         /// 根据物料名称获取物料实体信息
         /// </summary>
@@ -275,7 +283,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var goodsEntity = toosIBLL.ByNameGetGoodsEntity(name);
             return Success(goodsEntity);
         }
-   
+
         /// <summary>
         /// 获取物料列表
         /// </summary>
@@ -297,7 +305,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var goodsList = toosIBLL.GetGoodsListBySupplyName(G_SupplyName);
             return Success(goodsList);
-        } 
+        }
         /// <summary>
         /// 获取成品物料列表
         /// </summary>
@@ -363,7 +371,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var Role = toosIBLL.GetRoleList();
             return Success(Role);
-        } 
+        }
         /// <summary>
         /// 根据编码获取商品二级分类实体
         /// </summary>
@@ -410,7 +418,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var recordList = toosIBLL.ByCodeGetProceEntity(Code);
             return Success(recordList);
-        } 
+        }
         /// <summary>
         /// 获取工序列表
         /// </summary>
@@ -421,7 +429,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var proceEntity = toosIBLL.GetProceList();
             return Success(proceEntity);
-        } 
+        }
         /// <summary>
         /// 根据(工序号或工序名称)获取工序实体
         /// </summary>
@@ -491,7 +499,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var supplyList = toosIBLL.GetSupplyList();
             return Success(supplyList);
-        } 
+        }
         /// <summary>
         /// 获取资质有效期的供应商列表
         /// </summary>
@@ -513,7 +521,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             var userList = toosIBLL.GetUserList();
             return Success(userList);
-        } 
+        }
         /// <summary>
         /// 获取用户列表
         /// </summary>
@@ -546,7 +554,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult IsName(string tables,string field, string names,string keyValue)
+        public ActionResult IsName(string tables, string field, string names, string keyValue)
         {
             var isName = toosIBLL.IsName(tables, field, names, keyValue);
             return Success(isName);
@@ -560,9 +568,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult IsOrderNo(string tables,string field, string orderNo)
+        public ActionResult IsOrderNo(string tables, string field, string orderNo)
         {
-            var isOrderNo = toosIBLL.IsOrderNo(tables,field, orderNo);
+            var isOrderNo = toosIBLL.IsOrderNo(tables, field, orderNo);
             return Success(isOrderNo);
         }
         /// <summary>
@@ -658,7 +666,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult IsCodeAndSupplyCode(string tables, string field, string code, string field2, string code2, string keyValue)
         {
-            var isCode = toosIBLL.IsCodeAndSupplyCode(tables, field, code,field2,code2, keyValue);
+            var isCode = toosIBLL.IsCodeAndSupplyCode(tables, field, code, field2, code2, keyValue);
             return Success(isCode);
         }
 
@@ -668,7 +676,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <param name="goodsCode"></param>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public ActionResult GetProductBatchList(string goodsCode,string stockCode)
+        public ActionResult GetProductBatchList(string goodsCode, string stockCode)
         {
             var data = toosIBLL.GetProductBatchList(goodsCode, stockCode);
             return Success(data);
@@ -687,7 +695,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult AuditingBill(string keyValue, string tables, string field)
         {
-            toosIBLL.AuditingBill(keyValue,tables,field);
+            toosIBLL.AuditingBill(keyValue, tables, field);
             return Success("审核完成");
         }
         /// <summary>
@@ -714,8 +722,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         break;
                     case 3:
                         return Success("删除成功");
-                        break;                       
-                }               
+                        break;
+                }
             }
             return Fail(errMsg);
         }
@@ -728,7 +736,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <param name="type">操作类型：1，提交单据，2撤销单据,3删除单据</param>
         [HttpPost]
         [AjaxOnly]
-        public ActionResult PostOrCancelOrDeleteBill(string orderNo, string proc,int type)
+        public ActionResult PostOrCancelOrDeleteBill(string orderNo, string proc, int type)
         {
             string errMsg = "";
             int status = toosIBLL.PostOrCancelOrDeleteBill(orderNo, proc, out errMsg);
@@ -744,14 +752,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         break;
                     case 3:
                         return Success("删除成功");
-                        break;                       
-                }               
+                        break;
+                }
             }
             return Fail(errMsg);
         }
 
-       
+
 
         #endregion
-	}
+    }
 }
