@@ -9,7 +9,9 @@
 		"Charset":134
 	},
 	"Printer":{
-		"TopMargin":3.5,
+		"Size":256,
+		"Height":28,
+		"TopMargin":0.3,
 		"BottomMargin":1
 	},
 	"DetailGrid":{
@@ -123,7 +125,7 @@
 			}
 		],
 		"ColumnContent":{
-			"Height":0.79375,
+			"Height":0.608542,
 			"ColumnContentCell":[
 				{
 					"Column":"Column1",
@@ -133,8 +135,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.767292,
-							"Width":2.2225,
+							"Left":-0.661458,
+							"Width":2.09021,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -246,7 +248,8 @@
 			]
 		},
 		"ColumnTitle":{
-			"Height":0,
+			"Height":0.79375,
+			"RepeatStyle":"OnPage",
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
@@ -426,7 +429,192 @@
 						"Bold":true,
 						"Charset":134
 					},
-					"NewPage":"Before"
+					"NewPage":"Before",
+					"PrintGridBorder":false,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox45",
+							"Top":0.608542,
+							"Width":0.74,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawLeft|DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"TextAlign":"MiddleCenter",
+							"Text":"序号"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox46",
+							"Left":0.608542,
+							"Top":0.608542,
+							"Width":3.12,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"TextAlign":"MiddleCenter",
+							"Text":"物料名称"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox47",
+							"Left":3.59833,
+							"Top":0.608542,
+							"Width":2.51,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"TextAlign":"MiddleCenter",
+							"Text":"发货仓库"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox48",
+							"Left":6.00604,
+							"Top":0.608542,
+							"Width":1.87,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"TextAlign":"MiddleCenter",
+							"FirstCharIndent":2,
+							"Text":"规格"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox49",
+							"Left":7.80521,
+							"Top":0.608542,
+							"Width":1.27,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"WordWrap":true,
+							"TextAlign":"MiddleCenter",
+							"Text":"基本单位"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox50",
+							"Left":8.99583,
+							"Top":0.608542,
+							"Width":1.64,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"WordWrap":true,
+							"TextAlign":"MiddleCenter",
+							"Text":"数量"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox51",
+							"Left":10.6098,
+							"Top":0.608542,
+							"Width":1.5875,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"WordWrap":true,
+							"TextAlign":"MiddleCenter",
+							"Text":"辅助数量"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox53",
+							"Left":0.608542,
+							"Width":1.40229,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"WordWrap":true,
+							"TextAlign":"MiddleCenter",
+							"Text":"单价"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox54",
+							"Width":2.40771,
+							"Height":0.79,
+							"PaddingLeft":1,
+							"Border":{
+								"Styles":"[DrawLeft|DrawTop|DrawRight]"
+							},
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
+							"WordWrap":true,
+							"TextAlign":"MiddleCenter",
+							"Text":"总金额"
+						}
+					]
 				},
 				"GroupFooter":{
 					"Height":0.79375,
@@ -471,332 +659,6 @@
 			}
 		]
 	},
-	"PageHeader":{
-		"Height":7.80521,
-		"Control":[
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox21",
-				"Left":6.87917,
-				"Top":5.31813,
-				"Width":1.5875,
-				"Height":0.608542,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"收货仓库："
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox22",
-				"Left":1.00542,
-				"Top":5.29167,
-				"Width":1.79917,
-				"Height":0.635,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"单据号码："
-			},
-			{
-				"Type":"FieldBox",
-				"Name":"FieldBox13",
-				"Left":8.46667,
-				"Top":5.31813,
-				"Width":3.41313,
-				"Height":0.608542
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox23",
-				"Left":1.00542,
-				"Top":6.0325,
-				"Width":1.79917,
-				"Height":0.608542,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"单据时间："
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox24",
-				"Left":12.0385,
-				"Top":6.0325,
-				"Width":1.40229,
-				"Height":0.608542,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"制单人："
-			},
-			{
-				"Type":"FieldBox",
-				"Name":"FieldBox14",
-				"Left":2.80458,
-				"Top":6.0325,
-				"Width":5.79438,
-				"Height":0.608542
-			},
-			{
-				"Type":"FieldBox",
-				"Name":"FieldBox15",
-				"Left":13.3615,
-				"Top":6.0325,
-				"Width":3.59833,
-				"Height":0.608542
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox25",
-				"Left":5.79438,
-				"Top":4.39208,
-				"Width":4.60375,
-				"Height":0.820208,
-				"Font":{
-					"Name":"宋体",
-					"Size":217500,
-					"Bold":true,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"领料单"
-			},
-			{
-				"Type":"FieldBox",
-				"Name":"FieldBox16",
-				"Left":2.80458,
-				"Top":5.31813,
-				"Width":3.38667,
-				"Height":0.608542
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox26",
-				"Left":6.93208,
-				"Top":5.97958,
-				"Width":1.40229,
-				"Height":0.608542,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleJustiy",
-				"Text":"经手人："
-			},
-			{
-				"Type":"FieldBox",
-				"Name":"FieldBox17",
-				"Left":8.33438,
-				"Top":6.0325,
-				"Width":3.59833,
-				"Height":0.608542
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox31",
-				"Top":7.01146,
-				"Width":0.76,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawLeft|DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleCenter",
-				"Text":"序号"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox32",
-				"Left":0.608542,
-				"Top":7.01146,
-				"Width":3.14854,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleCenter",
-				"Text":"物料名称"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox33",
-				"Left":3.59833,
-				"Top":7.01146,
-				"Width":2.55,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleCenter",
-				"Text":"发货仓库"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox34",
-				"Left":6.00604,
-				"Top":7.01146,
-				"Width":1.9,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"TextAlign":"MiddleCenter",
-				"FirstCharIndent":2,
-				"Text":"规格"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox35",
-				"Left":7.80521,
-				"Top":7.01146,
-				"Width":1.3,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"WordWrap":true,
-				"TextAlign":"MiddleCenter",
-				"Text":"基本单位"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox36",
-				"Left":8.99583,
-				"Top":7.01146,
-				"Width":1.7,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"WordWrap":true,
-				"TextAlign":"MiddleCenter",
-				"Text":"数量"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox37",
-				"Left":10.6098,
-				"Top":7.01146,
-				"Width":1.65,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"WordWrap":true,
-				"TextAlign":"MiddleCenter",
-				"Text":"辅助数量"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox38",
-				"Left":12.1973,
-				"Top":7.01146,
-				"Width":1.45,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"WordWrap":true,
-				"TextAlign":"MiddleCenter",
-				"Text":"单价"
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox39",
-				"Left":13.62,
-				"Top":7.01,
-				"Width":2.40771,
-				"Height":0.79,
-				"PaddingLeft":1,
-				"Border":{
-					"Styles":"[DrawLeft|DrawTop|DrawRight]"
-				},
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"WordWrap":true,
-				"TextAlign":"MiddleCenter",
-				"Text":"总金额"
-			}
-		]
-	},
 	"PageFooter":{
 		"Height":1.40229,
 		"Control":[
@@ -804,7 +666,7 @@
 				"Type":"MemoBox",
 				"Name":"MemoBox1",
 				"Left":10.2923,
-				"Top":0.264583,
+				"Top":0.079375,
 				"Width":5.18583,
 				"Height":0.396875,
 				"TextAlign":"MiddleRight",
@@ -814,7 +676,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox17",
 				"Left":0.396875,
-				"Top":0.238125,
+				"Top":0.0529167,
 				"Width":2.01083,
 				"Height":0.396875,
 				"Font":{
@@ -830,7 +692,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox18",
 				"Left":8.38729,
-				"Top":0.238125,
+				"Top":0.0529167,
 				"Width":2.2225,
 				"Height":0.396875,
 				"Font":{
@@ -846,7 +708,7 @@
 				"Type":"FieldBox",
 				"Name":"FieldBox12",
 				"Left":10.0806,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":3.38667,
 				"Height":0.396875
 			},
@@ -854,7 +716,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox19",
 				"Left":4.78896,
-				"Top":0.238125,
+				"Top":0.0529167,
 				"Width":2.01083,
 				"Height":0.396875,
 				"Font":{
@@ -870,7 +732,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox20",
 				"Left":2.59292,
-				"Top":0.238125,
+				"Top":0.0529167,
 				"Width":2.01083,
 				"Height":0.396875,
 				"Font":{
@@ -882,5 +744,155 @@
 				"Text":"谷学春"
 			}
 		]
-	}
+	},
+	"ReportHeader":[
+		{
+			"Name":"ReportHeader1",
+			"Height":2.99,
+			"Control":[
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox25",
+					"Left":4.78896,
+					"Top":0.211667,
+					"Width":4.60375,
+					"Height":0.79375,
+					"Font":{
+						"Name":"宋体",
+						"Size":217500,
+						"Bold":true,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"领料单"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox22",
+					"Left":0.396875,
+					"Top":1.13771,
+					"Width":2.01083,
+					"Height":0.635,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据号码："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox16",
+					"Left":2.19604,
+					"Top":1.19063,
+					"Width":3.81,
+					"Height":0.608542,
+					"DataField":"C_CollarNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox40",
+					"Left":0.396875,
+					"Top":2.01083,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox18",
+					"Left":2.19604,
+					"Top":2.01083,
+					"Width":5.79438,
+					"Height":0.582083,
+					"DataField":"C_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox41",
+					"Left":6.32354,
+					"Top":1.19063,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"收货仓库："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox19",
+					"Left":8.30792,
+					"Top":1.19063,
+					"Width":3.41313,
+					"Height":0.608542,
+					"DataField":"C_StockToName"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox20",
+					"Left":8.30792,
+					"Top":2.01083,
+					"Width":3.59833,
+					"Height":0.582083,
+					"DataField":"C_CreateBy"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox42",
+					"Left":6.32354,
+					"Top":2.01083,
+					"Width":1.37583,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"经手人："
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox44",
+					"Left":11.2183,
+					"Top":2.01083,
+					"Width":1.40229,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单人："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox22",
+					"Left":12.5942,
+					"Top":2.01083,
+					"Width":3.59833,
+					"Height":0.582083,
+					"DataField":"C_CreateBy"
+				}
+			],
+			"RepeatOnPage":true
+		}
+	]
 }

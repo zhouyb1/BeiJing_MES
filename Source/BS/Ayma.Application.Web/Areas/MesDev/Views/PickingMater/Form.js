@@ -192,7 +192,21 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 },
-                { label: "包装规格", name: "C_UnitQty", width: 60, align: "left" },
+                {
+                    label: "包装规格", name: "C_UnitQty", width: 60, align: "left", editType: 'select', editOp: {
+                        width: 400,
+                        height: 400,
+                        colData: [
+                           { label: '物料名称', name: 'F_ItemName', width: 100, align: 'left' },
+                           { label: '包装数', name: 'F_ItemValue', width: 100, align: 'left', },
+                        ],
+                        url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
+                        param: { code: "1" },
+                        callback: function (selectdata, rownum, row) {
+                            row.C_UnitQty = selectdata.F_ItemValue;
+                        }
+                    }
+                },
                 { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
                 { label: "批次", name: "C_Batch", width: 80, align: "left" },
                 { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },

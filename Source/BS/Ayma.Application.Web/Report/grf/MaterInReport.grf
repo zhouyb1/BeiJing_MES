@@ -9,6 +9,8 @@
 		"Charset":134
 	},
 	"Printer":{
+		"Size":256,
+		"Height":28,
 		"TopMargin":0.3,
 		"BottomMargin":1
 	},
@@ -767,7 +769,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox6",
-							"Left":13.9965,
+							"Left":14.2081,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.582083,
@@ -786,12 +788,13 @@
 		]
 	},
 	"PageFooter":{
+		"Height":2.98979,
 		"Control":[
 			{
 				"Type":"StaticBox",
 				"Name":"StaticBox10",
 				"Left":0.396875,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":2.01083,
 				"Height":0.582083,
 				"Font":{
@@ -807,7 +810,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox12",
 				"Left":12.5942,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":2.01083,
 				"Height":0.582083,
 				"Font":{
@@ -823,7 +826,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox13",
 				"Left":5.21229,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":1.79917,
 				"Height":0.582083,
 				"Font":{
@@ -839,7 +842,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox14",
 				"Left":8.99583,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":2.01083,
 				"Height":0.582083,
 				"Font":{
@@ -855,7 +858,7 @@
 				"Type":"StaticBox",
 				"Name":"StaticBox16",
 				"Left":2.40771,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":1.98438,
 				"Height":0.582083,
 				"Font":{
