@@ -10,6 +10,7 @@ var acceptClick;
 var keyValue = request('keyValue');
 var tmp = new Map();
 var tmp_d = new Map();
+var stock;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -33,13 +34,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                $("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                $("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
 
                 var name = $(this).selectGet();
                 //绑定仓库编码
                 ayma.httpAsyncGet(top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity?code=' + name, function (result) {
                     $('#O_StockCode').val(result.data.S_Code);
+                    stock = result.data.S_Code;
                 });
             });
          
@@ -58,8 +60,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                $("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                $("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
             });
            
             //绑定班组
@@ -76,8 +78,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                $("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                $("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
+                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
             });
 
             //添加物料
@@ -114,7 +116,32 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                           children: [
                               { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
                              
-                              { label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
+                              {
+                                  label: "物料名称", name: "O_GoodsName", width: 120, align: "center", editType: 'select',
+                                  editOp: {
+                                      width: 600,
+                                      height: 500,
+                                      colData: [
+                                          { label: "名称", name: "w_goodsname", width: 120, align: "left" },
+                                          { label: "编码", name: "w_goodscode", width: 80, align: "center" },
+                                          { label: "批次", name: "w_batch", width: 90, align: "center" },
+                                          { label: "单价", name: "w_price", width: 80, align: "center" },
+                                          { label: "单位", name: "w_unit", width: 60, align: "center" },
+                                          { label: "库存", name: "w_qty", width: 100, align: "left" },
+                                      ],
+                                      url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
+                                      param: { queryJson: JSON.stringify({ 'stock': stock }) },
+                                      isPage: true,
+                                      callback: function (selectdata, rownum, row) {
+                                          row.O_GoodsCode = selectdata.w_goodscode;
+                                          row.O_GoodsName = selectdata.w_goodsname;
+                                          row.StockQty = selectdata.w_qty;
+                                          row.W_Unit = selectdata.w_unit;
+                                          row.O_Batch = selectdata.w_batch;
+                                          row.O_Price = selectdata.w_price;
+                                      }
+                                  }
+                              },
                               { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue==""?false:true },
                               {
                                   label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input',

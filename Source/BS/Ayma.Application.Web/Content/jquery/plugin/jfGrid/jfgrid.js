@@ -1021,17 +1021,20 @@
                         var $label = $('<div class="form-select" >' + (value || '') + '<i class="fa fa-ellipsis-h"></i></div>');
                         $label.css({ 'text-align': node.align });
                         $label.find('.fa-ellipsis-h')[0]._node = node;
+                        var st =node.editOp.param
                         $label.find('.fa-ellipsis-h').on('click', function () {
                             var _node = $(this)[0]._node;
                             $.jfGrid.layer({
                                 html: '<div class="jfgird-select"><div class="jfgird-select-tool"><div class="jfgird-select-tool-item"><input id="jfgird_select_keyword" style="width:200px;" type="text" class="form-control" placeholder="请输入要查询关键字"></div><div class="jfgird-select-tool-item"><a id="jfgird_select_search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a></div></div><div id="jfgird_select"></div></div>',
                                 width: _node.editOp.width || 400,
-                                height: _node.editOp.height || 400
+                                height: _node.editOp.height || 400,
+                                isPage:_node.editOp.isPage || false
                             },
                                 function ($html) {
                                     $html.find('#jfgird_select').jfGrid({
                                         headData: _node.editOp.colData,
                                         url: _node.editOp.url,
+                                        isPage:_node.editOp.isPage || false,
                                         onRenderComplete: function (rowdatas) {
                                             _node.editOp.rowdatas = rowdatas;
                                         },
@@ -1043,12 +1046,13 @@
                                             $.jfGrid.renderData($('#' + dfop.id));
                                         }
                                     });
-                                    if (!!_node.editOp.rowdatas) {
-                                        $html.find('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
-                                    }
-                                    else {
-                                        $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
-                                    }
+                                    //if (!!_node.editOp.rowdatas) {
+                                    //    $html.find('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
+                                    //}
+                                    //else {
+                                    //    $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
+                                    //}
+                                    $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
                                     $('#jfgird_select_search').on('click', function () {
                                         var data = [];
                                         var keyword = $('#jfgird_select_keyword').val();
