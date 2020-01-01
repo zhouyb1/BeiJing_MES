@@ -14,7 +14,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         private PickingMaterService pickingMaterService = new PickingMaterService();
 
         #region 获取数据
-
+        /// <summary>
+        /// 获取领料计划页面
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_CollarHeadTempEntity> GetTempPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return pickingMaterService.GetTempPageList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
@@ -86,7 +108,52 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-
+        /// <summary>
+        /// 获取Mes_CollarTempHead表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_CollarHeadTempEntity GetMes_CollarHeadTempEntity(string keyValue)
+        {
+            try
+            {
+                return pickingMaterService.GetMes_CollarHeadTempEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 获取Mes_CollarTempDetail表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_CollarDetailTempEntity> GetMes_CollarDetailTempEntity(string keyValue)
+        {
+            try
+            {
+                return pickingMaterService.GetMes_CollarDetailTempEntity(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取库存物料表
         /// </summary>

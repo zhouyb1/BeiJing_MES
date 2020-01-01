@@ -11,7 +11,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public interface PickingMaterIBLL
     {
         #region 获取数据
-
+        /// <summary>
+        /// 获取领料计划页面
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        IEnumerable<Mes_CollarHeadTempEntity> GetTempPageList(Pagination pagination, string queryJson);
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
@@ -30,7 +35,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         IEnumerable<Mes_CollarDetailEntity >GetMes_CollarDetailEntityList(string keyValue);
-
+        /// <summary>
+        /// 获取Mes_CollarTempHead表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        Mes_CollarHeadTempEntity GetMes_CollarHeadTempEntity(string keyValue);
+        /// <summary>
+        /// 获取Mes_CollarTempDetail表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        IEnumerable<Mes_CollarDetailTempEntity> GetMes_CollarDetailTempEntity(string keyValue);
         /// <summary>
         /// 获取库存物料表
         /// </summary>

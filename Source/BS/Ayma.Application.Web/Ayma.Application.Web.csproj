@@ -606,6 +606,8 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
+    <Content Include="Areas\MesDev\Views\PickingMater\TempForm.js" />
+    <Content Include="Areas\MesDev\Views\PickingMater\TempIndex.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\ProceIndex.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Index.js" />
@@ -2380,6 +2382,8 @@
     <Content Include="Areas\MesDev\Views\MaterInBill\SupplyGoodsListIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterialsSum\PrintReport.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterialsSum\InventoryDetail.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\TempIndex.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\TempForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

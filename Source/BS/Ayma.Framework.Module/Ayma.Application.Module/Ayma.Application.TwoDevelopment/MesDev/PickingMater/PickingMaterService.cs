@@ -19,7 +19,90 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public partial class PickingMaterService : RepositoryFactory
     {
         #region 获取数据
-
+        /// <summary>
+        /// 获取领料计划页面
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_CollarHeadTempEntity> GetTempPageList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.C_CollarNo,
+                t.C_CollarNoZS,
+                t.C_StockCode,
+                t.C_StockName,
+                t.C_StockToCode,
+                t.C_StockToName,
+                t.P_OrderNo,
+                t.P_OrderDate,
+                t.P_Status,
+                t.C_CreateBy,
+                t.C_CreateDate,
+                t.C_UpdateBy,
+                t.C_UpdateDate,
+                t.C_Remark,
+                t.M_DeleteBy,
+                t.M_DeleteDate,
+                t.M_UploadBy,
+                t.M_UploadDate,
+                t.C_TeamCode,
+                t.MonthBalance
+                ");
+                strSql.Append("  FROM Mes_CollarHeadTemp t ");
+                strSql.Append("  WHERE 1=1");
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["C_CollarNo"].IsEmpty())
+                {
+                    dp.Add("C_CollarNo", "%" + queryParam["C_CollarNo"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_CollarNo Like @C_CollarNo ");
+                }
+                if (!queryParam["C_CollarNoZS"].IsEmpty())
+                {
+                    dp.Add("C_CollarNoZS", "%" + queryParam["C_CollarNoZS"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_CollarNoZS Like @C_CollarNoZS ");
+                }
+                if (!queryParam["C_CreateBy"].IsEmpty())
+                {
+                    dp.Add("C_CreateBy", "%" + queryParam["C_CreateBy"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_CreateBy Like @C_CreateBy ");
+                }
+                if (!queryParam["C_StockToCode"].IsEmpty())
+                {
+                    dp.Add("C_StockToCode", "%" + queryParam["C_StockToCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.C_StockToCode Like @C_StockToCode ");
+                }
+                if (!queryParam["P_Status"].IsEmpty())
+                {
+                    dp.Add("P_Status", "%" + queryParam["P_Status"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_Status Like @P_Status ");
+                }
+                return this.BaseRepository().FindList<Mes_CollarHeadTempEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
@@ -153,7 +236,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取Mes_CollarTempHead表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public Mes_CollarHeadTempEntity GetMes_CollarHeadTempEntity(string keyValue)
+        {
+            try
+            {
+                return this.BaseRepository().FindEntity<Mes_CollarHeadTempEntity>(keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
 
+        /// <summary>
+        /// 获取Mes_CollarTempDetail表实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_CollarDetailTempEntity> GetMes_CollarDetailTempEntity(string keyValue)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_CollarDetailTempEntity>(t => t.C_CollarNo == keyValue);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 获取库存物料
         /// </summary>

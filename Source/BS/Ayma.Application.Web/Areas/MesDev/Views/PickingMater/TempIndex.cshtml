@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "领料计划查询";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<div class="am-layout">
+    <div class="am-layout-center">
+        <div class="am-layout-wrap am-layout-wrap-notitle">
+            <div class="am-layout-tool">
+                <div class="am-layout-tool-left">
+                    <div class="am-layout-tool-item">
+                        <div class="am-searchtxt">创建时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="am-query-formcontent">
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">领料单号</div>
+                                    <input id="C_CollarNo" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">生产计划单</div>
+                                    <input id="C_CollarNoZS" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">添加人</div>
+                                    <input id="C_CreateBy" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">领料仓</div>
+                                    <div id="C_StockToCode" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">单据状态</div>
+                                    <div id="P_Status" type="text" class="form-control"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="am-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" ayma-authorize="yes">
+                        <a id="am_edit" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
+                    </div>
+                </div>
+            </div>
+            <div class="am-layout-body" id="girdtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/PickingMater/TempIndex.js")

@@ -31,7 +31,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 领料计划页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult TempIndex()
+        {
+            return View();
+        }   /// <summary>
+        /// 领料计划Form页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult TempForm()
+        {
+            return View();
+        }
         /// <summary>
         /// 订单原物料需求列表
         /// </summary>
@@ -79,6 +95,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         #region 获取数据
 
         /// <summary>
+        /// 获取领料计划页面
+        /// </summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetTempPageList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = pickingMaterIBLL.GetTempPageList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>
@@ -115,7 +151,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
-
+        /// <summary>
+        /// 获取领料计划
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetTempFormData(string keyValue)
+        {
+            var Mes_CollarHeadTempData = pickingMaterIBLL.GetMes_CollarHeadTempEntity(keyValue);
+            var Mes_CollarDetailTempData = pickingMaterIBLL.GetMes_CollarDetailTempEntity(Mes_CollarHeadTempData.C_CollarNo);
+            var jsonData = new
+            {
+                Mes_CollarHeadTempData = Mes_CollarHeadTempData,
+                Mes_CollarDetailTempData = Mes_CollarDetailTempData,
+            };
+            return Success(jsonData);
+        }
         /// <summary>
         /// 获取库存料列表
         /// </summary>
