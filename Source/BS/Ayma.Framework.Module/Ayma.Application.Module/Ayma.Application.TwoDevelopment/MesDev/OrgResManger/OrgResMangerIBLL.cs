@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        DataTable GetGoodsList(Pagination obj, string keyword, string queryJson);
+        DataTable GetGoodsList(string keyword, string queryJson);
         /// <summary>
         /// 获取Mes_OrgResDetail表实体数据
         /// </summary>
@@ -49,7 +49,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        DataTable GetSecGoodsList(Pagination obj);
+        DataTable GetSecGoodsList(string keyword);
         IEnumerable<Mes_OrgResDetailEntity> GetMes_OrgResDetailList(string keyValue);
         #endregion
 

@@ -68,11 +68,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
+        public DataTable GetGoodsList( string keyword, string queryJson)
         {
             try
             {
-                return orgResMangerService.GetGoodsList(obj, keyword, queryJson);
+                return orgResMangerService.GetGoodsList(keyword, queryJson);
             }
             catch (Exception ex)
             {
@@ -91,11 +91,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        public DataTable GetSecGoodsList(Pagination obj)
+        public DataTable GetSecGoodsList(string  keyword )
         {
             try
             {
-                return orgResMangerService.GetSecGoodsList(obj);
+                return orgResMangerService.GetSecGoodsList(keyword);
             }
             catch (Exception ex)
             {

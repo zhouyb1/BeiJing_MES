@@ -801,7 +801,7 @@ ORDER BY C.F_Level";
         /// </summary>
         /// <param name="parentid"></param>
         /// <param name="boms"></param>
-        private void SumQty(string parentid, List<ProductBom> boms,float quantity)9
+        private void SumQty(string parentid, List<ProductBom> boms,float quantity)
         {
             var rows = boms.Where(r => r.F_ParentID == parentid); //子级
             if (rows == null || rows.Count() < 1)

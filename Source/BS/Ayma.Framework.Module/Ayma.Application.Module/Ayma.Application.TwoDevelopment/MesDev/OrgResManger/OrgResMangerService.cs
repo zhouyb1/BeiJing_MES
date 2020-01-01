@@ -160,7 +160,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public DataTable GetGoodsList(Pagination obj, string keyword, string queryJson)
+        public DataTable GetGoodsList(string keyword, string queryJson)
         {
             ICache redisCache = CacheFactory.CaChe();
             var userId = LoginUserInfo.Get().userId;
@@ -198,10 +198,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        public DataTable GetSecGoodsList(Pagination obj)
+        public DataTable GetSecGoodsList(string keyword)
         {
-            var sql = "SELECT DISTINCT C_SecName,C_SecCode,G_Unit FROM dbo.Mes_Convert INNER JOIN dbo.Mes_Goods  ON C_SecCode= G_Code";
-            var dt = this.BaseRepository().FindTable(sql);
+            var sql = "SELECT DISTINCT c_secname,c_seccode,g_unit FROM dbo.Mes_Convert INNER JOIN dbo.Mes_Goods  ON C_SecCode= G_Code";
+            var dp = new DynamicParameters(new { });
+
+            if (!keyword.IsEmpty())
+            {
+                dp.Add("keyword", "%" + keyword + "%", DbType.String);
+                sql += " where c_seccode+c_secname like @keyword ";
+            }
+            var dt = this.BaseRepository().FindTable(sql,dp);
             return dt;
         }
 
