@@ -9,6 +9,8 @@ using System.Linq;
 using System.Text;
 using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.Organization;
+using Ayma.Cache.Base;
+using Ayma.Cache.Factory;
 
 namespace Ayma.Application.TwoDevelopment.Tools
 {
@@ -30,6 +32,10 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
+                //ICache redisCache = CacheFactory.CaChe();
+                //var userId = LoginUserInfo.Get().userId;
+                //var key = userId + "_GoodsCode";
+                //var GoodsCode = redisCache.Read<string>(key);
                 StringBuilder strSql = new StringBuilder();
                 strSql.Append(@"select
                 t.ID,
@@ -37,9 +43,17 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 t.S_GoodsName as F_ItemName,
                 t.S_UnitQty as F_ItemValue,
                 t.S_Remark
-                FROM Mes_Specs t    
+                FROM Mes_Specs t   where 1=1 
                         ");
-                return this.BaseRepository().FindList<Mes_SpecsEntity>(strSql.ToString());
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+
+                //if (!GoodsCode.IsEmpty())
+                //{
+                //    dp.Add("GoodsCode", "%" + GoodsCode + "%", DbType.String);
+                //    strSql.Append(" AND t.S_GoodsCode like @GoodsCode ");
+                //}
+                return this.BaseRepository().FindList<Mes_SpecsEntity>(strSql.ToString(),dp);
             }
             catch (Exception ex)
             {

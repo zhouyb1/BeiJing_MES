@@ -192,9 +192,14 @@ var bootstrap = function ($, ayma) {
                                  { label: '包装数', name: 'F_ItemValue', width: 100, align: 'left', },
                               ],
                               url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
-                              param: { code: "1" },
                               callback: function (selectdata, rownum, row) {
-                                  row.M_UnitQty = selectdata.F_ItemValue;
+                                  if (row.M_GoodsName == selectdata.F_ItemName) {
+                                      row.M_UnitQty = selectdata.F_ItemValue;
+                                      ayma.alert.success("物料【" + row.M_GoodsName + "】的包装规格更改成功为【" + row.M_UnitQty + "】！");
+                                  } else {
+                                      ayma.alert.error("您需要更改包装规格的物料是【" + row.M_GoodsName + "】物料名称不符,请重新选择！");
+                                      ayma.layer.error("")
+                                  }
                               }
                           }
                       },
@@ -245,7 +250,18 @@ var bootstrap = function ($, ayma) {
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 4
+                inputCount: 4,
+                //onSelectRow: function (rowdata, dfop)
+                //{
+                //    $.ajax({
+                //        type: "get",
+                //        url: top.$.rootUrl + '/MesDev/Tools/ByRedisGetGoodsCode',
+                //        data: { code:dfop.M_GoodsCode},
+                //        async: false,
+                //        success: function (data) {
+                //        }
+                //    });
+                //}
             });
         },
         initData: function () {

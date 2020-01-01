@@ -134,8 +134,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
                 { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
                 { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
-                { label: "单价", name: "C_Price", width: 40, align: "left" },
                 { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
+                { label: "单价", name: "C_Price", width: 40, align: "left" },  
                 { label: "单位", name: "C_Unit", width: 40, align: "left" },
                 {
                     label: "领料数量",
@@ -203,7 +203,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
                         param: { code: "1" },
                         callback: function (selectdata, rownum, row) {
-                            row.C_UnitQty = selectdata.F_ItemValue;
+                            if (row.C_GoodsName == selectdata.F_ItemName) {
+                                row.C_UnitQty = selectdata.F_ItemValue;
+                                ayma.alert.success("物料【" + row.C_GoodsName + "】的包装规格更改成功为【" + row.C_UnitQty + "】！");
+                            } else {
+                                ayma.alert.error("您需要更改包装规格的物料是【" + row.C_GoodsName + "】物料名称不符,请重新选择！");
+                                ayma.layer.error("")
+                            }
                         }
                     }
                 },

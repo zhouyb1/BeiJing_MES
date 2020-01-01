@@ -70,7 +70,7 @@ var bootstrap = function ($, ayma) {
                     id: 'PickMaterForm',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/PickingMater/Form?formId=PickMaterForm',
-                    width: 800,
+                    width: 1000,
                     height: 600,
                     maxmin: true,
                     callBack: function (id) {
@@ -87,7 +87,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/PickingMater/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=form',
-                        width: 800,
+                        width: 1000,
                         height: 600,
                         maxmin: true,
                         callBack: function (id) {
@@ -105,7 +105,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/PickingMater/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=form',
-                        width: 800,
+                        width: 1000,
                         height: 600,
                         maxmin: true,
                         callBack: function (id) {

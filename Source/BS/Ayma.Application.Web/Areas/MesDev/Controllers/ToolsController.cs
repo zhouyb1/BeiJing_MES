@@ -47,6 +47,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(stockEntity);
         }
         /// <summary>
+        /// redis存物料编码
+        /// </summary>
+        /// <param name="code">仓库编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public void ByRedisGetGoodsCode(string code)
+        {
+            ICache redisCache = CacheFactory.CaChe();
+            var userId = LoginUserInfo.Get().userId;
+            var key = userId + "_GoodsCode";
+            redisCache.Write(key,code);
+        }
+        /// <summary>
         /// 根据班组编码或名称获取班组实体信息
         /// </summary>
         /// <param name="code">班组编码</param>
