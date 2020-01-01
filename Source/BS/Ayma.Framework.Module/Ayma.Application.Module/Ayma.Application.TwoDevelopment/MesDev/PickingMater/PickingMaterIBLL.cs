@@ -60,6 +60,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         void SaveEntity(List<Mes_CollarHeadEntity> headList, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList);
 
+        /// <summary>
+        /// 自动生成领料单
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        bool AutoCreateOrder(string date, out string message);
+
         #endregion
 
     }

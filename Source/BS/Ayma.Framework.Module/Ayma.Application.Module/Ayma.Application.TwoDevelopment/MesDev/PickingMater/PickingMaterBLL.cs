@@ -186,7 +186,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
-
+        /// <summary>
+        ///  自动生成领料单
+        /// </summary>
+        /// <param name="date"></param>
+        /// <param name="message"></param>
+        /// <returns></returns>
+        public bool AutoCreateOrder(string date,out string message)
+        {
+            try
+            {
+              return pickingMaterService.AutoCreateOrder(date, out message);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
         #endregion
 
     }

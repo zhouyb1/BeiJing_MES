@@ -125,6 +125,7 @@
     <Compile Include="MesDev\PickingMaterQuery\Mes_CollarViewModel.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MesDev\PickingMater\ExtensionModel\CollarExtension.cs" />
     <Compile Include="MesDev\ProceManager\Mes_ProceEntity.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerBLL.cs" />
     <Compile Include="MesDev\ProceManager\ProceManagerIBLL.cs" />
