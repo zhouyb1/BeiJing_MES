@@ -219,8 +219,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public void DeleteEntity(string keyValue)
         {
-            string message = "";
-            AutoCreateOrder("2019-12-31", out message);
+
 
             var db = this.BaseRepository().BeginTrans();
             try
@@ -251,6 +250,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public void SaveEntity(string keyValue, Mes_CollarHeadEntity entity,List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
         {
+
             var db = this.BaseRepository().BeginTrans();
             try
             {
@@ -503,40 +503,55 @@ ORDER BY C.F_Level";
                     }
                     else
                     {
-                        foreach (var group in groups)
+
+                        string billNoTempTemplate = "";
+                        string billNoTemplate = "";
+                        int index = 1;
+
+                        if (true)
                         {
-                            //生成单号
-                            string billTempNo = "";
-                            string billNo = "";
-                            if (true)
-                            {
-                                var dp = new DynamicParameters(new { });
-                                dp.Add("@BillType", "计划单");
-                                dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
-                                new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
-                                billTempNo = dp.Get<string>("@Doucno");
-                            }
-                            if (true)
-                            {
-                                var dp = new DynamicParameters(new { });
-                                dp.Add("@BillType", "领料单");
-                                dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
-                                new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
-                                billNo = dp.Get<string>("@Doucno");
-                            }
+                            var dp = new DynamicParameters(new { });
+                            dp.Add("@BillType", "计划单");
+                            dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                            new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
+                            billNoTempTemplate = dp.Get<string>("@Doucno");
+                           
+                        }
+                        if (true)
+                        {
+                            var dp = new DynamicParameters(new { });
+                            dp.Add("@BillType", "领料单");
+                            dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                            new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
+                            billNoTemplate = dp.Get<string>("@Doucno");
+                        }
+                        if (string.IsNullOrEmpty(billNoTempTemplate) || string.IsNullOrEmpty(billNoTemplate))
+                        {
+                            success = false;
+                            message = string.Format("领料计划单单号失败");
+                        }
+                        else
+                        {
 
-                            if (string.IsNullOrEmpty(billNo) || string.IsNullOrEmpty(billTempNo))
-                            {
-                                success = false;
-                                message = string.Format("领料计划单单号失败");
-                                break;
-                            }
 
-                            else
+                            billNoTempTemplate = billNoTempTemplate.Substring(0, 12);
+                            billNoTemplate = billNoTemplate.Substring(0, 12);
+
+                            foreach (var group in groups)
                             {
+                                //生成单号
+                                string billTempNo = "";
+                                string billNo = "";
+
+                                billTempNo = billNoTempTemplate+index.ToString().PadLeft(4, '0');
+                                billNo = billNoTemplate + index.ToString().PadLeft(4, '0');
+                                index++;
+
+                                //生成表头
                                 Mes_CollarHeadEntity head = new Mes_CollarHeadEntity();
                                 head.Create();
                                 head.C_CollarNo = billNo;
+                                head.C_Remark = "[根据生产计划单生成]";
                                 head.C_StockToCode = group.Key.F_InStockCode;
                                 head.C_StockToName = group.Key.F_InStockName;
                                 head.P_Status = ErpEnums.RequistStatusEnum.NoAudit;
@@ -551,40 +566,39 @@ ORDER BY C.F_Level";
                                 headtemp.C_StockToName = group.Key.F_InStockName;
                                 headtemp.P_Status = ErpEnums.RequistStatusEnum.NoAudit;
                                 tempheads.Add(headtemp);
-                            }
 
+                                //生成表体
+                                var rows = group.GroupBy(r => new { r.F_GoodsCode, r.F_GoodsName, r.F_Unit, r.F_Unit2, r.F_UnitQty, r.F_Price, r.F_OutStockCode, r.F_OutStockName });
+                                foreach (var row in rows)
+                                {
+                                    Mes_CollarDetailEntity detail = new Mes_CollarDetailEntity();
+                                    detail.Create();
+                                    detail.C_CollarNo = billNo;
+                                    detail.C_StockCode = row.Key.F_OutStockCode;
+                                    detail.C_StockName = row.Key.F_OutStockName;
+                                    detail.C_Unit = row.Key.F_Unit;
+                                    detail.C_Unit2 = row.Key.F_Unit2;
+                                    detail.C_UnitQty = row.Key.F_UnitQty;
+                                    detail.C_Price = row.Key.F_Price;
+                                    detail.C_PlanQty = row.Sum(r => r.F_PlanQty);
+                                    detail.C_SuggestQty = row.Sum(r => r.F_ProposeQty);
 
-                            //生成表体
-                            var rows = group.GroupBy(r => new { r.F_GoodsCode, r.F_GoodsName, r.F_Unit, r.F_Unit2, r.F_UnitQty, r.F_Price,r.F_OutStockCode, r.F_OutStockName });
-                            foreach (var row in rows)
-                            {
-                                Mes_CollarDetailEntity detail = new Mes_CollarDetailEntity();
-                                detail.Create();
-                                detail.C_CollarNo = billNo;
-                                detail.C_StockCode = row.Key.F_OutStockCode;
-                                detail.C_StockName = row.Key.F_OutStockName;
-                                detail.C_Unit = row.Key.F_Unit;
-                                detail.C_Unit2 = row.Key.F_Unit2;
-                                detail.C_UnitQty = row.Key.F_UnitQty;
-                                detail.C_Price = row.Key.F_Price;
-                                detail.C_PlanQty = row.Sum(r => r.F_PlanQty);
-                                detail.C_SuggestQty = row.Sum(r => r.F_ProposeQty);
+                                    details.Add(detail);
 
-                                details.Add(detail);
+                                    Mes_CollarDetailTempEntity detailtemp = new Mes_CollarDetailTempEntity();
+                                    detailtemp.Create();
+                                    detailtemp.C_CollarNo = billTempNo;
+                                    detailtemp.C_StockCode = row.Key.F_OutStockCode;
+                                    detailtemp.C_StockName = row.Key.F_OutStockName;
+                                    detailtemp.C_Unit = row.Key.F_Unit;
+                                    detailtemp.C_Unit2 = row.Key.F_Unit2;
+                                    detailtemp.C_UnitQty = row.Key.F_UnitQty;
+                                    detailtemp.C_Price = row.Key.F_Price;
+                                    detailtemp.C_PlanQty = detail.C_PlanQty;
+                                    detailtemp.C_SuggestQty = detail.C_SuggestQty;
 
-                                Mes_CollarDetailTempEntity detailtemp = new Mes_CollarDetailTempEntity();
-                                detailtemp.Create();
-                                detailtemp.C_CollarNo = billTempNo;
-                                detailtemp.C_StockCode = row.Key.F_OutStockCode;
-                                detailtemp.C_StockName = row.Key.F_OutStockName;
-                                detailtemp.C_Unit = row.Key.F_Unit;
-                                detailtemp.C_Unit2 = row.Key.F_Unit2;
-                                detailtemp.C_UnitQty = row.Key.F_UnitQty;
-                                detailtemp.C_Price = row.Key.F_Price;
-                                detailtemp.C_PlanQty = detail.C_PlanQty;
-                                detailtemp.C_SuggestQty = detail.C_SuggestQty;
-
-                                tempdetails.Add(detailtemp);
+                                    tempdetails.Add(detailtemp);
+                                }
                             }
                         }
                     }
@@ -599,12 +613,26 @@ ORDER BY C.F_Level";
 
                 #region 保存数据
 
-                db.Insert(tempheads);
-                db.Insert(tempdetails);
-                db.Insert(heads);
-                db.Insert(details);
+                if (success)
+                {
+                    string strUpdate = @"UPDATE dbo.Mes_ProductOrderHead SET P_Status=3 WHERE P_Status=2 AND CONVERT(VARCHAR(10),P_UseDate,120) =@date";
 
-                 #endregion
+                    // 虚拟参数
+                    var dp = new DynamicParameters(new { });
+                    if (!date.IsEmpty())
+                    {
+                        dp.Add("date", date, DbType.String);
+                    }
+
+                    db.ExecuteBySql(strUpdate,dp);
+
+                    db.Insert(tempheads);
+                    db.Insert(tempdetails);
+                    db.Insert(heads);
+                    db.Insert(details);
+                }
+
+                #endregion
 
                 if (success)
                 {
