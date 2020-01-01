@@ -82,6 +82,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("O_SECPRICE")]
         public double? O_SecPrice { get; set; }
+
+        public int? O_Index { get; set; }
+
         #endregion
 
         #region 扩展操作

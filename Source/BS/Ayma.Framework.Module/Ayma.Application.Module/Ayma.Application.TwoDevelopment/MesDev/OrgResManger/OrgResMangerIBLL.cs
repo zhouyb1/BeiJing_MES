@@ -44,6 +44,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
+
+        /// <summary>
+        /// 获取转换后的物料
+        /// </summary>
+        /// <returns></returns>
+        DataTable GetSecGoodsList(Pagination obj);
         IEnumerable<Mes_OrgResDetailEntity> GetMes_OrgResDetailList(string keyValue);
         #endregion
 

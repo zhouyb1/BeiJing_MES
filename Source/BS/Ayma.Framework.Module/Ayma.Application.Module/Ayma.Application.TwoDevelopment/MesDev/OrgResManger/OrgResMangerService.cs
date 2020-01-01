@@ -167,22 +167,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var key = userId + "_stock";
             var stock = redisCache.Read<string>(key);
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT  i.ID,
-                                i.I_GoodsCode W_GoodsCode, --组装前的物料
-                                i.I_GoodsName W_GoodsName,
-                                i.I_Batch W_Batch,
-                                i.I_Qty W_Qty,
-                                i.I_StockCode,
-                                i.I_StockName,
-                                (SELECT G_Price FROM dbo.Mes_Goods WHERE G_Code = i.I_GoodsCode) W_Price,
-                                i.I_Unit W_Unit,
-                                c.C_SecCode C_SecCode, --组装后的物料
-                                c.C_SecName C_SecName,
-                                c.C_ProNo
-                        FROM    dbo.Mes_Convert c
-                                LEFT JOIN dbo.Mes_Inventory i ON i.I_GoodsCode =c.C_Code   
-                                LEFT JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode   
-                                WHERE s.S_Kind = 4  and i.I_Qty > 0 ");
+            sb.Append(@"SELECT          c.C_Code O_GoodsCode ,
+                                        c.C_Name O_GoodsName ,
+                                        c.C_SecCode O_SecGoodsCode ,
+                                        c.C_SecName O_SecGoodsName ,
+                                        i.I_Batch O_Batch ,
+                                        i.I_Qty O_Qty ,
+                                        i.I_Unit O_Unit ,
+                                        (SELECT G_Price FROM dbo.Mes_Goods WHERE G_Code = i.I_GoodsCode) O_Price
+                                FROM    dbo.Mes_Convert c
+                                        INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
+                                        WHERE i.I_Qty > 0  ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
@@ -196,14 +191,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("stock", "%" + stock + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
-            if (!queryParam["proNo"].IsEmpty())
-            {
-                dp.Add("proNo", "%" + queryParam["proNo"].ToString() + "%", DbType.String);
-                sb.Append(" AND c.C_ProNo like @proNo ");
-            }
-
-            return BaseRepository().FindTable(sb.ToString(), dp, obj);
+            return BaseRepository().FindTable(sb.ToString(), dp);
         }
+
+        /// <summary>
+        /// 获取转换后的物料
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSecGoodsList(Pagination obj)
+        {
+            var sql = "SELECT DISTINCT C_SecName,C_SecCode,G_Unit FROM dbo.Mes_Convert INNER JOIN dbo.Mes_Goods  ON C_SecCode= G_Code";
+            var dt = this.BaseRepository().FindTable(sql);
+            return dt;
+        }
+
         /// <summary>
         /// 获取Mes_OrgResHead表实体数据
         /// </summary>
@@ -237,7 +238,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == keyValue);
+                return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == keyValue).OrderBy(c=>c.O_Index);
             }
             catch (Exception ex)
             {

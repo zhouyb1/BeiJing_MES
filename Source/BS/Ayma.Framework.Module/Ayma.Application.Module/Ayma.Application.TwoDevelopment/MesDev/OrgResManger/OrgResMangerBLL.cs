@@ -87,6 +87,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        // <summary>
+        /// 获取转换后的物料
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetSecGoodsList(Pagination obj)
+        {
+            try
+            {
+                return orgResMangerService.GetSecGoodsList(obj);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         /// <summary>
         /// 获取Mes_OrgResHead表实体数据
         /// </summary>
