@@ -574,6 +574,9 @@ ORDER BY C.F_Level";
                                     Mes_CollarDetailEntity detail = new Mes_CollarDetailEntity();
                                     detail.Create();
                                     detail.C_CollarNo = billNo;
+                                    detail.C_GoodsCode = row.Key.F_GoodsCode;
+                                    detail.C_GoodsName = row.Key.F_GoodsName;
+                                    detail.C_StockName = row.Key.F_OutStockName;
                                     detail.C_StockCode = row.Key.F_OutStockCode;
                                     detail.C_StockName = row.Key.F_OutStockName;
                                     detail.C_Unit = row.Key.F_Unit;
@@ -588,6 +591,8 @@ ORDER BY C.F_Level";
                                     Mes_CollarDetailTempEntity detailtemp = new Mes_CollarDetailTempEntity();
                                     detailtemp.Create();
                                     detailtemp.C_CollarNo = billTempNo;
+                                    detailtemp.C_GoodsCode = row.Key.F_GoodsCode;
+                                    detailtemp.C_GoodsName = row.Key.F_GoodsName;
                                     detailtemp.C_StockCode = row.Key.F_OutStockCode;
                                     detailtemp.C_StockName = row.Key.F_OutStockName;
                                     detailtemp.C_Unit = row.Key.F_Unit;
@@ -667,7 +672,7 @@ ORDER BY C.F_Level";
         /// </summary>
         /// <param name="parentid"></param>
         /// <param name="boms"></param>
-        private void SumQty(string parentid, List<ProductBom> boms,float quantity)
+        private void SumQty(string parentid, List<ProductBom> boms,float quantity)9
         {
             var rows = boms.Where(r => r.F_ParentID == parentid); //子级
             if (rows == null || rows.Count() < 1)
