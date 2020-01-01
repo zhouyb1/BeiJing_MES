@@ -59,6 +59,8 @@
     <Compile Include="Form\FormSchemeInfoMap.cs" />
     <Compile Include="Form\FormSchemeMap.cs" />
     <Compile Include="IM\IMContentMap.cs" />
+    <Compile Include="MesDev\Mes_CollarDetailTempMap.cs" />
+    <Compile Include="MesDev\Mes_CollarHeadTempMap.cs" />
     <Compile Include="MesDev\Mes_ConvertMap.cs" />
     <Compile Include="MesDev\Mes_BackStockDetailMap.cs" />
     <Compile Include="MesDev\Mes_BackStockHeadMap.cs" />

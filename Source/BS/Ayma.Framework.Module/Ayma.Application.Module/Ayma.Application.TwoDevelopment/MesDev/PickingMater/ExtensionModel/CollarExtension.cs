@@ -43,6 +43,56 @@
         public string F_GoodsName { get; set; }
 
         /// <summary>
+        /// 物料类型
+        /// </summary>
+        public int F_Kind { get; set; }
+
+        /// <summary>
+        /// 基本单位
+        /// </summary>
+        public string F_Unit { get; set; }
+
+
+        /// <summary>
+        ///包装单位
+        /// </summary>
+        public string F_Unit2 { get; set; }
+
+        /// <summary>
+        ///包装数量
+        /// </summary>
+        public float F_UnitQty { get; set; }
+
+        /// <summary>
+        /// 成本价
+        /// </summary>
+        public float? F_Price { get; set; }
+
+
+        /// <summary>
+        /// 车班入库编码仓库
+        /// </summary>
+        public string F_InStockCode { get; set; }
+
+        /// <summary>
+        /// 原料仓库仓库名称
+        /// </summary>
+        public string F_InStockName { get; set; }
+
+
+        /// <summary>
+        /// 原料仓库仓库编码
+        /// </summary>
+        public string F_OutStockCode { get; set; }
+
+        /// <summary>
+        /// 原料仓库仓库
+        /// </summary>
+        public string F_OutStockName { get; set; }
+
+
+
+        /// <summary>
         /// 计划数量
         /// </summary>
         public float? F_PlanQty { get; set; }
@@ -52,25 +102,14 @@
         /// </summary>
         public float? F_ProposeQty { get; set; }
 
-        /// <summary>
-        /// 车班入库仓库
-        /// </summary>
-        public string F_InStockCode { get; set; }
 
-        /// <summary>
-        /// 原料仓库仓库
-        /// </summary>
-        public string F_OutStockCode { get; set; }
 
         /// <summary>
         /// 物料级别
         /// </summary>
         public int F_Level { get; set; }
 
-        /// <summary>
-        /// 物料类型
-        /// </summary>
-        public int F_Kind { get; set; }
+
     }
 
     /// <summary>
@@ -105,20 +144,55 @@
         public string F_GoodsName { get; set; }
 
         /// <summary>
-        /// 车班入库仓库
+        /// 物料类型
+        /// </summary>
+        public int F_Kind { get; set; }
+
+        /// <summary>
+        /// 基本单位
+        /// </summary>
+        public string F_Unit { get; set; }
+
+
+        /// <summary>
+        ///包装单位
+        /// </summary>
+        public string F_Unit2 { get; set; }
+
+        /// <summary>
+        ///包装数量
+        /// </summary>
+        public float F_UnitQty { get; set; }
+
+        /// <summary>
+        /// 成本价
+        /// </summary>
+        public float? F_Price { get; set; }
+
+
+        /// <summary>
+        /// 车班入库编码仓库
         /// </summary>
         public string F_InStockCode { get; set; }
 
         /// <summary>
-        /// 原料仓库仓库
+        /// 原料仓库仓库名称
         /// </summary>
-        public string F_OutStockCode { get; set; }
+        public string F_InStockName { get; set; }
 
 
         /// <summary>
-        /// 物料类型
+        /// 原料仓库仓库编码
         /// </summary>
-        public int F_Kind { get; set; }
+        public string F_OutStockCode { get; set; }
+
+        /// <summary>
+        /// 原料仓库仓库
+        /// </summary>
+        public string F_OutStockName { get; set; }
+
+
+
 
         /// <summary>
         /// 计划数量

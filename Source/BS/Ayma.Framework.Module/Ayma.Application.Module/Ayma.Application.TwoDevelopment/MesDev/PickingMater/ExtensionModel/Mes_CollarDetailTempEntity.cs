@@ -9,7 +9,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// 日 期：2019-03-11 19:22
     /// 描 述：领料单
     /// </summary>
-    public partial class Mes_CollarDetailEntity 
+    public partial class Mes_CollarDetailTempEntity 
     {
         #region 实体成员
         /// <summary>
@@ -18,10 +18,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("ID")]
         public string ID { get; set; }
         /// <summary>
-        /// 领料单号
+        /// 计划单号
         /// </summary>
         [Column("C_COLLARNO")]
         public string C_CollarNo { get; set; }
+
+
+
         /// <summary>
         /// 订单号
         /// </summary>
@@ -109,6 +112,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string C_TeamCode { get; set; }
         [NotMapped]
         public DateTime C_CreateDate { get; set; }
+
 
         /// <summary>
         /// 计划数量

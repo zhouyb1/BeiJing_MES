@@ -219,6 +219,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public void DeleteEntity(string keyValue)
         {
+            string message = "";
+            AutoCreateOrder("2019-12-31", out message);
+
             var db = this.BaseRepository().BeginTrans();
             try
             {
@@ -353,6 +356,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 List<GoodsInventory> inventorys=new List<GoodsInventory>();
                 List<GoodsOut> goodsouts=new List<GoodsOut>();
 
+                List<Mes_CollarHeadTempEntity> tempheads = new List<Mes_CollarHeadTempEntity>();
+                List<Mes_CollarDetailTempEntity> tempdetails = new List<Mes_CollarDetailTempEntity>();
+
+                List<Mes_CollarHeadEntity> heads=new List<Mes_CollarHeadEntity>();
+                List<Mes_CollarDetailEntity> details=new List<Mes_CollarDetailEntity>();
+
+
                 #region 获取生产订单
                 if (success)
                 {
@@ -415,14 +425,21 @@ SELECT C.ID F_ID,
        C.B_GoodsCode F_GoodsCode,
        G.G_Name F_GoodsName,
        G.G_Kind F_Kind,
-       G.G_StockCode F_OutStockCode,--原料仓库仓库
-       C.B_StockCode F_InStockCode,--车班入库仓库
-       C.B_Qty F_PlanQty,
-       C.B_Qty F_ProposeQty,
-       C.F_Level
+	   G.G_Unit F_Unit,--基本单位
+	   G.G_Unit2 F_Unit2,--包装单位
+	   ISNULL(G.G_UnitQty,1) F_UnitQty,--包装数量(包装规格)
+	   G.G_Price F_Price,--成本价
+       C.B_StockCode F_InStockCode,--领料仓库
+	   S1.S_Name F_InStockName,
+       G.G_StockCode F_OutStockCode,--出料仓库
+	   S2.S_Name F_OutStockName,
+       B_Qty F_PlanQty,--计划数量
+       B_Qty F_ProposeQty,--建议数量
+       F_Level
 FROM CTE C
-    LEFT JOIN Mes_Goods G
-        ON C.B_GoodsCode = G.G_Code
+    LEFT JOIN Mes_Goods G ON C.B_GoodsCode = G.G_Code
+	LEFT JOIN Mes_Stock S1 ON S1.S_Code=C.B_StockCode
+	LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
 ORDER BY C.F_Level";
 
                     foreach (var product in products)
@@ -467,19 +484,127 @@ ORDER BY C.F_Level";
 
                 #region 加工数据
 
-                foreach (var product in products)
+                if (success)
                 {
-                    float? productQty = product.F_Qty;//生产数量
-                    var productBom = boms[product.F_GoodsCode];//配合
-                    var parent=productBom.Find(r => r.F_Level == 0);//根
+                    foreach (var product in products)
+                    {
+                        float? productQty = product.F_Qty;//生产数量
+                        var productBom = boms[product.F_GoodsCode];//配合
+                        var parent = productBom.Find(r => r.F_Level == 0);//根
 
-                    SumQty(parent.F_ID, productBom, productQty.Value);//计算所需数量
-                    CalculateQty(parent.F_ID, productBom, inventorys, goodsouts);//推算每个环节
+                        SumQty(parent.F_ID, productBom, productQty.Value);//计算所需数量
+                        CalculateQty(parent.F_ID, productBom, inventorys, goodsouts);//推算每个环节
+                    }
+                    var groups = goodsouts.Where(r => r.F_Kind == 1).GroupBy(r => new { r.F_InStockCode,r.F_InStockName});//按原料领料仓库分组
+                    if (groups.Count() < 1)
+                    {
+                        success = false;
+                        message = string.Format("没有需要生成领料计划单数据");
+                    }
+                    else
+                    {
+                        foreach (var group in groups)
+                        {
+                            //生成单号
+                            string billTempNo = "";
+                            string billNo = "";
+                            if (true)
+                            {
+                                var dp = new DynamicParameters(new { });
+                                dp.Add("@BillType", "计划单");
+                                dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                                new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
+                                billTempNo = dp.Get<string>("@Doucno");
+                            }
+                            if (true)
+                            {
+                                var dp = new DynamicParameters(new { });
+                                dp.Add("@BillType", "领料单");
+                                dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                                new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
+                                billNo = dp.Get<string>("@Doucno");
+                            }
+
+                            if (string.IsNullOrEmpty(billNo) || string.IsNullOrEmpty(billTempNo))
+                            {
+                                success = false;
+                                message = string.Format("领料计划单单号失败");
+                                break;
+                            }
+
+                            else
+                            {
+                                Mes_CollarHeadEntity head = new Mes_CollarHeadEntity();
+                                head.Create();
+                                head.C_CollarNo = billNo;
+                                head.C_StockToCode = group.Key.F_InStockCode;
+                                head.C_StockToName = group.Key.F_InStockName;
+                                head.P_Status = ErpEnums.RequistStatusEnum.NoAudit;
+                                heads.Add(head);
+
+
+                                Mes_CollarHeadTempEntity headtemp = new Mes_CollarHeadTempEntity();
+                                headtemp.Create();
+                                headtemp.C_CollarNo = billTempNo;
+                                headtemp.C_CollarNoZS = billNo;
+                                headtemp.C_StockToCode = group.Key.F_InStockCode;
+                                headtemp.C_StockToName = group.Key.F_InStockName;
+                                headtemp.P_Status = ErpEnums.RequistStatusEnum.NoAudit;
+                                tempheads.Add(headtemp);
+                            }
+
+
+                            //生成表体
+                            var rows = group.GroupBy(r => new { r.F_GoodsCode, r.F_GoodsName, r.F_Unit, r.F_Unit2, r.F_UnitQty, r.F_Price,r.F_OutStockCode, r.F_OutStockName });
+                            foreach (var row in rows)
+                            {
+                                Mes_CollarDetailEntity detail = new Mes_CollarDetailEntity();
+                                detail.Create();
+                                detail.C_CollarNo = billNo;
+                                detail.C_StockCode = row.Key.F_OutStockCode;
+                                detail.C_StockName = row.Key.F_OutStockName;
+                                detail.C_Unit = row.Key.F_Unit;
+                                detail.C_Unit2 = row.Key.F_Unit2;
+                                detail.C_UnitQty = row.Key.F_UnitQty;
+                                detail.C_Price = row.Key.F_Price;
+                                detail.C_PlanQty = row.Sum(r => r.F_PlanQty);
+                                detail.C_SuggestQty = row.Sum(r => r.F_ProposeQty);
+
+                                details.Add(detail);
+
+                                Mes_CollarDetailTempEntity detailtemp = new Mes_CollarDetailTempEntity();
+                                detailtemp.Create();
+                                detailtemp.C_CollarNo = billTempNo;
+                                detailtemp.C_StockCode = row.Key.F_OutStockCode;
+                                detailtemp.C_StockName = row.Key.F_OutStockName;
+                                detailtemp.C_Unit = row.Key.F_Unit;
+                                detailtemp.C_Unit2 = row.Key.F_Unit2;
+                                detailtemp.C_UnitQty = row.Key.F_UnitQty;
+                                detailtemp.C_Price = row.Key.F_Price;
+                                detailtemp.C_PlanQty = detail.C_PlanQty;
+                                detailtemp.C_SuggestQty = detail.C_SuggestQty;
+
+                                tempdetails.Add(detailtemp);
+                            }
+                        }
+                    }
+
+
+                    
                 }
 
+               
 
                 #endregion
 
+                #region 保存数据
+
+                db.Insert(tempheads);
+                db.Insert(tempdetails);
+                db.Insert(heads);
+                db.Insert(details);
+
+                 #endregion
 
                 if (success)
                 {
@@ -554,54 +679,68 @@ ORDER BY C.F_Level";
             {
                 foreach (var row in rows)
                 {
-                    if(row.F_ProposeQty<=0)
-                        continue;
 
-
-                    //存在车间库存情况
+                
                     GoodsOut gs = new GoodsOut();
                     gs.F_GoodsCode = row.F_GoodsCode;//物料编码
                     gs.F_GoodsName = row.F_GoodsName;//物料名称
-                    gs.F_InStockCode = row.F_InStockCode;//车间入库仓库
-                    gs.F_OutStockCode = row.F_OutStockCode;//原料出库仓库
                     gs.F_Kind = row.F_Kind;//物料类型
+                    gs.F_Unit = row.F_Unit;//基本单位
+                    gs.F_Unit2 = row.F_Unit2;//包装单位
+                    gs.F_UnitQty = row.F_UnitQty;//包装数量
+                    gs.F_Price = row.F_Price;//成本价
+                    gs.F_InStockCode = row.F_InStockCode;//车间入库仓库编码
+                    gs.F_InStockName = row.F_InStockName;//车间入库仓库名称
+                    gs.F_OutStockCode = row.F_OutStockCode;//原料出库仓库编码
+                    gs.F_OutStockName = row.F_OutStockName;//原料出库仓库名称
+
                     gs.F_PlanQty = row.F_PlanQty;//计划数量
 
-                    var inventory=inventorys.Find(r => r.F_GoodsCode == row.F_GoodsCode);//查找车间库存
-                    if (inventory != null && inventory.F_Qty>0)
+                    if (row.F_ProposeQty > 0)
                     {
-                        gs.F_InventoryQty = inventory.F_Qty;//库存数量
-                        var childrens = boms.Where(r => r.F_ParentID == row.F_ID);//查找子级
-
-                        if (inventory.F_Qty > row.F_ProposeQty)
+                        var inventory = inventorys.Find(r => r.F_GoodsCode == row.F_GoodsCode);//查找车间库存
+                        if (inventory != null && inventory.F_Qty > 0)
                         {
-                            //车间库存充足
-                            inventory.F_Qty -= row.F_ProposeQty;
+                            //存在车间库存情况
+                            gs.F_InventoryQty = inventory.F_Qty;//库存数量
+                            var childrens = boms.Where(r => r.F_ParentID == row.F_ID);//查找子级
 
-                            row.F_ProposeQty = 0;
-                            foreach (var children in childrens)
+                            if (inventory.F_Qty > row.F_ProposeQty)
                             {
-                                children.F_ProposeQty = 0;
+                                //车间库存充足
+                                inventory.F_Qty -= row.F_ProposeQty;
+
+                                row.F_ProposeQty = 0;
+                                foreach (var children in childrens)
+                                {
+                                    children.F_ProposeQty = 0;
+                                }
                             }
+                            else
+                            {
+                                //车间库存不足
+                                inventory.F_Qty = 0;
+                                gs.F_ProposeQty = row.F_ProposeQty - -inventory.F_Qty;
+
+                                var surplus = gs.F_ProposeQty / gs.F_PlanQty;
+                                foreach (var children in childrens)
+                                {
+                                    children.F_ProposeQty = children.F_PlanQty * surplus;
+                                }
+                            }
+                            goodsouts.Add(gs);
                         }
                         else
                         {
-                            //车间库存不足
-                            inventory.F_Qty = 0;
-                            gs.F_ProposeQty = row.F_ProposeQty- - inventory.F_Qty;
-
-                            var surplus = gs.F_ProposeQty / gs.F_PlanQty;
-                            foreach (var children in childrens)
-                            {
-                                children.F_ProposeQty = children.F_PlanQty* surplus;
-                            }
+                            gs.F_InventoryQty = 0;//库存数量
+                            gs.F_ProposeQty = row.F_ProposeQty;//建议数量
                         }
-                        goodsouts.Add(gs);
                     }
                     else
                     {
                         gs.F_InventoryQty = 0;//库存数量
-                        gs.F_ProposeQty = row.F_ProposeQty;//建议数量
+                        gs.F_ProposeQty =0;//建议数量
+
                     }
                     goodsouts.Add(gs);
 
