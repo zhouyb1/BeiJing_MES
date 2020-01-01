@@ -1045,13 +1045,12 @@
                                             $.jfGrid.renderData($('#' + dfop.id));
                                         }
                                     });
-                                    //if (!!_node.editOp.rowdatas) {
-                                    //    $html.find('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
-                                    //}
-                                    //else {
-                                    //    $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
-                                    //}
-                                    $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
+                                    if (!!_node.editOp.rowdatas) {
+                                        $html.find('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
+                                    }
+                                    else {
+                                        $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
+                                    }
                                     $('#jfgird_select_search').on('click', function () {
                                         var data = [];
                                         var keyword = $('#jfgird_select_keyword').val();
@@ -1059,7 +1058,7 @@
                                             for (var i = 0, l = _node.editOp.rowdatas.length; i < l; i++) {
                                                 var item = _node.editOp.rowdatas[i];
                                                 for (var j = 0, jl = _node.editOp.colData.length; j < jl; j++) {
-                                                    if (item[_node.editOp.colData[j].name].indexOf(keyword) != -1) {
+                                                    if (item[_node.editOp.colData[j].name].toString().indexOf(keyword) != -1) {
                                                         data.push(item);
                                                         break;
                                                     }
@@ -1072,6 +1071,13 @@
                                         }
 
                                     });
+                                    $('#jfgird_select_keyword').on('keydown', function (event) {
+
+                                        if (event.keyCode=="13") {
+                                            $('#jfgird_select_search').trigger('click');
+                                        }
+                                    })
+
                                 });
 
                         });
