@@ -19,6 +19,13 @@ var bootstrap = function ($, ayma) {
 $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
             page.bind();
             page.initData();
+            $('.fa-ellipsis-h').on('click', function() {
+                if ($('#O_StockName').selectGet() == "") {
+                    ayma.alert.error('请先选择日耗库');
+                    return false;
+                }
+                return false;
+            });
         },
         bind: function () {
             $("#O_StockName").select({
@@ -83,65 +90,66 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
 
             //添加物料
-            $('#am_add').on('click', function () {
+            //$('#am_add').on('click', function () {
 
-                if ($('#O_ProCode').selectGet()=="") {
-                    ayma.alert.error('请先选择工序');
-                    return false;
-                }
-                if ($('#O_StockName').selectGet()=="") {
-                    ayma.alert.error('请先选择日耗库');
-                    return false;
-                }
-                ayma.layerForm({
-                    id: 'MaterListForm',
-                    title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&stock=' + $('#O_StockCode').val() + '&proNo=' + $('#O_ProCode').selectGet(),
-                    width: 900,
-                    height: 700,
-                    maxmin: true,
-                    callback: function (id, index) {
-                        return top[id].closeWindow();
-                    }
-                });
-            });
+            //    if ($('#O_ProCode').selectGet()=="") {
+            //        ayma.alert.error('请先选择工序');
+            //        return false;
+            //    }
+            //    if ($('#O_StockName').selectGet()=="") {
+            //        ayma.alert.error('请先选择日耗库');
+            //        return false;
+            //    }
+            //    ayma.layerForm({
+            //        id: 'MaterListForm',
+            //        title: '添加物料',
+            //        url: top.$.rootUrl + '/MesDev/OrgResManager/GoodsListIndex?formId=' + parentFormId + '&stock=' + $('#O_StockCode').val() + '&proNo=' + $('#O_ProCode').selectGet(),
+            //        width: 900,
+            //        height: 700,
+            //        maxmin: true,
+            //        callback: function (id, index) {
+            //            return top[id].closeWindow();
+            //        }
+            //    });
+            //});
             $('#Mes_OrgResDetail_h').jfGrid({
                 headData: [
 
                       {
                           label: "组装前物料",
                           name: "B",
-                          width: 160,
+                          width: 180,
                           align: "center",
                           children: [
-                              { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
-                             
                               {
                                   label: "物料名称", name: "O_GoodsName", width: 120, align: "center", editType: 'select',
                                   editOp: {
-                                      width: 600,
+                                      width: 550,
                                       height: 500,
                                       colData: [
-                                          { label: "名称", name: "w_goodsname", width: 120, align: "left" },
-                                          { label: "编码", name: "w_goodscode", width: 80, align: "center" },
-                                          { label: "批次", name: "w_batch", width: 90, align: "center" },
-                                          { label: "单价", name: "w_price", width: 80, align: "center" },
-                                          { label: "单位", name: "w_unit", width: 60, align: "center" },
-                                          { label: "库存", name: "w_qty", width: 100, align: "left" },
+                                          { label: "名称", name: "o_goodsname", width: 120, align: "left" },
+                                          { label: "编码", name: "o_goodscode", width: 80, align: "center" },
+                                          { label: "批次", name: "o_batch", width: 90, align: "center" },
+                                          { label: "转换后的物料", name: "o_secgoodsname", width: 90, align: "left" },
+                                          { label: "转换后的物料", name: "o_goodsseccode", width: 90, align: "left",hidden:true },
+                                          { label: "单价", name: "o_price", width: 80, align: "center" },
+                                          { label: "单位", name: "o_unit", width: 60, align: "center" },
+                                          { label: "库存", name: "o_qty", width: 100, align: "left" },
                                       ],
                                       url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
-                                      param: { queryJson: JSON.stringify({ 'stock': stock }) },
-                                      isPage: true,
+                                      isPage: false,
                                       callback: function (selectdata, rownum, row) {
-                                          row.O_GoodsCode = selectdata.w_goodscode;
-                                          row.O_GoodsName = selectdata.w_goodsname;
-                                          row.StockQty = selectdata.w_qty;
-                                          row.W_Unit = selectdata.w_unit;
-                                          row.O_Batch = selectdata.w_batch;
-                                          row.O_Price = selectdata.w_price;
+                                          row.O_GoodsCode = selectdata.o_goodscode;
+                                          row.O_GoodsName = selectdata.o_goodsname;
+                                          row.StockQty = selectdata.o_qty;
+                                          row.O_Unit = selectdata.o_unit;
+                                          row.O_Batch = selectdata.o_batch;
+                                          row.O_Price = selectdata.o_price;
+                                          row.O_SecGoodsCode = selectdata.o_secgoodscode;
                                       }
                                   }
                               },
+                              { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
                               { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue==""?false:true },
                               {
                                   label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input',
@@ -157,10 +165,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                       }
                                   }
                               },
-                              { label: "单价", name: "O_Price", width: 60, align: "center" },
+                              { label: "单价", name: "O_Price", width: 80, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
                               { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' },
-                              { label: "O_SecGoodsCode", name: "O_SecGoodsCode", width: 90, align: "center",hidden:true }
+                              { label: "转换后的数量", name: "O_SecQty", width: 90, align: "center", hidden: true },
+                              { label: "转换后单价", name: "O_SecPrice", width: 90, align: "center", hidden: true },
+                              { label: "转换后单位", name: "O_SecUnit", width: 90, align: "center", hidden: true },
+                              { label: "转换后的批次", name: "O_SecBatch", width: 90, align: "center", hidden: true },
+                              { label: "转换后的物料编码", name: "O_SecGoodsCode", width: 90, align: "center", hidden: true },
+                              { label: "转换后的物料", name: "O_SecGoodsName", width: 90, align: "center", hidden: true },
                           ]
                       },
                 ],
@@ -179,11 +192,28 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     {
                         label: "组装后物料",
                         name: "B",
-                        width: 160,
+                        width: 180,
                         align: "center",
                         children: [
+                            {
+                                label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center", editType: 'select', editOp: {
+                                    width: 600,
+                                    height: 500,
+                                    colData: [
+                                        { label: "名称", name: "c_secname", width: 120, align: "left" },
+                                        { label: "编码", name: "c_seccode", width: 90, align: "center" },
+                                        { label: "单位", name: "g_unit", width: 90, align: "center" },
+                                    ],
+                                    url: top.$.rootUrl + '/MesDev/OrgResManager/GetSecGoodsList',
+                                    isPage: false,
+                                    callback: function (selectdata, rownum, row) {
+                                        row.O_SecGoodsCode = selectdata.c_seccode;
+                                        row.O_SecGoodsName = selectdata.c_secname;
+                                        row.O_SecUnit = selectdata.g_unit;
+                                    }
+                                }
+                            },
                             { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
-                            { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                             {
                                 label: "数量", name: "O_SecQty", width: 80, align: "center", editType: 'input',
                                 editOp: {
@@ -191,25 +221,40 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
                                             row.O_SecQty = 0;
                                         } else {
-                                            var arr = $("#Mes_OrgResDetail_h").jfGridGet('rowdatas');
-                                            if ($("#Mes_OrgResDetail_d").jfGridGet('rowdatas').length == 1) {
-                                               
-                                                var amounts = 0;
-                                                arr.forEach(function(val) {
-                                                    amounts = amounts += val.O_Qty * val.O_Price;
-                                                    row.O_SecPrice = (amounts / row.O_SecQty).toFixed(2);
-                                                });
-                                            } else {
-                                                row.O_SecPrice = (arr[rownum].O_Qty * arr[rownum].O_Price / row.O_SecQty).toFixed(2);
-                                                
+                                            var rowheadataList = $("#Mes_OrgResDetail_h").jfGridGet('rowdatas');
+                                            var amount = 0;
+
+
+                                            for (var i = 0, j=rowheadataList.length;i<j ;i++) {
+                                                if (rowheadataList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
+                                                    amount += rowheadataList[i].O_Price * rowheadataList[i].O_Qty;
+                                                    row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
+                                                  
+                                                    rowheadataList[i].O_SecQty = row.O_SecQty;
+                                                    rowheadataList[i].O_SecUnit = row.O_SecUnit;
+                                                    rowheadataList[i].O_SecBatch = row.O_SecBatch;
+                                                    rowheadataList[i].O_SecGoodsCode = row.O_SecGoodsCode;
+                                                    rowheadataList[i].O_SecGoodsName = row.O_SecGoodsName;
+                                                } 
                                             }
+                                            for (var k = 0, m = rowheadataList.length; k < m; k++) {
+                                                if (rowheadataList[k].O_SecGoodsCode==row.O_SecGoodsCode) {
+                                                    rowheadataList[k].O_SecPrice = row.O_SecPrice;
+                                                }
+                                            }
+                                            $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: rowheadataList });
                                         }
                                     }
                                 }
                             },
                              { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
-                             { label: "单位", name: "O_Unit", width: 80, align: "center" },
-                             { label: "批次", name: "O_SecBatch", width: 80, align: "center" }
+                             { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
+                            {
+                                label: "批次", name: "O_SecBatch", width: 80, align: "center", editType: "label",
+                                formatter: function (cellvalue, row) {
+                                   return  row.O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
+                                }
+                            }
                         ]
                     }
                 ],
@@ -232,16 +277,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             tempArr = tempArr.concat(data[id]);
                             $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: tempArr });
                             var arr = [];
-                            //for (var i = 0; i < data[id].length; i++) {
-                            //    if (!arr.includes(data[id][i].O_SecGoodsCode)) {
-                            //        arr.push(data[id][i].O_SecGoodsCode);
-                            //    } else {
-                            //        data[id].splice(i, 1);
-                            //        i--;
-                            //    }
-                            //}
+                            for (var i = 0; i < data[id].length; i++) {
+                                if (!arr.includes(data[id][i].O_SecGoodsCode)) {
+                                    arr.push(data[id][i].O_SecGoodsCode);
+                                } else {
+                                    data[id].splice(i, 1);
+                                    i--;
+                                }
+                            }
                             $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: data[id] });
-
                         }
                         else {
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
@@ -264,16 +308,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
         var data = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
-        var data_d = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
         if (data[0].O_GoodsCode == undefined || data[0].O_GoodsCode == "") {
             ayma.alert.error('请添加物料');
             return false;
         }
-        if (data_d.length==1) {//如果多个组装物料的产出物料都是同一个，为了保持数据的一对一，产出物的数量和单据都保持一致
-            for (var i = 0; i < data.length; i++) {
-                data[i].O_SecQty = data_d[0].O_SecQty;
-                data[i].O_SecPrice = data_d[0].O_SecPrice;
-            }
+
+        var num = 0;
+        for (var i = 0,j=data.length; i < j; i++) {
+            data[i].O_Index = num;
+            num++;
         }
         var postData = {
             strEntity: JSON.stringify($('[data-table="Mes_OrgResHead"]').GetFormData()),
@@ -401,11 +444,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
         //page.search(rows,row_d);
     };
-
-
-
-
-
 
     //获取处理前物料
     top.GetGoodsListHead = function () {
