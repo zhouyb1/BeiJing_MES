@@ -63,16 +63,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+
         /// <summary>
         /// 获取仓库物料
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public DataTable GetGoodsList( string keyword, string queryJson)
+        public DataTable GetGoodsList(string keyword, string queryJson ,Pagination obj)
         {
             try
             {
-                return orgResMangerService.GetGoodsList(keyword, queryJson);
+                return orgResMangerService.GetGoodsList(keyword, queryJson,obj);
             }
             catch (Exception ex)
             {
@@ -91,11 +92,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        public DataTable GetSecGoodsList(string  keyword )
+        public DataTable GetSecGoodsList(string  keyword,Pagination obj )
         {
             try
             {
-                return orgResMangerService.GetSecGoodsList(keyword);
+                return orgResMangerService.GetSecGoodsList(keyword,obj);
             }
             catch (Exception ex)
             {

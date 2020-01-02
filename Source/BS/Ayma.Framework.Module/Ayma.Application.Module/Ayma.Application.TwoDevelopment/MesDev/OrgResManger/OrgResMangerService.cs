@@ -160,7 +160,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="stockCode"></param>
         /// <returns></returns>
-        public DataTable GetGoodsList(string keyword, string queryJson)
+        public DataTable GetGoodsList(string keyword, string queryJson,Pagination obj)
         {
             ICache redisCache = CacheFactory.CaChe();
             var userId = LoginUserInfo.Get().userId;
@@ -177,7 +177,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         (SELECT G_Price FROM dbo.Mes_Goods WHERE G_Code = i.I_GoodsCode) O_Price
                                 FROM    dbo.Mes_Convert c
                                         INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
-                                        WHERE i.I_Qty > 0  ");
+                                        INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
+                                        WHERE i.I_Qty > 0 AND s.S_Kind =4  ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
@@ -191,14 +192,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("stock", "%" + stock + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
-            return BaseRepository().FindTable(sb.ToString(), dp);
+            return BaseRepository().FindTable(sb.ToString(), dp,obj);
         }
 
         /// <summary>
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        public DataTable GetSecGoodsList(string keyword)
+        public DataTable GetSecGoodsList(string keyword,Pagination obj)
         {
             var sql = "SELECT DISTINCT c_secname,c_seccode,g_unit FROM dbo.Mes_Convert INNER JOIN dbo.Mes_Goods  ON C_SecCode= G_Code";
             var dp = new DynamicParameters(new { });
@@ -208,7 +209,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
                 sql += " where c_seccode+c_secname like @keyword ";
             }
-            var dt = this.BaseRepository().FindTable(sql,dp);
+            var dt = this.BaseRepository().FindTable(sql,dp,obj);
             return dt;
         }
 
