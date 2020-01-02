@@ -19,13 +19,6 @@ var bootstrap = function ($, ayma) {
 $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
             page.bind();
             page.initData();
-            $('.fa-ellipsis-h').on('click', function() {
-                if ($('#O_StockName').selectGet() == "") {
-                    ayma.alert.error('请先选择日耗库');
-                    return false;
-                }
-                return false;
-            });
         },
         bind: function () {
             $("#O_StockName").select({
@@ -136,7 +129,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           { label: "单位", name: "o_unit", width: 60, align: "center" },
                                           { label: "库存", name: "o_qty", width: 100, align: "left" },
                                       ],
-                                      url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
+                                      url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList?stock='+$('#O_StockCode').val(),
                                       isPage: false,
                                       callback: function (selectdata, rownum, row) {
                                           row.O_GoodsCode = selectdata.o_goodscode;
