@@ -137,6 +137,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
                 { label: "单价", name: "C_Price", width: 40, align: "left" },  
                 { label: "单位", name: "C_Unit", width: 40, align: "left" },
+                { label: "计划数量", name: "C_PlanQty", width: 100, align: "left" },
+                { label: "建议数量", name: "C_SuggestQty", width: 100, align: "left" },
                 {
                     label: "领料数量",
                     name: "C_Qty",
@@ -213,8 +215,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 },
+                { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
                 { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
-                { label: "批次", name: "C_Batch", width: 80, align: "left" },
+            
                 { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
                 {
                     label: "原仓库名称",
@@ -234,16 +237,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     }
-                  },
+                },
+               { label: "批次", name: "C_Batch", width: 80, align: "left" },
                     //{ label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
                     //{ label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
-                    {
-                        label: '供应商编码', name: 'C_SupplyCode', width: 80, align: 'left', editType: 'label'
-                    },
-                    {
-                        label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
-                    },
-                    { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
+                    //{
+                    //    label: '供应商编码', name: 'C_SupplyCode', width: 80, align: 'left', editType: 'label'
+                    //},
+                    //{
+                    //    label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
+                    //},
+                  
                 ],
                 isAutoHeight: false,
                 footerrow: true,
