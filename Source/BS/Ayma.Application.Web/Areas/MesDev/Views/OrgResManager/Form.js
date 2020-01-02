@@ -131,7 +131,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           { label: "编码", name: "o_goodscode", width: 80, align: "center" },
                                           { label: "批次", name: "o_batch", width: 90, align: "center" },
                                           { label: "转换后的物料", name: "o_secgoodsname", width: 90, align: "left" },
-                                          { label: "转换后的物料", name: "o_goodsseccode", width: 90, align: "left",hidden:true },
+                                          { label: "转换后的物料", name: "o_secgoodscode", width: 90, align: "left", hidden: true },
                                           { label: "单价", name: "o_price", width: 80, align: "center" },
                                           { label: "单位", name: "o_unit", width: 60, align: "center" },
                                           { label: "库存", name: "o_qty", width: 100, align: "left" },
