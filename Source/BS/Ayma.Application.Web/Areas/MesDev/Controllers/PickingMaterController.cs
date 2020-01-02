@@ -252,6 +252,22 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             pickingMaterIBLL.SaveEntity(keyValue, entity, mes_CollarDetailEntityList);
             return Success("保存成功！");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult AutoCreateOrder(string date)
+        {
+            string message = "";
+            bool datas = pickingMaterIBLL.AutoCreateOrder(date, out message);
+            if (datas)
+            {
+                return Success("生成成功");
+            }
+            else
+            {
+                return Fail(message);
+            }
+        }
         #endregion
 
     }

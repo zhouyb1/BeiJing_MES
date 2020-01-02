@@ -24,7 +24,7 @@ var bootstrap = function ($, ayma) {
     acceptClick = function (callBack) {
         var postData = {};
         postData.date = $("#date").val();     
-        $.SaveForm(top.$.rootUrl + '/MesDev/Mes_ProductOrderHead/AutoCreateOrder', postData, function (res) {
+        $.SaveForm(top.$.rootUrl + '/MesDev/PickingMater/AutoCreateOrder', postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {
                 callBack();

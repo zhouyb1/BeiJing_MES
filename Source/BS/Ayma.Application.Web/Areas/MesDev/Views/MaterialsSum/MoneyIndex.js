@@ -192,75 +192,209 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "g_stockcode", width: 130, align: "center" },
                     //{ label: "供应商名称", name: "m_supplyname", width: 130, align: "center" },
                     { label: "单位", name: "g_unit", width: 130, align: "center" },
-                    { label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true },
-                    { label: "出库数量", name: "delivery", width: 90, align: "center", statistics: true },
+                    {
+                        label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                            if (row.inventoryquantity != undefined && !!row.inventoryquantity) {
+                                return row.inventoryquantity.toFixed(2) / 1;
+                            }
+                            if (row.inventoryquantity == "") {
+                                return row.inventoryquantity = 0;
+                            }
+                        }
+                    },
+                    {
+                        label: "出库数量", name: "delivery", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                            if (row.delivery != undefined && !!row.delivery) {
+                                return row.delivery.toFixed(6) / 1;
+                            }
+                            if (row.delivery == "") {
+                                return row.delivery = 0;
+                            }
+                        }
+                    },
                     {
                         label: "期初库存", name: "期初库存", width: 90, align: "center", children: [
-                         { label: "数量", name: "initialinventory", width: 90, align: "center", statistics: true },
-                         { label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true },
-                          { label: "期初金额", name: "initialamount", width: 90, align: "center", statistics: true },
+                         {
+                             label: "数量", name: "initialinventory", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.initialinventory != undefined && !!row.initialinventory) {
+                                     return row.initialinventory.toFixed(6) / 1;
+                                 }
+                                 if (row.initialinventory == "") {
+                                     return row.initialinventory = 0;
+                                 }
+                             }
+                         },
+                         {
+                             label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.price != undefined && !!row.price) {
+                                     return row.price.toFixed(6) / 1;
+                                 }
+                                 if (row.price == "") {
+                                     return row.price = 0;
+                                 }
+                             }
+                         },
+                          {
+                              label: "期初金额", name: "initialamount", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                  if (row.initialamount != undefined && !!row.initialamount) {
+                                      return row.initialamount.toFixed(6) / 1;
+                                  }
+                                  if (row.initialamount == "") {
+                                      return row.initialamount = 0;
+                                  }
+                              }
+                          },
                         ]
                     },
                     //{ label: "期初金额", name: "initialamount", width: 90, align: "center", statistics: true },
                     {
                         label: "期末库存", name: "期末库存", width: 90, align: "center",
                         children: [
-                         { label: "数量", name: "endinginventory", width: 90, align: "center", statistics: true },
-                         { label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true },
-                         { label: "期末金额", name: "finalamount", width: 90, align: "center", statistics: true },
+                         {
+                             label: "数量", name: "endinginventory", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.endinginventory != undefined && !!row.endinginventory) {
+                                     return row.endinginventory.toFixed(6) / 1;
+                                 }
+                                 if (row.endinginventory == "") {
+                                     return row.endinginventory = 0;
+                                 }
+                             }
+                         },
+                         {
+                             label: "加权平均价(元)", name: "price", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.price != undefined && !!row.price) {
+                                     return row.price.toFixed(6) / 1;
+                                 }
+                                 if (row.price == "") {
+                                     return row.price = 0;
+                                 }
+                             }
+                         },
+                         {
+                             label: "期末金额", name: "finalamount", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.finalamount != undefined && !!row.finalamount) {
+                                     return row.finalamount.toFixed(6) / 1;
+                                 }
+                                 if (row.finalamount == "") {
+                                     return row.finalamount = 0;
+                                 }
+                             }
+                         },
                         ]
                     },
                     //{ label: "期末金额", name: "finalamount", width: 160, align: "center", statistics: true },
                     //{ label: "加权平均价", name: "price", width: 90, align: "center" },
                     {
                         label: "次品退库", name: "次品退库", width: 90, align: "center", children: [
-                         { label: "数量", name: "back_qty", width: 90, align: "center", statistics: true },
+                         {
+                             label: "数量", name: "back_qty", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                 if (row.back_qty != undefined && !!row.back_qty) {
+                                     return row.back_qty.toFixed(6) / 1;
+                                 }
+                                 if (row.back_qty == "") {
+                                     return row.back_qty = 0;
+                                 }
+                             }
+                         },
                         ]
                     },
                     {
                         label: "退回仓库", name: "退回仓库", width: 90, align: "center", children: [
-                            { label: "数量", name: "withdrawingnumber", width: 90, align: "center", statistics: true },
+                            {
+                                label: "数量", name: "withdrawingnumber", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                    if (row.withdrawingnumber != undefined && !!row.withdrawingnumber) {
+                                        return row.withdrawingnumber.toFixed(6) / 1;
+                                    }
+                                    if (row.withdrawingnumber == "") {
+                                        return row.withdrawingnumber = 0;
+                                    }
+                                }
+                            },
                         ]
                     },
                     {
                         label: "原物料销售", name: "原物料销售", width: 90, align: "center", children: [
-                            { label: "数量", name: "materialssales", width: 90, align: "center", statistics: true },
                             {
-                                label: "销售单价(元)", name: "outprice", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop)
-                                {
-                                    if (row.outprice == null) {
-                                        return 0;
+                                label: "数量", name: "materialssales", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                    if (row.materialssales != undefined && !!row.materialssales) {
+                                        return row.materialssales.toFixed(6) / 1;
                                     }
-                                    else {
-                                        return row.outprice;
+                                    if (row.materialssales == "") {
+                                        return row.materialssales = 0;
+                                    }
+                                }
+                            },
+                            {
+                                label: "销售单价(元)", name: "outprice", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                    if (row.outprice != undefined && !!row.outprice) {
+                                        return row.outprice.toFixed(6) / 1;
+                                    }
+                                    if (row.outprice == "" || row.outprice == undefined) {
+                                        return row.outprice = 0;
                                     }
                                 }
                             },
                             {
                                 label: "金额(元)", name: "outamount", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
-                                    return row.materialssales * row.outprice;
+                                    return (row.materialssales * row.outprice).toFixed(6) / 1;
                                 }
                             },
                         ]
                     },
                     {
                         label: "报废物料", name: "报废单据", width: 90, align: "center", children: [
-                              { label: "数量", name: "scrapist", width: 90, align: "center", statistics: true },
+                              {
+                                  label: "数量", name: "scrapist", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                      if (row.C_PlanQty != undefined && !!row.C_PlanQty) {
+                                          return row.C_PlanQty.toFixed(6) / 1;
+                                      }
+                                      if (row.C_PlanQty == "") {
+                                          return row.C_PlanQty = 0;
+                                      }
+                                  }
+                              },
                         ]
                     },
                     {
                         label: "其它入库", name: "其它入库", width: 90, align: "center", children: [
-                                { label: "数量", name: "otherwarehouse", width: 90, align: "center", statistics: true },
+                                {
+                                    label: "数量", name: "otherwarehouse", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                        if (row.otherwarehouse != undefined && !!row.otherwarehouse) {
+                                            return row.otherwarehouse.toFixed(6) / 1;
+                                        }
+                                        if (row.otherwarehouse == "") {
+                                            return row.otherwarehouse = 0;
+                                        }
+                                    }
+                                },
                         ]
                     },
                     {
                         label: "其它出库", name: "其它出库", width: 90, align: "center", children: [
-                                  { label: "数量", name: "otheroutbound", width: 90, align: "center", statistics: true },
+                                  {
+                                      label: "数量", name: "otheroutbound", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                          if (row.otheroutbound != undefined && !!row.otheroutbound) {
+                                              return row.otheroutbound.toFixed(6) / 1;
+                                          }
+                                          if (row.otheroutbound == "") {
+                                              return row.otheroutbound = 0;
+                                          }
+                                      }
+                                  },
                         ]
                     },
                     {
                         label: "退供应商", name: "退供应商", width: 90, align: "center", children: [
-                                    { label: "数量", name: "supplierback", width: 90, align: "center", statistics: true },
+                                    {
+                                        label: "数量", name: "supplierback", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
+                                            if (row.supplierback != undefined && !!row.supplierback) {
+                                                return row.supplierback.toFixed(6) / 1;
+                                            }
+                                            if (row.supplierback == "") {
+                                                return row.supplierback = 0;
+                                            }
+                                        }
+                                    },
                         ]
                     },
                    {

@@ -200,8 +200,6 @@ var bootstrap = function ($, ayma) {
                                     ayma.alert.error("含税价格不能为0且只能为数字");
                                 }
                             }
-                        }, formatter: function () {
-
                         }
                     },
                     {

@@ -1,4 +1,4 @@
-﻿/* * 创建人：超级管理员
+﻿    /* * 创建人：超级管理员
  * 日  期：2019-09-16 10:59
  * 描  述：原物料统计(入库、出库、次品)
  */
@@ -162,29 +162,29 @@ var bootstrap = function ($, ayma) {
                          {
                              label: "数量", name: "F_InQty", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 if (row.F_InQty == null) {
-                                     return 0;
+                                 if (row.F_InQty != undefined && !!row.F_InQty) {
+                                     return row.F_InQty.toFixed(6) / 1;
                                  }
-                                 else {
-                                     return row.F_InQty;
+                                 if (row.F_InQty == null) {
+                                     return row.F_InQty = 0;
                                  }
                              }
                          },
                          {
                              label: "含税价格(元)", name: "F_InPrice", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 if (row.F_InPrice == null) {
-                                     return 0;
+                                 if (row.F_InPrice != undefined && !!row.F_InPrice) {
+                                     return row.F_InPrice.toFixed(6) / 1;
                                  }
-                                 else {
-                                     return row.F_InPrice;
+                                 if (row.F_InPrice == null) {
+                                     return row.F_InPrice = 0;
                                  }
                              }
                          },
                           {
                               label: "金额", name: "金额", width: 90, align: "center",
                               formatter: function (value, row, dfop) {
-                                  return row.F_InQty * row.F_InPrice;
+                                  return (row.F_InQty * row.F_InPrice).toFixed(6) / 1;
                               }
                           },
                         ]
@@ -195,29 +195,29 @@ var bootstrap = function ($, ayma) {
                          {
                              label: "数量", name: "F_OutQty", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 if (row.F_OutQty == null) {
-                                     return 0;
+                                 if (row.F_OutQty != undefined && !!row.F_OutQty) {
+                                     return row.F_OutQty.toFixed(6) / 1;
                                  }
-                                 else {
-                                     return row.F_OutQty;
+                                 if (row.F_OutQty == null) {
+                                     return row.F_OutQty = 0;
                                  }
                              }
                          },
                          {
                              label: "加权平均价(元)", name: "F_OutPrice", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 if (row.F_OutPrice == null) {
-                                     return 0;
+                                 if (row.F_OutPrice != undefined && !!row.F_OutPrice) {
+                                     return row.F_OutPrice.toFixed(6) / 1;
                                  }
-                                 else {
-                                     return row.F_OutPrice;
+                                 if (row.F_OutPrice == null) {
+                                     return row.F_OutPrice = 0;
                                  }
                              }
                          },
                          {
                              label: "金额", name: "finalamount", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 return row.F_OutQty * row.F_OutPrice;
+                                 return (row.F_OutQty * row.F_OutPrice).toFixed(6) / 1;
                              }
                          },
                         ]
@@ -225,12 +225,30 @@ var bootstrap = function ($, ayma) {
                        {
                            label: "结存", name: "结存", width: 90, align: "center",
                            children: [
-                            { label: "数量", name: "IntervoryQty", width: 90, align: "center" },
-                            { label: "加权平均价(元)", name: "G_Price", width: 90, align: "center" },
+                            {
+                                label: "数量", name: "IntervoryQty", width: 90, align: "center", formatter: function (value, row, dfop) {
+                                    if (row.IntervoryQty != undefined && !!row.IntervoryQty) {
+                                        return row.IntervoryQty.toFixed(6) / 1;
+                                    }
+                                    if (row.IntervoryQty == "") {
+                                        return row.IntervoryQty = 0;
+                                    }
+                                }
+                            },
+                            {
+                                label: "加权平均价(元)", name: "G_Price", width: 90, align: "center", formatter: function (value, row, dfop) {
+                                    if (row.G_Price != undefined && !!row.G_Price) {
+                                        return row.G_Price.toFixed(6) / 1;
+                                    }
+                                    if (row.G_Price == "") {
+                                        return row.G_Price = 0;
+                                    }
+                                }
+                            },
                             {
                                 label: "金额", name: "finalamount", width: 90, align: "center",
                                 formatter: function (value, row, dfop) {
-                                    return row.IntervoryQty * row.G_Price;
+                                    return (row.IntervoryQty * row.G_Price).toFixed(6) / 1;
                                 }
                             },
                            ]

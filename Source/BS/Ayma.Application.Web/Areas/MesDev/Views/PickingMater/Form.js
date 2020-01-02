@@ -135,10 +135,40 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
                 { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
                 { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
-                { label: "单价", name: "C_Price", width: 40, align: "left" },  
+                {
+                    label: "单价", name: "C_Price", width: 50, align: "left",
+                    formatter: function (value, row, dfop) {
+                        if (row.C_Price != undefined && !!row.C_Price) {
+                            return row.C_Price.toFixed(6) / 1;
+                        }
+                        if (row.C_Price=="") {
+                            return row.C_Price=0;
+                        }
+                    }
+                },
                 { label: "单位", name: "C_Unit", width: 40, align: "left" },
-                { label: "计划数量", name: "C_PlanQty", width: 100, align: "left" },
-                { label: "建议数量", name: "C_SuggestQty", width: 100, align: "left" },
+                {
+                    label: "计划数量", name: "C_PlanQty", width: 100, align: "left"
+                    , formatter: function (value, row, dfop)
+                    {
+                        if (row.C_PlanQty != undefined && !!row.C_PlanQty) {
+                            return row.C_PlanQty.toFixed(6)/1;
+                        }
+                        if (row.C_PlanQty == "") {
+                            return row.C_PlanQty = 0;
+                        }
+                    }
+                },
+                {
+                    label: "建议数量", name: "C_SuggestQty", width: 100, align: "left", formatter: function (value, row, dfop) {
+                        if (row.C_SuggestQty != undefined && !!row.C_PlanQty) {
+                            return row.C_SuggestQty.toFixed(6) / 1;
+                        }
+                        if (row.C_SuggestQty == "") {
+                            return row.C_SuggestQty = 0;
+                        }
+                    }
+                },
                 {
                     label: "领料数量",
                     name: "C_Qty",
@@ -157,13 +187,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 ayma.alert.error("领料数量不能大于库存数量");
                                 row.C_Qty = row.StockQty;
                             }
-                            row.C_Qty2 = row.C_Qty / row.C_UnitQty;
+                            row.C_Qty2 = (row.C_Qty / row.C_UnitQty).toFixed(6) / 1;
                         }
                     },
                     formatter: function (value, row, dfop) {
                             if (row.C_StockName == "蔬菜库") {
                                 return row.C_Qty = row.StockQty;
-                            }       
+                            }   
                     }
                 },
                 {
@@ -184,7 +214,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             if (row.C_Qty > row.StockQty) {
                                 ayma.alert.error("领料数量不能大于库存数量");
                                 row.C_Qty = row.StockQty;
-                                row.C_Qty2 = row.C_Qty / row.C_UnitQty;
+                                row.C_Qty2 = (row.C_Qty / row.C_UnitQty).toFixed(6) / 1;
                             }
                         }
                     },

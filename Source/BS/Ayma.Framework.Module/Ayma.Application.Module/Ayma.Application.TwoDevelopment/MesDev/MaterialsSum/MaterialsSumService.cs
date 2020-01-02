@@ -272,7 +272,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,m.M_Remark  
 									,m.M_StockName    
 									,t.M_CreateDate
-                                    ,dbo.GetUserNameById(t.M_CreateBy)    
+                                    ,dbo.GetUserNameById(t.M_CreateBy) as M_CreateBy
                                     ,(m.M_Qty*m.M_Price) as amount
 									 from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
                             where m.M_MaterInNo in (select b.M_MaterInNo from Mes_MaterInHead b where b.M_CreateDate>=@StartTime and b.M_CreateDate<=@EndTime and b.M_Status=3)
@@ -328,7 +328,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 						   ,m.C_Batch
 						   ,m.C_Price
 						   ,m.C_Remark
-                           ,dbo.GetUserNameById(t.C_CreateBy)    
+                           ,dbo.GetUserNameById(t.C_CreateBy) as C_CreateBy  
                            ,(m.C_Qty*m.C_Price) as amount 
                             from  Mes_CollarDetail m left join Mes_CollarHead t on (m.C_CollarNo=t.C_CollarNo) 
                             where m.C_CollarNo in (select C_CollarNo from Mes_CollarHead where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime and P_Status=3)
@@ -381,7 +381,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.B_Batch,
                             m.B_Price,
                             m.B_Remark,
-                            dbo.GetUserNameById(t.B_CreateBy),
+                            dbo.GetUserNameById(t.B_CreateBy) as B_CreateBy,
                            (m.B_Qty*m.B_Price) as amount   
                             from Mes_BackStockDetail m left join Mes_BackStockHead t on(m.B_BackStockNo=t.B_BackStockNo) where B_GoodsCode=@M_GoodsCode and m.B_BackStockNo 
                             in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
@@ -425,7 +425,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.S_CostomCode,
                             t.S_CostomName,
                             t.S_CreateDate,
-                            dbo.GetUserNameById(t.S_CreateBy),
+                            dbo.GetUserNameById(t.S_CreateBy) as S_CreateBy,
                             m.S_SaleNo,
                             m.S_GoodsCode,
                             m.S_GoodsName,
@@ -476,7 +476,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.S_StockCode,
                             t.S_StockName,
                             t.S_CreateDate,
-                            dbo.GetUserNameById(t.S_CreateBy),
+                            dbo.GetUserNameById(t.S_CreateBy) as S_CreateBy,
                             m.S_ScrapNo,
                             m.S_GoodsCode,
                             m.S_GoodsName,
@@ -525,7 +525,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.O_StockCode,
                             t.O_StockName,
                             t.O_CreateDate,
-                            dbo.GetUserNameById(t.O_CreateBy),
+                            dbo.GetUserNameById(t.O_CreateBy) as O_CreateBy,
                             m.O_OtherInNo,
                             m.O_GoodsCode,
                             m.O_GoodsName,
@@ -576,7 +576,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.O_DepartCode,
                             t.O_DepartName,
                             t.O_CreateDate,
-                            dbo.GetUserNameById(t.O_CreateBy),
+                            dbo.GetUserNameById(t.O_CreateBy) as O_CreateBy,
                             m.O_OtherOutNo,
                             m.O_GoodsCode,
                             m.O_GoodsName,
@@ -633,7 +633,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.B_Batch,
                             m.B_Price,
                             m.B_Remark,
-                            dbo.GetUserNameById(t.B_CreateBy),
+                            dbo.GetUserNameById(t.B_CreateBy) as B_CreateBy,
                            (m.B_Qty*m.B_Price) as amount 
                             from Mes_BackSupplyDetail m left join Mes_BackSupplyHead t on(m.B_BackSupplyNo=t.B_BackSupplyNo) where B_GoodsCode=@M_GoodsCode and m.B_BackSupplyNo 
                             in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)

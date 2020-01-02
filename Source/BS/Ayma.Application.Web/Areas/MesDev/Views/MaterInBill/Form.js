@@ -159,13 +159,13 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'M_Unit', width: 40, align: 'left', editType: 'label'
                     },
                      {
-                         label: '数量', name: 'M_Qty', width: 40, align: 'left', editType: 'input',
+                         label: '入库数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
                                      row.M_Qty = 0;
                                  }
-                                 row.M_Qty2 = row.M_Qty /row.M_UnitQty;                             
+                                 row.M_Qty2 = (row.M_Qty / row.M_UnitQty).toFixed(6) / 1;
                              }
                          }, 
                      },
@@ -179,7 +179,7 @@ var bootstrap = function ($, ayma) {
                                          row.M_Qty2 = 0;
                                      }
                                  }
-                                 row.M_Qty = row.M_Qty2 * row.M_UnitQty;
+                                 row.M_Qty = (row.M_Qty2 * row.M_UnitQty).toFixed(6) / 1;
                              }
                          }
                      },
@@ -205,18 +205,36 @@ var bootstrap = function ($, ayma) {
                       },
                       { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
                      {
-                         label: '不含税价格', name: 'M_Price', width: 70, align: 'left', editType: 'label',
-                         editOp: {
-                             callback: function (rownum, row) {
-                                 if (/\D/.test(row.M_Price.toString().replace('.', ''))) { //验证只能为数字
-                                     row.M_Price = 0;
-                                 }
-
+                         label: '不含税价格', name: 'M_Price', width: 70, align: 'left',formatter: function (value, row, dfop)
+                         {
+                             if (row.M_Price != undefined && !!row.M_Price) {
+                                 return row.M_Price.toFixed(6) / 1;
+                             }
+                             if (row.M_Price == "") {
+                                 return row.M_Price = 0;
                              }
                          }
                      },//最新维护的价格
-                    { label: "含税价格", name: "M_TaxPrice", width: 60, align: "left" },
-                    { label: "入库税率", name: "M_Tax", width: 60, align: "left" },
+                    {
+                        label: "含税价格", name: "M_TaxPrice", width: 60, align: "left", formatter: function (value, row, dfop) {
+                            if (row.M_TaxPrice != undefined && !!row.M_TaxPrice) {
+                                return row.M_TaxPrice.toFixed(6) / 1;
+                            }
+                            if (row.M_TaxPrice == "") {
+                                return row.M_TaxPrice = 0;
+                            }
+                        }
+                    },
+                    {
+                        label: "入库税率", name: "M_Tax", width: 60, align: "left", formatter: function (value, row, dfop) {
+                            if (row.M_Tax != undefined && !!row.M_Tax) {
+                                return row.M_Tax.toFixed(6) / 1;
+                            }
+                            if (row.M_Tax == "") {
+                                return row.M_Tax = 0;
+                            }
+                        }
+                    },
                    {
                         label: '批次', name: 'M_Batch', width: 80, align: 'left', editType: 'input',
                         editOp: {
