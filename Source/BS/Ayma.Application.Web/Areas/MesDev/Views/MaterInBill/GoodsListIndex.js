@@ -165,7 +165,14 @@ var bootstrap = function ($, ayma) {
                     var now = new Date();
                     var year = now.getFullYear(); //得到年份
                     var month = now.getMonth() + 1;//得到月份
+                    if (month >= 1 && month <= 9)
+                    {
+                        month = "0" + month;
+                    }
                     var date = now.getDate();//得到日期
+                    if (date >= 1 && date <= 9) {
+                        date = "0" + date;
+                    }
                     var time = year + '-' + month + '-' + date
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
                     if (isChecked.is(":checked")) {
