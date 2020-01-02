@@ -40,6 +40,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
+        /// <summary>
+        /// 表单页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PlanForm()
+        {
+            return View();
+        }
         #endregion
 
         #region 获取数据

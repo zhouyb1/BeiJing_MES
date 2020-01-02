@@ -15,6 +15,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     /// </summary>
     public partial class Mes_ProductOrderHeadController : MvcControllerBase
     {
+        private PickingMaterIBLL pickingMaterIBLL = new PickingMaterBLL();
         private Mes_ProductOrderHeadIBLL mes_ProductOrderHeadIBLL = new Mes_ProductOrderHeadBLL();
 
         #region 视图功能
@@ -167,6 +168,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
         
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AjaxOnly]
+        public ActionResult AutoCreateOrder(string date)
+        {
+            string message = "";
+            bool datas = pickingMaterIBLL.AutoCreateOrder(date, out message);
+            if(datas)
+            {
+                return Success("生成成功");
+            }
+            else
+            {
+                return Fail(message);
+            }
 
+             
+        }
     }
 }

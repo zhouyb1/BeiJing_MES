@@ -92,7 +92,20 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-
+            //生成领料单
+            $('#am_Col').on('click', function () {
+                ayma.layerForm({
+                    id: 'PlanForm',
+                    title: '生成领料单',
+                    url: top.$.rootUrl + '/MesDev/ProductOrderManager/PlanForm',
+                    width: 400,
+                    height: 300,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
             //统计
             $('#am_sum').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

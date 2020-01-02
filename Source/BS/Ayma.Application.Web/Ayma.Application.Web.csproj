@@ -616,6 +616,7 @@
     <Content Include="Areas\MesDev\Views\ProductOrderMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderMake\SearchIndex.js" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\BomPartSum.js" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\PlanForm.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\GoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\ProOutMake\SearchIndex.js" />
@@ -2384,6 +2385,7 @@
     <Content Include="Areas\MesDev\Views\MaterialsSum\InventoryDetail.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempForm.cshtml" />
+    <Content Include="Areas\MesDev\Views\ProductOrderManager\PlanForm.cshtml" />
     <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />

@@ -477,6 +477,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public bool AutoCreateOrder(string date, out string message)
         {
             bool success = true;
+            message = "";
             var db = this.BaseRepository().BeginTrans();
             try
             {
@@ -791,8 +792,8 @@ ORDER BY C.F_Level";
                 }
             }
 
-            message = "";
-            return false;
+    
+            return success;
         }
 
 

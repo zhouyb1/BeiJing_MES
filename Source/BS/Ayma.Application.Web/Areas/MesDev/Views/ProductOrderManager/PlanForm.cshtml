@@ -1,0 +1,10 @@
+﻿@using Ayma.Util
+@{
+    ViewBag.Title = "查询ERP餐料清单";
+    Layout = "~/Views/Shared/_GirdForm.cshtml";
+}
+<div class="col-xs-4 am-form-item" data-table="T_GoodsPriceDrive_H">
+    <div class="am-form-item-title">选择生产日期</div>
+    <input id="date" type="text" style="width:230px;" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ onpicked: function () { $('#date').trigger('change'); } })" />
+</div>
+@Html.AppendJsFile("/Areas/MesDev/Views/ProductOrderManager/PlanForm.js")
