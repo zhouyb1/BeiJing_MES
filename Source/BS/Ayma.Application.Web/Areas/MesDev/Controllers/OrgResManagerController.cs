@@ -132,20 +132,35 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         public ActionResult GetGoodsList(string pagination, string keyword, string queryJson)
         {
-            var data = orgResMangerIBLL.GetGoodsList( keyword, queryJson);
-
-            return Success(data);
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = orgResMangerIBLL.GetGoodsList( keyword, queryJson,paginationobj);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
 
         /// <summary>
         /// 获取转换后的物料
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetSecGoodsList(string keyword )
+        public ActionResult GetSecGoodsList(string keyword, string pagination)
         {
-            var data = orgResMangerIBLL.GetSecGoodsList(keyword);
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = orgResMangerIBLL.GetSecGoodsList(keyword, paginationobj);
 
-            return Success(data);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
         }
 
         /// <summary>
