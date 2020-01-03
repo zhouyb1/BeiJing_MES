@@ -35,7 +35,7 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal R_Qty{ set; get; }
+        public Double R_Qty{ set; get; }
         /// <summary>
         /// 批次
         /// </summary>

@@ -70,7 +70,7 @@ namespace Business.System
             parameters[2].Direction = ParameterDirection.Output;
             parameters[3].Direction = ParameterDirection.Output;
             CommandType type = CommandType.StoredProcedure;
-            db.ExecuteNonQuery(type, "sp_OrgRes_Post", parameters);
+            db.ExecuteNonQuery(type, "sp_OrgRes_PostNew", parameters);
             strReturn = parameters[3].Value.ToString();
 
 
@@ -97,6 +97,8 @@ namespace Business.System
                     strSql.Append("O_OrgResNo,");
                     strSql.Append("O_Record,");
                     strSql.Append("O_ProCode,");
+                    strSql.Append("O_StockCode,");
+                    strSql.Append("O_StockName,");
                     strSql.Append("O_WorkShopCode,");
                     strSql.Append("O_WorkShopName,");
                     strSql.Append("O_OrderNo,");
@@ -113,6 +115,8 @@ namespace Business.System
                     strSql.Append("@O_OrgResNo,");
                     strSql.Append("@O_Record,");
                     strSql.Append("@O_ProCode,");
+                    strSql.Append("@O_StockCode,");
+                    strSql.Append("@O_StockName,");
                     strSql.Append("@O_WorkShopCode,");
                     strSql.Append("@O_WorkShopName,");
                     strSql.Append("@O_OrderNo,");
@@ -134,6 +138,8 @@ namespace Business.System
                 paramList.Add(new SqlParameter("@O_OrgResNo", entity.O_OrgResNo));
                 paramList.Add(new SqlParameter("@O_Record", entity.O_Record));
                 paramList.Add(new SqlParameter("@O_ProCode", entity.O_ProCode));
+                paramList.Add(new SqlParameter("@O_StockCode", entity.O_StockCode));
+                paramList.Add(new SqlParameter("@O_StockName", entity.O_StockName));
                 paramList.Add(new SqlParameter("@O_WorkShopCode", entity.O_WorkShopCode));
                 paramList.Add(new SqlParameter("@O_WorkShopName", entity.O_WorkShopName));
                 paramList.Add(new SqlParameter("@O_OrderNo", entity.O_OrderNo));

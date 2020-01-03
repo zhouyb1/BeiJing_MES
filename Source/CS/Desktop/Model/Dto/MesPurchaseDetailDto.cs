@@ -41,12 +41,12 @@ namespace Model.Dto
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal P_Qty{ set; get; }
+        public Double P_Qty{ set; get; }
 
         /// <summary>
         /// 价格
         /// </summary>
-        public decimal P_Price{ set; get; }
+        public Double P_Price{ set; get; }
 
         /// <summary>
         /// 批次

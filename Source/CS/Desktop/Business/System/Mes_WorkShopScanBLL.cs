@@ -2,6 +2,7 @@
 using Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -42,17 +43,17 @@ namespace Business.System
         /// 查询数据
         /// </summary>
         /// <returns></returns>
-        public List<Mes_WorkShopScanEntity> GetList_WorkShopScan2(string condit)
+        public DataSet GetList_WorkShopScan2(string condit)
         {
             try
             {
                 var strSql = new StringBuilder();
                 //strSql.Append("SELECT W_GoodsCode,W_GoodsName,W_Batch,W_Qty,W_Price,W_WorkShop,W_Status,W_Unit,ID,W_Remark,W_RecordCode,W_StockCode,W_StockName FROM Mes_WorkShopScan ");
                 strSql.Append(condit);
-                var paramList = new List<SqlParameter>();
+                //var paramList = new List<SqlParameter>();
                 //paramList.Add(new SqlParameter("@B_BasketName", string.Format("{0}", B_BasketName)));
-                var rows = db.ExecuteObjects<Mes_WorkShopScanEntity>(strSql.ToString(), paramList.ToArray());
-                return rows;
+                DataSet ds = db.ExecuteDataSet(condit);
+                return ds;
             }
             catch (Exception)
             {
@@ -157,7 +158,7 @@ namespace Business.System
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns>返回值大于0:删除成功</returns>
-        public int UpdateEntity(string keyValue,Decimal dQty)
+        public int UpdateEntity(string keyValue, Double dQty)
         {
             try
             {

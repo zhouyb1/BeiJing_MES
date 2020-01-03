@@ -27,23 +27,34 @@ namespace DesktopApp
         Bmp2Bmp2Data b2d;
         Bmp2BmpProduct bp;
         string strBZQ; //保质期
+        string m_strBarcode = "";
         public frmWorkShopWeightList()
         {
             InitializeComponent();
         }
 
+        private void cmbGoodsName_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0)
+            {
+                return;
+            }
+            e.DrawBackground();
+            e.DrawFocusRectangle();
+            e.Graphics.DrawString(cmbGoodsName.GetItemText(cmbGoodsName.Items[e.Index]).ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 0);
+        }
         private void frmWorkShopWeightList_Load(object sender, EventArgs e)
         {
-            
 
-            Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
 
-            var Scan_rows = WorkShopScanBLL.GetList_WorkShopScan(" where W_WorkShop = '"+ Globels.strWorkShop +"'");
+            MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+
+            var Scan_rows = InventoryBLL.GetData(" where I_StockCode = '" + Globels.strStockCode + "' and I_Qty > 0");
             for (int i = 0; i < Scan_rows.Count; i++)
             {
-                string strGoodsCode = Scan_rows[i].W_GoodsCode;
+                string strGoodsCode = Scan_rows[i].I_GoodsCode;
                 Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
-                var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '"+ strGoodsCode +"'");
+                var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '" + strGoodsCode + "' and C_ProNo = '"+ Globels.strProce +"'");
                 for (int j = 0; j < Convert_rows.Count; j++)
                 {
                     if (!cmbGoodsName.Items.Contains(Convert_rows[j].C_SecName))
@@ -153,24 +164,31 @@ namespace DesktopApp
             }
             else
             {
-               if(txtQty.Text == "")
-               {
-                   MessageBox.Show("请先称重");
-                   return;
-               }
-                if(txtRQQty.Text == "")
-                {
-                    MessageBox.Show("请先输入容器重量");
-                    return;
-                }
-                if(IsNumberic(txtRQQty.Text) == false)
-                {
-                    MessageBox.Show("容器重量应该为数字");
-                    return;
-                }
-
                 try
                 {
+                
+                   if(txtQty.Text == "")
+                   {
+                       MessageBox.Show("请先称重");
+                       return;
+                   }
+                    if(txtRQQty.Text == "")
+                    {
+                        MessageBox.Show("请先输入容器重量");
+                        return;
+                    }
+                    if(IsNumberic(txtRQQty.Text) == false)
+                    {
+                        MessageBox.Show("容器重量应该为数字");
+                        return;
+                    }
+                    if (Convert.ToDouble(txtRQQty.Text) > Convert.ToDouble(txtQty.Text))
+                    {
+                        MessageBox.Show("容器重量不能大于称重重量");
+                        return;
+                    }
+
+                
                     this.Enabled = false;
                     Cursor.Current = Cursors.WaitCursor;
                     string strBarcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
@@ -189,7 +207,7 @@ namespace DesktopApp
                     WorkShopWeightEntity.W_SecBatch = txtBatch.Text;
                     WorkShopWeightEntity.W_SecGoodsCode = txtCode.Text;
                     WorkShopWeightEntity.W_SecGoodsName = cmbGoodsName.Text;
-                    WorkShopWeightEntity.W_SecQty = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                    WorkShopWeightEntity.W_SecQty = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
                     WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                     WorkShopWeightEntity.W_Status = 1;
                     WorkShopWeightEntity.W_WorkShopCode = Globels.strWorkShop;
@@ -199,7 +217,8 @@ namespace DesktopApp
                     if (nCount > 0)
                     {
                         string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
-                        Decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                        m_strBarcode = Barcode;
+                        Double dTemp = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
                         GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, cmbGoodsName.Text, dTemp.ToString(), strBZQ, strBarcode);
                         MessageBox.Show("添加成功");
                         SaveBarcode(Barcode, txtCode.Text, cmbGoodsName.Text, dTemp, Globels.strWorkShop);
@@ -226,7 +245,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -249,7 +268,7 @@ namespace DesktopApp
         {
             try
             {
-                Decimal var1 = Convert.ToDecimal(oText);
+                Double var1 = Convert.ToDouble(oText);
                 return true;
             }
             catch
@@ -264,12 +283,15 @@ namespace DesktopApp
         {
             this.Enabled = false;
             Cursor.Current = Cursors.WaitCursor;
-            if (Open())
+
+            try
             {
-                Thread.Sleep(100);
-                if (serialPort1.IsOpen)
+                if (Open())
                 {
                     Thread.Sleep(100);
+                    if (serialPort1.IsOpen)
+                    {
+                        Thread.Sleep(100);
                         byte[] byRead = new byte[serialPort1.ReadBufferSize];
                         int nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
                         string str = System.Text.Encoding.Default.GetString(byRead);
@@ -282,11 +304,11 @@ namespace DesktopApp
                         {
                             //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
                             //{
-                            char[] arr = strWeight[nLen - 1].Substring(0,7).ToCharArray();
+                            char[] arr = strWeight[nLen - 1].Substring(0, 7).ToCharArray();
                             Array.Reverse(arr);
-                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
-                                ; 
-                                //ZH(strWeight[nLen - 1].ToString());
+                            txtQty.Text = Double.Parse(new string(arr)).ToString();
+                            ;
+                            //ZH(strWeight[nLen - 1].ToString());
 
                             //}
                             //else
@@ -307,54 +329,62 @@ namespace DesktopApp
                             this.Enabled = true;
                             Cursor.Current = Cursors.Default;
                         }
-                    //byte[] byRead = null;
-                    //byRead = new byte[2048];
-                    //int nReadLen;
-                    //Thread.Sleep(100);
-                    //nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
-                    //string str = System.Text.Encoding.Default.GetString(byRead);
-                    //string[] strWeight = str.Split('=');
-                    //int nLen = strWeight.Length;
-                    //if (nLen > 1)
-                    //{
-                    //    //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
-                    //    //{
-                    //    txtQty.Text = ZH(strWeight[nLen - 1].ToString());
-                    //    //}
-                    //    //else
-                    //    //{
-                    //    //MessageBox.Show("串口没有打开");
+                        //byte[] byRead = null;
+                        //byRead = new byte[2048];
+                        //int nReadLen;
+                        //Thread.Sleep(100);
+                        //nReadLen = serialPort1.Read(byRead, 0, byRead.Length);
+                        //string str = System.Text.Encoding.Default.GetString(byRead);
+                        //string[] strWeight = str.Split('=');
+                        //int nLen = strWeight.Length;
+                        //if (nLen > 1)
+                        //{
+                        //    //if (strWeight[nLen - 3].ToString() == strWeight[nLen - 2].ToString() && strWeight[nLen - 4].ToString() == strWeight[nLen - 2].ToString())
+                        //    //{
+                        //    txtQty.Text = ZH(strWeight[nLen - 1].ToString());
+                        //    //}
+                        //    //else
+                        //    //{
+                        //    //MessageBox.Show("串口没有打开");
 
-                    //    //}
-                    //    Close();
-                    //    Thread.Sleep(100);
-                    //    this.Enabled = true;
-                    //    Cursor.Current = Cursors.Default;
-                    //}
-                    //else
-                    //{
-                    //    MessageBox.Show(str);
-                    //    Close();
-                    //    Thread.Sleep(100);
-                    //    this.Enabled = true;
-                    //    Cursor.Current = Cursors.Default;
-                    //}
+                        //    //}
+                        //    Close();
+                        //    Thread.Sleep(100);
+                        //    this.Enabled = true;
+                        //    Cursor.Current = Cursors.Default;
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show(str);
+                        //    Close();
+                        //    Thread.Sleep(100);
+                        //    this.Enabled = true;
+                        //    Cursor.Current = Cursors.Default;
+                        //}
 
-                    //MessageBox.Show(str);
-                }
-                else
-                {
-                    MessageBox.Show("串口没有打开");
+                        //MessageBox.Show(str);
+                    }
+                    else
+                    {
+                        MessageBox.Show("串口没有打开");
+                        this.Enabled = true;
+                        Cursor.Current = Cursors.Default;
+                    }
+
+                    Close();
                     this.Enabled = true;
                     Cursor.Current = Cursors.Default;
                 }
-
-                Close();
-                this.Enabled = true;
-                Cursor.Current = Cursors.Default;
+                else
+                {
+                    this.Enabled = true;
+                    Cursor.Current = Cursors.Default;
+                }
             }
-            else
+            catch(Exception ex)
             {
+                Close();
+                MessageBox.Show(ex.ToString());
                 this.Enabled = true;
                 Cursor.Current = Cursors.Default;
             }
@@ -441,7 +471,7 @@ namespace DesktopApp
                 Brush b = new SolidBrush(Color.Black);
                 Brush r = new SolidBrush(Color.White);
                 //g.DrawString(strHZ, f3, b, 15, 60);//设置位置
-
+                //int nBZQ = BZQ(strGoodsName);
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
@@ -571,7 +601,7 @@ namespace DesktopApp
         {
             try
             {
-                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                Double dSJ = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
                 txtSJ.Text = dSJ.ToString();
             }
             catch
@@ -584,13 +614,64 @@ namespace DesktopApp
         {
             try
             {
-                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
+                Double dSJ = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
                 txtSJ.Text = dSJ.ToString();
             }
             catch
             {
                 ;
             }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strSql = "select * from Mes_WorkShopWeight where W_Remark = '"+ m_strBarcode +"'";
+                Mes_WorkShopWeightBLL WorkShopWeightBLL = new Mes_WorkShopWeightBLL();
+                Mes_WorkShopWeightEntity WorkShopWeightEntity = new Mes_WorkShopWeightEntity();
+                DataSet ds = new DataSet();
+                ds = WorkShopWeightBLL.GetList_WorkShop(strSql);
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    string strOrderNo = ds.Tables[0].Rows[0]["W_OrderNo"].ToString();
+                    string strGoodsCode = ds.Tables[0].Rows[0]["W_SecGoodsCode"].ToString();
+                    string strBatch = ds.Tables[0].Rows[0]["W_SecBatch"].ToString();
+                    string strQty = ds.Tables[0].Rows[0]["W_SecQty"].ToString();
+                    //string strPrice = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["价格2"].Value.ToString();
+                    string strGoodsName = ds.Tables[0].Rows[0]["W_SecGoodsName"].ToString();
+                    string strBarcode = ds.Tables[0].Rows[0]["W_Remark"].ToString();
+                    //string strDate = dataGridView1.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["W_Price"].Value.ToString();
+
+                    if (MessageBox.Show("物料是否要补写?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        try
+                        {
+                            this.Enabled = false;
+                            Cursor.Current = Cursors.WaitCursor;
+
+                            GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strBZQ, strBarcode);
+                            //DeleteData(strId);
+                            //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDouble(strQty), strWorkShop);
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+
+                        }
+                        catch (Exception ex)
+                        {
+                            this.Enabled = true;
+                            Cursor.Current = Cursors.Default;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                //lblTS.Text = "系统提示：请选中某一行进行补写";
+            }
+        
+        
         }
 
 

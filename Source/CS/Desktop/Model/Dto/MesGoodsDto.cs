@@ -56,17 +56,17 @@ namespace Model.Dto
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal G_Qty{ set; get; }
+        public Double G_Qty{ set; get; }
 
         /// <summary>
         /// 上限预警比例
         /// </summary>
-        public decimal G_Super{ set; get; }
+        public Double G_Super{ set; get; }
 
         /// <summary>
         /// 下限预警比例
         /// </summary>
-        public decimal G_Lower{ set; get; }
+        public Double G_Lower{ set; get; }
 
         /// <summary>
         /// 添加人

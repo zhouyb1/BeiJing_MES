@@ -26,7 +26,7 @@ namespace Model.Dto
         /// <summary>
         /// 
         /// </summary>
-        public decimal M_Weight{ set; get; }
+        public Double M_Weight{ set; get; }
 
         #endregion
     }

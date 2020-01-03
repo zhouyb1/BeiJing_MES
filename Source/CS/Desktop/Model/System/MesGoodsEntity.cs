@@ -31,7 +31,7 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public decimal G_Price { set; get; }
+        public Double G_Price { set; get; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -39,7 +39,7 @@ namespace Model
         /// <summary>
         /// 购进税率
         /// </summary>
-        public decimal G_Itax { set; get; }
+        public Double G_Itax { set; get; }
         /// <summary>
         /// 供应商编码
         /// </summary>
@@ -51,15 +51,15 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal G_Qty{ set; get; }
+        public Double G_Qty{ set; get; }
         /// <summary>
         /// 上限预警比例
         /// </summary>
-        public decimal G_Super{ set; get; }
+        public Double G_Super{ set; get; }
         /// <summary>
         /// 下限预警比例
         /// </summary>
-        public decimal G_Lower{ set; get; }
+        public Double G_Lower{ set; get; }
         /// <summary>
         /// 添加人
         /// </summary>

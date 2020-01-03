@@ -41,7 +41,7 @@ namespace Model.Dto
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal O_Qty{ set; get; }
+        public Double O_Qty{ set; get; }
 
         /// <summary>
         /// 批次
@@ -51,7 +51,7 @@ namespace Model.Dto
         /// <summary>
         /// 价格
         /// </summary>
-        public decimal O_Price{ set; get; }
+        public Double O_Price{ set; get; }
 
         /// <summary>
         /// 物料编码
@@ -71,7 +71,7 @@ namespace Model.Dto
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal O_SecQty{ set; get; }
+        public Double O_SecQty{ set; get; }
 
         /// <summary>
         /// 批次
@@ -81,7 +81,7 @@ namespace Model.Dto
         /// <summary>
         /// 价格
         /// </summary>
-        public decimal O_SecPrice{ set; get; }
+        public Double O_SecPrice{ set; get; }
 
         #endregion
     }

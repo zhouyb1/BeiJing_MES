@@ -15,7 +15,7 @@ namespace Model
         public string O_WorkShop { set; get; }
         public string O_OrderNo { set; get; }
         public string O_OrderDate { set; get; }
-        public decimal O_Status { set; get; }
+        public Double O_Status { set; get; }
         public string O_CreateBy { set; get; }
         public DateTime O_CreateDate { set; get; }
         public string O_UpdateBy { set; get; }

@@ -88,12 +88,13 @@ namespace DesktopApp
             }
             try
             {
-                decimal dQty = Convert.ToDecimal(txtQty.Text);
-                decimal dResolveQty = Convert.ToDecimal(txtResolveQty.Text);
-                decimal dNextQty = dQty - dResolveQty;
+                Double dQty = Convert.ToDouble(txtQty.Text);
+                Double dResolveQty = Convert.ToDouble(txtResolveQty.Text);
+                Double dNextQty = dQty - dResolveQty;
                 if(dNextQty < 0)
                 {
                     lblTS.Text = "补写标签的数量不能大于原来标签数量";
+                    return;
                 }
                 string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                 GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
@@ -109,7 +110,21 @@ namespace DesktopApp
                 lblTS.Text = ex.ToString();
             }
 
-            //decimal dQty = 
+            //Double dQty = 
+        }
+
+        private int BZQ(string strGoodsCode)
+        {
+            int dd = 0;
+            MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+            var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + strGoodsCode + "'");
+            int nLen = Goods_rows.Count;
+            if (nLen > 0)
+            {
+                 dd = Goods_rows[0].G_Period * 24;
+                
+            }
+            return dd;
         }
 
         /// <summary>
@@ -120,7 +135,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -184,10 +199,12 @@ namespace DesktopApp
                 Brush r = new SolidBrush(Color.White);
                 //g.DrawString(strHZ, f3, b, 15, 60);//设置位置
 
+                int nBZQ = BZQ(strGoodsCode);
+
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
-                g.DrawString("保质期：" + "24小时", f4, b, 4, 50);//设置位置
-                g.DrawString("负责人：" + Globels.strUser, f4, b, 4, 70);//设置位置
+                g.DrawString("保质期：" + nBZQ.ToString() + "小时", f4, b, 4, 50);//设置位置
+                g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
                 g.DrawString("订单：", f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置

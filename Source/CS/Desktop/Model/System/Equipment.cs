@@ -70,11 +70,11 @@ namespace Model
         /// <summary>
         /// 高度（米）
         /// </summary>
-        public decimal? E_Height{ set; get; }
+        public Double? E_Height{ set; get; }
         /// <summary>
         /// 臂长（米）
         /// </summary>
-        public decimal? E_Width{ set; get; }
+        public Double? E_Width{ set; get; }
 
         /// <summary>
         /// 经度

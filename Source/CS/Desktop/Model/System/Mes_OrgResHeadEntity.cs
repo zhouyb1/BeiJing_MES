@@ -12,6 +12,8 @@ namespace Model
         public string O_OrgResNo { set; get; }
         public string O_Record { set; get; }
         public string O_ProCode { set; get; }
+        public string O_StockCode { set; get; }
+        public string O_StockName { set; get; }
         public string O_WorkShopCode { set; get; }
         public string O_WorkShopName { set; get; }
         public string O_OrderNo { set; get; }

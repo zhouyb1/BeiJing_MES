@@ -148,7 +148,7 @@ namespace DesktopApp
                     MesWeightRecord.W_GoodsCode = txtGoodsCode.Text;
                     MesWeightRecord.W_GoodsName = txtGoodsName.Text;
                     MesWeightRecord.W_Batch = txtBatch.Text;
-                    MesWeightRecord.W_Qty = decimal.Parse(txtQty.Text);
+                    MesWeightRecord.W_Qty = Double.Parse(txtQty.Text);
                     MesWeightRecord.W_Unit = txtUnit.Text;
 
                     if (MesWeightRecordBLL.SaveEntity("", MesWeightRecord) > 0)

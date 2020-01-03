@@ -109,8 +109,8 @@ namespace DesktopApp
                         OutWorkShopDetailEntity.O_GoodsCode = strGoodsCode;
                         OutWorkShopDetailEntity.O_GoodsName = strGoodsName;
                         OutWorkShopDetailEntity.O_OutNo = strIn_No;
-                        OutWorkShopDetailEntity.O_Price = Convert.ToDecimal(strPrice);
-                        OutWorkShopDetailEntity.O_Qty = Convert.ToDecimal(strQty);
+                        OutWorkShopDetailEntity.O_Price = Convert.ToDouble(strPrice);
+                        OutWorkShopDetailEntity.O_Qty = Convert.ToDouble(strQty);
                         OutWorkShopDetailEntity.O_Remark = "";
                         OutWorkShopDetailEntity.O_Unit = strUnit;
                         OutWorkShopDetailEntity.O_Batch = strBatch;
@@ -166,7 +166,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -183,7 +183,7 @@ namespace DesktopApp
 
         
 
-        private void UpdatePrice(string GoodsCode, decimal dPrice)
+        private void UpdatePrice(string GoodsCode, Double dPrice)
         {
             //修改价格物价加权平局价格
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();

@@ -16,7 +16,7 @@ namespace DesktopApp
     public partial class frmInWorkShopList : DockContent
     {
         public frmMain frmMain { get; set; }
-        //decimal Period; //保质期
+        //Double Period; //保质期
         private SysUser User;
         string m_strBarcode = "";
         string strUnit = "";
@@ -31,6 +31,12 @@ namespace DesktopApp
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(txtCode.Text == "" || txtPc.Text == "" || txtQty.Text == "" || txtBarcode.Text == "")
+            {
+                MessageBox.Show("请扫描二维码");
+                txtBarcode.Focus();
+                return;
+            }
             if (MessageBox.Show("是否保存", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                 try
@@ -47,11 +53,11 @@ namespace DesktopApp
                     InWorkShopTempEntity.I_GoodsCode = txtCode.Text;
                     InWorkShopTempEntity.I_GoodsName = txtName.Text;
                     InWorkShopTempEntity.I_Unit = strUnit;
-                    InWorkShopTempEntity.I_Qty = Convert.ToDecimal(txtQty.Text);
+                    InWorkShopTempEntity.I_Qty = Convert.ToDouble(txtQty.Text);
                     InWorkShopTempEntity.I_Batch = txtPc.Text;
                     InWorkShopTempEntity.I_Remark = "";
                     InWorkShopTempEntity.I_Barcode = txtBarcode.Text;
-                    InWorkShopTempEntity.I_Price = Convert.ToDecimal(txtPrice.Text);
+                    InWorkShopTempEntity.I_Price = Convert.ToDouble(txtPrice.Text);
                     InWorkShopTempEntity.I_Record = cmbRecord.Text;
 
                     Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
@@ -310,7 +316,7 @@ namespace DesktopApp
         {
             try
             {
-                if (MessageBox.Show("是否要完工", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+                if (MessageBox.Show("是否要提交", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
                 {
                     Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
                     var rows = InWorkShopTempBLL.GetList_InWorkShopTemp("where I_StockCode = '" + cmbStock.Text + "' and I_WorkShop = '" + cmbWorkShop.Text + "' and I_OrderNo = '" + comOrderNo.Text + "'");
@@ -329,28 +335,6 @@ namespace DesktopApp
                     string strIn_No = "";
                     MesMaterInHeadBLL MaterInHeadBLL = new MesMaterInHeadBLL();
                     strIn_No = MaterInHeadBLL.GetDH("车间入库到线边仓单");
-                    /*var rowsHead = InWorkShopHeadBLL.GetList_InWorkShopHead("where 1 = 1 order by I_InNo DESC");
-                    if (rowsHead == null || rowsHead.Count < 1)
-                    {
-                        strIn_No = "IW" + DateTime.Now.ToString("yyyyMMdd") + "000001";
-                    }
-                    else
-                    {
-                        string strDate = rowsHead[0].I_InNo.Substring(2, 8);
-                        if (strDate == DateTime.Now.ToString("yyyyMMdd"))
-                        {
-                            string strList = rowsHead[0].I_InNo.Substring(10, 6);
-                            int nList = Convert.ToInt32(strList) + 1;
-                            strIn_No = "IW" + DateTime.Now.ToString("yyyyMMdd") + nList.ToString().PadLeft(6, '0');
-                        }
-                        else
-                        {
-                            strIn_No = "IW" + DateTime.Now.ToString("yyyyMMdd") + "0001";
-                        }
-
-                    }*/
-
-
 
                     InWorkShopHeadEntity.I_InNo = strIn_No;
                     InWorkShopHeadEntity.I_OrderNo = comOrderNo.Text;

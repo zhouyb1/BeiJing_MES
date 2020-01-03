@@ -184,7 +184,7 @@ namespace Business.System
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns>返回值大于0:修改成功</returns>
-        public int UpdateEntity(string GoodsCode, decimal G_Price)
+        public int UpdateEntity(string GoodsCode, Double G_Price)
         {
             try
             {

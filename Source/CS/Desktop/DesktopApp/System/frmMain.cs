@@ -341,20 +341,20 @@ namespace DesktopApp
 
         private void cmsEquipmentBox_Click(object sender, EventArgs e)
         {
-            frmEquipmentList frmEquipmentBox = new frmEquipmentList(this);
-            frmEquipmentBox.TopLevel = false;
-            frmEquipmentBox.WindowState = FormWindowState.Maximized;
+            //frmEquipmentList frmEquipmentBox = new frmEquipmentList(this);
+            //frmEquipmentBox.TopLevel = false;
+            //frmEquipmentBox.WindowState = FormWindowState.Maximized;
 
-            foreach (DockContent frm in this.panMain.Contents)
-            {
-                if (frm.Name == frmEquipmentBox.Name)
-                {
-                    frm.Activate();//激活
-                    return;
-                }
-            }
+            //foreach (DockContent frm in this.panMain.Contents)
+            //{
+            //    if (frm.Name == frmEquipmentBox.Name)
+            //    {
+            //        frm.Activate();//激活
+            //        return;
+            //    }
+            //}
 
-            frmEquipmentBox.Show(this.panMain);
+            //frmEquipmentBox.Show(this.panMain);
         }
 
         private void cmsCompany_Click(object sender, EventArgs e)
@@ -716,20 +716,20 @@ namespace DesktopApp
 
         private void 车间出库ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmOutWorkShopList frmInWorkShop = new frmOutWorkShopList(this, User);
-            frmInWorkShop.TopLevel = false;
-            frmInWorkShop.WindowState = FormWindowState.Maximized;
+            //frmOutWorkShopList frmInWorkShop = new frmOutWorkShopList(this, User);
+            //frmInWorkShop.TopLevel = false;
+            //frmInWorkShop.WindowState = FormWindowState.Maximized;
 
-            foreach (DockContent frm in this.panMain.Contents)
-            {
-                if (frm.Name == frmInWorkShop.Name)
-                {
-                    frm.Activate();//激活
-                    return;
-                }
-            }
+            //foreach (DockContent frm in this.panMain.Contents)
+            //{
+            //    if (frm.Name == frmInWorkShop.Name)
+            //    {
+            //        frm.Activate();//激活
+            //        return;
+            //    }
+            //}
 
-            frmInWorkShop.Show(this.panMain);
+            //frmInWorkShop.Show(this.panMain);
         }
 
         private void 补打标签ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -785,7 +785,20 @@ namespace DesktopApp
 
         private void 出成率制作ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmSearchConver frmsearchconver = new frmSearchConver();
+            frmsearchconver.TopLevel = false;
+            frmsearchconver.WindowState = FormWindowState.Maximized;
 
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmsearchconver.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmsearchconver.Show(this.panMain);
         }
 
         private void 库存查询ToolStripMenuItem_Click(object sender, EventArgs e)

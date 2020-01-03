@@ -15,7 +15,7 @@ namespace DesktopApp
 {
     public partial class frmScrap : DockContent
     {
-        decimal dPrice = 0;
+        Double dPrice = 0;
         public frmScrap()
         {
             InitializeComponent();
@@ -70,6 +70,7 @@ namespace DesktopApp
             cmbStock.Text = row[0].S_Code;
 
             cmbGoodsCode.Items.Clear();
+            cmbGoodsName.Items.Clear();
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
             var row2 = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_Qty > 0 ");
             for (int i = 0; i < row2.Count; i++)
@@ -191,9 +192,9 @@ namespace DesktopApp
         private void cmbBatch_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-            var row = InventoryBLL.GetData("where I_StockCode = '" + cmbStock.Text + "' and I_GoodsName = '" + cmbGoodsName.Text + "' and I_Batch = '"+ cmbBatch.Text +"' and I_Qty > 0");
+            var row = InventoryBLL.GetData(" where I_StockCode = '" + cmbStock.Text + "' and I_GoodsName = '" + cmbGoodsName.Text + "' and I_Batch = '"+ cmbBatch.Text +"' and I_Qty > 0");
             
-            if (row.Count > 1)
+            if (row.Count > 0)
             {
                 txtQty.Text = row[0].I_Qty.ToString();
                 //MesInventoryBLL 
@@ -206,8 +207,8 @@ namespace DesktopApp
             {
                 try
                 {
-                    decimal dQty = Convert.ToDecimal(txtQty.Text);
-                    decimal dScrap = Convert.ToDecimal(txtScrapQty.Text);
+                    Double dQty = Convert.ToDouble(txtQty.Text);
+                    Double dScrap = Convert.ToDouble(txtScrapQty.Text);
                     if(dScrap > dQty)
                     {
                         lblTS.Text = "系统提示：报废数量不能大于库存数量！";
@@ -221,7 +222,7 @@ namespace DesktopApp
                             string strCode = listView1.Items[i].SubItems[2].Text;
                             if (strCode == cmbGoodsCode.Text)
                             {
-                                dScrap = dScrap + Convert.ToDecimal(listView1.Items[i].SubItems[5].Text);
+                                dScrap = dScrap + Convert.ToDouble(listView1.Items[i].SubItems[5].Text);
                                 listView1.Items[i].SubItems[5].Text = dScrap.ToString();
                                 bRet = true;
                                 break;
@@ -303,9 +304,9 @@ namespace DesktopApp
                         ScrapDetailEntity.S_Batch = listView1.Items[i].SubItems[4].Text;
                         ScrapDetailEntity.S_GoodsCode = listView1.Items[i].SubItems[2].Text;
                         ScrapDetailEntity.S_GoodsName = listView1.Items[i].SubItems[3].Text;
-                        ScrapDetailEntity.S_Price = Convert.ToDecimal(listView1.Items[i].SubItems[7].Text);
+                        ScrapDetailEntity.S_Price = Convert.ToDouble(listView1.Items[i].SubItems[7].Text);
                         ScrapDetailEntity.S_Unit = listView1.Items[i].SubItems[6].Text;
-                        ScrapDetailEntity.S_Qty = Convert.ToDecimal(listView1.Items[i].SubItems[5].Text);
+                        ScrapDetailEntity.S_Qty = Convert.ToDouble(listView1.Items[i].SubItems[5].Text);
                         ScrapDetailEntity.S_Remark = "";
 
                         ScrapDetailBLL.SaveEntity("",ScrapDetailEntity);

@@ -261,12 +261,6 @@
     <Compile Include="System\frmColler.Designer.cs">
       <DependentUpon>frmColler.cs</DependentUpon>
     </Compile>
-    <Compile Include="System\frmEquipmentEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="System\frmEquipmentEdit.Designer.cs">
-      <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
-    </Compile>
     <Compile Include="System\frmGoodsConvet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,12 +272,6 @@
     </Compile>
     <Compile Include="System\frmInspectList.Designer.cs">
       <DependentUpon>frmInspectList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="System\frmEquipmentList.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="System\frmEquipmentList.Designer.cs">
-      <DependentUpon>frmEquipmentList.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmDictionaryEdit.cs">
       <SubType>Form</SubType>
@@ -356,12 +344,6 @@
     </Compile>
     <Compile Include="System\frmScrap.Designer.cs">
       <DependentUpon>frmScrap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="System\frmSerialPortConfig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="System\frmSerialPortConfig.designer.cs">
-      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="System\frmStorageAdd.cs">
       <SubType>Form</SubType>
@@ -486,6 +468,12 @@
     <Compile Include="System\pd.Designer.cs">
       <DependentUpon>pd.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmSearchConver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmSearchConver.Designer.cs">
+      <DependentUpon>frmSearchConver.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="System\BracodePrintf.resx">
       <DependentUpon>BracodePrintf.cs</DependentUpon>
     </EmbeddedResource>
@@ -555,17 +543,11 @@
     <EmbeddedResource Include="System\frmBackup.resx">
       <DependentUpon>frmBackup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System\frmEquipmentEdit.resx">
-      <DependentUpon>frmEquipmentEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="System\frmGoodsConvet.resx">
       <DependentUpon>frmGoodsConvet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmInspectList.resx">
       <DependentUpon>frmInspectList.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="System\frmEquipmentList.resx">
-      <DependentUpon>frmEquipmentList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmDictionaryEdit.resx">
       <DependentUpon>frmDictionaryEdit.cs</DependentUpon>
@@ -603,8 +585,8 @@
     <EmbeddedResource Include="System\frmScrap.resx">
       <DependentUpon>frmScrap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System\frmSerialPortConfig.resx">
-      <DependentUpon>frmSerialPortConfig.cs</DependentUpon>
+    <EmbeddedResource Include="System\frmSearchConver.resx">
+      <DependentUpon>frmSearchConver.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmStorageAdd.resx">
       <DependentUpon>frmStorageAdd.cs</DependentUpon>

@@ -22,7 +22,7 @@ namespace DesktopApp
     public partial class frmOrgres : DockContent
     {
         public frmMain frmMain { get; set; }
-        //decimal Period; //保质期
+        //Double Period; //保质期
         private SysUser User;
         int n_Row = 0;
         NfcTag nfcTag;
@@ -273,10 +273,10 @@ namespace DesktopApp
                 Brush b = new SolidBrush(Color.Black);
                 Brush r = new SolidBrush(Color.White);
                 //g.DrawString(strHZ, f3, b, 15, 60);//设置位置
-
+                int nBZQ = BZQ(strGoodsCode);
                 g.DrawString("名称：" + strGoodsName, f4, b, 4, 10);//设置位置
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
-                g.DrawString("保质期：" + "24小时", f4, b, 4, 50);//设置位置
+                g.DrawString("保质期：" + nBZQ.ToString() + "小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
                 //g.DrawString("订单：" + comOrderNo.Text, f4, b, 4, 90);//设置位置
 
@@ -373,7 +373,7 @@ namespace DesktopApp
                     string strSecPc = "";
                     string strSecName = "";
                     string strSecUnit = "";
-                    Decimal dSecQty = 0;
+                    Double dSecQty = 0;
                     int nLen2 = dataGridView2.Rows.Count;
                     for (int i = 0; i < nLen2; i++)
                     {
@@ -395,7 +395,7 @@ namespace DesktopApp
 
                                     if (str[1].ToString() == strSecPc)
                                     {
-                                        dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                        dSecQty = dSecQty + Convert.ToDouble(strSecQty);
                                         
                                     }
                                     else
@@ -413,7 +413,7 @@ namespace DesktopApp
                             }
                             else
                             {
-                                dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                dSecQty = dSecQty + Convert.ToDouble(strSecQty);
                                 insertList.Add(strTemp);
                             }
                         }
@@ -457,7 +457,7 @@ namespace DesktopApp
                                     string strTempQty = str[3].ToString();
                                     if (strTempGoods == strGoods && strTempPc == strPc)
                                     {
-                                        Decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
+                                        Double dQty = Convert.ToDouble(strQty) + Convert.ToDouble(strTempQty);
                                         Goods[j] = strGoods + "," + dQty.ToString() + "," + strPc + "," + strPrice + "," + strName + "," + strUnit;
                                         bRet = true;
                                     }
@@ -512,12 +512,12 @@ namespace DesktopApp
                     OrgResHeadEntity.O_TeamName = cmbTeamName.Text;
 
                     int nRow = OrgResHeadBLL.SaveEntity("", OrgResHeadEntity);
-                    Decimal dSecPrice = 0;
-                    Decimal dTotal = 0;
+                    Double dSecPrice = 0;
+                    Double dTotal = 0;
                     for (int i = 0; i < Goods.Count; i++)
                     {
                         string[] strTemp = Goods[i].ToString().Split(',');
-                        dTotal = dTotal + (Convert.ToDecimal(strTemp[3].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
+                        dTotal = dTotal + (Convert.ToDouble(strTemp[3].ToString()) * Convert.ToDouble(strTemp[1].ToString()));
                     }
                     dSecPrice = dTotal / dSecQty;
 
@@ -545,8 +545,8 @@ namespace DesktopApp
 
                         OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
                         OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
-                        OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
-                        OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
+                        OrgResDetailEntity.O_Price = Convert.ToDouble(strTemp[3].ToString());
+                        OrgResDetailEntity.O_Qty = Convert.ToDouble(strTemp[1].ToString());
                         OrgResDetailEntity.O_Unit = strTemp[5].ToString();
                         OrgResDetailEntity.O_Batch = strTemp[2].ToString();
                         OrgResDetailEntity.O_SecPrice = dSecPrice;
@@ -657,7 +657,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -686,8 +686,8 @@ namespace DesktopApp
                     object obj = dataGridView1.Rows[i].Cells["选择"].Value;
                     if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
                     {
-                        Decimal dsyQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
-                        Decimal dylQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
+                        Double dsyQty = Convert.ToDouble(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
+                        Double dylQty = Convert.ToDouble(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
                         if (dsyQty == dylQty)
                         {
                             string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
@@ -695,7 +695,7 @@ namespace DesktopApp
                         }
                         else
                         {
-                            Decimal dQty = dylQty - dsyQty;
+                            Double dQty = dylQty - dsyQty;
                             string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
                             UpdateData(strID, dQty);
                         }
@@ -721,7 +721,7 @@ namespace DesktopApp
             }
         }
 
-        private void UpdatePrice(string GoodsCode, decimal dPrice)
+        private void UpdatePrice(string GoodsCode, Double dPrice)
         {
             //修改价格物价加权平局价格
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
@@ -797,7 +797,7 @@ namespace DesktopApp
             }
         }
 
-        private bool UpdateData(string strId,Decimal dQty)
+        private bool UpdateData(string strId,Double dQty)
         {
             try
             {
@@ -877,7 +877,7 @@ namespace DesktopApp
                         
                         GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch,strBarcode);
                         //DeleteData(strId);
-                        //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDecimal(strQty), strWorkShop);
+                        //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDouble(strQty), strWorkShop);
                         this.Enabled = true;
                         Cursor.Current = Cursors.Default;
 
@@ -894,6 +894,20 @@ namespace DesktopApp
                 //MessageBox.Show("请选中某一行进行退仓库");
                 lblTS.Text = "系统提示：请选中某一行进行补写";
             }
+        }
+
+        private int BZQ(string strGoodsCode)
+        {
+            int dd = 0;
+            MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+            var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + strGoodsCode + "'");
+            int nLen = Goods_rows.Count;
+            if (nLen > 0)
+            {
+                dd = Goods_rows[0].G_Period * 24;
+
+            }
+            return dd;
         }
 
         private void btnResolve_Click(object sender, EventArgs e)
@@ -925,7 +939,7 @@ namespace DesktopApp
             string strSecPc = "";
             string strSecName = "";
             string strSecUnit = "";
-            Decimal dSecQty = 0;
+            Double dSecQty = 0;
             int nLen2 = dataGridView2.Rows.Count;
             for (int i = 0; i < nLen2; i++)
             {
@@ -955,7 +969,7 @@ namespace DesktopApp
 
                             if (str[1].ToString() == strSecPc)
                             {
-                                dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                                dSecQty = dSecQty + Convert.ToDouble(strSecQty);
 
                             }
                             else
@@ -973,7 +987,7 @@ namespace DesktopApp
                     }
                     else
                     {
-                        dSecQty = dSecQty + Convert.ToDecimal(strSecQty);
+                        dSecQty = dSecQty + Convert.ToDouble(strSecQty);
                         insertList.Add(strTemp);
                     }
                 }

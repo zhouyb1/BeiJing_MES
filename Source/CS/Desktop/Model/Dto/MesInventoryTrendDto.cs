@@ -61,17 +61,17 @@ namespace Model.Dto
         /// <summary>
         /// 初始数量
         /// </summary>
-        public decimal I_QtyOld{ set; get; }
+        public Double I_QtyOld{ set; get; }
 
         /// <summary>
         /// 新数量
         /// </summary>
-        public decimal I_QtyNew{ set; get; }
+        public Double I_QtyNew{ set; get; }
 
         /// <summary>
         /// 移动数量
         /// </summary>
-        public decimal I_QtyTrend{ set; get; }
+        public Double I_QtyTrend{ set; get; }
 
         /// <summary>
         /// 备注

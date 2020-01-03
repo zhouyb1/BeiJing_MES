@@ -41,7 +41,7 @@ namespace Model.Dto
         /// <summary>
         /// 数量
         /// </summary>
-        public decimal M_Qty{ set; get; }
+        public Double M_Qty{ set; get; }
 
         /// <summary>
         /// 批次

@@ -64,18 +64,21 @@
             this.使用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSJ = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // cmbGoodsName
             // 
+            this.cmbGoodsName.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.cmbGoodsName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbGoodsName.Font = new System.Drawing.Font("宋体", 11F);
+            this.cmbGoodsName.Font = new System.Drawing.Font("宋体", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmbGoodsName.FormattingEnabled = true;
             this.cmbGoodsName.Location = new System.Drawing.Point(164, 21);
             this.cmbGoodsName.Name = "cmbGoodsName";
-            this.cmbGoodsName.Size = new System.Drawing.Size(244, 23);
+            this.cmbGoodsName.Size = new System.Drawing.Size(244, 30);
             this.cmbGoodsName.TabIndex = 123;
+            this.cmbGoodsName.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbGoodsName_DrawItem);
             this.cmbGoodsName.SelectedIndexChanged += new System.EventHandler(this.cmbGoodsCode_SelectedIndexChanged);
             // 
             // txtQty
@@ -152,11 +155,11 @@
             this.btnSave.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSave.Image = global::DesktopApp.Properties.Resources.save_disabled;
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(430, 138);
+            this.btnSave.Location = new System.Drawing.Point(430, 84);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(157, 63);
+            this.btnSave.Size = new System.Drawing.Size(120, 40);
             this.btnSave.TabIndex = 124;
-            this.btnSave.Text = "  保存";
+            this.btnSave.Text = " 写标";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -190,7 +193,7 @@
             this.btn_Weight.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btn_Weight.Location = new System.Drawing.Point(430, 25);
             this.btn_Weight.Name = "btn_Weight";
-            this.btn_Weight.Size = new System.Drawing.Size(157, 66);
+            this.btn_Weight.Size = new System.Drawing.Size(120, 40);
             this.btn_Weight.TabIndex = 128;
             this.btn_Weight.Text = "  获重";
             this.btn_Weight.UseVisualStyleBackColor = true;
@@ -406,11 +409,25 @@
             this.label10.TabIndex = 144;
             this.label10.Text = "转换后实际数量：";
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button2.Image = global::DesktopApp.Properties.Resources.save_disabled;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(430, 143);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 40);
+            this.button2.TabIndex = 146;
+            this.button2.Text = "  补写";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmWorkShopWeightList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(796, 435);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.txtSJ);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.dataGridView1);
@@ -487,5 +504,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 使用数量;
         private System.Windows.Forms.TextBox txtSJ;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button2;
     }
 }

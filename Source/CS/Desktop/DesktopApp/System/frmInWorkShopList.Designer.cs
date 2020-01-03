@@ -289,7 +289,7 @@
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(90, 30);
             this.btnUpload.TabIndex = 39;
-            this.btnUpload.Text = "完工";
+            this.btnUpload.Text = "提交";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
