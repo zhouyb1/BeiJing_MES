@@ -2,54 +2,33 @@
     ViewBag.Title = "配方从表列表";
     Layout = "~/Views/Shared/_Index.cshtml";
 }
-@Html.AppendCssFile("/Areas/MesDev/Views/BomHead/BomRecordIndex.css")
-<div class="am-layout">
+<div class="am-layout am-layout-left-center" id="am_layout">
+    <div class="am-layout-left">
+        <div class="am-layout-wrap">
+            <div class="am-layout-title">目录信息</div>
+            <div class="am-layout-body" id="am_left_tree"></div>
+        </div>
+    </div>
     <div class="am-layout-center">
-        <div class="am-layout-wrap am-layout-wrap-notitle">
+        <div class="am-layout-wrap">
+            <div class="am-layout-title">
+                配方信息 - <span id="titleinfo">未选择配方</span>
+            </div>
+
             <div class="am-layout-tool">
-                @*<div class="am-layout-tool-left">
+                <div class="am-layout-tool-left">
                     <div class="am-layout-tool-item">
-                        <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入名称/编码" />
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入物料名称/编号" />
                     </div>
                     <div class="am-layout-tool-item">
                         <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a>
-                    </div>
-                </div>*@
-                <div class="am-layout-tool-left">
-                    <div class="am-layout-tool-item">
-                        <div id="multiple_condition_query">
-                            <div class="am-query-formcontent">
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">工艺代码</div>
-                                    <div id="B_RecordCode"></div>
-                                </div>
-                               
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">配方编码</div>
-                                    <input id="B_FormulaCode" type="text" class="form-control"/>
-                                </div>
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">配方名称</div>
-                                    <input id="B_FormulaName" type="text" class="form-control" />
-                                </div>
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">物料编码</div>
-                                    <input id="B_GoodsCode" type="text" class="form-control"/>
-                                </div>
-                                <div class="col-xs-6 am-form-item">
-                                    <div class="am-form-item-title">物料名称</div>
-                                    <input id="B_GoodsName" type="text" class="form-control"/>
-                                </div>
-                               
-                            </div>
-                        </div>
-                    </div>
+                    </div>  
                 </div>
                 <div class="am-layout-tool-right">
-                    <div class=" btn-group btn-group-sm">
+                    <div class="btn-group btn-group-sm">
                         <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
                     </div>
-                    <div class=" btn-group btn-group-sm" >
+                    <div class="btn-group btn-group-sm" ayma-authorize="yes">
                         <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>
                         <a id="am_edit" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
                         <a id="am_delete" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
@@ -57,6 +36,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="am-layout-body" id="girdtable"></div>
         </div>
     </div>

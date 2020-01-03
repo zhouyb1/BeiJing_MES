@@ -136,7 +136,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取配方列表数据
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
+        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string parentId)
         {
             try
             {
@@ -167,35 +167,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         ");
                 strSql.Append("  FROM [dbo].[Mes_BomRecord] t ");
                 strSql.Append("  WHERE 1=1 ");
-                var queryParam = queryJson.ToJObject();
-                // 虚拟参数
-                var dp = new DynamicParameters(new { });
-                if (!queryParam["B_RecordCode"].IsEmpty())
+                if (!string.IsNullOrEmpty(parentId))
                 {
-                    dp.Add("B_RecordCode", queryParam["B_RecordCode"].ToString(), DbType.String);
-                    strSql.Append(" AND t.B_RecordCode = @B_RecordCode ");
+                    strSql.Append(" AND B_ParentID = @B_ParentID ");
                 }
-                if (!queryParam["B_FormulaCode"].IsEmpty())
-                {
-                    dp.Add("B_FormulaCode", "%" + queryParam["B_FormulaCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_FormulaCode Like @B_FormulaCode ");
-                }
-                if (!queryParam["B_GoodsCode"].IsEmpty())
-                {
-                    dp.Add("B_GoodsCode", "%" + queryParam["B_GoodsCode"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_GoodsCode Like @B_GoodsCode ");
-                }
-                if (!queryParam["B_GoodsName"].IsEmpty())
-                {
-                    dp.Add("B_GoodsName", "%" + queryParam["B_GoodsName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_GoodsName Like @B_GoodsName ");
-                }
-                if (!queryParam["B_FormulaName"].IsEmpty())
-                {
-                    dp.Add("B_FormulaName", "%" + queryParam["B_FormulaName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.B_FormulaName Like @B_FormulaName ");
-                }
-                return this.BaseRepository().FindList<Mes_BomRecordEntity>(strSql.ToString(), dp);
+                return this.BaseRepository().FindList<Mes_BomRecordEntity>(strSql.ToString(), new { B_ParentID = parentId });
             }
             catch (Exception ex)
             {

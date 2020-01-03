@@ -1,4 +1,6 @@
-﻿using Ayma.Util;
+﻿using Ayma.Cache.Base;
+using Ayma.Cache.Factory;
+using Ayma.Util;
 using System;
 using System.Collections.Generic;
 
@@ -85,15 +87,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        #region 缓存定义
+        private ICache cache = CacheFactory.CaChe();
+        private string cacheKey = "ayma_bom_"; // +父级Id
+        #endregion
         /// <summary>
         /// 获取配方列表数据
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList(string queryJson)
+        public List<Mes_BomRecordEntity> GetBomRecordTreeList(string parentId)
         {
             try
             {
-                return bomHeadService.GetBomRecordTreeList(queryJson);
+                if (string.IsNullOrEmpty(parentId))
+                {
+                    parentId = "0";
+                }
+                List<Mes_BomRecordEntity> list = cache.Read<List<Mes_BomRecordEntity>>(cacheKey + parentId,CacheId.area);
+                if (list == null)
+                {
+                    list = (List<Mes_BomRecordEntity>)bomHeadService.GetBomRecordTreeList(parentId);
+                    cache.Write<List<Mes_BomRecordEntity>>(cacheKey + parentId, list, CacheId.area);
+                }
+                return list;
             }
             catch (Exception ex)
             {
@@ -105,6 +121,36 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     throw ExceptionEx.ThrowBusinessException(ex);
                 }
+            }
+        }
+        /// <summary>
+        /// 获取区域列表数据
+        /// </summary>
+        /// <param name="parentId">父节点主键（0表示顶层）</param>
+        /// <param name="keyword">关键字查询（名称/编号）</param>
+        /// <returns></returns>
+        public List<Mes_BomRecordEntity> GetBomRecordTreeList(string parentId, string keyword)
+        {
+            try
+            {
+                List<Mes_BomRecordEntity> list = GetBomRecordTreeList(parentId);
+                if (!string.IsNullOrEmpty(keyword))
+                {
+                    list = list.FindAll(t => t.B_GoodsCode.Contains(keyword) || t.B_GoodsName.Contains(keyword));
+                }
+                return list;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+                throw;
             }
         }
         /// <summary>
@@ -177,7 +223,46 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        /// <summary>
+        /// 获取区域数据树（某一级的）
+        /// </summary>
+        /// <param name="parentId">父级主键</param>
+        /// <returns></returns>
+        public List<TreeModel> GetTree(string parentId)
+        {
+            try
+            {
+                List<TreeModel> treeList = new List<TreeModel>();
+                List<Mes_BomRecordEntity> list = GetBomRecordTreeList(parentId);
 
+                foreach (var item in list)
+                {
+                    TreeModel node = new TreeModel();
+                    node.id = item.ID;
+                    node.text = item.B_GoodsName;
+                    node.value = item.B_GoodsCode;
+                    node.showcheck = false;
+                    node.checkstate = 0;
+                    node.hasChildren = GetBomRecordTreeList(item.B_ParentID).Count > 0 ? true : false;
+                    node.isexpand = false;
+                    node.complete = false;
+                    treeList.Add(node);
+                }
+                return treeList;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+                throw;
+            }
+        }
         #endregion
 
         #region 提交数据

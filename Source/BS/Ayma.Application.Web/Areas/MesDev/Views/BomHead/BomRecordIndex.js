@@ -6,15 +6,14 @@ var refreshGirdData; // 更新数据
 var selectedRow;
 var bootstrap = function ($, ayma) {
     "use strict";
+    var parentId = "0";
     var page = {
         init: function () {
+            page.initTree();
             page.initGird();
             page.bind();
         },
         bind: function () {
-            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
-                page.search(queryJson);
-            }, 220, 500);
             
             //工艺代码
             $("#B_RecordCode").select({
@@ -28,6 +27,11 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetRecordList',
 
+            });
+            // 查询
+            $('#btn_Search').on('click', function () {
+                var keyword = $('#txt_Keyword').val();
+                page.search({ keyword: keyword });
             });
             // 刷新
             $('#am_refresh').on('click', function () {
@@ -113,6 +117,16 @@ var bootstrap = function ($, ayma) {
                 });
             });
         },
+        initTree: function () {
+            $('#am_left_tree').amtree({
+                url: top.$.rootUrl + '/MesDev/BomHead/GetTree',
+                nodeClick: function (item) {
+                    parentId = item.id;
+                    page.search();
+                    $('#titleinfo').text(item.text);
+                }
+            });
+        },
         initGird: function () {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordTreeList',
@@ -153,17 +167,16 @@ var bootstrap = function ($, ayma) {
                            { label: "修改时间", name: "B_UpdateDate", width: 100, align: "left" },
 
                 ],
-                isTree: true,
                 mainId: 'ID',
-                parentId: 'B_ParentID',
                 reloadSelected: true,
-                isShowNum: true
                 //isAutoHeight: true,          // 自动适应表格高度
             });
             page.search();
         },
         search: function (param) {
-            $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
+            param = param || {};
+            param.parentId = parentId;
+            $('#girdtable').jfGridSet('reload', { param: param });
         }
     };
 

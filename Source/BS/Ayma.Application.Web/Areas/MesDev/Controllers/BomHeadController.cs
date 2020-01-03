@@ -117,10 +117,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetBomRecordTreeList(string queryJson)
+        public ActionResult GetBomRecordTreeList(string parentId,string keyword)
         {
-            var data = bomHeadIBLL.GetBomRecordTreeList(queryJson);
-
+            var data = bomHeadIBLL.GetBomRecordTreeList(parentId, keyword);
             return Success(data);
         }
         /// <summary>
@@ -139,6 +138,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 Mes_BomRecordData = Mes_BomRecordData,
             };
             return Success(jsonData);
+        }
+        /// <summary>
+        /// 获取树形数据
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetTree(string parentId)
+        {
+            var data = bomHeadIBLL.GetTree(parentId);
+            return Success(data);
         }
         #endregion
 

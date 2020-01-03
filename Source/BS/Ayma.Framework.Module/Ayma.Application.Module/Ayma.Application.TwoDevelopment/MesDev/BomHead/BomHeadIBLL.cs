@@ -35,7 +35,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">工艺代码、配方编码、配方名称、物料编码、物料名称</param>
         /// <returns></returns>
-        IEnumerable<Mes_BomRecordEntity> GetBomRecordTreeList( string queryJson);
+        List<Mes_BomRecordEntity> GetBomRecordTreeList(string parentId);
+        /// <summary>
+        /// 获取配方列表数据
+        /// </summary>
+        /// <param name="queryJson">工艺代码、配方编码、配方名称、物料编码、物料名称</param>
+        /// <returns></returns>,string keyword
+        List<Mes_BomRecordEntity> GetBomRecordTreeList(string parentId,string keyword);
         /// <summary>
         /// 获取Mes_BomRecord表数据
         /// </summary>
@@ -54,6 +60,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
         Mes_BomRecordEntity GetMes_BomRecordEntity(string keyValue);
+        /// <summary>
+        /// 获取区域数据树（某一级的）
+        /// </summary>
+        /// <param name="parentId">父级主键</param>
+        /// <returns></returns>
+        List<TreeModel> GetTree(string parentId);
         #endregion
 
         #region 提交数据
