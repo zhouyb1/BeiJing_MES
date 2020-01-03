@@ -135,8 +135,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.661458,
-							"Width":2.01083,
+							"Left":-0.608542,
+							"Width":1.98438,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -789,6 +789,12 @@
 					"Top":1.19063,
 					"Width":3.81,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"C_CollarNo"
 				},
 				{
@@ -814,6 +820,12 @@
 					"Top":2.01083,
 					"Width":5.79438,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"C_CreateDate"
 				},
 				{
@@ -839,6 +851,12 @@
 					"Top":1.19063,
 					"Width":3.41313,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"C_StockToName"
 				},
 				{
@@ -848,6 +866,12 @@
 					"Top":2.01083,
 					"Width":3.59833,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"C_CreateBy"
 				},
 				{
@@ -889,6 +913,12 @@
 					"Top":2.01083,
 					"Width":3.59833,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"C_CreateBy"
 				}
 			],
