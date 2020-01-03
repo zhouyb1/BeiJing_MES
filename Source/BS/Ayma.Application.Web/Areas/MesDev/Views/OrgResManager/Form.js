@@ -19,6 +19,7 @@ var bootstrap = function ($, ayma) {
 $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"}); 
             page.bind();
             page.initData();
+            $('.fa-ellipsis-h').data("tip", "alert");
         },
         bind: function () {
             $("#O_StockName").select({
@@ -36,8 +37,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             }).on('change', function() {
                 //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
                 //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
-
                 var name = $(this).selectGet();
+                $('.fa-ellipsis-h').data("code", name);
+                $('.fa-ellipsis-h').data("tip", "alert");
                 //绑定仓库编码
                 ayma.httpAsyncGet(top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity?code=' + name, function (result) {
                     $('#O_StockCode').val(result.data.S_Code);
@@ -117,20 +119,20 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               {
                                   label: "物料名称", name: "O_GoodsName", width: 120, align: "center", editType: 'select',
                                   editOp: {
-                                      width: 550,
+                                      width: 580,
                                       height: 500,
                                       colData: [
-                                          { label: "名称", name: "o_goodsname", width: 120, align: "left" },
-                                          { label: "编码", name: "o_goodscode", width: 80, align: "center" },
+                                          { label: "物料名称", name: "o_goodsname", width: 100, align: "left" },
+                                          { label: "物料编码", name: "o_goodscode", width: 80, align: "center" },
                                           { label: "批次", name: "o_batch", width: 90, align: "center" },
-                                          { label: "转换后的物料", name: "o_secgoodsname", width: 90, align: "left" },
+                                          { label: "转换后的物料",name: "o_secgoodsname", width: 90, align: "left" },
                                           { label: "转换后的物料", name: "o_secgoodscode", width: 90, align: "left", hidden: true },
                                           { label: "单价", name: "o_price", width: 80, align: "center" },
                                           { label: "单位", name: "o_unit", width: 60, align: "center" },
                                           { label: "库存", name: "o_qty", width: 100, align: "left" },
                                       ],
-                                      url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList?stock='+$('#O_StockCode').val(),
-                                      isPage: false,
+                                      url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
+                                      isPage: true,
                                       callback: function (selectdata, rownum, row) {
                                           row.O_GoodsCode = selectdata.o_goodscode;
                                           row.O_GoodsName = selectdata.o_goodsname;
@@ -172,10 +174,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 280,
+                minheight: 220,
                 isEidt: true,
                 isMultiselect: true,
-                height: 280,
+                height: 220,
                 inputCount: 2,
 
             });
@@ -190,15 +192,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         children: [
                             {
                                 label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center", editType: 'select', editOp: {
-                                    width: 600,
+                                    width: 800,
                                     height: 500,
+                                    align: "right",
                                     colData: [
-                                        { label: "名称", name: "c_secname", width: 120, align: "left" },
-                                        { label: "编码", name: "c_seccode", width: 90, align: "center" },
+                                        { label: "物料名称", name: "c_secname", width: 120, align: "left" },
+                                        { label: "物料编码", name: "c_seccode", width: 90, align: "center" },
                                         { label: "单位", name: "g_unit", width: 90, align: "center" },
                                     ],
                                     url: top.$.rootUrl + '/MesDev/OrgResManager/GetSecGoodsList',
-                                    isPage: false,
+                                    isPage: true,
                                     callback: function (selectdata, rownum, row) {
                                         row.O_SecGoodsCode = selectdata.c_seccode;
                                         row.O_SecGoodsName = selectdata.c_secname;
@@ -253,10 +256,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: false,
                 footerrow: true,
-                minheight: 280,
+                minheight: 220,
                 isEidt: true,
                 isMultiselect: true,
-                height: 280,
+                height: 220,
                 inputCount: 1,
 
             });

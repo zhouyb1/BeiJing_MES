@@ -10,7 +10,7 @@
 
 (function ($, ayma) {
     "use strict";
-
+    //document.write("<script type='text/javascript' src='/Content/jquery/plugin/toastr/toastr.min.js'></script>");
     $.jfGrid = $.jfGrid || {};
     $.extend($.jfGrid, {
         /*绘制表格*/
@@ -1022,6 +1022,13 @@
                         $label.css({ 'text-align': node.align });
                         $label.find('.fa-ellipsis-h')[0]._node = node;
                         $label.find('.fa-ellipsis-h').on('click', function () {
+                            if ($(".fa-ellipsis-h").data('tip')=="alert") {
+                                if ($("[colname=O_GoodsName]").find('.fa-ellipsis-h').data('code') == undefined || $("[colname=O_GoodsName]").find('.fa-ellipsis-h').data('code') == "") {
+                                    alert("请先选择日耗库");
+                                    return false;
+                                }
+                            }
+                           
                             var _node = $(this)[0]._node;
                             $.jfGrid.layer({
                                 html: '<div class="jfgird-select"><div class="jfgird-select-tool"><div class="jfgird-select-tool-item"><input id="jfgird_select_keyword" style="width:200px;" type="text" class="form-control" placeholder="请输入要查询关键字"></div><div class="jfgird-select-tool-item"><a id="jfgird_select_search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a></div></div><div id="jfgird_select"></div></div>',
@@ -1034,9 +1041,9 @@
                                         headData: _node.editOp.colData,
                                         url: _node.editOp.url,
                                         isPage:_node.editOp.isPage || false,
-                                        onRenderComplete: function (rowdatas) {
-                                            _node.editOp.rowdatas = rowdatas;
-                                        },
+                                        //onRenderComplete: function (rowdatas) {
+                                        //    _node.editOp.rowdatas = rowdatas;
+                                        //},
                                         onSelectRow: function (rowdata) {
                                             if (!!_node.editOp.callback) {
                                                 _node.editOp.callback(rowdata, rownum, row, _node.editOp.selectData);
@@ -1045,31 +1052,16 @@
                                             $.jfGrid.renderData($('#' + dfop.id));
                                         }
                                     });
-                                    if (!!_node.editOp.rowdatas) {
-                                        $html.find('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
-                                    }
-                                    else {
-                                        $html.find('#jfgird_select').jfGridSet('reload', { param: _node.editOp.param });
-                                    }
+                                    $('#jfgird_select').jfGridSet('reload', { param: { keyword: "" } });
                                     $('#jfgird_select_search').on('click', function () {
                                         var data = [];
                                         var keyword = $('#jfgird_select_keyword').val();
                                         if (!!keyword) {
-                                            for (var i = 0, l = _node.editOp.rowdatas.length; i < l; i++) {
-                                                var item = _node.editOp.rowdatas[i];
-                                                for (var j = 0, jl = _node.editOp.colData.length; j < jl; j++) {
-                                                    if (item[_node.editOp.colData[j].name].toString().indexOf(keyword) != -1) {
-                                                        data.push(item);
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            $('#jfgird_select').jfGridSet('refreshdata', { rowdatas: data });
+                                            $('#jfgird_select').jfGridSet('reload', { param: { keyword: keyword } });
                                         }
                                         else {
-                                            $('#jfgird_select').jfGridSet('refreshdata', { rowdatas: _node.editOp.rowdatas });
+                                            $('#jfgird_select').jfGridSet('reload', { param: { keyword: keyword } });
                                         }
-
                                     });
                                     $('#jfgird_select_keyword').on('keydown', function (event) {
 
@@ -1077,7 +1069,6 @@
                                             $('#jfgird_select_search').trigger('click');
                                         }
                                     })
-
                                 });
 
                         });
