@@ -585,7 +585,7 @@ ORDER BY C.F_Level";
                         else
                         {
                             success = false;
-                            message = string.Format("产品编码{0}没有相应的配合", product.F_GoodsCode);
+                            message = string.Format("产品编码{0}没有相应的配方", product.F_GoodsCode);
                             break;
                         }
                     }
