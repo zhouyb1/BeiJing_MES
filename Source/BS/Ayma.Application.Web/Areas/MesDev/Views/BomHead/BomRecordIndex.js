@@ -63,7 +63,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'BomRecordForm',
                         title: '编辑配方',
-                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?B_ParentID=' + B_ParentID,
+                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?keyValue=' + keyValue,
                         width: 700,
                         height: 500,
                         callBack: function (id) {
@@ -81,7 +81,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'BomRecordForm',
                         title: '编辑配方',
-                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?B_ParentID=' + B_ParentID,
+                        url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?keyValue=' + keyValue,
                         width: 700,
                         height: 500,
                         callBack: function (id) {

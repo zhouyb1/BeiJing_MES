@@ -25,7 +25,6 @@ var bootstrap = function ($, ayma) {
                 $("#B_RecordCode").attr("disabled", "disabled");
                 $("#ProceName").css("display", "block");
                 $("#ProceCode").css("display", "block");
-                $("#B_ProceName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                 $("#B_Unit").css("display", "none");
                 $("#B_Unit1").css("display", "block");
                 $("#B_Unit1").attr("value", "g");
@@ -73,7 +72,6 @@ var bootstrap = function ($, ayma) {
                 if (value != "") {
                     $("#ProceName").css("display", "block");
                     $("#ProceCode").css("display", "block");
-                    $("#B_ProceName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                     $("#B_Unit").css("display", "none");
                     $("#B_Unit1").css("display", "block");
                     $("#B_Unit1").attr("value", "g");
