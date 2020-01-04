@@ -87,10 +87,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-        #region 缓存定义
-        private ICache cache = CacheFactory.CaChe();
-        private string cacheKey = "ayma_bom_"; // +父级Id
-        #endregion
         /// <summary>
         /// 获取配方列表数据
         /// </summary>
@@ -103,13 +99,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     parentId = "0";
                 }
-                List<Mes_BomRecordEntity> list = cache.Read<List<Mes_BomRecordEntity>>(cacheKey + parentId,CacheId.area);
-                if (list == null)
-                {
-                    list = (List<Mes_BomRecordEntity>)bomHeadService.GetBomRecordTreeList(parentId);
-                    cache.Write<List<Mes_BomRecordEntity>>(cacheKey + parentId, list, CacheId.area);
-                }
-                return list;
+
+                return (List<Mes_BomRecordEntity>)bomHeadService.GetBomRecordTreeList(parentId);  
             }
             catch (Exception ex)
             {
@@ -241,6 +232,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     node.id = item.ID;
                     node.text = item.B_GoodsName;
                     node.value = item.B_GoodsCode;
+                    node.icon = item.B_RecordCode;
                     node.showcheck = false;
                     node.checkstate = 0;
                     node.hasChildren = GetBomRecordTreeList(item.B_ParentID).Count > 0 ? true : false;

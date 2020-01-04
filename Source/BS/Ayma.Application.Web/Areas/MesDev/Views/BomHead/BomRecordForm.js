@@ -21,7 +21,7 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {          
-            if (parentId != '' && parentId != undefined) {
+            if (parentId != '' && parentId != undefined && parentId!=0) {
                 $("#B_RecordCode").attr("disabled", "disabled");
                 $("#ProceName").css("display", "block");
                 $("#ProceCode").css("display", "block");

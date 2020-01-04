@@ -7,6 +7,7 @@ var selectedRow;
 var bootstrap = function ($, ayma) {
     "use strict";
     var parentId = "0";
+    var recordCode;
     var page = {
         init: function () {
             page.initTree();
@@ -40,12 +41,12 @@ var bootstrap = function ($, ayma) {
             // 新增
             $('#am_add').on('click', function () {
                 var id = $('#girdtable').jfGridValue('ID');
-                var recordCode = $('#girdtable').jfGridValue('B_RecordCode');//工艺代码
+                //var recordCode = $('#girdtable').jfGridValue('B_RecordCode');//工艺代码
                 selectedRow = null;
                 ayma.layerForm({
                     id: 'BomRecordForm',
                     title: '新增配方',
-                    url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?recordCode=' + recordCode + '&parentId=' + id,
+                    url: top.$.rootUrl + '/MesDev/BomHead/BomRecordForm?recordCode=' + recordCode + '&parentId=' + parentId,
                     width: 700,
                     height: 500,
                     callBack: function (id) {
@@ -122,6 +123,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/BomHead/GetTree',
                 nodeClick: function (item) {
                     parentId = item.id;
+                    recordCode = item.icon;
                     page.search();
                     $('#titleinfo').text(item.text);
                 }
