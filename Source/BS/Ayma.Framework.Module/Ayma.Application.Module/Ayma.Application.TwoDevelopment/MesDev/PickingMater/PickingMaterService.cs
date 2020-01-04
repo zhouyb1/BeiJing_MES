@@ -414,7 +414,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
                 ORDER BY C.F_Level";
 
-                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom, dp);
+                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom);
                     if (rows.Count() > 0)
                     {
                         boms = rows.ToList();
@@ -508,8 +508,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         var F_GoodsCodes = product.Value.Where(r => r.F_Level != F_Level).Select(r => "''"+r.F_GoodsCode+"''");
                         dp.Add("F_GoodsCode", product.Value.Find(r=>r.F_Level==F_Level).F_GoodsCode, DbType.String);
                         dp.Add("F_GoodsCode", string.Join(",",F_GoodsCodes), DbType.String);
-    
 
+                        var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetQty,dp);
+                        if (rows.Count() > 0)
+                        {
+                            boms = rows.ToList();
+                        }
+                        else
+                        {
+                            success = false;
+                            message = "未获取到任何配方数据";
+                        }
 
                     }
 
