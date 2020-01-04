@@ -34,14 +34,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_InNo,
                 t.I_StockCode,
                 t.I_StockName,
-                s.W_Name I_WorkShop ,
-                t.I_OrderNo,
-                t.I_OrderDate,
+                dbo.GetStockByCode(I_WorkShop) I_WorkShop ,
                 t.I_Remark,
                 dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
-                strSql.Append("  FROM Mes_InWorkShopHead t left join Mes_WorkShop s on(t.I_WorkShop=s.W_Code)");
+                strSql.Append("  FROM Mes_InWorkShopHead t ");
                 strSql.Append("  WHERE t.I_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -77,6 +75,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("I_WorkShop", "%" + queryParam["I_WorkShop"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.W_Name Like @I_WorkShop ");
                 }
+                strSql.Append("  ORDER BY O_CreateDate DESC ");
+
                 return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
@@ -255,18 +255,31 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT DISTINCT G_Code I_GoodsCode,
-                                    G_Name I_GoodsName,
-                                    G_Unit I_Unit,
-                                    G_Price I_Price
-                            FROM    dbo.Mes_Goods g 
-                            WHERE  G_Kind in (1,2) ");
-                var dp = new DynamicParameters(new {});
+                strSql.Append(@"SELECT DISTINCT
+                                        d.O_SecGoodsCode ,
+                                        d.O_SecGoodsName ,
+                                        d.O_SecUnit ,
+                                        d.O_SecPrice ,
+                                        d.O_SecQty ,
+                                        d.O_SecBatch ,
+                                        h.O_StockCode ,
+                                        h.O_StockName ,
+                                        h.O_CreateDate 
+                                FROM    dbo.Mes_OrgResHead h
+                                        INNER JOIN dbo.Mes_OrgResDetail d ON h.O_OrgResNo = d.O_OrgResNo
+                                WHERE   O_Status = 3
+                                        AND h.o_transfer = 0 ");
+                var dp = new DynamicParameters(new { });
                 var queryParam = queryJson.ToJObject();
                 if (!queryParam["keyword"].IsEmpty())
                 {
                     dp.Add("keyword", "%" + queryParam["keyword"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND (G_Code+G_Name LIKE @keyword) ");
+                    strSql.Append(" AND (d.O_SecGoodsCode+d.O_SecGoodsName LIKE @keyword) ");
+                }
+                if (!queryParam["stock"].IsEmpty())
+                {
+                    dp.Add("stock", queryParam["stock"].ToString(), DbType.String);
+                    strSql.Append(" AND h.O_StockCode = @stock  ");
                 }
                return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
             }
