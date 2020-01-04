@@ -137,7 +137,16 @@ var bootstrap = function ($, ayma) {
                         label: "商品二级类型", name: "kindname", width: 80, align: "left"
                     },
                     {    label: "保质时间", name: "g_period", width: 80, align: "left" },
-                    { label: "价格", name: "g_price", width: 100, align: "left" },
+                    {
+                        label: "价格", name: "g_price", width: 100, align: "left", formatter: function (value, row, dfop) {
+                            if (row.g_price != undefined && !!row.g_price) {
+                                return row.g_price.toFixed(6) / 1;
+                            }
+                            if (row.g_price == "") {
+                                return row.g_price = 0;
+                            }
+                        }
+                    },
                     {
                         label: "单位", name: "g_unit", width: 80, align: "left",
                         formatterAsyns:function(callback,value,row) {
