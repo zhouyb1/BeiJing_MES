@@ -1,6 +1,7 @@
 ﻿using Ayma.Util;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -175,6 +176,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
            
+        }
+
+        public DataTable GetProductReport(string queryJson, out string message)
+        {
+            try
+            {
+                return pickingMaterService.GetProductReport(queryJson,out  message);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
         }
 
         #endregion

@@ -337,6 +337,228 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 获取出成率报表
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProductReport(string queryJson, out string message)
+        {
+            bool success = true;
+            message = "";
+
+            try
+            {
+                var queryParam = queryJson.ToJObject();
+                if (queryParam["StartTime"].IsEmpty() || queryParam["EndTime"].IsEmpty() ||
+                    queryParam["GoodsCode"].IsEmpty())
+                {
+                    success = false;
+                    message = "查询参数缺失";
+                }
+
+                List<ProductBom> boms=new List<ProductBom>();
+                Dictionary<string, List<ProductBom>> products=new Dictionary<string, List<ProductBom>>();
+
+                #region  获取产品配方
+
+                if (success)
+                {
+                    //加载所有成品
+                    string strGetBom = @"--递归获取子节点
+                WITH CTE
+                AS (SELECT ID,
+                B_ParentID,
+                B_GoodsCode,
+                B_GoodsName,
+                B_StockCode,
+                B_Qty,
+                B_ProceCode,
+                B_ProceName,
+                0 AS F_Level
+                FROM Mes_BomRecord
+                WHERE B_ParentID = '0'
+                UNION ALL
+                SELECT Bom1.ID,
+                Bom1.B_ParentID,
+                Bom1.B_GoodsCode,
+                Bom1.B_GoodsName,
+                Bom1.B_StockCode,
+                Bom1.B_Qty,
+                Bom1.B_ProceCode,
+                Bom1.B_ProceName,
+                (Bom2.F_Level + 1) F_Level
+                    FROM Mes_BomRecord Bom1,CTE Bom2
+                    WHERE Bom1.B_ParentID = Bom2.ID
+                    )
+                SELECT C.ID F_ID,
+                    C.B_ParentID F_ParentID,
+                    C.B_GoodsCode F_GoodsCode,
+                    G.G_Name F_GoodsName,
+                    C.B_ProceCode F_ProceCode,
+                    C.B_ProceName F_ProceName,
+                    G.G_Kind F_Kind,
+                    G.G_Unit F_Unit,--基本单位
+                G.G_Unit2 F_Unit2,--包装单位
+                ISNULL(G.G_UnitQty,1) F_UnitQty,--包装数量(包装规格)
+                G.G_Price F_Price,--成本价
+                C.B_StockCode F_InStockCode,--领料仓库编码
+                S1.S_Name F_InStockName,--领料仓库名称
+                G.G_StockCode F_OutStockCode,--出料仓库编码
+                S2.S_Name F_OutStockName,--出料仓库名称
+                B_Qty F_PlanQty,--计划数量
+                B_Qty F_ProposeQty,--建议数量
+                F_Level
+                    FROM CTE C
+                LEFT JOIN Mes_Goods G ON C.B_GoodsCode = G.G_Code
+                LEFT JOIN Mes_Stock S1 ON S1.S_Code=C.B_StockCode
+                LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
+                ORDER BY C.F_Level";
+
+                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom, dp);
+                    if (rows.Count() > 0)
+                    {
+                        boms = rows.ToList();
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "未获取到任何配方数据";
+                    }
+                }
+
+
+                #endregion
+
+                #region 根据原物料，找出成品
+                if (success)
+                {
+                    var rows=boms.Where(r => r.F_GoodsCode == queryParam["GoodsCode"].ToString());
+                    if (rows==null || rows.Count() < 0)
+                    {
+                        success = false;
+                        message = "未从配方数据中匹配到相应原物料";
+                    }
+                    else
+                    {
+                        foreach (var row in rows)
+                        {
+                            List<ProductBom> goods=new List<ProductBom>();
+                            GetGoods(row.F_GoodsCode, boms, goods);
+                            var bomroot=goods.Find(r => r.F_Level == 0);
+                            if (bomroot == null)
+                            {
+                                success = false;
+                                message = "原物料对应配方不完整";
+                                break;
+                            }
+                            else
+                            {
+                                products[bomroot.F_GoodsCode] = goods;
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region 提取数据
+                if (success)
+                {
+                    foreach (var product in products)
+                    {
+                        string strGetQty = @"--计算成品、半成品
+                        SELECT F_CreateDate,F_GoodsCode,SUM(F_Qty) F_Qty FROM
+                        (
+                            SELECT DISTINCT
+                        H.O_OrgResNo F_OrderNo,--单号
+                        CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单机日期
+                        D.O_SecGoodsCode F_GoodsCode,--物料编码
+                        D.O_SecQty F_Qty--物料数量
+                        FROM Mes_OrgResHead H
+                            INNER JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
+                        WHERE H.O_Status = 3 AND D.O_SecGoodsCode IN(@F_GoodsCodes)
+                        AND  (H.O_CreateDate >= @startTime AND H.O_CreateDate<= @endTime)
+                            )MyData 
+                            GROUP BY F_GoodsCode,F_CreateDate
+
+                        UNION ALL
+
+                        --计算原料
+                        SELECT F_CreateDate,F_GoodsCode,SUM(F_Qty) F_Qty FROM
+                        (
+                            SELECT DISTINCT
+                        H.O_OrgResNo F_OrderNo,--单号
+                        CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据日期
+                        D.O_GoodsCode F_GoodsCode,--物料编码
+                        D.O_Qty F_Qty--物料数量
+                        FROM Mes_OrgResHead H
+                            INNER JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
+                        WHERE H.O_Status = 3 AND D.O_GoodsCode=@F_GoodsCode
+                        AND  (H.O_CreateDate >= @startTime AND H.O_CreateDate<= @endTime)
+                            )MyData 
+                            GROUP BY F_GoodsCode,F_CreateDate
+                        ";
+                        var dp = new DynamicParameters(new { });
+                        if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                        {
+                            dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                            dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                        }
+
+                        var F_Level = product.Value.Max(r => r.F_Level);
+                        var F_GoodsCodes = product.Value.Where(r => r.F_Level != F_Level).Select(r => "''"+r.F_GoodsCode+"''");
+                        dp.Add("F_GoodsCode", product.Value.Find(r=>r.F_Level==F_Level).F_GoodsCode, DbType.String);
+                        dp.Add("F_GoodsCode", string.Join(",",F_GoodsCodes), DbType.String);
+    
+
+
+                    }
+
+                    //// 虚拟参数
+                    //var dp = new DynamicParameters(new { });
+                    //if (!queryParam["stockCode"].IsEmpty())
+                    //{
+                    //    dp.Add("stockCode", "%" + queryParam["stockCode"].ToString() + "%", DbType.String);
+                    //    //strSql.Append(" AND  S.I_StockCode like @stockCode ");
+                    //}
+                }
+                #endregion
+
+                return null;
+                //return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        private List<ProductBom> GetGoods(string childrenid, List<ProductBom> boms, List<ProductBom> goods)
+        {
+           var row= boms.Find(r => r.F_ID == childrenid);
+           if (row == null)
+               return goods;
+           else
+           {
+               if (row.F_Level == 0)
+               {
+                   goods.Add(row);
+                   return goods;
+               }
+               else
+               {
+                   goods.Add(row);
+                   return GetGoods(row.F_ParentID, boms, goods);
+               }
+           }
+        }
+
         #endregion
 
         #region 提交数据

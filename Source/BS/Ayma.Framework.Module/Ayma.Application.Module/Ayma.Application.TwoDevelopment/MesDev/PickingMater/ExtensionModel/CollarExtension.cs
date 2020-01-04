@@ -42,6 +42,18 @@
         /// </summary>
         public string F_GoodsName { get; set; }
 
+
+        /// <summary>
+        /// 工序编码
+        /// </summary>
+        public string F_ProceCode { get; set; }
+
+        /// <summary>
+        /// 工序名称
+        /// </summary>
+        public string F_ProceName { get; set; }
+
+
         /// <summary>
         /// 物料类型
         /// </summary>

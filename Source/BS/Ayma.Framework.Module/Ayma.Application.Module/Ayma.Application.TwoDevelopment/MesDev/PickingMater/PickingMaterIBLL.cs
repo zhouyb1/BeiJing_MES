@@ -1,5 +1,6 @@
 ﻿using Ayma.Util;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -52,6 +53,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_InventoryEntity> GetMaterList(Pagination pagination, string queryJson, string keyword);
+
+
+        /// <summary>
+        /// 获取报表数据
+        /// </summary>
+        /// <param name="queryJsond"></param>
+        /// <returns></returns>
+        DataTable GetProductReport(string queryJson, out string message);
         #endregion
 
         #region 提交数据
@@ -85,6 +94,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         bool AutoCreateOrder(string date, out string message);
 
         #endregion
+
 
     }
 }
