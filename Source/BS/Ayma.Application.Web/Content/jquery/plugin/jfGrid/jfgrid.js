@@ -42,7 +42,10 @@
             // 加载数据
             if (!!dfop.rowdatas && !dfop.url) {
                 if (dfop.isEidt && dfop.rowdatas.length == 0) {
-                    dfop.rowdatas.push({});// 
+                    for (var i = 0; i < 2; i++) {
+                        dfop.rowdatas.push({});
+                    }
+                   
                 }
                 $.jfGrid.renderData($self);
             }
@@ -1034,19 +1037,23 @@
                                 html: '<div class="jfgird-select"><div class="jfgird-select-tool"><div class="jfgird-select-tool-item"><input id="jfgird_select_keyword" style="width:200px;" type="text" class="form-control" placeholder="请输入要查询关键字"></div><div class="jfgird-select-tool-item"><a id="jfgird_select_search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;查询</a></div></div><div id="jfgird_select"></div></div>',
                                 width: _node.editOp.width || 400,
                                 height: _node.editOp.height || 400,
-                                isPage:_node.editOp.isPage || false
+                                isPage: _node.editOp.isPage || false,
+                                isMultiselect: _node.editOp.isMultiselect || false,
                             },
                                 function ($html) {
                                     $html.find('#jfgird_select').jfGrid({
                                         headData: _node.editOp.colData,
                                         url: _node.editOp.url,
-                                        isPage:_node.editOp.isPage || false,
-                                        //onRenderComplete: function (rowdatas) {
-                                        //    _node.editOp.rowdatas = rowdatas;
-                                        //},
+                                        isPage: _node.editOp.isPage || false,
+                                        isMultiselect: _node.editOp.isMultiselect || false,
+
+                                        onRenderComplete: function (rowdatas) {
+                                            _node.editOp.rowdatas = rowdatas;
+                                        },
                                         onSelectRow: function (rowdata) {
                                             if (!!_node.editOp.callback) {
-                                                _node.editOp.callback(rowdata, rownum, row, _node.editOp.selectData);
+                                                var isChecked = $("[rownum='rownum_jfgird_select_" + rownum + "']").find("input[role='checkbox']");
+                                                _node.editOp.callback(rowdata, rownum, row,isChecked, _node.editOp.selectData);
                                             }
                                             $html.remove();
                                             $.jfGrid.renderData($('#' + dfop.id));

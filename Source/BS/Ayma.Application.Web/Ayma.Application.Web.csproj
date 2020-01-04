@@ -1959,7 +1959,6 @@
     <Content Include="Content\webuploader\webuploader.withoutimage.min.js" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\Form.cshtml" />
     <Content Include="Areas\AM_WorkFlowModule\Views\WfScheme\HistoryForm.cshtml" />
-    <Content Include="Properties\PublishProfiles\Ayma.pubxml.user" />
     <Content Include="Resource\PhotoFile\0799d30d-5d14-4f15-aafe-be52b9808d52.jpg" />
     <Content Include="Resource\System\20180814\wu_1ckrbcai66tkv3p1fftkp31jkca.jpg" />
     <Content Include="ueditor\net\upload\image\20170515\6363046459232100007014778.jpg" />
@@ -2386,7 +2385,6 @@
     <Content Include="Areas\MesDev\Views\PickingMater\TempIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempForm.cshtml" />
     <Content Include="Areas\MesDev\Views\ProductOrderManager\PlanForm.cshtml" />
-    <None Include="Properties\PublishProfiles\Ayma.pubxml" />
     <Content Include="Views\AM_Content\style\am-layer.css" />
     <Content Include="Views\UserCenter\ContactForm.css" />
     <Content Include="Views\UserCenter\ContactForm.js" />
@@ -2746,7 +2744,9 @@
       <Name>Ayma.Util</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\MES.pubxml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

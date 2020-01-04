@@ -134,7 +134,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                       url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
                                       isPage: true,
                                       isMultiselect:false,
-                                      callback: function (selectdata, rownum, row) {
+                                      callback: function (selectdata, rownum, row, isChecked) {
                                           row.O_GoodsCode = selectdata.o_goodscode;
                                           row.O_GoodsName = selectdata.o_goodsname;
                                           row.StockQty = selectdata.o_qty;
@@ -146,7 +146,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           row.O_SecUnit = selectdata.o_unit;
                                           row.O_SecGoodsName = selectdata.o_secgoodsname;
                                           //带出转换后的物料
+
                                           top.FormRefreshGirdDataDetails(row);
+                                      
                                       }
                                   }
                               },
@@ -184,6 +186,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 height: 220,
                 inputCount: 2,
+                isMultiselect: true,
+
                 //isStatistics: true,
 
             });
@@ -248,6 +252,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 height: 220,
                 inputCount: 1,
+                isMultiselect: true,
+
                 //isStatistics: true,
             });
         },
@@ -286,21 +292,35 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     };
 
     // 保存数据
-    acceptClick = function (callBack) {
+    acceptClick = function(callBack) {
         if (!$('body').Validform()) {
             return false;
         }
         var data = $('#Mes_OrgResDetail_h').jfGridGet('rowdatas');
+        data = $.grep(data, function(item) {
+            return item.O_GoodsCode != undefined;
+        });
+
         if (data[0].O_GoodsCode == undefined || data[0].O_GoodsCode == "") {
             ayma.alert.error('请添加物料');
             return false;
         }
 
         var num = 0;
-        for (var i = 0,j=data.length; i < j; i++) {
+        for (var i = 0, j = data.length; i < j; i++)
+        {
+            if (data[i].O_Qty == undefined || data[i].O_Qty == 0) {
+                ayma.alert.error('请录入组装前的数量！');
+                return false;
+
+            }
+            if (data[i].O_SecQty == undefined || data[i].O_SecQty == 0) {
+                ayma.alert.error('请录入组装后的数量！');
+                return false;
+            }
             data[i].O_Index = num;
             num++;
-        }
+        };
         var postData = {
             strEntity: JSON.stringify($('[data-table="Mes_OrgResHead"]').GetFormData()),
             detailList: JSON.stringify(data)
