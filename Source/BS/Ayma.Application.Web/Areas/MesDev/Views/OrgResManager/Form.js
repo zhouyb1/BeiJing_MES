@@ -133,6 +133,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                       ],
                                       url: top.$.rootUrl + '/MesDev/OrgResManager/GetGoodsList',
                                       isPage: true,
+                                      isMultiselect:false,
                                       callback: function (selectdata, rownum, row) {
                                           row.O_GoodsCode = selectdata.o_goodscode;
                                           row.O_GoodsName = selectdata.o_goodsname;
@@ -141,13 +142,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           row.O_Batch = selectdata.o_batch;
                                           row.O_Price = selectdata.o_price;
                                           row.O_SecGoodsCode = selectdata.o_secgoodscode;
+
+                                          row.O_SecUnit = selectdata.o_unit;
+                                          row.O_SecGoodsName = selectdata.o_secgoodsname;
+                                          //带出转换后的物料
+                                          top.FormRefreshGirdDataDetails(row);
                                       }
                                   }
                               },
                               { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
                               { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue==""?false:true },
                               {
-                                  label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input',
+                                  label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input', 
                                   editOp: {
                                       callback: function (rownum, row) {
                                           if (/\D/.test(row.O_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -176,9 +182,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 footerrow: true,
                 minheight: 220,
                 isEidt: true,
-                isMultiselect: true,
                 height: 220,
                 inputCount: 2,
+                //isStatistics: true,
 
             });
 
@@ -190,28 +196,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         width: 180,
                         align: "center",
                         children: [
-                            {
-                                label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center", editType: 'select', editOp: {
-                                    width: 800,
-                                    height: 500,
-                                    align: "right",
-                                    colData: [
-                                        { label: "物料名称", name: "c_secname", width: 120, align: "left" },
-                                        { label: "物料编码", name: "c_seccode", width: 90, align: "center" },
-                                        { label: "单位", name: "g_unit", width: 90, align: "center" },
-                                    ],
-                                    url: top.$.rootUrl + '/MesDev/OrgResManager/GetSecGoodsList',
-                                    isPage: true,
-                                    callback: function (selectdata, rownum, row) {
-                                        row.O_SecGoodsCode = selectdata.c_seccode;
-                                        row.O_SecGoodsName = selectdata.c_secname;
-                                        row.O_SecUnit = selectdata.g_unit;
-                                    }
-                                }
-                            },
+                            {label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center"},
                             { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
                             {
-                                label: "数量", name: "O_SecQty", width: 80, align: "center", editType: 'input',
+                                label: "数量", name: "O_SecQty", width: 80, align: "center", editType: 'input', 
                                 editOp: {
                                     callback: function (rownum, row) {
                                         if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
@@ -258,10 +246,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 footerrow: true,
                 minheight: 220,
                 isEidt: true,
-                isMultiselect: true,
                 height: 220,
                 inputCount: 1,
-
+                //isStatistics: true,
             });
         },
         initData: function () {
@@ -470,7 +457,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
     top.FormRefreshGirdDataDetails = function (data) {
 
         var rows = $('#Mes_OrgResDetail_d').jfGridGet('rowdatas');
-        rows.push(data);
+        //循环判断有无同一产出物的物料
+        var isExist = false;
+        for (var i = 0,j=rows.length; i < j; i++) {
+            if (data.O_SecGoodsCode==rows[i].O_SecGoodsCode) {
+                isExist = true;
+            }
+        }
+        if (!isExist) {
+            rows.push(data);
+        }
+        //rows.push(data);
 
         var filterarray = $.grep(rows, function (item) {
             return item["O_SecGoodsCode"] != undefined;
