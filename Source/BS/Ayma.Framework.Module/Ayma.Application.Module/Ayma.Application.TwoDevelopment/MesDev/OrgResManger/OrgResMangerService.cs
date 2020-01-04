@@ -131,7 +131,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("O_OrgResNo", "%" + queryParam["O_OrgResNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_OrgResNo Like @O_OrgResNo ");
                 }
-                if (!queryParam["O_WorkShopName"].IsEmpty())
+                if (!queryParam["O_StockCode"].IsEmpty())
                 {
                     dp.Add("O_StockCode", "%" + queryParam["O_StockCode"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_StockCode Like @O_StockCode ");
@@ -140,6 +140,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("O_Status", "%" + queryParam["O_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_Status Like @O_Status ");
+                }
+                if (!queryParam["O_ProCode"].IsEmpty())
+                {
+                    dp.Add("O_ProCode", "%" + queryParam["O_ProCode"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.O_ProCode Like @O_ProCode ");
                 }
                 return this.BaseRepository().FindList<Mes_OrgResHeadEntity>(strSql.ToString(), dp, pagination);
             }
