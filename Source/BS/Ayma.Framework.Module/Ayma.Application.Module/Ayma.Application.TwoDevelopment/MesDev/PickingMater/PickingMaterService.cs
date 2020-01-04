@@ -506,7 +506,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                         var F_Level = product.Value.Max(r => r.F_Level);
                         var F_GoodsCodes = product.Value.Where(r => r.F_Level != F_Level).Select(r => "''"+r.F_GoodsCode+"''");
-                        dp.Add("F_GoodsCode", product.Value.Find(r=>r.F_Level==F_Level).F_GoodsCode, DbType.String);
+                        dp.Add("F_GoodsCodes", product.Value.Find(r=>r.F_Level==F_Level).F_GoodsCode, DbType.String);
                         dp.Add("F_GoodsCode", string.Join(",",F_GoodsCodes), DbType.String);
 
                         var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetQty,dp);
