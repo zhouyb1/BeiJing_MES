@@ -46,9 +46,22 @@ var bootstrap = function ($, ayma) {
                 //queryJson.type = "report";
                 page.search(queryJson);
             }, 220, 400);
-
+            //绑定工序
+            $('#O_ProCode').select({
+                type: 'default',
+                value: 'P_ProNo',
+                text: 'P_ProName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProceList',
+                // 访问数据接口参数
+                param: {}
+            });
             //绑定日耗库
-            $('#O_WorkShopName').select({
+            $("#O_StockCode").select({
                 type: 'default',
                 value: 'S_Code',
                 text: 'S_Name',
@@ -60,7 +73,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
-            });
+            })
 
             // 刷新
             $('#am_refresh').on('click', function () {

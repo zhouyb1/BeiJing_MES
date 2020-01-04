@@ -185,6 +185,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 minheight: 220,
                 isEidt: true,
                 height: 220,
+                rowCount: 2,
                 inputCount: 2,
                 isMultiselect: true,
 
@@ -248,6 +249,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ],
                 isAutoHeight: false,
                 footerrow: true,
+                rowCount:2,
                 minheight: 220,
                 isEidt: true,
                 height: 220,

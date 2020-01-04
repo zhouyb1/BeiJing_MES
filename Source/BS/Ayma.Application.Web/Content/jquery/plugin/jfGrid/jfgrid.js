@@ -42,7 +42,7 @@
             // 加载数据
             if (!!dfop.rowdatas && !dfop.url) {
                 if (dfop.isEidt && dfop.rowdatas.length == 0) {
-                    for (var i = 0; i < 2; i++) {
+                    for (var i = 0; i < dfop.rowCount; i++) {
                         dfop.rowdatas.push({});
                     }
                    
@@ -1778,8 +1778,8 @@
                 total: 0                  // 总页数
             },
             sidx: '',
-            sord: 'ASC',
-
+            sord: 'ASC', 
+            rowCount: 1,                  //form表单 grid表格默认显示条目
 
             isTree: false,                // 是否树形显示（没有分页的情况下才支持） (只有在数据不多情况下才建议使用)
             mainId: 'id',                 // 关联的主键
