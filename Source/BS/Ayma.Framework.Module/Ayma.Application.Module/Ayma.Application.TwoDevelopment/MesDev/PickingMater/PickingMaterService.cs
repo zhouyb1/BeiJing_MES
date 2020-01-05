@@ -358,6 +358,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                 List<ProductBom> boms=new List<ProductBom>();
                 Dictionary<string, List<ProductBom>> products=new Dictionary<string, List<ProductBom>>();
+                List<GoodsConvert> converts=new List<GoodsConvert>();
 
                 #region  获取产品配方
 
@@ -405,11 +406,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 S1.S_Name F_InStockName,--领料仓库名称
                 G.G_StockCode F_OutStockCode,--出料仓库编码
                 S2.S_Name F_OutStockName,--出料仓库名称
+				ISNULL(M.C_Min,0) F_ConvertMin,--最低转化率
+				ISNULL(M.C_Max,100) F_ConvertMax,--最大转化率
                 B_Qty F_PlanQty,--计划数量
                 B_Qty F_ProposeQty,--建议数量
                 F_Level
-                    FROM CTE C
+                FROM CTE C
                 LEFT JOIN Mes_Goods G ON C.B_GoodsCode = G.G_Code
+				LEFT JOIN Mes_Convert M ON M.C_SecCode=C.B_GoodsCode
                 LEFT JOIN Mes_Stock S1 ON S1.S_Code=C.B_StockCode
                 LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
                 ORDER BY C.F_Level";
@@ -497,6 +501,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             )MyData 
                             GROUP BY F_GoodsCode,F_CreateDate
                         ";
+
                         var dp = new DynamicParameters(new { });
                         if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                         {

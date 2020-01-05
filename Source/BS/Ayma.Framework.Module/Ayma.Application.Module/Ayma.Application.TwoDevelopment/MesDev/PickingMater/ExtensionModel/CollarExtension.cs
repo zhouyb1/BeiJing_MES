@@ -103,6 +103,18 @@
         public string F_OutStockName { get; set; }
 
 
+        
+
+        /// <summary>
+        /// 最小转化率
+        /// </summary>
+        public float? F_ConvertMin { get; set; }
+
+        /// <summary>
+        /// 最大转化率
+        /// </summary>
+        public float? F_ConvertMax { get; set; }
+
 
         /// <summary>
         /// 计划数量
@@ -221,5 +233,69 @@
         /// 建议数量
         /// </summary>
         public float? F_ProposeQty { get; set; }
+    }
+
+
+    /// <summary>
+    /// 物料转换
+    /// </summary>
+    public class GoodsConvert
+    {
+        /// <summary>
+        /// 物料编码
+        /// </summary>
+        public string F_GoodsCode { get; set; }
+
+        /// <summary>
+        /// 物料名称
+        /// </summary>
+        public string F_GoodsName { get; set; }
+
+
+        /// <summary>
+        /// 工序编码
+        /// </summary>
+        public string F_ProceCode { get; set; }
+
+        /// <summary>
+        /// 工序名称
+        /// </summary>
+        public string F_ProceName { get; set; }
+
+
+        /// <summary>
+        /// 物料级别
+        /// </summary>
+        public int F_Level { get; set; }
+
+
+        /// <summary>
+        /// 物料类型
+        /// </summary>
+        public int F_Kind { get; set; }
+
+
+        /// <summary>
+        /// 基本单位
+        /// </summary>
+        public string F_Unit { get; set; }
+
+
+        /// <summary>
+        /// 最小转化率
+        /// </summary>
+        public float? F_ConvertMin { get; set; }
+
+
+        /// <summary>
+        /// 最大转化率
+        /// </summary>
+        public float? F_ConvertMax { get; set; }
+
+
+        /// <summary>
+        /// 转换标识 低于下限 高于上限 合理
+        /// </summary>
+        public string F_ConvertTag { get; set; }
     }
 }
