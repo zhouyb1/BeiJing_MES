@@ -97,9 +97,36 @@ var bootstrap = function ($, ayma) {
                     { label: "商品编码", name: "I_GoodsCode", width: 114, align: "left" },
                     { label: "商品名称", name: "I_GoodsName", width: 114, align: "left" },
                     { label: "单位", name: "I_Unit", width: 114, align: "left" },
-                    { label: "数量", name: "I_Qty", width: 114, align: "left" },
-                    { label: "物料价格", name: "Price", width: 114, align: "left" },
-                    { label: "总金额", name: "AllMoney", width: 114, align: "left" },
+                    {
+                        label: "数量", name: "I_Qty", width: 114, align: "left", formatter: function (value, row, dfop) {
+                            if (row.I_Qty != undefined && !!row.I_Qty) {
+                                return row.I_Qty.toFixed(6) / 1;
+                            }
+                            if (row.I_Qty == "") {
+                                return row.I_Qty = 0;
+                            }
+                        }
+                    },
+                    {
+                        label: "物料价格", name: "Price", width: 114, align: "left", formatter: function (value, row, dfop) {
+                            if (row.Price != undefined && !!row.Price) {
+                                return row.Price.toFixed(6) / 1;
+                            }
+                            if (row.Price == "") {
+                                return row.Price = 0;
+                            }
+                        }
+                    },
+                    {
+                        label: "总金额", name: "AllMoney", width: 114, align: "left", formatter: function (value, row, dfop) {
+                            if (row.AllMoney != undefined && !!row.AllMoney) {
+                                return row.AllMoney.toFixed(6) / 1;
+                            }
+                            if (row.AllMoney == "") {
+                                return row.AllMoney = 0;
+                            }
+                        }
+                    },
                     { label: "下限预警量", name: "G_Lower", width: 114, align: "left" },
                     { label: "上限预警量", name: "G_Super", width: 114, align: "left" },
                     { label: "预警状态", name: "G_State", width: 114, align: "left" }
@@ -135,9 +162,36 @@ var bootstrap = function ($, ayma) {
                       { label: "商品编码", name: "I_GoodsCode", width: 100, align: "left" },
                       { label: "商品名称", name: "I_GoodsName", width: 100, align: "left" },
                       { label: "单位", name: "I_Unit", width: 100, align: "left" },
-                      { label: "数量", name: "I_Qty", width: 100, align: "left" },
-                      { label: "物料价格", name: "Price", width: 100, align: "left" },
-                      { label: "金额", name: "OneMoney", width: 160, align: "left" },
+                      {
+                          label: "数量", name: "I_Qty", width: 100, align: "left", formatter: function (value, row, dfop) {
+                              if (row.I_Qty != undefined && !!row.I_Qty) {
+                                  return row.I_Qty.toFixed(6) / 1;
+                              }
+                              if (row.I_Qty == "") {
+                                  return row.I_Qty = 0;
+                              }
+                          }
+                      },
+                      {
+                          label: "物料价格", name: "Price", width: 100, align: "left", formatter: function (value, row, dfop) {
+                              if (row.Price != undefined && !!row.Price) {
+                                  return row.Price.toFixed(6) / 1;
+                              }
+                              if (row.Price == "") {
+                                  return row.Price = 0;
+                              }
+                          }
+                      },
+                      {
+                          label: "金额", name: "OneMoney", width: 160, align: "left", formatter: function (value, row, dfop) {
+                              if (row.OneMoney != undefined && !!row.OneMoney) {
+                                  return row.OneMoney.toFixed(6) / 1;
+                              }
+                              if (row.OneMoney == "") {
+                                  return row.OneMoney = 0;
+                              }
+                          }
+                      },
                       { label: "批次", name: "I_Batch", width: 100, align: "left" },
                       { label: "备注", name: "I_Remark", width: 100, align: "left" },
                     ],
