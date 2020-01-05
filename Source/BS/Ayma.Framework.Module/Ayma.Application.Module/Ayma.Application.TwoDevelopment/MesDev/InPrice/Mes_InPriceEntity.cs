@@ -14,7 +14,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     {
         #region 实体成员
         /// <summary>
-        /// 主键
+        /// 主键说明
         /// </summary>
         [Column("ID")]
         public string ID { get; set; }
