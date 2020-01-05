@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -66,17 +67,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 初始数量
         /// </summary>
         [Column("I_QTYOLD")]
-        public double? I_QtyOld { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_QtyOld { get; set; }
         /// <summary>
         /// 新数量
         /// </summary>
         [Column("I_QTYNEW")]
-        public double? I_QtyNew { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_QtyNew { get; set; }
         /// <summary>
         /// 移动数量
         /// </summary>
         [Column("I_QTYTREND")]
-        public double? I_QtyTrend { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_QtyTrend { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

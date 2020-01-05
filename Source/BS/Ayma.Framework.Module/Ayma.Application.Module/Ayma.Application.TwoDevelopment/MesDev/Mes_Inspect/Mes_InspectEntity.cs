@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -73,12 +74,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 抽检数量
         /// </summary>
         [Column("I_GOODSQTY")]
-        public double? I_GoodsQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_GoodsQty { get; set; }
         /// <summary>
         /// 合格数量
         /// </summary>
         [Column("I_QUALIFIEDQTY")]
-        public double? I_QualifiedQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_QualifiedQty { get; set; }
         /// <summary>
         /// 不合格原因
         /// </summary>

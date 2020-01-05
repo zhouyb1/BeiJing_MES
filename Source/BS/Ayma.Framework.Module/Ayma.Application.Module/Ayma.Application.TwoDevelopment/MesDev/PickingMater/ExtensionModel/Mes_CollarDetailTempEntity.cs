@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -53,13 +54,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("C_UNITQTY")]
-        public double?  C_UnitQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal?  C_UnitQty { get; set; }
         /// <summary>
         /// 包装数量
         /// </summary>
         /// <returns></returns>
         [Column("C_QTY2")]
-        public double? C_Qty2 { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_Qty2 { get; set; }
         /// <summary>
         /// 供应商编码
         /// </summary>
@@ -89,7 +92,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("C_QTY")]
-        public double? C_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -104,7 +108,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("C_PRICE")]
-        public double? C_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_Price { get; set; }
         /// <summary>
         /// 班组
         /// </summary>
@@ -118,13 +123,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 计划数量
         /// </summary>
         [Column("C_PlanQty")]
-        public double? C_PlanQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_PlanQty { get; set; }
 
         /// <summary>
         /// 建议数量
         /// </summary>
         [Column("C_SuggestQty")]
-        public double? C_SuggestQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_SuggestQty { get; set; }
         #endregion
 
         #region 扩展操作

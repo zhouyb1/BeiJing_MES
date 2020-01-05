@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,7 +37,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 金额
         /// </summary>
         [Column("S_PAY")]
-        public double? S_Pay { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_Pay { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

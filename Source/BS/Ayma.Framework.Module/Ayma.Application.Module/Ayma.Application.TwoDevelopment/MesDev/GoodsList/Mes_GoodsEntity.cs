@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -51,7 +52,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("G_PRICE")]
-        public double? G_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Price { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -61,18 +63,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 单位重量
         /// </summary>
         [Column("G_UNITWEIGHT")]
-        public double? G_UnitWeight { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_UnitWeight { get; set; }
         
         /// <summary>
         /// 上限预警比例
         /// </summary>
         [Column("G_SUPER")]
-        public double? G_Super { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Super { get; set; }
         /// <summary>
         /// 下限预警比例
         /// </summary>
         [Column("G_LOWER")]
-        public double? G_Lower { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Lower { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -112,7 +117,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 包装规格
         /// </summary>
         [Column("G_UNITQTY")]
-        public double? G_UnitQty { get; set; }   
+        [DecimalPrecision(18, 6)]
+        public decimal? G_UnitQty { get; set; }   
         /// <summary>
         /// 包装单位
         /// </summary>
@@ -137,12 +143,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 销售税率
         /// </summary>
         [Column("G_Otax")]
-        public double? G_Otax { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Otax { get; set; }
         /// <summary>
         /// 购进税率
         /// </summary>
         [Column("G_ITAX")]
-        public double? G_Itax { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Itax { get; set; }
         #endregion
 
         #region 扩展操作
@@ -188,7 +196,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 最新价格
         /// </summary>
          [NotMapped]
-        public double? M_Price { get; set; }
+         [DecimalPrecision(18, 6)]
+        public decimal? M_Price { get; set; }
         #endregion
     }
 }

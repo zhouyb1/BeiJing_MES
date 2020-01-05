@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseContext.cs" />
+    <Compile Include="DecimalPrecisionAttribute.cs" />
+    <Compile Include="DecimalPrecisionAttributeConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

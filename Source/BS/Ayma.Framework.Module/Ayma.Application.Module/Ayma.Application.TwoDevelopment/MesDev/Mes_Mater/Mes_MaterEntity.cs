@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -53,7 +54,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_QTY")]
-        public double? P_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_Qty { get; set; }
 
         /// <summary>
         /// erp餐食编码
@@ -69,7 +71,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string P_Batch { get; set; }
 
         [NotMapped]
-        public double? P_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_Price { get; set; }
 
         #endregion
 

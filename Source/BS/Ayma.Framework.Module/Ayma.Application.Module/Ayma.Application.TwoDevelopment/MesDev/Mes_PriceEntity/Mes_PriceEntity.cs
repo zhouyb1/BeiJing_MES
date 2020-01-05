@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -47,12 +48,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_INPRICE")]
-        public double? P_InPrice { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_InPrice { get; set; }
         /// <summary>
         /// 供应商价格(含税)
         /// </summary>
         [Column("P_TAXPRICE")]
-        public double? P_TaxPrice { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_TaxPrice { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
@@ -70,7 +73,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("P_ITAX")]
-        public double? P_Itax { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_Itax { get; set; }
         /// <summary>
         /// 起始时间
         /// </summary>

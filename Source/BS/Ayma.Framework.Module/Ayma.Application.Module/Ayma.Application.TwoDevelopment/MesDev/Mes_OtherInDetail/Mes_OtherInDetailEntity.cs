@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -47,7 +48,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("O_QTY")]
-        public double? O_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? O_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -59,7 +61,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("O_PRICE")]
-        public double? O_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? O_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

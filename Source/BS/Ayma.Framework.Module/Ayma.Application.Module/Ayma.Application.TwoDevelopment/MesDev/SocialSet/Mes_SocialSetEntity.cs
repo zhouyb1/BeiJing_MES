@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,47 +32,56 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 工资基数
         /// </summary>
         [Column("S_WAGEBASE")]
-        public double? S_Wagebase { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_Wagebase { get; set; }
         /// <summary>
         /// 养老单位比例
         /// </summary>
         [Column("S_PENSIONUNITRATIO")]
-        public double? S_PensionUnitRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_PensionUnitRatio { get; set; }
         /// <summary>
         /// 养老个人比例
         /// </summary>
         [Column("S_PENSIONPERSONRATIO")]
-        public double? S_PensionPersonRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_PensionPersonRatio { get; set; }
         /// <summary>
         /// 失业单位比例
         /// </summary>
         [Column("S_OUTWORKUNITRATIO")]
-        public double? S_OutWorkUnitRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_OutWorkUnitRatio { get; set; }
         /// <summary>
         /// 失业个人比例
         /// </summary>
         [Column("S_OUTWORKPERSONRATIO")]
-        public double? S_OutWorkPersonRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_OutWorkPersonRatio { get; set; }
         /// <summary>
         /// 医疗单位比例
         /// </summary>
         [Column("S_MEDICALUNITRATIO")]
-        public double? S_MedicalUnitRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_MedicalUnitRatio { get; set; }
         /// <summary>
         /// 医疗个人比例
         /// </summary>
         [Column("S_MEDICALPRESONRATIO")]
-        public double? S_MedicalPresonRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_MedicalPresonRatio { get; set; }
         /// <summary>
         /// 工伤单位比例
         /// </summary>
         [Column("S_INJURYUNITRATIO")]
-        public double? S_InJuryUnitRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_InJuryUnitRatio { get; set; }
         /// <summary>
         /// 生育单位比例
         /// </summary>
         [Column("S_BEARUNITRATIO")]
-        public double? S_BearUnitRatio { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_BearUnitRatio { get; set; }
         #endregion
 
         #region 扩展操作

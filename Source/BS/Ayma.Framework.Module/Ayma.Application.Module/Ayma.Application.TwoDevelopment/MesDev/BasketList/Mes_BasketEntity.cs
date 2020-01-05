@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -31,7 +32,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// M_Weight
         /// </summary>
         [Column("M_WEIGHT")]
-        public double? M_Weight { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? M_Weight { get; set; }
         #endregion
 
         #region 扩展操作

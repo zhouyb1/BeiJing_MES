@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -46,7 +47,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("P_QTY")]
-        public double? P_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? P_Qty { get; set; }
         #endregion
 
         #region 扩展操作

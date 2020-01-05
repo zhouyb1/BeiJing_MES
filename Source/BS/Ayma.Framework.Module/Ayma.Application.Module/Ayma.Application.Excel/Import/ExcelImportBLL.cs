@@ -964,27 +964,27 @@ namespace Ayma.Application.Excel
                             {
                                 period = Convert.ToInt32(dr["保质时间(天)"]);//保质时间(天)
                             }
-                            double? price = 0;//价格
+                            decimal? price = 0;//价格
                             if (!dr["价格"].ToString().IsEmpty())
                             {
-                                price = Convert.ToDouble(dr["价格"]);
+                                price = Convert.ToDecimal(dr["价格"]);
                             }
 
 
-                            double? unitWeight = 0;//单位重量
+                            decimal? unitWeight = 0;//单位重量
                             if (!dr["单位重量"].ToString().IsEmpty())
                             {
-                                unitWeight = Convert.ToDouble(dr["单位重量"]);//单位重量
+                                unitWeight = Convert.ToDecimal(dr["单位重量"]);//单位重量
                             }
-                            double? super = 0;//上限预警单位数量
+                            decimal? super = 0;//上限预警单位数量
                             if (!dr["上限预警单位数量"].ToString().IsEmpty())
                             {
-                                super = Convert.ToDouble(dr["上限预警单位数量"]);//上限预警单位数量
+                                super = Convert.ToDecimal(dr["上限预警单位数量"]);//上限预警单位数量
                             }
-                            double? lower = 0;//下限预警单位数量
+                            decimal? lower = 0;//下限预警单位数量
                             if (!dr["下限预警单位数量"].ToString().IsEmpty())
                             {
-                                lower = Convert.ToDouble(dr["下限预警单位数量"]);//下限预警单位数量
+                                lower = Convert.ToDecimal(dr["下限预警单位数量"]);//下限预警单位数量
                             }
 
                             var tKind = dr["二级分类(肉食,蔬菜,调料,冷链,面条,糕点)"].ToString();//二级分类
@@ -1029,18 +1029,18 @@ namespace Ayma.Application.Excel
                             {
                                 prepareday = Convert.ToInt32(dr["备料天数"]);//备料天数
                             }
-                            double? otax = null;
+                            decimal? otax = null;
                             if (!dr["销售税率"].ToString().IsEmpty())
                             {
-                                otax = Convert.ToDouble(dr["销售税率"]);//销售税率
+                                otax = Convert.ToDecimal(dr["销售税率"]);//销售税率
                             }
-                            double? itax = null;
+                            decimal? itax = null;
                             if (!dr["购进税率"].ToString().IsEmpty())
                             {
-                                itax = Convert.ToDouble(dr["购进税率"]);//购进税率
+                                itax = Convert.ToDecimal(dr["购进税率"]);//购进税率
                             }
                             var erpcode = dr["ERP中的编码(成品必填)"].ToString();//ERP中的编码(成品必填)
-                            var unitQty = dr["包装规格"].ToDouble();//包装规格
+                            var unitQty = dr["包装规格"].ToDecimal();//包装规格
                             var unit = dr["单位"].ToString();//单位
                             var remark = dr["备注"].ToString();//备注
                             var model = new Mes_GoodsEntity()
@@ -1214,10 +1214,10 @@ namespace Ayma.Application.Excel
                             }
                             
                             var qtyTemp = dr["数量"].ToString();//数量
-                            double? qty= 0;
+                            decimal? qty= 0;
                             if (!qtyTemp.IsEmpty())
                             {
-                                qty = Convert.ToDouble(qtyTemp);
+                                qty = Convert.ToDecimal(qtyTemp);
                             }
 
 

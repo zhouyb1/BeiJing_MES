@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,7 +37,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 税率
         /// </summary>
         [Column("S_OTAX")]
-        public double? S_Otax { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_Otax { get; set; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -46,7 +48,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("S_QTY")]
-        public double? S_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -56,7 +59,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("S_PRICE")]
-        public double? S_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? S_Price { get; set; }
         /// <summary>
         /// 备注
         /// </summary>

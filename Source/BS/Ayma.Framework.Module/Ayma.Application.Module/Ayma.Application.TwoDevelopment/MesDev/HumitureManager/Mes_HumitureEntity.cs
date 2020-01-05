@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -36,12 +37,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 上限值
         /// </summary>
         [Column("H_UP")]
-        public double? H_Up { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? H_Up { get; set; }
         /// <summary>
         /// 下限值
         /// </summary>
         [Column("H_DOWN")]
-        public double? H_Down { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? H_Down { get; set; }
         /// <summary>
         /// 地址
         /// </summary>

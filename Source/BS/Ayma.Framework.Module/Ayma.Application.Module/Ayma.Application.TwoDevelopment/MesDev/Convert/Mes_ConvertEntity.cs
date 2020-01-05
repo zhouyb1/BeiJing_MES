@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,12 +42,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 最大转化率
         /// </summary>
         [Column("C_MAX")]
-        public double? C_Max { get; set; }   
+        [DecimalPrecision(18, 6)]
+        public decimal? C_Max { get; set; }   
         /// <summary>
         /// 最小转化率
         /// </summary>
         [Column("C_MIN")]
-        public double? C_Min { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? C_Min { get; set; }
         /// <summary>
         /// 工艺代码
         /// </summary>

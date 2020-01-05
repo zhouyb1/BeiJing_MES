@@ -854,7 +854,7 @@ ORDER BY C.F_Level";
                 {
                     foreach (var product in products)
                     {
-                        float? productQty = product.F_Qty;//生产数量
+                        decimal? productQty = product.F_Qty;//生产数量
                         var productBom = boms[product.F_GoodsCode];//配合
                         var parent = productBom.Find(r => r.F_Level == 0);//根
 
@@ -1038,7 +1038,7 @@ ORDER BY C.F_Level";
         /// </summary>
         /// <param name="parentid"></param>
         /// <param name="boms"></param>
-        private void SumQty(string parentid, List<ProductBom> boms,float quantity)
+        private void SumQty(string parentid, List<ProductBom> boms,decimal quantity)
         {
             var rows = boms.Where(r => r.F_ParentID == parentid); //子级
             if (rows == null || rows.Count() < 1)

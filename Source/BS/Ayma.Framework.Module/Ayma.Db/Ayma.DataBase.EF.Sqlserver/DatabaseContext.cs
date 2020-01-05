@@ -50,6 +50,7 @@ namespace Ayma.DataBase.SqlServer
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.Configurations.Add(configurationInstance);
             }
+            modelBuilder.Conventions.Add(new DecimalPrecisionAttributeConvention());
             base.OnModelCreating(modelBuilder);
         }
         #endregion

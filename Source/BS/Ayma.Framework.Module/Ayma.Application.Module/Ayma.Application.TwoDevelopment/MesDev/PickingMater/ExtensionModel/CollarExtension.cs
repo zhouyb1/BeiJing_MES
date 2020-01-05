@@ -14,7 +14,7 @@
         /// <summary>
         /// 生产数量
         /// </summary>
-        public float? F_Qty { get; set; }
+        public decimal? F_Qty { get; set; }
     }
 
     /// <summary>
@@ -73,12 +73,12 @@
         /// <summary>
         ///包装数量
         /// </summary>
-        public float F_UnitQty { get; set; }
+        public decimal F_UnitQty { get; set; }
 
         /// <summary>
         /// 成本价
         /// </summary>
-        public float? F_Price { get; set; }
+        public decimal? F_Price { get; set; }
 
 
         /// <summary>
@@ -119,12 +119,12 @@
         /// <summary>
         /// 计划数量
         /// </summary>
-        public float? F_PlanQty { get; set; }
+        public decimal? F_PlanQty { get; set; }
 
         /// <summary>
         /// 建议数量
         /// </summary>
-        public float? F_ProposeQty { get; set; }
+        public decimal? F_ProposeQty { get; set; }
 
 
 
@@ -149,7 +149,7 @@
         /// <summary>
         /// 物料数量
         /// </summary>
-        public float? F_Qty { get; set; }
+        public decimal? F_Qty { get; set; }
     }
 
     /// <summary>
@@ -186,12 +186,12 @@
         /// <summary>
         ///包装数量
         /// </summary>
-        public float F_UnitQty { get; set; }
+        public decimal F_UnitQty { get; set; }
 
         /// <summary>
         /// 成本价
         /// </summary>
-        public float? F_Price { get; set; }
+        public decimal? F_Price { get; set; }
 
 
         /// <summary>
@@ -221,18 +221,18 @@
         /// <summary>
         /// 计划数量
         /// </summary>
-        public float? F_PlanQty { get; set; }
+        public decimal? F_PlanQty { get; set; }
 
         /// <summary>
         /// 库存数量
         /// </summary>
-        public float? F_InventoryQty { get; set; }
+        public decimal? F_InventoryQty { get; set; }
 
 
         /// <summary>
         /// 建议数量
         /// </summary>
-        public float? F_ProposeQty { get; set; }
+        public decimal? F_ProposeQty { get; set; }
     }
 
 

@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -58,12 +59,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("I_QTY")]
-        public double? I_Qty { get; set; }  
+        [DecimalPrecision(18, 6)]
+        public decimal? I_Qty { get; set; }  
         /// <summary>
         /// 数量
         /// </summary>
         [NotMapped]
-        public double? Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? Qty { get; set; }
         /// <summary>
         /// 批次批次以入库时间（yyyymmdd)
         /// </summary>
@@ -99,12 +102,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 总金额
         /// </summary>
         [NotMapped]
-        public double? AllMoney { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? AllMoney { get; set; }
         /// <summary>
         /// 单个金额
         /// </summary>
         [NotMapped]
-        public double? OneMoney { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? OneMoney { get; set; }
         /// <summary>
         /// 班组
         /// </summary>
@@ -114,11 +119,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string I_TeamCode { get; set; }
 
         [NotMapped]
-        public double? I_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_Price { get; set; }
         [NotMapped]
-        public double? G_Super { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Super { get; set; }
         [NotMapped]
-        public double? G_Lower { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Lower { get; set; }
         [NotMapped]
         public string G_State { get; set; }
         [NotMapped]
@@ -128,12 +136,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [NotMapped]
         public string GoodsState { get; set; }
         [NotMapped]
-        public double? Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? Price { get; set; }
         /// <summary>
         /// 销售税率
         /// </summary>
         [NotMapped]
-        public double? I_Otax { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? I_Otax { get; set; }
         [NotMapped]
         public string S_Kind { get; set; }
         [NotMapped]

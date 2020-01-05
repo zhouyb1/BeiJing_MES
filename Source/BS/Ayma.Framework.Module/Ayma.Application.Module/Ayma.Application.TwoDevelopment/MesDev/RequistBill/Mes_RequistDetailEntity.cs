@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -42,7 +43,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("R_QTY")]
-        public double? R_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? R_Qty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -57,7 +59,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("R_PRICE")]
-        public double? R_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? R_Price { get; set; }
         #endregion
 
         #region 扩展操作

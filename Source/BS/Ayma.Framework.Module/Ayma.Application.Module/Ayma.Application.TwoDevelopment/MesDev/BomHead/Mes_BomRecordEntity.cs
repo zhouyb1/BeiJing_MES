@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.DataBase.SqlServer;
+using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -87,10 +88,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 数量
         /// </summary>
         [Column("B_QTY")]
-        public double? B_Qty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? B_Qty { get; set; }
 
         [NotMapped]
-        public double? B_Total { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? B_Total { get; set; }
 
         /// <summary>
         /// erp餐食编码
@@ -184,7 +187,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string G_SupplyName { get; set; }
 
         [NotMapped]
-        public double? G_Price { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_Price { get; set; }
 
         [NotMapped]
         public string G_TeamCode { get; set; }

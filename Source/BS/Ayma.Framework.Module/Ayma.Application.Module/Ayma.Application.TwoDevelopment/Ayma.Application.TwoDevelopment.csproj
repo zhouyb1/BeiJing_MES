@@ -366,6 +366,10 @@
       <Project>{13808645-2013-4896-8ee2-65144e222c69}</Project>
       <Name>Ayma.Cache.Redis</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Ayma.Db\Ayma.DataBase.EF.Sqlserver\Ayma.DataBase.SqlServer.csproj">
+      <Project>{890532f8-5205-4ee9-965c-84500cad24de}</Project>
+      <Name>Ayma.DataBase.SqlServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Ayma.Db\Ayma.DataBase.Repository\Ayma.DataBase.Repository.csproj">
       <Project>{7f5e2a6c-c859-494a-8577-75bf9603a80c}</Project>
       <Name>Ayma.DataBase.Repository</Name>
