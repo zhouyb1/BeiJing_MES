@@ -3,7 +3,6 @@ using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 namespace Ayma.Application.TwoDevelopment.MesDev
-
 {
     /// <summary>
     /// 创 建：超级管理员
@@ -12,6 +11,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     /// </summary>
     public partial class Mes_SpecsEntity 
     {
+        
         #region 实体成员
         /// <summary>
         /// 主键

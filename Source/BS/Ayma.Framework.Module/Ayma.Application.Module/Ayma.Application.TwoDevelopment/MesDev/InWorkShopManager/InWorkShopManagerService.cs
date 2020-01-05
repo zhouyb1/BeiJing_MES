@@ -255,33 +255,49 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT DISTINCT
-                                        d.O_SecGoodsCode ,
-                                        d.O_SecGoodsName ,
-                                        d.O_SecUnit ,
-                                        d.O_SecPrice ,
-                                        d.O_SecQty ,
-                                        d.O_SecBatch ,
-                                        h.O_StockCode ,
-                                        h.O_StockName ,
-                                        h.O_CreateDate 
-                                FROM    dbo.Mes_OrgResHead h
-                                        INNER JOIN dbo.Mes_OrgResDetail d ON h.O_OrgResNo = d.O_OrgResNo
-                                WHERE   O_Status = 3
-                                        AND h.o_transfer = 0 ");
+//                strSql.Append(@"SELECT DISTINCT
+//                                        d.O_SecGoodsCode ,
+//                                        d.O_SecGoodsName ,
+//                                        d.O_SecUnit ,
+//                                        d.O_SecPrice ,
+//                                        d.O_SecQty ,
+//                                        d.O_SecBatch ,
+//                                        h.O_StockCode ,
+//                                        h.O_StockName ,
+//                                        h.O_CreateDate 
+//                                FROM    dbo.Mes_OrgResHead h
+//                                        INNER JOIN dbo.Mes_OrgResDetail d ON h.O_OrgResNo = d.O_OrgResNo
+//                                WHERE   O_Status = 3
+//                                        AND h.o_transfer = 0 ");
+
+                strSql.Append(@"SELECT ID
+                                      ,P_ResNo
+                                      ,P_GoodsCode O_SecGoodsCode
+                                      ,P_GoodsName O_SecGoodsName
+                                      ,P_Oty 
+                                      ,P_RestQty O_SecQty
+                                      ,P_StockCode O_StockCode
+                                      ,P_StockName O_StockName
+                                      ,P_ProcutionDate O_ProcutionDate
+                                      ,P_Unit O_SecUnit
+                                      ,P_Batch O_SecBatch
+                                      ,P_Price O_SecPrice
+                                      ,P_Remark
+                              FROM Mes_GoodsForPacking where P_RestQty > 0 ");
+                
                 var dp = new DynamicParameters(new { });
                 var queryParam = queryJson.ToJObject();
                 if (!queryParam["keyword"].IsEmpty())
                 {
                     dp.Add("keyword", "%" + queryParam["keyword"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND (d.O_SecGoodsCode+d.O_SecGoodsName LIKE @keyword) ");
+                    strSql.Append(" AND (P_GoodsCode+P_GoodsName LIKE @keyword) ");
                 }
                 if (!queryParam["stock"].IsEmpty())
                 {
                     dp.Add("stock", queryParam["stock"].ToString(), DbType.String);
-                    strSql.Append(" AND h.O_StockCode = @stock  ");
+                    strSql.Append(" AND P_StockCode = @stock  ");
                 }
-               return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
+              return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
             }
             catch (Exception ex)
             {

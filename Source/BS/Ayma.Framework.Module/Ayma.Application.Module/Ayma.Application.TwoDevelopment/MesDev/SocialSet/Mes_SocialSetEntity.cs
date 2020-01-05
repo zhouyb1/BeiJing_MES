@@ -2,7 +2,6 @@
 using Ayma.Util;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>

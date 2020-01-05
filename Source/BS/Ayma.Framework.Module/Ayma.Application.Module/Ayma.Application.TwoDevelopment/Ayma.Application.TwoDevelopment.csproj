@@ -348,6 +348,7 @@
     <Compile Include="MesDev\Mes_Specs\Mes_SpecsService.cs" />
     <Compile Include="MesDev\Mes_Specs\Mes_SpecsIBLL.cs" />
     <Compile Include="MesDev\Mes_Specs\Mes_SpecsBLL.cs" />
+    <Compile Include="MesDev\Mes_GoodsForPacking\Mes_GoodsForPackingEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
