@@ -132,7 +132,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/InWorkShopManager/PostPageIndex',
                 headData: [
                     {
-                        label: "状态", name: "I_Status", width: 90, align: "left" ,
+                        label: "状态", name: "I_Status", width: 90, align: "center" ,
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -151,11 +151,11 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "I_InNo", width: 160, align: "left" },
-                    { label: "入往日耗库", name: "I_StockCode", width: 90, align: "left" },
-                    { label: "原日耗库", name: "I_WorkShop", width: 160, align: "left" },
-                    { label: "添加人", name: "I_CreateBy", width: 90, align: "left" },
-                    { label: "创建时间", name: "I_CreateDate", width: 160, align: "left", sort: true },
+                    { label: "入库单号", name: "I_InNo", width: 160, align: "center" },
+                    { label: "入往日耗库", name: "I_StockName", width: 110, align: "center" },
+                    { label: "原日耗库", name: "I_WorkShop", width: 140, align: "center" },
+                    { label: "添加人", name: "I_CreateBy", width: 90, align: "center" },
+                    { label: "创建时间", name: "I_CreateDate", width: 160, align: "center", sort: true },
                     { label: "备注", name: "I_Remark", width: 160, align: "left" },
 
                 ],
