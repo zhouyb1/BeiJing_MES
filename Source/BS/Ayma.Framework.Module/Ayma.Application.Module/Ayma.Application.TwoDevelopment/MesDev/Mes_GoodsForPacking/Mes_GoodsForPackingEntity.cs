@@ -80,12 +80,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("P_BATCH")]
         public string P_Batch { get; set; }
-        /// <summary>
-        /// 单价
-        /// </summary>
-        [Column("P_PRICE")]
-        [DecimalPrecision]
-        public decimal ? P_Price { get; set; }
+
         /// <summary>
         /// 单位
         /// </summary>

@@ -159,7 +159,7 @@ var bootstrap = function ($, ayma) {
                     //{ label: "生产订单时间", name: "I_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "I_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "I_CreateBy", width: 90, align: "left" },
-                    { label: "创建时间", name: "I_CreateDate", width: 160, align: "left" },
+                    { label: "创建时间", name: "I_CreateDate", width: 160, align: "left", sort: true },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

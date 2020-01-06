@@ -84,7 +84,6 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "o_secunit", width: 60, align: "center" },
                     { label: "库存", name: "o_secqty", width: 90, align: "center" },
                     { label: "单价", name: "o_secprice", width: 60, align: "center" },
-                    { label: "制作时间", name: "o_procutiondate", width: 150, align: "center" }
                 ],
                 mainId: 'id',
                 isMultiselect: true,         // 是否允许多选

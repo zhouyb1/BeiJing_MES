@@ -75,8 +75,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("I_WorkShop", "%" + queryParam["I_WorkShop"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.W_Name Like @I_WorkShop ");
                 }
-                strSql.Append("  ORDER BY O_CreateDate DESC ");
-
                 return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
@@ -270,20 +268,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 //                                WHERE   O_Status = 3
 //                                        AND h.o_transfer = 0 ");
 
-                strSql.Append(@"SELECT ID
-                                      ,P_ResNo
-                                      ,P_GoodsCode O_SecGoodsCode
+                strSql.Append(@"SELECT DISTINCT 
+                                       P_GoodsCode O_SecGoodsCode
                                       ,P_GoodsName O_SecGoodsName
                                       ,P_Oty 
                                       ,P_RestQty O_SecQty
                                       ,P_StockCode O_StockCode
                                       ,P_StockName O_StockName
-                                      ,P_ProcutionDate O_ProcutionDate
                                       ,P_Unit O_SecUnit
                                       ,P_Batch O_SecBatch
-                                      ,P_Price O_SecPrice
+                                      ,G_Price O_SecPrice
                                       ,P_Remark
-                              FROM Mes_GoodsForPacking where P_RestQty > 0 ");
+                              FROM Mes_GoodsForPacking  inner join  Mes_Goods  on G_Code = P_GoodsCode where P_RestQty > 0 ");
                 
                 var dp = new DynamicParameters(new { });
                 var queryParam = queryJson.ToJObject();

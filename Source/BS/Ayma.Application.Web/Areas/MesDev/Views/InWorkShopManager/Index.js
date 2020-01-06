@@ -250,7 +250,7 @@ var bootstrap = function ($, ayma) {
                     { label: "原日耗仓", name: "I_WorkShop", width: 150, align: "center" },
                     { label: "备注", name: "I_Remark", width: 160, align: "center" },
                     { label: "添加人", name: "I_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "I_CreateDate", width: 160, align: "center" },
+                    { label: "添加时间", name: "I_CreateDate", width: 160, align: "center", sort: true },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

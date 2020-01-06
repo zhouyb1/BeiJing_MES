@@ -53,7 +53,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 价格
         /// </summary>
         [Column("O_PRICE")]
-        [DecimalPrecision(18, 6)]
+        [DecimalPrecision]
         public decimal? O_Price { get; set; }
         /// <summary>
         /// 物料编码
