@@ -9,6 +9,34 @@ var bootstrap = function ($, ayma) {
             page.initData();
         },
         bind: function () {
+            $('#I_WorkShop').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+
+            $('#I_StockCode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
+                // 访问数据接口参数
+                param: {}
+            });
+
             $('#Mes_InWorkShopDetail').jfGrid({
                 headData: [
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left" },

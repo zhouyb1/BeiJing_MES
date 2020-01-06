@@ -59,7 +59,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#I_Status').DataItemSelect({ code: 'InXStatus' });
             //绑定仓库
-            $('#I_StockName').select({
+            $('#I_StockCode').select({
                 type: 'default',
                 value: 'S_Code',
                 text: 'S_Name',
