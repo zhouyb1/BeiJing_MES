@@ -92,7 +92,7 @@ namespace DesktopApp
 
                 车间扫描ToolStripMenuItem.Visible = false;;
                 车间入库ToolStripMenuItem.Visible = false;;
-                车间出库ToolStripMenuItem.Visible = false; ;
+                //车间出库ToolStripMenuItem.Visible = false; ;
                 人脸ToolStripMenuItem.Visible = false;;
                 
                 rFID管理ToolStripMenuItem.Visible = false;;
@@ -245,11 +245,11 @@ namespace DesktopApp
                                 车间入库ToolStripMenuItem.Visible = true;
                                 break;
                             }
-                        case "14":
-                            {
-                                车间出库ToolStripMenuItem.Visible = true;
-                                break;
-                            }
+                        //case "14":
+                        //    {
+                        //        车间出库ToolStripMenuItem.Visible = true;
+                        //        break;
+                        //    }
                         case "15":
                             {
                                 人脸ToolStripMenuItem.Visible = true;
@@ -835,6 +835,24 @@ namespace DesktopApp
             }
 
             frmInventory.Show(this.panMain);
+        }
+
+        private void 更新系统ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSearchConver frmsearchconver = new frmSearchConver();
+            frmsearchconver.TopLevel = false;
+            frmsearchconver.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmsearchconver.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmsearchconver.Show(this.panMain);
         }
 
 

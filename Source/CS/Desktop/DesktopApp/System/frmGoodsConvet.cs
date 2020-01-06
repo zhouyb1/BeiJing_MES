@@ -44,7 +44,8 @@ namespace DesktopApp
         private void UpdateGoods()
         {
             Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
-            string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Batch,a.I_Qty,a.I_Unit,a.ID,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
+            //string strSql = "select a.I_GoodsCode,a.I_GoodsName,SUM(a.I_Qty) as I_Qty,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0 GROUP BY a.I_GoodsCode,a.I_GoodsName,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price";
+            string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Qty,a.I_Batch,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
             DataSet ds = new DataSet();
             ds = WorkShopScanBLL.GetList_WorkShopScan2(strSql);
 
@@ -54,7 +55,7 @@ namespace DesktopApp
             int nLen = dataGridView1.Rows.Count;
             for (int i = 0; i < nLen - 1; i++)
             {
-                dataGridView1.Rows[i].Cells["实用数量"].Value = dataGridView1.Rows[i].Cells["数量"].Value;
+                dataGridView1.Rows[i].Cells["实用数量"].Value = "0";
                 dataGridView1.Rows[i].Cells["车间"].Value = Globels.strWorkShopName;
             }
         }
@@ -88,7 +89,12 @@ namespace DesktopApp
 
                         if(Convert.ToDouble(strQty) > Convert.ToDouble(strYLQty))
                         {
-                            lblTS.Text = "系统提示：物料：" + strName + "批次:" + strPc + "实用数量不能大于库存数量";
+                            lblTS.Text = "系统提示：物料：" + strName  + "实用数量不能大于库存数量";
+                            return;
+                        }
+                        if (Convert.ToDouble(strQty) == 0 || Convert.ToDouble(strQty) < 0)
+                        {
+                            lblTS.Text = "系统提示：物料：" + strName + "实用数量不能为0或者负数";
                             return;
                         }
 

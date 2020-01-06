@@ -27,43 +27,54 @@ namespace DesktopApp
         Bmp2Bmp2Data b2d;
         Bmp2BmpProduct bp;
         string strBZQ; //保质期
-        string m_strBarcode = "";
+        string m_strBarcode = "补写";
         public frmWorkShopWeightList()
         {
             InitializeComponent();
         }
 
-        private void cmbGoodsName_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0)
-            {
-                return;
-            }
-            e.DrawBackground();
-            e.DrawFocusRectangle();
-            e.Graphics.DrawString(cmbGoodsName.GetItemText(cmbGoodsName.Items[e.Index]).ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 0);
-        }
+        //private void cmbGoodsName_DrawItem(object sender, DrawItemEventArgs e)
+        //{
+        //    if (e.Index < 0)
+        //    {
+        //        return;
+        //    }
+        //    e.DrawBackground();
+        //    e.DrawFocusRectangle();
+        //    e.Graphics.DrawString(cmbGoodsName.GetItemText(cmbGoodsName.Items[e.Index]).ToString(), e.Font, new SolidBrush(e.ForeColor), e.Bounds.X, e.Bounds.Y + 0);
+        //}
         private void frmWorkShopWeightList_Load(object sender, EventArgs e)
         {
 
-
+            List<string> insertList = new List<string>();
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
-
+            this.listView1.Items.Clear();
+            this.listView1.BeginUpdate();
             var Scan_rows = InventoryBLL.GetData(" where I_StockCode = '" + Globels.strStockCode + "' and I_Qty > 0");
             for (int i = 0; i < Scan_rows.Count; i++)
             {
                 string strGoodsCode = Scan_rows[i].I_GoodsCode;
                 Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
                 var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '" + strGoodsCode + "' and C_ProNo = '"+ Globels.strProce +"'");
+                
                 for (int j = 0; j < Convert_rows.Count; j++)
                 {
-                    if (!cmbGoodsName.Items.Contains(Convert_rows[j].C_SecName))
+                    if (!insertList.Contains(Convert_rows[j].C_SecName))
                     {
-                        cmbGoodsName.Items.Add(Convert_rows[j].C_SecName);
+                        insertList.Add(Convert_rows[j].C_SecName);
+                        ListViewItem lvi = new ListViewItem(Convert_rows[j].C_SecName);
+                        this.listView1.Items.Add(lvi);
                     }
-                }
-            }
 
+                    //if (!cmbGoodsName.Items.Contains(Convert_rows[j].C_SecName))
+                    //{
+                    //    cmbGoodsName.Items.Add(Convert_rows[j].C_SecName);
+                    //}
+
+                }
+                
+            }
+            this.listView1.EndUpdate();
 
         }
 
@@ -92,7 +103,7 @@ namespace DesktopApp
         private void cmbGoodsCode_SelectedIndexChanged(object sender, EventArgs e)
         {
             MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-            var Goods_rows = GoodsBLL.GetListCondit("where G_Name = '" + cmbGoodsName.Text + "'");
+            var Goods_rows = GoodsBLL.GetListCondit("where G_Name = '" + txtGoodsName.Text + "'");
             int nLen = Goods_rows.Count;
             if (nLen > 0)
             {
@@ -155,7 +166,7 @@ namespace DesktopApp
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (cmbGoodsName.Text == "")
+            if (txtGoodsName.Text == "")
             {
                 MessageBox.Show("请先选择物料");
 
@@ -206,7 +217,7 @@ namespace DesktopApp
                     WorkShopWeightEntity.W_Remark = "";
                     WorkShopWeightEntity.W_SecBatch = txtBatch.Text;
                     WorkShopWeightEntity.W_SecGoodsCode = txtCode.Text;
-                    WorkShopWeightEntity.W_SecGoodsName = cmbGoodsName.Text;
+                    WorkShopWeightEntity.W_SecGoodsName = txtGoodsName.Text;
                     WorkShopWeightEntity.W_SecQty = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
                     WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                     WorkShopWeightEntity.W_Status = 1;
@@ -219,9 +230,9 @@ namespace DesktopApp
                         string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                         m_strBarcode = Barcode;
                         Double dTemp = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
-                        GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, cmbGoodsName.Text, dTemp.ToString(), strBZQ, strBarcode);
+                        GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtGoodsName.Text, dTemp.ToString(), strBZQ, strBarcode);
                         MessageBox.Show("添加成功");
-                        SaveBarcode(Barcode, txtCode.Text, cmbGoodsName.Text, dTemp, Globels.strWorkShop);
+                        SaveBarcode(Barcode, txtCode.Text, txtGoodsName.Text, dTemp, Globels.strWorkShop);
                     }
 
                     this.Enabled = true;
@@ -672,6 +683,32 @@ namespace DesktopApp
             }
         
         
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int nLen2 = listView1.SelectedIndices[0];
+                string strGoodsName = listView1.Items[nLen2].SubItems[0].Text.ToString();
+                MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                var Goods_rows = GoodsBLL.GetListCondit("where G_Name = '" + strGoodsName + "'");
+                int nLen = Goods_rows.Count;
+                if (nLen > 0)
+                {
+                    txtCode.Text = Goods_rows[0].G_Code;
+                    txtGoodsName.Text = Goods_rows[0].G_Name;
+                    txtUnit.Text = Goods_rows[0].G_Unit;
+                    int dd = Goods_rows[0].G_Period * 24;
+                    strBZQ = dd.ToString();
+                }
+                txtBatch.Text = DateTime.Now.ToString("yyyyMMdd");
+            }
+            catch(Exception ex)
+            {
+                ;
+            }
+            
         }
 
 

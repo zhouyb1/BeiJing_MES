@@ -70,7 +70,6 @@
             this.cmsPassword = new System.Windows.Forms.ToolStripMenuItem();
             this.原物料入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.补打标签ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.车间出库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间扫描ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间入库ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -144,7 +143,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
-            this.lbVer.Text = "V1.0.1.9";
+            this.lbVer.Text = "V1.0.2.0";
             // 
             // label3
             // 
@@ -264,7 +263,6 @@
             this.cmsUserManager,
             this.原物料入库ToolStripMenuItem,
             this.补打标签ToolStripMenuItem,
-            this.车间出库ToolStripMenuItem,
             this.车间扫描ToolStripMenuItem,
             this.车间入库ToolStripMenuItem,
             this.toolStripMenuItem2,
@@ -390,13 +388,6 @@
             this.补打标签ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
             this.补打标签ToolStripMenuItem.Text = "补打标签";
             this.补打标签ToolStripMenuItem.Click += new System.EventHandler(this.补打标签ToolStripMenuItem_Click);
-            // 
-            // 车间出库ToolStripMenuItem
-            // 
-            this.车间出库ToolStripMenuItem.Name = "车间出库ToolStripMenuItem";
-            this.车间出库ToolStripMenuItem.Size = new System.Drawing.Size(118, 25);
-            this.车间出库ToolStripMenuItem.Text = "日耗库到车间";
-            this.车间出库ToolStripMenuItem.Click += new System.EventHandler(this.车间出库ToolStripMenuItem_Click);
             // 
             // 车间扫描ToolStripMenuItem
             // 
@@ -567,8 +558,9 @@
             // 更新系统ToolStripMenuItem
             // 
             this.更新系统ToolStripMenuItem.Name = "更新系统ToolStripMenuItem";
-            this.更新系统ToolStripMenuItem.Size = new System.Drawing.Size(86, 25);
-            this.更新系统ToolStripMenuItem.Text = "更新系统";
+            this.更新系统ToolStripMenuItem.Size = new System.Drawing.Size(102, 25);
+            this.更新系统ToolStripMenuItem.Text = "出成率计算";
+            this.更新系统ToolStripMenuItem.Click += new System.EventHandler(this.更新系统ToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -636,7 +628,6 @@
         private System.Windows.Forms.ToolStripMenuItem 人员管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设备管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 照片管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 车间出库ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rFID管理ToolStripMenuItem;
         private global::System.Windows.Forms.ToolStripMenuItem 补打标签ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 车间设置ToolStripMenuItem;
