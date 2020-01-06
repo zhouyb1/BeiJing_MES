@@ -255,7 +255,7 @@ var bootstrap = function ($, ayma) {
                             var data = [];
                             for (var j = 0; j < list.length; j++) {
                                 for (var i = 0; i < lengh; i++) {
-                                    $("[rownum='rownum_jfgrid_chlidgird_content_girdtable_rownum_girdtable_" + j + "_t_" + i + "'][colname='P_GoodsName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method('" + rows[i].P_GoodsCode + "','6470af9c-c0be-4455-b8cc-164b9865bb24')>" + rows[i].P_GoodsName + "</ a>");
+                                    $("[rownum='rownum_jfgrid_chlidgird_content_girdtable_rownum_girdtable_" + j + "_t_" + i + "'][colname='P_GoodsName']").html("<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method('" + rows[i].P_GoodsCode + "','9b04a0f2-28c0-4a58-973d-47bd51944a1c')>" + rows[i].P_GoodsName + "</ a>");
                                 }
                             }       
                         },
