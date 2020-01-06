@@ -9,8 +9,9 @@
 		"Charset":134
 	},
 	"Printer":{
-		"Size":256,
-		"Height":27,
+		"Size":1,
+		"Width":21.59,
+		"Height":27.94,
 		"TopMargin":0.3,
 		"BottomMargin":1
 	},
@@ -135,8 +136,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.608542,
-							"Width":1.95792,
+							"Left":-0.555625,
+							"Width":1.82563,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",

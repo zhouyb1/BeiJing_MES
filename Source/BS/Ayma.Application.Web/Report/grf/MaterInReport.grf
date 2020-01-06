@@ -9,9 +9,12 @@
 		"Charset":134
 	},
 	"Printer":{
-		"Size":256,
-		"Height":27,
+		"Size":1,
+		"Width":21.59,
+		"Height":27.94,
+		"LeftMargin":1.3,
 		"TopMargin":0.3,
+		"RightMargin":1.3,
 		"BottomMargin":1
 	},
 	"DetailGrid":{
@@ -287,7 +290,8 @@
 			]
 		},
 		"ColumnTitle":{
-			"Height":0,
+			"Height":0.79,
+			"RepeatStyle":"OnPage",
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
@@ -449,7 +453,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"Summary2",
-							"Left":6.00604,
+							"Left":7.40833,
 							"Top":0.211667,
 							"Width":2.59292,
 							"Height":0.582083,
@@ -479,7 +483,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":11.1919,
+							"Left":13.3879,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.582083,
@@ -495,7 +499,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
-							"Left":13.9965,
+							"Left":17.1979,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.582083,
@@ -515,12 +519,12 @@
 				"Name":"Group2",
 				"PageGroup":true,
 				"GroupHeader":{
-					"Height":0.79375,
+					"Height":0,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox19",
-							"Width":1.45,
+							"Width":1.73,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -538,7 +542,7 @@
 							"Type":"StaticBox",
 							"Name":"StaticBox20",
 							"Left":1.57,
-							"Width":2.40771,
+							"Width":3.11,
 							"Height":0.79375,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -555,8 +559,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox21",
-							"Left":3.81,
-							"Width":1.5,
+							"Left":4.60375,
+							"Width":1.7,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -573,8 +577,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox22",
-							"Left":5.21229,
-							"Width":0.78,
+							"Left":6.40292,
+							"Width":0.7,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -592,8 +596,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox32",
-							"Left":6.00604,
-							"Width":1.1,
+							"Left":7.01146,
+							"Width":1.43,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -610,8 +614,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox33",
-							"Left":7.19667,
-							"Width":1.4,
+							"Left":8.38729,
+							"Width":1.79,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -628,8 +632,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox34",
-							"Left":8.59896,
-							"Width":0.92,
+							"Left":10.2129,
+							"Width":1.08,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -646,8 +650,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox35",
-							"Left":9.60438,
-							"Width":1.62,
+							"Left":11.4035,
+							"Width":1.9,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -664,8 +668,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox36",
-							"Left":11.1919,
-							"Width":1.72,
+							"Left":13.2027,
+							"Width":2.11,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -682,8 +686,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox37",
-							"Left":12.991,
-							"Width":1.48,
+							"Left":15.1871,
+							"Width":1.95,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -700,8 +704,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox38",
-							"Left":14.3933,
-							"Width":1.61396,
+							"Left":17.1979,
+							"Width":1.79917,
 							"Height":0.79,
 							"Border":{
 								"Styles":"[DrawRight]"
@@ -723,7 +727,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":6.00604,
+							"Left":7.40833,
 							"Top":0.211667,
 							"Width":2.59292,
 							"Height":0.582083,
@@ -753,7 +757,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox5",
-							"Left":11.1919,
+							"Left":13.3879,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.582083,
@@ -769,7 +773,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox6",
-							"Left":14.2081,
+							"Left":17.1979,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.582083,
@@ -926,7 +930,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
-					"Left":3.20146,
+					"Center":"Horizontal",
+					"Left":4.68313,
 					"Top":0.211667,
 					"Width":9.60438,
 					"Height":0.79375,
@@ -1058,7 +1063,7 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":10.6098,
+					"Left":12.0121,
 					"Top":1.40229,
 					"Width":5.18583,
 					"Height":0.608542,
