@@ -46,14 +46,14 @@ var bootstrap = function ($, ayma) {
             $('#I_Status').DataItemSelect({ code: 'ProOutStatus' });
             $("#I_WorkShop").select({
                 type: 'default',
-                value: 'W_Name',
-                text: 'W_Name',
+                value: 'S_Code',
+                text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -61,14 +61,14 @@ var bootstrap = function ($, ayma) {
             //绑定仓库
             $('#I_StockName').select({
                 type: 'default',
-                value: 'S_Name',
+                value: 'S_Code',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -152,14 +152,12 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "入库单号", name: "I_InNo", width: 160, align: "left" },
-                    { label: "仓库编码", name: "I_StockCode", width: 90, align: "left" },
-                    { label: "仓库名称", name: "I_StockName", width: 160, align: "left" },
-                    { label: "车间", name: "I_WorkShop", width: 160, align: "left" },
-                    //{ label: "生产订单号", name: "I_OrderNo", width: 160, align: "left" },
-                    //{ label: "生产订单时间", name: "I_OrderDate", width: 160, align: "left" },
-                    { label: "备注", name: "I_Remark", width: 160, align: "left" },
+                    { label: "入往日耗库", name: "I_StockCode", width: 90, align: "left" },
+                    { label: "原日耗库", name: "I_WorkShop", width: 160, align: "left" },
                     { label: "添加人", name: "I_CreateBy", width: 90, align: "left" },
                     { label: "创建时间", name: "I_CreateDate", width: 160, align: "left", sort: true },
+                    { label: "备注", name: "I_Remark", width: 160, align: "left" },
+
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

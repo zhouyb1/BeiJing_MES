@@ -106,14 +106,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_InNo,
                 t.I_StockCode,
                 t.I_StockName,
-                s.W_Name I_WorkShop ,
+                dbo.GetStockByCode(I_WorkShop) I_WorkShop,
                 t.I_OrderNo,
                 t.I_OrderDate,
                 t.I_Remark,
                dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
-                strSql.Append("  FROM Mes_InWorkShopHead t left join Mes_WorkShop s on(t.I_WorkShop=s.W_Code)");
+                strSql.Append("  FROM Mes_InWorkShopHead t ");
                 strSql.Append("  WHERE 1=1 and t.I_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -147,7 +147,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["I_WorkShop"].IsEmpty())
                 {
                     dp.Add("I_WorkShop", "%" + queryParam["I_WorkShop"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND s.W_Name Like @I_WorkShop ");
+                    strSql.Append(" AND t.I_WorkShop Like @I_WorkShop ");
                 }
                 return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(), dp, pagination);
 
