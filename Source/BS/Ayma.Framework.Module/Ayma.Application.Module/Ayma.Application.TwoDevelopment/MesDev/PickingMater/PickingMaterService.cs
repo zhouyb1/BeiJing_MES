@@ -469,62 +469,147 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     foreach (var product in products)
                     {
-                        string strGetQty = @"--计算成品、半成品
-                        SELECT F_CreateDate,F_GoodsCode,SUM(F_Qty) F_Qty FROM
-                        (
-                            SELECT DISTINCT
-                        H.O_OrgResNo F_OrderNo,--单号
-                        CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单机日期
-                        D.O_SecGoodsCode F_GoodsCode,--物料编码
-                        D.O_SecQty F_Qty--物料数量
-                        FROM Mes_OrgResHead H
-                            INNER JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
-                        WHERE H.O_Status = 3 AND D.O_SecGoodsCode IN(@F_GoodsCodes)
-                        AND  (H.O_CreateDate >= @startTime AND H.O_CreateDate<= @endTime)
-                            )MyData 
-                            GROUP BY F_GoodsCode,F_CreateDate
+                        string strGetQty = @"--当前物料数量统计
+SELECT 
+       F_CreateDate,
+	   F_GoodsCode,
+       SUM(F_Qty) F_Qty,
+       1 F_Type
+FROM
+(
+    SELECT DISTINCT
+           H.O_OrgResNo F_OrderNo,       --相关单据
+           D.O_SecGoodsCode F_GoodsCode, --当前物料编码
+		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+           D.O_SecQty F_Qty              --当前物料数量
+    FROM Mes_OrgResHead H
+        INNER JOIN Mes_OrgResDetail D
+            ON D.O_OrgResNo = H.O_OrgResNo
+    WHERE H.O_Status = 3
+          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND D.O_GoodsCode = @F_GoodsCode
+          AND D.O_SecGoodsCode = @F_SecGoodsCode
+) MyData
+GROUP BY F_CreateDate,F_GoodsCode
+UNION ALL
 
-                        UNION ALL
+--上级与当前关联物料统计
+SELECT F_CreateDate,
+       F_GoodsCode,
+       SUM(F_Qty) F_Qty,
+       2 F_Type
+FROM
+(
+    SELECT 
+	       D.O_GoodsCode F_GoodsCode, --上一级半成品编码
+		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+           D.O_Qty F_Qty              --上一级半成品数量
+    FROM Mes_OrgResHead H
+        INNER JOIN Mes_OrgResDetail D
+            ON D.O_OrgResNo = H.O_OrgResNo
+    WHERE H.O_Status = 3
+          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND D.O_GoodsCode = @F_GoodsCode
+          AND D.O_SecGoodsCode = @F_SecGoodsCode
+) MyData
+GROUP BY F_CreateDate,F_GoodsCode
 
-                        --计算原料
-                        SELECT F_CreateDate,F_GoodsCode,SUM(F_Qty) F_Qty FROM
-                        (
-                            SELECT DISTINCT
-                        H.O_OrgResNo F_OrderNo,--单号
-                        CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据日期
-                        D.O_GoodsCode F_GoodsCode,--物料编码
-                        D.O_Qty F_Qty--物料数量
-                        FROM Mes_OrgResHead H
-                            INNER JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
-                        WHERE H.O_Status = 3 AND D.O_GoodsCode=@F_GoodsCode
-                        AND  (H.O_CreateDate >= @startTime AND H.O_CreateDate<= @endTime)
-                            )MyData 
-                            GROUP BY F_GoodsCode,F_CreateDate
-                        ";
+UNION ALL
 
-                        var dp = new DynamicParameters(new { });
-                        if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
-                        {
-                            dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
-                            dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                        }
+--上级物料统计
+SELECT F_CreateDate,
+       F_GoodsCode,
+       SUM(F_Qty) F_Qty,
+       3 F_Type
+FROM
+(
+    SELECT 
+	      
+		   DISTINCT
+           H.O_OrgResNo F_OrderNo,       --相关单据
+		   D.O_SecGoodsCode F_GoodsCode, --上一级半成品编码
+		    CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+           D.O_SecQty F_Qty--上一级半成品数量
+    FROM Mes_OrgResHead H
+        INNER JOIN Mes_OrgResDetail D
+            ON D.O_OrgResNo = H.O_OrgResNo
+    WHERE H.O_Status = 3
+          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND D.O_SecGoodsCode = @F_GoodsCode
+) MyData
+GROUP BY F_CreateDate,F_GoodsCode";
 
                         var F_Level = product.Value.Max(r => r.F_Level);
-                        var F_GoodsCodes = product.Value.Where(r => r.F_Level != F_Level).Select(r => "''"+r.F_GoodsCode+"''");
-                        dp.Add("F_GoodsCodes", product.Value.Find(r=>r.F_Level==F_Level).F_GoodsCode, DbType.String);
-                        dp.Add("F_GoodsCode", string.Join(",",F_GoodsCodes), DbType.String);
-
-                        var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetQty,dp);
-                        if (rows.Count() > 0)
+                        for (int i = 0; i < F_Level; i++)
                         {
-                            boms = rows.ToList();
-                        }
-                        else
-                        {
-                            success = false;
-                            message = "未获取到任何配方数据";
-                        }
+                            int j = i + 1;
+                            var currentBom = product.Value.Find(r => r.F_Level == i);
+                            var lastBom = product.Value.Find(r => r.F_Level == j);
 
+
+                            //加载参数
+                            var dp = new DynamicParameters(new { });
+                            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                            {
+                                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                            }
+                            dp.Add("F_GoodsCode", lastBom.F_GoodsCode, DbType.String);
+                            dp.Add("F_SecGoodsCode", currentBom.F_GoodsCode, DbType.String);
+
+
+                            var rows = new RepositoryFactory().BaseRepository().FindList<GoodsOrg>(strGetQty, dp);
+                            if (rows.Count() > 0)
+                            {
+                                foreach (var row in rows)
+                                {
+                                    if (i == 0)
+                                    {
+                                        if (row.F_Type == 1)
+                                        {
+                                            GoodsConvert gc = new GoodsConvert();
+                                            gc.F_GoodsCode = currentBom.F_GoodsCode;
+                                            gc.F_GoodsName = currentBom.F_GoodsName;
+                                            gc.F_ProceCode = currentBom.F_ProceCode;
+                                            gc.F_ProceName = currentBom.F_ProceName;
+                                            gc.F_Level = currentBom.F_Level;
+                                            gc.F_Kind = currentBom.F_Kind;
+                                            gc.F_Unit = currentBom.F_Unit;
+                                            gc.F_ConvertMin = currentBom.F_ConvertMin;
+                                            gc.F_ConvertMax = currentBom.F_ConvertMax;
+                                            gc.F_Convert = 100;
+                                            gc.F_ConvertTag =0;
+                                        }  
+
+                                        if (row.F_Type == 2)
+                                        {
+                                            GoodsConvert gc = new GoodsConvert();
+                                            gc.F_GoodsCode = currentBom.F_GoodsCode;
+                                            gc.F_GoodsName = currentBom.F_GoodsName;
+                                            gc.F_ProceCode = currentBom.F_ProceCode;
+                                            gc.F_ProceName = currentBom.F_ProceName;
+                                            gc.F_Level = currentBom.F_Level;
+                                            gc.F_Kind = currentBom.F_Kind;
+                                            gc.F_Unit = currentBom.F_Unit;
+                                            gc.F_ConvertMin = currentBom.F_ConvertMin;
+                                            gc.F_ConvertMax = currentBom.F_ConvertMax;
+                                            gc.F_Convert = 100;
+                                            gc.F_ConvertTag = 0;
+                                        }
+                                    }
+
+                                }
+                                if (i == 0)
+                                {
+                                  
+
+                                }
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
                     }
 
                     //// 虚拟参数

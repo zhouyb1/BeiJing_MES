@@ -108,12 +108,12 @@
         /// <summary>
         /// 最小转化率
         /// </summary>
-        public float? F_ConvertMin { get; set; }
+        public decimal? F_ConvertMin { get; set; }
 
         /// <summary>
         /// 最大转化率
         /// </summary>
-        public float? F_ConvertMax { get; set; }
+        public decimal? F_ConvertMax { get; set; }
 
 
         /// <summary>
@@ -284,18 +284,48 @@
         /// <summary>
         /// 最小转化率
         /// </summary>
-        public float? F_ConvertMin { get; set; }
+        public decimal? F_ConvertMin { get; set; }
 
 
         /// <summary>
         /// 最大转化率
         /// </summary>
-        public float? F_ConvertMax { get; set; }
-
+        public decimal? F_ConvertMax { get; set; }
 
         /// <summary>
-        /// 转换标识 低于下限 高于上限 合理
+        /// 转化率
         /// </summary>
-        public string F_ConvertTag { get; set; }
+        public decimal? F_Convert { get; set; }
+        
+        /// <summary>
+        /// 转换标识 -1低于下限 1高于上限 0合理
+        /// </summary>
+        public int F_ConvertTag { get; set; }
+    }
+
+    /// <summary>
+    /// 物料转换数据
+    /// </summary>
+    public class GoodsOrg
+    {
+        /// <summary>
+        /// 物料编码
+        /// </summary>
+        public string F_GoodsCode { get; set; }
+
+        /// <summary>
+        /// 年月
+        /// </summary>
+        public string F_CreateDate { get; set; }
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public decimal F_Qty { get; set; }
+
+        /// <summary>
+        /// 数据类型
+        /// </summary>
+        public decimal F_Type { get; set; }
     }
 }
