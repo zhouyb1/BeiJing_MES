@@ -113,10 +113,21 @@ var bootstrap = function ($, ayma) {
                         label: '物料名称', name: 'O_GoodsName', width: 130, align: 'left', editType: 'label'
                     },
                     {
-                        label: '单位', name: 'O_Unit', width: 100, align: 'left', editType: 'label'
+                        label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'label',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_Price = 0;
+                                }
+
+                            }
+                        }
                     },
                     {
-                        label: '数量', name: 'O_Qty', width: 100, align: 'left', editType: 'input',
+                        label: '单位', name: 'O_Unit', width: 60, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '数量', name: 'O_Qty', width: 60, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 //if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -132,21 +143,39 @@ var bootstrap = function ($, ayma) {
                                     ayma.alert.error("数量不能大于库存数量");
                                     row.O_Qty = 0;
                                 }
+                                row.O_Qty2 = (row.O_Qty / row.O_UnitQty).toFixed(6) / 1;
                             }
                         }
                     },
+             {
+               label: '包装数量', name: 'O_Qty2', width: 100, align: 'left', editType: 'input',
+               editOp: {
+                   callback: function (rownum, row) {
+                       //if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
+                       //    row.P_Qty = 0;
+                       //}
+                       if (row.O_Qty2 != undefined && !!row.O_Qty2) {
+                           if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(row.O_Qty2.toString().replace('.', ''))) {
+                               ayma.alert.error("包装数量必须是非负数.");
+                               row.O_Qty2 = 0;
+                           }
+                       }
+                       row.O_Qty = (row.O_Qty2 * row.O_UnitQty).toFixed(6) / 1;
+                       if (row.O_Qty > row.I_Qty) {
+                           ayma.alert.error("数量不能大于库存数量");
+                           row.O_Qty2 = 0;
+                           row.O_Qty = 0;
+                       }
+                   }
+               }
+             },
+                      {
+                          label: '包装规格', name: 'O_UnitQty', width: 100, align: 'left', editType: 'label'
+                      },
+                     {
+                         label: '包装单位', name: 'O_Unit2', width: 100, align: 'left', editType: 'label'
+                     },
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
-                    {
-                        label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'label',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_Price = 0;
-                                }
-
-                            }
-                        }
-                    },
                     {
                         label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'label'
                     },

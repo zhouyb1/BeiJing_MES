@@ -153,7 +153,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [NotMapped]
         public string G_Qty2 { get; set; }
         [NotMapped]
-        public string G_UnitQty { get; set; }
+        [DecimalPrecision(18, 6)]
+        public decimal? G_UnitQty { get; set; }
         [NotMapped]
         public string G_Unit2 { get; set; }
         #endregion

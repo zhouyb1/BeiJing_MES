@@ -81,6 +81,8 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
+                    { label: "包装单位", name: "G_Unit2", width: 60, align: "left" },
+                    { label: "包装规格", name: "G_UnitQty", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "单价", name: "I_Price", width: 60, align: "left" },
                     { label: "批次", name: "I_Batch", width: 120, align: "left" }
@@ -132,6 +134,8 @@ var bootstrap = function ($, ayma) {
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
                         row['O_GoodsCode'] = row['I_GoodsCode'];
+                        row['O_Unit2'] = row['G_Unit2'];
+                        row['O_UnitQty'] = row['G_UnitQty'];
                         row['O_GoodsName'] = row['I_GoodsName'];
                         row['O_Unit'] = row['I_Unit'];
                         row['I_Qty'] = row['I_Qty'];

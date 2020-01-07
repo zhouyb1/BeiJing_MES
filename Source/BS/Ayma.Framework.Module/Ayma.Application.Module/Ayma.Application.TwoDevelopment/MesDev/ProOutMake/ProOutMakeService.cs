@@ -245,7 +245,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"select m.*,g.G_Price as I_Price from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_Qty <> 0 and m.I_StockCode =@stockCode");
+                strSql.Append(@"select m.*,g.G_Price as I_Price,g.G_Unit2,g.G_UnitQty from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_Qty <> 0 and m.I_StockCode =@stockCode");
                 var dp = new DynamicParameters(new { });
                 dp.Add("@stockCode", stockCode, DbType.String);
 
