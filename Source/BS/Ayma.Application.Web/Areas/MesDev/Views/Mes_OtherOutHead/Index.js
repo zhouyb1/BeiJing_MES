@@ -219,7 +219,6 @@ var bootstrap = function ($, ayma) {
                                          });
                                      }
                                  },
-                        { label: '是否月结', name: 'MonthBalance', width: 100, align: "left" },
                         { label: '单号', name: 'O_OtherOutNo', width: 130, align: "left" },
                         { label: '仓库编码', name: 'O_StockCode', width: 100, align: "left" },
                         { label: '仓库名称', name: 'O_StockName', width: 130, align: "left" },
