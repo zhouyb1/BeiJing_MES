@@ -204,16 +204,16 @@ var bootstrap = function ($, ayma) {
                     },
                     {
                         label: "购进税率(%)", name: "P_Itax", width: 160, align: "left"
-                        //, editType: 'input',
-                        //editOp: {
-                        //    callback: function (rownum, row) {
-                        //        if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
-                        //            row.P_Itax =0;
-                        //        }
-                        //    }
-                        //}, formatter: function (value, row, dfop) {
+                        , editType: 'input',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_Itax =0;
+                                }
+                            }
+                        }, formatter: function (value, row, dfop) {
 
-                        //}
+                        }
                     },
                            {
                                label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left"
