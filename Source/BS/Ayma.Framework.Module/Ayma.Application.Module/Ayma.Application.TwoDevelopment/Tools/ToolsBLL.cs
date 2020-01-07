@@ -25,11 +25,11 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="code">物料编码</param>
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_SpecsEntity> ByGoodsCodeGetUnit(string code)
+        public IEnumerable<Mes_SpecsEntity> ByGoodsCodeGetUnit(string keyword)
         {
             try
             {
-                return toolsService.ByGoodsCodeGetUnit(code);
+                return toolsService.ByGoodsCodeGetUnit(keyword);
             }
             catch (Exception ex)
             {

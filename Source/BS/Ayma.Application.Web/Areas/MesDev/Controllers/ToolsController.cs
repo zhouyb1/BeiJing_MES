@@ -24,9 +24,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult ByGoodsCodeGetUnit(string code)
+        public ActionResult ByGoodsCodeGetUnit(string keyword)
         {
-            var Unit = toosIBLL.ByGoodsCodeGetUnit(code);
+            var Unit = toosIBLL.ByGoodsCodeGetUnit(keyword);
             return Success(Unit);
         }
         /// <summary>

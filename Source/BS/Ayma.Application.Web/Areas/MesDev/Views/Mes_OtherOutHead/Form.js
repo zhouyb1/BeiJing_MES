@@ -170,7 +170,25 @@ var bootstrap = function ($, ayma) {
                }
              },
                       {
-                          label: '包装规格', name: 'O_UnitQty', width: 100, align: 'left', editType: 'label'
+                          label: '包装规格', name: 'O_UnitQty', width: 100, align: 'left', editType: 'select', editOp: {
+                              width: 400,
+                              height: 400,
+                              colData: [
+                                 { label: '物料名称', name: 'S_GoodsName', width: 100, align: 'left' },
+                                 { label: '包装数', name: 'S_UnitQty', width: 100, align: 'left', },
+                              ],
+                              url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
+                              param: { code: "1" },
+                              callback: function (selectdata, rownum, row) {
+                                  if (row.O_GoodsName == selectdata.S_GoodsName) {
+                                      row.O_UnitQty = selectdata.S_UnitQty;
+                                      ayma.alert.success("物料【" + row.O_GoodsName + "】的包装规格更改成功为【" + row.O_UnitQty + "】！");
+                                  } else {
+                                      ayma.alert.error("您需要更改包装规格的物料是【" + row.O_GoodsName + "】物料名称不符,请重新选择！");
+                                      ayma.layer.error("")
+                                  }
+                              }
+                          }
                       },
                      {
                          label: '包装单位', name: 'O_Unit2', width: 100, align: 'left', editType: 'label'

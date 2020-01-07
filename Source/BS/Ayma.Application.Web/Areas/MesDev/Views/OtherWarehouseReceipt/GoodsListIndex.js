@@ -104,11 +104,14 @@ var bootstrap = function ($, ayma) {
                     { label: "主键", name: "ID", width: 130, align: "left", hidden: true },
                     { label: "物料编码", name: "G_Code", width: 130, align: "left" },
                     { label: "物料名称", name: "G_Name", width: 130, align: "left" },
-                    { label: "保质时间", name: "G_Period", width: 130, align: "left" },
+                    { label: "保质时间", name: "G_Period", width: 70, align: "left" },
                     {
-                        label: "价格", name: "G_Price", width: 130, align: "left"
+                        label: "价格", name: "G_Price", width: 70, align: "left"
                     },
-                    { label: "单位", name: "G_Unit", width: 130, align: "left" }
+                    { label: "单位", name: "G_Unit", width: 70, align: "left" },
+                    { label: "包装单位", name: "G_Unit2", width: 70, align: "left" },
+                    { label: "包装规格", name: "G_UnitQty", width: 70, align: "left" }
+
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -126,6 +129,8 @@ var bootstrap = function ($, ayma) {
                         var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                         //copy需要更改的地方
                         row['O_GoodsCode'] = row['G_Code'];
+                        row['O_Unit2'] = row['G_Unit2'];
+                        row['O_UnitQty'] = row['G_UnitQty'];
                         row['O_GoodsName'] = row['G_Name'];
                         row['O_Unit'] = row['G_Unit'];
                         row['O_Price'] = row['G_Price'];

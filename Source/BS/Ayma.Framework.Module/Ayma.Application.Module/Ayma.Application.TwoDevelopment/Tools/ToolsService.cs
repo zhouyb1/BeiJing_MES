@@ -28,7 +28,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// </summary>
         /// <param name="code">物料编码</param>
         /// <returns></returns>
-        public IEnumerable<Mes_SpecsEntity> ByGoodsCodeGetUnit(string code)
+        public IEnumerable<Mes_SpecsEntity> ByGoodsCodeGetUnit(string keyword)
         {
             try
             {
@@ -40,19 +40,19 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 strSql.Append(@"select
                 t.ID,
                 t.S_GoodsCode,
-                t.S_GoodsName as F_ItemName,
-                t.S_UnitQty as F_ItemValue,
+                t.S_GoodsName,
+                t.S_UnitQty,
                 t.S_Remark
                 FROM Mes_Specs t   where 1=1 
                         ");
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
 
-                //if (!GoodsCode.IsEmpty())
-                //{
-                //    dp.Add("GoodsCode", "%" + GoodsCode + "%", DbType.String);
-                //    strSql.Append(" AND t.S_GoodsCode like @GoodsCode ");
-                //}
+                if (!keyword.IsEmpty())
+                {
+                    dp.Add("keyword", "%" + keyword + "%", DbType.String);
+                    strSql.Append(" AND convert(varchar(50),t.S_UnitQty)+t.S_GoodsName like @keyword ");
+                }
                 return this.BaseRepository().FindList<Mes_SpecsEntity>(strSql.ToString(),dp);
             }
             catch (Exception ex)

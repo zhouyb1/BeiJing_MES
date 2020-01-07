@@ -93,10 +93,45 @@ var bootstrap = function ($, ayma) {
                                  if (/\D/.test(row.O_Qty.toString().replace('.', ''))) { //验证只能为数字
                                      row.O_Qty = 0;
                                  }
-
+                                 row.O_Qty2 = (row.O_Qty / row.O_UnitQty).toFixed(6) / 1;
                              }
                          }
                      },
+                     {
+                         label: '包装数量', name: 'O_Qty2', width: 80, align: 'left', editType: 'input',
+                         editOp: {
+                             callback: function (rownum, row) {
+                                 if (/\D/.test(row.O_Qty2.toString().replace('.', ''))) { //验证只能为数字
+                                     row.O_Qty2 = 0;
+                                 }
+                                 row.O_Qty = (row.O_Qty2 * row.O_UnitQty).toFixed(6) / 1;
+                             }
+                         }
+                     },
+                    {
+                        label: '包装规格', name: 'O_UnitQty', width: 80, align: 'left', editType: 'select', editOp: {
+                            width: 400,
+                            height: 400,
+                            colData: [
+                               { label: '物料名称', name: 'S_GoodsName', width: 100, align: 'left' },
+                               { label: '包装数', name: 'S_UnitQty', width: 100, align: 'left', },
+                            ],
+                            url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
+                            param: { code: "1" },
+                            callback: function (selectdata, rownum, row) {
+                                if (row.O_GoodsName == selectdata.S_GoodsName) {
+                                    row.O_UnitQty = selectdata.S_UnitQty;
+                                    ayma.alert.success("物料【" + row.O_GoodsName + "】的包装规格更改成功为【" + row.O_UnitQty + "】！");
+                                } else {
+                                    ayma.alert.error("您需要更改包装规格的物料是【" + row.O_GoodsName + "】物料名称不符,请重新选择！");
+                                    ayma.layer.error("")
+                                }
+                            }
+                        }
+                    },
+                    {
+                        label: '包装单位', name: 'O_Unit2', width: 80, align: 'left', editType: 'label'
+                    },
                      {
                          label: '价格', name: 'O_Price', width: 80, align: 'left', editType: 'label',
                          editOp: {

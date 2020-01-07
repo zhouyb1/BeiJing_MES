@@ -320,6 +320,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_Otax]
                                   ,[G_Itax]
                                   ,[G_Price]
+                                  ,[G_Unit2]
                               FROM [dbo].[Mes_Goods] t ");
                 strSql.Append(" where 1=1 ");
                 var queryParam = queryJson.ToJObject();

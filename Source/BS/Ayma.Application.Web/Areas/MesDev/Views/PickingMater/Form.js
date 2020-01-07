@@ -229,14 +229,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         width: 400,
                         height: 400,
                         colData: [
-                           { label: '物料名称', name: 'F_ItemName', width: 100, align: 'left' },
-                           { label: '包装数', name: 'F_ItemValue', width: 100, align: 'left', },
+                           { label: '物料名称', name: 'S_GoodsName', width: 100, align: 'left' },
+                           { label: '包装数', name: 'S_UnitQty', width: 100, align: 'left', },
                         ],
                         url: top.$.rootUrl + '/MesDev/Tools/ByGoodsCodeGetUnit',
-                        param: { code: "1" },
                         callback: function (selectdata, rownum, row) {
-                            if (row.C_GoodsName == selectdata.F_ItemName) {
-                                row.C_UnitQty = selectdata.F_ItemValue;
+                            if (row.C_GoodsName == selectdata.S_GoodsName) {
+                                row.C_UnitQty = selectdata.S_UnitQty;
                                 ayma.alert.success("物料【" + row.C_GoodsName + "】的包装规格更改成功为【" + row.C_UnitQty + "】！");
                             } else {
                                 ayma.alert.error("您需要更改包装规格的物料是【" + row.C_GoodsName + "】物料名称不符,请重新选择！");

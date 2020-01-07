@@ -44,12 +44,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("O_UNIT")]
         public string O_Unit { get; set; }
         /// <summary>
+        /// 包装单位
+        /// </summary>
+        /// <returns></returns>
+        [Column("O_UNIT2")]
+        public string O_Unit2 { get; set; }
+        /// <summary>
         /// 数量
         /// </summary>
         /// <returns></returns>
         [Column("O_QTY")]
         [DecimalPrecision(18, 6)]
         public decimal? O_Qty { get; set; }
+        /// <summary>
+        /// 包装数量
+        /// </summary>
+        /// <returns></returns>
+        [Column("O_QTY2")]
+        [DecimalPrecision(18, 6)]
+        public decimal? O_Qty2 { get; set; }
+        /// <summary>
+        /// 包装规格
+        /// </summary>
+        /// <returns></returns>
+        [Column("O_UNITQTY")]
+        [DecimalPrecision(18, 6)]
+        public decimal? O_UnitQty { get; set; }
         /// <summary>
         /// 批次
         /// </summary>
