@@ -45,7 +45,19 @@ var bootstrap = function ($, ayma) {
                 page.search(queryJson);
             }, 220, 300);
             $('#E_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' });
-
+            $('#M_GoodsName').select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: {}
+            });
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();

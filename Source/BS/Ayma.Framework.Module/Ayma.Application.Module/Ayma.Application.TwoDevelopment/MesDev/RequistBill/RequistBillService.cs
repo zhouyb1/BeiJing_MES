@@ -89,6 +89,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.R_RequistNo,
                 t.R_StockCode,
@@ -108,7 +109,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.R_UploadBy) R_UploadBy,
                 t.R_UploadDate
                 ");
-                strSql.Append("  FROM Mes_RequistHead t ");
+                strSql.Append("  FROM Mes_RequistHead t left join Mes_RequistDetail s on(t.R_RequistNo=s.R_RequistNo)");
                 strSql.Append("  WHERE t.R_Status = 3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -118,6 +119,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.R_CreateDate >= @startTime AND t.R_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.R_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["R_RequistNo"].IsEmpty())
                 {

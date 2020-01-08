@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.B_BackSupplyNo,
                 t.B_StockCode,
@@ -45,7 +46,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_UploadDate,
                 t.B_Remark
                 ");
-                strSql.Append("  FROM Mes_BackSupplyHead t ");
+                strSql.Append("  FROM Mes_BackSupplyHead t left join Mes_BackSupplyDetail s on(t.B_BackSupplyNo=s.B_BackSupplyNo)");
                 strSql.Append("  WHERE 1=1 and t.B_Status=3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -54,6 +55,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("B_OrderDate", "%" + queryParam["B_OrderDate"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.B_CreateDate Like @B_CreateDate ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.B_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["B_BackSupplyNo"].IsEmpty())
                 {

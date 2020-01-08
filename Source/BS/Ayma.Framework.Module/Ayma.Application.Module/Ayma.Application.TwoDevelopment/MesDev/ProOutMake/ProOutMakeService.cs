@@ -102,6 +102,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                               distinct
                                t.[ID]
                               ,t.[P_ProOutNo]
                               ,t.[P_StockCode]
@@ -118,7 +119,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               ,t.[P_DeleteDate]
                               ,dbo.GetUserNameById(t.[P_UploadBy])P_UploadBy
                               ,t.[P_UploadDate]");
-                strSql.Append("  FROM Mes_ProOutHead t ");
+                strSql.Append("  FROM Mes_ProOutHead t left join Mes_ProOutDetail s on(t.P_ProOutNo=s.P_ProOutNo)");
                 strSql.Append("  WHERE t.P_Status=3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -128,6 +129,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.P_CreateDate >= @startTime AND t.P_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.P_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["P_OrderDate"].IsEmpty())
                 {

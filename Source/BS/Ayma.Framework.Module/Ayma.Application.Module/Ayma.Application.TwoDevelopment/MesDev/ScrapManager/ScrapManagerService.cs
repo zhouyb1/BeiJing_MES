@@ -99,6 +99,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.S_Status,
                 t.S_ScrapNo,
@@ -109,7 +110,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.S_CreateBy) S_CreateBy ,
                 t.S_CreateDate
                 ");
-                strSql.Append("  FROM Mes_ScrapHead t ");
+                strSql.Append("  FROM Mes_ScrapHead t left join Mes_ScrapDetail s on(t.S_ScrapNo=s.S_ScrapNo)");
                 strSql.Append("  WHERE 1=1 AND t.S_Status =3");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -119,6 +120,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.S_CreateDate >= @startTime AND t.S_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.S_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["S_ScrapNo"].IsEmpty())
                 {
