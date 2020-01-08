@@ -171,6 +171,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
             return Success(Mes_RequistHeadData.P_OrderNo);
         }
+
+        /// <summary>
+        /// 获取调拨单查询页面明细书
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetDetail(string orderNo)
+        {
+            var data = requistBillIBLL.GetMes_RequistDetailList(orderNo);
+            return Success(data);
+        }
+
         #endregion
 
         #region 提交数据

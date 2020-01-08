@@ -107,24 +107,6 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //双击详情
-            $('#girdtable').on('dblclick', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'form',
-                        title: '详情',
-                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/PostForm?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
-                        maxmin: true,
-                        btn: null,
-                        callBack: function (id) {
-                            return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
-                }
-            });
         },
         // 初始化列表
         initGird: function () {
@@ -163,7 +145,23 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 isPage: true,
                 sidx: 'I_CreateDate',
-                sord: 'DESC'
+                sord: 'DESC',
+                isSubGrid: true,
+                subGridRowExpanded: function(subgridId, row) {
+                    var orderNo = row.I_InNo;
+                    $('#' + subgridId).jfGrid({
+                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/GetDetail',
+                        headData: [
+                            { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left" },
+                            { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
+                            { label: "单位", name: "I_Unit", width: 60, align: "left" },
+                            { label: "数量", name: "I_Qty", width: 60, align: "left" },
+                            { label: "价格", name: "I_Price", width: 60, align: "left" },
+                            { label: "批次", name: "I_Batch", width: 80, align: "left" }
+                        ],
+                    });
+                    $('#' + subgridId).jfGridSet('reload', { param: { orderNo: orderNo } });
+                }
             });
         },
         search: function (param) {

@@ -108,23 +108,23 @@ var bootstrap = function ($, ayma) {
                 }
             });
             //双击详情
-            $('#girdtable').on('dblclick', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'form',
-                        title: '详情',
-                        url: top.$.rootUrl + '/MesDev/BackStockManager/PostPageForm?keyValue=' + keyValue,
-                        width: 700,
-                        height: 500,
-                        maxmin: true,
-                        btn: null,
-                        callBack: function (id) {
-                            return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
-                }
-            });
+            //$('#girdtable').on('dblclick', function () {
+            //    var keyValue = $('#girdtable').jfGridValue('ID');
+            //    if (ayma.checkrow(keyValue)) {
+            //        ayma.layerForm({
+            //            id: 'form',
+            //            title: '详情',
+            //            url: top.$.rootUrl + '/MesDev/BackStockManager/PostPageForm?keyValue=' + keyValue,
+            //            width: 700,
+            //            height: 500,
+            //            maxmin: true,
+            //            btn: null,
+            //            callBack: function (id) {
+            //                return top[id].acceptClick(refreshGirdData);
+            //            }
+            //        });
+            //    }
+            //});
             // 撤销单据
             $('#am_cancel').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("B_BackStockNo");
@@ -173,13 +173,30 @@ var bootstrap = function ($, ayma) {
                     { label: "退库仓库名称", name: "B_StockToName", width: 120, align: "left" },
                     { label: "备注", name: "B_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "B_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "B_CreateDate", width: 140, align: "left" },
+                    { label: "添加时间", name: "B_CreateDate", width: 140, align: "left" ,sort:true},
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
                 isPage: true,
                 sidx: 'B_CreateDate',
-                sord: 'desc'
+                sord: 'desc',
+                isSubGrid: true,
+                subGridRowExpanded: function (subgridId, row) {
+                    var orderNo = row.B_BackStockNo;
+                    $('#' + subgridId).jfGrid({
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/GetBackStockDetailList',
+                        headData: [
+                         { label: "物料编码", name: "B_GoodsCode", width: 130, align: "left", },
+                         { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
+                         { label: "单价", name: "B_Price", width: 130, align: "left" },
+                         { label: "单位", name: "B_Unit", width: 60, align: "left" },
+                         { label: "返回数量", name: "B_Qty", width: 60, align: "left", },
+                         { label: "批次", name: "B_Batch", width: 60, align: "left" }
+                        ],
+                    });
+                    $('#' + subgridId).jfGridSet('reload', { param: { orderNo: orderNo } });
+
+                }
             });
         },
         search: function (param) {
