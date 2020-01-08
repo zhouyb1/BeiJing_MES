@@ -189,6 +189,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(jsonData);
         }
 
+        /// <summary>
+        /// 单据查询界面获取明细
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public ActionResult GetDetail(string orderNo)
+        {
+            var data = inWorkShopManagerIBLL.GetMes_InWorkShopDetailList(orderNo);
+            return Success(data);
+        }
+
         #endregion
 
         #region 提交数据
