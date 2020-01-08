@@ -58,54 +58,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
         /// <summary>
-        /// 获取表单数据
+        /// 获取领料单明细数据
         /// </summary>
+        /// <param name="orderNo"></param>
         /// <returns></returns>
-        [HttpGet]
-        [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetPikingMaterList(string orderNo)
         {
-            var Mes_CollarHeadData = pickingMaterQueryIBLL.GetMes_CollarHeadEntity( keyValue );
-            var Mes_CollarDetailData = pickingMaterQueryIBLL.GetMes_CollarDetailEntityList(Mes_CollarHeadData.C_CollarNo);
-            var jsonData = new {
-                Mes_CollarHeadData = Mes_CollarHeadData,
-                Mes_CollarDetailData = Mes_CollarDetailData,
-            };
-            return Success(jsonData);
+            var data = pickingMaterQueryIBLL.GetMes_CollarDetailEntityList(orderNo);
+            return Success(data);
         }
         #endregion
 
-        #region 提交数据
-
-        /// <summary>
-        /// 删除实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        [HttpPost]
-        [AjaxOnly]
-        public ActionResult DeleteForm(string keyValue)
-        {
-            pickingMaterQueryIBLL.DeleteEntity(keyValue);
-            return Success("删除成功！");
-        }
-        /// <summary>
-        /// 保存实体数据（新增、修改）
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AjaxOnly]
-        public ActionResult SaveForm(string keyValue, string strEntity, string strmes_CollarDetailEntity)
-        {
-            Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
-            Mes_CollarDetailEntity mes_CollarDetailEntity = strmes_CollarDetailEntity.ToObject<Mes_CollarDetailEntity>();
-            pickingMaterQueryIBLL.SaveEntity(keyValue,entity,mes_CollarDetailEntity);
-            return Success("保存成功！");
-        }
-        #endregion
-
+      
     }
 }
