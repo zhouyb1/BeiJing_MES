@@ -46,6 +46,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson"></param>
         /// <returns></returns>
         IEnumerable<Mes_BackStockHeadEntity> GetBacStockList(Pagination pagination, string queryJson);
+
+        /// <summary>
+        /// 根据单号获取物料列表
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        IEnumerable<Mes_BackStockDetailEntity> GetBackStockDetailList(string orderNo);
+       
+
         #endregion
 
         #region 提交数据

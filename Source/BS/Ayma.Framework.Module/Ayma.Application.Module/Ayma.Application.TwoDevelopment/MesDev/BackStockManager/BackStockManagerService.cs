@@ -196,7 +196,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_CreateDate
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t ");
-                strSql.Append("  LEFT JOIN Mes_BackStockDetail t1 ON t1.B_BackStockNo = t.B_BackStockNo ");
                 strSql.Append("  WHERE 1=1 AND B_Status =3 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -243,9 +242,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 else
                 {
                     throw ExceptionEx.ThrowServiceException(ex);
-                }
+               }
             }
         }
+
+        /// <summary>
+        /// 根据单号获取物料列表
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_BackStockDetailEntity> GetBackStockDetailList(string orderNo)
+        {
+            return this.BaseRepository().FindList<Mes_BackStockDetailEntity>(c => c.B_BackStockNo == orderNo);
+        }
+
         #endregion
 
         #region 提交数据

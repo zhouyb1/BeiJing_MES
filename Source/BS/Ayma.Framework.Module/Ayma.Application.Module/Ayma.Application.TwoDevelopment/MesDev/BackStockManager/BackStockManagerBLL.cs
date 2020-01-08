@@ -137,6 +137,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        /// <summary>
+        /// 根据单号获取物料列表
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public  IEnumerable<Mes_BackStockDetailEntity> GetBackStockDetailList(string orderNo)
+        {
+            try
+            {
+                return backStockManagerService.GetBackStockDetailList(orderNo);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
