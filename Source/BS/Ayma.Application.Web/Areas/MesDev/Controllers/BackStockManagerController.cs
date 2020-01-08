@@ -126,6 +126,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
 
         /// <summary>
+        /// 根据单号获取物料明细列表
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public ActionResult GetBackStockDetailList(string orderNo)
+        {
+            var data = backStockManagerIBLL.GetBackStockDetailList(orderNo);
+            return Success(data);
+        }
+
+        /// <summary>
         /// 获取物料
         /// </summary>
         /// <returns></returns>
@@ -161,6 +172,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
         #endregion
 
         #region 提交数据
