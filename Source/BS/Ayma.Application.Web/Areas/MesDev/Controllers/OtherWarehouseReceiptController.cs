@@ -119,6 +119,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
+
+        /// <summary>
+        /// 单据查询界面：获取明细数据
+        /// </summary>
+        /// <param name="orderNo"></param>
+        /// <returns></returns>
+        public ActionResult GetDetail(string orderNo)
+        {
+            var data = otherWarehouseReceiptIBLL.GetMes_OtherInDetaiEntity(orderNo);
+            return Success(data);
+        }
         #endregion
 
         #region 提交数据
