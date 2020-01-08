@@ -44,7 +44,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 350);
+            }, 220, 350);
             $('#M_Status').DataItemSelect({ code: 'MaterInStatus' });
 
             $('#M_StockName').select({
@@ -91,6 +91,19 @@ var bootstrap = function ($, ayma) {
                 allowSearch: true,
                 // 访问数据接口地址 
                 url: top.$.rootUrl + '/MesDev/Tools/GetSupplyList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $('#M_GoodsName').select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
                 // 访问数据接口参数
                 param: {}
             });

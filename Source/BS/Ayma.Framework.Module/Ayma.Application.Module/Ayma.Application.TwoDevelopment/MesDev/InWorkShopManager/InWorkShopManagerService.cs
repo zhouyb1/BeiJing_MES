@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.I_Status,
                 t.I_InNo,
@@ -39,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.I_CreateBy) I_CreateBy,
                 t.I_CreateDate
                 ");
-                strSql.Append("  FROM Mes_InWorkShopHead t ");
+                strSql.Append("  FROM Mes_InWorkShopHead t left join Mes_InWorkShopDetail s on(t.I_InNo=s.I_InNo)");
                 strSql.Append("  WHERE t.I_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -49,6 +50,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.I_CreateDate >= @startTime AND t.I_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.I_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["I_InNo"].IsEmpty())
                 {

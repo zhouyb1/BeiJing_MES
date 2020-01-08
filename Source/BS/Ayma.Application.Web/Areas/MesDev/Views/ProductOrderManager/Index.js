@@ -172,9 +172,9 @@ var bootstrap = function ($, ayma) {
                                 callback: function (_data) {
                                     if (value == 0) {
                                         callback("<span class='label label-default'>" + _data.text + "</span>");
-                                    } else if (value == 1||value == 2) {
+                                    } else if (value == 2) {
                                         callback("<span class='label label-info'>" + _data.text + "</span>");
-                                    } else {
+                                    } else if (value == 3) {
                                         callback("<span class='label label-success'>" + _data.text + "</span>");
                                     }
                                 }

@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.E_Status,
                 t.E_ExpendNo,
@@ -41,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.E_UpdateBy) E_UpdateBy,
                 t.E_UpdateDate
                 ");
-                strSql.Append("  FROM Mes_ExpendHead t ");
+                strSql.Append("  FROM Mes_ExpendHead t left join Mes_ExpendDetail s on(t.E_ExpendNo=s.E_ExpendNo)");
                 strSql.Append("  WHERE 1=1 and E_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -51,6 +52,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.E_CreateDate >= @startTime AND t.E_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.E_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["MonthBalance"].IsEmpty())
                 {

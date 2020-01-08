@@ -42,8 +42,33 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
-
+            }, 280, 400);
+            $('#M_GoodsName').select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: {}
+            });
+            $('#O_SecGoodsName').select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: {}
+            });
             //绑定工序
             $('#O_ProCode').select({
                 type: 'default',

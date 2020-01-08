@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderStationID,
                 t.P_OrderDate,
                 t.P_OrderStationName,
-                t.P_CreateBy,
+                dbo.GetUserNameById(t.P_CreateBy) as P_CreateBy,
                 t.P_CreateDate,
                 t.P_UpdateBy,
                 t.P_UpdateDate,

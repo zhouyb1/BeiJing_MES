@@ -51,8 +51,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'P_Unit', width: 160, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'P_Qty', width: 160, align: 'left', editType: 'label'
+                        label: '数量', name: 'P_Qty', width: 160, align: 'left',formatter: function (value, row, dfop) {
+                            if (row.P_Qty == undefined || row.P_Qty == "" || row.P_Qty == null) {
+                                return row.P_Qty=0;
+                            }
+                            else {
+                                return row.P_Qty;
+                            }
+                        }
                     },
+
                 ],
                 isAutoHeight: true,
                 isEidt: true,

@@ -21,6 +21,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public Mes_OtherOutHeadService()
         {
             fieldSql= @"
+                distinct
                 t.ID,
                 t.O_OtherOutNo,
                 t.O_StockCode,
@@ -88,7 +89,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(fieldSql);
-                strSql.Append(" FROM Mes_OtherOutHead t where t.O_Status in(1,2)");
+                strSql.Append(" FROM Mes_OtherOutHead t left join Mes_OtherOutDetail s on(t.O_OtherOutNo=s.O_OtherOutNo) where t.O_Status in(1,2)");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
@@ -97,6 +98,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.O_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["O_StockName"].IsEmpty())
                 {

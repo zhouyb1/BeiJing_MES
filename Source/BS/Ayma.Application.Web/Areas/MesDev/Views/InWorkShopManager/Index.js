@@ -44,6 +44,19 @@ var bootstrap = function ($, ayma) {
                 page.search(queryJson);
             }, 250, 400);
             $('#I_Status').DataItemSelect({ code: 'ProOutStatus' });
+            $('#M_GoodsName').select({
+                type: 'default',
+                value: 'G_Name',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址 
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: {}
+            });
             $("#I_StockName").select({
                 type: 'default',
                 value: 'S_Name',

@@ -35,6 +35,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.O_Status,
                 t.O_OrgResNo,
@@ -45,7 +46,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                  dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
                 ");
-                strSql.Append("  FROM Mes_OrgResHead t ");
+                strSql.Append("  FROM Mes_OrgResHead t left join Mes_OrgResDetail s on(t.O_OrgResNo=s.O_OrgResNo)");
                 strSql.Append("  WHERE 1=1 AND t.O_Status in (1,2)");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -55,6 +56,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.O_GoodsName Like @M_GoodsName ");
+                }
+                if (!queryParam["O_SecGoodsName"].IsEmpty())
+                {
+                    dp.Add("O_SecGoodsName", "%" + queryParam["O_SecGoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.O_SecGoodsName Like @O_SecGoodsName ");
                 }
                 if (!queryParam["O_OrgResNo"].IsEmpty())
                 {

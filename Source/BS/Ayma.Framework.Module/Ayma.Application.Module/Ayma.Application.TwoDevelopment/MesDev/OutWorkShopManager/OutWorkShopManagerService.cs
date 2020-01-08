@@ -29,6 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(@"
+                distinct
                 t.ID,
                 t.O_Status,
                 t.O_OutNo,
@@ -43,7 +44,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_CreateDate,
                 t.O_Kind
                 ");
-                strSql.Append("  FROM Mes_OutWorkShopHead t ");
+                strSql.Append("  FROM Mes_OutWorkShopHead t left join Mes_OutWorkShopDetail s on(t.O_OutNo=s.O_OutNo)");
                 strSql.Append("  WHERE t.O_Status in (1,2) ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -58,6 +59,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("O_OutNo", "%" + queryParam["O_OutNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.O_OutNo Like @O_OutNo ");
+                }
+                if (!queryParam["M_GoodsName"].IsEmpty())
+                {
+                    dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND s.O_GoodsName Like @M_GoodsName ");
                 }
                 if (!queryParam["O_OrderNo"].IsEmpty())
                 {
