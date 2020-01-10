@@ -194,9 +194,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                     strSql3.Append(@" where s.i_goodscode=@g_codes and s.i_date=@time and s.i_stockcode=@g_stockcode");
                 }
-                string bbb = strSql.ToString();
-                string c = strSql2.ToString();
-                string qw = strSql3.ToString();
                 RepositoryFactory a = new RepositoryFactory();             
                 List<InventoryViewModel> datas = new List<InventoryViewModel>();  
                  var a1 = new RepositoryFactory().BaseRepository().FindList<InventoryViewModel>(strSql.ToString(), dp, pagination);

@@ -49,6 +49,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑供应商',
+                        url: top.$.rootUrl + '/MesDev/SupplyList/Form?keyValue=' + keyValue,
+                        width: 800,
+                        height: 400,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 删除
             $('#am_delete').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
