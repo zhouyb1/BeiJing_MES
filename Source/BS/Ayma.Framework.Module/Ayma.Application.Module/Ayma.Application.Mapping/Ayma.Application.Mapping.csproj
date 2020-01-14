@@ -180,6 +180,8 @@
     <Compile Include="MesDev\Mes_WorkShopScanMap.cs" />
     <Compile Include="MesDev\Mes_SpecsMap.cs" />
     <Compile Include="MesDev\Mes_GoodsForPackingMap.cs" />
+    <Compile Include="MesDev\Mes_ScanCodeMap.cs" />
+    <Compile Include="MesDev\Mes_ScanRecordMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
