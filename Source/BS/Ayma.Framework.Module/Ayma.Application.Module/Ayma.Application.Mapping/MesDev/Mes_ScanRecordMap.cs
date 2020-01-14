@@ -1,5 +1,6 @@
 ﻿using Ayma.Application.TwoDevelopment.MesDev;
 using System.Data.Entity.ModelConfiguration;
+using Ayma.Application.TwoDevelopment.MesDev.BarCodeInfo;
 
 namespace  Ayma.Application.Mapping
 {
