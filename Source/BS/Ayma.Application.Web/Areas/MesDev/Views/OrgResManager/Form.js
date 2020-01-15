@@ -82,6 +82,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             }).on('change', function() {
                 //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
                 //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+                $('#O_TeamName').val($(this).selectGetText());
             });
 
             //添加物料
