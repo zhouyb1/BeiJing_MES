@@ -5,45 +5,19 @@
 var selectedRow;
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
+    "use strict";
     var startTime;
     var endTime;
-    "use strict";
     var page = {
         init: function () {
             page.initGird();
             page.bind();
         },
         bind: function () {
-            // 时间搜索框
-            $('#datesearch').amdate({
-                dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
-                ],
-                // 月
-                mShow: false,
-                premShow: false,
-                // 季度
-                jShow: false,
-                prejShow: false,
-                // 年
-                ysShow: false,
-                yxShow: false,
-                preyShow: false,
-                yShow: false,
-                // 默认
-                dfvalue: '1',
-                selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
-                    page.search();
-                }
-            });
+           
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 250, 480);
             $('#M_GoodsName').select({
                 type: 'default',
                 value: 'G_Name',
@@ -232,7 +206,7 @@ var bootstrap = function ($, ayma) {
                                          });
                                      }
                                  },
-                        { label: '单号', name: 'O_OtherOutNo', width: 130, align: "left" },
+                        { label: '单据编号', name: 'O_OtherOutNo', width: 130, align: "left" },
                         { label: '仓库编码', name: 'O_StockCode', width: 100, align: "left" },
                         { label: '仓库名称', name: 'O_StockName', width: 130, align: "left" },
                         { label: '部门编码', name: 'O_DepartCode', width: 100, align: "left" },
@@ -249,11 +223,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'O_CreateDate',
                 sord: 'desc'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 250, 480);
             //供应商名称
             $("#P_SupplyName").select({
                 type: 'default',

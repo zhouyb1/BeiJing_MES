@@ -13,7 +13,7 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 250, 480);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();

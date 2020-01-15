@@ -14,36 +14,10 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
-            // 时间搜索框
-            $('#datesearch').amdate({
-                dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
-                ],
-                // 月
-                mShow: false,
-                premShow: false,
-                // 季度
-                jShow: false,
-                prejShow: false,
-                // 年
-                ysShow: false,
-                yxShow: false,
-                preyShow: false,
-                yShow: false,
-                // 默认
-                dfvalue: '1',
-                selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
-                    page.search();
-                }
-            });
+            
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 180, 300);
+            }, 250, 480);
             $('#S_Name').select({
                 type: 'default',
                 value: 'S_Name',
@@ -193,8 +167,6 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
                     { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
-                    //{ label: "生产订单号", name: "M_OrderNo", width: 160, align: "left" },
-                    //{ label: "订单时间", name: "M_OrderDate", width: 160, align: "left" },                   
                     { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },
                     { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
                     { label: "修改人", name: "M_UpdateBy", width: 90, align: "left" },
@@ -208,11 +180,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'M_CreateDate',
                 sord: 'DESC'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

@@ -78,11 +78,42 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult PrintReport()
         {
             return View();
-;        }
+        }
+
+        /// <summary>
+        /// 出成率查询
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ProductRateIndex()
+        {
+            return View();
+        }
+
+      
 
         #endregion
 
         #region 获取数据
+
+        /// <summary>
+        /// 出成率查询
+        /// </summary>
+        /// <returns></returns>
+        [AjaxOnly]
+        [HttpGet]
+        public ActionResult GetProductRateList(string pagination, string queryJson)
+        {
+            Pagination paginationobj = pagination.ToObject<Pagination>();
+            var data = orgResMangerIBLL.GetProductRateList(paginationobj, queryJson);
+            var jsonData = new
+            {
+                rows = data,
+                total = paginationobj.total,
+                page = paginationobj.page,
+                records = paginationobj.records
+            };
+            return Success(jsonData);
+        }
 
         /// <summary>
         /// 获取页面显示列表数据

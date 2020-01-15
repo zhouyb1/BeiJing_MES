@@ -268,11 +268,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'S_CreateDate',
                 sord:'DESC'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

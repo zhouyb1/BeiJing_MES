@@ -13,36 +13,10 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
-            // 时间搜索框
-            $('#datesearch').amdate({
-                dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
-                ],
-                // 月
-                mShow: false,
-                premShow: false,
-                // 季度
-                jShow: false,
-                prejShow: false,
-                // 年
-                ysShow: false,
-                yxShow: false,
-                preyShow: false,
-                yShow: false,
-                // 默认
-                dfvalue: '1',
-                selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
-                    page.search();
-                }
-            });
+           
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 150, 550);
+            }, 250, 480);
             $('#R_Status').DataItemSelect({ code: 'ProOutStatus' });
             // 刷新
             $('#am_refresh').on('click', function () {
@@ -243,8 +217,6 @@ var bootstrap = function ($, ayma) {
                     { label: "原仓库名称", name: "R_StockName", width: 160, align: "center" },
                     { label: "调拨仓库编码", name: "R_StockToCode", width: 90, align: "center" },
                     { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "center" },
-                    //{ label: "生产订单号", name: "P_OrderNo", width: 160, align: "left" },
-                    //{ label: "订单时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "备注", name: "R_Remark", width: 160, align: "left" },
                     { label: "添加人", name: "R_CreateBy", width: 100, align: "center" },
                     { label: "添加时间", name: "R_CreateDate", width: 160, align: "center" },
@@ -258,11 +230,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'R_CreateDate',
                 sord: 'DESC'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
