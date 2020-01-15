@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Ayma.Application.Base.SystemModule;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.Tools;
@@ -6,6 +7,7 @@ using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -270,5 +272,57 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
         #endregion
 
+        #region 报表数据
+
+        /// <summary>
+        /// 转换率报表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult GoodsConvertReport()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetReportData(string queryJson)
+        {
+            string messsage = "";
+            DataTable dt = pickingMaterIBLL.GetProductReportData(queryJson, out messsage);
+            if (string.IsNullOrEmpty(messsage))
+                return Success(dt);
+            else
+            {
+                return Fail(messsage);
+            }
+        }
+
+
+
+        /// <summary>
+        /// 获取页面显示列表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpPost]
+        [AjaxOnly]
+        public ActionResult GetReportTitle(string queryJson)
+        {
+            string messsage = "";
+            var jsonData = pickingMaterIBLL.GetProductReportTitle(queryJson, out messsage);
+            if (string.IsNullOrEmpty(messsage))
+                return Success(jsonData);
+            else
+            {
+                return Fail(messsage);
+            }
+        } 
+        #endregion
     }
 }
