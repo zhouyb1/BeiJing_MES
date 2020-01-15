@@ -359,6 +359,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
                 List<GoodsConvert> converts = new List<GoodsConvert>();
                 string goodscode = "";
+                DataTable dt = new DataTable("GoodsConvert");
 
                 #region 参数判断
 
@@ -728,7 +729,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                 if (success)
                 {
-                    DataTable dt = new DataTable("GoodsConvert");
+                 
                     DataColumn dc=new DataColumn();
                     dc.ColumnName = "F_CreateDate";
                     dc.DataType = typeof(string);
@@ -799,13 +800,12 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             dt.Rows.Add(dt);
                         }
                     }
-
-                    return dt;
                 }
 
                
                 #endregion
-                return null;
+
+                return dt;
             }
             catch (Exception ex)
             {
@@ -992,7 +992,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         var starbom = maxboms.Find(r => r.F_Level == maxlevel);
 
                         ColumnModel cm1 = new ColumnModel();
-                        cm1.name = "F_GoodsCode_" + starbom.F_ProceCode;
+                        cm1.name = "F_GoodsCode_Source";
                         cm1.label = "原物料编码";
                         cm1.width = 100;
                         cm1.align = "left";
@@ -1001,7 +1001,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm1.children = null;
 
                         ColumnModel cm2= new ColumnModel();
-                        cm2.name = "F_GoodsName_" + starbom.F_ProceCode;
+                        cm2.name = "F_GoodsName_Source";
                         cm2.label = "原物料名称";
                         cm2.width = 100;
                         cm2.align = "left";
@@ -1010,7 +1010,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm2.children = null;
 
                         ColumnModel cm3 = new ColumnModel();
-                        cm3.name = "F_GoodsQty_" + starbom.F_ProceCode;
+                        cm3.name = "F_GoodsQty_Source";
                         cm3.label = "数量(KG)";
                         cm3.width = 100;
                         cm3.align = "left";
@@ -1019,8 +1019,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm3.children = null;
 
                         ColumnModel cm = new ColumnModel();
-                        cm.name = "F_ProceCode_" + starbom.F_ProceCode;
-                        cm.label = starbom.F_ProceName;
+                        cm.name = "F_ProceCode_Source";
+                        cm.label = "原物料";
                         cm.width = 300;
                         cm.align = "center";
                         cm.sort = false;
