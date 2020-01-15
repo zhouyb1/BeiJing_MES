@@ -409,7 +409,7 @@ namespace Ayma.Util
                         res = "am-uitheme-top";        // 顶部菜单版本
                         break;
                     default:
-                        res = "am-uitheme-default";     // 经典版本
+                        res = "am-uitheme-accordion";     // 经典版本
                         break;
                 }
 
