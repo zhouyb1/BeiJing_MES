@@ -34,7 +34,7 @@ namespace Ayma.Application.Web.Controllers
                 case "4":
                     return View("AdminTop");          // 顶部菜单版本
                 default:
-                    return View("AdminDefault");      // 经典版本
+                    return View("AdminAccordion");      // 经典版本
             }
         }
         /// <summary>
