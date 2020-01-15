@@ -198,7 +198,8 @@ namespace Ayma.Application.WebApi
                "/webapi/test/getca",
                "/ayma/api/productorder/syncorder",
                "/api/facerecording/getuserinfo",
-               "/getuserinfo"
+               "/getuserinfo",
+               "/webapi/scanrecord/getbarcodeinfo"
             };
 
             if (ignoreUrl.Contains(path.ToLower()))// 登录接口，默认页面接口不做权限验证处理
@@ -206,25 +207,25 @@ namespace Ayma.Application.WebApi
                 WriterInfaceLog(ctx, req);
                 return null;
             }
-            if (string.IsNullOrEmpty(req.token))
-            {
-                return Fail("缺少token");
-            }
-            if (string.IsNullOrEmpty(req.loginMark))
-            {
-                return Fail("缺少loginMark");
-            }
+            //if (string.IsNullOrEmpty(req.token))
+            //{
+            //    return Fail("缺少token");
+            //}
+            //if (string.IsNullOrEmpty(req.loginMark))
+            //{
+            //    return Fail("缺少loginMark");
+            //}
         
             WriterInfaceLog(ctx, req);
-            switch (currentOper.stateCode)
-            {
-                case -1:
-                    return this.Fail("未找到登录信息");
-                case 0:
-                    return this.Fail("登录信息已过期");
-                default:
-                    break;
-            }
+            //switch (currentOper.stateCode)
+            //{
+            //    case -1:
+            //        return this.Fail("未找到登录信息");
+            //    case 0:
+            //        return this.Fail("登录信息已过期");
+            //    default:
+            //        break;
+            //}
             return null;
         }
         #endregion

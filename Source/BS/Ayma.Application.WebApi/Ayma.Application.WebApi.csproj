@@ -169,6 +169,7 @@
     <Compile Include="Modules\DepartmentApi.cs" />
     <Compile Include="Modules\FaceManager\FaceRecording.cs" />
     <Compile Include="Modules\FormApi.cs" />
+    <Compile Include="Modules\H5\ScanRecord.cs" />
     <Compile Include="Modules\Index.cs" />
     <Compile Include="Modules\AM_Crm\Invoice.cs" />
     <Compile Include="Modules\ProductOrder\ProductOrderApi.cs" />
