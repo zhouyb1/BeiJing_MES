@@ -24,6 +24,63 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 获取数据
 
         /// <summary>
+        /// 出成率查询
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProductRateList(Pagination pagination, string queryJson)
+        {
+            var strSql = new StringBuilder();
+            strSql.Append(@"SELECT  
+                                    O_StockName ,
+                                    O_GoodsCode ,
+                                    O_GoodsName ,
+                                    O_Unit ,
+                                    SUM(O_Qty) O_Qty ,
+                                    O_SecGoodsCode ,
+                                    O_SecGoodsName ,
+                                    SUM(O_SecQty) O_SecQty ,
+                                    O_SecUnit ,
+                                    O_TeamName ,
+                                   dbo.GetUserNameById(O_CreateBy) O_CreateBy ,
+                                    ( SUM(O_SecQty) / SUM(O_Qty) ) * 100 ProductRate
+                            FROM    dbo.Mes_OrgResHead h
+                                    LEFT JOIN dbo.Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo
+                            WHERE   O_Qty <> 0 AND O_SecQty <> 0  ");
+
+            var queryParam = queryJson.ToJObject();
+            // 虚拟参数
+            var dp = new DynamicParameters(new {});
+            if (!queryParam["StockCode"].IsEmpty())
+            {
+                dp.Add("StockCode", "%" + queryParam["StockCode"].ToString() + "%", DbType.String);
+                strSql.Append(" AND O_StockCode Like @StockCode ");
+            }
+            if (!queryParam["GoodsName"].IsEmpty())
+            {
+                dp.Add("GoodsName", "%" + queryParam["GoodsName"].ToString() + "%", DbType.String);
+                strSql.Append(" AND O_GoodsName Like @GoodsName  or O_SecGoodsName Like @GoodsName ");
+            }
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                strSql.Append(" AND (O_CreateDate >= @startTime AND O_CreateDate <= @endTime ) ");
+            }
+            strSql.Append(@" GROUP BY   O_StockName ,
+                                        O_GoodsCode ,
+                                        O_GoodsName ,
+                                        O_Unit ,
+                                        O_SecGoodsCode ,
+                                        O_SecGoodsName ,
+                                        O_SecUnit ,
+                                        O_TeamName ,
+                                        O_CreateBy ");
+            var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            return dt;
+        }
+
+
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>

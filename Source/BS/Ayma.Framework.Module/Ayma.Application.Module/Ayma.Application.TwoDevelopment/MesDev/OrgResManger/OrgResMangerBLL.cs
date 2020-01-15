@@ -18,6 +18,29 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 获取数据
 
         /// <summary>
+        /// 出成率查询
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetProductRateList(Pagination pagination, string queryJson)
+        {
+            try
+            {
+                return orgResMangerService.GetProductRateList(pagination, queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
         /// <param name="queryJson">查询参数</param>
