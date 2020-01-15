@@ -468,7 +468,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         foreach (var row in rows)
                         {
                             List<ProductBom> goods=new List<ProductBom>();
-                            GetGoods(row.F_GoodsCode, boms, goods);
+                            GetGoods(row.F_ID, boms, goods);
                             var bomroot=goods.Find(r => r.F_Level == 0);
                             if (bomroot == null)
                             {
@@ -942,7 +942,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         foreach (var row in rows)
                         {
                             List<ProductBom> goods = new List<ProductBom>();
-                            GetGoods(row.F_GoodsCode, boms, goods);
+                            GetGoods(row.F_ID, boms, goods);
                             var bomroot = goods.Find(r => r.F_Level == 0);
                             if (bomroot == null)
                             {
@@ -1034,7 +1034,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                        for (int i = maxlevel - 1; i <= 0; i--)
+                        for (int i = maxlevel - 1; i >= 0; i--)
                         {
                             var bom = maxboms.Find(r => r.F_Level == i);
 
@@ -1090,7 +1090,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             cm6.align = "left";
                             cm6.sort = false;
                             cm6.statistics = false;
-                            cm6.hiden = true;
+                            cm6.hidden = true;
                             cm6.children = null;
 
                             ColumnModel cm = new ColumnModel();
@@ -1111,13 +1111,13 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         }
                     }
 
-                   
+                    
                 }
 
 
                 #endregion
 
-                return null;
+                return columns;
             }
             catch (Exception ex)
             {

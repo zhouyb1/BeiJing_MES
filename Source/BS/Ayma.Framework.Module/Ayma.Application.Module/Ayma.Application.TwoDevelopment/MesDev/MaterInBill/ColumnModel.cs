@@ -43,14 +43,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
 
-        private bool _hiden = false;
+        private bool _hidden = false;
         /// <summary>
         /// 是否隐藏
         /// </summary>
-        public bool hiden
+        public bool hidden
         {
-            get { return _hiden; }
-            set { _hiden = value; }
+            get { return _hidden; }
+            set { _hidden = value; }
         }
         
         /// <summary>
