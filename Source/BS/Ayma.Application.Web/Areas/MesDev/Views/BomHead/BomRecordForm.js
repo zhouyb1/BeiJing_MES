@@ -20,11 +20,9 @@ var bootstrap = function ($, ayma) {
             page.bind();
             page.initData();
         },
-        bind: function () {          
-            if (parentId != '' && parentId != undefined && parentId!=0) {
+        bind: function () {
+            if (parentId != '' && parentId != undefined && parentId != 0) {
                 $("#B_RecordCode").attr("disabled", "disabled");
-                $("#ProceName").css("display", "block");
-                $("#ProceCode").css("display", "block");
                 $("#B_Unit").css("display", "none");
                 $("#B_Unit1").css("display", "block");
                 $("#B_Unit1").attr("value", "g");
@@ -38,9 +36,8 @@ var bootstrap = function ($, ayma) {
                 $("#B_Name").css("display", "none");
             } else {
                 $("#B_RecordCode").removeAttr("disabled");
-                $("#ProceName").css("display", "none");
-                $("#ProceCode").css("display", "none");
-                $("#B_ProceName").removeAttr("isvalid").removeAttr("checkexpession");
+                //$("#ProceName").css("display", "none");
+                //$("#ProceCode").css("display", "none");
                 $("#B_Unit").css("display", "block");
                 $("#B_Unit1").css("display", "none");
                 $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -67,11 +64,11 @@ var bootstrap = function ($, ayma) {
                 maxHeight: 225
             }).selectSet(parentId);
             //上级改变事件
-            $('#B_ParentID').bind("change", function() {
+            $('#B_ParentID').bind("change", function () {
                 var value = $(this).selectGet();
                 if (value != "") {
-                    $("#ProceName").css("display", "block");
-                    $("#ProceCode").css("display", "block");
+                    //$("#ProceName").css("display", "block");
+                    //$("#ProceCode").css("display", "block");
                     $("#B_Unit").css("display", "none");
                     $("#B_Unit1").css("display", "block");
                     $("#B_Unit1").attr("value", "g");
@@ -85,9 +82,8 @@ var bootstrap = function ($, ayma) {
                     $("#B_Name").css("display", "none");
                 }
                 else {
-                    $("#ProceName").css("display", "none");
-                    $("#ProceCode").css("display", "none");
-                    $("#B_ProceName").removeAttr("isvalid").removeAttr("checkexpession");
+                    //$("#ProceName").css("display", "none");
+                    //$("#ProceCode").css("display", "none");
                     $("#B_Unit").css("display", "block");
                     $("#B_Unit1").css("display", "none");
                     $("#B_FormulaCode").attr("isvalid", "yes").attr("checkexpession", "NotNull");
@@ -104,7 +100,7 @@ var bootstrap = function ($, ayma) {
                         url: top.$.rootUrl + '/MesDev/BomHead/GetBomRecordEntity',
                         data: { keyValue: value },
                         success: function (data) {
-                            var entity=JSON.parse(data).data;
+                            var entity = JSON.parse(data).data;
                             //工艺代码赋值
                             $("#B_RecordCode").selectSet(entity.B_RecordCode);
                         }
@@ -125,7 +121,7 @@ var bootstrap = function ($, ayma) {
                 allowSearch: true,
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetRecordList'
-               
+
             }).selectSet(recordCode);
             //物料名称
             $("#B_GoodsName").select({
@@ -139,7 +135,7 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
                 // 访问数据接口参数
-            }).bind("change",function() {
+            }).bind("change", function () {
                 var name = $(this).selectGet();
                 $.ajax({
                     type: "get",
@@ -153,11 +149,17 @@ var bootstrap = function ($, ayma) {
                             $("#StockName").css("display", "block");
                             $("#StockCode").css("display", "block");
                             $("#B_StockName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
+                            $("#ProceName").css("display", "none");
+                            $("#ProceCode").css("display", "none");
+                            $("#B_ProceName").removeAttr("isvalid").removeAttr("checkexpession");
                         }
                         else {
+                            $("#ProceName").css("display", "block");
+                            $("#ProceCode").css("display", "block");
                             $("#StockName").css("display", "none");
                             $("#StockCode").css("display", "none");
                             $("#B_StockName").removeAttr("isvalid").removeAttr("checkexpession");
+                            $("#B_ProceName").attr("isvalid", "yes").attr("checkexpession", "NotNull");
                         }
                     }
                 });
@@ -231,7 +233,7 @@ var bootstrap = function ($, ayma) {
             //});
         },
         initData: function () {
-            
+
             if (!!selectedRow) {
                 keyValue = selectedRow.ID || '';
                 $('#form').SetFormData(selectedRow);
