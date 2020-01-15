@@ -178,11 +178,30 @@ namespace Ayma.Application.TwoDevelopment.MesDev
            
         }
 
-        public DataTable GetProductReport(string queryJson, out string message)
+        public DataTable GetProductReportData(string queryJson, out string message)
         {
             try
             {
-                return pickingMaterService.GetProductReport(queryJson,out  message);
+                return pickingMaterService.GetProductReportData(queryJson, out  message);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        public DataTable GetProductReportTitle(string queryJson, out string message)
+        {
+            try
+            {
+                return pickingMaterService.GetProductReportTitle(queryJson, out  message);
             }
             catch (Exception ex)
             {

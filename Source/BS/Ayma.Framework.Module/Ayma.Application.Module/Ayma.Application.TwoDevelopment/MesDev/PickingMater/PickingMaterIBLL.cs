@@ -60,7 +60,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJsond"></param>
         /// <returns></returns>
-        DataTable GetProductReport(string queryJson, out string message);
+        DataTable GetProductReportData(string queryJson, out string message);
+
+        /// <summary>
+        /// 获取报表标题
+        /// </summary>
+        /// <param name="queryJsond"></param>
+        /// <returns></returns>
+        DataTable GetProductReportTitle(string queryJson, out string message);
         #endregion
 
         #region 提交数据
