@@ -67,7 +67,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJsond"></param>
         /// <returns></returns>
-        DataTable GetProductReportTitle(string queryJson, out string message);
+        IEnumerable<ColumnModel> GetProductReportTitle(string queryJson, out string message);
         #endregion
 
         #region 提交数据

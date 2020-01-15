@@ -42,6 +42,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             set;
         }
 
+
+        private bool _hiden = false;
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        public bool hiden
+        {
+            get { return _hiden; }
+            set { _hiden = value; }
+        }
+        
         /// <summary>
         /// 子列
         /// </summary>

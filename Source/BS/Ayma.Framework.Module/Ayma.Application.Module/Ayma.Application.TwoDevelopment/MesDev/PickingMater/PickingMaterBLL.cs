@@ -197,7 +197,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
-        public DataTable GetProductReportTitle(string queryJson, out string message)
+        public IEnumerable<ColumnModel> GetProductReportTitle(string queryJson, out string message)
         {
             try
             {
