@@ -693,9 +693,13 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             currentGc.F_Convert = Math.Round(d.Value, 0);//理论份数
                                             currentGc.F_ConvertTag = currentGc.F_Qty - currentGc.F_Convert;//偏差数
 
+                                            decimal? c = (currentGc.F_ConvertTag / currentGc.F_Convert) * 100;
+                                            currentGc.F_ConvertRange = Math.Round(c.Value, 2).ToString();
+
                                             currentGc.F_ConvertMin = currentBom.F_ConvertMin;
                                             currentGc.F_ConvertMax = currentBom.F_ConvertMax;
-                                            currentGc.F_ConvertRange = currentBom.F_ConvertMin.Value.ToString("0.00") + "-" + currentBom.F_ConvertMax.Value.ToString("0.00");
+
+                                            //currentGc.F_ConvertRange = currentBom.F_ConvertMin.Value.ToString("0.00") + "-" + currentBom.F_ConvertMax.Value.ToString("0.00");
                                             //currentGc.F_Convert = (group1.F_Qty / group2.F_Qty) * 100;
                                             //if (currentGc.F_Convert > currentGc.F_ConvertMax)
                                             //    currentGc.F_ConvertTag = 1;
@@ -1069,7 +1073,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm.name = "F_CreateDate";
                         cm.label = "日期";
                         cm.width = 100;
-                        cm.align = "left";
+                        cm.align = "center";
                         cm.sort = false;
                         cm.statistics = false;
                         cm.children = null;
@@ -1165,7 +1169,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                             ColumnModel cm5 = new ColumnModel();
                             cm5.name = "F_Convert_" + bom.F_ProceCode;
-                            cm5.label = "转化率";
+                            cm5.label = "转化率(%)";
                             cm5.width = 100;
                             cm5.align = "left";
                             cm5.sort = false;
@@ -1185,7 +1189,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             ColumnModel cm = new ColumnModel();
                             cm.name = "F_ProceCode_" + bom.F_ProceCode;
                             cm.label = bom.F_ProceName;
-                            cm.width = 500;
+                            cm.width = 600;
                             cm.align = "center";
                             cm.sort = false;
                             cm.statistics = false;
@@ -1230,15 +1234,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm3.statistics = false;
                         cm3.children = null;
 
-                        ColumnModel cm4 = new ColumnModel();
-                        cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
-                        cm4.label = "转化率标准";
-                        cm4.width = 100;
-                        cm4.align = "left";
-                        cm4.sort = false;
-                        cm4.statistics = false;
-                        cm4.hidden = true;
-                        cm4.children = null;
+
 
                         ColumnModel cm5 = new ColumnModel();
                         cm5.name = "F_Convert_" + bom.F_ProceCode;
@@ -1258,6 +1254,18 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm6.statistics = false;
                         cm6.children = null;
 
+
+                        ColumnModel cm4 = new ColumnModel();
+                        cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
+                        cm4.label = "偏差率(%)";
+                        cm4.width = 100;
+                        cm4.align = "left";
+                        cm4.sort = false;
+                        cm4.statistics = false;
+                        cm4.hidden = false;
+                        cm4.children = null;
+
+
                         ColumnModel cm = new ColumnModel();
                         cm.name = "F_ProceCode_" + bom.F_ProceCode;
                         cm.label = bom.F_ProceName;
@@ -1269,9 +1277,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm.children.Add(cm1);
                         cm.children.Add(cm2);
                         cm.children.Add(cm3);
-                        cm.children.Add(cm4);
+          
                         cm.children.Add(cm5);
                         cm.children.Add(cm6);
+                        cm.children.Add(cm4);
+
                         columns.Add(cm);
                     }
                 }
