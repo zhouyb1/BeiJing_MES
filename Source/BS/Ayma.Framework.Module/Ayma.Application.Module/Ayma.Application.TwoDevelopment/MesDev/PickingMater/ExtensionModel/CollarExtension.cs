@@ -334,7 +334,7 @@
         /// <summary>
         /// 转换标识 -1低于下限 1高于上限 0合理
         /// </summary>
-        public int F_ConvertTag { get; set; }
+        public decimal? F_ConvertTag { get; set; }
     }
 
     /// <summary>
