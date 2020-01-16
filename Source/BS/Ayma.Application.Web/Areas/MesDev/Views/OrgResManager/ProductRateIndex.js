@@ -75,7 +75,8 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "o_goodscode", width: 100, align: "center" },
                     { label: "物料名称", name: "o_goodsname", width: 120, align: "center" },
                     { label: "单位", name: "o_unit", width: 50, align: "center" },
-                    { label: "数量", name: "o_qty", width: 90, align: "center" }]
+                    { label: "使用数量", name: "o_qty", width: 90, align: "center" },
+                    { label: "剩余库存数量", name: "stockqty", width: 90, align: "center" }]
                    }, 
                 {
                     label: "转换后",
@@ -86,7 +87,7 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "o_secgoodscode", width: 100, align: "center" },
                     { label: "物料名称", name: "o_secgoodsname", width: 120, align: "center" },
                     { label: "单位", name: "o_secunit", width: 50, align: "center" },
-                    { label: "数量", name: "o_secqty", width: 90, align: "center" },
+                    { label: "产出数量", name: "o_secqty", width: 90, align: "center" },
                 ]
                 },
                 { label: "作业日耗库", name: "o_stockcode", width: 120, align: "center", hidden:true },
