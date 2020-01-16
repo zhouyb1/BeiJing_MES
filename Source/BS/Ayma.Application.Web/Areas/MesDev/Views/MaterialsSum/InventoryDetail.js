@@ -171,13 +171,12 @@ var bootstrap = function ($, ayma) {
                              }
                          },
                          {
-                             label: "含税价格(元)", name: "F_InPrice", width: 90, align: "center",
-                             formatter: function (value, row, dfop) {
-                                 if (row.F_InPrice != undefined && !!row.F_InPrice) {
-                                     return row.F_InPrice.toFixed(6) / 1;
+                             label: "单位成本", name: "G_Price", width: 90, align: "center", formatter: function (value, row, dfop) {
+                                 if (row.G_Price != undefined && !!row.G_Price) {
+                                     return row.G_Price.toFixed(6) / 1;
                                  }
-                                 if (row.F_InPrice == null) {
-                                     return row.F_InPrice = 0;
+                                 if (row.G_Price == "") {
+                                     return row.G_Price = 0;
                                  }
                              }
                          },
@@ -204,13 +203,12 @@ var bootstrap = function ($, ayma) {
                              }
                          },
                          {
-                             label: "加权平均价(元)", name: "F_OutPrice", width: 90, align: "center",
-                             formatter: function (value, row, dfop) {
-                                 if (row.F_OutPrice != undefined && !!row.F_OutPrice) {
-                                     return row.F_OutPrice.toFixed(6) / 1;
+                             label: "单位成本", name: "G_Price", width: 90, align: "center", formatter: function (value, row, dfop) {
+                                 if (row.G_Price != undefined && !!row.G_Price) {
+                                     return row.G_Price.toFixed(6) / 1;
                                  }
-                                 if (row.F_OutPrice == null) {
-                                     return row.F_OutPrice = 0;
+                                 if (row.G_Price == "") {
+                                     return row.G_Price = 0;
                                  }
                              }
                          },
@@ -236,7 +234,7 @@ var bootstrap = function ($, ayma) {
                                 }
                             },
                             {
-                                label: "加权平均价(元)", name: "G_Price", width: 90, align: "center", formatter: function (value, row, dfop) {
+                                label: "单位成本", name: "G_Price", width: 90, align: "center", formatter: function (value, row, dfop) {
                                     if (row.G_Price != undefined && !!row.G_Price) {
                                         return row.G_Price.toFixed(6) / 1;
                                     }
