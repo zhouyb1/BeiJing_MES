@@ -19,6 +19,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private OrgResMangerIBLL orgResMangerIBLL = new OrgResMangerBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private InventorySeachIBLL stock = new InventorySeachBLL();
         #region 视图功能
 
         /// <summary>
@@ -88,8 +89,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-
-      
 
         #endregion
 
@@ -262,6 +261,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
+           
+           
             //var  list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
             //foreach (var item in list)
             //{
