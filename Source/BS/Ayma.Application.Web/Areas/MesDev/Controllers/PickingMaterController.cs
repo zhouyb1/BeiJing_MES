@@ -297,78 +297,82 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             DataTable dt = pickingMaterIBLL.GetProductReportData(queryJson, out messsage);
             if (string.IsNullOrEmpty(messsage))
             {
-
-                //插入统计行
-                if (true)
+                #region 添加合计、统计行
+                if (dt != null && dt.Rows.Count > 0)
                 {
-                    string current = dt.Rows[0]["F_CreateDate"].ToString();
-                    for (int i = 0; i < dt.Rows.Count; i++)
+                    //插入统计行
+                    if (true)
                     {
-                        string last = dt.Rows[i]["F_CreateDate"].ToString();
-                        if (current != last)
+                        string current = dt.Rows[0]["F_CreateDate"].ToString();
+                        for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            DataRow dr = dt.NewRow();
-                            dr["F_CreateDate"] = "[" + current + "]合计";
-                            dt.Rows.InsertAt(dr, i);
-
-                            current = last;
-                            i++;
-                        }
-                    }
-                    DataRow drEnd = dt.NewRow();
-                    drEnd["F_CreateDate"] = "[" + current + "]合计";
-                    dt.Rows.InsertAt(drEnd, dt.Rows.Count);
-
-                    DataRow drSum = dt.NewRow();
-                    drSum["F_CreateDate"] = "总计";
-                    dt.Rows.InsertAt(drSum, dt.Rows.Count);
-                }
-
-                //计算统计行
-                if (true)
-                {
-                    for (int j = 0; j < dt.Columns.Count; j++)
-                    {
-                        //统计数量
-                        if (dt.Columns[j].ColumnName.Contains("F_GoodsQty"))
-                        {
-
-                            decimal everysum_qty = 0;
-                            decimal totalsum_qty = 0;
-                            for (int i = 0; i < dt.Rows.Count; i++)
+                            string last = dt.Rows[i]["F_CreateDate"].ToString();
+                            if (current != last)
                             {
-                                string current = dt.Rows[i]["F_CreateDate"].ToString();
-                                if (current.Contains("合计"))
+                                DataRow dr = dt.NewRow();
+                                dr["F_CreateDate"] = "[" + current + "]合计";
+                                dt.Rows.InsertAt(dr, i);
+
+                                current = last;
+                                i++;
+                            }
+                        }
+                        DataRow drEnd = dt.NewRow();
+                        drEnd["F_CreateDate"] = "[" + current + "]合计";
+                        dt.Rows.InsertAt(drEnd, dt.Rows.Count);
+
+                        DataRow drSum = dt.NewRow();
+                        drSum["F_CreateDate"] = "总计";
+                        dt.Rows.InsertAt(drSum, dt.Rows.Count);
+                    }
+
+                    //计算统计行
+                    if (true)
+                    {
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+                            //统计数量
+                            if (dt.Columns[j].ColumnName.Contains("F_GoodsQty"))
+                            {
+
+                                decimal everysum_qty = 0;
+                                decimal totalsum_qty = 0;
+                                for (int i = 0; i < dt.Rows.Count; i++)
                                 {
-                                    dt.Rows[i][j] = Math.Round(everysum_qty, 2);
-                                    everysum_qty = 0;
-                                }
-                                else
-                                {
-                                    if (current == "总计")
+                                    string current = dt.Rows[i]["F_CreateDate"].ToString();
+                                    if (current.Contains("合计"))
                                     {
-                                        dt.Rows[i][j] = Math.Round(totalsum_qty, 2);
+                                        dt.Rows[i][j] = Math.Round(everysum_qty, 2);
                                         everysum_qty = 0;
                                     }
                                     else
                                     {
-                                        if (dt.Rows[i][j] == DBNull.Value)
+                                        if (current == "总计")
                                         {
-                                            everysum_qty += 0;
-                                            totalsum_qty += 0;
+                                            dt.Rows[i][j] = Math.Round(totalsum_qty, 2);
+                                            everysum_qty = 0;
                                         }
                                         else
                                         {
-                                            everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
-                                            totalsum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                            if (dt.Rows[i][j] == DBNull.Value)
+                                            {
+                                                everysum_qty += 0;
+                                                totalsum_qty += 0;
+                                            }
+                                            else
+                                            {
+                                                everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                                totalsum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                            }
                                         }
                                     }
-                                }
 
+                                }
                             }
                         }
                     }
-                }
+                } 
+                #endregion
 
                 return Success(dt);
             }

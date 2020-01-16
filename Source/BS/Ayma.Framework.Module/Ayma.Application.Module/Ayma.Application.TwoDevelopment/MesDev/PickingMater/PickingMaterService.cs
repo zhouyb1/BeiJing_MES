@@ -577,6 +577,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             int j = i + 1;
                             var currentBom = product.Value.Find(r => r.F_Level == i);
                             var lastBom = product.Value.Find(r => r.F_Level == j);
+                            bool isbreak = false;//是否跳出
 
                             //加载参数
                             var dp = new DynamicParameters(new { });
@@ -588,6 +589,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             var rows = new RepositoryFactory().BaseRepository().FindList<GoodsOrg>(strGetQty, dp);
                             if (rows.Count() > 0)
                             {
+                                
                                 var gruops=rows.GroupBy(r => r.F_CreateDate);
                                 foreach (var gruop in gruops)
                                 {
@@ -599,6 +601,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         if (gruoprows.Count != 2)
                                         {
                                             //断层数据，无法计算
+                                            isbreak = true;
                                             break;
                                         }
 
@@ -657,6 +660,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         if (gruoprows.Count != 3)
                                         {
                                             //断层数据，无法计算
+                                            isbreak = true;
                                             break;
                                         }
 
@@ -784,8 +788,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             else
                             {
                                 //断层数据，无法计算
-                                break;
+                                isbreak = true;
                             }
+
+                            if (isbreak)
+                                break;
                         }
                     }
                 }
@@ -1055,7 +1062,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                        var starbom = maxboms.Find(r => r.F_Level == maxlevel);
+                        //var starbom = maxboms.Find(r => r.F_Level == maxlevel);
 
                         ColumnModel cm1 = new ColumnModel();
                         cm1.name = "F_GoodsCode_Source";
@@ -1176,8 +1183,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             columns.Add(cm);
                         }
                     }
-
-                    
                 }
 
 
