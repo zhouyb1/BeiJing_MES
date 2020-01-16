@@ -165,7 +165,7 @@ var loaddfimg;
 
         // 皮肤主题设置
         uitheme: function () {
-            var uitheme = top.$.cookie('Ayma_ADMS_V6.1_UItheme') || '1';
+            var uitheme = top.$.cookie('Ayma_ADMS_V6.1_UItheme') || '2';
             var $setting = $('<div class="am-theme-setting"></div>');
             var $btn = $('<button class="btn btn-default"><i class="fa fa-spin fa-gear"></i></button>');
             var _html = '<div class="panel-heading">界面风格</div>';
