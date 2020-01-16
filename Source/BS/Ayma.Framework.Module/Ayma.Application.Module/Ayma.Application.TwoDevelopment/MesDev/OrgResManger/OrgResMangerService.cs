@@ -30,22 +30,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public DataTable GetProductRateList(Pagination pagination, string queryJson)
         {
             var strSql = new StringBuilder();
-            strSql.Append(@"SELECT  
+            strSql.Append(@"SELECT  O_StockCode,
                                     O_StockName ,
                                     O_GoodsCode ,
                                     O_GoodsName ,
                                     O_Unit ,
-                                    SUM(O_Qty) O_Qty ,
                                     O_SecGoodsCode ,
                                     O_SecGoodsName ,
-                                    SUM(O_SecQty) O_SecQty ,
                                     O_SecUnit ,
                                     O_TeamName ,
-                                   dbo.GetUserNameById(O_CreateBy) O_CreateBy ,
-                                    ( SUM(O_SecQty) / SUM(O_Qty) ) * 100 ProductRate
+                                    dbo.GetUserNameById(O_CreateBy) O_CreateBy ,
+                                    SUM(O_Qty) O_Qty ,
+                                    SUM(O_SecQty) O_SecQty ,
+                                    (SUM(O_SecQty) / SUM(O_Qty)) * 100 ProductRate,
+                                    (SELECT SUM(I_Qty) FROM dbo.Mes_Inventory WHERE I_StockCode =O_StockCode AND I_GoodsCode =d.O_GoodsCode) stockQty
                             FROM    dbo.Mes_OrgResHead h
                                     LEFT JOIN dbo.Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo
-                            WHERE   O_Qty <> 0 AND O_SecQty <> 0  ");
+                            WHERE  O_Status =3  AND O_Qty <> 0 AND O_SecQty <> 0  ");
 
             var queryParam = queryJson.ToJObject();
             // 虚拟参数
@@ -58,7 +59,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             if (!queryParam["GoodsName"].IsEmpty())
             {
                 dp.Add("GoodsName", "%" + queryParam["GoodsName"].ToString() + "%", DbType.String);
-                strSql.Append(" AND O_GoodsName Like @GoodsName  or O_SecGoodsName Like @GoodsName ");
+                strSql.Append(" AND O_GoodsName Like @GoodsName ");
             }
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
             {
@@ -74,7 +75,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         O_SecGoodsName ,
                                         O_SecUnit ,
                                         O_TeamName ,
-                                        O_CreateBy ");
+                                        O_CreateBy ,
+                                        O_StockCode ");
             var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             return dt;
         }
@@ -264,7 +266,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
                                         WHERE i.I_Qty > 0 AND s.S_Kind =4  ");
             // 虚拟参数
-            var dp = new DynamicParameters(new { });
+            var dp = new DynamicParameters(new { });   
             var queryParam = queryJson.ToJObject();
             if (!keyword.IsEmpty())
             {
