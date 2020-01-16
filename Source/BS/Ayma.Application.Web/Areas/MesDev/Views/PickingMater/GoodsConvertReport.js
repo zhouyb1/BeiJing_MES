@@ -61,16 +61,16 @@ var bootstrap = function ($, ayma) {
                 $('#girdtable').jfGridSet("unload", {
                     url: top.$.rootUrl + '/MesDev/PickingMater/GetReportData',
                     headData: res.data,
-                    mainId: 'MClassName',
+                    mainId: 'F_CreateDate',
                     reloadSelected: true,
                     isPage: false,
-                    sidx: "MClassName", //排序字段
-                    sord: "ASC", //排序方式
+                    //sidx: "MClassName", //排序字段
+                    //sord: "ASC", //排序方式
                     footerrow: false,
                     isStatistics: false
                 });
 
-                //$('#girdtable').jfGridSet('reload', { param: postData });
+                $('#girdtable').jfGridSet('reload', { param: postData });
             });
         },
     };

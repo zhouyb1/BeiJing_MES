@@ -363,8 +363,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                 #region 参数判断
 
-                string F_StartTime = "";
-                string F_EndTime = "";
+                DateTime F_StartTime = DateTime.Now;
+                DateTime F_EndTime=DateTime.Now;
                 string F_GoodsCode = "";
 
                 var queryParam = queryJson.ToJObject();
@@ -375,8 +375,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 else
                 {
-                    F_StartTime = queryParam["StartTime"].ToString();
-                    F_EndTime = queryParam["EndTime"].ToString();
+                    F_StartTime = queryParam["StartTime"].ToDate();
+                    F_EndTime = queryParam["EndTime"].ToDate().AddMonths(1);
                     F_GoodsCode = queryParam["GoodsCode"].ToString();
                 }
                 #endregion
@@ -458,7 +458,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (success)
                 {
                     var rows=boms.Where(r => r.F_GoodsCode == F_GoodsCode);
-                    if (rows==null || rows.Count() < 0)
+                    if (rows==null || rows.Count() < 1)
                     {
                         success = false;
                         message = "未从配方数据中匹配到相应原物料";
@@ -498,6 +498,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     foreach (var product in products)
                     {
+                        #region SQL语句
                         string strGetQty = @"
 --当前物料数量统计
 SELECT 
@@ -567,7 +568,8 @@ FROM
           AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
           AND D.O_SecGoodsCode = @F_GoodsCode
 ) MyData
-GROUP BY F_CreateDate,F_GoodsCode";
+GROUP BY F_CreateDate,F_GoodsCode"; 
+                        #endregion
 
                         var F_Level = product.Value.Max(r => r.F_Level);
                         for (int i = 0; i < F_Level; i++)
@@ -578,8 +580,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                             //加载参数
                             var dp = new DynamicParameters(new { });
-                            dp.Add("startTime", F_StartTime.ToDate(), DbType.DateTime);
-                            dp.Add("endTime", F_EndTime.ToDate(), DbType.DateTime);
+                            dp.Add("startTime", F_StartTime, DbType.DateTime);
+                            dp.Add("endTime", F_EndTime, DbType.DateTime);
                             dp.Add("F_SecGoodsCode", currentBom.F_GoodsCode, DbType.String);
                             dp.Add("F_GoodsCode", lastBom.F_GoodsCode, DbType.String);
                             
@@ -590,85 +592,19 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                 foreach (var gruop in gruops)
                                 {
                                     var gruoprows = gruop.ToList();
-                                    if (gruoprows.Count != 3)
+                                    #region 最后一级
+                                    //最后一级
+                                    if (j == F_Level)
                                     {
-                                        //断层数据，无法计算
-                                        break;
-                                    }
-
-                                    var group1 = gruoprows.Find(r => r.F_Type == 1);
-                                    var group2 = gruoprows.Find(r => r.F_Type == 2);
-                                    var group3 = gruoprows.Find(r => r.F_Type == 3);
-
-                                    if (i == 0)
-                                    {
-                                        //成品
-                                        GoodsConvert currentGc = new GoodsConvert();
-                                        currentGc.F_ID = currentBom.F_ID;
-                                        currentGc.F_ParentID = currentBom.F_ParentID;
-
-                                        currentGc.F_CreateDate = gruop.Key;
-
-                                        currentGc.F_GoodsCode = currentBom.F_GoodsCode;
-                                        currentGc.F_GoodsName = currentBom.F_GoodsName;
-
-                                        currentGc.F_ProceCode = currentBom.F_ProceCode;
-                                        currentGc.F_ProceName = currentBom.F_ProceName;
-
-                                        currentGc.F_Level = currentBom.F_Level;
-                                        currentGc.F_Kind = currentBom.F_Kind;
-                                        currentGc.F_Unit = currentBom.F_Unit;
-
-                                        currentGc.F_Qty = group1.F_Qty;
-
-                                        currentGc.F_ConvertMin = currentBom.F_ConvertMin;
-                                        currentGc.F_ConvertMax = currentBom.F_ConvertMax;
-                                        currentGc.F_ConvertRange = currentBom.F_ConvertMin.Value + "-" + currentBom.F_ConvertMax.Value;
-                                        currentGc.F_Convert = (group1.F_Qty / group2.F_Qty) * 100;
-                                        if (currentGc.F_Convert > currentGc.F_ConvertMax)
-                                            currentGc.F_ConvertTag = 1;
-                                        else
+                                        if (gruoprows.Count != 2)
                                         {
-                                            if (currentGc.F_Convert < currentGc.F_ConvertMin)
-                                                currentGc.F_ConvertTag = -1;
-                                            else
-                                            {
-                                                currentGc.F_ConvertTag = 0;
-                                            }
+                                            //断层数据，无法计算
+                                            break;
                                         }
 
+                                        var group1 = gruoprows.Find(r => r.F_Type == 1);
+                                        var group2 = gruoprows.Find(r => r.F_Type == 2);
 
-
-                                        GoodsConvert lastGc = new GoodsConvert();
-                                        lastGc.F_ID = lastBom.F_ID;
-                                        lastGc.F_ParentID = lastBom.F_ParentID;
-
-                                        lastGc.F_CreateDate = gruop.Key;
-
-                                        lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                        lastGc.F_GoodsName = lastBom.F_GoodsName;
-
-                                        lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                        lastGc.F_ProceName = lastBom.F_ProceName;
-
-                                        lastGc.F_Level = lastBom.F_Level;
-                                        lastGc.F_Kind = lastBom.F_Kind;
-                                        lastGc.F_Unit = lastBom.F_Unit;
-
-                                        lastGc.F_Qty = group2.F_Qty;
-                                        lastGc.F_SumQty = group3.F_Qty;
-                                        
-                                        lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                        lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                        lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value + "-" + lastBom.F_ConvertMax.Value;
-                                        lastGc.F_Convert =0;
-                                        lastGc.F_ConvertTag = 0;
-
-                                        converts.Add(currentGc);
-                                        converts.Add(lastGc);
-                                    }
-                                    else
-                                    {
                                         //半成品
                                         var currentGc = converts.Find(r => r.F_ID == currentBom.F_ID && r.F_CreateDate == gruop.Key);
 
@@ -688,12 +624,12 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         lastGc.F_Kind = lastBom.F_Kind;
                                         lastGc.F_Unit = lastBom.F_Unit;
 
-                                        lastGc.F_Qty =(currentGc.F_Qty/currentGc.F_SumQty)*group2.F_Qty;
-                                        lastGc.F_SumQty = group3.F_Qty;
+                                        lastGc.F_Qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                        lastGc.F_SumQty = group2.F_Qty;
 
                                         lastGc.F_ConvertMin = lastBom.F_ConvertMin;
                                         lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                        lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value + "-" + lastBom.F_ConvertMax.Value;
+                                        lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
                                         lastGc.F_Convert = 0;
                                         lastGc.F_ConvertTag = 0;
 
@@ -713,6 +649,136 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         
                                         converts.Add(lastGc);
                                     }
+                                    #endregion
+
+                                    #region 其他级
+                                    else
+                                    {
+                                        if (gruoprows.Count != 3)
+                                        {
+                                            //断层数据，无法计算
+                                            break;
+                                        }
+
+                                        var group1 = gruoprows.Find(r => r.F_Type == 1);
+                                        var group2 = gruoprows.Find(r => r.F_Type == 2);
+                                        var group3 = gruoprows.Find(r => r.F_Type == 3);
+
+                                        if (i == 0)
+                                        {
+                                            //成品
+                                            GoodsConvert currentGc = new GoodsConvert();
+                                            currentGc.F_ID = currentBom.F_ID;
+                                            currentGc.F_ParentID = currentBom.F_ParentID;
+
+                                            currentGc.F_CreateDate = gruop.Key;
+
+                                            currentGc.F_GoodsCode = currentBom.F_GoodsCode;
+                                            currentGc.F_GoodsName = currentBom.F_GoodsName;
+
+                                            currentGc.F_ProceCode = currentBom.F_ProceCode;
+                                            currentGc.F_ProceName = currentBom.F_ProceName;
+
+                                            currentGc.F_Level = currentBom.F_Level;
+                                            currentGc.F_Kind = currentBom.F_Kind;
+                                            currentGc.F_Unit = currentBom.F_Unit;
+
+                                            currentGc.F_Qty = group1.F_Qty;
+
+                                            currentGc.F_ConvertMin = currentBom.F_ConvertMin;
+                                            currentGc.F_ConvertMax = currentBom.F_ConvertMax;
+                                            currentGc.F_ConvertRange = currentBom.F_ConvertMin.Value.ToString("0.00") + "-" + currentBom.F_ConvertMax.Value.ToString("0.00");
+                                            currentGc.F_Convert = (group1.F_Qty / group2.F_Qty) * 100;
+                                            if (currentGc.F_Convert > currentGc.F_ConvertMax)
+                                                currentGc.F_ConvertTag = 1;
+                                            else
+                                            {
+                                                if (currentGc.F_Convert < currentGc.F_ConvertMin)
+                                                    currentGc.F_ConvertTag = -1;
+                                                else
+                                                {
+                                                    currentGc.F_ConvertTag = 0;
+                                                }
+                                            }
+
+
+
+                                            GoodsConvert lastGc = new GoodsConvert();
+                                            lastGc.F_ID = lastBom.F_ID;
+                                            lastGc.F_ParentID = lastBom.F_ParentID;
+
+                                            lastGc.F_CreateDate = gruop.Key;
+
+                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
+                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
+
+                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
+                                            lastGc.F_ProceName = lastBom.F_ProceName;
+
+                                            lastGc.F_Level = lastBom.F_Level;
+                                            lastGc.F_Kind = lastBom.F_Kind;
+                                            lastGc.F_Unit = lastBom.F_Unit;
+
+                                            lastGc.F_Qty = group2.F_Qty;
+                                            lastGc.F_SumQty = group3.F_Qty;
+
+                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
+                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
+                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
+                                            lastGc.F_Convert = 0;
+                                            lastGc.F_ConvertTag = 0;
+
+                                            converts.Add(currentGc);
+                                            converts.Add(lastGc);
+                                        }
+                                        else
+                                        {
+                                            //半成品
+                                            var currentGc = converts.Find(r => r.F_ID == currentBom.F_ID && r.F_CreateDate == gruop.Key);
+
+                                            GoodsConvert lastGc = new GoodsConvert();
+                                            lastGc.F_ID = lastBom.F_ID;
+                                            lastGc.F_ParentID = lastBom.F_ParentID;
+
+                                            lastGc.F_CreateDate = gruop.Key;
+
+                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
+                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
+
+                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
+                                            lastGc.F_ProceName = lastBom.F_ProceName;
+
+                                            lastGc.F_Level = lastBom.F_Level;
+                                            lastGc.F_Kind = lastBom.F_Kind;
+                                            lastGc.F_Unit = lastBom.F_Unit;
+
+                                            lastGc.F_Qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                            lastGc.F_SumQty = group3.F_Qty;
+
+                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
+                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
+                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
+                                            lastGc.F_Convert = 0;
+                                            lastGc.F_ConvertTag = 0;
+
+
+                                            currentGc.F_Convert = (currentGc.F_Qty / lastGc.F_Qty) * 100;
+                                            if (currentGc.F_Convert > currentGc.F_ConvertMax)
+                                                currentGc.F_ConvertTag = 1;
+                                            else
+                                            {
+                                                if (currentGc.F_Convert < currentGc.F_ConvertMin)
+                                                    currentGc.F_ConvertTag = -1;
+                                                else
+                                                {
+                                                    currentGc.F_ConvertTag = 0;
+                                                }
+                                            }
+
+                                            converts.Add(lastGc);
+                                        }
+                                    }
+	                                #endregion
                                 }
                             }
                             else
@@ -740,21 +806,21 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     var starbom = maxboms.Find(r => r.F_Level == maxlevel);
                     dc = new DataColumn();
-                    dc.ColumnName = "F_GoodsCode_" + starbom.F_ProceCode;
+                    dc.ColumnName = "F_GoodsCode_Source";
                     dc.DataType = typeof(string);
                     dt.Columns.Add(dc);
 
                     dc = new DataColumn();
-                    dc.ColumnName = "F_GoodsName_" + starbom.F_ProceCode;
+                    dc.ColumnName = "F_GoodsName_Source";
                     dc.DataType = typeof(string);
                     dt.Columns.Add(dc);
 
                     dc = new DataColumn();
-                    dc.ColumnName = "F_GoodsQty_" + starbom.F_ProceCode;
+                    dc.ColumnName = "F_GoodsQty_Source";
                     dc.DataType = typeof(decimal);
                     dt.Columns.Add(dc);
 
-                    for (int i = maxlevel-1; i <=0; i--)
+                    for (int i = maxlevel-1; i >=0; i--)
                     {
                         var bom = maxboms.Find(r => r.F_Level==i);
                         dc = new DataColumn();
@@ -797,7 +863,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         {
                             DataRow dr = dt.NewRow();
                             SetDataRow(row.F_ParentID, group.ToList(), dr);
-                            dt.Rows.Add(dt);
+                            dt.Rows.Add(dr);
                         }
                     }
                 }
@@ -931,7 +997,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 if (success)
                 {
                     var rows = boms.Where(r => r.F_GoodsCode == F_GoodsCode);
-                    if (rows == null || rows.Count() < 0)
+                    if (rows == null || rows.Count() < 1)
                     {
                         success = false;
                         message = "未从配方数据中匹配到相应原物料";
@@ -1159,12 +1225,24 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 return dr;
             else
             {
-                dr["F_GoodsCode_" + row.F_ProceCode] = row.F_GoodsCode;
-                dr["F_GoodsName_" + row.F_ProceCode] = row.F_GoodsName;
-                dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
-                dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
-                dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
-                dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                dr["F_CreateDate"] = row.F_CreateDate;
+                //末级
+                if (row.F_ProceCode.IsEmpty())
+                {
+                    dr["F_GoodsCode_Source"] = row.F_GoodsCode;
+                    dr["F_GoodsName_Source"] = row.F_GoodsName;
+                    dr["F_GoodsQty_Source"] = row.F_Qty;
+                }
+                else
+                {
+                    dr["F_GoodsCode_" + row.F_ProceCode] = row.F_GoodsCode;
+                    dr["F_GoodsName_" + row.F_ProceCode] = row.F_GoodsName;
+                    dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
+                    dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
+                    dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
+                    dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                }
+
 
                 return SetDataRow(row.F_ID, converts, dr);
             }
