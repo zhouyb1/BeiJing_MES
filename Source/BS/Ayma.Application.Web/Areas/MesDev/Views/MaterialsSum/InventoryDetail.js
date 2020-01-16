@@ -183,7 +183,7 @@ var bootstrap = function ($, ayma) {
                           {
                               label: "金额", name: "金额", width: 90, align: "center",
                               formatter: function (value, row, dfop) {
-                                  return (row.F_InQty * row.F_InPrice).toFixed(6) / 1;
+                                  return (row.F_InQty * row.G_Price).toFixed(6) / 1;
                               }
                           },
                         ]
@@ -215,7 +215,7 @@ var bootstrap = function ($, ayma) {
                          {
                              label: "金额", name: "finalamount", width: 90, align: "center",
                              formatter: function (value, row, dfop) {
-                                 return (row.F_OutQty * row.F_OutPrice).toFixed(6) / 1;
+                                 return (row.F_OutQty * row.G_Price).toFixed(6) / 1;
                              }
                          },
                         ]
