@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -306,7 +307,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 return
                     this.BaseRepository()
-                        .FindList<Mes_InventoryEntity>(c => c.I_StockCode == stockCode && c.I_GoodsCode == goodsCode);
+                        .FindList<Mes_InventoryEntity>(c => c.I_StockCode == stockCode && c.I_GoodsCode == goodsCode).OrderBy(c=>c.I_Batch);
             }
             catch (Exception ex)
             {
@@ -418,6 +419,41 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+
+
+        /// <summary>
+        /// 获取当前物料所有库存数据(有批次)作为组装物料
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_OrgResDetailEntity> GetOrgGoodsList(string stock,string goodsCode)
+        {
+            var sql = new StringBuilder();
+            sql.Append(@"SELECT I_GoodsCode O_GoodsCode,
+                                I_GoodsName O_GoodsName,
+                                I_Unit O_Unit,
+                                I_Qty O_Qty,
+                                I_StockCode O_StockCode,
+                                I_StockName O_StockName,
+                                I_Batch O_Batch 
+                         FROM dbo.Mes_Inventory WHERE 1 = 1");
+
+            var dp = new DynamicParameters(new {});
+            if (!stock.IsEmpty())
+            {
+                dp.Add("I_StockCode", stock, DbType.String);
+                sql.Append(" AND I_StockCode=@I_StockCode ");
+            }
+            if (!goodsCode.IsEmpty())
+            {
+                dp.Add("I_GoodsCode", goodsCode, DbType.String);
+                sql.Append(" AND I_GoodsCode=@I_GoodsCode ");
+            }
+            sql.Append(" order by I_Batch ");
+            return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(sql.ToString(), dp);
+        }
+
         #endregion
 
         #region 提交数据

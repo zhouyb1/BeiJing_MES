@@ -360,18 +360,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var key = userId + "_stock";
             var stock = redisCache.Read<string>(key);
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT          c.C_Code O_GoodsCode ,
-                                        c.C_Name O_GoodsName ,
-                                        c.C_SecCode O_SecGoodsCode ,
-                                        c.C_SecName O_SecGoodsName ,
-                                        i.I_Batch O_Batch ,
-                                        i.I_Qty O_Qty ,
-                                        i.I_Unit O_Unit ,
-                                        (SELECT G_Price FROM dbo.Mes_Goods WHERE G_Code = i.I_GoodsCode) O_Price
-                                FROM    dbo.Mes_Convert c
-                                        INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
-                                        INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
-                                        WHERE i.I_Qty > 0 AND s.S_Kind =4  ");
+            sb.Append(@"SELECT  c.C_Code O_GoodsCode ,
+                                c.C_Name O_GoodsName ,
+                                c.C_SecCode O_SecGoodsCode ,
+                                c.C_SecName O_SecGoodsName ,
+                                SUM(i.I_Qty) O_Qty ,
+                                i.I_Unit O_Unit ,
+                                ( SELECT    G_Price
+                                  FROM      dbo.Mes_Goods
+                                  WHERE     G_Code = i.I_GoodsCode
+                                ) O_Price
+                        FROM    dbo.Mes_Convert c
+                                INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
+                                INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
+                                INNER JOIN dbo.Mes_Goods g ON g.G_Code=i.I_GoodsCode
+                        WHERE   i.I_Qty > 0
+                                AND s.S_Kind = 4 ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });   
             var queryParam = queryJson.ToJObject();
@@ -385,6 +389,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("stock", "%" + stock + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
+            sb.Append(@"  GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode ");
             return BaseRepository().FindTable(sb.ToString(), dp,obj);
         }
 
@@ -439,8 +444,36 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == keyValue).OrderBy(c=>c.O_Index);
+                //return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == keyValue).Sum()
+
+                var dp = new DynamicParameters(new {});
+                var sql = @"SELECT  O_GoodsCode ,
+                                    O_GoodsName ,
+                                    O_Unit ,
+                                    O_Price ,
+                                    SUM(O_Qty) O_Qty ,
+                                    O_SecGoodsCode ,
+                                    O_SecGoodsName ,
+                                    O_SecUnit ,
+                                    O_SecQty ,
+                                    O_SecPrice
+                            FROM    dbo.Mes_OrgResDetail
+                            WHERE   O_OrgResNo = @O_OrgResNo
+                            GROUP BY  O_GoodsCode ,
+                                    O_GoodsName ,
+                                    O_Unit ,
+                                    O_Price ,
+                                    O_SecGoodsCode ,
+                                    O_SecGoodsName ,
+                                    O_SecUnit ,
+                                    O_SecQty ,
+                                    O_SecPrice ";
+
+                dp.Add("O_OrgResNo",keyValue,DbType.String);
+                var list = this.BaseRepository().FindList<Mes_OrgResDetailEntity>(sql, dp);
+                return list;
             }
+          
             catch (Exception ex)
             {
                 if (ex is ExceptionEx)

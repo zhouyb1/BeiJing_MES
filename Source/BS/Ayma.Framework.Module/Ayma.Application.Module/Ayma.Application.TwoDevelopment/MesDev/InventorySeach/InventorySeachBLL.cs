@@ -230,6 +230,32 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         }
 
+
+        /// <summary>
+        /// 获取当前物料所有库存数据(有批次)作为组装物料
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        public IEnumerable<Mes_OrgResDetailEntity> GetOrgGoodsList(string stock, string goodsCode)
+        {
+            try
+            {
+                return inventorySeachService.GetOrgGoodsList(stock,goodsCode);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据

@@ -70,7 +70,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        IEnumerable<Mes_InventoryEntity> GetInventoryList(Pagination pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch); 
+        IEnumerable<Mes_InventoryEntity> GetInventoryList(Pagination pagination, string queryJson, string I_GoodsName, string I_StockName, string I_Unit, string I_Batch);
+
+        /// <summary>
+        /// 获取当前物料所有库存数据(有批次)作为组装物料
+        /// </summary>
+        /// <param name="stock"></param>
+        /// <param name="goodsCode"></param>
+        /// <returns></returns>
+        IEnumerable<Mes_OrgResDetailEntity> GetOrgGoodsList(string stock, string goodsCode);
         #endregion
 
         #region 提交数据
