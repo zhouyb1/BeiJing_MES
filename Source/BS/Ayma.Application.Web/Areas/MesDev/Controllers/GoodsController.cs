@@ -12,7 +12,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 扫码获取商品的信息
         /// </summary>
         /// <returns></returns>
-        public ActionResult GoodsInfo()
+        public ActionResult GoodsInfoIndex()
         {
             return View();
         }

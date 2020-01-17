@@ -585,6 +585,7 @@
     <Content Include="Areas\MesDev\Views\Mes_SaleManager\PostGoodsListIndex.js" />
     <Content Include="Areas\MesDev\Views\MonthBalance\Form.js" />
     <Content Include="Areas\MesDev\Views\MonthBalance\Index.js" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\ProductRateIndex.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\SearchForm.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\Form.js" />
     <Content Include="Areas\MesDev\Views\OrgResManager\GoodsListIndex.js" />
@@ -605,7 +606,6 @@
     <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempForm.js" />
@@ -2341,7 +2341,7 @@
     <Content Include="Areas\MesDev\Views\BomHead\ImportForm.cshtml" />
     <Content Include="Areas\MesDev\Views\Mes_BackSupply\AddForm.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\GoodsListIndex.cshtml" />
-    <Content Include="Areas\MesDev\Views\Goods\GoodsInfo.cshtml" />
+    <Content Include="Areas\MesDev\Views\Goods\GoodsInfoIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchIndex.cshtml" />
     <Content Include="Areas\MesDev\Views\CompUseHead\SearchForm.cshtml" />
     <Content Include="Areas\MesDev\Views\InWorkShopManager\Form.cshtml" />
@@ -2748,7 +2748,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.cshtml" />
-    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.cshtml" />
+    <Content Include="Areas\MesDev\Views\OrgResManager\ProductRateIndex.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
   </ItemGroup>
   <PropertyGroup>
