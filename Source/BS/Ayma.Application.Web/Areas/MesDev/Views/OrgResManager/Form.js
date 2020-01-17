@@ -140,7 +140,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           row.O_GoodsName = selectdata.o_goodsname;
                                           row.StockQty = selectdata.o_qty;
                                           row.O_Unit = selectdata.o_unit;
-                                          row.O_Batch = selectdata.o_batch;
+                                          //row.O_Batch = selectdata.o_batch;整合批次
                                           row.O_Price = selectdata.o_price;
                                           row.O_SecGoodsCode = selectdata.o_secgoodscode;
 
@@ -171,7 +171,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               },
                               { label: "单价", name: "O_Price", width: 80, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
-                              { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' },
+                              //{ label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' },
                               { label: "转换后的数量", name: "O_SecQty", width: 90, align: "center", hidden: true },
                               { label: "转换后单价", name: "O_SecPrice", width: 90, align: "center", hidden: true },
                               { label: "转换后单位", name: "O_SecUnit", width: 90, align: "center", hidden: true },
@@ -196,51 +196,59 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
             $('#Mes_OrgResDetail_d').jfGrid({
                 headData: [
+                {
+                    label: "组装后物料",
+                    name: "B",
+                    width: 180,
+                    align: "center",
+                    children: [
+                    { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
+                    { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
                     {
-                        label: "组装后物料",
-                        name: "B",
-                        width: 180,
+                        label: "数量",
+                        name: "O_SecQty",
+                        width: 80,
                         align: "center",
-                        children: [
-                            {label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center"},
-                            { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
-                            {
-                                label: "数量", name: "O_SecQty", width: 80, align: "center", editType: 'input', 
-                                editOp: {
-                                    callback: function (rownum, row) {
-                                        if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
-                                            row.O_SecQty = 0;
-                                        } else {
-                                            var rowheadataList = $("#Mes_OrgResDetail_h").jfGridGet('rowdatas');
-                                            var amount = 0;
+                        editType: 'input',
+                        editOp: {
+                            callback: function(rownum, row) {
+                                if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
+                                    row.O_SecQty = 0;
+                                } else {
+                                    var rowheadataList = $("#Mes_OrgResDetail_h").jfGridGet('rowdatas');
+                                    var amount = 0;
 
 
-                                            for (var i = 0, j=rowheadataList.length;i<j ;i++) {
-                                                if (rowheadataList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
-                                                    amount += rowheadataList[i].O_Price * rowheadataList[i].O_Qty;
-                                                    row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
-                                                  
-                                                    rowheadataList[i].O_SecQty = row.O_SecQty;
-                                                    rowheadataList[i].O_SecUnit = row.O_SecUnit;
-                                                    rowheadataList[i].O_SecBatch = row.O_SecBatch;
-                                                    rowheadataList[i].O_SecGoodsCode = row.O_SecGoodsCode;
-                                                    rowheadataList[i].O_SecGoodsName = row.O_SecGoodsName;
-                                                } 
-                                            }
-                                            for (var k = 0, m = rowheadataList.length; k < m; k++) {
-                                                if (rowheadataList[k].O_SecGoodsCode==row.O_SecGoodsCode) {
-                                                    rowheadataList[k].O_SecPrice = row.O_SecPrice;
-                                                }
-                                            }
-                                            $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: rowheadataList });
+                                    for (var i = 0, j = rowheadataList.length; i < j; i++) {
+                                        if (rowheadataList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
+                                            amount += rowheadataList[i].O_Price * rowheadataList[i].O_Qty;
+                                            row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
+
+                                            rowheadataList[i].O_SecQty = row.O_SecQty;
+                                            rowheadataList[i].O_SecUnit = row.O_SecUnit;
+                                            rowheadataList[i].O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
+                                            rowheadataList[i].O_SecGoodsCode = row.O_SecGoodsCode;
+                                            rowheadataList[i].O_SecGoodsName = row.O_SecGoodsName;
                                         }
                                     }
+                                    for (var k = 0, m = rowheadataList.length; k < m; k++) {
+                                        if (rowheadataList[k].O_SecGoodsCode == row.O_SecGoodsCode) {
+                                            rowheadataList[k].O_SecPrice = row.O_SecPrice;
+                                        }
+                                    }
+                                    $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: rowheadataList });
                                 }
-                            },
-                             { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
-                             { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
-                            {
-                                label: "批次", name: "O_SecBatch", width: 80, align: "center", editType: "label",
+                            }
+                        }
+                    },
+                    { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
+                    { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
+                    {
+                        label: "批次",
+                        name: "O_SecBatch",
+                        width: 80,
+                        align: "center",
+                        hidden:true,
                                 formatter: function (cellvalue, row) {
                                    return  row.O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
                                 }
@@ -309,7 +317,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             return false;
         }
 
-        var num = 0;
+        //var num = 0;
         for (var i = 0, j = data.length; i < j; i++)
         {
             if (data[i].O_Qty == undefined || data[i].O_Qty == 0) {
@@ -321,8 +329,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.alert.error('请录入组装后的数量！');
                 return false;
             }
-            data[i].O_Index = num;
-            num++;
+            //data[i].O_Index = num;
+            //num++;
         };
         var postData = {
             strEntity: JSON.stringify($('[data-table="Mes_OrgResHead"]').GetFormData()),

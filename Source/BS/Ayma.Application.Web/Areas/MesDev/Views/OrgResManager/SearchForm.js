@@ -77,7 +77,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               { label: "数量", name: "O_Qty", width: 80, align: "center" },
                               { label: "单价", name: "O_Price", width: 80, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
-                              { label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' }
+                              //{ label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' }
                           ]
                       }
                 ],
@@ -100,7 +100,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             { label: "数量", name: "O_SecQty", width: 80, align: "center"},
                             { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
                             { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
-                            { label: "批次", name: "O_SecBatch", width: 80, align: "center"}
+                            //{ label: "批次", name: "O_SecBatch", width: 80, align: "center"}
                         ]
                     }
                 ],
