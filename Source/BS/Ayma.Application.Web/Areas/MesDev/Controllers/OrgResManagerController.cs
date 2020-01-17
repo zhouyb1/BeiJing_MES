@@ -261,8 +261,20 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 return Fail("数量只能是大于0的实数");
             }
-           
-           
+
+            var groupList = mes_OrgResDetailList.GroupBy(c => new {c.O_GoodsCode,c.O_GoodsName}).ToList();
+
+            foreach (var t in groupList)
+            {
+                var stockQty = stock.GetOrgGoodsList(entity.O_StockCode, t.Key.O_GoodsCode).ToList().Sum(c => c.O_Qty);
+                var factQty = t.ToList().Sum(c => c.O_Qty);
+                if (factQty>stockQty)
+                {
+                    return Fail("当前【" + t.Key.O_GoodsName + "】录入数量大于总库存" + stockQty);
+                }
+            }
+
+            #region 舍去
             //var  list = mes_OrgResDetailList.GroupBy(c => c.O_GoodsCode).ToList();
             //foreach (var item in list)
             //{
@@ -272,8 +284,51 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             //    {
             //        return Fail("【"+stock.W_GoodsName+"】当前使用数量大于库存");
             //    }
-            //}
-            orgResMangerIBLL.SaveEntity(keyValue, entity, mes_OrgResDetailList);
+            //} 
+            #endregion
+
+            //按照先进先出原则生成单据
+            
+            var goods_list = new List< Mes_OrgResDetailEntity>();//记录物料批次数据
+            for (var i = 0; i < mes_OrgResDetailList.Count; i++)
+            {
+                //根据 物料编码和仓库获取所有库存
+               var stockList= stock.GetOrgGoodsList(entity.O_StockCode, mes_OrgResDetailList[i].O_GoodsCode).ToList();
+                for (var j = 0; j < stockList.Count; j++)//需求20个，两个批次分别为5个，7个
+                {
+                    if (mes_OrgResDetailList[i].O_Qty <= stockList[j].O_Qty)
+                    {
+                        //品种组装前物料
+                        stockList[j].O_Qty = mes_OrgResDetailList[i].O_Qty;
+                        stockList[j].O_Price = mes_OrgResDetailList[i].O_Price;
+                        //组装产出物
+                        stockList[j].O_SecGoodsCode = mes_OrgResDetailList[i].O_SecGoodsCode;
+                        stockList[j].O_SecGoodsName = mes_OrgResDetailList[i].O_SecGoodsName;
+                        stockList[j].O_SecBatch = mes_OrgResDetailList[i].O_SecBatch;
+                        stockList[j].O_SecPrice = mes_OrgResDetailList[i].O_SecPrice;
+                        stockList[j].O_SecUnit = mes_OrgResDetailList[i].O_SecUnit;
+                        stockList[j].O_SecQty = mes_OrgResDetailList[i].O_SecQty;
+                        goods_list.Add(stockList[j]);
+                        break;//数量足够 跳出循环
+                    }
+                    var qty = stockList[j].O_Qty; //取全部
+                    //拼装组装前物料
+                    stockList[j].O_Qty = qty;
+                    stockList[j].O_Price = mes_OrgResDetailList[i].O_Price;
+                    //拼装组装后产物
+                    stockList[j].O_SecGoodsCode = mes_OrgResDetailList[i].O_SecGoodsCode;
+                    stockList[j].O_SecGoodsName = mes_OrgResDetailList[i].O_SecGoodsName;
+                    stockList[j].O_SecBatch = mes_OrgResDetailList[i].O_SecBatch;
+                    stockList[j].O_SecPrice = mes_OrgResDetailList[i].O_SecPrice;
+                    stockList[j].O_SecUnit = mes_OrgResDetailList[i].O_SecUnit;
+                    stockList[j].O_SecQty = mes_OrgResDetailList[i].O_SecQty;
+                    goods_list.Add(stockList[j]);
+                    stockList.RemoveAt(j);
+                    j--;
+                    mes_OrgResDetailList[i].O_Qty = mes_OrgResDetailList[i].O_Qty - qty;
+                }
+            }
+            orgResMangerIBLL.SaveEntity(keyValue, entity, goods_list);
             return Success("保存成功！");
         }
         #endregion
