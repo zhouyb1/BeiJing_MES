@@ -261,6 +261,12 @@
     <Compile Include="System\frmColler.Designer.cs">
       <DependentUpon>frmColler.cs</DependentUpon>
     </Compile>
+    <Compile Include="System\frmESLSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\frmESLSearch.Designer.cs">
+      <DependentUpon>frmESLSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="System\frmGoodsConvet.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,6 +548,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmBackup.resx">
       <DependentUpon>frmBackup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\frmESLSearch.resx">
+      <DependentUpon>frmESLSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="System\frmGoodsConvet.resx">
       <DependentUpon>frmGoodsConvet.cs</DependentUpon>

@@ -58,6 +58,13 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblTS = new System.Windows.Forms.Label();
+            this.txtOrderDate = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.cmbWorkshopName = new System.Windows.Forms.ComboBox();
+            this.cmbStockName = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.生产订单号 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WorkShopName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -76,13 +83,6 @@
             this.条码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.remark = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblTS = new System.Windows.Forms.Label();
-            this.txtOrderDate = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cmbWorkshopName = new System.Windows.Forms.ComboBox();
-            this.cmbStockName = new System.Windows.Forms.ComboBox();
-            this.btnDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -433,117 +433,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(821, 231);
             this.dataGridView1.TabIndex = 69;
             // 
-            // 生产订单号
-            // 
-            this.生产订单号.DataPropertyName = "I_OrderNo";
-            this.生产订单号.HeaderText = "生产订单号";
-            this.生产订单号.Name = "生产订单号";
-            // 
-            // 车间
-            // 
-            this.车间.DataPropertyName = "I_WorkShop";
-            this.车间.HeaderText = "车间";
-            this.车间.Name = "车间";
-            this.车间.Width = 60;
-            // 
-            // WorkShopName
-            // 
-            this.WorkShopName.DataPropertyName = "I_WorkShopName";
-            this.WorkShopName.HeaderText = "车间名称";
-            this.WorkShopName.Name = "WorkShopName";
-            // 
-            // 线边仓
-            // 
-            this.线边仓.DataPropertyName = "I_StockCode";
-            this.线边仓.HeaderText = "线边仓";
-            this.线边仓.Name = "线边仓";
-            // 
-            // StockName
-            // 
-            this.StockName.DataPropertyName = "I_StockName";
-            this.StockName.HeaderText = "线边仓名称";
-            this.StockName.Name = "StockName";
-            // 
-            // 物料
-            // 
-            this.物料.DataPropertyName = "I_GoodsCode";
-            this.物料.HeaderText = "物料";
-            this.物料.Name = "物料";
-            // 
-            // GoodsName
-            // 
-            this.GoodsName.DataPropertyName = "I_GoodsName";
-            this.GoodsName.HeaderText = "物料名";
-            this.GoodsName.Name = "GoodsName";
-            // 
-            // 批次
-            // 
-            this.批次.DataPropertyName = "I_Batch";
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            // 
-            // Price
-            // 
-            this.Price.DataPropertyName = "I_Price";
-            this.Price.HeaderText = "价格";
-            this.Price.Name = "Price";
-            // 
-            // unit
-            // 
-            this.unit.DataPropertyName = "I_Unit";
-            this.unit.HeaderText = "单位";
-            this.unit.Name = "unit";
-            // 
-            // status
-            // 
-            this.status.DataPropertyName = "I_Status";
-            this.status.HeaderText = "状态";
-            this.status.Name = "status";
-            // 
-            // CreateBy
-            // 
-            this.CreateBy.DataPropertyName = "I_CreateBy";
-            this.CreateBy.HeaderText = "添加人";
-            this.CreateBy.Name = "CreateBy";
-            // 
-            // CreateDate
-            // 
-            this.CreateDate.DataPropertyName = "I_CreateDate";
-            this.CreateDate.HeaderText = "添加时间";
-            this.CreateDate.Name = "CreateDate";
-            // 
-            // 工艺代码
-            // 
-            this.工艺代码.DataPropertyName = "I_Record";
-            this.工艺代码.HeaderText = "工艺代码";
-            this.工艺代码.Name = "工艺代码";
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "I_Qty";
-            this.数量.HeaderText = "数量";
-            this.数量.Name = "数量";
-            // 
-            // 条码
-            // 
-            this.条码.DataPropertyName = "I_Barcode";
-            this.条码.HeaderText = "条码";
-            this.条码.Name = "条码";
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.Visible = false;
-            this.ID.Width = 5;
-            // 
-            // remark
-            // 
-            this.remark.DataPropertyName = "I_Remark";
-            this.remark.HeaderText = "备注";
-            this.remark.Name = "remark";
-            // 
             // lblTS
             // 
             this.lblTS.AutoSize = true;
@@ -619,6 +508,129 @@
             this.btnDelete.Text = "删除";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // 生产订单号
+            // 
+            this.生产订单号.DataPropertyName = "I_OrderNo";
+            this.生产订单号.HeaderText = "生产订单号";
+            this.生产订单号.Name = "生产订单号";
+            this.生产订单号.Visible = false;
+            // 
+            // 车间
+            // 
+            this.车间.DataPropertyName = "I_WorkShop";
+            this.车间.HeaderText = "车间";
+            this.车间.Name = "车间";
+            this.车间.Visible = false;
+            this.车间.Width = 60;
+            // 
+            // WorkShopName
+            // 
+            this.WorkShopName.DataPropertyName = "I_WorkShopName";
+            this.WorkShopName.HeaderText = "车间名称";
+            this.WorkShopName.Name = "WorkShopName";
+            // 
+            // 线边仓
+            // 
+            this.线边仓.DataPropertyName = "I_StockCode";
+            this.线边仓.HeaderText = "线边仓";
+            this.线边仓.Name = "线边仓";
+            this.线边仓.Visible = false;
+            // 
+            // StockName
+            // 
+            this.StockName.DataPropertyName = "I_StockName";
+            this.StockName.HeaderText = "线边仓名称";
+            this.StockName.Name = "StockName";
+            this.StockName.Visible = false;
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "I_GoodsCode";
+            this.物料.HeaderText = "物料";
+            this.物料.Name = "物料";
+            this.物料.Visible = false;
+            // 
+            // GoodsName
+            // 
+            this.GoodsName.DataPropertyName = "I_GoodsName";
+            this.GoodsName.HeaderText = "物料名";
+            this.GoodsName.Name = "GoodsName";
+            // 
+            // 批次
+            // 
+            this.批次.DataPropertyName = "I_Batch";
+            this.批次.HeaderText = "批次";
+            this.批次.Name = "批次";
+            // 
+            // Price
+            // 
+            this.Price.DataPropertyName = "I_Price";
+            this.Price.HeaderText = "价格";
+            this.Price.Name = "Price";
+            this.Price.Visible = false;
+            // 
+            // unit
+            // 
+            this.unit.DataPropertyName = "I_Unit";
+            this.unit.HeaderText = "单位";
+            this.unit.Name = "unit";
+            this.unit.Width = 60;
+            // 
+            // status
+            // 
+            this.status.DataPropertyName = "I_Status";
+            this.status.HeaderText = "状态";
+            this.status.Name = "status";
+            // 
+            // CreateBy
+            // 
+            this.CreateBy.DataPropertyName = "I_CreateBy";
+            this.CreateBy.HeaderText = "添加人";
+            this.CreateBy.Name = "CreateBy";
+            this.CreateBy.Visible = false;
+            // 
+            // CreateDate
+            // 
+            this.CreateDate.DataPropertyName = "I_CreateDate";
+            this.CreateDate.HeaderText = "添加时间";
+            this.CreateDate.Name = "CreateDate";
+            this.CreateDate.Visible = false;
+            // 
+            // 工艺代码
+            // 
+            this.工艺代码.DataPropertyName = "I_Record";
+            this.工艺代码.HeaderText = "工艺代码";
+            this.工艺代码.Name = "工艺代码";
+            this.工艺代码.Visible = false;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "I_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.Name = "数量";
+            // 
+            // 条码
+            // 
+            this.条码.DataPropertyName = "I_Barcode";
+            this.条码.HeaderText = "条码";
+            this.条码.Name = "条码";
+            this.条码.Visible = false;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
+            this.ID.Width = 5;
+            // 
+            // remark
+            // 
+            this.remark.DataPropertyName = "I_Remark";
+            this.remark.HeaderText = "备注";
+            this.remark.Name = "remark";
+            this.remark.Visible = false;
             // 
             // frmInWorkShopList
             // 
@@ -704,6 +716,13 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lblTS;
+        private System.Windows.Forms.TextBox txtOrderDate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cmbWorkshopName;
+        private System.Windows.Forms.ComboBox cmbStockName;
+        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.DataGridViewTextBoxColumn 生产订单号;
         private System.Windows.Forms.DataGridViewTextBoxColumn 车间;
         private System.Windows.Forms.DataGridViewTextBoxColumn WorkShopName;
@@ -722,12 +741,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn 条码;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn remark;
-        private System.Windows.Forms.Label lblTS;
-        private System.Windows.Forms.TextBox txtOrderDate;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ComboBox cmbWorkshopName;
-        private System.Windows.Forms.ComboBox cmbStockName;
-        private System.Windows.Forms.Button btnDelete;
     }
 }

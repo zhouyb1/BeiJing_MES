@@ -23,7 +23,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double M_Weight{ set; get; }
+        public decimal M_Weight{ set; get; }
         #endregion
     }
 }

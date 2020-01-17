@@ -193,7 +193,7 @@ namespace DesktopApp
                         MessageBox.Show("容器重量应该为数字");
                         return;
                     }
-                    if (Convert.ToDouble(txtRQQty.Text) > Convert.ToDouble(txtQty.Text))
+                    if (Convert.ToDecimal(txtRQQty.Text) > Convert.ToDecimal(txtQty.Text))
                     {
                         MessageBox.Show("容器重量不能大于称重重量");
                         return;
@@ -218,7 +218,7 @@ namespace DesktopApp
                     WorkShopWeightEntity.W_SecBatch = txtBatch.Text;
                     WorkShopWeightEntity.W_SecGoodsCode = txtCode.Text;
                     WorkShopWeightEntity.W_SecGoodsName = txtGoodsName.Text;
-                    WorkShopWeightEntity.W_SecQty = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
+                    WorkShopWeightEntity.W_SecQty = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                     WorkShopWeightEntity.W_SecUnit = txtUnit.Text;
                     WorkShopWeightEntity.W_Status = 1;
                     WorkShopWeightEntity.W_WorkShopCode = Globels.strWorkShop;
@@ -229,7 +229,7 @@ namespace DesktopApp
                     {
                         string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                         m_strBarcode = Barcode;
-                        Double dTemp = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
+                        decimal dTemp = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                         GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text.Trim() + "单号" + Globels.strOrderNo, txtGoodsName.Text, dTemp.ToString(), strBZQ, strBarcode);
                         MessageBox.Show("添加成功");
                         SaveBarcode(Barcode, txtCode.Text, txtGoodsName.Text, dTemp, Globels.strWorkShop);
@@ -256,7 +256,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -279,7 +279,7 @@ namespace DesktopApp
         {
             try
             {
-                Double var1 = Convert.ToDouble(oText);
+                decimal var1 = Convert.ToDecimal(oText);
                 return true;
             }
             catch
@@ -317,7 +317,7 @@ namespace DesktopApp
                             //{
                             char[] arr = strWeight[nLen - 1].Substring(0, 7).ToCharArray();
                             Array.Reverse(arr);
-                            txtQty.Text = Double.Parse(new string(arr)).ToString();
+                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
                             ;
                             //ZH(strWeight[nLen - 1].ToString());
 
@@ -487,7 +487,21 @@ namespace DesktopApp
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + strBZQ + "小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
-                //g.DrawString("订单：" + Globels.strOrderNo, f4, b, 4, 90);//设置位置
+
+                string strTeamName = "";
+                if(Globels.strStockCode == "0401")
+                {
+                    strTeamName = "蔬菜";
+                }
+                else if(Globels.strStockCode == "0402")
+                {
+                    strTeamName = "肉食";
+                }
+                else
+                {
+                    strTeamName = "热厨";
+                }
+                g.DrawString("班组：" + strTeamName, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
 
@@ -612,7 +626,7 @@ namespace DesktopApp
         {
             try
             {
-                Double dSJ = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
+                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                 txtSJ.Text = dSJ.ToString();
             }
             catch
@@ -625,7 +639,7 @@ namespace DesktopApp
         {
             try
             {
-                Double dSJ = Convert.ToDouble(txtQty.Text) - Convert.ToDouble(txtRQQty.Text);
+                decimal dSJ = Convert.ToDecimal(txtQty.Text) - Convert.ToDecimal(txtRQQty.Text);
                 txtSJ.Text = dSJ.ToString();
             }
             catch
@@ -649,6 +663,8 @@ namespace DesktopApp
                     string strGoodsCode = ds.Tables[0].Rows[0]["W_SecGoodsCode"].ToString();
                     string strBatch = ds.Tables[0].Rows[0]["W_SecBatch"].ToString();
                     string strQty = ds.Tables[0].Rows[0]["W_SecQty"].ToString();
+                    decimal d = Convert.ToDecimal(strQty);
+                    strQty = d.ToString("0.####");
                     //string strPrice = dataGridView2.Rows[dataGridView1.SelectedCells[0].RowIndex].Cells["价格2"].Value.ToString();
                     string strGoodsName = ds.Tables[0].Rows[0]["W_SecGoodsName"].ToString();
                     string strBarcode = ds.Tables[0].Rows[0]["W_Remark"].ToString();
@@ -663,7 +679,7 @@ namespace DesktopApp
 
                             GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strBZQ, strBarcode);
                             //DeleteData(strId);
-                            //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDouble(strQty), strWorkShop);
+                            //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDecimal(strQty), strWorkShop);
                             this.Enabled = true;
                             Cursor.Current = Cursors.Default;
 
@@ -674,6 +690,11 @@ namespace DesktopApp
                             Cursor.Current = Cursors.Default;
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("不好意思，您还没有打印过任何标签");
+                    return;
                 }
             }
             catch (Exception ex)

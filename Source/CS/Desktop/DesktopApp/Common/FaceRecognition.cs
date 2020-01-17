@@ -474,7 +474,7 @@ namespace DesktopApp
                     offset += size;
 
                     TimeSpan span = DateTime.Now - startTime;
-                    double second = span.TotalSeconds;
+                    Double second = span.TotalSeconds;
 
 
                     Application.DoEvents();

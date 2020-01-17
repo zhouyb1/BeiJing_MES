@@ -13,9 +13,9 @@ namespace Model
       public string I_GoodsCode{ set; get; }
       public string I_GoodsName{ set; get; }
       public string I_Unit{ set; get; }
-      public Double I_Qty { set; get; }
+      public decimal I_Qty { set; get; }
       public string I_Batch{ set; get; }
       public string I_Remark{ set; get; }
-      public Double I_Price { set; get; }
+      public decimal I_Price { set; get; }
     }
 }

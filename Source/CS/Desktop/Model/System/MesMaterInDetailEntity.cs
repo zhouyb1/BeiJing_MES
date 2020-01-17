@@ -31,7 +31,7 @@ namespace Model
         /// <summary>
         /// 税率
         /// </summary>
-        public Double M_GoodsItax { set; get; }
+        public decimal M_GoodsItax { set; get; }
         /// <summary>
         /// 单位
         /// </summary>
@@ -39,7 +39,7 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public Double M_Qty{ set; get; }
+        public decimal M_Qty{ set; get; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -48,7 +48,7 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public Double M_Price { set; get; }
+        public decimal M_Price { set; get; }
         /// <summary>
         /// 备注
         /// </summary>

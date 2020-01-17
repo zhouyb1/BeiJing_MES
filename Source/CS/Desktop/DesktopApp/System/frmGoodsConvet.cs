@@ -45,7 +45,7 @@ namespace DesktopApp
         {
             Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
             //string strSql = "select a.I_GoodsCode,a.I_GoodsName,SUM(a.I_Qty) as I_Qty,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0 GROUP BY a.I_GoodsCode,a.I_GoodsName,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price";
-            string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Qty,a.I_Batch,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
+            string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Batch,a.I_Qty,a.I_Unit,a.ID,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
             DataSet ds = new DataSet();
             ds = WorkShopScanBLL.GetList_WorkShopScan2(strSql);
 
@@ -87,12 +87,12 @@ namespace DesktopApp
                         string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
                         string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
 
-                        if(Convert.ToDouble(strQty) > Convert.ToDouble(strYLQty))
+                        if(Convert.ToDecimal(strQty) > Convert.ToDecimal(strYLQty))
                         {
                             lblTS.Text = "系统提示：物料：" + strName  + "实用数量不能大于库存数量";
                             return;
                         }
-                        if (Convert.ToDouble(strQty) == 0 || Convert.ToDouble(strQty) < 0)
+                        if (Convert.ToDecimal(strQty) == 0 || Convert.ToDecimal(strQty) < 0)
                         {
                             lblTS.Text = "系统提示：物料：" + strName + "实用数量不能为0或者负数";
                             return;
@@ -119,7 +119,7 @@ namespace DesktopApp
                                 string strTempQty = str[3].ToString();
                                 if (strTempGoods == strGoods && strTempPc == strPc)
                                 {
-                                    Double dQty = Convert.ToDouble(strQty) + Convert.ToDouble(strTempQty);
+                                    decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
                                     Goods[j] = strGoods + "," + dQty.ToString() + "," + strPc + "," + strPrice + "," + strName + "," + strUnit;
                                     bRet = true;
                                 }
@@ -172,14 +172,14 @@ namespace DesktopApp
                 OrgResHeadEntity.O_TeamName = Globels.strTeamName;
 
                 int nRow = OrgResHeadBLL.SaveEntity("", OrgResHeadEntity);
-                Double dSecPrice = 0;
-                Double dTotal = 0;
+                decimal dSecPrice = 0;
+                decimal dTotal = 0;
                 for (int i = 0; i < Goods.Count; i++)
                 {
                     string[] strTemp = Goods[i].ToString().Split(',');
-                    dTotal = dTotal + (Convert.ToDouble(strTemp[3].ToString()) * Convert.ToDouble(strTemp[1].ToString()));
+                    dTotal = dTotal + (Convert.ToDecimal(strTemp[3].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
                 }
-                dSecPrice = dTotal / Convert.ToDouble(txtQty.Text);
+                dSecPrice = dTotal / Convert.ToDecimal(txtQty.Text);
 
 
                 for (int i = 0; i < Goods.Count; i++)
@@ -188,7 +188,7 @@ namespace DesktopApp
                     OrgResDetailEntity.O_SecGoodsCode = txtGoodsCode.Text;
                     OrgResDetailEntity.O_SecGoodsName = txtGoodsName.Text;
                     OrgResDetailEntity.O_SecPrice = 0;
-                    OrgResDetailEntity.O_SecQty = Convert.ToDouble(txtQty.Text);
+                    OrgResDetailEntity.O_SecQty = Convert.ToDecimal(txtQty.Text);
                     OrgResDetailEntity.O_SecUnit = m_strUnit;
                     OrgResDetailEntity.O_SecBatch = txtPc.Text;
 
@@ -205,8 +205,8 @@ namespace DesktopApp
 
                     OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
                     OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
-                    OrgResDetailEntity.O_Price = Convert.ToDouble(strTemp[3].ToString());
-                    OrgResDetailEntity.O_Qty = Convert.ToDouble(strTemp[1].ToString());
+                    OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
+                    OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
                     OrgResDetailEntity.O_Unit = strTemp[5].ToString();
                     OrgResDetailEntity.O_Batch = strTemp[2].ToString();
                     OrgResDetailEntity.O_SecPrice = dSecPrice;
@@ -238,8 +238,8 @@ namespace DesktopApp
                     object obj = dataGridView1.Rows[i].Cells["选择"].Value;
                     if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
                     {
-                        Double dsyQty = Convert.ToDouble(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
-                        Double dylQty = Convert.ToDouble(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
+                        decimal dsyQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
+                        decimal dylQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
                         if (dsyQty == dylQty)
                         {
                             string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
@@ -247,7 +247,7 @@ namespace DesktopApp
                         }
                         else
                         {
-                            Double dQty = dylQty - dsyQty;
+                            decimal dQty = dylQty - dsyQty;
                             string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
                             UpdateData(strID, dQty);
                         }
@@ -315,7 +315,7 @@ namespace DesktopApp
             }
         }
 
-        private bool UpdateData(string strId, Double dQty)
+        private bool UpdateData(string strId, decimal dQty)
         {
             try
             {

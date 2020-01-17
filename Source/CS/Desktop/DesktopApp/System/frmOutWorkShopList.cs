@@ -20,7 +20,7 @@ namespace DesktopApp
     public partial class frmOutWorkShopList : DockContent
     {
         public frmMain frmMain { get; set; }
-        //Double Period; //保质期
+        //decimal Period; //保质期
         private SysUser User;
         string strUnit = "";
 
@@ -237,7 +237,7 @@ namespace DesktopApp
 
             try
             {
-                if(Convert.ToDouble(txtQty.Text) > Convert.ToDouble(txtStockQty.Text))
+                if(Convert.ToDecimal(txtQty.Text) > Convert.ToDecimal(txtStockQty.Text))
                 {
                     lblTS.Text = "不能超过库存数量!";
                     return;
@@ -266,11 +266,11 @@ namespace DesktopApp
                     OutWorkShopTempEntity.O_GoodsCode = cmbGoodsCode.Text;
                     OutWorkShopTempEntity.O_GoodsName = txtName.Text;
                     OutWorkShopTempEntity.O_Unit = strUnit;
-                    OutWorkShopTempEntity.O_Qty = Convert.ToDouble(txtQty.Text);
+                    OutWorkShopTempEntity.O_Qty = Convert.ToDecimal(txtQty.Text);
                     OutWorkShopTempEntity.O_Batch = cmbPc.Text;
                     OutWorkShopTempEntity.O_Remark = "";
                     OutWorkShopTempEntity.O_Barcode = txtBarcode.Text;
-                    OutWorkShopTempEntity.O_Price = Convert.ToDouble(txtPrice.Text);
+                    OutWorkShopTempEntity.O_Price = Convert.ToDecimal(txtPrice.Text);
                     OutWorkShopTempEntity.O_Record = cmbRecord.Text;
 
                     Mes_OutWorkShopTempBLL OutWorkShopTempBLL = new Mes_OutWorkShopTempBLL();

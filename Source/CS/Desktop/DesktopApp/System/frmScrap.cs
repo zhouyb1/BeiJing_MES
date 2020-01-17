@@ -15,7 +15,7 @@ namespace DesktopApp
 {
     public partial class frmScrap : DockContent
     {
-        Double dPrice = 0;
+        decimal dPrice = 0;
         public frmScrap()
         {
             InitializeComponent();
@@ -207,8 +207,8 @@ namespace DesktopApp
             {
                 try
                 {
-                    Double dQty = Convert.ToDouble(txtQty.Text);
-                    Double dScrap = Convert.ToDouble(txtScrapQty.Text);
+                    decimal dQty = Convert.ToDecimal(txtQty.Text);
+                    decimal dScrap = Convert.ToDecimal(txtScrapQty.Text);
                     if(dScrap > dQty)
                     {
                         lblTS.Text = "系统提示：报废数量不能大于库存数量！";
@@ -222,7 +222,7 @@ namespace DesktopApp
                             string strCode = listView1.Items[i].SubItems[2].Text;
                             if (strCode == cmbGoodsCode.Text)
                             {
-                                dScrap = dScrap + Convert.ToDouble(listView1.Items[i].SubItems[5].Text);
+                                dScrap = dScrap + Convert.ToDecimal(listView1.Items[i].SubItems[5].Text);
                                 listView1.Items[i].SubItems[5].Text = dScrap.ToString();
                                 bRet = true;
                                 break;
@@ -304,9 +304,9 @@ namespace DesktopApp
                         ScrapDetailEntity.S_Batch = listView1.Items[i].SubItems[4].Text;
                         ScrapDetailEntity.S_GoodsCode = listView1.Items[i].SubItems[2].Text;
                         ScrapDetailEntity.S_GoodsName = listView1.Items[i].SubItems[3].Text;
-                        ScrapDetailEntity.S_Price = Convert.ToDouble(listView1.Items[i].SubItems[7].Text);
+                        ScrapDetailEntity.S_Price = Convert.ToDecimal(listView1.Items[i].SubItems[7].Text);
                         ScrapDetailEntity.S_Unit = listView1.Items[i].SubItems[6].Text;
-                        ScrapDetailEntity.S_Qty = Convert.ToDouble(listView1.Items[i].SubItems[5].Text);
+                        ScrapDetailEntity.S_Qty = Convert.ToDecimal(listView1.Items[i].SubItems[5].Text);
                         ScrapDetailEntity.S_Remark = "";
 
                         ScrapDetailBLL.SaveEntity("",ScrapDetailEntity);

@@ -855,6 +855,24 @@ namespace DesktopApp
             frmsearchconver.Show(this.panMain);
         }
 
+        private void eSL标签查询ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmESLSearch frmsearchconver = new frmESLSearch();
+            frmsearchconver.TopLevel = false;
+            frmsearchconver.WindowState = FormWindowState.Maximized;
+
+            foreach (DockContent frm in this.panMain.Contents)
+            {
+                if (frm.Name == frmsearchconver.Name)
+                {
+                    frm.Activate();//激活
+                    return;
+                }
+            }
+
+            frmsearchconver.Show(this.panMain);
+        }
+
 
     }
 }

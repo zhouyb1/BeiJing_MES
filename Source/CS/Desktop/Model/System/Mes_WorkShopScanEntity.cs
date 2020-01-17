@@ -43,7 +43,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double W_Qty { set; get; }
+        public decimal W_Qty { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -51,7 +51,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double W_Price { set; get; }
+        public decimal W_Price { set; get; }
         
         /// <summary>
         /// 

@@ -111,10 +111,10 @@ namespace DesktopApp
 
                 WorkShopScanEntity.W_GoodsCode = cmbGoodsCode.Text;
                 WorkShopScanEntity.W_Batch = cmbPc.Text;
-                WorkShopScanEntity.W_Price = Convert.ToDouble(txtPrice.Text);
+                WorkShopScanEntity.W_Price = Convert.ToDecimal(txtPrice.Text);
 
                 WorkShopScanEntity.W_Status = 1;
-                WorkShopScanEntity.W_Qty = Convert.ToDouble(txtQty.Text);
+                WorkShopScanEntity.W_Qty = Convert.ToDecimal(txtQty.Text);
                 WorkShopScanEntity.W_Unit = txtUnit.Text;
                 WorkShopScanEntity.W_Remark = "";
                 int nCount = WorkShopScanBLL.SaveEntity("", WorkShopScanEntity);

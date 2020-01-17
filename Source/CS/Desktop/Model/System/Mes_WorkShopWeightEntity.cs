@@ -69,7 +69,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double W_SecQty { set; get; }
+        public decimal W_SecQty { set; get; }
         /// <summary>
         /// 
         /// </summary>

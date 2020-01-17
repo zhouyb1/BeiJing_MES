@@ -60,7 +60,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double O_Qty { set; get; }
+        public decimal O_Qty { set; get; }
         /// <summary>
         /// 
         /// </summary>
@@ -80,7 +80,7 @@ namespace Model
         /// <summary>
         /// 
         /// </summary>
-        public Double O_Price { set; get; }
+        public decimal O_Price { set; get; }
         #endregion
     }
 }

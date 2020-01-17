@@ -158,7 +158,7 @@ namespace Business.System
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns>返回值大于0:删除成功</returns>
-        public int UpdateEntity(string keyValue, Double dQty)
+        public int UpdateEntity(string keyValue, decimal dQty)
         {
             try
             {

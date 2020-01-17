@@ -12,7 +12,7 @@ namespace Model
         public string B_Barcode { set; get; }
         public string B_Code { set; get; }
         public string B_Name { set; get; }
-        public Double B_Qty { set; get; }
+        public decimal B_Qty { set; get; }
         public string B_WorkShopCode { set; get; }
         public int B_Status { set; get; }
         public DateTime B_Ptime { set; get; }

@@ -55,7 +55,7 @@ namespace DesktopApp
             }
         }
 
-        private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView_CelldecimalClick(object sender, DataGridViewCellEventArgs e)
         {
             photo();
         }

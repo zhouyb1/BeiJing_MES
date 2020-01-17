@@ -22,13 +22,13 @@ namespace DesktopApp
         private string P_OrderNo = "";//生产订单号
         private string M_Status = "";//单据状态
         private string M_StockCode = ""; //仓库
-        private Double Itox = 0;
+        private decimal Itox = 0;
         private SysUser User;
         private frmStorageList frmStorage;
         private string W_Kind;//称重类型
         private int rowindex;//获得当前选中的行的索引
         int whether;//是否打印 2:打印 
-        Double drqQty = 0;
+        decimal drqQty = 0;
         public frmStorageEdit(frmStorageList _frmStorageList, SysUser _User, string _M_MaterInNo, string _P_OrderNo, string _M_Status,string stockcode)
         {
             InitializeComponent();
@@ -170,14 +170,14 @@ namespace DesktopApp
             System.Drawing.Font fontLiShu3;
             fontLiShu3 = new System.Drawing.Font("宋体", 9, System.Drawing.FontStyle.Bold);
 
-            Double strQty = 0;
+            decimal strQty = 0;
             if (checkBox1.Checked == true)
             {
-                strQty = Convert.ToDouble(txtQty.Text.Trim()) - drqQty;
+                strQty = Convert.ToDecimal(txtQty.Text.Trim()) - drqQty;
             }
             else
             {
-                strQty = Convert.ToDouble(txtQty.Text.Trim());
+                strQty = Convert.ToDecimal(txtQty.Text.Trim());
             }
             g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 30, 10);
             g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 30, 25);
@@ -270,7 +270,7 @@ namespace DesktopApp
         //            MesWeightRecord.W_GoodsCode = txtGoodsCode.Text;
         //            MesWeightRecord.W_GoodsName = txtGoodsName.Text;
         //            MesWeightRecord.W_Batch = txtBatch.Text;
-        //            MesWeightRecord.W_Qty = Double.Parse(txtQty.Text);
+        //            MesWeightRecord.W_Qty = decimal.Parse(txtQty.Text);
         //            MesWeightRecord.W_Unit = txtUnit.Text;
 
         //            if (MesWeightRecordBLL.SaveEntity("", MesWeightRecord) > 0)
@@ -321,7 +321,7 @@ namespace DesktopApp
                     MesWeightRecord.W_GoodsCode = strGoods[0];
                     MesWeightRecord.W_GoodsName = strGoods[1];
                     MesWeightRecord.W_Batch = txtBatch.Text;
-                    MesWeightRecord.W_Qty = Double.Parse(txtQty.Text);
+                    MesWeightRecord.W_Qty = decimal.Parse(txtQty.Text);
                     MesWeightRecord.W_Unit = txtUnit.Text;
 
                     MesMaterInDetailEntity MaterInDetail = new MesMaterInDetailEntity();
@@ -335,17 +335,17 @@ namespace DesktopApp
                     MaterInDetail.M_GoodsCode = strGoods[0];
                     MaterInDetail.M_GoodsName = strGoods[1];
                     MaterInDetail.M_Batch = txtBatch.Text;
-                    MaterInDetail.M_Price = Convert.ToDouble(txtPrice.Text);
+                    MaterInDetail.M_Price = Convert.ToDecimal(txtPrice.Text);
                     MaterInDetail.M_GoodsItax = Itox;
                     
                     if (checkBox1.Checked == true)
                     {
-                        drqQty = Double.Parse(txtBasketQty.Text);
-                        MaterInDetail.M_Qty = Double.Parse(txtQty.Text) - drqQty;
+                        drqQty = decimal.Parse(txtBasketQty.Text);
+                        MaterInDetail.M_Qty = decimal.Parse(txtQty.Text) - drqQty;
                      }
                     else
                     {
-                        MaterInDetail.M_Qty = Double.Parse(txtQty.Text);
+                        MaterInDetail.M_Qty = decimal.Parse(txtQty.Text);
                     }
                     MaterInDetail.M_Unit = txtUnit.Text;
                     MaterInDetail.M_Kind = Convert.ToString(Goods_rows[0].G_Kind);
@@ -391,7 +391,7 @@ namespace DesktopApp
                         
                         //
 
-                        Double dPrice = (rowData.M_Price * rowData.M_Qty + MaterInDetail.M_Price * MaterInDetail.M_Qty) / (rowData.M_Qty + MaterInDetail.M_Qty);
+                        decimal dPrice = (rowData.M_Price * rowData.M_Qty + MaterInDetail.M_Price * MaterInDetail.M_Qty) / (rowData.M_Qty + MaterInDetail.M_Qty);
                         rowData.M_Price = dPrice;
                         rowData.M_Qty += MaterInDetail.M_Qty;
                         if (MaterInDetailBLL.SaveEntityTrans(rowData.ID, rowData, "", MesWeightRecord) > 0)//事务
@@ -556,7 +556,7 @@ namespace DesktopApp
                             //{
                             char[] arr = strWeight[nLen - 1].Substring(0,7).ToCharArray();
                             Array.Reverse(arr);
-                            txtQty.Text = Double.Parse(new string(arr)).ToString();
+                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
                                 ; 
                                 //ZH(strWeight[nLen - 1].ToString());
 

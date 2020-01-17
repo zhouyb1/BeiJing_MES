@@ -31,60 +31,67 @@ namespace DesktopApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(txtCode.Text == "" || txtPc.Text == "" || txtQty.Text == "" || txtBarcode.Text == "")
+
+            Save();
+        }
+
+        private void Save()
+        {
+            if (txtCode.Text == "" || txtPc.Text == "" || txtQty.Text == "" || txtBarcode.Text == "")
             {
                 MessageBox.Show("请扫描二维码");
                 txtBarcode.Focus();
                 return;
             }
-            if (MessageBox.Show("是否保存", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            //if (MessageBox.Show("是否保存", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            //{
+            try
             {
-                try
+                Mes_InWorkShopTempEntity InWorkShopTempEntity = new Mes_InWorkShopTempEntity();
+                InWorkShopTempEntity.I_StockCode = cmbStock.Text;
+                InWorkShopTempEntity.I_StockName = cmbStockName.Text;
+                InWorkShopTempEntity.I_WorkShop = cmbWorkShop.Text;
+                InWorkShopTempEntity.I_WorkShopName = cmbWorkshopName.Text;
+                InWorkShopTempEntity.I_OrderNo = comOrderNo.Text;
+                InWorkShopTempEntity.I_Status = 1;
+                InWorkShopTempEntity.I_CreateBy = Globels.strUser;
+                InWorkShopTempEntity.I_CreateDate = DateTime.Now;
+                InWorkShopTempEntity.I_GoodsCode = txtCode.Text;
+                InWorkShopTempEntity.I_GoodsName = txtName.Text;
+                InWorkShopTempEntity.I_Unit = strUnit;
+                InWorkShopTempEntity.I_Qty = Convert.ToDecimal(txtQty.Text);
+                InWorkShopTempEntity.I_Batch = txtPc.Text;
+                InWorkShopTempEntity.I_Remark = "";
+                InWorkShopTempEntity.I_Barcode = txtBarcode.Text;
+                InWorkShopTempEntity.I_Price = Convert.ToDecimal(txtPrice.Text);
+                InWorkShopTempEntity.I_Record = cmbRecord.Text;
+
+                Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
+
+
+                if (InWorkShopTempBLL.SaveEntity("", InWorkShopTempEntity) > 0)
                 {
-                    Mes_InWorkShopTempEntity InWorkShopTempEntity = new Mes_InWorkShopTempEntity();
-                    InWorkShopTempEntity.I_StockCode = cmbStock.Text;
-                    InWorkShopTempEntity.I_StockName = cmbStockName.Text;
-                    InWorkShopTempEntity.I_WorkShop = cmbWorkShop.Text;
-                    InWorkShopTempEntity.I_WorkShopName = cmbWorkshopName.Text;
-                    InWorkShopTempEntity.I_OrderNo = comOrderNo.Text;
-                    InWorkShopTempEntity.I_Status = 1;
-                    InWorkShopTempEntity.I_CreateBy = Globels.strUser;
-                    InWorkShopTempEntity.I_CreateDate = DateTime.Now;
-                    InWorkShopTempEntity.I_GoodsCode = txtCode.Text;
-                    InWorkShopTempEntity.I_GoodsName = txtName.Text;
-                    InWorkShopTempEntity.I_Unit = strUnit;
-                    InWorkShopTempEntity.I_Qty = Convert.ToDouble(txtQty.Text);
-                    InWorkShopTempEntity.I_Batch = txtPc.Text;
-                    InWorkShopTempEntity.I_Remark = "";
-                    InWorkShopTempEntity.I_Barcode = txtBarcode.Text;
-                    InWorkShopTempEntity.I_Price = Convert.ToDouble(txtPrice.Text);
-                    InWorkShopTempEntity.I_Record = cmbRecord.Text;
+                    //untCommon.InfoMsg("添加成功！");
 
-                    Mes_InWorkShopTempBLL InWorkShopTempBLL = new Mes_InWorkShopTempBLL();
-
-
-                    if (InWorkShopTempBLL.SaveEntity("", InWorkShopTempEntity) > 0)
-                    {
-                        untCommon.InfoMsg("添加成功！");
-
-                        UpdataNew();
-                        cls();
-                        UpdateBarcode(m_strBarcode);
-                        txtBarcode.SelectAll();
-                        txtBarcode.Focus();
-                        //frmParent.loadData();
-                    }
-                    else
-                    {
-                        untCommon.InfoMsg("添加失败！");
-                    }
+                    UpdataNew();
+                    cls();
+                    UpdateBarcode(m_strBarcode);
+                    txtBarcode.SelectAll();
+                    txtBarcode.Focus();
+                    //frmParent.loadData();
                 }
-                catch(Exception ex)
+                else
                 {
-                    ;
+                    untCommon.InfoMsg("添加失败！");
                 }
             }
-            
+            catch (Exception ex)
+            {
+                cls();
+                txtBarcode.SelectAll();
+                txtBarcode.Focus();
+            }
+            //}
         }
 
         private void cls()
@@ -247,7 +254,11 @@ namespace DesktopApp
 
                         }
                     }
+
+                    Save();
                 }
+
+                
             }
             catch(Exception ex)
             {

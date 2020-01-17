@@ -35,7 +35,7 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public Double P_Qty{ set; get; }
+        public decimal P_Qty{ set; get; }
         #endregion
     }
 }

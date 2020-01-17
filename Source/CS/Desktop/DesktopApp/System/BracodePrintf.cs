@@ -23,11 +23,11 @@ namespace DesktopApp
         //}
 
         public frmMain frmMain { get; set; }
-        //Double Period; //保质期
+        //decimal Period; //保质期
         private SysUser User;
 
         string strUnit = "";
-        Double drqQty = 0;
+        decimal drqQty = 0;
         public BracodePrintf(frmMain _frmMain, SysUser _User)
         {
             InitializeComponent();
@@ -90,7 +90,7 @@ namespace DesktopApp
                             //{
                             char[] arr = strWeight[nLen - 1].Substring(0, 7).ToCharArray();
                             Array.Reverse(arr);
-                            txtQty.Text = Double.Parse(new string(arr)).ToString();
+                            txtQty.Text = decimal.Parse(new string(arr)).ToString();
                             ;
                             //ZH(strWeight[nLen - 1].ToString());
 
@@ -230,7 +230,7 @@ namespace DesktopApp
             {
                 //MesBasketBLL BasketBLL = new MesBasketBLL();
                 //var Basket_rows = BasketBLL.GetList_BasketName(comBasketType.Text);
-                drqQty = Double.Parse(txtBasketQty.Text);
+                drqQty = decimal.Parse(txtBasketQty.Text);
             }
 
             Print();
@@ -282,14 +282,14 @@ namespace DesktopApp
             System.Drawing.Font fontLiShu3;
             fontLiShu3 = new System.Drawing.Font("宋体", 9, System.Drawing.FontStyle.Bold);
 
-            Double strQty = 0;
+            decimal strQty = 0;
             if (checkBox1.Checked == true)
             {
-                strQty = Convert.ToDouble(txtQty.Text.Trim()) - drqQty;
+                strQty = Convert.ToDecimal(txtQty.Text.Trim()) - drqQty;
             }
             else
             {
-                strQty = Convert.ToDouble(txtQty.Text.Trim());
+                strQty = Convert.ToDecimal(txtQty.Text.Trim());
             }
             g.DrawString("物料编码：" + strGoods[0], fontLiShu3, Brushes.Black, 10, 20);
             g.DrawString("物料名称：" + strGoods[1], fontLiShu3, Brushes.Black, 10, 40);

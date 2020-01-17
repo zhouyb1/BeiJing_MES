@@ -78,6 +78,7 @@
             this.出成率制作ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.库存查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间库存查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eSL标签查询ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人脸ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人员管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.设备管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -143,7 +144,7 @@
             this.lbVer.Name = "lbVer";
             this.lbVer.Size = new System.Drawing.Size(61, 12);
             this.lbVer.TabIndex = 5;
-            this.lbVer.Text = "V1.0.2.0";
+            this.lbVer.Text = "V1.0.2.9";
             // 
             // label3
             // 
@@ -410,7 +411,8 @@
             this.领料单ToolStripMenuItem,
             this.出成率制作ToolStripMenuItem,
             this.库存查询ToolStripMenuItem,
-            this.车间库存查询ToolStripMenuItem});
+            this.车间库存查询ToolStripMenuItem,
+            this.eSL标签查询ToolStripMenuItem});
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(86, 25);
             this.toolStripMenuItem2.Text = "车间单据";
@@ -450,6 +452,13 @@
             this.车间库存查询ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.车间库存查询ToolStripMenuItem.Text = "车间半成品库存查询";
             this.车间库存查询ToolStripMenuItem.Click += new System.EventHandler(this.车间库存查询ToolStripMenuItem_Click);
+            // 
+            // eSL标签查询ToolStripMenuItem
+            // 
+            this.eSL标签查询ToolStripMenuItem.Name = "eSL标签查询ToolStripMenuItem";
+            this.eSL标签查询ToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eSL标签查询ToolStripMenuItem.Text = "ESL标签查询";
+            this.eSL标签查询ToolStripMenuItem.Click += new System.EventHandler(this.eSL标签查询ToolStripMenuItem_Click);
             // 
             // 人脸ToolStripMenuItem
             // 
@@ -639,6 +648,7 @@
         private System.Windows.Forms.ToolStripMenuItem 报废单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 库存查询ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 车间库存查询ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eSL标签查询ToolStripMenuItem;
 
     }
 }

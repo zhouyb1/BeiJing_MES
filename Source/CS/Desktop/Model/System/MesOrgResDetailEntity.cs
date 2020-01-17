@@ -35,7 +35,7 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public Double O_Qty{ set; get; }
+        public decimal O_Qty{ set; get; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -43,7 +43,7 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public Double O_Price{ set; get; }
+        public decimal O_Price{ set; get; }
         /// <summary>
         /// 物料编码
         /// </summary>
@@ -59,7 +59,7 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public Double O_SecQty{ set; get; }
+        public decimal O_SecQty{ set; get; }
         /// <summary>
         /// 批次
         /// </summary>
@@ -67,7 +67,7 @@ namespace Model
         /// <summary>
         /// 价格
         /// </summary>
-        public Double O_SecPrice{ set; get; }
+        public decimal O_SecPrice{ set; get; }
         #endregion
     }
 }

@@ -11,7 +11,7 @@ namespace Model
         public string C_Code { set; get; }
         public string C_Name { set; get; }
         public string W_Batch { set; get; }
-        public Double W_Qty { set; get; }
+        public decimal W_Qty { set; get; }
 
     }
 }

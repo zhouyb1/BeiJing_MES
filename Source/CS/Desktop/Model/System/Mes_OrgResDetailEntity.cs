@@ -13,14 +13,14 @@ namespace Model
       public string O_GoodsCode { set; get; }
       public string O_GoodsName { set; get; }
       public string O_Unit { set; get; }
-      public Double O_Qty { set; get; }
+      public decimal O_Qty { set; get; }
       public string O_Batch { set; get; }
-      public Double O_Price { set; get; }
+      public decimal O_Price { set; get; }
       public string O_SecGoodsCode { set; get; }
       public string O_SecGoodsName { set; get; }
       public string O_SecUnit { set; get; }
-      public Double O_SecQty { set; get; }
+      public decimal O_SecQty { set; get; }
       public string O_SecBatch { set; get; }
-      public Double O_SecPrice { set; get; }
+      public decimal O_SecPrice { set; get; }
     }
 }

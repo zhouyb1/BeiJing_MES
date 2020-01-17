@@ -88,9 +88,9 @@ namespace DesktopApp
             }
             try
             {
-                Double dQty = Convert.ToDouble(txtQty.Text);
-                Double dResolveQty = Convert.ToDouble(txtResolveQty.Text);
-                Double dNextQty = dQty - dResolveQty;
+                decimal dQty = Convert.ToDecimal(txtQty.Text);
+                decimal dResolveQty = Convert.ToDecimal(txtResolveQty.Text);
+                decimal dNextQty = dQty - dResolveQty;
                 if(dNextQty < 0)
                 {
                     lblTS.Text = "补写标签的数量不能大于原来标签数量";
@@ -110,7 +110,7 @@ namespace DesktopApp
                 lblTS.Text = ex.ToString();
             }
 
-            //Double dQty = 
+            //decimal dQty = 
         }
 
         private int BZQ(string strGoodsCode)
@@ -135,7 +135,7 @@ namespace DesktopApp
         /// <param name="B_Name"></param>
         /// <param name="B_Qty"></param>
         /// <param name="B_WorkShopCode"></param>
-        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, Double B_Qty, string B_WorkShopCode)
+        private void SaveBarcode(string B_Barcode, string B_Code, string B_Name, decimal B_Qty, string B_WorkShopCode)
         {
             Mes_BarcodeEntity BarcodeEntity = new Mes_BarcodeEntity();
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
@@ -149,6 +149,7 @@ namespace DesktopApp
             BarcodeEntity.B_Itime = dt;
             BarcodeEntity.B_Otime = dt;
             BarcodeEntity.B_Utime = dt;
+            BarcodeEntity.B_Remark = "由" + txtQty.Text + "转换而来";
 
             BarcodeEntity.B_Status = 1;
             BarcodeBLL.SaveEntity("", BarcodeEntity);
@@ -205,7 +206,20 @@ namespace DesktopApp
                 g.DrawString("数量：" + strQty, f4, b, 4, 30);//设置位置
                 g.DrawString("保质期：" + nBZQ.ToString() + "小时", f4, b, 4, 50);//设置位置
                 g.DrawString("负责人：" + Globels.strName, f4, b, 4, 70);//设置位置
-                g.DrawString("订单：", f4, b, 4, 90);//设置位置
+                string strTeamName = "";
+                if (Globels.strStockCode == "0401")
+                {
+                    strTeamName = "蔬菜";
+                }
+                else if (Globels.strStockCode == "0402")
+                {
+                    strTeamName = "肉食";
+                }
+                else
+                {
+                    strTeamName = "热厨";
+                }
+                g.DrawString("班组：" + strTeamName, f4, b, 4, 90);//设置位置
 
                 g.DrawString("日期：" + DateTime.Now.ToString("yyyy-MM-dd"), f4, b, 178, 105);//设置位置
 

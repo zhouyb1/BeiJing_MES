@@ -39,11 +39,11 @@ namespace Model
         /// <summary>
         /// 数量
         /// </summary>
-        public Double W_Qty{ set; get; }
+        public decimal W_Qty{ set; get; }
 
         /// 价格
         /// </summary>
-        public Double W_Price { set; get; }
+        public decimal W_Price { set; get; }
 
         /// <summary>
         /// 批次

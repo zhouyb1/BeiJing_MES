@@ -51,11 +51,11 @@ namespace Model
         /// <summary>
         /// 下级物料数量
         /// </summary>
-        public Double B_SecQty{ set; get; }
+        public decimal B_SecQty{ set; get; }
         /// <summary>
         /// 转换率
         /// </summary>
-        public Double B_Conversion{ set; get; }
+        public decimal B_Conversion{ set; get; }
         /// <summary>
         /// 添加人
         /// </summary>
