@@ -2042,6 +2042,132 @@ ORDER BY C.F_Level";
 
         }
 
+
+        /// <summary>
+        /// 领料其他出库单报表
+        /// </summary>
+        /// <param name="queryJson"></param>
+        /// <returns></returns>
+        public DataTable GetOtherRport(string queryJson)
+        {
+            DataTable dt = new DataTable();
+
+            try
+            {
+
+
+                string sql = @"SELECT MyData.F_CreateDate,
+       MyData.F_GoodsCode,
+       G.G_Name F_GoodsName,
+       MyData.F_InQty,
+       (F_OutQty - F_InQty) F_DiffQty
+FROM
+(
+    SELECT (CASE
+                WHEN OutData.F_CreateDate IS NOT NULL THEN
+                    OutData.F_CreateDate
+                ELSE
+                    InData.F_CreateDate
+            END
+           ) F_CreateDate,
+           (CASE
+                WHEN OutData.F_GoodsCode IS NOT NULL THEN
+                    OutData.F_GoodsCode
+                ELSE
+                    InData.F_GoodsCode
+            END
+           ) F_GoodsCode,
+           ISNULL(OutData.F_OutQty, 0) F_OutQty,
+           ISNULL(InData.F_InQty, 0) F_InQty
+    FROM
+    (
+        SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+               D.O_GoodsCode F_GoodsCode,
+               SUM(D.O_Qty) F_OutQty
+        FROM Mes_OtherOutHead H
+            LEFT JOIN Mes_OtherOutDetail D
+                ON D.O_OtherOutNo = H.O_OtherOutNo
+        WHERE H.O_Status = 3
+        {0}
+        GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+                 O_GoodsCode
+    ) OutData
+        FULL JOIN
+        (
+            SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+                   D.O_GoodsCode F_GoodsCode,
+                   SUM(D.O_Qty) F_InQty
+            FROM Mes_OtherInHead H
+                LEFT JOIN dbo.Mes_OtherInDetail D
+                    ON D.O_OtherInNo = H.O_OtherInNo
+            WHERE H.O_Status = 3
+            {0}
+            GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+                     O_GoodsCode
+        ) InData
+            ON InData.F_CreateDate = OutData.F_CreateDate
+               AND InData.F_GoodsCode = OutData.F_GoodsCode
+) MyData
+    LEFT JOIN Mes_Goods G
+        ON G.G_Code = MyData.F_GoodsCode
+ORDER BY MyData.F_GoodsCode,
+         MyData.F_CreateDate;
+";
+
+
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                StringBuilder sbCmd = new StringBuilder();
+
+                sbCmd.Append(" AND 1=1");
+
+
+                var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    sbCmd.Append(" AND (H.O_CreateDate>=@StartTime AND H.O_CreateDate<@EndTime)");
+
+                    dp.Add("StartTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("EndTime", queryParam["EndTime"].ToDate().AddDays(1), DbType.DateTime);
+                }
+
+                if (!queryParam["GoodsCode"].IsEmpty())
+                {
+                    sbCmd.Append(" AND D.O_GoodsCode=@GoodsCode");
+
+
+                    dp.Add("GoodsCode", queryParam["GoodsCode"].ToString(), DbType.String);
+                }
+
+                if (!queryParam["StockCode"].IsEmpty())
+                {
+                    sbCmd.Append(" AND H.O_StockCode=@StockCode");
+
+                    dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
+                }
+
+                var row = this.BaseRepository().FindTable(string.Format(sql, sbCmd.ToString()), dp);
+                if (row != null)
+                {
+                    return row;
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+
+        }
+
         #endregion
 
     }

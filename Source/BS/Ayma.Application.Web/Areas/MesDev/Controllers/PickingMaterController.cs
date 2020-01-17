@@ -102,7 +102,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-        
+
+
+        /// <summary>
+        /// 报表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult OtherRport()
+        {
+            return View();
+        }
+
         #endregion
 
         #region 获取数据
@@ -427,6 +438,99 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
       
             DataTable dt = pickingMaterIBLL.GetCollarRport(queryJson);
           
+            #region 添加合计、统计行
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                //插入统计行
+                if (true)
+                {
+                    string current = dt.Rows[0]["F_GoodsName"].ToString();
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        string last = dt.Rows[i]["F_GoodsName"].ToString();
+                        if (current != last)
+                        {
+                            DataRow dr = dt.NewRow();
+                            dr["F_GoodsName"] = "[" + current + "]合计";
+                            dt.Rows.InsertAt(dr, i);
+
+                            current = last;
+                            i++;
+                        }
+                    }
+                    DataRow drEnd = dt.NewRow();
+                    drEnd["F_GoodsName"] = "[" + current + "]合计";
+                    dt.Rows.InsertAt(drEnd, dt.Rows.Count);
+
+                    DataRow drSum = dt.NewRow();
+                    drSum["F_GoodsName"] = "总计";
+                    dt.Rows.InsertAt(drSum, dt.Rows.Count);
+                }
+
+                //计算统计行
+                if (true)
+                {
+                    for (int j = 0; j < dt.Columns.Count; j++)
+                    {
+                        //统计数量
+                        if (dt.Columns[j].ColumnName.Contains("qty"))
+                        {
+
+                            decimal everysum_qty = 0;
+                            decimal totalsum_qty = 0;
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                string current = dt.Rows[i]["F_GoodsName"].ToString();
+                                if (current.Contains("合计"))
+                                {
+                                    dt.Rows[i][j] = Math.Round(everysum_qty, 2);
+                                    everysum_qty = 0;
+                                }
+                                else
+                                {
+                                    if (current == "总计")
+                                    {
+                                        dt.Rows[i][j] = Math.Round(totalsum_qty, 2);
+                                        everysum_qty = 0;
+                                    }
+                                    else
+                                    {
+                                        if (dt.Rows[i][j] == DBNull.Value)
+                                        {
+                                            everysum_qty += 0;
+                                            totalsum_qty += 0;
+                                        }
+                                        else
+                                        {
+                                            everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                            totalsum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            #endregion
+
+            return Success(dt);
+        }
+
+
+        /// <summary>
+        /// 获取其他出库单报表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetOtherRport(string queryJson)
+        {
+
+            DataTable dt = pickingMaterIBLL.GetCollarRport(queryJson);
+
             #region 添加合计、统计行
             if (dt != null && dt.Rows.Count > 0)
             {

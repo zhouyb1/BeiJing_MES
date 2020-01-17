@@ -234,6 +234,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+        public DataTable GetOtherRport(string queryJson)
+        {
+            try
+            {
+                return pickingMaterService.GetOtherRport(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
 
         #endregion
 

@@ -14,10 +14,6 @@
                         <div id="multiple_condition_query">
                             <div class="am-query-formcontent">
                                 <div class="col-xs-12 am-form-item">
-                                    <div class="am-form-item-title">物料名称</div>
-                                    <div id="GoodsCode" class="form-control"></div>
-                                </div>
-                                <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">起始日期</div>
                                     <input id="StartTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddMonths(-1).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
                                 </div>
@@ -25,6 +21,16 @@
                                 <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">截至日期</div>
                                     <input id="EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                </div>
+                                
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">物料名称</div>
+                                    <div id="GoodsCode" class="form-control"></div>
+                                </div>
+                                
+                                <div class="col-xs-12 am-form-item">
+                                    <div class="am-form-item-title">仓库名称</div>
+                                    <div id="StockCode" class="form-control"></div>
                                 </div>
                             </div>
                         </div>
@@ -34,21 +40,10 @@
                     <div class=" btn-group btn-group-sm">
                         <a id="am_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
                     </div>
-                    @*<div class=" btn-group btn-group-sm" ayma-authorize="yes">
-                        <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;新增</a>
-                        <a id="am_edit" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;编辑</a>
-                        <a id="am_delete" class="btn btn-default"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
-                        <a id="am_auditing" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;审核单据</a>
-                        <a id="am_post" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;提交单据</a>
-
-                        <a id="am_print" class="btn btn-default"><i class="fa fa-print"></i>&nbsp;打印</a>
-
-
-                    </div>*@
                 </div>
             </div>
             <div class="am-layout-body" id="girdtable"></div>
         </div>
     </div>
 </div>
-@Html.AppendJsFile("/Areas/MesDev/Views/PickingMater/GoodsConvertReport.js")
+@Html.AppendJsFile("/Areas/MesDev/Views/PickingMater/OtherRport.js")

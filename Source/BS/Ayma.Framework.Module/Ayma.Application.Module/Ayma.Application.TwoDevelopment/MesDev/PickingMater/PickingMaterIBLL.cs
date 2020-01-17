@@ -70,6 +70,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         IEnumerable<ColumnModel> GetProductReportTitle(string queryJson, out string message);
 
         DataTable GetCollarRport(string queryJson);
+
+        DataTable GetOtherRport(string queryJson);
+        
         #endregion
 
         #region 提交数据

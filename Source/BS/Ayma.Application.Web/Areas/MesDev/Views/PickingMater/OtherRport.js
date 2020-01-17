@@ -53,13 +53,13 @@ var bootstrap = function ($, ayma) {
             });
 
             $('#girdtable').AuthorizeJfGrid({
-                url: top.$.rootUrl + '/MesDev/PickingMater/GetCollarRport',
+                url: top.$.rootUrl + '/MesDev/PickingMater/GetOtherRport',
                 headData: [
                     { label: "物料名称", name: "f_goodsname", width: 200, align: "left" },
                     { label: "物料编码", name: "f_goodscode", width: 100, align: "center" },
-                    { label: "领料日期", name: "f_createdate", width: 100, align: "center" },
-                    { label: "领料数量", name: "f_outqty", width: 100, align: "center" },
-                    { label: "退料数量", name: "f_inqty", width: 100, align: "center" },
+                    { label: "出库日期", name: "f_createdate", width: 100, align: "center" },
+                    { label: "出库数量", name: "f_outqty", width: 100, align: "center" },
+                    { label: "退库数量", name: "f_inqty", width: 100, align: "center" },
                     //{ label: "差异数量", name: "f_diffqty", width: 100, align: "center" }
                 ]
             });
