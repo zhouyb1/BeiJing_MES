@@ -20,6 +20,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel
         public DateTime? F_CreateDate { get; set; }
         public decimal? IntervoryQty { get; set; }//库存
         public decimal? ThisIntervoryAumount { get; set; }//库存金额
+        public decimal? Aoumount { get; set; }
+        public decimal? M_Price { get; set; }
         public decimal? F_InQty { get; set; }
         public decimal? F_InPrice { get; set; }
         public decimal? F_OutQty { get; set; }

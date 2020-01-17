@@ -143,7 +143,13 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <param name="code">物料编码</param>
         /// </summary>
         /// <returns></returns>
-        Mes_GoodsEntity ByCodeGetGoodsEntity(string code); 
+        Mes_GoodsEntity ByCodeGetGoodsEntity(string code);
+        /// <summary>
+        /// 根据仓库编码获取物料实体信息
+        /// <param name="code">物料编码</param>
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> ByStokcGetGoodsEntity(string code); 
         /// <summary>
         /// 根据物料名称获取物料实体信息
         /// <param name="name">物料名称</param>

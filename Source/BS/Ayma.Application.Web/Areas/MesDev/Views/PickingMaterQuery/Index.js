@@ -44,30 +44,16 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 300);
-            //仓库
-            $('#C_StockCode').select({
-                type: 'default',
-                value: 'S_Code',
-                text: 'S_Name',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
-                // 访问数据接口参数
-                param: {}
-            });
             $('#M_GoodsName').select({
                 type: 'default',
                 value: 'G_Name',
                 text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
-                // 是否允许搜索
+                // 是否允许索搜
                 allowSearch: true,
                 // 访问数据接口地址 
-                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -84,6 +70,39 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetStockList',
                 // 访问数据接口参数
                 param: {}
+            }).on('change', function () {          
+                var code = $(this).selectGet();
+                if (code == "")
+                {
+                    $('#M_GoodsName').selectRefresh({
+                        type: 'default',
+                        value: 'G_Name',
+                        text: 'G_Name',
+                        // 展开最大高度
+                        maxHeight: 200,
+                        // 是否允许索搜
+                        allowSearch: true,
+                        // 访问数据接口地址 
+                        url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
+                        // 访问数据接口参数
+                        param: {}
+                    });
+                }
+                else {
+                    $('#M_GoodsName').selectRefresh({
+                        type: 'default',
+                        value: 'G_Name',
+                        text: 'G_Name',
+                        // 展开最大高度
+                        maxHeight: 200,
+                        // 是否允许索搜
+                        allowSearch: true,
+                        // 访问数据接口地址 
+                        url: top.$.rootUrl + '/MesDev/Tools/ByStokcGetGoodsEntity?code=' + code,
+                        // 访问数据接口参数
+                        param: {}
+                    });
+                }
             });
             // 刷新
             $('#am_refresh').on('click', function () {

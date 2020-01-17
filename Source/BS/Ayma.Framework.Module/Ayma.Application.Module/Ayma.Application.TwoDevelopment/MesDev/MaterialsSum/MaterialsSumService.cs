@@ -78,7 +78,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            RD.M_GoodsCode F_GoodsCode,
                            RD.M_GoodsName F_GoodsName,
                            RD.M_Unit F_Unit,
+                           RD.M_Price,
                            G.G_Price as G_Price,
+                           RD.M_Price*SUM(RD.M_Qty) AS Aoumount,
                            RD.M_TaxPrice F_InPrice,
 						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ dbo.GetUserNameById(RH.M_CreateBy) as F_Remark,
                            'R' F_Status,
@@ -118,7 +120,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 G.G_Price,
                                 RD.M_SupplyName,
 						        RH.M_CreateBy,
-						        RD.M_Unit
+						        RD.M_Unit,
+                                RD.M_Price
               ");
 
                 strSql2.Append(@"

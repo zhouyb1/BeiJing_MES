@@ -110,6 +110,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     m.M_Price ,
                                     m.M_Qty ,
                                     m.M_Unit ,
+                                    m.M_Tax,
                                     m.M_Qty*m.M_Price Amount,
                                     h.M_CreateDate ,
                                     dbo.GetUserNameById(h.M_CreateBy) M_CreateBy

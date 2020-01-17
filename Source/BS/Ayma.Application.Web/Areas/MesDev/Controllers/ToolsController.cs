@@ -286,6 +286,18 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(goodsEntity);
         }
         /// <summary>
+        /// 根据仓库编码获取物料实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult ByStokcGetGoodsEntity(string code)
+        {
+            var goodsEntity = toosIBLL.ByStokcGetGoodsEntity(code);
+            return Success(goodsEntity);
+        }
+        /// <summary>
         /// 根据物料名称获取物料实体信息
         /// </summary>
         /// <param name="name">物料名称</param>

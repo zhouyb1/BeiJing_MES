@@ -56,9 +56,12 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "", width: 90, align: "left" },
                     { label: "物料名称", name: "m_goodsname", width: 120, align: "center" },
                     { label: "单位", name: "m_unit", width: 80, align: "center" },
+                    { label: "包装单位", name: "m_unit2", width: 80, align: "center" },
+                    { label: "税率(%)", name: "m_tax", width: 80, align: "center" },
+                    { label: "包装数量", name: "m_unitqty", width: 80, align: "center" },
                     { label: "数量", name: "row_qty", width: 80, align: "center" },
                     { label: "价格", name: "m_price", width: 80, align: "center" },
-                    { label: "进货金额(元)", name: "row_amount", width: 100, align: "center" },
+                    { label: "不含税金额(元)", name: "row_amount", width: 100, align: "center" },
                    
                 ],
                 mainId: 'ID',

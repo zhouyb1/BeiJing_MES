@@ -697,7 +697,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                 ColumnModel cm1 = new ColumnModel();
                 cm1.name = "allamount";
-                cm1.label = "进货金额(元)";
+                cm1.label = "不含税金额(元)";
                 cm1.width = 100;
                 cm1.align = "center";
                 cm1.sort = false;
@@ -774,9 +774,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 d.M_GoodsCode ,
                                 d.M_GoodsName ,
                                 d.M_Unit ,
+                                d.M_Tax,
                                 MAX(d.M_Price) M_Price,
                                 SUM(d.M_Price * M_Qty) row_amount, 
-                                SUM(M_Qty) row_qty
+                                SUM(M_Qty) row_qty,
+                                d.M_Unit2,
+                                d.M_UnitQty
                         FROM    dbo.Mes_MaterInHead h
                                 LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
                         WHERE   h.M_Status = 3
@@ -787,7 +790,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 h.M_MaterInNo, 
                                 M_GoodsCode ,
                                 M_GoodsName ,
-                                M_Unit  ";
+                                M_Unit,
+                                d.M_Tax,
+                                d.M_Unit2,
+                                d.M_UnitQty 
+                                        ";
 
             var queryParam = queryJson.ToJObject();
             var dp = new DynamicParameters(new { });

@@ -157,6 +157,7 @@ var bootstrap = function ($, ayma) {
                     { label: "商品名称", name: "F_GoodsName", width: 115, align: "center" },
                     { label: "单位", name: "F_Unit", width: 50, align: "center" },
                     { label: "单据编号", name: "F_OrderNo", width: 130, align: "center" },
+                     //{ label: "无税价格", name: "M_Price", width: 130, align: "center" },
                     {
                         label: "收入", name: "收入", width: 90, align: "center", children: [
                          {
@@ -185,6 +186,12 @@ var bootstrap = function ($, ayma) {
                               formatter: function (value, row, dfop) {
                                   return (row.F_InQty * row.G_Price).toFixed(6) / 1;
                               }
+                          },
+                          {
+                              label: "无税金额", name: "Aoumount", width: 90, align: "center",
+                              //formatter: function (value, row, dfop) {
+                              //    return (row.F_InQty * row.G_Price).toFixed(6) / 1;
+                              //}
                           },
                         ]
                     },

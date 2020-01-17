@@ -575,7 +575,29 @@ namespace Ayma.Application.TwoDevelopment.Tools
         //        }
         //    }
         //}
-
+        /// <summary>
+        /// 根据仓库编码获取物料实体信息
+        /// </summary>
+        /// <param name="code">物料编码</param>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> ByStokcGetGoodsEntity(string code)
+        {
+            try
+            {
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(x => x.G_StockCode == code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         /// <summary>
         /// 根据物料编码获取物料实体信息
         /// </summary>
