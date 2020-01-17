@@ -68,6 +68,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJsond"></param>
         /// <returns></returns>
         IEnumerable<ColumnModel> GetProductReportTitle(string queryJson, out string message);
+
+        DataTable GetCollarRport(string queryJson);
         #endregion
 
         #region 提交数据

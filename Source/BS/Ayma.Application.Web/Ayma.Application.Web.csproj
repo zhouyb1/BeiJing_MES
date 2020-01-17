@@ -605,6 +605,7 @@
     <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempForm.js" />
@@ -2747,6 +2748,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
   </ItemGroup>
   <PropertyGroup>

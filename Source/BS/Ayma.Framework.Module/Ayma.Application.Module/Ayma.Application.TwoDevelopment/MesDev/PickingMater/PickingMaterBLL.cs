@@ -216,6 +216,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        public DataTable GetCollarRport(string queryJson)
+        {
+            try
+            {
+                return pickingMaterService.GetCollarRport(queryJson);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         #endregion
 
         #region 提交数据
