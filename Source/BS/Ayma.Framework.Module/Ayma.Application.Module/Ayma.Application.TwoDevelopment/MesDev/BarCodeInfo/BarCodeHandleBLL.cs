@@ -7,7 +7,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public class BarCodeHandleBLL:BarCodeHandleIBLL
     {
         private BarCodeHandleService service = new BarCodeHandleService();
-        public Mes_ScanCodeEntity GetGoodsInfoByCode(string code, string printfTime)
+        public ProductsInfo GetGoodsInfoByCode(string code, string printfTime)
         {
             try
             {

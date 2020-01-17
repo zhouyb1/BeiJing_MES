@@ -663,7 +663,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(keyValue);
+                return this.BaseRepository().FindEntity<Mes_GoodsEntity>(c=>c.ID==keyValue||c.G_Barcode==keyValue);
             }
             catch (Exception ex)
             {

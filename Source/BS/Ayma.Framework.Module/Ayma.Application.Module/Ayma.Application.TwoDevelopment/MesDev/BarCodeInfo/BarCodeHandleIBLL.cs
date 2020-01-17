@@ -4,6 +4,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     public  interface BarCodeHandleIBLL
     {
-        Mes_ScanCodeEntity GetGoodsInfoByCode(string code, string printfTime);
+        ProductsInfo GetGoodsInfoByCode(string code, string printfTime);
     }
 }
