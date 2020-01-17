@@ -42,7 +42,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 450);
+            }, 220, 300);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -72,11 +72,10 @@ var bootstrap = function ($, ayma) {
                     width: 160,
                     align: "center",
                     children: [
-                    { label: "物料编码", name: "o_goodscode", width: 100, align: "center" },
-                    { label: "物料名称", name: "o_goodsname", width: 120, align: "center" },
-                    { label: "单位", name: "o_unit", width: 50, align: "center" },
-                    { label: "使用数量", name: "o_qty", width: 90, align: "center" },
-                    { label: "剩余库存数量", name: "stockqty", width: 90, align: "center" }]
+                    { label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
+                    { label: "物料编码", name: "O_GoodsCode", width: 100, align: "center" },
+                    { label: "单位", name: "O_Unit", width: 50, align: "center" },
+                    { label: "使用数量", name: "O_Qty", width: 90, align: "center" }]
                    }, 
                 {
                     label: "转换后",
@@ -84,22 +83,20 @@ var bootstrap = function ($, ayma) {
                     width: 160,
                     align: "center",
                     children: [
-                    { label: "物料编码", name: "o_secgoodscode", width: 100, align: "center" },
-                    { label: "物料名称", name: "o_secgoodsname", width: 120, align: "center" },
-                    { label: "单位", name: "o_secunit", width: 50, align: "center" },
-                    { label: "产出数量", name: "o_secqty", width: 90, align: "center" },
-                ]
+                    { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
+                    { label: "物料编码", name: "O_SecGoodsCode", width: 100, align: "center" },
+                    { label: "单位", name: "O_SecUnit", width: 50, align: "center" },
+                    { label: "产出数量", name: "O_SecQty", width: 90, align: "center" } ]
                 },
-                { label: "作业日耗库", name: "o_stockcode", width: 120, align: "center", hidden:true },
-                { label: "作业日耗库", name: "o_stockname", width: 150, align: "center",},
-                { label: "作业班组", name: "o_teamname", width: 100, align: "center" },
-                { label: "出成率(%)", name: "productrate", width: 90, align: "center" },
-                { label: "添加人", name: "o_createby", width: 100, align: "center" },
+                { label: "作业日耗库", name: "O_StockName", width: 150, align: "center",},
+                { label: "作业班组", name: "O_TeamName", width: 100, align: "center" },
+                { label: "出成率(%)", name: "ProductRate", width: 90, align: "center" },
+                { label: "制作人加人", name: "O_CreateBy", width: 100, align: "center" },
                 ],
                 mainId: 'ID',
-                reloadSelected: true,
-                isPage: true,
-                sord: 'desc'
+                //reloadSelected: true,
+                //isPage: true,
+                //sord: 'desc'
             });
             page.search();
         },

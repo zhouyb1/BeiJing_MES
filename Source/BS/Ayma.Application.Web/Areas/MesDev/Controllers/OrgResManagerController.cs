@@ -104,14 +104,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
             var data = orgResMangerIBLL.GetProductRateList(paginationobj, queryJson);
-            var jsonData = new
-            {
-                rows = data,
-                total = paginationobj.total,
-                page = paginationobj.page,
-                records = paginationobj.records
-            };
-            return Success(jsonData);
+            //var jsonData = new
+            //{
+            //    rows = data,
+            //    total = paginationobj.total,
+            //    page = paginationobj.page,
+            //    records = paginationobj.records
+            //};
+            return Success(data);
         }
 
         /// <summary>
