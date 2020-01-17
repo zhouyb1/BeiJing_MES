@@ -344,6 +344,141 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        
+        #endregion
+
+        #region 提交数据
+
+        /// <summary>
+        /// 删除实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteEntity(string keyValue)
+        {
+
+
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                var mes_CollarHeadEntity = GetMes_CollarHeadEntity(keyValue); 
+                db.Delete<Mes_CollarHeadEntity>(t=>t.ID == keyValue);
+                db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntity.C_CollarNo);
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 保存实体数据（新增、修改）
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveEntity(string keyValue, Mes_CollarHeadEntity entity,List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
+        {
+
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                if (!string.IsNullOrEmpty(keyValue))
+                {
+                    var mes_CollarHeadEntityTmp = GetMes_CollarHeadEntity(keyValue); 
+                    entity.Modify(keyValue);
+                    db.Update(entity);
+                    db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntityTmp.C_CollarNo);
+                    foreach (var item in mes_CollarDetailEntityList)
+                    {
+                        item.Create();
+                        item.C_CollarNo = mes_CollarHeadEntityTmp.C_CollarNo;
+                    }
+
+                    db.Insert(mes_CollarDetailEntityList);
+                }
+                else
+                {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BillType", "领料单");
+                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
+                    db.ExecuteByProc("sp_GetDoucno", dp);
+                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
+                    entity.C_CollarNo = billNo;
+                    entity.Create();
+                    db.Insert(entity);
+                    foreach (var item in mes_CollarDetailEntityList)
+                    {
+                        item.Create();
+                        item.C_CollarNo = entity.C_CollarNo;
+                        item.C_OrderNo = null;
+                    }
+                    //mes_CollarDetailEntity.Create();
+                    //mes_CollarDetailEntity.C_CollarNo = entity.C_CollarNo;
+                    db.Insert(mes_CollarDetailEntityList);
+                }
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
+        /// 新增实体数据
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void SaveEntity(List<Mes_CollarHeadEntity> headList, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
+        {
+            var db = this.BaseRepository().BeginTrans();
+            try
+            {
+                foreach (var entity in headList)
+                {
+                    entity.Create();
+                }
+                db.Insert(headList);
+                foreach (var item in mes_CollarDetailEntityList)
+                {
+                    item.Create();
+                }
+                db.Insert(mes_CollarDetailEntityList);
+                db.Commit();
+            }
+            catch (Exception ex)
+            {
+                db.Rollback();
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        #endregion
+
+
+        #region 按原料统计出成率
         /// <summary>
         /// 获取出成率报表数据
         /// </summary>
@@ -364,7 +499,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 #region 参数判断
 
                 DateTime F_StartTime = DateTime.Now;
-                DateTime F_EndTime=DateTime.Now;
+                DateTime F_EndTime = DateTime.Now;
                 string F_GoodsCode = "";
 
                 var queryParam = queryJson.ToJObject();
@@ -380,7 +515,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     F_GoodsCode = queryParam["GoodsCode"].ToString();
                 }
                 #endregion
-                
+
                 #region  获取产品配方
 
                 if (success)
@@ -457,8 +592,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 #region 根据原物料，找出成品
                 if (success)
                 {
-                    var rows=boms.Where(r => r.F_GoodsCode == F_GoodsCode);
-                    if (rows==null || rows.Count() < 1)
+                    var rows = boms.Where(r => r.F_GoodsCode == F_GoodsCode);
+                    if (rows == null || rows.Count() < 1)
                     {
                         success = false;
                         message = "未从配方数据中匹配到相应原物料";
@@ -468,9 +603,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         int maxlevel = 0;
                         foreach (var row in rows)
                         {
-                            List<ProductBom> goods=new List<ProductBom>();
+                            List<ProductBom> goods = new List<ProductBom>();
                             GetGoods(row.F_ID, boms, goods);
-                            var bomroot=goods.Find(r => r.F_Level == 0);
+                            var bomroot = goods.Find(r => r.F_Level == 0);
                             if (bomroot == null)
                             {
                                 success = false;
@@ -568,7 +703,7 @@ FROM
           AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
           AND D.O_SecGoodsCode = @F_GoodsCode
 ) MyData
-GROUP BY F_CreateDate,F_GoodsCode"; 
+GROUP BY F_CreateDate,F_GoodsCode";
                         #endregion
 
                         var F_Level = product.Value.Max(r => r.F_Level);
@@ -585,12 +720,12 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             dp.Add("endTime", F_EndTime, DbType.DateTime);
                             dp.Add("F_SecGoodsCode", currentBom.F_GoodsCode, DbType.String);
                             dp.Add("F_GoodsCode", lastBom.F_GoodsCode, DbType.String);
-                            
+
                             var rows = new RepositoryFactory().BaseRepository().FindList<GoodsOrg>(strGetQty, dp);
                             if (rows.Count() > 0)
                             {
-                                
-                                var gruops=rows.GroupBy(r => r.F_CreateDate);
+
+                                var gruops = rows.GroupBy(r => r.F_CreateDate);
                                 foreach (var gruop in gruops)
                                 {
                                     var gruoprows = gruop.ToList();
@@ -638,7 +773,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
 
                                         decimal? d = (currentGc.F_Qty / lastGc.F_Qty) * 100;
-                                        currentGc.F_Convert =Math.Round(d.Value,2);
+                                        currentGc.F_Convert = Math.Round(d.Value, 2);
                                         if (currentGc.F_Convert > currentGc.F_ConvertMax)
                                             currentGc.F_ConvertTag = 1;
                                         else
@@ -650,7 +785,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                                 currentGc.F_ConvertTag = 0;
                                             }
                                         }
-                                        
+
                                         converts.Add(lastGc);
                                     }
                                     #endregion
@@ -791,7 +926,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             converts.Add(lastGc);
                                         }
                                     }
-	                                #endregion
+                                    #endregion
                                 }
                             }
                             else
@@ -811,8 +946,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                 if (success)
                 {
-                 
-                    DataColumn dc=new DataColumn();
+
+                    DataColumn dc = new DataColumn();
                     dc.ColumnName = "F_CreateDate";
                     dc.DataType = typeof(string);
                     dt.Columns.Add(dc);
@@ -820,7 +955,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     var maxboms = products[goodscode];
                     var maxlevel = maxboms.Max(r => r.F_Level);
 
-                    
+
 
                     if (true)
                     {
@@ -879,13 +1014,13 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         }
                     }
 
-                  
 
 
-                    var groups=converts.GroupBy(r => r.F_CreateDate);
+
+                    var groups = converts.GroupBy(r => r.F_CreateDate);
                     foreach (var group in groups)
                     {
-                        var rows = group.Where(r=>r.F_Level==0);
+                        var rows = group.Where(r => r.F_Level == 0);
                         foreach (var row in rows)
                         {
                             DataRow dr = dt.NewRow();
@@ -895,7 +1030,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     }
                 }
 
-               
+
                 #endregion
 
                 return dt;
@@ -924,7 +1059,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
             try
             {
-                List<ColumnModel> columns=new List<ColumnModel>();
+                List<ColumnModel> columns = new List<ColumnModel>();
                 List<ProductBom> boms = new List<ProductBom>();
                 Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
                 string goodscode = "";
@@ -1065,7 +1200,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 {
                     var maxboms = products[goodscode];
                     var maxlevel = maxboms.Max(r => r.F_Level);
-                  
+
 
                     if (true)
                     {
@@ -1093,7 +1228,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm1.statistics = false;
                         cm1.children = null;
 
-                        ColumnModel cm2= new ColumnModel();
+                        ColumnModel cm2 = new ColumnModel();
                         cm2.name = "F_GoodsName_Source";
                         cm2.label = "原物料名称";
                         cm2.width = 100;
@@ -1277,7 +1412,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm.children.Add(cm1);
                         cm.children.Add(cm2);
                         cm.children.Add(cm3);
-          
+
                         cm.children.Add(cm5);
                         cm.children.Add(cm6);
                         cm.children.Add(cm4);
@@ -1306,22 +1441,22 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
         private List<ProductBom> GetGoods(string childrenid, List<ProductBom> boms, List<ProductBom> goods)
         {
-           var row= boms.Find(r => r.F_ID == childrenid);
-           if (row == null)
-               return goods;
-           else
-           {
-               if (row.F_Level == 0)
-               {
-                   goods.Add(row);
-                   return goods;
-               }
-               else
-               {
-                   goods.Add(row);
-                   return GetGoods(row.F_ParentID, boms, goods);
-               }
-           }
+            var row = boms.Find(r => r.F_ID == childrenid);
+            if (row == null)
+                return goods;
+            else
+            {
+                if (row.F_Level == 0)
+                {
+                    goods.Add(row);
+                    return goods;
+                }
+                else
+                {
+                    goods.Add(row);
+                    return GetGoods(row.F_ParentID, boms, goods);
+                }
+            }
         }
 
         private DataRow SetDataRow(string parentid, List<GoodsConvert> converts, DataRow dr)
@@ -1355,135 +1490,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
         }
         #endregion
 
-        #region 提交数据
-
-        /// <summary>
-        /// 删除实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void DeleteEntity(string keyValue)
-        {
-
-
-            var db = this.BaseRepository().BeginTrans();
-            try
-            {
-                var mes_CollarHeadEntity = GetMes_CollarHeadEntity(keyValue); 
-                db.Delete<Mes_CollarHeadEntity>(t=>t.ID == keyValue);
-                db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntity.C_CollarNo);
-                db.Commit();
-            }
-            catch (Exception ex)
-            {
-                db.Rollback();
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 保存实体数据（新增、修改）
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_CollarHeadEntity entity,List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
-        {
-
-            var db = this.BaseRepository().BeginTrans();
-            try
-            {
-                if (!string.IsNullOrEmpty(keyValue))
-                {
-                    var mes_CollarHeadEntityTmp = GetMes_CollarHeadEntity(keyValue); 
-                    entity.Modify(keyValue);
-                    db.Update(entity);
-                    db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntityTmp.C_CollarNo);
-                    foreach (var item in mes_CollarDetailEntityList)
-                    {
-                        item.Create();
-                        item.C_CollarNo = mes_CollarHeadEntityTmp.C_CollarNo;
-                    }
-
-                    db.Insert(mes_CollarDetailEntityList);
-                }
-                else
-                {
-                    var dp = new DynamicParameters(new { });
-                    dp.Add("@BillType", "领料单");
-                    dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
-                    db.ExecuteByProc("sp_GetDoucno", dp);
-                    var billNo = dp.Get<string>("@Doucno");//存储过程返回单号
-                    entity.C_CollarNo = billNo;
-                    entity.Create();
-                    db.Insert(entity);
-                    foreach (var item in mes_CollarDetailEntityList)
-                    {
-                        item.Create();
-                        item.C_CollarNo = entity.C_CollarNo;
-                        item.C_OrderNo = null;
-                    }
-                    //mes_CollarDetailEntity.Create();
-                    //mes_CollarDetailEntity.C_CollarNo = entity.C_CollarNo;
-                    db.Insert(mes_CollarDetailEntityList);
-                }
-                db.Commit();
-            }
-            catch (Exception ex)
-            {
-                db.Rollback();
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
-        /// <summary>
-        /// 新增实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void SaveEntity(List<Mes_CollarHeadEntity> headList, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
-        {
-            var db = this.BaseRepository().BeginTrans();
-            try
-            {
-                foreach (var entity in headList)
-                {
-                    entity.Create();
-                }
-                db.Insert(headList);
-                foreach (var item in mes_CollarDetailEntityList)
-                {
-                    item.Create();
-                }
-                db.Insert(mes_CollarDetailEntityList);
-                db.Commit();
-            }
-            catch (Exception ex)
-            {
-                db.Rollback();
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
-
+        #region 根据计划单生成领料单
         /// <summary>
         /// 自动生成领料单
         /// </summary>
@@ -1497,16 +1504,16 @@ GROUP BY F_CreateDate,F_GoodsCode";
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                List< Product > products=new List<Product>();
-                Dictionary<string, List<ProductBom>> boms=new Dictionary<string, List<ProductBom>>();
-                List<GoodsInventory> inventorys=new List<GoodsInventory>();
-                List<GoodsOut> goodsouts=new List<GoodsOut>();
+                List<Product> products = new List<Product>();
+                Dictionary<string, List<ProductBom>> boms = new Dictionary<string, List<ProductBom>>();
+                List<GoodsInventory> inventorys = new List<GoodsInventory>();
+                List<GoodsOut> goodsouts = new List<GoodsOut>();
 
                 List<Mes_CollarHeadTempEntity> tempheads = new List<Mes_CollarHeadTempEntity>();
                 List<Mes_CollarDetailTempEntity> tempdetails = new List<Mes_CollarDetailTempEntity>();
 
-                List<Mes_CollarHeadEntity> heads=new List<Mes_CollarHeadEntity>();
-                List<Mes_CollarDetailEntity> details=new List<Mes_CollarDetailEntity>();
+                List<Mes_CollarHeadEntity> heads = new List<Mes_CollarHeadEntity>();
+                List<Mes_CollarDetailEntity> details = new List<Mes_CollarDetailEntity>();
 
 
                 #region 获取生产订单
@@ -1535,7 +1542,7 @@ HAVING(G.G_Code  IS NOT NULL)";
                     else
                     {
                         success = false;
-                        message = string.Format("生产日期{0}没有待生产的计划订单",date);
+                        message = string.Format("生产日期{0}没有待生产的计划订单", date);
                     }
                 }
                 #endregion
@@ -1641,7 +1648,7 @@ ORDER BY C.F_Level";
                         SumQty(parent.F_ID, productBom, productQty.Value);//计算所需数量
                         CalculateQty(parent.F_ID, productBom, inventorys, goodsouts);//推算每个环节
                     }
-                    var groups = goodsouts.Where(r => r.F_Kind == 1).GroupBy(r => new { r.F_InStockCode,r.F_InStockName});//按原料领料仓库分组
+                    var groups = goodsouts.Where(r => r.F_Kind == 1).GroupBy(r => new { r.F_InStockCode, r.F_InStockName });//按原料领料仓库分组
                     if (groups.Count() < 1)
                     {
                         success = false;
@@ -1661,7 +1668,7 @@ ORDER BY C.F_Level";
                             dp.Add("@Doucno", "", DbType.String, ParameterDirection.Output);
                             new RepositoryFactory().BaseRepository().ExecuteByProc("sp_GetDoucno", dp);
                             billNoTempTemplate = dp.Get<string>("@Doucno");
-                           
+
                         }
                         if (true)
                         {
@@ -1689,7 +1696,7 @@ ORDER BY C.F_Level";
                                 string billTempNo = "";
                                 string billNo = "";
 
-                                billTempNo = billNoTempTemplate+index.ToString().PadLeft(4, '0');
+                                billTempNo = billNoTempTemplate + index.ToString().PadLeft(4, '0');
                                 billNo = billNoTemplate + index.ToString().PadLeft(4, '0');
                                 index++;
 
@@ -1755,10 +1762,10 @@ ORDER BY C.F_Level";
                     }
 
 
-                    
+
                 }
 
-               
+
 
                 #endregion
 
@@ -1775,7 +1782,7 @@ ORDER BY C.F_Level";
                         dp.Add("date", date, DbType.String);
                     }
 
-                    db.ExecuteBySql(strUpdate,dp);
+                    db.ExecuteBySql(strUpdate, dp);
 
                     db.Insert(tempheads);
                     db.Insert(tempdetails);
@@ -1808,17 +1815,16 @@ ORDER BY C.F_Level";
                 }
             }
 
-    
+
             return success;
         }
-
 
         /// <summary>
         ///计算某个产品每个环节所需总数量(其中包含g=>kg转换)
         /// </summary>
         /// <param name="parentid"></param>
         /// <param name="boms"></param>
-        private void SumQty(string parentid, List<ProductBom> boms,decimal quantity)
+        private void SumQty(string parentid, List<ProductBom> boms, decimal quantity)
         {
             var rows = boms.Where(r => r.F_ParentID == parentid); //子级
             if (rows == null || rows.Count() < 1)
@@ -1829,10 +1835,10 @@ ORDER BY C.F_Level";
             {
                 foreach (var row in rows)
                 {
-                    row.F_ProposeQty = (row.F_ProposeQty * quantity)/1000;
-                    row.F_PlanQty = (row.F_PlanQty * quantity)/1000;
+                    row.F_ProposeQty = (row.F_ProposeQty * quantity) / 1000;
+                    row.F_PlanQty = (row.F_PlanQty * quantity) / 1000;
 
-                    SumQty(row.F_ID,boms,quantity);
+                    SumQty(row.F_ID, boms, quantity);
                 }
             }
         }
@@ -1845,12 +1851,12 @@ ORDER BY C.F_Level";
         /// <param name="inventorys"></param>
         /// <param name="goodsouts"></param>
         /// <returns></returns>
-        private List<GoodsOut> CalculateQty(string parentid ,List<ProductBom> boms, List<GoodsInventory> inventorys, List<GoodsOut> goodsouts)
+        private List<GoodsOut> CalculateQty(string parentid, List<ProductBom> boms, List<GoodsInventory> inventorys, List<GoodsOut> goodsouts)
         {
 
-            var rows=boms.Where(r => r.F_ParentID == parentid);//子级
+            var rows = boms.Where(r => r.F_ParentID == parentid);//子级
 
-            if (rows == null || rows.Count() < 1) 
+            if (rows == null || rows.Count() < 1)
             {
                 return goodsouts;
             }
@@ -1859,7 +1865,7 @@ ORDER BY C.F_Level";
                 foreach (var row in rows)
                 {
 
-                
+
                     GoodsOut gs = new GoodsOut();
                     gs.F_GoodsCode = row.F_GoodsCode;//物料编码
                     gs.F_GoodsName = row.F_GoodsName;//物料名称
@@ -1918,19 +1924,18 @@ ORDER BY C.F_Level";
                     else
                     {
                         gs.F_InventoryQty = 0;//库存数量
-                        gs.F_ProposeQty =0;//建议数量
+                        gs.F_ProposeQty = 0;//建议数量
 
                     }
                     goodsouts.Add(gs);
 
-                    CalculateQty(row.F_ID,boms,inventorys,goodsouts);
+                    CalculateQty(row.F_ID, boms, inventorys, goodsouts);
                 }
 
                 return goodsouts;
             }
 
         }
-
         #endregion
     }
 }
