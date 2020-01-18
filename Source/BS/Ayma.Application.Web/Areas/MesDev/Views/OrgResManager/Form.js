@@ -117,6 +117,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                           width: 180,
                           align: "center",
                           children: [
+                              { label: "转换后的数量", name: "O_SecQty", width: 90, align: "center", hidden: true },
+                              { label: "转换后单价", name: "O_SecPrice", width: 90, align: "center", hidden: true },
+                              { label: "转换后单位", name: "O_SecUnit", width: 90, align: "center", hidden: true },
+                              { label: "转换后的批次", name: "O_SecBatch", width: 90, align: "center", hidden: true },
+                              { label: "转换后的物料编码", name: "O_SecGoodsCode", width: 90, align: "center", hidden: true },
+                              { label: "转换后的物料", name: "O_SecGoodsName", width: 90, align: "center", hidden: true },
                               {
                                   label: "物料名称", name: "O_GoodsName", width: 120, align: "center", editType: 'select',
                                   editOp: {
@@ -144,7 +150,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                           row.O_Price = selectdata.o_price;
                                           row.O_SecGoodsCode = selectdata.o_secgoodscode;
 
-                                          row.O_SecUnit = selectdata.o_unit;
+                                          row.O_SecUnit = selectdata.o_secunit;
                                           row.O_SecGoodsName = selectdata.o_secgoodsname;
                                           //带出转换后的物料
 
@@ -172,14 +178,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               { label: "单价", name: "O_Price", width: 80, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
                               //{ label: "批次", name: "O_Batch", width: 80, align: "center", editType: 'input' },
-                              { label: "转换后的数量", name: "O_SecQty", width: 90, align: "center", hidden: true },
-                              { label: "转换后单价", name: "O_SecPrice", width: 90, align: "center", hidden: true },
-                              { label: "转换后单位", name: "O_SecUnit", width: 90, align: "center", hidden: true },
-                              { label: "转换后的批次", name: "O_SecBatch", width: 90, align: "center", hidden: true },
-                              { label: "转换后的物料编码", name: "O_SecGoodsCode", width: 90, align: "center", hidden: true },
-                              { label: "转换后的物料", name: "O_SecGoodsName", width: 90, align: "center", hidden: true },
                           ]
-                      },
+                      }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
@@ -202,6 +202,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     width: 180,
                     align: "center",
                     children: [
+                    {
+                        label: "批次",
+                        name: "O_SecBatch",
+                        width: 80,
+                        align: "center",
+                        hidden:true,
+                        formatter: function (cellvalue, row) {
+                            return  row.O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
+                        }
+                    },
                     { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                     { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
                     {
@@ -243,16 +253,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                     { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
                     { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
-                    {
-                        label: "批次",
-                        name: "O_SecBatch",
-                        width: 80,
-                        align: "center",
-                        hidden:true,
-                                formatter: function (cellvalue, row) {
-                                   return  row.O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
-                                }
-                            }
+                    
                         ]
                     }
                 ],
