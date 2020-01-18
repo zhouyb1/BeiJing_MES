@@ -948,12 +948,18 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 {
 
                     DataColumn dc = new DataColumn();
-                    dc.ColumnName = "F_CreateDate";
-                    dc.DataType = typeof(string);
-                    dt.Columns.Add(dc);
 
-                    var maxboms = products[goodscode];
-                    var maxlevel = maxboms.Max(r => r.F_Level);
+                    if (true)
+                    {
+                       
+                        dc.ColumnName = "F_CreateDate";
+                        dc.DataType = typeof(string);
+                        dt.Columns.Add(dc);
+                    }
+
+                
+
+      
 
 
 
@@ -979,6 +985,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
+                        var maxboms = products[goodscode];
+                        var maxlevel = maxboms.Max(r => r.F_Level);
+
                         for (int i = maxlevel - 1; i >= 0; i--)
                         {
                             var bom = maxboms.Find(r => r.F_Level == i);
@@ -1020,11 +1029,14 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     var groups = converts.GroupBy(r => r.F_CreateDate);
                     foreach (var group in groups)
                     {
-                        var rows = group.Where(r => r.F_Level == 0);
+                        var rows = group.Where(r => r.F_Level == 0);//找出成品
+                   
                         foreach (var row in rows)
                         {
+                            var maxlevel = products[row.F_GoodsCode].Max(r => r.F_Level);
+                            var children = products[row.F_GoodsCode].Find(r => r.F_Level == maxlevel);
                             DataRow dr = dt.NewRow();
-                            SetDataRow(row.F_ParentID, group.ToList(), dr);
+                            SetDataRow(children.F_ID, group.ToList(), dr);
                             dt.Rows.Add(dr);
                         }
                     }
@@ -1459,9 +1471,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
             }
         }
 
-        private DataRow SetDataRow(string parentid, List<GoodsConvert> converts, DataRow dr)
+        private DataRow SetDataRow(string id, List<GoodsConvert> converts, DataRow dr)
         {
-            var row = converts.Find(r => r.F_ParentID == parentid);
+            var row = converts.Find(r => r.F_ID == id);
             if (row == null)
                 return dr;
             else
@@ -1485,7 +1497,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 }
 
 
-                return SetDataRow(row.F_ID, converts, dr);
+                return SetDataRow(row.F_ParentID, converts, dr);
             }
         }
         #endregion
