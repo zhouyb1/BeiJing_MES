@@ -162,8 +162,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 var strSql = new StringBuilder();
                 strSql.AppendFormat(@"
-                  --周转仓出库到车间
-                  select a.O_GoodsCode GoodsCode,SUM(a.O_Qty) as Qty,a.O_Batch Batch,a.O_GoodsName GoodsName from dbo.Mes_OutWorkShopDetail as a left join Mes_OutWorkShopHead as b on a.O_OutNo = b.O_OutNo where  O_Kind = '1' and O_UploadDate > @startTime and O_UploadDate < @endTime {0} {2} group by a.O_GoodsCode,a.O_Batch,a.O_GoodsName
+                  --组装与拆分单据
+                  select a.O_GoodsCode GoodsCode,SUM(a.O_Qty) as Qty,a.O_Batch Batch,a.O_GoodsName GoodsName from dbo.Mes_OrgResDetail as a left join Mes_OrgResHead as b on a.O_OrgResNo = b.O_OrgResNo where O_UploadDate > @startTime and O_UploadDate < @endTime {0} {2} group by a.O_GoodsCode,a.O_Batch,a.O_GoodsName
                   UNION ALL
                   --周转仓报废
                   select a.S_GoodsCode,SUM(a.S_Qty) as qty,a.S_Batch,a.S_GoodsName from dbo.Mes_ScrapDetail as a left join Mes_ScrapHead as b on a.S_ScrapNo = b.S_ScrapNo where  S_UploadDate > @startTime and S_UploadDate < @endTime {1} {3} group by a.S_GoodsCode,a.S_Batch,a.S_GoodsName
