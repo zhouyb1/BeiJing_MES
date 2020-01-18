@@ -21,14 +21,27 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            
+            //绑定物料
+            $("#GoodsCode").select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 150,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetGoodsList',
+                // 访问数据接口参数
+                param: {}
+            });
             //绑定仓库
             $('#StockCode').select({
                 type: 'default',
                 value: 'S_Code',
                 text: 'S_Name',
                 // 展开最大高度
-                maxHeight: 200,
+                maxHeight: 150,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
