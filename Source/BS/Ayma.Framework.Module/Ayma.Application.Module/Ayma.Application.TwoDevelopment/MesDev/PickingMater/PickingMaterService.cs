@@ -762,7 +762,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         lastGc.F_Kind = lastBom.F_Kind;
                                         lastGc.F_Unit = lastBom.F_Unit;
 
-                                        lastGc.F_Qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                        decimal ? d_qty=(currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                        lastGc.F_Qty = Math.Round(d_qty.Value, 3);
                                         lastGc.F_SumQty = group2.F_Qty;
 
                                         lastGc.F_ConvertMin = lastBom.F_ConvertMin;
@@ -772,8 +773,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         lastGc.F_ConvertTag = 0;
 
 
-                                        decimal? d = (currentGc.F_Qty / lastGc.F_Qty) * 100;
-                                        currentGc.F_Convert = Math.Round(d.Value, 2);
+                                        decimal? d_convert = (currentGc.F_Qty / lastGc.F_Qty) * 100;
+                                        currentGc.F_Convert = Math.Round(d_convert.Value, 2);
                                         if (currentGc.F_Convert > currentGc.F_ConvertMax)
                                             currentGc.F_ConvertTag = 1;
                                         else
@@ -823,9 +824,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             currentGc.F_Kind = currentBom.F_Kind;
                                             currentGc.F_Unit = currentBom.F_Unit;
 
-                                            currentGc.F_Qty = group1.F_Qty;//实际生产
-                                            decimal? d = (group2.F_Qty * 1000) / lastBom.F_PlanQty;
-                                            currentGc.F_Convert = Math.Round(d.Value, 0);//理论份数
+                                            currentGc.F_Qty = Math.Round(group1.F_Qty,0);//实际生产
+
+                                            decimal? d_qty = (group2.F_Qty * 1000) / lastBom.F_PlanQty;
+                                            currentGc.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
+
                                             currentGc.F_ConvertTag = currentGc.F_Qty - currentGc.F_Convert;//偏差数
 
                                             decimal? c = (currentGc.F_ConvertTag / currentGc.F_Convert) * 100;
@@ -866,8 +869,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             lastGc.F_Kind = lastBom.F_Kind;
                                             lastGc.F_Unit = lastBom.F_Unit;
 
-                                            lastGc.F_Qty = group2.F_Qty;
-                                            lastGc.F_SumQty = group3.F_Qty;
+                                            lastGc.F_Qty = Math.Round(group2.F_Qty, 3);
+                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3); 
 
                                             lastGc.F_ConvertMin = lastBom.F_ConvertMin;
                                             lastGc.F_ConvertMax = lastBom.F_ConvertMax;
@@ -899,8 +902,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             lastGc.F_Kind = lastBom.F_Kind;
                                             lastGc.F_Unit = lastBom.F_Unit;
 
-                                            lastGc.F_Qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
-                                            lastGc.F_SumQty = group3.F_Qty;
+                                            decimal? d_qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                            lastGc.F_Qty =Math.Round(d_qty.Value,3);
+                                            lastGc.F_SumQty = Math.Round(group3.F_Qty,3);
 
                                             lastGc.F_ConvertMin = lastBom.F_ConvertMin;
                                             lastGc.F_ConvertMax = lastBom.F_ConvertMax;
@@ -909,8 +913,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             lastGc.F_ConvertTag = 0;
 
 
-                                            decimal? d = (currentGc.F_Qty / lastGc.F_Qty) * 100;
-                                            currentGc.F_Convert = Math.Round(d.Value, 2);//理论份数 ;
+                                            decimal? d_convert = (currentGc.F_Qty / lastGc.F_Qty) * 100;
+                                            currentGc.F_Convert = Math.Round(d_convert.Value, 2);//转化率;
+
                                             if (currentGc.F_Convert > currentGc.F_ConvertMax)
                                                 currentGc.F_ConvertTag = 1;
                                             else
