@@ -32,6 +32,23 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
+            // 双击编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑门列表',
+                        url: top.$.rootUrl + '/MesDev/DoorList/Form?keyValue=' + keyValue,
+                        width: 600,
+                        height: 400,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

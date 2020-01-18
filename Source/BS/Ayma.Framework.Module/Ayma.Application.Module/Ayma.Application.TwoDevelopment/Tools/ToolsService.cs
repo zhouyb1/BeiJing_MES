@@ -425,7 +425,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_WorkShopEntity>(t => t.W_Name == code);
+                return this.BaseRepository().FindEntity<Mes_WorkShopEntity>(t => t.W_Name == code||t.W_Code==code);
             }
             catch (Exception ex)
             {

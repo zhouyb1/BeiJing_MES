@@ -57,7 +57,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 });
             });
             //车间编码
-            $("#D_WorkShopName").select({
+            $("#W_Name").select({
                 type: 'default',
                 value: 'W_Name',
                 text: 'W_Name',

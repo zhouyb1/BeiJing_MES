@@ -68,9 +68,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [AjaxOnly]
         public ActionResult GetFormData(string keyValue)
         {
-            var Mes_DoorData = doorListIBLL.GetMes_DoorEntity( keyValue );
+            var Mes_DoorData = doorListIBLL.GetMes_DoorEntity(keyValue);
+            var list=toosIBLL.ByCodeGetWorkShopEntity(Mes_DoorData.D_WorkShopCode);
             var jsonData = new {
                 Mes_DoorData = Mes_DoorData,
+                list=list
             };
             return Success(jsonData);
         }
