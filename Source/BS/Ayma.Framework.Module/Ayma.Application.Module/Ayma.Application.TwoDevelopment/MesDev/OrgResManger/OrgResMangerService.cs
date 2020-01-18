@@ -360,23 +360,42 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var key = userId + "_stock";
             var stock = redisCache.Read<string>(key);
             StringBuilder sb = new StringBuilder();
-            sb.Append(@"SELECT  c.C_Code O_GoodsCode ,
+//            sb.Append(@"SELECT  c.C_Code O_GoodsCode ,
+//                                c.C_Name O_GoodsName ,
+//                                c.C_SecCode O_SecGoodsCode ,
+//                                c.C_SecName O_SecGoodsName ,
+//                                SUM(i.I_Qty) O_Qty ,
+//                                i.I_Unit O_Unit ,
+//                                ( SELECT    G_Price
+//                                  FROM      dbo.Mes_Goods
+//                                  WHERE     G_Code = i.I_GoodsCode
+//                                ) O_Price
+//                        FROM    dbo.Mes_Convert c
+//                                INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
+//                                INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
+//                                INNER JOIN dbo.Mes_Goods g ON g.G_Code=i.I_GoodsCode
+//                        WHERE   i.I_Qty > 0
+//                                AND s.S_Kind = 4 ");
+            // 虚拟参数
+
+
+            sb.Append(@" SELECT c.C_Code O_GoodsCode ,
                                 c.C_Name O_GoodsName ,
                                 c.C_SecCode O_SecGoodsCode ,
                                 c.C_SecName O_SecGoodsName ,
                                 SUM(i.I_Qty) O_Qty ,
                                 i.I_Unit O_Unit ,
+                                g.G_Unit O_SecUnit ,
                                 ( SELECT    G_Price
                                   FROM      dbo.Mes_Goods
                                   WHERE     G_Code = i.I_GoodsCode
                                 ) O_Price
-                        FROM    dbo.Mes_Convert c
-                                INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
+                        FROM    dbo.Mes_Inventory i
+                                INNER JOIN dbo.Mes_Convert c ON c.C_Code = i.I_GoodsCode
                                 INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
-                                INNER JOIN dbo.Mes_Goods g ON g.G_Code=i.I_GoodsCode
-                        WHERE   i.I_Qty > 0
-                                AND s.S_Kind = 4 ");
-            // 虚拟参数
+                                INNER JOIN dbo.Mes_Goods g ON g.G_Code=c.C_SecCode
+                        WHERE   i.I_Qty > 0 AND  s.S_Kind = 4
+                               GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode,g.G_Unit ");
             var dp = new DynamicParameters(new { });   
             var queryParam = queryJson.ToJObject();
             if (!keyword.IsEmpty())
