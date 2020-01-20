@@ -93,7 +93,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                              O_TeamName ,
                                             dbo.GetUserNameById(O_CreateBy) O_CreateBy
                                       FROM    Mes_OrgResHead h
-                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo  where 1 = 1 ");
+                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo  where 1 = 1  and O_Status = 3 ");
             if (!queryParam["StockCode"].IsEmpty())
             {
                 dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
@@ -132,7 +132,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         O_Unit,
                                         d.O_Batch
                                 FROM    Mes_OrgResHead h
-                                        LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_SecGoodsCode ='"+dtHead.Rows[i]["O_SecGoodsCode"].ToString()+"'");
+                                        LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_Status = 3  and O_SecGoodsCode ='" + dtHead.Rows[i]["O_SecGoodsCode"].ToString() + "'");
                 if (!queryParam["StockCode"].IsEmpty())
                 {
                     dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
@@ -156,15 +156,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                     for (var j = 0; j < dtBody.Rows.Count; j++)
                     {
-                        if (!dic.ContainsKey(dtBody.Rows[j]["O_OrgResNo"].ToString())&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()))
+                        if (!dic.ContainsKey(dtBody.Rows[j]["O_OrgResNo"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
                         {
                             //OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
                             dic.Add(dtBody.Rows[j]["O_OrgResNo"].ToString(), dtBody.Rows[j]["O_GoodsCode"].ToString());
                             dQtySec += dQtySec + Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
 
-                            dQty = dQty + Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
                         }
-                        //dQty = dQty + Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
+                        dQty = dQty + Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
+
                     }
                     decimal dConvert = (dQtySec / dQty)*100;
                     dConvert = Math.Round(dConvert, 2);
