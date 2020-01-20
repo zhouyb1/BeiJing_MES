@@ -65,19 +65,23 @@ window.onload = function () {
                     alts('没有获取到数据，请重新扫码~');
                 } else {
                     var loading = document.querySelector('.ball-pulse-sync');
-                    var timer_str = '';
-                    for (var i = 0; i < timer.length; i++) {
-                        timer_str += timer[i];
-                        if (i === 3) {
-                            timer_str += '-';
+                    if (timer.indexOf('-') === -1) {
+                        var timer_str = '';
+                        for (var i = 0; i < timer.length; i++) {
+                            timer_str += timer[i];
+                            if (i === 3) {
+                                timer_str += '-';
+                            };
+                            if (i === 5) {
+                                timer_str += '-';
+                            };
+                            if (i === 7) {
+                                timer_str += ' ';
+                            };
                         };
-                        if (i === 5) {
-                            timer_str += '-';
-                        };
-                        if (i === 7) {
-                            timer_str += ' ';
-                        };
-
+                    } else {
+                        var timer_str = timer;
+                        console.log(timer)
                     };
                     loading.style = 'opacity:0;z-index:-999;';
                     li[0].innerText = data.data.S_Name || '--';
@@ -87,9 +91,10 @@ window.onload = function () {
                     li[4].innerText = data.data.S_Team || '--';
                     li[5].innerText = data.data.S_Quality || '--';
                     li[6].innerText = data.data.S_Standard || '--';
-                    li[7].innerText = data.data.S_Storage || '--';
-                    li[8].innerText = '第 ' + data.data.S_ScanRecord + ' 次' || '--';
-                    li[9].innerText = data.data.S_ScanTime || '--';
+                    li[7].innerText = data.data.S_ProductDate || '--';
+                    li[8].innerText = data.data.S_Storage || '--';
+                    li[9].innerText = '第 ' + data.data.S_ScanRecord + ' 次' || '--';
+                    li[10].innerText = data.data.S_ScanTime || '--';
                     var show_alert = document.querySelector("#show_alert");
                     show_alert.addEventListener('click', function () {
                         alts(data.data.S_MaterName, true);
@@ -106,11 +111,10 @@ window.onload = function () {
                 };
             };
         };
-        xmlhttp.open("POST", 'https://aymaoto.jtlf.cn/webapi/Goods/GoodsInfo', true);
+        var str = JSON.stringify({ barCode: code, printfTime: timer })
+        xmlhttp.open("GET", 'http://211.103.182.221:7001/webapi/ScanRecord/GetBarCodeInfo?data=' + str, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
-        var str = 'barCode=' + code + '&printfTime=' + timer;
-        xmlhttp.send(str);
-
+        xmlhttp.send();
     } else {
         // alert('没有获取到数据，请重新扫码~');
         alts('没有获取到数据，请重新扫码~');
