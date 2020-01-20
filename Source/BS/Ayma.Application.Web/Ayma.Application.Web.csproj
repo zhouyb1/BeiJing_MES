@@ -541,6 +541,10 @@
     <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\PackingRateIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.js" />
+    <Content Include="Areas\MesDev\Views\Goods\css\css.css" />
+    <Content Include="Areas\MesDev\Views\Goods\Goods.js" />
+    <Content Include="Areas\MesDev\Views\Goods\img\head_s.jpg" />
+    <Content Include="Areas\MesDev\Views\Goods\img\body_s.jpg" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
@@ -736,6 +740,31 @@
     <Content Include="Content\gridreport\grbsctl6x64.cab" />
     <Content Include="Content\gridreport\GRInstall.js" />
     <Content Include="Content\gridreport\GRUtility.js" />
+    <Content Include="Content\H5\css\index.css" />
+    <Content Include="Content\H5\css\mui.css" />
+    <Content Include="Content\H5\css\mui.min.css" />
+    <Content Include="Content\H5\images\body_s.jpg" />
+    <Content Include="Content\H5\images\dc.png" />
+    <Content Include="Content\H5\images\dzfw.png" />
+    <Content Include="Content\H5\images\hd_bg.jpg" />
+    <Content Include="Content\H5\images\head.jpg" />
+    <Content Include="Content\H5\images\head_s.jpg" />
+    <Content Include="Content\H5\images\jfdh.png" />
+    <Content Include="Content\H5\images\sb.png" />
+    <Content Include="Content\H5\images\sc.png" />
+    <Content Include="Content\H5\images\xh1.jpg" />
+    <Content Include="Content\H5\images\xxcx.png" />
+    <Content Include="Content\H5\images\yjfk.png" />
+    <Content Include="Content\H5\images\zsfw.png" />
+    <Content Include="Content\H5\images\zwd.png" />
+    <Content Include="Content\H5\js\index.js" />
+    <Content Include="Content\H5\js\jquery.js" />
+    <Content Include="Content\H5\js\jquery.tmpl.min.js" />
+    <Content Include="Content\H5\js\md5.js" />
+    <Content Include="Content\H5\js\mui.js" />
+    <Content Include="Content\H5\js\mui.min.js" />
+    <Content Include="Content\H5\MES_CSS\index.css" />
+    <Content Include="Content\H5\MES_JS\index.js" />
     <Content Include="Content\images\404.png" />
     <Content Include="Content\images\adminDefault.png" />
     <Content Include="Content\images\arrow1.png" />
@@ -2749,6 +2778,7 @@
   <ItemGroup>
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\ProductRateIndex.cshtml" />
+    <Content Include="Content\H5\fonts\mui.ttf" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
   </ItemGroup>
   <PropertyGroup>
