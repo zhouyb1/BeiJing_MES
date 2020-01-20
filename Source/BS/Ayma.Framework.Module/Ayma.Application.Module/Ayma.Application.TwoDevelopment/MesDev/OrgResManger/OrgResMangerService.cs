@@ -156,7 +156,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                     for (var j = 0; j < dtBody.Rows.Count; j++)
                     {
-                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_GoodsCode"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
+                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_OrgResNo"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
                         {
                             OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
                             //dic.Add(dtBody.Rows[j]["O_OrgResNo"].ToString(), dtBody.Rows[j]["O_GoodsCode"].ToString());
