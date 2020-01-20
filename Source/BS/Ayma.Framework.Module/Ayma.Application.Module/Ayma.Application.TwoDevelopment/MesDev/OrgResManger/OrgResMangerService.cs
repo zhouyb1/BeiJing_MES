@@ -151,15 +151,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     decimal dQty = 0;
                     decimal dQtySec = 0;
-                   // List<string> OrgResNoList = new List<string>();
+                   List<string> OrgResNoList = new List<string>();
                     Dictionary<string, string> dic = new Dictionary<string, string>();
 
                     for (var j = 0; j < dtBody.Rows.Count; j++)
                     {
-                        if (!dic.ContainsKey(dtBody.Rows[j]["O_OrgResNo"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
+                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_GoodsCode"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
                         {
-                            //OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
-                            dic.Add(dtBody.Rows[j]["O_OrgResNo"].ToString(), dtBody.Rows[j]["O_GoodsCode"].ToString());
+                            OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
+                            //dic.Add(dtBody.Rows[j]["O_OrgResNo"].ToString(), dtBody.Rows[j]["O_GoodsCode"].ToString());
                             dQtySec += dQtySec + Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
 
                         }
