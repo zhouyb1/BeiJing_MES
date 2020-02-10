@@ -15,9 +15,6 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
-
-
-
 //处理前物料列表
 var goodsOutList = [];
 //处理后物料列表
@@ -141,7 +138,6 @@ var bootstrap = function ($, ayma) {
                 sord: 'ASC',
                 onSelectRow: function (rowobj, rowdata, rowid) {
 
-
                     //批次
                     var batch = new Date();
                     var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
@@ -162,7 +158,6 @@ var bootstrap = function ($, ayma) {
                     row.O_SecUnit = rowdata.w_unit;
                     row.O_SecQty = rowdata.quantity;
                     row.O_SecBatch = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
-
 
                     if (!isChecked.is(":checked")) {
                         //移除
