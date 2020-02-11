@@ -2780,6 +2780,7 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\ProductRateIndex.cshtml" />
     <Content Include="Content\H5\fonts\mui.ttf" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
+    <Content Include="Report\grf\YWLCRKTJReport.grf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

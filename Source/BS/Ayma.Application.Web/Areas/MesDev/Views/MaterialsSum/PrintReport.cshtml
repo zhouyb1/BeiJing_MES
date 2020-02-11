@@ -14,9 +14,9 @@
 
     var Report = request('report');
     var dataURL = request('data');
-    var name = request('startTime');
-    var name = request('endTime');
-    var name = request('ToDate');
+    var starttime = request('startTime');
+    var endtime = request('endTime');
+    var ToDate = request('ToDate');
     //var billtype = request('billtype');
 
     if (Report != "") {
@@ -24,7 +24,7 @@
     }
 
     if (dataURL != "") {
-        dataURL = "/Report/data/DataCenter.ashx?data=" + dataURL + "&name=" + name;
+        dataURL = "/Report/data/DataCenter.ashx?data=" + dataURL + "&starttime=" + starttime + "&endtime=" + endtime + "&ToDate=" + ToDate;
     }
 
     if ("@(ViewBag.DataUrl)" != "") {

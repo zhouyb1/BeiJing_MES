@@ -176,9 +176,19 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
-             
-
-            });        
+                var ToDate = getNextDate(startTime, -1);
+                    ayma.layerForm({
+                        id: 'YWCRKTJ',
+                        title: '原物料出入库打印',
+                        url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport?startTime=' + startTime.substr(0, 10) + "&endTime=" + endTime.substr(0, 10) + "&ToDate=" + ToDate + "&report=YWLCRKTJReport&data=YWLCRKTJ",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });              
+            });
         },
         // 初始化列表
         initGird: function () {
@@ -728,4 +738,12 @@ var bootstrap = function ($, ayma) {
         }
     }
     page.init();
+    function getNextDate(date,day) {  
+        var dd = new Date(date);
+        dd.setDate(dd.getDate() + day);
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1 < 10 ? "0" + (dd.getMonth() + 1) : dd.getMonth() + 1;
+        var d = dd.getDate() < 10 ? "0" + dd.getDate() : dd.getDate();
+        return y + "-" + m + "-" + d;
+    };
 }

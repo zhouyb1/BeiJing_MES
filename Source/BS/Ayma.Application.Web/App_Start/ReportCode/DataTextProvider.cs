@@ -270,6 +270,58 @@ using MyDbReportData = DatabaseXmlReportData;
 
         }
         /// <summary>
+        /// 原物料出入库统计
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string YWLCRKTJ(string starttime,string endtime,string ToDate)
+        {
+            var strSql = @" select 
+                                    (select S_Name from Mes_Stock where S_Code=s.G_StockCode)as S_Name,
+                                     s.G_StockCode
+								    ,s.G_Code 
+									,s.G_Name
+                                    ,s.G_Unit
+                                    ,'{0}' as 'startTime'
+                                    ,'{1}' as 'endTime'
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code ) as outPrice
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code )*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3)) as outamount
+			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3))as withdrawingnumber
+									,(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3)) as materialssales 
+									,(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3)) as scrapist  
+									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))  as otherwarehouse  
+									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3)) as otheroutbound  								
+									,(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3)) as supplierback                                    
+								    ,(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date='{2}') as Initialinventory													
+									,(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>='{0}' and M_CreateDate<='{1}' and M_Status=3) and M_GoodsCode=s.G_Code) as Inventoryquantity								
+									,(select G_Price from Mes_Goods where G_Code=s.G_Code ) as Price								  
+								    ,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail b where  b.B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead h 
+									where (h.B_CreateDate>='{0}' and h.B_CreateDate<='{1}' and B_Kind=1 and B_Status=3 )) AND B_GoodsCode=s.G_Code ) as Back_Qty							
+									,(select G_Price from Mes_Goods where G_Code=s.G_Code )*(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date='{2}') as initialamount
+						      	    ,(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>='{0}' and C_CreateDate<='{1}') and C_GoodsCode=s.G_Code  and P_Status=3)) as delivery
+									,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date='{2}')+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>='{0}' and M_CreateDate<='{1}' and M_Status=3) and M_GoodsCode=s.G_Code)-
+									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>='{0}' and C_CreateDate<='{1}') and C_GoodsCode=s.G_Code  and P_Status=3))
+									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3))
+									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3))
+									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3))
+									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
+									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
+									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3)))	 as Endinginventory																	   								   
+								    ,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date='{2}')+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>='{0}' and M_CreateDate<='{1}' and M_Status=3) and M_GoodsCode=s.G_Code)-
+									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>='{0}' and C_CreateDate<='{1}')and C_GoodsCode=s.G_Code  and P_Status=3))
+									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3))
+									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3))
+									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >='{0}' and S_CreateDate <='{1}')and S_Status=3))
+									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
+									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
+									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3)))*(select G_Price from Mes_Goods where G_Code=s.G_Code ) as finalamount																										
+									from Mes_Goods s where  s.G_Kind=1";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime,endtime,ToDate), "YWLCRKTJ"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
         /// 日耗品消耗单打印
         /// </summary>
         /// <param name="doucno"></param>
@@ -1034,6 +1086,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
+            SpecialDataFunMap.Add("YWLCRKTJ", YWLCRKTJ);
             SpecialDataFunMap.Add("Other", Other);
             SpecialDataFunMap.Add("ExpendManager", ExpendManager);
             SpecialDataFunMap.Add("OtherOut", OtherOut);
@@ -1106,6 +1159,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string MaterIn(HttpRequest Request)
         {
             return MaterIn(Request.QueryString["doucno"]);
+        }
+        private static string YWLCRKTJ(HttpRequest Request)
+        {
+            return YWLCRKTJ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["ToDate"]);
         }
         private static string Other(HttpRequest Request)
         {
