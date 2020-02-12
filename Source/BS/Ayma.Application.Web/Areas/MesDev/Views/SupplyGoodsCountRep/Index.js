@@ -105,6 +105,23 @@ var bootstrap = function ($, ayma) {
                     btn: ['导出Excel', '关闭']
                 });
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable_sum').jfGridValue('m_supplycode');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'GYSJHSJHZ',
+                        title: '供应商供货数据汇总',
+                        url: top.$.rootUrl + '/MesDev/SupplyGoodsCountRep/PrintReport?keyValue=' + keyValue + "&endtime=" + endTime + "&starttime=" + startTime + "&report=GYSJHSJHZReport&data=GYSJHSJHZ",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
         },
 
        

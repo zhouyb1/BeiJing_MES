@@ -44,6 +44,36 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
+            //导出excel
+            $('#am_export').on('click', function () {
+                var tableName = "girdtable";
+                var fileName = "供应商存货明细";
+                ayma.layerForm({
+                    id: "ExcelExportForm",
+                    title: '导出Excel数据',
+                    url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+                    width: 500,
+                    height: 400,
+                    callBack: function (id) {
+                        return top[id].acceptClick();
+                    },
+                    btn: ['导出Excel', '关闭']
+                });
+            });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                ayma.layerForm({
+                    id: 'GYSCHMX',
+                    title: '供应商存货明细',
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport2?startTime=' + startTime+ "&endTime=" + endTime+ "&report=GYSCHMXReport&data=GYSCHMX",
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
         },
         // 初始化列表
         initGird: function () {

@@ -173,7 +173,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.370417,
-							"Width":1.69333,
+							"Width":1.66688,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -597,9 +597,9 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
-					"Left":1.19063,
+					"Left":1.40229,
 					"Top":2.01083,
-					"Width":5.82083,
+					"Width":5.79438,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -612,7 +612,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
-					"Left":3.41313,
+					"Left":5.3975,
 					"Top":2.01083,
 					"Width":3.59833,
 					"Height":0.582083,
@@ -627,7 +627,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
-					"Left":2.98979,
+					"Left":4.78896,
 					"Top":2.01083,
 					"Width":1.40229,
 					"Height":0.582083,

@@ -322,6 +322,79 @@ using MyDbReportData = DatabaseXmlReportData;
 
         }
         /// <summary>
+        /// 供应商存货明细
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string GYSCHMX(string starttime, string endtime)
+        {
+            var strSql = @" SELECT 
+                                '{0}' as strattime,
+                                '{1}' as endtime,
+                                h.M_MaterInNo,
+                                h.M_SupplyCode,
+                                h.M_SupplyName ,
+                                d.M_GoodsCode ,
+                                d.M_GoodsName ,
+                                d.M_Unit ,
+                                d.M_Tax,
+                                MAX(d.M_Price) M_Price,
+                                SUM(d.M_Price * M_Qty) row_amount, 
+                                SUM(M_Qty) row_qty,
+                                d.M_Unit2,
+                                d.M_UnitQty
+                        FROM    dbo.Mes_MaterInHead h
+                                LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo
+                        WHERE   h.M_Status = 3
+                                AND d.M_Kind = 1 AND ( h.M_CreateDate >= '{0}' AND h.M_CreateDate <= '{1}' ) 
+                        GROUP BY
+                                h.M_SupplyName,
+                                h.M_SupplyCode,
+                                h.M_MaterInNo, 
+                                M_GoodsCode ,
+                                M_GoodsName ,
+                                M_Unit,
+                                d.M_Tax,
+                                d.M_Unit2,
+                                d.M_UnitQty ";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime), "GYSCHMX"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 供应商进货数据汇总
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string GYSJHSJHZ(string starttime, string endtime, string M_SupplyName)
+        {
+            var strSql = @" 		SELECT                            
+									'{0}'as statrtime,
+									'{1}' as endtime,
+									h.M_MaterInNo ,
+                                    m.M_SupplyCode ,
+                                    m.M_SupplyName ,
+                                    m.M_GoodsName ,
+                                    m.M_GoodsCode ,
+                                    m.M_StockName ,
+                                    m.M_StockCode ,
+                                    m.M_Price ,
+                                    m.M_Qty ,
+                                    m.M_Unit ,
+                                    m.M_Tax,
+                                    m.M_Qty*m.M_Price Amount,
+                                    h.M_CreateDate ,
+                                    dbo.GetUserNameById(h.M_CreateBy) M_CreateBy
+                            FROM    dbo.Mes_MaterInHead h
+                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  ='{2}' AND h.M_Status =3
+									 AND ( h.M_CreateDate >= '{0}' AND h.M_CreateDate <='{1}' ) ORDER BY h.M_CreateDate desc";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime, M_SupplyName), "GYSJHSJHZ"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
         /// 日耗品消耗单打印
         /// </summary>
         /// <param name="doucno"></param>
@@ -1086,6 +1159,8 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
             SpecialDataFunMap.Add("BackSupply", BackSupply);
             SpecialDataFunMap.Add("MaterIn", MaterIn);
+            SpecialDataFunMap.Add("GYSCHMX", GYSCHMX);
+            SpecialDataFunMap.Add("GYSJHSJHZ", GYSJHSJHZ);
             SpecialDataFunMap.Add("YWLCRKTJ", YWLCRKTJ);
             SpecialDataFunMap.Add("Other", Other);
             SpecialDataFunMap.Add("ExpendManager", ExpendManager);
@@ -1163,6 +1238,14 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string YWLCRKTJ(HttpRequest Request)
         {
             return YWLCRKTJ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["ToDate"]);
+        }
+        private static string GYSCHMX(HttpRequest Request)
+        {
+            return GYSCHMX(Request.QueryString["starttime"], Request.QueryString["endtime"]);
+        }
+        private static string GYSJHSJHZ(HttpRequest Request)
+        {
+            return GYSJHSJHZ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["M_SupplyName"]);
         }
         private static string Other(HttpRequest Request)
         {

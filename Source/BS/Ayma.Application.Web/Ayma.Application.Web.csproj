@@ -2779,8 +2779,12 @@
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.cshtml" />
     <Content Include="Areas\MesDev\Views\OrgResManager\ProductRateIndex.cshtml" />
     <Content Include="Content\H5\fonts\mui.ttf" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport2.cshtml" />
+    <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
     <Content Include="Report\grf\YWLCRKTJReport.grf" />
+    <Content Include="Report\grf\GYSCHMXReport.grf" />
+    <Content Include="Report\grf\GYSJHSJHZReport.grf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
