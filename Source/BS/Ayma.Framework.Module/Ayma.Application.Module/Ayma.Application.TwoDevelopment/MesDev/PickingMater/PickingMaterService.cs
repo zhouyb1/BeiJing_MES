@@ -2001,12 +2001,13 @@ ORDER BY C.F_Level";
                 if (!queryParam["StockCode"].IsEmpty())
                 {
                     sbOutCmd.Append(" AND H.C_StockCode=@StockCode");
-                    sbInCmd.Append("  AND D.B_StockToCode=@StockCode");
+                    sbInCmd.Append("  AND H.B_StockToCode=@StockCode");
 
                     dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
                 }
 
                 string sql = @"SELECT 
+            MyData.F_OutQty,
             MyData.F_CreateDate,
             MyData.F_GoodsCode,
             G.G_Name F_GoodsName,
@@ -2077,6 +2078,7 @@ ORDER BY C.F_Level";
        MyData.F_GoodsCode,
        G.G_Name F_GoodsName,
        MyData.F_InQty,
+       MyData.F_OutQty,
        (F_OutQty - F_InQty) F_DiffQty
 FROM
 (
@@ -2164,6 +2166,7 @@ ORDER BY MyData.F_GoodsCode,
                 }
 
                 var row = this.BaseRepository().FindTable(string.Format(sql, sbCmd.ToString()), dp);
+                string a = row.ToString();
                 if (row != null)
                 {
                     return row;

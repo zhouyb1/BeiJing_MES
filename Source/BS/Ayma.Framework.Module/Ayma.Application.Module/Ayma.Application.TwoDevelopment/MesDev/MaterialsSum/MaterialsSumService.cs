@@ -729,12 +729,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND s.G_Name Like @M_GoodsName ");
+                    strSql.Append(" AND s.G_Code Like @M_GoodsName ");
                 }
                 if (!queryParam["S_Name"].IsEmpty())
                 {
                     dp.Add("S_Name", "%" + queryParam["S_Name"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND (select S_Name from Mes_Stock where S_Code=s.G_StockCode) Like @S_Name ");
+                    strSql.Append(" AND s.G_StockCode Like @S_Name ");
                 }
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }

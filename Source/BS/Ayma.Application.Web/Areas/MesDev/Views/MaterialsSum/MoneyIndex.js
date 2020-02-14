@@ -78,7 +78,7 @@ var bootstrap = function ($, ayma) {
             //原物料名称
             $("#M_GoodsName").select({
                 type: 'default',
-                value: 'G_Name',
+                value: 'G_Code',
                 text: 'G_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -91,7 +91,7 @@ var bootstrap = function ($, ayma) {
             //原物料仓库
             $("#S_Name").select({
                 type: 'default',
-                value: 'S_Name',
+                value: 'S_Code',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -177,10 +177,12 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var ToDate = getNextDate(startTime, -1);
+                var M_GoodsName = $('#M_GoodsName').selectGet();
+                var S_Name = $('#S_Name').selectGet();
                     ayma.layerForm({
                         id: 'YWCRKTJ',
                         title: '原物料出入库打印',
-                        url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport?startTime=' + startTime+ "&endTime=" + endTime+ "&ToDate=" + ToDate + "&report=YWLCRKTJReport&data=YWLCRKTJ",
+                        url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport?startTime=' + startTime + "&endTime=" + endTime + "&M_GoodsName=" + M_GoodsName + "&S_Name=" + S_Name + "&ToDate=" + ToDate + "&report=YWLCRKTJReport&data=YWLCRKTJ",
                         width: 1000,
                         height: 800,
                         maxmin: true,

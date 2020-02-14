@@ -92,7 +92,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// 报表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport2()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 报表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport3()
+        {
+            return View();
+        }
         /// <summary>
         /// 报表页
         /// </summary>
@@ -529,7 +546,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult GetOtherRport(string queryJson)
         {
 
-            DataTable dt = pickingMaterIBLL.GetCollarRport(queryJson);
+            DataTable dt = pickingMaterIBLL.GetOtherRport(queryJson);
 
             #region 添加合计、统计行
             if (dt != null && dt.Rows.Count > 0)

@@ -51,7 +51,40 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: { strWhere: "S_Kind =1" }
             });
-
+            //导出excel
+            $('#am_export').on('click', function () {
+                var tableName = "girdtable";
+                var fileName = "其它出库汇总报表";
+                ayma.layerForm({
+                    id: "ExcelExportForm",
+                    title: '导出Excel数据',
+                    url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+                    width: 500,
+                    height: 400,
+                    callBack: function (id) {
+                        return top[id].acceptClick();
+                    },
+                    btn: ['导出Excel', '关闭']
+                });
+            });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var starttime = $('#StartTime').val();
+                var endtime = $('#EndTime').val();
+                var GoodsCode = $('#GoodsCode').selectGet();
+                var StockCode = $('#StockCode').selectGet();
+                ayma.layerForm({
+                    id: 'LLCKHZBBReport',
+                    title: '原物料出入库打印',
+                    url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport3?starttime=' + starttime + "&endtime=" + endtime + "&GoodsCode=" + GoodsCode + "&StockCode=" + StockCode + "&report=LLCKHZBBReport&data=LLCKHZBB",
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/PickingMater/GetCollarRport',
                 headData: [

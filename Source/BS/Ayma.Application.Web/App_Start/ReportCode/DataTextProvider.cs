@@ -274,9 +274,10 @@ using MyDbReportData = DatabaseXmlReportData;
         /// </summary>
         /// <param name="doucno"></param>
         /// <returns></returns>
-        public static string YWLCRKTJ(string starttime,string endtime,string ToDate)
+        public static string YWLCRKTJ(string starttime, string endtime, string ToDate, string S_Name, string M_GoodsName)
         {
-            var strSql = @" select 
+            var strSql = new StringBuilder();
+            strSql.Append(@" select 
                                     (select S_Name from Mes_Stock where S_Code=s.G_StockCode)as S_Name,
                                      s.G_StockCode
 								    ,s.G_Code 
@@ -315,9 +316,17 @@ using MyDbReportData = DatabaseXmlReportData;
 									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
 									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
 									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3)))*(select G_Price from Mes_Goods where G_Code=s.G_Code ) as finalamount																										
-									from Mes_Goods s where  s.G_Kind=1";
+									from Mes_Goods s where  s.G_Kind=1");
+            if (!S_Name.IsEmpty())
+            {
+                strSql.Append(" AND s.G_StockCode=" + S_Name);
+            }
+            if (!M_GoodsName.IsEmpty())
+            {
+                strSql.Append("  AND s.G_Code=" + M_GoodsName);
+            }
             ArrayList QueryList = new ArrayList();
-            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime,endtime,ToDate), "YWLCRKTJ"));
+            QueryList.Add(new ReportQueryItem(string.Format(strSql.ToString(), starttime, endtime, ToDate), "YWLCRKTJ"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
@@ -328,6 +337,7 @@ using MyDbReportData = DatabaseXmlReportData;
         /// <returns></returns>
         public static string GYSCHMX(string starttime, string endtime)
         {
+
             var strSql = @" SELECT 
                                 '{0}' as strattime,
                                 '{1}' as endtime,
@@ -359,6 +369,162 @@ using MyDbReportData = DatabaseXmlReportData;
                                 d.M_UnitQty ";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime), "GYSCHMX"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 其他出库汇总报表
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string QTCKHZBB(string starttime, string endtime, string GoodsCode, string StockCode)
+        {
+            var strSql = @"SELECT 
+	                        '{0}' as starttime,
+		                        '{1}' as endtime,
+	                        MyData.F_CreateDate,
+                               MyData.F_GoodsCode,
+                               G.G_Name F_GoodsName,
+                               MyData.F_InQty,
+                               MyData.F_OutQty,
+                               (F_OutQty - F_InQty) F_DiffQty
+                        FROM
+                        (
+                            SELECT (CASE
+                                        WHEN OutData.F_CreateDate IS NOT NULL THEN
+                                            OutData.F_CreateDate
+                                        ELSE
+                                            InData.F_CreateDate
+                                    END
+                                   ) F_CreateDate,
+                                   (CASE
+                                        WHEN OutData.F_GoodsCode IS NOT NULL THEN
+                                            OutData.F_GoodsCode
+                                        ELSE
+                                            InData.F_GoodsCode
+                                    END
+                                   ) F_GoodsCode,
+                                   ISNULL(OutData.F_OutQty, 0) F_OutQty,
+                                   ISNULL(InData.F_InQty, 0) F_InQty
+                            FROM
+                            (
+                                SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+                                       D.O_GoodsCode F_GoodsCode,
+                                       SUM(D.O_Qty) F_OutQty
+                                FROM Mes_OtherOutHead H
+                                    LEFT JOIN Mes_OtherOutDetail D
+                                        ON D.O_OtherOutNo = H.O_OtherOutNo
+                                WHERE H.O_Status = 3
+                            AND  (H.O_CreateDate>='{0}' and CONVERT(VARCHAR(10), H.O_CreateDate, 120)<='{1}' )
+                             {2}
+                                GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+                                         O_GoodsCode
+                            ) OutData
+                                FULL JOIN
+                                (
+                                    SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+                                           D.O_GoodsCode F_GoodsCode,
+                                           SUM(D.O_Qty) F_InQty
+                                    FROM Mes_OtherInHead H
+                                        LEFT JOIN dbo.Mes_OtherInDetail D
+                                            ON D.O_OtherInNo = H.O_OtherInNo
+                                    WHERE H.O_Status = 3
+                                      AND  (H.O_CreateDate>='{0}' and CONVERT(VARCHAR(10), H.O_CreateDate, 120)<='{1}' )
+                                    {2}
+                                    GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+                                             O_GoodsCode
+                                ) InData
+                                    ON InData.F_CreateDate = OutData.F_CreateDate
+                                       AND InData.F_GoodsCode = OutData.F_GoodsCode
+                        ) MyData
+                            LEFT JOIN Mes_Goods G
+                                ON G.G_Code = MyData.F_GoodsCode
+                        ORDER BY MyData.F_GoodsCode,
+                                 MyData.F_CreateDate;
+                ";
+
+            // 虚拟参数
+            StringBuilder sbCmd = new StringBuilder();
+            StringBuilder sbInCmd = new StringBuilder();
+            if (!GoodsCode.IsEmpty())
+            {
+                sbCmd.Append(" AND D.O_GoodsCode=" + GoodsCode);
+            }
+
+            if (!StockCode.IsEmpty())
+            {
+                sbCmd.Append(" AND H.O_StockCode=" + StockCode);
+
+            }
+
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime, sbCmd.ToString()), "QTCKHZBB"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+
+        }
+        /// <summary>
+        /// 领料出库汇总报表
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string LLCKHZBB(string starttime, string endtime, string GoodsCode, string StockCode)
+        {
+
+            var strSql = @"SELECT 
+			'{0}' as starttime,
+			'{1}' as endtime,
+            MyData.F_CreateDate,
+            MyData.F_GoodsCode,
+            G.G_Name F_GoodsName,
+            MyData.F_InQty,
+			MyData.F_OutQty,
+            (F_OutQty-F_InQty) F_DiffQty
+                FROM
+            (
+                SELECT 
+                    (CASE WHEN OutData.F_CreateDate IS NOT NULL THEN OutData.F_CreateDate ELSE InData.F_CreateDate  END) F_CreateDate,
+            (CASE WHEN OutData.F_GoodsCode IS NOT NULL THEN OutData.F_GoodsCode ELSE InData.F_GoodsCode  END) F_GoodsCode,
+            ISNULL(OutData.F_OutQty,0) F_OutQty,
+            ISNULL(InData.F_InQty,0) F_InQty
+                FROM
+                (
+                    SELECT CONVERT(VARCHAR(10),H.C_CreateDate,120) F_CreateDate,D.C_GoodsCode F_GoodsCode,SUM(D.C_Qty) F_OutQty FROM Mes_CollarHead H
+                LEFT JOIN Mes_CollarDetail D ON D.C_CollarNo = H.C_CollarNo
+            WHERE H.P_Status=3 
+			AND (H.C_CreateDate>='{0}' AND H.C_CreateDate<'{1}')
+                    {2}
+            GROUP BY CONVERT(VARCHAR(10),H.C_CreateDate,120),C_GoodsCode
+                )OutData
+                FULL JOIN
+            (
+                SELECT CONVERT(VARCHAR(10),H.B_CreateDate,120) F_CreateDate,D.B_GoodsCode F_GoodsCode,SUM(D.B_Qty) F_InQty FROM Mes_BackStockHead H
+                LEFT JOIN dbo.Mes_BackStockDetail D ON  D.B_BackStockNo = H.B_BackStockNo
+            WHERE H.B_Status=3 AND (H.B_CreateDate>='{0}' AND H.B_CreateDate<'{1}')
+			{3}
+            GROUP BY CONVERT(VARCHAR(10),H.B_CreateDate,120),B_GoodsCode
+                )InData ON InData.F_CreateDate = OutData.F_CreateDate AND InData.F_GoodsCode = OutData.F_GoodsCode
+                )MyData LEFT JOIN Mes_Goods G ON G.G_Code=MyData.F_GoodsCode
+            ORDER BY MyData.F_GoodsCode,MyData.F_CreateDate;
+                ";
+            // 虚拟参数
+            StringBuilder sbOutCmd = new StringBuilder();
+            StringBuilder sbInCmd = new StringBuilder();
+
+            if (!GoodsCode.IsEmpty())
+            {
+                sbOutCmd.Append(" AND D.C_GoodsCode=" + GoodsCode);
+                sbInCmd.Append("  AND D.B_GoodsCode=" + GoodsCode);
+            }
+
+            if (!StockCode.IsEmpty())
+            {
+                sbOutCmd.Append(" AND H.C_StockCode=" + StockCode);
+                sbInCmd.Append("  AND H.B_StockToCode=" + StockCode);
+
+            }
+
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime, sbOutCmd, sbInCmd), "LLCKHZBB"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }
@@ -1161,6 +1327,8 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("MaterIn", MaterIn);
             SpecialDataFunMap.Add("GYSCHMX", GYSCHMX);
             SpecialDataFunMap.Add("GYSJHSJHZ", GYSJHSJHZ);
+            SpecialDataFunMap.Add("QTCKHZBB", QTCKHZBB);
+            SpecialDataFunMap.Add("LLCKHZBB", LLCKHZBB);
             SpecialDataFunMap.Add("YWLCRKTJ", YWLCRKTJ);
             SpecialDataFunMap.Add("Other", Other);
             SpecialDataFunMap.Add("ExpendManager", ExpendManager);
@@ -1237,11 +1405,19 @@ using MyDbReportData = DatabaseXmlReportData;
         }
         private static string YWLCRKTJ(HttpRequest Request)
         {
-            return YWLCRKTJ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["ToDate"]);
+            return YWLCRKTJ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["ToDate"], Request.QueryString["S_Name"], Request.QueryString["M_GoodsName"]);
         }
         private static string GYSCHMX(HttpRequest Request)
         {
             return GYSCHMX(Request.QueryString["starttime"], Request.QueryString["endtime"]);
+        }
+        private static string QTCKHZBB(HttpRequest Request)
+        {
+            return QTCKHZBB(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["GoodsCode"], Request.QueryString["StockCode"]);
+        }
+        private static string LLCKHZBB(HttpRequest Request)
+        {
+            return LLCKHZBB(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["GoodsCode"], Request.QueryString["StockCode"]);
         }
         private static string GYSJHSJHZ(HttpRequest Request)
         {

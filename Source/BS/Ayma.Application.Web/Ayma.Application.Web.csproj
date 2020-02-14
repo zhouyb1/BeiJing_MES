@@ -610,8 +610,10 @@
     <Content Include="Areas\MesDev\Views\PickingMaterQuery\Form.cshtml">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\GoodsConvertReport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\OrderMaterList.js" />
+    <Content Include="Areas\MesDev\Views\PickingMater\OtherRport.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempForm.js" />
     <Content Include="Areas\MesDev\Views\PickingMater\TempIndex.js" />
     <Content Include="Areas\MesDev\Views\ProceManager\Form.js" />
@@ -2781,10 +2783,16 @@
     <Content Include="Content\H5\fonts\mui.ttf" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport2.cshtml" />
     <Content Include="Areas\MesDev\Views\SupplyGoodsCountRep\PrintReport.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\OtherRport.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\CollarRport.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\PrintReport2.cshtml" />
+    <Content Include="Areas\MesDev\Views\PickingMater\PrintReport3.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
     <Content Include="Report\grf\YWLCRKTJReport.grf" />
     <Content Include="Report\grf\GYSCHMXReport.grf" />
     <Content Include="Report\grf\GYSJHSJHZReport.grf" />
+    <Content Include="Report\grf\QTCKHZBBReport.grf" />
+    <Content Include="Report\grf\LLCKHZBBReport.grf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

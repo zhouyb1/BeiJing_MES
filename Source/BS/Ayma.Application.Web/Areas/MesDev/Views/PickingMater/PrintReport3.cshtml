@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "原物料出入库汇总";
+    ViewBag.Title = "入库和成品入库";
     Layout = "~/Views/Shared/_Form.cshtml";
 }
 
@@ -11,14 +11,12 @@
     if (Installed) {
         CreateReport("Report");
     }
-
     var Report = request('report');
     var dataURL = request('data');
-    var starttime = request('startTime');
-    var endtime = request('endTime');
-    var ToDate = request('ToDate'); 
-    var S_Name = request('S_Name');
-    var M_GoodsName = request('M_GoodsName');
+    var starttime = request('starttime');
+    var endtime = request('endtime');
+    var GoodsCode = request('GoodsCode');
+    var StockCode = request('StockCode');
     //var billtype = request('billtype');
 
     if (Report != "") {
@@ -26,7 +24,7 @@
     }
 
     if (dataURL != "") {
-        dataURL = "/Report/data/DataCenter.ashx?data=" + dataURL + "&starttime=" + starttime + "&endtime=" + endtime + "&ToDate=" + ToDate + "&M_GoodsName=" + M_GoodsName + "&S_Name=" + S_Name;
+        dataURL = "/Report/data/DataCenter.ashx?data=" + dataURL + "&starttime=" + starttime + "&endtime=" + endtime + "&GoodsCode=" + GoodsCode + "&StockCode=" + StockCode;
     }
 
     if ("@(ViewBag.DataUrl)" != "") {
