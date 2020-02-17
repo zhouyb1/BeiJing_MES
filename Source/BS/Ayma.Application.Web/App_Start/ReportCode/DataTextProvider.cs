@@ -366,7 +366,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 M_Unit,
                                 d.M_Tax,
                                 d.M_Unit2,
-                                d.M_UnitQty ";
+                                d.M_UnitQty order by h.M_SupplyCode";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime), "GYSCHMX"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -553,10 +553,10 @@ using MyDbReportData = DatabaseXmlReportData;
                                     h.M_CreateDate ,
                                     dbo.GetUserNameById(h.M_CreateBy) M_CreateBy
                             FROM    dbo.Mes_MaterInHead h
-                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  ='{2}' AND h.M_Status =3
-									 AND ( h.M_CreateDate >= '{0}' AND h.M_CreateDate <='{1}' ) ORDER BY h.M_CreateDate desc";
+                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_Status =3
+									 AND ( h.M_CreateDate >= '{0}' AND h.M_CreateDate <='{1}' ) ORDER BY m.M_SupplyCode  asc";
             ArrayList QueryList = new ArrayList();
-            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime, M_SupplyName), "GYSJHSJHZ"));
+            QueryList.Add(new ReportQueryItem(string.Format(strSql, starttime, endtime), "GYSJHSJHZ"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
 
         }

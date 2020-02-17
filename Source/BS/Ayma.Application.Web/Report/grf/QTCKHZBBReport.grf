@@ -85,7 +85,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.185208,
-							"Width":1.50813,
+							"Width":1.45521,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -287,238 +287,73 @@
 				}
 			},
 			{
-				"Name":"PageGroup",
-				"PageGroup":true,
+				"Name":"Group1",
+				"ByFields":"F_GoodsCode",
 				"GroupHeader":{
-					"Height":0,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Bold":true,
-						"Charset":134
-					},
-					"NewPage":"Before",
-					"PrintGridBorder":false,
-					"Control":[
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox45",
-							"Top":0.608542,
-							"Width":0.74,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawLeft|DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"Text":"序号"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox46",
-							"Left":0.608542,
-							"Top":0.608542,
-							"Width":3.12,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"Text":"物料名称"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox47",
-							"Left":3.59833,
-							"Top":0.608542,
-							"Width":2.51,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"Text":"发货仓库"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox48",
-							"Left":6.00604,
-							"Top":0.608542,
-							"Width":1.87,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"FirstCharIndent":2,
-							"Text":"规格"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox49",
-							"Left":7.80521,
-							"Top":0.608542,
-							"Width":1.27,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"基本单位"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox50",
-							"Left":8.99583,
-							"Top":0.608542,
-							"Width":1.64,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"数量"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox51",
-							"Left":10.6098,
-							"Top":0.608542,
-							"Width":1.5875,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"辅助数量"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox53",
-							"Left":0.608542,
-							"Width":1.40229,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"单价"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox54",
-							"Width":2.40771,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawLeft|DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"总金额"
-						}
-					]
+					"Height":0
 				},
 				"GroupFooter":{
 					"Height":0.79375,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Bold":true,
-						"Charset":134
-					},
 					"Control":[
 						{
-							"Type":"StaticBox",
-							"Name":"TextBox5",
-							"Top":0.185208,
-							"Width":1.98438,
+							"Type":"FieldBox",
+							"Name":"FieldBox21",
+							"Left":1.00542,
+							"Top":0.211667,
+							"Width":3.59833,
 							"Height":0.582083,
-							"Text":"本页小计："
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"F_GoodsName"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox43",
+							"Top":0.211667,
+							"Width":1.40229,
+							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"小计："
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox3",
+							"Name":"SummaryBox7",
 							"Left":7.80521,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.396875,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
 							"TextAlign":"MiddleRight",
 							"DataField":"F_OutQty",
 							"Format":"0"
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox4",
+							"Name":"SummaryBox8",
 							"Left":10.6098,
 							"Top":0.211667,
 							"Width":2.77813,
 							"Height":0.396875,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
 							"TextAlign":"MiddleRight",
 							"DataField":"F_InQty",
 							"Format":"0"

@@ -16,7 +16,7 @@
 		"AppendBlankRow":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT                            \r\n'2019-11-12 00:00:00'as statrtime,\r\n'2020-02-12 23:59:59' as endtime,\r\n\t\t\t\t\t\t\t\t\th.M_MaterInNo ,\r\n                                    m.M_SupplyCode ,\r\n                                    m.M_SupplyName ,\r\n                                    m.M_GoodsName ,\r\n                                    m.M_GoodsCode ,\r\n                                    m.M_StockName ,\r\n                                    m.M_StockCode ,\r\n                                    m.M_Price ,\r\n                                    m.M_Qty ,\r\n                                    m.M_Unit ,\r\n                                    m.M_Tax,\r\n                                    m.M_Qty*m.M_Price Amount,\r\n                                    h.M_CreateDate ,\r\n                                    dbo.GetUserNameById(h.M_CreateBy) M_CreateBy\r\n                            FROM    dbo.Mes_MaterInHead h\r\n                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  ='00002' AND h.M_Status =3\r\n\r\n\t\t\t\t\t\t\t\t\t AND ( h.M_CreateDate >= '2019-11-12 00:00:00' AND h.M_CreateDate <='2020-02-12 23:59:59' ) ORDER BY h.M_CreateDate desc",
+			"QuerySQL":"SELECT                            \r\n'2019-11-12 00:00:00'as statrtime,\r\n'2020-02-12 23:59:59' as endtime,\r\n\t\t\t\t\t\t\t\t\th.M_MaterInNo ,\r\n                                    m.M_SupplyCode ,\r\n                                    m.M_SupplyName ,\r\n                                    m.M_GoodsName ,\r\n                                    m.M_GoodsCode ,\r\n                                    m.M_StockName ,\r\n                                    m.M_StockCode ,\r\n                                    m.M_Price ,\r\n                                    m.M_Qty ,\r\n                                    m.M_Unit ,\r\n                                    m.M_Tax,\r\n                                    m.M_Qty*m.M_Price Amount,\r\n                                    h.M_CreateDate ,\r\n                                    dbo.GetUserNameById(h.M_CreateBy) M_CreateBy\r\n                            FROM    dbo.Mes_MaterInHead h\r\n                                    LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_Status =3\r\n\r\n\t\t\t\t\t\t\t\t\t AND ( h.M_CreateDate >= '2019-11-12 00:00:00' AND h.M_CreateDate <='2020-02-12 23:59:59' ) ORDER BY h.M_CreateDate desc",
 			"Field":[
 				{
 					"Name":"endTime"
@@ -127,7 +127,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.3175,
-							"Width":1.5875,
+							"Width":1.53458,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -403,7 +403,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":8.38729,
+							"Left":8.59896,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.396875,
@@ -414,9 +414,9 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox5",
-							"Left":12.409,
+							"Left":12.5942,
 							"Top":0.211667,
-							"Width":2.77813,
+							"Width":2.80458,
 							"Height":0.396875,
 							"TextAlign":"MiddleRight",
 							"DataField":"Amount",
@@ -426,241 +426,128 @@
 				}
 			},
 			{
-				"Name":"PageGroup",
-				"PageGroup":true,
+				"Name":"Group1",
+				"ByFields":"M_SupplyCode",
 				"GroupHeader":{
-					"Height":0,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Bold":true,
-						"Charset":134
-					},
-					"NewPage":"Before",
-					"PrintGridBorder":false,
+					"Height":0.79375,
 					"Control":[
 						{
-							"Type":"StaticBox",
-							"Name":"StaticBox45",
-							"Top":0.608542,
-							"Width":0.74,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawLeft|DrawTop|DrawRight]"
-							},
+							"Type":"FieldBox",
+							"Name":"FieldBox22",
+							"Left":2.56646,
+							"Top":0.0264583,
+							"Width":3.59833,
+							"Height":0.582083,
 							"Font":{
 								"Name":"宋体",
 								"Size":90000,
-								"Weight":400,
+								"Bold":true,
 								"Charset":134
 							},
-							"TextAlign":"MiddleCenter",
-							"Text":"序号"
+							"DataField":"M_SupplyCode"
+						},
+						{
+							"Type":"FieldBox",
+							"Name":"FieldBox23",
+							"Left":7.96396,
+							"Top":0.0264583,
+							"Width":4.84188,
+							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"M_SupplyName"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox45",
+							"Left":0.370417,
+							"Top":0.0264583,
+							"Width":2.19604,
+							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"供应商编码："
 						},
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox46",
-							"Left":0.608542,
-							"Top":0.608542,
-							"Width":3.12,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
+							"Left":5.76792,
+							"Top":0.0264583,
+							"Width":2.19604,
+							"Height":0.582083,
 							"Font":{
 								"Name":"宋体",
 								"Size":90000,
-								"Weight":400,
+								"Bold":true,
 								"Charset":134
 							},
-							"TextAlign":"MiddleCenter",
-							"Text":"物料名称"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox47",
-							"Left":3.59833,
-							"Top":0.608542,
-							"Width":2.51,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"Text":"发货仓库"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox48",
-							"Left":6.00604,
-							"Top":0.608542,
-							"Width":1.87,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"TextAlign":"MiddleCenter",
-							"FirstCharIndent":2,
-							"Text":"规格"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox49",
-							"Left":7.80521,
-							"Top":0.608542,
-							"Width":1.27,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"基本单位"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox50",
-							"Left":8.99583,
-							"Top":0.608542,
-							"Width":1.64,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"数量"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox51",
-							"Left":10.6098,
-							"Top":0.608542,
-							"Width":1.5875,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"辅助数量"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox53",
-							"Left":0.608542,
-							"Width":1.40229,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"单价"
-						},
-						{
-							"Type":"StaticBox",
-							"Name":"StaticBox54",
-							"Width":2.40771,
-							"Height":0.79,
-							"PaddingLeft":1,
-							"Border":{
-								"Styles":"[DrawLeft|DrawTop|DrawRight]"
-							},
-							"Font":{
-								"Name":"宋体",
-								"Size":90000,
-								"Weight":400,
-								"Charset":134
-							},
-							"WordWrap":true,
-							"TextAlign":"MiddleCenter",
-							"Text":"总金额"
+							"Text":"供应商名称："
 						}
 					]
 				},
 				"GroupFooter":{
+					"BackColor":"E1FFFF",
 					"Height":0.79375,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Bold":true,
-						"Charset":134
-					},
 					"Control":[
 						{
-							"Type":"SummaryBox",
-							"Name":"Summary2",
-							"Left":12.409,
-							"Top":0.211667,
-							"Width":2.77813,
-							"Height":0.396875,
-							"TextAlign":"MiddleRight",
-							"DataField":"Amount",
-							"Format":"$#,##0.00"
-						},
-						{
 							"Type":"StaticBox",
-							"Name":"TextBox5",
-							"Top":0.185208,
-							"Width":1.98438,
+							"Name":"StaticBox47",
+							"BackColor":"FFFFFF",
+							"Left":0.396875,
+							"Top":0.211667,
+							"Width":2.19604,
 							"Height":0.582083,
-							"Text":"本页小计："
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"小计："
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox3",
-							"Left":8.38729,
+							"Name":"SummaryBox6",
+							"BackColor":"FFFFFF",
+							"Left":8.59896,
 							"Top":0.211667,
 							"Width":2.80458,
 							"Height":0.396875,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
 							"TextAlign":"MiddleRight",
 							"DataField":"M_Qty",
 							"Format":"0"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox7",
+							"BackColor":"FFFFFF",
+							"Left":12.8058,
+							"Top":0.211667,
+							"Width":2.59292,
+							"Height":0.396875,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"TextAlign":"MiddleRight",
+							"DataField":"Amount",
+							"Format":"$#,##0.00"
 						}
 					]
 				}
@@ -683,7 +570,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.99,
+			"Height":2.59292,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -705,7 +592,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -720,7 +607,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
 					"Left":1.40229,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":5.79438,
 					"Height":0.582083,
 					"Font":{
@@ -735,7 +622,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
 					"Left":5.3975,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
 					"Font":{
@@ -750,7 +637,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
 					"Left":4.78896,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.582083,
 					"Font":{
@@ -766,41 +653,11 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
 					"Left":12.0121,
-					"Top":2.19604,
+					"Top":1.64042,
 					"Width":5.18583,
 					"Height":0.396875,
 					"TextAlign":"MiddleRight",
 					"Text":"共[#SystemVar(PageCount)#]页 第[#SystemVar(PageNumber)#]页"
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox21",
-					"Left":2.40771,
-					"Top":1.19063,
-					"Width":3.59833,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"M_SupplyName"
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"StaticBox43",
-					"Left":0.396875,
-					"Top":1.19063,
-					"Width":2.40771,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"Text":"供应商名称："
 				}
 			],
 			"RepeatOnPage":true

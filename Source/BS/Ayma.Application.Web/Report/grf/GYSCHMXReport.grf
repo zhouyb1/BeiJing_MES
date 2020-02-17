@@ -127,8 +127,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.370417,
-							"Width":1.64042,
+							"Left":-0.3175,
+							"Width":1.5875,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -422,7 +422,132 @@
 					"Text":"不含税金额(元)"
 				}
 			]
-		}
+		},
+		"Group":[
+			{
+				"Name":"Group1",
+				"GroupHeader":{
+					"Height":0
+				},
+				"GroupFooter":{
+					"Height":0.608542,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox45",
+							"Width":1.40229,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"总计"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox3",
+							"Left":14.2081,
+							"Width":2.80458,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"row_qty"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox4",
+							"Left":17.5948,
+							"Width":2.80458,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"row_amount",
+							"Format":"$#,##0.00"
+						}
+					]
+				}
+			},
+			{
+				"Name":"Group2",
+				"ByFields":"M_SupplyCode",
+				"GroupHeader":{
+					"Height":0
+				},
+				"GroupFooter":{
+					"Height":0.79375,
+					"Control":[
+						{
+							"Type":"FieldBox",
+							"Name":"FieldBox21",
+							"Left":4.20688,
+							"Top":0.211667,
+							"Width":6.79979,
+							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"M_SupplyName"
+						},
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox44",
+							"Top":0.211667,
+							"Width":1.40229,
+							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"小计"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox1",
+							"Left":14.2081,
+							"Width":2.80458,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"row_qty"
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox2",
+							"Left":17.5948,
+							"Width":2.80458,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Bold":true,
+								"Charset":134
+							},
+							"DataField":"row_amount",
+							"Format":"$#,##0.00"
+						}
+					]
+				}
+			}
+		]
 	},
 	"PageFooter":{
 		"Height":1.40229,

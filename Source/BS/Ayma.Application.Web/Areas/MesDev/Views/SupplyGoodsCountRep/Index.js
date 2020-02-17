@@ -108,7 +108,6 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable_sum').jfGridValue('m_supplycode');
-                if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'GYSJHSJHZ',
                         title: '供应商供货数据汇总',
@@ -120,7 +119,6 @@ var bootstrap = function ($, ayma) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
-                }
             });
         },
 

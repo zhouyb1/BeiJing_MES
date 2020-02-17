@@ -85,7 +85,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.185208,
-							"Width":1.53458,
+							"Width":1.48167,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -288,7 +288,7 @@
 			},
 			{
 				"Name":"PageGroup",
-				"PageGroup":true,
+				"ByFields":"F_GoodsCode",
 				"GroupHeader":{
 					"Height":0,
 					"Font":{
@@ -499,7 +499,7 @@
 							"Top":0.185208,
 							"Width":1.98438,
 							"Height":0.582083,
-							"Text":"本页小计："
+							"Text":"小计："
 						},
 						{
 							"Type":"SummaryBox",
@@ -522,6 +522,15 @@
 							"TextAlign":"MiddleRight",
 							"DataField":"F_InQty",
 							"Format":"0"
+						},
+						{
+							"Type":"FieldBox",
+							"Name":"FieldBox21",
+							"Left":1.5875,
+							"Top":0.211667,
+							"Width":6.00604,
+							"Height":0.396875,
+							"DataField":"F_GoodsName"
 						}
 					]
 				}
