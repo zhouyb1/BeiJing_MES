@@ -299,80 +299,180 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             };
             return Success(jsonData);
         }
-        ///// <summary>
-        ///// 获取Export表数据
-        ///// <summary>
-        ///// <param name="queryJson">查询参数</param>
-        ///// <returns></returns>
-        //public FileResult Export(Pagination pagination,string queryJson)
-        //{
+        /// <summary>
+        /// 获取Export表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public FileResult Export2(Pagination pagination,string queryJson)
+        {
 
-
-        //    var datas = materialsSumIBLL.GetInventoryDetail(pagination,queryJson);
-        //    var dt = AsDataTable(datas);
-        //    var ms = NPOIExcel.ToExcel(dt, "销售分析表", "销售分析表");
-        //    return File(ms.GetBuffer(), "application/vnd.ms-excel", "销售分析.xls");
-        //}
-        ///// <summary>
-        ///// 获取导出Excel数据
-        ///// <summary>
-        ///// <param name="queryJson">查询参数</param>
-        ///// <returns></returns>
-        //public DataTable AsDataTable(IEnumerable<InventoryViewModel> data)
-        //{
-        //    PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(InventoryViewModel));
-        //    var table = new DataTable();
-        //    //定义列名
-        //    foreach (PropertyDescriptor prop in properties)
-        //    {
-        //        switch (prop.Name)
-        //        {
-        //            case "F_CreateDate": table.Columns.Add("日期", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_Remark": table.Columns.Add("摘要", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_GoodsCode": table.Columns.Add("商品编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_GoodsName": table.Columns.Add("商品名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_OrderNo": table.Columns.Add("单据编号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-        //            case "F_InQty": table.Columns.Add("收入(数量，含税价格(元)，金额)", typeof(string)); break;
-        //            case "F_OutQty": table.Columns.Add("发出(数量，加权平均价(元)，金额)", typeof(string)); break;
-        //            case "IntervoryQty": table.Columns.Add("结存(数量，加权平均价(元)，金额)", typeof(string)); break;
-        //            default: break;
-        //        }
-        //    }
-        //    //表格列名排序
-        //    table.Columns["日期"].SetOrdinal(0);
-        //    table.Columns["摘要"].SetOrdinal(1);
-        //    table.Columns["商品编码"].SetOrdinal(2);
-        //    table.Columns["商品名称"].SetOrdinal(3);
-        //    table.Columns["单位"].SetOrdinal(4);
-        //    table.Columns["收入(数量，含税价格(元)，金额)"].SetOrdinal(5);
-        //    table.Columns["发出(数量，加权平均价(元)，金额)"].SetOrdinal(6);
-        //    table.Columns["结存(数量，加权平均价(元)，金额)"].SetOrdinal(7);
-        //    //给数据
-        //    foreach (var item in data)
-        //    {
-        //        DataRow row = table.NewRow();
-        //        foreach (PropertyDescriptor prop in properties)
-        //            switch (prop.Name)
-        //            {
-        //                case "F_CreateDate": row["日期"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_Remark": row["摘要"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_GoodsCode": row["商品编码"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_GoodsName": row["商品名称"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_OrderNo": row["单据编号"] = prop.GetValue(item) ?? DBNull.Value; break;
-        //                case "F_InQty": row["收入(数量，含税价格(元)，金额)"] = item.F_InQty + "," + item.F_InPrice; break;
-        //                case "F_OutQty": row["发出(数量，加权平均价(元)，金额)"] = item.F_OutQty + "," + item.F_OutPrice; break;
-        //                case "IntervoryQty": row["结存(数量，加权平均价(元)，金额)"] = item.IntervoryQty + "," + item.G_Price; break;
-        //            }
-        //        table.Rows.Add(row);
-        //    }
-        //    return table;
-        //}
+            pagination.page = 1;
+            pagination.records = 0;
+            pagination.rows = 999999;
+            pagination.sidx = "";
+            pagination.sord = "ASC";
+            var datas = materialsSumIBLL.GetInventoryDetail(pagination,queryJson);
+            var dt = AsDataTable(datas);
+            var ms = NPOIExcel.ToExcel(dt, "库存明细统计", "库存明细统计");
+            return File(ms.GetBuffer(), "application/vnd.ms-excel", "库存明细统计.xls");
+        }
+        /// <summary>
+        /// 获取导出Excel数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public DataTable AsDataTable(IEnumerable<InventoryViewModel> data)
+        {
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(InventoryViewModel));
+            var table = new DataTable();
+            //定义列名
+            foreach (PropertyDescriptor prop in properties)
+            {
+                switch (prop.Name)
+                {
+                    case "F_CreateDate": table.Columns.Add("日期", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_Remark": table.Columns.Add("摘要", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_GoodsCode": table.Columns.Add("商品编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_GoodsName": table.Columns.Add("商品名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_OrderNo": table.Columns.Add("单据编号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "G_Price": table.Columns.Add("单位成本", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "F_InQty": table.Columns.Add("收入(数量，金额，无税金额)", typeof(string)); break;
+                    case "F_OutQty": table.Columns.Add("发出(数量，金额)", typeof(string)); break;
+                    case "IntervoryQty": table.Columns.Add("结存(数量，金额)", typeof(string)); break;
+                    default: break;
+                }
+            }
+            //表格列名排序
+            table.Columns["日期"].SetOrdinal(0);
+            table.Columns["摘要"].SetOrdinal(1);
+            table.Columns["商品编码"].SetOrdinal(2);
+            table.Columns["商品名称"].SetOrdinal(3);
+            table.Columns["单位"].SetOrdinal(4);
+            table.Columns["单据编号"].SetOrdinal(5);
+            table.Columns["单位成本"].SetOrdinal(6);
+            table.Columns["收入(数量，金额，无税金额)"].SetOrdinal(7);
+            table.Columns["发出(数量，金额)"].SetOrdinal(8);
+            table.Columns["结存(数量，金额)"].SetOrdinal(9);
+            //给数据
+            foreach (var item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    switch (prop.Name)
+                    {
+                        case "F_CreateDate": row["日期"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_Remark": row["摘要"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_GoodsCode": row["商品编码"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_GoodsName": row["商品名称"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_OrderNo": row["单据编号"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price": row["单位成本"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_InQty": row["收入(数量，金额，无税金额)"] = item.F_InQty + "," + Math.Round((item.F_InQty * item.G_Price).ToDecimal(),6)+ "," + item.Aoumount; break;
+                        case "F_OutQty": row["发出(数量，金额)"] = item.F_OutQty + "," + Math.Round((item.F_OutPrice * item.G_Price).ToDecimal(), 6); break;
+                        case "IntervoryQty": row["结存(数量，金额)"] = item.IntervoryQty + "," + Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
+                    }
+                table.Rows.Add(row);
+            }
+            return table;
+        }
         #endregion
 
         #region 提交数据
+        /// <summary>
+        /// 获取Export表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public FileResult Export(Pagination pagination,string queryJson)
+        {
 
+            pagination.page = 1;
+            pagination.records = 0;
+            pagination.rows = 99999999;
+            pagination.sidx = "g_code";
+            pagination.sord = "desc";
+            DataTable dt =materialsSumIBLL.GetMaterialSumListByDate(pagination,queryJson);
+            //给列名
+            dt.Columns["rownum"].ColumnName = "序号";
+            dt.Columns["g_code"].ColumnName = "商品编码";
+            dt.Columns["g_name"].ColumnName = "商品名称";
+            dt.Columns["s_name"].ColumnName = "仓库名称";
+            dt.Columns["g_stockcode"].ColumnName = "仓库编码";
+            dt.Columns["g_unit"].ColumnName = "单位";
+            dt.Columns["price"].ColumnName = "加权平均价(元)";
+            dt.Columns["inventoryquantity"].ColumnName = "入库数量";
+            dt.Columns["delivery"].ColumnName = "出库数量";
+            dt.Columns["initialinventory"].ColumnName = "期初库存_数量";
+            dt.Columns["initialamount"].ColumnName = "期初库存_金额";
+            dt.Columns["endinginventory"].ColumnName = "期末库存_数量";
+            dt.Columns["finalamount"].ColumnName = "期末库存_金额";
+            dt.Columns["back_qty"].ColumnName = "次品退库_数量";
+            dt.Columns["withdrawingnumber"].ColumnName = "退回仓库_数量";
+            dt.Columns["materialssales"].ColumnName = "原物料销售_数量";
+            dt.Columns["outprice"].ColumnName = "原物料销售_单价";
+            dt.Columns["outamount"].ColumnName = "原物料销售_金额";
+            dt.Columns["scrapist"].ColumnName = "报废物料_数量";
+            dt.Columns["otherwarehouse"].ColumnName = "其它入库_数量";
+            dt.Columns["otheroutbound"].ColumnName = "其它出库_数量";
+            dt.Columns["supplierback"].ColumnName = "退供应商_数量";
+            dt.Columns["startTime"].ColumnName = "开始时间";
+            dt.Columns["endTime"].ColumnName = "结束时间";
+
+
+            //表格列名排序
+            dt.Columns["序号"].SetOrdinal(0);
+            dt.Columns["商品编码"].SetOrdinal(1);
+            dt.Columns["商品名称"].SetOrdinal(2);
+            dt.Columns["仓库名称"].SetOrdinal(3);
+            dt.Columns["仓库编码"].SetOrdinal(4);
+            dt.Columns["单位"].SetOrdinal(5);
+            dt.Columns["加权平均价(元)"].SetOrdinal(6);
+            dt.Columns["入库数量"].SetOrdinal(7);
+            dt.Columns["出库数量"].SetOrdinal(8);
+            dt.Columns["期初库存_数量"].SetOrdinal(9);
+            dt.Columns["期初库存_金额"].SetOrdinal(10);
+            dt.Columns["期末库存_数量"].SetOrdinal(11);
+            dt.Columns["期末库存_金额"].SetOrdinal(12);
+            dt.Columns["次品退库_数量"].SetOrdinal(13);
+            dt.Columns["退回仓库_数量"].SetOrdinal(14);
+            dt.Columns["原物料销售_数量"].SetOrdinal(15);
+            dt.Columns["原物料销售_单价"].SetOrdinal(16);
+            dt.Columns["原物料销售_金额"].SetOrdinal(17);
+            dt.Columns["报废物料_数量"].SetOrdinal(18);
+            dt.Columns["其它入库_数量"].SetOrdinal(19);
+            dt.Columns["其它出库_数量"].SetOrdinal(20);
+            dt.Columns["退供应商_数量"].SetOrdinal(21);
+            dt.Columns["开始时间"].SetOrdinal(22);
+            dt.Columns["结束时间"].SetOrdinal(23);
+            //给数据
+
+ 
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (dt.Rows[i]["原物料销售_单价"].ToString() == null || dt.Rows[i]["原物料销售_单价"].ToString()=="")
+                    {
+                        dt.Rows[i]["原物料销售_单价"] = 0;
+                    }
+                    else
+                    {
+                        dt.Rows[i]["原物料销售_单价"] = dt.Rows[i]["原物料销售_单价"];
+                    }
+                    if (dt.Rows[i]["原物料销售_金额"].ToString() == null || dt.Rows[i]["原物料销售_金额"].ToString() == "")
+                    {
+                        dt.Rows[i]["原物料销售_金额"] = 0;
+                    }
+                    else
+                    {
+                        dt.Rows[i]["原物料销售_金额"] = dt.Rows[i]["原物料销售_金额"];
+                    }
+                }
+            
+            
+            var ms = NPOIExcel.ToExcel(dt, "原物料出入库统计", "原物料出入库统计");
+            return File(ms.GetBuffer(), "application/vnd.ms-excel", "原物料出入库统计.xls");
+        }
         
         #endregion
 

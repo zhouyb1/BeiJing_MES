@@ -7,6 +7,7 @@ using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -402,6 +403,45 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success("保存成功！");
         }
         #endregion
+        /// <summary>
+        /// 获取Export表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public FileResult Export(Pagination pagination, string queryJson)
+        {
+            DataTable dt = orgResMangerIBLL.GetProductRateList(pagination, queryJson);
 
+            //给列名
+            dt.Columns["O_GoodsName"].ColumnName = "转换前_物料名称";
+            dt.Columns["O_GoodsCode"].ColumnName = "转换前_物料编码";
+            dt.Columns["O_Unit"].ColumnName = "转换前_单位";
+            dt.Columns["O_Qty"].ColumnName = "转换前_使用数量";
+            dt.Columns["O_SecGoodsName"].ColumnName = "转换后_物料编码";
+            dt.Columns["O_SecGoodsCode"].ColumnName = "转换后_物料名称";
+            dt.Columns["O_SecUnit"].ColumnName = "转换后_单位";
+            dt.Columns["O_SecQty"].ColumnName = "转换后_使用数量";
+            dt.Columns["O_StockName"].ColumnName = "作业日耗库";
+            dt.Columns["O_TeamName"].ColumnName = "作业班组";
+            dt.Columns["ProductRate"].ColumnName = "出成率(%)";
+            dt.Columns["O_CreateBy"].ColumnName = "制作人";
+            //表格列名排序
+            dt.Columns["转换前_物料名称"].SetOrdinal(0);
+            dt.Columns["转换前_物料编码"].SetOrdinal(1);
+            dt.Columns["转换前_单位"].SetOrdinal(2);
+            dt.Columns["转换前_使用数量"].SetOrdinal(3);
+            dt.Columns["转换后_物料编码"].SetOrdinal(4);
+            dt.Columns["转换后_物料名称"].SetOrdinal(5);
+            dt.Columns["转换后_单位"].SetOrdinal(6);
+            dt.Columns["转换后_使用数量"].SetOrdinal(7);
+            dt.Columns["作业日耗库"].SetOrdinal(8);
+            dt.Columns["作业班组"].SetOrdinal(9);
+            dt.Columns["出成率(%)"].SetOrdinal(10);
+            dt.Columns["制作人"].SetOrdinal(11);
+
+
+            var ms = NPOIExcel.ToExcel(dt, "出成率查询报表", "出成率查询报表");
+            return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率查询报表.xls");
+        }
     }
 }

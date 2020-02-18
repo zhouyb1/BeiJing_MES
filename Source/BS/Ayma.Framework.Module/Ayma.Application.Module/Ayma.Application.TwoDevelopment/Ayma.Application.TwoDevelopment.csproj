@@ -74,6 +74,7 @@
     <Compile Include="MesDev\InventorySeach\GoodsPriceModel.cs" />
     <Compile Include="MesDev\InventorySeach\PickOrUsedModel.cs" />
     <Compile Include="MesDev\MaterialsSum\ViewModel\InventoryViewModel.cs" />
+    <Compile Include="MesDev\MaterialsSum\ViewModel\InventoryTableModel.cs" />
     <Compile Include="MesDev\MaterInBill\ColumnModel.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeBLL.cs" />
     <Compile Include="MesDev\Mes_Arrange\Mes_ArrangeEntity.cs" />

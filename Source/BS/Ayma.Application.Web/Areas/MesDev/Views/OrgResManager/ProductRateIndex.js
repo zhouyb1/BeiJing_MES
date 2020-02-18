@@ -7,6 +7,7 @@ var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
     var endTime;
+    var jsonquery = {};
     var page = {
         init: function () {
             page.initGird();
@@ -60,6 +61,12 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
+            //导出
+            $('#am_export').on('click', function () {
+                var url = top.$.rootUrl + '/MesDev/OrgResManager/Export?queryJson=' + JSON.stringify(jsonquery);
+
+                window.location.href = url;
+            });
         },
         // 初始化列表
         initGird: function () {
@@ -91,7 +98,7 @@ var bootstrap = function ($, ayma) {
                 { label: "作业日耗库", name: "O_StockName", width: 150, align: "center",},
                 { label: "作业班组", name: "O_TeamName", width: 100, align: "center" },
                 { label: "出成率(%)", name: "ProductRate", width: 90, align: "center" },
-                { label: "制作人加人", name: "O_CreateBy", width: 100, align: "center" },
+                { label: "制作人", name: "O_CreateBy", width: 100, align: "center" },
                 ],
                 mainId: 'ID',
                 //reloadSelected: true,
@@ -104,6 +111,7 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            jsonquery = param;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

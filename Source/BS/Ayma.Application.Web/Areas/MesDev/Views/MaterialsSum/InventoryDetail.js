@@ -13,11 +13,11 @@ var start = decodeURIComponent(request('startTime'));
 var end = decodeURIComponent(request('endTime'));
 var bootstrap = function ($, ayma) {
     "use strict";
-    var jsonquery = {};
     var startTime;
     var endTime;
     var tabTitle = "汇总";
     var data;
+    var jsonquery = {};
     var page = {
         init: function () {
 
@@ -107,26 +107,26 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-            $('#am_export').on('click', function () {
-                var tableName = "girdtable";
-                var fileName = "库存明细统计";
-                ayma.layerForm({
-                    id: "ExcelExportForm",
-                    title: '导出Excel数据',
-                    url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
-                    width: 500,
-                    height: 380,
-                    callBack: function (id) {
-                        return top[id].acceptClick();
-                    },
-                    btn: ['导出Excel', '关闭']
-                });
-            });
-            // 导出
             //$('#am_export').on('click', function () {
-            //    var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export?queryJson=' + JSON.stringify(jsonquery);
-            //    window.location.href = url;
+            //    var tableName = "girdtable";
+            //    var fileName = "库存明细统计";
+            //    ayma.layerForm({
+            //        id: "ExcelExportForm",
+            //        title: '导出Excel数据',
+            //        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+            //        width: 500,
+            //        height: 380,
+            //        callBack: function (id) {
+            //            return top[id].acceptClick();
+            //        },
+            //        btn: ['导出Excel', '关闭']
+            //    });
             //});
+            // 导出
+            $('#am_export').on('click', function () {
+                var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export2?queryJson=' + JSON.stringify(jsonquery);
+                window.location.href = url;
+            });
             $('#girdtable').on('dblclick', function ()
             {
                 var keyValue = $('#girdtable').jfGridValue('F_OrderNo');
