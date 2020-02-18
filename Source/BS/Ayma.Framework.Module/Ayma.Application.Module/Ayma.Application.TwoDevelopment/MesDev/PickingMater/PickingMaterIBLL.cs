@@ -69,6 +69,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         IEnumerable<ColumnModel> GetProductReportTitle(string queryJson, out string message);
 
+
+        /// <summary>
+        /// 获取报表数据
+        /// </summary>
+        /// <param name="queryJsond"></param>
+        /// <returns></returns>
+        DataTable GetProductReportDataEx(string queryJson, out string message);
+
+        /// <summary>
+        /// 获取报表标题
+        /// </summary>
+        /// <param name="queryJsond"></param>
+        /// <returns></returns>
+        IEnumerable<ColumnModel> GetProductReportTitleEx(string queryJson, out string message);
+
         DataTable GetCollarRport(string queryJson);
 
         DataTable GetOtherRport(string queryJson);

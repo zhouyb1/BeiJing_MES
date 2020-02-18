@@ -216,6 +216,44 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+        public DataTable GetProductReportDataEx(string queryJson, out string message)
+        {
+            try
+            {
+                return pickingMaterService.GetProductReportDataEx(queryJson, out message);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
+        public IEnumerable<ColumnModel> GetProductReportTitleEx(string queryJson, out string message)
+        {
+            try
+            {
+                return pickingMaterService.GetProductReportTitleEx(queryJson, out message);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+
         public DataTable GetCollarRport(string queryJson)
         {
             try
