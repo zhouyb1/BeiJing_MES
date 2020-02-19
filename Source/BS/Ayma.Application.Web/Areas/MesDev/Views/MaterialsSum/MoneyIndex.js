@@ -116,64 +116,61 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-            //导出
-            $('#am_export').on('click', function () {
-                var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export?queryJson=' + JSON.stringify(jsonquery);
-
-                window.location.href = url;
-            });
             //导出excel
-            //$('#am_export').on('click', function () {
-            //    var tableName = "";
-            //    var fileName = "";
-            //    if (tabTitle == "汇总") {
-            //        tableName = "girdtable_sum";
-            //        fileName = "原物料出入库汇总";
-            //    }
-            //    else if (tabTitle == "入库明细") {
-            //        tableName = "girdtable_detail";
-            //        fileName = "原物料入库明细";
-            //    }
-            //    else if (tabTitle == "出库明细") {
-            //        tableName = "girdtable_Outbounddetails";
-            //        fileName = "原物料出库明细";
-            //    }
-            //    else if (tabTitle == "退库明细") {
-            //        tableName = "girdtable_withdrawingdetails";
-            //        fileName = "原物料退库明细";
-            //    }
-            //    else if (tabTitle == "原物料销售明细") {
-            //        tableName = "girdtable_materialssales";
-            //        fileName = "原物料销售明细";
-            //    }
-            //    else if (tabTitle == "报废数量明细") {
-            //        tableName = "girdtable_scrapnumber";
-            //        fileName = "报废数量明细";
-            //    }
-            //    else if (tabTitle == "其它入库明细") {
-            //        tableName = "girdtable_other";
-            //        fileName = "其它入库明细";
-            //    }
-            //    else if (tabTitle == "其它出库明细") {
-            //        tableName = "girdtable_otherout";
-            //        fileName = "其它出库明细";
-            //    }
-            //    else {
-            //        tableName = "girdtable_supplierback";
-            //        fileName = "退供应商明细";
-            //    }
-            //    ayma.layerForm({
-            //        id: "ExcelExportForm",
-            //        title: '导出Excel数据',
-            //        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
-            //        width: 500,
-            //        height: 400,
-            //        callBack: function (id) {
-            //            return top[id].acceptClick();
-            //        },
-            //        btn: ['导出Excel', '关闭']
-            //    });
-            //});
+            $('#am_export').on('click', function () {
+                var tableName = "";
+                var fileName = "";
+                if (tabTitle == "汇总") {
+                    var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export?queryJson=' + JSON.stringify(jsonquery);
+                    window.location.href = url;
+                }
+                else if (tabTitle == "入库明细") {
+                    tableName = "girdtable_detail";
+                    fileName = "原物料入库明细";
+                }
+                else if (tabTitle == "出库明细") {
+                    tableName = "girdtable_Outbounddetails";
+                    fileName = "原物料出库明细";
+                }
+                else if (tabTitle == "退库明细") {
+                    tableName = "girdtable_withdrawingdetails";
+                    fileName = "原物料退库明细";
+                }
+                else if (tabTitle == "原物料销售明细") {
+                    tableName = "girdtable_materialssales";
+                    fileName = "原物料销售明细";
+                }
+                else if (tabTitle == "报废数量明细") {
+                    tableName = "girdtable_scrapnumber";
+                    fileName = "报废数量明细";
+                }
+                else if (tabTitle == "其它入库明细") {
+                    tableName = "girdtable_other";
+                    fileName = "其它入库明细";
+                }
+                else if (tabTitle == "其它出库明细") {
+                    tableName = "girdtable_otherout";
+                    fileName = "其它出库明细";
+                }
+                else {
+                    tableName = "girdtable_supplierback";
+                    fileName = "退供应商明细";
+                }
+                if (tabTitle != "汇总")
+                {
+                    ayma.layerForm({
+                        id: "ExcelExportForm",
+                        title: '导出Excel数据',
+                        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
+                        width: 500,
+                        height: 400,
+                        callBack: function (id) {
+                            return top[id].acceptClick();
+                        },
+                        btn: ['导出Excel', '关闭']
+                    });
+                }
+            });
             $('#girdtable_sum').on('dblclick', function () {
                 var g_code = $('#girdtable_sum').jfGridValue('g_code');
                 var g_stockcode = $('#girdtable_sum').jfGridValue('g_stockcode');

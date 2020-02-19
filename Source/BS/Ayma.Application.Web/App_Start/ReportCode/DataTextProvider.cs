@@ -277,7 +277,7 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string YWLCRKTJ(string starttime, string endtime, string ToDate, string S_Name, string M_GoodsName)
         {
             var strSql = new StringBuilder();
-            strSql.Append(@" select 
+            strSql.Append(@"                                          select * from  ( select 
                                     (select S_Name from Mes_Stock where S_Code=s.G_StockCode)as S_Name,
                                      s.G_StockCode
 								    ,s.G_Code 
@@ -316,7 +316,9 @@ using MyDbReportData = DatabaseXmlReportData;
 									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
 									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >='{0}' and O_CreateDate <='{1}')and O_Status=3))
 									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >='{0}' and B_CreateDate <='{1}')and B_Status=3)))*(select G_Price from Mes_Goods where G_Code=s.G_Code ) as finalamount																										
-									from Mes_Goods s where  s.G_Kind=1");
+									from Mes_Goods s where  s.G_Kind=1) t  where ltrim(rtrim(t.Inventoryquantity)) not in ('0.000000')  or ltrim(rtrim(t.delivery)) not in ('0.000000') or ltrim(rtrim(t.back_qty)) not in ('0.000000') 
+									or ltrim(rtrim(t.withdrawingnumber)) not in ('0.000000') or ltrim(rtrim(t.materialssales)) not in ('0.000000') or ltrim(rtrim(t.scrapist)) not in ('0.000000') or ltrim(rtrim(t.otherwarehouse)) not in ('0.000000') 
+									or ltrim(rtrim(t.otheroutbound)) not in ('0.000000') or ltrim(rtrim(t.supplierback)) not in ('0.000000')");
             if (!S_Name.IsEmpty())
             {
                 strSql.Append(" AND s.G_StockCode=" + S_Name);
