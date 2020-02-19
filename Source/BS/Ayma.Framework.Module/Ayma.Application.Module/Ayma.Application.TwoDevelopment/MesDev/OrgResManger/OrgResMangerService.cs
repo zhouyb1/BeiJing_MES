@@ -129,8 +129,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         O_GoodsCode ,
                                         O_GoodsName ,
                                         h.O_OrgResNo ,
-                                        O_Unit,
-                                        d.O_Batch
+                                        O_Unit
+                                        --d.O_Batch
                                 FROM    Mes_OrgResHead h
                                         LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_Status = 3  and O_SecGoodsCode ='" + dtHead.Rows[i]["O_SecGoodsCode"].ToString() + "'");
                 if (!queryParam["StockCode"].IsEmpty())
@@ -144,26 +144,24 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
                     sqlBody.Append(" AND (O_UploadDate > @startTime AND O_UploadDate < @endTime ) ");
                 }
-                sqlBody.Append(" group by O_GoodsName,h.O_OrgResNo,O_Batch,O_GoodsCode ,O_Unit");
+                sqlBody.Append(" group by O_GoodsName,h.O_OrgResNo,O_GoodsCode,O_Unit");
                 var dtBody = this.BaseRepository().FindTable(sqlBody.ToString(), dp);
                 
                 if (dtBody.Rows.Count>0)
                 {
                     decimal dQty = 0;
                     decimal dQtySec = 0;
-                   List<string> OrgResNoList = new List<string>();
-                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    var OrgResNoList = new List<string>();
 
                     for (var j = 0; j < dtBody.Rows.Count; j++)
                     {
-                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_OrgResNo"].ToString()))//&&!dic.ContainsValue(dtBody.Rows[j]["O_GoodsCode"].ToString()
+                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_OrgResNo"].ToString()))
                         {
                             OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
-                            //dic.Add(dtBody.Rows[j]["O_OrgResNo"].ToString(), dtBody.Rows[j]["O_GoodsCode"].ToString());
-                            dQtySec += dQtySec + Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
+                            dQtySec += Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
 
                         }
-                        dQty = dQty + Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
+                        dQty += Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
 
                     }
                     decimal dConvert = (dQtySec / dQty)*100;
@@ -394,8 +392,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 INNER JOIN dbo.Mes_Convert c ON c.C_Code = i.I_GoodsCode
                                 INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
                                 INNER JOIN dbo.Mes_Goods g ON g.G_Code=c.C_SecCode
-                        WHERE   i.I_Qty > 0 AND  s.S_Kind = 4
-                               GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode,g.G_Unit ");
+                        WHERE   i.I_Qty > 0 AND  s.S_Kind = 4  ");
             var dp = new DynamicParameters(new { });   
             var queryParam = queryJson.ToJObject();
             if (!keyword.IsEmpty())
@@ -408,7 +405,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("stock", "%" + stock + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
-            sb.Append(@"  GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode ");
+            sb.Append(@" GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode,g.G_Unit ");
             return BaseRepository().FindTable(sb.ToString(), dp,obj);
         }
 
