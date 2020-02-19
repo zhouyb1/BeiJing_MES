@@ -627,6 +627,147 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
             return Success(dt);
         }
+        /// <summary>
+        /// 获取Export表数据
+        /// <summary>
+        /// <param name="queryJson">查询参数</param>
+        /// <returns></returns>
+        public ActionResult Export(string queryJson)
+        {
+                string message="";
+                DataTable dt = pickingMaterIBLL.GetProductReportData(queryJson,out message);
+                if (string.IsNullOrEmpty(message))
+                {
+                    //给列名
+                    dt.Columns["F_CreateDate"].ColumnName = "日期";
+                    dt.Columns["F_GoodsCode_Source"].ColumnName = "原物料_编码";
+                    dt.Columns["F_GoodsName_Source"].ColumnName = "原物料_名称";
+                    dt.Columns["F_GoodsQty_Source"].ColumnName = "原物料_数量(KG)";
+                    dt.Columns["F_GoodsCode_01"].ColumnName = "前处理_物料编码";
+                    dt.Columns["F_GoodsName_01"].ColumnName = "前处理_物料名称";
+                    dt.Columns["F_GoodsQty_01"].ColumnName = "前处理_数量(KG)";
+                    dt.Columns["F_ConvertRange_01"].ColumnName = "前处理_转换标准率";
+                    dt.Columns["F_Convert_01"].ColumnName = "前处理_转换率(%)";
+                    dt.Columns["F_GoodsCode_03"].ColumnName = "细加工_物料编码";
+                    dt.Columns["F_GoodsName_03"].ColumnName = "细加工_物料名称";
+                    dt.Columns["F_GoodsQty_03"].ColumnName = "细加工_数量(KG)";
+                    dt.Columns["F_ConvertRange_03"].ColumnName = "细加工_转换标准率";
+                    dt.Columns["F_Convert_03"].ColumnName = "细加工_转换率(%)";
+                    dt.Columns["F_GoodsCode_04"].ColumnName = "包装_物料编码";
+                    dt.Columns["F_GoodsName_04"].ColumnName = "包装_物料名称";
+                    dt.Columns["F_GoodsQty_04"].ColumnName = "包装_实际份数量(盒)";
+                    dt.Columns["F_Convert_04"].ColumnName = "包装_理论分数(盒)";
+                    dt.Columns["F_ConvertTag_04"].ColumnName = "包装_偏差数(盒)";
+                    dt.Columns["F_ConvertRange_04"].ColumnName = "包装_偏差率(%)";
+                    //表格列名排序
+                    dt.Columns["日期"].SetOrdinal(0);
+                    dt.Columns["原物料_编码"].SetOrdinal(1);
+                    dt.Columns["原物料_名称"].SetOrdinal(2);
+                    dt.Columns["原物料_数量(KG)"].SetOrdinal(3);
+                    dt.Columns["前处理_物料编码"].SetOrdinal(4);
+                    dt.Columns["前处理_物料名称"].SetOrdinal(5);
+                    dt.Columns["前处理_数量(KG)"].SetOrdinal(6);
+                    dt.Columns["前处理_转换标准率"].SetOrdinal(7);
+                    dt.Columns["前处理_转换率(%)"].SetOrdinal(8);
+                    dt.Columns["细加工_物料编码"].SetOrdinal(9);
+                    dt.Columns["细加工_物料名称"].SetOrdinal(10);
+                    dt.Columns["细加工_数量(KG)"].SetOrdinal(11);
+                    dt.Columns["细加工_转换标准率"].SetOrdinal(12);
+                    dt.Columns["细加工_转换率(%)"].SetOrdinal(13);
+                    dt.Columns["包装_物料编码"].SetOrdinal(14);
+                    dt.Columns["包装_物料名称"].SetOrdinal(15);
+                    dt.Columns["包装_实际份数量(盒)"].SetOrdinal(16);
+                    dt.Columns["包装_理论分数(盒)"].SetOrdinal(17);
+                    dt.Columns["包装_偏差数(盒)"].SetOrdinal(18);
+                    dt.Columns["包装_偏差率(%)"].SetOrdinal(19);
+                    //删除不要的列
+                    dt.Columns.Remove("F_ConvertTag_01");
+                    dt.Columns.Remove("F_ConvertTag_03");
+                    #region 添加合计、统计行
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        //插入统计行
+                        if (true)
+                        {
+                            string current = dt.Rows[0]["日期"].ToString();
+                            for (int i = 0; i < dt.Rows.Count; i++)
+                            {
+                                string last = dt.Rows[i]["日期"].ToString();
+                                if (current != last)
+                                {
+                                    DataRow dr = dt.NewRow();
+                                    dr["日期"] = "[" + current + "]合计";
+                                    dt.Rows.InsertAt(dr, i);
+
+                                    current = last;
+                                    i++;
+                                }
+                            }
+                            DataRow drEnd = dt.NewRow();
+                            drEnd["日期"] = "[" + current + "]合计";
+                            dt.Rows.InsertAt(drEnd, dt.Rows.Count);
+
+                            DataRow drSum = dt.NewRow();
+                            drSum["日期"] = "总计";
+                            dt.Rows.InsertAt(drSum, dt.Rows.Count);
+                        }
+
+                        //计算统计行
+                        if (true)
+                        {
+                            for (int j = 0; j < dt.Columns.Count; j++)
+                            {
+                                //统计数量
+                                if (dt.Columns[j].ColumnName.Contains("数量"))
+                                {
+
+                                    decimal everysum_qty = 0;
+                                    decimal totalsum_qty = 0;
+                                    for (int i = 0; i < dt.Rows.Count; i++)
+                                    {
+                                        string current = dt.Rows[i]["日期"].ToString();
+                                        if (current.Contains("合计"))
+                                        {
+                                            dt.Rows[i][j] = Math.Round(everysum_qty, 2);
+                                            everysum_qty = 0;
+                                        }
+                                        else
+                                        {
+                                            if (current == "总计")
+                                            {
+                                                dt.Rows[i][j] = Math.Round(totalsum_qty, 2);
+                                                everysum_qty = 0;
+                                            }
+                                            else
+                                            {
+                                                if (dt.Rows[i][j] == DBNull.Value)
+                                                {
+                                                    everysum_qty += 0;
+                                                    totalsum_qty += 0;
+                                                }
+                                                else
+                                                {
+                                                    everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                                    totalsum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    #endregion
+
+                    var ms = NPOIExcel.ToExcel(dt, "出成率报表-按原物料", "出成率报表-按原物料");
+                    return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率报表-按原物料.xls");
+                }
+                else
+                {
+                    return Fail(message);
+                }
+        }
         #endregion
     }
 }

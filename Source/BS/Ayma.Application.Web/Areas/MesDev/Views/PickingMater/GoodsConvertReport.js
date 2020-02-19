@@ -3,11 +3,11 @@
  * 描  述：领料单
  */
 var refreshGirdData;
-var jsonquery;
 var bootstrap = function ($, ayma) {
     "use strict";
     var startTime;
     var endTime;
+    var jsonquery = {};
     var page = {
         init: function () {
             page.bind();
@@ -36,7 +36,15 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-
+            $('#am_export').on('click', function () {
+                var list = $('#girdtable').jfGridGet('rowdatas');
+                if (list.length<=0) {
+                    ayma.alert.error("请先查出数据");
+                    return;
+                }
+                var url = top.$.rootUrl + '/MesDev/PickingMater/Export?queryJson=' + JSON.stringify(jsonquery);
+                    window.location.href = url;               
+            });
             $('#girdtable').jfGrid({});
 
         },
