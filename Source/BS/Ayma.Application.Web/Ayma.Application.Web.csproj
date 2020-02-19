@@ -541,10 +541,6 @@
     <Content Include="Areas\MesDev\Views\GoodsList\LivingToCookIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\PackingRateIndex.js" />
     <Content Include="Areas\MesDev\Views\GoodsList\YieldRateIndex.js" />
-    <Content Include="Areas\MesDev\Views\Goods\css\css.css" />
-    <Content Include="Areas\MesDev\Views\Goods\Goods.js" />
-    <Content Include="Areas\MesDev\Views\Goods\img\head_s.jpg" />
-    <Content Include="Areas\MesDev\Views\Goods\img\body_s.jpg" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Form.js" />
     <Content Include="Areas\MesDev\Views\HumitureManager\Index.js" />
     <Content Include="Areas\MesDev\Views\InventortTrend\Form.js" />
