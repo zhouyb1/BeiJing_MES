@@ -300,7 +300,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     var tempStock = dicGoods[mes_OrgResDetailList[i].O_GoodsCode];
                     for (var j = 0; j < tempStock.Count; j++) //需求20个，两个批次分别为5个，7个
                     {
-                        if (mes_OrgResDetailList[i].O_Qty <= tempStock[j].O_Qty)
+                        if (mes_OrgResDetailList[i].O_Qty <tempStock[j].O_Qty)
                         {
                             //品种组装前物料
                             reqGoods=new Mes_OrgResDetailEntity();
@@ -319,6 +319,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                             reqGoods.O_SecQty = mes_OrgResDetailList[i].O_SecQty;
 
                             goods_list.Add(reqGoods);
+                            tempStock[i].O_Qty = tempStock[i].O_Qty - mes_OrgResDetailList[i].O_Qty;
                             break; //数量足够 跳出循环
                         }
                         reqGoods = new Mes_OrgResDetailEntity();
@@ -351,7 +352,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     var stockList =stock.GetOrgGoodsList(entity.O_StockCode, mes_OrgResDetailList[i].O_GoodsCode).ToList();
                     for (var j = 0; j < stockList.Count; j++) //需求20个，两个批次分别为5个，7个
                     {
-                        if (mes_OrgResDetailList[i].O_Qty <= stockList[j].O_Qty)
+                        if (mes_OrgResDetailList[i].O_Qty < stockList[j].O_Qty)
                         {
 
                             //品种组装前物料
@@ -371,31 +372,36 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                             reqGoods.O_SecQty = mes_OrgResDetailList[i].O_SecQty;
 
                             goods_list.Add(reqGoods);
-                            break; //数量足够 跳出循环
+                            stockList[i].O_Qty = stockList[i].O_Qty - mes_OrgResDetailList[i].O_Qty;
+                            //break; //数量足够 跳出循环 注释时间：2020年2月24日14:52:45
                         }
-                        reqGoods = new Mes_OrgResDetailEntity();
-                        var qty = stockList[j].O_Qty; //取全部
-                        //拼装组装前物料
-                        reqGoods.O_Qty = qty;
-                        reqGoods.O_Price = mes_OrgResDetailList[i].O_Price;
-                        reqGoods.O_GoodsCode = stockList[j].O_GoodsCode;
-                        reqGoods.O_GoodsName = stockList[j].O_GoodsName;
-                        reqGoods.O_Batch = stockList[j].O_Batch;
-                        reqGoods.O_Unit = mes_OrgResDetailList[i].O_Unit;
+                        else
+                        {
+                            reqGoods = new Mes_OrgResDetailEntity();
+                            var qty = stockList[j].O_Qty; //取全部
+                            //拼装组装前物料
+                            reqGoods.O_Qty = qty;
+                            reqGoods.O_Price = mes_OrgResDetailList[i].O_Price;
+                            reqGoods.O_GoodsCode = stockList[j].O_GoodsCode;
+                            reqGoods.O_GoodsName = stockList[j].O_GoodsName;
+                            reqGoods.O_Batch = stockList[j].O_Batch;
+                            reqGoods.O_Unit = mes_OrgResDetailList[i].O_Unit;
 
-                        //拼装组装后产物
-                        reqGoods.O_SecGoodsCode = mes_OrgResDetailList[i].O_SecGoodsCode;
-                        reqGoods.O_SecGoodsName = mes_OrgResDetailList[i].O_SecGoodsName;
-                        reqGoods.O_SecBatch = mes_OrgResDetailList[i].O_SecBatch;
-                        reqGoods.O_SecPrice = mes_OrgResDetailList[i].O_SecPrice;
-                        reqGoods.O_SecUnit = mes_OrgResDetailList[i].O_SecUnit;
-                        reqGoods.O_SecQty = mes_OrgResDetailList[i].O_SecQty;
+                            //拼装组装后产物
+                            reqGoods.O_SecGoodsCode = mes_OrgResDetailList[i].O_SecGoodsCode;
+                            reqGoods.O_SecGoodsName = mes_OrgResDetailList[i].O_SecGoodsName;
+                            reqGoods.O_SecBatch = mes_OrgResDetailList[i].O_SecBatch;
+                            reqGoods.O_SecPrice = mes_OrgResDetailList[i].O_SecPrice;
+                            reqGoods.O_SecUnit = mes_OrgResDetailList[i].O_SecUnit;
+                            reqGoods.O_SecQty = mes_OrgResDetailList[i].O_SecQty;
 
-                        goods_list.Add(reqGoods);
-                        stockList.RemoveAt(j);
-                        dicGoods[mes_OrgResDetailList[i].O_GoodsCode] = stockList;//记录剩余批次库存
-                        j--;
-                        mes_OrgResDetailList[i].O_Qty = mes_OrgResDetailList[i].O_Qty - qty;
+                            goods_list.Add(reqGoods);
+                            stockList.RemoveAt(j);
+                            //dicGoods[mes_OrgResDetailList[i].O_GoodsCode] = stockList; //记录剩余批次库存 注释时间：2020年2月24日14:53:42
+                            j--;
+                            mes_OrgResDetailList[i].O_Qty = mes_OrgResDetailList[i].O_Qty - qty;
+                        }
+                        dicGoods[mes_OrgResDetailList[i].O_GoodsCode] = stockList; //记录剩余批次库存
                     }  
                 }
             }
