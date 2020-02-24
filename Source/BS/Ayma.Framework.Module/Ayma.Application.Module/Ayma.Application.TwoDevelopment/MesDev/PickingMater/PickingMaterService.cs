@@ -547,7 +547,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     FROM Mes_BomRecord Bom1,CTE Bom2
                     WHERE Bom1.B_ParentID = Bom2.ID
                     )
-                SELECT C.ID F_ID,
+                SELECT DISTINCT
+                    C.ID F_ID,
                     C.B_ParentID F_ParentID,
                     C.B_GoodsCode F_GoodsCode,
                     G.G_Name F_GoodsName,
@@ -1130,7 +1131,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     FROM Mes_BomRecord Bom1,CTE Bom2
                     WHERE Bom1.B_ParentID = Bom2.ID
                     )
-                SELECT C.ID F_ID,
+                SELECT DISTINCT
+                    C.ID F_ID,
                     C.B_ParentID F_ParentID,
                     C.B_GoodsCode F_GoodsCode,
                     G.G_Name F_GoodsName,
@@ -1456,9 +1458,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
             }
         }
 
-        private List<ProductBom> GetGoods(string childrenid, List<ProductBom> boms, List<ProductBom> goods)
+        private List<ProductBom> GetGoods(string parentid, List<ProductBom> boms, List<ProductBom> goods)
         {
-            var row = boms.Find(r => r.F_ID == childrenid);
+            var row = boms.Find(r => r.F_ID == parentid);
             if (row == null)
                 return goods;
             else
@@ -1521,8 +1523,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
             try
             {
                 List<ProductBom> boms = new List<ProductBom>();
-                Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
                 List<GoodsConvert> converts = new List<GoodsConvert>();
+
+                Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
                 string goodscode = "";
                 DataTable dt = new DataTable("GoodsConvert");
 
@@ -1563,7 +1566,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 B_ProceName,
                 0 AS F_Level
                 FROM Mes_BomRecord
-                WHERE B_ParentID = '0'
+                WHERE B_GoodsCode=@F_GoodsCode
                 UNION ALL
                 SELECT Bom1.ID,
                 Bom1.B_ParentID,
@@ -1577,7 +1580,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     FROM Mes_BomRecord Bom1,CTE Bom2
                     WHERE Bom1.B_ParentID = Bom2.ID
                     )
-                SELECT C.ID F_ID,
+                SELECT DISTINCT
+                    C.ID F_ID,
                     C.B_ParentID F_ParentID,
                     C.B_GoodsCode F_GoodsCode,
                     G.G_Name F_GoodsName,
@@ -1604,7 +1608,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
                 ORDER BY C.F_Level";
 
-                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom);
+                    //加载参数
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("F_GoodsCode",F_GoodsCode, DbType.String);
+                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom, dp);
+
                     if (rows.Count() > 0)
                     {
                         boms = rows.ToList();
@@ -1612,48 +1620,29 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     else
                     {
                         success = false;
-                        message = "未获取到任何配方数据";
+                        message = "未获取到产品配方数据";
                     }
                 }
-
-
                 #endregion
 
-                #region 根据原物料，找出成品
+                #region  获取配方中每一个原料数据
                 if (success)
                 {
-                    var rows = boms.Where(r => r.F_GoodsCode == F_GoodsCode);
-                    if (rows == null || rows.Count() < 1)
+                    List<ProductBom> childrens = new List<ProductBom>();
+                    foreach (var bom in boms)
                     {
-                        success = false;
-                        message = "未从配方数据中匹配到相应原物料";
-                    }
-                    else
-                    {
-                        int maxlevel = 0;
-                        foreach (var row in rows)
+                        var children= boms.Find(r => r.F_ParentID == bom.F_ID);
+                        if (children == null)
                         {
-                            List<ProductBom> goods = new List<ProductBom>();
-                            GetGoods(row.F_ID, boms, goods);
-                            var bomroot = goods.Find(r => r.F_Level == 0);
-                            if (bomroot == null)
-                            {
-                                success = false;
-                                message = "原物料对应配方不完整";
-                                break;
-                            }
-                            else
-                            {
-                                var F_Level = goods.Max(r => r.F_Level);
-                                if (F_Level > maxlevel)
-                                {
-                                    maxlevel = F_Level;
-                                    goodscode = bomroot.F_GoodsCode;
-                                }
-
-                                products[bomroot.F_GoodsCode] = goods;
-                            }
+                            childrens.Add(bom);
                         }
+                    }
+
+                    foreach (var children in childrens)
+                    {
+                        List<ProductBom> goods = new List<ProductBom>();
+                        GetGoodsEx(children.F_ID, boms, goods);
+                        products[children.F_GoodsCode] = goods;
                     }
                 }
                 #endregion
@@ -1752,6 +1741,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             dp.Add("F_GoodsCode", lastBom.F_GoodsCode, DbType.String);
 
                             var rows = new RepositoryFactory().BaseRepository().FindList<GoodsOrg>(strGetQty, dp);
+
+
                             if (rows.Count() > 0)
                             {
 
@@ -1792,7 +1783,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                         lastGc.F_Kind = lastBom.F_Kind;
                                         lastGc.F_Unit = lastBom.F_Unit;
 
-                                        decimal ? d_qty=(currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
+                                        decimal? d_qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
                                         lastGc.F_Qty = Math.Round(d_qty.Value, 3);
                                         lastGc.F_SumQty = group2.F_Qty;
 
@@ -1854,7 +1845,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             currentGc.F_Kind = currentBom.F_Kind;
                                             currentGc.F_Unit = currentBom.F_Unit;
 
-                                            currentGc.F_Qty = Math.Round(group1.F_Qty,0);//实际生产
+                                            currentGc.F_Qty = Math.Round(group1.F_Qty, 0);//实际生产
 
                                             decimal? d_qty = (group2.F_Qty * 1000) / lastBom.F_PlanQty;
                                             currentGc.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
@@ -1900,7 +1891,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             lastGc.F_Unit = lastBom.F_Unit;
 
                                             lastGc.F_Qty = Math.Round(group2.F_Qty, 3);
-                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3); 
+                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3);
 
                                             lastGc.F_ConvertMin = lastBom.F_ConvertMin;
                                             lastGc.F_ConvertMax = lastBom.F_ConvertMax;
@@ -1933,8 +1924,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             lastGc.F_Unit = lastBom.F_Unit;
 
                                             decimal? d_qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
-                                            lastGc.F_Qty =Math.Round(d_qty.Value,3);
-                                            lastGc.F_SumQty = Math.Round(group3.F_Qty,3);
+                                            lastGc.F_Qty = Math.Round(d_qty.Value, 3);
+                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3);
 
                                             lastGc.F_ConvertMin = lastBom.F_ConvertMin;
                                             lastGc.F_ConvertMax = lastBom.F_ConvertMax;
@@ -1991,11 +1982,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         dc.DataType = typeof(string);
                         dt.Columns.Add(dc);
                     }
-
-                
-
-      
-
 
 
                     if (true)
@@ -2057,8 +2043,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             dt.Columns.Add(dc);
                         }
                     }
-
-
 
 
                     var groups = converts.GroupBy(r => r.F_CreateDate);
@@ -2486,10 +2470,9 @@ GROUP BY F_CreateDate,F_GoodsCode";
             }
         }
 
-
-        private List<ProductBom> GetGoodsEx(string childrenid, List<ProductBom> boms, List<ProductBom> goods)
+        private List<ProductBom> GetGoodsEx(string parentid, List<ProductBom> boms, List<ProductBom> goods)
         {
-            var row = boms.Find(r => r.F_ID == childrenid);
+            var row = boms.Find(r => r.F_ID == parentid);
             if (row == null)
                 return goods;
             else
