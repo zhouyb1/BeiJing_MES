@@ -373,7 +373,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
                             goods_list.Add(reqGoods);
                             stockList[i].O_Qty = stockList[i].O_Qty - mes_OrgResDetailList[i].O_Qty;
-                            //break; //数量足够 跳出循环 注释时间：2020年2月24日14:52:45
                         }
                         else
                         {
@@ -397,7 +396,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
                             goods_list.Add(reqGoods);
                             stockList.RemoveAt(j);
-                            //dicGoods[mes_OrgResDetailList[i].O_GoodsCode] = stockList; //记录剩余批次库存 注释时间：2020年2月24日14:53:42
                             j--;
                             mes_OrgResDetailList[i].O_Qty = mes_OrgResDetailList[i].O_Qty - qty;
                         }
