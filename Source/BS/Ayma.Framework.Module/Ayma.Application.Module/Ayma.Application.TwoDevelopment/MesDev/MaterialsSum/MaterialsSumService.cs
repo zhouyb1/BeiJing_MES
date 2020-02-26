@@ -50,7 +50,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("G_Code", queryParam["G_Code"].ToString(), DbType.String);
                 }
-                else {
+                else
+                {
                     dp.Add("G_Code", "", DbType.String);
                 }
                 //页面传的参数
@@ -109,9 +110,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               AND RD.M_Kind = 1
                               AND RD.M_StockCode=@g_stockcode
 		                      AND (RH.M_CreateDate>=@start and RH.M_CreateDate<=@end)
-                     "); 
+                     ");
                 }
-                  strSql.Append(@"
+                strSql.Append(@"
                          GROUP BY RH.M_CreateDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
