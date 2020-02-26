@@ -187,11 +187,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 height: 220,
                 rowCount: 2,
-                inputCount: 2,
+                inputCount: 1,
                 isMultiselect: true,
-
                 //isStatistics: true,
-
             });
 
             $('#Mes_OrgResDetail_d').jfGrid({
@@ -228,22 +226,24 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     var rowheadataList = $("#Mes_OrgResDetail_h").jfGridGet('rowdatas');
                                     var amount = 0;
 
+                                    var arr = $.grep(rowheadataList, function(item) {
+                                        return item.O_SecGoodsCode == row.O_SecGoodsCode;
+                                    });
+
+                                    for (var k = 0,len=arr.length; k < len; k++) {
+                                        amount += arr[k].O_Price * arr[k].O_Qty;
+                                    }
+                                    row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
 
                                     for (var i = 0, j = rowheadataList.length; i < j; i++) {
                                         if (rowheadataList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
-                                            amount += rowheadataList[i].O_Price * rowheadataList[i].O_Qty;
-                                            row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
-
+                                           
                                             rowheadataList[i].O_SecQty = row.O_SecQty;
                                             rowheadataList[i].O_SecUnit = row.O_SecUnit;
                                             rowheadataList[i].O_SecBatch = ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "");
                                             rowheadataList[i].O_SecGoodsCode = row.O_SecGoodsCode;
                                             rowheadataList[i].O_SecGoodsName = row.O_SecGoodsName;
-                                        }
-                                    }
-                                    for (var k = 0, m = rowheadataList.length; k < m; k++) {
-                                        if (rowheadataList[k].O_SecGoodsCode == row.O_SecGoodsCode) {
-                                            rowheadataList[k].O_SecPrice = row.O_SecPrice;
+                                            rowheadataList[i].O_SecPrice = row.O_SecPrice;
                                         }
                                     }
                                     $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: rowheadataList });
