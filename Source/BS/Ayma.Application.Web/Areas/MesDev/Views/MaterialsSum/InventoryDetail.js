@@ -107,21 +107,20 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
-            //$('#am_export').on('click', function () {
-            //    var tableName = "girdtable";
-            //    var fileName = "库存明细统计";
-            //    ayma.layerForm({
-            //        id: "ExcelExportForm",
-            //        title: '导出Excel数据',
-            //        url: encodeURI(top.$.rootUrl + '/Utility/ExcelExportForm?gridId=' + tableName + '&filename=' + encodeURI(fileName)),
-            //        width: 500,
-            //        height: 380,
-            //        callBack: function (id) {
-            //            return top[id].acceptClick();
-            //        },
-            //        btn: ['导出Excel', '关闭']
-            //    });
-            //});
+            // 快速打印
+            $('#am_print').on('click', function () {
+                ayma.layerForm({
+                    id: 'KCMXTJ',
+                    title: '库存明细打印',
+                    url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport2?report=KCMXTJReport&data=KCMXTJ&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
             // 导出
             $('#am_export').on('click', function () {
                 var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export2?queryJson=' + JSON.stringify(jsonquery);

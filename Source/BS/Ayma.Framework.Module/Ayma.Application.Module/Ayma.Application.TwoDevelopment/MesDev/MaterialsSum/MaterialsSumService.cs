@@ -672,6 +672,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
+                var queryParam = queryJson.ToJObject();
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                string Time = StartTime.AddDays(-1).ToShortDateString();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("Time", Time, DbType.DateTime);
                 strSql.Append(@"                            select* from  ( select 
                                     (select S_Name from Mes_Stock where S_Code=s.G_StockCode)as S_Name,
                                      s.G_StockCode
@@ -711,19 +720,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
 									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
 									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)))*(select G_Price from Mes_Goods where G_Code=s.G_Code ) as finalamount																										
-									from Mes_Goods s where  s.G_Kind=1) t where ltrim(rtrim(t.Inventoryquantity)) not in ('0.000000')  or ltrim(rtrim(t.delivery)) not in ('0.000000') or ltrim(rtrim(t.back_qty)) not in ('0.000000') 
-									or ltrim(rtrim(t.withdrawingnumber)) not in ('0.000000') or ltrim(rtrim(t.materialssales)) not in ('0.000000') or ltrim(rtrim(t.scrapist)) not in ('0.000000') or ltrim(rtrim(t.otherwarehouse)) not in ('0.000000') 
-									or ltrim(rtrim(t.otheroutbound)) not in ('0.000000') or ltrim(rtrim(t.supplierback)) not in ('0.000000')										
-									 ");
-                var queryParam = queryJson.ToJObject();
-                // 虚拟参数
-                var dp = new DynamicParameters(new { });
-                DateTime StartTime = queryParam["StartTime"].ToDate();
-                DateTime EndTime = queryParam["EndTime"].ToDate();
-                string Time = StartTime.AddDays(-1).ToShortDateString();
-                dp.Add("StartTime", StartTime, DbType.DateTime);
-                dp.Add("EndTime", EndTime, DbType.DateTime);
-                dp.Add("Time", Time, DbType.DateTime);
+									from Mes_Goods s where  s.G_Kind=1");
+
                 if (!queryParam["M_GoodsCode"].IsEmpty())
                 {
                     dp.Add("M_GoodsCode", "%" + queryParam["M_GoodsCode"].ToString() + "%", DbType.String);
@@ -739,6 +737,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("S_Name", "%" + queryParam["S_Name"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.G_StockCode Like @S_Name ");
                 }
+
+                strSql.Append(@" ) t where ltrim(rtrim(t.Inventoryquantity)) not in ('0.000000')  or ltrim(rtrim(t.delivery)) not in ('0.000000') or ltrim(rtrim(t.back_qty)) not in ('0.000000') 
+									or ltrim(rtrim(t.withdrawingnumber)) not in ('0.000000') or ltrim(rtrim(t.materialssales)) not in ('0.000000') or ltrim(rtrim(t.scrapist)) not in ('0.000000') or ltrim(rtrim(t.otherwarehouse)) not in ('0.000000') 
+									or ltrim(rtrim(t.otheroutbound)) not in ('0.000000') or ltrim(rtrim(t.supplierback)) not in ('0.000000')									
+									 ");
+        
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Web;
 using System.Text;
 using System.Diagnostics;
+using Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Util;
 using Newtonsoft.Json;
@@ -21,6 +22,9 @@ namespace Ayma.Application.Web
 
 #if _JSON_REPORT_DATA
     using MyDbReportData = DatabaseJsonReportData;
+    using Ayma.DataBase.Repository;
+    using Dapper;
+    using System.Data;
 
 #else
 using MyDbReportData = DatabaseXmlReportData;
@@ -1154,6 +1158,267 @@ using MyDbReportData = DatabaseXmlReportData;
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
+        /// <summary>
+        /// 库存明细统计
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string KCMXTJ(string queryJson)
+        {
+                var strSql = new StringBuilder();
+                var strSql2 = new StringBuilder();
+                var strSql3 = new StringBuilder();
+               
+                var queryParam = queryJson.ToJObject();
+                //虚拟参数
+                var dp = new DynamicParameters(new { });
+                DateTime StartTime = queryParam["StartTime"].ToDate();
+                DateTime EndTime = queryParam["EndTime"].ToDate();
+                string Time = StartTime.AddDays(-1).ToShortDateString();
+                dp.Add("StartTime", StartTime, DbType.DateTime);
+                dp.Add("EndTime", EndTime, DbType.DateTime);
+                dp.Add("Time", Time, DbType.DateTime);
+                if (!queryParam["S_Code"].IsEmpty())
+                {
+                    dp.Add("S_Code", queryParam["S_Code"].ToString(), DbType.String);
+                }
+                else
+                {
+                    dp.Add("S_Code", "", DbType.String);
+                }
+                if (!queryParam["G_Code"].IsEmpty())
+                {
+                    dp.Add("G_Code", queryParam["G_Code"].ToString(), DbType.String);
+                }
+                else
+                {
+                    dp.Add("G_Code", "", DbType.String);
+                }
+                //页面传的参数
+                if (!queryParam["start"].IsEmpty())
+                {
+                    dp.Add("start", queryParam["start"].ToDate(), DbType.DateTime);
+                    string time = queryParam["start"].ToDate().AddDays(-1).ToShortDateString();
+                    dp.Add("time", time, DbType.DateTime);
+                }
+                if (!queryParam["end"].IsEmpty())
+                {
+                    dp.Add("end", queryParam["end"].ToDate(), DbType.DateTime);
+                }
+                if (!queryParam["g_codes"].IsEmpty())
+                {
+                    dp.Add("g_codes", queryParam["g_codes"].ToString(), DbType.String);
+                }
+                if (!queryParam["g_stockcode"].IsEmpty())
+                {
+                    dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
+                }
+                strSql.Append(@"
+                           SELECT RH.M_CreateDate F_CreateDate
+");
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+                    strSql.Append(@"
+                      ,@StartTime as starttime,
+                      @EndTime endtime
+                     ");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+                    strSql.Append(@"
+                      ,@start as starttime,
+                       @end as endtime
+                     ");
+                }
+                strSql.Append(@"
+                           ,RH.M_MaterInNo F_OrderNo,
+                           RD.M_GoodsCode F_GoodsCode,
+                           RD.M_GoodsName F_GoodsName,
+                           RD.M_Unit F_Unit,
+                           RD.M_Price,
+                           G.G_Price as G_Price,
+                           RD.M_Price*SUM(RD.M_Qty) AS Aoumount,
+                           RD.M_TaxPrice F_InPrice,
+						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ dbo.GetUserNameById(RH.M_CreateBy) as F_Remark,
+                           'R' F_Status,
+                           SUM(RD.M_Qty) F_InQty,
+                           SUM(RD.M_Qty)*G.G_Price as SRJE
+                    FROM Mes_MaterInHead RH
+                        LEFT JOIN Mes_MaterInDetail RD
+                            ON RH.M_MaterInNo = RD.M_MaterInNo               
+                        LEFT JOIN Mes_Goods G
+                            ON G.G_Code = RD.M_GoodsCode  Where 1=1              
+                             ");
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+                    strSql.Append(@"
+                              AND RD.M_GoodsCode =@G_Code
+                              AND RH.M_Status = 3
+                              AND RD.M_Kind = 1
+                              AND RD.M_StockCode=@S_Code
+		                      AND (RH.M_CreateDate>=@StartTime and RH.M_CreateDate<=@EndTime)
+                     ");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+                    strSql.Append(@"
+                              AND RD.M_GoodsCode =@g_codes
+                              AND RH.M_Status = 3
+                              AND RD.M_Kind = 1
+                              AND RD.M_StockCode=@g_stockcode
+		                      AND (RH.M_CreateDate>=@start and RH.M_CreateDate<=@end)
+                     ");
+                }
+                strSql.Append(@"
+                         GROUP BY RH.M_CreateDate,
+                                RH.M_MaterInNo,
+                                RD.M_GoodsCode,
+                                RD.M_GoodsName,
+                                M_TaxPrice,
+                                G.G_Price,
+                                RD.M_SupplyName,
+						        RH.M_CreateBy,
+						        RD.M_Unit,
+                                RD.M_Price
+              ");
+
+                strSql2.Append(@"
+                      SELECT CH.C_CreateDate F_CreateDate"
+                    );
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+                    strSql2.Append(@"
+                      ,@StartTime as starttime,
+                     '@EndTime endtime
+                     ");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+                    strSql2.Append(@"
+                      ,@start as starttime,
+                       @end as endtime
+                     ");
+                }
+                strSql2.Append(@"
+                           ,CH.C_CollarNo F_OrderNo,
+                           CD.C_GoodsCode F_GoodsCode,
+                           CD.C_GoodsName F_GoodsName,
+                           G.G_Price as G_Price,
+                           CD.C_Unit F_Unit,
+                           CD.C_Price F_OutPrice,
+                           'C' F_Status,
+                         '从【'+  CD.C_StockName+'】调拨【'+ CH.C_StockToName+'】制单:'+ dbo.GetUserNameById(CH.C_CreateBy) as F_Remark,
+                           SUM(CD.C_Qty) F_OutQty,
+                            SUM(CD.C_Qty)* G.G_Price as FCJE
+                    FROM Mes_CollarHead CH
+                        LEFT JOIN Mes_CollarDetail CD
+                            ON CD.C_CollarNo = CH.C_CollarNo
+                        LEFT JOIN Mes_Goods G     
+                        ON G.G_Code = CD.C_GoodsCode        
+                             ");
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+
+                    strSql2.Append(@"             
+                    WHERE CD.C_GoodsCode =@G_Code
+                            AND CH.P_Status = 3
+			                AND CD.C_StockCode=@S_Code
+		                    AND (CH.C_CreateDate>=@StartTime and CH.C_CreateDate<=@EndTime)
+                 
+                            ");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+
+                    strSql2.Append(@"
+                            WHERE CD.C_GoodsCode =@g_codes
+                            AND CH.P_Status = 3
+			                AND CD.C_StockCode=@g_stockcode
+		                    AND (CH.C_CreateDate>=@start and CH.C_CreateDate<=@end)
+                     ");
+                }
+                strSql2.Append(@"
+                             GROUP BY CH.C_CollarNo,
+                             CH.C_CreateDate,
+                             CD.C_GoodsCode,
+                             CD.C_GoodsName,
+                             CD.C_Price,
+                             G.G_Price,
+                             CD.C_StockName,
+							 CH.C_StockToName,
+							 CH.C_CreateBy,
+					 	     CD.C_Unit
+            ");
+                strSql3.Append(@"
+                select isnull(sum(I_Qty),0) as IntervoryQty
+                         ");
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+                    strSql3.Append(" ,@StartTime as starttime, @EndTime endtime,((select g.G_Price from Mes_Goods g where g.G_Code=@G_Code)*isnull(sum(I_Qty),0)) as JCJE  ,@Time as F_CreateDate");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+
+                    strSql3.Append(" ,@start as starttime,@end as endtime,((select g.G_Price from Mes_Goods g where g.G_Code=@g_codes)*isnull(sum(I_Qty),0)) as JCJE,@time as F_CreateDate");
+                }
+                strSql3.Append(@",'上期结存' as F_Remark 
+                             from  Mes_InventoryLS s 
+         	");
+                if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
+                {
+                    strSql3.Append(@" where s.I_GoodsCode=@G_Code and s.I_Date=@Time and s.I_StockCode=@S_Code");
+                }
+                if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
+                {
+
+                    strSql3.Append(@" where s.i_goodscode=@g_codes and s.i_date=@time and s.i_stockcode=@g_stockcode");
+                }
+                string asss = strSql.ToString();
+                string asssss = strSql3.ToString();
+                RepositoryFactory a = new RepositoryFactory();             
+                List<InventoryViewModel> datas = new List<InventoryViewModel>();  
+                 var a1 = new RepositoryFactory().BaseRepository().FindList<InventoryViewModel>(strSql.ToString(), dp);
+                 var a2 = new RepositoryFactory().BaseRepository().FindList<InventoryViewModel>(strSql2.ToString(), dp);
+                 var a3 = new RepositoryFactory().BaseRepository().FindList<InventoryViewModel>(strSql3.ToString(), dp);
+
+                if(!a1.IsEmpty())
+                {
+                    datas.AddRange(a1);
+                }
+                if (!a2.IsEmpty())
+                {
+                    datas.AddRange(a2);
+                }
+                if (!a3.IsEmpty())
+                {
+                    datas.AddRange(a3);
+                }
+                else
+                {
+                    datas.Add(new InventoryViewModel { IntervoryQty = 0, F_GoodsCode = "上期结存", F_CreateDate = DateTime.Parse(Time) });
+                }
+
+                var rows= datas.OrderBy(r=>r.F_CreateDate).ToList();
+
+                decimal? qty = rows[0].IntervoryQty;
+
+                for (int i = 1; i < rows.Count; i++)
+                {
+                    if (rows[i].F_Status == "R")
+                    {
+                        qty = rows[i].IntervoryQty = qty + rows[i].F_InQty;
+                    }
+                    else
+                    {
+                        qty = rows[i].IntervoryQty = qty - rows[i].F_OutQty;
+                    }
+                    rows[i].JCJE = Math.Round((rows[i].IntervoryQty * rows[i].G_Price).ToDecimal(), 6);
+                }
+                var json = JsonConvert.SerializeObject(new { PurchaseSummary = rows });
+                return json;
+
+        
         } 
         /// <summary>
         /// 车间入库到线边仓
@@ -1322,6 +1587,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
             SpecialDataFunMap.Add("SaleManager", SaleManager);
+            SpecialDataFunMap.Add("KCMXTJ", KCMXTJ);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
             SpecialDataFunMap.Add("InWorkShop", InWorkShop);
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
@@ -1408,6 +1674,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string YWLCRKTJ(HttpRequest Request)
         {
             return YWLCRKTJ(Request.QueryString["starttime"], Request.QueryString["endtime"], Request.QueryString["ToDate"], Request.QueryString["S_Name"], Request.QueryString["M_GoodsName"]);
+        }
+        private static string KCMXTJ(HttpRequest Request)
+        {
+            return KCMXTJ(Request.QueryString["queryJson"]);
         }
         private static string GYSCHMX(HttpRequest Request)
         {
