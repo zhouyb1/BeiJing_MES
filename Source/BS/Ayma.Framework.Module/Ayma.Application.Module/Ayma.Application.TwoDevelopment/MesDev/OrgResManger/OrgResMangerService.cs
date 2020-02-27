@@ -91,13 +91,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                              O_SecUnit ,
                                              O_StockName ,
                                              O_TeamName ,
+                                             C_ProName O_ProName,
                                             dbo.GetUserNameById(O_CreateBy) O_CreateBy
                                       FROM    Mes_OrgResHead h
-                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo  where 1 = 1  and O_Status = 3 ");
+                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo 
+                                     LEFT JOIN Mes_Convert  ON C_ProNo = O_ProCode  where 1 = 1  and O_Status = 3 ");
             if (!queryParam["StockCode"].IsEmpty())
             {
                 dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
                 sqlHead.Append(" AND O_StockCode =@StockCode ");
+            }
+            if (!queryParam["O_SecGoodsName"].IsEmpty())
+            {
+                dp.Add("O_SecGoodsName", "%" + queryParam["O_SecGoodsName"].ToString() + "%", DbType.String);
+                sqlHead.Append(" AND O_SecGoodsName like @O_SecGoodsName ");
             }
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
             {
@@ -119,6 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             data.Columns.Add("O_SecQty", typeof(decimal));
             data.Columns.Add("O_Unit", typeof(string));
             data.Columns.Add("O_SecUnit", typeof(string));
+            data.Columns.Add("O_ProName", typeof(string));
             data.Columns.Add("ProductRate", typeof(decimal));
             for (var i=0;i<dtHead.Rows.Count;i++)
             {
@@ -137,6 +145,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
                     sqlBody.Append(" AND O_StockCode =@StockCode ");
+                }
+                if (!queryParam["O_GoodsName"].IsEmpty())
+                {
+                    dp.Add("O_GoodsName", "%" + queryParam["O_GoodsName"].ToString() + "%", DbType.String);
+                    sqlBody.Append(" AND O_GoodsName like @O_GoodsName ");
                 }
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
@@ -174,6 +187,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     row["O_GoodsName"] = dtBody.Rows[0]["O_GoodsName"].ToString();
                     row["O_SecGoodsCode"] = dtHead.Rows[i]["O_SecGoodsCode"].ToString();
                     row["O_SecGoodsName"] = dtHead.Rows[i]["O_SecGoodsName"].ToString();
+                    row["O_ProName"] = dtHead.Rows[i]["O_ProName"].ToString();
                     row["O_Unit"] = dtBody.Rows[0]["O_Unit"].ToString();
                     row["O_SecUnit"] = dtHead.Rows[i]["O_SecUnit"].ToString();
                     row["O_Qty"] = dQty;
