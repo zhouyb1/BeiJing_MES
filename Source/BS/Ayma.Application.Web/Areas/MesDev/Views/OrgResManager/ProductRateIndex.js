@@ -95,7 +95,8 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "O_SecUnit", width: 50, align: "center" },
                     { label: "产出数量", name: "O_SecQty", width: 90, align: "center" } ]
                 },
-                { label: "作业日耗库", name: "O_StockName", width: 150, align: "center",},
+                { label: "作业日耗库", name: "O_StockName", width: 130, align: "center", },
+                { label: "作业工序", name: "O_ProName", width: 90, align: "center" },
                 { label: "作业班组", name: "O_TeamName", width: 100, align: "center" },
                 { label: "出成率(%)", name: "ProductRate", width: 90, align: "center" },
                 { label: "制作人", name: "O_CreateBy", width: 100, align: "center" },
