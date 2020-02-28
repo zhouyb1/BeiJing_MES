@@ -1419,6 +1419,234 @@ using MyDbReportData = DatabaseXmlReportData;
                 return json;
 
         
+        }
+        /// <summary>
+        /// 出成率查询
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string CCLCX(string queryJson)
+        {
+
+            var strSql = new StringBuilder();
+            // 虚拟参数        
+            //var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
+            // 虚拟参数
+            var dp = new DynamicParameters(new { });
+            var queryParam = queryJson.ToJObject();
+            var sqlHead = new StringBuilder();
+            dp.Add("starttime", queryParam["StartTime"].ToString(), DbType.String);
+            dp.Add("endtime", queryParam["EndTime"].ToString(), DbType.String);
+            sqlHead.Append(@"SELECT DISTINCT 
+                                            @starttime as starttime,
+                                            @endtime as endtime,
+                                             O_SecGoodsCode ,
+                                             O_SecGoodsName ,
+                                             O_SecUnit ,
+                                             O_StockName ,
+                                             O_TeamName ,
+                                            dbo.GetUserNameById(O_CreateBy) O_CreateBy
+                                      FROM    Mes_OrgResHead h
+                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo  where 1 = 1  and O_Status = 3 ");
+            if (!queryParam["StockCode"].IsEmpty())
+            {
+                dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
+                sqlHead.Append(" AND O_StockCode =@StockCode ");
+            }
+            if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+            {
+                dp.Add("startTime", queryParam["StartTime"].ToString(), DbType.String);
+                dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
+                sqlHead.Append(" AND (O_UploadDate > @startTime AND O_UploadDate <@endTime ) ");
+            }
+
+            var dtHead = new RepositoryFactory().BaseRepository().FindTable(sqlHead.ToString(), dp);
+            DataTable data = new DataTable();
+            data.Columns.Add("O_GoodsCode", typeof(string));
+            data.Columns.Add("starttime", typeof(string));
+            data.Columns.Add("endtime", typeof(string));
+            data.Columns.Add("O_GoodsName", typeof(string));
+            data.Columns.Add("O_SecGoodsCode", typeof(string));
+            data.Columns.Add("O_SecGoodsName", typeof(string));
+            data.Columns.Add("O_StockName", typeof(string));
+            data.Columns.Add("O_TeamName", typeof(string));
+            data.Columns.Add("O_CreateBy", typeof(string));
+            data.Columns.Add("O_Qty", typeof(decimal));
+            data.Columns.Add("O_SecQty", typeof(decimal));
+            data.Columns.Add("O_Unit", typeof(string));
+            data.Columns.Add("O_SecUnit", typeof(string));
+            data.Columns.Add("ProductRate", typeof(decimal));
+            for (var i=0;i<dtHead.Rows.Count;i++)
+            {
+                //查询 转换后
+                var sqlBody = new StringBuilder();
+                sqlBody.Append(@"SELECT 
+                                        @starttime as starttime,
+                                        @endtime as endtime,
+                                        SUM(O_Qty)  O_Qty ,
+                                        SUM(O_SecQty)  O_SecQty ,
+                                        O_GoodsCode ,
+                                        O_GoodsName ,
+                                        h.O_OrgResNo ,
+                                        O_Unit
+                                        --d.O_Batch
+                                FROM    Mes_OrgResHead h
+                                        LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_Status = 3  and O_SecGoodsCode ='" + dtHead.Rows[i]["O_SecGoodsCode"].ToString() + "'");
+                if (!queryParam["StockCode"].IsEmpty())
+                {
+                    dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
+                    sqlBody.Append(" AND O_StockCode =@StockCode ");
+                }
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToString(), DbType.String);
+                    dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
+                    sqlBody.Append(" AND (O_UploadDate > @startTime AND O_UploadDate < @endTime ) ");
+                }
+                sqlBody.Append(" group by O_GoodsName,h.O_OrgResNo,O_GoodsCode,O_Unit");
+                var dtBody = new RepositoryFactory().BaseRepository().FindTable(sqlBody.ToString(), dp);
+                
+                if (dtBody.Rows.Count>0)
+                {
+                    decimal dQty = 0;
+                    decimal dQtySec = 0;
+                    var OrgResNoList = new List<string>(); 
+
+                    for (var j = 0; j < dtBody.Rows.Count; j++)
+                    {
+                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_OrgResNo"].ToString()))
+                        {
+                            OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
+                            dQtySec += Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
+
+                        }
+                        dQty += Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
+
+                    }
+                    decimal dConvert = (dQtySec / dQty)*100;
+                    dConvert = Math.Round(dConvert, 2);
+                    DataRow row = data.NewRow();
+                    row["O_CreateBy"] = dtHead.Rows[i]["O_CreateBy"].ToString();
+                    row["O_TeamName"] = dtHead.Rows[i]["O_TeamName"].ToString();
+                    row["O_StockName"] = dtHead.Rows[i]["O_StockName"].ToString();
+                    row["O_GoodsCode"] = dtBody.Rows[0]["O_GoodsCode"].ToString();
+                    row["O_GoodsName"] = dtBody.Rows[0]["O_GoodsName"].ToString();
+                    row["O_SecGoodsCode"] = dtHead.Rows[i]["O_SecGoodsCode"].ToString();
+                    row["O_SecGoodsName"] = dtHead.Rows[i]["O_SecGoodsName"].ToString();
+                    row["O_Unit"] = dtBody.Rows[0]["O_Unit"].ToString();
+                    row["O_SecUnit"] = dtHead.Rows[i]["O_SecUnit"].ToString();
+                    row["starttime"] = dtHead.Rows[i]["starttime"].ToString();
+                    row["endtime"] = dtHead.Rows[i]["endtime"].ToString();
+                    row["O_Qty"] = dQty;
+                    row["O_SecQty"] = dQtySec;
+                    row["ProductRate"] = dConvert;
+                    data.Rows.Add(row);
+                }
+            }
+            var json = JsonConvert.SerializeObject(new { PurchaseSummary = data });
+            return json;
+        }
+        /// <summary>
+        /// 出成率报表-按原物料
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string CCLBB(string queryJson)
+        {
+            string messsage = "";
+            Ayma.Application.TwoDevelopment.MesDev.PickingMaterService picking = new Ayma.Application.TwoDevelopment.MesDev.PickingMaterService();
+            DataTable dt = picking.GetProductReportData(queryJson, out messsage);
+            var queryParam = queryJson.ToJObject();
+            dt.Columns.Add("starttime", typeof(string));
+            dt.Columns.Add("endtime", typeof(string));
+            foreach (DataRow dr in dt.Rows)
+            {
+                //为新添加的列进行赋值
+                dr["starttime"] = queryParam["StartTime"].ToString(); ;
+                dr["endtime"] = queryParam["EndTime"].ToString();
+            }
+            if (string.IsNullOrEmpty(messsage))
+            {
+                #region 添加合计、统计行
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    //插入统计行
+                    if (true)
+                    {
+                        string current = dt.Rows[0]["F_CreateDate"].ToString();
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            string last = dt.Rows[i]["F_CreateDate"].ToString();
+                            if (current != last)
+                            {
+                                DataRow dr = dt.NewRow();
+                                dr["F_CreateDate"] = "[" + current + "]合计";
+                                dt.Rows.InsertAt(dr, i);
+
+                                current = last;
+                                i++;
+                            }
+                        }
+                        DataRow drEnd = dt.NewRow();
+                        drEnd["F_CreateDate"] = "[" + current + "]合计";
+                        dt.Rows.InsertAt(drEnd, dt.Rows.Count);
+
+                        DataRow drSum = dt.NewRow();
+                        drSum["F_CreateDate"] = "总计";
+                        dt.Rows.InsertAt(drSum, dt.Rows.Count);
+                    }
+
+                    //计算统计行
+                    if (true)
+                    {
+                        for (int j = 0; j < dt.Columns.Count; j++)
+                        {
+                            //统计数量
+                            if (dt.Columns[j].ColumnName.Contains("F_GoodsQty"))
+                            {
+
+                                decimal everysum_qty = 0;
+                                decimal totalsum_qty = 0;
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    string current = dt.Rows[i]["F_CreateDate"].ToString();
+                                    if (current.Contains("合计"))
+                                    {
+                                        dt.Rows[i][j] = Math.Round(everysum_qty, 2);
+                                        everysum_qty = 0;
+                                    }
+                                    else
+                                    {
+                                        if (current == "总计")
+                                        {
+                                            dt.Rows[i][j] = Math.Round(totalsum_qty, 2);
+                                            everysum_qty = 0;
+                                        }
+                                        else
+                                        {
+                                            if (dt.Rows[i][j] == DBNull.Value)
+                                            {
+                                                everysum_qty += 0;
+                                                totalsum_qty += 0;
+                                            }
+                                            else
+                                            {
+                                                everysum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                                totalsum_qty += decimal.Parse(dt.Rows[i][j].ToString());
+                                            }
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+                #endregion
+            }
+
+            var json = JsonConvert.SerializeObject(new { PurchaseSummary = dt });
+            return json;
         } 
         /// <summary>
         /// 车间入库到线边仓
@@ -1588,6 +1816,8 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("OrgRes", OrgRes);
             SpecialDataFunMap.Add("SaleManager", SaleManager);
             SpecialDataFunMap.Add("KCMXTJ", KCMXTJ);
+            SpecialDataFunMap.Add("CCLCX", CCLCX);
+            SpecialDataFunMap.Add("CCLBB", CCLBB);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
             SpecialDataFunMap.Add("InWorkShop", InWorkShop);
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
@@ -1678,6 +1908,14 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string KCMXTJ(HttpRequest Request)
         {
             return KCMXTJ(Request.QueryString["queryJson"]);
+        }
+        private static string CCLCX(HttpRequest Request)
+        {
+            return CCLCX(Request.QueryString["queryJson"]);
+        }
+        private static string CCLBB(HttpRequest Request)
+        {
+            return CCLBB(Request.QueryString["queryJson"]);
         }
         private static string GYSCHMX(HttpRequest Request)
         {

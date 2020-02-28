@@ -40,6 +40,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         public ActionResult SearchIndex()
         {
              return View();
+        }
+        /// <summary>
+        /// 报表页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport2()
+        {
+            return View();
         } 
         /// <summary>
         /// 查询详情表单

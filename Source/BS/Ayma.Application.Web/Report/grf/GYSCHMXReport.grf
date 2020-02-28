@@ -13,7 +13,6 @@
 		"BottomMargin":1
 	},
 	"DetailGrid":{
-		"AppendBlankRow":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
 			"QuerySQL":"SELECT \r\n'2019-11-12' as strattime,\r\n'2020-2-12' as endtime,\r\nh.M_MaterInNo,\r\n                                h.M_SupplyCode,\r\n                                h.M_SupplyName ,\r\n                                d.M_GoodsCode ,\r\n                                d.M_GoodsName ,\r\n                                d.M_Unit ,\r\n                                d.M_Tax,\r\n                                MAX(d.M_Price) M_Price,\r\n                                SUM(d.M_Price * M_Qty) row_amount, \r\n                                SUM(M_Qty) row_qty,\r\n                                d.M_Unit2,\r\n                                d.M_UnitQty\r\n                        FROM    dbo.Mes_MaterInHead h\r\n                                LEFT JOIN dbo.Mes_MaterInDetail d ON d.M_MaterInNo = h.M_MaterInNo\r\n                        WHERE   h.M_Status = 3\r\n                                AND d.M_Kind = 1 AND ( h.M_CreateDate >= '2019-11-12' AND h.M_CreateDate <= '2020-2-12' ) \r\n                        GROUP BY\r\n                                h.M_SupplyName,\r\n                                h.M_SupplyCode,\r\n                                h.M_MaterInNo, \r\n                                M_GoodsCode ,\r\n                                M_GoodsName ,\r\n                                M_Unit,\r\n                                d.M_Tax,\r\n                                d.M_Unit2,\r\n                                d.M_UnitQty",
@@ -74,11 +73,11 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":2.40771
+				"Width":3.20146
 			},
 			{
 				"Name":"Column7",
-				"Width":2.80458
+				"Width":1.98438
 			},
 			{
 				"Name":"Column4",
@@ -86,11 +85,11 @@
 			},
 			{
 				"Name":"C_Unit",
-				"Width":1.37583
+				"Width":1.61396
 			},
 			{
 				"Name":"C_Qty",
-				"Width":1.61396
+				"Width":1.19063
 			},
 			{
 				"Name":"Column9",
@@ -106,11 +105,11 @@
 			},
 			{
 				"Name":"Column11",
-				"Width":1.98438
+				"Width":1.61396
 			},
 			{
 				"Name":"Column12",
-				"Width":2.01083
+				"Width":1.5875
 			},
 			{
 				"Name":"Column13"
@@ -127,8 +126,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.3175,
-							"Width":1.5875,
+							"Left":-0.264583,
+							"Width":1.50813,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -448,7 +447,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
-							"Left":14.2081,
+							"Left":14.3933,
 							"Width":2.80458,
 							"Height":0.608542,
 							"Font":{
@@ -462,7 +461,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":17.5948,
+							"Left":17.1979,
 							"Width":2.80458,
 							"Height":0.608542,
 							"Font":{
@@ -518,7 +517,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":14.2081,
+							"Left":14.3933,
 							"Width":2.80458,
 							"Height":0.608542,
 							"Font":{
@@ -532,7 +531,7 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":17.5948,
+							"Left":17.1979,
 							"Width":2.80458,
 							"Height":0.608542,
 							"Font":{
@@ -647,7 +646,7 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":12.0121,
+					"Left":14.2081,
 					"Top":2.19604,
 					"Width":5.18583,
 					"Height":0.396875,

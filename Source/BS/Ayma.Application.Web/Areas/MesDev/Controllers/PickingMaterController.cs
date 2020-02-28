@@ -115,6 +115,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        public ActionResult PrintReport4()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 报表页
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ActionResult CollarRport()
         {
             return View();

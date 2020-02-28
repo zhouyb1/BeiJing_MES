@@ -132,11 +132,11 @@
 			},
 			{
 				"Name":"Column9",
-				"Width":1.5875
+				"Width":1.98438
 			},
 			{
 				"Name":"Column2",
-				"Width":1.42875
+				"Width":2.01083
 			},
 			{
 				"Name":"Column3",
@@ -144,21 +144,23 @@
 			},
 			{
 				"Name":"Column11",
-				"Width":4.20688
-			},
-			{
-				"Name":"Column12",
 				"Width":2.98979
 			},
 			{
-				"Name":"Column13"
+				"Name":"Column12",
+				"Width":2.2225
+			},
+			{
+				"Name":"Column13",
+				"Width":2.01083
 			},
 			{
 				"Name":"Column15",
-				"Width":4.02167
+				"Width":3.04271
 			},
 			{
-				"Name":"Column16"
+				"Name":"Column16",
+				"Width":2.38125
 			}
 		],
 		"ColumnContent":{
@@ -166,14 +168,20 @@
 			"ColumnContentCell":[
 				{
 					"Column":"Column1",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
 					"FreeCell":true,
 					"Control":[
 						{
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.370417,
-							"Width":1.66688,
+							"Left":-0.3175,
+							"Width":1.61396,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -190,7 +198,7 @@
 					"Column":"C_GoodsName",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -201,7 +209,7 @@
 					"Column":"Column7",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -212,7 +220,7 @@
 					"Column":"Column4",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -223,7 +231,7 @@
 					"Column":"C_Unit",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -234,7 +242,7 @@
 					"Column":"C_Qty",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -245,7 +253,7 @@
 					"Column":"Column9",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -256,7 +264,7 @@
 					"Column":"Column2",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -267,7 +275,7 @@
 					"Column":"Column3",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -278,7 +286,7 @@
 					"Column":"Column11",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -288,7 +296,7 @@
 					"Column":"Column12",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -298,7 +306,7 @@
 					"Column":"Column13",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -308,7 +316,7 @@
 					"Column":"Column15",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -318,7 +326,7 @@
 					"Column":"Column16",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -335,7 +343,7 @@
 					"Column":"Column1",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -348,7 +356,7 @@
 					"Column":"C_GoodsName",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -361,7 +369,7 @@
 					"Column":"Column7",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -374,7 +382,7 @@
 					"Column":"Column4",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -387,7 +395,7 @@
 					"Column":"C_Unit",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -400,7 +408,7 @@
 					"Column":"C_Qty",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -413,7 +421,7 @@
 					"Column":"Column9",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -426,7 +434,7 @@
 					"Column":"Column2",
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -443,7 +451,7 @@
 							"Column":"Column3",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -456,7 +464,7 @@
 							"Column":"Column11",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -469,7 +477,7 @@
 							"Column":"Column12",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -480,7 +488,7 @@
 					],
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -497,7 +505,7 @@
 							"Column":"Column13",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -510,7 +518,7 @@
 							"Column":"Column15",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -523,7 +531,7 @@
 							"Column":"Column16",
 							"Font":{
 								"Name":"宋体",
-								"Size":90000,
+								"Size":75000,
 								"Weight":400,
 								"Charset":134
 							},
@@ -534,7 +542,7 @@
 					],
 					"Font":{
 						"Name":"宋体",
-						"Size":90000,
+						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
@@ -643,7 +651,7 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":12.0121,
+					"Left":14.2081,
 					"Top":2.19604,
 					"Width":5.18583,
 					"Height":0.396875,

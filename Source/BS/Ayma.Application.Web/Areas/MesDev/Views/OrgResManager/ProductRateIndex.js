@@ -61,6 +61,20 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {}
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                ayma.layerForm({
+                    id: 'CCLCX',
+                    title: '出成率查询',
+                    url: top.$.rootUrl + '/MesDev/OrgResManager/PrintReport2?report=CCLCXReport&data=CCLCX&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
             //导出
             $('#am_export').on('click', function () {
                 var url = top.$.rootUrl + '/MesDev/OrgResManager/Export?queryJson=' + JSON.stringify(jsonquery);

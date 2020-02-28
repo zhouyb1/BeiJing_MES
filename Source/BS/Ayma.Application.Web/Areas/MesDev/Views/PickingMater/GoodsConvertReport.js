@@ -45,6 +45,20 @@ var bootstrap = function ($, ayma) {
                 var url = top.$.rootUrl + '/MesDev/PickingMater/Export?queryJson=' + JSON.stringify(jsonquery);
                     window.location.href = url;               
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                ayma.layerForm({
+                    id: 'CCLBB',
+                    title: '出成率报表',
+                    url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport4?report=CCLBBReport&data=CCLBB&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
+            });
             $('#girdtable').jfGrid({});
 
         },
