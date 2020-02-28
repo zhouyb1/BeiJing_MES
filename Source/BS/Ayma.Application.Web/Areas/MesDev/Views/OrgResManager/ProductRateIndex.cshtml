@@ -24,8 +24,8 @@
                                 </div>
                                 <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">制作日期</div>
-                                    <input id="StartTime" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
-                                    <input id="EndTime" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull"  style="display: none"/>
+                                    <input id="StartTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                    <input id="EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" style="display: none" />
 
                                 </div>
                                 @*<div class="col-xs-12 am-form-item">
