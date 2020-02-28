@@ -181,7 +181,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据号", name: "O_OrgResNo", width: 160, align: "center" },
-                    { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
+                    { label: "工序", name: "O_ProCode", width: 90, align: "center" },
                     { label: "日耗仓名称", name: "O_StockName", width: 120, align: "center" },
                     { label: "日耗仓编码", name: "O_StockCode", width: 90, align: "center" },
                     { label: "备注", name: "O_Remark", width: 160, align: "center" },
