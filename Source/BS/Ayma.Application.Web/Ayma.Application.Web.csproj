@@ -2795,14 +2795,16 @@
     <Content Include="Report\grf\KCMXTJReport.grf" />
     <Content Include="Areas\MesDev\Views\OrgResManager\PrintReport2.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\PrintReport4.cshtml" />
+    <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport3.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
     <Content Include="Report\grf\YWLCRKTJReport.grf" />
     <Content Include="Report\grf\GYSCHMXReport.grf" />
     <Content Include="Report\grf\GYSJHSJHZReport.grf" />
     <Content Include="Report\grf\QTCKHZBBReport.grf" />
-    <Content Include="Report\grf\LLCKHZBBReport.grf" />
     <Content Include="Report\grf\CCLCXReport.grf" />
     <Content Include="Report\grf\CCLBBReport.grf" />
+    <Content Include="Report\grf\GYSCHFLHZReport.grf" />
+    <Content Include="Report\grf\LLCKHZBBReport.grf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

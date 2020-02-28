@@ -3,6 +3,7 @@
  * 描  述：原物料入库列表
  */
 var refreshGirdData;
+var jsonquery = {};
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -18,6 +19,20 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
                 //page.search();
+            });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                ayma.layerForm({
+                    id: 'GYSCHFLHZ',
+                    title: '供应商存货分类汇总',
+                    url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport3?report=GYSCHFLHZReport&data=GYSCHFLHZ&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
+                    width: 1000,
+                    height: 800,
+                    maxmin: true,
+                    callBack: function (id) {
+                        return top[id].acceptClick(refreshGirdData);
+                    }
+                });
             });
             $('#girdtable').jfGrid({});
 
@@ -42,7 +57,7 @@ var bootstrap = function ($, ayma) {
         },
         search: function(param) {
             param = param || {};
-            
+            jsonquery = param;
             var postData = {};
             postData.queryJson = JSON.stringify(param);
             $.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {

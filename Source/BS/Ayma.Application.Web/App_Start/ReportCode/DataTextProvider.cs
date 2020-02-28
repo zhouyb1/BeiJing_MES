@@ -1647,7 +1647,28 @@ using MyDbReportData = DatabaseXmlReportData;
 
             var json = JsonConvert.SerializeObject(new { PurchaseSummary = dt });
             return json;
-        } 
+        }
+        /// <summary>
+        /// 供应商存货分类汇总
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string GYSCHFLHZ(string queryJson)
+        {
+            Ayma.Application.TwoDevelopment.MesDev.MaterInBillService mater = new Ayma.Application.TwoDevelopment.MesDev.MaterInBillService();
+            var dt = mater.GetMaterInSum(queryJson);
+            var queryParam = queryJson.ToJObject();
+            dt.Columns.Add("starttime", typeof(string));
+            dt.Columns.Add("endtime", typeof(string));
+            foreach (DataRow dr in dt.Rows)
+            {
+                //为新添加的列进行赋值
+                dr["starttime"] = queryParam["StartTime"].ToString(); ;
+                dr["endtime"] = queryParam["EndTime"].ToString();
+            }
+            var json = JsonConvert.SerializeObject(new { PurchaseSummary = dt });
+            return json;
+        }
         /// <summary>
         /// 车间入库到线边仓
         /// </summary>
@@ -1818,6 +1839,7 @@ using MyDbReportData = DatabaseXmlReportData;
             SpecialDataFunMap.Add("KCMXTJ", KCMXTJ);
             SpecialDataFunMap.Add("CCLCX", CCLCX);
             SpecialDataFunMap.Add("CCLBB", CCLBB);
+            SpecialDataFunMap.Add("GYSCHFLHZ", GYSCHFLHZ);
             SpecialDataFunMap.Add("OutWorkShop", OutWorkShop);
             SpecialDataFunMap.Add("InWorkShop", InWorkShop);
             SpecialDataFunMap.Add("ProOutMake", ProOutMake);
@@ -1916,6 +1938,10 @@ using MyDbReportData = DatabaseXmlReportData;
         private static string CCLBB(HttpRequest Request)
         {
             return CCLBB(Request.QueryString["queryJson"]);
+        }
+        private static string GYSCHFLHZ(HttpRequest Request)
+        {
+            return GYSCHFLHZ(Request.QueryString["queryJson"]);
         }
         private static string GYSCHMX(HttpRequest Request)
         {

@@ -139,6 +139,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return View();
         }
         /// <summary>
+        /// 报表页3
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport3()
+        {
+            return View();
+        }
+        /// <summary>
         /// 供应商存货明细
         /// </summary>
         /// <returns></returns>
