@@ -123,6 +123,11 @@ var bootstrap = function ($, ayma) {
             });
             // 导出
             $('#am_export').on('click', function () {
+                //修正gird没有数据时不能导出
+                if ($('#girdtable').jfGridGet('rowdatas').length==0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export2?queryJson=' + JSON.stringify(jsonquery);
                 window.location.href = url;
             });

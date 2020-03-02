@@ -15,7 +15,7 @@ var bootstrap = function ($, ayma) {
 
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 200, 350);
+            }, 250, 480);
 
             // 刷新
             $('#am_refresh').on('click', function () {
