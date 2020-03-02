@@ -58,7 +58,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.C_GoodsName Like @M_GoodsName ");
                 }
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty() && string.IsNullOrWhiteSpace(C_CollarNo))
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);

@@ -334,7 +334,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty() && string.IsNullOrWhiteSpace(M_MaterInNo))
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
