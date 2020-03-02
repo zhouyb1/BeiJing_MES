@@ -432,6 +432,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["O_SecUnit"].ColumnName = "转换后_单位";
             dt.Columns["O_SecQty"].ColumnName = "转换后_使用数量";
             dt.Columns["O_StockName"].ColumnName = "作业日耗库";
+            dt.Columns["O_ProName"].ColumnName = "作业工序";
             dt.Columns["O_TeamName"].ColumnName = "作业班组";
             dt.Columns["ProductRate"].ColumnName = "出成率(%)";
             dt.Columns["O_CreateBy"].ColumnName = "制作人";
@@ -445,9 +446,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["转换后_单位"].SetOrdinal(6);
             dt.Columns["转换后_使用数量"].SetOrdinal(7);
             dt.Columns["作业日耗库"].SetOrdinal(8);
-            dt.Columns["作业班组"].SetOrdinal(9);
-            dt.Columns["出成率(%)"].SetOrdinal(10);
-            dt.Columns["制作人"].SetOrdinal(11);
+            dt.Columns["作业工序"].SetOrdinal(9);
+            dt.Columns["作业班组"].SetOrdinal(10);
+            dt.Columns["出成率(%)"].SetOrdinal(11);
+            dt.Columns["制作人"].SetOrdinal(12);
 
 
             var ms = NPOIExcel.ToExcel(dt, "出成率实时查询", "出成率实时查询");

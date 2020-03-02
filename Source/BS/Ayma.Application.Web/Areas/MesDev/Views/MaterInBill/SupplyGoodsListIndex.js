@@ -46,6 +46,10 @@ var bootstrap = function ($, ayma) {
             });
             //导出excel
             $('#am_export').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var tableName = "girdtable";
                 var fileName = "供应商存货明细";
                 ayma.layerForm({
@@ -62,6 +66,10 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'GYSCHMX',
                     title: '供应商存货明细打印',

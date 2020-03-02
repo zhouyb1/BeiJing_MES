@@ -1290,7 +1290,7 @@ using MyDbReportData = DatabaseXmlReportData;
                 {
                     strSql2.Append(@"
                       ,@StartTime as starttime,
-                     '@EndTime endtime
+                     @EndTime endtime
                      ");
                 }
                 if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
@@ -1375,6 +1375,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     strSql3.Append(@" where s.i_goodscode=@g_codes and s.i_date=@time and s.i_stockcode=@g_stockcode");
                 }
                 string asss = strSql.ToString();
+                string assss = strSql2.ToString();
                 string asssss = strSql3.ToString();
                 RepositoryFactory a = new RepositoryFactory();             
                 List<InventoryViewModel> datas = new List<InventoryViewModel>();  

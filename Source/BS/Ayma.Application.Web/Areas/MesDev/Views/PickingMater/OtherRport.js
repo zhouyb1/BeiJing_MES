@@ -53,6 +53,10 @@ var bootstrap = function ($, ayma) {
             });
             //导出excel
             $('#am_export').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var tableName = "girdtable";
                 var fileName = "其它出库汇总报表";      
                 ayma.layerForm({
@@ -69,6 +73,10 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var starttime = $('#StartTime').val();
                 var endtime = $('#EndTime').val();
                 var GoodsCode = $('#GoodsCode').selectGet();

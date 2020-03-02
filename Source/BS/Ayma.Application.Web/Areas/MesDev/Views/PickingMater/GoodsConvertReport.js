@@ -37,16 +37,19 @@ var bootstrap = function ($, ayma) {
                 param: {}
             });
             $('#am_export').on('click', function () {
-                var list = $('#girdtable').jfGridGet('rowdatas');
-                if (list.length<=0) {
-                    ayma.alert.error("请先查出数据");
-                    return;
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
                 }
                 var url = top.$.rootUrl + '/MesDev/PickingMater/Export?queryJson=' + JSON.stringify(jsonquery);
                     window.location.href = url;               
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'CCLBB',
                     title: '出成率报表-按原物料打印',

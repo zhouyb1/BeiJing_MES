@@ -121,6 +121,10 @@ var bootstrap = function ($, ayma) {
                 var tableName = "";
                 var fileName = "";
                 if (tabTitle == "汇总") {
+                    if ($('#girdtable_sum').jfGridGet('rowdatas').length == 0) {
+                        ayma.alert.warning('当前没有数据行！');
+                        return false;
+                    }
                     var url = top.$.rootUrl + '/MesDev/MaterialsSum/Export?queryJson=' + JSON.stringify(jsonquery);
                     window.location.href = url;
                 }
@@ -174,13 +178,17 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_sum').on('dblclick', function () {
                 var g_code = $('#girdtable_sum').jfGridValue('g_code');
                 var g_stockcode = $('#girdtable_sum').jfGridValue('g_stockcode');
-                //var module = top.ayma.clientdata.get(['modulesMap', '6c1dfb3e-9f16-40db-9d72-4fe5d604b06f']);//本地ID
-                var module = top.ayma.clientdata.get(['modulesMap', '2f8b20ae-293b-4431-9a11-16a3e801f019']);//京铁列服ID
+                var module = top.ayma.clientdata.get(['modulesMap', '6c1dfb3e-9f16-40db-9d72-4fe5d604b06f']);//本地ID
+                //var module = top.ayma.clientdata.get(['modulesMap', '2f8b20ae-293b-4431-9a11-16a3e801f019']);//京铁列服ID
                 module.F_UrlAddress = '/MesDev/MaterialsSum/InventoryDetail?g_code=' + encodeURIComponent(g_code) + '&g_stockcode=' + encodeURIComponent(g_stockcode) + '&startTime=' + encodeURIComponent(startTime) + '&endTime=' + encodeURIComponent(endTime);
                top.ayma.frameTab.openNew(module);
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                if ($('#girdtable_sum').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var ToDate = getNextDate(startTime, -1);
                 var M_GoodsName = $('#M_GoodsName').selectGet();
                 var S_Name = $('#S_Name').selectGet();

@@ -63,6 +63,10 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'CCLCX',
                     title: '出成率实时查询打印',
@@ -77,8 +81,11 @@ var bootstrap = function ($, ayma) {
             });
             //导出
             $('#am_export').on('click', function () {
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 var url = top.$.rootUrl + '/MesDev/OrgResManager/Export?queryJson=' + JSON.stringify(jsonquery);
-
                 window.location.href = url;
             });
         },

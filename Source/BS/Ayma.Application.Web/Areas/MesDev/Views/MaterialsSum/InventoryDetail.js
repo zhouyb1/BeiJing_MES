@@ -109,6 +109,11 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                //修正gird没有数据时不能导出
+                if ($('#girdtable').jfGridGet('rowdatas').length == 0) {
+                    ayma.alert.warning('当前没有数据行！');
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'KCMXTJ',
                     title: '库存明细统计打印',
