@@ -448,13 +448,13 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":1.00542,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"SummaryBox",
 							"Name":"Summary2",
 							"Left":7.40833,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.59292,
 							"Height":0.582083,
 							"Font":{
@@ -469,7 +469,6 @@
 						{
 							"Type":"StaticBox",
 							"Name":"TextBox5",
-							"Top":0.185208,
 							"Width":1.98438,
 							"Height":0.582083,
 							"Font":{
@@ -484,7 +483,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
 							"Left":13.3879,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.80458,
 							"Height":0.582083,
 							"Font":{
@@ -500,7 +499,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
 							"Left":17.1979,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.80458,
 							"Height":0.582083,
 							"Font":{
@@ -722,13 +721,13 @@
 					]
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
 							"Left":7.40833,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.59292,
 							"Height":0.582083,
 							"Font":{
@@ -743,7 +742,6 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox31",
-							"Top":0.185208,
 							"Width":1.98438,
 							"Height":0.582083,
 							"Font":{
@@ -758,7 +756,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox5",
 							"Left":13.3879,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.80458,
 							"Height":0.582083,
 							"Font":{
@@ -774,7 +772,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox6",
 							"Left":17.1979,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":2.80458,
 							"Height":0.582083,
 							"Font":{
@@ -931,7 +929,7 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":4.68313,
+					"Left":9.26042,
 					"Top":0.211667,
 					"Width":9.60438,
 					"Height":0.79375,

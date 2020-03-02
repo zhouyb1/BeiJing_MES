@@ -22,6 +22,11 @@ var bootstrap = function ($, ayma) {
             });
             // 快速打印
             $('#am_print').on('click', function () {
+                var list = $('#girdtable').jfGridGet('rowdatas');
+                if (list.length <= 0) {
+                    ayma.alert.error("请先查出数据");
+                    return;
+                }
                 ayma.layerForm({
                     id: 'GYSCHFLHZ',
                     title: '供应商存货分类汇总打印',
