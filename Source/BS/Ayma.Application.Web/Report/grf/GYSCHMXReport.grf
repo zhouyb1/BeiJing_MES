@@ -7,10 +7,10 @@
 		"Charset":134
 	},
 	"Printer":{
-		"LeftMargin":0.5,
+		"LeftMargin":0.3,
 		"TopMargin":0.3,
-		"RightMargin":0.5,
-		"BottomMargin":1
+		"RightMargin":0.3,
+		"BottomMargin":0.3
 	},
 	"DetailGrid":{
 		"Recordset":{
@@ -73,11 +73,11 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":3.20146
+				"Width":2.80458
 			},
 			{
 				"Name":"Column7",
-				"Width":1.98438
+				"Width":1.19063
 			},
 			{
 				"Name":"Column4",
@@ -85,15 +85,15 @@
 			},
 			{
 				"Name":"C_Unit",
-				"Width":1.61396
+				"Width":2.01083
 			},
 			{
 				"Name":"C_Qty",
-				"Width":1.19063
+				"Width":0.79375
 			},
 			{
 				"Name":"Column9",
-				"Width":1.5875
+				"Width":1.00542
 			},
 			{
 				"Name":"Column2",
@@ -101,18 +101,19 @@
 			},
 			{
 				"Name":"Column3",
-				"Width":1.98438
+				"Width":0.978958
 			},
 			{
 				"Name":"Column11",
-				"Width":1.61396
+				"Width":1.79917
 			},
 			{
 				"Name":"Column12",
-				"Width":1.5875
+				"Width":1.79917
 			},
 			{
-				"Name":"Column13"
+				"Name":"Column13",
+				"Width":2.38125
 			}
 		],
 		"ColumnContent":{
@@ -126,8 +127,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.264583,
-							"Width":1.50813,
+							"Left":-0.211667,
+							"Width":1.40229,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -434,7 +435,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox45",
-							"Width":1.40229,
+							"AlignColumn":"Column1",
+							"Width":1.00542,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -442,13 +444,13 @@
 								"Bold":true,
 								"Charset":134
 							},
-							"Text":"总计"
+							"Text":"总计："
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
-							"Left":14.3933,
-							"Width":2.80458,
+							"Left":13.3879,
+							"Width":2.40771,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -461,8 +463,9 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":17.1979,
-							"Width":2.80458,
+							"AlignColumn":"Column13",
+							"Left":16.9863,
+							"Width":2.40771,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -483,13 +486,13 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"FieldBox",
 							"Name":"FieldBox21",
 							"Left":4.20688,
-							"Top":0.211667,
+							"Top":0.0264583,
 							"Width":6.79979,
 							"Height":0.582083,
 							"Font":{
@@ -503,8 +506,9 @@
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox44",
-							"Top":0.211667,
-							"Width":1.40229,
+							"AlignColumn":"Column1",
+							"Top":0.0264583,
+							"Width":1.00542,
 							"Height":0.582083,
 							"Font":{
 								"Name":"宋体",
@@ -512,13 +516,13 @@
 								"Bold":true,
 								"Charset":134
 							},
-							"Text":"小计"
+							"Text":"小计："
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":14.3933,
-							"Width":2.80458,
+							"Left":13.3879,
+							"Width":2.40771,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -531,8 +535,9 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":17.1979,
-							"Width":2.80458,
+							"AlignColumn":"Column13",
+							"Left":16.9863,
+							"Width":2.40771,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -564,7 +569,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.99,
+			"Height":2.01083,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -586,7 +591,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -601,7 +606,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
 					"Left":1.19063,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":5.82083,
 					"Height":0.582083,
 					"Font":{
@@ -616,7 +621,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
 					"Left":5.79438,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
 					"Font":{
@@ -631,7 +636,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
 					"Left":5.00063,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.582083,
 					"Font":{
@@ -646,9 +651,9 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":14.2081,
-					"Top":2.19604,
-					"Width":5.18583,
+					"Left":14.605,
+					"Top":1.45521,
+					"Width":5.00063,
 					"Height":0.396875,
 					"TextAlign":"MiddleRight",
 					"Text":"共[#SystemVar(PageCount)#]页 第[#SystemVar(PageNumber)#]页"

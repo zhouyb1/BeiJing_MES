@@ -9,10 +9,10 @@
 	"ProcessEndScript":"Report.FieldByName(\"JCJE\").AsFloat",
 	"Printer":{
 		"Oriention":"Landscape",
-		"LeftMargin":1,
-		"TopMargin":0.5,
+		"LeftMargin":0.3,
+		"TopMargin":0.3,
 		"RightMargin":0.3,
-		"BottomMargin":0.5
+		"BottomMargin":0.3
 	},
 	"DetailGrid":{
 		"AppendBlankRow":true,
@@ -148,7 +148,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.264583,
-							"Width":1.45521,
+							"Width":1.42875,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -568,7 +568,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.99,
+			"Height":2.19604,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -590,7 +590,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -605,7 +605,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
 					"Left":1.19063,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":5.82083,
 					"Height":0.582083,
 					"Font":{
@@ -619,8 +619,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
-					"Left":7.59354,
-					"Top":2.01083,
+					"Left":6.00604,
+					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
 					"Font":{
@@ -634,9 +634,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
-					"Left":5.21229,
-					"Top":2.01083,
-					"Width":1.37583,
+					"Left":4.39208,
+					"Top":1.45521,
+					"Width":1.40229,
 					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
@@ -650,9 +650,9 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":22.8071,
-					"Top":2.40771,
-					"Width":5.18583,
+					"Left":22.9923,
+					"Top":1.45521,
+					"Width":5.21229,
 					"Height":0.396875,
 					"TextAlign":"MiddleRight",
 					"Text":"共[#SystemVar(PageCount)#]页 第[#SystemVar(PageNumber)#]页"

@@ -188,7 +188,7 @@ var bootstrap = function ($, ayma) {
                         id: 'YWCRKTJ',
                         title: '原物料出入库打印',
                         url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport?startTime=' + startTime + "&endTime=" + endTime + "&M_GoodsName=" + M_GoodsName + "&S_Name=" + S_Name + "&ToDate=" + ToDate + "&report=YWLCRKTJReport&data=YWLCRKTJ",
-                        width: 1000,
+                        width: 1200,
                         height: 800,
                         maxmin: true,
                         callBack: function (id) {

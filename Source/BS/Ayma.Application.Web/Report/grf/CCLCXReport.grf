@@ -8,10 +8,10 @@
 	},
 	"Printer":{
 		"Oriention":"Landscape",
-		"LeftMargin":1,
-		"TopMargin":0.5,
+		"LeftMargin":0.3,
+		"TopMargin":0.3,
 		"RightMargin":0.3,
-		"BottomMargin":0.5
+		"BottomMargin":0.3
 	},
 	"DetailGrid":{
 		"AppendBlankRow":true,
@@ -441,14 +441,14 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.99,
+			"Height":2.01083,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
-					"Left":9.60438,
+					"Left":9.78958,
 					"Top":0.211667,
-					"Width":8.99583,
+					"Width":9.02229,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -463,7 +463,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -478,7 +478,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
 					"Left":1.19063,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":5.82083,
 					"Height":0.582083,
 					"Font":{
@@ -493,7 +493,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
 					"Left":4.39208,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
 					"Font":{
@@ -508,7 +508,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
 					"Left":3.41313,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.37583,
 					"Height":0.582083,
 					"Font":{
@@ -524,7 +524,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
 					"Left":22.8071,
-					"Top":2.40771,
+					"Top":1.45521,
 					"Width":5.18583,
 					"Height":0.396875,
 					"TextAlign":"MiddleRight",

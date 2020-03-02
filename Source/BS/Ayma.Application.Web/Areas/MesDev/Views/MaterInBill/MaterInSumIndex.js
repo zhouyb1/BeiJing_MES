@@ -24,9 +24,9 @@ var bootstrap = function ($, ayma) {
             $('#am_print').on('click', function () {
                 ayma.layerForm({
                     id: 'GYSCHFLHZ',
-                    title: '供应商存货分类汇总',
+                    title: '供应商存货分类汇总打印',
                     url: top.$.rootUrl + '/MesDev/MaterInBill/PrintReport3?report=GYSCHFLHZReport&data=GYSCHFLHZ&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
-                    width: 1000,
+                    width: 1200,
                     height: 800,
                     maxmin: true,
                     callBack: function (id) {

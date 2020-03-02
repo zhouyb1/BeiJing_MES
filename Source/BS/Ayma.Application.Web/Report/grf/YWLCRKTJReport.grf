@@ -7,10 +7,10 @@
 		"Charset":134
 	},
 	"Printer":{
-		"LeftMargin":0.5,
+		"LeftMargin":0.3,
 		"TopMargin":0.3,
-		"RightMargin":0.5,
-		"BottomMargin":1
+		"RightMargin":0.3,
+		"BottomMargin":0.3
 	},
 	"DetailGrid":{
 		"AppendBlankRow":true,
@@ -124,7 +124,7 @@
 			},
 			{
 				"Name":"C_Unit",
-				"Width":1.37583
+				"Width":1.19063
 			},
 			{
 				"Name":"C_Qty",
@@ -181,7 +181,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.3175,
-							"Width":1.61396,
+							"Width":1.56104,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -569,7 +569,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.99,
+			"Height":2.19604,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -591,7 +591,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -606,7 +606,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
 					"Left":1.40229,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":5.79438,
 					"Height":0.582083,
 					"Font":{
@@ -621,7 +621,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
 					"Left":5.3975,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
 					"Font":{
@@ -636,7 +636,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
 					"Left":4.78896,
-					"Top":2.01083,
+					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.582083,
 					"Font":{
@@ -652,7 +652,7 @@
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
 					"Left":14.2081,
-					"Top":2.19604,
+					"Top":1.64042,
 					"Width":5.18583,
 					"Height":0.396875,
 					"TextAlign":"MiddleRight",

@@ -54,7 +54,7 @@ var bootstrap = function ($, ayma) {
             //导出excel
             $('#am_export').on('click', function () {
                 var tableName = "girdtable";
-                var fileName = "其它出库汇总报表";
+                var fileName = "领料出库汇总报表";
                 ayma.layerForm({
                     id: "ExcelExportForm",
                     title: '导出Excel数据',
@@ -75,7 +75,7 @@ var bootstrap = function ($, ayma) {
                 var StockCode = $('#StockCode').selectGet();
                 ayma.layerForm({
                     id: 'LLCKHZBBReport',
-                    title: '原物料出入库打印',
+                    title: '领料出库汇总报表打印',
                     url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport3?starttime=' + starttime + "&endtime=" + endtime + "&GoodsCode=" + GoodsCode + "&StockCode=" + StockCode + "&report=LLCKHZBBReport&data=LLCKHZBB",
                     width: 1000,
                     height: 800,

@@ -10,7 +10,7 @@
 		"LeftMargin":0.5,
 		"TopMargin":0.3,
 		"RightMargin":0.5,
-		"BottomMargin":1
+		"BottomMargin":0.3
 	},
 	"DetailGrid":{
 		"Recordset":{
@@ -125,8 +125,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.264583,
-							"Width":1.48167,
+							"Left":-0.211667,
+							"Width":1.34938,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -383,7 +383,7 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -394,30 +394,31 @@
 						{
 							"Type":"StaticBox",
 							"Name":"TextBox9",
-							"Top":0.185208,
-							"Width":1.98438,
-							"Height":0.582083,
+							"AlignColumn":"Column1",
+							"Top":0.211667,
+							"Width":1.00542,
+							"Height":0.396875,
 							"Text":"总计："
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox4",
-							"Left":8.20208,
+							"Name":"SummaryBox8",
+							"AlignColumn":"C_Qty",
+							"Left":11.1654,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":1.64042,
 							"Height":0.396875,
-							"TextAlign":"MiddleRight",
 							"DataField":"M_Qty",
 							"Format":"0"
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox5",
-							"Left":12.1973,
+							"Name":"SummaryBox9",
+							"AlignColumn":"Column2",
+							"Left":14.5785,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":2.64583,
 							"Height":0.396875,
-							"TextAlign":"MiddleRight",
 							"DataField":"Amount",
 							"Format":"$#,##0.00"
 						}
@@ -428,7 +429,7 @@
 				"Name":"Group1",
 				"ByFields":"M_SupplyCode",
 				"GroupHeader":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"FieldBox",
@@ -493,15 +494,16 @@
 				},
 				"GroupFooter":{
 					"BackColor":"E1FFFF",
-					"Height":0.79375,
+					"Height":0.608542,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox47",
 							"BackColor":"FFFFFF",
+							"AlignColumn":"Column1",
 							"Top":0.211667,
-							"Width":2.19604,
-							"Height":0.582083,
+							"Width":1.00542,
+							"Height":0.396875,
 							"Font":{
 								"Name":"宋体",
 								"Size":90000,
@@ -514,9 +516,10 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox6",
 							"BackColor":"FFFFFF",
-							"Left":8.20208,
+							"AlignColumn":"C_Qty",
+							"Left":11.1654,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":1.64042,
 							"Height":0.396875,
 							"Font":{
 								"Name":"宋体",
@@ -524,7 +527,6 @@
 								"Bold":true,
 								"Charset":134
 							},
-							"TextAlign":"MiddleRight",
 							"DataField":"M_Qty",
 							"Format":"0"
 						},
@@ -532,9 +534,10 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox7",
 							"BackColor":"FFFFFF",
-							"Left":12.409,
+							"AlignColumn":"Column2",
+							"Left":14.5785,
 							"Top":0.211667,
-							"Width":2.59292,
+							"Width":2.64583,
 							"Height":0.396875,
 							"Font":{
 								"Name":"宋体",
@@ -542,7 +545,6 @@
 								"Bold":true,
 								"Charset":134
 							},
-							"TextAlign":"MiddleRight",
 							"DataField":"Amount",
 							"Format":"$#,##0.00"
 						}
@@ -567,7 +569,7 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":2.59292,
+			"Height":2.01083,
 			"Control":[
 				{
 					"Type":"StaticBox",
@@ -649,10 +651,10 @@
 				{
 					"Type":"MemoBox",
 					"Name":"MemoBox1",
-					"Left":12.0121,
-					"Top":1.64042,
-					"Width":5.18583,
-					"Height":0.396875,
+					"Left":14.3933,
+					"Top":1.40229,
+					"Width":5.21229,
+					"Height":0.608542,
 					"TextAlign":"MiddleRight",
 					"Text":"共[#SystemVar(PageCount)#]页 第[#SystemVar(PageNumber)#]页"
 				}

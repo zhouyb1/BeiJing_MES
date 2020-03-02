@@ -111,9 +111,9 @@ var bootstrap = function ($, ayma) {
             $('#am_print').on('click', function () {
                 ayma.layerForm({
                     id: 'KCMXTJ',
-                    title: '库存明细打印',
+                    title: '库存明细统计打印',
                     url: top.$.rootUrl + '/MesDev/MaterialsSum/PrintReport2?report=KCMXTJReport&data=KCMXTJ&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
-                    width: 1000,
+                    width: 1200,
                     height: 800,
                     maxmin: true,
                     callBack: function (id) {

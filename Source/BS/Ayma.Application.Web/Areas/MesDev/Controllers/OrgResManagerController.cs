@@ -450,8 +450,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["制作人"].SetOrdinal(11);
 
 
-            var ms = NPOIExcel.ToExcel(dt, "出成率查询报表", "出成率查询报表");
-            return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率查询报表.xls");
+            var ms = NPOIExcel.ToExcel(dt, "出成率实时查询", "出成率实时查询");
+            return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率实时查询.xls");
         }
     }
 }

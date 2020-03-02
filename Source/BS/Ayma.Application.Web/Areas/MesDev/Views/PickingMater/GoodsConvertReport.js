@@ -49,9 +49,9 @@ var bootstrap = function ($, ayma) {
             $('#am_print').on('click', function () {
                 ayma.layerForm({
                     id: 'CCLBB',
-                    title: '出成率报表',
+                    title: '出成率报表-按原物料打印',
                     url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport4?report=CCLBBReport&data=CCLBB&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
-                    width: 1000,
+                    width: 1200,
                     height: 800,
                     maxmin: true,
                     callBack: function (id) {

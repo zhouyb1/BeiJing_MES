@@ -110,7 +110,7 @@ var bootstrap = function ($, ayma) {
                 var keyValue = $('#girdtable_sum').jfGridValue('m_supplycode');
                     ayma.layerForm({
                         id: 'GYSJHSJHZ',
-                        title: '供应商供货数据汇总',
+                        title: '供应商供货数据汇总打印',
                         url: top.$.rootUrl + '/MesDev/SupplyGoodsCountRep/PrintReport?keyValue=' + keyValue + "&endtime=" + endTime + "&starttime=" + startTime + "&report=GYSJHSJHZReport&data=GYSJHSJHZ",
                         width: 1000,
                         height: 800,

@@ -75,7 +75,7 @@ var bootstrap = function ($, ayma) {
                 var StockCode = $('#StockCode').selectGet();
                 ayma.layerForm({
                     id: 'QTCKHZBB',
-                    title: '原物料出入库打印',
+                    title: '其它出库汇总报表打印',
                     url: top.$.rootUrl + '/MesDev/PickingMater/PrintReport2?starttime=' + starttime + "&endtime=" + endtime + "&GoodsCode=" + GoodsCode + "&StockCode=" + StockCode + "&report=QTCKHZBBReport&data=QTCKHZBB",
                     width: 1000,
                     height: 800,

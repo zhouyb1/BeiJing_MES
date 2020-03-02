@@ -65,9 +65,9 @@ var bootstrap = function ($, ayma) {
             $('#am_print').on('click', function () {
                 ayma.layerForm({
                     id: 'CCLCX',
-                    title: '出成率查询',
+                    title: '出成率实时查询打印',
                     url: top.$.rootUrl + '/MesDev/OrgResManager/PrintReport2?report=CCLCXReport&data=CCLCX&queryJson=' + encodeURIComponent(JSON.stringify(jsonquery)),
-                    width: 1000,
+                    width: 1200,
                     height: 800,
                     maxmin: true,
                     callBack: function (id) {
