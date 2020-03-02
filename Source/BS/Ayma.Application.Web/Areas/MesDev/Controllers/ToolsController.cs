@@ -109,6 +109,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(stockList);
         }
         /// <summary>
+        /// 根据仓库获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetGoodsListByStock(string S_Code)
+        {
+            var stockList = toosIBLL.GetGoodsListByStock(S_Code);
+            return Success(stockList);
+        }
+        /// <summary>
         /// 获取客户列表
         /// </summary>
         /// <returns></returns>

@@ -68,18 +68,7 @@ var bootstrap = function ($, ayma) {
                 tabTitle = activeTab;
             });
             //原物料名称
-            $("#G_Code").select({
-                type: 'default',
-                value: 'G_Code',
-                text: 'G_Name',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
-                // 访问数据接口参数
-            });
+            $('#G_Code').select();
             //原物料仓库
             $("#S_Code").select({
                 type: 'default',
@@ -92,7 +81,32 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetOriginalStockList',
                 // 访问数据接口参数
+            }).bind("change", function () {
+                var S_Code = $('#S_Code').selectGet();
+                $('#G_Code').selectRefresh({
+                    url: top.$.rootUrl + '/MesDev/Tools/GetGoodsListByStock?S_Code=' + S_Code,//根据仓库查物料
+                    type: 'default',
+                    value: 'G_Code',
+                    text: "G_Name",
+                    maxHeight: 225,
+                    param: {}
+                });
+
+            });;
+            //原物料名称
+            $("#G_Code").select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetMaterialGoodsList',
+                // 访问数据接口参数
             });
+
             //绑定供应商
             $("#G_SupplyCode").select({
                 type: 'default',

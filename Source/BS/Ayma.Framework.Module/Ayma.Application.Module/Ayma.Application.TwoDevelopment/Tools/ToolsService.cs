@@ -249,6 +249,38 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 根据仓库获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsListByStock(string S_Code)
+        {
+            try
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(@"select * from Mes_Goods where G_Kind=1 and (select S_Kind from Mes_Stock where S_Code=G_StockCode)=1");
+                if (!S_Code.IsEmpty())
+                {
+                    sb.Append(" and G_StockCode=" + S_Code);
+                }
+                else
+                {
+                    sb.Append(" and G_StockCode=''");
+                }
+                return this.BaseRepository().FindList<Mes_GoodsEntity>(sb.ToString());
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 根据参数获取仓库列表
         /// </summary>
         /// <returns></returns>
@@ -740,6 +772,8 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 }
             }
         }
+    
+        /// <summary>
         /// <summary>
         /// 根据供应商获取物料列表
         /// </summary>

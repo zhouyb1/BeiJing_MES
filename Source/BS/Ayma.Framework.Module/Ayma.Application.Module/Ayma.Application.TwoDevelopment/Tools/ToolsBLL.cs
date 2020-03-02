@@ -207,6 +207,28 @@ namespace Ayma.Application.TwoDevelopment.Tools
             }
         }
         /// <summary>
+        /// 根据仓库获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Mes_GoodsEntity> GetGoodsListByStock(string S_Code)
+        {
+            try
+            {
+                return toolsService.GetGoodsListByStock(S_Code);
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowBusinessException(ex);
+                }
+            }
+        }
+        /// <summary>
         /// 获取客户    列表
         /// </summary>
         /// <returns></returns>

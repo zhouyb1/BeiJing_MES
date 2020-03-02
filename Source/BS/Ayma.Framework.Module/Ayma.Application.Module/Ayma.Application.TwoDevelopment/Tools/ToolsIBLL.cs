@@ -69,10 +69,15 @@ namespace Ayma.Application.TwoDevelopment.Tools
         /// <returns></returns>
         List<TreeModel> GetBomRecordTree();
         /// <summary>
-        /// 获取原料仓库列表
+        /// 根据参数获取仓库列表
         /// </summary>
         /// <returns></returns>
         IEnumerable<Mes_StockEntity> GetStockListByParam(string strWhere);
+        /// <summary>
+        /// 根据仓库获取物料列表
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Mes_GoodsEntity> GetGoodsListByStock(string S_Code);
         /// <summary>
         /// 获取原物料仓库列表
         /// </summary>
