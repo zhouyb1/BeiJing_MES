@@ -44,8 +44,8 @@ namespace DesktopApp
         private void UpdateGoods()
         {
             Mes_WorkShopScanBLL WorkShopScanBLL = new Mes_WorkShopScanBLL();
-            //string strSql = "select a.I_GoodsCode,a.I_GoodsName,SUM(a.I_Qty) as I_Qty,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0 GROUP BY a.I_GoodsCode,a.I_GoodsName,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price";
-            string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Batch,a.I_Qty,a.I_Unit,a.ID,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
+            string strSql = "select a.I_GoodsCode,a.I_GoodsName,SUM(a.I_Qty) as I_Qty,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0 GROUP BY a.I_GoodsCode,a.I_GoodsName,a.I_Unit,a.I_StockCode,a.I_StockName,c.G_Price";
+            //string strSql = "select a.I_GoodsCode,a.I_GoodsName,a.I_Batch,a.I_Qty,a.I_Unit,a.ID,a.I_StockCode,a.I_StockName,c.G_Price from Mes_Inventory as a left join Mes_Convert as b on b.C_Code = a.I_GoodsCode left join Mes_Goods as c on a.I_GoodsCode = c.G_Code where C_SecCode = '" + txtGoodsCode.Text + "' and a.I_StockCode = '" + Globels.strStockCode + "' and a.I_Qty > 0";
             DataSet ds = new DataSet();
             ds = WorkShopScanBLL.GetList_WorkShopScan2(strSql);
 
@@ -82,7 +82,7 @@ namespace DesktopApp
                         strStockCode = dataGridView1.Rows[i].Cells["仓库编码"].Value.ToString();
                         strStockName = dataGridView1.Rows[i].Cells["仓库名称"].Value.ToString();
 
-                        string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
+                        //string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
                         string strPrice = dataGridView1.Rows[i].Cells["价格"].Value.ToString();
                         string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
                         string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
@@ -117,16 +117,16 @@ namespace DesktopApp
                                 string strTempGoods = str[0].ToString();
                                 string strTempPc = str[2].ToString();
                                 string strTempQty = str[3].ToString();
-                                if (strTempGoods == strGoods && strTempPc == strPc)
+                                if (strTempGoods == strGoods)
                                 {
                                     decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
-                                    Goods[j] = strGoods + "," + dQty.ToString() + "," + strPc + "," + strPrice + "," + strName + "," + strUnit;
+                                    Goods[j] = strGoods + "," + dQty.ToString()  + "," + strPrice + "," + strName + "," + strUnit;
                                     bRet = true;
                                 }
                             }
                             if (bRet == false)
                             {
-                                Goods.Add(strGoods + "," + strQty + "," + strPc + "," + strPrice + "," + strName + "," + strUnit);
+                                Goods.Add(strGoods + "," + strQty + ","  + strPrice + "," + strName + "," + strUnit);
                             }
                         }
                         else
@@ -177,7 +177,7 @@ namespace DesktopApp
                 for (int i = 0; i < Goods.Count; i++)
                 {
                     string[] strTemp = Goods[i].ToString().Split(',');
-                    dTotal = dTotal + (Convert.ToDecimal(strTemp[3].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
+                    dTotal = dTotal + (Convert.ToDecimal(strTemp[2].ToString()) * Convert.ToDecimal(strTemp[1].ToString()));
                 }
                 dSecPrice = dTotal / Convert.ToDecimal(txtQty.Text);
 
@@ -195,22 +195,62 @@ namespace DesktopApp
                     string[] strTemp = Goods[i].ToString().Split(',');
 
                     string strGoodsCode = strTemp[0].ToString();
-                    Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
-                    var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_SecCode = '" + strGoodsCode + "'");
-                    string strC_GoodsCode = "";
-                    if (Convert_rows.Count > 0)
+                    //Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
+                    //var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_SecCode = '" + strGoodsCode + "'");
+                    //string strC_GoodsCode = "";
+                    //if (Convert_rows.Count > 0)
+                    //{
+                    //    strC_GoodsCode = Convert_rows[0].C_Code;
+                    //}
+                    MesInventoryBLL InventoryBLL = new MesInventoryBLL();
+                    var Inventory_row = InventoryBLL.GetData(" where I_StockCode = '" + Globels.strStockCode + "' and I_GoodsCode = '" + strGoodsCode + "' and I_Qty > 0 order by I_Batch");
+                    if (Inventory_row.Count > 0)
                     {
-                        strC_GoodsCode = Convert_rows[0].C_Code;
+                        Decimal dTotalQty = Convert.ToDecimal(strTemp[1].ToString());
+                        for (int j = 0; j < Inventory_row.Count; j++)
+                        {
+                            if (dTotalQty > 0)
+                            {
+                                if (dTotalQty < Inventory_row[j].I_Qty)
+                                {
+
+                                    OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
+                                    OrgResDetailEntity.O_GoodsName = strTemp[3].ToString();
+                                    OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[2].ToString());
+                                    OrgResDetailEntity.O_Qty = dTotalQty;
+                                    OrgResDetailEntity.O_Unit = strTemp[4].ToString();
+                                    OrgResDetailEntity.O_Batch = Inventory_row[j].I_Batch;
+                                    OrgResDetailEntity.O_SecPrice = dSecPrice;
+                                    nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
+                                    //UpdateData(Inventory_row[j].ID, Inventory_row[j].I_Qty - dTotalQty);
+                                    break;
+                                }
+                                else
+                                {
+                                    OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
+                                    OrgResDetailEntity.O_GoodsName = strTemp[3].ToString();
+                                    OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[2].ToString());
+                                    OrgResDetailEntity.O_Qty = Inventory_row[j].I_Qty;
+                                    OrgResDetailEntity.O_Unit = strTemp[4].ToString();
+                                    OrgResDetailEntity.O_Batch = Inventory_row[j].I_Batch;
+                                    OrgResDetailEntity.O_SecPrice = dSecPrice;
+                                    nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
+                                    dTotalQty = dTotalQty - Inventory_row[j].I_Qty;
+                                    //DeleteData(Inventory_row[j].ID);
+                                }
+                            }
+                            
+                        }
                     }
 
-                    OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
-                    OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
-                    OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
-                    OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
-                    OrgResDetailEntity.O_Unit = strTemp[5].ToString();
-                    OrgResDetailEntity.O_Batch = strTemp[2].ToString();
-                    OrgResDetailEntity.O_SecPrice = dSecPrice;
-                    nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
+                    //OrgResDetailEntity.O_GoodsCode = strTemp[0].ToString();
+                    //OrgResDetailEntity.O_GoodsName = strTemp[4].ToString();
+                    //OrgResDetailEntity.O_Price = Convert.ToDecimal(strTemp[3].ToString());
+                    //OrgResDetailEntity.O_Qty = Convert.ToDecimal(strTemp[1].ToString());
+                    //OrgResDetailEntity.O_Unit = strTemp[5].ToString();
+                    //OrgResDetailEntity.O_Batch = strTemp[2].ToString();
+                    //OrgResDetailEntity.O_SecPrice = dSecPrice;
+                    //nRow = OrgResDetailBLL.SaveEntity("", OrgResDetailEntity);
 
                 }
                 Upload(strIn_No);
@@ -232,27 +272,27 @@ namespace DesktopApp
         {
             try
             {
-                int nLen = dataGridView1.Rows.Count;
-                for (int i = 0; i < nLen; i++)
-                {
-                    object obj = dataGridView1.Rows[i].Cells["选择"].Value;
-                    if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
-                    {
-                        decimal dsyQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
-                        decimal dylQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
-                        if (dsyQty == dylQty)
-                        {
-                            string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
-                            DeleteData(strID);
-                        }
-                        else
-                        {
-                            decimal dQty = dylQty - dsyQty;
-                            string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
-                            UpdateData(strID, dQty);
-                        }
-                    }
-                }
+                //int nLen = dataGridView1.Rows.Count;
+                //for (int i = 0; i < nLen; i++)
+                //{
+                //    object obj = dataGridView1.Rows[i].Cells["选择"].Value;
+                //    if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                //    {
+                //        decimal dsyQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["实用数量"].Value.ToString());
+                //        decimal dylQty = Convert.ToDecimal(dataGridView1.Rows[i].Cells["数量"].Value.ToString());
+                //        if (dsyQty == dylQty)
+                //        {
+                //            string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
+                //            DeleteData(strID);
+                //        }
+                //        else
+                //        {
+                //            decimal dQty = dylQty - dsyQty;
+                //            string strID = dataGridView1.Rows[i].Cells["ID"].Value.ToString();
+                //            UpdateData(strID, dQty);
+                //        }
+                //    }
+                //}
 
                 string strTemp = Globels.strID;
                 string[] str = strTemp.Split(',');
