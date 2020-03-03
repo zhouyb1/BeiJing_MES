@@ -321,9 +321,23 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             pagination.rows = 999999;
             pagination.sidx = "";
             pagination.sord = "ASC";
-            var datas = materialsSumIBLL.GetInventoryDetail(pagination,queryJson);
+              var datas = materialsSumIBLL.GetInventoryDetail(pagination,queryJson);
             var dt = AsDataTable(datas);
-            var ms = NPOIExcel.ToExcel(dt, "库存明细统计", "库存明细统计");
+            var queryParam = queryJson.ToJObject();
+            var StartTime = "";
+            var EndTime = "";
+            if (!queryParam["start"].ToString().IsEmpty() && !queryParam["end"].ToString().IsEmpty())
+            {
+                StartTime = queryParam["start"].ToString();
+                EndTime = queryParam["end"].ToString();
+            }
+            else
+            {
+                StartTime = queryParam["StartTime"].ToString();
+                EndTime = queryParam["EndTime"].ToString();
+            
+            }
+            var ms = NPOIExcel.ToExcelMoreheader(dt, "库存明细统计", "库存明细统计", StartTime, EndTime);
             return File(ms.GetBuffer(), "application/vnd.ms-excel", "库存明细统计.xls");
         }
         /// <summary>
@@ -346,10 +360,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     case "F_GoodsName": table.Columns.Add("商品名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_OrderNo": table.Columns.Add("单据编号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "G_Price": table.Columns.Add("单位成本", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "F_InQty": table.Columns.Add("收入(数量，金额，无税金额)", typeof(string)); break;
-                    case "F_OutQty": table.Columns.Add("发出(数量，金额)", typeof(string)); break;
-                    case "IntervoryQty": table.Columns.Add("结存(数量，金额)", typeof(string)); break;
+                    case "F_InQty": table.Columns.Add("收入_数量", typeof(string)); break;
+                    case "G_Price": table.Columns.Add("收入_单位成本(元)", typeof(string)); break;
+                    case "SRJE": table.Columns.Add("收入_金额", typeof(string)); break;
+                    case "Aoumount": table.Columns.Add("收入_无税金额", typeof(string)); break;
+                    case "F_OutQty": table.Columns.Add("发出_数量", typeof(string)); break;
+                    case "G_Price1": table.Columns.Add("发出_单位成本(元)", typeof(string)); break;
+                    case "FCJE": table.Columns.Add("发出_金额", typeof(string)); break;
+                    case "IntervoryQty": table.Columns.Add("结存_数量", typeof(string)); break;
+                    case "G_Price2": table.Columns.Add("结存_单位成本(元)", typeof(string)); break;
+                    case "JCJE": table.Columns.Add("结存_金额", typeof(string)); break;
                     default: break;
                 }
             }
@@ -360,10 +380,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             table.Columns["商品名称"].SetOrdinal(3);
             table.Columns["单位"].SetOrdinal(4);
             table.Columns["单据编号"].SetOrdinal(5);
-            table.Columns["单位成本"].SetOrdinal(6);
-            table.Columns["收入(数量，金额，无税金额)"].SetOrdinal(7);
-            table.Columns["发出(数量，金额)"].SetOrdinal(8);
-            table.Columns["结存(数量，金额)"].SetOrdinal(9);
+            table.Columns["收入_数量"].SetOrdinal(6);
+            table.Columns["收入_单位成本(元)"].SetOrdinal(7);
+            table.Columns["收入_金额"].SetOrdinal(8);
+            table.Columns["收入_无税金额"].SetOrdinal(9);
+            table.Columns["发出_数量"].SetOrdinal(10);
+            table.Columns["发出_单位成本(元)"].SetOrdinal(11);
+            table.Columns["发出_金额"].SetOrdinal(12);
+            table.Columns["结存_数量"].SetOrdinal(13);
+            table.Columns["结存_单位成本(元)"].SetOrdinal(14);
+            table.Columns["结存_金额"].SetOrdinal(15);
             //给数据
             foreach (var item in data)
             {
@@ -377,10 +403,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         case "F_GoodsName": row["商品名称"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "F_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "F_OrderNo": row["单据编号"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "G_Price": row["单位成本"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "F_InQty": row["收入(数量，金额，无税金额)"] = item.F_InQty + "," + Math.Round((item.F_InQty * item.G_Price).ToDecimal(),6)+ "," + item.Aoumount; break;
-                        case "F_OutQty": row["发出(数量，金额)"] = item.F_OutQty + "," + Math.Round((item.F_OutPrice * item.G_Price).ToDecimal(), 6); break;
-                        case "IntervoryQty": row["结存(数量，金额)"] = item.IntervoryQty + "," + Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
+                        case "F_InQty": row["收入_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price": row["收入_单位成本(元)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "SRJE": row["收入_金额"] = Math.Round((item.F_InQty * item.G_Price).ToDecimal(), 6); break;
+                        case "Aoumount": row["收入_无税金额"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_OutQty": row["发出_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price1": row["发出_单位成本(元)"] = item.G_Price; break;
+                        case "FCJE": row["发出_金额"] = Math.Round((item.F_OutQty * item.G_Price).ToDecimal(), 6); break;
+                        case "IntervoryQty": row["结存_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price2": row["结存_单位成本(元)"] = item.G_Price; break;
+                        case "JCJE": row["结存_金额"] = Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
                     }
                 table.Rows.Add(row);
             }
@@ -403,7 +435,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             pagination.sidx = "g_code";
             pagination.sord = "desc";
             DataTable dt =materialsSumIBLL.GetMaterialSumListByDate(pagination,queryJson);
-            //给列名
             dt.Columns["rownum"].ColumnName = "序号";
             dt.Columns["g_code"].ColumnName = "商品编码";
             dt.Columns["g_name"].ColumnName = "商品名称";
@@ -426,10 +457,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["otherwarehouse"].ColumnName = "其它入库_数量";
             dt.Columns["otheroutbound"].ColumnName = "其它出库_数量";
             dt.Columns["supplierback"].ColumnName = "退供应商_数量";
-            dt.Columns["startTime"].ColumnName = "开始时间";
-            dt.Columns["endTime"].ColumnName = "结束时间";
-
-
+            dt.Columns.Remove("startTime");
+            dt.Columns.Remove("endTime");
             //表格列名排序
             dt.Columns["序号"].SetOrdinal(0);
             dt.Columns["商品编码"].SetOrdinal(1);
@@ -453,11 +482,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["其它入库_数量"].SetOrdinal(19);
             dt.Columns["其它出库_数量"].SetOrdinal(20);
             dt.Columns["退供应商_数量"].SetOrdinal(21);
-            dt.Columns["开始时间"].SetOrdinal(22);
-            dt.Columns["结束时间"].SetOrdinal(23);
             //给数据
 
- 
+     
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     if (dt.Rows[i]["原物料销售_单价"].ToString() == null || dt.Rows[i]["原物料销售_单价"].ToString()=="")
@@ -477,9 +504,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         dt.Rows[i]["原物料销售_金额"] = dt.Rows[i]["原物料销售_金额"];
                     }
                 }
-            
-            
-            var ms = NPOIExcel.ToExcel(dt, "原物料出入库统计", "原物料出入库统计");
+              var queryParam = queryJson.ToJObject();
+
+
+              var ms = NPOIExcel.ToExcelMoreheader(dt, "原物料出入库统计", "原物料出入库统计", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
             return File(ms.GetBuffer(), "application/vnd.ms-excel", "原物料出入库统计.xls");
         }
         

@@ -8,7 +8,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel
 {
    public class InventoryViewModel
     {
-       
+       public string rownum { get; set; }  
         public string F_OrderNo { get; set; }
         public string F_GoodsCode { get; set; }
         public string F_GoodsName { get; set; }
@@ -30,5 +30,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel
         public decimal? F_OutQty { get; set; }
         public decimal? F_OutPrice { get; set; }
         public decimal? G_Price { get; set; }//结存的价格
+        public decimal? G_Price1 { get; set; }//结存的价格
+        public decimal? G_Price2 { get; set; }//结存的价格
     }
 }

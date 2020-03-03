@@ -768,8 +768,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         }
                     }
                     #endregion
-
-                    var ms = NPOIExcel.ToExcel(dt, "出成率报表-按原物料", "出成率报表-按原物料");
+                    var queryParam = queryJson.ToJObject();
+                    var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率报表-按原物料", "出成率报表-按原物料", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
                     return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率报表-按原物料.xls");
                 }
                 else

@@ -451,8 +451,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["出成率(%)"].SetOrdinal(11);
             dt.Columns["制作人"].SetOrdinal(12);
 
-
-            var ms = NPOIExcel.ToExcel(dt, "出成率实时查询", "出成率实时查询");
+            var queryParam = queryJson.ToJObject();
+            var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率实时查询", "出成率实时查询", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
             return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率实时查询.xls");
         }
     }
