@@ -648,6 +648,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 if (string.IsNullOrEmpty(message))
                 {
                     //给列名
+                    dt.Columns.Add("rownum", typeof(string));
+                    dt.Columns["rownum"].ColumnName = "序号";
                     dt.Columns["F_CreateDate"].ColumnName = "日期";
                     dt.Columns["F_GoodsCode_Source"].ColumnName = "原物料_编码";
                     dt.Columns["F_GoodsName_Source"].ColumnName = "原物料_名称";
@@ -669,26 +671,27 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     dt.Columns["F_ConvertTag_04"].ColumnName = "包装_偏差数(盒)";
                     dt.Columns["F_ConvertRange_04"].ColumnName = "包装_偏差率(%)";
                     //表格列名排序
-                    dt.Columns["日期"].SetOrdinal(0);
-                    dt.Columns["原物料_编码"].SetOrdinal(1);
-                    dt.Columns["原物料_名称"].SetOrdinal(2);
-                    dt.Columns["原物料_数量(KG)"].SetOrdinal(3);
-                    dt.Columns["前处理_物料编码"].SetOrdinal(4);
-                    dt.Columns["前处理_物料名称"].SetOrdinal(5);
-                    dt.Columns["前处理_数量(KG)"].SetOrdinal(6);
-                    dt.Columns["前处理_转换标准率"].SetOrdinal(7);
-                    dt.Columns["前处理_转换率(%)"].SetOrdinal(8);
-                    dt.Columns["细加工_物料编码"].SetOrdinal(9);
-                    dt.Columns["细加工_物料名称"].SetOrdinal(10);
-                    dt.Columns["细加工_数量(KG)"].SetOrdinal(11);
-                    dt.Columns["细加工_转换标准率"].SetOrdinal(12);
-                    dt.Columns["细加工_转换率(%)"].SetOrdinal(13);
-                    dt.Columns["包装_物料编码"].SetOrdinal(14);
-                    dt.Columns["包装_物料名称"].SetOrdinal(15);
-                    dt.Columns["包装_实际份数量(盒)"].SetOrdinal(16);
-                    dt.Columns["包装_理论分数(盒)"].SetOrdinal(17);
-                    dt.Columns["包装_偏差数(盒)"].SetOrdinal(18);
-                    dt.Columns["包装_偏差率(%)"].SetOrdinal(19);
+                    dt.Columns["序号"].SetOrdinal(0);
+                    dt.Columns["日期"].SetOrdinal(1);
+                    dt.Columns["原物料_编码"].SetOrdinal(2);
+                    dt.Columns["原物料_名称"].SetOrdinal(3);
+                    dt.Columns["原物料_数量(KG)"].SetOrdinal(4);
+                    dt.Columns["前处理_物料编码"].SetOrdinal(5);
+                    dt.Columns["前处理_物料名称"].SetOrdinal(6);
+                    dt.Columns["前处理_数量(KG)"].SetOrdinal(7);
+                    dt.Columns["前处理_转换标准率"].SetOrdinal(8);
+                    dt.Columns["前处理_转换率(%)"].SetOrdinal(9);
+                    dt.Columns["细加工_物料编码"].SetOrdinal(10);
+                    dt.Columns["细加工_物料名称"].SetOrdinal(11);
+                    dt.Columns["细加工_数量(KG)"].SetOrdinal(12);
+                    dt.Columns["细加工_转换标准率"].SetOrdinal(13);
+                    dt.Columns["细加工_转换率(%)"].SetOrdinal(14);
+                    dt.Columns["包装_物料编码"].SetOrdinal(15);
+                    dt.Columns["包装_物料名称"].SetOrdinal(16);
+                    dt.Columns["包装_实际份数量(盒)"].SetOrdinal(17);
+                    dt.Columns["包装_理论分数(盒)"].SetOrdinal(18);
+                    dt.Columns["包装_偏差数(盒)"].SetOrdinal(19);
+                    dt.Columns["包装_偏差率(%)"].SetOrdinal(20);
                     //删除不要的列
                     dt.Columns.Remove("F_ConvertTag_01");
                     dt.Columns.Remove("F_ConvertTag_03");
@@ -768,6 +771,12 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         }
                     }
                     #endregion
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+
+                        dt.Rows[i]["序号"] = i + 1;
+                    }
+
                     var queryParam = queryJson.ToJObject();
                     var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率报表-按原物料", "出成率报表-按原物料", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
                     return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率报表-按原物料.xls");

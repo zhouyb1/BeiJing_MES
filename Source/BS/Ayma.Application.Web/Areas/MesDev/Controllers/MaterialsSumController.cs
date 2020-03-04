@@ -354,6 +354,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             {
                 switch (prop.Name)
                 {
+                    case "rownum": table.Columns.Add("序号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_CreateDate": table.Columns.Add("日期", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_Remark": table.Columns.Add("摘要", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_GoodsCode": table.Columns.Add("商品编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
@@ -374,21 +375,22 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
             }
             //表格列名排序
-            table.Columns["日期"].SetOrdinal(0);
-            table.Columns["摘要"].SetOrdinal(1);
-            table.Columns["商品编码"].SetOrdinal(2);
-            table.Columns["商品名称"].SetOrdinal(3);
-            table.Columns["单位"].SetOrdinal(4);
-            table.Columns["单据编号"].SetOrdinal(5);
-            table.Columns["收入_数量"].SetOrdinal(6);
-            table.Columns["收入_单位成本(元)"].SetOrdinal(7);
-            table.Columns["收入_金额"].SetOrdinal(8);
-            table.Columns["收入_无税金额"].SetOrdinal(9);
-            table.Columns["发出_数量"].SetOrdinal(10);
-            table.Columns["发出_单位成本(元)"].SetOrdinal(11);
-            table.Columns["发出_金额"].SetOrdinal(12);
-            table.Columns["结存_数量"].SetOrdinal(13);
-            table.Columns["结存_单位成本(元)"].SetOrdinal(14);
+            table.Columns["序号"].SetOrdinal(0);
+            table.Columns["日期"].SetOrdinal(1 );
+            table.Columns["摘要"].SetOrdinal(2);
+            table.Columns["商品编码"].SetOrdinal(3);
+            table.Columns["商品名称"].SetOrdinal(4);
+            table.Columns["单位"].SetOrdinal(5);
+            table.Columns["单据编号"].SetOrdinal(6);
+            table.Columns["收入_数量"].SetOrdinal(7);
+            table.Columns["收入_单位成本(元)"].SetOrdinal(8);
+            table.Columns["收入_金额"].SetOrdinal(9);
+            table.Columns["收入_无税金额"].SetOrdinal(10);
+            table.Columns["发出_数量"].SetOrdinal(11);
+            table.Columns["发出_单位成本(元)"].SetOrdinal(12);
+            table.Columns["发出_金额"].SetOrdinal(13);
+            table.Columns["结存_数量"].SetOrdinal(14);
+            table.Columns["结存_单位成本(元)"].SetOrdinal(15);
             table.Columns["结存_金额"].SetOrdinal(15);
             //给数据
             foreach (var item in data)
@@ -415,6 +417,11 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         case "JCJE": row["结存_金额"] = Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
                     }
                 table.Rows.Add(row);
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+
+                    table.Rows[i]["序号"] = i + 1;
+                }
             }
             return table;
         }

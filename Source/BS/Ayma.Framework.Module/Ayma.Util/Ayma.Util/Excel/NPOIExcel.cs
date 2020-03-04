@@ -179,21 +179,22 @@ namespace Ayma.Util
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 3, 3));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 4, 4));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 5, 5));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 6, 9));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 10, 12));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 12, 15));  
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 6, 6));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 7, 10));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 11, 13));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 13, 16));  
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
                     row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
                     row.Cells[i].CellStyle = cellStyle1;
                 }
-                row.CreateCell(6).SetCellValue("收入");
-                row.CreateCell(10).SetCellValue("发出");
-                row.CreateCell(12).SetCellValue("结存");
-                row.Cells[6].CellStyle = cellStyle1;
-                row.Cells[10].CellStyle = cellStyle1;
-                row.Cells[12].CellStyle = cellStyle1;
+                row.CreateCell(7).SetCellValue("收入");
+                row.CreateCell(11).SetCellValue("发出");
+                row.CreateCell(13).SetCellValue("结存");
+                row.Cells[7].CellStyle = cellStyle1;
+                row.Cells[11].CellStyle = cellStyle1;
+                row.Cells[13].CellStyle = cellStyle1;
                    
                 #endregion
             }
@@ -202,24 +203,25 @@ namespace Ayma.Util
                 #region 出成率报表-按原物料
                 row = sheet.CreateRow(2);
                 //合并
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 0, 0));             
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 1, 3));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 4, 8));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 9, 13));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 14, 19));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 0, 0));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 1, 1));  
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 2, 4));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 5, 9));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 10, 14));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 15, 20));
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
                     row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
                     row.Cells[i].CellStyle = cellStyle1;
                 }
-                row.CreateCell(1).SetCellValue("原物料");
-                row.CreateCell(4).SetCellValue("前处理");
-                row.CreateCell(9).SetCellValue("细加工");
-                row.CreateCell(14).SetCellValue("包装");
-                row.Cells[1].CellStyle = cellStyle1;
-                row.Cells[4].CellStyle = cellStyle1;
-                row.Cells[9].CellStyle = cellStyle1;
+                row.CreateCell(2).SetCellValue("原物料");
+                row.CreateCell(5).SetCellValue("前处理");
+                row.CreateCell(10).SetCellValue("细加工");
+                row.CreateCell(15).SetCellValue("包装");
+                row.Cells[2].CellStyle = cellStyle1;
+                row.Cells[5].CellStyle = cellStyle1;
+                row.Cells[10].CellStyle = cellStyle1;
                 row.Cells[14].CellStyle = cellStyle1;
                 #endregion
             }
@@ -228,9 +230,9 @@ namespace Ayma.Util
                 #region 出成率实时查询
                 row = sheet.CreateRow(2);
                 //合并
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 0, 3));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 4, 7));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 8, 8));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 0, 0));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 1, 4));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 5, 8));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 9, 9));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 10,10 ));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 11, 11));
@@ -241,10 +243,10 @@ namespace Ayma.Util
                     row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
                     row.Cells[i].CellStyle = cellStyle1;
                 }
-                row.CreateCell(0).SetCellValue("转换前");
-                row.CreateCell(4).SetCellValue("转换后");
-                row.Cells[0].CellStyle = cellStyle1;
-                row.Cells[4].CellStyle = cellStyle1;
+                row.CreateCell(1).SetCellValue("转换前");
+                row.CreateCell(5).SetCellValue("转换后");
+                row.Cells[1].CellStyle = cellStyle1;
+                row.Cells[5].CellStyle = cellStyle1;
                 #endregion
             }
             //处理表格列头
@@ -272,19 +274,31 @@ namespace Ayma.Util
             //单独设置列宽
             if (title == "库存明细统计")
             {
-                sheet.SetColumnWidth(0, 20 * 265);
-                sheet.SetColumnWidth(1, 50 * 265);
-                sheet.SetColumnWidth(5, 20 * 265);
-                sheet.SetColumnWidth(7, 20 * 265);
-                sheet.SetColumnWidth(11, 20 * 265);
-                sheet.SetColumnWidth(14, 20 * 265);
+                sheet.SetColumnWidth(0, 8 * 265);
+                sheet.SetColumnWidth(1, 20 * 265);
+                sheet.SetColumnWidth(2, 50 * 265);
+                sheet.SetColumnWidth(6, 20 * 265);
+                sheet.SetColumnWidth(8, 20 * 265);
+                sheet.SetColumnWidth(12, 20 * 265);
+                sheet.SetColumnWidth(15, 20 * 265);
             }
             if (title == "出成率报表-按原物料")
-            {
+            {    
                 for (int j = 0; j < table.Columns.Count; j++)
                 {
-                    sheet.SetColumnWidth(j, 20 * 265);
+                    if (j == 0)
+                    {
+                        sheet.SetColumnWidth(j, 8 * 265);
+                    }
+                    else
+                    {
+                        sheet.SetColumnWidth(j, 20 * 265);
+                    }
                 }
+            }
+            if (title == "出成率实时查询")
+            {
+                sheet.SetColumnWidth(0, 8 * 265);
             }
             using (MemoryStream ms = new MemoryStream())
             {

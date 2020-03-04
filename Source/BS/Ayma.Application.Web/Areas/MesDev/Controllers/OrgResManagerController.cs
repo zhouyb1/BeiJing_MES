@@ -423,6 +423,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             DataTable dt = orgResMangerIBLL.GetProductRateList(pagination, queryJson);
 
             //给列名
+            dt.Columns.Add("rownum", typeof(string));
+            dt.Columns["rownum"].ColumnName = "序号";
             dt.Columns["O_GoodsName"].ColumnName = "转换前_物料名称";
             dt.Columns["O_GoodsCode"].ColumnName = "转换前_物料编码";
             dt.Columns["O_Unit"].ColumnName = "转换前_单位";
@@ -437,19 +439,26 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["ProductRate"].ColumnName = "出成率(%)";
             dt.Columns["O_CreateBy"].ColumnName = "制作人";
             //表格列名排序
-            dt.Columns["转换前_物料名称"].SetOrdinal(0);
-            dt.Columns["转换前_物料编码"].SetOrdinal(1);
-            dt.Columns["转换前_单位"].SetOrdinal(2);
-            dt.Columns["转换前_使用数量"].SetOrdinal(3);
-            dt.Columns["转换后_物料编码"].SetOrdinal(4);
-            dt.Columns["转换后_物料名称"].SetOrdinal(5);
-            dt.Columns["转换后_单位"].SetOrdinal(6);
-            dt.Columns["转换后_使用数量"].SetOrdinal(7);
-            dt.Columns["作业日耗库"].SetOrdinal(8);
-            dt.Columns["作业工序"].SetOrdinal(9);
-            dt.Columns["作业班组"].SetOrdinal(10);
-            dt.Columns["出成率(%)"].SetOrdinal(11);
-            dt.Columns["制作人"].SetOrdinal(12);
+            dt.Columns["序号"].SetOrdinal(0);
+            dt.Columns["转换前_物料名称"].SetOrdinal(1);
+            dt.Columns["转换前_物料编码"].SetOrdinal(2);
+            dt.Columns["转换前_单位"].SetOrdinal(3);
+            dt.Columns["转换前_使用数量"].SetOrdinal(4);
+            dt.Columns["转换后_物料编码"].SetOrdinal(5);
+            dt.Columns["转换后_物料名称"].SetOrdinal(6);
+            dt.Columns["转换后_单位"].SetOrdinal(7);
+            dt.Columns["转换后_使用数量"].SetOrdinal(8);
+            dt.Columns["作业日耗库"].SetOrdinal(9);
+            dt.Columns["作业工序"].SetOrdinal(10);
+            dt.Columns["作业班组"].SetOrdinal(11);
+            dt.Columns["出成率(%)"].SetOrdinal(12);
+            dt.Columns["制作人"].SetOrdinal(13);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+
+                dt.Rows[i]["序号"] = i + 1;
+            }
 
             var queryParam = queryJson.ToJObject();
             var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率实时查询", "出成率实时查询", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
