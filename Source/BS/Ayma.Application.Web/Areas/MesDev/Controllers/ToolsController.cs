@@ -719,6 +719,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success(data);
         }
 
+
+        /// <summary>
+        /// 获取作业工序
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetProce()
+        {
+            var data = toosIBLL.GetProceList();
+            return Success(data);
+        }
+
         #endregion
 
         #region 提交数据

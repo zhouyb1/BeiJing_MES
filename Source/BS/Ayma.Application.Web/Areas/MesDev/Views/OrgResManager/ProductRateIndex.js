@@ -43,7 +43,7 @@ var bootstrap = function ($, ayma) {
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 300);
+            }, 250, 300);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -60,6 +60,21 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
                 // 访问数据接口参数
                 param: {}
+            });
+
+            $('#ProCode').select({
+                type: 'default',
+                value: 'P_ProNo',
+                text: 'P_ProName',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProce',
+                // 访问数据接口参数
+                param: {}
+
             });
             // 快速打印
             $('#am_print').on('click', function () {
