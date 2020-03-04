@@ -18,7 +18,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料编码", name: "C_GoodsCode", width: 130, align: "left" },
                     { label: "物料名称", name: "C_GoodsName", width: 130, align: "left" },
-                    { label: "单位", name: "C_Unit", width: 60, align: "left" },
+                    { label: "单位", name: "C_Unit", width: 60, align: "left" ,hidden:true},
                     { label: "数量", name: "C_Qty", width: 60, align: "left" },
                     { label: "批次", name: "C_Batch", width:90, align: "left" }
                 ],
