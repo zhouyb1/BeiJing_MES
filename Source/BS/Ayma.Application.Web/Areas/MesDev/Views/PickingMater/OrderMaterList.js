@@ -191,9 +191,7 @@ var bootstrap = function ($, ayma) {
                         row["C_TeamCode"] = row["I_TeamCode"];
                         row["C_TeamName"] = row["I_TeamName"];
                         row["StockQty"] = row["I_Qty"];
-                        row["C_Price"] = row["I_Price"];
-                        //2019年7月18日14:16:17 行数据唯一标识
-                        //row["row_sign"] = row["I_GoodsCode"] + row["I_Batch"];
+                        row["C_Price"] = null;
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

@@ -131,18 +131,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             $('#Mes_CollarDetail').jfGrid({
                 headData: [
-                { label: "领料单", name: "C_CollarNo", width: 130, align: "left", hidden: true },
+                { label: "领料单",   name: "C_CollarNo", width: 130, align: "left", hidden: true },
                 { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
                 { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
                 { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
-                {
-                    label: "单价", name: "C_Price", width: 50, align: "left",
-                    formatter: function (value, row, dfop) {
+                { label: "单价", name: "C_Price",  width: 50, align: "left",hidden:true,formatter: function (value, row, dfop) {
                         if (row.C_Price != undefined && !!row.C_Price) {
                             return row.C_Price.toFixed(6) / 1;
                         }
                         if (row.C_Price=="") {
-                            return row.C_Price=0;
+                            return row.C_Price = 0;
                         }
                     }
                 },
@@ -268,15 +266,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 },
                { label: "批次", name: "C_Batch", width: 80, align: "left" },
-                    //{ label: "班组名称", name: "C_TeamName", width: 80, align: "left" , hidden:true },
-                    //{ label: "班组编号", name: "C_TeamCode", width: 80, align: "left",hidden:true },
-                    //{
-                    //    label: '供应商编码', name: 'C_SupplyCode', width: 80, align: 'left', editType: 'label'
-                    //},
-                    //{
-                    //    label: '供应商名称', name: 'C_SupplyName', width: 140, align: 'left', editType: 'label'
-                    //},
-                  
+                    
                 ],
                 isAutoHeight: false,
                 footerrow: true,
