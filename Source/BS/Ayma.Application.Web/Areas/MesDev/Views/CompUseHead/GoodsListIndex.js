@@ -163,7 +163,7 @@ var bootstrap = function ($, ayma) {
                         row['C_GoodsCode'] = row['g_code'];
                         row['C_GoodsName'] = row['g_name'];
                         row['C_Unit'] = row['g_unit'];
-                        row['C_Price'] = row['g_price'];
+                        row['C_Price'] = row['g_price'] = null;
                         row["C_Qty"] = quantity;
                         row['C_Batch'] = row['batch'];
                         //row['Qty'] = row['qty'];

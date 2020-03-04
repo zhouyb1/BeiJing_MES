@@ -133,7 +133,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '批次', name: 'C_Batch', width: 80, align: 'left', editType: 'label'
                     },
                     {
-                        label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label'
+                        label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label',hidden:true
                     },
                     //{
                     //    label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
