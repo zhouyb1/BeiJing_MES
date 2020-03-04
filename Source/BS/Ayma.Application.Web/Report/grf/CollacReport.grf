@@ -136,8 +136,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.555625,
-							"Width":1.82563,
+							"Left":-0.502708,
+							"Width":1.74625,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -379,7 +379,7 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.661458,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -390,18 +390,16 @@
 						{
 							"Type":"StaticBox",
 							"Name":"TextBox9",
-							"Top":0.185208,
 							"Width":1.98438,
-							"Height":0.582083,
+							"Height":0.608542,
 							"Text":"总计："
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
 							"Left":2.59292,
-							"Top":0.211667,
 							"Width":7.01146,
-							"Height":0.582083,
+							"Height":0.608542,
 							"DataField":"aoumnt",
 							"Format":"$$"
 						},
@@ -411,7 +409,7 @@
 							"Left":12.8058,
 							"Top":0.211667,
 							"Width":2.80458,
-							"Height":0.582083,
+							"Height":0.396875,
 							"TextAlign":"MiddleRight",
 							"DataField":"aoumnt",
 							"Format":"$#,##0.00"
@@ -618,7 +616,7 @@
 					]
 				},
 				"GroupFooter":{
-					"Height":0.79375,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -630,9 +628,8 @@
 							"Type":"SummaryBox",
 							"Name":"Summary1",
 							"Left":2.59292,
-							"Top":0.211667,
 							"Width":7.01146,
-							"Height":0.582083,
+							"Height":0.608542,
 							"DataField":"aoumnt",
 							"Format":"$$"
 						},
@@ -640,9 +637,8 @@
 							"Type":"SummaryBox",
 							"Name":"Summary2",
 							"Left":12.8058,
-							"Top":0.211667,
 							"Width":2.80458,
-							"Height":0.582083,
+							"Height":0.608542,
 							"TextAlign":"MiddleRight",
 							"DataField":"aoumnt",
 							"Format":"$#,##0.00"
@@ -650,9 +646,8 @@
 						{
 							"Type":"StaticBox",
 							"Name":"TextBox5",
-							"Top":0.185208,
 							"Width":1.98438,
-							"Height":0.582083,
+							"Height":0.608542,
 							"Text":"本页小计："
 						}
 					]
@@ -728,21 +723,6 @@
 				},
 				"TextAlign":"MiddleJustiy",
 				"Text":"库管员："
-			},
-			{
-				"Type":"StaticBox",
-				"Name":"StaticBox20",
-				"Left":2.59292,
-				"Top":0.0529167,
-				"Width":2.01083,
-				"Height":0.396875,
-				"Font":{
-					"Name":"宋体",
-					"Size":90000,
-					"Weight":400,
-					"Charset":134
-				},
-				"Text":"谷学春"
 			}
 		]
 	},
@@ -754,9 +734,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
-					"Left":5.60917,
+					"Center":"Horizontal",
+					"Left":5.10646,
 					"Top":0.211667,
-					"Width":4.60375,
+					"Width":6.40292,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -765,15 +746,15 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"领料单"
+					"Text":"列服公司领料单"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox22",
-					"Left":0.396875,
-					"Top":1.13771,
+					"Left":0.370417,
+					"Top":1.79917,
 					"Width":2.01083,
-					"Height":0.635,
+					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -786,9 +767,9 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox16",
-					"Left":2.19604,
-					"Top":1.19063,
-					"Width":3.81,
+					"Left":2.38125,
+					"Top":1.79917,
+					"Width":2.98979,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -801,10 +782,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
-					"Left":0.396875,
-					"Top":2.01083,
-					"Width":1.79917,
-					"Height":0.608542,
+					"Left":0.370417,
+					"Top":2.40771,
+					"Width":2.01083,
+					"Height":0.47625,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -817,10 +798,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
-					"Left":2.19604,
-					"Top":2.01083,
-					"Width":5.79438,
-					"Height":0.582083,
+					"Left":2.40771,
+					"Top":2.40771,
+					"Width":3.38667,
+					"Height":0.449792,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -832,10 +813,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox41",
-					"Left":6.32354,
-					"Top":1.19063,
-					"Width":1.79917,
-					"Height":0.608542,
+					"Left":9.60438,
+					"Top":1.85208,
+					"Width":2.19604,
+					"Height":0.529167,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -848,10 +829,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox19",
-					"Left":8.30792,
-					"Top":1.19063,
-					"Width":3.41313,
-					"Height":0.608542,
+					"Left":11.8004,
+					"Top":1.85208,
+					"Width":3.59833,
+					"Height":0.555625,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -861,43 +842,12 @@
 					"DataField":"C_StockToName"
 				},
 				{
-					"Type":"FieldBox",
-					"Name":"FieldBox20",
-					"Left":8.30792,
-					"Top":2.01083,
-					"Width":3.59833,
-					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"C_CreateBy"
-				},
-				{
-					"Type":"StaticBox",
-					"Name":"StaticBox42",
-					"Left":6.32354,
-					"Top":2.01083,
-					"Width":1.37583,
-					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"经手人："
-				},
-				{
 					"Type":"StaticBox",
 					"Name":"StaticBox44",
-					"Left":11.2183,
-					"Top":2.01083,
-					"Width":1.40229,
-					"Height":0.582083,
+					"Left":9.60438,
+					"Top":2.40771,
+					"Width":2.19604,
+					"Height":0.529167,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -910,10 +860,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox22",
-					"Left":12.5942,
-					"Top":2.01083,
+					"Left":11.8004,
+					"Top":2.40771,
 					"Width":3.59833,
-					"Height":0.582083,
+					"Height":0.529167,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,

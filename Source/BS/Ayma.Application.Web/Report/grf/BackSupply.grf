@@ -57,26 +57,32 @@
 		},
 		"Column":[
 			{
-				"Name":"Column1"
+				"Name":"Column1",
+				"Width":0.767292
 			},
 			{
-				"Name":"B_GoodsCode"
+				"Name":"B_GoodsCode",
+				"Width":2.61938
 			},
 			{
-				"Name":"B_GoodsName"
+				"Name":"B_GoodsName",
+				"Width":2.59292
 			},
 			{
 				"Name":"B_Unit",
-				"Width":2.80458
+				"Width":1.40229
 			},
 			{
-				"Name":"B_Qty"
+				"Name":"B_Qty",
+				"Width":1.79917
 			},
 			{
-				"Name":"Column2"
+				"Name":"Column2",
+				"Width":1.98438
 			},
 			{
-				"Name":"Column3"
+				"Name":"Column3",
+				"Width":1.79917
 			},
 			{
 				"Name":"B_Batch"
@@ -91,7 +97,8 @@
 						{
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
-							"Width":2.40771,
+							"Left":-0.370417,
+							"Width":0.978958,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -136,11 +143,13 @@
 			]
 		},
 		"ColumnTitle":{
+			"Height":1.00542,
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
 					"Column":"Column1",
 					"TextAlign":"MiddleCenter",
+					"TextOrientation":"U2DL2R0",
 					"Text":"序号"
 				},
 				{
@@ -186,7 +195,41 @@
 					"Text":"批次"
 				}
 			]
-		}
+		},
+		"Group":[
+			{
+				"Name":"Group1",
+				"GroupHeader":{
+					"Height":0
+				},
+				"GroupFooter":{
+					"Height":0.6,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox10",
+							"Width":2.59292,
+							"Height":0.608542,
+							"Font":{
+								"Name":"宋体",
+								"Size":105000,
+								"Bold":true,
+								"Charset":134
+							},
+							"Text":"合计："
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox1",
+							"Left":10.6098,
+							"Width":2.77813,
+							"Height":0.608542,
+							"DataField":"aumount"
+						}
+					]
+				}
+			}
+		]
 	},
 	"ReportHeader":[
 		{
@@ -212,38 +255,29 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.608542,
-					"Top":1.48167,
-					"Width":0.978958,
-					"Height":0.582083,
-					"TextAlign":"TopRight",
-					"Text":"单号:"
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox1",
-					"Left":1.69333,
-					"Top":1.48167,
-					"Width":2.59292,
-					"Height":0.582083,
-					"TextAlign":"TopLeft"
+					"Left":0.211667,
+					"Top":1.905,
+					"Width":2.19604,
+					"Height":0.608542,
+					"TextAlign":"TopJustiy",
+					"Text":"单据编号:"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":9.60438,
-					"Top":1.48167,
+					"Left":9.57792,
+					"Top":2.01083,
 					"Width":2.01083,
 					"Height":0.582083,
-					"TextAlign":"TopLeft",
+					"TextAlign":"TopJustiy",
 					"Text":"仓库名称:"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":11.2183,
-					"Top":1.48167,
-					"Width":2.59292,
+					"Left":11.5888,
+					"Top":2.01083,
+					"Width":2.61938,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
 					"DataField":"B_StockName"
@@ -251,20 +285,20 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox4",
-					"Left":0.608542,
-					"Top":2.38125,
-					"Width":1.98438,
-					"Height":0.582083,
-					"TextAlign":"TopLeft",
+					"Left":0.211667,
+					"Top":2.59292,
+					"Width":2.19604,
+					"Height":0.608542,
+					"TextAlign":"TopJustiy",
 					"Text":"单据时间:"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
 					"Left":2.40771,
-					"Top":2.40771,
+					"Top":2.59292,
 					"Width":3.78354,
-					"Height":0.582083,
+					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"DataField":"B_CreateDate"
 				},
@@ -272,29 +306,29 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
 					"Left":2.40771,
-					"Top":1.48167,
+					"Top":1.905,
 					"Width":2.98979,
-					"Height":0.582083,
+					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"DataField":"B_BackSupplyNo"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":9.63083,
-					"Top":2.38125,
-					"Width":1.34938,
-					"Height":0.582083,
-					"TextAlign":"TopLeft",
+					"Left":9.60438,
+					"Top":2.61938,
+					"Width":1.98438,
+					"Height":0.608542,
+					"TextAlign":"TopJustiy",
 					"Text":"制作人:"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":11.1654,
-					"Top":2.40771,
+					"Left":11.5888,
+					"Top":2.59292,
 					"Width":4.02167,
-					"Height":0.582083,
+					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"DataField":"B_CreateBy"
 				}
@@ -307,53 +341,23 @@
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox5",
-					"Left":0.211667,
-					"Top":0.211667,
-					"Width":1.37583,
-					"Height":0.582083,
-					"TextAlign":"TopLeft",
-					"Text":"备注:"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":9.73667,
-					"Top":0.185208,
+					"Left":0.211667,
+					"Top":0.396875,
 					"Width":2.59292,
-					"Height":0.582083,
+					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"Text":"审核人:"
 				},
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox7",
-					"Left":0.211667,
-					"Top":1.19063,
-					"Width":2.59292,
-					"Height":0.608542,
-					"TextAlign":"TopLeft",
-					"Text":"收货人签名:"
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":9.73667,
-					"Top":1.16417,
-					"Width":2.59292,
+					"Left":12.991,
+					"Top":0.396875,
+					"Width":2.61938,
 					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"Text":"采购部签名:"
-				},
-				{
-					"Type":"FieldBox",
-					"Name":"FieldBox6",
-					"Left":2.01083,
-					"Top":0.211667,
-					"Width":3.99521,
-					"Height":0.582083,
-					"TextAlign":"TopLeft",
-					"DataField":"B_Remark"
 				}
 			]
 		}

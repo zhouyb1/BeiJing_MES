@@ -79,30 +79,40 @@
 		},
 		"Column":[
 			{
+				"Name":"Column7",
+				"Width":0.978958
+			},
+			{
 				"Name":"S_GoodsCode",
-				"Width":3.2
+				"Width":1.98438
 			},
 			{
 				"Name":"S_GoodsName",
-				"Width":4.39208
+				"Width":2.98979
 			},
 			{
-				"Name":"S_Unit"
+				"Name":"S_Unit",
+				"Width":1.00542
 			},
 			{
-				"Name":"S_Qty"
+				"Name":"S_Qty",
+				"Width":2.01083
 			},
 			{
-				"Name":"S_Otax"
+				"Name":"S_Otax",
+				"Width":1.19063
 			},
 			{
-				"Name":"Column2"
+				"Name":"Column2",
+				"Width":1.77271
 			},
 			{
-				"Name":"Column3"
+				"Name":"Column3",
+				"Width":1.98438
 			},
 			{
-				"Name":"Column4"
+				"Name":"Column4",
+				"Width":1.21708
 			},
 			{
 				"Name":"Column5"
@@ -114,6 +124,20 @@
 		"ColumnContent":{
 			"Height":0.79375,
 			"ColumnContentCell":[
+				{
+					"Column":"Column7",
+					"FreeCell":true,
+					"Control":[
+						{
+							"Type":"SystemVarBox",
+							"Name":"SystemVarBox1",
+							"Width":0.79375,
+							"Height":0.608542,
+							"TextAlign":"MiddleCenter",
+							"SystemVar":"RowNo"
+						}
+					]
+				},
 				{
 					"Column":"S_GoodsCode",
 					"Font":{
@@ -231,6 +255,13 @@
 			"ColumnTitleCell":[
 				{
 					"GroupTitle":false,
+					"Column":"Column7",
+					"TextAlign":"MiddleCenter",
+					"TextOrientation":"U2DL2R0",
+					"Text":"序号"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"S_GoodsCode",
 					"Font":{
 						"Name":"宋体",
@@ -263,6 +294,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
+					"TextOrientation":"U2DL2R0",
 					"Text":"单位"
 				},
 				{
@@ -430,10 +462,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":6.95854,
-					"Top":1.905,
+					"Left":6.58813,
+					"Top":2.91042,
 					"Width":1.40229,
-					"Height":0.608542,
+					"Height":0.64,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -446,8 +478,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.555625,
-					"Top":1.87854,
+					"Left":0.211667,
+					"Top":2.88396,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -462,8 +494,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":8.54604,
-					"Top":1.905,
+					"Left":7.99042,
+					"Top":2.91042,
 					"Width":2.61938,
 					"Height":0.608542,
 					"DataField":"S_StockName"
@@ -471,10 +503,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.555625,
-					"Top":2.69875,
+					"Left":0.211667,
+					"Top":3.59833,
 					"Width":1.79917,
-					"Height":0.608542,
+					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -482,15 +514,15 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据时间："
+					"Text":"制单时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":11.5358,
-					"Top":2.72521,
-					"Width":1.40229,
-					"Height":0.608542,
+					"Left":11.4035,
+					"Top":3.59833,
+					"Width":1.56104,
+					"Height":0.58,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -503,18 +535,18 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.54,
-					"Top":2.69875,
-					"Width":3.81,
+					"Left":2.06375,
+					"Top":3.57188,
+					"Width":3.78354,
 					"Height":0.608542,
 					"DataField":"S_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":13.0969,
-					"Top":2.72521,
-					"Width":2.64583,
+					"Left":13.0175,
+					"Top":3.59833,
+					"Width":2.80458,
 					"Height":0.608542,
 					"DataField":"S_CreateBy"
 				},
@@ -537,19 +569,19 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.54,
-					"Top":1.905,
-					"Width":3.41313,
+					"Left":2.06375,
+					"Top":2.91042,
+					"Width":3.38667,
 					"Height":0.608542,
 					"DataField":"S_SaleNo"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
-					"Left":11.5623,
-					"Top":1.905,
-					"Width":1.40229,
-					"Height":0.608542,
+					"Left":11.5358,
+					"Top":2.98979,
+					"Width":1.45521,
+					"Height":0.64,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -562,8 +594,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
-					"Left":12.9646,
-					"Top":1.905,
+					"Left":12.991,
+					"Top":2.98979,
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"S_CostomName"
@@ -571,10 +603,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox14",
-					"Left":7.01146,
-					"Top":2.72521,
-					"Width":1.37583,
-					"Height":0.608542,
+					"Left":6.58813,
+					"Top":3.59833,
+					"Width":1.40229,
+					"Height":0.58,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -587,10 +619,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox14",
-					"Left":8.59896,
-					"Top":2.59292,
-					"Width":2.59292,
-					"Height":0.820208,
+					"Left":8.04333,
+					"Top":3.59833,
+					"Width":2.61938,
+					"Height":0.608542,
 					"DataField":"S_CreateBy"
 				}
 			]
@@ -599,29 +631,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":4.20688,
+			"Height":2.59292,
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox5",
-					"Left":6.985,
-					"Top":1.74625,
-					"Width":1.98438,
-					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"单据备注："
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":0.582083,
-					"Top":0.714375,
+					"Left":0.185208,
+					"Top":0.47625,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -635,28 +651,19 @@
 				},
 				{
 					"Type":"FieldBox",
-					"Name":"FieldBox9",
-					"Left":8.99583,
-					"Top":1.74625,
-					"Width":4.20688,
-					"Height":0.582083,
-					"DataField":"S_Remark"
-				},
-				{
-					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":2.56646,
-					"Top":0.714375,
+					"Left":2.16958,
+					"Top":0.47625,
 					"Width":4.20688,
 					"Height":0.582083
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
-					"Left":6.95854,
-					"Top":0.79375,
+					"Left":9.57792,
+					"Top":0.47625,
 					"Width":1.98438,
-					"Height":0.396875,
+					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -669,18 +676,18 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox11",
-					"Left":8.81062,
-					"Top":0.79375,
+					"Left":11.5623,
+					"Top":0.47625,
 					"Width":4.18042,
 					"Height":0.608542
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
-					"Left":11.6152,
-					"Top":0.687917,
+					"Left":9.57792,
+					"Top":1.27,
 					"Width":1.98438,
-					"Height":0.582083,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -693,16 +700,16 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox12",
-					"Left":13.5996,
-					"Top":0.687917,
+					"Left":11.5623,
+					"Top":1.27,
 					"Width":4.20688,
-					"Height":0.582083
+					"Height":0.608542
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox12",
-					"Left":0.582083,
-					"Top":1.74625,
+					"Left":0.185208,
+					"Top":1.34938,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -717,8 +724,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox13",
-					"Left":2.56646,
-					"Top":1.74625,
+					"Left":2.16958,
+					"Top":1.34938,
 					"Width":4.20688,
 					"Height":0.582083
 				}
