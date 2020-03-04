@@ -101,6 +101,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
                 sqlHead.Append(" AND O_StockCode =@StockCode ");
             }
+            if (!queryParam["ProCode"].IsEmpty())
+            {
+                dp.Add("ProCode", queryParam["ProCode"].ToString(), DbType.String);
+                sqlHead.Append(" AND O_ProCode =@ProCode ");
+            }
+          
             if (!queryParam["O_SecGoodsName"].IsEmpty())
             {
                 dp.Add("O_SecGoodsName", "%" + queryParam["O_SecGoodsName"].ToString() + "%", DbType.String);
