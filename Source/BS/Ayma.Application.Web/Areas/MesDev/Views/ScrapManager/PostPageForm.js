@@ -35,7 +35,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "物料编码", name: "S_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "S_GoodsName", width: 130, align: "left" },
-                    { label: "单价", name: "S_Price", width: 60, align: "left" },
+                    { label: "单价", name: "S_Price", width: 60, align: "left", hidden: true },
                     { label: "单位", name: "S_Unit", width: 60, align: "left" },
                     { label: "数量", name: "S_Qty", width: 60, align: "left",},
                     { label: "批次", name: "S_Batch", width: 80, align: "left" }
