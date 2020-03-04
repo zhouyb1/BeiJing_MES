@@ -90,21 +90,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             }
-            //生产订单号
-            //$('#P_OrderNo').select({
-            //    type: 'default',
-            //    value: 'P_OrderNo',
-            //    text: 'P_OrderNo',
-            //    // 展开最大高度
-            //    maxHeight: 200,
-            //    // 是否允许搜索
-            //    allowSearch: true,
-            //    // 访问数据接口地址
-            //    url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
-            //    // 访问数据接口参数
-            //    param: { orderNo: orderNo }
-            //});
-            //单据状态
+           
             //添加商品
             $("#am_add").on("click", function () {
                 var stockCode = $('#R_StockCode').val();
@@ -156,7 +142,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '库存数量', name: 'R_SQty', width: 100, align: 'left', editType: 'label',hidden:keyValue==""?false:true
                     },
                      {
-                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label'
+                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label',hidden:true
                      },
                     {
                         label: '批次', name: 'R_Batch', width: 100, align: 'left', editType: 'label'
