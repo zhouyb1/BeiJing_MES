@@ -237,6 +237,7 @@ namespace Ayma.Util
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 10,10 ));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 11, 11));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 12, 12));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 13, 13));
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
