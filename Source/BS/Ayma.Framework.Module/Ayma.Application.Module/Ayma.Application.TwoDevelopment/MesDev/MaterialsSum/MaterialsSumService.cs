@@ -80,7 +80,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            RD.M_GoodsName F_GoodsName,
                            RD.M_Unit F_Unit,
                            RD.M_Price,
-                           G.G_Price as G_Price,
+                           dbo.GetPrice( RD.M_GoodsCode,MONTH(GetDate())) as G_Price,
                            RD.M_Price*SUM(RD.M_Qty) AS Aoumount,
                            RD.M_TaxPrice F_InPrice,
 						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ dbo.GetUserNameById(RH.M_CreateBy) as F_Remark,
@@ -130,7 +130,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
-                           G.G_Price as G_Price,
+                           dbo.GetPrice(CD.C_GoodsCode,MONTH(GetDate())) as G_Price,
                            CD.C_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
@@ -699,10 +699,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)) as supplierback                                    
 								    ,(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time) as Initialinventory													
 									,(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code) as Inventoryquantity								
-									,(select G_Price from Mes_Goods where G_Code=s.G_Code ) as Price								  
+									,dbo.GetPrice(s.G_Code,MONTH(GetDate())) as Price								  
 								    ,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail b where  b.B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead h 
 									where (h.B_CreateDate>=@StartTime and h.B_CreateDate<=@EndTime and B_Kind=1 and B_Status=3 )) AND B_GoodsCode=s.G_Code ) as Back_Qty							
-									,(select G_Price from Mes_Goods where G_Code=s.G_Code )*(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time) as initialamount
+									,dbo.GetPrice(s.G_Code,MONTH(GetDate()))*(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time) as initialamount
 						      	    ,(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3)) as delivery
 									,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
 									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3))
@@ -719,7 +719,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3))
 									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
 									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
-									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)))*(select G_Price from Mes_Goods where G_Code=s.G_Code ) as finalamount																										
+									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)))*dbo.GetPrice(s.G_Code,MONTH(GetDate())) as finalamount																										
 									from Mes_Goods s where  s.G_Kind=1");
 
                 if (!queryParam["M_GoodsCode"].IsEmpty())

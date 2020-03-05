@@ -182,7 +182,7 @@ namespace Ayma.Util
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 6, 6));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 2, 7, 10));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 2, 11, 13));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 13, 16));  
+                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 14, 16));  
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
@@ -191,10 +191,10 @@ namespace Ayma.Util
                 }
                 row.CreateCell(7).SetCellValue("收入");
                 row.CreateCell(11).SetCellValue("发出");
-                row.CreateCell(13).SetCellValue("结存");
+                row.CreateCell(14).SetCellValue("结存");
                 row.Cells[7].CellStyle = cellStyle1;
                 row.Cells[11].CellStyle = cellStyle1;
-                row.Cells[13].CellStyle = cellStyle1;
+                row.Cells[14].CellStyle = cellStyle1;
                    
                 #endregion
             }

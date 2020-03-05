@@ -391,7 +391,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             table.Columns["发出_金额"].SetOrdinal(13);
             table.Columns["结存_数量"].SetOrdinal(14);
             table.Columns["结存_单位成本(元)"].SetOrdinal(15);
-            table.Columns["结存_金额"].SetOrdinal(15);
+            table.Columns["结存_金额"].SetOrdinal(16);
             //给数据
             foreach (var item in data)
             {
