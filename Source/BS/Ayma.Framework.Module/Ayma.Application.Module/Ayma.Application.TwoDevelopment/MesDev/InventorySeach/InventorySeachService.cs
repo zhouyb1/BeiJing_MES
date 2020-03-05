@@ -437,7 +437,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 I_StockCode O_StockCode,
                                 I_StockName O_StockName,
                                 I_Batch O_Batch 
-                         FROM dbo.Mes_Inventory WHERE 1 = 1");
+                         FROM dbo.Mes_Inventory WHERE 1 = 1 and I_Qty > 0 ");
 
             var dp = new DynamicParameters(new {});
             if (!stock.IsEmpty())
