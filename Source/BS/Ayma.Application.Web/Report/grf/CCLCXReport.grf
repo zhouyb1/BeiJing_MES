@@ -446,7 +446,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
-					"Left":9.78958,
+					"Center":"Horizontal",
+					"Left":12.9646,
 					"Top":0.211667,
 					"Width":9.02229,
 					"Height":0.79375,

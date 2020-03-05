@@ -180,8 +180,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.3175,
-							"Width":1.53458,
+							"Left":-0.264583,
+							"Width":1.50813,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -574,7 +574,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
-					"Left":5.60917,
+					"Center":"Horizontal",
+					"Left":10.4246,
 					"Top":0.211667,
 					"Width":8.99583,
 					"Height":0.79375,
