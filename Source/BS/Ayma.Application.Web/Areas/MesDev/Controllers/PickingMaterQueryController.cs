@@ -69,6 +69,24 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var data = pickingMaterQueryIBLL.GetMes_CollarDetailEntityList(orderNo);
             return Success(data);
         }
+
+        /// <summary>
+        /// 获取表单数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [AjaxOnly]
+        public ActionResult GetFormData(string keyValue)
+        {
+            var Mes_CollarHeadData = pickingMaterQueryIBLL.GetMes_CollarHeadEntity(keyValue);
+            var Mes_CollarDetailData = pickingMaterQueryIBLL.GetMes_CollarDetailEntityList(Mes_CollarHeadData.C_CollarNo);
+            var jsonData = new
+            {
+                Mes_CollarHeadData = Mes_CollarHeadData,
+                Mes_CollarDetailData = Mes_CollarDetailData,
+            };
+            return Success(jsonData);
+        }
         #endregion
 
       
