@@ -167,7 +167,6 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //打印
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('M_MaterInNo');
