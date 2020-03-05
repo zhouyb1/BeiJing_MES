@@ -65,12 +65,13 @@ var bootstrap = function ($, ayma) {
             // 查看详情
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('R_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue,
-                        width: 700,
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '+&status=' + status,
+                        width: 900,
                         height: 600,
                         maxmin: true,
                         btn: null,
@@ -83,17 +84,17 @@ var bootstrap = function ($, ayma) {
             //双击详情
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('R_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue,
-                        width: 700,
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue+'+&status=' + status,
+                        width: 900,
                         height: 600,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {
-
                         }
                     });
                 }

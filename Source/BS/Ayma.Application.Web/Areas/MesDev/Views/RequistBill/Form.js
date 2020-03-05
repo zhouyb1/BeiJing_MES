@@ -78,19 +78,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 });
             });
-            var orderNo = "";
-            if (!!keyValue) {//根据主键获取生产订单号
-                $.ajax({
-                    url: top.$.rootUrl + '/MesDev/RequistBill/GetOrderNoBy?keyValue=' + keyValue,
-                    type: "GET",
-                    dataType: "json",
-                    async: false,
-                    success: function (data) {
-                        orderNo = data.info;
-                    }
-                });
-            }
-           
+          
             //添加商品
             $("#am_add").on("click", function () {
                 var stockCode = $('#R_StockCode').val();
@@ -113,16 +101,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('#Mes_RequistDetail').jfGrid({
                 headData: [
                     {
-                        label: '物料编码', name: 'R_GoodsCode', width: 140, align: 'left', editType: 'label', frozen: true
+                        label: '物料编码', name: 'R_GoodsCode', width: 90, align: 'left', editType: 'label', frozen: true
                     },
                     {
-                        label: '物料名称', name: 'R_GoodsName', width: 140, align: 'left', editType: 'label', frozen: true
+                        label: '物料名称', name: 'R_GoodsName', width: 120, align: 'left', editType: 'label', frozen: true
                     },
                     {
-                        label: '单位', name: 'R_Unit', width: 60, align: 'left', editType: 'label'
+                        label: '单位', name: 'R_Unit', width: 50, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'R_Qty', width: 100, align: 'left', editType: 'input',
+                        label: '数量', name: 'R_Qty', width: 80, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.R_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -141,9 +129,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     {
                         label: '库存数量', name: 'R_SQty', width: 100, align: 'left', editType: 'label',hidden:keyValue==""?false:true
                     },
-                     {
-                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label',hidden:true
-                     },
+                    {
+                        label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label', hidden: status==3?false:true
+                    },
+                    {
+                        label: '金额', name: 'R_Amount', width: 100, align: 'left', editType: 'label', hidden: status == 3 ? false : true
+                    },
                     {
                         label: '批次', name: 'R_Batch', width: 100, align: 'left', editType: 'label'
                     },
