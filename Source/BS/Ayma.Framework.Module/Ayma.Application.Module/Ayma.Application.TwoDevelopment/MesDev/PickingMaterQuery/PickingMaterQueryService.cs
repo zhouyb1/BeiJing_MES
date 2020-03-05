@@ -142,7 +142,34 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_CollarDetailEntity>(t=>t.C_CollarNo == keyValue);
+               // return this.BaseRepository().FindList<Mes_CollarDetailEntity>(t=>t.C_CollarNo == keyValue);
+                //获取加权平均价
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT d.C_StockCode
+                                      ,d.C_StockName
+                                      ,d.C_Unit2
+                                      ,d.C_UnitQty
+                                      ,d.C_Qty2
+                                      ,d.C_SupplyCode
+                                      ,d.C_SupplyName
+                                      ,d.C_GoodsCode
+                                      ,d.C_GoodsName
+                                      ,d.C_Unit
+                                      ,d.C_Qty
+                                      ,d.C_Batch
+                                      ,d.C_Remark
+                                      ,d.C_Price
+                                      ,d.C_PlanQty
+                                      ,d.C_SuggestQty
+                                      ,dbo.GetPrice(C_GoodsCode,DATEPART(mm,h.M_UploadDate)) C_Price
+                                      ,(dbo.GetPrice(C_GoodsCode,DATEPART(mm,h.M_UploadDate))*d.C_Qty) C_Amount
+                                  FROM dbo.Mes_CollarHead h INNER JOIN dbo.Mes_CollarDetail d ON h.C_CollarNo=d.C_CollarNo  where h.C_CollarNo =@C_CollarNo");
+
+                var dp = new DynamicParameters(new {});
+                dp.Add("@C_CollarNo",keyValue,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_CollarDetailEntity>(strSql.ToString(), dp);
+                return entity;
+
             }
             catch (Exception ex)
             {
