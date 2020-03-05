@@ -6,8 +6,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2019-11-08 14:02
-    /// 描 述：财务月结
+    /// 日 期：2020-03-05 10:46
+    /// 描 述：月结
     /// </summary>
     public partial class Mes_MonthBalanceEntity 
     {
@@ -43,7 +43,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("M_REMARK")]
         public string M_Remark { get; set; }
         #endregion
-
+ 
         #region 扩展操作
         /// <summary>
         /// 新增调用

@@ -22,6 +22,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         private ToolsIBLL toolsIBLL = new ToolsBLL();
         private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
         private Mes_ProductOrderHeadIBLL orderBll = new Mes_ProductOrderHeadBLL();
+
         #region 视图功能
 
         /// <summary>
@@ -166,7 +167,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         }
      
         /// <summary>
-        /// 获取页面显示列表数据
+        /// 获取页面显示列表数据 
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
@@ -225,7 +226,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetMaterList(string pagination, string queryJson, string keyword)
+        public ActionResult GetMaterList(string pagination, string queryJson, string keyword) 
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
             var data = pickingMaterIBLL.GetMaterList(paginationobj, queryJson, keyword).ToList();
