@@ -128,6 +128,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("C_SuggestQty")]
         [DecimalPrecision(18, 6)]
         public decimal? C_SuggestQty { get; set; }
+
+        /// <summary>
+        /// 金额
+        /// </summary>
+        [NotMapped]
+        public decimal? C_Amount { get; set; }
+
         #endregion
 
         #region 扩展操作
