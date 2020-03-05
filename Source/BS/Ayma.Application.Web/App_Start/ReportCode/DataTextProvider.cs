@@ -1239,13 +1239,13 @@ using MyDbReportData = DatabaseXmlReportData;
                            RD.M_GoodsName F_GoodsName,
                            RD.M_Unit F_Unit,
                            RD.M_Price,
-                           dbo.GetPrice(RD.M_GoodsCode,MONTH(GetDate()))  as G_Price,
+                          dbo.GetPrice(RD.M_GoodsCode,RIGHT('00'+CAST(MONTH(RH.M_UploadDate) AS VARCHAR(2)),2)) as G_Price,
                            RD.M_Price*SUM(RD.M_Qty) AS Aoumount,
                            RD.M_TaxPrice F_InPrice,
 						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ dbo.GetUserNameById(RH.M_CreateBy) as F_Remark,
                            'R' F_Status,
                            SUM(RD.M_Qty) F_InQty,
-                           SUM(RD.M_Qty)*G.G_Price as SRJE
+                           SUM(RD.M_Qty)*dbo.GetPrice(RD.M_GoodsCode,RIGHT('00'+CAST(MONTH(RH.M_UploadDate) AS VARCHAR(2)),2)) as SRJE
                     FROM Mes_MaterInHead RH
                         LEFT JOIN Mes_MaterInDetail RD
                             ON RH.M_MaterInNo = RD.M_MaterInNo               
@@ -1278,7 +1278,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
                                 M_TaxPrice,
-                                G.G_Price,
+                                RH.M_UploadDate,
                                 RD.M_SupplyName,
 						        RH.M_CreateBy,
 						        RD.M_Unit,
@@ -1306,13 +1306,13 @@ using MyDbReportData = DatabaseXmlReportData;
                            ,CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
-                           dbo.GetPrice(CD.C_GoodsCode,MONTH(GetDate())) as G_Price,
+                          dbo.GetPrice(CD.C_GoodsCode,RIGHT('00'+CAST(MONTH(CH.M_UploadDate) AS VARCHAR(2)),2)) as G_Price,
                            CD.C_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
                          '从【'+  CD.C_StockName+'】调拨【'+ CH.C_StockToName+'】制单:'+ dbo.GetUserNameById(CH.C_CreateBy) as F_Remark,
                            SUM(CD.C_Qty) F_OutQty,
-                            SUM(CD.C_Qty)* G.G_Price as FCJE
+                            SUM(CD.C_Qty)*dbo.GetPrice(CD.C_GoodsCode,RIGHT('00'+CAST(MONTH(CH.M_UploadDate) AS VARCHAR(2)),2)) as FCJE
                     FROM Mes_CollarHead CH
                         LEFT JOIN Mes_CollarDetail CD
                             ON CD.C_CollarNo = CH.C_CollarNo
@@ -1346,7 +1346,7 @@ using MyDbReportData = DatabaseXmlReportData;
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,
-                             G.G_Price,
+                            CH.M_UploadDate,
                              CD.C_StockName,
 							 CH.C_StockToName,
 							 CH.C_CreateBy,
