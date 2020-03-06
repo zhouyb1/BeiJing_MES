@@ -483,18 +483,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 //return this.BaseRepository().FindList<Mes_OrgResDetailEntity>(t=>t.O_OrgResNo == keyValue).Sum()
 
                 var dp = new DynamicParameters(new {});
-                var sql = @"SELECT  O_GoodsCode ,
+                var sql = @"SELECT
+                                    O_GoodsCode ,
                                     O_GoodsName ,
                                     O_Unit ,
-                                    O_Price ,
+                                    dbo.GetPrice(O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price ,
                                     SUM(O_Qty) O_Qty ,
                                     O_SecGoodsCode ,
                                     O_SecGoodsName ,
                                     O_SecUnit ,
                                     O_SecQty ,
                                     O_SecPrice
-                            FROM    dbo.Mes_OrgResDetail
-                            WHERE   O_OrgResNo = @O_OrgResNo
+                            FROM  dbo.Mes_OrgResHead h INNER JOIN   dbo.Mes_OrgResDetail d ON h.O_OrgResNo= d.O_OrgResNo
+                           WHERE   h.O_OrgResNo = @O_OrgResNo
                             GROUP BY  O_GoodsCode ,
                                     O_GoodsName ,
                                     O_Unit ,
@@ -503,7 +504,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     O_SecGoodsName ,
                                     O_SecUnit ,
                                     O_SecQty ,
-                                    O_SecPrice ";
+                                    O_SecPrice,
+                                    O_UploadDate ";
 
                 dp.Add("O_OrgResNo",keyValue,DbType.String);
                 var list = this.BaseRepository().FindList<Mes_OrgResDetailEntity>(sql, dp);
