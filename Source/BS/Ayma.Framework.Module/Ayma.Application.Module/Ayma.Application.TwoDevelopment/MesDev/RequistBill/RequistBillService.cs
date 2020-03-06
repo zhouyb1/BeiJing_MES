@@ -283,8 +283,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,d.R_Qty
                                       ,d.R_Batch
                                       ,d.R_Remark
-                                      ,dbo.GetPrice(d.R_GoodsCode,DATEPART(mm,h.R_UploadDate)) R_Price
-                                      ,dbo.GetPrice(d.R_GoodsCode,DATEPART(mm,h.R_UploadDate))* d.R_Qty R_Amount
+                                      ,dbo.GetPrice(d.R_GoodsCode,CONVERT(VARCHAR(6),h.R_UploadDate,112)) R_Price
+                                      ,dbo.GetPrice(d.R_GoodsCode,CONVERT(VARCHAR(6),h.R_UploadDate,112))* d.R_Qty R_Amount
                                   FROM dbo.Mes_RequistHead h INNER JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo =d.R_RequistNo where h.R_RequistNo =@R_RequistNo");
                 var dp = new DynamicParameters(new {});
                 dp.Add("R_RequistNo",keyValue,DbType.String);
