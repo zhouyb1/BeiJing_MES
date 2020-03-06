@@ -61,6 +61,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [DecimalPrecision(18, 6)]
         public decimal? O_Price { get; set; }
 
+        /// <summary>
+        /// 金额
+        /// </summary>
+        [DecimalPrecision(18, 6)]
+        [NotMapped]
+        public decimal? O_Amount { get; set; }
+
         #endregion
 
         #region 扩展操作

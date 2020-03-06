@@ -227,7 +227,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OutWorkShopDetailEntity>(t=>t.O_OutNo == keyValue);
+                //return this.BaseRepository().FindList<Mes_OutWorkShopDetailEntity>(t=>t.O_OutNo == keyValue);
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT 
+                                       d.O_GoodsCode
+                                      ,d.O_GoodsName
+                                      ,d.O_Unit
+                                      ,d.O_Qty
+                                      ,d.O_Batch
+                                      ,d.O_Remark
+                                      ,CONVERT(VARCHAR(6),h.O_UploadDate,112) O_Price
+                                      ,CONVERT(VARCHAR(6),h.O_UploadDate,112)* d.O_Qty O_Amount
+                                  FROM dbo.Mes_OutWorkShopHead h 
+                                  INNER JOIN  dbo.Mes_OutWorkShopDetail d ON h.O_OutNo =d.O_OutNo WHERE h.O_OutNo=@O_OutNo");
+                var dp = new DynamicParameters(new {});
+                dp.Add("@O_OutNo",keyValue,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_OutWorkShopDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
