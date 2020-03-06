@@ -161,8 +161,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,d.C_Price
                                       ,d.C_PlanQty
                                       ,d.C_SuggestQty
-                                      ,dbo.GetPrice(C_GoodsCode,DATEPART(mm,h.M_UploadDate)) C_Price
-                                      ,(dbo.GetPrice(C_GoodsCode,DATEPART(mm,h.M_UploadDate))*d.C_Qty) C_Amount
+                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),h.M_UploadDate,112)) C_Price
+                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),h.M_UploadDate,112))*d.C_Qty C_Amount
                                   FROM dbo.Mes_CollarHead h INNER JOIN dbo.Mes_CollarDetail d ON h.C_CollarNo=d.C_CollarNo  where h.C_CollarNo =@C_CollarNo");
 
                 var dp = new DynamicParameters(new {});
