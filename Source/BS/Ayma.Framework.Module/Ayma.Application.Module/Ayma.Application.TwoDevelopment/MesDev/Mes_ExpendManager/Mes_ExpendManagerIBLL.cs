@@ -29,7 +29,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string keyValue);
+        IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string keyValue, string state);
 
         /// <summary>
         /// 获取原物料

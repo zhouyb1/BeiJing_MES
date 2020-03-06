@@ -127,10 +127,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var mes_OtherOutHead = mes_OtherOutHeadIBLL.GetEntity(keyValue);
-            var Mes_OtherOutDetailData = mes_OtherOutHeadIBLL.GetOtherOutDetailEntity(mes_OtherOutHead.O_OtherOutNo);
+            var Mes_OtherOutDetailData = mes_OtherOutHeadIBLL.GetOtherOutDetailEntity(mes_OtherOutHead.O_OtherOutNo,state);
             var jsonData = new
             {
                 mes_OtherOutHead = mes_OtherOutHead,

@@ -188,11 +188,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string expendNo)
+        public IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string expendNo, string state)
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ExpendDetailEntity>(t => t.E_ExpendNo == expendNo);
+                var dp = new DynamicParameters(new { });
+                var strSql = new StringBuilder();
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.E_ExpendNo
+                                  ,d.E_GoodsCode
+                                  ,d.E_GoodsName
+                                  ,d.E_Unit
+                                  ,d.E_Qty
+                                  ,d.E_Batch
+                                  ,d.E_Remark
+                                  ,dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),h.E_UploadDate,112)) E_Price
+                              FROM  dbo.Mes_ExpendHead h INNER JOIN dbo.Mes_ExpendDetail d ON d.E_ExpendNo =h.E_ExpendNo where h.E_ExpendNo =@E_ExpendNo");
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.E_ExpendNo
+                                  ,d.E_GoodsCode
+                                  ,d.E_GoodsName
+                                  ,d.E_Unit
+                                  ,d.E_Qty
+                                  ,d.E_Batch
+                                  ,d.E_Remark
+                                  ,dbo.GetPrice(d.E_GoodsCode,@time) E_Price
+                              FROM  dbo.Mes_ExpendHead h INNER JOIN dbo.Mes_ExpendDetail d ON d.E_ExpendNo =h.E_ExpendNo where h.E_ExpendNo =@E_ExpendNo");
+                }
+                dp.Add("@E_ExpendNo", expendNo, DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_ExpendDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
@@ -221,7 +257,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    s.I_Batch ,
                                    s.I_Qty ,
                                    s.I_Kind,
-                                   g.G_Price I_Price,
+                                   dbo.GetPrice(s.I_GoodsCode,@time) I_Price,
                                    s.I_Unit,
 								   g.G_SupplyCode I_SupplyCode,
 								   g.G_SupplyName I_SupplyName
@@ -231,6 +267,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var queryParam = queryJson.ToJObject();
             // 虚拟参数
             var dp = new DynamicParameters(new { });
+            DateTime now = DateTime.Now;
+            //获取拼接形式的，精确到毫秒
+            string time = now.ToString("yyyyMM");
+            dp.Add("time", time, DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);

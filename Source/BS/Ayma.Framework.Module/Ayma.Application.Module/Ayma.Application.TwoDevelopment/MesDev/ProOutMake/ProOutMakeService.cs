@@ -251,8 +251,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@"select m.*,g.G_Price as I_Price,g.G_Unit2,g.G_UnitQty from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_Qty <> 0 and m.I_StockCode =@stockCode");
                 var dp = new DynamicParameters(new { });
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
+                strSql.Append(@"select m.*,dbo.GetPrice(m.I_GoodsCode,@time) as I_Price,g.G_Unit2,g.G_UnitQty from Mes_Inventory m left join Mes_Goods g on m.I_GoodsCode = g.G_Code where m.I_Qty <> 0 and m.I_StockCode =@stockCode");
                 dp.Add("@stockCode", stockCode, DbType.String);
 
                 return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, paginationobj);

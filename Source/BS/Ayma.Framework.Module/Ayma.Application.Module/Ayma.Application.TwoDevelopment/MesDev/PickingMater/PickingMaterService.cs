@@ -229,7 +229,37 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_CollarDetailEntity>(t=>t.C_CollarNo == keyValue);
+                //return this.BaseRepository().FindList<Mes_CollarDetailEntity>(t=>t.C_CollarNo == keyValue);
+                 //获取加权平均价
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT d.C_StockCode
+                                      ,d.C_StockName
+                                      ,d.C_Unit2
+                                      ,d.C_UnitQty
+                                      ,d.C_Qty2
+                                      ,d.C_SupplyCode
+                                      ,d.C_SupplyName
+                                      ,d.C_GoodsCode
+                                      ,d.C_GoodsName
+                                      ,d.C_Unit
+                                      ,d.C_Qty
+                                      ,d.C_Batch
+                                      ,d.C_Remark
+                                      ,d.C_Price
+                                      ,d.C_PlanQty
+                                      ,d.C_SuggestQty
+                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),@time,112)) C_Price
+                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),@time,112))*d.C_Qty C_Amount
+                                  FROM dbo.Mes_CollarHead h INNER JOIN dbo.Mes_CollarDetail d ON h.C_CollarNo=d.C_CollarNo  where h.C_CollarNo =@C_CollarNo");
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                dp.Add("time", time, DbType.String);
+                dp.Add("@C_CollarNo",keyValue,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_CollarDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
@@ -299,6 +329,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             try
             {
                 var strSql = new StringBuilder();
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+               string time=now.ToString("yyyyMM");
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                dp.Add("time", time  , DbType.String);
                 strSql.Append(@"SELECT  S.ID ,
                                         S.I_StockCode ,
                                         S.I_StockName ,
@@ -308,7 +344,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         S.I_Unit ,
                                         S.I_Qty ,                              
                                         S.I_Batch ,
-									    G.G_Price I_Price,
+									    dbo.GetPrice(S.I_GoodsCode,@time) I_Price,
 										G.G_UnitQty,
 										G.G_Unit2,
 										G.G_Unit,
@@ -317,8 +353,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where  S.I_Kind=1 and  S.I_Qty <> 0 ");
 
                 var queryParam = queryJson.ToJObject();
-                // 虚拟参数
-                var dp = new DynamicParameters(new { });
+     
                 if (!keyword .IsEmpty())
                 {
                     dp.Add("keyword", "%"+keyword+"%", DbType.String);

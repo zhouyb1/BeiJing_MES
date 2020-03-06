@@ -10,6 +10,7 @@ var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
 var status = request('status');
+var state = request('state');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -169,7 +170,7 @@ var bootstrap = function ($, ayma) {
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/GetFormData?keyValue=' + keyValue+'&state='+state, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_OtherInDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -197,6 +198,9 @@ var bootstrap = function ($, ayma) {
         if (data.length == 0 || data[0].O_GoodsCode == null) {
             ayma.alert.error("请添加物料！");
             return false;
+        }
+        for (var i = 0; i < data.length; i++) {
+            data[i].O_Price = null;
         }
         var postData = {};
         var obj = $('[data-table="Mes_OtherInHead"]').GetFormData();

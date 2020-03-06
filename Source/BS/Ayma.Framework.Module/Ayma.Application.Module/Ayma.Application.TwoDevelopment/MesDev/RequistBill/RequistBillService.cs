@@ -31,12 +31,25 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 var strSql=new StringBuilder();
                 strSql.Append(@"
-                                 SELECT t.I_Qty,t.I_Batch,t1.* FROM dbo.Mes_Inventory t
+                                 SELECT t.I_Qty,t.I_Batch,
+                                    t1.G_Code
+                                    ,t1.G_Name
+                                    ,t1.G_Kind
+                                    ,t1.G_Period
+                                    ,dbo.GetPrice(t1.G_Code,@time)  G_Price
+                                    ,t1.G_Unit
+                                    ,t1.G_SupplyName
+                                    ,t1.G_SupplyCode
+                                     FROM dbo.Mes_Inventory t
                                  LEFT JOIN dbo.Mes_Goods t1 ON t.I_GoodsCode=t1.G_Code");
                 strSql.Append("  where t.I_Qty <> 0 AND I_StockCode='" + stockCode + "'");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
                 if (!queryParam["GoodsType"].IsEmpty())
                 {
                     dp.Add("G_Kind", queryParam["GoodsType"].ToString(),DbType.String);
@@ -272,12 +285,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_RequistDetail表数据
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_RequistDetailEntity> GetMes_RequistDetailList(string keyValue)
+        public IEnumerable<Mes_RequistDetailEntity> GetMes_RequistDetailList(string keyValue,string state)
         {
             try
             {
+                var dp = new DynamicParameters(new { });
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT d.R_GoodsCode
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT d.R_GoodsCode
                                       ,d.R_GoodsName
                                       ,d.R_Unit
                                       ,d.R_Qty
@@ -286,7 +302,23 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,dbo.GetPrice(d.R_GoodsCode,CONVERT(VARCHAR(6),h.R_UploadDate,112)) R_Price
                                       ,dbo.GetPrice(d.R_GoodsCode,CONVERT(VARCHAR(6),h.R_UploadDate,112))* d.R_Qty R_Amount
                                   FROM dbo.Mes_RequistHead h INNER JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo =d.R_RequistNo where h.R_RequistNo =@R_RequistNo");
-                var dp = new DynamicParameters(new {});
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT d.R_GoodsCode
+                                      ,d.R_GoodsName
+                                      ,d.R_Unit
+                                      ,d.R_Qty
+                                      ,d.R_Batch
+                                      ,d.R_Remark
+                                      ,dbo.GetPrice(d.R_GoodsCode,@time) R_Price
+                                      ,dbo.GetPrice(d.R_GoodsCode,@time)* d.R_Qty R_Amount
+                                  FROM dbo.Mes_RequistHead h INNER JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo =d.R_RequistNo where h.R_RequistNo =@R_RequistNo");
+                }
                 dp.Add("R_RequistNo",keyValue,DbType.String);
                 var entity = this.BaseRepository().FindList<Mes_RequistDetailEntity>(strSql.ToString(), dp);
                 return entity;

@@ -135,12 +135,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 { label: "生产订单", name: "C_OrderNo", width: 130, align: "left", hidden: true },
                 { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
                 { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
-                { label: "单价", name: "C_Price",  width: 50, align: "left",hidden:true,formatter: function (value, row, dfop) {
-                        if (row.C_Price != undefined && !!row.C_Price) {
-                            return row.C_Price.toFixed(6) / 1;
+                {
+                    label: "单价", name: "C_Price", width: 50, align: "left", formatter: function (value, row, dfop) {
+                    if (row.C_Price != undefined && !!row.C_Price) {
+                        return row.C_Price.toFixed(6) / 1;
                         }
-                        if (row.C_Price=="") {
-                            return row.C_Price = 0;
+                    if (row.C_Price == "") {
+                        return row.C_Price = 0;
                         }
                     }
                 },
@@ -307,12 +308,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             ayma.alert.error('请添加物料');
             return false;
         }
-
         if ($("#C_StockName").selectGet() == $("#C_StockToName").selectGet()) {
             
             ayma.alert.error('领料仓库与原料仓库相同');
             return false;
         }
+        for (var i = 0; i < data.length; i++) {
+            data[i].C_Price = null;        
+        }
+       
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_CollarHead"]').GetFormData());
         postData.strmes_CollarDetailEntity = JSON.stringify(data);

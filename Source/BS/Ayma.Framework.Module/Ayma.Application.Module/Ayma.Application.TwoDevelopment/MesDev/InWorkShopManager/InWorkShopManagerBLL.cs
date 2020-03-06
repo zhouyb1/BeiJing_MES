@@ -92,11 +92,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InWorkShopDetailEntity> GetMes_InWorkShopDetailList(string keyValue)
+        public IEnumerable<Mes_InWorkShopDetailEntity> GetMes_InWorkShopDetailList(string keyValue,string state)
         {
             try
             {
-                return inWorkShopManagerService.GetMes_InWorkShopDetailList(keyValue);
+                return inWorkShopManagerService.GetMes_InWorkShopDetailList(keyValue,state);
             }
             catch (Exception ex)
             {

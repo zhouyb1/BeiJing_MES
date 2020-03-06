@@ -59,7 +59,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "center" },
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "center" },
-                    { label: "单价", name: "I_Price", width: 60, align: "center",hidden:true },
+                    { label: "单价", name: "I_Price", width: 60, align: "center"},
                     { label: "库存", name: "stockQty", width: 60, align: "center", hidden: keyValue == "" ? false : true },
                     {
                         label: "数量", name: "I_Qty", width: 90, align: "center", editType: 'input',
@@ -115,7 +115,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/InWorkShopManager/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/InWorkShopManager/GetFormData?keyValue=' + keyValue+'&state=1', function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_InWorkShopDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -146,6 +146,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if ($('#I_StockCode').selectGet()==$('#I_WorkShop').selectGet()) {
             ayma.alert.error('不能指定同一个日耗仓！');
             return false;
+        }
+        for (var i = 0; i < data.length; i++) {
+            data[i].I_Price = null;
         }
         var postData = {};
         var head = $('[data-table="Mes_InWorkShopHead"]').GetFormData();

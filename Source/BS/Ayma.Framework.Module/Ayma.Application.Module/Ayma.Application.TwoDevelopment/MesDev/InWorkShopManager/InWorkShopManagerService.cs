@@ -206,13 +206,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InWorkShopDetailEntity> GetMes_InWorkShopDetailList(string keyValue)
+        public IEnumerable<Mes_InWorkShopDetailEntity> GetMes_InWorkShopDetailList(string keyValue,string state)
         {
             try
             {
                 //return this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(t=>t.I_InNo == keyValue);
+                var dp = new DynamicParameters(new { });
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT
                                    d.I_GoodsCode
                                   ,d.I_GoodsName
                                   ,d.I_Unit
@@ -222,7 +225,24 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),h.I_UploadDate,112)) I_Price
                                   ,dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),h.I_UploadDate,112)) *I_Qty I_Amount
                               FROM  dbo.Mes_InWorkShopHead h INNER JOIN dbo.Mes_InWorkShopDetail d ON d.I_InNo =h.I_InNo where h.I_InNo =@I_InNo");
-                var dp = new DynamicParameters(new {});
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT
+                                   d.I_GoodsCode
+                                  ,d.I_GoodsName
+                                  ,d.I_Unit
+                                  ,d.I_Qty
+                                  ,d.I_Batch
+                                  ,d.I_Remark
+                                  ,dbo.GetPrice(d.I_GoodsCode,@time) I_Price
+                                  ,dbo.GetPrice(d.I_GoodsCode,@time) *I_Qty I_Amount
+                              FROM  dbo.Mes_InWorkShopHead h INNER JOIN dbo.Mes_InWorkShopDetail d ON d.I_InNo =h.I_InNo where h.I_InNo =@I_InNo");
+                }
                 dp.Add("@I_InNo",keyValue,DbType.String);
                 var entity = this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(strSql.ToString(), dp);
                 return entity;
@@ -304,11 +324,15 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,P_StockName O_StockName
                                       ,P_Unit O_SecUnit
                                       ,P_Batch O_SecBatch
-                                      ,G_Price O_SecPrice
+                                      ,dbo.GetPrice(P_GoodsCode,@time) O_SecPrice
                                       ,P_Remark
                               FROM Mes_GoodsForPacking  inner join  Mes_Goods  on G_Code = P_GoodsCode where P_RestQty > 0 ");
                 
                 var dp = new DynamicParameters(new { });
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
                 var queryParam = queryJson.ToJObject();
                 if (!queryParam["keyword"].IsEmpty())
                 {

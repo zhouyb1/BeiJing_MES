@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue);
+        IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue,string state);
         #endregion
 
         #region 提交数据

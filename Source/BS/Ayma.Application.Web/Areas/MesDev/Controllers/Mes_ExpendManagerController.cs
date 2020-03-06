@@ -113,10 +113,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_ExpendHeadData = mes_ExpendManagerIBLL.GetMes_ExpendHeadEntity( keyValue );
-            var Mes_ExpendDetailData = mes_ExpendManagerIBLL.GetMes_ExpendDetailEntity( Mes_ExpendHeadData.E_ExpendNo );
+            var Mes_ExpendDetailData = mes_ExpendManagerIBLL.GetMes_ExpendDetailEntity(Mes_ExpendHeadData.E_ExpendNo, state);
             var jsonData = new {
                 Mes_ExpendHeadData = Mes_ExpendHeadData,
                 Mes_ExpendDetailData = Mes_ExpendDetailData,

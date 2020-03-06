@@ -62,6 +62,9 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'E_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
+                        label: '单价', name: 'E_Price', width: 70, align: 'center', editType: 'label'
+                    },
+                    {
                         label: '数量', name: 'E_Qty', width: 80, align: 'center', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
@@ -96,7 +99,7 @@ var bootstrap = function ($, ayma) {
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/Mes_ExpendManager/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/Mes_ExpendManager/GetFormData?keyValue=' + keyValue+'&state=1', function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_ExpendDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -123,6 +126,10 @@ var bootstrap = function ($, ayma) {
             ayma.alert.error('请添加物料');
             return false;
         }
+        for (var i = 0; i < dataList.length; i++) {
+            dataList[i].E_Price = null;
+        }
+
         var postData = {};
         var head = $('[data-table="Mes_ExpendHead"]').GetFormData();
         head.E_StockName = $('#E_StockCode').selectGetText();

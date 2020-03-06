@@ -108,10 +108,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_OtherInHead = otherWarehouseReceiptIBLL.GetEntity(keyValue);
-            var Mes_OtherInDetail = otherWarehouseReceiptIBLL.GetMes_OtherInDetaiEntity(Mes_OtherInHead.O_OtherInNo);
+            var Mes_OtherInDetail = otherWarehouseReceiptIBLL.GetMes_OtherInDetaiEntity(Mes_OtherInHead.O_OtherInNo, state);
             var jsonData = new
             {
                 Mes_OtherInHead = Mes_OtherInHead,
@@ -125,9 +125,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// </summary>
         /// <param name="orderNo"></param>
         /// <returns></returns>
-        public ActionResult GetDetail(string orderNo)
+        public ActionResult GetDetail(string orderNo,string state)
         {
-            var data = otherWarehouseReceiptIBLL.GetMes_OtherInDetaiEntity(orderNo);
+            var data = otherWarehouseReceiptIBLL.GetMes_OtherInDetaiEntity(orderNo, state);
             return Success(data);
         }
         #endregion

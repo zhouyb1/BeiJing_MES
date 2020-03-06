@@ -70,8 +70,8 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
-                    { label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
-                    { label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
+                    //{ label: "供应商编码", name: "I_SupplyCode", width: 130, align: "left" },
+                    //{ label: "供应商名称", name: "I_SupplyName", width: 130, align: "left" },
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },

@@ -113,11 +113,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue)
+        public IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue,string state)
         {
             try
             {
-                return mes_OtherOutHeadService.GetOtherOutDetailEntity(keyValue);
+                return mes_OtherOutHeadService.GetOtherOutDetailEntity(keyValue,state);
             }
             catch (Exception ex)
             {

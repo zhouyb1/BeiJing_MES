@@ -330,13 +330,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                   ,[G_Prepareday]
                                   ,[G_Otax]
                                   ,[G_Itax]
-                                  ,[G_Price]
+                                  ,dbo.GetPrice(G_Code,@time) G_Price
                                   ,[G_Unit2]
                               FROM [dbo].[Mes_Goods] t ");
                 strSql.Append(" where 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
@@ -371,11 +375,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue)
+        public IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue,string state)
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OtherInDetailEntity>(t => t.O_OtherInNo == keyValue);
+                var dp = new DynamicParameters(new { });
+                var strSql = new StringBuilder();
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.O_OtherInNo
+                                  ,d.O_GoodsCode
+                                  ,d.O_GoodsName
+                                  ,d.O_Unit
+                                  ,d.O_Qty
+                                  ,d.O_Batch
+                                  ,d.O_Remark
+                                  ,d.O_Unit2
+                                  ,d.O_UnitQty
+                                  ,d.O_Qty2
+                                  ,dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price
+                              FROM  dbo.Mes_OtherInHead h INNER JOIN dbo.Mes_OtherInDetail d ON d.O_OtherInNo =h.O_OtherInNo where h.O_OtherInNo =@O_OtherInNo");
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.O_OtherInNo
+                                  ,d.O_GoodsCode
+                                  ,d.O_GoodsName
+                                  ,d.O_Unit
+                                  ,d.O_Qty
+                                  ,d.O_Batch
+                                  ,d.O_Remark
+                                  ,d.O_Unit2
+                                  ,d.O_UnitQty
+                                  ,d.O_Qty2
+                                  ,dbo.GetPrice(d.O_GoodsCode,@time) O_Price
+                              FROM  dbo.Mes_OtherInHead h INNER JOIN dbo.Mes_OtherInDetail d ON d.O_OtherInNo =h.O_OtherInNo where h.O_OtherInNo =@O_OtherInNo");
+                }
+                dp.Add("@O_OtherInNo", keyValue, DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_OtherInDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {

@@ -68,11 +68,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string keyValue)
+        public IEnumerable<Mes_ExpendDetailEntity> GetMes_ExpendDetailEntity(string keyValue,string state)
         {
             try
             {
-                return mes_ExpendManagerService.GetMes_ExpendDetailEntity(keyValue);
+                return mes_ExpendManagerService.GetMes_ExpendDetailEntity(keyValue, state);
             }
             catch (Exception ex)
             {

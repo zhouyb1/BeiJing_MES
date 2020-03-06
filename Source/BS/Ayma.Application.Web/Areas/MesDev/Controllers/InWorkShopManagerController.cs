@@ -126,10 +126,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_InWorkShopHeadData = inWorkShopManagerIBLL.GetMes_InWorkShopHeadEntity( keyValue );
-            var Mes_InWorkShopDetailData = inWorkShopManagerIBLL.GetMes_InWorkShopDetailList(Mes_InWorkShopHeadData.I_InNo);
+            var Mes_InWorkShopDetailData = inWorkShopManagerIBLL.GetMes_InWorkShopDetailList(Mes_InWorkShopHeadData.I_InNo,state);
             var jsonData = new {
                 Mes_InWorkShopHeadData = Mes_InWorkShopHeadData,
                 Mes_InWorkShopDetailData = Mes_InWorkShopDetailData,
@@ -194,9 +194,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// </summary>
         /// <param name="orderNo"></param>
         /// <returns></returns>
-        public ActionResult GetDetail(string orderNo)
+        public ActionResult GetDetail(string orderNo,string state)
         {
-            var data = inWorkShopManagerIBLL.GetMes_InWorkShopDetailList(orderNo);
+            var data = inWorkShopManagerIBLL.GetMes_InWorkShopDetailList(orderNo, state);
             return Success(data);
         }
 

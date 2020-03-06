@@ -191,7 +191,7 @@ var bootstrap = function ($, ayma) {
                         row["C_TeamCode"] = row["I_TeamCode"];
                         row["C_TeamName"] = row["I_TeamName"];
                         row["StockQty"] = row["I_Qty"];
-                        row["C_Price"] = null;
+                        row["C_Price"] = row["I_Price"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {

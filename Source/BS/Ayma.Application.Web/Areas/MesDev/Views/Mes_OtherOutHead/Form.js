@@ -9,6 +9,7 @@ var tmp = new Map();
 var parentFormId = request('formId');
 var keyValue = request('keyValue');
 var status = request('status');
+var state = request('state');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -212,7 +213,7 @@ var bootstrap = function ($, ayma) {
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/Mes_OtherOutHead/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/Mes_OtherOutHead/GetFormData?keyValue=' + keyValue + '&state=' + state, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_OtherOutDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -243,7 +244,7 @@ var bootstrap = function ($, ayma) {
         }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_OtherOutHead"]').GetFormData());
-        postData.strmes_OtherOutDetailList = JSON.stringify($('#Mes_OtherOutDetail').jfGridGet('rowdatas'));
+        postData.strmes_OtherOutDetailList = JSON.stringify(data);
         $.SaveForm(top.$.rootUrl + '/MesDev/Mes_OtherOutHead/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调
             if (!!callBack) {

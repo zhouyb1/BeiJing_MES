@@ -176,7 +176,7 @@ var bootstrap = function ($, ayma) {
                         row['R_GoodsCode'] = row['g_code'];
                         row['R_GoodsName'] = row['g_name'];
                         row['R_Unit'] = row['g_unit'];
-                        row['R_Price'] = row['g_price'] = null;//不录入单价
+                        row['R_Price'] = row['g_price'];//不录入单价
                         row["R_Qty"] = quantity;
                         row["R_SQty"] = row['i_qty'];
                         row['R_Batch'] = row['i_batch'];

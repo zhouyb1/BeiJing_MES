@@ -218,11 +218,53 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue)
+        public IEnumerable<Mes_OtherOutDetailEntity> GetOtherOutDetailEntity(string keyValue,string state)
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_OtherOutDetailEntity>(t=>t.O_OtherOutNo==keyValue);
+                var dp = new DynamicParameters(new { });
+                var strSql = new StringBuilder();
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.O_OtherOutNo
+                                  ,d.O_GoodsCode
+                                  ,d.O_GoodsName
+                                  ,d.O_Unit
+                                  ,d.O_Qty
+                                  ,d.O_Batch
+                                  ,d.O_Remark
+                                  ,d.O_Unit2
+                                  ,d.O_UnitQty
+                                  ,d.O_Qty2
+                                  ,dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price
+                              FROM  dbo.Mes_OtherOutHead h INNER JOIN dbo.Mes_OtherOutDetail d ON d.O_OtherOutNo =h.O_OtherOutNo where h.O_OtherOutNo =@O_OtherOutNo");
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.O_OtherOutNo
+                                  ,d.O_GoodsCode
+                                  ,d.O_GoodsName
+                                  ,d.O_Unit
+                                  ,d.O_Qty
+                                  ,d.O_Batch
+                                  ,d.O_Remark
+                                  ,d.O_Unit2
+                                  ,d.O_UnitQty
+                                  ,d.O_Qty2
+                                  ,dbo.GetPrice(d.O_GoodsCode,@time) O_Price
+                              FROM  dbo.Mes_OtherOutHead h INNER JOIN dbo.Mes_OtherOutDetail d ON d.O_OtherOutNo =h.O_OtherOutNo where h.O_OtherOutNo =@O_OtherOutNo");
+                }
+                dp.Add("@O_OtherOutNo", keyValue, DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_OtherOutDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
@@ -274,6 +316,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
+                string a = null;
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     var mes_OtherOutHeadEntityTmp = GetEntity(keyValue);
@@ -282,6 +325,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     db.Delete<Mes_OtherOutDetailEntity>(t => t.O_OtherOutNo == mes_OtherOutHeadEntityTmp.O_OtherOutNo);
                     foreach (Mes_OtherOutDetailEntity item in mes_OtherOutDetailList)
                     {
+                        item.O_Price =a.ToDecimal();
                         item.Create();
                         item.O_OtherOutNo = mes_OtherOutHeadEntityTmp.O_OtherOutNo;
                         db.Insert(item);
@@ -299,6 +343,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     db.Insert(strEntity);
                     foreach (Mes_OtherOutDetailEntity item in mes_OtherOutDetailList)
                     {
+                        item.O_Price = a.ToDecimal(); ;
                         item.Create();
                         item.O_OtherOutNo = strEntity.O_OtherOutNo;
                         db.Insert(item);

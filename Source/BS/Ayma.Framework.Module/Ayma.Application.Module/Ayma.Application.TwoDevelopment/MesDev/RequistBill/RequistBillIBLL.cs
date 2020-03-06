@@ -38,7 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_RequistDetail表数据
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Mes_RequistDetailEntity> GetMes_RequistDetailList(string keyValue);
+        IEnumerable<Mes_RequistDetailEntity> GetMes_RequistDetailList(string keyValue,string state);
         /// <summary>
         /// 获取Mes_RequistHead表实体数据
         /// </summary>

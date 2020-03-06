@@ -148,10 +148,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_RequistHeadData = requistBillIBLL.GetMes_RequistHeadEntity(keyValue);
-            var Mes_RequistDetailData = requistBillIBLL.GetMes_RequistDetailList(Mes_RequistHeadData.R_RequistNo);
+            var Mes_RequistDetailData = requistBillIBLL.GetMes_RequistDetailList(Mes_RequistHeadData.R_RequistNo,state);
             var jsonData = new
             {
                 Mes_RequistHeadData = Mes_RequistHeadData,
@@ -176,9 +176,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// 获取调拨单查询页面明细书
         /// </summary>
         /// <returns></returns>
-        public ActionResult GetDetail(string orderNo)
+        public ActionResult GetDetail(string orderNo,string state)
         {
-            var data = requistBillIBLL.GetMes_RequistDetailList(orderNo);
+            var data = requistBillIBLL.GetMes_RequistDetailList(orderNo,state);
             return Success(data);
         }
 

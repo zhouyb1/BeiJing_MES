@@ -63,7 +63,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue);
+        IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue,string state);
         #endregion
 
     }

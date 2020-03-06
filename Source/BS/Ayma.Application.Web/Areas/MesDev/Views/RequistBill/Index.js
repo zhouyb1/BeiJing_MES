@@ -83,7 +83,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'RequistBill',
                         title: '编辑调拨单',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu,
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu+'&state=1',
                         width: 950,
                         height: 700,
                         maxmin: true,
@@ -101,7 +101,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'RequistBill',
                         title: '编辑调拨单',
-                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu,
+                        url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '&formId=RequistBill' + '&status=' + statu + '&state=1',
                         width: 950,
                         height: 700,
                         maxmin: true,

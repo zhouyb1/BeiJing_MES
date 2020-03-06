@@ -9,6 +9,7 @@ var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');
 var status = request('status');
+var state = request('state');
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -130,7 +131,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '库存数量', name: 'R_SQty', width: 100, align: 'left', editType: 'label',hidden:keyValue==""?false:true
                     },
                     {
-                        label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label', hidden: status==3?false:true
+                        label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label',
                     },
                     {
                         label: '金额', name: 'R_Amount', width: 100, align: 'left', editType: 'label', hidden: status == 3 ? false : true
@@ -157,7 +158,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/RequistBill/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/RequistBill/GetFormData?keyValue=' + keyValue+'&state='+state, function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_RequistDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -195,6 +196,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 ayma.alert.error("数量不能为空");
                 return false;
             }
+        }
+        for (var i = 0; i < rowlist.length; i++) {
+            rowlist[i].R_Price = null;
         }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_RequistHead"]').GetFormData());

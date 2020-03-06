@@ -188,11 +188,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue)
+        public IEnumerable<Mes_OtherInDetailEntity> GetMes_OtherInDetaiEntity(string keyValue,string state)
         {
             try
             {
-                return otherWarehouseReceiptService.GetMes_OtherInDetaiEntity(keyValue);
+                return otherWarehouseReceiptService.GetMes_OtherInDetaiEntity(keyValue,state);
             }
             catch (Exception ex)
             {
