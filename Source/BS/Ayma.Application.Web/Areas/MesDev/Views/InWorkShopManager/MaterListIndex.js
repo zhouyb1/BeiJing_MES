@@ -101,7 +101,7 @@ var bootstrap = function ($, ayma) {
                         row['I_GoodsCode'] = row.o_secgoodscode;
                         row['I_GoodsName'] = row.o_secgoodsname;
                         row['I_Unit'] = row.o_secunit;
-                        row['I_Price'] = row.o_secprice;
+                        row['I_Price'] = row.o_secprice=null;
                         row['I_Batch'] = row.o_secbatch;
                         row["I_Qty"] = row.o_secqty;
                         row["stockQty"] = row.o_secqty;

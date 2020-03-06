@@ -44,15 +44,15 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "I_Unit", width: 60, align: "left" },
                     { label: "数量", name: "I_Qty", width: 60, align: "left" },
                     { label: "价格", name: "I_Price", width: 60, align: "left" },
+                    { label: "金额", name: "I_Amount", width: 60, align: "left", statistics: true },
                     { label: "批次", name: "I_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 400,
                 height: 300,
-                inputCount: 2
+                isStatistics:true
             });
-           
         },
         initData: function () {
             if (!!keyValue) {

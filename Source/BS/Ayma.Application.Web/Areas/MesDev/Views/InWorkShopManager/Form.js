@@ -59,7 +59,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料名称", name: "I_GoodsName", width: 130, align: "center" },
                     { label: "物料编码", name: "I_GoodsCode", width: 130, align: "center" },
-                    { label: "单价", name: "I_Price", width: 60, align: "center" },
+                    { label: "单价", name: "I_Price", width: 60, align: "center",hidden:true },
                     { label: "库存", name: "stockQty", width: 60, align: "center", hidden: keyValue == "" ? false : true },
                     {
                         label: "数量", name: "I_Qty", width: 90, align: "center", editType: 'input',
