@@ -148,7 +148,7 @@ var bootstrap = function($, ayma) {
                 headData: [
                 { label: "物料编码", name: "B_GoodsCode", width: 130, align: "left", },
                 { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
-                { label: "单价", name: "B_Price", width: 130, align: "left" },
+                { label: "单价", name: "B_Price", width: 130, align: "left" ,hidden:true},
                 { label: "单位", name: "B_Unit", width: 60, align: "left" },
                 {
                     label: "返回数量",
