@@ -60,6 +60,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("S_PRICE")]
         [DecimalPrecision(18, 6)]
         public decimal? S_Price { get; set; }
+
+        /// <summary>
+        /// 金额
+        /// </summary>
+        [DecimalPrecision(18, 6)]
+        [NotMapped]
+        public decimal? S_Amount { get; set; }
+
         #endregion
 
         #region 扩展操作

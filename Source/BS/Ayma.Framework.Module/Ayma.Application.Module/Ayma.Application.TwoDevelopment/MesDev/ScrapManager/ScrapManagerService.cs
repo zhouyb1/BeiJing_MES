@@ -188,7 +188,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_ScrapDetailEntity>(c=>c.S_ScrapNo==orderNo);
+                //return this.BaseRepository().FindList<Mes_ScrapDetailEntity>(c=>c.S_ScrapNo==orderNo);
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT d.S_GoodsCode
+                                      ,d.S_GoodsName
+                                      ,d.S_Unit
+                                      ,d.S_Qty
+                                      ,d.S_Batch
+                                      ,d.S_Remark
+                                      ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112)) S_Price 
+                                      ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112))* d.S_Qty S_Amount
+                                  FROM dbo.Mes_ScrapHead h INNER JOIN dbo.Mes_ScrapDetail d ON d.S_ScrapNo=h.S_ScrapNo where h.S_ScrapNo =@S_ScrapNo");
+                var dp = new DynamicParameters(new {});
+                dp.Add("@S_ScrapNo",orderNo,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_ScrapDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
