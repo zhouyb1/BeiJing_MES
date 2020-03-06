@@ -4,6 +4,7 @@ using Ayma.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -89,111 +90,128 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         #region 提交数据
 
-        /// <summary>
-        /// 删除实体数据
-        /// </summary>
-        /// <param name="keyValue">主键</param>
-        /// <returns></returns>
-        public void DeleteEntity(string keyValue, out string msg)
-        {
-            try
-            {
-                msg = "";
-                var entityTemp = this.BaseRepository().FindEntity<Mes_MonthBalanceEntity>(r=>r.ID==keyValue);
-
-                if (entityTemp != null)
-                {
-                    if (entityTemp.M_Status == 2)
-                    {
-                        this.BaseRepository().Delete<Mes_MonthBalanceEntity>(t => t.ID == keyValue);
-                    }
-                    else
-                    {
-                        msg = "已月结的凭证无法删除！";
-                    }
-                }
-                else
-                {
-                    msg = "月结的凭证不存在！";
-                }
-
-             
-            }
-            catch (Exception ex)
-            {
-                if (ex is ExceptionEx)
-                {
-                    throw;
-                }
-                else
-                {
-                    throw ExceptionEx.ThrowServiceException(ex);
-                }
-            }
-        }
 
 
         public void PostOrCancel(string month, int type, out string msg)
         {
             try
             {
+                DateTime dt=DateTime.Parse(month);//月结日期
+                string lastDate = dt.AddMonths(-1).ToString("yyyy-MM");
+                string nextDate= dt.AddMonths(1).ToString("yyyy-MM");
                 msg = "";
-                var entityTemp = this.BaseRepository().FindEntity<Mes_MonthBalanceEntity>(r => r.M_Months == month);
+                var entity = this.BaseRepository().FindEntity<Mes_MonthBalanceEntity>(r => r.M_Months == month);
 
-                if (entityTemp != null)
+                if (entity != null)
                 {
-                    //月结
+                    #region 月结
                     if (type == 1)
                     {
-                        if (entityTemp.M_Status == 1)
+                        if (entity.M_Status == 1)
                         {
                             msg = "已月结凭证，不能重复月结！";
                         }
                         else
                         {
-                            UserInfo userinfo = LoginUserInfo.Get();
-                            var dp = new DynamicParameters(new { });
-                            dp.Add("@BalanceMonth", month);
-                            dp.Add("@BalanceBy", userinfo.realName);
-                            dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
-                            dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
-                            this.BaseRepository().ExecuteByProc("sp_MonthBalance_Post", dp);
+                            string sql =
+                                 @"SELECT [ID]
+      ,[M_Months]
+      ,[M_MonthBalanceTime]
+      ,[M_MonthBalanceBy]
+      ,[M_Status]
+      ,[M_Remark]
+  FROM [Mes_MonthBalance]
+  WHERE LEFT(M_Months,7)='"+ lastDate + "'";
 
-                            int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
-                            string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
-
-                            if (errcode != 0)
+                            var rows=this.BaseRepository().FindList<Mes_MonthBalanceEntity>(sql);
+                            if (rows == null || rows.Count() < 1)
                             {
-                                msg = errMsg;
+                                msg = "上月月结的凭证不存在！";
                             }
+                            else
+                            {
+                               var entityTemp= rows.First();
+                               if (entityTemp.M_Status != 1)
+                               {
+                                   msg = "上月月结的凭证未月结，请先月结上月月结凭证！";
+                               }
+                               else
+                               {
+                                   UserInfo userinfo = LoginUserInfo.Get();
+                                   var dp = new DynamicParameters(new { });
+                                   dp.Add("@BalanceMonth", month);
+                                   dp.Add("@BalanceBy", userinfo.realName);
+                                   dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                                   dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                                   this.BaseRepository().ExecuteByProc("sp_MonthBalance_Post", dp);
 
+                                   int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
+                                   string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+
+                                   if (errcode != 0)
+                                   {
+                                       msg = errMsg;
+                                   }
+                                }
+                            }
                         }
                     }
+                    #endregion
+
+                    #region 反月结
+
                     else
                     {
-                        if (entityTemp.M_Status != 1)
+                        if (entity.M_Status != 1)
                         {
                             msg = "未月结凭证，不能反月结！";
                         }
                         else
                         {
-                            UserInfo userinfo = LoginUserInfo.Get();
-                            var dp = new DynamicParameters(new { });
-                            dp.Add("@BalanceMonth", month);
-                            dp.Add("@BalanceBy", userinfo.realName);
-                            dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
-                            dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
-                            this.BaseRepository().ExecuteByProc("sp_MonthBalance_Cancel", dp);
+                            string sql =
+                                @"SELECT [ID]
+      ,[M_Months]
+      ,[M_MonthBalanceTime]
+      ,[M_MonthBalanceBy]
+      ,[M_Status]
+      ,[M_Remark]
+  FROM [Mes_MonthBalance]
+  WHERE LEFT(M_Months,7)='" + nextDate + "'";
 
-                            int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
-                            string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
-
-                            if (errcode != 0)
+                            var rows = this.BaseRepository().FindList<Mes_MonthBalanceEntity>(sql);
+                            bool success = true;
+                            if (rows != null || rows.Count()>= 1)
                             {
-                                msg = errMsg;
+                                var entityTemp = rows.First();
+                                if (entityTemp.M_Status != 2)
+                                {
+                                    success = false;
+                                    msg = "下月月结的凭证未反月结，请先反月结下月月结凭证！";
+                                }
+                            }
+
+                            if (success)
+                            {
+                                UserInfo userinfo = LoginUserInfo.Get();
+                                var dp = new DynamicParameters(new { });
+                                dp.Add("@BalanceMonth", month);
+                                dp.Add("@BalanceBy", userinfo.realName);
+                                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                                this.BaseRepository().ExecuteByProc("sp_MonthBalance_Cancel", dp);
+
+                                int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
+                                string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+
+                                if (errcode != 0)
+                                {
+                                    msg = errMsg;
+                                }
                             }
                         }
                     }
+
+                    #endregion
                 }
                 else
                 {
@@ -216,7 +234,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 保存实体数据（新增、修改）
+        /// 新增月结凭证
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
@@ -259,6 +277,49 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
+
+        /// <summary>
+        /// 删除月结凭证
+        /// </summary>
+        /// <param name="keyValue">主键</param>
+        /// <returns></returns>
+        public void DeleteEntity(string keyValue, out string msg)
+        {
+            try
+            {
+                msg = "";
+                var entityTemp = this.BaseRepository().FindEntity<Mes_MonthBalanceEntity>(r => r.ID == keyValue);
+
+                if (entityTemp != null)
+                {
+                    if (entityTemp.M_Status == 2)
+                    {
+                        this.BaseRepository().Delete<Mes_MonthBalanceEntity>(t => t.ID == keyValue);
+                    }
+                    else
+                    {
+                        msg = "已月结的凭证无法删除！";
+                    }
+                }
+                else
+                {
+                    msg = "月结的凭证不存在！";
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
         #endregion
 
     }

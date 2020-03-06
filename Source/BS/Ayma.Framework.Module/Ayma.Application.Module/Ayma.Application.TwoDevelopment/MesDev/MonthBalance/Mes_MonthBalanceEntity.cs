@@ -17,12 +17,14 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("ID")]
         public string ID { get; set; }
+
         /// <summary>
         /// 月结月份 201911
         /// </summary>
         /// <returns></returns>
         [Column("M_MONTHS")]
         public string M_Months { get; set; }
+
         /// <summary>
         /// 月结时间
         /// </summary>
