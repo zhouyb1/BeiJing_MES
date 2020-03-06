@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
            
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 250, 480);
+            }, 300, 480);
             $('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
             $('#M_GoodsName').select({
                 type: 'default',

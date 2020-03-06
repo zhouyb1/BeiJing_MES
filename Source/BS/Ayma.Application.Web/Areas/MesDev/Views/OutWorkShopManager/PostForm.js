@@ -18,15 +18,15 @@ var bootstrap = function ($, ayma) {
                     { label: "单位", name: "O_Unit", width: 60, align: "left" },
                     { label: "数量", name: "O_Qty", width: 60, align: "left" },
                     { label: "价格", name: "O_Price", width: 60, align: "left" },
+                    { label: "金额", name: "O_Amount", width: 60, align: "left", statistics: true },
                     { label: "批次", name: "O_Batch", width: 90, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 400,
                 height: 300,
-                inputCount: 2
-            });
-           
+                isStatistics:true
+        });
         },
         initData: function () {
             if (!!keyValue) {

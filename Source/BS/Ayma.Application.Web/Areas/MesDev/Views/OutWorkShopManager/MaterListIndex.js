@@ -158,7 +158,7 @@ var bootstrap = function ($, ayma) {
                         row["O_Qty"] = quantity;
                         row['O_Batch'] =  row['I_Batch'];
                         row["ID"] = row['ID'];
-                        row["O_Price"] = row["I_Price"];//edit 2019年4月15日17:09:12
+                        row["O_Price"] = row["I_Price"]=null;//edit 2019年4月15日17:09:12
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
