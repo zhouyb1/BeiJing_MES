@@ -236,8 +236,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,d.O_Qty
                                       ,d.O_Batch
                                       ,d.O_Remark
-                                      ,CONVERT(VARCHAR(6),h.O_UploadDate,112) O_Price
-                                      ,CONVERT(VARCHAR(6),h.O_UploadDate,112)* d.O_Qty O_Amount
+                                      ,dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price
+                                      ,dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112))* d.O_Qty O_Amount
                                   FROM dbo.Mes_OutWorkShopHead h 
                                   INNER JOIN  dbo.Mes_OutWorkShopDetail d ON h.O_OutNo =d.O_OutNo WHERE h.O_OutNo=@O_OutNo");
                 var dp = new DynamicParameters(new {});
