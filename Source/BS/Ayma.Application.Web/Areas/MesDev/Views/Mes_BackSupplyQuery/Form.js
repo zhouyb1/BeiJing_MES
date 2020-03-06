@@ -32,6 +32,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'B_Unit', width: 50, align: 'left', editType: 'label'
                     },
                     {
+                        label: '单价', name: 'B_Price', width: 50, align: 'left', editType: 'label'
+                    },
+                    {
                         label: '数量', name: 'B_Qty', width: 80, align: 'left', editType: 'label'
                     },
                     {
