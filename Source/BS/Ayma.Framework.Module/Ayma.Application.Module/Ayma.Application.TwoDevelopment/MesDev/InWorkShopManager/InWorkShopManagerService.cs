@@ -210,7 +210,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(t=>t.I_InNo == keyValue);
+                //return this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(t=>t.I_InNo == keyValue);
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT
+                                   d.I_GoodsCode
+                                  ,d.I_GoodsName
+                                  ,d.I_Unit
+                                  ,d.I_Qty
+                                  ,d.I_Batch
+                                  ,d.I_Remark
+                                  ,dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),h.I_UploadDate,112)) I_Price
+                                  ,dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),h.I_UploadDate,112)) *I_Qty I_Amount
+                              FROM  dbo.Mes_InWorkShopHead h INNER JOIN dbo.Mes_InWorkShopDetail d ON d.I_InNo =h.I_InNo where h.I_InNo =@I_InNo");
+                var dp = new DynamicParameters(new {});
+                dp.Add("@I_InNo",keyValue,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_InWorkShopDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
