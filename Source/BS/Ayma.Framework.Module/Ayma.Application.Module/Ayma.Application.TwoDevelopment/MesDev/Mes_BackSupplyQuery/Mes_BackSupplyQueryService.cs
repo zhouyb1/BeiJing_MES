@@ -115,6 +115,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var dp = new DynamicParameters(new {});
                 dp.Add("@B_BackSupplyNo",keyValue,DbType.String);
                 var entity = this.BaseRepository().FindList<Mes_BackSupplyDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
