@@ -162,7 +162,22 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_BackStockDetailEntity>(t=>t.B_BackStockNo == keyValue);
+                //return this.BaseRepository().FindList<Mes_BackStockDetailEntity>(t=>t.B_BackStockNo == keyValue);
+                var strSql = new StringBuilder();
+                strSql.Append(@"SELECT 
+                                       d.B_GoodsCode
+                                      ,d.B_GoodsName
+                                      ,d.B_Unit
+                                      ,d.B_Qty
+                                      ,d.B_Batch
+                                      ,d.B_Remark
+                                      ,dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),h.B_UploadDate,112)) B_Price
+                                  FROM dbo.Mes_BackStockHead h INNER JOIN  dbo.Mes_BackStockDetail d ON h.B_BackStockNo =d.B_BackStockNo
+                                  WHERE h.B_BackStockNo =@B_BackStockNo");
+                var dp = new DynamicParameters(new {});
+                dp.Add("@B_BackStockNo",keyValue,DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_BackStockDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
