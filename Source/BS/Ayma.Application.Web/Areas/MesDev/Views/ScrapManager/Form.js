@@ -80,7 +80,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料编码", name: "S_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "S_GoodsName", width: 130, align: "left" },
-                    { label: "单价", name: "S_Price", width: 130, align: "left" },
+                    { label: "单价", name: "S_Price", width: 130, align: "left",hidden:true },
                     { label: "单位", name: "S_Unit", width: 60, align: "left",hidden:true },
                     {
                         label: "数量", name: "S_Qty", width: 60, align: "left" ,editType:'input',
@@ -99,6 +99,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
+                    { label: "金额", name: "S_Amount", width: 100, align: "left" ,statistics:true},
+
                     { label: "库存", name: "G_Qty", width: 60, align: "left", hidden: keyValue == "" ? false : true },
 
                     { label: "批次", name: "S_Batch", width: 80, align: "left" }
@@ -109,7 +111,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: true,
                 isMultiselect: true,
                 height: 300,
-                inputCount: 1
+                inputCount: 1,
+                isStatistics:true
             });
         },
         initData: function () {
