@@ -4,7 +4,6 @@
 ///_JSON_REPORT_DATA：指定产生 JSON 形式的报表数据。
 //#define _XML_REPORT_DATA
 #define _JSON_REPORT_DATA
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,7 +15,7 @@ using Ayma.Application.TwoDevelopment.MesDev.MaterialsSum.ViewModel;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Util;
 using Newtonsoft.Json;
-
+using Newtonsoft.Json.Converters;
 namespace Ayma.Application.Web
 {
 
@@ -1239,7 +1238,7 @@ using MyDbReportData = DatabaseXmlReportData;
                            RD.M_GoodsName F_GoodsName,
                            RD.M_Unit F_Unit,
                            RD.M_Price,
-                          dbo.GetPrice(RD.M_GoodsCode,RIGHT('00'+CAST(MONTH(RH.M_UploadDate) AS VARCHAR(2)),2)) as G_Price,
+                          dbo.GetPrice(RD.M_GoodsCode,datepart(year,RH.M_UploadDate)*100+datepart(month,RH.M_UploadDate)) as G_Price,
                            RD.M_Price*SUM(RD.M_Qty) AS Aoumount,
                            RD.M_TaxPrice F_InPrice,
 						   '从【'+ RD.M_SupplyName+'】购进【'+RD.M_GoodsName+'】制单:'+ dbo.GetUserNameById(RH.M_CreateBy) as F_Remark,
@@ -1306,7 +1305,7 @@ using MyDbReportData = DatabaseXmlReportData;
                            ,CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
-                          dbo.GetPrice(CD.C_GoodsCode,RIGHT('00'+CAST(MONTH(CH.M_UploadDate) AS VARCHAR(2)),2)) as G_Price,
+                          dbo.GetPrice(CD.C_GoodsCode,datepart(year,CH.M_UploadDate)*100+datepart(month,CH.M_UploadDate)) as G_Price,
                            CD.C_Unit F_Unit,
                            CD.C_Price F_OutPrice,
                            'C' F_Status,
@@ -1417,8 +1416,11 @@ using MyDbReportData = DatabaseXmlReportData;
                         qty = rows[i].IntervoryQty = qty - rows[i].F_OutQty;
                     }
                     rows[i].JCJE = Math.Round((rows[i].IntervoryQty * rows[i].G_Price).ToDecimal(), 6);
+                    Convert.ToDateTime(rows[i].F_CreateDate);
                 }
-                var json = JsonConvert.SerializeObject(new { PurchaseSummary = rows });
+               //自定义日期格式
+                IsoDateTimeConverter timeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd HH':'mm':'ss" };
+                var json = JsonConvert.SerializeObject(new { PurchaseSummary = rows },timeConverter);
                 return json;
 
         

@@ -75,7 +75,7 @@
 			},
 			{
 				"Name":"C_GoodsName",
-				"Width":3.59833
+				"Width":3.78354
 			},
 			{
 				"Name":"Column7",
@@ -83,7 +83,7 @@
 			},
 			{
 				"Name":"Column4",
-				"Width":3.01625
+				"Width":1.61396
 			},
 			{
 				"Name":"C_Unit",
@@ -95,39 +95,39 @@
 			},
 			{
 				"Name":"Column21",
-				"Width":2.40771
-			},
-			{
-				"Name":"Column9",
-				"Width":3.59833
-			},
-			{
-				"Name":"Column3",
-				"Width":1.82563
-			},
-			{
-				"Name":"Column12",
-				"Width":1.95792
-			},
-			{
-				"Name":"Column17",
-				"Width":1.79917
-			},
-			{
-				"Name":"Column13",
-				"Width":2.2225
-			},
-			{
-				"Name":"Column16",
-				"Width":1.98438
-			},
-			{
-				"Name":"Column19",
 				"Width":2.01083
 			},
 			{
+				"Name":"Column9",
+				"Width":3.20146
+			},
+			{
+				"Name":"Column3",
+				"Width":1.79917
+			},
+			{
+				"Name":"Column12",
+				"Width":2
+			},
+			{
+				"Name":"Column17",
+				"Width":2
+			},
+			{
+				"Name":"Column13",
+				"Width":1.8
+			},
+			{
+				"Name":"Column16",
+				"Width":2
+			},
+			{
+				"Name":"Column19",
+				"Width":1.8
+			},
+			{
 				"Name":"Column20",
-				"Width":1.98438
+				"Width":2
 			}
 		],
 		"ColumnContent":{
@@ -147,8 +147,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.211667,
-							"Width":1.40229,
+							"Left":-0.15875,
+							"Width":1.29646,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -169,7 +169,6 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"WordWrap":true,
 					"DataField":"F_CreateDate"
 				},
 				{
@@ -224,6 +223,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"G_Price"
 				},
 				{
@@ -256,6 +256,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"SRJE"
 				},
 				{
@@ -266,6 +267,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"Aoumount"
 				},
 				{
@@ -276,6 +278,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"F_OutQty"
 				},
 				{
@@ -286,6 +289,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"FCJE"
 				},
 				{
@@ -296,6 +300,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"IntervoryQty"
 				},
 				{
@@ -306,6 +311,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"JCJE"
 				}
 			]
@@ -574,7 +580,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
 					"Center":"Horizontal",
-					"Left":13.7848,
+					"Left":12.6206,
 					"Top":0.211667,
 					"Width":8.99583,
 					"Height":0.79375,

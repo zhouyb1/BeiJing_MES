@@ -72,6 +72,15 @@
 				},
 				{
 					"Name":"taxamount"
+				},
+				{
+					"Name":"清洁"
+				},
+				{
+					"Name":"商品"
+				},
+				{
+					"Name":"包材"
 				}
 			]
 		},
@@ -93,8 +102,10 @@
 				"Width":2.59292
 			},
 			{
-				"Name":"C_Unit",
-				"Width":2.98979
+				"Name":"Column19"
+			},
+			{
+				"Name":"Column20"
 			},
 			{
 				"Name":"Column8",
@@ -105,6 +116,13 @@
 			},
 			{
 				"Name":"Column10"
+			},
+			{
+				"Name":"C_Unit",
+				"Width":2.98979
+			},
+			{
+				"Name":"Column21"
 			},
 			{
 				"Name":"Column11"
@@ -123,13 +141,15 @@
 			},
 			{
 				"Name":"Column16",
-				"Width":3.28083
+				"Width":3.73063
 			},
 			{
-				"Name":"Column17"
+				"Name":"Column17",
+				"Width":3.25438
 			},
 			{
-				"Name":"Column18"
+				"Name":"Column18",
+				"Width":3.25438
 			}
 		],
 		"ColumnContent":{
@@ -150,7 +170,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.0264583,
-							"Width":1.21708,
+							"Width":1.16417,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -197,6 +217,61 @@
 					"DataField":"调料"
 				},
 				{
+					"Column":"Column19",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"清洁"
+				},
+				{
+					"Column":"Column20",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"商品"
+				},
+				{
+					"Column":"Column8",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"蔬菜"
+				},
+				{
+					"Column":"Column9",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"冷链"
+				},
+				{
+					"Column":"Column10",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"熟食"
+				},
+				{
 					"Column":"C_Unit",
 					"Font":{
 						"Name":"宋体",
@@ -208,34 +283,15 @@
 					"DataField":"消耗"
 				},
 				{
-					"Column":"Column8",
+					"Column":"Column21",
 					"Font":{
 						"Name":"宋体",
 						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
-					"DataField":"蔬菜"
-				},
-				{
-					"Column":"Column9",
-					"Font":{
-						"Name":"宋体",
-						"Size":75000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"冷链"
-				},
-				{
-					"Column":"Column10",
-					"Font":{
-						"Name":"宋体",
-						"Size":75000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"熟食"
+					"WordWrap":true,
+					"DataField":"包材"
 				},
 				{
 					"Column":"Column11",
@@ -245,6 +301,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"肉食"
 				},
 				{
@@ -255,6 +312,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"米饭"
 				},
 				{
@@ -265,6 +323,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"汤汁"
 				},
 				{
@@ -275,6 +334,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"汤汁"
 				},
 				{
@@ -285,6 +345,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"糕点"
 				},
 				{
@@ -295,6 +356,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"allamount"
 				},
 				{
@@ -305,6 +367,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"DataField":"tax"
 				},
 				{
@@ -377,16 +440,27 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"C_Unit",
+					"Column":"Column19",
 					"Font":{
 						"Name":"宋体",
 						"Size":75000,
 						"Weight":400,
 						"Charset":134
 					},
-					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
-					"Text":"消耗"
+					"Text":"清洁"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column20",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"商品"
 				},
 				{
 					"GroupTitle":false,
@@ -423,6 +497,31 @@
 					},
 					"TextAlign":"MiddleCenter",
 					"Text":"熟食"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"C_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"消耗"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column21",
+					"Font":{
+						"Name":"宋体",
+						"Size":75000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"包材"
 				},
 				{
 					"GroupTitle":false,
@@ -670,7 +769,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
 					"Center":"Horizontal",
-					"Left":18.7854,
+					"Left":23.7596,
 					"Width":8.99583,
 					"Height":0.79375,
 					"Font":{
