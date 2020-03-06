@@ -91,7 +91,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         #region 提交数据
 
 
-
+        /// <summary>
+        /// 月结、反月结
+        /// </summary>
+        /// <param name="month"></param>
+        /// <param name="type"></param>
+        /// <param name="msg"></param>
         public void PostOrCancel(string month, int type, out string msg)
         {
             try
@@ -137,22 +142,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                }
                                else
                                {
-                                   UserInfo userinfo = LoginUserInfo.Get();
-                                   var dp = new DynamicParameters(new { });
-                                   dp.Add("@BalanceMonth", month);
-                                   dp.Add("@BalanceBy", userinfo.realName);
-                                   dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
-                                   dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
-                                   this.BaseRepository().ExecuteByProc("sp_MonthBalance_Post", dp);
-
-                                   int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
-                                   string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
-
-                                   if (errcode != 0)
-                                   {
-                                       msg = errMsg;
-                                   }
-                                }
+                                   PostMonthBalance(month, out msg);//月结
+                               }
                             }
                         }
                     }
@@ -192,21 +183,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                             if (success)
                             {
-                                UserInfo userinfo = LoginUserInfo.Get();
-                                var dp = new DynamicParameters(new { });
-                                dp.Add("@BalanceMonth", month);
-                                dp.Add("@BalanceBy", userinfo.realName);
-                                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
-                                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
-                                this.BaseRepository().ExecuteByProc("sp_MonthBalance_Cancel", dp);
-
-                                int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
-                                string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
-
-                                if (errcode != 0)
-                                {
-                                    msg = errMsg;
-                                }
+                                CancelMonthBalance(month, out msg);//反月结
                             }
                         }
                     }
@@ -231,6 +208,99 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
+        }
+
+
+        /// <summary>
+        /// 月结
+        /// </summary>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public bool PostMonthBalance(string month, out string msg)
+        {
+            msg = "";
+
+            try
+            {
+                UserInfo userinfo = LoginUserInfo.Get();
+                var dp = new DynamicParameters(new { });
+                dp.Add("@BalanceMonth", month);
+                dp.Add("@BalanceBy", userinfo.realName);
+                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                this.BaseRepository().ExecuteByProc("sp_MonthBalance_Post", dp);
+
+                int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
+                string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+
+                if (errcode != 0)
+                {
+                    msg = errMsg;
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 反月结
+        /// </summary>
+        /// <param name="month"></param>
+        /// <returns></returns>
+        public bool CancelMonthBalance(string month, out string msg)
+        {
+            msg = "";
+
+            try
+            {
+                UserInfo userinfo = LoginUserInfo.Get();
+                var dp = new DynamicParameters(new { });
+                dp.Add("@BalanceMonth", month);
+                dp.Add("@BalanceBy", userinfo.realName);
+                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
+                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
+                this.BaseRepository().ExecuteByProc("sp_MonthBalance_Cancel", dp);
+
+                int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
+                string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+
+                if (errcode != 0)
+                {
+                    msg = errMsg;
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+           
         }
 
         /// <summary>
