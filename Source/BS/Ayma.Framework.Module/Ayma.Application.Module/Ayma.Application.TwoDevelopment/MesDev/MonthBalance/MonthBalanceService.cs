@@ -227,7 +227,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 string lastDate = dt.AddMonths(-1).ToString("yyyy-MM");
 
 
-                #region 加载数据
+                #region 月结库存、各单据数量
+                List<Mes_MonthBalanceEntity> listMonthBalanceDetail=new List<Mes_MonthBalanceEntity>();//各项数据
+
+
                 Mes_MonthBalanceEntity lastMonthBalanceEntity = new Mes_MonthBalanceEntity(); //加载上月月结凭证
                 if (success)
                 {
@@ -648,7 +651,7 @@ GROUP BY H.I_StockCode,
                         listInspectQty = rows.ToList();
                 }
 
-                List<Mes_MonthBalanceDetailEntity> listInWorkShopQty = new List<Mes_MonthBalanceDetailEntity>();           //半成品入库数量
+                List<Mes_MonthBalanceDetailEntity> listInWorkShopQty = new List<Mes_MonthBalanceDetailEntity>();//半成品入库数量
                 if (success)
                 {
                     string sql =
@@ -708,6 +711,8 @@ GROUP BY H.O_StockCode,
                     if (rows != null && rows.Count() > 0)
                         M_OrgresOutQty = rows.ToList();
                 }
+
+
                 #endregion
 
 
