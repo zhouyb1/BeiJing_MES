@@ -617,19 +617,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     var list = dt.Rows[i].ItemArray.ToList();
                     list.RemoveAt(1);
                     var array = list.ToArray();
-                    dt.Rows[i]["allamount"] = array.Sum(c => c.ToInt());
+                    dt.Rows[i]["allamount"] = array.Sum(c => c.ToDecimal(6));
                 }
 
                 for (var i = 0; i < dtTax.Rows.Count; i++)
                 {
                     var arr = dtTax.Rows[i].ItemArray;
-                    dt.Rows[i]["tax"] = arr.Sum(c => c.ToInt());
+                    dt.Rows[i]["tax"] = arr.Sum(c => c.ToDecimal(6));
                 }
 
                  for (var i = 0; i < dtTaxAlmount.Rows.Count; i++)
                 {
                     var arr = dtTaxAlmount.Rows[i].ItemArray;
-                    dt.Rows[i]["taxamount"] = arr.Sum(c => c.ToInt());
+                    dt.Rows[i]["taxamount"] = arr.Sum(c => c.ToDecimal(6));
                 }
                 return dt;
             }
