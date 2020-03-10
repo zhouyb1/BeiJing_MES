@@ -228,10 +228,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
 
                 #region 月结库存、各单据数量
-                List<Mes_MonthBalanceEntity> listMonthBalanceDetail=new List<Mes_MonthBalanceEntity>();//各项数据
+                List<Mes_MonthBalanceDetailEntity> listMonthBalanceDetail = new List<Mes_MonthBalanceDetailEntity>();//各项数据
 
-
-                Mes_MonthBalanceEntity lastMonthBalanceEntity = new Mes_MonthBalanceEntity(); //加载上月月结凭证
+                //加载上月月结凭证
+                Mes_MonthBalanceEntity lastMonthBalanceEntity = new Mes_MonthBalanceEntity(); 
                 if (success)
                 {
                     string sql =
@@ -251,7 +251,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     }
                 }
 
-                List<Mes_MonthBalanceDetailEntity> listLastQty = new List<Mes_MonthBalanceDetailEntity>();//加载上月月结库存
+                //加载上月月结库存
+                List<Mes_MonthBalanceDetailEntity> listLastQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -270,8 +271,24 @@ WHERE LEFT(M_Months,7)='" + lastDate + "'";
                     if (rows != null && rows.Count() > 0)
                         listLastQty = rows.ToList();
                 }
+                foreach (var row in listLastQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_LastQty += entity.M_LastQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listNowQty = new List<Mes_MonthBalanceDetailEntity>();//加载当月月结库存
+
+                //加载当月月结库存
+                List<Mes_MonthBalanceDetailEntity> listNowQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -287,8 +304,24 @@ FROM Mes_Inventory";
                     if (rows != null && rows.Count() > 0)
                         listNowQty = rows.ToList();
                 }
+                foreach (var row in listNowQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_StockQty += entity.M_StockQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listInQty = new List<Mes_MonthBalanceDetailEntity>(); //入库数量
+
+                //入库数量
+                List<Mes_MonthBalanceDetailEntity> listInQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -318,8 +351,23 @@ GROUP BY
                     if (rows != null && rows.Count() > 0)
                         listInQty = rows.ToList();
                 }
+                foreach (var row in listInQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_InQty += entity.M_InQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listBackSupplyQty = new List<Mes_MonthBalanceDetailEntity>();//退供应商数量
+                //退供应商数量
+                List<Mes_MonthBalanceDetailEntity> listBackSupplyQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -347,8 +395,23 @@ GROUP BY H.B_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listBackSupplyQty = rows.ToList();
                 }
+                foreach (var row in listBackSupplyQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_BackSupplyQty += entity.M_BackSupplyQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listOutQty = new List<Mes_MonthBalanceDetailEntity>();//领料单数量
+                //领料单数量
+                List<Mes_MonthBalanceDetailEntity> listOutQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -377,8 +440,23 @@ GROUP BY D.C_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listOutQty = rows.ToList();
                 }
+                foreach (var row in listOutQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_OutQty += entity.M_OutQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listBackStockQty = new List<Mes_MonthBalanceDetailEntity>(); //退库单数量
+                //退库单数量
+                List<Mes_MonthBalanceDetailEntity> listBackStockQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -407,8 +485,23 @@ GROUP BY H.B_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listBackStockQty = rows.ToList();
                 }
+                foreach (var row in listBackStockQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_BackStockQty += entity.M_BackStockQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listScrapQty = new List<Mes_MonthBalanceDetailEntity>();//报废单数量
+                //报废单数量
+                List<Mes_MonthBalanceDetailEntity> listScrapQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -437,10 +530,23 @@ GROUP BY H.S_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listScrapQty = rows.ToList();
                 }
+                foreach (var row in listScrapQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_ScrapQty += entity.M_ScrapQty;
+                    }
+                }
 
-
-
-                List<Mes_MonthBalanceDetailEntity> listOtherInQty = new List<Mes_MonthBalanceDetailEntity>();//其他入库单数量
+                //其他入库单数量
+                List<Mes_MonthBalanceDetailEntity> listOtherInQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -469,8 +575,23 @@ GROUP BY H.O_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listOtherInQty = rows.ToList();
                 }
+                foreach (var row in listOtherInQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_OtherInQty += entity.M_OtherInQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listOtherOutQty = new List<Mes_MonthBalanceDetailEntity>(); //其他出库单数量
+                //其他出库单数量
+                List<Mes_MonthBalanceDetailEntity> listOtherOutQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -498,6 +619,20 @@ GROUP BY H.O_StockCode,
 
                     if (rows != null && rows.Count() > 0)
                         listOtherOutQty = rows.ToList();
+                }
+                foreach (var row in listOtherOutQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_OtherOutQty += entity.M_OtherOutQty;
+                    }
                 }
 
                 List<Mes_MonthBalanceDetailEntity> listSaleQty = new List<Mes_MonthBalanceDetailEntity>(); //销售单数量
@@ -529,8 +664,23 @@ GROUP BY H.S_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listSaleQty = rows.ToList();
                 }
+                foreach (var row in listSaleQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_SaleQty += entity.M_SaleQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listExpendQty = new List<Mes_MonthBalanceDetailEntity>();//消耗单数量
+                //消耗单数量
+                List<Mes_MonthBalanceDetailEntity> listExpendQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -559,9 +709,23 @@ GROUP BY H.E_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listExpendQty = rows.ToList();
                 }
+                foreach (var row in listExpendQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_ExpendQty += entity.M_ExpendQty;
+                    }
+                }
 
-
-                List<Mes_MonthBalanceDetailEntity> listRequistInQty = new List<Mes_MonthBalanceDetailEntity>();//调拨入数量
+                //调拨入数量
+                List<Mes_MonthBalanceDetailEntity> listRequistInQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -590,9 +754,23 @@ GROUP BY H.R_StockToCode,
                     if (rows != null && rows.Count() > 0)
                         listRequistInQty = rows.ToList();
                 }
+                foreach (var row in listRequistInQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_RequistQty += entity.M_RequistQty;
+                    }
+                }
 
-
-                List<Mes_MonthBalanceDetailEntity> listRequistOutQty = new List<Mes_MonthBalanceDetailEntity>(); //调拨出数量
+                //调拨出数量
+                List<Mes_MonthBalanceDetailEntity> listRequistOutQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -601,7 +779,7 @@ SELECT H.R_StockCode M_StockCode,
        H.R_StockName M_StockName,
        D.R_GoodsCode M_GoodsCode,
        D.R_GoodsName M_GoodsName,
-       SUM(-D.R_Qty) M_RequistQty
+       SUM(D.R_Qty) M_RequistQty
 FROM Mes_RequistHead H
     LEFT JOIN Mes_RequistDetail D
         ON H.R_RequistNo = D.R_RequistNo
@@ -621,9 +799,23 @@ GROUP BY H.R_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listRequistOutQty = rows.ToList();
                 }
+                foreach (var row in listRequistOutQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_RequistQty -= entity.M_RequistQty;
+                    }
+                }
 
-
-                List<Mes_MonthBalanceDetailEntity> listInspectQty = new List<Mes_MonthBalanceDetailEntity>();//抽检单数量
+                //抽检单数量
+                List<Mes_MonthBalanceDetailEntity> listInspectQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -650,8 +842,23 @@ GROUP BY H.I_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listInspectQty = rows.ToList();
                 }
+                foreach (var row in listInspectQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_InspectQty += entity.M_InspectQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> listInWorkShopQty = new List<Mes_MonthBalanceDetailEntity>();//半成品入库数量
+                //半成品入库数量
+                List<Mes_MonthBalanceDetailEntity> listInWorkShopQty = new List<Mes_MonthBalanceDetailEntity>();
                 if (success)
                 {
                     string sql =
@@ -681,8 +888,23 @@ GROUP BY H.I_StockCode,
                     if (rows != null && rows.Count() > 0)
                         listInWorkShopQty = rows.ToList();
                 }
+                foreach (var row in listInWorkShopQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_InWorkShopQty += entity.M_InWorkShopQty;
+                    }
+                }
 
-                List<Mes_MonthBalanceDetailEntity> M_OrgresOutQty = new List<Mes_MonthBalanceDetailEntity>(); //半成品出库数量
+                //半成品出库数量
+                List<Mes_MonthBalanceDetailEntity> listOrgresOutQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -711,11 +933,25 @@ GROUP BY H.O_StockCode,
                     if (rows != null && rows.Count() > 0)
                         M_OrgresOutQty = rows.ToList();
                 }
-
-
+                foreach (var row in listOrgresOutQty)
+                {
+                    var entity = listMonthBalanceDetail.Find(r => r.M_StockCode == row.M_StockCode && r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        row.Create();
+                        row.M_Months = month;
+                        listMonthBalanceDetail.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_OrgresOutQty += entity.M_OrgresOutQty;
+                    }
+                }
                 #endregion
 
+                #region 月结成本价
 
+                #endregion
                 return success;
             }
             catch (Exception ex)
