@@ -949,9 +949,106 @@ GROUP BY H.O_StockCode,
                     }
                 }
                 #endregion
+                #region 成本价月结
 
-                #region 月结成本价
+                //成本价
+                List<Mes_MonthBalancePrice> listCostPrice = new List<Mes_MonthBalancePrice>();
 
+                //采购入库单统计
+                List <Mes_MonthBalancePrice> listMaterInPrice = new List<Mes_MonthBalancePrice>();
+                if (success)
+                {
+                    string sql =
+                        @"
+SELECT
+       D.M_GoodsCode,
+       D.M_GoodsName,
+	   SUM(D.M_Qty*D.M_Price) M_TotalAmount,
+       SUM(D.M_Qty) M_StockQty,
+       1 M_Kind
+FROM Mes_MaterInHead H
+    LEFT JOIN Mes_MaterInDetail D
+        ON H.M_MaterInNo = D.M_MaterInNo
+WHERE H.M_Status=3
+    AND (H.M_CreateDate>@starDate AND H.M_CreateDate<=@endDate)
+GROUP BY 
+       D.M_GoodsCode,
+       D.M_GoodsName";
+
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@starDate", lastMonthBalanceEntity.M_Months.ToDate(), DbType.DateTime);
+                    dp.Add("@endDate", month.ToDate(), DbType.DateTime);
+                   
+                    var rows = this.BaseRepository().FindList<Mes_MonthBalancePrice>(sql, dp);
+
+                    if (rows != null && rows.Count() > 0)
+                        listMaterInPrice = rows.ToList();
+                }
+                foreach (var row in listMaterInPrice)
+                {
+                    var entity = listCostPrice.Find(r => r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        listCostPrice.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_StockQty = row.M_StockQty;
+                        entity.M_GoodsPrice = 0;
+                        entity.M_TotalAmount = row.M_TotalAmount;
+                        entity.M_Kind = row.M_Kind;
+                    }
+                }
+
+                //上月成本价统计
+                List<Mes_MonthBalancePrice> listLastCostPrice = new List<Mes_MonthBalancePrice>();
+                if (success)
+                {
+                    string sql =
+                        @"
+SELECT
+       P.M_GoodsCode
+      ,P.M_GoodsName
+      ,P.M_GoodsPrice M_LastPrice
+      ,P.M_StockQty M_LastQty
+	  ,G.G_Kind M_Kind
+  FROM Mes_MonthBalancePrice P
+  LEFT JOIN Mes_Goods G ON P.M_GoodsCode=G.G_Code
+  WHERE LEFT(P.M_Months,7)='" + lastDate + "'";
+                    var rows = this.BaseRepository().FindList<Mes_MonthBalancePrice>(sql);
+                    if (rows != null && rows.Count() > 0)
+                        listLastCostPrice = rows.ToList();
+                }
+
+                var filters= listLastCostPrice.Where(r => r.M_Kind == 1);
+                foreach (var row in filters)
+                {
+                    var entity = listCostPrice.Find(r => r.M_GoodsCode == row.M_GoodsCode);
+                    if (entity == null)
+                    {
+                        listCostPrice.Add(row);
+                    }
+                    else
+                    {
+                        entity.M_LastQty = row.M_LastQty;
+                        entity.M_LastPrice = row.M_LastPrice;
+                        entity.M_Kind = row.M_Kind;
+                    }
+                }
+
+
+                List<Mes_MonthBalancePriceEntity> listMonthBalancePrice = new List<Mes_MonthBalancePriceEntity>();
+                foreach (var row in listCostPrice)
+                {
+                    Mes_MonthBalancePriceEntity entity=new Mes_MonthBalancePriceEntity();
+                    entity.Create();
+                    entity.M_Months=month;
+                    entity.M_GoodsCode = row.M_GoodsCode;
+                    entity.M_GoodsName = row.M_GoodsName;
+                    entity.M_LastQty = row.M_LastQty;
+                    entity.M_LastPrice = row.M_LastPrice;
+                    
+                }
                 #endregion
 
                 return success;
