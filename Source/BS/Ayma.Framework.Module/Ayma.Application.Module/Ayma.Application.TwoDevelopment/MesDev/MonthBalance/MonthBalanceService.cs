@@ -1036,7 +1036,7 @@ SELECT
                     }
                 }
 
-
+                //计算原料成本价
                 List<Mes_MonthBalancePriceEntity> listMonthBalancePrice = new List<Mes_MonthBalancePriceEntity>();
                 foreach (var row in listCostPrice)
                 {
@@ -1047,7 +1047,21 @@ SELECT
                     entity.M_GoodsName = row.M_GoodsName;
                     entity.M_LastQty = row.M_LastQty;
                     entity.M_LastPrice = row.M_LastPrice;
+                    entity.M_GoodsPrice = ((row.M_LastQty * row.M_LastPrice) + (row.M_TotalAmount)) /
+                                          (row.M_LastQty + row.M_StockQty);
+
+                    var stocks = listNowQty.Where(r => r.M_GoodsCode == row.M_GoodsCode);
+                    if (stocks != null && stocks.Count() > 0)
+                    {
+                        entity.M_StockQty = stocks.Sum(r => r.M_StockQty);
+                    }
+                    else
+                    {
+                        entity.M_StockQty = 0;
+                    }
+
                     
+
                 }
                 #endregion
 

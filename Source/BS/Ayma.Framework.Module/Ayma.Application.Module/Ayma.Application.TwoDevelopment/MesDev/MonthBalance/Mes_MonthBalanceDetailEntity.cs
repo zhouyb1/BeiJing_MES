@@ -53,91 +53,91 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <returns></returns>
         [Column("M_STOCKQTY")]
-        public double? M_StockQty { get; set; }
+        public decimal? M_StockQty { get; set; }
         /// <summary>
         /// 上月库存
         /// </summary>
         /// <returns></returns>
         [Column("M_LASTQTY")]
-        public double? M_LastQty { get; set; }
+        public decimal? M_LastQty { get; set; }
         /// <summary>
         /// 原料入库数量
         /// </summary>
         /// <returns></returns>
         [Column("M_INQTY")]
-        public double? M_InQty { get; set; }
+        public decimal? M_InQty { get; set; }
         /// <summary>
         /// 原料退供应商数量
         /// </summary>
         /// <returns></returns>
         [Column("M_BACKSUPPLYQTY")]
-        public double? M_BackSupplyQty { get; set; }
+        public decimal? M_BackSupplyQty { get; set; }
         /// <summary>
         /// 领料数量
         /// </summary>
         /// <returns></returns>
         [Column("M_OUTQTY")]
-        public double? M_OutQty { get; set; }
+        public decimal? M_OutQty { get; set; }
         /// <summary>
         /// 退库数量
         /// </summary>
         /// <returns></returns>
         [Column("M_BACKSTOCKQTY")]
-        public double? M_BackStockQty { get; set; }
+        public decimal? M_BackStockQty { get; set; }
         /// <summary>
         /// 报废数量
         /// </summary>
         /// <returns></returns>
         [Column("M_SCRAPQTY")]
-        public double? M_ScrapQty { get; set; }
+        public decimal? M_ScrapQty { get; set; }
         /// <summary>
         /// 其他入库数量
         /// </summary>
         /// <returns></returns>
         [Column("M_OTHERINQTY")]
-        public double? M_OtherInQty { get; set; }
+        public decimal? M_OtherInQty { get; set; }
         /// <summary>
         /// 其他出库数量
         /// </summary>
         /// <returns></returns>
         [Column("M_OTHEROUTQTY")]
-        public double? M_OtherOutQty { get; set; }
+        public decimal? M_OtherOutQty { get; set; }
         /// <summary>
         /// 售卖数量
         /// </summary>
         /// <returns></returns>
         [Column("M_SALEQTY")]
-        public double? M_SaleQty { get; set; }
+        public decimal? M_SaleQty { get; set; }
         /// <summary>
         /// 消耗数量
         /// </summary>
         /// <returns></returns>
         [Column("M_EXPENDQTY")]
-        public double? M_ExpendQty { get; set; }
+        public decimal? M_ExpendQty { get; set; }
         /// <summary>
         /// 调拨数量
         /// </summary>
         /// <returns></returns>
         [Column("M_REQUISTQTY")]
-        public double? M_RequistQty { get; set; }
+        public decimal? M_RequistQty { get; set; }
         /// <summary>
         /// 物料转换数量
         /// </summary>
         /// <returns></returns>
         [Column("M_ORGRESOUTQTY")]
-        public double? M_OrgresOutQty { get; set; }
+        public decimal? M_OrgresOutQty { get; set; }
         /// <summary>
         /// 抽检数量
         /// </summary>
         /// <returns></returns>
         [Column("M_INSPECTQTY")]
-        public double? M_InspectQty { get; set; }
+        public decimal? M_InspectQty { get; set; }
         /// <summary>
         /// 车间到线边仓的入库数量
         /// </summary>
         /// <returns></returns>
         [Column("M_INWORKSHOPQTY")]
-        public double? M_InWorkShopQty { get; set; }
+        public decimal? M_InWorkShopQty { get; set; }
         #endregion
 
         #region 扩展操作
