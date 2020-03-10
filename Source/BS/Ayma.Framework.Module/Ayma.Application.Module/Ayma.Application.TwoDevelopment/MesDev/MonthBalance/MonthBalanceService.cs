@@ -953,6 +953,7 @@ GROUP BY H.O_StockCode,
                 #region 月结成本价
 
                 #endregion
+
                 return success;
             }
             catch (Exception ex)
