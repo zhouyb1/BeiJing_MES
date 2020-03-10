@@ -635,7 +635,8 @@ GROUP BY H.O_StockCode,
                     }
                 }
 
-                List<Mes_MonthBalanceDetailEntity> listSaleQty = new List<Mes_MonthBalanceDetailEntity>(); //销售单数量
+                //销售单数量
+                List<Mes_MonthBalanceDetailEntity> listSaleQty = new List<Mes_MonthBalanceDetailEntity>(); 
                 if (success)
                 {
                     string sql =
@@ -931,7 +932,7 @@ GROUP BY H.O_StockCode,
                     var rows = this.BaseRepository().FindList<Mes_MonthBalanceDetailEntity>(sql, dp);
 
                     if (rows != null && rows.Count() > 0)
-                        M_OrgresOutQty = rows.ToList();
+                        listOrgresOutQty = rows.ToList();
                 }
                 foreach (var row in listOrgresOutQty)
                 {
