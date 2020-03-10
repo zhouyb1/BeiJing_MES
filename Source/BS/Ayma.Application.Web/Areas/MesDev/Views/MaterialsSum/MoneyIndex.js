@@ -480,7 +480,7 @@ var bootstrap = function ($, ayma) {
                                { label: "入库金额", name: "amount", width: 70, align: "left", statistics: true },
                                { label: "批次", name: "m_batch", width: 80, align: "left" },
                                { label: "商品税率", name: "m_goodsitax", width: 80, align: "left" },
-                               { label: "价格", name: "m_price", width: 70, align: "left" },
+                               { label: "无税价格", name: "m_price", width: 70, align: "left" },
                                { label: "备注", name: "m_remark", width: 70, align: "left" },
                                { label: "入库时间", name: "m_createdate", width: 150, align: "left" },
                                { label: "添加人", name: "m_createby", width: 80, align: "left" },

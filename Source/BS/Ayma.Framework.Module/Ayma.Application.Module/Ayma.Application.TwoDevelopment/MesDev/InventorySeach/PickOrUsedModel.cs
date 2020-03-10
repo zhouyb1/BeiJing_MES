@@ -34,7 +34,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("BATCH")]
         public string Batch { get; set; }
-      
+        /// <summary>
+        /// 仓库
+        /// </summary>
+        [Column("STOCKCODE")]
+        public string StockCode { get; set; }
         #endregion
 
         

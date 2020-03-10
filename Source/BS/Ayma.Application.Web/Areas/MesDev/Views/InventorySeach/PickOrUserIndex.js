@@ -58,7 +58,8 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "商品编码", name: "GoodsCode", width: 160, align: "left"},
                     { label: "商品名称", name: "GoodsName", width: 160, align: "left"},
-                    { label: "领用数量", name: "Qty", width: 160, align: "left"},
+                    { label: "领用数量", name: "Qty", width: 160, align: "left" },
+                    { label: "仓库", name: "StockCode", width: 160, align: "left" },
                     { label: "批次", name: "Batch", width: 160, align: "left"},
                 ],
                 mainId: 'GoodsCode',
@@ -70,7 +71,8 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "商品编码", name: "GoodsCode", width: 160, align: "left"},
                     { label: "商品名称", name: "GoodsName", width: 160, align: "left"},
-                    { label: "使用数量", name: "Qty", width: 160, align: "left"},
+                    { label: "使用数量", name: "Qty", width: 160, align: "left" },
+                    { label: "仓库", name: "StockCode", width: 160, align: "left" },
                     { label: "批次", name: "Batch", width: 160, align: "left"},
                 ],
                 mainId: 'GoodsCode',

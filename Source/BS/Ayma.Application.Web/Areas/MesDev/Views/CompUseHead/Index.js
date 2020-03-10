@@ -3,7 +3,7 @@
  * 描  述：强制使用记录单据
  */
 var refreshGirdData;
-var bootstrap = function ($, ayma) {
+var bootstrap = function ($,ayma) {
     "use strict";
     var startTime;
     var endTime;

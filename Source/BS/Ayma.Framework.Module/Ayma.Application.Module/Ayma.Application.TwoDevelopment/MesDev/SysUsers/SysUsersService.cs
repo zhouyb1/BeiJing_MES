@@ -30,7 +30,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("SELECT ");
                 strSql.Append(@"
                 t.ID,
-                t.ID,
                 t.U_Code,
                 t.U_Name,
                 t.U_Pass,

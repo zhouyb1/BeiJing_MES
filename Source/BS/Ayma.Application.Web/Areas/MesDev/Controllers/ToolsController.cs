@@ -43,7 +43,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             ICache redisCache = CacheFactory.CaChe();
             var userId = LoginUserInfo.Get().userId;
             var key = userId + "_stock";
-            redisCache.Write(key, stockEntity.S_Code);
+            if (!code.IsEmpty())
+            {
+                redisCache.Write(key, stockEntity.S_Code);
+            }
             return Success(stockEntity);
         }
         /// <summary>
