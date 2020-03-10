@@ -90,11 +90,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
-        public IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo)
+        public IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo,string state)
         {
             try
             {
-                return scrapManagerService.GetMes_ScrapDeail(orderNo);
+                return scrapManagerService.GetMes_ScrapDeail(orderNo,state);
             }
             catch (Exception ex)
             {

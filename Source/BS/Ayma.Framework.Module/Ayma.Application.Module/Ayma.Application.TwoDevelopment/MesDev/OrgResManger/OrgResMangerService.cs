@@ -404,16 +404,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 SUM(i.I_Qty) O_Qty ,
                                 i.I_Unit O_Unit ,
                                 g.G_Unit O_SecUnit ,
-                                ( SELECT    G_Price
-                                  FROM      dbo.Mes_Goods
-                                  WHERE     G_Code = i.I_GoodsCode
-                                ) O_Price
+                            dbo.GetPrice(i.I_GoodsCode,@time)  O_Price
                         FROM    dbo.Mes_Inventory i
                                 INNER JOIN dbo.Mes_Convert c ON c.C_Code = i.I_GoodsCode
                                 INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
                                 INNER JOIN dbo.Mes_Goods g ON g.G_Code=c.C_SecCode
                         WHERE   i.I_Qty > 0 AND  s.S_Kind = 4  ");
-            var dp = new DynamicParameters(new { });   
+            var dp = new DynamicParameters(new { });
+            DateTime now = DateTime.Now;
+            //获取拼接形式的，精确到毫秒
+            string time = now.ToString("yyyyMM");
+            dp.Add("time", time, DbType.String);
+
             var queryParam = queryJson.ToJObject();
             if (!keyword.IsEmpty())
             {
@@ -487,7 +489,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     O_GoodsCode ,
                                     O_GoodsName ,
                                     O_Unit ,
-                                    dbo.GetPrice(O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price ,
+                                    dbo.GetPrice(O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price,
                                     SUM(O_Qty) O_Qty ,
                                     O_SecGoodsCode ,
                                     O_SecGoodsName ,

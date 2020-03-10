@@ -30,7 +30,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_CompUseDetail表数据
         /// <summary>
         /// <returns></returns>
-        IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue);
+        IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue,string state);
         /// <summary>
         /// 获取Mes_CompUseHead表实体数据
         /// </summary>

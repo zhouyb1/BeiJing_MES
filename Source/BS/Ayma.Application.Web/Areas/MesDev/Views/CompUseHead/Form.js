@@ -133,7 +133,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '批次', name: 'C_Batch', width: 80, align: 'left', editType: 'label'
                     },
                     {
-                        label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label',hidden:true
+                        label: '价格', name: 'C_Price', width: 100, align: 'left', editType: 'label',
                     },
                     //{
                     //    label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
@@ -164,7 +164,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/CompUseHead/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/CompUseHead/GetFormData?keyValue=' + keyValue+'&state=1', function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_CompUseDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -192,6 +192,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (data.length==0||data[0].C_GoodsCode==null) {
             ayma.alert.error('请添加物料！');
             return false;
+        }
+        for (var i = 0; i < data.length; i++) {
+            data[i].C_Price = null;
         }
         var postData = {};
         postData.strEntity = JSON.stringify($('[data-table="Mes_CompUseHead"]').GetFormData());

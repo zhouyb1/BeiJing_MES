@@ -139,10 +139,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_CompUseHeadData = compUseHeadIBLL.GetMes_CompUseHeadEntity( keyValue );
-            var Mes_CompUseDetailData = compUseHeadIBLL.GetMes_CompUseDetailList( Mes_CompUseHeadData.C_No );
+            var Mes_CompUseDetailData = compUseHeadIBLL.GetMes_CompUseDetailList(Mes_CompUseHeadData.C_No, state);
             var jsonData = new {
                 Mes_CompUseHeadData = Mes_CompUseHeadData,
                 Mes_CompUseDetailData = Mes_CompUseDetailData,

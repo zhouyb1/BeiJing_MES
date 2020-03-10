@@ -184,25 +184,45 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue"></param>
         /// <returns></returns>
-        public IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo)
+        public IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo,string state)
         {
             try
             {
                 //return this.BaseRepository().FindList<Mes_ScrapDetailEntity>(c=>c.S_ScrapNo==orderNo);
+                var dp = new DynamicParameters(new { });
                 var strSql = new StringBuilder();
-                strSql.Append(@"SELECT d.S_GoodsCode
-                                      ,d.S_GoodsName
-                                      ,d.S_Unit
-                                      ,d.S_Qty
-                                      ,d.S_Batch
-                                      ,d.S_Remark
-                                      ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112)) S_Price 
-                                      ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112))* d.S_Qty S_Amount
-                                  FROM dbo.Mes_ScrapHead h INNER JOIN dbo.Mes_ScrapDetail d ON d.S_ScrapNo=h.S_ScrapNo where h.S_ScrapNo =@S_ScrapNo");
-                var dp = new DynamicParameters(new {});
-                dp.Add("@S_ScrapNo",orderNo,DbType.String);
-                var entity = this.BaseRepository().FindList<Mes_ScrapDetailEntity>(strSql.ToString(), dp);
-                return entity;
+                    if (state.IsEmpty())
+                    {
+                        strSql.Append(@"SELECT d.S_GoodsCode
+                                          ,d.S_GoodsName
+                                          ,d.S_Unit
+                                          ,d.S_Qty
+                                          ,d.S_Batch
+                                          ,d.S_Remark
+                                          ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112)) S_Price 
+                                          ,dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),h.S_UploadDate,112))* d.S_Qty S_Amount
+                                      FROM dbo.Mes_ScrapHead h INNER JOIN dbo.Mes_ScrapDetail d ON d.S_ScrapNo=h.S_ScrapNo where h.S_ScrapNo =@S_ScrapNo");
+                    }
+                    else
+                    {
+                        DateTime now = DateTime.Now;
+                        //获取拼接形式的，精确到毫秒
+                        string time = now.ToString("yyyyMM");
+                        dp.Add("time", time, DbType.String);
+                        strSql.Append(@"SELECT d.S_GoodsCode
+                                          ,d.S_GoodsName
+                                          ,d.S_Unit
+                                          ,d.S_Qty
+                                          ,d.S_Batch
+                                          ,d.S_Remark
+                                          ,dbo.GetPrice(d.S_GoodsCode,@time) S_Price 
+                                          ,dbo.GetPrice(d.S_GoodsCode,@time)* d.S_Qty S_Amount
+                                      FROM dbo.Mes_ScrapHead h INNER JOIN dbo.Mes_ScrapDetail d ON d.S_ScrapNo=h.S_ScrapNo where h.S_ScrapNo =@S_ScrapNo");
+                    }
+                       dp.Add("@S_ScrapNo", orderNo, DbType.String);
+                        var entity = this.BaseRepository().FindList<Mes_ScrapDetailEntity>(strSql.ToString(), dp);
+                        return entity;
+              
             }
             catch (Exception ex)
             {
@@ -231,12 +251,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.I_GoodsCode G_GoodsCode,
                                 t.I_GoodsName G_GoodsName,
                                 t.I_Unit G_Unit ,
-                                g.G_Price ,
+                                dbo.GetPrice(t.I_GoodsCode,@time) G_Price ,
                                 t.I_Qty G_Qty 
                         FROM    dbo.Mes_Inventory t
                         LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE t.I_Qty <> 0 and t.I_StockCode =@I_StockCode ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
+            DateTime now = DateTime.Now;
+            //获取拼接形式的，精确到毫秒
+            string time = now.ToString("yyyyMM");
+            dp.Add("time", time, DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);

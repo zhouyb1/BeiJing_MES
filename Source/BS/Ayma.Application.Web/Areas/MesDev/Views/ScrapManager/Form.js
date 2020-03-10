@@ -80,7 +80,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料编码", name: "S_GoodsCode", width: 130, align: "left", },
                     { label: "物料名称", name: "S_GoodsName", width: 130, align: "left" },
-                    { label: "单价", name: "S_Price", width: 130, align: "left",hidden:true },
+                    { label: "单价", name: "S_Price", width: 130, align: "left", },
                     { label: "单位", name: "S_Unit", width: 60, align: "left",hidden:true },
                     {
                         label: "数量", name: "S_Qty", width: 60, align: "left" ,editType:'input',
@@ -117,7 +117,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         initData: function () {
             if (!!keyValue) {
-                $.SetForm(top.$.rootUrl + '/MesDev/ScrapManager/GetFormData?keyValue=' + keyValue, function (data) {
+                $.SetForm(top.$.rootUrl + '/MesDev/ScrapManager/GetFormData?keyValue=' + keyValue+'&state=1', function (data) {
                     for (var id in data) {
                         if (!!data[id].length && data[id].length > 0) {
                             $('#Mes_ScrapDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
@@ -143,6 +143,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (data.length==0||data[0].S_GoodsCode == null) {
             ayma.alert.error('请添加物料');
             return false;
+        }
+        for (var i = 0; i < data.length; i++) {
+            data[i].S_Price = null;
         }
         var postData = {
             strEntity: JSON.stringify($('body').GetFormData()),

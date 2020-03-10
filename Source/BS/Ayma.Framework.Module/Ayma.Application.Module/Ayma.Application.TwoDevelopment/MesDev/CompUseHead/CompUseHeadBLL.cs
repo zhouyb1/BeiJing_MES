@@ -66,11 +66,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_CompUseDetail表数据
         /// <summary>
         /// <returns></returns>
-        public IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue)
+        public IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue,string state)
         {
             try
             {
-                return compUseHeadService.GetMes_CompUseDetailList(keyValue);
+                return compUseHeadService.GetMes_CompUseDetailList(keyValue,state);
             }
             catch (Exception ex)
             {

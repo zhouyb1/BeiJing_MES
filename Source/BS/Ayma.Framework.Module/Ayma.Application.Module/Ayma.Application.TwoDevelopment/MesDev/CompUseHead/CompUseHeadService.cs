@@ -183,11 +183,47 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取Mes_CompUseDetail表数据
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue)
+        public IEnumerable<Mes_CompUseDetailEntity> GetMes_CompUseDetailList(string keyValue,string state)
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_CompUseDetailEntity>(t=>t.C_No == keyValue );
+                var dp = new DynamicParameters(new { });
+                var strSql = new StringBuilder();
+                if (state.IsEmpty())
+                {
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.C_No
+                                  ,d.C_GoodsCode
+                                  ,d.C_GoodsName
+                                  ,d.C_Unit
+                                  ,d.C_Qty
+                                  ,d.C_Batch
+                                  ,d.C_Remark
+                                  ,dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),h.C_UploadDate,112)) C_Price
+                              FROM  dbo.Mes_CompUseHead h INNER JOIN dbo.Mes_CompUseDetail d ON d.C_No =h.C_No where h.C_No =@C_No");
+                }
+                else
+                {
+                    DateTime now = DateTime.Now;
+                    //获取拼接形式的，精确到毫秒
+                    string time = now.ToString("yyyyMM");
+                    dp.Add("time", time, DbType.String);
+                    strSql.Append(@"SELECT
+                                   d.ID
+                                  ,d.C_No
+                                  ,d.C_GoodsCode
+                                  ,d.C_GoodsName
+                                  ,d.C_Unit
+                                  ,d.C_Qty
+                                  ,d.C_Batch
+                                  ,d.C_Remark
+                                  ,dbo.GetPrice(d.C_GoodsCode,@time) C_Price
+                               FROM  dbo.Mes_CompUseHead h INNER JOIN dbo.Mes_CompUseDetail d ON d.C_No =h.C_No where h.C_No =@C_No");
+                }
+                dp.Add("@C_No", keyValue, DbType.String);
+                var entity = this.BaseRepository().FindList<Mes_CompUseDetailEntity>(strSql.ToString(), dp);
+                return entity;
             }
             catch (Exception ex)
             {
@@ -265,13 +301,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_Unit g_unit,
                 t.I_Qty Qty,
                 t.I_Batch Batch,
-                b.G_Price
+                dbo.GetPrice(t.I_GoodsCode,@time) as G_Price
                 ");
                 strSql.Append("  FROM Mes_Inventory t LEFT JOIN Mes_Goods b ON t.I_GoodsCode=b.G_Code");
                 strSql.Append("  WHERE t.I_Qty <> 0 And b.G_Kind=1 And t.I_StockCode=@I_StockCode ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters();
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
+
                 dp.Add("I_StockCode", stockCode);
                 if (!keyword.IsEmpty())
                 {

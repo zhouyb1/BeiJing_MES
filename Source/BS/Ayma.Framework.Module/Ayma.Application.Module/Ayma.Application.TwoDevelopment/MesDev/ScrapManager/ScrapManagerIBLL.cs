@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="orderNo"></param>
         /// <returns></returns>
-        IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo);
+        IEnumerable<Mes_ScrapDetailEntity> GetMes_ScrapDeail(string orderNo,string state);
         /// <summary>
         /// 获取仓库物料
         /// </summary>

@@ -114,12 +114,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.I_GoodsCode G_GoodsCode,
                                 t.I_GoodsName G_GoodsName,
                                 t.I_Unit G_Unit ,
-                                g.G_Price G_Price,
+                                dbo.GetPrice(t.I_GoodsCode,@time) G_Price,
                                 t.I_Qty G_Qty 
                         FROM    dbo.Mes_Inventory t
                         LEFT JOIN dbo.Mes_Goods g ON t.I_GoodsCode = g.G_Code WHERE t.I_Qty <> 0 AND t.I_StockCode =@I_StockCode ");
             // 虚拟参数
             var dp = new DynamicParameters(new { });
+            DateTime now = DateTime.Now;
+            //获取拼接形式的，精确到毫秒
+            string time = now.ToString("yyyyMM");
+            dp.Add("time", time, DbType.String);
             if (!keyword.IsEmpty())
             {
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
@@ -162,7 +166,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                //return this.BaseRepository().FindList<Mes_BackStockDetailEntity>(t=>t.B_BackStockNo == keyValue);
                 var strSql = new StringBuilder();
                 strSql.Append(@"SELECT 
                                        d.B_GoodsCode
@@ -171,13 +174,19 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,d.B_Qty
                                       ,d.B_Batch
                                       ,d.B_Remark
-                                      ,dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),h.B_UploadDate,112)) B_Price
+                                      ,dbo.GetPrice(d.B_GoodsCode,@time) B_Price
                                   FROM dbo.Mes_BackStockHead h INNER JOIN  dbo.Mes_BackStockDetail d ON h.B_BackStockNo =d.B_BackStockNo
                                   WHERE h.B_BackStockNo =@B_BackStockNo");
-                var dp = new DynamicParameters(new {});
-                dp.Add("@B_BackStockNo",keyValue,DbType.String);
+                var dp = new DynamicParameters(new { });
+                DateTime now = DateTime.Now;
+                //获取拼接形式的，精确到毫秒
+                string time = now.ToString("yyyyMM");
+                dp.Add("time", time, DbType.String);
+
+                dp.Add("@B_BackStockNo", keyValue, DbType.String);
                 var entity = this.BaseRepository().FindList<Mes_BackStockDetailEntity>(strSql.ToString(), dp);
                 return entity;
+           
             }
             catch (Exception ex)
             {
@@ -280,7 +289,21 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public IEnumerable<Mes_BackStockDetailEntity> GetBackStockDetailList(string orderNo)
         {
-            return this.BaseRepository().FindList<Mes_BackStockDetailEntity>(c => c.B_BackStockNo == orderNo);
+            var strSql = new StringBuilder();
+            strSql.Append(@"SELECT 
+                                       d.B_GoodsCode
+                                      ,d.B_GoodsName
+                                      ,d.B_Unit
+                                      ,d.B_Qty
+                                      ,d.B_Batch
+                                      ,d.B_Remark
+                                      ,dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),h.B_UploadDate,112)) B_Price
+                                  FROM dbo.Mes_BackStockHead h INNER JOIN  dbo.Mes_BackStockDetail d ON h.B_BackStockNo =d.B_BackStockNo
+                                  WHERE h.B_BackStockNo =@B_BackStockNo");
+            var dp = new DynamicParameters(new { });
+            dp.Add("@B_BackStockNo", orderNo, DbType.String);
+            var entity = this.BaseRepository().FindList<Mes_BackStockDetailEntity>(strSql.ToString(), dp);
+            return entity;
         }
 
         #endregion

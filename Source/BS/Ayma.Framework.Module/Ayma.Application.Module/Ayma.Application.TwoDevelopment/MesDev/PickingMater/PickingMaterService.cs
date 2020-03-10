@@ -248,8 +248,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       ,d.C_Price
                                       ,d.C_PlanQty
                                       ,d.C_SuggestQty
-                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),@time,112)) C_Price
-                                      ,dbo.GetPrice(C_GoodsCode,CONVERT(VARCHAR(6),@time,112))*d.C_Qty C_Amount
+                                      ,dbo.GetPrice(C_GoodsCode,@time) C_Price
+                                      ,dbo.GetPrice(C_GoodsCode,@time)*d.C_Qty C_Amount
                                   FROM dbo.Mes_CollarHead h INNER JOIN dbo.Mes_CollarDetail d ON h.C_CollarNo=d.C_CollarNo  where h.C_CollarNo =@C_CollarNo");
                 DateTime now = DateTime.Now;
                 //获取拼接形式的，精确到毫秒

@@ -131,10 +131,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetFormData(string keyValue)
+        public ActionResult GetFormData(string keyValue,string state)
         {
             var Mes_ScrapHeadData = scrapManagerIBLL.GetMes_ScrapHeadEntity( keyValue );
-            var detail = scrapManagerIBLL.GetMes_ScrapDeail(Mes_ScrapHeadData.S_ScrapNo);
+            var detail = scrapManagerIBLL.GetMes_ScrapDeail(Mes_ScrapHeadData.S_ScrapNo,state);
             var jsonData = new {
                 Mes_ScrapHeadData = Mes_ScrapHeadData,
                 Mes_ScrapDetailData=detail
