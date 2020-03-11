@@ -91,11 +91,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                              O_SecUnit ,
                                              O_StockName ,
                                              O_TeamName ,
-                                             C_ProName O_ProName,
-                                            dbo.GetUserNameById(O_CreateBy) O_CreateBy
+                                             P_ProName O_ProName,
+                                             dbo.GetUserNameById(O_CreateBy) O_CreateBy
                                       FROM    Mes_OrgResHead h
                                      LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo 
-                                     LEFT JOIN Mes_Convert  ON C_ProNo = O_ProCode  where 1 = 1  and O_Status = 3 ");
+                                     LEFT JOIN Mes_Proce  ON P_ProNo = O_ProCode   where 1 = 1  and O_Status = 3 ");
             if (!queryParam["StockCode"].IsEmpty())
             {
                 dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
@@ -143,8 +143,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         O_GoodsCode ,
                                         O_GoodsName ,
                                         h.O_OrgResNo ,
-                                        O_Unit
-                                        --d.O_Batch
+                                        O_SecGoodsCode ,
+                                        O_Unit,
+                                       (SELECT CAST(CONVERT(DECIMAL(3),C_Min) AS VARCHAR ) + '-'+CAST(CONVERT(DECIMAL(3),C_Max) AS VARCHAR) FROM dbo.Mes_Convert WHERE C_Code=o_GoodsCode AND C_SecCode=O_SecGoodsCode) targetRate
                                 FROM    Mes_OrgResHead h
                                         LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_Status = 3  and O_SecGoodsCode ='" + dtHead.Rows[i]["O_SecGoodsCode"].ToString() + "'");
                 if (!queryParam["StockCode"].IsEmpty())
