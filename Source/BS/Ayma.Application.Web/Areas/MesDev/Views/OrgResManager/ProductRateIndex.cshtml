@@ -8,6 +8,12 @@
             <div class="am-layout-tool">
                 <div class="am-layout-tool-left">
                     <div class="am-layout-tool-item">
+                        <div class="am-searchtxt">提交时间</div>
+                    </div>
+                    <div class="am-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="am-layout-tool-item">
                         <div id="multiple_condition_query">
                             <div class="am-query-formcontent">
                                 <div class="col-xs-12 am-form-item">
@@ -26,13 +32,13 @@
                                     <div class="am-form-item-title">转换后物料</div>
                                     <input id="O_SecGoodsName" type="text" class="form-control" />
                                 </div>
-                                <div class="col-xs-12 am-form-item">
+                                @*<div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">制作日期</div>
                                     <input id="StartTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
                                     <input id="EndTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" style="display: none" />
 
                                 </div>
-                                @*<div class="col-xs-12 am-form-item">
+                                <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">日期</div>
                                     <div id="area" class="col-xs-5 am-form-area">
                                         <input id="StartTime" type="text" class="form-control time" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd 00:00:00' })" value="@DateTime.Now.AddDays(-6).ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />

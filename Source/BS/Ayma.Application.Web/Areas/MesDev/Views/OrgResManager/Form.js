@@ -35,8 +35,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
                 var name = $(this).selectGet();
                 $('.fa-ellipsis-h').data("code", name);
                 $('.fa-ellipsis-h').data("tip", "alert");
@@ -62,8 +60,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+               
             });
            
             //绑定班组
@@ -80,8 +77,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function() {
-                //$("#Mes_OrgResDetail_h").jfGridSet('refreshdata', { rowdatas: [] });
-                //$("#Mes_OrgResDetail_d").jfGridSet('refreshdata', { rowdatas: [] });
+               
                 $('#O_TeamName').val($(this).selectGetText());
             });
 

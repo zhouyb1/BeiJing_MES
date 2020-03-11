@@ -5,8 +5,8 @@
 var refreshGirdData;
 var bootstrap = function ($, ayma) {
     "use strict";
-    var startTime;
-    var endTime;
+    var StartTime;
+    var EndTime;
     var jsonquery = {};
     var page = {
         init: function () {
@@ -36,14 +36,14 @@ var bootstrap = function ($, ayma) {
                 // 默认
                 dfvalue: '1',
                 selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
+                    StartTime = begin;
+                    EndTime = end;
                     page.search();
                 }
             });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 250, 300);
+            }, 250, 350);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -146,8 +146,8 @@ var bootstrap = function ($, ayma) {
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = $("#StartTime").val();
-            param.EndTime = $("#EndTime").val();
+            param.StartTime = StartTime;
+            param.EndTime = EndTime;
             jsonquery = param;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
