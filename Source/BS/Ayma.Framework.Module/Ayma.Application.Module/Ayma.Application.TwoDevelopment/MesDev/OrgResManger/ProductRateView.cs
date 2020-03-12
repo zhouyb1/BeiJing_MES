@@ -23,5 +23,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string O_StockName { get; set; }
         public string O_TeamName { get; set; }
         public string O_ProName { get; set; }
+        public decimal? DIFF { get; set; }
     }
 }
