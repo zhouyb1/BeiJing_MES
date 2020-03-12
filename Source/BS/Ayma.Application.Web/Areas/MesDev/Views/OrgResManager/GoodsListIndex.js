@@ -2,7 +2,6 @@
  * 描  述：组装物料列表
  */
 var stock = request('stock');
-var proNo = request('proNo');
 var refreshGirdData;
 //上级元素的刷新表格方法
 var parentRefreshGirdData;
@@ -15,6 +14,9 @@ var newArray = [];
 var queryJson;
 //关闭窗口
 var closeWindow;
+
+
+
 //处理前物料列表
 var goodsOutList = [];
 //处理后物料列表
@@ -28,17 +30,17 @@ var bootstrap = function ($, ayma) {
             var rows;
             rows = top.GetGoodsListHead();
             for (var i = 0; i < rows.length; i++) {
-                goodsOutList.push({ O_GoodsCode: rows[i].O_GoodsCode, O_Batch:rows[i].O_Batch, O_SecGoodsCode: rows[i].O_SecGoodsCode });
+                goodsOutList.push({ O_GoodsCode: rows[i].O_GoodsCode, O_SecGoodsCode: rows[i].O_SecGoodsCode });
             }
             rows = top.GetGoodsListDetails();
             for (var i = 0; i < rows.length; i++) {
-                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode, O_SecBatch: rows[i].O_SecBatch ,O_Batch:rows[i].O_Batch});
+                goodsSecList.push({ O_SecGoodsCode: rows[i].O_SecGoodsCode });
             }
+
+
             page.initGird();
             page.bind();
-            //获取父级iframe中的刷新商品列表方法
-            //parentRefreshGirdData = $(top[parentFormId]).context.firstChild.contentWindow.refreshGirdData;
-            //parentRemoveGridData = $(top[parentFormId]).context.firstChild.contentWindow.RemoveGridData;
+         
         },
         bind: function () {
 
@@ -107,14 +109,11 @@ var bootstrap = function ($, ayma) {
                        width: 160,
                        align: "center",
                        children: [
-                           { label: "物料编码", name: "w_goodscode", width: 90, align: "center", },
-                           { label: "物料名称", name: "w_goodsname", width: 120, align: "center" },
-                           { label: "单价", name: "w_price", width: 60, align: "center" },
-                           { label: "单位", name: "w_unit", width: 60, align: "center" },
-                           {
-                               label: "库存", name: "w_qty", width: 90, align: "center", 
-                           },
-                           { label: "批次", name: "w_batch", width: 90, align: "center",}
+                           { label: "物料编码", name: "o_goodscode", width: 90, align: "center", },
+                           { label: "物料名称", name: "o_goodsname", width: 120, align: "center" },
+                           { label: "单价", name: "o_price", width: 60, align: "center" },
+                           { label: "单位", name: "o_unit", width: 60, align: "center" },
+                           { label: "数量", name: "o_qty", width: 90, align: "center" },
                        ]
                    },
                     {
@@ -123,47 +122,35 @@ var bootstrap = function ($, ayma) {
                         width: 160,
                         align: "center",
                         children: [
-                           { label: "物料编码", name: "c_seccode", width: 90, align: "center", },
-                           { label: "物料名称", name: "c_secname", width: 120, align: "center" },
-                           //{ label: "单价", name: "w_secprice", width: 60, align: "center" },
-                           { label: "单位", name: "w_unit", width: 60, align: "center" },
+                           { label: "物料编码", name: "o_secgoodscode", width: 90, align: "center", },
+                           { label: "物料名称", name: "o_secgoodsname", width: 120, align: "center" },
+                           { label: "单位", name: "o_secunit", width: 60, align: "center" },
                         ]
                     }
                 ],
-                mainId: 'id',
                 isMultiselect: true,         // 是否允许多选
                 isShowNum: true,
                 isPage: true,
-                sidx: 'w_batch',
                 sord: 'ASC',
                 onSelectRow: function (rowobj, rowdata, rowid) {
-
-                    //批次
-                    var batch = new Date();
-                    var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
                     var isChecked = $("[rownum='" + rowid + "']").find("input[role='checkbox']");
 
                     var row = {};
-                    row.ID = rowdata.id;
-                    row.O_GoodsCode = rowdata.w_goodscode;
-                    row.O_GoodsName = rowdata.w_goodsname;
-                    row.O_Unit = rowdata.w_unit;
-                    row.O_Qty = quantity;
-                    row.O_Price = rowdata.w_price;
-                    row.O_Batch = rowdata.w_batch;
-                    row.StockQty = rowdata.w_qty;
+                    row.O_GoodsCode = rowdata.o_goodscode;
+                    row.O_GoodsName = rowdata.o_goodsname;
+                    row.O_Unit = rowdata.o_unit;
+                    row.O_Price = rowdata.o_price;
+                    row.StockQty = rowdata.o_qty;
 
-                    row.O_SecGoodsCode = rowdata.c_seccode;
-                    row.O_SecGoodsName = rowdata.c_secname;
-                    row.O_SecUnit = rowdata.w_unit;
-                    row.O_SecQty = rowdata.quantity;
-                    row.O_SecBatch = ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "");
+                    row.O_SecGoodsCode = rowdata.o_secgoodscode;
+                    row.O_SecGoodsName = rowdata.o_secgoodsname;
+                    row.O_SecUnit = rowdata.o_secunit;
 
                     if (!isChecked.is(":checked")) {
                         //移除
                         var ismove = false;
                         for (var i = 0; i < goodsOutList.length; i++) {
-                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch) {
+                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
                                 ismove = true;
                                 goodsOutList.splice(i, 1);
                                 break;
@@ -174,62 +161,50 @@ var bootstrap = function ($, ayma) {
                         }
                   
 
-                        //ismove = true;
-                        //for (var i = 0; i < goodsOutList.length; i++) {
-                        //    if (goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
-                        //        ismove = false;
-                        //        break;
-                        //    }
-                        //}
-                        //if (ismove) {
-                        //    for (var i = 0; i < goodsSecList.length; i++) {
-                        //        if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
-                        //            goodsSecList[i].O_SecBatch == row.O_SecBatch) {
-                        //            goodsSecList.splice(i, 1);
-                        //            top.FormRemoveGirdDataDetails(row);
-                        //            break;
-                        //        }
-                        //    }
-                        //}
-                        for (var i = 0; i < goodsSecList.length; i++) {
-                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode &&
-                                goodsSecList[i].O_SecBatch == row.O_SecBatch && goodsSecList[i].O_Batch==row.O_Batch) {
-                                goodsSecList.splice(i, 1);
-                                ismove = true;
+                        ismove = true;
+                        for (var i = 0; i < goodsOutList.length; i++) {
+                            if (goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
+                                ismove = false;
                                 break;
                             }
                         }
                         if (ismove) {
-                            top.FormRemoveGirdDataDetails(row);
+                            for (var i = 0; i < goodsSecList.length; i++) {
+                                if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode ) {
+                                    goodsSecList.splice(i, 1);
+                                    top.FormRemoveGirdDataDetails(row);
+                                    break;
+                                }
+                            }
                         }
 
                     } else {
                         //新增
 
                         //判断是否已经添加过
-                        var isadd = true; //修改 head部分不判断，点一条copy一条过去
+                        var isadd = true;
                         for (var i = 0; i < goodsOutList.length; i++) {
-                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_Batch == row.O_Batch&&goodsOutList[i].O_SecGoodsCode==row.O_SecGoodsCode) {
+                            if (goodsOutList[i].O_GoodsCode == row.O_GoodsCode && goodsOutList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
                                 isadd = false;
-                                break;
+                                break;;
                             }
                         }
                         if (isadd) {
                             top.FormRefreshGirdDataHead(row);
-                            goodsOutList.push({ O_GoodsCode: row.O_GoodsCode, O_Batch: row.O_Batch ,O_SecGoodsCode:row.O_SecGoodsCode});
+                            goodsOutList.push({ O_GoodsCode: row.O_GoodsCode,O_SecGoodsCode:row.O_SecGoodsCode});
                         }
 
 
                         isadd = true;
                         for (var i = 0; i < goodsSecList.length; i++) {
-                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode && goodsSecList[i].O_SecBatch == row.O_SecBatch&&goodsSecList[i].O_Batch==row.O_Batch) {
+                            if (goodsSecList[i].O_SecGoodsCode == row.O_SecGoodsCode ) {
                                 isadd = false;
                                 break;
                             }
                         }
                         if (isadd) {
                             top.FormRefreshGirdDataDetails(row);
-                            goodsSecList.push({ O_SecGoodsCode: row.O_SecGoodsCode, O_SecBatch: row.O_SecBatch,O_Batch:row.O_Batch });
+                            goodsSecList.push({ O_SecGoodsCode: row.O_SecGoodsCode });
                         }
                     }
                 },
@@ -238,10 +213,9 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
-                            for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['w_goodscode'] == rowslist[j]['O_GoodsCode'] && rows[i]["w_batch"]==rowslist[j]["O_Batch"]) {
+                            for (var j = 0, len = rowslist.length; j < len; j++) {
+                                if (rows[i]['o_goodscode'] == rowslist[j]['O_GoodsCode'] && rows[i]["o_secgoodscode"]==rowslist[j]["O_SecGoodsCode"]) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
@@ -257,7 +231,6 @@ var bootstrap = function ($, ayma) {
             queryJson = param || {};
             param = $("#txt_Keyword").val();
             queryJson.stock = stock;
-            queryJson.proNo = proNo;
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }
     };
