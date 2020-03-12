@@ -187,15 +187,17 @@ var bootstrap = function ($, ayma) {
                         parentRemoveGridData(row);
                     }
                 },
-                onRenderComplete: function (rows) {
+                onRenderComplete: function(rows) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
-                    var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
-                    for (var i = 0; i < rows.length; i++) {
-                        for (var j = 0; j < rowlistlenght; j++) {
-                            if (rows[i]['g_code'] == rowslist[j]['R_GoodsCode'] && rows[i]['i_batch'] == rowslist[j]['R_Batch']) {
-                                $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
-                                break;
+                    if (JSON.stringify(rowslist) != "[]") {
+                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        for (var i = 0; i < rows.length; i++) {
+                            for (var j = 0; j < rowlistlenght; j++) {
+                                if (rows[i]['g_code'] == rowslist[j]['R_GoodsCode'] && rows[i]['i_batch'] == rowslist[j]['R_Batch']) {
+                                    $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
+                                    break;
+                                }
                             }
                         }
                     }

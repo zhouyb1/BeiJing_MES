@@ -40,7 +40,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             };
             //绑定原仓库
             $('#R_StockName').select(dfop).on('change', function () {
-                if (status==1) {
+                if (status==1||status=="") {
                     $('#Mes_RequistDetail').jfGridSet('refreshdata', { rowdatas: [] });
                 }
                 var code = $(this).selectGet();
