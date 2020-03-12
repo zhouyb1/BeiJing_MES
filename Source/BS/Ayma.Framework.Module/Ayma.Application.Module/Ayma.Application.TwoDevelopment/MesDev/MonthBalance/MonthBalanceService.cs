@@ -1106,7 +1106,7 @@ SELECT
                     var dp = new DynamicParameters(new { });
                     dp.Add("@beginTime", lastMonthBalanceEntity.M_Months.ToDate(), DbType.DateTime);
                     dp.Add("@endTime", month.ToDate(), DbType.DateTime);
-
+                       
                     //--原料入库单
                     db.ExecuteBySql("UPDATE Mes_MaterInHead SET MonthBalance='月结' WHERE M_CreateDate>@beginTime AND M_CreateDate<=@endTime", dp);
 
@@ -1164,8 +1164,10 @@ SELECT
                 }
                 #endregion
 
+
                 return success;
             }
+
             catch (Exception ex)
             {
                 db.Rollback();//回滚事物
