@@ -18,7 +18,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 出成率查询
         /// </summary>
         /// <returns></returns>
-        DataTable GetProductRateList(Pagination pagination, string queryJson);
+        IEnumerable<ProductRateView> GetProductRateList(Pagination pagination, string queryJson);
 
         /// <summary>
         /// 获取页面显示列表数据

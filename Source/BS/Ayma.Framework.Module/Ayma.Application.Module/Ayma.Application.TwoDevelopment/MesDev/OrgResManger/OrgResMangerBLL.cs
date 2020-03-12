@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using Ayma.Application.TwoDevelopment.MesDev;
 using Ayma.Application.TwoDevelopment.MesDev.ScrapManager;
 using Ayma.Util;
 using System;
@@ -21,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 出成率查询
         /// </summary>
         /// <returns></returns>
-        public DataTable GetProductRateList(Pagination pagination, string queryJson)
+        public IEnumerable<ProductRateView> GetProductRateList(Pagination pagination, string queryJson)
         {
             try
             {
