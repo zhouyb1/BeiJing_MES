@@ -36,6 +36,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                                 O_SecGoodsCode,
                                                 O_SecGoodsName,
                                                 O_SecUnit,
+                                                dbo.GetUserNameById(O_CreateBy)O_CreateBy,
                                                 SUM(O_Qty) O_Qty ,
                                                 SUM(O_SecQty) O_SecQty ,
                                                (SUM(O_SecQty) / SUM(O_Qty)) * 100 ProductRate,
@@ -85,7 +86,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       O_StockName,
                                       O_TeamName,
                                       C_Max,
-                                      C_Min ) 
+                                      C_Min,
+                                      O_CreateBy) 
                                SELECT *,(CASE WHEN CTE.ProductRate >CTE.O_Max THEN CTE.ProductRate-CTE.O_MAX
                                                       WHEN CTE.ProductRate <CTE.O_MIN THEN CTE.ProductRate-CTE.O_Min 
                                                       WHEN CTE.ProductRate>=CTE.O_MIN AND CTE.ProductRate<=CTE.O_Max THEN 0
