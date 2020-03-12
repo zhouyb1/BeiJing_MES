@@ -24,6 +24,7 @@ namespace Ayma.Application.Web
     using Ayma.DataBase.Repository;
     using Dapper;
     using System.Data;
+    using Ayma.Application.TwoDevelopment.MesDev;
 
 #else
 using MyDbReportData = DatabaseXmlReportData;
@@ -1432,123 +1433,80 @@ using MyDbReportData = DatabaseXmlReportData;
         /// <returns></returns>
         public static string CCLCX(string queryJson)
         {
-
             var strSql = new StringBuilder();
-            // 虚拟参数        
-            //var dt = this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
-            // 虚拟参数
-            var dp = new DynamicParameters(new { });
             var queryParam = queryJson.ToJObject();
-            var sqlHead = new StringBuilder();
-            dp.Add("starttime", queryParam["StartTime"].ToString(), DbType.String);
-            dp.Add("endtime", queryParam["EndTime"].ToString(), DbType.String);
-            sqlHead.Append(@"SELECT DISTINCT 
-                                            @starttime as starttime,
-                                            @endtime as endtime,
-                                             O_SecGoodsCode ,
-                                             O_SecGoodsName ,
-                                             O_SecUnit ,
-                                             O_StockName ,
-                                             O_TeamName ,
-                                            dbo.GetUserNameById(O_CreateBy) O_CreateBy
-                                      FROM    Mes_OrgResHead h
-                                     LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo  where 1 = 1  and O_Status = 3 ");
+            //虚拟参数
+            var dp = new DynamicParameters(new { });
+
+            DateTime StartTime = queryParam["StartTime"].ToDate();
+            DateTime EndTime = queryParam["EndTime"].ToDate();
+            dp.Add("StartTime", StartTime, DbType.String);
+            dp.Add("EndTime", StartTime, DbType.String);
+            strSql.Append(@"WITH CTE AS 
+                                        (SELECT @StartTime as starttime,
+                                                @EndTime as endtime,
+                                                O_GoodsCode ,
+                                                O_GoodsName ,
+                                                O_Unit,
+                                                O_SecGoodsCode,
+                                                O_SecGoodsName,
+                                                O_SecUnit,
+                                                dbo.GetUserNameById(O_CreateBy)O_CreateBy,
+                                                SUM(O_Qty) O_Qty ,
+                                                SUM(O_SecQty) O_SecQty ,
+                                               (SUM(O_SecQty) / SUM(O_Qty)) * 100 ProductRate,
+                                               (CAST(CONVERT(DECIMAL(3),C_Min) AS VARCHAR ) + '-'+CAST(CONVERT(DECIMAL(3),C_Max) AS VARCHAR)) targetRate,
+                                                CONVERT(DECIMAL(3),C_Min) O_Min,
+                                                CONVERT(DECIMAL(3),C_Max) O_Max,
+                                                O_StockName,
+                                                O_TeamName,
+                                                P_ProName O_ProName
+                                        FROM    Mes_OrgResHead h
+                                                LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo
+                                                LEFT JOIN dbo.Mes_Convert c ON c.C_Code =d.O_GoodsCode AND c.C_SecCode =d.O_SecGoodsCode
+                                                LEFT JOIN dbo.Mes_Proce ON P_ProNo =O_ProCode
+                                                WHERE O_Status = 3 ");
+
             if (!queryParam["StockCode"].IsEmpty())
             {
                 dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
-                sqlHead.Append(" AND O_StockCode =@StockCode ");
+                strSql.Append(" AND O_StockCode =@StockCode ");
+            }
+            if (!queryParam["ProCode"].IsEmpty())
+            {
+                dp.Add("ProCode", queryParam["ProCode"].ToString(), DbType.String);
+                strSql.Append(" AND O_ProCode =@ProCode ");
+            }
+
+            if (!queryParam["O_SecGoodsName"].IsEmpty())
+            {
+                dp.Add("O_SecGoodsName", "%" + queryParam["O_SecGoodsName"].ToString() + "%", DbType.String);
+                strSql.Append(" AND O_SecGoodsName like @O_SecGoodsName ");
             }
             if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
             {
                 dp.Add("startTime", queryParam["StartTime"].ToString(), DbType.String);
                 dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
-                sqlHead.Append(" AND (O_UploadDate > @startTime AND O_UploadDate <@endTime ) ");
+                strSql.Append(" AND (O_UploadDate > @startTime AND O_UploadDate <@endTime ) ");
             }
-
-            var dtHead = new RepositoryFactory().BaseRepository().FindTable(sqlHead.ToString(), dp);
-            DataTable data = new DataTable();
-            data.Columns.Add("O_GoodsCode", typeof(string));
-            data.Columns.Add("starttime", typeof(string));
-            data.Columns.Add("endtime", typeof(string));
-            data.Columns.Add("O_GoodsName", typeof(string));
-            data.Columns.Add("O_SecGoodsCode", typeof(string));
-            data.Columns.Add("O_SecGoodsName", typeof(string));
-            data.Columns.Add("O_StockName", typeof(string));
-            data.Columns.Add("O_TeamName", typeof(string));
-            data.Columns.Add("O_CreateBy", typeof(string));
-            data.Columns.Add("O_Qty", typeof(decimal));
-            data.Columns.Add("O_SecQty", typeof(decimal));
-            data.Columns.Add("O_Unit", typeof(string));
-            data.Columns.Add("O_SecUnit", typeof(string));
-            data.Columns.Add("ProductRate", typeof(decimal));
-            for (var i=0;i<dtHead.Rows.Count;i++)
-            {
-                //查询 转换后
-                var sqlBody = new StringBuilder();
-                sqlBody.Append(@"SELECT 
-                                        @starttime as starttime,
-                                        @endtime as endtime,
-                                        SUM(O_Qty)  O_Qty ,
-                                        SUM(O_SecQty)  O_SecQty ,
-                                        O_GoodsCode ,
-                                        O_GoodsName ,
-                                        h.O_OrgResNo ,
-                                        O_Unit
-                                        --d.O_Batch
-                                FROM    Mes_OrgResHead h
-                                        LEFT JOIN Mes_OrgResDetail d ON d.O_OrgResNo = h.O_OrgResNo where 1 = 1  and O_Status = 3  and O_SecGoodsCode ='" + dtHead.Rows[i]["O_SecGoodsCode"].ToString() + "'");
-                if (!queryParam["StockCode"].IsEmpty())
-                {
-                    dp.Add("StockCode", queryParam["StockCode"].ToString(), DbType.String);
-                    sqlBody.Append(" AND O_StockCode =@StockCode ");
-                }
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
-                {
-                    dp.Add("startTime", queryParam["StartTime"].ToString(), DbType.String);
-                    dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
-                    sqlBody.Append(" AND (O_UploadDate > @startTime AND O_UploadDate < @endTime ) ");
-                }
-                sqlBody.Append(" group by O_GoodsName,h.O_OrgResNo,O_GoodsCode,O_Unit");
-                var dtBody = new RepositoryFactory().BaseRepository().FindTable(sqlBody.ToString(), dp);
-                
-                if (dtBody.Rows.Count>0)
-                {
-                    decimal dQty = 0;
-                    decimal dQtySec = 0;
-                    var OrgResNoList = new List<string>(); 
-
-                    for (var j = 0; j < dtBody.Rows.Count; j++)
-                    {
-                        if (!OrgResNoList.Contains(dtBody.Rows[j]["O_OrgResNo"].ToString()))
-                        {
-                            OrgResNoList.Add(dtBody.Rows[j]["O_OrgResNo"].ToString());
-                            dQtySec += Convert.ToDecimal(dtBody.Rows[j]["O_SecQty"].ToString());
-
-                        }
-                        dQty += Convert.ToDecimal(dtBody.Rows[j]["O_Qty"].ToString());
-
-                    }
-                    decimal dConvert = (dQtySec / dQty)*100;
-                    dConvert = Math.Round(dConvert, 2);
-                    DataRow row = data.NewRow();
-                    row["O_CreateBy"] = dtHead.Rows[i]["O_CreateBy"].ToString();
-                    row["O_TeamName"] = dtHead.Rows[i]["O_TeamName"].ToString();
-                    row["O_StockName"] = dtHead.Rows[i]["O_StockName"].ToString();
-                    row["O_GoodsCode"] = dtBody.Rows[0]["O_GoodsCode"].ToString();
-                    row["O_GoodsName"] = dtBody.Rows[0]["O_GoodsName"].ToString();
-                    row["O_SecGoodsCode"] = dtHead.Rows[i]["O_SecGoodsCode"].ToString();
-                    row["O_SecGoodsName"] = dtHead.Rows[i]["O_SecGoodsName"].ToString();
-                    row["O_Unit"] = dtBody.Rows[0]["O_Unit"].ToString();
-                    row["O_SecUnit"] = dtHead.Rows[i]["O_SecUnit"].ToString();
-                    row["starttime"] = dtHead.Rows[i]["starttime"].ToString();
-                    row["endtime"] = dtHead.Rows[i]["endtime"].ToString();
-                    row["O_Qty"] = dQty;
-                    row["O_SecQty"] = dQtySec;
-                    row["ProductRate"] = dConvert;
-                    data.Rows.Add(row);
-                }
-            }
-            var json = JsonConvert.SerializeObject(new { PurchaseSummary = data });
+            strSql.Append(@" GROUP BY O_GoodsName ,
+                                      O_GoodsCode ,
+                                      O_Unit,
+                                      P_ProName,
+                                      O_SecGoodsCode,
+                                      O_SecGoodsName,
+                                      O_SecUnit,
+                                      O_StockName,
+                                      O_TeamName,
+                                      C_Max,
+                                      C_Min,
+                                      O_CreateBy) 
+                               SELECT *,(CASE WHEN CTE.ProductRate >CTE.O_Max THEN CTE.ProductRate-CTE.O_MAX
+                                                      WHEN CTE.ProductRate <CTE.O_MIN THEN CTE.ProductRate-CTE.O_Min 
+                                                      WHEN CTE.ProductRate>=CTE.O_MIN AND CTE.ProductRate<=CTE.O_Max THEN 0
+                                                      ELSE 0 END )DIFF FROM CTE");
+            var dt =  new RepositoryFactory().BaseRepository().FindList<ProductRateView>(strSql.ToString(), dp);
+            var json = JsonConvert.SerializeObject(new { PurchaseSummary = dt });
             return json;
         }
         /// <summary>

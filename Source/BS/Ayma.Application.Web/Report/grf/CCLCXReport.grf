@@ -58,36 +58,47 @@
 				},
 				{
 					"Name":"endtime"
+				},
+				{
+					"Name":"targetRate"
+				},
+				{
+					"Name":"DIFF"
 				}
 			]
 		},
 		"Column":[
 			{
 				"Name":"Column3",
-				"Width":1.82563
+				"Width":3.57188
 			},
 			{
 				"Name":"Column12",
-				"Width":2.98979
+				"Width":2.59292
 			},
 			{
 				"Name":"Column17",
-				"Width":1.95792
+				"Width":1.21708
 			},
 			{
-				"Name":"Column21"
+				"Name":"Column21",
+				"Width":2.38125
 			},
 			{
-				"Name":"Column13"
+				"Name":"Column13",
+				"Width":3.38667
 			},
 			{
-				"Name":"Column16"
+				"Name":"Column16",
+				"Width":2.59292
 			},
 			{
-				"Name":"Column19"
+				"Name":"Column19",
+				"Width":1.79917
 			},
 			{
-				"Name":"Column20"
+				"Name":"Column20",
+				"Width":2.40771
 			},
 			{
 				"Name":"作业日耗库",
@@ -97,7 +108,16 @@
 				"Name":"Column24"
 			},
 			{
-				"Name":"Column22"
+				"Name":"Column22",
+				"Width":2.40771
+			},
+			{
+				"Name":"Column25",
+				"Width":2.98979
+			},
+			{
+				"Name":"Column26",
+				"Width":2.35479
 			},
 			{
 				"Name":"Column23"
@@ -226,6 +246,26 @@
 					},
 					"WordWrap":true,
 					"DataField":"ProductRate"
+				},
+				{
+					"Column":"Column25",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"targetRate"
+				},
+				{
+					"Column":"Column26",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"DIFF"
 				},
 				{
 					"Column":"Column23",
@@ -412,6 +452,30 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column25",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"出成率指标(%)"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column26",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"偏差(%)"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"Column23",
 					"Font":{
 						"Name":"宋体",
@@ -447,7 +511,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
 					"Center":"Horizontal",
-					"Left":12.9646,
+					"Left":14.4727,
 					"Top":0.211667,
 					"Width":9.02229,
 					"Height":0.79375,
@@ -464,7 +528,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox40",
 					"Left":0.396875,
-					"Top":1.45521,
+					"Top":1.40229,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -478,10 +542,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
-					"Left":1.19063,
-					"Top":1.45521,
-					"Width":5.82083,
-					"Height":0.582083,
+					"Left":1.40229,
+					"Top":1.40229,
+					"Width":5.79438,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -493,10 +557,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
-					"Left":4.39208,
-					"Top":1.45521,
+					"Left":5.3975,
+					"Top":1.40229,
 					"Width":3.59833,
-					"Height":0.582083,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -508,10 +572,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
-					"Left":3.41313,
-					"Top":1.45521,
-					"Width":1.37583,
-					"Height":0.582083,
+					"Left":4.81542,
+					"Top":1.40229,
+					"Width":1.40229,
+					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,

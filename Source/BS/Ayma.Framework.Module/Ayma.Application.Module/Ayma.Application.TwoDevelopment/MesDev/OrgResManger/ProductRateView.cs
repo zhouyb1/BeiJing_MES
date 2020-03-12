@@ -8,6 +8,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 {
     public class ProductRateView
     {
+        public string starttime { get; set; }
+        public string endtime { get; set; }
+        public string rownum { get; set; } //序号
         public string O_GoodsCode { get; set; }
         public string O_GoodsName { get; set; }
         public string O_Unit { get; set; }
@@ -24,5 +27,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public string O_TeamName { get; set; }
         public string O_ProName { get; set; }
         public decimal? DIFF { get; set; }
+        public string O_CreateBy { get; set; }
     }
 }

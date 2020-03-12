@@ -129,6 +129,7 @@
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerBLL.cs" />
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerIBLL.cs" />
     <Compile Include="MesDev\InWorkShopManager\InWorkShopManagerService.cs" />
+    <Compile Include="MesDev\OrgResManger\ProductRateView.cs" />
     <Compile Include="MesDev\OtherWarehouseReceipt\Mes_OtherInHeadEntity.cs" />
     <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptBLL.cs" />
     <Compile Include="MesDev\OtherWarehouseReceipt\OtherWarehouseReceiptIBLL.cs" />

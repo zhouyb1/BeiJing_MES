@@ -8,6 +8,7 @@ using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using System.Data;
+using System.ComponentModel;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -406,56 +407,96 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             return Success("保存成功！");
         }
         #endregion
+        public FileResult Export(Pagination pagination, string queryJson)
+        {
+
+            var datas = orgResMangerIBLL.GetProductRateList(pagination, queryJson);
+            var dt = AsDataTable(datas);
+            var queryParam = queryJson.ToJObject();
+            var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率实时查询", "出成率实时查询", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
+            return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率实时查询.xls");
+        }
         /// <summary>
-        /// 获取Export表数据
+        /// 获取导出Excel数据
         /// <summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        //public FileResult Export(Pagination pagination, string queryJson)
-        //{
-            //var dt = orgResMangerIBLL.GetProductRateList(pagination, queryJson);
+        public DataTable AsDataTable(IEnumerable<ProductRateView> data)
+        {
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(typeof(ProductRateView));
+            var table = new DataTable();
+            //定义列名
+            foreach (PropertyDescriptor prop in properties)
+            {
+                switch (prop.Name)
+                {
+                    case "rownum": table.Columns.Add("序号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_GoodsName": table.Columns.Add("转换前_物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_GoodsCode": table.Columns.Add("转换前_物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_Unit": table.Columns.Add("转换前_单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_Qty": table.Columns.Add("转换前_使用数量", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecGoodsName": table.Columns.Add("转换后_物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecGoodsCode": table.Columns.Add("转换后_物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecUnit": table.Columns.Add("转换后_单位", typeof(string)); break;
+                    case "O_SecQty": table.Columns.Add("转换后_产出数量", typeof(string)); break;
+                    case "O_StockName": table.Columns.Add("作业日耗库", typeof(string)); break;
+                    case "O_ProName": table.Columns.Add("作业工序", typeof(string)); break;
+                    case "O_TeamName": table.Columns.Add("作业班组", typeof(string)); break;
+                    case "ProductRate": table.Columns.Add("出成率(%)", typeof(string)); break;
+                    case "targetRate": table.Columns.Add("出成率指标(%)", typeof(string)); break;
+                    case "DIFF": table.Columns.Add("偏差(%)", typeof(string)); break;
+                    case "O_CreateBy": table.Columns.Add("制作人", typeof(string)); break;
+                    default: break;
+                }
+            }
 
-            //给列名
-            //dt.Columns.Add("rownum", typeof(string));
-            //dt.Columns["rownum"].ColumnName = "序号";
-            //dt.Columns["O_GoodsName"].ColumnName = "转换前_物料名称";
-            //dt.Columns["O_GoodsCode"].ColumnName = "转换前_物料编码";
-            //dt.Columns["O_Unit"].ColumnName = "转换前_单位";
-            //dt.Columns["O_Qty"].ColumnName = "转换前_使用数量";
-            //dt.Columns["O_SecGoodsName"].ColumnName = "转换后_物料编码";
-            //dt.Columns["O_SecGoodsCode"].ColumnName = "转换后_物料名称";
-            //dt.Columns["O_SecUnit"].ColumnName = "转换后_单位";
-            //dt.Columns["O_SecQty"].ColumnName = "转换后_使用数量";
-            //dt.Columns["O_StockName"].ColumnName = "作业日耗库";
-            //dt.Columns["O_ProName"].ColumnName = "作业工序";
-            //dt.Columns["O_TeamName"].ColumnName = "作业班组";
-            //dt.Columns["ProductRate"].ColumnName = "出成率(%)";
-            //dt.Columns["O_CreateBy"].ColumnName = "制作人";
-            ////表格列名排序
-            //dt.Columns["序号"].SetOrdinal(0);
-            //dt.Columns["转换前_物料名称"].SetOrdinal(1);
-            //dt.Columns["转换前_物料编码"].SetOrdinal(2);
-            //dt.Columns["转换前_单位"].SetOrdinal(3);
-            //dt.Columns["转换前_使用数量"].SetOrdinal(4);
-            //dt.Columns["转换后_物料编码"].SetOrdinal(5);
-            //dt.Columns["转换后_物料名称"].SetOrdinal(6);
-            //dt.Columns["转换后_单位"].SetOrdinal(7);
-            //dt.Columns["转换后_使用数量"].SetOrdinal(8);
-            //dt.Columns["作业日耗库"].SetOrdinal(9);
-            //dt.Columns["作业工序"].SetOrdinal(10);
-            //dt.Columns["作业班组"].SetOrdinal(11);
-            //dt.Columns["出成率(%)"].SetOrdinal(12);
-            //dt.Columns["制作人"].SetOrdinal(13);
+            table.Columns["序号"].SetOrdinal(0);
+            table.Columns["转换前_物料名称"].SetOrdinal(1);
+            table.Columns["转换前_物料编码"].SetOrdinal(2);
+            table.Columns["转换前_单位"].SetOrdinal(3);
+            table.Columns["转换前_使用数量"].SetOrdinal(4);
+            table.Columns["转换后_物料名称"].SetOrdinal(5);
+            table.Columns["转换后_物料编码"].SetOrdinal(6);
+            table.Columns["转换后_单位"].SetOrdinal(7);
+            table.Columns["转换后_产出数量"].SetOrdinal(8);
+            table.Columns["作业日耗库"].SetOrdinal(9);
+            table.Columns["作业工序"].SetOrdinal(10);
+            table.Columns["作业班组"].SetOrdinal(11);
+            table.Columns["出成率(%)"].SetOrdinal(12);
+            table.Columns["出成率指标(%)"].SetOrdinal(13);
+            table.Columns["偏差(%)"].SetOrdinal(14);
+            table.Columns["制作人"].SetOrdinal(15);
+            //给数据
+            foreach (var item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    switch (prop.Name)
+                    {
+                        case "O_GoodsName": row["转换前_物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_GoodsCode": row["转换前_物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_Unit": row["转换前_单位"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_Qty": row["转换前_使用数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsName": row["转换后_物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsCode": row["转换后_物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecUnit": row["转换后_单位"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecQty": row["转换后_产出数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_StockName": row["作业日耗库"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_ProName": row["作业工序"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_TeamName": row["作业班组"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "ProductRate": row["出成率(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "targetRate": row["出成率指标(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "DIFF": row["偏差(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_CreateBy": row["制作人"] = prop.GetValue(item) ?? DBNull.Value; break;
+                    }
+                table.Rows.Add(row);
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
 
-            //for (int i = 0; i < dt.Rows.Count; i++)
-            //{
-
-            //    dt.Rows[i]["序号"] = i + 1;
-            //}
-
-            //var queryParam = queryJson.ToJObject();
-            //var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率实时查询", "出成率实时查询", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
-            //return File(null, "application/vnd.ms-excel", "出成率实时查询.xls");
-       // }
+                    table.Rows[i]["序号"] = i + 1;
+                }
+            }
+            return table;
+        }
     }
 }

@@ -238,6 +238,8 @@ namespace Ayma.Util
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 11, 11));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 12, 12));
                 sheet.AddMergedRegion(new CellRangeAddress(2, 3, 13, 13));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 14, 14));
+                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 15, 15));
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
@@ -300,6 +302,7 @@ namespace Ayma.Util
             if (title == "出成率实时查询")
             {
                 sheet.SetColumnWidth(0, 8 * 265);
+                sheet.SetColumnWidth(9, 20 * 265);
             }
             using (MemoryStream ms = new MemoryStream())
             {
