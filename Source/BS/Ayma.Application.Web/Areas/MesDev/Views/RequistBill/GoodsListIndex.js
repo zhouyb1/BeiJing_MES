@@ -171,12 +171,12 @@ var bootstrap = function ($, ayma) {
                         }
                     }
                         //获取一键数量
-                        var quantity = ($("#quantity").val()) == "" ? "0" : $("#quantity").val();
+                        var quantity = ($("#quantity").val()) == "" ? "0" : $("#quant ity").val();
                         //copy需要更改的地方
                         row['R_GoodsCode'] = row['g_code'];
                         row['R_GoodsName'] = row['g_name'];
                         row['R_Unit'] = row['g_unit'];
-                        row['R_Price'] = row['g_price'];//不录入单价
+                        row['R_Price'] = row['g_price'];
                         row["R_Qty"] = quantity;
                         row["R_SQty"] = row['i_qty'];
                         row['R_Batch'] = row['i_batch'];
@@ -211,7 +211,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, stockCode: stockCode, queryJson: JSON.stringify(queryJson) } });
         }
     };
-    refreshGirdData = function () {
+    refreshGirdData = function () { 
         page.search();
     };
     closeWindow = function () {
