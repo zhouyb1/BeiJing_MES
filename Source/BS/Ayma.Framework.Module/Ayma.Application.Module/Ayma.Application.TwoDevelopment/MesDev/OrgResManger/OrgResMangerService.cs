@@ -263,30 +263,16 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         public DataTable GetGoodsList(string keyword, string queryJson,Pagination obj)
         {
-            ICache redisCache = CacheFactory.CaChe();
-            var userId = LoginUserInfo.Get().userId;
-            var key = userId + "_stock";
-            var stock = redisCache.Read<string>(key);
+            #region 作废
+            //ICache redisCache = CacheFactory.CaChe();
+            //var userId = LoginUserInfo.Get().userId;
+            //var key = userId + "_stock";
+            //var stock = redisCache.Read<string>(key); 
+            #endregion
+
             StringBuilder sb = new StringBuilder();
-//            sb.Append(@"SELECT  c.C_Code O_GoodsCode ,
-//                                c.C_Name O_GoodsName ,
-//                                c.C_SecCode O_SecGoodsCode ,
-//                                c.C_SecName O_SecGoodsName ,
-//                                SUM(i.I_Qty) O_Qty ,
-//                                i.I_Unit O_Unit ,
-//                                ( SELECT    G_Price
-//                                  FROM      dbo.Mes_Goods
-//                                  WHERE     G_Code = i.I_GoodsCode
-//                                ) O_Price
-//                        FROM    dbo.Mes_Convert c
-//                                INNER JOIN Mes_Inventory i ON i.I_GoodsCode = c.C_Code
-//                                INNER JOIN dbo.Mes_Stock s ON s.S_Code = i.I_StockCode
-//                                INNER JOIN dbo.Mes_Goods g ON g.G_Code=i.I_GoodsCode
-//                        WHERE   i.I_Qty > 0
-//                                AND s.S_Kind = 4 ");
+
             // 虚拟参数
-
-
             sb.Append(@" SELECT c.C_Code O_GoodsCode ,
                                 c.C_Name O_GoodsName ,
                                 c.C_SecCode O_SecGoodsCode ,
@@ -312,9 +298,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("keyword", "%" + keyword + "%", DbType.String);
                 sb.Append(" AND i.I_GoodsCode+i.I_GoodsName like @keyword ");
             }
-            if (!stock.IsEmpty())
+            if (!queryParam["stock"].IsEmpty())
             {
-                dp.Add("stock", "%" + stock + "%", DbType.String);
+                dp.Add("stock", "%" + queryParam["stock"].ToString() + "%", DbType.String);
                 sb.Append(" AND i.I_StockCode like @stock ");
             }
             sb.Append(@" GROUP BY C_Code,C_Name,C_SecCode,C_SecName,I_Unit,I_GoodsCode,g.G_Unit ");
