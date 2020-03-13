@@ -1163,8 +1163,6 @@ SELECT
                     db.Commit();
                 }
                 #endregion
-
-
                 return success;
             }
 

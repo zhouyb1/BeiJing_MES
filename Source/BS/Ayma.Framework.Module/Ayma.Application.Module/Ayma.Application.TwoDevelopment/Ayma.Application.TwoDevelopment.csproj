@@ -113,6 +113,7 @@
     <Compile Include="MesDev\Mes_WorkShopScan\Mes_WorkShopScanService.cs" />
     <Compile Include="MesDev\Model\YieldRateModel.cs" />
     <Compile Include="MesDev\MonthBalance\Extend\Mes_MonthBalancePrice.cs" />
+    <Compile Include="MesDev\MonthBalance\Extend\Mes_Product.cs" />
     <Compile Include="MesDev\MonthBalance\Mes_MonthBalancePriceEntity.cs" />
     <Compile Include="MesDev\MonthBalance\Mes_MonthBalanceDetailEntity.cs" />
     <Compile Include="MesDev\MonthBalance\Mes_MonthBalanceEntity.cs" />
