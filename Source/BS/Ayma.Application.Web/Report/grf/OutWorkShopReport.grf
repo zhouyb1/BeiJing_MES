@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OutNo ,\r\n        h.O_CreateBy ,\r\n        h.O_CreateDate ,\r\nh.O_Remark,\r\n        d.O_GoodsCode ,\r\n        d.O_GoodsName ,\r\n        d.O_Unit ,\r\n        d.O_Qty ,\r\n        d.O_Batch ,\r\n        h.O_StockName\r\nFROM    dbo.Mes_OutWorkShopHead h\r\n        LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo\r\nWHERE   O_Status = 2",
+			"QuerySQL":"SELECT  h.O_OutNo ,\r\n                                h.O_CreateDate,\r\n                                h.O_CreateBy,\r\n                                h.O_Remark,\r\n                                d.O_GoodsCode ,\r\n                                d.O_GoodsName ,\r\n                                d.O_Unit ,\r\n                                d.O_Qty ,\r\n                                d.O_Batch,\r\n                                h.O_StockName,\r\n\t\t\t\t\t\t\t\tcase when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_OutWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo",
 			"Field":[
 				{
 					"Name":"O_OutNo"
@@ -44,12 +44,21 @@
 				},
 				{
 					"Name":"O_Remark"
+				},
+				{
+					"Name":"O_Price",
+					"Type":"Float"
+				},
+				{
+					"Name":"aoumnt",
+					"Type":"Float"
 				}
 			]
 		},
 		"Column":[
 			{
-				"Name":"O_OutNo"
+				"Name":"O_OutNo",
+				"Width":1.37583
 			},
 			{
 				"Name":"O_GoodsCode",
@@ -57,16 +66,27 @@
 			},
 			{
 				"Name":"O_GoodsName",
+				"Width":2.61938
+			},
+			{
+				"Name":"O_Unit",
+				"Width":1.40229
+			},
+			{
+				"Name":"O_Qty",
 				"Width":2.01083
 			},
 			{
-				"Name":"O_Unit"
+				"Name":"Column1",
+				"Width":2.38125
 			},
 			{
-				"Name":"O_Qty"
+				"Name":"Column2",
+				"Width":2.19604
 			},
 			{
-				"Name":"O_Batch"
+				"Name":"O_Batch",
+				"Width":2.01083
 			}
 		],
 		"ColumnContent":{
@@ -87,22 +107,40 @@
 				},
 				{
 					"Column":"O_GoodsCode",
+					"WordWrap":true,
 					"DataField":"O_GoodsCode"
 				},
 				{
 					"Column":"O_GoodsName",
+					"WordWrap":true,
 					"DataField":"O_GoodsName"
 				},
 				{
 					"Column":"O_Unit",
+					"WordWrap":true,
 					"DataField":"O_Unit"
 				},
 				{
 					"Column":"O_Qty",
+					"WordWrap":true,
 					"DataField":"O_Qty"
 				},
 				{
+					"Column":"Column1",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"DataField":"O_Price"
+				},
+				{
+					"Column":"Column2",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"DataField":"aoumnt"
+				},
+				{
 					"Column":"O_Batch",
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
 					"DataField":"O_Batch"
 				}
 			]
@@ -139,6 +177,18 @@
 					"Column":"O_Qty",
 					"TextAlign":"MiddleCenter",
 					"Text":"数量"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column1",
+					"TextAlign":"MiddleCenter",
+					"Text":"加权平均价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column2",
+					"TextAlign":"MiddleCenter",
+					"Text":"金额"
 				},
 				{
 					"GroupTitle":false,
@@ -218,7 +268,7 @@
 					"Name":"FieldBox2",
 					"Left":2.19604,
 					"Top":2.77813,
-					"Width":3.41313,
+					"Width":5.3975,
 					"Height":0.608542,
 					"DataField":"O_CreateDate"
 				},
@@ -235,9 +285,9 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":5.715,
+					"Left":3.78354,
 					"Top":0.608542,
-					"Width":4.60375,
+					"Width":8.44021,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -246,7 +296,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"出库单"
+					"Text":"日耗库出库到车间"
 				},
 				{
 					"Type":"FieldBox",

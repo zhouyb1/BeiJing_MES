@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.I_InNo ,\r\n        h.I_CreateBy ,\r\n        h.I_CreateDate ,\r\n       h.I_Remark,\r\n        d.I_GoodsCode ,\r\n        d.I_GoodsName ,\r\n        d.I_Unit ,\r\n        d.I_Qty ,\r\n        d.I_Batch ,\r\n        h.I_StockName\r\nFROM    dbo.Mes_InWorkShopHead h\r\n        LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo\r\nWHERE   I_Status = 2",
+			"QuerySQL":"SELECT  h.I_InNo ,\r\n                               h.I_CreateDate,\r\n                               h.I_CreateBy,\r\n                               h.I_Remark,\r\n                                d.I_GoodsCode ,\r\n                                d.I_GoodsName ,\r\n                                d.I_Unit ,\r\n                                d.I_Qty ,\r\n                                d.I_Batch,\r\n                                h.I_StockName,\r\n\t                            case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end I_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end *d.I_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_InWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo\r\n                        WHERE   h.I_Status!=1",
 			"Field":[
 				{
 					"Name":"I_InNo"
@@ -44,29 +44,49 @@
 				},
 				{
 					"Name":"I_Remark"
+				},
+				{
+					"Name":"aoumnt",
+					"Type":"Float"
+				},
+				{
+					"Name":"I_Price",
+					"Type":"Float"
 				}
 			]
 		},
 		"Column":[
 			{
-				"Name":"I_InNo"
+				"Name":"I_InNo",
+				"Width":0.767292
 			},
 			{
 				"Name":"I_GoodsCode",
-				"Width":1.98438
+				"Width":2.19604
 			},
 			{
 				"Name":"I_GoodsName",
-				"Width":2.01083
+				"Width":4.60375
 			},
 			{
-				"Name":"I_Unit"
+				"Name":"I_Unit",
+				"Width":1.5875
 			},
 			{
-				"Name":"I_Qty"
+				"Name":"I_Qty",
+				"Width":1.42875
 			},
 			{
-				"Name":"I_Batch"
+				"Name":"Column1",
+				"Width":2.2225
+			},
+			{
+				"Name":"Column2",
+				"Width":2.19604
+			},
+			{
+				"Name":"I_Batch",
+				"Width":1.79917
 			}
 		],
 		"ColumnContent":{
@@ -74,6 +94,12 @@
 			"ColumnContentCell":[
 				{
 					"Column":"I_InNo",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"FreeCell":true,
 					"Control":[
 						{
@@ -87,27 +113,73 @@
 				},
 				{
 					"Column":"I_GoodsCode",
-					"TextAlign":"MiddleCenter",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_GoodsCode"
 				},
 				{
 					"Column":"I_GoodsName",
-					"TextAlign":"MiddleCenter",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"DataField":"I_GoodsName"
 				},
 				{
 					"Column":"I_Unit",
-					"TextAlign":"MiddleCenter",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_Unit"
 				},
 				{
 					"Column":"I_Qty",
-					"TextAlign":"MiddleCenter",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_Qty"
 				},
 				{
+					"Column":"Column1",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"I_Price"
+				},
+				{
+					"Column":"Column2",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"aoumnt"
+				},
+				{
 					"Column":"I_Batch",
-					"TextAlign":"MiddleCenter",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_Batch"
 				}
 			]
@@ -118,36 +190,96 @@
 				{
 					"GroupTitle":false,
 					"Column":"I_InNo",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"序号"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"I_GoodsCode",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"物料编码"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"I_GoodsName",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"物料名称"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"I_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"单位"
 				},
 				{
 					"GroupTitle":false,
 					"Column":"I_Qty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"数量"
 				},
 				{
 					"GroupTitle":false,
+					"Column":"Column1",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"加权平均价"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column2",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"金额"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"I_Batch",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"批次"
 				}
@@ -240,9 +372,9 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":4.7625,
+					"Left":3.99521,
 					"Top":0.608542,
-					"Width":6.50875,
+					"Width":8.83708,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -251,7 +383,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"车间入库到线边仓"
+					"Text":"车间入库日耗库单制作"
 				},
 				{
 					"Type":"FieldBox",

@@ -59,7 +59,7 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string Picking(string doucno)
         {
             string sql = @"SELECT  
-                     t.P_Status ,
+        t.P_Status ,
         t.C_CollarNo ,
         t.C_StockToName ,
         t.C_CreateDate ,
@@ -74,13 +74,14 @@ using MyDbReportData = DatabaseXmlReportData;
         d.C_GoodsName,
         t.C_Remark,
 		d.C_Remark as Remark,
-		d.C_Price,
-		(d.C_Price*d.C_Qty) as aoumnt,
+		case when M_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),M_UploadDate,112)) end C_Price,
+		M_UploadDate,
+				CONVERT(decimal(18,6),(case when M_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),M_UploadDate,112)) end*d.C_Qty))as aoumnt,
 		'1'+d.C_Unit2+'='+convert(varchar(50),convert(decimal(18,1),d.C_UnitQty))+d.C_Unit as Packingspecification,
 	    convert(varchar(50),cast(d.C_Qty/d.C_UnitQty as int))+d.C_Unit2+convert(varchar(50),convert(decimal(18,1),d.C_Qty%d.C_UnitQty))+d.C_Unit as Auxiliarynumber
             FROM    Mes_CollarHead t
                     LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo
-            WHERE   t.C_CollarNo ='{0}'
+					WHERE   t.C_CollarNo ='{0}'
             ORDER BY M_UploadDate DESC";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Picking"));
@@ -122,7 +123,7 @@ using MyDbReportData = DatabaseXmlReportData;
         /// <returns></returns>
         public static string Scrap(string doucno)
         {
-            string sql = @"SELECT   h.S_ScrapNo ,
+            string sql = @"SELECT  h.S_ScrapNo ,
                                     h.S_CreateDate,
                                     h.S_CreateBy,
                                     h.S_Remark,
@@ -130,10 +131,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.S_GoodsName ,
                                     d.S_Unit ,
                                     d.S_Qty ,
-                                    d.S_Batch
+                                    d.S_Batch,
+									case when S_UploadDate is null then dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),S_UploadDate,112)) end S_Price,
+								CONVERT(decimal(18,6),(case when S_UploadDate is null then dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),S_UploadDate,112)) end *d.S_Qty)) as aoumnt
                             FROM    dbo.Mes_ScrapHead h
                                     LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo 
-                            WHERE   h.S_ScrapNo ='{0}'and h.S_Status=2"; 
+                            WHERE   h.S_ScrapNo ='{0}'and h.S_Status=!=1"; 
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Scrap"));
 
@@ -146,7 +149,7 @@ using MyDbReportData = DatabaseXmlReportData;
         /// <returns></returns>
         public static string BackStock(string doucno)
         {
-            var strsql = @"SELECT  h.B_BackStockNo ,
+            var strsql = @"SELECT h.B_BackStockNo ,
                                     h.B_CreateDate,
                                     h.B_CreateBy,
                                     h.B_Remark,
@@ -155,10 +158,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.B_GoodsCode ,
                                     d.B_GoodsName ,
                                     d.B_Qty ,
-                                    d.B_Unit
+                                    d.B_Unit,
+									case when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end B_Price,
+								CONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *d.B_Qty)) as aoumnt
                             FROM    dbo.Mes_BackStockHead h
                                     LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo
-                            WHERE   h.B_BackStockNo ='{0}' and h.B_Status=2";
+                            WHERE   h.B_BackStockNo ='{0}' and h.B_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strsql, doucno), "BackStock"));
 
@@ -224,7 +229,7 @@ using MyDbReportData = DatabaseXmlReportData;
 		                        ((d.S_Price*(1+(d.S_Otax/100)))* d.S_Qty)-(d.S_Price*d.S_Qty) as tax
                         FROM    dbo.Mes_SaleHead h
                                 LEFT JOIN dbo.Mes_SaleDetail d ON h.S_SaleNo = d.S_SaleNo
-                            WHERE   h.S_SaleNo='{0}' and h.S_Status=2";
+                            WHERE   h.S_SaleNo='{0}' and h.S_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "SaleManager"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -586,11 +591,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.E_Unit ,
                                     d.E_Qty,
 		                            d.E_Batch,
-		                            d.E_Price,
-		                            h.E_Remark
+		                            h.E_Remark,
+									case when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end E_Price,
+								CONVERT(decimal(18,6),(case when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end *d.E_Qty)) as aoumnt
                             FROM    dbo.Mes_ExpendHead h
                                     LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo
-                            WHERE   h.E_ExpendNo='{0}' and h.E_Status=2";
+                            WHERE   h.E_ExpendNo='{0}' and h.E_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "ExpendManager"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -614,10 +620,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.O_Qty ,
                                     d.O_Unit,
 		                            h.O_Remark,
-		                            d.O_Batch
+		                            d.O_Batch,
+	                            case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,
+								CONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt
                             FROM    dbo.Mes_OtherInHead h
                                     LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)
-                            WHERE   h.O_OtherInNo='{0}' and h.O_Status=2";
+                            WHERE   h.O_OtherInNo='{0}' and h.O_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Other"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -1153,10 +1161,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                 d.O_Unit ,
                                 d.O_Qty ,
                                 d.O_Batch,
-                                h.O_StockName
+                                h.O_StockName,
+	case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,
+								CONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt
                         FROM    dbo.Mes_OutWorkShopHead h
                                 LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo
-                        WHERE   h.O_OutNo ='{0}' and h.O_Status=2";
+                        WHERE   h.O_OutNo ='{0}'";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -1648,10 +1658,12 @@ using MyDbReportData = DatabaseXmlReportData;
                                 d.I_Unit ,
                                 d.I_Qty ,
                                 d.I_Batch,
-                                h.I_StockName
+                                h.I_StockName,
+	                            case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end I_Price,
+								CONVERT(decimal(18,6),(case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end *d.I_Qty)) as aoumnt
                         FROM    dbo.Mes_InWorkShopHead h
                                 LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo
-                        WHERE   h.I_InNo ='{0}' and h.I_Status=2";
+                        WHERE   h.I_InNo ='{0}' and h.I_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -1699,11 +1711,11 @@ using MyDbReportData = DatabaseXmlReportData;
                                 d.O_Unit,
 		                        h.O_Remark,
 		                        d.O_Batch,
-		                        d.O_Price,
-		                        (d.O_Price*d.O_Qty) as aoumout
+		                       case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,
+								CONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt
                         FROM    dbo.Mes_OtherOutHead h
                                 LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo
-                        WHERE    h.O_OtherOutNo ='{0}' and h.O_Status=2";
+                        WHERE    h.O_OtherOutNo ='{0}' and h.O_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OtherOut"));
             return MyDbReportData.TextFromMultiSQL(QueryList);

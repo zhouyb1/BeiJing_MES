@@ -180,10 +180,6 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                    {
                        return Fail("物料【" + item.O_GoodsName + "】入库数量不能为空!");
                    }
-                   if (string.IsNullOrEmpty(item.O_Price.ToString()) || item.O_Price == 0)
-                   {
-                       return Fail("物料【" + item.O_GoodsName + "】价格为空请及时维护价格!");
-                   }
                }
               mes_OtherOutHeadIBLL.SaveEntity(keyValue, entity, mes_OtherOutDetailList);
             return Success("保存成功！");

@@ -7,6 +7,8 @@
 		"Charset":134
 	},
 	"Printer":{
+		"TopMargin":1,
+		"BottomMargin":1
 	},
 	"DetailGrid":{
 		"Recordset":{
@@ -88,22 +90,22 @@
 			},
 			{
 				"Name":"S_GoodsName",
-				"Width":2.98979
+				"Width":3.81
 			},
 			{
 				"Name":"S_Unit",
-				"Width":1.00542
+				"Width":0.820208
 			},
 			{
 				"Name":"S_Qty",
-				"Width":2.01083
+				"Width":1.40229
 			},
 			{
 				"Name":"S_Otax",
-				"Width":1.19063
+				"Width":1.00542
 			},
 			{
-				"Name":"Column2",
+				"Name":"Column8",
 				"Width":1.77271
 			},
 			{
@@ -111,14 +113,20 @@
 				"Width":1.98438
 			},
 			{
+				"Name":"Column2",
+				"Width":1.77271
+			},
+			{
+				"Name":"Column5",
+				"Width":2.24896
+			},
+			{
 				"Name":"Column4",
 				"Width":1.21708
 			},
 			{
-				"Name":"Column5"
-			},
-			{
-				"Name":"Column6"
+				"Name":"Column6",
+				"Width":1.85208
 			}
 		],
 		"ColumnContent":{
@@ -126,6 +134,12 @@
 			"ColumnContentCell":[
 				{
 					"Column":"Column7",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"FreeCell":true,
 					"Control":[
 						{
@@ -157,6 +171,7 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"S_GoodsName"
 				},
@@ -194,7 +209,7 @@
 					"DataField":"S_Otax"
 				},
 				{
-					"Column":"Column2",
+					"Column":"Column8",
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -202,7 +217,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"DataField":"Taxprice"
+					"DataField":"S_Price"
 				},
 				{
 					"Column":"Column3",
@@ -216,7 +231,7 @@
 					"DataField":"Notaxamount"
 				},
 				{
-					"Column":"Column4",
+					"Column":"Column2",
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -224,7 +239,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"DataField":"tax"
+					"DataField":"Taxprice"
 				},
 				{
 					"Column":"Column5",
@@ -236,6 +251,17 @@
 					},
 					"TextAlign":"MiddleCenter",
 					"DataField":"Taxamount"
+				},
+				{
+					"Column":"Column4",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"DataField":"tax"
 				},
 				{
 					"Column":"Column6",
@@ -256,6 +282,12 @@
 				{
 					"GroupTitle":false,
 					"Column":"Column7",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"TextOrientation":"U2DL2R0",
 					"Text":"序号"
@@ -323,7 +355,7 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"Column2",
+					"Column":"Column8",
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -331,7 +363,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"含税单价"
+					"Text":"无税单价"
 				},
 				{
 					"GroupTitle":false,
@@ -347,7 +379,7 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"Column4",
+					"Column":"Column2",
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -355,7 +387,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"税额"
+					"Text":"含税单价"
 				},
 				{
 					"GroupTitle":false,
@@ -368,6 +400,18 @@
 					},
 					"TextAlign":"MiddleCenter",
 					"Text":"含税金额"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column4",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleCenter",
+					"Text":"税额"
 				},
 				{
 					"GroupTitle":false,
@@ -390,58 +434,38 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":1.00542,
+					"Height":0.79375,
 					"Control":[
 						{
 							"Type":"StaticBox",
 							"Name":"StaticBox13",
 							"Top":0.211667,
-							"Width":1.40229,
+							"Width":1.00542,
 							"Height":0.582083,
 							"TextAlign":"MiddleCenter",
 							"Text":"总计"
 						},
 						{
 							"Type":"SummaryBox",
-							"Name":"SummaryBox1",
-							"Left":5.79438,
-							"Top":0.211667,
-							"Width":2.40771,
-							"Height":0.582083,
-							"DataField":"S_Qty"
-						},
-						{
-							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":10.3981,
+							"AlignColumn":"Column3",
+							"Left":11.774,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":2.01083,
 							"Height":0.582083,
-							"DataField":"Notaxamount"
-						},
-						{
-							"Type":"SummaryBox",
-							"Name":"SummaryBox3",
-							"Left":11.8004,
-							"Top":0.211667,
-							"Width":2.98979,
-							"Height":0.582083,
-							"DataField":"tax"
+							"DataField":"Notaxamount",
+							"Format":"$#,##0.00"
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":13.2027,
+							"AlignColumn":"Column5",
+							"Left":15.531,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":2.27542,
 							"Height":0.582083,
-							"DataField":"Taxamount"
-						},
-						{
-							"Type":"Line",
-							"Name":"Line1",
-							"Left":1.5875,
-							"Height":1.00542
+							"DataField":"Taxamount",
+							"Format":"$#,##0.00"
 						}
 					]
 				}
@@ -457,13 +481,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":4.39208,
+			"Height":2.80458,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
 					"Left":6.58813,
-					"Top":2.91042,
+					"Top":1.42875,
 					"Width":1.40229,
 					"Height":0.64,
 					"Font":{
@@ -479,7 +503,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
 					"Left":0.211667,
-					"Top":2.88396,
+					"Top":1.40229,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -495,7 +519,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
 					"Left":7.99042,
-					"Top":2.91042,
+					"Top":1.42875,
 					"Width":2.61938,
 					"Height":0.608542,
 					"DataField":"S_StockName"
@@ -504,7 +528,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
 					"Left":0.211667,
-					"Top":3.59833,
+					"Top":2.11667,
 					"Width":1.79917,
 					"Height":0.582083,
 					"Font":{
@@ -520,7 +544,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
 					"Left":11.4035,
-					"Top":3.59833,
+					"Top":2.11667,
 					"Width":1.56104,
 					"Height":0.58,
 					"Font":{
@@ -536,7 +560,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
 					"Left":2.06375,
-					"Top":3.57188,
+					"Top":2.09021,
 					"Width":3.78354,
 					"Height":0.608542,
 					"DataField":"S_CreateDate"
@@ -545,7 +569,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
 					"Left":13.0175,
-					"Top":3.59833,
+					"Top":2.11667,
 					"Width":2.80458,
 					"Height":0.608542,
 					"DataField":"S_CreateBy"
@@ -570,7 +594,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
 					"Left":2.06375,
-					"Top":2.91042,
+					"Top":1.42875,
 					"Width":3.38667,
 					"Height":0.608542,
 					"DataField":"S_SaleNo"
@@ -579,7 +603,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
 					"Left":11.5358,
-					"Top":2.98979,
+					"Top":1.50813,
 					"Width":1.45521,
 					"Height":0.64,
 					"Font":{
@@ -595,7 +619,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
 					"Left":12.991,
-					"Top":2.98979,
+					"Top":1.50813,
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"S_CostomName"
@@ -604,7 +628,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox14",
 					"Left":6.58813,
-					"Top":3.59833,
+					"Top":2.11667,
 					"Width":1.40229,
 					"Height":0.58,
 					"Font":{
@@ -620,7 +644,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox14",
 					"Left":8.04333,
-					"Top":3.59833,
+					"Top":2.11667,
 					"Width":2.61938,
 					"Height":0.608542,
 					"DataField":"S_CreateBy"
