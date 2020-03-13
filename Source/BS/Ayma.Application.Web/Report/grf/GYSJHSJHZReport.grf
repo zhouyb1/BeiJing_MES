@@ -91,7 +91,7 @@
 			},
 			{
 				"Name":"C_Unit",
-				"Width":1.37583
+				"Width":0.79375
 			},
 			{
 				"Name":"C_Qty",
@@ -125,8 +125,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.211667,
-							"Width":1.32292,
+							"Left":-0.15875,
+							"Width":1.29646,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -404,7 +404,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox8",
 							"AlignColumn":"C_Qty",
-							"Left":11.1654,
+							"Left":10.5833,
 							"Top":0.211667,
 							"Width":1.64042,
 							"Height":0.396875,
@@ -414,10 +414,9 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox9",
-							"AlignColumn":"Column2",
-							"Left":14.5785,
+							"Left":13.5996,
 							"Top":0.211667,
-							"Width":2.64583,
+							"Width":4.60375,
 							"Height":0.396875,
 							"DataField":"Amount",
 							"Format":"$#,##0.00"
@@ -517,7 +516,7 @@
 							"Name":"SummaryBox6",
 							"BackColor":"FFFFFF",
 							"AlignColumn":"C_Qty",
-							"Left":11.1654,
+							"Left":10.5833,
 							"Top":0.211667,
 							"Width":1.64042,
 							"Height":0.396875,
@@ -534,10 +533,9 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox7",
 							"BackColor":"FFFFFF",
-							"AlignColumn":"Column2",
-							"Left":14.5785,
+							"Left":13.5996,
 							"Top":0.211667,
-							"Width":2.64583,
+							"Width":4.78896,
 							"Height":0.396875,
 							"Font":{
 								"Name":"宋体",
@@ -575,7 +573,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
 					"Center":"Horizontal",
-					"Left":6.11188,
+					"Left":5.82083,
 					"Top":0.211667,
 					"Width":8.99583,
 					"Height":0.79375,

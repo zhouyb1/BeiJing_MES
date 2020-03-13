@@ -76,44 +76,40 @@
 				"Width":2.80458
 			},
 			{
-				"Name":"Column7",
-				"Width":1.19063
-			},
-			{
 				"Name":"Column4",
-				"Width":2.19604
+				"Width":3.38667
 			},
 			{
 				"Name":"C_Unit",
-				"Width":2.01083
-			},
-			{
-				"Name":"C_Qty",
-				"Width":0.79375
-			},
-			{
-				"Name":"Column9",
-				"Width":1.00542
-			},
-			{
-				"Name":"Column2",
-				"Width":1.42875
-			},
-			{
-				"Name":"Column3",
-				"Width":0.978958
+				"Width":5.60917
 			},
 			{
 				"Name":"Column11",
-				"Width":1.79917
+				"Width":1.21708
 			},
 			{
 				"Name":"Column12",
-				"Width":1.79917
+				"Width":1.21708
 			},
 			{
 				"Name":"Column13",
-				"Width":2.38125
+				"Width":2.43417
+			},
+			{
+				"Name":"C_Qty",
+				"Width":0.582083
+			},
+			{
+				"Name":"Column9",
+				"Width":0.820208
+			},
+			{
+				"Name":"Column2",
+				"Width":0.608542
+			},
+			{
+				"Name":"Column3",
+				"Width":0.714375
 			}
 		],
 		"ColumnContent":{
@@ -128,7 +124,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.211667,
-							"Width":1.37583,
+							"Width":1.34938,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -153,17 +149,6 @@
 					"DataField":"M_MaterInNo"
 				},
 				{
-					"Column":"Column7",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"WordWrap":true,
-					"DataField":"M_SupplyCode"
-				},
-				{
 					"Column":"Column4",
 					"Font":{
 						"Name":"宋体",
@@ -184,6 +169,36 @@
 					},
 					"WordWrap":true,
 					"DataField":"M_GoodsName"
+				},
+				{
+					"Column":"Column11",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"row_qty"
+				},
+				{
+					"Column":"Column12",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"M_Price"
+				},
+				{
+					"Column":"Column13",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"row_amount"
 				},
 				{
 					"Column":"C_Qty",
@@ -228,36 +243,6 @@
 					},
 					"WordWrap":true,
 					"DataField":"M_UnitQty"
-				},
-				{
-					"Column":"Column11",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"row_qty"
-				},
-				{
-					"Column":"Column12",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"M_Price"
-				},
-				{
-					"Column":"Column13",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"DataField":"row_amount"
 				}
 			]
 		},
@@ -293,19 +278,6 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"Column7",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"WordWrap":true,
-					"TextAlign":"MiddleCenter",
-					"Text":"供应商编号"
-				},
-				{
-					"GroupTitle":false,
 					"Column":"Column4",
 					"Font":{
 						"Name":"宋体",
@@ -329,6 +301,45 @@
 					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"Text":"物料名称"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column11",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"数量"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column12",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"不含税价格"
+				},
+				{
+					"GroupTitle":false,
+					"Column":"Column13",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"不含税金额(元)"
 				},
 				{
 					"GroupTitle":false,
@@ -381,45 +392,6 @@
 					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"Text":"包装数量"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"Column11",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"WordWrap":true,
-					"TextAlign":"MiddleCenter",
-					"Text":"数量"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"Column12",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"WordWrap":true,
-					"TextAlign":"MiddleCenter",
-					"Text":"价格"
-				},
-				{
-					"GroupTitle":false,
-					"Column":"Column13",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"WordWrap":true,
-					"TextAlign":"MiddleCenter",
-					"Text":"不含税金额(元)"
 				}
 			]
 		},
@@ -449,8 +421,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
-							"Left":13.3879,
-							"Width":2.40771,
+							"Left":12.8058,
+							"Width":2.38125,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -463,9 +435,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"AlignColumn":"Column13",
-							"Left":16.9863,
-							"Width":2.40771,
+							"Left":15.1871,
+							"Width":3.81,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -491,10 +462,9 @@
 						{
 							"Type":"FieldBox",
 							"Name":"FieldBox21",
-							"Left":4.20688,
-							"Top":0.0264583,
+							"Left":3.59833,
 							"Width":6.79979,
-							"Height":0.582083,
+							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
 								"Size":90000,
@@ -521,8 +491,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":13.3879,
-							"Width":2.40771,
+							"Left":12.8058,
+							"Width":2.38125,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -535,9 +505,8 @@
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"AlignColumn":"Column13",
-							"Left":16.9863,
-							"Width":2.40771,
+							"Left":15.1871,
+							"Width":4.02167,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
