@@ -74,9 +74,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               {label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
                               { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
                               { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue == "" ? false : true },
-                              { label: "数量", name: "O_Qty", width: 80, align: "center" },
-                              { label: "单价", name: "O_Price", width: 80, align: "center" },
                               { label: "单位", name: "O_Unit", width: 60, align: "center" },
+                              { label: "数量", name: "O_Qty", width: 80, align: "center", statistics: true },
+                              { label: "单位成本", name: "O_Price", width: 80, align: "center" },
+                              { label: "金额", name: "O_Amount", width: 80, align: "center",statistics:true },
+
                           ]
                       }
                 ],
@@ -84,6 +86,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 footerrow: true,
                 minheight: 220,
                 height: 220,
+                isStatistics:true
             });
             //组装后
             $('#Mes_OrgResDetail_d').jfGrid({
@@ -96,16 +99,18 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         children: [
                             { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                             { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
-                            { label: "数量", name: "O_SecQty", width: 80, align: "center"},
-                            { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
                             { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
+                            { label: "数量", name: "O_SecQty", width: 80, align: "center", statistics: true },
+                            { label: "单位成本", name: "O_SecPrice", width: 80, align: "center" },
+                            { label: "金额", name: "O_SecAmount", width: 80, align: "center", statistics: true },
                         ]
-                    }
+                    },
                 ],
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 220,
                 height: 220,
+                isStatistics:true
             });
         },
         initData: function () {

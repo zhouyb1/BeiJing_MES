@@ -123,9 +123,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                               { label: "转换后的物料", name: "O_SecGoodsName", width: 90, align: "center", hidden: true },
                               { label: "物料名称", name: "O_GoodsName", width: 120, align: "center", },
                               { label: "物料编码", name: "O_GoodsCode", width: 90, align: "center" },
-                              { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue==""?false:true },
+                              { label: "库存", name: "StockQty", width: 80, align: "center", hidden: keyValue == "" ? false : true },
+                              { label: "单位", name: "O_Unit", width: 60, align: "center" },
                               {
-                                  label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input', 
+                                  label: "数量", name: "O_Qty", width: 80, align: "center", editType: 'input', statistics: true,
                                   editOp: {
                                       callback: function (rownum, row) {
                                           if (/\D/.test(row.O_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -135,11 +136,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                               ayma.alert.error('不能大于库存数量');
                                               row.O_Qty = 0;
                                           }
+                                          row.O_Amount = row.O_Qty * row.O_Price;
                                       }
                                   }
                               },
-                              { label: "单价", name: "O_Price", width: 80, align: "center" },
-                              { label: "单位", name: "O_Unit", width: 60, align: "center" },
+                              { label: "单位成本", name: "O_Price", width: 80, align: "center" },
+                              { label: "金额", name: "O_Amount", width: 90, align: "center", statistics: true, },
+
                           ]
                       }
                 ],
@@ -150,7 +153,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 height: 220,
                 inputCount: 1,
                 isMultiselect: true,
-                //isStatistics: true,
+                isStatistics: true,
             });
 
             $('#Mes_OrgResDetail_d').jfGrid({
@@ -173,12 +176,14 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                     { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
                     { label: "物料编码", name: "O_SecGoodsCode", width: 90, align: "center", },
+                    { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
                     {
                         label: "数量",
                         name: "O_SecQty",
                         width: 80,
                         align: "center",
                         editType: 'input',
+                        statistics:true,
                         editOp: {
                             callback: function(rownum, row) {
                                 if (/\D/.test(row.O_SecQty.toString().replace('.', ''))) { //验证只能为数字
@@ -195,7 +200,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                         amount += arr[k].O_Price * arr[k].O_Qty;
                                     }
                                     row.O_SecPrice = (amount / row.O_SecQty).toFixed(6);
-
+                                    //新增金额计算
+                                    row.O_SecAmount = row.O_SecPrice * row.O_SecQty;
                                     for (var i = 0, j = rowheadataList.length; i < j; i++) {
                                         if (rowheadataList[i].O_SecGoodsCode == row.O_SecGoodsCode) {
                                            
@@ -205,6 +211,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                             rowheadataList[i].O_SecGoodsCode = row.O_SecGoodsCode;
                                             rowheadataList[i].O_SecGoodsName = row.O_SecGoodsName;
                                             rowheadataList[i].O_SecPrice = row.O_SecPrice;
+                                           
                                         }
                                     }
                                     $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: rowheadataList });
@@ -212,8 +219,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
-                    { label: "单价", name: "O_SecPrice", width: 80, align: "center" },
-                    { label: "单位", name: "O_SecUnit", width: 80, align: "center" },
+                    { label: "单位成本", name: "O_SecPrice", width: 80, align: "center" },
+                    { label: "金额", name: "O_SecAmount", width: 90, align: "center", statistics: true, },
                     
                         ]
                     }
@@ -225,8 +232,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 height: 220,
                 inputCount: 1,
                 isMultiselect: true,
-
-                //isStatistics: true,
+                isStatistics: true,
             });
         },
         initData: function () {
