@@ -367,6 +367,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     O_Unit ,
                                     dbo.GetPrice(O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Price,
                                     SUM(O_Qty) O_Qty ,
+                                    sum(O_Qty)* dbo.GetPrice(O_GoodsCode,CONVERT(VARCHAR(6),h.O_UploadDate,112)) O_Amount,
+                                    O_SecQty * O_SecPrice O_SecAmount,
                                     O_SecGoodsCode ,
                                     O_SecGoodsName ,
                                     O_SecUnit ,
@@ -383,7 +385,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     O_SecUnit ,
                                     O_SecQty ,
                                     O_SecPrice,
-                                    O_UploadDate ";
+                                    O_UploadDate";
 
                 dp.Add("O_OrgResNo",keyValue,DbType.String);
                 var list = this.BaseRepository().FindList<Mes_OrgResDetailEntity>(sql, dp);

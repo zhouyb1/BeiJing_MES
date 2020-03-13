@@ -90,6 +90,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
         public int? O_Index { get; set; }
 
+        /// <summary>
+        /// 转换前物料金额
+        /// </summary>
+        [NotMapped]
+        public decimal? O_Amount { get; set; }
+
+        /// <summary>
+        /// 转换后物料金额
+        /// </summary>
+        [NotMapped]
+        public decimal? O_SecAmount { get; set; }
+
         #endregion
 
         #region 扩展操作
