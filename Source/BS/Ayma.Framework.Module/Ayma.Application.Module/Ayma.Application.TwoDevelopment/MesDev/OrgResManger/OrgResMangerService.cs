@@ -88,8 +88,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                       C_Max,
                                       C_Min,
                                       O_CreateBy) 
-                               SELECT *,(CASE WHEN CTE.ProductRate >CTE.O_Max THEN CTE.ProductRate-CTE.O_MAX
-                                                      WHEN CTE.ProductRate <CTE.O_MIN THEN CTE.ProductRate-CTE.O_Min 
+                               SELECT *,(CASE WHEN CTE.ProductRate >CTE.O_Max THEN ROUND(CTE.ProductRate-CTE.O_MAX,2)
+                                                      WHEN CTE.ProductRate <CTE.O_MIN THEN ROUND(CTE.ProductRate-CTE.O_Min,2)
                                                       WHEN CTE.ProductRate>=CTE.O_MIN AND CTE.ProductRate<=CTE.O_Max THEN 0
                                                       ELSE 0 END )DIFF FROM CTE");
             var dt = this.BaseRepository().FindList<ProductRateView>(strSql.ToString(), dp);
