@@ -135,7 +135,7 @@ var bootstrap = function ($, ayma) {
                 { label: "作业工序", name: "O_ProName", width: 70, align: "center" },
                 { label: "作业班组", name: "O_TeamName", width: 100, align: "center" },
                 { label: "出成率(%)", name: "ProductRate", width: 80, align: "center" },
-                { label: "出成率指标(%)", name: "targetRate", width: 80, align: "center" },
+                { label: "考核区间(%)", name: "targetRate", width: 80, align: "center" },
                 { label: "偏差(%)", name: "DIFF", width: 80, align: "center" },
                 { label: "制作人", name: "O_CreateBy", width: 100, align: "center" },
                 ],
