@@ -115,10 +115,10 @@ var bootstrap = function ($, ayma) {
                     width: 160,
                     align: "center",
                     children: [
-                    { label: "物料名称", name: "O_GoodsName", width: 120, align: "center" },
-                    { label: "物料编码", name: "O_GoodsCode", width: 100, align: "center" },
+                    { label: "物料名称", name: "O_GoodsName", width: 110, align: "center" },
+                    { label: "物料编码", name: "O_GoodsCode", width: 70, align: "center" },
                     { label: "单位", name: "O_Unit", width: 50, align: "center" },
-                    { label: "使用数量", name: "O_Qty", width: 90, align: "center" }]
+                    { label: "使用数量", name: "O_Qty", width: 80, align: "center" }]
                    }, 
                 {
                     label: "转换后",
@@ -126,17 +126,17 @@ var bootstrap = function ($, ayma) {
                     width: 160,
                     align: "center",
                     children: [
-                    { label: "物料名称", name: "O_SecGoodsName", width: 120, align: "center" },
-                    { label: "物料编码", name: "O_SecGoodsCode", width: 100, align: "center" },
+                    { label: "物料名称", name: "O_SecGoodsName", width: 110, align: "center" },
+                    { label: "物料编码", name: "O_SecGoodsCode", width: 70, align: "center" },
                     { label: "单位", name: "O_SecUnit", width: 50, align: "center" },
-                    { label: "产出数量", name: "O_SecQty", width: 90, align: "center" } ]
+                    { label: "产出数量", name: "O_SecQty", width: 80, align: "center" } ]
                 },
-                { label: "作业日耗库", name: "O_StockName", width: 130, align: "center", },
-                { label: "作业工序", name: "O_ProName", width: 90, align: "center" },
+                { label: "作业日耗库", name: "O_StockName", width: 120, align: "center", },
+                { label: "作业工序", name: "O_ProName", width: 70, align: "center" },
                 { label: "作业班组", name: "O_TeamName", width: 100, align: "center" },
-                { label: "出成率(%)", name: "ProductRate", width: 90, align: "center" },
-                { label: "出成率指标(%)", name: "targetRate", width: 90, align: "center" },
-                { label: "偏差(%)", name: "DIFF", width: 90, align: "center" },
+                { label: "出成率(%)", name: "ProductRate", width: 80, align: "center" },
+                { label: "出成率指标(%)", name: "targetRate", width: 80, align: "center" },
+                { label: "偏差(%)", name: "DIFF", width: 80, align: "center" },
                 { label: "制作人", name: "O_CreateBy", width: 100, align: "center" },
                 ],
                 mainId: 'ID',
