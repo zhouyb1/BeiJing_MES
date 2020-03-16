@@ -1083,6 +1083,79 @@ SELECT
 
                 #region 半成品成本价
 
+                //物料转换关系
+                List<Mes_Product> listConvert = new List<Mes_Product>();
+                if (success)
+                {
+                    string sql = @"SELECT C_Code M_Code,
+       C_Name M_Name,
+       C_SecCode M_SecCode,
+       C_SecName M_SecName
+FROM Mes_Convert";
+
+                    var rows = this.BaseRepository().FindList<Mes_Product>(sql);
+                    if (rows != null && rows.Count() > 0)
+                    {
+                        listConvert = rows.ToList();
+                    }
+                    else
+                    {
+                        success = false;
+                        msg = "物料转换信息不完整";
+                    }
+                }
+
+
+                //本次月使用原料
+                List<Mes_Product> listUseProducts = new List<Mes_Product>();
+                if (success)
+                {
+                    string sql = @"SELECT DISTINCT
+           D.O_GoodsCode M_GoodsCode,
+           D.O_GoodsName M_GoodsName
+    FROM Mes_OrgResHead H
+        LEFT JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
+        LEFT JOIN Mes_Goods G ON G.G_Code = D.O_GoodsCode
+    WHERE G.G_Kind = 1
+          AND H.O_Status = 3
+		  AND (H.O_CreateDate>@starDate AND H.O_CreateDate<=@endDate)";
+
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@starDate", lastMonthBalanceEntity.M_Months.ToDate(), DbType.DateTime);
+                    dp.Add("@endDate", month.ToDate(), DbType.DateTime);
+                    var rows = this.BaseRepository().FindList<Mes_Product>(sql, dp);
+                    if (rows != null && rows.Count() > 0)
+                    {
+                        listUseProducts = rows.ToList();
+                    }
+                    else
+                    {
+                        success = false;
+                        msg = "物料转换信息不完整";
+                    }
+                }
+
+
+
+                //根据使用原料获得最终bom表
+                List<Mes_UseProduct> listBomProducts = new List<Mes_UseProduct>();
+                if (success)
+                {
+                    foreach (var row in listUseProducts)
+                    {
+                        GetBomProducts(row.M_GoodsCode, 0, listConvert, listBomProducts);
+                    }
+                }
+
+                if (success)
+                {
+                    int maxLevel=listBomProducts.Max(r => r.M_Level);
+                    for (int i = 1; i <= maxLevel; i++)
+                    {
+
+                    }
+                }
+
                 #endregion
 
                 #endregion
@@ -1165,7 +1238,6 @@ SELECT
                 #endregion
                 return success;
             }
-
             catch (Exception ex)
             {
                 db.Rollback();//回滚事物
@@ -1181,6 +1253,72 @@ SELECT
             }
         }
 
+        private List<Mes_UseProduct> GetBomProducts(string goodcode,int level, List<Mes_Product> converts, List<Mes_UseProduct> products)
+        {
+            try
+            {
+                var rows = converts.Where(r => r.M_GoodsCode == goodcode);
+
+                if (rows == null || rows.Count() < 1)
+                {
+                    return products;
+                }
+                else
+                {
+                    foreach (var row in rows)
+                    {
+                        var current = products.Find(r => r.M_GoodsCode == row.M_GoodsCode);
+                        if (current == null)
+                        {
+                            return GetBomProducts(row.M_SecCode, level + 1, converts, products);
+                        }
+                        else
+                        {
+                            Mes_UseProduct product = new Mes_UseProduct();
+                            product.M_Level = level;
+                            product.M_GoodsCode = row.M_GoodsCode;
+                            product.M_GoodsName = row.M_GoodsName;
+                            product.M_GoodsPrice = 0;
+                            product.M_Qty = 0;
+                            product.ChildUseProducts = new List<Mes_UseProduct>();
+
+                            var childs = converts.Where(r => r.M_SecCode == row.M_GoodsCode);//寻找子元素
+                            if (childs != null && childs.Count() > 0)
+                            {
+                                foreach (var child in childs)
+                                {
+                                    Mes_UseProduct childproduct = new Mes_UseProduct();
+                                    childproduct.M_Level = level-1;
+                                    childproduct.M_GoodsCode = child.M_GoodsCode;
+                                    childproduct.M_GoodsName = child.M_GoodsName;
+                                    childproduct.M_GoodsPrice = 0;
+                                    childproduct.M_Qty = 0;
+                                    childproduct.ChildUseProducts = new List<Mes_UseProduct>();
+
+                                    product.ChildUseProducts.Add(childproduct);
+                                }
+                            }
+                            products.Add(product);
+
+                            return GetBomProducts(row.M_SecCode, level + 1, converts, products);
+                        }
+                    }
+                }
+
+                return products;
+            }
+            catch (Exception ex)
+            {
+                if (ex is ExceptionEx)
+                {
+                    throw;
+                }
+                else
+                {
+                    throw ExceptionEx.ThrowServiceException(ex);
+                }
+            }
+        }
 
         /// <summary>
         /// 反月结
