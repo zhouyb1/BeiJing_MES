@@ -214,7 +214,6 @@ var bootstrap = function ($, ayma) {
                     { label: "商品名称", name: "g_name", width: 130, align: "center" },
                     { label: "仓库名称", name: "s_name", width: 130, align: "center" },
                     { label: "仓库编码", name: "g_stockcode", width: 130, align: "center" },
-                    //{ label: "供应商名称", name: "m_supplyname", width: 130, align: "center" },
                     { label: "单位", name: "g_unit", width: 130, align: "center" },
                     {
                         label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
@@ -462,7 +461,7 @@ var bootstrap = function ($, ayma) {
                 reloadSelected: true,
                 footerrow: true,
                 isPage: true,
-                //isStatistics: true,
+                isStatistics: true,
                 sidx: 'g_code',
                 sord: 'desc',
             });
