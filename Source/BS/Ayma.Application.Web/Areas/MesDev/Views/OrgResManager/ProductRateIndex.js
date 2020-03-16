@@ -34,7 +34,7 @@ var bootstrap = function ($, ayma) {
                 preyShow: false,
                 yShow: false,
                 // 默认
-                dfvalue: '1',
+                dfvalue: '0',
                 selectfn: function (begin, end) {
                     StartTime = begin;
                     EndTime = end;
