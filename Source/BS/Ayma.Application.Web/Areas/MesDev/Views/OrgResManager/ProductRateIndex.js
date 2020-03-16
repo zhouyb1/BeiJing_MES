@@ -18,9 +18,7 @@ var bootstrap = function ($, ayma) {
             $('#datesearch').amdate({
                 dfdata: [
                     { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
                     { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
                 ],
                 // 月
                 mShow: false,
@@ -34,7 +32,7 @@ var bootstrap = function ($, ayma) {
                 preyShow: false,
                 yShow: false,
                 // 默认
-                dfvalue: '1',
+                dfvalue: '0',
                 selectfn: function (begin, end) {
                     StartTime = begin;
                     EndTime = end;
@@ -140,9 +138,21 @@ var bootstrap = function ($, ayma) {
                 { label: "制作人", name: "O_CreateBy", width: 100, align: "center" },
                 ],
                 mainId: 'ID',
-                //reloadSelected: true,
-                //isPage: true,
-                //sord: 'desc'
+                onRenderComplete: function(rows) {
+
+                    for (var i = 0, len = rows.length; i < len; i++) {
+                        if (rows[i].DIFF>0) {
+                            $("[rownum=rownum_girdtable_" + i + "][colname=DIFF]").css('color', "blue");
+                        }
+                        else if (rows[i].DIFF < 0) {
+                            $("[rownum=rownum_girdtable_" + i + "][colname=DIFF]").css('color', "red");
+                        } else {
+                            $("[rownum=rownum_girdtable_" + i + "][colname=DIFF]").css('color', "green");
+                        }
+
+                    }
+                }
+
             });
             page.search();
         },
