@@ -318,7 +318,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
             pagination.page = 1;
             pagination.records = 0;
-            pagination.rows = 999999;
+            pagination.rows = 999999;   
             pagination.sidx = "";
             pagination.sord = "ASC";
               var datas = materialsSumIBLL.GetInventoryDetail(pagination,queryJson);
@@ -522,9 +522,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["其它入库_数量"].SetOrdinal(19);
             dt.Columns["其它出库_数量"].SetOrdinal(20);
             dt.Columns["退供应商_数量"].SetOrdinal(21);
-            //给数据
-
-     
+            //给数据     
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     if (dt.Rows[i]["原物料销售_单价"].ToString() == null || dt.Rows[i]["原物料销售_单价"].ToString()=="")
