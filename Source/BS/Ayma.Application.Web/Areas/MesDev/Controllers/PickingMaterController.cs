@@ -779,8 +779,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     }
 
                     var queryParam = queryJson.ToJObject();
+                    DateTime StartTime = queryParam["StartTime"].ToDate();
+                    DateTime EndTime = queryParam["EndTime"].ToDate();
+                    string starttime = StartTime.ToString("yyyyMMdd");
+                    string endtime = EndTime.ToString("yyyyMMdd");
                     var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率报表-按原物料", "出成率报表-按原物料", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
-                    return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率报表-按原物料.xls");
+                    if (starttime == endtime)
+                    {
+                        return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "_出成率报表-按原物料.xls");
+                    }
+                    else
+                    {
+                        return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "-" + endtime + "_出成率报表-按原物料.xls");
+                    }
                 }
                 else
                 {

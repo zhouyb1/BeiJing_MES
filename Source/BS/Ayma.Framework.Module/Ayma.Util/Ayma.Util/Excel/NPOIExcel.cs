@@ -86,14 +86,27 @@ namespace Ayma.Util
         /// <param name="table"></param>
         /// <returns></returns>
         public static MemoryStream ToExcelMoreheader(DataTable table, string title, string sheetName, string StartTime, string EndTime)
-        {
+            {
             IWorkbook workBook = new HSSFWorkbook();
             string _sheetName = sheetName.IsEmpty() ? "sheet1" : sheetName;
             ISheet sheet = workBook.CreateSheet(_sheetName);
 
             //处理表格标题
             IRow row = sheet.CreateRow(0);
-            row.CreateCell(0).SetCellValue(title);
+            if (title == "物料出成率列表")
+            {
+                if (StartTime == EndTime)
+                {
+                    row.CreateCell(0).SetCellValue(StartTime + "_" + title);
+                }
+                else
+                {
+                    row.CreateCell(0).SetCellValue(StartTime + "-" + EndTime + "_" + title);
+                }              
+            }
+            else {
+                row.CreateCell(0).SetCellValue(title);
+            }          
             sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, table.Columns.Count - 1));
             row.Height = 500;
             //表格标题的样式
@@ -114,6 +127,7 @@ namespace Ayma.Util
             cellStyle1.SetFont(font1);
             cellStyle1.VerticalAlignment = VerticalAlignment.Center;
             cellStyle1.Alignment = HorizontalAlignment.Center;
+
             //日期的样式
             ICellStyle cellStyle2 = workBook.CreateCellStyle();
             IFont font2 = workBook.CreateFont();
@@ -122,11 +136,14 @@ namespace Ayma.Util
             cellStyle2.SetFont(font2);
             cellStyle2.VerticalAlignment = VerticalAlignment.Center;
             cellStyle2.Alignment = HorizontalAlignment.Left;
-            //空第一行出来加日期
-            row = sheet.CreateRow(1);
-            sheet.AddMergedRegion(new CellRangeAddress(1, 1, 0, table.Columns.Count - 1));
-            row.CreateCell(0).SetCellValue("日期："+StartTime+"至"+EndTime);
-            row.Cells[0].CellStyle = cellStyle2;
+            if (title != "物料出成率列表")
+            {
+                //空第一行出来加日期
+                row = sheet.CreateRow(1);
+                sheet.AddMergedRegion(new CellRangeAddress(1, 1, 0, table.Columns.Count - 1));
+                row.CreateCell(0).SetCellValue("日期：" + StartTime + "至" + EndTime);
+                row.Cells[0].CellStyle = cellStyle2;
+            }
             //空一行出来合并
             if (title == "原物料出入库统计")
             {
@@ -225,21 +242,21 @@ namespace Ayma.Util
                 row.Cells[14].CellStyle = cellStyle1;
                 #endregion
             }
-            else if (title == "出成率实时查询")
+            else if (title == "物料出成率列表")
             {
                 #region 出成率实时查询
-                row = sheet.CreateRow(2);
+                row = sheet.CreateRow(1);
                 //合并
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 0, 0));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 1, 4));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 2, 5, 8));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 9, 9));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 10,10 ));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 11, 11));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 12, 12));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 13, 13));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 14, 14));
-                sheet.AddMergedRegion(new CellRangeAddress(2, 3, 15, 15));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 0, 0));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 1, 1, 4));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 1, 5, 8));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 9, 9));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 10,10 ));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 11, 11));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 12, 12));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 13, 13));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 14, 14));
+                sheet.AddMergedRegion(new CellRangeAddress(1, 2, 15, 15));
                 //赋列名
                 for (int i = 0; i < table.Columns.Count; i++)
                 {
@@ -250,30 +267,55 @@ namespace Ayma.Util
                 row.CreateCell(5).SetCellValue("转换后");
                 row.Cells[1].CellStyle = cellStyle1;
                 row.Cells[5].CellStyle = cellStyle1;
+                //处理表格列头
+                row = sheet.CreateRow(2);
+                for (int i = 0; i < table.Columns.Count; i++)
+                {
+                    row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
+                    row.Cells[i].CellStyle = cellStyle1;
+                    row.Height = 300;
+                    sheet.AutoSizeColumn(i);
+                }
+                //起始行号，终止行号， 起始列号，终止列号
+                //处理数据内容
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    row = sheet.CreateRow(3 + i);
+                    row.Height = 250;
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        row.CreateCell(j).SetCellValue(table.Rows[i][j].ToString());
+                        sheet.SetColumnWidth(j, 256 * 15);
+                    }
+                }
                 #endregion
             }
-            //处理表格列头
-            row = sheet.CreateRow(3);
-            for (int i = 0; i < table.Columns.Count; i++)
+            if (title != "物料出成率列表")
             {
-                row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
-                row.Cells[i].CellStyle = cellStyle1;
-                row.Height = 300;
-                sheet.AutoSizeColumn(i);
-            }
-         
-            //起始行号，终止行号， 起始列号，终止列号
-            //处理数据内容
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                row = sheet.CreateRow(4 + i);
-                row.Height = 250;
-                for (int j = 0; j < table.Columns.Count; j++)
+                //处理表格列头
+                row = sheet.CreateRow(3);
+                for (int i = 0; i < table.Columns.Count; i++)
                 {
-                    row.CreateCell(j).SetCellValue(table.Rows[i][j].ToString());
-                    sheet.SetColumnWidth(j, 256 * 15);
+                    row.CreateCell(i).SetCellValue(table.Columns[i].ColumnName);
+                    row.Cells[i].CellStyle = cellStyle1;
+                    row.Height = 300;
+                    sheet.AutoSizeColumn(i);
+                }
+
+                //起始行号，终止行号， 起始列号，终止列号
+                //处理数据内容
+                for (int i = 0; i < table.Rows.Count; i++)
+                {
+                    row = sheet.CreateRow(4 + i);
+                    row.Height = 250;
+                    for (int j = 0; j < table.Columns.Count; j++)
+                    {
+                        row.CreateCell(j).SetCellValue(table.Rows[i][j].ToString());
+                        sheet.SetColumnWidth(j, 256 * 15);
+                    }
                 }
             }
+
             //单独设置列宽
             if (title == "库存明细统计")
             {

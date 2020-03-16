@@ -337,8 +337,41 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 EndTime = queryParam["EndTime"].ToString();
             
             }
+            DateTime StartTimes = queryParam["StartTime"].ToDate();
+            DateTime EndTimes = queryParam["EndTime"].ToDate();
+            string starttime = StartTimes.ToString("yyyyMMdd");
+            string endtime = EndTimes.ToString("yyyyMMdd");
+            DateTime Start = queryParam["start"].ToDate();
+            DateTime End = queryParam["end"].ToDate();
+            string start = Start.ToString("yyyyMMdd");
+            string end = End.ToString("yyyyMMdd");
             var ms = NPOIExcel.ToExcelMoreheader(dt, "库存明细统计", "库存明细统计", StartTime, EndTime);
-            return File(ms.GetBuffer(), "application/vnd.ms-excel", "库存明细统计.xls");
+
+            if (!queryParam["start"].ToString().IsEmpty() && !queryParam["end"].ToString().IsEmpty())
+            {
+                if (start == end)
+                {
+                    return File(ms.GetBuffer(), "application/vnd.ms-excel", start + "_库存明细统计.xls");
+                }
+                else
+                {
+                    return File(ms.GetBuffer(), "application/vnd.ms-excel", start + "-" + end + "_库存明细统计.xls");
+                }
+            }
+            else
+            {
+                if (starttime == endtime)
+                {
+                    return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "_库存明细统计.xls");
+                }
+                else
+                {
+                    return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "-" + endtime + "_库存明细统计.xls");
+                }
+
+            }
+
+           
         }
         /// <summary>
         /// 获取导出Excel数据
@@ -512,10 +545,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     }
                 }
               var queryParam = queryJson.ToJObject();
-
-
+              DateTime StartTime = queryParam["StartTime"].ToDate();
+              DateTime EndTime = queryParam["EndTime"].ToDate();
+              string starttime = StartTime.ToString("yyyyMMdd");
+              string endtime = EndTime.ToString("yyyyMMdd");
               var ms = NPOIExcel.ToExcelMoreheader(dt, "原物料出入库统计", "原物料出入库统计", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
-            return File(ms.GetBuffer(), "application/vnd.ms-excel", "原物料出入库统计.xls");
+              if (starttime == endtime)
+              {
+                  return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "_原物料出入库统计.xls");
+              }
+              else
+              {
+                  return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "-" + endtime + "_原物料出入库统计.xls");
+              }
         }
         
         #endregion

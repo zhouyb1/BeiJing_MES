@@ -413,8 +413,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             var datas = orgResMangerIBLL.GetProductRateList(pagination, queryJson);
             var dt = AsDataTable(datas);
             var queryParam = queryJson.ToJObject();
-            var ms = NPOIExcel.ToExcelMoreheader(dt, "出成率实时查询", "出成率实时查询", queryParam["StartTime"].ToString(), queryParam["EndTime"].ToString());
-            return File(ms.GetBuffer(), "application/vnd.ms-excel", "出成率实时查询.xls");
+            DateTime StartTime = queryParam["StartTime"].ToDate();
+            DateTime EndTime = queryParam["EndTime"].ToDate();
+            string starttime = StartTime.ToString("yyyyMMdd");
+            string endtime = EndTime.ToString("yyyyMMdd");
+            var ms = NPOIExcel.ToExcelMoreheader(dt, "物料出成率列表", "物料出成率列表", starttime, endtime);
+            if (starttime == endtime)
+            {
+                return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime + "_物料出成率列表.xls");
+            }
+            else
+            {
+                return File(ms.GetBuffer(), "application/vnd.ms-excel", starttime +"-"+endtime+ "_物料出成率列表.xls");
+            }
         }
         /// <summary>
         /// 获取导出Excel数据
@@ -431,14 +442,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 switch (prop.Name)
                 {
                     case "rownum": table.Columns.Add("序号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_GoodsName": table.Columns.Add("转换前_物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_GoodsCode": table.Columns.Add("转换前_物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_Unit": table.Columns.Add("转换前_单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_Qty": table.Columns.Add("转换前_使用数量", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecGoodsName": table.Columns.Add("转换后_物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecGoodsCode": table.Columns.Add("转换后_物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecUnit": table.Columns.Add("转换后_单位", typeof(string)); break;
-                    case "O_SecQty": table.Columns.Add("转换后_产出数量", typeof(string)); break;
+                    case "O_GoodsName": table.Columns.Add("物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_GoodsCode": table.Columns.Add("物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_Qty": table.Columns.Add("使用数量", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecGoodsName": table.Columns.Add("物料名称.", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecGoodsCode": table.Columns.Add("物料编码.", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecUnit": table.Columns.Add("单位.", typeof(string)); break;
+                    case "O_SecQty": table.Columns.Add("产出数量", typeof(string)); break;
                     case "O_StockName": table.Columns.Add("作业日耗库", typeof(string)); break;
                     case "O_ProName": table.Columns.Add("作业工序", typeof(string)); break;
                     case "O_TeamName": table.Columns.Add("作业班组", typeof(string)); break;
@@ -451,14 +462,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             }
 
             table.Columns["序号"].SetOrdinal(0);
-            table.Columns["转换前_物料名称"].SetOrdinal(1);
-            table.Columns["转换前_物料编码"].SetOrdinal(2);
-            table.Columns["转换前_单位"].SetOrdinal(3);
-            table.Columns["转换前_使用数量"].SetOrdinal(4);
-            table.Columns["转换后_物料名称"].SetOrdinal(5);
-            table.Columns["转换后_物料编码"].SetOrdinal(6);
-            table.Columns["转换后_单位"].SetOrdinal(7);
-            table.Columns["转换后_产出数量"].SetOrdinal(8);
+            table.Columns["物料名称"].SetOrdinal(1);
+            table.Columns["物料编码"].SetOrdinal(2);
+            table.Columns["单位"].SetOrdinal(3);
+            table.Columns["使用数量"].SetOrdinal(4);
+            table.Columns["物料名称."].SetOrdinal(5);
+            table.Columns["物料编码."].SetOrdinal(6);
+            table.Columns["单位."].SetOrdinal(7);
+            table.Columns["产出数量"].SetOrdinal(8);
             table.Columns["作业日耗库"].SetOrdinal(9);
             table.Columns["作业工序"].SetOrdinal(10);
             table.Columns["作业班组"].SetOrdinal(11);
@@ -473,14 +484,14 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 foreach (PropertyDescriptor prop in properties)
                     switch (prop.Name)
                     {
-                        case "O_GoodsName": row["转换前_物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_GoodsCode": row["转换前_物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_Unit": row["转换前_单位"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_Qty": row["转换前_使用数量"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecGoodsName": row["转换后_物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecGoodsCode": row["转换后_物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecUnit": row["转换后_单位"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecQty": row["转换后_产出数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_GoodsName": row["物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_GoodsCode": row["物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_Qty": row["使用数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsName": row["物料名称."] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsCode": row["物料编码."] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecUnit": row["单位."] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecQty": row["产出数量"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_StockName": row["作业日耗库"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_ProName": row["作业工序"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_TeamName": row["作业班组"] = prop.GetValue(item) ?? DBNull.Value; break;
