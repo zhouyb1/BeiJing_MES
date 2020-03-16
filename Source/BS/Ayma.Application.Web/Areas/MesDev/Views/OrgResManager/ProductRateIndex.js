@@ -156,7 +156,6 @@ var bootstrap = function ($, ayma) {
                 }
 
             });
-            page.search();
         },
         search: function (param) {
             param = param || {};
