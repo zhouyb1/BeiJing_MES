@@ -39,7 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                                 dbo.GetUserNameById(O_CreateBy)O_CreateBy,
                                                 SUM(O_Qty) O_Qty ,
                                                 SUM(O_SecQty) O_SecQty ,
-                                               (SUM(O_SecQty) / SUM(O_Qty)) * 100 ProductRate,
+                                                CONVERT(DECIMAL(18,2),(SUM(O_SecQty) / SUM(O_Qty)) * 100) ProductRate,
                                                (CAST(CONVERT(DECIMAL(3),C_Min) AS VARCHAR ) + '-'+CAST(CONVERT(DECIMAL(3),C_Max) AS VARCHAR)) targetRate,
                                                 CONVERT(DECIMAL(3),C_Min) O_Min,
                                                 CONVERT(DECIMAL(3),C_Max) O_Max,
@@ -76,18 +76,20 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("endTime", queryParam["EndTime"].ToString(), DbType.String);
                 strSql.Append(" AND (O_UploadDate > @startTime AND O_UploadDate <@endTime ) ");
             }
-            strSql.Append(@" GROUP BY O_GoodsName ,
-                                      O_GoodsCode ,
-                                      O_Unit,
+            strSql.Append(@" GROUP BY 
                                       P_ProName,
-                                      O_SecGoodsCode,
-                                      O_SecGoodsName,
-                                      O_SecUnit,
-                                      O_StockName,
                                       O_TeamName,
+                                      O_StockName,
+                                      O_CreateBy,
+                                      O_GoodsName ,
+                                      O_GoodsCode ,
+                                      O_SecGoodsName,
+                                      O_SecGoodsCode,
+                                      O_Unit,
+                                      O_SecUnit,
                                       C_Max,
-                                      C_Min,
-                                      O_CreateBy) 
+                                      C_Min
+                                     ) 
                                SELECT *,(CASE WHEN CTE.ProductRate >CTE.O_Max THEN ROUND(CTE.ProductRate-CTE.O_MAX,2)
                                                       WHEN CTE.ProductRate <CTE.O_MIN THEN ROUND(CTE.ProductRate-CTE.O_Min,2)
                                                       WHEN CTE.ProductRate>=CTE.O_MIN AND CTE.ProductRate<=CTE.O_Max THEN 0
