@@ -18,7 +18,9 @@ var bootstrap = function ($, ayma) {
             $('#datesearch').amdate({
                 dfdata: [
                     { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
                     { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
+                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
                 ],
                 // 月
                 mShow: false,
@@ -32,7 +34,7 @@ var bootstrap = function ($, ayma) {
                 preyShow: false,
                 yShow: false,
                 // 默认
-                dfvalue: '0',
+                dfvalue: '1',
                 selectfn: function (begin, end) {
                     StartTime = begin;
                     EndTime = end;
