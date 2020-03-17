@@ -47,7 +47,7 @@ var bootstrap = function ($, ayma) {
                     } else {
                         ayma.layerConfirm('是否确认月结？', function (res) {
                             if (res) {
-                                ayma.deleteForm(top.$.rootUrl + '/MesDev/MonthBalance/PostOrCancel', { month: month,type:1}, function () {
+                                ayma.postForm(top.$.rootUrl + '/MesDev/MonthBalance/PostOrCancel', { month: month,type:1}, function () {
                                     refreshGirdData();
                                 });
                             }
@@ -118,7 +118,7 @@ var bootstrap = function ($, ayma) {
                     { label: "主键", name: "ID", width: 160, align: "left",hidden:true},
                     { label: "月结日期", name: "M_Months", width: 100, align: "left" },
                     { label: "月结人", name: "M_MonthBalanceBy", width: 120, align: "left" },
-                    { label: "月结时间", name: "M_MonthBalanceTime", width: 120, align: "left"},
+                    { label: "月结时间", name: "M_MonthBalanceTime", width: 200, align: "left"},
                     {
                         label: "状态", name: "M_Status", width: 100, align: "left",
                         formatterAsync: function (callback, value, row) {

@@ -171,7 +171,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 
                             var rows = this.BaseRepository().FindList<Mes_MonthBalanceEntity>(sql);
                             bool success = true;
-                            if (rows != null || rows.Count()>= 1)
+                            if (rows != null && rows.Count()>= 1)
                             {
                                 var entityTemp = rows.First();
                                 if (entityTemp.M_Status != 2)
@@ -285,6 +285,21 @@ WHERE LEFT(M_Months,7)='" + lastDate + "'";
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                //row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -320,6 +335,22 @@ FROM Mes_Inventory";
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                //row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
+
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -369,6 +400,22 @@ GROUP BY
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                //row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
+
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -416,6 +463,22 @@ GROUP BY H.B_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                //row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
+
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -465,6 +528,21 @@ GROUP BY D.C_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                //row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -513,6 +591,21 @@ GROUP BY H.B_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                //row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -562,6 +655,21 @@ GROUP BY H.S_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                //row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -611,6 +719,21 @@ GROUP BY H.O_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                //row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -660,6 +783,21 @@ GROUP BY H.O_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                //row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -709,6 +847,21 @@ GROUP BY H.S_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                //row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -758,6 +911,21 @@ GROUP BY H.E_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                //row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -807,6 +975,21 @@ GROUP BY H.R_StockToCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                //row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -856,6 +1039,21 @@ GROUP BY H.R_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                //row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -903,6 +1101,21 @@ GROUP BY H.I_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                //row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -953,6 +1166,21 @@ GROUP BY H.I_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                //row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
@@ -1002,6 +1230,21 @@ GROUP BY H.O_StockCode,
                             {
                                 row.Create();
                                 row.M_Months = month;
+                                row.M_StockQty = 0;
+                                row.M_LastQty = 0;
+                                row.M_InQty = 0;
+                                row.M_BackSupplyQty = 0;
+                                row.M_OutQty = 0;
+                                row.M_BackStockQty = 0;
+                                row.M_ScrapQty = 0;
+                                row.M_OtherInQty = 0;
+                                row.M_OtherOutQty = 0;
+                                row.M_SaleQty = 0;
+                                row.M_ExpendQty = 0;
+                                row.M_RequistQty = 0;
+                                //row.M_OrgresOutQty = 0;
+                                row.M_InspectQty = 0;
+                                row.M_InWorkShopQty = 0;
                                 listMonthBalanceDetail.Add(row);
                             }
                             else
