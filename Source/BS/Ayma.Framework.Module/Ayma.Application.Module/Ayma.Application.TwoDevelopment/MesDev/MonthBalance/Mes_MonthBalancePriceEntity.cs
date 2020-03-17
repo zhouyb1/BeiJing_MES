@@ -18,6 +18,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <returns></returns>
         [Column("ID")]
         public string ID { get; set; }
+
         /// <summary>
         /// M_Months
         /// </summary>
@@ -70,6 +71,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             this.ID = Guid.NewGuid().ToString();
         }
+
         /// <summary>
         /// 编辑调用
         /// </summary>

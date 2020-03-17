@@ -1088,7 +1088,8 @@ SELECT
                     {
                         listLastCostPrice = rows.ToList();
 
-                        var filters = rows.Where(r => r.M_Kind == 1);
+                        var filters = listLastCostPrice.Where(r => r.M_Kind == 1);
+
                         foreach (var row in filters)
                         {
                             var entity = listCostPrice.Find(r => r.M_GoodsCode == row.M_GoodsCode);
@@ -1117,20 +1118,23 @@ SELECT
                     entity.M_GoodsCode = row.M_GoodsCode;
                     entity.M_GoodsName = row.M_GoodsName;
 
-                    entity.M_LastQty = row.M_LastQty;
-                    entity.M_LastPrice = row.M_LastPrice;
+                    entity.M_LastQty = row.M_LastQty.HasValue? row.M_LastQty.Value:0;
+                    entity.M_LastPrice = row.M_LastPrice.HasValue ? row.M_LastPrice.Value : 0;
 
-                    if ((row.M_LastQty + row.M_StockQty) == 0)
+                    decimal M_StockQty=row.M_StockQty.HasValue ? row.M_StockQty.Value : 0;
+                    decimal M_TotalAmount=row.M_TotalAmount.HasValue ? row.M_TotalAmount.Value : 0;
+
+                    if ((entity.M_LastQty + M_StockQty) == 0)
                     {
                         entity.M_GoodsPrice = 0;
                     }
                     else
                     {
-                        entity.M_GoodsPrice = ((row.M_LastQty * row.M_LastPrice) + (row.M_TotalAmount)) / (row.M_LastQty + row.M_StockQty);
+                        entity.M_GoodsPrice = ((entity.M_LastQty * entity.M_LastPrice) + M_TotalAmount) / (entity.M_LastQty + M_StockQty);
                     }
 
 
-                    var stocks = listNowQty.Where(r => r.M_GoodsCode == row.M_GoodsCode);
+                    var stocks = listOutQty.Where(r => r.M_GoodsCode == row.M_GoodsCode);
                     if (stocks != null && stocks.Count() > 0)
                     {
                         entity.M_StockQty = stocks.Sum(r => r.M_StockQty);
@@ -1139,6 +1143,8 @@ SELECT
                     {
                         entity.M_StockQty = 0;
                     }
+
+                    listMonthBalancePrice.Add(entity);
                 }
                 #endregion
 
@@ -1148,12 +1154,11 @@ SELECT
                 List<Mes_Product> listConvert = new List<Mes_Product>();
                 if (success)
                 {
-                    string sql = @"SELECT C_Code M_Code,
-       C_Name M_Name,
-       C_SecCode M_SecCode,
-       C_SecName M_SecName
+                    string sql = @"SELECT C_Code M_GoodsCode,
+       C_Name M_GoodsName,
+       C_SecCode M_SecGoodsCode,
+       C_SecName M_SecGoodsName
 FROM Mes_Convert";
-
                     var rows = this.BaseRepository().FindList<Mes_Product>(sql);
                     if (rows != null && rows.Count() > 0)
                     {
@@ -1197,6 +1202,39 @@ FROM Mes_Convert";
                 }
 
 
+                List<Mes_Product> listConvertDatas = new List<Mes_Product>();
+                //循环从数据库读取本月数据
+                if (success)
+                {
+                    string sql = @"SELECT    
+           D.O_GoodsCode M_GoodsCode,
+           D.O_GoodsName M_GoodsName,
+		   D.O_Qty M_Qty,
+		   D.O_SecGoodsCode M_SecGoodsCode,
+		   D.O_SecGoodsName M_SecGoodsName,
+		   D.O_SecQty M_SecQty
+    FROM Mes_OrgResHead H
+        LEFT JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
+        LEFT JOIN Mes_Goods G ON G.G_Code = D.O_GoodsCode
+    WHERE G.G_Kind = 1
+          AND H.O_Status = 3
+		  AND (H.O_CreateDate>@starDate AND H.O_CreateDate<=@endDate)";
+
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@starDate", lastMonthBalanceEntity.M_Months.ToDate(), DbType.DateTime);
+                    dp.Add("@endDate", month.ToDate(), DbType.DateTime);
+                    var rows = this.BaseRepository().FindList<Mes_Product>(sql, dp);
+                    if (rows != null && rows.Count() > 0)
+                    {
+                        listConvertDatas = rows.ToList();
+                    }
+                    else
+                    {
+                        success = false;
+                        msg = "转换单数据不完整";
+                    }
+                }
+
 
                 //根据使用原料获得最终bom表
                 List<Mes_UseProduct> listBomProducts = new List<Mes_UseProduct>();
@@ -1208,12 +1246,87 @@ FROM Mes_Convert";
                     }
                 }
 
+
+                //计算半成品成本价
                 if (success)
                 {
                     int maxLevel=listBomProducts.Max(r => r.M_Level);
                     for (int i = 1; i <= maxLevel; i++)
                     {
+                        var rows=listBomProducts.Where(r => r.M_Level == i);
 
+
+                        foreach (var row in rows)
+                        {
+
+                            var childs = row.ChildUseProducts;
+                            if (childs == null || childs.Count < 1)
+                            {
+                                success = false;
+                                msg = "转换关系存在错误";
+                                break;
+                            }
+
+                            //转换后数据
+                            var secDatas = listConvertDatas.Where(r => r.M_SecGoodsCode == row.M_GoodsCode);
+                            if (secDatas.Count() < 1)
+                                continue;
+
+                            //转换后数量
+                            decimal? secQty = secDatas.Sum(r => r.M_SecQty) / childs.Count;
+
+                            //原料总价值
+                            decimal? sumAmount = 0;
+                            foreach (var child in childs)
+                            {
+                                //上级用料数据
+                                var datas=secDatas.Where(r => r.M_GoodsCode == child.M_GoodsCode);
+
+                                //上级用料数量
+                                var qty = datas.Sum(r => r.M_Qty);
+
+                                //上级成本价
+                                decimal price = 0;
+                                var goodsprice= listMonthBalancePrice.Find(r => r.M_GoodsCode == child.M_GoodsCode);
+                                if (goodsprice != null)
+                                {
+                                    price = goodsprice.M_GoodsPrice.HasValue ? goodsprice.M_GoodsPrice.Value : 0;
+                                }
+
+                                sumAmount += (price * qty);
+                            }
+
+                            #region 添加到成本价表
+
+                            //上次月结数
+                            var lastPrice=listLastCostPrice.Find(r => r.M_GoodsCode == row.M_GoodsCode);
+
+                            Mes_MonthBalancePriceEntity entity = new Mes_MonthBalancePriceEntity();
+                            entity.Create();
+                            entity.M_Months = month;
+                            entity.M_GoodsCode = row.M_GoodsCode;
+                            entity.M_GoodsName = row.M_GoodsName;
+                            entity.M_GoodsPrice = sumAmount / secQty;
+                            entity.M_StockQty = secQty;
+
+                            if (lastPrice != null)
+                            {
+                                entity.M_LastQty = lastPrice.M_LastQty;
+                                entity.M_LastPrice = lastPrice.M_LastPrice;
+                            }
+                            else
+                            {
+                                entity.M_LastQty = 0;
+                                entity.M_LastPrice = 0;
+                            }
+
+                            listMonthBalancePrice.Add(entity);
+
+                            #endregion
+                        }
+
+                        if (!success)
+                            break;
                     }
                 }
 
@@ -1329,9 +1442,9 @@ FROM Mes_Convert";
                     foreach (var row in rows)
                     {
                         var current = products.Find(r => r.M_GoodsCode == row.M_GoodsCode);
-                        if (current == null)
+                        if (current != null)
                         {
-                            return GetBomProducts(row.M_SecCode, level + 1, converts, products);
+                            return GetBomProducts(row.M_SecGoodsCode, level + 1, converts, products);
                         }
                         else
                         {
@@ -1343,7 +1456,7 @@ FROM Mes_Convert";
                             product.M_Qty = 0;
                             product.ChildUseProducts = new List<Mes_UseProduct>();
 
-                            var childs = converts.Where(r => r.M_SecCode == row.M_GoodsCode);//寻找子元素
+                            var childs = converts.Where(r => r.M_SecGoodsCode == row.M_GoodsCode);//寻找子元素
                             if (childs != null && childs.Count() > 0)
                             {
                                 foreach (var child in childs)
@@ -1361,7 +1474,7 @@ FROM Mes_Convert";
                             }
                             products.Add(product);
 
-                            return GetBomProducts(row.M_SecCode, level + 1, converts, products);
+                            return GetBomProducts(row.M_SecGoodsCode, level + 1, converts, products);
                         }
                     }
                 }
@@ -1390,31 +1503,116 @@ FROM Mes_Convert";
         {
             msg = "";
 
+            var db = this.BaseRepository().BeginTrans();
+            UserInfo user = LoginUserInfo.Get();
             try
             {
-                UserInfo userinfo = LoginUserInfo.Get();
-                var dp = new DynamicParameters(new { });
-                dp.Add("@BalanceMonth", month);
-                dp.Add("@BalanceBy", userinfo.realName);
-                dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
-                dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
-                this.BaseRepository().ExecuteByProc("sp_MonthBalance_Cancel", dp);
+                DateTime dt = DateTime.Parse(month);//月结日期
+                string lastDate = dt.AddMonths(-1).ToString("yyyy-MM");
 
-                int errcode = dp.Get<int>("@errcode");//返回的错误代码 0：成功
-                string errMsg = dp.Get<string>("@errtxt");//存储过程返回的错误消息
+                //加载上月月结凭证
+                Mes_MonthBalanceEntity lastMonthBalanceEntity = new Mes_MonthBalanceEntity();
+                if (true)
+                {
+                    string sql =
+                        @"SELECT [ID]
+      ,[M_Months]
+      ,[M_MonthBalanceTime]
+      ,[M_MonthBalanceBy]
+      ,[M_Status]
+      ,[M_Remark]
+  FROM [Mes_MonthBalance]
+  WHERE LEFT(M_Months,7)='" + lastDate + "'";
 
-                if (errcode != 0)
-                {
-                    msg = errMsg;
-                    return false;
+                    var rows = this.BaseRepository().FindList<Mes_MonthBalanceEntity>(sql);
+                    if (rows != null && rows.Count() > 0)
+                    {
+                        lastMonthBalanceEntity = rows.First();
+                    }
                 }
-                else
+
+                //更新单据状态
+                if (true)
                 {
-                    return true;
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@beginTime", lastMonthBalanceEntity.M_Months.ToDate(), DbType.DateTime);
+                    dp.Add("@endTime", month.ToDate(), DbType.DateTime);
+
+                    //--原料入库单
+                    db.ExecuteBySql("UPDATE Mes_MaterInHead SET MonthBalance=NULL WHERE M_CreateDate>@beginTime AND M_CreateDate<=@endTime", dp);
+
+                    //退供应商单
+                    db.ExecuteBySql("UPDATE Mes_BackSupplyHead SET MonthBalance=NULL WHERE B_CreateDate>@beginTime AND B_CreateDate<=@endTime", dp);
+
+                    //领料单
+                    db.ExecuteBySql("UPDATE Mes_CollarHead SET MonthBalance=NULL WHERE C_CreateDate>@beginTime AND C_CreateDate<=@endTime", dp);
+
+                    //退库单
+                    db.ExecuteBySql("UPDATE Mes_BackStockHead SET MonthBalance=NULL WHERE B_CreateDate>@beginTime AND B_CreateDate<=@endTime", dp);
+
+                    //报废单
+                    db.ExecuteBySql("UPDATE Mes_ScrapHead SET MonthBalance=NULL WHERE S_CreateDate>@beginTime AND S_CreateDate<=@endTime", dp);
+
+                    //组装与拆分单
+                    db.ExecuteBySql("UPDATE Mes_OrgResHead SET MonthBalance=NULL WHERE O_CreateDate>@beginTime AND O_CreateDate<=@endTime", dp);
+
+                    //车间入库到线边仓单
+                    db.ExecuteBySql("UPDATE Mes_InWorkShopHead SET MonthBalance=NULL WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
+
+                    //调拨单
+                    db.ExecuteBySql("UPDATE Mes_RequistHead SET MonthBalance=NULL WHERE R_CreateDate>@beginTime AND R_CreateDate<=@endTime", dp);
+
+                    //其他出库单
+                    db.ExecuteBySql("UPDATE Mes_OtherOutHead SET MonthBalance=NULL WHERE O_CreateDate>@beginTime AND O_CreateDate<=@endTime", dp);
+
+                    //其他入库单
+                    db.ExecuteBySql("UPDATE Mes_OtherInHead SET MonthBalance=NULL WHERE O_CreateDate>@beginTime AND O_CreateDate<=@endTime", dp);
+
+                    //原物料销售单
+                    db.ExecuteBySql("UPDATE Mes_SaleHead SET MonthBalance=NULL WHERE S_CreateDate>@beginTime AND S_CreateDate<=@endTime", dp);
+
+                    //消耗单
+                    db.ExecuteBySql("UPDATE Mes_ExpendHead SET MonthBalance=NULL WHERE E_CreateDate>@beginTime AND E_CreateDate<=@endTime", dp);
+
+                    //强制使用记录单
+                    db.ExecuteBySql("UPDATE Mes_CompUseHead SET MonthBalance=NULL WHERE C_CreateDate>@beginTime AND C_CreateDate<=@endTime", dp);
+
+                    //抽检单
+                    db.ExecuteBySql("UPDATE Mes_Inspect SET MonthBalance=NULL WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
+
+                    //抽检单
+                    db.ExecuteBySql("UPDATE Mes_Inspect SET MonthBalance=NULL WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
                 }
+                
+                //更新凭证状态
+                if (true)
+                {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BalanceBy", user.account, DbType.String);
+                    dp.Add("@BalanceMonth", month, DbType.String);
+
+                    //更新状态
+                    db.ExecuteBySql(" UPDATE Mes_MonthBalance SET M_Status=2,M_MonthBalanceBy=@BalanceBy,M_MonthBalanceTime=GETDATE() WHERE M_Months=@BalanceMonth", dp);
+                }
+
+                //删除数据
+                if (true)
+                {
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@BalanceMonth", month, DbType.String);
+
+                    db.ExecuteBySql("DELETE Mes_MonthBalanceDetail WHERE M_Months=@BalanceMonth", dp);
+                    db.ExecuteBySql("DELETE Mes_MonthBalancePrice WHERE M_Months=@BalanceMonth", dp);
+                }
+
+                db.Commit();
+
+                return true;
             }
             catch (Exception ex)
             {
+                db.Rollback();
+
                 if (ex is ExceptionEx)
                 {
                     throw;

@@ -3,7 +3,7 @@
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
     /// <summary>
-    /// 配方
+    /// 物料转换关系
     /// </summary>
     public class Mes_Product
     {
@@ -17,16 +17,26 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         public string M_GoodsName { get; set; }
 
+        /// <summary>
+        /// 原料数量
+        /// </summary>
+        public decimal? M_Qty { get; set; }
 
         /// <summary>
         /// 转换后物料编码
         /// </summary>
-        public string M_SecCode { get; set; }
+        public string M_SecGoodsCode { get; set; }
 
         /// <summary>
         /// 物料名称
         /// </summary>
-        public string M_SecName { get; set; }
+        public string M_SecGoodsName { get; set; }
+
+
+        /// <summary>
+        /// 转换数量
+        /// </summary>
+        public decimal? M_SecQty { get; set; }
     }
 
     /// <summary>
