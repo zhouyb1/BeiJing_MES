@@ -15,6 +15,7 @@ using System.Text;
 using System.Web;
 using Ayma.Util;
 using HorizontalAlignment = NPOI.SS.UserModel.HorizontalAlignment;
+using NPOI.HSSF.Util;
 
 namespace Ayma.Util
 {
@@ -93,20 +94,7 @@ namespace Ayma.Util
 
             //处理表格标题
             IRow row = sheet.CreateRow(0);
-            if (title == "物料出成率列表")
-            {
-                if (StartTime == EndTime)
-                {
-                    row.CreateCell(0).SetCellValue(StartTime + "_" + title);
-                }
-                else
-                {
-                    row.CreateCell(0).SetCellValue(StartTime + "-" + EndTime + "_" + title);
-                }              
-            }
-            else {
-                row.CreateCell(0).SetCellValue(title);
-            }          
+            row.CreateCell(0).SetCellValue(title);        
             sheet.AddMergedRegion(new CellRangeAddress(0, 0, 0, table.Columns.Count - 1));
             row.Height = 500;
             //表格标题的样式
@@ -287,6 +275,29 @@ namespace Ayma.Util
                         row.CreateCell(j).SetCellValue(table.Rows[i][j].ToString());
                         sheet.SetColumnWidth(j, 256 * 15);
                     }
+
+                    double cell = row.GetCell(14).ToDouble();
+                    //字体的样式
+                    ICellStyle cellStyle3 = workBook.CreateCellStyle();
+                    IFont font3 = workBook.CreateFont();
+                    if (cell > 0)
+                    {
+                        font3.Color = HSSFColor.Blue.Index;
+                    }
+                    else if (cell < 0)
+                    {
+                        font3.Color = HSSFColor.Red.Index;
+                    }
+                    else
+                    {
+                        font3.Color = HSSFColor.Green.Index;
+                    }
+                    cellStyle3.SetFont(font3);
+                    cellStyle3.VerticalAlignment = VerticalAlignment.Center;
+                    cellStyle3.Alignment = HorizontalAlignment.Left;
+                    //设置颜色
+                    row.Cells[14].CellStyle = cellStyle3;
+              
                 }
                 #endregion
             }

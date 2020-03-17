@@ -454,7 +454,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     case "O_ProName": table.Columns.Add("作业工序", typeof(string)); break;
                     case "O_TeamName": table.Columns.Add("作业班组", typeof(string)); break;
                     case "ProductRate": table.Columns.Add("出成率(%)", typeof(string)); break;
-                    case "targetRate": table.Columns.Add("出成率指标(%)", typeof(string)); break;
+                    case "targetRate": table.Columns.Add("考核区间(%)", typeof(string)); break;
                     case "DIFF": table.Columns.Add("偏差(%)", typeof(string)); break;
                     case "O_CreateBy": table.Columns.Add("制作人", typeof(string)); break;
                     default: break;
@@ -474,7 +474,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             table.Columns["作业工序"].SetOrdinal(10);
             table.Columns["作业班组"].SetOrdinal(11);
             table.Columns["出成率(%)"].SetOrdinal(12);
-            table.Columns["出成率指标(%)"].SetOrdinal(13);
+            table.Columns["考核区间(%)"].SetOrdinal(13);
             table.Columns["偏差(%)"].SetOrdinal(14);
             table.Columns["制作人"].SetOrdinal(15);
             //给数据
@@ -496,7 +496,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         case "O_ProName": row["作业工序"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_TeamName": row["作业班组"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "ProductRate": row["出成率(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "targetRate": row["出成率指标(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "targetRate": row["考核区间(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "DIFF": row["偏差(%)"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_CreateBy": row["制作人"] = prop.GetValue(item) ?? DBNull.Value; break;
                     }
