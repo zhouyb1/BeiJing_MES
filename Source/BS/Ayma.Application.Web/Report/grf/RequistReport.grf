@@ -188,10 +188,9 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
 							"Center":"Vertical",
-							"Left":10.3981,
-							"Top":0.079375,
-							"Width":2.59292,
-							"Height":0.396875,
+							"Left":9.78958,
+							"Width":1.40229,
+							"Height":0.608542,
 							"DataField":"R_Qty"
 						}
 					]
