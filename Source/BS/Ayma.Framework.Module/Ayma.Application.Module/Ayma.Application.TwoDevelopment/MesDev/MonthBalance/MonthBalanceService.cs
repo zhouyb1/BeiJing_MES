@@ -195,7 +195,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     msg = "月结的凭证不存在！";
                 }
 
-
             }
             catch (Exception ex)
             {
@@ -1640,7 +1639,7 @@ FROM Mes_Convert";
                     db.ExecuteBySql("UPDATE Mes_Inspect SET MonthBalance='月结' WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
 
                     //抽检单
-                    db.ExecuteBySql("UPDATE Mes_Inspect SET MonthBalance='月结' WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
+                    //db.ExecuteBySql("UPDATE Mes_Inspect SET MonthBalance='月结' WHERE I_CreateDate>@beginTime AND I_CreateDate<=@endTime", dp);
 
 
                     var dpUpdate = new DynamicParameters(new { });
