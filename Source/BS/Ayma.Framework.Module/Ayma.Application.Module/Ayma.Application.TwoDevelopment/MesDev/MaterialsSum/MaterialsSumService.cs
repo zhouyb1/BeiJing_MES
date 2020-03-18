@@ -668,7 +668,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
         public DataTable GetMaterialSumListByDate(Pagination pagination, string queryJson)
-       {
+        {
             try
             {
                 var strSql = new StringBuilder();
@@ -681,7 +681,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dp.Add("StartTime", StartTime, DbType.DateTime);
                 dp.Add("EndTime", EndTime, DbType.DateTime);
                 dp.Add("Time", Time, DbType.DateTime);
-                strSql.Append(@"     select* from  ( select 鸡就是鸡
+                strSql.Append(@"                            select* from  ( select 
                                     (select S_Name from Mes_Stock where S_Code=s.G_StockCode)as S_Name,
                                      s.G_StockCode
 								    ,s.G_Code 
@@ -690,7 +690,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     ,@StartTime as 'startTime'
                                     ,@EndTime as 'endTime'
                                     ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code ) as outPrice
-                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_Good   sCode=s.G_Code )*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as outamount
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code )*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as outamount
 			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))as withdrawingnumber
 									,(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as materialssales 
 									,(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as scrapist  
@@ -742,7 +742,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									or ltrim(rtrim(t.withdrawingnumber)) not in ('0.000000') or ltrim(rtrim(t.materialssales)) not in ('0.000000') or ltrim(rtrim(t.scrapist)) not in ('0.000000') or ltrim(rtrim(t.otherwarehouse)) not in ('0.000000') 
 									or ltrim(rtrim(t.otheroutbound)) not in ('0.000000') or ltrim(rtrim(t.supplierback)) not in ('0.000000')									
 									 ");
-        
+
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
@@ -757,6 +757,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
+
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>

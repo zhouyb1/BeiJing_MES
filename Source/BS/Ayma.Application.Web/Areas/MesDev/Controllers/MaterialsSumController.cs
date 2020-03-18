@@ -394,16 +394,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     case "F_GoodsName": table.Columns.Add("商品名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "F_OrderNo": table.Columns.Add("单据编号", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "F_InQty": table.Columns.Add("收入_数量", typeof(string)); break;
-                    case "G_Price": table.Columns.Add("收入_单位成本(元)", typeof(string)); break;
-                    case "SRJE": table.Columns.Add("收入_金额", typeof(string)); break;
-                    case "Aoumount": table.Columns.Add("收入_无税金额", typeof(string)); break;
-                    case "F_OutQty": table.Columns.Add("发出_数量", typeof(string)); break;
-                    case "G_Price1": table.Columns.Add("发出_单位成本(元)", typeof(string)); break;
-                    case "FCJE": table.Columns.Add("发出_金额", typeof(string)); break;
-                    case "IntervoryQty": table.Columns.Add("结存_数量", typeof(string)); break;
-                    case "G_Price2": table.Columns.Add("结存_单位成本(元)", typeof(string)); break;
-                    case "JCJE": table.Columns.Add("结存_金额", typeof(string)); break;
+                    case "F_InQty": table.Columns.Add("数量", typeof(string)); break;
+                    case "G_Price": table.Columns.Add("单位成本(元)", typeof(string)); break;
+                    case "SRJE": table.Columns.Add("金额", typeof(string)); break;
+                    case "Aoumount": table.Columns.Add("无税金额", typeof(string)); break;
+                    case "F_OutQty": table.Columns.Add("数量 ", typeof(string)); break;
+                    case "G_Price1": table.Columns.Add("单位成本(元) ", typeof(string)); break;
+                    case "FCJE": table.Columns.Add("金额 ", typeof(string)); break;
+                    case "IntervoryQty": table.Columns.Add(" 数量", typeof(string)); break;
+                    case "G_Price2": table.Columns.Add(" 单位成本(元)", typeof(string)); break;
+                    case "JCJE": table.Columns.Add(" 金额", typeof(string)); break;
                     default: break;
                 }
             }
@@ -415,16 +415,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             table.Columns["商品名称"].SetOrdinal(4);
             table.Columns["单位"].SetOrdinal(5);
             table.Columns["单据编号"].SetOrdinal(6);
-            table.Columns["收入_数量"].SetOrdinal(7);
-            table.Columns["收入_单位成本(元)"].SetOrdinal(8);
-            table.Columns["收入_金额"].SetOrdinal(9);
-            table.Columns["收入_无税金额"].SetOrdinal(10);
-            table.Columns["发出_数量"].SetOrdinal(11);
-            table.Columns["发出_单位成本(元)"].SetOrdinal(12);
-            table.Columns["发出_金额"].SetOrdinal(13);
-            table.Columns["结存_数量"].SetOrdinal(14);
-            table.Columns["结存_单位成本(元)"].SetOrdinal(15);
-            table.Columns["结存_金额"].SetOrdinal(16);
+            table.Columns["数量"].SetOrdinal(7);
+            table.Columns["单位成本(元)"].SetOrdinal(8);
+            table.Columns["金额"].SetOrdinal(9);
+            table.Columns["无税金额"].SetOrdinal(10);
+            table.Columns["数量 "].SetOrdinal(11);
+            table.Columns["单位成本(元) "].SetOrdinal(12);
+            table.Columns["金额 "].SetOrdinal(13);
+            table.Columns[" 数量"].SetOrdinal(14);
+            table.Columns[" 单位成本(元)"].SetOrdinal(15);
+            table.Columns[" 金额"].SetOrdinal(16);
             //给数据
             foreach (var item in data)
             {
@@ -438,16 +438,16 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         case "F_GoodsName": row["商品名称"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "F_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "F_OrderNo": row["单据编号"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "F_InQty": row["收入_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "G_Price": row["收入_单位成本(元)"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "SRJE": row["收入_金额"] = Math.Round((item.F_InQty * item.G_Price).ToDecimal(), 6); break;
-                        case "Aoumount": row["收入_无税金额"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "F_OutQty": row["发出_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "G_Price1": row["发出_单位成本(元)"] = item.G_Price; break;
-                        case "FCJE": row["发出_金额"] = Math.Round((item.F_OutQty * item.G_Price).ToDecimal(), 6); break;
-                        case "IntervoryQty": row["结存_数量"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "G_Price2": row["结存_单位成本(元)"] = item.G_Price; break;
-                        case "JCJE": row["结存_金额"] = Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
+                        case "F_InQty": row["数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price": row["单位成本(元)"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "SRJE": row["金额"] = Math.Round((item.F_InQty * item.G_Price).ToDecimal(), 6); break;
+                        case "Aoumount": row["无税金额"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "F_OutQty": row["数量 "] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price1": row["单位成本(元) "] = item.G_Price; break;
+                        case "FCJE": row["金额 "] = Math.Round((item.F_OutQty * item.G_Price).ToDecimal(), 6); break;
+                        case "IntervoryQty": row[" 数量"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "G_Price2": row[" 单位成本(元)"] = item.G_Price; break;
+                        case "JCJE": row[" 金额"] = Math.Round((item.IntervoryQty * item.G_Price).ToDecimal(), 6); break;
                     }
                 table.Rows.Add(row);
                 for (int i = 0; i < table.Rows.Count; i++)
@@ -484,15 +484,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["price"].ColumnName = "加权平均价(元)";
             dt.Columns["inventoryquantity"].ColumnName = "入库数量";
             dt.Columns["delivery"].ColumnName = "出库数量";
-            dt.Columns["initialinventory"].ColumnName = "期初库存_数量";
-            dt.Columns["initialamount"].ColumnName = "期初库存_金额";
-            dt.Columns["endinginventory"].ColumnName = "期末库存_数量";
-            dt.Columns["finalamount"].ColumnName = "期末库存_金额";
+            dt.Columns["initialinventory"].ColumnName = "数量";
+            dt.Columns["initialamount"].ColumnName = "金额";
+            dt.Columns["endinginventory"].ColumnName = "数量 ";
+            dt.Columns["finalamount"].ColumnName = "金额 ";
             dt.Columns["back_qty"].ColumnName = "次品退库_数量";
             dt.Columns["withdrawingnumber"].ColumnName = "退回仓库_数量";
-            dt.Columns["materialssales"].ColumnName = "原物料销售_数量";
-            dt.Columns["outprice"].ColumnName = "原物料销售_单价";
-            dt.Columns["outamount"].ColumnName = "原物料销售_金额";
+            dt.Columns["materialssales"].ColumnName = " 数量";
+            dt.Columns["outprice"].ColumnName = "单价";
+            dt.Columns["outamount"].ColumnName = " 金额";
             dt.Columns["scrapist"].ColumnName = "报废物料_数量";
             dt.Columns["otherwarehouse"].ColumnName = "其它入库_数量";
             dt.Columns["otheroutbound"].ColumnName = "其它出库_数量";
@@ -509,15 +509,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             dt.Columns["加权平均价(元)"].SetOrdinal(6);
             dt.Columns["入库数量"].SetOrdinal(7);
             dt.Columns["出库数量"].SetOrdinal(8);
-            dt.Columns["期初库存_数量"].SetOrdinal(9);
-            dt.Columns["期初库存_金额"].SetOrdinal(10);
-            dt.Columns["期末库存_数量"].SetOrdinal(11);
-            dt.Columns["期末库存_金额"].SetOrdinal(12);
+            dt.Columns["数量"].SetOrdinal(9);
+            dt.Columns["金额"].SetOrdinal(10);
+            dt.Columns["数量 "].SetOrdinal(11);
+            dt.Columns["金额 "].SetOrdinal(12);
             dt.Columns["次品退库_数量"].SetOrdinal(13);
             dt.Columns["退回仓库_数量"].SetOrdinal(14);
-            dt.Columns["原物料销售_数量"].SetOrdinal(15);
-            dt.Columns["原物料销售_单价"].SetOrdinal(16);
-            dt.Columns["原物料销售_金额"].SetOrdinal(17);
+            dt.Columns[" 数量"].SetOrdinal(15);
+            dt.Columns["单价"].SetOrdinal(16);
+            dt.Columns[" 金额"].SetOrdinal(17);
             dt.Columns["报废物料_数量"].SetOrdinal(18);
             dt.Columns["其它入库_数量"].SetOrdinal(19);
             dt.Columns["其它出库_数量"].SetOrdinal(20);
@@ -525,21 +525,21 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             //给数据     
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
-                    if (dt.Rows[i]["原物料销售_单价"].ToString() == null || dt.Rows[i]["原物料销售_单价"].ToString()=="")
+                    if (dt.Rows[i]["单价"].ToString() == null || dt.Rows[i]["单价"].ToString()=="")
                     {
-                        dt.Rows[i]["原物料销售_单价"] = 0;
+                        dt.Rows[i]["单价"] = 0;
                     }
                     else
                     {
-                        dt.Rows[i]["原物料销售_单价"] = dt.Rows[i]["原物料销售_单价"];
+                        dt.Rows[i]["单价"] = dt.Rows[i]["单价"];
                     }
-                    if (dt.Rows[i]["原物料销售_金额"].ToString() == null || dt.Rows[i]["原物料销售_金额"].ToString() == "")
+                    if (dt.Rows[i][" 金额"].ToString() == null || dt.Rows[i][" 金额"].ToString() == "")
                     {
-                        dt.Rows[i]["原物料销售_金额"] = 0;
+                        dt.Rows[i][" 金额"] = 0;
                     }
                     else
                     {
-                        dt.Rows[i]["原物料销售_金额"] = dt.Rows[i]["原物料销售_金额"];
+                        dt.Rows[i][" 金额"] = dt.Rows[i][" 金额"];
                     }
                 }
               var queryParam = queryJson.ToJObject();

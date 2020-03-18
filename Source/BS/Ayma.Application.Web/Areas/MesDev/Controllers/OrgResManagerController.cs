@@ -446,9 +446,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     case "O_GoodsCode": table.Columns.Add("物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "O_Unit": table.Columns.Add("单位", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
                     case "O_Qty": table.Columns.Add("使用数量", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecGoodsName": table.Columns.Add("物料名称.", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecGoodsCode": table.Columns.Add("物料编码.", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
-                    case "O_SecUnit": table.Columns.Add("单位.", typeof(string)); break;
+                    case "O_SecGoodsName": table.Columns.Add(" 物料名称", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecGoodsCode": table.Columns.Add(" 物料编码", Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType); break;
+                    case "O_SecUnit": table.Columns.Add(" 单位", typeof(string)); break;
                     case "O_SecQty": table.Columns.Add("产出数量", typeof(string)); break;
                     case "O_StockName": table.Columns.Add("作业日耗库", typeof(string)); break;
                     case "O_ProName": table.Columns.Add("作业工序", typeof(string)); break;
@@ -466,9 +466,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
             table.Columns["物料编码"].SetOrdinal(2);
             table.Columns["单位"].SetOrdinal(3);
             table.Columns["使用数量"].SetOrdinal(4);
-            table.Columns["物料名称."].SetOrdinal(5);
-            table.Columns["物料编码."].SetOrdinal(6);
-            table.Columns["单位."].SetOrdinal(7);
+            table.Columns[" 物料名称"].SetOrdinal(5);
+            table.Columns[" 物料编码"].SetOrdinal(6);
+            table.Columns[" 单位"].SetOrdinal(7);
             table.Columns["产出数量"].SetOrdinal(8);
             table.Columns["作业日耗库"].SetOrdinal(9);
             table.Columns["作业工序"].SetOrdinal(10);
@@ -488,9 +488,9 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                         case "O_GoodsCode": row["物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_Unit": row["单位"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_Qty": row["使用数量"] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecGoodsName": row["物料名称."] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecGoodsCode": row["物料编码."] = prop.GetValue(item) ?? DBNull.Value; break;
-                        case "O_SecUnit": row["单位."] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsName": row[" 物料名称"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecGoodsCode": row[" 物料编码"] = prop.GetValue(item) ?? DBNull.Value; break;
+                        case "O_SecUnit": row[" 单位"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_SecQty": row["产出数量"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_StockName": row["作业日耗库"] = prop.GetValue(item) ?? DBNull.Value; break;
                         case "O_ProName": row["作业工序"] = prop.GetValue(item) ?? DBNull.Value; break;
