@@ -866,8 +866,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":7.40833,
-					"Top":1.40229,
+					"Left":7.38188,
+					"Top":1.66688,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -930,8 +930,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":9.2075,
-					"Top":1.40229,
+					"Left":9.18104,
+					"Top":1.66688,
 					"Width":3.59833,
 					"Height":0.608542,
 					"Font":{
@@ -976,8 +976,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox17",
-					"Left":0.502708,
-					"Top":1.40229,
+					"Left":0.47625,
+					"Top":1.66688,
 					"Width":1.69333,
 					"Height":0.608542,
 					"Font":{
@@ -992,8 +992,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox14",
-					"Left":2.19604,
-					"Top":1.40229,
+					"Left":2.16958,
+					"Top":1.66688,
 					"Width":5.00063,
 					"Height":0.608542,
 					"Font":{
