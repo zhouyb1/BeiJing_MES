@@ -70,20 +70,23 @@
 			},
 			{
 				"Name":"E_GoodsName",
-				"Width":3.99521
+				"Width":3.38667
 			},
 			{
-				"Name":"E_Unit"
+				"Name":"E_Unit",
+				"Width":1.61396
 			},
 			{
 				"Name":"E_Qty",
-				"Width":1.82563
+				"Width":2.19604
 			},
 			{
-				"Name":"E_Price"
+				"Name":"E_Price",
+				"Width":2.01083
 			},
 			{
-				"Name":"Column2"
+				"Name":"Column2",
+				"Width":2.40771
 			},
 			{
 				"Name":"E_Batch"
@@ -319,8 +322,8 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
 							"AlignColumn":"Column2",
-							"Left":16.7746,
-							"Width":3.01625,
+							"Left":14.1817,
+							"Width":2.43417,
 							"Height":0.608542,
 							"DataField":"aoumnt"
 						}
@@ -429,7 +432,7 @@
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":8.67833,
+					"Left":7.09083,
 					"Width":5.3975,
 					"Height":0.79375,
 					"Font":{
