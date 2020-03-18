@@ -69,27 +69,27 @@
 			},
 			{
 				"Name":"O_GoodsName",
-				"Width":4.20688
+				"Width":3.41313
 			},
 			{
 				"Name":"O_Qty",
-				"Width":2.98979
+				"Width":1.40229
 			},
 			{
 				"Name":"O_Unit",
-				"Width":1.82563
+				"Width":1.5875
 			},
 			{
 				"Name":"Column2",
-				"Width":2.38125
+				"Width":1.77271
 			},
 			{
 				"Name":"Column3",
-				"Width":2.46063
+				"Width":2.19604
 			},
 			{
 				"Name":"O_Batch",
-				"Width":1.85208
+				"Width":1.61396
 			}
 		],
 		"ColumnContent":{
@@ -308,7 +308,25 @@
 					"Height":0
 				},
 				"GroupFooter":{
-					"Height":0
+					"Height":0.608542,
+					"Control":[
+						{
+							"Type":"StaticBox",
+							"Name":"StaticBox9",
+							"Left":0.211667,
+							"Width":1.19063,
+							"Height":0.608542,
+							"Text":"总记："
+						},
+						{
+							"Type":"SummaryBox",
+							"Name":"SummaryBox1",
+							"Left":11.8004,
+							"Width":2.59292,
+							"Height":0.608542,
+							"DataField":"aoumnt"
+						}
+					]
 				}
 			}
 		]
@@ -316,15 +334,15 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":4,
+			"Height":4.20688,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":11.0331,
-					"Top":2.69875,
+					"Left":10.3981,
+					"Top":2.98979,
 					"Width":1.79917,
-					"Height":0.608542,
+					"Height":0.502708,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -338,7 +356,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
 					"Left":0.423333,
-					"Top":2.67229,
+					"Top":2.93688,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -353,17 +371,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":12.8323,
-					"Top":2.69875,
+					"Left":12.1973,
+					"Top":3.59833,
 					"Width":3.59833,
-					"Height":0.608542,
-					"DataField":"O_StockName"
+					"Height":0.396875,
+					"DataField":"O_CreateBy"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
 					"Left":0.423333,
-					"Top":3.28083,
+					"Top":3.54542,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -373,15 +391,15 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据时间："
+					"Text":"制单时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":11.0331,
-					"Top":3.30729,
+					"Left":10.3981,
+					"Top":3.59833,
 					"Width":1.79917,
-					"Height":0.608542,
+					"Height":0.396875,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -395,19 +413,19 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
 					"Left":2.2225,
-					"Top":3.28083,
+					"Top":3.59833,
 					"Width":3.59833,
-					"Height":0.608542,
+					"Height":0.555625,
 					"DataField":"O_CreateDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":12.8323,
-					"Top":3.33375,
+					"Left":12.1973,
+					"Top":2.98979,
 					"Width":3.20146,
-					"Height":0.582083,
-					"DataField":"O_CreateBy"
+					"Height":0.502708,
+					"DataField":"O_StockName"
 				},
 				{
 					"Type":"StaticBox",
@@ -429,7 +447,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
 					"Left":2.2225,
-					"Top":2.67229,
+					"Top":2.93688,
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"O_OtherInNo"
