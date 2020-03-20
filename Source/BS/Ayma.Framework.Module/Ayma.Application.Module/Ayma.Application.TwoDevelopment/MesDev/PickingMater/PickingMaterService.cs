@@ -2003,7 +2003,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 }
                 #endregion
 
-                  #region 组装数据
+                #region 组装数据
 
                 if (success)
                 {

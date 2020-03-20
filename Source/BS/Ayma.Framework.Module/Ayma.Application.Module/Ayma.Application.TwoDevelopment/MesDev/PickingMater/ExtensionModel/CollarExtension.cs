@@ -1,4 +1,6 @@
-﻿namespace Ayma.Application.TwoDevelopment.MesDev.ExtensionModel
+﻿using System.Collections.Generic;
+
+namespace Ayma.Application.TwoDevelopment.MesDev.ExtensionModel
 {
     /// <summary>
     /// 生产计划
@@ -138,6 +140,43 @@
 
 
     }
+
+
+    /// <summary>
+    /// 转换单
+    /// </summary>
+    public class ProductCommon
+    {
+
+        /// <summary>
+        /// 物料编码
+        /// </summary>
+        public string F_GoodsCode { get; set; }
+
+        /// <summary>
+        /// 物料名称
+        /// </summary>
+        public string F_GoodsName { get; set; }
+
+
+        /// <summary>
+        /// 物料级别
+        /// </summary>
+        public int F_Level { get; set; }
+
+
+        /// <summary>
+        /// 数量
+        /// </summary>
+        public decimal? F_Qty { get; set; }
+
+
+        /// <summary>
+        /// 子物料
+        /// </summary>
+        public List<ProductCommon> ChildProductCommons { get; set; }
+    }
+
 
     /// <summary>
     /// 车间物料库存
