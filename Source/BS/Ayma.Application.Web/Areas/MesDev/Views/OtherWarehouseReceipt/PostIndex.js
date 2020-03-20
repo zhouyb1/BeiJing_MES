@@ -131,6 +131,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('O_OtherInNo');
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'OtherReport',
+                        title: '其它入库单打印',
+                        url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/PrintReport?keyValue=' + keyValue + "&report=OtherReport&data=Other",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("O_OtherInNo");
