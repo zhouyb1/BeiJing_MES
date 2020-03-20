@@ -105,7 +105,23 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('O_OrgResNo');
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '物料组装单打印',
+                        url: top.$.rootUrl + '/MesDev/OrgResManager/PrintReport?keyValue=' + keyValue + "&report=OrgResReport&data=OrgRes",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 查看详情
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

@@ -195,7 +195,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.O_SecQty*d.O_SecPrice O_SecAmount
                             FROM    dbo.Mes_OrgResHead h
                                     LEFT JOIN dbo.Mes_OrgResDetail D ON h.O_OrgResNo = d.O_OrgResNo
-                            WHERE   1=1 AND h.O_OrgResNo ='{0}'and h.O_Status=2";
+                            WHERE   1=1 AND h.O_OrgResNo ='{0}'and h.O_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "OrgRes"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
