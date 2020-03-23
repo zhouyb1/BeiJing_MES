@@ -107,6 +107,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+                // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('O_OtherOutNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'OtherOutReport',
+                        title: '其它出库单打印',
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/PrintReport?keyValue=' + keyValue + "&report=OtherOutReport&data=OtherOut",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("O_OtherOutNo");

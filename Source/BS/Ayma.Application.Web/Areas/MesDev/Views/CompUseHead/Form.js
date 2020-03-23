@@ -188,6 +188,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         if (!$('body').Validform()) {
             return false;
         }
+        if (status == 2) {
+         
+            ayma.alert.error("该单据已审核不能修改")
+            return false;
+        }
         var data = $('#Mes_CompUseDetail').jfGridGet('rowdatas');
         if (data.length==0||data[0].C_GoodsCode==null) {
             ayma.alert.error('请添加物料！');

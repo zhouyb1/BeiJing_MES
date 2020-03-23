@@ -100,7 +100,23 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('B_BackStockNo');
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '退库单打印',
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/PrintReport?keyValue=' + keyValue + "&report=BackStockReport&data=BackStock",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
 
             // 查看详情
             $('#am_detail').on('click', function () {

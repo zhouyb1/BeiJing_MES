@@ -82,6 +82,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#    ').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('S_ScrapNo');
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'SaleOutReport',
+                        title: '报废单打印',
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PrintReport?keyValue=' + keyValue + "&report=ScrapReport&data=Scrap",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             // 撤销单据
             $('#am_cancle').on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("S_ScrapNo");

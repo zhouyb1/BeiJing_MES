@@ -109,6 +109,23 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('C_No');
+                if (ayma.checkrow(keyValue, true)) {
+                    ayma.layerForm({
+                        id: 'CompUseHead',
+                        title: '强制使用记录单',
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/PrintReport?keyValue=' + keyValue + "&report=CompUseHeadReport&data=CompUseHead",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //双击详情
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

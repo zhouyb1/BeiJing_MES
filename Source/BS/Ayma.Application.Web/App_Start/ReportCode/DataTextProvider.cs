@@ -105,12 +105,12 @@ using MyDbReportData = DatabaseXmlReportData;
                     b.B_GoodsName,
                     b.B_Unit,
                     b.B_Qty,
-                    b.B_Batch
-                    ,(select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode) as Price,
-                    ((select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode)*b.B_Qty) as aumount
+                    b.B_Batch,
+	                case when B_UploadDate is null then dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end Price,
+			    	CONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *b.B_Qty)) as aumount
             FROM    dbo.Mes_BackSupplyHead a
                     LEFT JOIN dbo.Mes_BackSupplyDetail b ON a.B_BackSupplyNo=b.B_BackSupplyNo
-            WHERE   a.B_BackSupplyNo ='{0}' and a.B_Status=2";
+            WHERE   a.B_BackSupplyNo ='{0}' and a.B_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "BackSupply"));
 
@@ -136,7 +136,7 @@ using MyDbReportData = DatabaseXmlReportData;
 								CONVERT(decimal(18,6),(case when S_UploadDate is null then dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.S_GoodsCode,CONVERT(VARCHAR(6),S_UploadDate,112)) end *d.S_Qty)) as aoumnt
                             FROM    dbo.Mes_ScrapHead h
                                     LEFT JOIN dbo.Mes_ScrapDetail d ON h.S_ScrapNo = d.S_ScrapNo 
-                            WHERE   h.S_ScrapNo ='{0}'and h.S_Status=!=1"; 
+                            WHERE   h.S_ScrapNo ='{0}'and h.S_Status!=1"; 
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "Scrap"));
 
@@ -678,7 +678,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     d.R_Batch 
                             FROM    dbo.Mes_RequistHead h
                                     LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo
-                            WHERE   h.R_RequistNo='{0}' and h.R_Status=2";
+                            WHERE   h.R_RequistNo='{0}' and h.R_Status!=1";
             ArrayList QueryList = new ArrayList();
             QueryList.Add(new ReportQueryItem(string.Format(strSql, doucno), "Requist"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
@@ -1720,6 +1720,32 @@ using MyDbReportData = DatabaseXmlReportData;
             QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "OtherOut"));
             return MyDbReportData.TextFromMultiSQL(QueryList);
         }
+            /// <summary>
+        /// 强制使用
+        /// </summary>
+        /// <param name="doucno"></param>
+        /// <returns></returns>
+        public static string CompUseHead(string doucno)
+        {
+            var sql = @"select 
+                        h.C_No,
+                        h.C_OrderNo,
+                        h.C_CreateDate,
+                        h.C_StockName,
+                        (select W_Name from Mes_WorkShop where W_Code=h.C_WorkShop) as C_WorkShopName,
+                        d.C_GoodsCode,
+                        d.C_GoodsName,
+                        d.C_Unit,
+                        d.C_Batch,
+                        d.C_Qty,
+                        case when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end C_Price,
+                        CONVERT(decimal(18,6),(case when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end *d.C_Qty)) as aoumnt
+                        from Mes_CompUseHead h left join Mes_CompUseDetail d on h.C_No=d.C_No
+                        WHERE    h.C_No ='{0}' and h.C_Status!=1";
+            ArrayList QueryList = new ArrayList();
+            QueryList.Add(new ReportQueryItem(string.Format(sql, doucno), "CompUseHead"));
+            return MyDbReportData.TextFromMultiSQL(QueryList);
+        }
         #endregion
 
         #region 根据 HTTP 请求中的参数生成报表数据，主要是为例子报表自动分配合适的数据生成函数
@@ -1807,6 +1833,7 @@ using MyDbReportData = DatabaseXmlReportData;
            
             //SpecialDataFunMap.Add("Test", Test);
             SpecialDataFunMap.Add("Picking", Picking);
+            SpecialDataFunMap.Add("CompUseHead", CompUseHead);
             SpecialDataFunMap.Add("Scrap", Scrap);
             SpecialDataFunMap.Add("BackStock",BackStock);
             SpecialDataFunMap.Add("OrgRes", OrgRes);
@@ -1958,7 +1985,10 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             return ProductOrder(Request.QueryString["doucno"]);
         }
-
+        private static string CompUseHead(HttpRequest Request)
+        {
+            return CompUseHead(Request.QueryString["doucno"]);
+        }
         #region 业务
         /// <summary>
         /// Test

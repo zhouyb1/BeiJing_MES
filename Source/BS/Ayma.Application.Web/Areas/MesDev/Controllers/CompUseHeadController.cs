@@ -30,6 +30,15 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }  
+          /// <summary>
+        /// 打印页面
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult PrintReport()
+        {
+             return View();
+        }  
         /// <summary>
         /// 查询页面
         /// </summary>

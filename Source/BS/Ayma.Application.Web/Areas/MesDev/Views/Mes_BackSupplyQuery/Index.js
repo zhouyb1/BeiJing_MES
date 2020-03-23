@@ -65,6 +65,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('B_BackSupplyNo');
+                if (keyValue == "") {
+                    ayma.alert.error("请选择要打印的单据！");
+                } else {
+                    ayma.layerForm({
+                        id: 'BackSupplyReport',
+                        title: '退供应商单打印',
+                        url: top.$.rootUrl + '/MesDev/Mes_BackSupply/PrintReport?keyValue=' + keyValue + "&report=BackSupply&data=BackSupply",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
             //双击详情
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

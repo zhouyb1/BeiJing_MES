@@ -2795,6 +2795,7 @@
     <Content Include="Areas\MesDev\Views\OrgResManager\PrintReport2.cshtml" />
     <Content Include="Areas\MesDev\Views\PickingMater\PrintReport4.cshtml" />
     <Content Include="Areas\MesDev\Views\MaterInBill\PrintReport3.cshtml" />
+    <Content Include="Areas\MesDev\Views\CompUseHead\PrintReport.cshtml" />
     <None Include="Properties\PublishProfiles\MES.pubxml" />
     <Content Include="Report\grf\CCLBBReport.grf" />
     <Content Include="Report\grf\CCLCXReport.grf" />
@@ -2805,6 +2806,7 @@
     <Content Include="Report\grf\LLCKHZBBReport.grf" />
     <Content Include="Report\grf\QTCKHZBBReport.grf" />
     <Content Include="Report\grf\YWLCRKTJReport.grf" />
+    <Content Include="Report\grf\CompUseHeadReport.grf" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

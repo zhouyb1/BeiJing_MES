@@ -13,46 +13,46 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.B_BackStockNo ,\r\n                                    h.B_CreateDate,\r\n                                    h.B_CreateBy,\r\n                                    h.B_Remark,\r\n                                    h.B_StockName ,\r\n                                    h.B_StockToName ,\r\n                                    d.B_GoodsCode ,\r\n                                    d.B_GoodsName ,\r\n                                    d.B_Qty ,\r\n                                    d.B_Unit,\r\n\t\t\t\t\t\t\t\t\tcase when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end B_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *d.B_Qty)) as aoumnt\r\n                            FROM    dbo.Mes_BackStockHead h\r\n                                    LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo",
+			"QuerySQL":"select \r\nh.C_No,\r\nh.C_OrderNo,\r\nh.C_CreateDate,\r\nh.C_StockName,\r\n(select W_Name from Mes_WorkShop where W_Code=h.C_WorkShop) as C_WorkShopName,\r\nd.C_GoodsCode,\r\nd.C_GoodsName,\r\nd.C_Unit,\r\nd.C_Batch,\r\nd.C_Qty,\r\ncase when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end C_Price,\r\nCONVERT(decimal(18,6),(case when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end *d.C_Qty)) as aoumnt\r\nfrom Mes_CompUseHead h left join Mes_CompUseDetail d on h.C_No=d.C_No",
 			"Field":[
 				{
-					"Name":"B_BackStockNo"
-				},
-				{
-					"Name":"B_StockName"
-				},
-				{
-					"Name":"B_StockToName"
-				},
-				{
-					"Name":"B_GoodsCode"
-				},
-				{
-					"Name":"B_GoodsName"
-				},
-				{
-					"Name":"B_Qty",
+					"Name":"aoumnt",
 					"Type":"Float"
 				},
 				{
-					"Name":"B_Unit"
+					"Name":"C_No"
 				},
 				{
-					"Name":"B_Remark"
+					"Name":"C_OrderNo"
 				},
 				{
-					"Name":"B_CreateDate",
+					"Name":"C_CreateDate",
 					"Type":"DateTime"
 				},
 				{
-					"Name":"B_CreateBy"
+					"Name":"C_StockName"
 				},
 				{
-					"Name":"B_Price",
+					"Name":"C_WorkShopName"
+				},
+				{
+					"Name":"C_GoodsCode"
+				},
+				{
+					"Name":"C_GoodsName"
+				},
+				{
+					"Name":"C_Unit"
+				},
+				{
+					"Name":"C_Batch"
+				},
+				{
+					"Name":"C_Qty",
 					"Type":"Float"
 				},
 				{
-					"Name":"aoumnt",
+					"Name":"C_Price",
 					"Type":"Float"
 				}
 			]
@@ -71,6 +71,10 @@
 				"Width":5.58271
 			},
 			{
+				"Name":"B_Unit",
+				"Width":1.79917
+			},
+			{
 				"Name":"B_Qty",
 				"Width":1.79917
 			},
@@ -83,11 +87,11 @@
 				"Width":2.01083
 			},
 			{
-				"Name":"B_Unit",
-				"Width":1.79917
+				"Name":"Column4"
 			}
 		],
 		"ColumnContent":{
+			"Height":0.608542,
 			"ColumnContentCell":[
 				{
 					"Column":"Column1",
@@ -103,8 +107,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.529167,
-							"Width":2.56646,
+							"Left":-0.47625,
+							"Width":2.51354,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -119,8 +123,7 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"TextAlign":"MiddleCenter",
-					"DataField":"B_GoodsCode"
+					"DataField":"C_GoodsCode"
 				},
 				{
 					"Column":"B_GoodsName",
@@ -131,40 +134,7 @@
 						"Charset":134
 					},
 					"WordWrap":true,
-					"DataField":"B_GoodsName"
-				},
-				{
-					"Column":"B_Qty",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleCenter",
-					"DataField":"B_Qty"
-				},
-				{
-					"Column":"Column2",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleCenter",
-					"DataField":"B_Price"
-				},
-				{
-					"Column":"Column3",
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleCenter",
-					"DataField":"aoumnt"
+					"DataField":"C_GoodsName"
 				},
 				{
 					"Column":"B_Unit",
@@ -174,8 +144,52 @@
 						"Weight":400,
 						"Charset":134
 					},
+					"WordWrap":true,
+					"DataField":"C_Unit"
+				},
+				{
+					"Column":"B_Qty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_Qty"
+				},
+				{
+					"Column":"Column2",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"C_Price"
+				},
+				{
+					"Column":"Column3",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
-					"DataField":"B_Unit"
+					"DataField":"aoumnt"
+				},
+				{
+					"Column":"Column4",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"DataField":"C_Batch"
 				}
 			]
 		},
@@ -221,6 +235,19 @@
 				},
 				{
 					"GroupTitle":false,
+					"Column":"B_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
+					"TextAlign":"MiddleCenter",
+					"Text":"单位"
+				},
+				{
+					"GroupTitle":false,
 					"Column":"B_Qty",
 					"Font":{
 						"Name":"宋体",
@@ -257,16 +284,15 @@
 				},
 				{
 					"GroupTitle":false,
-					"Column":"B_Unit",
+					"Column":"Column4",
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
 						"Weight":400,
 						"Charset":134
 					},
-					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
-					"Text":"单位"
+					"Text":"批次"
 				}
 			]
 		},
@@ -296,7 +322,7 @@
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
 							"AlignColumn":"Column3",
-							"Left":13.5731,
+							"Left":15.3723,
 							"Width":2.03729,
 							"Height":0.608542,
 							"Font":{
@@ -347,7 +373,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"退库仓："
+					"Text":"车间："
 				},
 				{
 					"Type":"StaticBox",
@@ -372,24 +398,36 @@
 					"Top":2.11667,
 					"Width":3.59833,
 					"Height":0.608542,
-					"DataField":"B_StockName"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_WorkShopName"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":1.98438,
-					"Top":2.09021,
+					"Left":2.01083,
+					"Top":2.19604,
 					"Width":3.59833,
-					"Height":0.582083,
-					"DataField":"B_StockToName"
+					"Height":0.396875,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_StockName"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":6.40292,
+					"Left":5.63563,
 					"Top":0.079375,
-					"Width":4.60375,
+					"Width":9.12813,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
@@ -398,7 +436,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleCenter",
-					"Text":"退库单"
+					"Text":"强制使用记录单"
 				},
 				{
 					"Type":"FieldBox",
@@ -407,7 +445,13 @@
 					"Top":1.48167,
 					"Width":3.38667,
 					"Height":0.582083,
-					"DataField":"B_BackStockNo"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_No"
 				},
 				{
 					"Type":"StaticBox",
@@ -432,7 +476,43 @@
 					"Top":1.40229,
 					"Width":3.59833,
 					"Height":0.608542,
-					"DataField":"B_CreateDate"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.29167,
+					"Top":1.42875,
+					"Width":3.09563,
+					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"生产订单号："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":7.19667,
+					"Top":1.40229,
+					"Width":3.59833,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_OrderNo"
 				}
 			]
 		}
@@ -440,13 +520,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
-			"Height":1.40229,
+			"Height":0.79375,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
 					"Left":0.132292,
-					"Top":0.502708,
+					"Top":0.132292,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -462,7 +542,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
 					"Left":2.11667,
-					"Top":0.502708,
+					"Top":0.132292,
 					"Width":4.20688,
 					"Height":0.582083
 				}

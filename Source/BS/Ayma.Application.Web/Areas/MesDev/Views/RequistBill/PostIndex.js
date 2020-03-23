@@ -99,6 +99,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            // 快速打印
+            $('#am_print').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('R_RequistNo');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'RequistReport',
+                        title: '调拨单打印',
+                        url: top.$.rootUrl + '/MesDev/RequistBill/PrintReport?keyValue=' + keyValue + "&report=RequistReport&data=Requist",
+                        width: 1000,
+                        height: 800,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                } else {
+                    ayma.alert.error("请选择要打印的单据！");
+                }
+            });
             //撤销单据
             $("#am_cancel").on('click', function () {
                 var orderNo = $("#girdtable").jfGridValue("R_RequistNo");
