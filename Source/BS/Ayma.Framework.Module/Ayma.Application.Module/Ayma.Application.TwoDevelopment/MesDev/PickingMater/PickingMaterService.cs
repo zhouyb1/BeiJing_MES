@@ -1559,8 +1559,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
             {
                 List<ProductBom> boms = new List<ProductBom>();
                 List<GoodsConvert> converts = new List<GoodsConvert>();
-
-                Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
+                List<Mes_Product> listConvertDatas = new List<Mes_Product>();
+                List<ProductCommon> products = new List<ProductCommon>();
                 string goodscode = "";
                 DataTable dt = new DataTable("GoodsConvert");
 
@@ -1660,344 +1660,231 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 }
                 #endregion
 
+
                 #region  获取配方中每一个原料数据
                 if (success)
                 {
-                    List<ProductBom> childrens = new List<ProductBom>();
-                    foreach (var bom in boms)
-                    {
-                        var children= boms.Find(r => r.F_ParentID == bom.F_ID);
-                        if (children == null)
-                        {
-                            childrens.Add(bom);
-                        }
-                    }
-
-                    foreach (var children in childrens)
-                    {
-                        List<ProductBom> goods = new List<ProductBom>();
-                        GetGoodsEx(children.F_ID, boms, goods);
-                        products[children.F_GoodsCode] = goods;
-                    }
+                    //顶级元素
+                    var row=boms.Find(r => r.F_Level==0);
+                    GetGoodsEx(row.F_ID, boms, products);
                 }
                 #endregion
+
+
+                //读取数据，用于后期处理
+                if (success)
+                {
+                    string sql = @"SELECT     
+           CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+           D.O_GoodsCode M_GoodsCode,
+           D.O_GoodsName M_GoodsName,
+		   D.O_Qty M_Qty,
+		   D.O_SecGoodsCode M_SecGoodsCode,
+		   D.O_SecGoodsName M_SecGoodsName,
+		   D.O_SecQty M_SecQty
+    FROM Mes_OrgResHead H
+        LEFT JOIN Mes_OrgResDetail D ON D.O_OrgResNo = H.O_OrgResNo
+        LEFT JOIN Mes_Goods G ON G.G_Code = D.O_GoodsCode
+    WHERE G.G_Kind = 1
+          AND H.O_Status = 3
+		  AND (H.O_CreateDate>@starDate AND H.O_CreateDate<=@endDate)";
+
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("@starDate", F_StartTime, DbType.DateTime);
+                    dp.Add("@endDate",  F_EndTime, DbType.DateTime);
+                    var rows = this.BaseRepository().FindList<Mes_Product>(sql, dp);
+                    if (rows != null && rows.Count() > 0)
+                    {
+                        listConvertDatas = rows.ToList();
+                    }
+                    else
+                    {
+                        success = false;
+                        message = "转换单数据不完整";
+                    }
+                }
+
 
                 #region 提取转换单数据
                 if (success)
                 {
-                    foreach (var product in products)
+                    var F_Level = products.Max(r => r.F_Level);
+                    for (int i = 0; i < F_Level; i++)
                     {
-                        #region SQL语句
-                        string strGetQty = @"
---当前物料数量统计
-SELECT 
-       F_CreateDate,
-	   F_GoodsCode,
-       SUM(F_Qty) F_Qty,
-       1 F_Type
-FROM
-(
-    SELECT DISTINCT
-           H.O_OrgResNo F_OrderNo,       --相关单据
-           D.O_SecGoodsCode F_GoodsCode, --当前物料编码
-		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
-           D.O_SecQty F_Qty              --当前物料数量
-    FROM Mes_OrgResHead H
-        INNER JOIN Mes_OrgResDetail D
-            ON D.O_OrgResNo = H.O_OrgResNo
-    WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
-          AND D.O_GoodsCode = @F_GoodsCode
-          AND D.O_SecGoodsCode = @F_SecGoodsCode
-) MyData
-GROUP BY F_CreateDate,F_GoodsCode
-
-UNION ALL
-
---上级与当前关联物料统计
-SELECT F_CreateDate,
-       F_GoodsCode,
-       SUM(F_Qty) F_Qty,
-       2 F_Type
-FROM
-(
-    SELECT 
-	       D.O_GoodsCode F_GoodsCode, --上一级半成品编码
-		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
-           D.O_Qty F_Qty              --上一级半成品数量
-    FROM Mes_OrgResHead H
-        INNER JOIN Mes_OrgResDetail D
-            ON D.O_OrgResNo = H.O_OrgResNo
-    WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
-          AND D.O_GoodsCode = @F_GoodsCode
-          AND D.O_SecGoodsCode = @F_SecGoodsCode
-) MyData
-GROUP BY F_CreateDate,F_GoodsCode
-
-UNION ALL
-
-----上级物料统计
-SELECT F_CreateDate,
-       F_GoodsCode,
-       SUM(F_Qty) F_Qty,
-       3 F_Type
-FROM
-(
-    SELECT 
-		   DISTINCT
-           H.O_OrgResNo F_OrderNo,       --相关单据
-		   D.O_SecGoodsCode F_GoodsCode, --上一级半成品编码
-		    CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
-           D.O_SecQty F_Qty--上一级半成品数量
-    FROM Mes_OrgResHead H
-        INNER JOIN Mes_OrgResDetail D
-            ON D.O_OrgResNo = H.O_OrgResNo
-    WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
-          AND D.O_SecGoodsCode = @F_GoodsCode
-) MyData
-GROUP BY F_CreateDate,F_GoodsCode";
-                        #endregion
-
-                        var F_Level = product.Value.Max(r => r.F_Level);
-                        for (int i = 0; i < F_Level; i++)
+                        //同级物料
+                        var sames= products.Where(r => r.F_Level == i);
+  
+                        foreach (var same in sames)
                         {
-                            int j = i + 1;
-                            var currentBom = product.Value.Find(r => r.F_Level == i);
-                            var lastBom = product.Value.Find(r => r.F_Level == j);
-                            bool isbreak = false;//是否跳出
-
-                            //加载参数
-                            var dp = new DynamicParameters(new { });
-                            dp.Add("startTime", F_StartTime, DbType.DateTime);
-                            dp.Add("endTime", F_EndTime, DbType.DateTime);
-                            dp.Add("F_SecGoodsCode", currentBom.F_GoodsCode, DbType.String);
-                            dp.Add("F_GoodsCode", lastBom.F_GoodsCode, DbType.String);
-
-                            var rows = new RepositoryFactory().BaseRepository().FindList<GoodsOrg>(strGetQty, dp);
-
-
-                            if (rows.Count() > 0)
-                            {
-
-                                var gruops = rows.GroupBy(r => r.F_CreateDate);
-                                foreach (var gruop in gruops)
-                                {
-                                    var gruoprows = gruop.ToList();
-                                    #region 最后一级
-                                    //最后一级
-                                    if (j == F_Level)
-                                    {
-                                        if (gruoprows.Count != 2)
-                                        {
-                                            //断层数据，无法计算
-                                            isbreak = true;
-                                            break;
-                                        }
-
-                                        var group1 = gruoprows.Find(r => r.F_Type == 1);
-                                        var group2 = gruoprows.Find(r => r.F_Type == 2);
-
-                                        //半成品
-                                        var currentGc = converts.Find(r => r.F_ID == currentBom.F_ID && r.F_CreateDate == gruop.Key);
-
-                                        GoodsConvert lastGc = new GoodsConvert();
-                                        lastGc.F_ID = lastBom.F_ID;
-                                        lastGc.F_ParentID = lastBom.F_ParentID;
-
-                                        lastGc.F_CreateDate = gruop.Key;
-
-                                        lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                        lastGc.F_GoodsName = lastBom.F_GoodsName;
-
-                                        lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                        lastGc.F_ProceName = lastBom.F_ProceName;
-
-                                        lastGc.F_Level = lastBom.F_Level;
-                                        lastGc.F_Kind = lastBom.F_Kind;
-                                        lastGc.F_Unit = lastBom.F_Unit;
-
-                                        decimal? d_qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
-                                        lastGc.F_Qty = Math.Round(d_qty.Value, 3);
-                                        lastGc.F_SumQty = group2.F_Qty;
-
-                                        lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                        lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                        lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
-                                        lastGc.F_Convert = 0;
-                                        lastGc.F_ConvertTag = 0;
-
-
-                                        decimal? d_convert = (currentGc.F_Qty / lastGc.F_Qty) * 100;
-                                        currentGc.F_Convert = Math.Round(d_convert.Value, 2);
-                                        if (currentGc.F_Convert > currentGc.F_ConvertMax)
-                                            currentGc.F_ConvertTag = 1;
-                                        else
-                                        {
-                                            if (currentGc.F_Convert < currentGc.F_ConvertMin)
-                                                currentGc.F_ConvertTag = -1;
-                                            else
-                                            {
-                                                currentGc.F_ConvertTag = 0;
-                                            }
-                                        }
-
-                                        converts.Add(lastGc);
-                                    }
-                                    #endregion
-
-                                    #region 其他级
-                                    else
-                                    {
-                                        if (gruoprows.Count != 3)
-                                        {
-                                            //断层数据，无法计算
-                                            isbreak = true;
-                                            break;
-                                        }
-
-                                        var group1 = gruoprows.Find(r => r.F_Type == 1);
-                                        var group2 = gruoprows.Find(r => r.F_Type == 2);
-                                        var group3 = gruoprows.Find(r => r.F_Type == 3);
-
-                                        if (i == 0)
-                                        {
-                                            //成品
-                                            GoodsConvert currentGc = new GoodsConvert();
-                                            currentGc.F_ID = currentBom.F_ID;
-                                            currentGc.F_ParentID = currentBom.F_ParentID;
-
-                                            currentGc.F_CreateDate = gruop.Key;
-
-                                            currentGc.F_GoodsCode = currentBom.F_GoodsCode;
-                                            currentGc.F_GoodsName = currentBom.F_GoodsName;
-
-                                            currentGc.F_ProceCode = currentBom.F_ProceCode;
-                                            currentGc.F_ProceName = currentBom.F_ProceName;
-
-                                            currentGc.F_Level = currentBom.F_Level;
-                                            currentGc.F_Kind = currentBom.F_Kind;
-                                            currentGc.F_Unit = currentBom.F_Unit;
-
-                                            currentGc.F_Qty = Math.Round(group1.F_Qty, 0);//实际生产
-
-                                            decimal? d_qty = (group2.F_Qty * 1000) / lastBom.F_PlanQty;
-                                            currentGc.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
-
-                                            currentGc.F_ConvertTag = currentGc.F_Qty - currentGc.F_Convert;//偏差数
-
-                                            decimal? c = (currentGc.F_ConvertTag / currentGc.F_Convert) * 100;
-                                            currentGc.F_ConvertRange = Math.Round(c.Value, 2).ToString();
-
-                                            currentGc.F_ConvertMin = currentBom.F_ConvertMin;
-                                            currentGc.F_ConvertMax = currentBom.F_ConvertMax;
-
-                                            //currentGc.F_ConvertRange = currentBom.F_ConvertMin.Value.ToString("0.00") + "-" + currentBom.F_ConvertMax.Value.ToString("0.00");
-                                            //currentGc.F_Convert = (group1.F_Qty / group2.F_Qty) * 100;
-                                            //if (currentGc.F_Convert > currentGc.F_ConvertMax)
-                                            //    currentGc.F_ConvertTag = 1;
-                                            //else
-                                            //{
-                                            //    if (currentGc.F_Convert < currentGc.F_ConvertMin)
-                                            //        currentGc.F_ConvertTag = -1;
-                                            //    else
-                                            //    {
-                                            //        currentGc.F_ConvertTag = 0;
-                                            //    }
-                                            //}
-
-
-
-                                            GoodsConvert lastGc = new GoodsConvert();
-                                            lastGc.F_ID = lastBom.F_ID;
-                                            lastGc.F_ParentID = lastBom.F_ParentID;
-
-                                            lastGc.F_CreateDate = gruop.Key;
-
-                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
-
-                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                            lastGc.F_ProceName = lastBom.F_ProceName;
-
-                                            lastGc.F_Level = lastBom.F_Level;
-                                            lastGc.F_Kind = lastBom.F_Kind;
-                                            lastGc.F_Unit = lastBom.F_Unit;
-
-                                            lastGc.F_Qty = Math.Round(group2.F_Qty, 3);
-                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3);
-
-                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
-                                            lastGc.F_Convert = 0;
-                                            lastGc.F_ConvertTag = 0;
-
-                                            converts.Add(currentGc);
-                                            converts.Add(lastGc);
-                                        }
-                                        else
-                                        {
-                                            //半成品
-                                            var currentGc = converts.Find(r => r.F_ID == currentBom.F_ID && r.F_CreateDate == gruop.Key);
-
-                                            GoodsConvert lastGc = new GoodsConvert();
-                                            lastGc.F_ID = lastBom.F_ID;
-                                            lastGc.F_ParentID = lastBom.F_ParentID;
-
-                                            lastGc.F_CreateDate = gruop.Key;
-
-                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
-
-                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                            lastGc.F_ProceName = lastBom.F_ProceName;
-
-                                            lastGc.F_Level = lastBom.F_Level;
-                                            lastGc.F_Kind = lastBom.F_Kind;
-                                            lastGc.F_Unit = lastBom.F_Unit;
-
-                                            decimal? d_qty = (currentGc.F_Qty / currentGc.F_SumQty) * group2.F_Qty;
-                                            lastGc.F_Qty = Math.Round(d_qty.Value, 3);
-                                            lastGc.F_SumQty = Math.Round(group3.F_Qty, 3);
-
-                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
-                                            lastGc.F_Convert = 0;
-                                            lastGc.F_ConvertTag = 0;
-
-
-                                            decimal? d_convert = (currentGc.F_Qty / lastGc.F_Qty) * 100;
-                                            currentGc.F_Convert = Math.Round(d_convert.Value, 2);//转化率;
-
-                                            if (currentGc.F_Convert > currentGc.F_ConvertMax)
-                                                currentGc.F_ConvertTag = 1;
-                                            else
-                                            {
-                                                if (currentGc.F_Convert < currentGc.F_ConvertMin)
-                                                    currentGc.F_ConvertTag = -1;
-                                                else
-                                                {
-                                                    currentGc.F_ConvertTag = 0;
-                                                }
-                                            }
-
-                                            converts.Add(lastGc);
-                                        }
-                                    }
-                                    #endregion
-                                }
-                            }
-                            else
-                            {
-                                //断层数据，无法计算
-                                isbreak = true;
-                            }
-
-                            if (isbreak)
+                            //最后一级不统计
+                            if (same.ChildProductCommons == null || same.ChildProductCommons.Count < 1)
                                 break;
+
+                            //当前bom
+                            var currentBom = boms.Find(r => r.F_GoodsCode == same.F_GoodsCode);
+
+                            //转换后数据
+                            var groups = listConvertDatas.Where(r => r.M_SecGoodsCode == same.F_GoodsCode).GroupBy(r => r.M_CreateDate);
+
+                            //遍历数据
+                            foreach (var group in groups)
+                            {
+                                #region 成品
+
+                                if (i == 0)
+                                {
+                                    //成品
+
+                                    //子级
+                                    if (true)
+                                    {
+                                        //子物料
+                                        foreach (var child in same.ChildProductCommons)
+                                        {
+                                            //子级bom
+                                            var lastBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
+
+                                            var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
+
+                                            GoodsConvert lastGc = new GoodsConvert();
+                                            lastGc.F_ID = lastBom.F_ID;
+                                            lastGc.F_ParentID = lastBom.F_ParentID;
+
+                                            lastGc.F_CreateDate = group.Key;
+
+                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
+                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
+
+                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
+                                            lastGc.F_ProceName = lastBom.F_ProceName;
+
+                                            lastGc.F_Level = lastBom.F_Level;
+                                            lastGc.F_Kind = lastBom.F_Kind;
+                                            lastGc.F_Unit = lastBom.F_Unit;
+
+                                            lastGc.F_Qty = childConvertDatas.Sum(r => r.M_Qty);//子级使用数量
+                                            lastGc.F_SumQty = 0;
+
+                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
+                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
+                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
+                                            lastGc.F_Convert = 0;
+                                            lastGc.F_ConvertTag = 0;
+
+                                            converts.Add(lastGc);
+                                        }
+                                    }
+
+                                    //当前级
+                                    if (true)
+                                    {
+                                        GoodsConvert currentGc = new GoodsConvert();
+                                        currentGc.F_ID = currentBom.F_ID;
+                                        currentGc.F_ParentID = currentBom.F_ParentID;
+
+                                        currentGc.F_CreateDate = group.Key;
+
+                                        currentGc.F_GoodsCode = currentBom.F_GoodsCode;
+                                        currentGc.F_GoodsName = currentBom.F_GoodsName;
+
+                                        currentGc.F_ProceCode = currentBom.F_ProceCode;
+                                        currentGc.F_ProceName = currentBom.F_ProceName;
+
+                                        currentGc.F_Level = currentBom.F_Level;
+                                        currentGc.F_Kind = currentBom.F_Kind;
+                                        currentGc.F_Unit = currentBom.F_Unit;
+
+                                        //子级个数
+                                        int sonsize = same.ChildProductCommons.Count;
+
+                                        decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
+                                        currentGc.F_Qty = M_SecQty;//实际生产
+
+
+                                        //子级bom
+                                        var lastBom = boms.Find(r => r.F_GoodsCode == same.ChildProductCommons[0].F_GoodsCode);
+                                        var lastGc = converts.Find(r => r.F_GoodsCode == lastBom.F_GoodsCode);
+
+                                        decimal? d_qty = (lastGc.F_Qty * 1000) / lastBom.F_PlanQty;
+                                        currentGc.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
+
+                                        currentGc.F_ConvertTag = currentGc.F_Qty - currentGc.F_Convert;//偏差数
+
+                                        decimal? c = (currentGc.F_ConvertTag / currentGc.F_Convert) * 100;
+                                        currentGc.F_ConvertRange = Math.Round(c.Value, 2).ToString();
+
+                                        currentGc.F_ConvertMin = currentBom.F_ConvertMin;
+                                        currentGc.F_ConvertMax = currentBom.F_ConvertMax;
+
+                                        converts.Add(currentGc);
+                                    }
+
+                                }
+
+                                #endregion
+
+                                #region 半成品
+                                else
+                                {
+                                    //半成品
+
+                                    //当前级
+                                    if (true)
+                                    {
+                                        var currentGc = converts.Find(r => r.F_GoodsCode == same.F_GoodsCode);
+                                        //子级个数
+                                        int sonsize = same.ChildProductCommons.Count;
+
+                                        decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
+                                        currentGc.F_SumQty = M_SecQty;
+                                    }
+
+
+                                    //子级
+                                    if (true)
+                                    {
+                                        //子物料
+                                        foreach (var child in same.ChildProductCommons)
+                                        {
+                                            //子级bom
+                                            var lastBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
+
+                                            var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
+
+                                            GoodsConvert lastGc = new GoodsConvert();
+                                            lastGc.F_ID = lastBom.F_ID;
+                                            lastGc.F_ParentID = lastBom.F_ParentID;
+
+                                            lastGc.F_CreateDate = group.Key;
+
+                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
+                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
+
+                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
+                                            lastGc.F_ProceName = lastBom.F_ProceName;
+
+                                            lastGc.F_Level = lastBom.F_Level;
+                                            lastGc.F_Kind = lastBom.F_Kind;
+                                            lastGc.F_Unit = lastBom.F_Unit;
+
+                                            lastGc.F_Qty = childConvertDatas.Sum(r => r.M_Qty);//子级使用数量
+                                            lastGc.F_SumQty = 0;
+
+                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
+                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
+                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
+                                            lastGc.F_Convert = 0;
+                                            lastGc.F_ConvertTag = 0;
+
+                                            converts.Add(lastGc);
+                                        }
+                                    }
+
+
+                                }
+                                #endregion
+
+                            }
                         }
                     }
                 }
@@ -2505,23 +2392,40 @@ GROUP BY F_CreateDate,F_GoodsCode";
             }
         }
 
-        private List<ProductBom> GetGoodsEx(string parentid, List<ProductBom> boms, List<ProductBom> goods)
+        private List<ProductCommon> GetGoodsEx(string id, List<ProductBom> boms, List<ProductCommon> goods)
         {
-            var row = boms.Find(r => r.F_ID == parentid);
+            var row = boms.Find(r => r.F_ID == id);
             if (row == null)
                 return goods;
             else
             {
-                if (row.F_Level == 0)
+                ProductCommon entity=new ProductCommon();
+                entity.F_Level = row.F_Level;
+                entity.F_GoodsCode = row.F_GoodsCode;
+                entity.F_GoodsName = row.F_GoodsName;
+                entity.F_Qty = 0;
+                entity.ChildProductCommons=new List<ProductCommon>();
+
+                var childs = boms.Where(r => r.F_ParentID == id);
+
+                if (childs != null && childs.Count() > 0)
                 {
-                    goods.Add(row);
-                    return goods;
+                    foreach (var child in childs)
+                    {
+                        ProductCommon childentity = new ProductCommon();
+                        childentity.F_Level = child.F_Level;
+                        childentity.F_GoodsCode = child.F_GoodsCode;
+                        childentity.F_GoodsName = child.F_GoodsName;
+                        childentity.F_Qty = 0;
+                        childentity.ChildProductCommons = new List<ProductCommon>();
+
+                        entity.ChildProductCommons.Add(childentity);
+
+                        return GetGoodsEx(child.F_ID, boms, goods);
+                    }
                 }
-                else
-                {
-                    goods.Add(row);
-                    return GetGoods(row.F_ParentID, boms, goods);
-                }
+
+                return goods;
             }
         }
 

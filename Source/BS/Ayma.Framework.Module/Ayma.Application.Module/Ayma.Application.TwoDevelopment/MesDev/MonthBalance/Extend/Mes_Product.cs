@@ -8,6 +8,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
     public class Mes_Product
     {
         /// <summary>
+        /// 日期
+        /// </summary>
+        public string M_CreateDate { get; set; }
+
+        /// <summary>
         /// 物料编码
         /// </summary>
         public string M_GoodsCode { get; set; }
