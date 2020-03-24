@@ -1926,61 +1926,61 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     }
 
 
-                    if (true)
-                    {
-                        var maxboms = products[goodscode];
-                        var maxlevel = maxboms.Max(r => r.F_Level);
+                    //if (true)
+                    //{
+                    //    var maxboms = products[goodscode];
+                    //    var maxlevel = maxboms.Max(r => r.F_Level);
 
-                        for (int i = maxlevel - 1; i >= 0; i--)
-                        {
-                            var bom = maxboms.Find(r => r.F_Level == i);
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_GoodsCode_" + bom.F_ProceCode;
-                            dc.DataType = typeof(string);
-                            dt.Columns.Add(dc);
+                    //    for (int i = maxlevel - 1; i >= 0; i--)
+                    //    {
+                    //        var bom = maxboms.Find(r => r.F_Level == i);
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_GoodsCode_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(string);
+                    //        dt.Columns.Add(dc);
 
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_GoodsName_" + bom.F_ProceCode;
-                            dc.DataType = typeof(string);
-                            dt.Columns.Add(dc);
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_GoodsName_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(string);
+                    //        dt.Columns.Add(dc);
 
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_GoodsQty_" + bom.F_ProceCode;
-                            dc.DataType = typeof(decimal);
-                            dt.Columns.Add(dc);
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_GoodsQty_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(decimal);
+                    //        dt.Columns.Add(dc);
 
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_ConvertRange_" + bom.F_ProceCode;
-                            dc.DataType = typeof(string);
-                            dt.Columns.Add(dc);
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_ConvertRange_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(string);
+                    //        dt.Columns.Add(dc);
 
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_Convert_" + bom.F_ProceCode;
-                            dc.DataType = typeof(decimal);
-                            dt.Columns.Add(dc);
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_Convert_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(decimal);
+                    //        dt.Columns.Add(dc);
 
-                            dc = new DataColumn();
-                            dc.ColumnName = "F_ConvertTag_" + bom.F_ProceCode;
-                            dc.DataType = typeof(int);
-                            dt.Columns.Add(dc);
-                        }
-                    }
+                    //        dc = new DataColumn();
+                    //        dc.ColumnName = "F_ConvertTag_" + bom.F_ProceCode;
+                    //        dc.DataType = typeof(int);
+                    //        dt.Columns.Add(dc);
+                    //    }
+                    //}
 
 
-                    var groups = converts.GroupBy(r => r.F_CreateDate);
-                    foreach (var group in groups)
-                    {
-                        var rows = group.Where(r => r.F_Level == 0);//找出成品
+                    //var groups = converts.GroupBy(r => r.F_CreateDate);
+                    //foreach (var group in groups)
+                    //{
+                    //    var rows = group.Where(r => r.F_Level == 0);//找出成品
                    
-                        foreach (var row in rows)
-                        {
-                            var maxlevel = products[row.F_GoodsCode].Max(r => r.F_Level);
-                            var children = products[row.F_GoodsCode].Find(r => r.F_Level == maxlevel);
-                            DataRow dr = dt.NewRow();
-                            SetDataRow(children.F_ID, group.ToList(), dr);
-                            dt.Rows.Add(dr);
-                        }
-                    }
+                    //    foreach (var row in rows)
+                    //    {
+                    //        var maxlevel = products[row.F_GoodsCode].Max(r => r.F_Level);
+                    //        var children = products[row.F_GoodsCode].Find(r => r.F_Level == maxlevel);
+                    //        DataRow dr = dt.NewRow();
+                    //        SetDataRow(children.F_ID, group.ToList(), dr);
+                    //        dt.Rows.Add(dr);
+                    //    }
+                    //}
                 }
 
 

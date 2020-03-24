@@ -1880,7 +1880,7 @@ FROM Mes_Convert";
 
                 entity.Create();
                 entity.M_Status = 2;
-                entity.M_MonthBalanceBy = userinfo.account;
+                entity.M_MonthBalanceBy = userinfo.account;  
                 entity.M_MonthBalanceTime=DateTime.Now;
                 msg = "";
 
