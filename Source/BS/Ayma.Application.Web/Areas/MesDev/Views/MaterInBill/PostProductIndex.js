@@ -138,13 +138,13 @@ var bootstrap = function ($, ayma) {
                     { label: "提交时间", name: "M_UploadDate", width: 160, align: "left"}
                 ],
                 mainId: 'ID',
-                isPage: true,
+                isPage: true,   
                 sidx: 'M_CreateDate',
                 sord: 'DESC'
             });
             page.search();
         },
-        search: function (param) {
+        search: function (param) {  
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
