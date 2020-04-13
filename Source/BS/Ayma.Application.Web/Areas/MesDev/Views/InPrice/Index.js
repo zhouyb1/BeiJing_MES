@@ -160,8 +160,8 @@ var bootstrap = function ($, ayma) {
                     { label: "供应商名称", name: "P_SupplyName", width: 200, align: "left", hidden: true },
                     { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left"},
                     { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
-                    { label: "开始时间", name: "P_StartDate", width: 160, align: "left" },
-                    { label: "到期时间", name: "P_EndDate", width: 160, align: "left" },
+                    { label: "开始时间", name: "P_StartDate", width: 160, align: "left", editType: 'dateinput' },
+                    { label: "到期时间", name: "P_EndDate", width: 160, align: "left", editType: 'dateinput' },
                     {
                         label: "供应商价格(含税)", name: "P_TaxPrice", width: 160, align: "left" , editType: 'input',
                         editOp: {
