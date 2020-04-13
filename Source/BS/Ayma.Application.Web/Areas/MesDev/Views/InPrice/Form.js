@@ -235,11 +235,14 @@ var bootstrap = function ($, ayma) {
                 strEntity: JSON.stringify($('body').GetFormData()), strEntity2: JSON.stringify($('body').GetFormData())
             };
             $.SaveForm(top.$.rootUrl + '/MesDev/InPrice/SaveForm?keyValue=' + keyValue, postData, function (res) {
+          
                 // 保存成功后才回调
                 if (!!callBack) {
+                    ayma.alert.success("保存成功！");
                     callBack();
                 }
             })
     };
     page.init();
+
 }

@@ -113,7 +113,7 @@ var bootstrap = function ($, ayma) {
             // 删除
             $('#am_delete').on('click', function() {
                 var dataList = [];
-                var data = $('#girdtable').jfGridGet('rowdata');
+                var data = $subgridTable.jfGridGet('rowdata');
                 if (data == null || data.length == 0) {
                     ayma.alert.warning('请勾选任意一行！');
                     return false;
@@ -127,7 +127,7 @@ var bootstrap = function ($, ayma) {
                 ayma.layerConfirm('是否确认删除该项！', function(res) {
                     if (res) {
                         ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteForm', { strEntity:  dataList }, function () {
-                            refreshGirdData();
+                            refreshSubGirdData();
                         });
                     }
                 });
@@ -209,14 +209,14 @@ var bootstrap = function ($, ayma) {
                                }
                            },
                        {
-                           label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
+                           label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true, hidden: true,
                            formatter: function (value, grid, rows) {
                                var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordDel('" + grid.ID + "')\">删除</a>";
                                return result;
                            }
                        },
                          {
-                             label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
+                             label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,hidden:true,
                              formatter: function (value, grid, rows) {
                                  var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordEdit('" + grid.ID + "')\">编辑</a>";
                                  return result;

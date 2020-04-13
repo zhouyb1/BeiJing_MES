@@ -39,7 +39,7 @@
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_InPrice">
         <div class="am-form-item-title">到期时间<font face="宋体">*</font></div>
-        <input id="P_EndDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+        <input id="P_EndDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddDays(365).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
     </div>
     @*<div class="col-xs-6 am-form-item"  data-table="Mes_InPrice" >
         <div class="am-form-item-title">起始批次<font face="宋体">*</font></div>
