@@ -1,13 +1,12 @@
-﻿using Dapper;
+﻿using Ayma.Application.TwoDevelopment.MesDev.ExtensionModel;
 using Ayma.DataBase.Repository;
 using Ayma.Util;
+using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
-using Ayma.Application.TwoDevelopment.MesDev.ExtensionModel;
-using Microsoft.Win32.SafeHandles;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
 {
@@ -103,7 +102,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
             }
         }
-     
+
         /// <summary>
         /// 获取页面显示列表数据
         /// </summary>
@@ -181,7 +180,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_Status", "%" + queryParam["P_Status"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_Status Like @P_Status ");
                 }
-                return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(),dp, pagination);
+                return this.BaseRepository().FindList<Mes_CollarHeadEntity>(strSql.ToString(), dp, pagination);
             }
             catch (Exception ex)
             {
@@ -225,12 +224,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public IEnumerable< Mes_CollarDetailEntity >GetMes_CollarDetailEntity(string keyValue)
+        public IEnumerable<Mes_CollarDetailEntity> GetMes_CollarDetailEntity(string keyValue)
         {
             try
             {
                 //return this.BaseRepository().FindList<Mes_CollarDetailEntity>(t=>t.C_CollarNo == keyValue);
-                 //获取加权平均价
+                //获取加权平均价
                 var strSql = new StringBuilder();
                 strSql.Append(@"SELECT d.C_StockCode
                                       ,d.C_StockName
@@ -257,7 +256,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
                 dp.Add("time", time, DbType.String);
-                dp.Add("@C_CollarNo",keyValue,DbType.String);
+                dp.Add("@C_CollarNo", keyValue, DbType.String);
                 var entity = this.BaseRepository().FindList<Mes_CollarDetailEntity>(strSql.ToString(), dp);
                 return entity;
             }
@@ -331,10 +330,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var strSql = new StringBuilder();
                 DateTime now = DateTime.Now;
                 //获取拼接形式的，精确到毫秒
-               string time=now.ToString("yyyyMM");
+                string time = now.ToString("yyyyMM");
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                dp.Add("time", time  , DbType.String);
+                dp.Add("time", time, DbType.String);
                 strSql.Append(@"SELECT  S.ID ,
                                         S.I_StockCode ,
                                         S.I_StockName ,
@@ -353,10 +352,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    FROM    dbo.Mes_Inventory S   left join Mes_Goods G on (S.I_GoodsCode=G.G_Code) where  S.I_Kind=1 and  S.I_Qty <> 0 ");
 
                 var queryParam = queryJson.ToJObject();
-     
-                if (!keyword .IsEmpty())
+
+                if (!keyword.IsEmpty())
                 {
-                    dp.Add("keyword", "%"+keyword+"%", DbType.String);
+                    dp.Add("keyword", "%" + keyword + "%", DbType.String);
                     strSql.Append(" AND  S.I_GoodsCode + S.I_GoodsName like @keyword ");
                 }
                 if (!queryParam["stockCode"].IsEmpty())
@@ -366,7 +365,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 return this.BaseRepository().FindList<Mes_InventoryEntity>(strSql.ToString(), dp, pagination);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 if (ex is ExceptionEx)
                 {
@@ -379,7 +378,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             }
         }
 
-        
+
         #endregion
 
         #region 提交数据
@@ -396,9 +395,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                var mes_CollarHeadEntity = GetMes_CollarHeadEntity(keyValue); 
-                db.Delete<Mes_CollarHeadEntity>(t=>t.ID == keyValue);
-                db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntity.C_CollarNo);
+                var mes_CollarHeadEntity = GetMes_CollarHeadEntity(keyValue);
+                db.Delete<Mes_CollarHeadEntity>(t => t.ID == keyValue);
+                db.Delete<Mes_CollarDetailEntity>(t => t.C_CollarNo == mes_CollarHeadEntity.C_CollarNo);
                 db.Commit();
             }
             catch (Exception ex)
@@ -420,7 +419,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="keyValue">主键</param>
         /// <returns></returns>
-        public void SaveEntity(string keyValue, Mes_CollarHeadEntity entity,List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
+        public void SaveEntity(string keyValue, Mes_CollarHeadEntity entity, List<Mes_CollarDetailEntity> mes_CollarDetailEntityList)
         {
 
             var db = this.BaseRepository().BeginTrans();
@@ -428,10 +427,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 if (!string.IsNullOrEmpty(keyValue))
                 {
-                    var mes_CollarHeadEntityTmp = GetMes_CollarHeadEntity(keyValue); 
+                    var mes_CollarHeadEntityTmp = GetMes_CollarHeadEntity(keyValue);
                     entity.Modify(keyValue);
                     db.Update(entity);
-                    db.Delete<Mes_CollarDetailEntity>(t=>t.C_CollarNo == mes_CollarHeadEntityTmp.C_CollarNo);
+                    db.Delete<Mes_CollarDetailEntity>(t => t.C_CollarNo == mes_CollarHeadEntityTmp.C_CollarNo);
                     foreach (var item in mes_CollarDetailEntityList)
                     {
                         item.Create();
@@ -1645,7 +1644,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     //加载参数
                     var dp = new DynamicParameters(new { });
-                    dp.Add("F_GoodsCode",F_GoodsCode, DbType.String);
+                    dp.Add("F_GoodsCode", F_GoodsCode, DbType.String);
                     var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom, dp);
 
                     if (rows.Count() > 0)
@@ -1665,7 +1664,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 if (success)
                 {
                     //顶级元素
-                    var row=boms.Find(r => r.F_Level==0);
+                    var row = boms.Find(r => r.F_Level == 0);
                     GetGoodsEx(row.F_ID, boms, products);
                 }
                 #endregion
@@ -1674,7 +1673,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 //读取数据，用于后期处理
                 if (success)
                 {
-                    string sql = @"SELECT     
+                    string sql = @"SELECT     555555555555
            CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
            D.O_GoodsCode M_GoodsCode,
            D.O_GoodsName M_GoodsName,
@@ -1691,7 +1690,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     var dp = new DynamicParameters(new { });
                     dp.Add("@starDate", F_StartTime, DbType.DateTime);
-                    dp.Add("@endDate",  F_EndTime, DbType.DateTime);
+                    dp.Add("@endDate", F_EndTime, DbType.DateTime);
                     var rows = this.BaseRepository().FindList<Mes_Product>(sql, dp);
                     if (rows != null && rows.Count() > 0)
                     {
@@ -1712,8 +1711,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     for (int i = 0; i < F_Level; i++)
                     {
                         //同级物料
-                        var sames= products.Where(r => r.F_Level == i);
-  
+                        var sames = products.Where(r => r.F_Level == i);
+
                         foreach (var same in sames)
                         {
                             //最后一级不统计
@@ -1899,7 +1898,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                       
+
                         dc.ColumnName = "F_CreateDate";
                         dc.DataType = typeof(string);
                         dt.Columns.Add(dc);
@@ -1971,7 +1970,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     //foreach (var group in groups)
                     //{
                     //    var rows = group.Where(r => r.F_Level == 0);//找出成品
-                   
+
                     //    foreach (var row in rows)
                     //    {
                     //        var maxlevel = products[row.F_GoodsCode].Max(r => r.F_Level);
@@ -2399,12 +2398,12 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 return goods;
             else
             {
-                ProductCommon entity=new ProductCommon();
+                ProductCommon entity = new ProductCommon();
                 entity.F_Level = row.F_Level;
                 entity.F_GoodsCode = row.F_GoodsCode;
                 entity.F_GoodsName = row.F_GoodsName;
                 entity.F_Qty = 0;
-                entity.ChildProductCommons=new List<ProductCommon>();
+                entity.ChildProductCommons = new List<ProductCommon>();
 
                 var childs = boms.Where(r => r.F_ParentID == id);
 
@@ -2469,6 +2468,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
         /// <param name="message"></param>
         /// <returns></returns>
         public bool AutoCreateOrder(string date, out string message)
+
         {
             bool success = true;
             message = "";
@@ -2919,8 +2919,8 @@ ORDER BY C.F_Level";
         /// <param name="queryJson"></param>
         /// <returns></returns>
         public DataTable GetCollarRport(string queryJson)
-        { 
-            DataTable dt=new DataTable();
+        {
+            DataTable dt = new DataTable();
 
             try
             {

@@ -1669,7 +1669,7 @@ FROM Mes_Convert";
             }
         }
 
-        private List<Mes_UseProduct> GetBomProducts(string goodcode,int level, List<Mes_Product> converts, List<Mes_UseProduct> products)
+        private List<Mes_UseProduct> GetBomProducts(string goodcode,int level, List<Mes_Product> converts, List<Mes_UseProduct> products)                                           
         {
             try
             {
