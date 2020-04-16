@@ -50,12 +50,12 @@ namespace DesktopApp
             MesInventoryBLL InventoryBLL = new MesInventoryBLL();
             this.listView1.Items.Clear();
             this.listView1.BeginUpdate();
-            var Scan_rows = InventoryBLL.GetData(" where I_StockCode = '" + Globels.strStockCode + "' and I_Qty > 0");
+            var Scan_rows = InventoryBLL.GetData(" where I_StockCode = '" + Globels.strStockCode + "' and I_Qty > 0 order by I_GoodsCode");
             for (int i = 0; i < Scan_rows.Count; i++)
             {
                 string strGoodsCode = Scan_rows[i].I_GoodsCode;
                 Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
-                var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '" + strGoodsCode + "' and C_ProNo = '"+ Globels.strProce +"'");
+                var Convert_rows = ConvertBLL.GetList_Mes_Convert(" where C_Code = '" + strGoodsCode + "' and C_ProNo = '" + Globels.strProce + "' order by C_SecName");
                 
                 for (int j = 0; j < Convert_rows.Count; j++)
                 {

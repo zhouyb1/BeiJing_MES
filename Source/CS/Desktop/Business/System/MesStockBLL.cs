@@ -44,7 +44,7 @@ namespace Business.System
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT * FROM Mes_Stock ");
+                strSql.Append("SELECT * FROM Mes_Stock");
                 strSql.Append(Condit);
                 var rows = db.ExecuteObjects<MesStockEntity>(strSql.ToString());
                 return rows;

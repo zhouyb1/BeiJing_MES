@@ -44,7 +44,6 @@
             this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -63,7 +62,6 @@
             this.选择,
             this.物料,
             this.物料名称,
-            this.批次,
             this.数量,
             this.实用数量,
             this.价格,
@@ -220,13 +218,6 @@
             this.物料名称.Name = "物料名称";
             this.物料名称.ReadOnly = true;
             // 
-            // 批次
-            // 
-            this.批次.DataPropertyName = "I_Batch";
-            this.批次.HeaderText = "批次";
-            this.批次.Name = "批次";
-            this.批次.ReadOnly = true;
-            // 
             // 数量
             // 
             this.数量.DataPropertyName = "I_Qty";
@@ -326,7 +317,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn 选择;
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料;
         private System.Windows.Forms.DataGridViewTextBoxColumn 物料名称;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 批次;
         private System.Windows.Forms.DataGridViewTextBoxColumn 数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 实用数量;
         private System.Windows.Forms.DataGridViewTextBoxColumn 价格;

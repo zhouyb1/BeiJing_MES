@@ -30,7 +30,7 @@ namespace DesktopApp
         {
             DateTime dt1 = Convert.ToDateTime(dateTimePicker1.Text);
             DateTime dt = dt1.AddDays(1);
-            string strSql = "SELECT * FROM Mes_Barcode WHERE B_WorkShopCode = '" + Globels.strWorkShop + "' AND B_Ptime > '" + dt1 + "' and B_Ptime < '" + dt + "'";
+            string strSql = "SELECT * FROM Mes_Barcode WHERE B_WorkShopCode = '" + Globels.strWorkShop + "' AND B_Ptime > '" + dt1 + "' and B_Ptime < '" + dt + "' order by B_Ptime";
             DataSet ds = new DataSet();
             Mes_ConvertBLL ConvertBLL = new Mes_ConvertBLL();
             ds = ConvertBLL.GetList(strSql);
@@ -41,9 +41,6 @@ namespace DesktopApp
             for (int i = 0; i < nLen; i++)
             {
                 
-                
-                    
-
                     ListViewItem lvi = new ListViewItem(ds.Tables[0].Rows[i]["B_Code"].ToString());
                     lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Name"].ToString());
                     lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Qty"].ToString());
@@ -57,7 +54,7 @@ namespace DesktopApp
                     }
 
 
-                    lvi.SubItems.Add(ds.Tables[0].Rows[0]["B_Remark"].ToString());
+                    lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Remark"].ToString());
                     this.listView1.Items.Add(lvi);
                 
             }

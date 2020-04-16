@@ -24,7 +24,7 @@ namespace DesktopApp
         NfcTag nfcTag;
         Bmp2Bmp2Data b2d;
         Bmp2BmpProduct bp;
-
+        string m_strBarcode = "";//标签条码
         public frmResolve()
         {
             InitializeComponent();
@@ -48,6 +48,8 @@ namespace DesktopApp
                         txtBatch.Text = Resolve(strTemp[1].ToString());
                         txtQty.Text = Resolve(strTemp[2].ToString());
 
+                        m_strBarcode = strTemp[4].ToString(); ;
+
                         MesGoodsBLL GoodsBLL = new MesGoodsBLL();
                         var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
                         int nLen = Goods_rows.Count;
@@ -56,7 +58,7 @@ namespace DesktopApp
                             txtName.Text = Goods_rows[0].G_Name;
                             txtUnit.Text = Goods_rows[0].G_Unit;
                             //txtPrice.Text = Goods_rows[0].G_Price.ToString();
-
+                            
                         }
                     
                 }
@@ -98,12 +100,14 @@ namespace DesktopApp
                 }
                 string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                 GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
-                SaveBarcode(Barcode,txtCode.Text,txtName.Text,dQty,Globels.strWorkShop);
+                SaveBarcode(Barcode, txtCode.Text, txtName.Text, dResolveQty, Globels.strWorkShop);
                 MessageBox.Show("请拿开第一张卡，放置第二张卡");
 
                  Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
                 GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
                 SaveBarcode(Barcode, txtCode.Text, txtName.Text, dNextQty, Globels.strWorkShop);
+
+                DeleteData(m_strBarcode);
             }
             catch(Exception ex)
             {
@@ -111,6 +115,18 @@ namespace DesktopApp
             }
 
             //decimal dQty = 
+        }
+
+        /// <summary>
+        /// 删除原卡信息
+        /// </summary>
+        /// <param name="strGoodsCode"></param>
+        /// <returns></returns>
+        private void DeleteData(string strBarcode)
+        {
+            Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
+            string strSql = "Update Mes_Barcode set B_Remark = '已经分写' where B_Barcode = '"+ strBarcode +"'";
+            BarcodeBLL.Update(strSql);
         }
 
         private int BZQ(string strGoodsCode)
@@ -149,7 +165,7 @@ namespace DesktopApp
             BarcodeEntity.B_Itime = dt;
             BarcodeEntity.B_Otime = dt;
             BarcodeEntity.B_Utime = dt;
-            BarcodeEntity.B_Remark = "由" + txtQty.Text + "转换而来";
+            BarcodeEntity.B_Remark = "由" + txtQty.Text + "分写而来";
 
             BarcodeEntity.B_Status = 1;
             BarcodeBLL.SaveEntity("", BarcodeEntity);

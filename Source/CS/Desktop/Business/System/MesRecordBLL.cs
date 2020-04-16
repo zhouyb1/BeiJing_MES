@@ -25,7 +25,7 @@ namespace Business.System
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT * FROM Mes_Record");
+                strSql.Append("SELECT * FROM Mes_Record order by R_Record");
                 var rows = db.ExecuteObjects<MesRecordEntity>(strSql.ToString());
                 return rows;
             }
