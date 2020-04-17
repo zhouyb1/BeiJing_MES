@@ -150,7 +150,7 @@ namespace DesktopApp
             }
 
             MesStockBLL StockBLL = new MesStockBLL();
-            var Stock_rows = StockBLL.GetData(" where S_Kind = 4");
+            var Stock_rows = StockBLL.GetData(" where S_Kind = 4 order by S_Code asc");
             for (int i = 0; i < Stock_rows.Count; i++)
             {
                 cmbStock.Items.Add(Stock_rows[i].S_Code);

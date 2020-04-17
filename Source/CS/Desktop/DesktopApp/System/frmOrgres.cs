@@ -375,6 +375,39 @@ namespace DesktopApp
             //    return;
             //}
             dataGridView2.DataSource = row2;
+            int nLen = dataGridView2.Columns.Count;
+            for(int i = 0; i < dataGridView2.Columns.Count - 1; i++)
+            {
+                string strQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
+                dataGridView2.Rows[i].Cells["数量2"].Value = Delete0(strQty);
+            }
+        }
+
+        private string Delete0(string strQty)
+        {
+            string strTemp = "";
+            string strreturn = "";
+            for (int i = 0; i < strQty.Length; i++)
+            {
+                string str = strQty.Substring(strQty.Length - i - 1, 1);
+                if(str == ".")
+                {
+                    strTemp = strQty.Substring(0, strQty.Length - i - 1);
+
+                    break;
+                }
+                else if (str == "0")
+                {
+                    ;
+                }
+                else
+                {
+                    strTemp = strQty.Substring(0, strQty.Length - i);
+                    break;
+                }
+            }
+            strreturn = strTemp;
+                return strreturn;
         }
 
         private void btn_upload_Click(object sender, EventArgs e)

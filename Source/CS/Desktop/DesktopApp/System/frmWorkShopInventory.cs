@@ -33,7 +33,7 @@ namespace DesktopApp
 
         private void Search()
         {
-            string strSql = "select * from Mes_Barcode where B_WorkShopCode = '" + txtCode.Text + "' and B_Status = '1'";
+            string strSql = "select * from Mes_Barcode where B_WorkShopCode = '" + txtCode.Text + "' and B_Status = '1' order by B_Code";
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
             var row = BarcodeBLL.GetList_Mes_Barcode(strSql);
 

@@ -55,9 +55,39 @@ namespace DesktopApp
             int nLen = dataGridView1.Rows.Count;
             for (int i = 0; i < nLen - 1; i++)
             {
+                string strQty = dataGridView1.Rows[i].Cells["数量"].Value.ToString();
+                dataGridView1.Rows[i].Cells["数量"].Value = Delete0(strQty);
+
                 dataGridView1.Rows[i].Cells["实用数量"].Value = "0";
                 dataGridView1.Rows[i].Cells["车间"].Value = Globels.strWorkShopName;
             }
+        }
+
+        private string Delete0(string strQty)
+        {
+            string strTemp = "";
+            string strreturn = "";
+            for (int i = 0; i < strQty.Length; i++)
+            {
+                string str = strQty.Substring(strQty.Length - i - 1, 1);
+                if (str == ".")
+                {
+                    strTemp = strQty.Substring(0, strQty.Length - i - 1);
+
+                    break;
+                }
+                else if (str == "0")
+                {
+                    ;
+                }
+                else
+                {
+                    strTemp = strQty.Substring(0, strQty.Length - i);
+                    break;
+                }
+            }
+            strreturn = strTemp;
+            return strreturn;
         }
 
         private void btn_Convet_Click(object sender, EventArgs e)
