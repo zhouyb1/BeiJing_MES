@@ -45,7 +45,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( h.M_OrderDate >= @startTime AND h.M_OrderDate <= @endTime ) ");
                 }
                 if (!queryParam["M_SupplyCode"].IsEmpty())
                 {
@@ -113,6 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     m.M_Tax,
                                     m.M_Qty*m.M_Price Amount,
                                     h.M_CreateDate ,
+                                    h.M_OrderDate,
                                     dbo.GetUserNameById(h.M_CreateBy) M_CreateBy
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_SupplyCode  =@supplyCode AND h.M_Status =3  ";
@@ -122,8 +123,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                 dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                sql += " AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ";
-                sql += "ORDER BY h.M_CreateDate desc";
+                sql += " AND ( h.M_OrderDate >= @startTime AND h.M_OrderDate <= @endTime ) ";
+                sql += "ORDER BY h.M_OrderDate desc";
             }
             dp.Add("@supplyCode",supplyCode,DbType.String);
             return this.BaseRepository().FindTable(sql, dp);

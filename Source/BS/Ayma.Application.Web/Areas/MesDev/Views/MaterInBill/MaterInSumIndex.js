@@ -63,8 +63,6 @@ var bootstrap = function ($, ayma) {
         search: function(param) {
             param = param || {};
             jsonquery = param;
-            param["StartTime"] = param["StartTime"] + " 00:00:00";
-            param["EndTime"] = param["EndTime"] + " 23:59:59";
             var postData = {};
             postData.queryJson = JSON.stringify(param);
             $.GetForm(top.$.rootUrl + '/MesDev/MaterInBill/GetPageTitle', postData, function (res) {

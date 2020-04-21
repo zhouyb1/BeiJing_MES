@@ -681,13 +681,13 @@ FROM
     SELECT DISTINCT
            H.O_OrgResNo F_OrderNo,       --相关单据
            D.O_SecGoodsCode F_GoodsCode, --当前物料编码
-		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+		   CONVERT(VARCHAR(7),H.O_OrderDate,120) F_CreateDate,--单据月份
            D.O_SecQty F_Qty              --当前物料数量
     FROM Mes_OrgResHead H
         INNER JOIN Mes_OrgResDetail D
             ON D.O_OrgResNo = H.O_OrgResNo
     WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND (H.O_OrderDate >= @startTime AND H.O_OrderDate < @endTime)
           AND D.O_GoodsCode = @F_GoodsCode
           AND D.O_SecGoodsCode = @F_SecGoodsCode
 ) MyData
@@ -704,13 +704,13 @@ FROM
 (
     SELECT 
 	       D.O_GoodsCode F_GoodsCode, --上一级半成品编码
-		   CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+		   CONVERT(VARCHAR(7),H.O_OrderDate,120) F_CreateDate,--单据月份
            D.O_Qty F_Qty              --上一级半成品数量
     FROM Mes_OrgResHead H
         INNER JOIN Mes_OrgResDetail D
             ON D.O_OrgResNo = H.O_OrgResNo
     WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND (H.O_OrderDate >= @startTime AND H.O_OrderDate < @endTime)
           AND D.O_GoodsCode = @F_GoodsCode
           AND D.O_SecGoodsCode = @F_SecGoodsCode
 ) MyData
@@ -729,13 +729,13 @@ FROM
 		   DISTINCT
            H.O_OrgResNo F_OrderNo,       --相关单据
 		   D.O_SecGoodsCode F_GoodsCode, --上一级半成品编码
-		    CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
+		    CONVERT(VARCHAR(7),H.O_OrderDate,120) F_CreateDate,--单据月份
            D.O_SecQty F_Qty--上一级半成品数量
     FROM Mes_OrgResHead H
         INNER JOIN Mes_OrgResDetail D
             ON D.O_OrgResNo = H.O_OrgResNo
     WHERE H.O_Status = 3
-          AND (H.O_CreateDate >= @startTime AND H.O_CreateDate < @endTime)
+          AND (H.O_OrderDate >= @startTime AND H.O_OrderDate < @endTime)
           AND D.O_SecGoodsCode = @F_GoodsCode
 ) MyData
 GROUP BY F_CreateDate,F_GoodsCode";
@@ -2935,8 +2935,8 @@ ORDER BY C.F_Level";
                 var dp = new DynamicParameters(new { });
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
-                    sbOutCmd.Append(" AND (H.C_CreateDate>=@StartTime AND H.C_CreateDate<@EndTime)");
-                    sbInCmd.Append("  AND (H.B_CreateDate>=@StartTime AND H.B_CreateDate<@EndTime)");
+                    sbOutCmd.Append(" AND (H.P_OrderDate>=@StartTime AND H.P_OrderDate<@EndTime)");
+                    sbInCmd.Append("  AND (H.B_OrderDate>=@StartTime AND H.B_OrderDate<@EndTime)");
 
                     dp.Add("StartTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("EndTime", queryParam["EndTime"].ToDate().AddDays(1), DbType.DateTime);
@@ -2974,17 +2974,17 @@ ORDER BY C.F_Level";
             ISNULL(InData.F_InQty,0) F_InQty
                 FROM
                 (
-                    SELECT CONVERT(VARCHAR(10),H.C_CreateDate,120) F_CreateDate,D.C_GoodsCode F_GoodsCode,SUM(D.C_Qty) F_OutQty FROM Mes_CollarHead H
+                    SELECT CONVERT(VARCHAR(10),H.P_OrderDate,120) F_CreateDate,D.C_GoodsCode F_GoodsCode,SUM(D.C_Qty) F_OutQty FROM Mes_CollarHead H
                 LEFT JOIN Mes_CollarDetail D ON D.C_CollarNo = H.C_CollarNo
             WHERE H.P_Status=3 {0}
-            GROUP BY CONVERT(VARCHAR(10),H.C_CreateDate,120),C_GoodsCode
+            GROUP BY CONVERT(VARCHAR(10),H.P_OrderDate,120),C_GoodsCode
                 )OutData
                 FULL JOIN
             (
-                SELECT CONVERT(VARCHAR(10),H.B_CreateDate,120) F_CreateDate,D.B_GoodsCode F_GoodsCode,SUM(D.B_Qty) F_InQty FROM Mes_BackStockHead H
+                SELECT CONVERT(VARCHAR(10),H.B_OrderDate,120) F_CreateDate,D.B_GoodsCode F_GoodsCode,SUM(D.B_Qty) F_InQty FROM Mes_BackStockHead H
                 LEFT JOIN dbo.Mes_BackStockDetail D ON  D.B_BackStockNo = H.B_BackStockNo
             WHERE H.B_Status=3 {1}
-            GROUP BY CONVERT(VARCHAR(10),H.B_CreateDate,120),B_GoodsCode
+            GROUP BY CONVERT(VARCHAR(10),H.B_OrderDate,120),B_GoodsCode
                 )InData ON InData.F_CreateDate = OutData.F_CreateDate AND InData.F_GoodsCode = OutData.F_GoodsCode
                 )MyData LEFT JOIN Mes_Goods G ON G.G_Code=MyData.F_GoodsCode
             ORDER BY MyData.F_GoodsCode,MyData.F_CreateDate";
@@ -3052,7 +3052,7 @@ FROM
            ISNULL(InData.F_InQty, 0) F_InQty
     FROM
     (
-        SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+        SELECT CONVERT(VARCHAR(10), H.O_OrderDate, 120) F_CreateDate,
                D.O_GoodsCode F_GoodsCode,
                SUM(D.O_Qty) F_OutQty
         FROM Mes_OtherOutHead H
@@ -3060,12 +3060,12 @@ FROM
                 ON D.O_OtherOutNo = H.O_OtherOutNo
         WHERE H.O_Status = 3
         {0}
-        GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+        GROUP BY CONVERT(VARCHAR(10), H.O_OrderDate, 120),
                  O_GoodsCode
     ) OutData
         FULL JOIN
         (
-            SELECT CONVERT(VARCHAR(10), H.O_CreateDate, 120) F_CreateDate,
+            SELECT CONVERT(VARCHAR(10), H.O_OrderDate, 120) F_CreateDate,
                    D.O_GoodsCode F_GoodsCode,
                    SUM(D.O_Qty) F_InQty
             FROM Mes_OtherInHead H
@@ -3073,7 +3073,7 @@ FROM
                     ON D.O_OtherInNo = H.O_OtherInNo
             WHERE H.O_Status = 3
             {0}
-            GROUP BY CONVERT(VARCHAR(10), H.O_CreateDate, 120),
+            GROUP BY CONVERT(VARCHAR(10), H.O_OrderDate, 120),
                      O_GoodsCode
         ) InData
             ON InData.F_CreateDate = OutData.F_CreateDate
@@ -3096,7 +3096,7 @@ ORDER BY MyData.F_GoodsCode,
                 var dp = new DynamicParameters(new { });
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
-                    sbCmd.Append(" AND (H.O_CreateDate>=@StartTime AND H.O_CreateDate<@EndTime)");
+                    sbCmd.Append(" AND (H.O_OrderDate>=@StartTime AND H.O_OrderDate<@EndTime)");
 
                     dp.Add("StartTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("EndTime", queryParam["EndTime"].ToDate().AddDays(1), DbType.DateTime);

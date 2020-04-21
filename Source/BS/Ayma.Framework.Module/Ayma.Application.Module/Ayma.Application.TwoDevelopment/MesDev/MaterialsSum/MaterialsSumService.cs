@@ -74,7 +74,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
                 }
                 strSql.Append(@"
-                           SELECT RH.M_CreateDate F_CreateDate,
+                           SELECT RH.M_OrderDate F_CreateDate,
                            RH.M_MaterInNo F_OrderNo,
                            RD.M_GoodsCode F_GoodsCode,
                            RD.M_GoodsName F_GoodsName,
@@ -99,7 +99,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               AND RH.M_Status = 3
                               AND RD.M_Kind = 1
                               AND RD.M_StockCode=@S_Code
-		                      AND (RH.M_CreateDate>=@StartTime and RH.M_CreateDate<=@EndTime)
+		                      AND (RH.M_OrderDate>=@StartTime and RH.M_OrderDate<=@EndTime)
                      ");
                 }
                 if (queryParam["S_Code"].IsEmpty() && queryParam["G_Code"].IsEmpty() && !queryParam["g_stockcode"].IsEmpty() && !queryParam["g_codes"].IsEmpty())
@@ -109,11 +109,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                               AND RH.M_Status = 3
                               AND RD.M_Kind = 1
                               AND RD.M_StockCode=@g_stockcode
-		                      AND (RH.M_CreateDate>=@start and RH.M_CreateDate<=@end)
+		                      AND (RH.M_OrderDate>=@start and RH.M_OrderDate<=@end)
                      ");
                 }
                 strSql.Append(@"
-                         GROUP BY RH.M_CreateDate,
+                         GROUP BY RH.M_OrderDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
@@ -126,7 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
               ");
 
                 strSql2.Append(@"
-                      SELECT CH.C_CreateDate F_CreateDate,
+                      SELECT CH.P_OrderDate F_CreateDate,
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
@@ -149,7 +149,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     WHERE CD.C_GoodsCode =@G_Code
                             AND CH.P_Status = 3
 			                AND CD.C_StockCode=@S_Code
-		                    AND (CH.C_CreateDate>=@StartTime and CH.C_CreateDate<=@EndTime)
+		                    AND (CH.P_OrderDate>=@StartTime and CH.P_OrderDate<=@EndTime)
                  
                             ");
                 }
@@ -160,12 +160,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             WHERE CD.C_GoodsCode =@g_codes
                             AND CH.P_Status = 3
 			                AND CD.C_StockCode=@g_stockcode
-		                    AND (CH.C_CreateDate>=@start and CH.C_CreateDate<=@end)
+		                    AND (CH.P_OrderDate>=@start and CH.P_OrderDate<=@end)
                      ");
                 }
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
-                             CH.C_CreateDate,
+                             CH.P_OrderDate,
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,
@@ -690,36 +690,36 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                     ,@StartTime as 'startTime'
                                     ,@EndTime as 'endTime'
                                     ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code ) as outPrice
-                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code )*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as outamount
-			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))as withdrawingnumber
-									,(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as materialssales 
-									,(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3)) as scrapist  
-									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))  as otherwarehouse  
-									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3)) as otheroutbound  								
-									,(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)) as supplierback                                    
+                                    ,(select ISNULL(O_SalePrice,0) from Mes_OutPrice where O_GoodsCode=s.G_Code )*(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3)) as outamount
+			                	   	,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3))as withdrawingnumber
+									,(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3)) as materialssales 
+									,(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3)) as scrapist  
+									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))  as otherwarehouse  
+									,(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3)) as otheroutbound  								
+									,(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)) as supplierback                                    
 								    ,(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time) as Initialinventory													
-									,(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code) as Inventoryquantity								
+									,(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_OrderDate>=@StartTime and M_OrderDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code) as Inventoryquantity								
 									,dbo.GetPrice(s.G_Code,CONVERT(VARCHAR(6),GetDate(),112)) as Price								  
 								    ,(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail b where  b.B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead h 
-									where (h.B_CreateDate>=@StartTime and h.B_CreateDate<=@EndTime and B_Kind=1 and B_Status=3 )) AND B_GoodsCode=s.G_Code ) as Back_Qty							
+									where (h.B_OrderDate>=@StartTime and h.B_OrderDate<=@EndTime and B_Kind=1 and B_Status=3 )) AND B_GoodsCode=s.G_Code ) as Back_Qty							
 									,dbo.GetPrice(s.G_Code,CONVERT(VARCHAR(6),GetDate(),112))*(select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time) as initialamount
-						      	    ,(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3)) as delivery
-									,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
-									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>=@StartTime and C_CreateDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3))
-									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))
-									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3))
-									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3))
-									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
-									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
-									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)))	 as Endinginventory																	   								   
-								    ,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_CreateDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
-									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (C_CreateDate>=@StartTime and C_CreateDate<=@EndTime)and C_GoodsCode=s.G_Code  and P_Status=3))
-									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3))
-									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3))
-									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3))
-									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
-									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3))
-									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)))*dbo.GetPrice(s.G_Code,CONVERT(VARCHAR(6),GetDate(),112)) as finalamount																										
+						      	    ,(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (P_OrderDate>=@StartTime and P_OrderDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3)) as delivery
+									,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_OrderDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
+									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (P_OrderDate>=@StartTime and P_OrderDate<=@EndTime) and C_GoodsCode=s.G_Code  and P_Status=3))
+									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3))
+									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
+									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
+									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (OOrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
+									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
+									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)))	 as Endinginventory																	   								   
+								    ,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_OrderDate>=@StartTime and M_CreateDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
+									(select ISNULL(SUM(C_Qty),0) from Mes_CollarDetail where C_CollarNo in(select C_CollarNo from Mes_CollarHead  where (P_OrderDate>=@StartTime and P_OrderDate<=@EndTime)and C_GoodsCode=s.G_Code  and P_Status=3))
+									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3))
+									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
+									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
+									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
+									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
+									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)))*dbo.GetPrice(s.G_Code,CONVERT(VARCHAR(6),GetDate(),112)) as finalamount																										
 									from Mes_Goods s where  s.G_Kind=1");
 
                 if (!queryParam["M_GoodsCode"].IsEmpty())

@@ -595,7 +595,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    sqlParm.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+                    sqlParm.Append(" AND ( h.M_OrderDate >= @startTime AND h.M_OrderDate <= @endTime ) ");
                 }
                 var rowHeads = this.BaseRepository().FindList<Mes_GoodKindEntity>(sqlHead).ToList();
 
@@ -803,7 +803,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             {
                 dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                 dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                sqlParam.Append(" AND ( h.M_CreateDate >= @startTime AND h.M_CreateDate <= @endTime ) ");
+                sqlParam.Append(" AND ( h.M_OrderDate >= @startTime AND h.M_OrderDate <= @endTime ) ");
             }
             var dt = this.BaseRepository().FindTable(string.Format(sql, sqlParam.ToString()),dp);
             return dt;
