@@ -273,6 +273,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,m.M_Remark  
 									,m.M_StockName    
 									,t.M_CreateDate
+                                    ,t.M_OrderDate,
                                     ,dbo.GetUserNameById(t.M_CreateBy) as M_CreateBy
                                     ,(m.M_Qty*m.M_Price) as amount
 									 from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
@@ -317,6 +318,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.C_StockToCode
 						   ,t.C_StockToName
 						   ,t.C_CreateDate
+                           ,t.P_OrderDate
                            ,m.C_StockCode
 						   ,m.C_StockName
 						   ,m.C_CollarNo
@@ -374,6 +376,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.B_StockToCode,
                             t.B_StockToName,
                             t.B_CreateDate,
+                            t.B_OrderDate,
                             m.B_BackStockNo,
                             m.B_GoodsCode,
                             m.B_GoodsName,
@@ -426,6 +429,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.S_CostomCode,
                             t.S_CostomName,
                             t.S_CreateDate,
+                            t.S_OrderDate,
                             dbo.GetUserNameById(t.S_CreateBy) as S_CreateBy,
                             m.S_SaleNo,
                             m.S_GoodsCode,
@@ -477,6 +481,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.S_StockCode,
                             t.S_StockName,
                             t.S_CreateDate,
+                            t.S_OrderDate,
                             dbo.GetUserNameById(t.S_CreateBy) as S_CreateBy,
                             m.S_ScrapNo,
                             m.S_GoodsCode,
@@ -526,6 +531,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.O_StockCode,
                             t.O_StockName,
                             t.O_CreateDate,
+                            t.O_OrderDate,
                             dbo.GetUserNameById(t.O_CreateBy) as O_CreateBy,
                             m.O_OtherInNo,
                             m.O_GoodsCode,
@@ -577,6 +583,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.O_DepartCode,
                             t.O_DepartName,
                             t.O_CreateDate,
+                            t.O_OrderDate,
                             dbo.GetUserNameById(t.O_CreateBy) as O_CreateBy,
                             m.O_OtherOutNo,
                             m.O_GoodsCode,
@@ -626,6 +633,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             t.B_StockCode,
                             t.B_StockName,
                             t.B_CreateDate,
+                            t.B_OrderDate,
                             m.B_BackSupplyNo,
                             m.B_GoodsCode,
                             m.B_GoodsName,
