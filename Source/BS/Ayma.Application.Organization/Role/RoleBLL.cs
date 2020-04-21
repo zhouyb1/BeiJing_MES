@@ -64,7 +64,7 @@ namespace Ayma.Application.Organization
                 List<RoleEntity> list = GetList();
                 if (!string.IsNullOrEmpty(keyword))
                 {
-                    list = list.FindAll(t => t.F_FullName.Contains(keyword) || t.F_EnCode.Contains(keyword));
+                    list = list.FindAll(t => t.F_FullName.Contains(keyword) || t.F_EnCode.Contains(keyword)|| t.F_RoleId==keyword);
                 }
                 return list;
             }
