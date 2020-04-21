@@ -215,7 +215,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.S_CreateDate,
                                 dbo.GetUserNameById(t.S_UpdateBy) S_UpdateBy,
                                 t.S_UpdateDate,
-                                t.MonthBalance
+                                t.MonthBalance,     
+                                t.S_OrderDate
                                 ");
                 strSql.Append("  FROM Mes_SaleHead t left join Mes_SaleDetail s on(t.S_SaleNo=s.S_SaleNo)");
                 strSql.Append("  WHERE 1=1 AND S_Status = 3 ");
@@ -226,7 +227,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.S_CreateDate >= @startTime AND t.S_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.S_OrderDate >= @startTime AND t.S_OrderDate <= @endTime ) ");
                 }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {

@@ -101,6 +101,7 @@ var bootstrap = function ($, ayma) {
                     { label: "客户名称", name: "S_CostomName", width: 130, align: "left" },
                     { label: "客户编码", name: "S_CostomCode", width: 90, align: "left" },
                     { label: "备注", name: "S_Remark", width: 130, align: "left" },
+                    { label: "单据时间", name: "S_OrderDate", width: 130, align: "left" },
                     { label: "添加人", name: "S_CreateBy", width: 100, align: "left" },
                     { label: "添加时间", name: "S_CreateDate", width: 130, align: "left" },
                     { label: "修改人", name: "S_UpdateBy", width: 100, align: "left" },

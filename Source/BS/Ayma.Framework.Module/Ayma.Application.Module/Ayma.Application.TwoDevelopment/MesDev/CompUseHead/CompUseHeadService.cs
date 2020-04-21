@@ -133,7 +133,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.C_CreateDate >= @startTime AND t.C_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.C_OrderDate >= @startTime AND t.C_OrderDate <= @endTime ) ");
                 }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {

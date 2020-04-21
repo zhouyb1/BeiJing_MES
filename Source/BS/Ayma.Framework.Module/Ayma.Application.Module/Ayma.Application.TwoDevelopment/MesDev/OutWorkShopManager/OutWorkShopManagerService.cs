@@ -106,7 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         }
 
         /// <summary>
-        /// 领料单查询
+        /// 日耗库出库车间单查询
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Mes_OutWorkShopHeadEntity> GetPostIndex(Pagination pagination ,string queryJson)
@@ -140,7 +140,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.O_OrderDate >= @startTime AND t.O_OrderDate <= @endTime ) ");
                 }
 
                 if (!queryParam["M_GoodsName"].IsEmpty())

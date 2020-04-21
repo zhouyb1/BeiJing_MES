@@ -338,7 +338,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
                 }
                 if (!string.IsNullOrWhiteSpace(M_MaterInNo) && queryParam["M_MaterInNo"].IsEmpty() && queryParam["S_Name"].IsEmpty())
                 {

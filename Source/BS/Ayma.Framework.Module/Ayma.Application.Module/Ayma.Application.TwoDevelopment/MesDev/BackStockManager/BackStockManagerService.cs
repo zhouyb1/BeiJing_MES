@@ -222,6 +222,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_StockToCode,
                 t.B_StockToName,
                 t.B_Remark,
+                t.B_OrderDate,
                 dbo.GetUserNameById(t.B_CreateBy) B_CreateBy,
                 t.B_Kind,
                 t.B_CreateDate
@@ -245,7 +246,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.B_CreateDate >= @startTime AND t.B_CreateDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.B_OrderDate >= @startTime AND t.B_OrderDate <= @endTime ) ");
                 }
                 if (!queryParam["B_StockName"].IsEmpty())
                 {

@@ -16,10 +16,10 @@ var bootstrap = function ($, ayma) {
             // 时间搜索框
             $('#datesearch').amdate({
                 dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } }
+                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd') }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
+                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
+                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
+                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd') } }
                 ],
                 // 月
                 mShow: false,
@@ -177,7 +177,7 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编号", name: "C_StockCode", width: 100, align: "left" },
                     { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
                     //{ label: "订单号", name: "C_OrderNo", width: 160, align: "left"},
-                    //{ label: "订单时间", name: "C_OrderDate", width: 160, align: "left"},               
+                    { label: "单据时间", name: "C_OrderDate", width: 160, align: "left"},               
                     { label: "添加人", name: "C_CreateBy", width: 100, align: "left"},
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],

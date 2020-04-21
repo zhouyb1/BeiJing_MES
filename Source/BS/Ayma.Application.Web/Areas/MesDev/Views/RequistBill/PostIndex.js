@@ -164,6 +164,7 @@ var bootstrap = function ($, ayma) {
                     { label: "调拨仓库编码", name: "R_StockToCode", width: 100, align: "left"},
                     { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "left"},
                     { label: "备注", name: "R_Remark", width: 160, align: "left" },
+                    { label: "单据时间", name: "P_OrderDate", width: 160, align: "left" },
                     { label: "添加人", name: "R_CreateBy", width: 100, align: "left"},
                     { label: "添加时间", name: "R_CreateDate", width: 160, align: "left"},
                     { label: "修改人", name: "R_UpdateBy", width: 100, align: "left"},

@@ -155,6 +155,7 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库名称", name: "O_StockName", width: 160, align: "left" },
                     { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
                     { label: "备注", name: "O_Remark", width: 160, align: "left" },
+                    { label: "单据时间", name: "O_OrderDate", width: 160, align: "left" },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "left" },
                     { label: "创建时间", name: "O_CreateDate", width: 160, align: "left" },
                 ],
