@@ -27,14 +27,15 @@
         <div class="am-form-item-title">部门编码</div>
         <input id="O_DepartCode" type="text" class="form-control"  disabled="disabled" style="background: #f1efef" />
     </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_BackSupplyHead">
+        <div class="am-form-item-title">单据日期</div>
+        <input id="O_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" disabled="@ViewBag.disabled" />
+    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_OtherOutHead">
         <div class="am-form-item-title">备注</div>
         <input id="O_Remark" type="text" class="form-control" />
     </div>
-    <div class="col-xs-6 am-form-item" style="display:none" data-table="Mes_OtherOutHead">
-        <div class="am-form-item-title">月结</div>
-        <input id="MonthBalance" type="text" class="form-control"/>
-    </div>
+    
     <div class="col-xs-12 am-form-item" data-table="Mes_ProOutHead">
         <div class="am-form-item-title"></div>
         <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;添加物料</a>

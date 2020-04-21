@@ -79,15 +79,17 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('I_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MaterForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm',
+                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm&status='+statu,
                         width: 700,
                         height: 500,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: statu == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -96,14 +98,16 @@ var bootstrap = function ($, ayma) {
             //双击编辑
             $('#girdtable').on('dblclick', function() {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var statu = $('#girdtable').jfGridValue('I_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MaterForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm',
+                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm&status='+statu,
                         width: 700,
                         height: 500,
                         maxmin: true,
+                        btn: statu == 2 ? null : "",
                         callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

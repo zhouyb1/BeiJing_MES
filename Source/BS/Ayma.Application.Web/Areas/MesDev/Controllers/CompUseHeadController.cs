@@ -1,4 +1,5 @@
-﻿using Ayma.Util;
+﻿using Ayma.Application.Organization;
+using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
@@ -66,6 +67,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
+
         /// <summary>
         /// 表单页
         /// </summary>
@@ -73,12 +75,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-            if (Request["keyValue"] == null)
+            //获取登录用户的角色
+            var user = LoginUserInfo.Get();
+            var list = new RoleBLL().GetList(user.roleIds);
+            if (list.Count > 0)
             {
-                ViewBag.C_No = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.CompUser).ToString());//自动获取主编码
+                if (list[0].F_FullName != "系统管理员")
+                {
+                    ViewBag.disabled = "disabled";
+                }
             }
-             return View();
+            return View();
         }
+
         #endregion
 
         #region 获取数据

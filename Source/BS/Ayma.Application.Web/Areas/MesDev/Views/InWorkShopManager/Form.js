@@ -8,6 +8,7 @@ var stockCode;
 var parentFormId = request('formId');
 var acceptClick;
 var keyValue = request('keyValue');
+var status = request('status');
 var tmp = new Map();
 var bootstrap = function ($, ayma) {
     "use strict";
@@ -19,6 +20,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
+            if (status==2) {
+                $('#am_add').attr('disabled', true);
+            }
+
             //绑定线边仓仓库
             var dfop = {
                 type: 'default',

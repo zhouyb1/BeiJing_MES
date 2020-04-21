@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Ayma.Application.Base.SystemModule;
+using Ayma.Application.Organization;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Application.TwoDevelopment.Tools;
 using Ayma.Util;
@@ -37,11 +38,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-            if (Request["keyValue"]==null)
+            //获取登录用户的角色
+            var user = LoginUserInfo.Get();
+            var list = new RoleBLL().GetList(user.roleIds);
+            if (list.Count > 0)
             {
-                ViewBag.OrderNo = new CodeRuleBLL().GetBillCode(((int)ErpEnums.OrderNoRuleEnum.Scrap).ToString());//自动获取主编码
+                if (list[0].F_FullName != "系统管理员")
+                {
+                    ViewBag.disabled = "disabled";
+                }
             }
-             return View();
+            return View();
         }
 
         /// <summary>

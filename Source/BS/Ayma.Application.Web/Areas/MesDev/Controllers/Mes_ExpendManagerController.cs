@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Ayma.Application.Organization;
 using Ayma.Application.TwoDevelopment;
 using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
@@ -28,6 +29,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
              return View();
         }
+
         /// <summary>
         /// 表单页
         /// </summary>
@@ -35,8 +37,19 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         [HttpGet]
         public ActionResult Form()
         {
-             return View();
+            //获取登录用户的角色
+            var user = LoginUserInfo.Get();
+            var list = new RoleBLL().GetList(user.roleIds);
+            if (list.Count > 0)
+            {
+                if (list[0].F_FullName != "系统管理员")
+                {
+                    ViewBag.disabled = "disabled";
+                }
+            }
+            return View();
         }
+
         #endregion
 
         /// <summary>

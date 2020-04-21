@@ -24,7 +24,7 @@ var bootstrap = function($, ayma) {
                 $('#B_StockName').attr('readonly', true);
                 $('#B_StockToName').attr('readonly', true);
                 $('#B_Remark').attr('readonly', true);
-                $('#B_OrderDate').attr('disabled', true);
+                $('#am_add').attr('disabled', true);
             }
             //绑定线边仓库
             $('#B_StockName').select({

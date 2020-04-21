@@ -85,11 +85,12 @@ var bootstrap = function ($,ayma) {
                     ayma.layerForm({
                         id: 'compUserForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue+'&status='+statu,
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/Form?formId=compUserForm&keyValue=' + keyValue + '&status=' + statu,
                         width: 900,
                         height: 700,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: statu == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -107,6 +108,7 @@ var bootstrap = function ($,ayma) {
                         width: 900,
                         height: 700,
                         maxmin: true,
+                        btn: statu == 2 ? null : "",
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

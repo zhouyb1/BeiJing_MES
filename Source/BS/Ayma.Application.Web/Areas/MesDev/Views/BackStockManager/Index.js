@@ -109,11 +109,12 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'BackIndexform',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform'+'&status='+statu,
+                        url: top.$.rootUrl + '/MesDev/BackStockManager/Form?keyValue=' + keyValue + '&formId=BackIndexform' + '&status=' + statu,
                         width: 800,
                         height: 600,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: statu == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -131,6 +132,7 @@ var bootstrap = function ($, ayma) {
                         width: 800,
                         height: 600,
                         maxmin: true,
+                        btn: statu == 2 ? null : "",
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

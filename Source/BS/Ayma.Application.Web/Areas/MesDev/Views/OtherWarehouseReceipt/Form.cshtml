@@ -4,29 +4,24 @@
 }
 <div class="am-form-wrap" id="form">
     <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
-    <div class="am-form-item-title">单据号码</div>
+        <div class="am-form-item-title">单据号码</div>
         <input id="O_OtherInNo" type="text" placeholder="系统自动生成" disabled="disabled" class="form-control" />
-</div>
-    <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead" style="display:none">
-        <div class="am-form-item-title">单据状态<font face="宋体">*</font></div>
-        <div id="O_Status" type="text" class="form-control" disabled="disabled">
-        </div>
     </div>
-<div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
-    <div class="am-form-item-title">入库仓<font face="宋体">*</font></div>
-    <div id="O_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"> </div>
-</div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
+        <div class="am-form-item-title">入库仓<font face="宋体">*</font></div>
+        <div id="O_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"> </div>
+    </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead">
         <div class="am-form-item-title">仓库编码</div>
         <input id="O_StockCode" type="text" class="form-control" disabled="disabled" style="background: #f1efef" />
     </div>
+    <div class="col-xs-6 am-form-item" data-table="Mes_BackSupplyHead">
+        <div class="am-form-item-title">单据日期</div>
+        <input id="O_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" disabled="@ViewBag.disabled" />
+    </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_OtherInHead">
-    <div class="am-form-item-title">备注</div>
-    <input id="O_Remark" type="text" class="form-control" />
-</div>
-    <div class="col-xs-6 am-form-item" data-table="Mes_OtherInHead" style="display:none">
-        <div class="am-form-item-title">月结</div>
-        <input id="MonthBalance" type="text" class="form-control" />
+        <div class="am-form-item-title">备注</div>
+        <input id="O_Remark" type="text" class="form-control" />
     </div>
     <div class="col-xs-12 am-form-item" data-table="Mes_OtherInHead">
     <div class="am-form-item-title"></div>

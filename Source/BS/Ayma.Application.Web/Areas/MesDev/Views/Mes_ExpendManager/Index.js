@@ -63,7 +63,8 @@ var bootstrap = function ($, ayma) {
                         width: 800,
                         height: 600,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: status == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -81,6 +82,7 @@ var bootstrap = function ($, ayma) {
                         width: 800,
                         height: 600,
                         maxmin: true,
+                        btn: status == 2 ? null : "",
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

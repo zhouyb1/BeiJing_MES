@@ -22,9 +22,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status==2) {
                 $('#C_StockName').attr('readonly', true);
                 $('#C_OrderNo').attr('readonly', true);
-                $('#C_OrderDate').attr('disabled', true);
                 $('#C_WorkShop').attr('readonly', true);
-
+                $('#am_add').attr('disabled', true);
             }
             $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             $('#C_WorkShop').select({

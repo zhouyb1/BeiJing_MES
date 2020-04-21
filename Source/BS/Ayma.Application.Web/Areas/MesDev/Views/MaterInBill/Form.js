@@ -25,8 +25,7 @@ var bootstrap = function ($, ayma) {
             if (status==2) {
                 $('#M_StockName').css('background', '#f1efef');
                 $('#M_StockName').attr('readonly', true);
-                $('#M_OrderDate').attr('disabled', 'disabled');
-                $('#M_OrderDate').attr('disabled', true);
+                $('#am_add').attr('disabled', true);
             }
             //绑定仓库
             var dfop = {

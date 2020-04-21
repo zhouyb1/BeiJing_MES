@@ -79,11 +79,12 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'OtherHead',
                         title: '编辑其它出库单',
-                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?status=' + status + '&keyValue=' + keyValue + '&formId=OtherHead'+'&state=1',
+                        url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?status=' + status + '&keyValue=' + keyValue + '&formId=OtherHead' + '&state=1',
                         width: 900,
                         height: 650,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: status == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -102,7 +103,8 @@ var bootstrap = function ($, ayma) {
                         width: 900,
                         height: 650,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: status == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });

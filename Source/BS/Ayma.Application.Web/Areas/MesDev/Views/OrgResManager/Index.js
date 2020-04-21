@@ -94,15 +94,17 @@ var bootstrap = function ($, ayma) {
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MasterIndexForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
+                        url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm&status=" + status,
                         width: 1000,
                         height: 700,
                         maxmin: true,
-                        callBack: function (id) {
+                        btn: status == 2 ? null : "",
+                        callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
                     });
@@ -115,10 +117,11 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'MasterIndexForm',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm",
+                        url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm&status=" + status,
                         width: 900,
                         height: 600,
                         maxmin: true,
+                        btn: status == 2 ? null : "",
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

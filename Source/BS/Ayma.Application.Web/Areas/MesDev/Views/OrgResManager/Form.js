@@ -8,6 +8,7 @@ var stockCode;
 var parentFormId = request('formId');
 var acceptClick;
 var keyValue = request('keyValue');
+var status = request('status');
 var tmp = new Map();
 var tmp_d = new Map();
 var stock;
@@ -22,6 +23,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             $('.fa-ellipsis-h').data("tip", "alert");
         },
         bind: function () {
+            if (status==2) {
+                $('#am_add').attr('disabled', true);
+            }
             $("#O_StockName").select({
                 type: 'default',
                 value: 'S_Name',
@@ -36,9 +40,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
             }).on('change', function() {
                 var name = $(this).selectGet();
-
-                //$('.fa-ellipsis-h').data("code", name);
-                //$('.fa-ellipsis-h').data("tip", "alert");
                 $('#Mes_OrgResDetail_h').jfGridSet('refreshdata', { rowdatas: [] });
                 $('#Mes_OrgResDetail_d').jfGridSet('refreshdata', { rowdatas: [] });
                 //绑定仓库编码

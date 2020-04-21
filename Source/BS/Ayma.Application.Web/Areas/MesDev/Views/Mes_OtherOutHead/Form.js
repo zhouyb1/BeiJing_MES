@@ -23,6 +23,7 @@ var bootstrap = function ($, ayma) {
             if (status == 2) {
                 $('#O_StockName').attr('readonly', true);
                 $("#O_DepartName").attr('readonly', true);
+                $('#am_add').attr('disabled', true);
             }
             //绑定仓库
             var dfop = {
