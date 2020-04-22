@@ -219,8 +219,13 @@ var bootstrap = function ($, ayma) {
                     { label: "原仓库名称", name: "R_StockName", width: 160, align: "center" },
                     { label: "调拨仓库编码", name: "R_StockToCode", width: 90, align: "center" },
                     { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "center" },
-                    { label: "单据时间", name: "R_OrderDate", width: 160, align: "center" },
-                    { label: "创建时间", name: "R_CreateDate", width: 160, align: "center" },
+                    {
+                        label: "单据时间", name: "R_OrderDate", width: 160, align: "center",sort:true,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
+                    { label: "创建时间", name: "R_CreateDate", width: 160, align: "center",sort:true },
                     { label: "添加人", name: "R_CreateBy", width: 100, align: "center" },
                     { label: "修改时间", name: "R_UpdateDate", width: 160, align: "center" },
                     { label: "修改人", name: "R_UpdateBy", width: 100, align: "center" },

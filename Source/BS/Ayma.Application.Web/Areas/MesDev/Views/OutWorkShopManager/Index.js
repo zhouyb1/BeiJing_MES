@@ -249,7 +249,12 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "O_StockCode", width: 100, align: "left"},
                     { label: "仓库名称", name: "O_StockName", width: 100, align: "left" },
                     { label: "调拨车间", name: "O_WorkShopName", width: 160, align: "left" },
-                    { label: "单据时间", name: "O_OrderDate", width: 160, align: "left",sort:true },
+                    {
+                        label: "单据时间", name: "O_OrderDate", width: 160, align: "left",sort:true,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "创建时间", name: "O_CreateDate", width: 160, align: "left",sort:true },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "left" },
                     { label: "备注", name: "O_Remark", width: 160, align: "left" }

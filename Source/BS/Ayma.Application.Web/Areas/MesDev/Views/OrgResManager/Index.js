@@ -248,7 +248,12 @@ var bootstrap = function ($, ayma) {
                     { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
                     { label: "日耗库", name: "O_StockName", width: 160, align: "center" },
                     { label: "日耗库编码", name: "O_StockCode", width: 90, align: "center" },
-                    { label: "单据时间", name: "O_OrderDate", width: 130, align: "center", sort: true },
+                    {
+                        label: "单据时间", name: "O_OrderDate", width: 130, align: "center", sort: true ,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "创建时间", name: "O_CreateDate", width: 130, align: "center", sort: true },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
                     { label: "备注", name: "O_Remark", width: 150, align: "center" }

@@ -195,9 +195,13 @@ var bootstrap = function ($,ayma) {
                     { label: "车间名称", name: "C_WorkShopName", width: 160, align: "left" },
                     { label: "仓库编号", name: "C_StockCode", width: 100, align: "left" },
                     { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
-                     { label: "添加时间", name: "C_CreateDate", width: 160, align: "left" },
-                    //{ label: "订单号", name: "C_OrderNo", width: 160, align: "left"},
-                    //{ label: "订单时间", name: "C_OrderDate", width: 160, align: "left"},                    
+                    { label: "创建时间", name: "C_CreateDate", width: 160, align: "left" },
+                    {
+                        label: "单据时间", name: "C_OrderDate", width: 160, align: "left",sort:true,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },                    
                     { label: "添加人", name: "C_CreateBy", width: 100, align: "left"},
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],

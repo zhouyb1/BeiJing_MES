@@ -194,7 +194,12 @@ var bootstrap = function ($, ayma) {
                     { label: "消耗单号", name: "E_ExpendNo", width: 130, align: "left"},
                     { label: "仓库名称", name: "E_StockName", width: 130, align: "left"},
                     { label: "仓库编码", name: "E_StockCode", width: 90, align: "left"},
-                    { label: "单据时间", name: "E_OrderDate", width: 130, align: "left",sort:true },
+                    {
+                        label: "单据时间", name: "E_OrderDate", width: 130, align: "left",sort:true,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "创建时间", name: "E_CreateDate", width: 130, align: "left",sort:true },
                     { label: "添加人", name: "E_CreateBy", width: 130, align: "left"},
                     { label: "修改人", name: "E_UpdateBy", width: 130, align: "left"},
