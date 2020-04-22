@@ -38,6 +38,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.MonthBalance,
                 t.E_Remark,
                 t.E_CreateDate,
+                t.E_OrderDate,
                 dbo.GetUserNameById(t.E_CreateBy) E_CreateBy,
                 dbo.GetUserNameById(t.E_UpdateBy) E_UpdateBy,
                 t.E_UpdateDate
@@ -53,16 +54,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.E_CreateDate >= @startTime AND t.E_CreateDate <= @endTime ) ");
                 }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.E_OrderDate >= @OrderDate_S AND t.E_OrderDate <= @OrderDate_E ) ");
+                }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.E_GoodsName Like @M_GoodsName ");
                 }
-                if (!queryParam["MonthBalance"].IsEmpty())
-                {
-                    dp.Add("MonthBalance", "%" + queryParam["MonthBalance"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.MonthBalance Like @MonthBalance ");
-                }
+               
                 if (!queryParam["E_StockCode"].IsEmpty())
                 {
                     dp.Add("E_StockCode", queryParam["E_StockCode"].ToString(), DbType.String);

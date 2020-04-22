@@ -118,6 +118,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetProNamekByCode(O_ProCode) O_ProCode,
                 t.O_StockCode,
                 t.O_StockName,
+                t.O_OrderDate,
                 t.O_Remark,
                  dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate
@@ -132,6 +133,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.O_CreateDate >= @startTime AND t.O_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.O_OrderDate >= @OrderDate_S AND t.O_OrderDate <= @OrderDate_E ) ");
                 }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {
