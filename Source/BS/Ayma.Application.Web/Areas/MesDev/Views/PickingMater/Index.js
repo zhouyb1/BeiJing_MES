@@ -234,9 +234,9 @@ var bootstrap = function ($, ayma) {
                     { label: "领料仓编码", name: "C_StockToCode", width: 90, align: "center" },
                     { label: "领料仓", name: "C_StockToName", width: 160, align: "center"},
                     { label: "生产订单号", name: "P_OrderNo", width: 160, align: "left",hidden:"hidden"},
-                    { label: "订单时间", name: "P_OrderDate", width: 160, align: "left", hidden: "hidden" },                 
+                    { label: "单据时间", name: "P_OrderDate", width: 160, align: "center", sort: true },
+                    { label: "创建时间", name: "C_CreateDate", width: 160, align: "center", sort: true },
                     { label: "添加人", name: "C_CreateBy", width: 100, align: "center" },
-                    { label: "添加时间", name: "C_CreateDate", width: 160, align: "center" },
                     { label: "备注", name: "C_Remark", width: 160, align: "left" },
                 ],
                 onRenderComplete: function (rows) {
@@ -257,6 +257,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         },
     };

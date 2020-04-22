@@ -211,18 +211,18 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "退供应商单号", name: "B_BackSupplyNo", width: 160, align: "left"},
-                    { label: "仓库编码", name: "B_StockCode", width: 90, align: "left"},
-                    { label: "仓库名称", name: "B_StockName", width: 160, align: "left"},
-                    { label: "备注", name: "B_Remark", width: 160, align: "left" },
-                    { label: "添加人", name: "B_CreateBy", width: 90, align: "left"},
-                    { label: "添加时间", name: "B_CreateDate", width: 160, align: "left"},
-                    { label: "修改人", name: "B_UpdateBy", width: 90, align: "left"},
-                    { label: "修改时间", name: "B_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "B_UploadBy", width: 90, align: "left" },
-                    { label: "提交时间", name: "B_UploadDate", width: 160, align: "left" },
-                    { label: "删除人", name: "B_DeleteBy", width: 90, align: "left"},
-                    { label: "删除时间", name: "B_DeleteDate", width: 160, align: "left"},    
+                    { label: "退供应商单号", name: "B_BackSupplyNo", width: 160, align: "center"},
+                    { label: "仓库编码", name: "B_StockCode", width: 90, align: "center" },
+                    { label: "仓库名称", name: "B_StockName", width: 160, align: "center" },
+                    { label: "备注", name: "B_Remark", width: 160, align: "center" },
+                    { label: "单据时间", name: "B_CreateDate", width: 160, align: "center",sort:true },
+                    { label: "创建时间", name: "B_CreateDate", width: 160, align: "center",sort:true },
+                    { label: "添加人", name: "B_CreateBy", width: 90, align: "center" },
+                    { label: "修改人", name: "B_UpdateBy", width: 90, align: "center" },
+                    { label: "修改时间", name: "B_UpdateDate", width: 160, align: "left" }
+                   
+                    
+                       
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -236,6 +236,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

@@ -230,9 +230,10 @@ var bootstrap = function ($, ayma) {
                     { label: "报废单号", name: "S_ScrapNo", width: 160, align: "center" },
                     { label: "仓库编码", name: "S_StockCode", width: 90, align: "center" },
                     { label: "仓库名称", name: "S_StockName", width: 160, align: "center" },
-                    { label: "备注", name: "S_Remark", width: 160, align: "left"},
+                    { label: "单据时间", name: "S_OrderDate", width: 160, align: "center", sort: true },
+                    { label: "创建时间", name: "S_CreateDate", width: 160, align: "center", sort: true },
                     { label: "添加人", name: "S_CreateBy", width: 100, align: "center" },
-                    { label: "添加时间", name: "S_CreateDate", width: 160, align: "center" },
+                    { label: "备注", name: "S_Remark", width: 160, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -247,6 +248,8 @@ var bootstrap = function ($, ayma) {
 
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

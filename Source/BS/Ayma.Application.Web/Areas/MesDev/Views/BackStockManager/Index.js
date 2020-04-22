@@ -238,7 +238,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/BackStockManager/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "B_Status", width: 80, align: "left",
+                        label: "状态", name: "B_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -258,7 +258,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     {
-                        label: "单据类型", name: "B_Kind", width: 80, align: "left",
+                        label: "单据类型", name: "B_Kind", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -273,14 +273,16 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "退仓库单号", name: "B_BackStockNo", width: 150, align: "left"},
+                    { label: "退仓库单号", name: "B_BackStockNo", width: 150, align: "center" },
                     { label: "仓库编码", name: "B_StockCode", width: 80, align: "center"},
-                    { label: "仓库名称", name: "B_StockName", width: 120, align: "left"},
+                    { label: "仓库名称", name: "B_StockName", width: 120, align: "center" },
                     { label: "退库仓库编码", name: "B_StockToCode", width: 80, align: "center" },
-                    { label: "退库仓库名称", name: "B_StockToName", width: 120, align: "left"},
-                    { label: "备注", name: "B_Remark", width: 160, align: "left"},
-                    { label: "添加人", name: "B_CreateBy", width: 80, align: "left"},
-                    { label: "添加时间", name: "B_CreateDate", width: 130, align: "left"}
+                    { label: "退库仓库名称", name: "B_StockToName", width: 120, align: "center" },
+                    { label: "单据时间", name: "B_OrderDate", width: 120, align: "center", sort: true },
+                    { label: "创建时间", name: "B_CreateDate", width: 130, align: "center",sort:true },
+                    { label: "添加人", name: "B_CreateBy", width: 80, align: "center" },
+                    { label: "备注", name: "B_Remark", width: 160, align: "left" }
+
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -294,6 +296,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();//新增单据时间
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

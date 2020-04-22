@@ -194,12 +194,12 @@ var bootstrap = function ($, ayma) {
                     { label: "消耗单号", name: "E_ExpendNo", width: 130, align: "left"},
                     { label: "仓库名称", name: "E_StockName", width: 130, align: "left"},
                     { label: "仓库编码", name: "E_StockCode", width: 90, align: "left"},
-                    { label: "是否已月结", name: "MonthBalance", width: 90, align: "left"},
-                    { label: "备注", name: "E_Remark", width: 130, align: "left"},
-                    { label: "提交时间", name: "E_CreateDate", width: 130, align: "left"},
+                    { label: "单据时间", name: "E_OrderDate", width: 130, align: "left",sort:true },
+                    { label: "创建时间", name: "E_CreateDate", width: 130, align: "left",sort:true },
                     { label: "添加人", name: "E_CreateBy", width: 130, align: "left"},
                     { label: "修改人", name: "E_UpdateBy", width: 130, align: "left"},
-                    { label: "修改时间", name: "E_UpdateDate", width: 130, align: "left"},
+                    { label: "修改时间", name: "E_UpdateDate", width: 130, align: "left" },
+                    { label: "备注", name: "E_Remark", width: 130, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
@@ -211,6 +211,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
