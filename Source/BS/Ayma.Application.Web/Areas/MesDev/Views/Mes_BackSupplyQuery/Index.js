@@ -166,8 +166,6 @@ var bootstrap = function ($, ayma) {
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
