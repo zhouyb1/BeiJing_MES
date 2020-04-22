@@ -27,6 +27,9 @@ var bootstrap = function ($, ayma) {
                 $('#M_StockName').attr('readonly', true);
                 $('#am_add').attr('disabled', true);
             }
+            if (status == 3) {
+                $('#am_add').css('display','none')
+            }
             //绑定仓库
             var dfop = {
                 type: 'default',

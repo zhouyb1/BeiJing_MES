@@ -78,11 +78,12 @@ var bootstrap = function ($, ayma) {
             });
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/PostForm?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/PostForm?keyValue=' + keyValue + '+&status=' + status,
                         width: 700,
                         height: 500,
                         maxmin: true,
@@ -96,11 +97,12 @@ var bootstrap = function ($, ayma) {
             //双击详情
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/PostForm?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/OutWorkShopManager/PostForm?keyValue=' + keyValue + '+&status=' + status,
                         width: 700,
                         height: 500,
                         maxmin: true,

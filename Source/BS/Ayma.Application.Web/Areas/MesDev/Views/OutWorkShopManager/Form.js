@@ -23,6 +23,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status==2) {
                 $('#O_StockName').attr('readonly', 'readonly');
                 $('#O_StockName').css('background', '#f1efef');
+            } if (status == 3) {
+                $('#am_add').css('display', 'none')
             }
             //出库类型
             $("#O_Kind").DataItemSelect({ code: "O_Kind" });

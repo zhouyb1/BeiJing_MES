@@ -25,6 +25,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#R_StockToName').attr('readonly', true);
                 $('#R_StockToName').attr('readonly', true);
                 $('#am_add').attr('disabled', true);
+            } if (status == 3) {
+                $('#am_add').css('display', 'none')
             }
             var dfop = {
                 type: 'default',

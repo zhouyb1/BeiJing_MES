@@ -91,24 +91,6 @@ var bootstrap = function ($, ayma) {
                 location.reload();
             });
            
-            // 查看详情
-            $('#am_edit').on('click', function () {
-                var keyValue = $('#girdtable').jfGridValue('ID');
-                if (ayma.checkrow(keyValue)) {
-                    ayma.layerForm({
-                        id: 'compUserForm',
-                        title: '查看详情',
-                        url: top.$.rootUrl + '/MesDev/CompUseHead/SearchForm?formId=compUserForm&keyValue=' + keyValue,
-                        width: 900,
-                        height: 700,
-                        btn:null,
-                        maxmin: true,
-                        callBack: function (id) {
-                            return top[id].acceptClick(refreshGirdData);
-                        }
-                    });
-                }
-            });
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('C_No');
@@ -126,14 +108,34 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
-            //双击详情
-            $('#girdtable').on('dblclick', function () {
+            // 查看详情
+            $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('C_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'compUserForm',
                         title: '查看详情',
-                        url: top.$.rootUrl + '/MesDev/CompUseHead/SearchForm?formId=compUserForm&keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/SearchForm?formId=compUserForm&keyValue=' + keyValue + '+&status=' + status,
+                        width: 900,
+                        height: 700,
+                        btn: null,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('C_Status');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'compUserForm',
+                        title: '查看详情',
+                        url: top.$.rootUrl + '/MesDev/CompUseHead/SearchForm?formId=compUserForm&keyValue=' + keyValue + '+&status=' + status,
                         width: 900,
                         height: 700,
                         btn: null,

@@ -49,11 +49,12 @@ var bootstrap = function ($, ayma) {
             // 查看详情
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('S_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue + '+&status=' + status,
                         width: 700,
                         height: 500,
                         maxmin: true,
@@ -67,11 +68,12 @@ var bootstrap = function ($, ayma) {
             //双击详情
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('S_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
                         title: '详情',
-                        url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue + '+&status=' + status,
                         width: 700,
                         height: 500,
                         maxmin: true,
@@ -83,7 +85,7 @@ var bootstrap = function ($, ayma) {
                 }
             });
             // 快速打印
-            $('#    ').on('click', function () {
+            $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('S_ScrapNo');
                 if (ayma.checkrow(keyValue, true)) {
                     ayma.layerForm({
