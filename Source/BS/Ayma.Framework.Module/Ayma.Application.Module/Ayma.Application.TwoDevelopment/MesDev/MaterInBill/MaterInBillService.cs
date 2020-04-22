@@ -411,12 +411,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 strSql.Append("  WHERE t.M_Status in (1,2) AND t.M_OrderKind=0 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
-                var dp = new DynamicParameters(new { });
+                var dp = new DynamicParameters(new { });//OrderDate_S
                 if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.M_OrderDate >= @OrderDate_S AND t.M_OrderDate <= @OrderDate_E ) ");
                 }
                 if (!queryParam["S_Name"].IsEmpty())
                 {
