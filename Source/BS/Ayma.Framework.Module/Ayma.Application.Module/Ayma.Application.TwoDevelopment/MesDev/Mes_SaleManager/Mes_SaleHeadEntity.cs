@@ -97,6 +97,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("MONTHBALANCE")]
         public string MonthBalance { get; set; }
+        /// <summary>
+        /// 单据时间
+        /// </summary>
+        [Column("S_ORDERDATE")]
+        public DateTime? S_OrderDate { get; set; }
         #endregion
 
         #region 扩展操作
