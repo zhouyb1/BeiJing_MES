@@ -283,9 +283,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                 }
             }
             Mes_CollarHeadEntity entity = strEntity.ToObject<Mes_CollarHeadEntity>();
-            //获取订单时间
-            //var order = orderBll.GetEntityByNo(entity.P_OrderNo);
-            entity.P_OrderDate = null;
+           
             var mes_CollarDetailEntityList = strmes_CollarDetailEntity.ToObject<List<Mes_CollarDetailEntity>>();
             if (mes_CollarDetailEntityList.Any(c=>c.C_Qty<=0))
             {
@@ -304,7 +302,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                }
                if (goods.C_Qty>stock.I_Qty)
                {
-                   return Fail(goods.C_GoodsName + "不存在或库存不足");
+                   return Fail("[" + goods.C_GoodsName + "]" + goods.C_GoodsName + "库存不足！");
                }
             }
 

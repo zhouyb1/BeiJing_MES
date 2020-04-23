@@ -220,7 +220,7 @@ var bootstrap = function ($, ayma) {
                     { label: "调拨仓库编码", name: "R_StockToCode", width: 90, align: "center" },
                     { label: "调拨仓库名称", name: "R_StockToName", width: 160, align: "center" },
                     {
-                        label: "单据时间", name: "R_OrderDate", width: 160, align: "center",sort:true,
+                        label: "单据时间", name: "P_OrderDate", width: 160, align: "center",sort:true,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
