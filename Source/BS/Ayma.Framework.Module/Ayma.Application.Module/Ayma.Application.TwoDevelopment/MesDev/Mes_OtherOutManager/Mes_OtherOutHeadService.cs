@@ -30,7 +30,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_DepartName,
                 t.O_Status,
                 t.O_OrderDate,
-                t.O_CreateBy,
+                dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate,
                 dbo.GetUserNameById(t.O_UpdateBy) O_UpdateBy,
                 t.O_UpdateDate,
