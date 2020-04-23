@@ -121,7 +121,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             this.O_Status = ErpEnums.OtherInStatusEnum.NoAudit;
             this.O_CreateDate = DateTime.Now;
             this.O_CreateBy = userInfo.userId;
-            this.O_OrderDate = DateTime.Now;
         }
         /// <summary>
         /// 编辑调用
