@@ -1176,7 +1176,7 @@ using MyDbReportData = DatabaseXmlReportData;
         /// </summary>
         /// <param name="doucno"></param>
         /// <returns></returns>
-        public static string KCMXTJ (string queryJson)
+        public static string KCMXTJ(string queryJson)
         {
                 var strSql = new StringBuilder();
                 var strSql2 = new StringBuilder();
