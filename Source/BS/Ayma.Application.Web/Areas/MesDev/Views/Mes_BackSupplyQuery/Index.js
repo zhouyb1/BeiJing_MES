@@ -166,9 +166,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'B_CreateDate',
                 sord:'desc'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
