@@ -98,7 +98,7 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Left":-0.370417,
-							"Width":0.9525,
+							"Width":0.926042,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"

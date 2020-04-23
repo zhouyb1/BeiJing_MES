@@ -877,12 +877,12 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据号码："
+					"Text":"单据编号："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":7.59354,
+					"Left":7.40833,
 					"Top":2.19604,
 					"Width":1.61396,
 					"Height":0.608542,
@@ -898,7 +898,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":9.2075,
+					"Left":9.02229,
 					"Top":2.19604,
 					"Width":3.59833,
 					"Height":0.608542,

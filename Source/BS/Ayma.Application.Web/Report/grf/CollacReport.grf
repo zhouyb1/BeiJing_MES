@@ -137,7 +137,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.502708,
-							"Width":1.74625,
+							"Width":1.71979,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -762,7 +762,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据号码："
+					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",

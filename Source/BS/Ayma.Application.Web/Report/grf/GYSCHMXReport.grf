@@ -124,7 +124,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.211667,
-							"Width":1.34938,
+							"Width":1.32292,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -274,7 +274,7 @@
 					},
 					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
-					"Text":"入库单号"
+					"Text":"单据编号"
 				},
 				{
 					"GroupTitle":false,

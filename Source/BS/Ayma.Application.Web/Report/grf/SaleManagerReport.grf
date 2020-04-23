@@ -513,7 +513,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据号码："
+					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",

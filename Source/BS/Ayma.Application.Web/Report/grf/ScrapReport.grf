@@ -106,7 +106,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-1.13771,
-							"Width":3.01625,
+							"Width":2.98979,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"

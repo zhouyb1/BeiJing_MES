@@ -469,7 +469,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_detail').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialDetailListByDate',
                 headData: [
-                               { label: "入库单号", name: "m_materinno", width: 130, align: "left" },
+                               { label: "单据编号", name: "m_materinno", width: 130, align: "left" },
                                { label: "供应商编码", name: "m_supplycode", width: 80, align: "left" },
                                { label: "供应商名称", name: "m_supplyname", width: 150, align: "left" },
                                { label: "商品编码", name: "m_goodscode", width: 80, align: "left" },
@@ -496,7 +496,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_Outbounddetails').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialOutDetailListByDate',
                 headData: [
-                               { label: "领料单号", name: "c_collarno", width: 130, align: "left" },
+                               { label: "单据编号", name: "c_collarno", width: 130, align: "left" },
                                //{ label: "原仓库编码", name: "c_stockcode", width: 80, align: "left" },
                                { label: "原仓库名称", name: "c_stockname", width: 130, align: "left" },
                                //{ label: "领料仓库编码", name: "c_stocktocode", width: 80, align: "left" },
@@ -526,7 +526,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_withdrawingdetails').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialBackDetailListByDate',
                 headData: [
-                               { label: "退库单号", name: "b_backstockno", width: 130, align: "left" },
+                               { label: "单据编号", name: "b_backstockno", width: 130, align: "left" },
                                { label: "仓库编码", name: "b_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "b_stockname", width: 130, align: "left" },
                                { label: "退料仓库编码", name: "b_stocktocode", width: 130, align: "left" },
@@ -554,7 +554,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_materialssales').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSaleDetailListByDate',
                 headData: [
-                               { label: "销售单号", name: "s_saleno", width: 130, align: "left" },
+                               { label: "单据编号", name: "s_saleno", width: 130, align: "left" },
                                { label: "仓库编码", name: "s_stockcode", width: 130, align: "left" },
                                { label: "仓库名称", name: "s_stockname", width: 130, align: "left" },
                                { label: "客户名称", name: "s_costomname", width: 130, align: "left" },
@@ -583,7 +583,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_scrapnumber').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialScrapDetailListByDate',
                 headData: [
-                               { label: "报废单号", name: "s_scrapno", width: 130, align: "left" },
+                               { label: "单据编号", name: "s_scrapno", width: 130, align: "left" },
                                { label: "仓库编码", name: "s_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "s_stockname", width: 130, align: "left" },
                                { label: "报废数量", name: "s_qty", width: 90, align: "center", statistics: true },
@@ -610,7 +610,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_other').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialOtherDetailListByDate',
                 headData: [
-                               { label: "其它入库单号", name: "o_otherinno", width: 130, align: "left" },
+                               { label: "单据编号", name: "o_otherinno", width: 130, align: "left" },
                                { label: "仓库编码", name: "o_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "o_stockname", width: 130, align: "left" },
                                { label: "其它入库数量", name: "o_qty", width: 80, align: "center", statistics: true },
@@ -637,7 +637,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_otherout').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialOtherOutDetailListByDate',
                 headData: [
-                               { label: "其它出库单号", name: "o_otheroutno", width: 130, align: "left" },
+                               { label: "单据编号", name: "o_otheroutno", width: 130, align: "left" },
                                { label: "仓库编码", name: "o_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "o_stockname", width: 130, align: "left" },
                                { label: "部门编码", name: "o_departcode", width: 80, align: "left" },
@@ -666,7 +666,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_supplierback').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialBackSupplyDetailListByDate',
                 headData: [
-                               { label: "退供应商单号", name: "b_backsupplyno", width: 130, align: "left" },
+                               { label: "单据编号", name: "b_backsupplyno", width: 130, align: "left" },
                                { label: "仓库编码", name: "b_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "b_stockname", width: 130, align: "left" },
                                { label: "退供应商数量", name: "b_qty", width: 80, align: "center", statistics: true },

@@ -563,7 +563,7 @@ using MyDbReportData = DatabaseXmlReportData;
                                     m.M_Unit ,
                                     m.M_Tax,
                                     m.M_Qty*m.M_Price Amount,
-                                    h.M_OrderDate as M_CreateDate ,
+                                    Convert(varchar(10),h.M_OrderDate,120) as M_CreateDate ,
                                     dbo.GetUserNameById(h.M_CreateBy) M_CreateBy
                             FROM    dbo.Mes_MaterInHead h
                                     LEFT JOIN dbo.Mes_MaterInDetail m ON m.M_MaterInNo = h.M_MaterInNo  WHERE h.M_Status =3

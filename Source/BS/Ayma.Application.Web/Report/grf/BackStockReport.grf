@@ -104,7 +104,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.529167,
-							"Width":2.56646,
+							"Width":2.54,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -363,7 +363,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据号码："
+					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",

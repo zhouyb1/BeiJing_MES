@@ -128,7 +128,7 @@
 							"Center":"Both",
 							"Left":-0.0264583,
 							"Top":0.291042,
-							"Width":1.37583,
+							"Width":1.34938,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -410,7 +410,7 @@
 					"Width":2.59292,
 					"Height":0.608542,
 					"TextAlign":"MiddleJustiy",
-					"Text":"单据编码："
+					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",
