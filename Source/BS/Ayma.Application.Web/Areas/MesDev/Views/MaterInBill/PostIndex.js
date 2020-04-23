@@ -148,7 +148,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/MaterInBill/GetPostPageList?M_MaterInNo=' + M_MaterInNo,
                 headData: [
                     {
-                        label: "状态", name: "M_Status", width: 90, align: "left",
+                        label: "状态", name: "M_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -167,21 +167,21 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
-                    { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
-                    { label: "备注", name: "M_Remark", width: 160, align: "left" },
+                    { label: "单据编号", name: "M_MaterInNo", width: 130, align: "center" },
+                    { label: "供应商名称", name: "M_SupplyName", width: 140, align: "center" },
+                    { label: "备注", name: "M_Remark", width: 160, align: "center" },
                     {
-                        label: "单据时间", name: "M_OrderDate", width: 160, align: "left",
+                        label: "单据时间", name: "M_OrderDate", width: 100, align: "center",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },
-                    { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
-                    { label: "修改人", name: "M_UpdateBy", width: 90, align: "left" },
-                    { label: "修改时间", name: "M_UpdateDate", width: 160, align: "left" },
-                    { label: "提交人", name: "M_UploadBy", width: 90, align: "left"},
-                    { label: "提交时间", name: "M_UploadDate", width: 160, align: "left" },
+                    { label: "添加人", name: "M_CreateBy", width: 90, align: "center" },
+                    { label: "添加时间", name: "M_CreateDate", width: 130, align: "center" },
+                    { label: "修改人", name: "M_UpdateBy", width: 90, align: "center" },
+                    { label: "修改时间", name: "M_UpdateDate", width: 130, align: "center" },
+                    { label: "提交人", name: "M_UploadBy", width: 90, align: "center" },
+                    { label: "提交时间", name: "M_UploadDate", width: 130, align: "center" },
                     
                 ],
                 mainId: 'ID',

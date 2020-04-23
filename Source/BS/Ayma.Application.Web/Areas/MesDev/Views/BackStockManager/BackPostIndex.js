@@ -176,7 +176,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/BackStockManager/GetBacStockList',
                 headData: [
                     {
-                        label: "状态", name: "B_Status", width: 80, align: "center",
+                        label: "状态", name: "B_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -195,20 +195,20 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "退仓库单号", name: "B_BackStockNo", width: 150, align: "left" },
+                    { label: "单据编号", name: "B_BackStockNo", width: 130, align: "center" },
                     { label: "仓库编码", name: "B_StockCode", width: 90, align: "center" },
-                    { label: "仓库名称", name: "B_StockName", width: 120, align: "left" },
+                    { label: "仓库名称", name: "B_StockName", width: 130, align: "center" },
                     { label: "退库仓库编码", name: "B_StockToCode", width: 90, align: "center" },
-                    { label: "退库仓库名称", name: "B_StockToName", width: 120, align: "left" },
-                    { label: "备注", name: "B_Remark", width: 160, align: "left" },
+                    { label: "退库仓库名称", name: "B_StockToName", width: 120, align: "center" },
+                    { label: "备注", name: "B_Remark", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "B_OrderDate", width: 140, align: "left", sort: true,
+                        label: "单据时间", name: "B_OrderDate", width: 100, align: "center", sort: true,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
                     { label: "添加人", name: "B_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "B_CreateDate", width: 140, align: "left" ,sort:true},
+                    { label: "添加时间", name: "B_CreateDate", width: 130, align: "center", sort: true },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

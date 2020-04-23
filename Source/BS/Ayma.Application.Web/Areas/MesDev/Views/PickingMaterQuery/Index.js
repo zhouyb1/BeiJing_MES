@@ -182,7 +182,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/PickingMaterQuery/GetPageList?C_CollarNo=' + C_CollarNo,
                 headData: [
                       {
-                          label: "状态", name: "P_Status", width: 100, align: "left",
+                          label: "状态", name: "P_Status", width: 90, align: "center",
                           formatterAsync: function (callback, value, row) {
                               ayma.clientdata.getAsync('dataItem', {
                                   key: value,
@@ -201,18 +201,18 @@ var bootstrap = function ($, ayma) {
                               });
                           }
                       },
-                    { label: "领料单号", name: "C_CollarNo", width: 160, align: "center"},
-                    { label: "领料仓库编码", name: "C_StockToCode", width: 90, align: "left" },
-                    { label: "领料仓库名称", name: "C_StockToName", width: 160, align: "center" },
-                    { label: "备注", name: "C_Remark", width: 160, align: "left" },
+                    { label: "单据编号", name: "C_CollarNo", width: 130, align: "center"},
+                    { label: "领料仓编码", name: "C_StockToCode", width: 90, align: "center" },
+                    { label: "领料仓名称", name: "C_StockToName", width: 130, align: "center" },
+                    { label: "备注", name: "C_Remark", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "P_OrderDate", width: 160, align: "left",
+                        label: "单据时间", name: "P_OrderDate", width: 100, align: "center",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "添加人", name: "C_CreateBy", width: 100, align: "center" },
-                    { label: "添加时间", name: "C_CreateDate", width: 160, align: "center" },
+                    { label: "添加人", name: "C_CreateBy", width: 90, align: "center" },
+                    { label: "创建时间", name: "C_CreateDate", width: 130, align: "center" },
                   
                 ],
                 

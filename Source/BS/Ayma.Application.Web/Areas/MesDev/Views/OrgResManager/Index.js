@@ -226,7 +226,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/OrgResManager/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "O_Status", width: 90, align: "left", formatterAsync: function (callback, value, row) {
+                        label: "状态", name: "O_Status", width: 90, align: "center", formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
                                 code: 'ProOutStatus',
@@ -244,12 +244,12 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据号", name: "O_OrgResNo", width: 150, align: "center", sort: true },
+                    { label: "单据编号", name: "O_OrgResNo", width: 130, align: "center", sort: true },
                     { label: "工序号", name: "O_ProCode", width: 90, align: "center" },
                     { label: "日耗库", name: "O_StockName", width: 160, align: "center" },
                     { label: "日耗库编码", name: "O_StockCode", width: 90, align: "center" },
                     {
-                        label: "单据时间", name: "O_OrderDate", width: 130, align: "center", sort: true ,
+                        label: "单据时间", name: "O_OrderDate", width: 100, align: "center", sort: true ,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }

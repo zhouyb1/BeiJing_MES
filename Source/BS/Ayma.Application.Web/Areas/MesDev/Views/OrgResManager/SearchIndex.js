@@ -178,7 +178,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/OrgResManager/OrgResManagerList',
                 headData: [
                     {
-                        label: "状态", name: "O_Status", width: 90, align: "left", formatterAsync: function (callback, value, row) {
+                        label: "状态", name: "O_Status", width: 90, align: "center", formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
                                 code: 'ProOutStatus',
@@ -196,19 +196,19 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据号", name: "O_OrgResNo", width: 160, align: "center" },
+                    { label: "单据编号", name: "O_OrgResNo", width: 130, align: "center" },
                     { label: "工序", name: "O_ProCode", width: 90, align: "center" },
                     { label: "日耗仓名称", name: "O_StockName", width: 120, align: "center" },
                     { label: "日耗仓编码", name: "O_StockCode", width: 90, align: "center" },
-                    { label: "备注", name: "O_Remark", width: 160, align: "center" },
+                    { label: "备注", name: "O_Remark", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "O_OrderDate", width: 160, align: "center",
+                        label: "单据时间", name: "O_OrderDate", width: 100, align: "center",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "O_CreateDate", width: 160, align: "center"}
+                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center"}
                 ],
                 mainId:'ID',
                 reloadSelected: true,

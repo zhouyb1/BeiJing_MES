@@ -171,7 +171,7 @@ var bootstrap = function ($,ayma) {
                 headData: [
                     
                     {
-                        label: "状态", name: "C_Status", width: 100, align: "left",
+                        label: "状态", name: "C_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -190,19 +190,19 @@ var bootstrap = function ($,ayma) {
                             });
                         }
                     },
-                    { label: "单号", name: "C_No", width: 160, align: "left"},
-                    { label: "车间编号", name: "C_WorkShop", width: 100, align: "left" },
-                    { label: "车间名称", name: "C_WorkShopName", width: 160, align: "left" },
-                    { label: "仓库编号", name: "C_StockCode", width: 100, align: "left" },
-                    { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
-                    { label: "创建时间", name: "C_CreateDate", width: 160, align: "left" },
+                    { label: "单据编号", name: "C_No", width: 130, align: "center"},
+                    { label: "车间编号", name: "C_WorkShop", width: 70, align: "center" },
+                    { label: "车间名称", name: "C_WorkShopName", width: 120, align: "center" },
+                    { label: "仓库编号", name: "C_StockCode", width: 100, align: "center" },
+                    { label: "仓库名称", name: "C_StockName", width: 120, align: "center" },
+                    { label: "创建时间", name: "C_CreateDate", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "C_OrderDate", width: 160, align: "left",sort:true,
+                        label: "单据时间", name: "C_OrderDate", width: 100, align: "center",sort:true,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },                    
-                    { label: "添加人", name: "C_CreateBy", width: 100, align: "left"},
+                    { label: "添加人", name: "C_CreateBy", width: 80, align: "center" },
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],
                 mainId:'ID',

@@ -182,7 +182,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/GetPageList',
                 headData: [
                                 {
-                                    label: "单据状态", name: "O_Status", width: 90, align: "left",
+                                    label: "单据状态", name: "O_Status", width: 90, align: "center",
                                     formatterAsync: function (callback, value, row) {
                                         ayma.clientdata.getAsync('dataItem', {
                                             key: value,
@@ -202,20 +202,20 @@ var bootstrap = function ($, ayma) {
                                         });
                                     }
                                 },
-                        { label: '单号', name: 'O_OtherInNo', width: 200, align: "left" },
-                        { label: '仓库编码', name: 'O_StockCode', width: 100, align: "left" },
-                        { label: '仓库名称', name: 'O_StockName', width: 150, align: "left" },
+                        { label: '单据编号', name: 'O_OtherInNo', width: 130, align: "center" },
+                        { label: '仓库编码', name: 'O_StockCode', width: 80, align: "center" },
+                        { label: '仓库名称', name: 'O_StockName', width: 130, align: "center" },
                         {
-                          label: '单据时间', name: 'O_OrderDate', width: 150, align: "left" ,sort:true,
+                            label: '单据时间', name: 'O_OrderDate', width: 100, align: "center", sort: true,
                           formatter: function(cellvalue, options, rowObject) {
                                 return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                             }
                         },
-                        { label: '创建时间', name: 'O_CreateDate', width: 150, align: "left", sort: true },
-                        { label: '添加人', name: 'O_CreateBy', width: 150, align: "left" },
-                        { label: '修改人', name: 'O_UpdateBy', width: 150, align: "left" },
-                        { label: '修改时间', name: 'O_UpdateDate', width: 150, align: "left" },
-                        { label: '备注', name: 'O_Remark', width: 150, align: "left" },     
+                        { label: '创建时间', name: 'O_CreateDate', width: 130, align: "center", sort: true },
+                        { label: '添加人', name: 'O_CreateBy', width: 90, align: "center" },
+                        { label: '修改人', name: 'O_UpdateBy', width: 90, align: "center" },
+                        { label: '修改时间', name: 'O_UpdateDate', width: 150, align: "center" },
+                        { label: '备注', name: 'O_Remark', width: 150, align: "center" },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

@@ -75,7 +75,7 @@ var bootstrap = function ($, ayma) {
                 headData: [
                     { label: "主键", name: "ID", width: 100, align: "left", hidden: true },
                     {
-                        label: "状态", name: "S_Status", width: 90, align: "left",
+                        label: "状态", name: "S_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -94,23 +94,23 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "是否已月结", name: "MonthBalance", width: 80, align: "left" },
-                    { label: "单据编码", name: "S_SaleNo", width: 130, align: "left" },
-                    { label: "仓库名称", name: "S_StockName", width: 130, align: "left" },
-                    { label: "仓库编码", name: "S_StockCode", width: 90, align: "left" },
-                    { label: "客户名称", name: "S_CostomName", width: 130, align: "left" },
-                    { label: "客户编码", name: "S_CostomCode", width: 90, align: "left" },
-                    { label: "备注", name: "S_Remark", width: 130, align: "left" },
+                    { label: "是否已月结", name: "MonthBalance", width: 80, align: "center" },
+                    { label: "单据编码", name: "S_SaleNo", width: 130, align: "center" },
+                    { label: "仓库名称", name: "S_StockName", width: 130, align: "center" },
+                    { label: "仓库编码", name: "S_StockCode", width: 90, align: "center" },
+                    { label: "客户名称", name: "S_CostomName", width: 130, align: "center" },
+                    { label: "客户编码", name: "S_CostomCode", width: 90, align: "center" },
+                    { label: "备注", name: "S_Remark", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "S_OrderDate", width: 130, align: "left",
+                        label: "单据时间", name: "S_OrderDate", width: 100, align: "center",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "添加人", name: "S_CreateBy", width: 100, align: "left" },
-                    { label: "添加时间", name: "S_CreateDate", width: 130, align: "left" },
-                    { label: "修改人", name: "S_UpdateBy", width: 100, align: "left" },
-                    { label: "修改时间", name: "S_UpdateDate", width: 130, align: "left" },
+                    { label: "添加人", name: "S_CreateBy", width: 100, align: "center" },
+                    { label: "添加时间", name: "S_CreateDate", width: 130, align: "center" },
+                    { label: "修改人", name: "S_UpdateBy", width: 100, align: "center" },
+                    { label: "修改时间", name: "S_UpdateDate", width: 130, align: "center" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

@@ -207,7 +207,7 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/ScrapManager/GetPageList',
                 headData: [
                     {
-                        label: "状态", name: "S_Status", width: 100, align: "center",
+                        label: "状态", name: "S_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
@@ -227,18 +227,18 @@ var bootstrap = function ($, ayma) {
                         }
                         
                     },
-                    { label: "报废单号", name: "S_ScrapNo", width: 160, align: "center" },
+                    { label: "单据编号", name: "S_ScrapNo", width: 130, align: "center" },
                     { label: "仓库编码", name: "S_StockCode", width: 90, align: "center" },
-                    { label: "仓库名称", name: "S_StockName", width: 160, align: "center" },
+                    { label: "仓库名称", name: "S_StockName", width: 130, align: "center" },
                     {
-                        label: "单据时间", name: "S_OrderDate", width: 160, align: "center", sort: true ,
+                        label: "单据时间", name: "S_OrderDate", width: 100, align: "center", sort: true ,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "创建时间", name: "S_CreateDate", width: 160, align: "center", sort: true },
-                    { label: "添加人", name: "S_CreateBy", width: 100, align: "center" },
-                    { label: "备注", name: "S_Remark", width: 160, align: "left" }
+                    { label: "创建时间", name: "S_CreateDate", width: 130, align: "center", sort: true },
+                    { label: "添加人", name: "S_CreateBy", width: 90, align: "center" },
+                    { label: "备注", name: "S_Remark", width: 130, align: "center" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
