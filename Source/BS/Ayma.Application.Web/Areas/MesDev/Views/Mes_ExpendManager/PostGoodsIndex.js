@@ -100,14 +100,14 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库名称", name: "E_StockName", width: 130, align: "left" },
                     { label: "仓库编码", name: "E_StockCode", width: 90, align: "left" },
                     { label: "是否已月结", name: "MonthBalance", width: 90, align: "left" },
-                    { label: "备注", name: "E_Remark", width: 130, align: "left" },
+                    { label: "备注", name: "  ", width: 130, align: "left" },
                     {
                         label: "单据时间", name: "E_OrderDate", width: 130, align: "left",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "提交时间", name: "E_CreateDate", width: 130, align: "left" },
+                    { label: "添加时间", name: "E_CreateDate", width: 130, align: "left" },
                     { label: "添加人", name: "E_CreateBy", width: 130, align: "left" },
                     { label: "修改人", name: "E_UpdateBy", width: 130, align: "left" },
                     { label: "修改时间", name: "E_UpdateDate", width: 130, align: "left" },
