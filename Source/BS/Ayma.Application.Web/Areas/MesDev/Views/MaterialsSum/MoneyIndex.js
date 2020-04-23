@@ -583,7 +583,7 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_scrapnumber').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialScrapDetailListByDate',
                 headData: [
-                               { label: "报废单号", name: "s_scrapNo", width: 130, align: "left" },
+                               { label: "报废单号", name: "s_scrapno", width: 130, align: "left" },
                                { label: "仓库编码", name: "s_stockcode", width: 80, align: "left" },
                                { label: "仓库名称", name: "s_stockname", width: 130, align: "left" },
                                { label: "报废数量", name: "s_qty", width: 90, align: "center", statistics: true },
