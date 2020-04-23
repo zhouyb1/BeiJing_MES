@@ -1227,7 +1227,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
                 }
                 strSql.Append(@"
-                           SELECT RH.M_OrderDate F_CreateDate
+                           SELECT RH.M_CreateDate F_CreateDate
 ");
                 if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
                 {
@@ -1283,7 +1283,7 @@ using MyDbReportData = DatabaseXmlReportData;
                      ");
                 }
                 strSql.Append(@"
-                         GROUP BY RH.M_OrderDate,
+                         GROUP BY RH.M_CreateDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
@@ -1296,7 +1296,7 @@ using MyDbReportData = DatabaseXmlReportData;
               ");
 
                 strSql2.Append(@"
-                      SELECT CH.P_OrderDate F_CreateDate"
+                      SELECT CH.C_CreateDate F_CreateDate"
                     );
                 if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
                 {
@@ -1352,7 +1352,7 @@ using MyDbReportData = DatabaseXmlReportData;
                 }
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
-                             CH.P_OrderDate,
+                             CH.C_CreateDate,
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,

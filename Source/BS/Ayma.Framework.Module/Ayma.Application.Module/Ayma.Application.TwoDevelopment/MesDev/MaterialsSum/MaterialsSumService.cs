@@ -74,7 +74,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
                 }
                 strSql.Append(@"
-                           SELECT RH.M_OrderDate F_CreateDate,
+                           SELECT RH.M_CreateDate F_CreateDate,
                            RH.M_MaterInNo F_OrderNo,
                            RD.M_GoodsCode F_GoodsCode,
                            RD.M_GoodsName F_GoodsName,
@@ -113,7 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                      ");
                 }
                 strSql.Append(@"
-                         GROUP BY RH.M_OrderDate,
+                         GROUP BY RH.M_CreateDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
@@ -126,7 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
               ");
 
                 strSql2.Append(@"
-                      SELECT CH.P_OrderDate F_CreateDate,
+                      SELECT CH.C_CreateDate F_CreateDate,
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
@@ -165,7 +165,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
-                             CH.P_OrderDate,
+                             CH.C_CreateDate,
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,
@@ -273,14 +273,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									,m.M_Remark  
 									,m.M_StockName    
 									,t.M_CreateDate
-                                    ,t.M_OrderDate,
+                                    ,t.M_OrderDate
                                     ,dbo.GetUserNameById(t.M_CreateBy) as M_CreateBy
                                     ,(m.M_Qty*m.M_Price) as amount
 									 from  Mes_MaterInDetail m left join Mes_MaterInHead t on (m.M_MaterInNo=t.M_MaterInNo) 
-                            where m.M_MaterInNo in (select b.M_MaterInNo from Mes_MaterInHead b where b.M_CreateDate>=@StartTime and b.M_CreateDate<=@EndTime and b.M_Status=3)
+                            where m.M_MaterInNo in (select b.M_MaterInNo from Mes_MaterInHead b where b.M_OrderDate>=@StartTime and b.M_OrderDate<=@EndTime and b.M_Status=3)
                              and m.M_GoodsCode=@M_GoodsCode
-
-                             ");
+                                    ");
 
                 var queryParam = queryJson.ToJObject();
                 //虚拟参数
@@ -334,7 +333,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                            ,dbo.GetUserNameById(t.C_CreateBy) as C_CreateBy  
                            ,(m.C_Qty*dbo.GetPrice(m.C_GoodsCode,CONVERT(VARCHAR(6),t.M_UploadDate,112))) as amount 
                             from  Mes_CollarDetail m left join Mes_CollarHead t on (m.C_CollarNo=t.C_CollarNo) 
-                            where m.C_CollarNo in (select C_CollarNo from Mes_CollarHead where C_CreateDate>=@StartTime and C_CreateDate<=@EndTime and P_Status=3)
+                            where m.C_CollarNo in (select C_CollarNo from Mes_CollarHead where P_OrderDate>=@StartTime and P_OrderDate<=@EndTime and P_Status=3)
                              and m.C_GoodsCode=@M_GoodsCode
                              ");
 
@@ -388,7 +387,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             dbo.GetUserNameById(t.B_CreateBy) as B_CreateBy,
                            (m.B_Qty*dbo.GetPrice( m.B_GoodsCode,CONVERT(VARCHAR(6),t.B_UploadDate,112))) as amount   
                             from Mes_BackStockDetail m left join Mes_BackStockHead t on(m.B_BackStockNo=t.B_BackStockNo) where B_GoodsCode=@M_GoodsCode and m.B_BackStockNo 
-                            in(select B_BackStockNo from Mes_BackStockHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
+                            in(select B_BackStockNo from Mes_BackStockHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -442,7 +441,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.S_Remark
                            ,(m.S_Qty*m.S_Price) as amount   
                              from Mes_SaleDetail m left join Mes_SaleHead t on(m.S_SaleNo=t.S_SaleNo) where S_GoodsCode=@M_GoodsCode and m.S_SaleNo 
-                             in(select S_SaleNo from Mes_SaleHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
+                             in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3) 
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -493,7 +492,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.S_Remark
                            ,(m.S_Qty*dbo.GetPrice( m.S_GoodsCode,CONVERT(VARCHAR(6),t.S_UploadDate,112))) as amount   
                              from Mes_ScrapDetail m left join Mes_ScrapHead t on(m.S_ScrapNo=t.S_ScrapNo) where S_GoodsCode=@M_GoodsCode and m.S_ScrapNo 
-                             in(select S_ScrapNo from Mes_ScrapHead where (S_CreateDate >=@StartTime and S_CreateDate <=@EndTime)and S_Status=3) 
+                             in(select S_ScrapNo from Mes_ScrapHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3) 
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -540,10 +539,10 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.O_Qty,
                             dbo.GetPrice(m.O_GoodsCode,CONVERT(VARCHAR(6),t.O_UploadDate,112)) O_Price,
                             m.O_Batch,
-                            m.O_Remark
-                           ,(m.O_Qty*dbo.GetPrice(m.O_GoodsCode,CONVERT(VARCHAR(6),t.O_UploadDate,112))) as amount   
+                            m.O_Remark,
+                           (m.O_Qty*dbo.GetPrice(m.O_GoodsCode,CONVERT(VARCHAR(6),t.O_UploadDate,112))) as amount   
                              from Mes_OtherInDetail m left join Mes_OtherInHead t on(m.O_OtherInNo=t.O_OtherInNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherInNo 
-                             in(select O_OtherInNo from Mes_OtherInHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
+                             in(select O_OtherInNo from Mes_OtherInHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3) 
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -595,7 +594,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             m.O_Remark
                            ,(m.O_Qty*dbo.GetPrice(m.O_GoodsCode,CONVERT(VARCHAR(6),t.O_UploadDate,112))) as amount
                              from Mes_OtherOutDetail m left join Mes_OtherOutHead t on(m.O_OtherOutNo=t.O_OtherOutNo) where O_GoodsCode=@M_GoodsCode and m.O_OtherOutNo 
-                             in(select O_OtherOutNo from Mes_OtherOutHead where (O_CreateDate >=@StartTime and O_CreateDate <=@EndTime)and O_Status=3) 
+                             in(select O_OtherOutNo from Mes_OtherOutHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3) 
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -645,7 +644,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                             dbo.GetUserNameById(t.B_CreateBy) as B_CreateBy,
                            (m.B_Qty*dbo.GetPrice(m.B_GoodsCode,CONVERT(VARCHAR(6),t.B_UploadDate,112))) as amount 
                             from Mes_BackSupplyDetail m left join Mes_BackSupplyHead t on(m.B_BackSupplyNo=t.B_BackSupplyNo) where B_GoodsCode=@M_GoodsCode and m.B_BackSupplyNo 
-                            in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_CreateDate >=@StartTime and B_CreateDate <=@EndTime)and B_Status=3)
+                            in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)
                              ");
 
                 var queryParam = queryJson.ToJObject();
@@ -717,7 +716,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
 									+(select  ISNULL(SUM(B_Qty),0) from Mes_BackStockDetail where B_GoodsCode=s.G_Code  and B_BackStockNo in(select B_BackStockNo from Mes_BackStockHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3))
 									-(select  ISNULL(SUM(S_Qty),0) from Mes_SaleDetail where S_GoodsCode=s.G_Code  and S_SaleNo in(select S_SaleNo from Mes_SaleHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
 									-(select ISNULL(SUM(S_Qty),0) from Mes_ScrapDetail where S_GoodsCode=s.G_Code  and S_ScrapNo in(select S_ScrapNo from Mes_ScrapHead where (S_OrderDate >=@StartTime and S_OrderDate <=@EndTime)and S_Status=3))
-									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (OOrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
+									+(select  ISNULL(SUM(O_Qty),0) from Mes_OtherInDetail where O_GoodsCode=s.G_Code  and O_OtherInNo in(select O_OtherInNo from Mes_OtherInHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
 									-(select  ISNULL(SUM(O_Qty),0) from Mes_OtherOutDetail where O_GoodsCode=s.G_Code  and O_OtherOutNo in(select O_OtherOutNo from Mes_OtherOutHead where (O_OrderDate >=@StartTime and O_OrderDate <=@EndTime)and O_Status=3))
 									-(select  ISNULL(SUM(B_Qty),0) from Mes_BackSupplyDetail where B_GoodsCode=s.G_Code  and B_BackSupplyNo in(select B_BackSupplyNo from Mes_BackSupplyHead where (B_OrderDate >=@StartTime and B_OrderDate <=@EndTime)and B_Status=3)))	 as Endinginventory																	   								   
 								    ,((select ISNULL(SUM(I_Qty),0) from Mes_InventoryLS where I_GoodsCode=s.G_Code   and I_Date=@Time)+(select ISNULL(SUM(M_Qty),0) from Mes_MaterInDetail where M_MaterInNo in (select M_MaterInNo from Mes_MaterInHead where M_OrderDate>=@StartTime and M_OrderDate<=@EndTime and M_Status=3) and M_GoodsCode=s.G_Code)-
