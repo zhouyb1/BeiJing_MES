@@ -147,7 +147,12 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编码", name: "B_StockCode", width: 90, align: "left"},
                     { label: "仓库名称", name: "B_StockName", width: 160, align: "left" },
                     { label: "备注", name: "B_Remark", width: 160, align: "left" },
-                    { label: "单据时间", name: "B_OrderDate", width: 160, align: "left" },
+                    {
+                        label: "单据时间", name: "B_OrderDate", width: 160, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "添加人", name: "B_CreateBy", width: 90, align: "left"},
                     { label: "添加时间", name: "B_CreateDate", width: 160, align: "left"},
                     { label: "修改人", name: "B_UpdateBy", width: 90, align: "left"},

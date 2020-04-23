@@ -172,7 +172,12 @@ var bootstrap = function ($, ayma) {
                         { label: '部门编码', name: 'O_DepartCode', width: 150, align: "left" },
                         { label: '部门名称', name: 'O_DepartName', width: 150, align: "left" },
                         { label: '备注', name: 'O_Remark', width: 150, align: "left" },
-                        { label: '单据时间', name: 'O_OrderDate', width: 150, align: "left" },
+                        {
+                            label: '单据时间', name: 'O_OrderDate', width: 150, align: "left",
+                            formatter: function (cellvalue, options, rowObject) {
+                                return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                            }
+                        },
                         { label: '添加人', name: 'O_CreateBy', width: 150, align: "left" },
                         { label: '添加时间', name: 'O_CreateDate', width: 150, align: "left" },
                         { label: '修改人', name: 'O_UpdateBy', width: 150, align: "left" },

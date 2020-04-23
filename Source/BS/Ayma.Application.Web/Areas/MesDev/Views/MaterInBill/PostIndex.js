@@ -170,7 +170,12 @@ var bootstrap = function ($, ayma) {
                     { label: "入库单号", name: "M_MaterInNo", width: 160, align: "left" },
                     { label: "供应商名称", name: "M_SupplyName", width: 160, align: "left" },
                     { label: "备注", name: "M_Remark", width: 160, align: "left" },
-                    { label: "单据时间", name: "M_OrderDate", width: 160, align: "left" },
+                    {
+                        label: "单据时间", name: "M_OrderDate", width: 160, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "添加人", name: "M_CreateBy", width: 90, align: "left" },
                     { label: "添加时间", name: "M_CreateDate", width: 160, align: "left" },
                     { label: "修改人", name: "M_UpdateBy", width: 90, align: "left" },

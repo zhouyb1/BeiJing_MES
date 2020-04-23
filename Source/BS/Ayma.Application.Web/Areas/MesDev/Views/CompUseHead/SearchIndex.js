@@ -179,7 +179,12 @@ var bootstrap = function ($, ayma) {
                     { label: "仓库编号", name: "C_StockCode", width: 100, align: "left" },
                     { label: "仓库名称", name: "C_StockName", width: 160, align: "left" },
                     //{ label: "订单号", name: "C_OrderNo", width: 160, align: "left"},
-                    { label: "单据时间", name: "C_OrderDate", width: 160, align: "left"},               
+                    {
+                        label: "单据时间", name: "C_OrderDate", width: 160, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "添加人", name: "C_CreateBy", width: 100, align: "left"},
                     { label: "备注", name: "C_Remark", width: 160, align: "left"},
                 ],
