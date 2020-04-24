@@ -78,7 +78,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'OtherHead',
-                        title: '编辑其它出库单',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?keyValue=' + keyValue + '&formId=OtherHead' + '+&status=' + status,
                         width: 900,
                         height: 650,
@@ -97,7 +97,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'OtherHead',
-                        title: '编辑其它出库单',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?keyValue=' + keyValue + '&formId=OtherHead'+'+&status=' + status,
                         width: 900,
                         height: 650,

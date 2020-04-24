@@ -128,7 +128,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MasterIndexForm',
-                        title: '详情',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/SearchForm?keyValue=' + keyValue + "&formId=MasterIndexForm",
                         width: 800,
                         height: 600,
@@ -146,7 +146,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MasterIndexForm',
-                        title: '详情',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/SearchForm?keyValue=' + keyValue + "&formId=MasterIndexForm",
                         width: 800,
                         height: 600,

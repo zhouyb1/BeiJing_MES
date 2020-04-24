@@ -82,7 +82,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '详情',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/InWorkShopManager/PostForm?keyValue=' + keyValue,
                         width: 700,
                         height: 500,
@@ -94,6 +94,25 @@ var bootstrap = function ($, ayma) {
                     });
                 }
             });
+            //双击详情
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '单据详情',
+                        url: top.$.rootUrl + '/MesDev/InWorkShopManager/PostForm?keyValue=' + keyValue,
+                        width: 700,
+                        height: 500,
+                        maxmin: true,
+                        btn: null,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('I_InNo');

@@ -56,7 +56,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '详情',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue + '&status=' + statu,
                         width: 1000,
                         height: 600,
@@ -92,7 +92,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '详情',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/MaterInBill/Form?keyValue=' + keyValue +'&status=' + statu,
                         width: 1000,
                         height: 600,

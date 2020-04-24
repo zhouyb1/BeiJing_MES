@@ -88,7 +88,7 @@ var bootstrap = function ($, ayma) {
                         width: 700,
                         height: 500,
                         maxmin: true,
-                        btn: statu == 2 ? null : "",
+                        btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }
@@ -107,7 +107,7 @@ var bootstrap = function ($, ayma) {
                         width: 700,
                         height: 500,
                         maxmin: true,
-                        btn: statu == 2 ? null : "",
+                        btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {
                             return top[id].acceptClick(refreshGirdData);
                         }

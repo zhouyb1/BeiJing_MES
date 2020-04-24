@@ -114,7 +114,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue + '&formId=""',
                         width: 800,
                         height: 600,
@@ -132,7 +132,7 @@ var bootstrap = function ($, ayma) {
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'form',
-                        title: '编辑',
+                        title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/PickingMaterQuery/Form?keyValue=' + keyValue + '&formId=""',
                         width: 800,
                         height: 600,
