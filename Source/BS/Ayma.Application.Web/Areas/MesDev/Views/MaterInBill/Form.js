@@ -238,12 +238,12 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                    {
-                       label: "不含税金额", name: "不含税金额", width: 80, align: "left",statistics:true, formatter: function (value, row, dfop) {
+                       label: "不含税金额", name: "不含税金额", width: 80, align: "left", formatter: function (value, row, dfop) {
                            return row.M_Price * row.M_Qty;
                        }
                    },
                    {
-                       label: "含税金额", name: "含税金额", width: 60, align: "left", statistics: true, formatter: function (value, row, dfop) {
+                       label: "含税金额", name: "含税金额", width: 60, align: "left", formatter: function (value, row, dfop) {
                            return row.M_TaxPrice * row.M_Qty;
                        }
                    },
