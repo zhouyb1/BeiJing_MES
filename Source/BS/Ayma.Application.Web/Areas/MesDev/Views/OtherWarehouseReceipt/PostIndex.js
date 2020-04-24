@@ -14,33 +14,6 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
-            // 时间搜索框
-            $('#datesearch').amdate({
-                dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd') }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
-                    { name: '近7天', begin: function () { return ayma.getDate('yyyy-MM-dd', 'd', -6) }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
-                    { name: '近1个月', begin: function () { return ayma.getDate('yyyy-MM-dd', 'm', -1) }, end: function () { return ayma.getDate('yyyy-MM-dd') } },
-                    { name: '近3个月', begin: function () { return ayma.getDate('yyyy-MM-dd', 'm', -3) }, end: function () { return ayma.getDate('yyyy-MM-dd') } }
-                ],
-                // 月
-                mShow: false,
-                premShow: false,
-                // 季度
-                jShow: false,
-                prejShow: false,
-                // 年
-                ysShow: false,
-                yxShow: false,
-                preyShow: false,
-                yShow: false,
-                // 默认
-                dfvalue: '1',
-                selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
-                    page.search();
-                }
-            });
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 180, 500);
@@ -215,8 +188,8 @@ var bootstrap = function ($, ayma) {
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
