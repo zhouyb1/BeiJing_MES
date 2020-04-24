@@ -187,7 +187,12 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('S_SaleNo');
+                var status = $("#girdtable").jfGridValue("S_Status");
                 if (ayma.checkrow(keyValue)) {
+                    if (status != "2") {
+                        ayma.alert.error("单据未审核");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'SaleManagerReport',
                         title: '原物料销售单打印',

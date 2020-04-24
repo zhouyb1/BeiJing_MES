@@ -181,7 +181,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.264583,
-							"Width":1.50813,
+							"Width":1.48167,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -575,7 +575,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox25",
 					"Center":"Horizontal",
-					"Left":10.4246,
+					"Left":5.715,
 					"Top":0.211667,
 					"Width":8.99583,
 					"Height":0.79375,
@@ -593,7 +593,7 @@
 					"Name":"StaticBox40",
 					"Left":0.396875,
 					"Top":1.45521,
-					"Width":1.40229,
+					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -601,12 +601,12 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"Text":"时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
-					"Left":1.40229,
+					"Left":2.09021,
 					"Top":1.45521,
 					"Width":5.79438,
 					"Height":0.582083,
@@ -621,7 +621,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
-					"Left":5.3975,
+					"Left":6.08542,
 					"Top":1.45521,
 					"Width":3.59833,
 					"Height":0.582083,
@@ -636,7 +636,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
-					"Left":4.78896,
+					"Left":5.47688,
 					"Top":1.45521,
 					"Width":1.40229,
 					"Height":0.582083,

@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OtherInNo ,\r\n                                    h.O_StockName ,\r\n                                    h.O_CreateDate ,\r\n                                    h.O_CreateBy ,\r\n\t\t                            h.MonthBalance,\r\n                                    d.O_GoodsCode ,\r\n                                    d.O_GoodsName ,\r\n                                    d.O_Qty ,\r\n                                    d.O_Unit,\r\n\t\t                            h.O_Remark,\r\n\t\t                            d.O_Batch,\r\n\t\t\t\t\t\t\t\t\tcase when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty))\t as aoumnt\r\n\r\n\t\t\t\t\t\t\t\t\t\r\n                            FROM    dbo.Mes_OtherInHead h\r\n                                    LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)",
+			"QuerySQL":"SELECT  h.O_OtherInNo ,\r\n                                    h.O_StockName ,\r\n                                    h.O_CreateDate ,\r\n                                    h.O_CreateBy ,\r\n\t\t                            h.MonthBalance,\r\nh.O_OrderDate,\r\n                                    d.O_GoodsCode ,\r\n                                    d.O_GoodsName ,\r\n                                    d.O_Qty ,\r\n                                    d.O_Unit,\r\n\t\t                            h.O_Remark,\r\n\t\t                            d.O_Batch,\r\n\t\t\t\t\t\t\t\t\tcase when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty))\t as aoumnt\r\n\r\n\t\t\t\t\t\t\t\t\t\r\n                            FROM    dbo.Mes_OtherInHead h\r\n                                    LEFT JOIN dbo.Mes_OtherInDetail d ON (h.O_OtherInNo = d.O_OtherInNo)",
 			"Field":[
 				{
 					"Name":"O_OtherInNo"
@@ -55,6 +55,11 @@
 				{
 					"Name":"aoumnt",
 					"Type":"Float"
+				},
+				{
+					"Name":"O_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -334,13 +339,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":4.20688,
+			"Height":2.59292,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":10.3981,
-					"Top":2.98979,
+					"Left":0.423333,
+					"Top":1.98438,
 					"Width":1.79917,
 					"Height":0.502708,
 					"Font":{
@@ -356,7 +361,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
 					"Left":0.423333,
-					"Top":2.93688,
+					"Top":1.27,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -371,17 +376,23 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":12.1973,
-					"Top":3.59833,
+					"Left":12.9646,
+					"Top":2.06375,
 					"Width":3.59833,
 					"Height":0.396875,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_CreateBy"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.423333,
-					"Top":3.54542,
+					"Left":5.76792,
+					"Top":1.27,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -391,13 +402,13 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"制单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":10.3981,
-					"Top":3.59833,
+					"Left":11.1654,
+					"Top":2.06375,
 					"Width":1.79917,
 					"Height":0.396875,
 					"Font":{
@@ -412,26 +423,38 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.2225,
-					"Top":3.59833,
+					"Left":7.51417,
+					"Top":1.27,
 					"Width":3.59833,
 					"Height":0.555625,
-					"DataField":"O_CreateDate"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"O_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":12.1973,
-					"Top":2.98979,
+					"Left":2.2225,
+					"Top":1.98438,
 					"Width":3.20146,
 					"Height":0.502708,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_StockName"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Left":6.19125,
-					"Top":1.19063,
+					"Top":0.264583,
 					"Width":4.60375,
 					"Height":0.820208,
 					"Font":{
@@ -447,10 +470,47 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
 					"Left":2.2225,
-					"Top":2.93688,
+					"Top":1.27,
 					"Width":3.41313,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_OtherInNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox10",
+					"Left":5.74146,
+					"Top":1.95792,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox10",
+					"Left":7.48771,
+					"Top":1.95792,
+					"Width":3.59833,
+					"Height":0.555625,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"O_CreateDate"
 				}
 			]
 		}

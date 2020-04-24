@@ -170,7 +170,12 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('R_RequistNo');
+                var status = $("#girdtable").jfGridValue("R_Status");
                 if (ayma.checkrow(keyValue)) {
+                    if (status != "2") {
+                        ayma.alert.error("单据未审核");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'RequistReport',
                         title: '调拨单打印',

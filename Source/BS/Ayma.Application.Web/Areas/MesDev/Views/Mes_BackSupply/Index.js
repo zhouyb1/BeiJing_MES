@@ -166,10 +166,13 @@ var bootstrap = function ($, ayma) {
             });
             //打印
             $('#am_print').on('click', function() {
-                var keyValue = $('#girdtable').jfGridValue('B_BackSupplyNo');
-                if (keyValue == "") {
-                    ayma.alert.error("请选择要打印的单据！");
-                } else {
+                 var keyValue = $('#girdtable').jfGridValue('B_BackSupplyNo');
+                var status = $("#girdtable").jfGridValue("B_Status");
+                if (ayma.checkrow(keyValue)) {
+                    if (status != "2") {
+                        ayma.alert.error("单据未审核");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'BackSupplyReport',
                         title: '退供应商单打印',

@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"select a.B_BackSupplyNo,a.B_StockName,a.B_CreateDate,a.B_CreateBy,a.B_Remark,b.B_GoodsCode,b.B_GoodsName,b.B_Unit,\r\nb.B_Qty,b.B_Batch,(select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode) as Price,((select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode)*b.B_Qty) as aumount\r\nfrom dbo.Mes_BackSupplyHead a left join dbo.Mes_BackSupplyDetail b \r\non a.B_BackSupplyNo=b.B_BackSupplyNo where a.B_BackSupplyNo='{0}'",
+			"QuerySQL":"select a.B_BackSupplyNo,a.B_StockName,a.B_CreateDate,a.B_OrderDate,a.B_CreateBy,a.B_Remark,b.B_GoodsCode,b.B_GoodsName,b.B_Unit,\r\nb.B_Qty,b.B_Batch,(select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode) as Price,((select P_InPrice from Mes_InPrice where P_GoodsCode=b.B_GoodsCode)*b.B_Qty) as aumount\r\nfrom dbo.Mes_BackSupplyHead a left join dbo.Mes_BackSupplyDetail b \r\non a.B_BackSupplyNo=b.B_BackSupplyNo where a.B_BackSupplyNo='{0}'",
 			"Field":[
 				{
 					"Name":"B_BackSupplyNo"
@@ -52,6 +52,11 @@
 				},
 				{
 					"Name":"B_CreateBy"
+				},
+				{
+					"Name":"B_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -98,7 +103,7 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Left":-0.370417,
-							"Width":0.926042,
+							"Width":0.820208,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -239,13 +244,13 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":5.60917,
+					"Left":3.41313,
 					"Top":0.396875,
-					"Width":3.99521,
+					"Width":7.19667,
 					"Height":1.00542,
 					"Font":{
 						"Name":"宋体",
-						"Size":180000,
+						"Size":217500,
 						"Weight":400,
 						"Charset":134
 					},
@@ -265,8 +270,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":9.57792,
-					"Top":2.01083,
+					"Left":0.211667,
+					"Top":2.67229,
 					"Width":2.01083,
 					"Height":0.582083,
 					"TextAlign":"TopJustiy",
@@ -275,8 +280,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":11.5888,
-					"Top":2.01083,
+					"Left":2.2225,
+					"Top":2.67229,
 					"Width":2.61938,
 					"Height":0.582083,
 					"TextAlign":"TopLeft",
@@ -285,18 +290,18 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox4",
-					"Left":0.211667,
-					"Top":2.59292,
+					"Left":5.95313,
+					"Top":2.61938,
 					"Width":2.19604,
 					"Height":0.608542,
 					"TextAlign":"TopJustiy",
-					"Text":"单据时间:"
+					"Text":"制单时间:"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":2.40771,
-					"Top":2.59292,
+					"Left":8.14917,
+					"Top":2.61938,
 					"Width":3.78354,
 					"Height":0.608542,
 					"TextAlign":"TopLeft",
@@ -307,7 +312,7 @@
 					"Name":"FieldBox4",
 					"Left":2.40771,
 					"Top":1.905,
-					"Width":2.98979,
+					"Width":3.59833,
 					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"DataField":"B_BackSupplyNo"
@@ -315,8 +320,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":9.60438,
-					"Top":2.61938,
+					"Left":11.3242,
+					"Top":1.87854,
 					"Width":1.98438,
 					"Height":0.608542,
 					"TextAlign":"TopJustiy",
@@ -325,12 +330,32 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":11.5888,
-					"Top":2.59292,
+					"Left":13.3085,
+					"Top":1.85208,
 					"Width":4.02167,
 					"Height":0.608542,
 					"TextAlign":"TopLeft",
 					"DataField":"B_CreateBy"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.92667,
+					"Top":1.82563,
+					"Width":2.19604,
+					"Height":0.608542,
+					"TextAlign":"TopJustiy",
+					"Text":"单据时间:"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox6",
+					"Left":8.12271,
+					"Top":1.82563,
+					"Width":3.78354,
+					"Height":0.608542,
+					"TextAlign":"TopLeft",
+					"DataField":"B_OrderDate"
 				}
 			]
 		}
@@ -338,6 +363,7 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":1.19063,
 			"Control":[
 				{
 					"Type":"StaticBox",

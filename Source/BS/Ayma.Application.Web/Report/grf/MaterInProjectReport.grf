@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_CreateDate ,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        h.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\nWHERE   h.M_Status = 2",
+			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n        h.M_CreateDate ,\r\nh.M_OrderDate,\r\n        h.M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        h.M_Remark\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\nWHERE   h.M_Status = 2",
 			"Field":[
 				{
 					"Name":"M_MaterInNo"
@@ -47,6 +47,11 @@
 				{
 					"Name":"M_CreateDate",
 					"Type":"DateTime"
+				},
+				{
+					"Name":"M_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -87,7 +92,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.370417,
-							"Width":2.72521,
+							"Width":2.64583,
 							"Height":0.608542,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -172,13 +177,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.81,
+			"Height":2.80458,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":7.88458,
-					"Top":1.74625,
+					"Left":0.0264583,
+					"Top":2.06375,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -193,8 +198,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.608542,
-					"Top":1.77271,
+					"Left":0.0529167,
+					"Top":1.21708,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -209,8 +214,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":9.39271,
-					"Top":1.74625,
+					"Left":1.53458,
+					"Top":2.06375,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"M_StockName"
@@ -218,8 +223,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.608542,
-					"Top":2.80458,
+					"Left":5.47688,
+					"Top":1.24354,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -234,8 +239,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":7.91104,
-					"Top":2.67229,
+					"Left":10.6892,
+					"Top":2.03729,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -250,17 +255,17 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.54,
-					"Top":2.72521,
+					"Left":7.19667,
+					"Top":1.19063,
 					"Width":3.20146,
 					"Height":0.608542,
-					"DataField":"M_CreateDate"
+					"DataField":"M_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":9.44563,
-					"Top":2.67229,
+					"Left":12.2238,
+					"Top":2.03729,
 					"Width":3.62479,
 					"Height":0.608542,
 					"DataField":"M_CreateBy"
@@ -284,11 +289,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.59292,
-					"Top":1.79917,
+					"Left":2.03729,
+					"Top":1.24354,
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"M_MaterInNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.45042,
+					"Top":2.11667,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox10",
+					"Left":7.17021,
+					"Top":2.06375,
+					"Width":3.20146,
+					"Height":0.608542,
+					"DataField":"M_CreateDate"
 				}
 			]
 		}
@@ -296,12 +326,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":0.79375,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
 					"Left":0.608542,
-					"Top":1.19063,
+					"Top":0.264583,
 					"Width":2.01083,
 					"Height":0.396875,
 					"Font":{
@@ -317,7 +348,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox10",
 					"Left":8.20208,
-					"Top":1.19063,
+					"Top":0.264583,
 					"Width":2.01083,
 					"Height":0.396875,
 					"Font":{
@@ -331,17 +362,9 @@
 				},
 				{
 					"Type":"FieldBox",
-					"Name":"FieldBox8",
-					"Left":2.8575,
-					"Top":1.87854,
-					"Width":3.41313,
-					"Height":0.396875
-				},
-				{
-					"Type":"FieldBox",
 					"Name":"FieldBox9",
 					"Left":2.61938,
-					"Top":1.19063,
+					"Top":0.264583,
 					"Width":3.38667,
 					"Height":0.396875,
 					"DataField":"M_Remark"

@@ -19,7 +19,7 @@
 		"AppendBlankRow":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\n        dbo.GetUserNameById(t.C_CreateBy) as C_CreateBy ,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n     d.C_Unit2,\r\n   d.C_UnitQty,\r\n   d.C_Qty2,\r\n         d.C_StockName,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Remark as Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt,\r\n\t\t'1'+d.C_Unit2+'='+convert(varchar(50),convert(decimal(18,1),d.C_UnitQty))+d.C_Unit as Packingspecification,\r\n\t    convert(varchar(50),cast(d.C_Qty/d.C_UnitQty as int))+d.C_Unit2+convert(varchar(50),convert(decimal(18,1),d.C_Qty%d.C_UnitQty))+d.C_Unit as Auxiliarynumber\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
+			"QuerySQL":"SELECT  \r\n        t.P_Status ,\r\n        t.C_CollarNo ,\r\n        t.C_StockToName ,\r\n        t.C_CreateDate ,\r\nt.P_OrderDate,\r\n        dbo.GetUserNameById(t.C_CreateBy) as C_CreateBy ,\r\n        d.C_Unit,\r\n        d.C_Qty,\r\n        d.C_GoodsCode,\r\n     d.C_Unit2,\r\n   d.C_UnitQty,\r\n   d.C_Qty2,\r\n         d.C_StockName,\r\n        d.C_GoodsName,\r\n        t.C_Remark,\r\n\t\td.C_Remark as Remark,\r\n\t\td.C_Price,\r\n\t\t(d.C_Price*d.C_Qty) as aoumnt,\r\n\t\t'1'+d.C_Unit2+'='+convert(varchar(50),convert(decimal(18,1),d.C_UnitQty))+d.C_Unit as Packingspecification,\r\n\t    convert(varchar(50),cast(d.C_Qty/d.C_UnitQty as int))+d.C_Unit2+convert(varchar(50),convert(decimal(18,1),d.C_Qty%d.C_UnitQty))+d.C_Unit as Auxiliarynumber\r\nFROM    Mes_CollarHead t\r\n        LEFT JOIN dbo.Mes_CollarDetail d ON t.C_CollarNo = d.C_CollarNo\r\nWHERE   1=1\r\nORDER BY M_UploadDate DESC",
 			"Field":[
 				{
 					"Name":"C_GoodsCode"
@@ -84,6 +84,11 @@
 				},
 				{
 					"Name":"Auxiliarynumber"
+				},
+				{
+					"Name":"P_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -136,8 +141,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.502708,
-							"Width":1.71979,
+							"Left":-0.449792,
+							"Width":1.66688,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -808,13 +813,13 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"DataField":"C_CreateDate"
+					"DataField":"P_OrderDate"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox41",
-					"Left":9.60438,
-					"Top":1.85208,
+					"Left":6.0325,
+					"Top":1.74625,
 					"Width":2.19604,
 					"Height":0.529167,
 					"Font":{
@@ -829,8 +834,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox19",
-					"Left":11.8004,
-					"Top":1.85208,
+					"Left":8.12271,
+					"Top":1.74625,
 					"Width":3.59833,
 					"Height":0.555625,
 					"Font":{
@@ -844,8 +849,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox44",
-					"Left":9.60438,
-					"Top":2.40771,
+					"Left":11.1654,
+					"Top":1.71979,
 					"Width":2.19604,
 					"Height":0.529167,
 					"Font":{
@@ -860,8 +865,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox22",
-					"Left":11.8004,
-					"Top":2.40771,
+					"Left":13.3615,
+					"Top":1.71979,
 					"Width":3.59833,
 					"Height":0.529167,
 					"Font":{
@@ -871,6 +876,37 @@
 						"Charset":134
 					},
 					"DataField":"C_CreateBy"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox55",
+					"Left":6.05896,
+					"Top":2.38125,
+					"Width":2.01083,
+					"Height":0.47625,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox23",
+					"Left":7.99042,
+					"Top":2.38125,
+					"Width":3.38667,
+					"Height":0.449792,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_CreateDate"
 				}
 			],
 			"RepeatOnPage":true

@@ -62,6 +62,7 @@ using MyDbReportData = DatabaseXmlReportData;
         t.P_Status ,
         t.C_CollarNo ,
         t.C_StockToName ,
+        t.P_OrderDate,
         t.C_CreateDate ,
         dbo.GetUserNameById(t.C_CreateBy) as C_CreateBy ,
         d.C_Unit,
@@ -99,7 +100,8 @@ using MyDbReportData = DatabaseXmlReportData;
                     a.B_BackSupplyNo,
                     a.B_StockName,
                     a.B_CreateDate,
-                    a.B_CreateBy,
+                    a.B_OrderDate,
+                    dbo.GetUserNameById(a.B_CreateBy) as B_CreateBy ,
                     a.B_Remark,
                     b.B_GoodsCode,
                     b.B_GoodsName,
@@ -125,7 +127,8 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             string sql = @"SELECT  h.S_ScrapNo ,
                                     h.S_CreateDate,
-                                    h.S_CreateBy,
+                                    dbo.GetUserNameById(h.S_CreateBy) as S_CreateBy,
+                                    h.S_OrderDate,
                                     h.S_Remark,
                                     d.S_GoodsCode ,
                                     d.S_GoodsName ,
@@ -151,7 +154,8 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strsql = @"SELECT h.B_BackStockNo ,
                                     h.B_CreateDate,
-                                    h.B_CreateBy,
+                                     dbo.GetUserNameById(h.B_CreateBy) as B_CreateBy,
+                                    h.B_OrderDate,
                                     h.B_Remark,
                                     h.B_StockName ,
                                     h.B_StockToName ,
@@ -179,7 +183,8 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @"    SELECT  h.O_OrgResNo ,
                                     h.O_CreateDate,
-                                    h.O_CreateBy,
+                                    dbo.GetUserNameById( h.O_CreateBy) as O_CreateBy ,
+                                    h.O_OrderDate,
                                     h.O_Remark,
                                     h.O_WorkShopName,
                                     dbo.GetProNamekByCode(O_ProCode) O_ProCode,
@@ -212,7 +217,8 @@ using MyDbReportData = DatabaseXmlReportData;
                         SELECT  h.S_SaleNo ,
                                 h.S_StockName ,
                                 h.S_CostomName ,
-                                h.S_CreateBy ,
+                                 dbo.GetUserNameById(h.S_CreateBy ) as S_CreateBy ,
+                                h.S_OrderDate,
 		                        h.S_CreateDate,
 		                        h.MonthBalance,
                                 d.S_GoodsCode ,
@@ -247,6 +253,7 @@ using MyDbReportData = DatabaseXmlReportData;
         h.M_StockName ,
 		h.M_SupplyName,
         h.M_CreateDate ,
+        h.M_OrderDate,
         dbo.GetUserNameById(h.M_CreateBy ) as M_CreateBy ,
         d.M_GoodsCode ,
         d.M_GoodsName ,
@@ -583,8 +590,9 @@ using MyDbReportData = DatabaseXmlReportData;
             var strSql = @" 
                             SELECT  h.E_ExpendNo ,
                                     h.E_StockName ,
-                                    h.E_CreateBy ,
+                                    dbo.GetUserNameById(h.E_CreateBy ) as E_CreateBy,
                                     h.E_CreateDate ,
+                                    h.E_OrderDate,
 		                            h.MonthBalance,
                                     d.E_GoodsCode ,
                                     d.E_GoodsName ,
@@ -613,7 +621,8 @@ using MyDbReportData = DatabaseXmlReportData;
                             SELECT  h.O_OtherInNo ,
                                     h.O_StockName ,
                                     h.O_CreateDate ,
-                                    h.O_CreateBy ,
+                                     dbo.GetUserNameById(h.O_CreateBy ) as O_CreateBy ,
+                                    h.O_OrderDate,
 		                            h.MonthBalance,
                                     d.O_GoodsCode ,
                                     d.O_GoodsName ,
@@ -641,7 +650,8 @@ using MyDbReportData = DatabaseXmlReportData;
             var strSql = @" SELECT  h.M_MaterInNo ,
                                     h.M_StockName ,
                                     h.M_CreateDate,
-                                    h.M_CreateBy,
+                                     dbo.GetUserNameById( h.M_CreateBy) as M_CreateBy,
+                                    h.M_OrderDate,
                                     h.M_Remark,
                                     h.M_CreateBy ,
                                     d.M_GoodsCode ,
@@ -667,7 +677,8 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @" SELECT  h.R_RequistNo ,
                                     h.R_CreateDate,
-                                    h.R_CreateBy,
+                                     dbo.GetUserNameById(h.R_CreateBy) as R_CreateBy ,
+                                    h.P_OrderDate,
                                     h.R_Remark,
                                     h.R_StockName,
                                     h.R_StockToName,
@@ -693,9 +704,10 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var strSql = @"SELECT   h.P_OrderNo ,
                                     h.P_CreateDate ,
-                                    h.P_CreateBy,
+                                     dbo.GetUserNameById(h.P_CreateBy) as P_CreateBy ,
                                     h.P_Remark,
                                     h.P_OrderStationName,
+                                    h.P_OrderDate,
                                     d.P_GoodsCode ,
                                     d.P_GoodsName ,
                                     d.P_Qty ,
@@ -1154,8 +1166,9 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var sql = @"SELECT  h.O_OutNo ,
                                 h.O_CreateDate,
-                                h.O_CreateBy,
+                                 dbo.GetUserNameById(h.O_CreateBy) as O_CreateBy ,
                                 h.O_Remark,
+                                h.O_OrderDate,
                                 d.O_GoodsCode ,
                                 d.O_GoodsName ,
                                 d.O_Unit ,
@@ -1185,11 +1198,13 @@ using MyDbReportData = DatabaseXmlReportData;
                 var queryParam = queryJson.ToJObject();
                 //虚拟参数
                 var dp = new DynamicParameters(new { });
-                DateTime StartTime = queryParam["StartTime"].ToDate();
-                DateTime EndTime = queryParam["EndTime"].ToDate();
-                string Time = StartTime.AddDays(-1).ToShortDateString();
-                dp.Add("StartTime", StartTime, DbType.DateTime);
-                dp.Add("EndTime", EndTime, DbType.DateTime);
+                DateTime StartTime1 = queryParam["StartTime"].ToDate();
+                DateTime EndTime1 = queryParam["EndTime"].ToDate();
+                string StartTime = StartTime1.ToString("yyyy-MM-dd");
+                string EndTime = EndTime1.ToString("yyyy-MM-dd");
+                string Time = StartTime1.AddDays(-1).ToShortDateString();
+                dp.Add("StartTime", StartTime, DbType.String);
+                dp.Add("EndTime", EndTime, DbType.String);
                 dp.Add("Time", Time, DbType.DateTime);
                 if (!queryParam["S_Code"].IsEmpty())
                 {
@@ -1210,13 +1225,17 @@ using MyDbReportData = DatabaseXmlReportData;
                 //页面传的参数
                 if (!queryParam["start"].IsEmpty())
                 {
-                    dp.Add("start", queryParam["start"].ToDate(), DbType.DateTime);
+                    DateTime start1 = queryParam["start"].ToDate();
+                    string start = start1.ToString("yyyy-MM-dd");
+                    dp.Add("start", start, DbType.String);
                     string time = queryParam["start"].ToDate().AddDays(-1).ToShortDateString();
                     dp.Add("time", time, DbType.DateTime);
                 }
                 if (!queryParam["end"].IsEmpty())
                 {
-                    dp.Add("end", queryParam["end"].ToDate(), DbType.DateTime);
+                    DateTime end1 = queryParam["end"].ToDate();
+                    string end = end1.ToString("yyyy-MM-dd");
+                    dp.Add("end", end, DbType.String);
                 }
                 if (!queryParam["g_codes"].IsEmpty())
                 {
@@ -1227,7 +1246,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
                 }
                 strSql.Append(@"
-                           SELECT RH.M_CreateDate F_CreateDate
+                           SELECT RH.M_OrderDate F_CreateDate
 ");
                 if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
                 {
@@ -1283,7 +1302,7 @@ using MyDbReportData = DatabaseXmlReportData;
                      ");
                 }
                 strSql.Append(@"
-                         GROUP BY RH.M_CreateDate,
+                         GROUP BY RH.M_OrderDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
@@ -1296,7 +1315,7 @@ using MyDbReportData = DatabaseXmlReportData;
               ");
 
                 strSql2.Append(@"
-                      SELECT CH.C_CreateDate F_CreateDate"
+                      SELECT CH.P_OrderDate F_CreateDate"
                     );
                 if (!queryParam["S_Code"].IsEmpty() && !queryParam["G_Code"].IsEmpty() && !string.IsNullOrWhiteSpace(Time))
                 {
@@ -1352,7 +1371,7 @@ using MyDbReportData = DatabaseXmlReportData;
                 }
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
-                             CH.C_CreateDate,
+                             CH.P_OrderDate,
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,
@@ -1430,7 +1449,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     Convert.ToDateTime(rows[i].F_CreateDate);
                 }
                //自定义日期格式
-                IsoDateTimeConverter timeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd HH':'mm':'ss" };
+                IsoDateTimeConverter timeConverter = new IsoDateTimeConverter { DateTimeFormat = "yyyy'-'MM'-'dd" };
                 var json = JsonConvert.SerializeObject(new { PurchaseSummary = rows },timeConverter);
                 return json;
 
@@ -1650,11 +1669,12 @@ using MyDbReportData = DatabaseXmlReportData;
         public static string InWorkShop(string doucno)
         {
             var sql = @"SELECT  h.I_InNo ,
-                               h.I_CreateDate,
-                               h.I_CreateBy,
+                                h.I_CreateDate,
+                                dbo.GetUserNameById( h.I_CreateBy) as I_CreateBy ,
                                h.I_Remark,
                                 d.I_GoodsCode ,
                                 d.I_GoodsName ,
+                                h.I_OrderDate,
                                 d.I_Unit ,
                                 d.I_Qty ,
                                 d.I_Batch,
@@ -1677,8 +1697,9 @@ using MyDbReportData = DatabaseXmlReportData;
         {
             var sql = @"SELECT  h.P_ProOutNo ,
                                 h.P_CreateDate,
-                                h.P_CreateBy,
+                                 dbo.GetUserNameById(h.P_CreateBy) as P_CreateBy ,
                                 h.P_Remark,
+                                h.P_OrderDate,
                                 d.P_GoodsCode ,
                                 d.P_GoodsName ,
                                 d.P_Unit ,
@@ -1702,7 +1723,8 @@ using MyDbReportData = DatabaseXmlReportData;
             var sql = @"SELECT  h.O_OtherOutNo ,
                                 h.O_StockName ,
                                 h.O_DepartName ,
-                                h.O_CreateBy ,
+                                h.O_OrderDate,
+                                 dbo.GetUserNameById(h.O_CreateBy ) as O_CreateBy ,
 		                        h.O_CreateDate,
 		                        h.MonthBalance,
                                 d.O_GoodsCode ,
@@ -1730,8 +1752,10 @@ using MyDbReportData = DatabaseXmlReportData;
             var sql = @"select 
                         h.C_No,
                         h.C_OrderNo,
+                       dbo.GetUserNameById(h.C_CreateBy) as C_CreateBy,
                         h.C_CreateDate,
                         h.C_StockName,
+                        h.C_OrderDate,
                         (select W_Name from Mes_WorkShop where W_Code=h.C_WorkShop) as C_WorkShopName,
                         d.C_GoodsCode,
                         d.C_GoodsName,

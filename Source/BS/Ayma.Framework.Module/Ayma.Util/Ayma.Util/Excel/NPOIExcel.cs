@@ -129,7 +129,7 @@ namespace Ayma.Util
                 //空第一行出来加日期
                 row = sheet.CreateRow(1);
                 sheet.AddMergedRegion(new CellRangeAddress(1, 1, 0, table.Columns.Count - 1));
-                row.CreateCell(0).SetCellValue("日期：" + StartTime + "至" + EndTime);
+                row.CreateCell(0).SetCellValue("单据时间：" + StartTime + "至" + EndTime);
                 row.Cells[0].CellStyle = cellStyle2;
             }
             //空一行出来合并

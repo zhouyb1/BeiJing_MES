@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.R_RequistNo ,\r\n        h.R_CreateBy,\r\n        h.R_CreateDate ,\r\nh.R_Remark,\r\n        h.R_StockName,\r\n        h.R_StockToName,\r\n        h.R_Remark,\r\n        d.R_GoodsCode ,\r\n        d.R_GoodsName ,\r\n        d.R_Unit ,\r\n        d.R_Qty ,\r\n        d.R_Batch \r\nFROM    dbo.Mes_RequistHead h\r\n        LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo\r\nWHERE   h.R_Status = 2",
+			"QuerySQL":"SELECT  h.R_RequistNo ,\r\n        h.R_CreateBy,\r\n        h.R_CreateDate ,\r\nh.P_OrderDate,\r\nh.R_Remark,\r\n        h.R_StockName,\r\n        h.R_StockToName,\r\n        h.R_Remark,\r\n        d.R_GoodsCode ,\r\n        d.R_GoodsName ,\r\n        d.R_Unit ,\r\n        d.R_Qty ,\r\n        d.R_Batch \r\nFROM    dbo.Mes_RequistHead h\r\n        LEFT JOIN dbo.Mes_RequistDetail d ON h.R_RequistNo = d.R_RequistNo\r\nWHERE   h.R_Status = 2",
 			"Field":[
 				{
 					"Name":"R_RequistNo"
@@ -47,6 +47,11 @@
 				{
 					"Name":"R_CreateDate",
 					"Type":"DateTime"
+				},
+				{
+					"Name":"P_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -206,34 +211,22 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":10.6098,
-					"Top":2.48708,
+					"Left":0.370417,
+					"Top":3.22792,
 					"Width":1.79917,
 					"Height":0.582083,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"原仓库："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.396875,
-					"Top":3.09563,
-					"Width":1.79917,
+					"Left":5.42396,
+					"Top":2.46063,
+					"Width":1.98438,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"制单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
@@ -242,29 +235,23 @@
 					"Top":2.48708,
 					"Width":1.79917,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":2.19604,
-					"Top":3.09563,
+					"Left":7.22313,
+					"Top":2.46063,
 					"Width":3.41313,
 					"Height":0.608542,
-					"DataField":"R_CreateDate"
+					"DataField":"P_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":12.409,
-					"Top":2.48708,
+					"Left":2.16958,
+					"Top":3.22792,
 					"Width":3.59833,
 					"Height":0.582083,
 					"DataField":"R_StockName"
@@ -298,27 +285,39 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":10.6098,
-					"Top":3.12208,
-					"Width":1.79917,
+					"Left":5.45042,
+					"Top":3.20146,
+					"Width":2.35479,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
 					"Text":"调往仓库："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":12.409,
-					"Top":3.12208,
+					"Left":7.40833,
+					"Top":3.20146,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"R_StockToName"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":10.5569,
+					"Top":2.46063,
+					"Width":1.79917,
+					"Height":0.608542,
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":12.356,
+					"Top":2.46063,
+					"Width":3.41313,
+					"Height":0.608542,
+					"DataField":"R_CreateDate"
 				}
 			]
 		}

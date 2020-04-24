@@ -13,7 +13,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.E_ExpendNo ,\r\n                                    h.E_StockName ,\r\n                                    h.E_CreateBy ,\r\n                                    h.E_CreateDate ,\r\n\t\t                            h.MonthBalance,\r\n                                    d.E_GoodsCode ,\r\n                                    d.E_GoodsName ,\r\n                                    d.E_Unit ,\r\n                                    d.E_Qty,\r\n\t\t                            d.E_Batch,\r\n\t\t                            h.E_Remark,\r\n\t\t\t\t\t\t\t\t\tcase when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end E_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end *d.E_Qty)) as aoumnt\r\n                            FROM    dbo.Mes_ExpendHead h\r\n                                    LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo",
+			"QuerySQL":"SELECT  h.E_ExpendNo ,\r\n                                    h.E_StockName ,\r\n                                    h.E_CreateBy ,\r\n                                    h.E_CreateDate ,\r\n\t\t                            h.MonthBalance,\r\nh.E_OrderDate,\r\n                                    d.E_GoodsCode ,\r\n                                    d.E_GoodsName ,\r\n                                    d.E_Unit ,\r\n                                    d.E_Qty,\r\n\t\t                            d.E_Batch,\r\n\t\t                            h.E_Remark,\r\n\t\t\t\t\t\t\t\t\tcase when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end E_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when E_UploadDate is null then dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.E_GoodsCode,CONVERT(VARCHAR(6),E_UploadDate,112)) end *d.E_Qty)) as aoumnt\r\n                            FROM    dbo.Mes_ExpendHead h\r\n                                    LEFT JOIN dbo.Mes_ExpendDetail d ON h.E_ExpendNo = d.E_ExpendNo",
 			"Field":[
 				{
 					"Name":"E_ExpendNo"
@@ -57,6 +57,11 @@
 				{
 					"Name":"aoumnt",
 					"Type":"Float"
+				},
+				{
+					"Name":"E_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -339,22 +344,6 @@
 			"Control":[
 				{
 					"Type":"StaticBox",
-					"Name":"StaticBox1",
-					"Left":11.6152,
-					"Top":1.5875,
-					"Width":1.40229,
-					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
-					"TextAlign":"MiddleJustiy",
-					"Text":"仓库："
-				},
-				{
-					"Type":"StaticBox",
 					"Name":"StaticBox3",
 					"Left":0.105833,
 					"Top":1.5875,
@@ -370,19 +359,10 @@
 					"Text":"单据编号："
 				},
 				{
-					"Type":"FieldBox",
-					"Name":"FieldBox3",
-					"Left":12.991,
-					"Top":1.5875,
-					"Width":2.61938,
-					"Height":0.608542,
-					"DataField":"E_StockName"
-				},
-				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.105833,
-					"Top":2.24896,
+					"Left":5.31813,
+					"Top":1.56104,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -392,13 +372,13 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"制单时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":11.6152,
-					"Top":2.2225,
+					"Left":10.9008,
+					"Top":2.35479,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -413,32 +393,44 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":1.79917,
-					"Top":2.24896,
+					"Left":7.01146,
+					"Top":1.56104,
 					"Width":3.81,
 					"Height":0.608542,
-					"DataField":"E_CreateDate"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"E_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":12.991,
-					"Top":2.19604,
+					"Left":12.2767,
+					"Top":2.32833,
 					"Width":2.80458,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"E_CreateBy"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
-					"Left":7.09083,
-					"Width":5.3975,
+					"Left":6.79979,
+					"Width":6.00604,
 					"Height":0.79375,
 					"Font":{
 						"Name":"宋体",
 						"Size":217500,
-						"Bold":true,
+						"Weight":400,
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
@@ -451,7 +443,75 @@
 					"Top":1.56104,
 					"Width":3.81,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"E_ExpendNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.26521,
+					"Top":2.32833,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":6.95854,
+					"Top":2.32833,
+					"Width":3.81,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"E_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox1",
+					"Left":0.211667,
+					"Top":2.30188,
+					"Width":1.37583,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"仓库："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox3",
+					"Left":1.79917,
+					"Top":2.30188,
+					"Width":2.59292,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"E_StockName"
 				}
 			]
 		}

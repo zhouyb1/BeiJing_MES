@@ -172,10 +172,15 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('I_InNo');
+                var status = $("#girdtable").jfGridValue("I_Status");
                 if (ayma.checkrow(keyValue)) {
+                    if (status != "2") {
+                        ayma.alert.error("单据未审核");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'SaleInReport',
-                        title: '入库单打印',
+                        title: '车间入库日耗库单打印',
                         url: top.$.rootUrl + '/MesDev/InWorkShopManager/PrintReport?keyValue=' + keyValue + "&report=InWorkShopReport&data=InWorkShop",
                         width: 1000,
                         height: 800,

@@ -21,7 +21,7 @@
 		"AppendBlankRow":true,
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n\t\th.M_SupplyName,\r\n        h.M_CreateDate ,\r\n       dbo.GetUserNameById(h.M_CreateBy ) as M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        (d.M_Qty*g.G_Price) Amount,\r\n        d.M_Price,\r\n\t\td.M_StockCode,\r\n\t\td.M_StockName,\r\n\t\td.M_Unit2,\r\n\t\td.M_UnitQty,\r\n\t\td.M_Qty,\r\n\t\td.M_Tax,\r\n\t\td.M_Qty2,\r\n\t\td.M_TaxPrice,\r\n\t\t(d.M_TaxPrice*d.M_Qty) as Taxamount,\r\n\t\t(d.M_Price*d.M_Qty) as Notaxamount,\r\n        h.M_Remark,\r\n\t\t'1'+d.M_Unit2+'='+convert(varchar(50),convert(decimal(18,1),d.M_UnitQty))+d.M_Unit as Packingspecification,\r\n\t\tconvert(varchar(50),cast(d.M_Qty/d.M_UnitQty as int))+d.M_Unit2+convert(varchar(50),convert(decimal(18,1),d.M_Qty%d.M_UnitQty))+d.M_Unit as Auxiliarynumber\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\n        LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode",
+			"QuerySQL":"SELECT  h.M_MaterInNo ,\r\n        h.M_StockName ,\r\n\t\th.M_SupplyName,\r\n        h.M_CreateDate ,\r\nh.M_OrderDate,\r\n       dbo.GetUserNameById(h.M_CreateBy ) as M_CreateBy ,\r\n        d.M_GoodsCode ,\r\n        d.M_GoodsName ,\r\n        d.M_Kind,\r\n        d.M_Unit,\r\n        d.M_Qty,\r\n        d.M_Batch,\r\n        (d.M_Qty*g.G_Price) Amount,\r\n        d.M_Price,\r\n\t\td.M_StockCode,\r\n\t\td.M_StockName,\r\n\t\td.M_Unit2,\r\n\t\td.M_UnitQty,\r\n\t\td.M_Qty,\r\n\t\td.M_Tax,\r\n\t\td.M_Qty2,\r\n\t\td.M_TaxPrice,\r\n\t\t(d.M_TaxPrice*d.M_Qty) as Taxamount,\r\n\t\t(d.M_Price*d.M_Qty) as Notaxamount,\r\n        h.M_Remark,\r\n\t\t'1'+d.M_Unit2+'='+convert(varchar(50),convert(decimal(18,1),d.M_UnitQty))+d.M_Unit as Packingspecification,\r\n\t\tconvert(varchar(50),cast(d.M_Qty/d.M_UnitQty as int))+d.M_Unit2+convert(varchar(50),convert(decimal(18,1),d.M_Qty%d.M_UnitQty))+d.M_Unit as Auxiliarynumber\r\nFROM    dbo.Mes_MaterInHead h\r\n        LEFT JOIN dbo.Mes_MaterInDetail d ON ( h.M_MaterInNo = d.M_MaterInNo )\r\n        LEFT JOIN dbo.Mes_Goods g ON g.G_Code =d.M_GoodsCode",
 			"Field":[
 				{
 					"Name":"M_MaterInNo"
@@ -104,6 +104,11 @@
 				},
 				{
 					"Name":"Auxiliarynumber"
+				},
+				{
+					"Name":"M_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -790,7 +795,7 @@
 		]
 	},
 	"PageFooter":{
-		"Height":2.98979,
+		"Height":1.00542,
 		"Control":[
 			{
 				"Type":"StaticBox",
@@ -866,8 +871,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":7.38188,
-					"Top":1.66688,
+					"Left":0.47625,
+					"Top":2.40771,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -882,8 +887,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox7",
-					"Left":7.40833,
-					"Top":2.19604,
+					"Left":13.6525,
+					"Top":2.32833,
 					"Width":1.61396,
 					"Height":0.608542,
 					"Font":{
@@ -898,8 +903,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox6",
-					"Left":9.02229,
-					"Top":2.19604,
+					"Left":15.2665,
+					"Top":2.32833,
 					"Width":3.59833,
 					"Height":0.608542,
 					"Font":{
@@ -930,8 +935,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":9.18104,
-					"Top":1.66688,
+					"Left":2.27542,
+					"Top":2.40771,
 					"Width":3.59833,
 					"Height":0.608542,
 					"Font":{
@@ -945,8 +950,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
-					"Left":0.502708,
-					"Top":2.24896,
+					"Left":6.64104,
+					"Top":2.40771,
 					"Width":1.69333,
 					"Height":0.608542,
 					"Font":{
@@ -961,10 +966,10 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":2.19604,
-					"Top":2.24896,
+					"Left":8.38729,
+					"Top":2.40771,
 					"Width":5.00063,
-					"Height":0.608542,
+					"Height":0.582083,
 					"Font":{
 						"Name":"宋体",
 						"Size":90000,
@@ -1019,6 +1024,37 @@
 					},
 					"TextAlign":"MiddleRight",
 					"Text":"共[#SystemVar(PageCount)#]页 第[#SystemVar(PageNumber)#]页"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox39",
+					"Left":6.6675,
+					"Top":1.71979,
+					"Width":1.69333,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox15",
+					"Left":8.36083,
+					"Top":1.71979,
+					"Width":5.00063,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"M_OrderDate"
 				}
 			],
 			"RepeatOnPage":true

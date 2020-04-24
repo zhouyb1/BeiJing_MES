@@ -13,7 +13,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OtherOutNo ,\r\n                                h.O_StockName ,\r\n                                h.O_DepartName ,\r\n                                h.O_CreateBy ,\r\n\t\t                        h.O_CreateDate,\r\n\t\t                        h.MonthBalance,\r\n                                d.O_GoodsCode ,\r\n                                d.O_GoodsName ,\r\n                                d.O_Qty,\r\n                                d.O_Unit,\r\n\t\t                        h.O_Remark,\r\n\t\t                        d.O_Batch,\r\n\t\t                       case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_OtherOutHead h\r\n                                LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo",
+			"QuerySQL":"SELECT  h.O_OtherOutNo ,\r\n                                h.O_StockName ,\r\n                                h.O_DepartName ,\r\n                                h.O_CreateBy ,h.O_OrderDate,\r\n\t\t                        h.O_CreateDate,\r\n\t\t                        h.MonthBalance,\r\n                                d.O_GoodsCode ,\r\n                                d.O_GoodsName ,\r\n                                d.O_Qty,\r\n                                d.O_Unit,\r\n\t\t                        h.O_Remark,\r\n\t\t                        d.O_Batch,\r\n\t\t                       case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_OtherOutHead h\r\n                                LEFT JOIN dbo.Mes_OtherOutDetail d ON h.O_OtherOutNo = d.O_OtherOutNo",
 			"Field":[
 				{
 					"Name":"O_OtherOutNo"
@@ -60,6 +60,11 @@
 				{
 					"Name":"aoumnt",
 					"Type":"Float"
+				},
+				{
+					"Name":"O_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -242,16 +247,10 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":11.1919,
-					"Top":2.03729,
+					"Left":10.9802,
+					"Top":2.16958,
 					"Width":1.40229,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"仓库："
 				},
@@ -262,20 +261,14 @@
 					"Top":1.42875,
 					"Width":1.79917,
 					"Height":0.635,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":12.5942,
-					"Top":2.03729,
+					"Left":12.3825,
+					"Top":2.16958,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"O_StockName"
@@ -283,27 +276,21 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.370417,
-					"Top":2.01083,
+					"Left":5.42396,
+					"Top":1.40229,
 					"Width":1.79917,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"单据时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.16958,
-					"Top":2.01083,
+					"Left":7.22313,
+					"Top":1.40229,
 					"Width":3.62479,
 					"Height":0.608542,
-					"DataField":"O_CreateDate"
+					"DataField":"O_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
@@ -317,27 +304,40 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":11.1919,
-					"Top":1.37583,
+					"Left":0.396875,
+					"Top":2.19604,
 					"Width":1.40229,
 					"Height":0.608542,
-					"Font":{
-						"Name":"宋体",
-						"Size":90000,
-						"Weight":400,
-						"Charset":134
-					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"部门："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":12.5942,
-					"Top":1.37583,
+					"Left":1.79917,
+					"Top":2.19604,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"O_DepartName"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":5.42396,
+					"Top":2.14313,
+					"Width":1.79917,
+					"Height":0.608542,
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox13",
+					"Left":7.22313,
+					"Top":2.14313,
+					"Width":3.62479,
+					"Height":0.608542,
+					"DataField":"O_CreateDate"
 				}
 			]
 		}

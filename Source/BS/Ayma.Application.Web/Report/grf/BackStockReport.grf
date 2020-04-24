@@ -13,7 +13,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.B_BackStockNo ,\r\n                                    h.B_CreateDate,\r\n                                    h.B_CreateBy,\r\n                                    h.B_Remark,\r\n                                    h.B_StockName ,\r\n                                    h.B_StockToName ,\r\n                                    d.B_GoodsCode ,\r\n                                    d.B_GoodsName ,\r\n                                    d.B_Qty ,\r\n                                    d.B_Unit,\r\n\t\t\t\t\t\t\t\t\tcase when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end B_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *d.B_Qty)) as aoumnt\r\n                            FROM    dbo.Mes_BackStockHead h\r\n                                    LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo",
+			"QuerySQL":"SELECT  h.B_BackStockNo ,\r\n                                    h.B_CreateDate,\r\nh.B_OrderDate,\r\n                                    h.B_CreateBy,\r\n                                    h.B_Remark,\r\n                                    h.B_StockName ,\r\n                                    h.B_StockToName ,\r\n                                    d.B_GoodsCode ,\r\n                                    d.B_GoodsName ,\r\n                                    d.B_Qty ,\r\n                                    d.B_Unit,\r\n\t\t\t\t\t\t\t\t\tcase when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end B_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *d.B_Qty)) as aoumnt\r\n                            FROM    dbo.Mes_BackStockHead h\r\n                                    LEFT JOIN dbo.Mes_BackStockDetail d ON h.B_BackStockNo = d.B_BackStockNo",
 			"Field":[
 				{
 					"Name":"B_BackStockNo"
@@ -54,6 +54,11 @@
 				{
 					"Name":"aoumnt",
 					"Type":"Float"
+				},
+				{
+					"Name":"B_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -103,8 +108,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.529167,
-							"Width":2.54,
+							"Left":-0.47625,
+							"Width":2.43417,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -372,6 +377,12 @@
 					"Top":2.11667,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"B_StockName"
 				},
 				{
@@ -381,6 +392,12 @@
 					"Top":2.09021,
 					"Width":3.59833,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"B_StockToName"
 				},
 				{
@@ -407,6 +424,12 @@
 					"Top":1.48167,
 					"Width":3.38667,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"B_BackStockNo"
 				},
 				{
@@ -432,7 +455,44 @@
 					"Top":1.40229,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"B_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox11",
+					"Left":5.13292,
+					"Top":1.48167,
+					"Width":1.71979,
+					"Height":0.635,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":6.77333,
+					"Top":1.48167,
+					"Width":3.59833,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"B_OrderDate"
 				}
 			]
 		}

@@ -174,7 +174,12 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetInventoryDetail',
                 headData: [
-                    { label: "日期", name: "F_CreateDate", width: 130, align: "center" },
+                    {
+                        label: "日期", name: "F_CreateDate", width: 130, align: "center",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     { label: "摘要", name: "F_Remark", width: 300, align: "center" },
                     { label: "商品编码", name: "F_GoodsCode", width: 115, align: "center" },
                     { label: "商品名称", name: "F_GoodsName", width: 115, align: "center" },

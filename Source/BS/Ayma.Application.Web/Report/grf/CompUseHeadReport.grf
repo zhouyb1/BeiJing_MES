@@ -13,7 +13,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"select \r\nh.C_No,\r\nh.C_OrderNo,\r\nh.C_CreateDate,\r\nh.C_StockName,\r\n(select W_Name from Mes_WorkShop where W_Code=h.C_WorkShop) as C_WorkShopName,\r\nd.C_GoodsCode,\r\nd.C_GoodsName,\r\nd.C_Unit,\r\nd.C_Batch,\r\nd.C_Qty,\r\ncase when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end C_Price,\r\nCONVERT(decimal(18,6),(case when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end *d.C_Qty)) as aoumnt\r\nfrom Mes_CompUseHead h left join Mes_CompUseDetail d on h.C_No=d.C_No",
+			"QuerySQL":"select \r\nh.C_No,\r\nh.C_OrderNo,\r\nh.C_CreateDate,\r\nh.C_OrderDate,\r\nh.C_StockName,\r\n(select W_Name from Mes_WorkShop where W_Code=h.C_WorkShop) as C_WorkShopName,\r\nd.C_GoodsCode,\r\nd.C_GoodsName,\r\nd.C_Unit,\r\nd.C_Batch,\r\nd.C_Qty,\r\ncase when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end C_Price,\r\nCONVERT(decimal(18,6),(case when C_UploadDate is null then dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.C_GoodsCode,CONVERT(VARCHAR(6),C_UploadDate,112)) end *d.C_Qty)) as aoumnt\r\nfrom Mes_CompUseHead h left join Mes_CompUseDetail d on h.C_No=d.C_No",
 			"Field":[
 				{
 					"Name":"aoumnt",
@@ -54,6 +54,11 @@
 				{
 					"Name":"C_Price",
 					"Type":"Float"
+				},
+				{
+					"Name":"C_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -108,7 +113,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.47625,
-							"Width":2.48708,
+							"Width":2.43417,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -362,8 +367,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":10.5304,
-					"Top":2.14313,
+					"Left":5.31813,
+					"Top":2.09021,
 					"Width":1.61396,
 					"Height":0.582083,
 					"Font":{
@@ -394,8 +399,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":12.1708,
-					"Top":2.11667,
+					"Left":6.95854,
+					"Top":2.06375,
 					"Width":3.59833,
 					"Height":0.608542,
 					"Font":{
@@ -513,6 +518,37 @@
 						"Charset":134
 					},
 					"DataField":"C_OrderNo"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox12",
+					"Left":10.5304,
+					"Top":2.09021,
+					"Width":1.71979,
+					"Height":0.635,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"单据时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox12",
+					"Left":12.1708,
+					"Top":2.09021,
+					"Width":3.59833,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"C_OrderDate"
 				}
 			]
 		}

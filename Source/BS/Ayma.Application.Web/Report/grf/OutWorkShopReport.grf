@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.O_OutNo ,\r\n                                h.O_CreateDate,\r\n                                h.O_CreateBy,\r\n                                h.O_Remark,\r\n                                d.O_GoodsCode ,\r\n                                d.O_GoodsName ,\r\n                                d.O_Unit ,\r\n                                d.O_Qty ,\r\n                                d.O_Batch,\r\n                                h.O_StockName,\r\n\t\t\t\t\t\t\t\tcase when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_OutWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo",
+			"QuerySQL":"SELECT  h.O_OutNo ,\r\n                                h.O_CreateDate,\r\n                                h.O_CreateBy,\r\nh.O_OrderDate,\r\n                                h.O_Remark,\r\n                                d.O_GoodsCode ,\r\n                                d.O_GoodsName ,\r\n                                d.O_Unit ,\r\n                                d.O_Qty ,\r\n                                d.O_Batch,\r\n                                h.O_StockName,\r\n\t\t\t\t\t\t\t\tcase when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end O_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when O_UploadDate is null then dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.O_GoodsCode,CONVERT(VARCHAR(6),O_UploadDate,112)) end *d.O_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_OutWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_OutWorkShopDetail d ON h.O_OutNo = d.O_OutNo",
 			"Field":[
 				{
 					"Name":"O_OutNo"
@@ -52,6 +52,11 @@
 				{
 					"Name":"aoumnt",
 					"Type":"Float"
+				},
+				{
+					"Name":"O_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -213,13 +218,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.81,
+			"Height":3.20146,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":8.20208,
-					"Top":1.66688,
+					"Left":0.105833,
+					"Top":2.27542,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -234,9 +239,9 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":0.608542,
-					"Top":2.77813,
-					"Width":1.5875,
+					"Left":5.08,
+					"Top":1.45521,
+					"Width":2.11667,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -244,14 +249,13 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"TextAlign":"MiddleJustiy",
 					"Text":"单据时间："
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.687917,
-					"Top":1.71979,
+					"Left":0.132292,
+					"Top":1.53458,
 					"Width":1.79917,
 					"Height":0.635,
 					"Font":{
@@ -266,19 +270,31 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":2.19604,
-					"Top":2.77813,
+					"Left":7.03792,
+					"Top":1.45521,
 					"Width":5.3975,
 					"Height":0.608542,
-					"DataField":"O_CreateDate"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"O_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":9.76313,
-					"Top":1.66688,
+					"Left":1.66688,
+					"Top":2.27542,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_StockName"
 				},
 				{
@@ -286,7 +302,7 @@
 					"Name":"ReportTitle",
 					"Center":"Horizontal",
 					"Left":3.78354,
-					"Top":0.608542,
+					"Top":0.211667,
 					"Width":8.44021,
 					"Height":0.79375,
 					"Font":{
@@ -301,17 +317,23 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.35479,
-					"Top":1.71979,
+					"Left":1.79917,
+					"Top":1.53458,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_OutNo"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":8.22854,
-					"Top":2.75167,
+					"Left":11.3506,
+					"Top":2.16958,
 					"Width":1.5875,
 					"Height":0.608542,
 					"Font":{
@@ -326,11 +348,47 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":9.81604,
-					"Top":2.75167,
-					"Width":3.41313,
+					"Left":12.7529,
+					"Top":2.19604,
+					"Width":3.38667,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_CreateBy"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":6.95854,
+					"Top":2.24896,
+					"Width":5.3975,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"O_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox10",
+					"Left":5.10646,
+					"Top":2.27542,
+					"Width":1.87854,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"Text":"制单时间："
 				}
 			]
 		}
@@ -338,12 +396,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":0.79375,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
 					"Left":0.608542,
-					"Top":1.27,
+					"Top":0.15875,
 					"Width":2.01083,
 					"Height":0.582083,
 					"Font":{
@@ -359,7 +418,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
 					"Left":8.255,
-					"Top":1.27,
+					"Top":0.15875,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -375,7 +434,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
 					"Left":2.8575,
-					"Top":1.27,
+					"Top":0.15875,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"O_Remark"
@@ -384,7 +443,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
 					"Left":10.2394,
-					"Top":1.27,
+					"Top":0.15875,
 					"Width":4.20688,
 					"Height":0.582083
 				}

@@ -172,7 +172,7 @@
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
 							"Left":-0.15875,
-							"Width":1.29646,
+							"Width":1.27,
 							"Height":0.608542,
 							"Font":{
 								"Name":"宋体",
@@ -787,7 +787,7 @@
 					"Name":"StaticBox40",
 					"Left":0.396875,
 					"Top":1.40229,
-					"Width":1.40229,
+					"Width":1.61396,
 					"Height":0.608542,
 					"Font":{
 						"Name":"宋体",
@@ -795,12 +795,12 @@
 						"Weight":400,
 						"Charset":134
 					},
-					"Text":"时间："
+					"Text":"单据时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox18",
-					"Left":1.40229,
+					"Left":2.01083,
 					"Top":1.40229,
 					"Width":2.98979,
 					"Height":0.608542,
@@ -815,7 +815,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox20",
-					"Left":5.00063,
+					"Left":5.21229,
 					"Top":1.40229,
 					"Width":3.59833,
 					"Height":0.608542,
@@ -830,7 +830,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox42",
-					"Left":4.39208,
+					"Left":4.60375,
 					"Top":1.40229,
 					"Width":1.40229,
 					"Height":0.608542,

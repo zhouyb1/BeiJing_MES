@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.I_InNo ,\r\n                               h.I_CreateDate,\r\n                               h.I_CreateBy,\r\n                               h.I_Remark,\r\n                                d.I_GoodsCode ,\r\n                                d.I_GoodsName ,\r\n                                d.I_Unit ,\r\n                                d.I_Qty ,\r\n                                d.I_Batch,\r\n                                h.I_StockName,\r\n\t                            case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end I_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end *d.I_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_InWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo\r\n                        WHERE   h.I_Status!=1",
+			"QuerySQL":"SELECT  h.I_InNo ,\r\n                               h.I_CreateDate,\r\nh.I_OrderDate,\r\n                               h.I_CreateBy,\r\n                               h.I_Remark,\r\n                                d.I_GoodsCode ,\r\n                                d.I_GoodsName ,\r\n                                d.I_Unit ,\r\n                                d.I_Qty ,\r\n                                d.I_Batch,\r\n                                h.I_StockName,\r\n\t                            case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end I_Price,\r\n\t\t\t\t\t\t\t\tCONVERT(decimal(18,6),(case when I_UploadDate is null then dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(d.I_GoodsCode,CONVERT(VARCHAR(6),I_UploadDate,112)) end *d.I_Qty)) as aoumnt\r\n                        FROM    dbo.Mes_InWorkShopHead h\r\n                                LEFT JOIN dbo.Mes_InWorkShopDetail d ON h.I_InNo = d.I_InNo\r\n                        WHERE   h.I_Status!=1",
 			"Field":[
 				{
 					"Name":"I_InNo"
@@ -52,6 +52,11 @@
 				{
 					"Name":"I_Price",
 					"Type":"Float"
+				},
+				{
+					"Name":"I_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -300,13 +305,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.81,
+			"Height":3.20146,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":0.820208,
-					"Top":2.54,
+					"Left":0.105833,
+					"Top":2.30188,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -321,7 +326,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox2",
-					"Left":7.91104,
+					"Left":5.50333,
 					"Top":1.5875,
 					"Width":1.79917,
 					"Height":0.608542,
@@ -337,7 +342,7 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
-					"Left":0.846667,
+					"Left":0.105833,
 					"Top":1.64042,
 					"Width":1.79917,
 					"Height":0.635,
@@ -353,19 +358,31 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":9.525,
+					"Left":7.11729,
 					"Top":1.5875,
 					"Width":3.38667,
 					"Height":0.608542,
-					"DataField":"I_CreateDate"
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"I_OrderDate"
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":2.2225,
-					"Top":2.54,
+					"Left":1.50813,
+					"Top":2.30188,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_StockName"
 				},
 				{
@@ -388,17 +405,23 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
-					"Left":2.51354,
+					"Left":1.77271,
 					"Top":1.64042,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_InNo"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":7.91104,
-					"Top":2.54,
+					"Left":11.0596,
+					"Top":2.40771,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -413,11 +436,48 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":9.31333,
-					"Top":2.54,
+					"Left":12.4619,
+					"Top":2.40771,
 					"Width":3.59833,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"I_CreateBy"
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":7.14375,
+					"Top":2.35479,
+					"Width":4.04813,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"DataField":"I_CreateDate"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox10",
+					"Left":5.52979,
+					"Top":2.35479,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
 				}
 			]
 		}
@@ -425,12 +485,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":0.79375,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox5",
 					"Left":0.740833,
-					"Top":1.29646,
+					"Top":0.185208,
 					"Width":2.01083,
 					"Height":0.582083,
 					"Font":{
@@ -446,7 +507,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox8",
 					"Left":8.06979,
-					"Top":1.29646,
+					"Top":0.185208,
 					"Width":1.98438,
 					"Height":0.582083,
 					"Font":{
@@ -462,7 +523,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox8",
 					"Left":2.98979,
-					"Top":1.29646,
+					"Top":0.185208,
 					"Width":4.20688,
 					"Height":0.582083,
 					"DataField":"I_Remark"
@@ -471,7 +532,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
 					"Left":10.0542,
-					"Top":1.29646,
+					"Top":0.185208,
 					"Width":4.20688,
 					"Height":0.582083
 				}

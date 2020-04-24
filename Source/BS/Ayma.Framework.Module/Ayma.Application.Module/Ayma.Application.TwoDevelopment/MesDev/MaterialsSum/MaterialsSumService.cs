@@ -74,7 +74,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("g_stockcode", queryParam["g_stockcode"].ToString(), DbType.String);
                 }
                 strSql.Append(@"
-                           SELECT RH.M_CreateDate F_CreateDate,
+                           SELECT  CONVERT(varchar(10), RH.M_OrderDate, 120 ) F_CreateDate,
                            RH.M_MaterInNo F_OrderNo,
                            RD.M_GoodsCode F_GoodsCode,
                            RD.M_GoodsName F_GoodsName,
@@ -113,7 +113,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                      ");
                 }
                 strSql.Append(@"
-                         GROUP BY RH.M_CreateDate,
+                         GROUP BY RH.M_OrderDate,
                                 RH.M_MaterInNo,
                                 RD.M_GoodsCode,
                                 RD.M_GoodsName,
@@ -126,7 +126,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
               ");
 
                 strSql2.Append(@"
-                      SELECT CH.C_CreateDate F_CreateDate,
+                      SELECT CONVERT(varchar(10), CH.P_OrderDate, 120 ) F_CreateDate,
                            CH.C_CollarNo F_OrderNo,
                            CD.C_GoodsCode F_GoodsCode,
                            CD.C_GoodsName F_GoodsName,
@@ -165,7 +165,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 }
                 strSql2.Append(@"
                              GROUP BY CH.C_CollarNo,
-                             CH.C_CreateDate,
+                             CH.P_OrderDate,
                              CD.C_GoodsCode,
                              CD.C_GoodsName,
                              CD.C_Price,

@@ -167,7 +167,12 @@ var bootstrap = function ($, ayma) {
             // 快速打印
             $('#am_print').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('O_OtherOutNo');
+                var status = $("#girdtable").jfGridValue("O_Status");
                 if (ayma.checkrow(keyValue)) {
+                    if (status != "2") {
+                        ayma.alert.error("单据未审核");
+                        return false;
+                    }
                     ayma.layerForm({
                         id: 'OtherOutReport',
                         title: '其它出库单打印',

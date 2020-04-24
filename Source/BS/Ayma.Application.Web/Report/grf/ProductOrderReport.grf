@@ -11,7 +11,7 @@
 	"DetailGrid":{
 		"Recordset":{
 			"ConnectionString":"Provider=SQLOLEDB.1;Password=ayma-62861701;Persist Security Info=True;User ID=sa;Initial Catalog=MES_BJ;Data Source=183.236.45.60;Use Procedure for Prepare=1;Auto Translate=True;Packet Size=4096;Workstation ID=DESKTOP-8KUC2G0;Use Encryption for Data=False;Tag with column collation when possible=False",
-			"QuerySQL":"SELECT  h.P_OrderNo ,\r\n        h.P_CreateDate ,\r\nh.P_CreateBy,\r\n        h.P_OrderStationName,\r\n        d.P_GoodsCode ,\r\n        d.P_GoodsName ,\r\n        d.P_Qty ,\r\n        d.P_Unit \r\nFROM    dbo.Mes_ProductOrderHead h\r\n        LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo\r\nWHERE   h.P_Status = 2",
+			"QuerySQL":"SELECT  h.P_OrderNo ,\r\n        h.P_CreateDate ,\r\nh.P_CreateBy,\r\n        h.P_OrderStationName,\r\n        d.P_GoodsCode ,\r\n        d.P_GoodsName ,\r\nd.P_OrderDate,\r\n        d.P_Qty ,\r\n        d.P_Unit \r\nFROM    dbo.Mes_ProductOrderHead h\r\n        LEFT JOIN dbo.Mes_ProductOrderDetail d ON h.P_OrderNo = d.P_OrderNo\r\nWHERE   h.P_Status = 2",
 			"Field":[
 				{
 					"Name":"P_OrderNo"
@@ -38,6 +38,11 @@
 				},
 				{
 					"Name":"P_CreateBy"
+				},
+				{
+					"Name":"P_OrderDate",
+					"Type":"DateTime",
+					"Format":"yyyy/MM/dd"
 				}
 			]
 		},
@@ -150,13 +155,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.81,
+			"Height":3.20146,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox1",
-					"Left":7.46125,
-					"Top":2.19604,
+					"Left":0.449792,
+					"Top":2.38125,
 					"Width":1.40229,
 					"Height":0.608542,
 					"Font":{
@@ -172,7 +177,7 @@
 					"Type":"StaticBox",
 					"Name":"StaticBox3",
 					"Left":0.396875,
-					"Top":2.19604,
+					"Top":1.64042,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -187,8 +192,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":8.86354,
-					"Top":2.19604,
+					"Left":1.85208,
+					"Top":2.38125,
 					"Width":3.59833,
 					"Height":0.608542,
 					"DataField":"P_OrderStationName"
@@ -196,8 +201,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox6",
-					"Left":0.396875,
-					"Top":3.01625,
+					"Left":5.82083,
+					"Top":1.64042,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -212,11 +217,11 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":2.19604,
-					"Top":2.98979,
+					"Left":7.62,
+					"Top":1.61396,
 					"Width":3.20146,
 					"Height":0.608542,
-					"DataField":"P_CreateDate"
+					"DataField":"P_OrderDate"
 				},
 				{
 					"Type":"StaticBox",
@@ -238,7 +243,7 @@
 					"Type":"FieldBox",
 					"Name":"FieldBox7",
 					"Left":2.19604,
-					"Top":2.19604,
+					"Top":1.64042,
 					"Width":3.41313,
 					"Height":0.608542,
 					"DataField":"P_OrderNo"
@@ -246,8 +251,8 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox11",
-					"Left":7.40833,
-					"Top":2.98979,
+					"Left":11.1654,
+					"Top":1.64042,
 					"Width":1.79917,
 					"Height":0.608542,
 					"Font":{
@@ -262,11 +267,36 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox9",
-					"Left":9.02229,
-					"Top":2.98979,
+					"Left":12.7,
+					"Top":1.64042,
 					"Width":3.20146,
 					"Height":0.608542,
 					"DataField":"P_CreateBy"
+				},
+				{
+					"Type":"StaticBox",
+					"Name":"StaticBox13",
+					"Left":5.79438,
+					"Top":2.40771,
+					"Width":1.79917,
+					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"TextAlign":"MiddleJustiy",
+					"Text":"制单时间："
+				},
+				{
+					"Type":"FieldBox",
+					"Name":"FieldBox11",
+					"Left":7.59354,
+					"Top":2.38125,
+					"Width":3.20146,
+					"Height":0.608542,
+					"DataField":"P_CreateDate"
 				}
 			]
 		}
@@ -274,12 +304,13 @@
 	"ReportFooter":[
 		{
 			"Name":"ReportFooter1",
+			"Height":0,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox12",
-					"Left":0.343958,
-					"Top":0.9525,
+					"Left":0.396875,
+					"Top":0.343958,
 					"Width":1.98438,
 					"Height":0.555625,
 					"Font":{
@@ -294,8 +325,8 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox10",
-					"Left":2.38125,
-					"Top":0.9525,
+					"Left":2.43417,
+					"Top":0.343958,
 					"Width":3.41313,
 					"Height":0.555625
 				}
