@@ -112,8 +112,8 @@
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Horizontal",
-							"Left":-0.47625,
-							"Width":2.43417,
+							"Left":-0.423333,
+							"Width":2.38125,
 							"Height":0.396875,
 							"TextAlign":"MiddleCenter",
 							"SystemVar":"RowNo"
@@ -399,7 +399,7 @@
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":6.95854,
+					"Left":7.19667,
 					"Top":2.06375,
 					"Width":3.59833,
 					"Height":0.608542,
