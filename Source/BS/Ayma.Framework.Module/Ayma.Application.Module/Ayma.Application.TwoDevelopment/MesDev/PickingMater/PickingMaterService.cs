@@ -1675,11 +1675,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 }
                 #endregion
 
+                #region 读取数据，用于后期处理
 
-                //读取数据，用于后期处理
                 if (success)
                 {
-                    string sql = @"SELECT     555555555555
+                    string sql = @"SELECT     
            CONVERT(VARCHAR(7),H.O_CreateDate,120) F_CreateDate,--单据月份
            D.O_GoodsCode M_GoodsCode,
            D.O_GoodsName M_GoodsName,
@@ -1709,6 +1709,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     }
                 }
 
+                #endregion
+
 
                 #region 提取转换单数据
                 if (success)
@@ -1721,19 +1723,22 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                         foreach (var same in sames)
                         {
-                            //最后一级不统计
+
+                            //原物料
                             if (same.ChildProductCommons == null || same.ChildProductCommons.Count < 1)
                                 break;
 
                             //当前bom
                             var currentBom = boms.Find(r => r.F_GoodsCode == same.F_GoodsCode);
 
-                            //转换后数据
-                            var groups = listConvertDatas.Where(r => r.M_SecGoodsCode == same.F_GoodsCode).GroupBy(r => r.M_CreateDate);
 
+                            //转换后数据
+                            var afterConvertDatas = listConvertDatas.Where(r => r.M_SecGoodsCode == same.F_GoodsCode).GroupBy(r => r.M_CreateDate);
+                            
                             //遍历数据
-                            foreach (var group in groups)
+                            foreach (var group in afterConvertDatas)
                             {
+
                                 #region 成品
 
                                 if (i == 0)
@@ -1823,7 +1828,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                                         converts.Add(currentGc);
                                     }
-
                                 }
 
                                 #endregion
@@ -1884,11 +1888,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                             converts.Add(lastGc);
                                         }
                                     }
-
-
                                 }
                                 #endregion
-
                             }
                         }
                     }
