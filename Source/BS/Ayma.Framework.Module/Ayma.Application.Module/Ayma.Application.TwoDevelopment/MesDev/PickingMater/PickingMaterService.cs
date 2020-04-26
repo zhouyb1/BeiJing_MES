@@ -1665,7 +1665,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 }
                 #endregion
 
-
                 #region  获取配方中每一个原料数据
                 if (success)
                 {
@@ -1711,7 +1710,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                 #endregion
 
-
                 #region 提取转换单数据
                 if (success)
                 {
@@ -1731,7 +1729,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
                             //当前bom
                             var currentBom = boms.Find(r => r.F_GoodsCode == same.F_GoodsCode);
 
-
                             //转换后数据
                             var afterConvertDatas = listConvertDatas.Where(r => r.M_SecGoodsCode == same.F_GoodsCode).GroupBy(r => r.M_CreateDate);
                             
@@ -1743,90 +1740,74 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                                 if (i == 0)
                                 {
-                                    //成品
+                                    //当前级
+                                    GoodsConvert currentConvert = new GoodsConvert();
+                                    currentConvert.F_ID = currentBom.F_ID;
+                                    currentConvert.F_ParentID = currentBom.F_ParentID;
+                                    currentConvert.F_GoodsCode = currentBom.F_GoodsCode;
+                                    currentConvert.F_GoodsName = currentBom.F_GoodsName;
+                                    currentConvert.F_CreateDate = group.Key;
+
+                                    //放到上级物料展示
+                                    //currentConvert.F_ProceCode = currentBom.F_ProceCode;
+                                    //currentConvert.F_ProceName = currentBom.F_ProceName;
+
+                                    currentConvert.F_Level = currentBom.F_Level;
+                                    currentConvert.F_Kind = currentBom.F_Kind;
+                                    currentConvert.F_Unit = currentBom.F_Unit;
+
+                                    //子级个数
+                                    int sonsize = same.ChildProductCommons.Count;
+
+                                    decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
+                                    currentConvert.F_Qty = M_SecQty;//实际生产
+
+                                    converts.Add(currentConvert);
+
 
                                     //子级
-                                    if (true)
+                                    foreach (var child in same.ChildProductCommons)
                                     {
-                                        //子物料
-                                        foreach (var child in same.ChildProductCommons)
-                                        {
-                                            //子级bom
-                                            var lastBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
-
-                                            var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
-
-                                            GoodsConvert lastGc = new GoodsConvert();
-                                            lastGc.F_ID = lastBom.F_ID;
-                                            lastGc.F_ParentID = lastBom.F_ParentID;
-
-                                            lastGc.F_CreateDate = group.Key;
-
-                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
-
-                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                            lastGc.F_ProceName = lastBom.F_ProceName;
-
-                                            lastGc.F_Level = lastBom.F_Level;
-                                            lastGc.F_Kind = lastBom.F_Kind;
-                                            lastGc.F_Unit = lastBom.F_Unit;
-
-                                            lastGc.F_Qty = childConvertDatas.Sum(r => r.M_Qty);//子级使用数量
-                                            lastGc.F_SumQty = 0;
-
-                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
-                                            lastGc.F_Convert = 0;
-                                            lastGc.F_ConvertTag = 0;
-
-                                            converts.Add(lastGc);
-                                        }
-                                    }
-
-                                    //当前级
-                                    if (true)
-                                    {
-                                        GoodsConvert currentGc = new GoodsConvert();
-                                        currentGc.F_ID = currentBom.F_ID;
-                                        currentGc.F_ParentID = currentBom.F_ParentID;
-
-                                        currentGc.F_CreateDate = group.Key;
-
-                                        currentGc.F_GoodsCode = currentBom.F_GoodsCode;
-                                        currentGc.F_GoodsName = currentBom.F_GoodsName;
-
-                                        currentGc.F_ProceCode = currentBom.F_ProceCode;
-                                        currentGc.F_ProceName = currentBom.F_ProceName;
-
-                                        currentGc.F_Level = currentBom.F_Level;
-                                        currentGc.F_Kind = currentBom.F_Kind;
-                                        currentGc.F_Unit = currentBom.F_Unit;
-
-                                        //子级个数
-                                        int sonsize = same.ChildProductCommons.Count;
-
-                                        decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
-                                        currentGc.F_Qty = M_SecQty;//实际生产
-
-
                                         //子级bom
-                                        var lastBom = boms.Find(r => r.F_GoodsCode == same.ChildProductCommons[0].F_GoodsCode);
-                                        var lastGc = converts.Find(r => r.F_GoodsCode == lastBom.F_GoodsCode);
+                                        var childBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
 
-                                        decimal? d_qty = (lastGc.F_Qty * 1000) / lastBom.F_PlanQty;
-                                        currentGc.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
+                                        //转换后的数据
+                                        var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
 
-                                        currentGc.F_ConvertTag = currentGc.F_Qty - currentGc.F_Convert;//偏差数
+                                        GoodsConvert childConvert = new GoodsConvert();
+                                        childConvert.F_ID = childBom.F_ID;
+                                        childConvert.F_ParentID = childBom.F_ParentID;
 
-                                        decimal? c = (currentGc.F_ConvertTag / currentGc.F_Convert) * 100;
-                                        currentGc.F_ConvertRange = Math.Round(c.Value, 2).ToString();
+                                        childConvert.F_CreateDate = group.Key;
 
-                                        currentGc.F_ConvertMin = currentBom.F_ConvertMin;
-                                        currentGc.F_ConvertMax = currentBom.F_ConvertMax;
+                                        childConvert.F_GoodsCode = childBom.F_GoodsCode;
+                                        childConvert.F_GoodsName = childBom.F_GoodsName;
 
-                                        converts.Add(currentGc);
+                                        //childConvert.F_ProceCode = childBom.F_ProceCode;
+                                        //childConvert.F_ProceName = childBom.F_ProceName;
+                                        childConvert.F_ProceCode = currentBom.F_ProceCode;
+                                        childConvert.F_ProceName = currentBom.F_ProceName;
+
+                                        childConvert.F_Level = childBom.F_Level;
+                                        childConvert.F_Kind = childBom.F_Kind;
+                                        childConvert.F_Unit = childBom.F_Unit;
+
+
+                                        childConvert.F_Qty = childConvertDatas.Sum(r => r.M_Qty);//子级使用数量
+                                        childConvert.F_SumQty = 0;//总数量
+
+                                        decimal? d_qty = (currentConvert.F_Qty * 1000) / childBom.F_PlanQty;
+                                        childConvert.F_Convert = Math.Round(d_qty.Value, 0);//理论份数
+
+                                        childConvert.F_ConvertTag = currentConvert.F_Qty - childConvert.F_Convert;//偏差数
+
+                                        decimal? c = (childConvert.F_ConvertTag / childConvert.F_Convert) * 100;
+                                        childConvert.F_ConvertRange = Math.Round(c.Value, 2).ToString();
+
+                                        childConvert.F_ConvertMin = currentBom.F_ConvertMin;
+                                        childConvert.F_ConvertMax = currentBom.F_ConvertMax;
+
+                                        converts.Add(childConvert);
                                     }
                                 }
 
@@ -1835,58 +1816,64 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                 #region 半成品
                                 else
                                 {
-                                    //半成品
 
                                     //当前级
-                                    if (true)
-                                    {
-                                        var currentGc = converts.Find(r => r.F_GoodsCode == same.F_GoodsCode);
-                                        //子级个数
-                                        int sonsize = same.ChildProductCommons.Count;
+                                    var currentConvert = converts.Find(r => r.F_GoodsCode == same.F_GoodsCode);
+                                  
+                                    //子级个数
+                                    int sonsize = same.ChildProductCommons.Count;
 
-                                        decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
-                                        currentGc.F_SumQty = M_SecQty;
-                                    }
+                                    decimal? M_SecQty = group.Sum(r => r.M_SecQty) / sonsize;
+                                    currentConvert.F_SumQty = M_SecQty;
 
 
                                     //子级
-                                    if (true)
+                                    foreach (var child in same.ChildProductCommons)
                                     {
-                                        //子物料
-                                        foreach (var child in same.ChildProductCommons)
-                                        {
-                                            //子级bom
-                                            var lastBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
+                                        //子级bom
+                                        var childBom = boms.Find(r => r.F_GoodsCode == child.F_GoodsCode);
 
-                                            var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
+                                        //
+                                        var childConvertDatas = group.Where(r => r.M_GoodsCode == child.F_GoodsCode);
 
-                                            GoodsConvert lastGc = new GoodsConvert();
-                                            lastGc.F_ID = lastBom.F_ID;
-                                            lastGc.F_ParentID = lastBom.F_ParentID;
+                                        GoodsConvert childConvert = new GoodsConvert();
+                                        childConvert.F_ID = childBom.F_ID;
+                                        childConvert.F_ParentID = childBom.F_ParentID;
+                                        childConvert.F_CreateDate = group.Key;
+                                        childConvert.F_GoodsCode = childBom.F_GoodsCode;
+                                        childConvert.F_GoodsName = childBom.F_GoodsName;
 
-                                            lastGc.F_CreateDate = group.Key;
+                                        childConvert.F_ProceCode = currentBom.F_ProceCode;
+                                        childConvert.F_ProceName = currentBom.F_ProceName;
 
-                                            lastGc.F_GoodsCode = lastBom.F_GoodsCode;
-                                            lastGc.F_GoodsName = lastBom.F_GoodsName;
+                                        childConvert.F_Level = childBom.F_Level;
+                                        childConvert.F_Kind = childBom.F_Kind;
+                                        childConvert.F_Unit = childBom.F_Unit;
 
-                                            lastGc.F_ProceCode = lastBom.F_ProceCode;
-                                            lastGc.F_ProceName = lastBom.F_ProceName;
+                                        childConvert.F_Qty = childConvertDatas.Sum(r => r.M_Qty)* (currentConvert.F_Qty/ currentConvert.F_SumQty);//子级使用数量
+                                        childConvert.F_SumQty = 0;
 
-                                            lastGc.F_Level = lastBom.F_Level;
-                                            lastGc.F_Kind = lastBom.F_Kind;
-                                            lastGc.F_Unit = lastBom.F_Unit;
+                                        childConvert.F_ConvertMin = currentBom.F_ConvertMin;
+                                        childConvert.F_ConvertMax = currentBom.F_ConvertMax;
+                                        childConvert.F_ConvertRange = currentBom.F_ConvertMin.Value.ToString("0.00") + "-" + childBom.F_ConvertMax.Value.ToString("0.00");
 
-                                            lastGc.F_Qty = childConvertDatas.Sum(r => r.M_Qty);//子级使用数量
-                                            lastGc.F_SumQty = 0;
+                                        //转化率
+                                       decimal? d_convert = (currentConvert.F_Qty / childConvert.F_Qty) * 100;
+                                       childConvert.F_Convert= Math.Round(d_convert.Value, 2);
 
-                                            lastGc.F_ConvertMin = lastBom.F_ConvertMin;
-                                            lastGc.F_ConvertMax = lastBom.F_ConvertMax;
-                                            lastGc.F_ConvertRange = lastBom.F_ConvertMin.Value.ToString("0.00") + "-" + lastBom.F_ConvertMax.Value.ToString("0.00");
-                                            lastGc.F_Convert = 0;
-                                            lastGc.F_ConvertTag = 0;
-
-                                            converts.Add(lastGc);
-                                        }
+                                       if (childConvert.F_Convert > childConvert.F_ConvertMax)
+                                           childConvert.F_ConvertTag = 1;
+                                       else
+                                       {
+                                           if (childConvert.F_Convert < childConvert.F_ConvertMin)
+                                               childConvert.F_ConvertTag = -1;
+                                           else
+                                           {
+                                               childConvert.F_ConvertTag = 0;
+                                           }
+                                       }
+                                      
+                                       converts.Add(childConvert);
                                     }
                                 }
                                 #endregion
@@ -1905,7 +1892,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-
                         dc.ColumnName = "F_CreateDate";
                         dc.DataType = typeof(string);
                         dt.Columns.Add(dc);
@@ -1914,79 +1900,116 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                        //var starbom = maxboms.Find(r => r.F_Level == maxlevel);
                         dc = new DataColumn();
-                        dc.ColumnName = "F_GoodsCode_Source";
+                        dc.ColumnName = "F_GoodsCode";
                         dc.DataType = typeof(string);
                         dt.Columns.Add(dc);
 
                         dc = new DataColumn();
-                        dc.ColumnName = "F_GoodsName_Source";
+                        dc.ColumnName = "F_GoodsName";
                         dc.DataType = typeof(string);
                         dt.Columns.Add(dc);
 
                         dc = new DataColumn();
-                        dc.ColumnName = "F_GoodsQty_Source";
+                        dc.ColumnName = "F_GoodsQty";
                         dc.DataType = typeof(decimal);
                         dt.Columns.Add(dc);
                     }
 
 
-                    //if (true)
-                    //{
-                    //    var maxboms = products[goodscode];
-                    //    var maxlevel = maxboms.Max(r => r.F_Level);
+                    if (true)
+                    {
 
-                    //    for (int i = maxlevel - 1; i >= 0; i--)
-                    //    {
-                    //        var bom = maxboms.Find(r => r.F_Level == i);
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_GoodsCode_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(string);
-                    //        dt.Columns.Add(dc);
+                        var F_Level = products.Max(r => r.F_Level);
 
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_GoodsName_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(string);
-                    //        dt.Columns.Add(dc);
+                        for (int i = F_Level; i <=1 ; i--)
+                        {
 
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_GoodsQty_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(decimal);
-                    //        dt.Columns.Add(dc);
+                            var bom = boms.Find(r => r.F_Level == (i-1));
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_GoodsCode_" + bom.F_ProceCode;
+                            dc.DataType = typeof(string);
+                            dt.Columns.Add(dc);
 
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_ConvertRange_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(string);
-                    //        dt.Columns.Add(dc);
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_GoodsName_" + bom.F_ProceCode;
+                            dc.DataType = typeof(string);
+                            dt.Columns.Add(dc);
 
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_Convert_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(decimal);
-                    //        dt.Columns.Add(dc);
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_GoodsQty_" + bom.F_ProceCode;
+                            dc.DataType = typeof(decimal);
+                            dt.Columns.Add(dc);
 
-                    //        dc = new DataColumn();
-                    //        dc.ColumnName = "F_ConvertTag_" + bom.F_ProceCode;
-                    //        dc.DataType = typeof(int);
-                    //        dt.Columns.Add(dc);
-                    //    }
-                    //}
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_ConvertRange_" + bom.F_ProceCode;
+                            dc.DataType = typeof(string);
+                            dt.Columns.Add(dc);
+
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_Convert_" + bom.F_ProceCode;
+                            dc.DataType = typeof(decimal);
+                            dt.Columns.Add(dc);
+
+                            dc = new DataColumn();
+                            dc.ColumnName = "F_ConvertTag_" + bom.F_ProceCode;
+                            dc.DataType = typeof(int);
+                            dt.Columns.Add(dc);
+                        }
+                    }
 
 
-                    //var groups = converts.GroupBy(r => r.F_CreateDate);
-                    //foreach (var group in groups)
-                    //{
-                    //    var rows = group.Where(r => r.F_Level == 0);//找出成品
+                    var groups = converts.GroupBy(r => r.F_CreateDate);
+                    foreach (var group in groups)
+                    {
+                        var rows = group.Where(r => r.F_Level == 0);//找出成品
 
-                    //    foreach (var row in rows)
-                    //    {
-                    //        var maxlevel = products[row.F_GoodsCode].Max(r => r.F_Level);
-                    //        var children = products[row.F_GoodsCode].Find(r => r.F_Level == maxlevel);
-                    //        DataRow dr = dt.NewRow();
-                    //        SetDataRow(children.F_ID, group.ToList(), dr);
-                    //        dt.Rows.Add(dr);
-                    //    }
-                    //}
+
+
+                        //找出层级中最大的个数
+                        int maxcount = 1;
+                        int maxcountlevel = 1;
+                        var maxlevel = products.Max(r => r.F_Level);
+                        for (int i = 1; i <= maxlevel; i++)
+                        {
+                           int cout= products.Where(r => r.F_Level == i).Count();
+                           if (maxcount < cout)
+                           {
+                               maxcount = cout;
+                               maxcountlevel = i;
+                           }
+                        }
+
+                       var middlerows = group.Where(r => r.F_Level == maxcountlevel).OrderBy(r=>r.F_ParentID);
+                       foreach (var row in middlerows)
+                       {
+
+                            DataRow dr = dt.NewRow();
+                            dr["F_CreateDate"] = row.F_CreateDate;
+
+                            if (row.F_Level == 0)
+                            {
+                                //成品
+                                dr["F_GoodsCode"] = row.F_GoodsCode;
+                                dr["F_GoodsName"] = row.F_GoodsName;
+                                dr["F_GoodsQty"] = row.F_Qty;
+                            }
+                            else
+                            {
+                                //半成品
+                                dr["F_GoodsCode_" + row.F_ProceCode] = row.F_GoodsCode;
+                                dr["F_GoodsName_" + row.F_ProceCode] = row.F_GoodsName;
+                                dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
+                                dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
+                                dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
+                                dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                            }
+                          
+                            dt.Rows.Add(dr);
+                        }
+
+
+                    }
                 }
 
 
@@ -2020,23 +2043,25 @@ GROUP BY F_CreateDate,F_GoodsCode";
             {
                 List<ColumnModel> columns = new List<ColumnModel>();
                 List<ProductBom> boms = new List<ProductBom>();
-                Dictionary<string, List<ProductBom>> products = new Dictionary<string, List<ProductBom>>();
+                List<ProductCommon> products = new List<ProductCommon>();
                 string goodscode = "";
 
                 #region 参数判断
 
-                string F_StartTime = "";
-                string F_EndTime = "";
+                DateTime F_StartTime = DateTime.Now;
+                DateTime F_EndTime = DateTime.Now;
                 string F_GoodsCode = "";
 
                 var queryParam = queryJson.ToJObject();
-                if (queryParam["GoodsCode"].IsEmpty())
+                if (queryParam["StartTime"].IsEmpty() || queryParam["EndTime"].IsEmpty() || queryParam["GoodsCode"].IsEmpty())
                 {
                     success = false;
                     message = "查询参数缺失";
                 }
                 else
                 {
+                    F_StartTime = queryParam["StartTime"].ToDate();
+                    F_EndTime = queryParam["EndTime"].ToDate().AddMonths(1);
                     F_GoodsCode = queryParam["GoodsCode"].ToString();
                 }
                 #endregion
@@ -2058,7 +2083,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 B_ProceName,
                 0 AS F_Level
                 FROM Mes_BomRecord
-                WHERE B_ParentID = '0'
+                WHERE B_GoodsCode=@F_GoodsCode
                 UNION ALL
                 SELECT Bom1.ID,
                 Bom1.B_ParentID,
@@ -2072,7 +2097,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     FROM Mes_BomRecord Bom1,CTE Bom2
                     WHERE Bom1.B_ParentID = Bom2.ID
                     )
-                SELECT C.ID F_ID,
+                SELECT DISTINCT
+                    C.ID F_ID,
                     C.B_ParentID F_ParentID,
                     C.B_GoodsCode F_GoodsCode,
                     G.G_Name F_GoodsName,
@@ -2099,7 +2125,11 @@ GROUP BY F_CreateDate,F_GoodsCode";
                 LEFT JOIN Mes_Stock S2 ON S2.S_Code=G.G_StockCode
                 ORDER BY C.F_Level";
 
-                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom);
+                    //加载参数
+                    var dp = new DynamicParameters(new { });
+                    dp.Add("F_GoodsCode", F_GoodsCode, DbType.String);
+                    var rows = new RepositoryFactory().BaseRepository().FindList<ProductBom>(strGetBom, dp);
+
                     if (rows.Count() > 0)
                     {
                         boms = rows.ToList();
@@ -2107,49 +2137,17 @@ GROUP BY F_CreateDate,F_GoodsCode";
                     else
                     {
                         success = false;
-                        message = "未获取到任何配方数据";
+                        message = "未获取到产品配方数据";
                     }
                 }
-
-
                 #endregion
 
-                #region 根据原物料，找出成品
+                #region  获取配方中每一个原料数据
                 if (success)
                 {
-                    var rows = boms.Where(r => r.F_GoodsCode == F_GoodsCode);
-                    if (rows == null || rows.Count() < 1)
-                    {
-                        success = false;
-                        message = "未从配方数据中匹配到相应原物料";
-                    }
-                    else
-                    {
-                        int maxlevel = 0;
-                        foreach (var row in rows)
-                        {
-                            List<ProductBom> goods = new List<ProductBom>();
-                            GetGoods(row.F_ID, boms, goods);
-                            var bomroot = goods.Find(r => r.F_Level == 0);
-                            if (bomroot == null)
-                            {
-                                success = false;
-                                message = "原物料对应配方不完整";
-                                break;
-                            }
-                            else
-                            {
-                                var F_Level = goods.Max(r => r.F_Level);
-                                if (F_Level > maxlevel)
-                                {
-                                    maxlevel = F_Level;
-                                    goodscode = bomroot.F_GoodsCode;
-                                }
-
-                                products[bomroot.F_GoodsCode] = goods;
-                            }
-                        }
-                    }
+                    //顶级元素
+                    var row = boms.Find(r => r.F_Level == 0);
+                    GetGoodsEx(row.F_ID, boms, products);
                 }
                 #endregion
 
@@ -2157,9 +2155,6 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                 if (success)
                 {
-                    var maxboms = products[goodscode];
-                    var maxlevel = maxboms.Max(r => r.F_Level);
-
 
                     if (true)
                     {
@@ -2176,11 +2171,10 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                        //var starbom = maxboms.Find(r => r.F_Level == maxlevel);
 
                         ColumnModel cm1 = new ColumnModel();
-                        cm1.name = "F_GoodsCode_Source";
-                        cm1.label = "原物料编码";
+                        cm1.name = "F_GoodsCode";
+                        cm1.label = "成品编码";
                         cm1.width = 100;
                         cm1.align = "left";
                         cm1.sort = false;
@@ -2188,8 +2182,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm1.children = null;
 
                         ColumnModel cm2 = new ColumnModel();
-                        cm2.name = "F_GoodsName_Source";
-                        cm2.label = "原物料名称";
+                        cm2.name = "F_GoodsName";
+                        cm2.label = "成品名称";
                         cm2.width = 100;
                         cm2.align = "left";
                         cm2.sort = false;
@@ -2197,8 +2191,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm2.children = null;
 
                         ColumnModel cm3 = new ColumnModel();
-                        cm3.name = "F_GoodsQty_Source";
-                        cm3.label = "数量(KG)";
+                        cm3.name = "F_GoodsQty";
+                        cm3.label = "数量(盒)";
                         cm3.width = 100;
                         cm3.align = "left";
                         cm3.sort = false;
@@ -2206,8 +2200,8 @@ GROUP BY F_CreateDate,F_GoodsCode";
                         cm3.children = null;
 
                         ColumnModel cm = new ColumnModel();
-                        cm.name = "F_ProceCode_Source";
-                        cm.label = "原物料";
+                        cm.name = "F_ProceCode";
+                        cm.label = "成品";
                         cm.width = 300;
                         cm.align = "center";
                         cm.sort = false;
@@ -2221,165 +2215,173 @@ GROUP BY F_CreateDate,F_GoodsCode";
 
                     if (true)
                     {
-                        for (int i = maxlevel - 1; i >= 1; i--)
+
+                        var F_Level = products.Max(r => r.F_Level);
+
+                        for (int i = F_Level; i <= 1; i--)
                         {
-                            var bom = maxboms.Find(r => r.F_Level == i);
+                            var bom = boms.Find(r => r.F_Level == (i - 1));
+                            if (i == 1)
+                            {
+                                //成品
+                                ColumnModel cm1 = new ColumnModel();
+                                cm1.name = "F_GoodsCode_" + bom.F_ProceCode;
+                                cm1.label = "物料编码";
+                                cm1.width = 100;
+                                cm1.align = "left";
+                                cm1.sort = false;
+                                cm1.statistics = false;
+                                cm1.children = null;
 
-                            ColumnModel cm1 = new ColumnModel();
-                            cm1.name = "F_GoodsCode_" + bom.F_ProceCode;
-                            cm1.label = "物料编码";
-                            cm1.width = 100;
-                            cm1.align = "left";
-                            cm1.sort = false;
-                            cm1.statistics = false;
-                            cm1.children = null;
+                                ColumnModel cm2 = new ColumnModel();
+                                cm2.name = "F_GoodsName_" + bom.F_ProceCode;
+                                cm2.label = "物料名称";
+                                cm2.width = 100;
+                                cm2.align = "left";
+                                cm2.sort = false;
+                                cm2.statistics = false;
+                                cm2.children = null;
 
-                            ColumnModel cm2 = new ColumnModel();
-                            cm2.name = "F_GoodsName_" + bom.F_ProceCode;
-                            cm2.label = "物料名称";
-                            cm2.width = 100;
-                            cm2.align = "left";
-                            cm2.sort = false;
-                            cm2.statistics = false;
-                            cm2.children = null;
+                                ColumnModel cm3 = new ColumnModel();
+                                cm3.name = "F_GoodsQty_" + bom.F_ProceCode;
+                                cm3.label = "实际份数(盒)";
+                                cm3.width = 100;
+                                cm3.align = "left";
+                                cm3.sort = false;
+                                cm3.statistics = false;
+                                cm3.children = null;
 
-                            ColumnModel cm3 = new ColumnModel();
-                            cm3.name = "F_GoodsQty_" + bom.F_ProceCode;
-                            cm3.label = "数量(KG)";
-                            cm3.width = 100;
-                            cm3.align = "left";
-                            cm3.sort = false;
-                            cm3.statistics = false;
-                            cm3.children = null;
 
-                            ColumnModel cm4 = new ColumnModel();
-                            cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
-                            cm4.label = "转化率标准";
-                            cm4.width = 100;
-                            cm4.align = "left";
-                            cm4.sort = false;
-                            cm4.statistics = false;
-                            cm4.children = null;
 
-                            ColumnModel cm5 = new ColumnModel();
-                            cm5.name = "F_Convert_" + bom.F_ProceCode;
-                            cm5.label = "转化率(%)";
-                            cm5.width = 100;
-                            cm5.align = "left";
-                            cm5.sort = false;
-                            cm5.statistics = false;
-                            cm5.children = null;
+                                ColumnModel cm5 = new ColumnModel();
+                                cm5.name = "F_Convert_" + bom.F_ProceCode;
+                                cm5.label = "理论份数(盒)";
+                                cm5.width = 100;
+                                cm5.align = "left";
+                                cm5.sort = false;
+                                cm5.statistics = false;
+                                cm5.children = null;
 
-                            ColumnModel cm6 = new ColumnModel();
-                            cm6.name = "F_ConvertTag_" + bom.F_ProceCode;
-                            cm6.label = "转化率标记";
-                            cm6.width = 100;
-                            cm6.align = "left";
-                            cm6.sort = false;
-                            cm6.statistics = false;
-                            cm6.hidden = true;
-                            cm6.children = null;
+                                ColumnModel cm6 = new ColumnModel();
+                                cm6.name = "F_ConvertTag_" + bom.F_ProceCode;
+                                cm6.label = "偏差数(盒)";
+                                cm6.width = 100;
+                                cm6.align = "left";
+                                cm6.sort = false;
+                                cm6.statistics = false;
+                                cm6.children = null;
 
-                            ColumnModel cm = new ColumnModel();
-                            cm.name = "F_ProceCode_" + bom.F_ProceCode;
-                            cm.label = bom.F_ProceName;
-                            cm.width = 600;
-                            cm.align = "center";
-                            cm.sort = false;
-                            cm.statistics = false;
-                            cm.children = new List<ColumnModel>();
-                            cm.children.Add(cm1);
-                            cm.children.Add(cm2);
-                            cm.children.Add(cm3);
-                            cm.children.Add(cm4);
-                            cm.children.Add(cm5);
-                            cm.children.Add(cm6);
-                            columns.Add(cm);
+
+                                ColumnModel cm4 = new ColumnModel();
+                                cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
+                                cm4.label = "偏差率(%)";
+                                cm4.width = 100;
+                                cm4.align = "left";
+                                cm4.sort = false;
+                                cm4.statistics = false;
+                                cm4.hidden = false;
+                                cm4.children = null;
+
+
+                                ColumnModel cm = new ColumnModel();
+                                cm.name = "F_ProceCode_" + bom.F_ProceCode;
+                                cm.label = bom.F_ProceName;
+                                cm.width = 500;
+                                cm.align = "center";
+                                cm.sort = false;
+                                cm.statistics = false;
+                                cm.children = new List<ColumnModel>();
+                                cm.children.Add(cm1);
+                                cm.children.Add(cm2);
+                                cm.children.Add(cm3);
+
+                                cm.children.Add(cm5);
+                                cm.children.Add(cm6);
+                                cm.children.Add(cm4);
+
+                                columns.Add(cm);
+                            }
+                            else
+                            {
+                                //半成品
+                                ColumnModel cm1 = new ColumnModel();
+                                cm1.name = "F_GoodsCode_" + bom.F_ProceCode;
+                                cm1.label = "物料编码";
+                                cm1.width = 100;
+                                cm1.align = "left";
+                                cm1.sort = false;
+                                cm1.statistics = false;
+                                cm1.children = null;
+
+                                ColumnModel cm2 = new ColumnModel();
+                                cm2.name = "F_GoodsName_" + bom.F_ProceCode;
+                                cm2.label = "物料名称";
+                                cm2.width = 100;
+                                cm2.align = "left";
+                                cm2.sort = false;
+                                cm2.statistics = false;
+                                cm2.children = null;
+
+                                ColumnModel cm3 = new ColumnModel();
+                                cm3.name = "F_GoodsQty_" + bom.F_ProceCode;
+                                cm3.label = "数量(KG)";
+                                cm3.width = 100;
+                                cm3.align = "left";
+                                cm3.sort = false;
+                                cm3.statistics = false;
+                                cm3.children = null;
+
+                                ColumnModel cm4 = new ColumnModel();
+                                cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
+                                cm4.label = "转化率标准";
+                                cm4.width = 100;
+                                cm4.align = "left";
+                                cm4.sort = false;
+                                cm4.statistics = false;
+                                cm4.children = null;
+
+                                ColumnModel cm5 = new ColumnModel();
+                                cm5.name = "F_Convert_" + bom.F_ProceCode;
+                                cm5.label = "转化率(%)";
+                                cm5.width = 100;
+                                cm5.align = "left";
+                                cm5.sort = false;
+                                cm5.statistics = false;
+                                cm5.children = null;
+
+                                ColumnModel cm6 = new ColumnModel();
+                                cm6.name = "F_ConvertTag_" + bom.F_ProceCode;
+                                cm6.label = "转化率标记";
+                                cm6.width = 100;
+                                cm6.align = "left";
+                                cm6.sort = false;
+                                cm6.statistics = false;
+                                cm6.hidden = true;
+                                cm6.children = null;
+
+                                ColumnModel cm = new ColumnModel();
+                                cm.name = "F_ProceCode_" + bom.F_ProceCode;
+                                cm.label = bom.F_ProceName;
+                                cm.width = 600;
+                                cm.align = "center";
+                                cm.sort = false;
+                                cm.statistics = false;
+                                cm.children = new List<ColumnModel>();
+                                cm.children.Add(cm1);
+                                cm.children.Add(cm2);
+                                cm.children.Add(cm3);
+                                cm.children.Add(cm4);
+                                cm.children.Add(cm5);
+                                cm.children.Add(cm6);
+                                columns.Add(cm);
+                            }
+
+                           
+
+
                         }
                     }
-
-                    if (true)
-                    {
-                        var bom = maxboms.Find(r => r.F_Level == 0);
-                        ColumnModel cm1 = new ColumnModel();
-                        cm1.name = "F_GoodsCode_" + bom.F_ProceCode;
-                        cm1.label = "物料编码";
-                        cm1.width = 100;
-                        cm1.align = "left";
-                        cm1.sort = false;
-                        cm1.statistics = false;
-                        cm1.children = null;
-
-                        ColumnModel cm2 = new ColumnModel();
-                        cm2.name = "F_GoodsName_" + bom.F_ProceCode;
-                        cm2.label = "物料名称";
-                        cm2.width = 100;
-                        cm2.align = "left";
-                        cm2.sort = false;
-                        cm2.statistics = false;
-                        cm2.children = null;
-
-                        ColumnModel cm3 = new ColumnModel();
-                        cm3.name = "F_GoodsQty_" + bom.F_ProceCode;
-                        cm3.label = "实际份数(盒)";
-                        cm3.width = 100;
-                        cm3.align = "left";
-                        cm3.sort = false;
-                        cm3.statistics = false;
-                        cm3.children = null;
-
-
-
-                        ColumnModel cm5 = new ColumnModel();
-                        cm5.name = "F_Convert_" + bom.F_ProceCode;
-                        cm5.label = "理论份数(盒)";
-                        cm5.width = 100;
-                        cm5.align = "left";
-                        cm5.sort = false;
-                        cm5.statistics = false;
-                        cm5.children = null;
-
-                        ColumnModel cm6 = new ColumnModel();
-                        cm6.name = "F_ConvertTag_" + bom.F_ProceCode;
-                        cm6.label = "偏差数(盒)";
-                        cm6.width = 100;
-                        cm6.align = "left";
-                        cm6.sort = false;
-                        cm6.statistics = false;
-                        cm6.children = null;
-
-
-                        ColumnModel cm4 = new ColumnModel();
-                        cm4.name = "F_ConvertRange_" + bom.F_ProceCode;
-                        cm4.label = "偏差率(%)";
-                        cm4.width = 100;
-                        cm4.align = "left";
-                        cm4.sort = false;
-                        cm4.statistics = false;
-                        cm4.hidden = false;
-                        cm4.children = null;
-
-
-                        ColumnModel cm = new ColumnModel();
-                        cm.name = "F_ProceCode_" + bom.F_ProceCode;
-                        cm.label = bom.F_ProceName;
-                        cm.width = 500;
-                        cm.align = "center";
-                        cm.sort = false;
-                        cm.statistics = false;
-                        cm.children = new List<ColumnModel>();
-                        cm.children.Add(cm1);
-                        cm.children.Add(cm2);
-                        cm.children.Add(cm3);
-
-                        cm.children.Add(cm5);
-                        cm.children.Add(cm6);
-                        cm.children.Add(cm4);
-
-                        columns.Add(cm);
-                    }
                 }
-
 
                 #endregion
 
