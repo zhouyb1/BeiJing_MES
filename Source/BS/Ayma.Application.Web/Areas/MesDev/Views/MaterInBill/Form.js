@@ -25,10 +25,15 @@ var bootstrap = function ($, ayma) {
             if (status==2) {
                 $('#M_StockName').css('background', '#f1efef');
                 $('#M_StockName').attr('readonly', true);
+                $('#M_SupplyCode').attr('disabled', true);
                 $('#am_add').attr('disabled', true);
             }
             if (status == 3) {
-                $('#am_add').css('display','none')
+                $('#am_add').css('display', 'none')
+                $('#M_StockName').attr('disabled', true);
+                $('#M_SupplyCode').attr('disabled', true);
+                $('#M_StockCode').attr('disabled', true);
+                $('#M_Remark').attr('disabled', true);
             }
             //绑定仓库
             var dfop = {
