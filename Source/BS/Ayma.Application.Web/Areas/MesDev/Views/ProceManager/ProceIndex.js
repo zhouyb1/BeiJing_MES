@@ -26,7 +26,7 @@ var bootstrap = function ($, ayma) {
                     title: '新增工序',
                     url: top.$.rootUrl + '/MesDev/ProceManager/ProceForm',
                     width: 500,
-                    height: 300,
+                    height: 500,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -43,7 +43,24 @@ var bootstrap = function ($, ayma) {
                         title: '编辑工序',
                         url: top.$.rootUrl + '/MesDev/ProceManager/ProceForm?keyValue=' + keyValue,
                         width: 500,
-                        height: 300,
+                        height: 500,
+                        maxmin: true,
+                        callBack: function (id) {
+                            return top[id].acceptClick(refreshGirdData);
+                        }
+                    });
+                }
+            });
+            // 编辑
+            $('#girdtable').on('dblclick', function () {
+                var keyValue = $('#girdtable').jfGridValue('ID');
+                if (ayma.checkrow(keyValue)) {
+                    ayma.layerForm({
+                        id: 'form',
+                        title: '编辑工序',
+                        url: top.$.rootUrl + '/MesDev/ProceManager/ProceForm?keyValue=' + keyValue,
+                        width: 500,
+                        height: 500,
                         maxmin: true,
                         callBack: function (id) {
                             return top[id].acceptClick(refreshGirdData);
