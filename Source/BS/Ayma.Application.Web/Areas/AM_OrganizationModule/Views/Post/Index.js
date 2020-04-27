@@ -154,16 +154,7 @@ var bootstrap = function ($, ayma) {
                         { label: "岗位名称", name: "F_Name", width: 300, align: "left" },
                         { label: "岗位编号", name: "F_EnCode", width: 100, align: "left" },
                         {
-                            label: "所属部门", name: "F_DepartmentId", width: 120, align: "left",
-                            formatterAsync: function (callback, value) {
-                                ayma.clientdata.getAsync('department', {
-                                    key: value,
-                                    companyId: companyId,
-                                    callback: function (item) {
-                                        callback(item.F_FullName);
-                                    }
-                                });
-                            }
+                            label: "所属部门", name: "F_FullName", width: 120, align: "left",
                         },
                         { label: "备注", name: "F_Description", width: 200, align: "left" },
                         { label: "创建人", name: "F_CreateUserName", width: 100, align: "left" },

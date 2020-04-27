@@ -90,6 +90,8 @@ namespace Ayma.Application.Organization
         /// <returns></returns>
         [Column("F_MODIFYUSERNAME")]
         public string F_ModifyUserName { get; set; }
+        [NotMapped]
+        public string F_FullName { get; set; }
         #endregion
 
         #region 扩展操作

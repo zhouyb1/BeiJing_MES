@@ -31,10 +31,9 @@ namespace Ayma.Application.Organization
             try
             {
                 List<PostEntity> list = cache.Read<List<PostEntity>>(cacheKey + companyId, CacheId.post);
-                if (list == null) {
+
                     list = (List<PostEntity>)postService.GetList(companyId);
                     cache.Write<List<PostEntity>>(cacheKey + companyId, list, CacheId.post);
-                }
                 return list;
             }
             catch (Exception ex)

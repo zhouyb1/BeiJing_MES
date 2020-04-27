@@ -21,6 +21,7 @@ namespace Ayma.Application.Organization
                     t.F_PostId,
                     t.F_ParentId,
                     t.F_Name,
+(select F_FullName from AM_Base_Department where F_DepartmentId=t.F_DepartmentId) as F_FullName,
                     t.F_EnCode,
                     t.F_CompanyId,
                     t.F_DepartmentId,
@@ -48,7 +49,21 @@ namespace Ayma.Application.Organization
             {
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
-                strSql.Append(fieldSql);
+                strSql.Append(@" t.F_PostId,
+                    t.F_ParentId,
+                    t.F_Name,
+(select F_FullName from AM_Base_Department where F_DepartmentId=t.F_DepartmentId) as F_FullName,
+                    t.F_EnCode,
+                    t.F_CompanyId,
+                    t.F_DepartmentId,
+                    t.F_DeleteMark,
+                    t.F_Description,
+                    t.F_CreateDate,
+                    t.F_CreateUserId,
+                    t.F_CreateUserName,
+                    t.F_ModifyDate,
+                    t.F_ModifyUserId,
+                    t.F_ModifyUserName");
                 strSql.Append(" FROM AM_Base_Post t WHERE t.F_DeleteMark = 0 AND t.F_CompanyId =@companyId ORDER BY t.F_DepartmentId,t.F_ParentId,t.F_EnCode ");
                 return this.BaseRepository().FindList<PostEntity>(strSql.ToString(), new { companyId = companyId });
             }

@@ -45,6 +45,9 @@ var bootstrap = function ($, ayma) {
         var postData = $('#form').GetFormData(keyValue);
         if (postData["F_ParentId"] == undefined || postData["F_ParentId"] == '' || postData["F_ParentId"] == '&nbsp;') {
             postData["F_ParentId"] = '0';
+        } else if (postData["F_ParentId"] == keyValue) {
+            ayma.alert.error('上级不能是自己本身');
+            return false;
         }
         $.SaveForm(top.$.rootUrl + '/AM_OrganizationModule/Post/SaveForm?keyValue=' + keyValue, postData, function (res) {
             // 保存成功后才回调

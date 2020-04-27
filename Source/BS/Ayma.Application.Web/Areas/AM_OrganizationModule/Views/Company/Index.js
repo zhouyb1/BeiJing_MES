@@ -26,11 +26,13 @@ var bootstrap = function ($, ayma) {
             });
             // 新增
             $('#am_add').on('click', function () {
+                var keyValue = $('#girdtable').jfGridValue('F_CompanyId');
+                var F_CompanyId = $('#girdtable').jfGridValue('F_CompanyId');
                 selectedRow = null;
                 ayma.layerForm({
                     id: 'Form',
                     title: '添加公司',
-                    url: top.$.rootUrl + '/AM_OrganizationModule/Company/Form',
+                    url: top.$.rootUrl + '/AM_OrganizationModule/Company/Form?F_CompanyId=' + F_CompanyId,
                     width: 750,
                     height: 500,
                     callBack: function (id) {
@@ -83,8 +85,11 @@ var bootstrap = function ($, ayma) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
                     },
-                    { label: "负责人", name: "F_Manager", width: 100, align: "left"},
-                    { label: "经营范围", name: "F_Fax", width: 200, align: "left" },
+                    { label: "电话", name: "F_OuterPhone", width: 100, align: "left" },
+                    { label: "邮编", name: "F_Postalcode", width: 100, align: "left" },
+                    { label: "电子邮箱", name: "F_Email", width: 100, align: "left" },
+                    { label: "传真", name: "F_Fax", width: 100, align: "left" },
+                    { label: "经营范围", name: "F_BusinessScope", width: 200, align: "left" },
                     { label: "备注", name: "F_Description", width: 200, align: "left" }
                 ],
                 isTree: true,

@@ -7,7 +7,7 @@
  */
 var companyId = request('companyId');
 
-
+var companyId = request('companyId');
 var acceptClick;
 var keyValue = '';
 var bootstrap = function ($, ayma) {
@@ -22,7 +22,8 @@ var bootstrap = function ($, ayma) {
             // 部门性质
             $('#F_Nature').DataItemSelect({ code: 'DepartmentNature', maxHeight: 230 });
             // 上级部门
-            $('#F_ParentId').DepartmentSelect({ companyId: companyId, maxHeight: 160 });
+            $('#F_ParentId').DepartmentSelect({maxHeight: 160 });
+            $('#F_ParentId').selectSet(companyId);
         },
         initData: function () {
             if (!!selectedRow) {
@@ -39,6 +40,9 @@ var bootstrap = function ($, ayma) {
         var postData = $('#form').GetFormData(keyValue);
         if (postData["F_ParentId"] == '' || postData["F_ParentId"] == '&nbsp;') {
             postData["F_ParentId"] = '0';
+        } else if (postData["F_ParentId"] == keyValue) {
+            ayma.alert.error('上级不能是自己本身');
+            return false;
         }
         postData["F_CompanyId"] = companyId;
         $.SaveForm(top.$.rootUrl + '/AM_OrganizationModule/Department/SaveForm?keyValue=' + keyValue, postData, function (res) {
