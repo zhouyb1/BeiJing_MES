@@ -55,7 +55,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 // 访问数据接口参数
                 param: {}
             }).on('change', function () {
-                if (!!keyValue) {
+                     if (status == "" || status == 1) {
                     $('#Mes_InWorkShopDetail').jfGridSet('refreshdata', { rowdatas: [] });
                 }
             });
@@ -104,6 +104,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             });
             //添加物料
             $('#am_add').on('click', function () {
+                if ($('#I_WorkShop').selectGet() == "") {
+                    ayma.alert.error("请选择原日耗仓！");
+                    return false;
+                }
                 ayma.layerForm({
                     id: 'MaterListForm',
                     title: '添加物料',
