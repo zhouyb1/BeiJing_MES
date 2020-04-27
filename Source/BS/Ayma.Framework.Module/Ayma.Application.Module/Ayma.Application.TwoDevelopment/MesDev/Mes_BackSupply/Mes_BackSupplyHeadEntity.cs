@@ -41,7 +41,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 状态（1=单据生成，2=审核通过，3=单据完成，-1=单据删除）
         /// </summary>
         [Column("B_STATUS")]
-        public ErpEnums.BackSupplyStatusEnum B_Status { get; set; }
+        public ErpEnums.BackSupplyStatusEnum ?B_Status { get; set; }
         /// <summary>
         /// 添加人
         /// </summary>
