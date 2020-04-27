@@ -266,8 +266,8 @@ var bootstrap = function ($, ayma) {
                     {
                         label: "仓库名称", name: "M_StockName", width: 100, align: "left",
                         formatter: function (value, row, dfop) {                                                                         
-                            if (row != null && row.M_StockCode != undefined && parentFormId == "") {
-                                return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.M_StockCode + "','15de44ea-955b-456c-a082-4e02fb46e2f9')>" + row.M_StockName + "</ a>";
+                            if (row != null && row.M_StockCode != undefined) {
+                                return "<a href =# style=text-decoration:underline title='点击查询库存' onclick=js_method_stock('" + row.M_StockCode + "','9b04a0f2-28c0-4a58-973d-47bd51944a1c')>" + row.M_StockName + "</ a>";
                             }
                             else {
                                 return row.M_StockName;
