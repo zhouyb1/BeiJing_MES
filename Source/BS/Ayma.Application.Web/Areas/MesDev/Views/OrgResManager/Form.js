@@ -25,6 +25,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             if (status==2) {
                 $('#am_add').attr('disabled', true);
+                $('#O_ProCode').attr('disabled', true);
+                $('#O_TeamName').attr('disabled', true);
+                $('#O_StockName').attr('disabled', true);
             }
             $("#O_StockName").select({
                 type: 'default',

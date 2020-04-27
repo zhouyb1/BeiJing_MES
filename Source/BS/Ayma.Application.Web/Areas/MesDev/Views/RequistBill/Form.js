@@ -23,10 +23,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status==2) {
                 $("#R_StockName").attr('readonly', true);
                 $('#R_StockToName').attr('readonly', true);
-                $('#R_StockToName').attr('readonly', true);
+                $('#R_Remark').attr('readonly', true);
                 $('#am_add').attr('disabled', true);
             } if (status == 3) {
                 $('#am_add').css('display', 'none')
+                $("#R_StockName").attr('readonly', true);
+                $('#R_StockToName').attr('readonly', true);
+                $('#R_Remark').attr('readonly', true);
             }
             var dfop = {
                 type: 'default',

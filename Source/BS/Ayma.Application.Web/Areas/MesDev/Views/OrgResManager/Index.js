@@ -113,6 +113,7 @@ var bootstrap = function ($, ayma) {
             // 双击编辑
             $('#girdtable').on('dblclick', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
+                var status = $('#girdtable').jfGridValue('O_Status');
                 if (ayma.checkrow(keyValue)) {
                     ayma.layerForm({
                         id: 'MasterIndexForm',

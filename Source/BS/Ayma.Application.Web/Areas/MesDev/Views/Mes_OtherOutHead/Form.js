@@ -24,9 +24,13 @@ var bootstrap = function ($, ayma) {
                 $('#O_StockName').attr('readonly', true);
                 $("#O_DepartName").attr('readonly', true);
                 $('#am_add').attr('disabled', true);
+                $("#O_Remark").attr('readonly', true);
             }
             if (status == 3) {
                 $('#am_add').css('display', 'none')
+                $('#O_StockName').attr('readonly', true);
+                $("#O_DepartName").attr('readonly', true); 
+                $("#O_Remark").attr('readonly', true); 
             }
             //绑定仓库
             var dfop = {

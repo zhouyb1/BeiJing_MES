@@ -23,10 +23,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#C_StockName').attr('readonly', true);
                 $('#C_OrderNo').attr('readonly', true);
                 $('#C_WorkShop').attr('readonly', true);
-                $('#am_add').attr('disabled', true);
+                $('#C_Remark').attr('readonly', true);
+                $('#am_add').attr('disabled', true); 
             }
             if (status == 3) {
                 $('#am_add').css('display', 'none')
+                $('#C_StockName').attr('readonly', true);
+                $('#C_OrderNo').attr('readonly', true);
+                $('#C_WorkShop').attr('readonly', true);
+                $('#C_Remark').attr('readonly', true);
             }
             $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             $('#C_WorkShop').select({

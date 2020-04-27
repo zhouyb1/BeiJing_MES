@@ -21,7 +21,8 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             if (status==2) {
                 $('#B_StockName').attr('readonly', true);
-                $('#am_add').attr('disabled', true);
+                $('#am_add').attr('disabled', true); 
+                $('#B_Remark').attr('readonly', true);
             }
             var dfop = {
                 type: 'default',

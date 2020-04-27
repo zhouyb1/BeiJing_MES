@@ -22,9 +22,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             if (status==2) {
                 $('#O_StockName').attr('readonly', 'readonly');
+                $('#O_Remark').attr('readonly', 'readonly');
                 $('#O_StockName').css('background', '#f1efef');
             } if (status == 3) {
-                $('#am_add').css('display', 'none')
+                $('#am_add').css('display', 'none');
+                $('#O_StockName').attr('readonly', 'readonly');
+                $('#O_Remark').attr('readonly', 'readonly');
             }
             //出库类型
             $("#O_Kind").DataItemSelect({ code: "O_Kind" });

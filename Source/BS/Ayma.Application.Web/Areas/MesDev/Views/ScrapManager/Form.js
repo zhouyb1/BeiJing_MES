@@ -21,10 +21,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         },
         bind: function () {
             if (status == "2") {
-                $('#S_StockName').attr('readonly', 'readonly');
+                $('#S_StockName').attr('readonly', 'readonly'); 
+                $('#S_Remark').attr('readonly', 'readonly'); 
                 $("#am_add").attr('disabled',true);
             } if (status == 3) {
-                $('#am_add').css('display', 'none')
+                $('#am_add').css('display', 'none');
+                $('#S_StockName').attr('readonly', 'readonly');
+                $('#S_Remark').attr('readonly', 'readonly');
             }
             //绑定仓库
             var dfop = {

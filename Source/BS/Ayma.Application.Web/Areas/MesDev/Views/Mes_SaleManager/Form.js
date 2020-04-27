@@ -21,6 +21,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             if (status == 2) {
                 $('#S_StockCode').attr('readonly', true);
                 $("#S_CostomCode").attr('readonly', true);
+                $("#S_Remark").attr('readonly', true);
+                $("#am_add").attr('disabled',true);
             }
             //绑定仓库
             var dfop = {

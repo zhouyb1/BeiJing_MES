@@ -20,7 +20,8 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             if (status==2) {
                 $('#E_StockCode').attr('readonly', true);
-                $('#am_add').attr('disabled', true);
+                $('#E_Remark').attr('readonly', true);
+                $('#am_add').attr('disabled', true); 
             }
             
             $('#E_StockCode').DataSourceSelect({ code: 'StockList', value: 's_code', text: 's_name' }).on('change', function() {

@@ -22,6 +22,9 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
         bind: function () {
             if (status==2) {
                 $('#am_add').attr('disabled', true);
+                $('#I_WorkShop').attr('disabled', true);
+                $('#I_StockCode').attr('disabled', true);
+                $('#I_Remark').attr('disabled', true);
             }
 
             //绑定线边仓仓库
