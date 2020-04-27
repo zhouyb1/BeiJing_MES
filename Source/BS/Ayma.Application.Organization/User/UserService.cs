@@ -42,6 +42,7 @@ namespace Ayma.Application.Organization
                           ,t.[F_DepartmentId]
                           ,t.[F_SecurityLevel]
                           ,t.[F_OpenId]
+                          ,(select F_FullName from AM_Base_Department where F_DepartmentId=t.F_DepartmentId) as D_Code
                           ,t.[F_Question]
                           ,t.[F_AnswerQuestion]
                           ,t.[F_CheckOnLine]
