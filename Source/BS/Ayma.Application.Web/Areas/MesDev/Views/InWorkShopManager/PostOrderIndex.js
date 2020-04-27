@@ -170,6 +170,8 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "添加人", name: "I_CreateBy", width: 90, align: "center" },
                     { label: "创建时间", name: "I_CreateDate", width: 130, align: "center", sort: true },
+                    { label: "提交人", name: "I_UploadBy", width: 90, align: "center" },
+                    { label: "提交时间", name: "I_UploadDate", width: 130, align: "center", sort: true },
 
                 ],
                 mainId: 'ID',

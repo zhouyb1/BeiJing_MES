@@ -232,7 +232,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_OrderDate,
                 dbo.GetUserNameById(t.B_CreateBy) B_CreateBy,
                 t.B_Kind,
-                t.B_CreateDate
+                t.B_CreateDate,
+                t.B_UploadBy,
+                t.B_UploadDate
                 ");
                 strSql.Append("  FROM Mes_BackStockHead t left join Mes_BackStockDetail s on(t.B_BackStockNo=s.B_BackStockNo)");
                 strSql.Append("  WHERE 1=1 AND B_Status =3 ");

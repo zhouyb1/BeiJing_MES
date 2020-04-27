@@ -208,7 +208,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_StockName,
                 t.O_Remark,
                 dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
-                t.O_CreateDate
+                t.O_CreateDate,
+                t.O_UploadDate,
+                dbo.GetUserNameById(t.O_UploadBy) O_UploadBy
                 ");
                 strSql.Append("  FROM Mes_OrgResHead t left join Mes_OrgResDetail s on(t.O_OrgResNo=s.O_OrgResNo)");
                 strSql.Append("  WHERE 1=1 AND t.O_Status =3");

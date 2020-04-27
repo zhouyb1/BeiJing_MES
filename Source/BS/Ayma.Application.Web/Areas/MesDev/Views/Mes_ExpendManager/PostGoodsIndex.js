@@ -110,6 +110,8 @@ var bootstrap = function ($, ayma) {
                     { label: "添加人", name: "E_CreateBy", width: 130, align: "center" },
                     { label: "修改人", name: "E_UpdateBy", width: 130, align: "center" },
                     { label: "修改时间", name: "E_UpdateDate", width: 130, align: "left" },
+                    { label: "提交人", name: "E_UploadBy", width: 130, align: "center" },
+                    { label: "提交时间", name: "E_UploadDate", width: 130, align: "left" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

@@ -326,7 +326,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.M_Remark,
                 t.M_DeleteBy,
                 t.M_DeleteDate,
-                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
+                 M_UploadBy,
                 t.M_UploadDate
                 ");
                 strSql.Append("  FROM Mes_MaterInHead t left join Mes_MaterInDetail s on(t.M_MaterInNo=s.M_MaterInNo)");

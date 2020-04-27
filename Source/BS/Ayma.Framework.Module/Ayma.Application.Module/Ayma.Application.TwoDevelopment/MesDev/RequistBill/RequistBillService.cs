@@ -119,7 +119,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.R_Remark,
                 t.R_DeleteBy,
                 t.R_DeleteDate,
-                dbo.GetUserNameById(t.R_UploadBy) R_UploadBy,
+                R_UploadBy,
                 t.R_UploadDate
                 ");
                 strSql.Append("  FROM Mes_RequistHead t left join Mes_RequistDetail s on(t.R_RequistNo=s.R_RequistNo)");

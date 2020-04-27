@@ -180,7 +180,9 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "添加人", name: "O_CreateBy", width: 90, align: "center" },
-                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center"}
+                    { label: "添加时间", name: "O_CreateDate", width: 130, align: "center" },
+                    { label: "提交人", name: "O_UploadBy", width: 130, align: "center" },
+                    { label: "提交时间", name: "O_UploadDate", width: 130, align: "center" },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

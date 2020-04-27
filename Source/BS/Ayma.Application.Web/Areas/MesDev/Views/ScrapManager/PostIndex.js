@@ -155,6 +155,8 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "添加人", name: "S_CreateBy", width: 90, align: "center" },
                     { label: "添加时间", name: "S_CreateDate", width: 130, align: "center" },
+                    { label: "提交人", name: "S_UploadBy", width: 90, align: "center" },
+                    { label: "提交时间", name: "S_UploadDate", width: 130, align: "center" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,

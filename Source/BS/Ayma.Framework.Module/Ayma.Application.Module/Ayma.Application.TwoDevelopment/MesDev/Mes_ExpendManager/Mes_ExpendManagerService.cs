@@ -115,7 +115,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.E_CreateBy) E_CreateBy,
                 dbo.GetUserNameById(t.E_UpdateBy) E_UpdateBy,
                 t.E_UpdateDate,
-                t.E_OrderDate
+                t.E_OrderDate,
+                t.E_UploadBy,
+                t.E_UploadDate
                 ");
                 strSql.Append("  FROM Mes_ExpendHead t left join Mes_ExpendDetail s on(t.E_ExpendNo=s.E_ExpendNo)");
                 strSql.Append("  WHERE 1=1 and E_Status = 3 ");

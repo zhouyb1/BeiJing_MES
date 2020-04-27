@@ -158,6 +158,9 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "添加人", name: "C_CreateBy", width: 100, align: "center" },
+                    { label: "添加人", name: "C_CreateDate", width: 100, align: "center" },
+                    { label: "提交人", name: "C_UploadBy", width: 100, align: "center" },
+                    { label: "提交时间", name: "C_UploadDate", width: 100, align: "center" },
                     { label: "备注", name: "C_Remark", width: 130, align: "center" },
                 ],
                 mainId:'ID',

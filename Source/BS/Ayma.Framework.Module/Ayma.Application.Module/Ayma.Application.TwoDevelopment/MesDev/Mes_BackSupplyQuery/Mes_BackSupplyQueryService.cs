@@ -42,7 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.B_UpdateDate,
                 dbo.GetUserNameById(t.B_DeleteBy) B_DeleteBy,
                 t.B_DeleteDate,
-                dbo.GetUserNameById(t.B_UploadBy) B_UploadBy,
+                t.B_UploadBy,
                 t.B_UploadDate,
                 t.B_Remark
                 ");

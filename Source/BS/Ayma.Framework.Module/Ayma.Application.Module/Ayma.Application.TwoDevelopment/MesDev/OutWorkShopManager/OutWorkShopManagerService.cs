@@ -135,7 +135,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_Remark,
                 dbo.GetUserNameById(t.O_CreateBy) O_CreateBy,
                 t.O_CreateDate,
-                t.O_Kind
+                t.O_Kind,
+                t.O_UploadBy,
+                t.O_UploadDate
                 ");
                 strSql.Append("  FROM Mes_OutWorkShopHead t left join Mes_OutWorkShopDetail s on(t.O_OutNo=s.O_OutNo)");
                 strSql.Append("  WHERE 1=1 and t.O_Status=3");
