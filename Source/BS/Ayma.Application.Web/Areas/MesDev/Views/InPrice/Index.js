@@ -144,7 +144,7 @@ var bootstrap = function ($, ayma) {
                     { label: "资质到期时间", name: "S_EffectTime", width: 200, align: "left" },
                 ],
                 mainId:'ID',
-                reloadSelected: true,
+                reloadSelected: false,
                 isPage: true,
                 isSubGrid: true,
                 subGridRowExpanded: function (subgridId, row) {

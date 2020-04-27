@@ -108,7 +108,7 @@ var bootstrap = function ($, ayma) {
                         { label: '物料名称', name: 'P_GoodsName', width: 150, align: "left" },
                 ],
                 mainId:'ID',
-                reloadSelected: true,
+                reloadSelected: false,
                 isPage: true,
                 isSubGrid: true,
                 subGridRowExpanded: function (subgridId, row) {

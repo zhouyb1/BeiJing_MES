@@ -134,7 +134,7 @@ var bootstrap = function ($, ayma) {
                 mainId: 'ID',
                 sidx: "I_StockCode",
                 sord: 'ASC',
-                reloadSelected: true,
+                reloadSelected: false,
                 isPage: true,
                 onRenderComplete: function (rows) {
                     for (var i = 0; i < rows.length; i++) {
