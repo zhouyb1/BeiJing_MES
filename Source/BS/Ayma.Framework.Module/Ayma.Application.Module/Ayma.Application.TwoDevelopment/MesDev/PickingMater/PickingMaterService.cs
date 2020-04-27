@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 
 namespace Ayma.Application.TwoDevelopment.MesDev
@@ -2005,9 +2006,19 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                 dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
                                 dr["F_ConvertTag _" + row.F_ProceCode] = row.F_ConvertTag;
                             }
-                          
+
                             dt.Rows.Add(dr);
                         }
+
+
+                       foreach (var row in middlerows)
+                       {
+                           int index = 0;
+                           var currentBom = boms.Find(r => r.F_GoodsCode == row.F_GoodsCode && r.F_Level == row.F_Level);
+
+                           //树形前半段
+                            SetDataRowEx(index,currentBom.F_ParentID,converts,dt);
+                       }
 
 
                     }
@@ -2438,33 +2449,40 @@ GROUP BY F_CreateDate,F_GoodsCode";
             }
         }
 
-        private DataRow SetDataRowEx(string id, List<GoodsConvert> converts, DataRow dr)
+        private void SetDataRowEx(int index,string parentid, List<GoodsConvert> converts, DataTable dt)
         {
-            var row = converts.Find(r => r.F_ID == id);
-            if (row == null)
-                return dr;
+            var rows = converts.Where(r => r.F_ParentID == parentid);
+            if (rows == null || rows.Count()<1)
+                return ;
             else
             {
-                dr["F_CreateDate"] = row.F_CreateDate;
-                //末级
-                if (row.F_ProceCode.IsEmpty())
+
+                foreach (var row in rows)
                 {
-                    dr["F_GoodsCode_Source"] = row.F_GoodsCode;
-                    dr["F_GoodsName_Source"] = row.F_GoodsName;
-                    dr["F_GoodsQty_Source"] = row.F_Qty;
-                }
-                else
-                {
-                    dr["F_GoodsCode_" + row.F_ProceCode] = row.F_GoodsCode;
-                    dr["F_GoodsName_" + row.F_ProceCode] = row.F_GoodsName;
-                    dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
-                    dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
-                    dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
-                    dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                      
                 }
 
 
-                return SetDataRow(row.F_ParentID, converts, dr);
+                //dr["F_CreateDate"] = row.F_CreateDate;
+                ////末级
+                //if (row.F_ProceCode.IsEmpty())
+                //{
+                //    dr["F_GoodsCode_Source"] = row.F_GoodsCode;
+                //    dr["F_GoodsName_Source"] = row.F_GoodsName;
+                //    dr["F_GoodsQty_Source"] = row.F_Qty;
+                //}
+                //else
+                //{
+                //    dr["F_GoodsCode_" + row.F_ProceCode] = row.F_GoodsCode;
+                //    dr["F_GoodsName_" + row.F_ProceCode] = row.F_GoodsName;
+                //    dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
+                //    dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
+                //    dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
+                //    dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                //}
+
+
+                //return SetDataRow(row.F_ParentID, converts, dr);
             }
         }
         #endregion
