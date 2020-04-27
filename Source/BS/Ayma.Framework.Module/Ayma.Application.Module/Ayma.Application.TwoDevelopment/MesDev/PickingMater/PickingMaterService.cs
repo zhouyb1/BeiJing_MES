@@ -1980,6 +1980,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                            }
                         }
 
+
                        var middlerows = group.Where(r => r.F_Level == maxcountlevel).OrderBy(r=>r.F_ParentID);
                        foreach (var row in middlerows)
                        {
@@ -2002,7 +2003,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
                                 dr["F_GoodsQty_" + row.F_ProceCode] = row.F_Qty;
                                 dr["F_ConvertRange_" + row.F_ProceCode] = row.F_ConvertRange;
                                 dr["F_Convert_" + row.F_ProceCode] = row.F_Convert;
-                                dr["F_ConvertTag_" + row.F_ProceCode] = row.F_ConvertTag;
+                                dr["F_ConvertTag _" + row.F_ProceCode] = row.F_ConvertTag;
                             }
                           
                             dt.Rows.Add(dr);
