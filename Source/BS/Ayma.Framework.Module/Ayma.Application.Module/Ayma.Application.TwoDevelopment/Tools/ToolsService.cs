@@ -1588,7 +1588,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 UserInfo userinfo = LoginUserInfo.Get();
                 var dp = new DynamicParameters(new {});
                 dp.Add("@OrderNo", orderNo);
-                dp.Add("@UserName", userinfo.realName);
+                dp.Add("@UserName", userinfo.userId);
                 dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
                 dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
                 this.BaseRepository().ExecuteByProc(proc, dp);
@@ -1620,7 +1620,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
                 UserInfo userinfo = LoginUserInfo.Get();
                 var dp = new DynamicParameters(new { });
                 dp.Add("@OrderNo", orderNo);
-                dp.Add("@UserName", userinfo.realName);
+                dp.Add("@UserName", userinfo.userId);
                 dp.Add("@errcode", "", DbType.Int32, ParameterDirection.Output);
                 dp.Add("@errtxt", "", DbType.String, ParameterDirection.Output);
                 this.BaseRepository().ExecuteByProc(proc, dp);
