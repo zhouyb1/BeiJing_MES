@@ -175,8 +175,8 @@ var bootstrap = function ($, ayma) {
                         { label: '修改人', name: 'O_UpdateBy', width: 90, align: "center" },
                         { label: '修改时间', name: 'O_UpdateDate', width: 130, align: "center" },
                         { label: '提交人', name: 'O_UploadBy', width: 100, align: "center" },
-                        { label: '提交时间', name: 'O_UploadDate', width: 130, align: "center" },
-                        { label: '月结', name: 'MonthBalance', width: 90, align: "center" },
+                        { label: '提交时间', name: 'O_UploadDate', width: 130, align: "center" }
+                        //{ label: '月结', name: 'MonthBalance', width: 90, align: "center" },
                 ],
                 mainId: 'ID',
                 reloadSelected: true,
