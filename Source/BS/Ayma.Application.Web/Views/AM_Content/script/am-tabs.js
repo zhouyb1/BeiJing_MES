@@ -74,6 +74,7 @@
                 }
             }
             else {
+                ayma.frameTab.focus(module.F_ModuleId);
             }
         },
         //解决iframe src缓存
