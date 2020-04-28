@@ -78,11 +78,6 @@ var bootstrap = function ($, ayma) {
                 url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
                 // 访问数据接口参数
             });
-            $('#M_SupplyCode').on('change', function () {
-                if (status == "" || status == 1) {
-                    $('#Mes_MaterInDetail').jfGridSet('refreshdata', { rowdatas: [] });
-                }
-            });
             var orderNo = "";
             if (!!keyValue) {//根据主键获取生产订单号
                 $.ajax({
@@ -148,6 +143,11 @@ var bootstrap = function ($, ayma) {
                     },
                     {
                         label: '物料名称', name: 'M_GoodsName', width: 110, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '供应商编码', name: 'M_SupplyCode', width: 110, align: 'left', editType: 'label'
+                    }, {
+                        label: '供应商名称', name: 'M_SupplyName', width: 110, align: 'left', editType: 'label'
                     },
                      {
                          label: "商品类型", name: "M_Kind", width: 60, align: "left",
@@ -361,7 +361,7 @@ var bootstrap = function ($, ayma) {
                 var flagRow = true;
                 //加个循环判断数组重复
                 for (var k = 0; k < rows.length; k++) {
-                    if (rows[k].M_GoodsCode == row.p_goodscode) {
+                    if (rows[k].M_GoodsCode == row.p_goodscode && rows[k].M_SupplyCode == row.p_supplycode) {
                         flagRow = false;
                     }
                 }
@@ -376,7 +376,7 @@ var bootstrap = function ($, ayma) {
                     var flag = true;
                     //加个循环判断数组重复
                     for (var j = 0; j < rows.length; j++) {
-                        if (rows[j].M_GoodsCode == data[i].p_goodscode) {
+                        if (rows[j].M_GoodsCode == data[i].p_goodscode && rows[k].M_SupplyCode == row.p_supplycode) {
                             flag = false;
                         }
                     }
