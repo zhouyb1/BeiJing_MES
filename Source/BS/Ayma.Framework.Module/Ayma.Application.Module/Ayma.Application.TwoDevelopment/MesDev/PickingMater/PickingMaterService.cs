@@ -2497,7 +2497,7 @@ GROUP BY F_CreateDate,F_GoodsCode";
         /// <returns></returns>
         public bool AutoCreateOrder(string date, out string message)
 
-        {
+        {  
             bool success = true;
             message = "";
             var db = this.BaseRepository().BeginTrans();
@@ -2769,7 +2769,7 @@ ORDER BY C.F_Level";
                 #endregion
 
                 #region 保存数据
-
+                   
                 if (success)
                 {
                     string strUpdate = @"UPDATE dbo.Mes_ProductOrderHead SET P_Status=3 WHERE P_Status=2 AND CONVERT(VARCHAR(10),P_UseDate,120) =@date";
