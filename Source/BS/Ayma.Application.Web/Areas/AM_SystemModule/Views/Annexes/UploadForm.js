@@ -23,7 +23,7 @@ var bootstrap = function ($, ayma) {
             $item.append('<div class="am-file-image"><img src="' + top.$.rootUrl + '/Content/images/filetype/' + item.F_FileType + '.png"></div>');
             $item.append('<span class="am-file-name">' + item.F_FileName + '(' + ayma.countFileSize(item.F_FileSize) + ')</span>');
 
-            $item.append('<div class="am-msg"><i class="fa fa-check-circle"></i></div>');
+            //$item.append('<div class="am-msg"><i class="fa fa-check-circle"></i></div>');删除图标
             $item.append('<div class="am-tool-bar"><i class="fa fa-cloud-preview" title="预览"  data-value="' + item.F_Id + '" ></i><i class="fa fa-cloud-download" title="下载"  data-value="' + item.F_Id + '" ></i><i class="fa fa-minus-circle" title="删除"  data-value="' + item.F_Id + '" ></i></div>');
 
             $item.find('.am-tool-bar .fa-minus-circle').on('click', function () {
