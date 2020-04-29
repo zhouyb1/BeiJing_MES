@@ -233,10 +233,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 220,
-                isEidt: true,
+                isEidt: status == 1 || status == "" ? true : false,
                 height: 220,
                 inputCount: 1,
-                isMultiselect: true,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 isStatistics: true,
             });
         },

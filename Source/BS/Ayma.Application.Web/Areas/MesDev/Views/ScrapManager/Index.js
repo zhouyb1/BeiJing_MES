@@ -57,8 +57,8 @@ var bootstrap = function ($, ayma) {
                     id: 'ScrapIndexForm',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/ScrapManager/Form?formId=ScrapIndexForm',
-                    width: 800,
-                    height: 500,
+                    width: 1000,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -75,8 +75,8 @@ var bootstrap = function ($, ayma) {
                         id: 'ScrapIndexForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=ScrapIndexForm',
-                        width: 800,
-                        height: 500,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function (id) {
@@ -94,8 +94,8 @@ var bootstrap = function ($, ayma) {
                         id: 'ScrapIndexForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/ScrapManager/Form?status=' + statu + '&keyValue=' + keyValue + '&formId=ScrapIndexForm',
-                        width: 800,
-                        height: 500,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function (id) {

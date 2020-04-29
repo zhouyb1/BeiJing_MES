@@ -25,7 +25,7 @@ var bootstrap = function ($, ayma) {
                 footerrow: true,
                 minheight: 400,
                 height: 300,
-                isStatistics:true
+                isStatistics: false
         });
         },
         initData: function () {

@@ -123,20 +123,6 @@ var bootstrap = function ($, ayma) {
                         label: '物料名称', name: 'O_GoodsName', width: 130, align: 'left', editType: 'label'
                     },
                     {
-                        label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'label',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
-                                    row.P_Price = 0;
-                                }
-
-                            }
-                        }
-                    },
-                    {
-                        label: '单位', name: 'O_Unit', width: 60, align: 'left', editType: 'label'
-                    },
-                    {
                         label: '数量', name: 'O_Qty', width: 60, align: 'left', editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
@@ -208,14 +194,28 @@ var bootstrap = function ($, ayma) {
                         label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'label'
                     },
                     {
+                        label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'label',
+                        editOp: {
+                            callback: function (rownum, row) {
+                                if (/\D/.test(row.P_Price.toString().replace('.', ''))) { //验证只能为数字
+                                    row.P_Price = 0;
+                                }
+
+                            }
+                        }
+                    },
+                    {
+                        label: '单位', name: 'O_Unit', width: 60, align: 'left', editType: 'label'
+                    },
+                    {
                         label: '备注', name: 'O_Remark', width: 100, align: 'left', editType: 'input'
                     },
                 ],
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 350,
-                isEidt: true,
-                isMultiselect: true,
+                isEidt: status == 1 || status == "" ? true : false,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
                 inputCount: 2
             });

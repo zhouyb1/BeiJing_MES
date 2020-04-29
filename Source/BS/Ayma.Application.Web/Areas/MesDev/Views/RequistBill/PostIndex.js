@@ -71,8 +71,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue + '+&status=' + status,
-                        width: 900,
-                        height: 600,
+                        width: 950,
+                        height: 700,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {
@@ -90,8 +90,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/RequistBill/Form?keyValue=' + keyValue+'+&status=' + status,
-                        width: 900,
-                        height: 600,
+                        width: 950,
+                        height: 700,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {

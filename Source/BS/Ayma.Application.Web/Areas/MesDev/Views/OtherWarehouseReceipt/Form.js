@@ -139,9 +139,6 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                    {
-                        label: '包装单位', name: 'O_Unit2', width: 80, align: 'left', editType: 'label'
-                    },
                      {
                          label: '价格', name: 'O_Price', width: 80, align: 'left', editType: 'label',
                          editOp: {
@@ -152,7 +149,10 @@ var bootstrap = function ($, ayma) {
 
                              }
                          }
-                     },//最新维护的价格
+                     },
+                    {
+                        label: '包装单位', name: 'O_Unit2', width: 80, align: 'left', editType: 'label'
+                    },//最新维护的价格
                     {
                         label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'input',
                         editOp: {
@@ -171,8 +171,8 @@ var bootstrap = function ($, ayma) {
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 320,
-                isEidt: true,
-                isMultiselect: true,
+                isEidt: status == 1 || status == "" ? true : false,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
                 inputCount: 3
             });

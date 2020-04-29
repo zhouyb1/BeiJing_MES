@@ -45,8 +45,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                 ],
                 isAutoHeight: true,
-                isMultiselect: true,    // 是否允许多选
-                isEidt: true,
                 footerrow: true,
                 minheight: 400
             });

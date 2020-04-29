@@ -117,9 +117,9 @@ var bootstrap = function ($, ayma) {
                     },
                 ],
                 isAutoHeight: true,
-                isEidt: true,
+                isEidt: status == 1 || status == "" ? true : false,
                 reloadSelected: true,
-                isMultiselect: true,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 footerrow: true,
                 minheight: 400,
                 inputCount:2

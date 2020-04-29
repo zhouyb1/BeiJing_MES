@@ -162,10 +162,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     },
                 ],
                 isAutoHeight: true,
-                isEidt: true,
+                isEidt: status == 1 || status == "" ? true : false,
                 footerrow: true,
                 minheight: 330,
-                isMultiselect: true,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
                 inputCount: 2
             });

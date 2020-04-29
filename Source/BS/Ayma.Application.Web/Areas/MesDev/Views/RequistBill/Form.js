@@ -157,8 +157,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 400,
-                isEidt: true,
-                isMultiselect: true,
+                isEidt: status == 1 || status == "" ? true : false,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
                 inputCount: 2
             });

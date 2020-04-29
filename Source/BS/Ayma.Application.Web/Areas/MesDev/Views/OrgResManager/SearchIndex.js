@@ -102,8 +102,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MasterIndexForm',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/SearchForm?keyValue=' + keyValue + "&formId=MasterIndexForm",
-                        width: 800,
-                        height: 600,
+                        width: 1000,
+                        height: 750,
                         maxmin: true,
                         btn:null,
                         callBack: function (id) {
@@ -120,8 +120,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MasterIndexForm',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/SearchForm?keyValue=' + keyValue + "&formId=MasterIndexForm",
-                        width: 800,
-                        height: 600,
+                        width: 1000,
+                        height: 750,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {

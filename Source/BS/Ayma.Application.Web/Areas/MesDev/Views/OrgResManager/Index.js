@@ -84,7 +84,7 @@ var bootstrap = function ($, ayma) {
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/OrgResManager/Form?formId=MasterIndexForm',
                     width: 1000,
-                    height: 700,
+                    height: 750,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -101,7 +101,7 @@ var bootstrap = function ($, ayma) {
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm&status=" + status,
                         width: 1000,
-                        height: 700,
+                        height: 750,
                         maxmin: true,
                         btn: status == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {
@@ -120,7 +120,7 @@ var bootstrap = function ($, ayma) {
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/OrgResManager/Form?keyValue=' + keyValue + "&formId=MasterIndexForm&status=" + status,
                         width: 900,
-                        height: 600,
+                        height: 750,
                         maxmin: true,
                         btn: status == 2 ? null : ['确认', '关闭'],
                         callBack: function (id) {

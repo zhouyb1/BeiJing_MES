@@ -55,8 +55,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue + '+&status=' + status,
-                        width: 700,
-                        height: 500,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn:null,
                         callBack: function (id) {
@@ -74,8 +74,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/ScrapManager/PostPageForm?keyValue=' + keyValue + '+&status=' + status,
-                        width: 700,
-                        height: 500,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn: null,
                         callBack: function (id) {

@@ -43,8 +43,8 @@ var bootstrap = function ($, ayma) {
                     id: 'form',
                     title: '新增',
                     url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/Form?formId=form',
-                    width: 800,
-                    height: 600,
+                    width: 1000,
+                    height: 700,
                     maxmin: true,
                     callBack: function (id) {
                         return top[id].acceptClick(refreshGirdData);
@@ -60,8 +60,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/Form?status=' + status + '&keyValue=' + keyValue + '&formId=form',
-                        width: 800,
-                        height: 600,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn: status == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {
@@ -79,8 +79,8 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/Mes_ExpendManager/Form?status=' + status + '&keyValue=' + keyValue + '&formId=form',
-                        width: 800,
-                        height: 600,
+                        width: 1000,
+                        height: 700,
                         maxmin: true,
                         btn: status == 2 ? null : ['确认', '关闭'],
                         callBack: function (id) {

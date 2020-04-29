@@ -49,21 +49,6 @@ var bootstrap = function ($, ayma) {
                 param: {}
 
             });
-            // 新增
-            $('#am_add').on('click', function () {
-                selectedRow = null;
-                ayma.layerForm({
-                    id: 'form',
-                    title: '新增',
-                    url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/Form?formId=form',
-                    width: 900,
-                    height: 600,
-                    maxmin: true,
-                    callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
-                    }
-                });
-            });
             // 编辑
             $('#am_detail').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');
@@ -74,7 +59,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/Form?keyValue=' + keyValue + '&status=' + statu + '&formId=form',
-                        width: 900,
+                        width: 1000,
                         height: 600,
                         maxmin: true,
                         btn: null,
@@ -94,7 +79,7 @@ var bootstrap = function ($, ayma) {
                         id: 'form',
                         title: '单据详情',
                         url: top.$.rootUrl + '/MesDev/OtherWarehouseReceipt/Form?keyValue=' + keyValue + '&status=' + statu,
-                        width: 900,
+                        width: 1000,
                         height: 600,
                         maxmin: true,
                         btn: null,

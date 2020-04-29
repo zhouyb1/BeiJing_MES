@@ -55,21 +55,6 @@ var bootstrap = function ($, ayma) {
             $('#am_refresh').on('click', function () {
                 location.reload();
             });
-            // 新增
-            $('#am_add').on('click', function () {
-                selectedRow = null;
-                ayma.layerForm({
-                    id: 'OtherHead',
-                    title: '新增其它出库单',
-                    url: top.$.rootUrl + '/MesDev/Mes_OtherOutHead/Form?formId=OtherHead',
-                    width: 900,
-                    height: 650,
-                    maxmin: true,
-                    callBack: function (id) {
-                        return top[id].acceptClick(refreshGirdData);
-                    }
-                });
-            });
             // 编辑
             $('#am_edit').on('click', function () {
                 var keyValue = $('#girdtable').jfGridValue('ID');

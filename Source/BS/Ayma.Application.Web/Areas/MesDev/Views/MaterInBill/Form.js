@@ -283,8 +283,8 @@ var bootstrap = function ($, ayma) {
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 320,
-                isEidt: true,
-                isMultiselect: true,
+                isEidt: status == 1 || status == "" ? true : false,
+                isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
                 inputCount: 4,
                 isStatistics: true
