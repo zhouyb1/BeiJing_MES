@@ -241,9 +241,9 @@ var bootstrap = function ($, ayma) {
                             });
                         }
                     },
-                    { label: "单据编号", name: "I_InNo", width: 130, align: "center"},
-                    { label: "入往日耗仓", name: "I_StockName", width: 130, align: "center" },
+                    { label: "单据编号", name: "I_InNo", width: 140, align: "center" },
                     { label: "原日耗仓", name: "I_WorkShop", width: 130, align: "center" },
+                    { label: "入往日耗仓", name: "I_StockName", width: 130, align: "center" },
                     {
                         label: "单据时间", name: "I_OrderDare", width: 100, align: "center",sort:true,
                         formatter: function (cellvalue, options, rowObject) {
