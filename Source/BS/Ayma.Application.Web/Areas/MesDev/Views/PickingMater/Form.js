@@ -125,6 +125,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     width: 1000,
                     height: 600,
                     maxmin: true,
+                    btn: ['关闭'],
                     callback: function(id, index) {
                         return top[id].closeWindow();
                     }

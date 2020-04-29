@@ -72,6 +72,7 @@ var bootstrap = function ($, ayma) {
                         width: 750,
                         height: 600,
                         maxmin: true,
+                        btn: ['关闭'],
                         callBack: function (id, index) {
                             return top[id].closeWindow();
                         }

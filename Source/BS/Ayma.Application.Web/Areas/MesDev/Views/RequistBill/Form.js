@@ -100,6 +100,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     width: 1000,
                     height: 800,
                     maxmin: true,
+                    btn: ['关闭'],
                     callBack: function (id, index) {
                         return top[id].closeWindow();
                     }
