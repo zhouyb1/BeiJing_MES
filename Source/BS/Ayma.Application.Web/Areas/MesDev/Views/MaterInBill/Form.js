@@ -140,32 +140,16 @@ var bootstrap = function ($, ayma) {
                      },
 
                     {
-                        label: '物料编码', name: 'M_GoodsCode', width: 90, align: 'left', editType: 'label'
+                        label: '物料编码', name: 'M_GoodsCode', width: 60, align: 'left', editType: 'label'
                     },
                     {
                         label: '物料名称', name: 'M_GoodsName', width: 110, align: 'left', editType: 'label'
                     },
                     {
-                        label: '供应商编码', name: 'M_SupplyCode', width: 110, align: 'left', editType: 'label'
+                        label: '供应商编码', name: 'M_SupplyCode', width: 70 , align: 'left', editType: 'label'
                     }, {
                         label: '供应商名称', name: 'M_SupplyName', width: 110, align: 'left', editType: 'label'
-                    },
-                     {
-                         label: "商品类型", name: "M_Kind", width: 60, align: "left",
-                         formatterAsync: function (callback, value, row) {
-
-                             ayma.clientdata.getAsync('dataItem', {
-                                 key: value,
-                                 code: 'GoodsType',
-                                 callback: function (_data) {
-                                     callback(_data.text);
-                                 }
-                             });
-                         }
-                     },
-                    {
-                        label: '单位', name: 'M_Unit', width: 40, align: 'left', editType: 'label'
-                    },
+                    },               
                      {
                          label: '入库数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
                          editOp: {
@@ -191,6 +175,27 @@ var bootstrap = function ($, ayma) {
                              }
                          }
                      },
+                   {
+                       label: '批次', name: 'M_Batch', width: 80, align: 'left' ,editType: 'input',
+                       editOp: {
+                           callback: function (rownum, row) {
+                               if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
+                                   row.M_Batch = 0;
+                               }
+
+                           }
+                       }
+                   },
+                   {
+                       label: "不含税金额", name: "不含税金额", width: 80, align: "left", formatter: function (value, row, dfop) {
+                           return row.M_Price * row.M_Qty;
+                       }
+                   },
+                   {
+                       label: "含税金额", name: "含税金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           return row.M_TaxPrice * row.M_Qty;
+                       }
+                   },
                       {
                           label: "包装规格", name: "M_UnitQty", width: 60, align: "left", editType: 'select', editOp: {
                               width: 400,
@@ -210,6 +215,9 @@ var bootstrap = function ($, ayma) {
                                   }
                               }
                           }
+                      },
+                      {
+                          label: '单位', name: 'M_Unit', width: 40, align: 'left', editType: 'label'
                       },
                       { label: "包装单位", name: "M_Unit2", width: 60, align: "left" },
                      {
@@ -243,27 +251,19 @@ var bootstrap = function ($, ayma) {
                             }
                         }
                     },
-                   {
-                       label: "不含税金额", name: "不含税金额", width: 80, align: "left", formatter: function (value, row, dfop) {
-                           return row.M_Price * row.M_Qty;
-                       }
-                   },
-                   {
-                       label: "含税金额", name: "含税金额", width: 60, align: "left", formatter: function (value, row, dfop) {
-                           return row.M_TaxPrice * row.M_Qty;
-                       }
-                   },
-                   {
-                        label: '批次', name: 'M_Batch', width: 80, align: 'left', editType: 'input',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
-                                    row.M_Batch = 0;
-                                }
+                     {
+                         label: "商品类型", name: "M_Kind", width: 60, align: "left",
+                         formatterAsync: function (callback, value, row) {
 
-                            }
-                        }
-                    }, 
+                             ayma.clientdata.getAsync('dataItem', {
+                                 key: value,
+                                 code: 'GoodsType',
+                                 callback: function (_data) {
+                                     callback(_data.text);
+                                 }
+                             });
+                         }
+                     },
                     {
                         label: "仓库名称", name: "M_StockName", width: 100, align: "left",
                         formatter: function (value, row, dfop) {                                                                         
@@ -362,7 +362,7 @@ var bootstrap = function ($, ayma) {
                 var flagRow = true;
                 //加个循环判断数组重复
                 for (var k = 0; k < rows.length; k++) {
-                    if (rows[k].M_GoodsCode == row.p_goodscode && rows[k].M_SupplyCode == row.p_supplycode) {
+                    if (rows[k].M_GoodsCode == row.p_goodscode && rows[k].M_SupplyCode == row.p_supplycode && rows[k].M_Batch == ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "")) {
                         flagRow = false;
                     }
                 }
@@ -377,7 +377,7 @@ var bootstrap = function ($, ayma) {
                     var flag = true;
                     //加个循环判断数组重复
                     for (var j = 0; j < rows.length; j++) {
-                        if (rows[j].M_GoodsCode == data[i].p_goodscode && rows[k].M_SupplyCode == row.p_supplycode) {
+                        if (rows[j].M_GoodsCode == data[i].p_goodscode && rows[k].M_SupplyCode == row.p_supplycode && rows[k].M_Batch == ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "")) {
                             flag = false;
                         }
                     }

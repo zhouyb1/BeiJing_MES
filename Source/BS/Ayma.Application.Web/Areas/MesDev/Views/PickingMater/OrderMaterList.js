@@ -185,8 +185,13 @@ var bootstrap = function ($, ayma) {
                         row['C_GoodsName'] = row['I_GoodsName'];
                         row['C_Unit'] = row['I_Unit'];
                         row['C_Batch'] = row["I_Batch"];
-                        row["C_Qty"] = quantity;
-                        row["C_Qty2"] = quantity;
+                        if (row['C_StockName'] == "蔬菜库") {
+                            row["C_Qty"] = row["I_Qty"];
+                            row["C_Qty2"] = row["I_Qty"] / row['G_UnitQty'];
+                        } else {
+                            row["C_Qty"] = quantity;
+                            row["C_Qty2"] = quantity;
+                        }                 
                         row["ID"] = row['ID'];
                         row["C_TeamCode"] = row["I_TeamCode"];
                         row["C_TeamName"] = row["I_TeamName"];

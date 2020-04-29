@@ -152,17 +152,13 @@ var bootstrap = function ($, ayma) {
                 success: function (data) {
                     var isOk = JSON.parse(data).data;
                     if (isOk) {
-                        $("#P_SupplyCode").addClass("am-field-error");
-                        $("#P_SupplyCode").parent().append(html);
-                        $("#P_GoodsCode").addClass("am-field-error");
-                        $("#P_GoodsCode").parent().append(html);
-                        ayma.alert.error("编码重复");
+                        $("#P_SupplyName").addClass("am-field-error");
+                        $("#P_GoodsName").addClass("am-field-error");
+                        ayma.alert.error("供应商【" + $("#P_SupplyName").selectGet() + "】已有物料【" + $("#P_GoodsName").selectGet() + "】请勿重复添加！");
                         SupplyCodestate = false;
                     } else {
-                        $("#P_SupplyCode").removeClass("am-field-error");
-                        $("#isCode").remove();
-                        $("#P_GoodsCode").removeClass("am-field-error");
-                        $("#isCode2").remove();
+                        $("#P_SupplyName").removeClass("am-field-error");
+                        $("#P_GoodsName").removeClass("am-field-error");
                         SupplyCodestate = true;
                     }
                 }
@@ -238,7 +234,6 @@ var bootstrap = function ($, ayma) {
           
                 // 保存成功后才回调
                 if (!!callBack) {
-                    ayma.alert.success("保存成功！");
                     callBack();
                 }
             })

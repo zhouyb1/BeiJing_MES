@@ -169,11 +169,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                             row.C_Qty2 = (row.C_Qty / row.C_UnitQty).toFixed(6) / 1;
                         }
-                    },
-                    formatter: function (value, row, dfop) {
-                            if (row.C_StockName == "蔬菜库") {
-                                return row.C_Qty = row.StockQty;
-                            }   
                     }
                 },
                 {
@@ -196,11 +191,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 row.C_Qty = row.StockQty;
                                 row.C_Qty2 = (row.C_Qty / row.C_UnitQty).toFixed(6) / 1;
                             }
-                        }
-                    },
-                    formatter: function (value, row, dfop) {
-                        if (row.C_StockName == "蔬菜库") {
-                            return row.C_Qty2 = row.C_Qty / row.C_UnitQty;
                         }
                     }
                 },
