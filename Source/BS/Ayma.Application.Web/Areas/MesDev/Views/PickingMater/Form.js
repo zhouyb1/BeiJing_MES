@@ -147,28 +147,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     }
                 },
                 { label: "单位", name: "C_Unit", width: 40, align: "left" },
-                {
-                    label: "计划数量", name: "C_PlanQty", width: 100, align: "left"
-                    , formatter: function (value, row, dfop)
-                    {
-                        if (row.C_PlanQty != undefined && !!row.C_PlanQty) {
-                            return row.C_PlanQty.toFixed(6)/1;
-                        }
-                        if (row.C_PlanQty == "") {
-                            return row.C_PlanQty = 0;
-                        }
-                    }
-                },
-                {
-                    label: "建议数量", name: "C_SuggestQty", width: 100, align: "left", formatter: function (value, row, dfop) {
-                        if (row.C_SuggestQty != undefined && !!row.C_PlanQty) {
-                            return row.C_SuggestQty.toFixed(6) / 1;
-                        }
-                        if (row.C_SuggestQty == "") {
-                            return row.C_SuggestQty = 0;
-                        }
-                    }
-                },
+                { label: "批次", name: "C_Batch", width: 80, align: "left" },
                 {
                     label: "领料数量",
                     name: "C_Qty",
@@ -267,8 +246,27 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         }
                     }
                 },
-               { label: "批次", name: "C_Batch", width: 80, align: "left" },
-                    
+                {
+                    label: "计划数量", name: "C_PlanQty", width: 100, align: "left"
+                    , formatter: function (value, row, dfop) {
+                        if (row.C_PlanQty != undefined && !!row.C_PlanQty) {
+                            return row.C_PlanQty.toFixed(6) / 1;
+                        }
+                        if (row.C_PlanQty == "") {
+                            return row.C_PlanQty = 0;
+                        }
+                    }
+                },
+                {
+                    label: "建议数量", name: "C_SuggestQty", width: 100, align: "left", formatter: function (value, row, dfop) {
+                        if (row.C_SuggestQty != undefined && !!row.C_PlanQty) {
+                            return row.C_SuggestQty.toFixed(6) / 1;
+                        }
+                        if (row.C_SuggestQty == "") {
+                            return row.C_SuggestQty = 0;
+                        }
+                    }
+                } 
                 ],
                 isAutoHeight: false,
                 footerrow: true,
