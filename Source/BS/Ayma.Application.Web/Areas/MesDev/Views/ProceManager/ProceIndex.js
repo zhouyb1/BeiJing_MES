@@ -91,7 +91,7 @@ var bootstrap = function ($, ayma) {
                     { label: "工序名称", name: "P_ProName", width: 200, align: "left" },
                     { label: '车间', name: 'P_WorkShop', width: 200, align: 'left' },
                     {
-                        label: "是否最后一道工序", name: "P_Kind", width: 160, align: "left",
+                        label: "是否最后一道工序", name: "P_Kind", width: 160, align: "left",hidden:true,
                         formatterAsync: function (callback, value, row) {
                             ayma.clientdata.getAsync('dataItem', {
                                 key: value,
