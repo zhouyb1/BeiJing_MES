@@ -207,7 +207,7 @@ var bootstrap = function ($, ayma) {
                     newArray = rows;
                     var rowslist = top.NewGirdData();
                     if (JSON.stringify(rowslist) !== '[]') {
-                        var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
+                        var rowlistlenght =  rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
                                 if (rows[i]['I_GoodsCode'] == rowslist[j]['C_GoodsCode'] && rows[i]["I_Batch"]==rowslist[j]["C_Batch"]) {
