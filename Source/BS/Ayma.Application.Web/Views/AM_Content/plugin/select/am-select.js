@@ -56,7 +56,32 @@
                             $.select.render(dfop);
                         }
                         
+                    } else { //为了下方trigger事件的触发而写
+                        var $this = $(this);
+                        var keyword = $this.val();
+                        var $select = $this.parents('.am-select');
+                        var dfop = $select[0]._select.dfop;
+                        if (dfop.type == "tree" || dfop.type == "treemultiple") {
+                            var $optionContent = $this.parent().prev();
+                            $optionContent.amtreeSet('search', { keyword: keyword });
+                        }
+                        else if (dfop.type == "default" || dfop.type == "multiple") {
+                            for (var i = 0, l = dfop.data.length; i < l; i++) {
+                                var _item = dfop.data[i];
+                                if (!keyword || _item[dfop.text].indexOf(keyword) != -1) {
+                                    _item._lrhide = false;
+                                }
+                                else {
+                                    _item._lrhide = true;
+                                }
+                            }
+                            $.select.render(dfop);
+                        }
                     }
+                });
+                // 搜索图标click事件
+                $search.find('.fa-search').on('click', function() {
+                    $search.find('input').trigger('keypress');
                 });
             }
             $self.append($option);
