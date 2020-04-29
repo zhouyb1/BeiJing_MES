@@ -27,7 +27,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         if (isOk) {
                             $("#C_Code").addClass("am-field-error");
                             $("#C_Code").parent().append(html);
-                            ayma.alert.error("编码重复");
+                           // ayma.alert.error("编码重复");
                         } else {
                             $("#C_Code").removeClass("am-field-error");
                             $("#isCode").remove();
@@ -49,7 +49,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         if (isOk) {
                             $("#C_Name").addClass("am-field-error");
                             $("#C_Name").parent().append(html);
-                            ayma.alert.error("名称重复");
+                            //ayma.alert.error("名称重复");
                         } else {
                             $("#C_Name").removeClass("am-field-error");
                             $("#isCode").remove();
