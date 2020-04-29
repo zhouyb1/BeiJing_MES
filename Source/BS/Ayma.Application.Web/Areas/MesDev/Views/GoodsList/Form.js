@@ -221,7 +221,7 @@ var bootstrap = function ($, ayma) {
                 if (period != undefined && period != "") {
                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(period.toString().replace('.', ''))) {
                         ayma.alert.error("保质时间必须是非负数.");
-                        $("#G_Period").val(0);
+                        $("#G_Period").val(7);
                     }
 
                 }
@@ -298,7 +298,7 @@ var bootstrap = function ($, ayma) {
                 if (unitWeight != undefined && unitWeight != "") {
                     if (! /^[+]{0,1}(\d+)$|^[+]{0,1}(\d+\.\d+)$/.test(unitWeight.toString().replace('.', ''))) {
                         ayma.alert.error("单位重量必须是非负数.");
-                        $("#G_UnitWeight").val(0);
+                        $("#G_UnitWeight").val(1);
                     }
 
                 }
