@@ -50,11 +50,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单位", name: "C_Unit", width: 40, align: "left" },
                     { label: "领料数量", name: "C_Qty", width: 60, align: "left" },
                     { label: "金额", name: "C_Amount", width: 60, align: "left", statistics: true },
-                    { label: "计划数量", name: "C_PlanQty", width: 100, align: "left" },
-                    { label: "建议数量", name: "C_SuggestQty", width: 100, align: "left" },
+                    { label: "批次", name: "C_Batch", width: 80, align: "left" },
                     { label: "包装数量", name: "C_Qty2", width: 60, align: "left" },
                     { label: "包装规格", name: "C_UnitQty", width: 60, align: "left", },
                     { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
+                    { label: "计划数量", name: "C_PlanQty", width: 100, align: "left" },
+                    { label: "建议数量", name: "C_SuggestQty", width: 100, align: "left" },
                     { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
                             {
                                 label: "原仓库名称",
@@ -74,7 +75,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                     }
                                 }
                             },
-                    { label: "批次", name: "C_Batch", width: 80, align: "left" },
                 ],
                 isAutoHeight: false,
                 footerrow: true,
