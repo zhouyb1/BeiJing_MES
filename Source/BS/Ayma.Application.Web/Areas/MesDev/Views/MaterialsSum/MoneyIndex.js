@@ -210,11 +210,11 @@ var bootstrap = function ($, ayma) {
             $('#girdtable_sum').jfGrid({
                 url: top.$.rootUrl + '/MesDev/MaterialsSum/GetMaterialSumListByDate',
                 headData: [
-                    { label: "商品编码", name: "g_code", width: 130, align: "center" },
-                    { label: "商品名称", name: "g_name", width: 130, align: "center" },
-                    { label: "仓库名称", name: "s_name", width: 130, align: "center" },
-                    { label: "仓库编码", name: "g_stockcode", width: 130, align: "center" },
-                    { label: "单位", name: "g_unit", width: 130, align: "center" },
+                    { label: "商品编码", name: "g_code", width: 80, align: "center" },
+                    { label: "商品名称", name: "g_name", width: 120, align: "center" },
+                    { label: "仓库名称", name: "s_name", width: 120, align: "center" },
+                    { label: "仓库编码", name: "g_stockcode", width: 70, align: "center" },
+                    { label: "单位", name: "g_unit", width: 60, align: "center" },
                     {
                         label: "入库数量", name: "inventoryquantity", width: 90, align: "center", statistics: true, formatter: function (value, row, dfop) {
                             if (row.inventoryquantity != undefined && !!row.inventoryquantity) {
@@ -421,12 +421,12 @@ var bootstrap = function ($, ayma) {
                         ]
                     },
                    {
-                        label: "开始时间", name: "startTime", width: 130, align: "center", formatter: function (value, row, dfop) {
+                        label: "开始时间", name: "startTime", width: 100, align: "center", formatter: function (value, row, dfop) {
                                                  return startTime;
                                              }
                                          },
                         {
-                            label: "结束时间", name: "end", width: 130, align: "center",
+                            label: "结束时间", name: "end", width: 100, align: "center",
                             formatter: function (value, row, dfop) {
                                 return endTime;
                             }

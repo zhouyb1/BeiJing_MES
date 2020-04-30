@@ -43,13 +43,13 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/Period/GetPageList',
                 headData: [
-                        { label: '仓库名称', name: 'M_StockName', width: 150, align: "left" },
-                        { label: '商品名称', name: 'M_GoodsName', width: 200, align: "left" },
-                        { label: '单位', name: 'M_Unit', width: 200, align: "left" },
-                        { label: '保质期(天)', name: 'G_Period', width: 150, align: "left" },
-                        { label: '在库时间(天)', name: 'InventoryDay', width: 150, align: "left" },
-                        { label: '保质期状态', name: 'GoodsState', width: 150, align: "left"},
-                        { label: '批次', name: 'M_Batch', width: 200, align: "left" }
+                        { label: '仓库名称', name: 'M_StockName', width: 120, align: "left" },
+                        { label: '商品名称', name: 'M_GoodsName', width: 120, align: "left" },
+                        { label: '单位', name: 'M_Unit', width: 60, align: "left" },
+                        { label: '保质期(天)', name: 'G_Period', width: 70, align: "left" },
+                        { label: '在库时间(天)', name: 'InventoryDay', width: 80, align: "left" },
+                        { label: '保质期状态', name: 'GoodsState', width: 80, align: "left"},
+                        { label: '批次', name: 'M_Batch', width: 90, align: "left" }
                 ],
                 mainId:'ID',
                 reloadSelected: true,
