@@ -180,6 +180,17 @@ var bootstrap = function ($, ayma) {
                         }
                     });
                 }
+
+                //var status = $("#girdtable").jfGridValue("P_Status");
+                //var orderno = $('#girdtable').jfGridValue('C_CollarNo');
+                //if (ayma.checkrow(orderno, true)) {
+                //    if (status != 2) {
+                //        ayma.alert.error("单据未审核");
+                //        return false;
+                //    }
+                //    var url = "/AM_ReportModule/GridReport/DisplayReport?report=CollacReport&data=Picking&doucno=" + orderno;
+                //    window.open(url, "_blank");
+                //}
             });
             // 预览打印
             $('#am_printview').on('click', function () {
