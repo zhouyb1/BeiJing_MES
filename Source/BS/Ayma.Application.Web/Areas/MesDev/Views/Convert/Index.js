@@ -95,6 +95,10 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.C_Code = $("#C_Code").val();
+            param.C_Name = $("#C_Name").val();
+            param.C_SecCode = $("#C_SecCode").val();
+            param.C_SecName = $("#C_SecName").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
