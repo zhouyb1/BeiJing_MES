@@ -188,6 +188,7 @@ var bootstrap = function ($, ayma) {
                 isSubGrid: true, // 是否有子表editType 
                 subGridRowExpanded: function (subgridId, row) {
                     var orderNo = row.P_OrderNo;
+                    var P_Status = row.P_Status;
                     var subgridTableId = subgridId + "_t";
                     $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
                     $subgridTable = $("#" + subgridTableId);
@@ -195,17 +196,17 @@ var bootstrap = function ($, ayma) {
                         url: top.$.rootUrl + '/MesDev/ProductOrderManager/GetOrderDetail?orderNo=' + orderNo,
                         headData: [
                             {
-                                label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
+                                label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true, hidden: P_Status == 2 ? true : false,
                                 formatter: function (value, grid, rows) {
-                                    var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordEdit('" + grid.ID + "')\">编辑</a>";
+                                    var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordEdit('" + grid.id + "')\">编辑</a>";
                                     return result;
                                 }
                             },
-                            { label: "物料编码", name: "P_GoodsCode", width: 160, align: "left" },
-                            { label: "物料名称", name: "P_GoodsName", width: 160, align: "left" },
-                            { label: "数量", name: "P_Qty", width: 160, align: "left" },
-                            { label: "单位", name: "P_Unit", width: 160, align: "left" },
-                            { label: "订单时间", name: "P_OrderDate", width: 160, align: "left" }
+                            { label: "物料编码", name: "p_goodscode", width: 160, align: "left" },
+                            { label: "物料名称", name: "p_goodsname", width: 160, align: "left" },
+                            { label: "数量", name: "p_qty", width: 160, align: "left" },
+                            { label: "单位", name: "p_unit", width: 160, align: "left" },
+                            { label: "订单时间", name: "p_orderdate", width: 160, align: "left" }
                         ],
                         mainId: 'ID',
                         reloadSelected: false,

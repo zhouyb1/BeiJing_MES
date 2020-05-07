@@ -55,8 +55,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 isPage: true,
                 isStatistics: true,
-                isAutoHeight: true,
+                isAutoHeight: false,
                 isEidt: false,
+                height: 300,
                 footerrow: true,
                 minheight: 400
             });
