@@ -253,7 +253,6 @@ var bootstrap = function ($, ayma) {
                 sidx: 'M_CreateDate',
                 sord:'DESC'
             });
-
             page.search();
         },
         search: function (param) {
