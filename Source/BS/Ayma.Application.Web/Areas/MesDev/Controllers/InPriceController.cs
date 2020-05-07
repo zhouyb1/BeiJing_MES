@@ -66,10 +66,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetPriceBySupply(string pagination, string P_SupplyCode)
+        public ActionResult GetPriceBySupply(string pagination, string P_SupplyCode, string P_GoodsName)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            var data = inPriceIBLL.GetPriceBySupply(paginationobj, P_SupplyCode);
+            var data = inPriceIBLL.GetPriceBySupply(paginationobj, P_SupplyCode, P_GoodsName);
             var jsonData = new
             {
                 rows = data,

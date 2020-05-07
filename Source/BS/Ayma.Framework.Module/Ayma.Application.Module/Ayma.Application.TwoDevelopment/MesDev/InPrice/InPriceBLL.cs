@@ -44,11 +44,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode)
+        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode, string P_GoodsName)
         {
             try
             {
-                return inPriceService.GetPriceBySupply(pagination, P_SupplyCode);
+                return inPriceService.GetPriceBySupply(pagination, P_SupplyCode, P_GoodsName);
             }
             catch (Exception ex)
             {

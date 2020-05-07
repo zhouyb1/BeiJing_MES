@@ -79,7 +79,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         /// <param name="queryJson">查询参数</param>
         /// <returns></returns>
-        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode)
+        public IEnumerable<Mes_InPriceEntity> GetPriceBySupply(Pagination pagination, string P_SupplyCode, string P_GoodsName)
         {
             try
             {
@@ -105,6 +105,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("P_SupplyCode", "%" + P_SupplyCode.ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_SupplyCode Like @P_SupplyCode ");
+                }
+                if (!P_SupplyCode.IsEmpty())
+                {
+                    dp.Add("P_GoodsName", "%" + P_GoodsName.ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.P_GoodsName Like @P_GoodsName ");
                 }
                 return this.BaseRepository().FindList<Mes_InPriceEntity>(strSql.ToString(), dp, pagination);
             }
@@ -182,7 +187,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var db = this.BaseRepository().BeginTrans();
             try
             {
-                db.Delete<Mes_InPriceEntity>(t => t.ID == keyValue);
+                db.Delete<Mes_InPriceEntity>(t => t.P_SupplyCode == keyValue||t.ID==keyValue);
                 db.Commit();
             }
             catch (Exception ex)

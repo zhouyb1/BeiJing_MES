@@ -109,7 +109,7 @@ var bootstrap = function ($, ayma) {
                     { label: "税号", name: "S_TaxCode", width: 160, align: "left" },
                     { label: "备注", name: "S_Remark", width: 160, align: "left"},
                     { label: "添加人", name: "S_CreateBy", width: 100, align: "center" },
-                    { label: "添加时间", name: "S_CreateDate", width: 160, align: "center" },
+                    { label: "添加时间", name: "S_CreateDate", width: 160, align: "center",sort:true },
                     { label: "修改人", name: "S_UpdateBy", width: 100, align: "center" },
                     { label: "修改时间", name: "S_UpdateDate", width: 160, align: "center" },
                     { label: "资质1", name: "S_Effect1", width: 160, align: "left",hidden:true },
@@ -121,8 +121,8 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 isPage: true,
-                sidx: "S_Code",
-                sord: "asc"
+                sidx: "S_CreateDate",
+                sord: "desc"
             });
             page.search();
         },

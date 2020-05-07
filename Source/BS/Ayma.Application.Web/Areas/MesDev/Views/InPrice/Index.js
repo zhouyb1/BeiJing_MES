@@ -36,7 +36,7 @@ var bootstrap = function ($, ayma) {
                     height: 400,
                     maxmin: true,
                     callBack: function (id) {
-                        return top[id].acceptClick(refreshSubGirdData);
+                        return top[id].acceptClick(refreshGirdData);
                     }
                 });
             });
@@ -110,27 +110,44 @@ var bootstrap = function ($, ayma) {
                     }
                 });
             });
-            // 删除
+            // 删除 多选删除子列表数据
+            //$('#am_delete').on('click', function() {
+            //    var dataList = [];
+            //    var data = $subgridTable.jfGridGet('rowdata');
+            //    if (data == null || data.length == 0) {
+            //        ayma.alert.warning('请勾选任意一行！');
+            //        return false;
+            //    }
+            //    else if (data.length == undefined) {
+            //        dataList.push(data);
+            //    }
+            //    else {
+            //        dataList = data;
+            //    }
+            //    ayma.layerConfirm('是否确认删除该项！', function(res) {
+            //        if (res) {
+            //            ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteForm', { strEntity:  dataList }, function () {
+            //                refreshGirdData();
+            //            });
+            //        }
+            //    });
+
+            //});
+            // 删除 整个供应商
             $('#am_delete').on('click', function() {
-                var dataList = [];
-                var data = $subgridTable.jfGridGet('rowdata');
-                if (data == null || data.length == 0) {
+                var dataFather = $("#girdtable").jfGridGet('rowdata');
+                var keyValue = $("#girdtable").jfGridValue("P_SupplyCode");
+                if (dataFather == null || dataFather.length == 0) {
                     ayma.alert.warning('请勾选任意一行！');
                     return false;
                 }
-                else if (data.length == undefined) {
-                    dataList.push(data);
-                }
-                else {
-                    dataList = data;
-                }
-                ayma.layerConfirm('是否确认删除该项！', function(res) {
-                    if (res) {
-                        ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteForm', { strEntity:  dataList }, function () {
-                            refreshSubGirdData();
-                        });
-                    }
-                });
+                    ayma.layerConfirm('是否确认删除该项！', function (res) {
+                        if (res) {
+                            ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteEntity', { keyValue: keyValue }, function () {
+                                refreshGirdData();
+                            });
+                        }
+                    });
 
             });
         },
@@ -153,7 +170,7 @@ var bootstrap = function ($, ayma) {
                     $("#" + subgridId).html("<div class=\"am-layout-body\" id=\"" + subgridTableId + "\"></div>");
                     $subgridTable = $("#" + subgridTableId);
                     $subgridTable.jfGrid({
-                        url: top.$.rootUrl + '/MesDev/InPrice/GetPriceBySupply?P_SupplyCode=' + P_SupplyCode,
+                        url: top.$.rootUrl + '/MesDev/InPrice/GetPriceBySupply?P_SupplyCode=' + P_SupplyCode + '&P_GoodsName=' + $("#P_GoodsName").selectGet(),
                         headData: [
                     { label: "ID", name: "ID", width: 160, align: "left", hidden: true },
                     { label: "供应商编码", name: "P_SupplyCode", width: 200, align: "left", hidden: true },
@@ -209,7 +226,7 @@ var bootstrap = function ($, ayma) {
                                }
                            },
                        {
-                           label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true, hidden: true,
+                           label: '操作', name: '', index: '', width: 120, align: 'left', frozen: true,
                            formatter: function (value, grid, rows) {
                                var result = "<a href=\"javascript:;\" style=\"color:#f60\" onclick=\"recordDel('" + grid.ID + "')\">删除</a>";
                                return result;
@@ -264,7 +281,7 @@ var bootstrap = function ($, ayma) {
         ayma.layerConfirm('是否确认删除该项！', function (res) {
             if (res) {
                 ayma.deleteForm(top.$.rootUrl + '/MesDev/InPrice/DeleteEntity', { keyValue: keyValue }, function () {
-                    refreshSubGirdData();
+                    refreshGirdData();
                 });
             }
         });
