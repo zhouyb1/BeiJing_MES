@@ -13,38 +13,9 @@ var bootstrap = function ($, ayma) {
             page.bind();
         },
         bind: function () {
-            // 时间搜索框
-            $('#datesearch').amdate({
-                dfdata: [
-                    { name: '今天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00') }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59') } },
-                    { name: '明天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 1) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 1) } },
-                    { name: '后月', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 2) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 2) } },
-                    { name: '后3天', begin: function () { return ayma.getDate('yyyy-MM-dd 00:00:00', 'd', 3) }, end: function () { return ayma.getDate('yyyy-MM-dd 23:59:59', 'd', 3) } }
-                ],
-                // 月
-                mShow: false,
-                premShow: false,
-                // 季度
-                jShow: false,
-                prejShow: false,
-                // 年
-                ysShow: false,
-                yxShow: false,
-                preyShow: false,
-                yShow: false,
-                // 默认
-                dfvalue: '0',
-                selectfn: function (begin, end) {
-                    startTime = begin;
-                    endTime = end;
-                    page.search();
-                }
-            });
-
-
-            $('#multiple_condition_query').MultipleQuery(function (queryJson) {
+         $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 400);
+            }, 255, 400);
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();
@@ -137,11 +108,12 @@ var bootstrap = function ($, ayma) {
                 sidx: 'P_OrderDate',
                 sord: 'desc'
             });
+            page.search();
         },
         search: function (param) {
             param = param || {};
-            param.StartTime = startTime;
-            param.EndTime = endTime;
+            param.StartTime = $("#StartTime").val();
+            param.EndTime = $("#EndTime").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
