@@ -588,6 +588,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
                     return Fail("物料【" + item.M_GoodsName + "】包装数量不能为空!");
                 }  
             }
+            entity.M_Status = ErpEnums.MaterInStatusEnum.NoAudit;
             entity.M_OrderKind = orderKind; //单据类型 成品与非成品
             materInBillIBLL.SaveEntity(keyValue, entity, mes_MaterInDetailList);
             return Success("保存成功！");
