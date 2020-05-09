@@ -46,7 +46,10 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                     {
-                        label: '订单时间', name: 'P_OrderDate', width: 100, align: 'left', editType: 'label'
+                        label: '订单时间', name: 'P_OrderDate', width: 160, align: 'left', editType: 'label',
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
                     }
                 ],
                 isAutoHeight: false,
