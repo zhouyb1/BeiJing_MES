@@ -103,7 +103,34 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             try
             {
-                return this.BaseRepository().FindEntity<Mes_InventoryTrendEntity>(keyValue);
+                var strSql = new StringBuilder();
+                strSql.Append("SELECT ");
+                strSql.Append(@"
+                t.ID,
+                t.I_OrderKind,
+                t.I_StockCode,
+                t.I_StockName,
+                t.I_GoodsCode,
+                t.I_GoodsName,
+                t.I_Unit,
+                t.I_Batch,
+                (select G_Period from Mes_Goods t where G_Code=I_GoodsCode) as I_Period,
+                t.I_OrderNo,
+                t.I_QtyOld,
+                t.I_QtyNew,
+                t.I_QtyTrend,
+                t.I_Remark
+                ");
+                strSql.Append("  FROM Mes_InventoryTrend t ");
+                strSql.Append("  WHERE 1=1 ");
+                // 虚拟参数
+                var dp = new DynamicParameters(new { });
+                if (!keyValue.IsEmpty())
+                {
+                    dp.Add("keyValue", "%" + keyValue.ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.ID Like @keyValue ");
+                }
+                return this.BaseRepository().FindEntity<Mes_InventoryTrendEntity>(strSql.ToString(), dp);
             }
             catch (Exception ex)
             {
