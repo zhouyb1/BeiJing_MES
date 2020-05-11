@@ -48,25 +48,15 @@ var bootstrap = function ($, ayma) {
                     { label: "数量", name: "I_Qty", width: 80, align: "left" },
                     { label: "物料价格", name: "Price", width: 80, align: "left" },
                     { label: "总金额", name: "AllMoney", width: 100, align: "left" },
-                    { label: "下限预警量", name: "G_Lower", width: 80, align: "left" },
-                    { label: "上限预警量", name: "G_Super", width: 80, align: "left" },
-                    { label: "预警状态", name: "G_State", width: 80, align: "left" }
+                    //{ label: "下限预警量", name: "G_Lower", width: 80, align: "left" },
+                    //{ label: "上限预警量", name: "G_Super", width: 80, align: "left" },
+                    //{ label: "预警状态", name: "G_State", width: 80, align: "left" }
                 ],
                 mainId: 'ID',
                 sidx: "I_StockCode",
                 sord: 'ASC',
                 reloadSelected: false,
                 isPage: true,
-                onRenderComplete: function (rows) {
-                    for (var i = 0; i < rows.length; i++) {
-                        if (rows[i].G_State == "正常" || rows[i].G_State == "无") {
-                            continue;
-                        }
-                        else {
-                            $("[rownum='rownum_girdtable_" + i + "']").css('background-color', '#d9534f');//预警状态不正常的整行标红
-                        }
-                    }
-                },
                 isSubGrid: true,
                 subGridRowExpanded: function (subgridId, row) {
                     var I_GoodsName = row.I_GoodsName;
