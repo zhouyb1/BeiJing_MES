@@ -13,23 +13,23 @@
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Supply" >
         <div class="am-form-item-title">资质期限<font face="宋体">*</font></div>
-        <input id="S_EffectTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
+        <input id="S_EffectTime" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.AddYears(3).ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Supply">
-        <div class="am-form-item-title">联系人<font face="宋体">*</font></div>
-        <input id="S_Person" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">联系人</div>
+        <input id="S_Person" type="text" class="form-control" />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Supply">
-        <div class="am-form-item-title">联系电话<font face="宋体">*</font></div>
-        <input id="S_Telephone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">联系电话</div>
+        <input id="S_Telephone" type="text" class="form-control"  />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Supply">
-        <div class="am-form-item-title">法人<font face="宋体">*</font></div>
-        <input id="S_Corp" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">法人</div>
+        <input id="S_Corp" type="text" class="form-control" />
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Supply">
-        <div class="am-form-item-title">地址<font face="宋体">*</font></div>
-        <input id="S_Address" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        <div class="am-form-item-title">地址</div>
+        <input id="S_Address" type="text" class="form-control"/>
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Supply">
         <div class="am-form-item-title">税号</div>
