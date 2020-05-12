@@ -95,6 +95,7 @@
             this.txtBatch.Font = new System.Drawing.Font("宋体", 11F);
             this.txtBatch.Location = new System.Drawing.Point(359, 46);
             this.txtBatch.Name = "txtBatch";
+            this.txtBatch.ReadOnly = true;
             this.txtBatch.Size = new System.Drawing.Size(244, 24);
             this.txtBatch.TabIndex = 120;
             // 
@@ -114,6 +115,7 @@
             this.txtCode.Font = new System.Drawing.Font("宋体", 11F);
             this.txtCode.Location = new System.Drawing.Point(359, 72);
             this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(244, 24);
             this.txtCode.TabIndex = 118;
             // 
@@ -157,6 +159,7 @@
             this.txtUnit.Font = new System.Drawing.Font("宋体", 11F);
             this.txtUnit.Location = new System.Drawing.Point(359, 98);
             this.txtUnit.Name = "txtUnit";
+            this.txtUnit.ReadOnly = true;
             this.txtUnit.Size = new System.Drawing.Size(244, 24);
             this.txtUnit.TabIndex = 127;
             // 
@@ -434,6 +437,7 @@
             this.txtGoodsName.Font = new System.Drawing.Font("宋体", 11F);
             this.txtGoodsName.Location = new System.Drawing.Point(359, 19);
             this.txtGoodsName.Name = "txtGoodsName";
+            this.txtGoodsName.ReadOnly = true;
             this.txtGoodsName.Size = new System.Drawing.Size(244, 24);
             this.txtGoodsName.TabIndex = 148;
             // 

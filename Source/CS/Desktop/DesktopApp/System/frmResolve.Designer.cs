@@ -78,6 +78,7 @@
             this.txtBarcode.Font = new System.Drawing.Font("宋体", 11F);
             this.txtBarcode.Location = new System.Drawing.Point(119, 40);
             this.txtBarcode.Name = "txtBarcode";
+            this.txtBarcode.ReadOnly = true;
             this.txtBarcode.Size = new System.Drawing.Size(244, 24);
             this.txtBarcode.TabIndex = 1;
             this.txtBarcode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtBarcode_KeyDown);
@@ -87,6 +88,7 @@
             this.txtUnit.Font = new System.Drawing.Font("宋体", 11F);
             this.txtUnit.Location = new System.Drawing.Point(119, 161);
             this.txtUnit.Name = "txtUnit";
+            this.txtUnit.ReadOnly = true;
             this.txtUnit.Size = new System.Drawing.Size(244, 24);
             this.txtUnit.TabIndex = 136;
             // 
@@ -125,6 +127,7 @@
             this.txtBatch.Font = new System.Drawing.Font("宋体", 11F);
             this.txtBatch.Location = new System.Drawing.Point(119, 109);
             this.txtBatch.Name = "txtBatch";
+            this.txtBatch.ReadOnly = true;
             this.txtBatch.Size = new System.Drawing.Size(244, 24);
             this.txtBatch.TabIndex = 132;
             // 
@@ -144,6 +147,7 @@
             this.txtName.Font = new System.Drawing.Font("宋体", 11F);
             this.txtName.Location = new System.Drawing.Point(119, 135);
             this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
             this.txtName.Size = new System.Drawing.Size(244, 24);
             this.txtName.TabIndex = 130;
             // 
@@ -174,6 +178,7 @@
             this.txtCode.Font = new System.Drawing.Font("宋体", 11F);
             this.txtCode.Location = new System.Drawing.Point(119, 82);
             this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
             this.txtCode.Size = new System.Drawing.Size(244, 24);
             this.txtCode.TabIndex = 137;
             // 

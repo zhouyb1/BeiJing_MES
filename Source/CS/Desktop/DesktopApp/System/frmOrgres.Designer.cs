@@ -59,24 +59,6 @@
             this.btn_Weight = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加时间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加人2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.生产订单2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbTeam = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -99,6 +81,24 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加时间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加人2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.生产订单2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -399,141 +399,6 @@
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
-            // 选择2
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.选择2.DefaultCellStyle = dataGridViewCellStyle1;
-            this.选择2.FillWeight = 40F;
-            this.选择2.HeaderText = "选择2";
-            this.选择2.Name = "选择2";
-            this.选择2.Width = 60;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "W_RecordCode";
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "W_RecordName";
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            this.Column2.Visible = false;
-            // 
-            // 物料2
-            // 
-            this.物料2.DataPropertyName = "W_SecGoodsCode";
-            this.物料2.HeaderText = "物料";
-            this.物料2.Name = "物料2";
-            this.物料2.Visible = false;
-            this.物料2.Width = 80;
-            // 
-            // 物料名称2
-            // 
-            this.物料名称2.DataPropertyName = "W_SecGoodsName";
-            this.物料名称2.HeaderText = "物料名称";
-            this.物料名称2.Name = "物料名称2";
-            this.物料名称2.Width = 130;
-            // 
-            // 数量2
-            // 
-            this.数量2.DataPropertyName = "W_SecQty";
-            this.数量2.HeaderText = "称重数量";
-            this.数量2.Name = "数量2";
-            // 
-            // 单位2
-            // 
-            this.单位2.DataPropertyName = "W_SecUnit";
-            this.单位2.FillWeight = 40F;
-            this.单位2.HeaderText = "单位";
-            this.单位2.Name = "单位2";
-            this.单位2.Width = 40;
-            // 
-            // 添加时间2
-            // 
-            this.添加时间2.DataPropertyName = "W_CreateDate";
-            this.添加时间2.FillWeight = 140F;
-            this.添加时间2.HeaderText = "称重时间";
-            this.添加时间2.Name = "添加时间2";
-            this.添加时间2.Width = 180;
-            // 
-            // 车间2
-            // 
-            this.车间2.DataPropertyName = "W_WorkShopCode";
-            this.车间2.HeaderText = "车间";
-            this.车间2.Name = "车间2";
-            this.车间2.Visible = false;
-            this.车间2.Width = 60;
-            // 
-            // 工序2
-            // 
-            this.工序2.DataPropertyName = "W_ProceCode";
-            this.工序2.HeaderText = "工序";
-            this.工序2.Name = "工序2";
-            this.工序2.Visible = false;
-            this.工序2.Width = 60;
-            // 
-            // 工序名称2
-            // 
-            this.工序名称2.DataPropertyName = "W_ProceName";
-            this.工序名称2.HeaderText = "工序名称";
-            this.工序名称2.Name = "工序名称2";
-            this.工序名称2.Visible = false;
-            this.工序名称2.Width = 80;
-            // 
-            // 批次2
-            // 
-            this.批次2.DataPropertyName = "W_SecBatch";
-            this.批次2.HeaderText = "批次";
-            this.批次2.Name = "批次2";
-            // 
-            // 添加人2
-            // 
-            this.添加人2.DataPropertyName = "W_CreateBy";
-            this.添加人2.HeaderText = "添加人";
-            this.添加人2.Name = "添加人2";
-            this.添加人2.Visible = false;
-            this.添加人2.Width = 70;
-            // 
-            // 车间名称2
-            // 
-            this.车间名称2.DataPropertyName = "W_WorkShopName";
-            this.车间名称2.HeaderText = "车间名称";
-            this.车间名称2.Name = "车间名称2";
-            this.车间名称2.Visible = false;
-            // 
-            // 状态2
-            // 
-            this.状态2.DataPropertyName = "W_Status";
-            this.状态2.HeaderText = "状态";
-            this.状态2.Name = "状态2";
-            this.状态2.Visible = false;
-            // 
-            // 备注2
-            // 
-            this.备注2.DataPropertyName = "W_Remark";
-            this.备注2.HeaderText = "备注";
-            this.备注2.Name = "备注2";
-            this.备注2.Visible = false;
-            // 
-            // 生产订单2
-            // 
-            this.生产订单2.DataPropertyName = "W_OrderNo";
-            this.生产订单2.HeaderText = "生产订单号";
-            this.生产订单2.Name = "生产订单2";
-            this.生产订单2.Visible = false;
-            // 
-            // ID2
-            // 
-            this.ID2.DataPropertyName = "ID";
-            this.ID2.HeaderText = "ID";
-            this.ID2.Name = "ID2";
-            this.ID2.Visible = false;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -791,6 +656,158 @@
             this.comboBox1.Size = new System.Drawing.Size(80, 24);
             this.comboBox1.TabIndex = 139;
             this.comboBox1.Visible = false;
+            // 
+            // 选择2
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.选择2.DefaultCellStyle = dataGridViewCellStyle1;
+            this.选择2.FillWeight = 40F;
+            this.选择2.HeaderText = "选择";
+            this.选择2.Name = "选择2";
+            this.选择2.Width = 60;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "W_RecordCode";
+            this.Column1.HeaderText = "Column1";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "W_RecordName";
+            this.Column2.HeaderText = "Column2";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
+            // 
+            // 物料2
+            // 
+            this.物料2.DataPropertyName = "W_SecGoodsCode";
+            this.物料2.HeaderText = "物料";
+            this.物料2.Name = "物料2";
+            this.物料2.ReadOnly = true;
+            this.物料2.Visible = false;
+            this.物料2.Width = 80;
+            // 
+            // 物料名称2
+            // 
+            this.物料名称2.DataPropertyName = "W_SecGoodsName";
+            this.物料名称2.HeaderText = "物料名称";
+            this.物料名称2.Name = "物料名称2";
+            this.物料名称2.ReadOnly = true;
+            this.物料名称2.Width = 130;
+            // 
+            // 数量2
+            // 
+            this.数量2.DataPropertyName = "W_SecQty";
+            this.数量2.HeaderText = "称重数量";
+            this.数量2.Name = "数量2";
+            this.数量2.ReadOnly = true;
+            // 
+            // 单位2
+            // 
+            this.单位2.DataPropertyName = "W_SecUnit";
+            this.单位2.FillWeight = 40F;
+            this.单位2.HeaderText = "单位";
+            this.单位2.Name = "单位2";
+            this.单位2.ReadOnly = true;
+            this.单位2.Width = 40;
+            // 
+            // 添加时间2
+            // 
+            this.添加时间2.DataPropertyName = "W_CreateDate";
+            this.添加时间2.FillWeight = 140F;
+            this.添加时间2.HeaderText = "称重时间";
+            this.添加时间2.Name = "添加时间2";
+            this.添加时间2.ReadOnly = true;
+            this.添加时间2.Width = 180;
+            // 
+            // 车间2
+            // 
+            this.车间2.DataPropertyName = "W_WorkShopCode";
+            this.车间2.HeaderText = "车间";
+            this.车间2.Name = "车间2";
+            this.车间2.ReadOnly = true;
+            this.车间2.Visible = false;
+            this.车间2.Width = 60;
+            // 
+            // 工序2
+            // 
+            this.工序2.DataPropertyName = "W_ProceCode";
+            this.工序2.HeaderText = "工序";
+            this.工序2.Name = "工序2";
+            this.工序2.ReadOnly = true;
+            this.工序2.Visible = false;
+            this.工序2.Width = 60;
+            // 
+            // 工序名称2
+            // 
+            this.工序名称2.DataPropertyName = "W_ProceName";
+            this.工序名称2.HeaderText = "工序名称";
+            this.工序名称2.Name = "工序名称2";
+            this.工序名称2.ReadOnly = true;
+            this.工序名称2.Visible = false;
+            this.工序名称2.Width = 80;
+            // 
+            // 批次2
+            // 
+            this.批次2.DataPropertyName = "W_SecBatch";
+            this.批次2.HeaderText = "批次";
+            this.批次2.Name = "批次2";
+            this.批次2.ReadOnly = true;
+            // 
+            // 添加人2
+            // 
+            this.添加人2.DataPropertyName = "W_CreateBy";
+            this.添加人2.HeaderText = "添加人";
+            this.添加人2.Name = "添加人2";
+            this.添加人2.ReadOnly = true;
+            this.添加人2.Visible = false;
+            this.添加人2.Width = 70;
+            // 
+            // 车间名称2
+            // 
+            this.车间名称2.DataPropertyName = "W_WorkShopName";
+            this.车间名称2.HeaderText = "车间名称";
+            this.车间名称2.Name = "车间名称2";
+            this.车间名称2.ReadOnly = true;
+            this.车间名称2.Visible = false;
+            // 
+            // 状态2
+            // 
+            this.状态2.DataPropertyName = "W_Status";
+            this.状态2.HeaderText = "状态";
+            this.状态2.Name = "状态2";
+            this.状态2.ReadOnly = true;
+            this.状态2.Visible = false;
+            // 
+            // 备注2
+            // 
+            this.备注2.DataPropertyName = "W_Remark";
+            this.备注2.HeaderText = "备注";
+            this.备注2.Name = "备注2";
+            this.备注2.ReadOnly = true;
+            this.备注2.Visible = false;
+            // 
+            // 生产订单2
+            // 
+            this.生产订单2.DataPropertyName = "W_OrderNo";
+            this.生产订单2.HeaderText = "生产订单号";
+            this.生产订单2.Name = "生产订单2";
+            this.生产订单2.ReadOnly = true;
+            this.生产订单2.Visible = false;
+            // 
+            // ID2
+            // 
+            this.ID2.DataPropertyName = "ID";
+            this.ID2.HeaderText = "ID";
+            this.ID2.Name = "ID2";
+            this.ID2.ReadOnly = true;
+            this.ID2.Visible = false;
             // 
             // frmOrgres
             // 

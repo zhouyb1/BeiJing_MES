@@ -375,8 +375,8 @@ namespace DesktopApp
             //    return;
             //}
             dataGridView2.DataSource = row2;
-            int nLen = dataGridView2.Columns.Count;
-            for(int i = 0; i < dataGridView2.Columns.Count - 1; i++)
+            int nLen = dataGridView2.Rows.Count;
+            for (int i = 0; i < dataGridView2.Rows.Count - 1; i++)
             {
                 string strQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
                 dataGridView2.Rows[i].Cells["数量2"].Value = Delete0(strQty);
