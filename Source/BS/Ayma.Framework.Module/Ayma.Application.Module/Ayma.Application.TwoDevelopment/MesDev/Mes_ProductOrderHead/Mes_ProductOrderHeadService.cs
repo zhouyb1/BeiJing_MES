@@ -272,7 +272,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     var com_name = json["com_name"].ToString();
                     var stock = json["stock"].ToString();
                     var name = json["name"].ToString();
-                    var wj = json["wj"].ToString();
+                    //var wj = json["wj"].ToString();
                     var t_date = json["t_date"].ToString();
                     var use_date = json["use_date"].ToString();
                     var data = JArray.Parse(json["bodyList"].ToString());
@@ -286,7 +286,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                         food.com_name = com_name;
                         food.stock = stock;
                         food.name = name;
-                        food.wj = wj;
+                        //food.wj = wj;
                         food.t_date = t_date;
                         food.use_date = use_date;
                         list.Add(food);
