@@ -50,7 +50,7 @@ var bootstrap = function ($, ayma) {
                         label: '计划日期', name: 't_date', width: 100, align: 'left', 
                     },
                      {
-                         label: '外局名称', name: 'wj', width: 160, align: 'left', 
+                         label: '外局名称', name: 'wj', width: 160, align: 'left', hidden:true
                      },
                 ],
                 isPage: true,
