@@ -46,10 +46,10 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 headData: [
                     { label: "物料编码", name: "C_GoodsCode", width: 80, align: "left" },
                     { label: "物料名称", name: "C_GoodsName", width: 100, align: "left" },
-                    { label: "单价", name: "C_Price", width: 50, align: "left" },
+                    { label: "单价", name: "C_Price", width: 70, align: "left" },
                     { label: "单位", name: "C_Unit", width: 40, align: "left" },
                     { label: "领料数量", name: "C_Qty", width: 60, align: "left" },
-                    { label: "金额", name: "C_Amount", width: 60, align: "left", statistics: true },
+                    { label: "金额", name: "C_Amount", width: 80, align: "left", statistics: true },
                     { label: "批次", name: "C_Batch", width: 80, align: "left" },
                     { label: "包装数量", name: "C_Qty2", width: 60, align: "left" },
                     { label: "包装规格", name: "C_UnitQty", width: 60, align: "left", },
