@@ -158,6 +158,7 @@ var bootstrap = function ($, ayma) {
                                      row.M_Qty = 0;
                                  }
                                  row.M_Qty2 = (row.M_Qty / row.M_UnitQty).toFixed(6) / 1;
+                                 
                              }
                          }, 
                      },
@@ -188,13 +189,13 @@ var bootstrap = function ($, ayma) {
                    },
                    {
                        label: "不含税金额", name: "不含税金额", width: 80, align: "left", formatter: function (value, row, dfop) {
-                           return row.M_Price * row.M_Qty;
-                       }
+                           return row.不含税金额 = row.M_Price * row.M_Qty;
+                       }, statistics: true
                    },
                    {
                        label: "含税金额", name: "含税金额", width: 60, align: "left", formatter: function (value, row, dfop) {
-                           return row.M_TaxPrice * row.M_Qty;
-                       }
+                           return row.含税金额=row.M_TaxPrice * row.M_Qty;
+                       }, statistics: true
                    },
                       {
                           label: "包装规格", name: "M_UnitQty", width: 60, align: "left", editType: 'select', editOp: {

@@ -217,7 +217,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 },
                 { label: "包装单位", name: "C_Unit2", width: 60, align: "left" },
                 { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
-            
+                 {
+                     label: "金额", name: "金额", width: 80, align: "left", formatter: function (value, row, dfop) {
+                         return row.金额 = row.C_Price * row.C_Qty;
+                     }, statistics: true
+                 },
                 { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },
                 {
                     label: "原仓库名称",
@@ -266,7 +270,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {
