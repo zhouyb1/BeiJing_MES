@@ -2769,7 +2769,7 @@ ORDER BY C.F_Level";
                 #endregion
 
                 #region 保存数据
-                   
+
                 if (success)
                 {
                     string strUpdate = @"UPDATE dbo.Mes_ProductOrderHead SET P_Status=3 WHERE P_Status=2 AND CONVERT(VARCHAR(10),P_UseDate,120) =@date";
@@ -2788,7 +2788,6 @@ ORDER BY C.F_Level";
                     db.Insert(heads);
                     db.Insert(details);
                 }
-
                 #endregion
 
                 if (success)
