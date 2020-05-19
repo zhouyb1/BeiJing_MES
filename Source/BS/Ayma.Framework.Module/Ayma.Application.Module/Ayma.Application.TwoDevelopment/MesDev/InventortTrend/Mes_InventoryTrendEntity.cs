@@ -86,6 +86,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("I_REMARK")]
         public string I_Remark { get; set; }
+        /// <summary>
+        /// 操作时间
+        /// </summary>
+
+        [Column("I_CREATEDATE")]
+        public DateTime? I_CreateDate { get; set; }
+
         #endregion
 
         #region 扩展操作

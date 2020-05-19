@@ -42,6 +42,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_QtyOld,
                 t.I_QtyNew,
                 t.I_QtyTrend,
+                t.I_CreateDate,
                 t.I_Remark
                 ");
                 strSql.Append("  FROM Mes_InventoryTrend t ");
