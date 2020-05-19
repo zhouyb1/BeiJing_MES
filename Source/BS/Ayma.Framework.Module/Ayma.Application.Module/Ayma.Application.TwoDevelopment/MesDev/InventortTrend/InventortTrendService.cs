@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_GoodsName,
                 t.I_Unit,
                 t.I_Batch,
-                (select G_Period from Mes_Goods t where G_Code=I_GoodsCode) as I_Period,
+                g.G_Period  I_Period,
                 t.I_OrderNo,
                 t.I_QtyOld,
                 t.I_QtyNew,
@@ -45,7 +45,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_CreateDate,
                 t.I_Remark
                 ");
-                strSql.Append("  FROM Mes_InventoryTrend t ");
+                strSql.Append("  FROM Mes_InventoryTrend t  LEFT JOIN  Mes_Goods  g ON g.G_Code=t.I_GoodsCode ");
                 strSql.Append("  WHERE 1=1 ");
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
@@ -80,7 +80,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("I_Batch", "%" + queryParam["I_Batch"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.I_Batch Like @I_Batch ");
                 }
-                strSql.Append(" order by I_CreateDate desc ");
 
                 return this.BaseRepository().FindList<Mes_InventoryTrendEntity>(strSql.ToString(),dp, pagination);
             }
