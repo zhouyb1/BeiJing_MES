@@ -116,7 +116,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 dbo.GetUserNameById(t.S_CreateBy) S_CreateBy ,
                 t.S_CreateDate,
                 t.S_UploadDate,
-                t.S_UploadBy
+                 dbo.GetUserNameById(t.S_UploadBy) S_UploadBy
                 ");
                 strSql.Append("  FROM Mes_ScrapHead t left join Mes_ScrapDetail s on(t.S_ScrapNo=s.S_ScrapNo)");
                 strSql.Append("  WHERE 1=1 AND t.S_Status =3");

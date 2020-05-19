@@ -172,7 +172,7 @@ var bootstrap = function ($, ayma) {
                     { label: '角色编号', name: 'F_EnCode', width: 100, align: 'left' },
                     { label: '角色名称', name: 'F_FullName', width: 200, align: 'left' },
                     {
-                        label: '创建时间', name: 'F_CreateDate', width: 130, align: 'center'
+                        label: '创建时间', name: 'F_CreateDate', width: 130, align: 'center',sort:true
                     },
                     {
                         label: '创建人', name: 'F_CreateUserName', width: 130, align: 'center'
@@ -187,7 +187,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 isPage: true,
                 reloadSelected: true,
-                mainId: 'F_RoleId'
+                mainId: 'F_RoleId',
+                sidx: "F_CreateDate",
+                sord: 'DESC',
             });
 
             page.search();

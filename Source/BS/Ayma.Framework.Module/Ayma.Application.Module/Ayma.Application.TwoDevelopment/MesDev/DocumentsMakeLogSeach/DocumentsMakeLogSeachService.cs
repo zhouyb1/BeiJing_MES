@@ -37,7 +37,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.F_OrderNo,
                 t.F_Remark,
                 t.F_CreateDate,
-                t.F_CreateUserName
+                 dbo.GetUserNameById(t.F_CreateUserName) F_CreateUserName
                 ");
                 strSql.Append("  FROM T_DocumentsMakeLog t ");
                 strSql.Append("  WHERE 1=1 ");

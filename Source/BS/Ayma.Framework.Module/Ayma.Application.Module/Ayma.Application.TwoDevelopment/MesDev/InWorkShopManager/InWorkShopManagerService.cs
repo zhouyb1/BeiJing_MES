@@ -121,7 +121,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.I_StockName,
                 dbo.GetStockByCode(I_WorkShop) I_WorkShop,
                 t.I_OrderNo,
-                t.I_UploadBy,
+                dbo.GetUserNameById(t.I_UploadBy) I_UploadBy,
                 t.I_UploadDate,
                 t.I_OrderDate,
                 t.I_Remark,

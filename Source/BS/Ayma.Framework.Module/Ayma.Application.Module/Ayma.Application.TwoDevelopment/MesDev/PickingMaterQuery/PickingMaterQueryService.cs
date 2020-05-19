@@ -40,7 +40,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.P_OrderNo,
                 t.C_Remark,
                 dbo.GetUserNameById(t.C_CreateBy) C_CreateBy,
-                t.M_UploadBy,
+                dbo.GetUserNameById(t.M_UploadBy) M_UploadBy,
                 t.M_UploadDate,
                 t.C_CreateDate,
                 t.P_OrderDate

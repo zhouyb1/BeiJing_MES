@@ -108,7 +108,7 @@ namespace Ayma.Application.Organization
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(fieldSql);
-                strSql.Append(" FROM AM_Base_Company t WHERE t.F_EnabledMark = 1 AND t.F_DeleteMark = 0  ORDER BY t.F_ParentId,t.F_FullName ");
+                strSql.Append(" FROM AM_Base_Company t WHERE t.F_EnabledMark = 1 AND t.F_DeleteMark = 0  ORDER BY t.F_CreateDate desc");
                 return this.BaseRepository().FindList<CompanyEntity>(strSql.ToString());
             }
             catch (Exception ex)

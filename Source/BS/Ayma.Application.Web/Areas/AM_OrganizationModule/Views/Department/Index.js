@@ -99,7 +99,8 @@ var bootstrap = function ($, ayma) {
                         { label: "负责人", name: "F_Manager", width: 100, align: "left"},
                         { label: "电话号", name: "F_OuterPhone", width: 100, align: "left" },
                         { label: "分机号", name: "F_InnerPhone", width: 60, align: "center" },
-                        { label: "备注", name: "F_Description", width: 200, align: "left"}
+                        { label: "备注", name: "F_Description", width: 200, align: "left" },
+                        { label: "创建时间", name: "F_CreateDate", width: 200, align: "left" },
                 ],
 
                 isTree: true,

@@ -88,6 +88,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         public void Modify(string keyValue)
         {
             this.ID = keyValue;
+            this.P_InPrice = (this.P_TaxPrice / (1 + (this.P_Itax / 100)));//含税价格 /1+税率
         }
         #endregion
         #region 扩展字段

@@ -97,6 +97,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         {
             var userInfo = LoginUserInfo.Get();
             this.ID = Guid.NewGuid().ToString();
+            this.P_InPrice = (this.P_TaxPrice / (1 + (this.P_Itax / 100)));//含税价格 /1+税率
             this.P_CreateDate = DateTime.Now;
             this.P_CreateBy = userInfo.userId;
         }

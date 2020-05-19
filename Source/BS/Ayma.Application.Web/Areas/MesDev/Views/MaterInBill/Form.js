@@ -151,7 +151,7 @@ var bootstrap = function ($, ayma) {
                         label: '供应商名称', name: 'M_SupplyName', width: 110, align: 'left', editType: 'label'
                     },               
                      {
-                         label: '入库数量', name: 'M_Qty', width: 60, align: 'left', statistics: true, editType: 'input',
+                         label: '入库数量', name: 'M_Qty', width: 60, align: 'left', statistics: true, editType: status == 1 || status=="" ? 'input' : 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -163,7 +163,7 @@ var bootstrap = function ($, ayma) {
                          }, 
                      },
                      {
-                         label: "包装数量", name: "M_Qty2", width: 60, align: "left", editType: 'input',
+                         label: "包装数量", name: "M_Qty2", width: 60, align: "left", editType: status == 1 || status == "" ? 'input' : 'label',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (row.M_Qty2 != undefined && !!row.M_Qty2) {
@@ -177,7 +177,7 @@ var bootstrap = function ($, ayma) {
                          }
                      },
                    {
-                       label: '批次', name: 'M_Batch', width: 80, align: 'left' ,editType: 'input',
+                       label: '批次', name: 'M_Batch', width: 80, align: 'left', editType: status == 1 || status == "" ? 'input' : 'label',
                        editOp: {
                            callback: function (rownum, row) {
                                if (/\D/.test(row.M_Batch.toString().replace('.', ''))) { //验证只能为数字
@@ -208,7 +208,7 @@ var bootstrap = function ($, ayma) {
                        }, statistics: true
                    },
                       {
-                          label: "包装规格", name: "M_UnitQty", width: 60, align: "left", editType: 'select', editOp: {
+                          label: "包装规格", name: "M_UnitQty", width: 60, align: "left", editType: status == 1 || status == "" ? 'select' : 'label', editOp: {
                               width: 400,
                               height: 400,
                               colData: [

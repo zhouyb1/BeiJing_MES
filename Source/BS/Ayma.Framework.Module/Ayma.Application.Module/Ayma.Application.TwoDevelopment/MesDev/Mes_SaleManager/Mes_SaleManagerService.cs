@@ -225,7 +225,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                 t.MonthBalance,     
                                 t.S_OrderDate,
                                 t.S_UploadDate,
-                                t.S_UploadBy
+                                dbo.GetUserNameById(t.S_UploadBy)  S_UploadBy
                                 ");
                 strSql.Append("  FROM Mes_SaleHead t left join Mes_SaleDetail s on(t.S_SaleNo=s.S_SaleNo)");
                 strSql.Append("  WHERE 1=1 AND S_Status = 3 ");

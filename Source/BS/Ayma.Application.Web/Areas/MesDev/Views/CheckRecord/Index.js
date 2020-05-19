@@ -71,7 +71,6 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/CheckRecord/GetPageList',
                 headData: [
-                     { label: "ID", name: "ID", width: 160, align: "left" },
                     { label: "用户编码", name: "C_PersonId", width: 160, align: "left" },
                     { label: "用户姓名", name: "F_RealName", width: 160, align: "left" },
                     { label: "部门名称", name: "D_Code", width: 160, align: "left" },

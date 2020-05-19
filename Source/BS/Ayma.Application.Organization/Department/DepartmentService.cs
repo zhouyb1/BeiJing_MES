@@ -57,7 +57,7 @@ namespace Ayma.Application.Organization
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(fieldSql);
-                strSql.Append(" FROM AM_Base_Department t WHERE t.F_EnabledMark = 1 AND t.F_DeleteMark = 0 AND F_CompanyId = @companyId ORDER BY t.F_ParentId,t.F_FullName ");
+                strSql.Append(" FROM AM_Base_Department t WHERE t.F_EnabledMark = 1 AND t.F_DeleteMark = 0 AND F_CompanyId = @companyId ORDER BY t.F_CreateDate desc ");
                 return this.BaseRepository().FindList<DepartmentEntity>(strSql.ToString(), new { companyId = companyId });
             }
             catch (Exception ex)

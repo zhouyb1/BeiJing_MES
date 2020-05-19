@@ -129,7 +129,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.C_StockCode,
                 t.C_CreateDate,
                 s.W_Name as C_WorkShopName,
-                t.C_UploadBy,
+               dbo.GetUserNameById(t.C_UploadBy) C_UploadBy,
                 t.C_UploadDate
                 ");
                 strSql.Append("  FROM Mes_CompUseHead t left join Mes_WorkShop s on(t.C_WorkShop=s.W_Code) left join Mes_CompUseDetail b on(b.C_No=t.C_No)");

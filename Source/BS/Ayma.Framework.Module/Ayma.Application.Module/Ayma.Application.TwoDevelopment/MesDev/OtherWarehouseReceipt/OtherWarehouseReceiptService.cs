@@ -34,7 +34,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 t.O_UpdateDate,
                 dbo.GetUserNameById(t.O_DeleteBy) O_DeleteBy,
                 t.O_DeleteDate,
-                O_UploadBy,
+                 dbo.GetUserNameById(t.O_UploadBy) O_UploadBy,
                 t.O_UploadDate,
                 t.O_Remark,
                 t.MonthBalance

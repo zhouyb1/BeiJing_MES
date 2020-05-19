@@ -208,7 +208,7 @@ var bootstrap = function ($, ayma) {
                     },
                            {
                                label: "供应商价格(不含税)", name: "P_InPrice", width: 160, align: "left"
-                                  , editType: 'input',
+                                  , editType: 'label',
                                editOp: {
                                    callback: function (rownum, row) {
                                        if (/\D/.test(row.P_InPrice.toString().replace('.', ''))) { //验证只能为数字

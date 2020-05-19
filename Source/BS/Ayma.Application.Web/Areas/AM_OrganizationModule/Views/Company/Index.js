@@ -90,7 +90,8 @@ var bootstrap = function ($, ayma) {
                     { label: "电子邮箱", name: "F_Email", width: 100, align: "left" },
                     { label: "传真", name: "F_Fax", width: 100, align: "left" },
                     { label: "经营范围", name: "F_BusinessScope", width: 200, align: "left" },
-                    { label: "备注", name: "F_Description", width: 200, align: "left" }
+                    { label: "备注", name: "F_Description", width: 200, align: "left" },
+                    { label: "创建时间", name: "F_CreateDate", width: 200, align: "left" }
                 ],
                 isTree: true,
                 mainId: 'F_CompanyId',
