@@ -94,7 +94,13 @@ var bootstrap = function ($, ayma) {
                     { label: "单据号", name: "I_OrderNo", width: 130, align: "left"},
                     { label: "初始数量", name: "I_QtyOld", width: 60, align: "left"},
                     { label: "新数量", name: "I_QtyNew", width: 60, align: "left"},
-                    { label: "移动数量", name: "I_QtyTrend", width: 60, align: "left"},
+                    { label: "移动数量", name: "I_QtyTrend", width: 60, align: "left" },
+                    {
+                        label: "操作时间", name: "I_CreateDate", width: 100, align: "left" ,sort:true,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd hh:mm:ss');
+                        }
+                    },
                     { label: "备注", name: "I_Remark", width: 120, align: "left"},
                 ],
                 mainId:'ID',
