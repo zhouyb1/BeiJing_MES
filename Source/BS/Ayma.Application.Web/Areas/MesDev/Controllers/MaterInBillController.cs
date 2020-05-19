@@ -49,7 +49,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             //获取登录用户的角色
             var user = LoginUserInfo.Get();
-            var rcode = useribll.GetEntityByUserId(user.userId);
+            var rcode = useribll.GetEntityByUserId(user.userId);//通过用户id获取角色id
             var list = new RoleBLL().GetList(rcode.R_Code);
             if (list.Count > 0)
             {

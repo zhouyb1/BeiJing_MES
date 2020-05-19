@@ -21,6 +21,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private PickingMaterIBLL pickingMaterIBLL = new PickingMaterBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
+        private UserIBLL useribll = new UserBLL();
         private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
         private Mes_ProductOrderHeadIBLL orderBll = new Mes_ProductOrderHeadBLL();
 
@@ -71,7 +72,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
 
             //获取登录用户的角色
             var user = LoginUserInfo.Get();
-            var list = new RoleBLL().GetList(user.roleIds);
+            var rcode = useribll.GetEntityByUserId(user.userId);//通过用户id获取角色id
+            var list = new RoleBLL().GetList(rcode.R_Code);
             if (list.Count > 0)
             {
                 if (list[0].F_FullName != "系统管理员")
