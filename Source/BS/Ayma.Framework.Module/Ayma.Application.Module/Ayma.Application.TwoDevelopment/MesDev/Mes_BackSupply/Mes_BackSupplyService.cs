@@ -108,28 +108,45 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取退供应商物料数据
         /// </summary>
         /// <returns></returns>
-        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode)
+        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append(@" SELECT t.I_GoodsCode ,
-                                        t.I_GoodsName ,
-                                        t.I_Unit ,
-                                        t.I_Batch ,
-                                        t.I_Qty,
-                                        p.P_InPrice I_Price
-                                FROM    dbo.Mes_Inventory t
-                                        LEFT JOIN dbo.Mes_InPrice p ON p.P_GoodsCode = t.I_GoodsCode ");
-
-                strSql.Append("  WHERE t.I_Kind = 1 and t.I_Qty <> 0 And t.I_StockCode=@I_StockCode ");
+                strSql.Append(@" SELECT  t.I_GoodsCode ,
+                                            t.I_GoodsName ,
+                                            t.I_Unit ,
+                                            t.I_Batch ,
+                                            t.I_Qty ,
+                                            t.I_StockName,
+                                            p.P_InPrice I_Price,
+                                            p.P_SupplyCode I_SupplyCode,
+                                            p.P_SupplyName I_SupplyName,
+                                            p.P_Itax I_Itax,
+                                            p.P_TaxPrice I_TaxPrice
+                                    FROM    dbo.Mes_Inventory t
+                                            LEFT JOIN dbo.Mes_InPrice p ON p.P_GoodsCode = t.I_GoodsCode
+                                            LEFT JOIN dbo.Mes_Stock k ON k.S_Code=t.I_StockCode
+                                            LEFT JOIN dbo.Mes_Supply s ON s.S_Code=p.P_SupplyCode
+                                            WHERE  k.S_Kind=1  AND t.I_Kind=1 and t.I_Qty > 0 AND p.P_InPrice IS NOT NULL ");
+                var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters();
-                dp.Add("I_StockCode", stockCode);
+              
+                if (!queryParam["stockCode"].IsEmpty())
+                {
+                    dp.Add("@I_StockCode", queryParam["stockCode"].ToString(),DbType.String);
+                    strSql.Append(" And t.I_StockCode=@I_StockCode ");
+                }
+                if (!queryParam["supplyCode"].IsEmpty())
+                {
+                    dp.Add("@supplyCode", queryParam["supplyCode"].ToString(), DbType.String);
+                    strSql.Append(" And s.S_Code=@supplyCode ");
+                }
                 if (!keyword.IsEmpty())
                 {
                     dp.Add("keyword", "%" + keyword + "%", DbType.String);
-                    strSql.Append(" AND I_GoodsCode+I_GoodsName like @keyword ");
+                    strSql.Append(" AND t.I_GoodsCode+t.I_GoodsName like @keyword ");
                 }
                 return this.BaseRepository().FindTable(strSql.ToString(), dp, pagination);
             }

@@ -43,11 +43,11 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取退供应商物料数据
         /// </summary>
         /// <returns></returns>
-        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode)
+        public DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword)
         {
             try
             {
-                return mes_BackSupplyService.GetBackGoodsList(pagination, queryJson, keyword, stockCode);
+                return mes_BackSupplyService.GetBackGoodsList(pagination, queryJson, keyword);
             }
             catch (Exception ex)
             {

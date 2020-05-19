@@ -24,7 +24,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 获取退供应商物料数据
         /// </summary>
         /// <returns></returns>
-        DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword, string stockCode);
+        DataTable GetBackGoodsList(Pagination pagination, string queryJson, string keyword);
 
         /// <summary>
         /// 获取Mes_BackSupplyDetail表数据

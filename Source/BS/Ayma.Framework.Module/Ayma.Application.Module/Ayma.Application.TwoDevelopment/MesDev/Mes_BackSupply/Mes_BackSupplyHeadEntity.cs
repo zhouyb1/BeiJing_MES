@@ -23,12 +23,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [Column("B_BACKSUPPLYNO")]
         public string B_BackSupplyNo { get; set; }
         /// <summary>
-        /// 物料编码
+        /// 供应商编码
         /// </summary>
         [Column("B_STOCKCODE")]
         public string B_StockCode { get; set; }
         /// <summary>
-        /// 物料名称
+        /// 供应商名称
         /// </summary>
         [Column("B_STOCKNAME")]
         public string B_StockName { get; set; }
@@ -87,6 +87,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// </summary>
         [Column("B_REMARK")]
         public string B_Remark { get; set; }
+        /// <summary>
+        /// 供应商编码
+        /// </summary>
+        [Column("B_SUPPLYCODE")]
+        public string B_SupplyCode { get; set; }
+        /// <summary>
+        /// 供应商名称
+        /// </summary>
+        [Column("B_SUPPLYNAME")]
+        public string B_SupplyName { get; set; }
+
         #endregion
 
         #region 扩展操作
