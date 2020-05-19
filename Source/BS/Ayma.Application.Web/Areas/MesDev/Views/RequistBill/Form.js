@@ -118,7 +118,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '单位', name: 'R_Unit', width: 50, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'R_Qty', width: 80, align: 'left', editType: 'input',
+                        label: '数量', name: 'R_Qty', width: 80, align: 'left', statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.R_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -141,7 +141,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '价格', name: 'R_Price', width: 100, align: 'left', editType: 'label',
                     },
                     {
-                        label: '金额', name: 'R_Amount', width: 100, align: 'left', editType: 'label', hidden: status == 3 ? false : true
+                        label: '金额', name: 'R_Amount', width: 100, align: 'left', editType: 'label', statistics: true, hidden: status == 3 ? false : true
                     },
                     {
                         label: '批次', name: 'R_Batch', width: 100, align: 'left', editType: 'label'
@@ -160,7 +160,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {

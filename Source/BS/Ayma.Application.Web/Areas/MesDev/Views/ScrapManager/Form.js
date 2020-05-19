@@ -89,7 +89,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单价", name: "S_Price", width: 130, align: "left", },
                     { label: "单位", name: "S_Unit", width: 60, align: "left",hidden:true },
                     {
-                        label: "数量", name: "S_Qty", width: 60, align: "left" ,editType:'input',
+                        label: "数量", name: "S_Qty", width: 60, align: "left", statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (row.S_Qty != undefined && !!row.S_Qty) {
@@ -105,7 +105,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                             }
                         }
                     },
-                    { label: "金额", name: "S_Amount", width: 100, align: "left" ,statistics:true},
+                         {
+                             label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                                 if (row.S_Qty == "" || row.S_Qty == null || row.S_Qty == undefined) {
+                                     return row.金额 = 0;
+                                 }
+                                 else {
+                                     return row.金额 = row.S_Price * row.S_Qty;
+                                 }
+                             }, statistics: true
+                         },
 
                     { label: "库存", name: "G_Qty", width: 60, align: "left", hidden: keyValue == "" ? false : true },
 

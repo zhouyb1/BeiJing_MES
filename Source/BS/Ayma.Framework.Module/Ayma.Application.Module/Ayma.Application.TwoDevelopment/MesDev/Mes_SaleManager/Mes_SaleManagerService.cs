@@ -171,7 +171,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                    s.I_Batch ,
                                    s.I_Qty ,
                                    s.I_Kind,
-                                   g.G_Otax I_Otax,
+                                   ISNULL(g.G_Otax ,0) I_Otax,
                                    (select O_SalePrice from Mes_OutPrice where O_GoodsCode=s.I_GoodsCode) as I_Price,
                                    s.I_Unit,
 								   g.G_SupplyCode I_SupplyCode,

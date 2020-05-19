@@ -37,14 +37,24 @@ var bootstrap = function ($, ayma) {
                     { label: "物料名称", name: "S_GoodsName", width: 130, align: "left" },
                     { label: "单价", name: "S_Price", width: 60, align: "left" },
                     { label: "单位", name: "S_Unit", width: 60, align: "left" },
-                    { label: "数量", name: "S_Qty", width: 60, align: "left", },
-                    { label: "金额", name: "S_Amount", width: 60, align: "left",statistics:true },
+                    { label: "数量", name: "S_Qty", width: 60, align: "left", statistics: true },
+                       {
+                           label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                               if (row.S_Qty == "" || row.S_Qty == null || row.S_Qty == undefined) {
+                                   return row.金额 = 0;
+                               }
+                               else {
+                                   return row.金额 = row.S_Price * row.S_Qty;
+                               }
+                           }, statistics: true
+                       },
                     { label: "批次", name: "S_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
                 footerrow: true,
                 minheight: 400,
-                height: 300,
+                height: 30,
+                isStatistics: true
                 
             });
         },

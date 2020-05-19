@@ -1,4 +1,4 @@
-﻿/* * 创建人：超级管理员
+﻿    /* * 创建人：超级管理员
  * 日  期：2019-03-15 16:11
  * 描  述：线边仓退料到仓库
  */
@@ -155,7 +155,7 @@ var bootstrap = function($, ayma) {
                     label: "返回数量",
                     name: "B_Qty",
                     width: 60,
-                    align: "left",
+                    align: "left", statistics: true,
                     editType: 'input',
                     editOp: {
                         callback: function (rownum, row) {
@@ -170,7 +170,19 @@ var bootstrap = function($, ayma) {
                     }
                 },
                 {
-                    label: "库存", name: "G_Qty", width: 60, align: "left",  hidden: keyValue == "" ? false : true},
+                    label: "库存", name: "G_Qty", width: 60, align: "left", hidden: keyValue == "" ? false : true
+                }
+                ,
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.B_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.B_Price * row.B_Qty;
+                           }
+                       }, statistics: true
+                   },
                     { label: "批次", name: "B_Batch", width: 80, align: "left" }
                 ],
                 isAutoHeight: false,
@@ -179,7 +191,8 @@ var bootstrap = function($, ayma) {
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 1
+                inputCount: 1,
+                isStatistics: true
             });
         },
         initData: function() {

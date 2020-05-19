@@ -97,7 +97,7 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'O_Unit', width: 80, align: 'left', editType: 'label'
                     },
                      {
-                         label: '数量', name: 'O_Qty', width: 80, align: 'left', editType: 'input',
+                         label: '数量', name: 'O_Qty', width: 80, align: 'left', statistics: true, editType: 'input',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.O_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -150,20 +150,29 @@ var bootstrap = function ($, ayma) {
                              }
                          }
                      },
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.O_Qty == "" || row.O_Qty == null || row.O_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.O_Price * row.O_Qty;
+                           }
+                       }, statistics: true
+                   }, {
+                       label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'input',
+                       editOp: {
+                           callback: function (rownum, row) {
+                               if (/\D/.test(row.O_Batch.toString().replace('.', ''))) { //验证只能为数字
+                                   row.O_Batch = 0;
+                               }
+
+                           }
+                       }
+                   },
                     {
                         label: '包装单位', name: 'O_Unit2', width: 80, align: 'left', editType: 'label'
-                    },//最新维护的价格
-                    {
-                        label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'input',
-                        editOp: {
-                            callback: function (rownum, row) {
-                                if (/\D/.test(row.O_Batch.toString().replace('.', ''))) { //验证只能为数字
-                                    row.O_Batch = 0;
-                                }
-
-                            }
-                        }
-                    },
+                    },//最新维护的价格                
                     {
                         label: '备注', name: 'O_Remark', width: 160, align: 'left', editType: 'input'
                     },
@@ -174,7 +183,8 @@ var bootstrap = function ($, ayma) {
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 3
+                inputCount: 3,
+                isStatistics: true
             });
         },
         initData: function () {

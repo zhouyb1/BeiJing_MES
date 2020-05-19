@@ -147,7 +147,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     //    label: '库存', name: 'Qty', width: 100, align: 'left', editType: 'label'
                     //},
                     {
-                        label: '数量', name: 'C_Qty', width: 100, align: 'left', editType: 'input',
+                        label: '数量', name: 'C_Qty', width: 100, align: 'left', statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.C_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -156,6 +156,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
 
                             }
                         }
+                    }, {
+                        label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                            if (row.C_Qty == "" || row.C_Qty == null || row.C_Qty == undefined) {
+                                return row.金额 = 0;
+                            }
+                            else {
+                                return row.金额 = row.C_Price * row.C_Qty;
+                            }
+                        }, statistics: true
                     },
                     {
                         label: '备注', name: 'C_Remark', width: 150, align: 'left',editType: 'input'
@@ -167,7 +176,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 minheight: 330,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2 ,
+                isStatistics:true	
             });
         },
         initData: function () {

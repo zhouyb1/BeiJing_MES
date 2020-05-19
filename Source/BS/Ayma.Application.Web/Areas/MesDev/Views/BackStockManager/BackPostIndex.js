@@ -199,9 +199,21 @@ var bootstrap = function ($, ayma) {
                          { label: "物料名称", name: "B_GoodsName", width: 130, align: "left" },
                          { label: "单价", name: "B_Price", width: 130, align: "left" },
                          { label: "单位", name: "B_Unit", width: 60, align: "left" },
-                         { label: "返回数量", name: "B_Qty", width: 60, align: "left", },
+                         { label: "返回数量", name: "B_Qty", width: 60, align: "left", statistics: true, },
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.B_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.B_Price * row.B_Qty;
+                           }
+                       }, statistics: true
+                   },
                          { label: "批次", name: "B_Batch", width: 90, align: "left" }
                         ],
+                        footerrow: true,
+                        isStatistics: true,
                     });
                     $('#' + subgridId).jfGridSet('reload', { param: { orderNo: orderNo } });
 

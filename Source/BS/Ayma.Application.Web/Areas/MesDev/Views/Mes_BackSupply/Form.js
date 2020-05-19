@@ -93,7 +93,7 @@ var bootstrap = function ($, ayma) {
                         label: '单位', name: 'B_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'B_Qty', width: 80, align: 'center', editType: 'input',
+                        label: '数量', name: 'B_Qty', width: 80, align: 'center', statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.B_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -108,6 +108,15 @@ var bootstrap = function ($, ayma) {
                     },
                      {
                          label: '库存', name: 'Qty', width: 80, align: 'center', editType: 'label',hidden:keyValue==""?false:true
+                     }, {
+                         label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                             if (row.M_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
+                                 return row.金额 = 0;
+                             }
+                             else {
+                                 return row.金额 = row.B_Price * row.B_Qty;
+                             }
+                         }, statistics: true
                      },
                     {
                         label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
@@ -122,7 +131,8 @@ var bootstrap = function ($, ayma) {
                 isMultiselect: status == 1 || status == "" ? true : false,
                 footerrow: true,
                 minheight: 400,
-                inputCount:2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {

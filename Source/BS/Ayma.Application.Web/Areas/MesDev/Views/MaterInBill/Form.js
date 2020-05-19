@@ -151,7 +151,7 @@ var bootstrap = function ($, ayma) {
                         label: '供应商名称', name: 'M_SupplyName', width: 110, align: 'left', editType: 'label'
                     },               
                      {
-                         label: '入库数量', name: 'M_Qty', width: 60, align: 'left', editType: 'input',
+                         label: '入库数量', name: 'M_Qty', width: 60, align: 'left', statistics: true, editType: 'input',
                          editOp: {
                              callback: function (rownum, row) {
                                  if (/\D/.test(row.M_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -189,12 +189,22 @@ var bootstrap = function ($, ayma) {
                    },
                    {
                        label: "不含税金额", name: "不含税金额", width: 80, align: "left", formatter: function (value, row, dfop) {
-                           return row.不含税金额 = row.M_Price * row.M_Qty;
+                           if (row.M_Qty == "" || row.M_Qty == null || row.M_Qty == undefined) {
+                               return row.不含税金额 = 0;
+                           }
+                           else {
+                               return row.不含税金额 = row.M_Price * row.M_Qty;
+                           }
                        }, statistics: true
                    },
                    {
                        label: "含税金额", name: "含税金额", width: 60, align: "left", formatter: function (value, row, dfop) {
-                           return row.含税金额=row.M_TaxPrice * row.M_Qty;
+                           if (row.M_Qty == "" || row.M_Qty == null || row.M_Qty == undefined) {
+                               return row.含税金额 = 0;
+                           }
+                           else {
+                               return row.含税金额 = row.M_TaxPrice * row.M_Qty;
+                           }
                        }, statistics: true
                    },
                       {

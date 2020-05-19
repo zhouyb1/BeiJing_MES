@@ -133,10 +133,21 @@ var bootstrap = function ($, ayma) {
                             { label: "物料编码", name: "S_GoodsCode", width: 90, align: "left" },
                             { label: "批次", name: "S_Batch", width: 100, align: "left" },
                             { label: "单价", name: "S_Price", width: 80, align: "left" },
-                            { label: "数量", name: "S_Qty", width: 90, align: "left" },
+                            { label: "数量", name: "S_Qty", width: 90, align: "left", statistics: true },
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.S_Qty == "" || row.S_Qty == null || row.S_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.S_Price * row.S_Qty;
+                           }
+                       }, statistics: true
+                   },
                             { label: "单位", name: "S_Unit", width: 80, align: "left" }
                         ],
-                       
+                        footerrow: true,
+                        isStatistics: true
                     }).jfGridSet("reload");
                 }
                 

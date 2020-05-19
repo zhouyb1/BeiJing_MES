@@ -107,7 +107,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '价格', name: 'C_Price', width: 120, align: 'left', editType: 'label',
                     },
                     {
-                        label: '数量', name: 'C_Qty', width: 80, align: 'left', editType: 'label'
+                        label: '数量', name: 'C_Qty', width: 80, align: 'left', statistics: true, editType: 'label'
+                    }, {
+                        label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                            if (row.C_Qty == "" || row.C_Qty == null || row.C_Qty == undefined) {
+                                return row.金额 = 0;
+                            }
+                            else {
+                                return row.金额 = row.C_Price * row.C_Qty;
+                            }
+                        }, statistics: true
                     },
                     {
                         label: '备注', name: 'C_Remark', width: 200, align: 'left', editType: 'label'
@@ -119,7 +128,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 minheight: 400,
                 isMultiselect: false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {

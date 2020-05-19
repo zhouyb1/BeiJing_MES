@@ -155,6 +155,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     name: "C_Qty",
                     width: 60,
                     align: "left",
+                     statistics: true,
                     editType: 'input',
                     editOp: {
                         callback: function(rownum, row) {
@@ -219,7 +220,12 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 { label: "库存", name: "StockQty", width: 40, align: "left", hidden: keyValue == "" ? false : true },
                  {
                      label: "金额", name: "金额", width: 80, align: "left", formatter: function (value, row, dfop) {
-                         return row.金额 = row.C_Price * row.C_Qty;
+                         if (row.C_Qty == "" || row.C_Qty == null || row.C_Qty == undefined) {
+                             return row.金额 = 0;
+                         }
+                         else {
+                             return row.金额 = row.C_Price * row.C_Qty;
+                         }
                      }, statistics: true
                  },
                 { label: "原仓库编码", name: "C_StockCode", width: 90, align: "left" },

@@ -85,8 +85,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MaterForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm&status='+statu,
-                        width: 700,
-                        height: 500,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {
@@ -104,8 +104,8 @@ var bootstrap = function ($, ayma) {
                         id: 'MaterForm',
                         title: '编辑',
                         url: top.$.rootUrl + '/MesDev/InWorkShopManager/Form?keyValue=' + keyValue + '&formId=MaterForm&status='+statu,
-                        width: 700,
-                        height: 500,
+                        width: 900,
+                        height: 700,
                         maxmin: true,
                         btn: statu == 2 ? null : ['确认', '关闭'],
                         callBack: function(id) {

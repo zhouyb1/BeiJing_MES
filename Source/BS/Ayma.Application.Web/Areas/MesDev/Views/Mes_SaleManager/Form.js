@@ -106,13 +106,13 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         //}
                     },
                     {
-                        label: '销售税率', name: 'S_Otax', width: 160, align: 'center', editType: 'label'
+                        label: '销售税率', name: 'S_Otax', width: 160, align: 'center', 
                     },
                     {
                         label: '单位', name: 'S_Unit', width: 70, align: 'center', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'S_Qty', width: 80, align: 'center', editType: 'input',
+                        label: '数量', name: 'S_Qty', width: 80, align: 'center', statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.S_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -128,6 +128,16 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                      {
                          label: '库存', name: 'StockQty', width: 80, align: 'center', editType: 'label',hidden:keyValue==""?false:true
                      },
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.S_Qty == "" || row.S_Qty == null || row.S_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.S_Price * row.S_Qty;
+                           }
+                       }, statistics: true
+                   },
                     {
                         label: '批次', name: 'S_Batch', width: 160, align: 'center', editType: 'label'
                     },
@@ -141,7 +151,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isMultiselect: status == 1 || status == "" ? true : false,
                 footerrow: true,
                 minheight: 400,
-                inputCount:2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {

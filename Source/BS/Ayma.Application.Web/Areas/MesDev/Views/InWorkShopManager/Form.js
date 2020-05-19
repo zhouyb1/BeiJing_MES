@@ -70,7 +70,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                     { label: "单价", name: "I_Price", width: 60, align: "center"},
                     { label: "库存", name: "stockQty", width: 60, align: "center", hidden: keyValue == "" ? false : true },
                     {
-                        label: "数量", name: "I_Qty", width: 90, align: "center", editType: 'input',
+                        label: "数量", name: "I_Qty", width: 90, align: "center", statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.I_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -82,6 +82,15 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                                 }
                             }
                         }
+                    }, {
+                        label: "金额", name: "金额", width: 80, align: "left", formatter: function (value, row, dfop) {
+                            if (row.I_Qty == "" || row.I_Qty == null || row.I_Qty == undefined) {
+                                return row.金额 = 0;
+                            }
+                            else {
+                                return row.金额 = row.I_Price * row.I_Qty;
+                            }
+                        }, statistics: true
                     },
                     {
                         label: "批次", name: "I_Batch", width: 90, align: "center", editType: 'input',
@@ -103,7 +112,8 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2,
+                isStatistics: true
             });
             //添加物料
             $('#am_add').on('click', function () {

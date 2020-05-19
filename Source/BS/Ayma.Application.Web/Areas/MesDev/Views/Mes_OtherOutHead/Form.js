@@ -123,7 +123,7 @@ var bootstrap = function ($, ayma) {
                         label: '物料名称', name: 'O_GoodsName', width: 130, align: 'left', editType: 'label'
                     },
                     {
-                        label: '数量', name: 'O_Qty', width: 60, align: 'left', editType: 'input',
+                        label: '数量', name: 'O_Qty', width: 60, align: 'left', statistics: true, editType: 'input',
                         editOp: {
                             callback: function (rownum, row) {
                                 //if (/\D/.test(row.P_Qty.toString().replace('.', ''))) { //验证只能为数字
@@ -186,12 +186,22 @@ var bootstrap = function ($, ayma) {
                               }
                           }
                       },
-                     {
-                         label: '包装单位', name: 'O_Unit2', width: 100, align: 'left', editType: 'label'
-                     },
+                   {
+                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                           if (row.O_Qty == "" || row.O_Qty == null || row.O_Qty == undefined) {
+                               return row.金额 = 0;
+                           }
+                           else {
+                               return row.金额 = row.O_Price * row.O_Qty;
+                           }
+                       }, statistics: true
+                   }, 
                     { label: '库存', name: 'I_Qty', width: 100, align: 'left', hidden: keyValue == "" ? false : true },
                     {
                         label: '批次', name: 'O_Batch', width: 100, align: 'left', editType: 'label'
+                    },
+                    {
+                        label: '包装单位', name: 'O_Unit2', width: 100, align: 'left', editType: 'label'
                     },
                     {
                         label: '价格', name: 'O_Price', width: 60, align: 'left', editType: 'label',
@@ -217,7 +227,8 @@ var bootstrap = function ($, ayma) {
                 isEidt: status == 1 || status == "" ? true : false,
                 isMultiselect: status == 1 || status == "" ? true : false,
                 height: 300,
-                inputCount: 2
+                inputCount: 2,
+                isStatistics: true
             });
         },
         initData: function () {

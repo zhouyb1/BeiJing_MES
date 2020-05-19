@@ -188,10 +188,18 @@ var bootstrap = function ($, ayma) {
                             { label: "物料编码", name: "I_GoodsCode", width: 130, align: "left" },
                             { label: "物料名称", name: "I_GoodsName", width: 130, align: "left" },
                             { label: "单位", name: "I_Unit", width: 60, align: "left" },
-                            { label: "数量", name: "I_Qty", width: 60, align: "left" },
+                            { label: "数量", name: "I_Qty", width: 60, align: "left", statistics: true },
                             { label: "价格", name: "I_Price", width: 60, align: "left" },
+                                {
+                                    label: "金额", name: "金额", width: 80, align: "left", formatter: function (value, row, dfop) {
+                                        return row.金额 = row.I_Price * row.I_Qty;
+                                    }, statistics: true
+                                },
                             { label: "批次", name: "I_Batch", width: 80, align: "left" }
                         ],
+                        isAutoHeight: false,
+                        footerrow: true,
+                        isStatistics: true
                     });
                     $('#' + subgridId).jfGridSet('reload', { param: { orderNo: orderNo } });
                 }
