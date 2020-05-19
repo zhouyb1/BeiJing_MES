@@ -150,10 +150,10 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         [AjaxOnly]
-        public ActionResult GetBackGoodsList(string pagination, string queryJson, string keyword, string stockCode)
+        public ActionResult GetBackGoodsList(string pagination, string queryJson, string keyword)
         {
             Pagination paginationobj = pagination.ToObject<Pagination>();
-            DataTable data = mes_BackSupplyIBLL.GetBackGoodsList(paginationobj, queryJson, keyword, stockCode);
+            DataTable data = mes_BackSupplyIBLL.GetBackGoodsList(paginationobj, queryJson, keyword);
             var jsonData = new
             {
                 rows = data,
