@@ -80,6 +80,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("I_Batch", "%" + queryParam["I_Batch"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.I_Batch Like @I_Batch ");
                 }
+                strSql.Append(" order by I_CreateDate desc ");
+
                 return this.BaseRepository().FindList<Mes_InventoryTrendEntity>(strSql.ToString(),dp, pagination);
             }
             catch (Exception ex)
