@@ -96,7 +96,7 @@ var bootstrap = function ($, ayma) {
                     { label: "新数量", name: "I_QtyNew", width: 60, align: "left"},
                     { label: "移动数量", name: "I_QtyTrend", width: 60, align: "left" },
                     {
-                        label: "操作时间", name: "I_CreateDate", width: 100, align: "left",
+                        label: "操作时间", name: "I_CreateDate", width: 100, align: "left",sort:true,
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd hh:mm:ss');
                         }
