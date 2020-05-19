@@ -14,12 +14,14 @@
         <input id="B_BackSupplyNo" type="text" placeholder="系统自动生成" class="form-control" disabled="disabled"/>
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_BackSupplyHead" >
-        <div class="am-form-item-title">仓库名称<font face="宋体">*</font></div>
-        <div id="B_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <div class="am-form-item-title">供应商<font face="宋体">*</font></div>
+        <div id="B_SupplyCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input type="hidden" id="B_SupplyName"/>
     </div>
-    <div class="col-xs-6 am-form-item"  data-table="Mes_BackSupplyHead" >
-        <div class="am-form-item-title">仓库编码<font face="宋体">*</font></div>
-        <input id="B_StockCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly="readonly" />
+    <div class="col-xs-6 am-form-item" data-table="Mes_BackSupplyHead">
+        <div class="am-form-item-title">仓库<font face="宋体">*</font></div>
+        <div id="B_StockCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input type="hidden" id="B_StockName" />
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_BackSupplyHead" >
         <div class="am-form-item-title">单据时间</div>

@@ -16,6 +16,8 @@ var queryJson;
 var closeWindow;
 //仓库编码
 var stockCode = request('stockCode');
+//供应商编码
+var supplyCode = request('supplyCode');
 var bootstrap = function ($, ayma) {
     "use strict";
     var page = {
@@ -85,14 +87,14 @@ var bootstrap = function ($, ayma) {
         // 初始化列表
         initGird: function () {
             $('#girdtable').jfGrid({
-                url: top.$.rootUrl + '/MesDev/Mes_BackSupply/GetBackGoodsList?stockCode=' + stockCode,
+                url: top.$.rootUrl + '/MesDev/Mes_BackSupply/GetBackGoodsList',
                 headData: [
-                    { label: "物料编码", name: "i_goodscode", width: 130, align: "left", },
+                    { label: "物料编码", name: "i_goodscode", width: 80, align: "left", },
                     { label: "物料名称", name: "i_goodsname", width: 130, align: "left" },
-                    { label: "单价(不含税)", name: "i_price", width: 90, align: "left" },
                     { label: "单位", name: "i_unit", width: 80, align: "left" },
-                    { label: "数量", name: "i_qty", width: 100, align: "left" },
-                    { label: "批次", name: "i_batch", width: 100, align: "left" }
+                    { label: "单价(不含税)", name: "i_price", width: 90, align: "left" },
+                    { label: "库存", name: "i_qty", width: 90, align: "left" },
+                    { label: "批次", name: "i_batch", width: 80, align: "left" }
                 ],
                 mainId: 'ID',
                 isMultiselect: true,         // 是否允许多选
@@ -179,8 +181,10 @@ var bootstrap = function ($, ayma) {
             page.search();
         },
         search: function (param) {
-            queryJson = param;
+            queryJson = param|| {}
             param = $("#txt_Keyword").val();
+            queryJson.stockCode = stockCode;
+            queryJson.supplyCode = supplyCode;
             $('#girdtable').jfGridSet('reload', { param: { keyword: param, queryJson: JSON.stringify(queryJson) } });
         }
     };

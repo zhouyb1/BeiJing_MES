@@ -20,13 +20,14 @@ var bootstrap = function ($, ayma) {
         },
         bind: function () {
             if (status==2) {
-                $('#B_StockName').attr('readonly', true);
+                $('#B_StockCode').attr('readonly', true);
+                $('#B_SupplyCode').attr('readonly', true);
                 $('#am_add').attr('disabled', true); 
                 $('#B_Remark').attr('readonly', true);
             }
             var dfop = {
                 type: 'default',
-                value: 'S_Name',
+                value: 'S_Code',
                 text: 'S_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -37,32 +38,57 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口参数
                 param: {strWhere:'S_Kind = 1 '}
             }
-            $("#B_StockName").select(dfop).on('change', function () {
-                if (status==1) {
-                    $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
-                }
-                var name = $(this).selectGet();
-                $.ajax({
-                    type: "get",
-                    url: top.$.rootUrl + '/MesDev/Tools/ByCodeGetStockEntity',
-                    data: { code: name },
-                    success: function (data) {
-                        var entity = JSON.parse(data).data;
-                        $("#B_StockCode").val(entity.S_Code);
-                    }
-                });
+            $("#B_StockCode").select(dfop).on('change', function () {
+                $('#B_StockName').val($(this).selectGetText());
             });
+            $('#B_SupplyCode').select({
+                type: 'default',
+                value: 'S_Code',
+                text: 'S_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
+                // 访问数据接口参数
+            }).on('change', function() {
+                if (status == 1) {
+                    ayma.layerConfirm('更改供应商将会清除商品列表，是否继续？！', function(res, dialog) {
+                        if (res) {
+                            $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                            top.layer.close(dialog);
+                        }
+                    });
+                } else {
+                    if (status=="") {
+                        ayma.layerConfirm('更改供应商将会清除商品列表，是否继续？！', function (res, dialog) {
+                            if (res) {
+                                $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                                top.layer.close(dialog);
+                            }
+                        });
+                    }
+                }
+                $('#B_SupplyName').val($(this).selectGetText());
+            });
+
             //添加物料
             $("#am_add").on("click", function () {
-                var stockCode = $("#B_StockCode").val();
+                var stockCode = $("#B_StockCode").selectGet();
+                var supplyCode = $('#B_SupplyCode').selectGet();
                 if (stockCode == "") {
                     ayma.alert.error("请选择仓库");
+                    return false;
+                }
+                if (supplyCode=="") {
+                    ayma.alert.error("请选择供应商");
                     return false;
                 }
                 ayma.layerForm({
                     id: 'GoodsListIndexForm',
                     title: '添加物料',
-                    url: top.$.rootUrl + '/MesDev/Mes_BackSupply/BackGoodsList?formId=' + parentFormId + '&stockCode=' + stockCode,
+                    url: top.$.rootUrl + '/MesDev/Mes_BackSupply/BackGoodsList?formId=' + parentFormId + '&stockCode=' + stockCode + '&supplyCode=' + supplyCode,
                     width: 750,
                     height: 600,
                     maxmin: true,
