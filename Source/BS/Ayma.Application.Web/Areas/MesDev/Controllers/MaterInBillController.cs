@@ -20,6 +20,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     public partial class MaterInBillController : MvcControllerBase
     {
         private MaterInBillIBLL materInBillIBLL = new MaterInBillBLL();
+        private UserIBLL useribll = new UserBLL();
         private ToolsIBLL toolsIBLL = new ToolsBLL();
 
         #region 视图功能
@@ -48,7 +49,8 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         {
             //获取登录用户的角色
             var user = LoginUserInfo.Get();
-            var list = new RoleBLL().GetList(user.roleIds);
+            var rcode = useribll.GetEntityByUserId(user.userId);
+            var list = new RoleBLL().GetList(rcode.R_Code);
             if (list.Count > 0)
             {
                 if (list[0].F_FullName != "系统管理员")
