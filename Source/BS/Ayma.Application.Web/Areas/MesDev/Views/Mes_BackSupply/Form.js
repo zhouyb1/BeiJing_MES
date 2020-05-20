@@ -9,6 +9,8 @@ var tmp = new Map();
 var keyValue = request('keyValue');
 var parentFormId = request('formId');//上一级formId
 var status = request('status');
+var supplyCode = "";
+var layTip = false;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -52,23 +54,31 @@ var bootstrap = function ($, ayma) {
                 // 访问数据接口地址
                 url: top.$.rootUrl + '/MesDev/Tools/GetEffectSupplyList',
                 // 访问数据接口参数
-            }).on('change', function() {
+            }).on('change', function () {
+                if ($(this).selectGet() == supplyCode) {
+                    return false;
+                }
                 if (status == 1) {
                     ayma.layerConfirm('更改供应商将会清除商品列表，是否继续？！', function(res, dialog) {
                         if (res) {
                             $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                            supplyCode = $(this).selectGet();
                             top.layer.close(dialog);
                         }
                     });
                 } else {
-                    if (status=="") {
+                    if (layTip) {
                         ayma.layerConfirm('更改供应商将会清除商品列表，是否继续？！', function (res, dialog) {
                             if (res) {
+                                layTip = false;
                                 $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: [] });
+                                supplyCode = $(this).selectGet();
+                                layTip = true;
                                 top.layer.close(dialog);
                             }
                         });
                     }
+                    layTip = true;
                 }
                 $('#B_SupplyName').val($(this).selectGetText());
             });
@@ -76,7 +86,7 @@ var bootstrap = function ($, ayma) {
             //添加物料
             $("#am_add").on("click", function () {
                 var stockCode = $("#B_StockCode").selectGet();
-                var supplyCode = $('#B_SupplyCode').selectGet();
+                supplyCode = $('#B_SupplyCode').selectGet();
                 if (stockCode == "") {
                     ayma.alert.error("请选择仓库");
                     return false;
@@ -169,7 +179,9 @@ var bootstrap = function ($, ayma) {
                             $('#Mes_BackSupplyDetail').jfGridSet('refreshdata', { rowdatas: data[id] });
                         }
                         else {
+                            supplyCode = data[id].B_SupplyCode;
                             $('[data-table="' + id + '"]').SetFormData(data[id]);
+                            
                         }
                     }
                 });
