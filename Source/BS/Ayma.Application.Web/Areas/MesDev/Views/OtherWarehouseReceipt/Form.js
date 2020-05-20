@@ -241,7 +241,7 @@ var bootstrap = function ($, ayma) {
                 var flagRow = true;
                 //加个循环判断数组重复
                 for (var k = 0; k < rows.length; k++) {
-                    if (rows[k].O_GoodsCode == row.G_Code) {
+                    if (rows[k].O_GoodsCode == row.G_Code && rows[k].O_Batch == ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "")) {
                         flagRow = false;
                     }
                 }
@@ -256,7 +256,7 @@ var bootstrap = function ($, ayma) {
                     var flag = true;
                     //加个循环判断数组重复
                     for (var j = 0; j < rows.length; j++) {
-                        if (rows[j].O_GoodsCode == data[i].G_Code) {
+                        if (rows[j].O_GoodsCode == data[i].G_Code && rows[k].O_Batch == ayma.formatDate(new Date(), "yyyy-MM-dd").toString().replace(/-/g, "")) {
                             flag = false;
                         }
                     }

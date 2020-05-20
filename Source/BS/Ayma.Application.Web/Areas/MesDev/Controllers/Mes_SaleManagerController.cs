@@ -4,6 +4,7 @@ using Ayma.Util;
 using Ayma.Application.TwoDevelopment.MesDev;
 using System.Web.Mvc;
 using System.Collections.Generic;
+using Ayma.Application.Organization;
 
 namespace Ayma.Application.Web.Areas.MesDev.Controllers
 {
@@ -16,7 +17,7 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
     {
         private Mes_SaleManagerIBLL mes_SaleManagerIBLL = new Mes_SaleManagerBLL();
         private InventorySeachIBLL invSeachIbll = new InventorySeachBLL();
-
+        private UserIBLL useribll = new UserBLL();
         #region 视图功能
 
         /// <summary>
@@ -51,7 +52,17 @@ namespace Ayma.Application.Web.Areas.MesDev.Controllers
         /// <returns></returns>
         [HttpGet]
         public ActionResult Form()
-        {
+        {   //获取登录用户的角色
+            var user = LoginUserInfo.Get();
+            var rcode = useribll.GetEntityByUserId(user.userId);//通过用户id获取角色id
+            var list = new RoleBLL().GetList(rcode.R_Code);
+            if (list.Count > 0)
+            {
+                if (list[0].F_FullName != "系统管理员")
+                {
+                    ViewBag.disabled = "disabled";
+                }
+            }
             return View();
         }
         /// <summary>

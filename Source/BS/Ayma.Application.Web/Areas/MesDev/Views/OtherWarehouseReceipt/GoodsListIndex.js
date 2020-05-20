@@ -150,7 +150,7 @@ var bootstrap = function ($, ayma) {
                         var rowlistlenght = rowslist[0]["ID"] == undefined ? 0 : rowslist.length;
                         for (var i = 0; i < rows.length; i++) {
                             for (var j = 0; j < rowlistlenght; j++) {
-                                if (rows[i]['G_Code'] == rowslist[j]['O_GoodsCode']) {
+                                if (rows[i]['G_Code'] == rowslist[j]['O_GoodsCode'] && ayma.formatDate(batch, "yyyy-MM-dd").toString().replace(/-/g, "") == rowslist[j]['O_Batch']) {
                                     $("[rownum='rownum_girdtable_" + i + "']").eq(2).children().attr("checked", "checked");
                                     break;
                                 }
