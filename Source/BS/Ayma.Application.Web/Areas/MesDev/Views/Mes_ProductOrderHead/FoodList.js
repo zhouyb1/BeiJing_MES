@@ -57,9 +57,8 @@ var bootstrap = function ($, ayma) {
                 isStatistics: true,
                 isAutoHeight: false,
                 isEidt: false,
-                height: 300,
-                footerrow: true,
-                minheight: 400
+                height: 489 ,
+                footerrow: true
             });
 
             $("#am_add").on("click", function () {

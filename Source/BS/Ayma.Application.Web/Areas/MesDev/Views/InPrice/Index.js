@@ -195,7 +195,8 @@ var bootstrap = function ($, ayma) {
                     },
                     {
                         label: "购进税率(%)", name: "P_Itax", width: 160, align: "left"
-                        , editType: 'input',
+                        , editType: 'myinput
+                        ',
                         editOp: {
                             callback: function (rownum, row) {
                                 if (/\D/.test(row.P_Itax.toString().replace('.', ''))) { //验证只能为数字

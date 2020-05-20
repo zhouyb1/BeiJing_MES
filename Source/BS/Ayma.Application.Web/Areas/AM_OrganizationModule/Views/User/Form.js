@@ -54,7 +54,6 @@ var bootstrap = function ($, ayma) {
                 keyValue = selectedRow.F_UserId;
                 selectedRow.F_Password = "******";
                 $('#form').SetFormData(selectedRow);
-                $('#F_Password').attr('readonly', 'readonly');
                 $('#F_Account').attr('readonly', 'readonly');
             }
             else {

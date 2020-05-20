@@ -909,6 +909,38 @@
                             });
                         }
                         break;
+                    case 'myinput': //2020 5-20 何鹏创建自用
+                        if (!!node.numbercount) {
+                            if (value != undefined) {
+                                var num = new Number(value);
+                                value = parseFloat(num).toFixed(node.numbercount);
+                            }
+                        }
+                        var $input = $('<input  type="text" class="form-control" placeholder="0"/>').val(value || '');
+                        $input.css({ 'text-align': node.align });
+                        $input.on('input propertychange', function () {
+                            var _$input = $(this);
+                            row[node.name] = _$input.val();
+                            if (node.statistics) {
+                                $.jfGrid.renderStatisticsOne($('#' + dfop.id), node.name);
+                            }
+                            if (!!node.editOp && !!node.editOp.callback) {
+                                node.editOp.callback(rownum, row);
+                                $.jfGrid.renderData($('#' + dfop.id));
+                                $('[rownum="rownum_' + dfop.id + '_' + rownum + '"][colname="' + node.name + '"]>input').focus();
+                            }
+                        });
+
+                        $dcell.html($input);
+                        if (!!node.formatter) {
+                            node.formatter(value, row, dfop, $dcell);
+                        }
+                        if (!!node.blur) {
+                            $input.blur(function () {
+                                node.blur(row);
+                            });
+                        }
+                        break;
                     case 'moneyinput'://金额输入框
                         var $input = $('<input  type="text" class="form-control" isvalid="yes" checkexpession="Money"/>').val(value || '');
                         $input.css({ 'text-align': node.align });

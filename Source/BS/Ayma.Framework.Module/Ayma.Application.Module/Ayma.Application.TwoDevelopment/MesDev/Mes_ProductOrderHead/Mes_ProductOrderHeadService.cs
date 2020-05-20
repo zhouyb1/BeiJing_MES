@@ -67,7 +67,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["P_OrderDate"].IsEmpty())
                 {
                     dp.Add("P_OrderDate",queryParam["P_OrderDate"].ToString(), DbType.String);
-                    strSql.Append(" AND t.P_OrderDate=@P_OrderDate ");
+                    strSql.Append(" AND t.P_OrderDate = @P_OrderDate ");
                 }
                 if (!queryParam["P_OrderNo"].IsEmpty())
                 {
