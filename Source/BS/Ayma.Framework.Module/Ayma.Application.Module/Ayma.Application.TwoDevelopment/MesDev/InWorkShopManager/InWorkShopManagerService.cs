@@ -350,7 +350,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["stock"].IsEmpty())
                 {
                     dp.Add("stock", queryParam["stock"].ToString(), DbType.String);
-                    strSql.Append(" AND P_StockCode = @stock  ");
+                    strSql.Append(" AND P_WorkShopCode = @stock  ");
                 }
               return this.BaseRepository().FindTable(strSql.ToString(),dp, paginationobj);
             }
