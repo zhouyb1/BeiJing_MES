@@ -117,16 +117,16 @@ var bootstrap = function ($, ayma) {
                         label: '退供应商单号', name: 'B_BackSupplyNo', width: 160, align: 'left', editType: 'label', hidden: 'true'
                     },
                     {
-                        label: '物料编码', name: 'B_GoodsCode', width: 100, align: 'center', editType: 'label'
+                        label: '物料编码', name: 'B_GoodsCode', width: 80, align: 'center', editType: 'label'
                     },
                     {
-                        label: '物料名称', name: 'B_GoodsName', width: 160, align: 'center', editType: 'label'
+                        label: '物料名称', name: 'B_GoodsName', width: 130, align: 'center', editType: 'label'
                     },
                      {
                          label: '单价(不含税)', name: 'B_Price', width: 80, align: 'center', editType: 'label'
                      },
                     {
-                        label: '单位', name: 'B_Unit', width: 70, align: 'center', editType: 'label'
+                        label: '单位', name: 'B_Unit', width: 50, align: 'center', editType: 'label'
                     },
                     {
                         label: '数量', name: 'B_Qty', width: 80, align: 'center', statistics: true, editType: 'input',
@@ -145,7 +145,7 @@ var bootstrap = function ($, ayma) {
                      {
                          label: '库存', name: 'Qty', width: 80, align: 'center', editType: 'label',hidden:keyValue==""?false:true
                      }, {
-                         label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
+                         label: "金额", name: "金额", width: 100, align: "left", formatter: function (value, row, dfop) {
                              if (row.M_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
                                  return row.金额 = 0;
                              }
@@ -155,10 +155,10 @@ var bootstrap = function ($, ayma) {
                          }, statistics: true
                      },
                     {
-                        label: '批次', name: 'B_Batch', width: 160, align: 'center', editType: 'label'
+                        label: '批次', name: 'B_Batch', width: 90, align: 'center', editType: 'label'
                     },
                     {
-                        label: '备注', name: 'B_Remark', width: 200, align: 'left', editType: 'input'
+                        label: '备注', name: 'B_Remark', width: 130, align: 'left', editType: 'input'
                     },
                 ],
                 isAutoHeight: true,

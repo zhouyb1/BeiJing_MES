@@ -121,7 +121,6 @@ var bootstrap = function ($, ayma) {
             $('#girdtable').AuthorizeJfGrid({
                 url: top.$.rootUrl + '/MesDev/Mes_BackSupplyQuery/GetPageList',
                 headData: [
-                    { label: "  主键", name: "ID", width: 160, align: "left", hidden: "true" },
                     {
                         label: "状态", name: "B_Status", width: 90, align: "center",
                         formatterAsync: function (callback, value, row) {
@@ -144,11 +143,10 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据编号", name: "B_BackSupplyNo", width: 130, align: "center" },
-                    { label: "仓库编码", name: "B_StockCode", width: 90, align: "center" },
                     { label: "仓库名称", name: "B_StockName", width: 130, align: "center" },
-                    { label: "备注", name: "B_Remark", width: 160, align: "left" },
+                    { label: "仓库编码", name: "B_StockCode", width: 70, align: "center" },
                     {
-                        label: "单据时间", name: "B_OrderDate", width: 160, align: "center",
+                        label: "单据时间", name: "B_OrderDate", width: 100, align: "center",
                         formatter: function (cellvalue, options, rowObject) {
                             return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
                         }
@@ -159,6 +157,8 @@ var bootstrap = function ($, ayma) {
                     { label: "修改时间", name: "B_UpdateDate", width: 130, align: "center" },
                     { label: "提交人", name: "B_UploadBy", width: 90, align: "center" },
                     { label: "提交时间", name: "B_UploadDate", width: 130, align: "center" },
+                    { label: "备注", name: "B_Remark", width: 160, align: "left" },
+                     { label: "  主键", name: "ID", width: 160, align: "left", hidden: "true" },
                 ],
                 mainId:'ID',
                 reloadSelected: true,

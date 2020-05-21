@@ -44,17 +44,17 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             //入往日耗库
             $('#I_StockCode').select(dfop);
           
-            //原日耗库
+            //生产车间
             $('#I_WorkShop').select({
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Name',
+                value: 'W_Code',
+                text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
                 param: {}
             }).on('change', function () {

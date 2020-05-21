@@ -8,31 +8,33 @@
         <div class="am-form-item-title">单据编号</div>
         <input id="O_OrgResNo" type="text" class="form-control" placeholder="系统自动生成" class="form-control" disabled="disabled" />
     </div>
-    <div class="col-xs-4 am-form-item"  data-table="Mes_OrgResHead" >
-        <div class="am-form-item-title">工序<font face="宋体">*</font></div>
-        <div id="O_ProCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
-    </div>
     <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
-        <div class="am-form-item-title">日耗仓名称<font face="宋体">*</font></div>
-        <div id="O_StockName" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
-    </div>
-    <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
-        <div class="am-form-item-title">日耗仓编码</div>
-        <input id="O_StockCode" type="text" class="form-control" readonly="readonly" />
+        <div class="am-form-item-title">生产车间<font face="宋体">*</font></div>
+        <div id="O_WorkShopCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input id="O_WorkShopName" type="hidden" class="form-control" readonly="readonly" />
     </div>
     <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
         <div class="am-form-item-title">班组<font face="宋体">*</font></div>
         <div id="O_TeamCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
-        <input id="O_TeamName" type="text" class="form-control" style="display: none"/> 
+        <input id="O_TeamName" type="hidden" />
+    </div>
+    <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
+        <div class="am-form-item-title">日耗仓<font face="宋体">*</font></div>
+        <div id="O_StockCode" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
+        <input id="O_StockName" type="hidden" class="form-control" readonly="readonly" />
+    </div>
+    <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
+        <div class="am-form-item-title">工序<font face="宋体">*</font></div>
+        <div id="O_ProCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     <div class="col-xs-4 am-form-item" data-table="Mes_OrgResHead">
         <div class="am-form-item-title">单据时间</div>
         <input id="O_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" disabled="@ViewBag.disabled" />
     </div>
-    <div class="col-xs-4 am-form-item"  data-table="Mes_OrgResHead" >
+    @*<div class="col-xs-4 am-form-item"  data-table="Mes_OrgResHead" >
         <div class="am-form-item-title">备注</div>
         <input id="O_Remark" type="text" class="form-control"  />
-    </div>
+    </div>*@
     <div class="col-xs-12 am-form-item" data-table="Mes_RequistHead">
         <div class="am-form-item-title"></div>
         <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;添加物料</a>

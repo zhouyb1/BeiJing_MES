@@ -85,7 +85,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 if (!queryParam["I_WorkShop"].IsEmpty())
                 {
                     dp.Add("I_WorkShop", "%" + queryParam["I_WorkShop"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND s.W_Name Like @I_WorkShop ");
+                    strSql.Append(" AND t.I_WorkShop Like @I_WorkShop ");
                 }
                 return this.BaseRepository().FindList<Mes_InWorkShopHeadEntity>(strSql.ToString(),dp, pagination);
             }

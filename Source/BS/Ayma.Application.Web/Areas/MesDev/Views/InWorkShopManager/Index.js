@@ -46,7 +46,7 @@ var bootstrap = function ($, ayma) {
             });
             $("#I_WorkShop").select({
                 type: 'default',
-                value: 'W_Name',
+                value: 'W_Code',
                 text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
@@ -242,7 +242,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据编号", name: "I_InNo", width: 140, align: "center" },
-                    { label: "原日耗仓", name: "I_WorkShop", width: 130, align: "center" },
+                    { label: "生产车间", name: "I_WorkShop", width: 130, align: "center" },
                     { label: "入往日耗仓", name: "I_StockName", width: 130, align: "center" },
                     {
                         label: "单据时间", name: "I_OrderDare", width: 100, align: "center",sort:true,

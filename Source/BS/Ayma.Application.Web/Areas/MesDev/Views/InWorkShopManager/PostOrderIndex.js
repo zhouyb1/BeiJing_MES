@@ -33,14 +33,14 @@ var bootstrap = function ($, ayma) {
             $('#I_Status').DataItemSelect({ code: 'ProOutStatus' });
             $("#I_WorkShop").select({
                 type: 'default',
-                value: 'S_Code',
-                text: 'S_Name',
+                value: 'W_Code',
+                text: 'W_Name',
                 // 展开最大高度
                 maxHeight: 200,
                 // 是否允许搜索
                 allowSearch: true,
                 // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetLineStockList',
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
                 // 访问数据接口参数
                 param: {}
             });
@@ -159,8 +159,9 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "单据编号", name: "I_InNo", width: 130, align: "center" },
+                    { label: "生产车间", name: "I_WorkShop", width: 130, align: "center" },
                     { label: "入往日耗库", name: "I_StockName", width: 130, align: "center" },
-                    { label: "原日耗库", name: "I_WorkShop", width: 130, align: "center" },
+                   
                     { label: "备注", name: "I_Remark", width: 130, align: "center" },
                     {
                         label: "单据时间", name: "I_OrderDate", width: 100, align: "center",
