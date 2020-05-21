@@ -338,7 +338,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == 4);
+                return this.BaseRepository().FindList<Mes_StockEntity>(c => c.S_Kind == 4).OrderBy(c=>c.S_Name);
             }
             catch (Exception ex)
             {
