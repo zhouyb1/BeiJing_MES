@@ -321,7 +321,7 @@
 						"Charset":134
 					},
 					"TextAlign":"MiddleJustiy",
-					"Text":"仓库："
+					"Text":"日耗库："
 				},
 				{
 					"Type":"StaticBox",
