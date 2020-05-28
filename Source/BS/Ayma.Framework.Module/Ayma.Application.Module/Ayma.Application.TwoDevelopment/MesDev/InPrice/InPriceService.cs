@@ -106,7 +106,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("P_SupplyCode", "%" + P_SupplyCode.ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_SupplyCode Like @P_SupplyCode ");
                 }
-                if (!P_SupplyCode.IsEmpty())
+                if (!P_GoodsName.IsEmpty())
                 {
                     dp.Add("P_GoodsName", "%" + P_GoodsName.ToString() + "%", DbType.String);
                     strSql.Append(" AND t.P_GoodsName Like @P_GoodsName ");
