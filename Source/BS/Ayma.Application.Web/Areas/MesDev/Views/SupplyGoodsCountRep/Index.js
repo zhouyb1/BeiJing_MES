@@ -165,7 +165,6 @@ var bootstrap = function ($, ayma) {
                     { label: "经办人", name: "m_createby", width: 100, align: "center" },
                 ],
                 mainId: 'ID',
-                reloadSelected: true,
                 isPage: false,
                 isStatistics: true,
                 footerrow: true
