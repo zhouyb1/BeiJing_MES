@@ -5,18 +5,17 @@ namespace  Ayma.Application.Mapping
 {
     /// <summary>
     /// 创 建：超级管理员
-    /// 日 期：2020-03-05 10:46
-    /// 描 述：月结
+    /// 日 期：2020-05-18 11:13
+    /// 描 述：月结数量
     /// </summary>
-    public partial class Mes_MonthBalanceMap : EntityTypeConfiguration<Mes_MonthBalanceEntity>
+    public partial class Mes_MonthBalanceDetailMap : EntityTypeConfiguration<Mes_MonthBalanceDetailEntity>
     {
-        public Mes_MonthBalanceMap()
+        public Mes_MonthBalanceDetailMap()
         {
             #region 表、主键
             //表
-            this.ToTable("MES_MONTHBALANCE");
+            this.ToTable("MES_MONTHBALANCEDETAIL");
             //主键
-            this.HasKey(t => t.ID);
             #endregion
 
             #region 配置关系

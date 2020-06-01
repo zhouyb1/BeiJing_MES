@@ -364,6 +364,8 @@
     <Compile Include="MesDev\Mes_GoodsForPacking\Mes_GoodsForPackingEntity.cs" />
     <Compile Include="MesDev\BarCodeInfo\Mes_ScanCodeEntity.cs" />
     <Compile Include="MesDev\BarCodeInfo\Mes_ScanRecordEntity.cs" />
+    <Compile Include="MesDev\MonthBalancePrice\Mes_MonthBalancePriceEntity.cs" />
+    <Compile Include="MesDev\MonthBalanceDetail\Mes_MonthBalanceDetailEntity.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Ayma.Application.Organization\Ayma.Application.Organization.csproj">
