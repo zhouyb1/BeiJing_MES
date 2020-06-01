@@ -155,6 +155,7 @@ var bootstrap = function ($, ayma) {
                             ayma.postForm(top.$.rootUrl + '/MesDev/Tools/PostOrCancelOrDeleteBill', { orderNo: orderNo, proc: 'sp_Collar_Post', type: 1 }, function () {
                                 refreshGirdData();
                             });
+                            refreshGirdData();
                         }
                     });
                 }
