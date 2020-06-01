@@ -73,9 +73,9 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         /// 编辑调用
         /// </summary>
         /// <param name="keyValue"></param>
-        public void Modify( keyValue)
+        public void Modify(string keyValue)
         {
-            this. = keyValue;
+            this.ID = keyValue;
         }
         #endregion
     }
