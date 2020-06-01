@@ -26,10 +26,7 @@
         <div class="am-form-item-title">仓库编码<font face="宋体">*</font></div>
         <input id="C_StockCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly="readonly" />
     </div>
-    @*<div class="col-xs-6 am-form-item"  data-table="Mes_CompUseHead" >
-        <div class="am-form-item-title">生产订单号<font face="宋体">*</font></div>
-        <div id="C_OrderNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" disabled="disabled"></div>
-    </div>*@
+    
     <div class="col-xs-6 am-form-item"  data-table="Mes_CompUseHead" >
         <div class="am-form-item-title">单据时间<font face="宋体">*</font></div>
         <input id="C_OrderDate" type="text" class="form-control am-input-wdatepicker" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" value="@DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")" isvalid="yes" checkexpession="NotNull" disabled="disabled" />
@@ -38,17 +35,6 @@
         <div class="am-form-item-title">备注</div>
         <input id="C_Remark" type="text" class="form-control" disabled="disabled"/>
     </div>
-    <div class="col-xs-6 am-form-item" data-table="Mes_CompUseHead">
-        <div class="am-form-item-title">状态</div>
-        <div id="C_Status" class="form-control" disabled="disabled"></div>
-
-    </div>
-
-   
-    @*<div class="col-xs-12 am-form-item" data-table="Mes_CompUseHead">
-        <div class="am-form-item-title"></div>
-        <a id="am_add" class="btn btn-default"><i class="fa fa-plus"></i>&nbsp;添加商品</a>
-    </div>*@
     <div class="col-xs-12 am-form-item am-form-item-grid" >
         <div id="Mes_CompUseDetail"></div>
     </div>

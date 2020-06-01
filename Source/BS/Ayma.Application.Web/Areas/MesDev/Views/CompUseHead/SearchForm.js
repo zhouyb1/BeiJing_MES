@@ -18,7 +18,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            $('#C_Status').DataItemSelect({ code: 'CompUserStatus' });
             $('#C_WorkShop').select({
                 type: 'default',
                 value: 'W_Code',
