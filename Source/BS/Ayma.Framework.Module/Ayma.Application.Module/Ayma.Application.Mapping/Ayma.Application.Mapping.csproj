@@ -67,7 +67,6 @@
     <Compile Include="MesDev\Mes_InspectMap.cs" />
     <Compile Include="MesDev\Mes_MonthBalancePriceMap.cs" />
     <Compile Include="MesDev\Mes_MonthBalanceDetailMap.cs" />
-    <Compile Include="MesDev\Mes_MonthBalanceMap.cs" />
     <Compile Include="MesDev\Mes_OrgResDetailMap.cs" />
     <Compile Include="MesDev\Mes_OrgResHeadMap.cs" />
     <Compile Include="MesDev\Mes_InWorkShopDetailMap.cs" />
