@@ -182,6 +182,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();//新增单据时间
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

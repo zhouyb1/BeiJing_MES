@@ -241,6 +241,18 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
+                {
+                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
+                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.B_CreateDate >= @startTime AND t.B_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.B_OrderDate >= @OrderDate_S AND t.B_OrderDate <= @OrderDate_E ) ");
+                }
                 if (!queryParam["B_BackStockNo"].IsEmpty())
                 {
                     dp.Add("B_BackStockNo", queryParam["B_BackStockNo"].ToString(), DbType.String);
@@ -250,12 +262,6 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("M_GoodsName", "%" + queryParam["M_GoodsName"].ToString() + "%", DbType.String);
                     strSql.Append(" AND s.B_GoodsName Like @M_GoodsName ");
-                }
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
-                {
-                    dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
-                    dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.B_OrderDate >= @startTime AND t.B_OrderDate <= @endTime ) ");
                 }
                 if (!queryParam["B_StockName"].IsEmpty())
                 {

@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
            
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 300, 480);
+            }, 320, 480);
             $('#O_Status').DataItemSelect({ code: 'ProOutStatus' });
             $('#M_GoodsName').select({
                 type: 'default',
@@ -180,6 +180,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();//新增单据时间
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };

@@ -137,7 +137,13 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.I_OrderDate >= @startTime AND t.I_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.I_CreateDate >= @startTime AND t.I_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.I_OrderDate >= @OrderDate_S AND t.I_OrderDate <= @OrderDate_E ) ");
                 }
                 if (!queryParam["M_GoodsName"].IsEmpty())
                 {

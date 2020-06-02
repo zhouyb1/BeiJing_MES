@@ -15,7 +15,7 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 250, 400);
+            }, 280, 400);
             $('#M_GoodsName').select({
                 type: 'default',
                 value: 'G_Name',
@@ -175,6 +175,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();//新增单据时间
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
