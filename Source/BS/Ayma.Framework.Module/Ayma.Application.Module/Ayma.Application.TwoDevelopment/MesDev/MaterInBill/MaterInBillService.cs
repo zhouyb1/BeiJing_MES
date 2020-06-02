@@ -334,11 +334,17 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                 var queryParam = queryJson.ToJObject();
                 // 虚拟参数
                 var dp = new DynamicParameters(new { });
-                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty() && string.IsNullOrWhiteSpace(M_MaterInNo))
+                if (!queryParam["StartTime"].IsEmpty() && !queryParam["EndTime"].IsEmpty())
                 {
                     dp.Add("startTime", queryParam["StartTime"].ToDate(), DbType.DateTime);
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
-                    strSql.Append(" AND ( t.M_OrderDate >= @startTime AND t.M_OrderDate <= @endTime ) ");
+                    strSql.Append(" AND ( t.M_CreateDate >= @startTime AND t.M_CreateDate <= @endTime ) ");
+                }
+                if (!queryParam["OrderDate_S"].IsEmpty() && !queryParam["OrderDate_E"].IsEmpty())//新增单据时间
+                {
+                    dp.Add("OrderDate_S", queryParam["OrderDate_S"].ToDate(), DbType.DateTime);
+                    dp.Add("OrderDate_E", queryParam["OrderDate_E"].ToDate(), DbType.DateTime);
+                    strSql.Append(" AND ( t.M_OrderDate >= @OrderDate_S AND t.M_OrderDate <= @OrderDate_E ) ");
                 }
                 if (!string.IsNullOrWhiteSpace(M_MaterInNo) && queryParam["M_MaterInNo"].IsEmpty() && queryParam["S_Name"].IsEmpty())
                 {

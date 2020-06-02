@@ -16,7 +16,7 @@ var bootstrap = function ($, ayma) {
         bind: function () {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
-            }, 220, 500);
+            }, 250, 500);
             $('#M_GoodsName').select({
                 type: 'default',
                 value: 'G_Name',
@@ -185,7 +185,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "提交人", name: "M_UploadBy", width: 90, align: "center" },
-                    { label: "提交时间", name: "M_UploadDate", width: 90, align: "center" },
+                    { label: "提交时间", name: "M_UploadDate", width: 130, align: "center" },
                     { label: "添加人", name: "C_CreateBy", width: 90, align: "center" },
                     { label: "创建时间", name: "C_CreateDate", width: 130, align: "center" },
                   
@@ -203,6 +203,8 @@ var bootstrap = function ($, ayma) {
             param = param || {};
             param.StartTime = $("#StartTime").val();
             param.EndTime = $("#EndTime").val();
+            param.OrderDate_S = $("#OrderDate_S").val();//新增单据时间
+            param.OrderDate_E = $("#OrderDate_E").val();
             $('#girdtable').jfGridSet('reload', { param: { queryJson: JSON.stringify(param) } });
         }
     };
