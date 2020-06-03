@@ -120,6 +120,8 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                         d.B_Qty ,
                                         d.B_Batch ,
                                         d.B_Remark ,
+                                        d.B_TaxPrice,
+                                        h.B_SupplyName,
                                         dbo.GetPrice(d.B_GoodsCode, CONVERT(VARCHAR(6), h.B_UploadDate, 112)) B_Price
                                 FROM    Mes_BackSupplyHead h
                                         INNER JOIN dbo.Mes_BackSupplyDetail d ON h.B_BackSupplyNo = d.B_BackSupplyNo

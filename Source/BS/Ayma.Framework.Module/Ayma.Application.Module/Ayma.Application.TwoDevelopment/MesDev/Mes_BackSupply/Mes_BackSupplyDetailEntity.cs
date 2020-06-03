@@ -57,6 +57,12 @@ namespace Ayma.Application.TwoDevelopment.MesDev
         [DecimalPrecision(18, 6)]
         public decimal? B_Price { get; set; }
         /// <summary>
+        /// 单价(含税)
+        /// </summary>
+        [Column("B_TAXPRICE")]
+        [DecimalPrecision(18, 6)]
+        public decimal? B_TaxPrice { get; set; }
+        /// <summary>
         /// 备注
         /// </summary>
         [Column("B_REMARK")]

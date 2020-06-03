@@ -23,27 +23,38 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                         label: '退供应商单号', name: 'B_BackSupplyNo', width: 160, align: 'left', editType: 'label', hidden: true
                     },
                     {
-                        label: '物料编码', name: 'B_GoodsCode', width: 160, align: 'left', editType: 'label'
+                        label: '物料编码', name: 'B_GoodsCode', width: 80, align: 'left', editType: 'label'
                     },
                     {
                         label: '物料名称', name: 'B_GoodsName', width: 160, align: 'left', editType: 'label'
                     },
                     {
-                        label: '单位', name: 'B_Unit', width: 50, align: 'left', editType: 'label'
+                        label: '单位', name: 'B_Unit', width: 40, align: 'left', editType: 'label'
                     },
                     {
-                        label: '单价', name: 'B_Price', width: 50, align: 'left', editType: 'label'
+                        label: '不含税单价', name: 'B_Price', width: 80, align: 'left', editType: 'label'
                     },
-                   {
-                       label: "金额", name: "金额", width: 60, align: "left", formatter: function (value, row, dfop) {
-                           if (row.B_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
-                               return row.金额 = 0;
-                           }
-                           else {
-                               return row.金额 = row.B_Price * row.B_Qty;
-                           }
-                       }, statistics: true
-                   },
+                     {
+                         label: '含税单价', name: 'B_TaxPrice', width: 80, align: 'left', editType: 'label'
+                     }, {
+                         label: "不含税金额", name: "不含税金额", width: 100, align: "left", formatter: function (value, row, dfop) {
+                             if (row.B_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
+                                 return row.不含税金额 = 0;
+                             }
+                             else {
+                                 return row.不含税金额 = row.B_Price * row.B_Qty;
+                             }
+                         }, statistics: true
+                     }, {
+                         label: "含税金额", name: "含税金额", width: 100, align: "left", formatter: function (value, row, dfop) {
+                             if (row.B_Qty == "" || row.B_Qty == null || row.B_Qty == undefined) {
+                                 return row.含税金额 = 0;
+                             }
+                             else {
+                                 return row.含税金额 = row.B_TaxPrice * row.B_Qty;
+                             }
+                         }, statistics: true
+                     },
                     {
                         label: '数量', name: 'B_Qty', width: 80, align: 'left', statistics: true, editType: 'label'
                     },

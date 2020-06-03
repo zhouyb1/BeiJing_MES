@@ -92,7 +92,8 @@ var bootstrap = function ($, ayma) {
                     { label: "物料编码", name: "i_goodscode", width: 80, align: "left", },
                     { label: "物料名称", name: "i_goodsname", width: 130, align: "left" },
                     { label: "单位", name: "i_unit", width: 80, align: "left" },
-                    { label: "单价(不含税)", name: "i_price", width: 90, align: "left" },
+                    { label: "不含税单价", name: "i_price", width: 90, align: "left" },
+                    { label: "含税单价", name: "i_taxprice", width: 90, align: "left" },
                     { label: "库存", name: "i_qty", width: 90, align: "left" },
                     { label: "批次", name: "i_batch", width: 80, align: "left" }
                 ],
@@ -155,6 +156,7 @@ var bootstrap = function ($, ayma) {
                         row['Qty'] = row['i_qty'];
                         row["B_Qty"] = quantity;
                         row["B_Price"] = row["i_price"];
+                        row["B_TaxPrice"] = row["i_taxprice"];
                         parentRefreshGirdData([], row);
                     }
                     if (!isChecked.is(":checked")) {
