@@ -100,6 +100,7 @@ using MyDbReportData = DatabaseXmlReportData;
                     a.B_BackSupplyNo,
                     a.B_StockName,
                     a.B_CreateDate,
+                    a.B_SupplyName,
                     a.B_OrderDate,
                     dbo.GetUserNameById(a.B_CreateBy) as B_CreateBy ,
                     a.B_Remark,
@@ -108,8 +109,10 @@ using MyDbReportData = DatabaseXmlReportData;
                     b.B_Unit,
                     b.B_Qty,
                     b.B_Batch,
-	                case when B_UploadDate is null then dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end Price,
-			    	CONVERT(decimal(18,6),(case when B_UploadDate is null then dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),GETDATE(),112)) else dbo.GetPrice(b.B_GoodsCode,CONVERT(VARCHAR(6),B_UploadDate,112)) end *b.B_Qty)) as aumount
+	                b.B_Price,
+                    b.B_TaxPrice,
+			    	(b.B_Qty*b.B_Price) as aumount,
+                    (b.B_Qty*b.B_TaxPrice) as taxaumount
             FROM    dbo.Mes_BackSupplyHead a
                     LEFT JOIN dbo.Mes_BackSupplyDetail b ON a.B_BackSupplyNo=b.B_BackSupplyNo
             WHERE   a.B_BackSupplyNo ='{0}' and a.B_Status!=1";
