@@ -36,16 +36,16 @@
                                     <div class="am-form-item-title">单据编号</div>
                                     <input id="C_No" type="text" class="form-control" />
                                 </div>
-                               <div class="col-xs-12 am-form-item">
+                            <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">单据时间</div>
                                     <div id="area" class="col-xs-5 am-form-area">
-                                        <input id="OrderDate_S" type="text" class="form-control time" onfocus="WdatePicker({ maxDate: '#F{$dp.$D(\'OrderDate_E\')}', dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.AddDays(-6).ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                        <input id="OrderDate_S" type="text" class="form-control time" onfocus="WdatePicker({ maxDate: '#F{$dp.$D(\'OrderDate_E\')}', dateFmt: 'yyyy-MM-dd 00:00:00' })" value="@DateTime.Now.AddDays(-6).ToString("yyyy-MM-dd 00:00:00")" isvalid="yes" checkexpession="NotNull" />
                                     </div>
                                     <div class="am-form-item-title" style="margin-left: 45%">至</div>
                                     <div class="col-xs-5" style="margin-left: 16.5%">
-                                        <input id="OrderDate_E" type="text" class="form-control time" onfocus="WdatePicker({ minDate: '#F{$dp.$D(\'OrderDate_S\')}', dateFmt: 'yyyy-MM-dd' })" value="@DateTime.Now.ToString("yyyy-MM-dd")" isvalid="yes" checkexpession="NotNull" />
+                                        <input id="OrderDate_E" type="text" class="form-control time" onfocus="WdatePicker({ minDate: '#F{$dp.$D(\'OrderDate_S\')}', dateFmt: 'yyyy-MM-dd 23:59:59' })" value="@DateTime.Now.ToString("yyyy-MM-dd 23:59:59")" isvalid="yes" checkexpession="NotNull" />
                                     </div>
-                                </div>
+                                </div>  
                                 <div class="col-xs-12 am-form-item">
                                     <div class="am-form-item-title">创建时间</div>
                                     <div id="area" class="col-xs-5 am-form-area">

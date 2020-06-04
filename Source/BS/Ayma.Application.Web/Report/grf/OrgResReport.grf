@@ -9,6 +9,10 @@
 		"Charset":134
 	},
 	"Printer":{
+		"LeftMargin":0.5,
+		"TopMargin":0.5,
+		"RightMargin":0.5,
+		"BottomMargin":0.5
 	},
 	"DetailGrid":{
 		"CenterView":true,
@@ -77,7 +81,7 @@
 		"Column":[
 			{
 				"Name":"O_OrgResNo",
-				"Width":1.37583
+				"Width":0.582083
 			},
 			{
 				"Name":"O_GoodsName",
@@ -93,7 +97,7 @@
 			},
 			{
 				"Name":"O_Price",
-				"Width":1.79917
+				"Width":2.40771
 			},
 			{
 				"Name":"O_Amount",
@@ -105,7 +109,7 @@
 			},
 			{
 				"Name":"O_SecQty",
-				"Width":1.79917
+				"Width":1.37583
 			},
 			{
 				"Name":"O_SecUnit",
@@ -113,7 +117,7 @@
 			},
 			{
 				"Name":"O_SecPrice",
-				"Width":1.79917
+				"Width":2.19604
 			},
 			{
 				"Name":"O_SecAmount",
@@ -125,13 +129,19 @@
 			"ColumnContentCell":[
 				{
 					"Column":"O_OrgResNo",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"FreeCell":true,
 					"Control":[
 						{
 							"Type":"SystemVarBox",
 							"Name":"SystemVarBox1",
 							"Center":"Both",
-							"Left":0.0264583,
+							"Left":-0.370417,
 							"Top":0.291042,
 							"Width":1.29646,
 							"Height":0.396875,
@@ -142,51 +152,121 @@
 				},
 				{
 					"Column":"O_GoodsName",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_GoodsName"
 				},
 				{
 					"Column":"O_Qty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_Qty"
 				},
 				{
 					"Column":"O_Unit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_Unit"
 				},
 				{
 					"Column":"O_Price",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_Price"
 				},
 				{
 					"Column":"O_Amount",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_Amount"
 				},
 				{
 					"Column":"O_SecGoodsName",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_SecGoodsName"
 				},
 				{
 					"Column":"O_SecQty",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_SecQty"
 				},
 				{
 					"Column":"O_SecUnit",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_SecUnit"
 				},
 				{
 					"Column":"O_SecPrice",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_SecPrice"
 				},
 				{
 					"Column":"O_SecAmount",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
+					"WordWrap":true,
 					"TextAlign":"MiddleCenter",
 					"DataField":"O_SecAmount"
 				}
@@ -198,6 +278,12 @@
 				{
 					"GroupTitle":false,
 					"Column":"O_OrgResNo",
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"TextOrientation":"U2DL2R0",
 					"Text":"序号"
@@ -209,12 +295,24 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_GoodsName",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"物料"
 						},
 						{
 							"GroupTitle":false,
 							"Column":"O_Qty",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"TextOrientation":"U2DL2R0",
 							"Text":"数量"
@@ -222,6 +320,12 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_Unit",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"TextOrientation":"U2DL2R0",
 							"Text":"单位"
@@ -229,16 +333,34 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_Price",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"单价"
 						},
 						{
 							"GroupTitle":false,
 							"Column":"O_Amount",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"金额"
 						}
 					],
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"组装前的物料"
 				},
@@ -249,12 +371,24 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_SecGoodsName",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"物料"
 						},
 						{
 							"GroupTitle":false,
 							"Column":"O_SecQty",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"TextOrientation":"U2DL2R0",
 							"Text":"数量"
@@ -262,6 +396,12 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_SecUnit",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"TextOrientation":"U2DL2R0",
 							"Text":"单位"
@@ -269,16 +409,34 @@
 						{
 							"GroupTitle":false,
 							"Column":"O_SecPrice",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"单价"
 						},
 						{
 							"GroupTitle":false,
 							"Column":"O_SecAmount",
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"TextAlign":"MiddleCenter",
 							"Text":"金额"
 						}
 					],
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleCenter",
 					"Text":"组装后的物料"
 				}
@@ -299,25 +457,45 @@
 							"Top":0.211667,
 							"Width":2.40771,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"Text":"总合计："
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox2",
-							"Left":6.79979,
+							"AlignColumn":"O_Amount",
+							"Left":9.57792,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":3.04271,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"DataField":"O_Amount",
 							"Format":"0.00"
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox4",
-							"Left":13.5996,
+							"AlignColumn":"O_SecAmount",
+							"Left":20.9815,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":3.01625,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"DataField":"O_SecAmount"
 						}
 					]
@@ -338,25 +516,45 @@
 							"Top":0.211667,
 							"Width":2.40771,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"Text":"每页合计："
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox1",
-							"Left":6.79979,
+							"AlignColumn":"O_Amount",
+							"Left":9.57792,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":3.04271,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"DataField":"O_Amount",
 							"Format":"0.00"
 						},
 						{
 							"Type":"SummaryBox",
 							"Name":"SummaryBox3",
-							"Left":13.5996,
+							"AlignColumn":"O_SecAmount",
+							"Left":20.9815,
 							"Top":0.211667,
-							"Width":2.80458,
+							"Width":3.01625,
 							"Height":0.582083,
+							"Font":{
+								"Name":"宋体",
+								"Size":90000,
+								"Weight":400,
+								"Charset":134
+							},
 							"DataField":"O_SecAmount"
 						}
 					]
@@ -371,18 +569,30 @@
 				"Type":"MemoBox",
 				"Name":"MemoBox5",
 				"Left":12.1973,
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":5.3975,
 				"Height":0.582083,
+				"Font":{
+					"Name":"宋体",
+					"Size":90000,
+					"Weight":400,
+					"Charset":134
+				},
 				"TextAlign":"MiddleCenter",
 				"Text":"共[#SystemVar(PageCount)#]页第[#SystemVar(PageNumber)#]页"
 			},
 			{
 				"Type":"StaticBox",
 				"Name":"StaticBox16",
-				"Top":0.211667,
+				"Top":0.0264583,
 				"Width":2.40771,
 				"Height":0.582083,
+				"Font":{
+					"Name":"宋体",
+					"Size":90000,
+					"Weight":400,
+					"Charset":134
+				},
 				"Text":"主管签名："
 			}
 		]
@@ -390,12 +600,13 @@
 	"ReportHeader":[
 		{
 			"Name":"ReportHeader1",
-			"Height":3.41313,
+			"Height":3.20146,
 			"Control":[
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox9",
-					"Left":6.19125,
+					"Center":"Horizontal",
+					"Left":9.68375,
 					"Width":4.60375,
 					"Height":1.00542,
 					"Font":{
@@ -410,96 +621,156 @@
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox12",
-					"Left":0.211667,
+					"Left":1.69333,
 					"Top":1.5875,
 					"Width":2.59292,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"单据编号："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox1",
-					"Left":2.80458,
+					"Left":4.28625,
 					"Top":1.61396,
 					"Width":3.38667,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_OrgResNo"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox13",
-					"Left":6.27063,
+					"Left":7.75229,
 					"Top":1.64042,
 					"Width":2.59292,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"作业车间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox2",
-					"Left":8.73125,
+					"Left":10.2129,
 					"Top":1.64042,
 					"Width":2.98979,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_WorkShopName"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox14",
-					"Left":0.238125,
+					"Left":1.71979,
 					"Top":2.40771,
 					"Width":2.59292,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"单据时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox3",
-					"Left":2.83104,
+					"Left":4.31271,
 					"Top":2.40771,
 					"Width":3.81,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_OrderDate"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox15",
-					"Left":11.7475,
+					"Left":13.2292,
 					"Top":1.64042,
 					"Width":2.59292,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"作业工序："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox4",
-					"Left":14.1552,
+					"Left":15.6369,
 					"Top":1.64042,
 					"Width":2.59292,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_ProCode"
 				},
 				{
 					"Type":"StaticBox",
 					"Name":"StaticBox17",
-					"Left":6.24417,
+					"Left":7.72583,
 					"Top":2.35479,
 					"Width":2.59292,
 					"Height":0.608542,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"TextAlign":"MiddleJustiy",
 					"Text":"制单时间："
 				},
 				{
 					"Type":"FieldBox",
 					"Name":"FieldBox5",
-					"Left":8.59896,
+					"Left":10.0806,
 					"Top":2.32833,
 					"Width":3.81,
 					"Height":0.582083,
+					"Font":{
+						"Name":"宋体",
+						"Size":90000,
+						"Weight":400,
+						"Charset":134
+					},
 					"DataField":"O_CreateDate"
 				}
 			],
