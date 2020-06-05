@@ -179,7 +179,7 @@ var bootstrap = function ($, ayma) {
                 var g_code = $('#girdtable_sum').jfGridValue('g_code');
                 var g_stockcode = $('#girdtable_sum').jfGridValue('g_stockcode');
                 //var module = top.ayma.clientdata.get(['modulesMap', '6c1dfb3e-9f16-40db-9d72-4fe5d604b06f']);//本地ID
-                 var module = top.ayma.clientdata.get(['modulesMap', 'id="2f8b20ae-293b-4431-9a11-16a3e801f019"']);//京铁列服ID
+                 var module = top.ayma.clientdata.get(['modulesMap', '2f8b20ae-293b-4431-9a11-16a3e801f019']);//京铁列服ID
                 module.F_UrlAddress = '/MesDev/MaterialsSum/InventoryDetail?g_code=' + encodeURIComponent(g_code) + '&g_stockcode=' + encodeURIComponent(g_stockcode) + '&startTime=' + encodeURIComponent(startTime) + '&endTime=' + encodeURIComponent(endTime);
                top.ayma.frameTab.openNew(module);
             });
