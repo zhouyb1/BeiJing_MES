@@ -8,9 +8,9 @@
 	},
 	"Printer":{
 		"Oriention":"Landscape",
-		"LeftMargin":0.3,
+		"LeftMargin":0.7,
 		"TopMargin":0.3,
-		"RightMargin":0.3,
+		"RightMargin":0.7,
 		"BottomMargin":0.3
 	},
 	"DetailGrid":{
