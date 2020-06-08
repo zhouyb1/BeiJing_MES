@@ -53,7 +53,7 @@ var bootstrap = function ($, ayma) {
                     var newQty = parseInt(quantity);
                     ayma.loading(true);
                     for (var i = 0; i < newArray.length; i++) {
-                        if (newQty > newArray[i]["i_qty"]) {
+                        if (newQty > newArray[i]["I_Qty"]) {
                             ayma.alert.error("其中有输入数量大于库存数量的库存，不能一键设置");
                             $("#quantity").val("");
                             ayma.loading(false);

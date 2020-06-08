@@ -51,6 +51,18 @@ var bootstrap = function ($, ayma) {
                 }
                 if (quantity == "0") {
                     return;
+                } else {
+                    var newQty = parseInt(quantity);
+                    ayma.loading(true);
+                    for (var i = 0; i < newArray.length; i++) {
+                        if (newQty > newArray[i]["o_secqty"]) {
+                            ayma.alert.error("其中有输入数量大于库存数量的库存，不能一键设置");
+                            $("#quantity").val("");
+                            ayma.loading(false);
+                            return;
+                        }
+                    }
+                    ayma.loading(false);
                 }
             });
             //全选
