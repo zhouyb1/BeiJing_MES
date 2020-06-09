@@ -49,7 +49,7 @@ namespace DesktopApp
             DataSet ds = new DataSet();
             ds = WorkShopScanBLL.GetList_WorkShopScan2(strSql);
 
-            
+
             dataGridView1.DataSource = ds.Tables[0];
 
             int nLen = dataGridView1.Rows.Count;
@@ -104,61 +104,61 @@ namespace DesktopApp
                 for (int i = 0; i < nLen; i++)
                 {
                     object obj = dataGridView1.Rows[i].Cells["选择"].Value;
-                    if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                    //if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")
+                    //{
+                    string strGoods = dataGridView1.Rows[i].Cells["物料"].Value.ToString();
+                    string strQty = dataGridView1.Rows[i].Cells["实用数量"].Value.ToString();
+                    string strYLQty = dataGridView1.Rows[i].Cells["数量"].Value.ToString();
+                    strStockCode = dataGridView1.Rows[i].Cells["仓库编码"].Value.ToString();
+                    strStockName = dataGridView1.Rows[i].Cells["仓库名称"].Value.ToString();
+
+                    //string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
+                    string strPrice = dataGridView1.Rows[i].Cells["价格"].Value.ToString();
+                    string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
+                    string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
+
+                    if (Convert.ToDecimal(strQty) > Convert.ToDecimal(strYLQty))
                     {
-                        string strGoods = dataGridView1.Rows[i].Cells["物料"].Value.ToString();
-                        string strQty = dataGridView1.Rows[i].Cells["实用数量"].Value.ToString();
-                        string strYLQty = dataGridView1.Rows[i].Cells["数量"].Value.ToString();
-                        strStockCode = dataGridView1.Rows[i].Cells["仓库编码"].Value.ToString();
-                        strStockName = dataGridView1.Rows[i].Cells["仓库名称"].Value.ToString();
+                        lblTS.Text = "系统提示：物料：" + strName + "实用数量不能大于库存数量";
+                        return;
+                    }
+                    if (Convert.ToDecimal(strQty) == 0 || Convert.ToDecimal(strQty) < 0)
+                    {
+                        lblTS.Text = "系统提示：物料：" + strName + "实用数量不能为0或者负数";
+                        return;
+                    }
 
-                        //string strPc = dataGridView1.Rows[i].Cells["批次"].Value.ToString();
-                        string strPrice = dataGridView1.Rows[i].Cells["价格"].Value.ToString();
-                        string strName = dataGridView1.Rows[i].Cells["物料名称"].Value.ToString();
-                        string strUnit = dataGridView1.Rows[i].Cells["单位"].Value.ToString();
-
-                        if(Convert.ToDecimal(strQty) > Convert.ToDecimal(strYLQty))
+                    if (Jud(strGoods, txtGoodsCode.Text))
+                    {
+                        if (strOldGoods.Contains(strGoods))
                         {
-                            lblTS.Text = "系统提示：物料：" + strName  + "实用数量不能大于库存数量";
-                            return;
+
                         }
-                        if (Convert.ToDecimal(strQty) == 0 || Convert.ToDecimal(strQty) < 0)
+                        else
                         {
-                            lblTS.Text = "系统提示：物料：" + strName + "实用数量不能为0或者负数";
-                            return;
+                            nKind = nKind + 1;
+                            strOldGoods.Add(strGoods);
                         }
-
-                        if (Jud(strGoods, txtGoodsCode.Text))
+                        bool bRet = false;
+                        for (int j = 0; j < Goods.Count; j++)
                         {
-                            if (strOldGoods.Contains(strGoods))
+                            string strTemp = Goods[j].ToString();
+                            string[] str = strTemp.Split(',');
+                            string strTempGoods = str[0].ToString();
+                            string strTempPc = str[2].ToString();
+                            string strTempQty = str[3].ToString();
+                            if (strTempGoods == strGoods)
                             {
-
-                            }
-                            else
-                            {
-                                nKind = nKind + 1;
-                                strOldGoods.Add(strGoods);
-                            }
-                            bool bRet = false;
-                            for (int j = 0; j < Goods.Count; j++)
-                            {
-                                string strTemp = Goods[j].ToString();
-                                string[] str = strTemp.Split(',');
-                                string strTempGoods = str[0].ToString();
-                                string strTempPc = str[2].ToString();
-                                string strTempQty = str[3].ToString();
-                                if (strTempGoods == strGoods)
-                                {
-                                    decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
-                                    Goods[j] = strGoods + "," + dQty.ToString()  + "," + strPrice + "," + strName + "," + strUnit;
-                                    bRet = true;
-                                }
-                            }
-                            if (bRet == false)
-                            {
-                                Goods.Add(strGoods + "," + strQty + ","  + strPrice + "," + strName + "," + strUnit);
+                                decimal dQty = Convert.ToDecimal(strQty) + Convert.ToDecimal(strTempQty);
+                                Goods[j] = strGoods + "," + dQty.ToString() + "," + strPrice + "," + strName + "," + strUnit;
+                                bRet = true;
                             }
                         }
+                        if (bRet == false)
+                        {
+                            Goods.Add(strGoods + "," + strQty + "," + strPrice + "," + strName + "," + strUnit);
+                        }
+                        //}
                         else
                         {
                             lblTS.Text = "系统提示：选择的物料生成不了下一个物料，请核对";
@@ -269,7 +269,7 @@ namespace DesktopApp
                                     //DeleteData(Inventory_row[j].ID);
                                 }
                             }
-                            
+
                         }
                     }
 
@@ -291,7 +291,7 @@ namespace DesktopApp
                 //Update();
                 this.Close();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 lblTS.Text = ex.ToString();
                 return;
@@ -331,8 +331,8 @@ namespace DesktopApp
                 {
 
                     string strID = str[i];
-                        DeleteWeightData(strID);
-                    
+                    DeleteWeightData(strID);
+
                 }
 
                 return true;
@@ -465,6 +465,6 @@ namespace DesktopApp
             }
         }
 
-        
+
     }
 }

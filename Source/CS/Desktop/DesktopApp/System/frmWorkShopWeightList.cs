@@ -732,6 +732,9 @@ namespace DesktopApp
             
         }
 
-
+        private void frmWorkShopWeightList_Activated(object sender, EventArgs e)
+        {
+            txtQty.Focus();
+        }
     }
 }
