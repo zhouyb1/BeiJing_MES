@@ -108,7 +108,7 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     {
-                        label: "物料价格", name: "Price", width: 60, align: "left", formatter: function (value, row, dfop) {
+                        label: "物料价格", name: "Price", width: 85 , align: "left", formatter: function (value, row, dfop) {
                             if (row.Price != undefined && !!row.Price) {
                                 return row.Price.toFixed(6) / 1;
                             }
@@ -129,7 +129,7 @@ var bootstrap = function ($, ayma) {
                     },
                     { label: "下限预警量", name: "G_Lower", width: 70, align: "left" },
                     { label: "上限预警量", name: "G_Super", width: 70, align: "left" },
-                    { label: "预警状态", name: "G_State", width: 60, align: "left" }
+                    { label: "预警状态", name: "G_State", width: 100, align: "left" }
                 ],
                 mainId: 'ID',
                 sidx: "I_StockCode",
