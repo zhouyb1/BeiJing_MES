@@ -101,7 +101,7 @@ namespace DesktopApp
                 string strStockName = "";
                 string strStockCode = "";
 
-                for (int i = 0; i < nLen; i++)
+                for (int i = 0; i < nLen - 1; i++)
                 {
                     object obj = dataGridView1.Rows[i].Cells["选择"].Value;
                     //if (Convert.ToString(obj) == "True" || Convert.ToString(obj) == "1")

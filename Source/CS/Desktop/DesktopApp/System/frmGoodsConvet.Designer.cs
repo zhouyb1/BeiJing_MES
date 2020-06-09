@@ -29,6 +29,17 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仓库编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仓库名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtGoodsCode = new System.Windows.Forms.TextBox();
@@ -41,23 +52,11 @@
             this.txtGoodsName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTS = new System.Windows.Forms.Label();
-            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仓库编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仓库名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.选择,
@@ -78,6 +77,100 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(1141, 370);
             this.dataGridView1.TabIndex = 99;
+            // 
+            // 选择
+            // 
+            this.选择.HeaderText = "选择";
+            this.选择.MinimumWidth = 6;
+            this.选择.Name = "选择";
+            this.选择.Visible = false;
+            this.选择.Width = 40;
+            // 
+            // 物料
+            // 
+            this.物料.DataPropertyName = "I_GoodsCode";
+            this.物料.HeaderText = "物料";
+            this.物料.MinimumWidth = 6;
+            this.物料.Name = "物料";
+            this.物料.ReadOnly = true;
+            this.物料.Width = 125;
+            // 
+            // 物料名称
+            // 
+            this.物料名称.DataPropertyName = "I_GoodsName";
+            this.物料名称.HeaderText = "物料名称";
+            this.物料名称.MinimumWidth = 6;
+            this.物料名称.Name = "物料名称";
+            this.物料名称.ReadOnly = true;
+            this.物料名称.Width = 125;
+            // 
+            // 数量
+            // 
+            this.数量.DataPropertyName = "I_Qty";
+            this.数量.HeaderText = "数量";
+            this.数量.MinimumWidth = 6;
+            this.数量.Name = "数量";
+            this.数量.ReadOnly = true;
+            this.数量.Width = 125;
+            // 
+            // 实用数量
+            // 
+            this.实用数量.HeaderText = "实用数量";
+            this.实用数量.MinimumWidth = 6;
+            this.实用数量.Name = "实用数量";
+            this.实用数量.Width = 125;
+            // 
+            // 价格
+            // 
+            this.价格.DataPropertyName = "G_Price";
+            this.价格.HeaderText = "价格";
+            this.价格.MinimumWidth = 6;
+            this.价格.Name = "价格";
+            this.价格.ReadOnly = true;
+            this.价格.Width = 125;
+            // 
+            // 车间
+            // 
+            this.车间.HeaderText = "车间";
+            this.车间.MinimumWidth = 6;
+            this.车间.Name = "车间";
+            this.车间.ReadOnly = true;
+            this.车间.Width = 125;
+            // 
+            // 单位
+            // 
+            this.单位.DataPropertyName = "I_Unit";
+            this.单位.HeaderText = "单位";
+            this.单位.MinimumWidth = 6;
+            this.单位.Name = "单位";
+            this.单位.ReadOnly = true;
+            this.单位.Width = 60;
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Visible = false;
+            this.ID.Width = 125;
+            // 
+            // 仓库编码
+            // 
+            this.仓库编码.DataPropertyName = "I_StockCode";
+            this.仓库编码.HeaderText = "仓库编码";
+            this.仓库编码.MinimumWidth = 6;
+            this.仓库编码.Name = "仓库编码";
+            this.仓库编码.Width = 125;
+            // 
+            // 仓库名称
+            // 
+            this.仓库名称.DataPropertyName = "I_StockName";
+            this.仓库名称.HeaderText = "仓库名称";
+            this.仓库名称.MinimumWidth = 6;
+            this.仓库名称.Name = "仓库名称";
+            this.仓库名称.Width = 125;
             // 
             // label12
             // 
@@ -212,100 +305,6 @@
             this.lblTS.Name = "lblTS";
             this.lblTS.Size = new System.Drawing.Size(0, 20);
             this.lblTS.TabIndex = 148;
-            // 
-            // 选择
-            // 
-            this.选择.HeaderText = "选择";
-            this.选择.MinimumWidth = 6;
-            this.选择.Name = "选择";
-            this.选择.Visible = false;
-            this.选择.Width = 40;
-            // 
-            // 物料
-            // 
-            this.物料.DataPropertyName = "I_GoodsCode";
-            this.物料.HeaderText = "物料";
-            this.物料.MinimumWidth = 6;
-            this.物料.Name = "物料";
-            this.物料.ReadOnly = true;
-            this.物料.Width = 125;
-            // 
-            // 物料名称
-            // 
-            this.物料名称.DataPropertyName = "I_GoodsName";
-            this.物料名称.HeaderText = "物料名称";
-            this.物料名称.MinimumWidth = 6;
-            this.物料名称.Name = "物料名称";
-            this.物料名称.ReadOnly = true;
-            this.物料名称.Width = 125;
-            // 
-            // 数量
-            // 
-            this.数量.DataPropertyName = "I_Qty";
-            this.数量.HeaderText = "数量";
-            this.数量.MinimumWidth = 6;
-            this.数量.Name = "数量";
-            this.数量.ReadOnly = true;
-            this.数量.Width = 125;
-            // 
-            // 实用数量
-            // 
-            this.实用数量.HeaderText = "实用数量";
-            this.实用数量.MinimumWidth = 6;
-            this.实用数量.Name = "实用数量";
-            this.实用数量.Width = 125;
-            // 
-            // 价格
-            // 
-            this.价格.DataPropertyName = "G_Price";
-            this.价格.HeaderText = "价格";
-            this.价格.MinimumWidth = 6;
-            this.价格.Name = "价格";
-            this.价格.ReadOnly = true;
-            this.价格.Width = 125;
-            // 
-            // 车间
-            // 
-            this.车间.HeaderText = "车间";
-            this.车间.MinimumWidth = 6;
-            this.车间.Name = "车间";
-            this.车间.ReadOnly = true;
-            this.车间.Width = 125;
-            // 
-            // 单位
-            // 
-            this.单位.DataPropertyName = "I_Unit";
-            this.单位.HeaderText = "单位";
-            this.单位.MinimumWidth = 6;
-            this.单位.Name = "单位";
-            this.单位.ReadOnly = true;
-            this.单位.Width = 60;
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.MinimumWidth = 6;
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
-            this.ID.Width = 125;
-            // 
-            // 仓库编码
-            // 
-            this.仓库编码.DataPropertyName = "I_StockCode";
-            this.仓库编码.HeaderText = "仓库编码";
-            this.仓库编码.MinimumWidth = 6;
-            this.仓库编码.Name = "仓库编码";
-            this.仓库编码.Width = 125;
-            // 
-            // 仓库名称
-            // 
-            this.仓库名称.DataPropertyName = "I_StockName";
-            this.仓库名称.HeaderText = "仓库名称";
-            this.仓库名称.MinimumWidth = 6;
-            this.仓库名称.Name = "仓库名称";
-            this.仓库名称.Width = 125;
             // 
             // frmGoodsConvet
             // 

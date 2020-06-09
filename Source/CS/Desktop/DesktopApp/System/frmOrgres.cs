@@ -376,7 +376,7 @@ namespace DesktopApp
             //}
             dataGridView2.DataSource = row2;
             int nLen = dataGridView2.Rows.Count;
-            for (int i = 0; i < dataGridView2.Rows.Count - 1; i++)
+            for (int i = 0; i < dataGridView2.Rows.Count ; i++)
             {
                 string strQty = dataGridView2.Rows[i].Cells["数量2"].Value.ToString();
                 dataGridView2.Rows[i].Cells["数量2"].Value = Delete0(strQty);
@@ -1082,13 +1082,13 @@ namespace DesktopApp
                 {
                     try
                     {
-                        this.Enabled = false;
+                        //this.Enabled = false;
                         Cursor.Current = Cursors.WaitCursor;
                         DeleteWeightData(strId);
                         DeleteBarcode(strBarcode);
 
                         UpdateGoods();
-                        this.Enabled = true;
+                        //this.Enabled = true;
                         Cursor.Current = Cursors.Default;
 
                     }

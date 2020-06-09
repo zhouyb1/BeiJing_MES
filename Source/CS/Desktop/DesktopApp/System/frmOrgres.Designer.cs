@@ -59,6 +59,24 @@
             this.btn_Weight = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加时间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.工序名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.批次2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.添加人2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.状态2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.生产订单2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.cmbTeam = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -81,24 +99,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.btn_Delete = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.选择2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加时间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.工序名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.批次2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.添加人2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间名称2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.状态2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.备注2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.生产订单2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.SuspendLayout();
@@ -110,7 +110,7 @@
             this.cmbProce.FormattingEnabled = true;
             this.cmbProce.Location = new System.Drawing.Point(354, 32);
             this.cmbProce.Name = "cmbProce";
-            this.cmbProce.Size = new System.Drawing.Size(169, 23);
+            this.cmbProce.Size = new System.Drawing.Size(169, 26);
             this.cmbProce.TabIndex = 106;
             this.cmbProce.SelectedIndexChanged += new System.EventHandler(this.cmbProce_SelectedIndexChanged);
             // 
@@ -121,7 +121,7 @@
             this.label4.Location = new System.Drawing.Point(21, 37);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.Size = new System.Drawing.Size(66, 19);
             this.label4.TabIndex = 105;
             this.label4.Text = "工序：";
             // 
@@ -173,6 +173,7 @@
             this.仓库名称});
             this.dataGridView1.Location = new System.Drawing.Point(42, 155);
             this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(883, 66);
             this.dataGridView1.TabIndex = 97;
@@ -181,6 +182,7 @@
             // 选择
             // 
             this.选择.HeaderText = "选择";
+            this.选择.MinimumWidth = 6;
             this.选择.Name = "选择";
             this.选择.Width = 40;
             // 
@@ -188,53 +190,68 @@
             // 
             this.物料.DataPropertyName = "W_GoodsCode";
             this.物料.HeaderText = "物料";
+            this.物料.MinimumWidth = 6;
             this.物料.Name = "物料";
             this.物料.ReadOnly = true;
+            this.物料.Width = 125;
             // 
             // 物料名称
             // 
             this.物料名称.DataPropertyName = "W_GoodsName";
             this.物料名称.HeaderText = "物料名称";
+            this.物料名称.MinimumWidth = 6;
             this.物料名称.Name = "物料名称";
             this.物料名称.ReadOnly = true;
+            this.物料名称.Width = 125;
             // 
             // 批次
             // 
             this.批次.DataPropertyName = "W_Batch";
             this.批次.HeaderText = "批次";
+            this.批次.MinimumWidth = 6;
             this.批次.Name = "批次";
             this.批次.ReadOnly = true;
+            this.批次.Width = 125;
             // 
             // 数量
             // 
             this.数量.DataPropertyName = "W_Qty";
             this.数量.HeaderText = "数量";
+            this.数量.MinimumWidth = 6;
             this.数量.Name = "数量";
             this.数量.ReadOnly = true;
+            this.数量.Width = 125;
             // 
             // 实用数量
             // 
             this.实用数量.HeaderText = "实用数量";
+            this.实用数量.MinimumWidth = 6;
             this.实用数量.Name = "实用数量";
+            this.实用数量.Width = 125;
             // 
             // 价格
             // 
             this.价格.DataPropertyName = "W_Price";
             this.价格.HeaderText = "价格";
+            this.价格.MinimumWidth = 6;
             this.价格.Name = "价格";
             this.价格.ReadOnly = true;
+            this.价格.Width = 125;
             // 
             // 车间
             // 
             this.车间.DataPropertyName = "W_WorkShop";
             this.车间.HeaderText = "车间";
+            this.车间.MinimumWidth = 6;
             this.车间.Name = "车间";
             this.车间.ReadOnly = true;
+            this.车间.Width = 125;
             // 
             // 状态
             // 
             this.状态.DataPropertyName = "W_Status";
             this.状态.HeaderText = "状态";
+            this.状态.MinimumWidth = 6;
             this.状态.Name = "状态";
             this.状态.ReadOnly = true;
             this.状态.Visible = false;
@@ -244,6 +261,7 @@
             // 
             this.单位.DataPropertyName = "W_Unit";
             this.单位.HeaderText = "单位";
+            this.单位.MinimumWidth = 6;
             this.单位.Name = "单位";
             this.单位.ReadOnly = true;
             this.单位.Width = 60;
@@ -252,34 +270,44 @@
             // 
             this.ID.DataPropertyName = "ID";
             this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Visible = false;
+            this.ID.Width = 125;
             // 
             // 备注
             // 
             this.备注.DataPropertyName = "W_Remark";
             this.备注.HeaderText = "备注";
+            this.备注.MinimumWidth = 6;
             this.备注.Name = "备注";
             this.备注.ReadOnly = true;
+            this.备注.Width = 125;
             // 
             // 单号
             // 
             this.单号.DataPropertyName = "W_RecordCode";
             this.单号.HeaderText = "单号";
+            this.单号.MinimumWidth = 6;
             this.单号.Name = "单号";
+            this.单号.Width = 125;
             // 
             // 仓库编码
             // 
             this.仓库编码.DataPropertyName = "W_StockCode";
             this.仓库编码.HeaderText = "仓库编码";
+            this.仓库编码.MinimumWidth = 6;
             this.仓库编码.Name = "仓库编码";
+            this.仓库编码.Width = 125;
             // 
             // 仓库名称
             // 
             this.仓库名称.DataPropertyName = "W_StockName";
             this.仓库名称.HeaderText = "仓库名称";
+            this.仓库名称.MinimumWidth = 6;
             this.仓库名称.Name = "仓库名称";
+            this.仓库名称.Width = 125;
             // 
             // label7
             // 
@@ -288,7 +316,7 @@
             this.label7.Location = new System.Drawing.Point(270, 6);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 15);
+            this.label7.Size = new System.Drawing.Size(104, 19);
             this.label7.TabIndex = 91;
             this.label7.Text = "车间编码：";
             // 
@@ -300,7 +328,7 @@
             this.cmbWorkShop.FormattingEnabled = true;
             this.cmbWorkShop.Location = new System.Drawing.Point(354, 6);
             this.cmbWorkShop.Name = "cmbWorkShop";
-            this.cmbWorkShop.Size = new System.Drawing.Size(169, 23);
+            this.cmbWorkShop.Size = new System.Drawing.Size(169, 26);
             this.cmbWorkShop.TabIndex = 86;
             this.cmbWorkShop.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShop_SelectedIndexChanged);
             // 
@@ -312,7 +340,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label1.Size = new System.Drawing.Size(52, 15);
+            this.label1.Size = new System.Drawing.Size(66, 19);
             this.label1.TabIndex = 85;
             this.label1.Text = "车间：";
             // 
@@ -350,7 +378,7 @@
             this.label2.Location = new System.Drawing.Point(270, 35);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(82, 15);
+            this.label2.Size = new System.Drawing.Size(104, 19);
             this.label2.TabIndex = 118;
             this.label2.Text = "工序编码：";
             // 
@@ -399,6 +427,185 @@
             this.dataGridView2.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView2_CellClick);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
+            // 选择2
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.NullValue = false;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.选择2.DefaultCellStyle = dataGridViewCellStyle1;
+            this.选择2.FillWeight = 40F;
+            this.选择2.HeaderText = "选择";
+            this.选择2.MinimumWidth = 6;
+            this.选择2.Name = "选择2";
+            this.选择2.Width = 60;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "W_RecordCode";
+            this.Column1.HeaderText = "Column1";
+            this.Column1.MinimumWidth = 6;
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            this.Column1.Width = 125;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "W_RecordName";
+            this.Column2.HeaderText = "Column2";
+            this.Column2.MinimumWidth = 6;
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Visible = false;
+            this.Column2.Width = 125;
+            // 
+            // 物料2
+            // 
+            this.物料2.DataPropertyName = "W_SecGoodsCode";
+            this.物料2.HeaderText = "物料";
+            this.物料2.MinimumWidth = 6;
+            this.物料2.Name = "物料2";
+            this.物料2.ReadOnly = true;
+            this.物料2.Visible = false;
+            this.物料2.Width = 80;
+            // 
+            // 物料名称2
+            // 
+            this.物料名称2.DataPropertyName = "W_SecGoodsName";
+            this.物料名称2.HeaderText = "物料名称";
+            this.物料名称2.MinimumWidth = 6;
+            this.物料名称2.Name = "物料名称2";
+            this.物料名称2.ReadOnly = true;
+            this.物料名称2.Width = 130;
+            // 
+            // 数量2
+            // 
+            this.数量2.DataPropertyName = "W_SecQty";
+            this.数量2.HeaderText = "称重数量";
+            this.数量2.MinimumWidth = 6;
+            this.数量2.Name = "数量2";
+            this.数量2.ReadOnly = true;
+            this.数量2.Width = 125;
+            // 
+            // 单位2
+            // 
+            this.单位2.DataPropertyName = "W_SecUnit";
+            this.单位2.FillWeight = 40F;
+            this.单位2.HeaderText = "单位";
+            this.单位2.MinimumWidth = 6;
+            this.单位2.Name = "单位2";
+            this.单位2.ReadOnly = true;
+            this.单位2.Width = 40;
+            // 
+            // 添加时间2
+            // 
+            this.添加时间2.DataPropertyName = "W_CreateDate";
+            this.添加时间2.FillWeight = 140F;
+            this.添加时间2.HeaderText = "称重时间";
+            this.添加时间2.MinimumWidth = 6;
+            this.添加时间2.Name = "添加时间2";
+            this.添加时间2.ReadOnly = true;
+            this.添加时间2.Width = 180;
+            // 
+            // 车间2
+            // 
+            this.车间2.DataPropertyName = "W_WorkShopCode";
+            this.车间2.HeaderText = "车间";
+            this.车间2.MinimumWidth = 6;
+            this.车间2.Name = "车间2";
+            this.车间2.ReadOnly = true;
+            this.车间2.Visible = false;
+            this.车间2.Width = 60;
+            // 
+            // 工序2
+            // 
+            this.工序2.DataPropertyName = "W_ProceCode";
+            this.工序2.HeaderText = "工序";
+            this.工序2.MinimumWidth = 6;
+            this.工序2.Name = "工序2";
+            this.工序2.ReadOnly = true;
+            this.工序2.Visible = false;
+            this.工序2.Width = 60;
+            // 
+            // 工序名称2
+            // 
+            this.工序名称2.DataPropertyName = "W_ProceName";
+            this.工序名称2.HeaderText = "工序名称";
+            this.工序名称2.MinimumWidth = 6;
+            this.工序名称2.Name = "工序名称2";
+            this.工序名称2.ReadOnly = true;
+            this.工序名称2.Visible = false;
+            this.工序名称2.Width = 80;
+            // 
+            // 批次2
+            // 
+            this.批次2.DataPropertyName = "W_SecBatch";
+            this.批次2.HeaderText = "批次";
+            this.批次2.MinimumWidth = 6;
+            this.批次2.Name = "批次2";
+            this.批次2.ReadOnly = true;
+            this.批次2.Width = 125;
+            // 
+            // 添加人2
+            // 
+            this.添加人2.DataPropertyName = "W_CreateBy";
+            this.添加人2.HeaderText = "添加人";
+            this.添加人2.MinimumWidth = 6;
+            this.添加人2.Name = "添加人2";
+            this.添加人2.ReadOnly = true;
+            this.添加人2.Visible = false;
+            this.添加人2.Width = 70;
+            // 
+            // 车间名称2
+            // 
+            this.车间名称2.DataPropertyName = "W_WorkShopName";
+            this.车间名称2.HeaderText = "车间名称";
+            this.车间名称2.MinimumWidth = 6;
+            this.车间名称2.Name = "车间名称2";
+            this.车间名称2.ReadOnly = true;
+            this.车间名称2.Visible = false;
+            this.车间名称2.Width = 125;
+            // 
+            // 状态2
+            // 
+            this.状态2.DataPropertyName = "W_Status";
+            this.状态2.HeaderText = "状态";
+            this.状态2.MinimumWidth = 6;
+            this.状态2.Name = "状态2";
+            this.状态2.ReadOnly = true;
+            this.状态2.Visible = false;
+            this.状态2.Width = 125;
+            // 
+            // 备注2
+            // 
+            this.备注2.DataPropertyName = "W_Remark";
+            this.备注2.HeaderText = "备注";
+            this.备注2.MinimumWidth = 6;
+            this.备注2.Name = "备注2";
+            this.备注2.ReadOnly = true;
+            this.备注2.Visible = false;
+            this.备注2.Width = 125;
+            // 
+            // 生产订单2
+            // 
+            this.生产订单2.DataPropertyName = "W_OrderNo";
+            this.生产订单2.HeaderText = "生产订单号";
+            this.生产订单2.MinimumWidth = 6;
+            this.生产订单2.Name = "生产订单2";
+            this.生产订单2.ReadOnly = true;
+            this.生产订单2.Visible = false;
+            this.生产订单2.Width = 125;
+            // 
+            // ID2
+            // 
+            this.ID2.DataPropertyName = "ID";
+            this.ID2.HeaderText = "ID";
+            this.ID2.MinimumWidth = 6;
+            this.ID2.Name = "ID2";
+            this.ID2.ReadOnly = true;
+            this.ID2.Visible = false;
+            this.ID2.Width = 125;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -406,7 +613,7 @@
             this.label5.Location = new System.Drawing.Point(270, 61);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 15);
+            this.label5.Size = new System.Drawing.Size(104, 19);
             this.label5.TabIndex = 123;
             this.label5.Text = "班组编码：";
             // 
@@ -418,7 +625,7 @@
             this.cmbTeam.FormattingEnabled = true;
             this.cmbTeam.Location = new System.Drawing.Point(354, 58);
             this.cmbTeam.Name = "cmbTeam";
-            this.cmbTeam.Size = new System.Drawing.Size(169, 23);
+            this.cmbTeam.Size = new System.Drawing.Size(169, 26);
             this.cmbTeam.TabIndex = 122;
             this.cmbTeam.SelectedIndexChanged += new System.EventHandler(this.cmbTeam_SelectedIndexChanged);
             // 
@@ -429,7 +636,7 @@
             this.label8.Location = new System.Drawing.Point(21, 63);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 15);
+            this.label8.Size = new System.Drawing.Size(66, 19);
             this.label8.TabIndex = 121;
             this.label8.Text = "班组：";
             // 
@@ -454,7 +661,7 @@
             this.lblTS.ForeColor = System.Drawing.Color.Red;
             this.lblTS.Location = new System.Drawing.Point(34, 435);
             this.lblTS.Name = "lblTS";
-            this.lblTS.Size = new System.Drawing.Size(0, 16);
+            this.lblTS.Size = new System.Drawing.Size(0, 20);
             this.lblTS.TabIndex = 128;
             // 
             // cmbTeamName
@@ -465,7 +672,7 @@
             this.cmbTeamName.FormattingEnabled = true;
             this.cmbTeamName.Location = new System.Drawing.Point(77, 60);
             this.cmbTeamName.Name = "cmbTeamName";
-            this.cmbTeamName.Size = new System.Drawing.Size(188, 23);
+            this.cmbTeamName.Size = new System.Drawing.Size(188, 26);
             this.cmbTeamName.TabIndex = 130;
             this.cmbTeamName.SelectedIndexChanged += new System.EventHandler(this.cmbTeamName_SelectedIndexChanged);
             // 
@@ -477,7 +684,7 @@
             this.cmbWorkShopName.FormattingEnabled = true;
             this.cmbWorkShopName.Location = new System.Drawing.Point(77, 8);
             this.cmbWorkShopName.Name = "cmbWorkShopName";
-            this.cmbWorkShopName.Size = new System.Drawing.Size(188, 23);
+            this.cmbWorkShopName.Size = new System.Drawing.Size(188, 26);
             this.cmbWorkShopName.TabIndex = 129;
             this.cmbWorkShopName.SelectedIndexChanged += new System.EventHandler(this.cmbWorkShopName_SelectedIndexChanged);
             // 
@@ -488,7 +695,7 @@
             this.cmbProceName.FormattingEnabled = true;
             this.cmbProceName.Location = new System.Drawing.Point(77, 34);
             this.cmbProceName.Name = "cmbProceName";
-            this.cmbProceName.Size = new System.Drawing.Size(188, 23);
+            this.cmbProceName.Size = new System.Drawing.Size(188, 26);
             this.cmbProceName.TabIndex = 132;
             this.cmbProceName.SelectedIndexChanged += new System.EventHandler(this.cmbProceName_SelectedIndexChanged);
             // 
@@ -526,7 +733,7 @@
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.label6.Size = new System.Drawing.Size(97, 15);
+            this.label6.Size = new System.Drawing.Size(123, 19);
             this.label6.TabIndex = 81;
             this.label6.Text = "生产订单号：";
             this.label6.Visible = false;
@@ -538,7 +745,7 @@
             this.label9.Location = new System.Drawing.Point(431, 399);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(82, 15);
+            this.label9.Size = new System.Drawing.Size(104, 19);
             this.label9.TabIndex = 125;
             this.label9.Text = "订单时间：";
             this.label9.Visible = false;
@@ -550,7 +757,7 @@
             this.comOrderNo.FormattingEnabled = true;
             this.comOrderNo.Location = new System.Drawing.Point(204, 383);
             this.comOrderNo.Name = "comOrderNo";
-            this.comOrderNo.Size = new System.Drawing.Size(222, 23);
+            this.comOrderNo.Size = new System.Drawing.Size(222, 26);
             this.comOrderNo.TabIndex = 83;
             this.comOrderNo.Visible = false;
             this.comOrderNo.SelectedIndexChanged += new System.EventHandler(this.comOrderNo_SelectedIndexChanged);
@@ -559,7 +766,7 @@
             // 
             this.txtOrderDate.Location = new System.Drawing.Point(531, 370);
             this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.Size = new System.Drawing.Size(200, 21);
+            this.txtOrderDate.Size = new System.Drawing.Size(200, 25);
             this.txtOrderDate.TabIndex = 126;
             this.txtOrderDate.Visible = false;
             // 
@@ -570,7 +777,7 @@
             this.label3.Location = new System.Drawing.Point(117, 376);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(82, 15);
+            this.label3.Size = new System.Drawing.Size(104, 19);
             this.label3.TabIndex = 87;
             this.label3.Text = "工艺代码：";
             this.label3.Visible = false;
@@ -582,7 +789,7 @@
             this.label10.Location = new System.Drawing.Point(431, 391);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(82, 15);
+            this.label10.Size = new System.Drawing.Size(104, 19);
             this.label10.TabIndex = 93;
             this.label10.Text = "工艺编码：";
             this.label10.Visible = false;
@@ -594,7 +801,7 @@
             this.cmbRecordName.FormattingEnabled = true;
             this.cmbRecordName.Location = new System.Drawing.Point(204, 354);
             this.cmbRecordName.Name = "cmbRecordName";
-            this.cmbRecordName.Size = new System.Drawing.Size(222, 23);
+            this.cmbRecordName.Size = new System.Drawing.Size(222, 26);
             this.cmbRecordName.TabIndex = 131;
             this.cmbRecordName.Visible = false;
             this.cmbRecordName.SelectedIndexChanged += new System.EventHandler(this.cmbRecordName_SelectedIndexChanged);
@@ -606,7 +813,7 @@
             this.cmbRecord.FormattingEnabled = true;
             this.cmbRecord.Location = new System.Drawing.Point(518, 396);
             this.cmbRecord.Name = "cmbRecord";
-            this.cmbRecord.Size = new System.Drawing.Size(200, 23);
+            this.cmbRecord.Size = new System.Drawing.Size(200, 26);
             this.cmbRecord.TabIndex = 88;
             this.cmbRecord.Visible = false;
             this.cmbRecord.SelectedIndexChanged += new System.EventHandler(this.cmbRecord_SelectedIndexChanged);
@@ -653,161 +860,9 @@
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(584, 14);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(80, 24);
+            this.comboBox1.Size = new System.Drawing.Size(80, 28);
             this.comboBox1.TabIndex = 139;
             this.comboBox1.Visible = false;
-            // 
-            // 选择2
-            // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.NullValue = false;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.选择2.DefaultCellStyle = dataGridViewCellStyle1;
-            this.选择2.FillWeight = 40F;
-            this.选择2.HeaderText = "选择";
-            this.选择2.Name = "选择2";
-            this.选择2.Width = 60;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "W_RecordCode";
-            this.Column1.HeaderText = "Column1";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "W_RecordName";
-            this.Column2.HeaderText = "Column2";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Visible = false;
-            // 
-            // 物料2
-            // 
-            this.物料2.DataPropertyName = "W_SecGoodsCode";
-            this.物料2.HeaderText = "物料";
-            this.物料2.Name = "物料2";
-            this.物料2.ReadOnly = true;
-            this.物料2.Visible = false;
-            this.物料2.Width = 80;
-            // 
-            // 物料名称2
-            // 
-            this.物料名称2.DataPropertyName = "W_SecGoodsName";
-            this.物料名称2.HeaderText = "物料名称";
-            this.物料名称2.Name = "物料名称2";
-            this.物料名称2.ReadOnly = true;
-            this.物料名称2.Width = 130;
-            // 
-            // 数量2
-            // 
-            this.数量2.DataPropertyName = "W_SecQty";
-            this.数量2.HeaderText = "称重数量";
-            this.数量2.Name = "数量2";
-            this.数量2.ReadOnly = true;
-            // 
-            // 单位2
-            // 
-            this.单位2.DataPropertyName = "W_SecUnit";
-            this.单位2.FillWeight = 40F;
-            this.单位2.HeaderText = "单位";
-            this.单位2.Name = "单位2";
-            this.单位2.ReadOnly = true;
-            this.单位2.Width = 40;
-            // 
-            // 添加时间2
-            // 
-            this.添加时间2.DataPropertyName = "W_CreateDate";
-            this.添加时间2.FillWeight = 140F;
-            this.添加时间2.HeaderText = "称重时间";
-            this.添加时间2.Name = "添加时间2";
-            this.添加时间2.ReadOnly = true;
-            this.添加时间2.Width = 180;
-            // 
-            // 车间2
-            // 
-            this.车间2.DataPropertyName = "W_WorkShopCode";
-            this.车间2.HeaderText = "车间";
-            this.车间2.Name = "车间2";
-            this.车间2.ReadOnly = true;
-            this.车间2.Visible = false;
-            this.车间2.Width = 60;
-            // 
-            // 工序2
-            // 
-            this.工序2.DataPropertyName = "W_ProceCode";
-            this.工序2.HeaderText = "工序";
-            this.工序2.Name = "工序2";
-            this.工序2.ReadOnly = true;
-            this.工序2.Visible = false;
-            this.工序2.Width = 60;
-            // 
-            // 工序名称2
-            // 
-            this.工序名称2.DataPropertyName = "W_ProceName";
-            this.工序名称2.HeaderText = "工序名称";
-            this.工序名称2.Name = "工序名称2";
-            this.工序名称2.ReadOnly = true;
-            this.工序名称2.Visible = false;
-            this.工序名称2.Width = 80;
-            // 
-            // 批次2
-            // 
-            this.批次2.DataPropertyName = "W_SecBatch";
-            this.批次2.HeaderText = "批次";
-            this.批次2.Name = "批次2";
-            this.批次2.ReadOnly = true;
-            // 
-            // 添加人2
-            // 
-            this.添加人2.DataPropertyName = "W_CreateBy";
-            this.添加人2.HeaderText = "添加人";
-            this.添加人2.Name = "添加人2";
-            this.添加人2.ReadOnly = true;
-            this.添加人2.Visible = false;
-            this.添加人2.Width = 70;
-            // 
-            // 车间名称2
-            // 
-            this.车间名称2.DataPropertyName = "W_WorkShopName";
-            this.车间名称2.HeaderText = "车间名称";
-            this.车间名称2.Name = "车间名称2";
-            this.车间名称2.ReadOnly = true;
-            this.车间名称2.Visible = false;
-            // 
-            // 状态2
-            // 
-            this.状态2.DataPropertyName = "W_Status";
-            this.状态2.HeaderText = "状态";
-            this.状态2.Name = "状态2";
-            this.状态2.ReadOnly = true;
-            this.状态2.Visible = false;
-            // 
-            // 备注2
-            // 
-            this.备注2.DataPropertyName = "W_Remark";
-            this.备注2.HeaderText = "备注";
-            this.备注2.Name = "备注2";
-            this.备注2.ReadOnly = true;
-            this.备注2.Visible = false;
-            // 
-            // 生产订单2
-            // 
-            this.生产订单2.DataPropertyName = "W_OrderNo";
-            this.生产订单2.HeaderText = "生产订单号";
-            this.生产订单2.Name = "生产订单2";
-            this.生产订单2.ReadOnly = true;
-            this.生产订单2.Visible = false;
-            // 
-            // ID2
-            // 
-            this.ID2.DataPropertyName = "ID";
-            this.ID2.HeaderText = "ID";
-            this.ID2.Name = "ID2";
-            this.ID2.ReadOnly = true;
-            this.ID2.Visible = false;
             // 
             // frmOrgres
             // 
