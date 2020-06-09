@@ -75,7 +75,12 @@ var bootstrap = function ($, ayma) {
                     { label: "用户姓名", name: "F_RealName", width: 160, align: "left" },
                     { label: "部门名称", name: "D_Code", width: 160, align: "left" },
                     { label: "班组名称", name: "F_TeamName", width: 160, align: "left" },
-                    { label: "打卡日期", name: "C_ScanDate", width: 160, align: "left"},
+                    {
+                        label: "打卡日期", name: "C_ScanDate", width: 160, align: "left",
+                        formatter: function (cellvalue, options, rowObject) {
+                            return ayma.formatDate(cellvalue, 'yyyy-MM-dd');
+                        }
+                    },
                     {
                         label: "打卡时间", name: "C_ScanTime", width: 160, align: "left",
                         formatter: function (cellvalue, options, rowObject) {
@@ -86,7 +91,9 @@ var bootstrap = function ($, ayma) {
                 ],
                 mainId:'ID',
                 reloadSelected: true,
-                isPage: true
+                isPage: true,
+                sidx: 'C_ScanTime',                 // 排序列
+                sord: 'DESC',                 // 排序类型
             });
             page.search();
         },
