@@ -29,17 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仓库编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.仓库名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtGoodsCode = new System.Windows.Forms.TextBox();
@@ -52,6 +41,17 @@
             this.txtGoodsName = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblTS = new System.Windows.Forms.Label();
+            this.选择 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.物料 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.物料名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.实用数量 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.价格 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.车间 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.单位 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仓库编码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.仓库名称 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -70,13 +70,134 @@
             this.ID,
             this.仓库编码,
             this.仓库名称});
-            this.dataGridView1.Location = new System.Drawing.Point(53, 78);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.dataGridView1.Location = new System.Drawing.Point(40, 62);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1141, 370);
+            this.dataGridView1.Size = new System.Drawing.Size(856, 296);
             this.dataGridView1.TabIndex = 99;
+            // 
+            // label12
+            // 
+            this.label12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(6, 62);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(27, 104);
+            this.label12.TabIndex = 137;
+            this.label12.Text = "转换前物料";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(52, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(40, 16);
+            this.label1.TabIndex = 138;
+            this.label1.Text = "物料";
+            // 
+            // txtGoodsCode
+            // 
+            this.txtGoodsCode.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtGoodsCode.Location = new System.Drawing.Point(99, 15);
+            this.txtGoodsCode.Name = "txtGoodsCode";
+            this.txtGoodsCode.ReadOnly = true;
+            this.txtGoodsCode.Size = new System.Drawing.Size(100, 26);
+            this.txtGoodsCode.TabIndex = 139;
+            // 
+            // txtPc
+            // 
+            this.txtPc.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtPc.Location = new System.Drawing.Point(410, 15);
+            this.txtPc.Name = "txtPc";
+            this.txtPc.ReadOnly = true;
+            this.txtPc.Size = new System.Drawing.Size(100, 26);
+            this.txtPc.TabIndex = 141;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(363, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 16);
+            this.label2.TabIndex = 140;
+            this.label2.Text = "批次";
+            // 
+            // txtQty
+            // 
+            this.txtQty.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtQty.Location = new System.Drawing.Point(590, 15);
+            this.txtQty.Name = "txtQty";
+            this.txtQty.ReadOnly = true;
+            this.txtQty.Size = new System.Drawing.Size(100, 26);
+            this.txtQty.TabIndex = 143;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(543, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 16);
+            this.label3.TabIndex = 142;
+            this.label3.Text = "数量";
+            // 
+            // btn_Convet
+            // 
+            this.btn_Convet.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Convet.Image = global::DesktopApp.Properties.Resources.ok;
+            this.btn_Convet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Convet.Location = new System.Drawing.Point(803, 15);
+            this.btn_Convet.Name = "btn_Convet";
+            this.btn_Convet.Size = new System.Drawing.Size(90, 30);
+            this.btn_Convet.TabIndex = 145;
+            this.btn_Convet.Text = "物料转换";
+            this.btn_Convet.UseVisualStyleBackColor = true;
+            this.btn_Convet.Click += new System.EventHandler(this.btn_Convet_Click);
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Font = new System.Drawing.Font("宋体", 11F);
+            this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
+            this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Search.Location = new System.Drawing.Point(704, 15);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(90, 30);
+            this.btn_Search.TabIndex = 144;
+            this.btn_Search.Text = "查询原料";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // txtGoodsName
+            // 
+            this.txtGoodsName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtGoodsName.Location = new System.Drawing.Point(257, 15);
+            this.txtGoodsName.Name = "txtGoodsName";
+            this.txtGoodsName.ReadOnly = true;
+            this.txtGoodsName.Size = new System.Drawing.Size(100, 26);
+            this.txtGoodsName.TabIndex = 147;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(210, 19);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(40, 16);
+            this.label4.TabIndex = 146;
+            this.label4.Text = "名称";
+            // 
+            // lblTS
+            // 
+            this.lblTS.AutoSize = true;
+            this.lblTS.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTS.ForeColor = System.Drawing.Color.Red;
+            this.lblTS.Location = new System.Drawing.Point(33, 366);
+            this.lblTS.Name = "lblTS";
+            this.lblTS.Size = new System.Drawing.Size(0, 16);
+            this.lblTS.TabIndex = 148;
             // 
             // 选择
             // 
@@ -93,6 +214,7 @@
             this.物料.MinimumWidth = 6;
             this.物料.Name = "物料";
             this.物料.ReadOnly = true;
+            this.物料.Visible = false;
             this.物料.Width = 125;
             // 
             // 物料名称
@@ -102,7 +224,7 @@
             this.物料名称.MinimumWidth = 6;
             this.物料名称.Name = "物料名称";
             this.物料名称.ReadOnly = true;
-            this.物料名称.Width = 125;
+            this.物料名称.Width = 120;
             // 
             // 数量
             // 
@@ -111,14 +233,14 @@
             this.数量.MinimumWidth = 6;
             this.数量.Name = "数量";
             this.数量.ReadOnly = true;
-            this.数量.Width = 125;
+            this.数量.Width = 120;
             // 
             // 实用数量
             // 
             this.实用数量.HeaderText = "实用数量";
             this.实用数量.MinimumWidth = 6;
             this.实用数量.Name = "实用数量";
-            this.实用数量.Width = 125;
+            this.实用数量.Width = 120;
             // 
             // 价格
             // 
@@ -127,7 +249,7 @@
             this.价格.MinimumWidth = 6;
             this.价格.Name = "价格";
             this.价格.ReadOnly = true;
-            this.价格.Width = 125;
+            this.价格.Width = 120;
             // 
             // 车间
             // 
@@ -135,7 +257,7 @@
             this.车间.MinimumWidth = 6;
             this.车间.Name = "车间";
             this.车间.ReadOnly = true;
-            this.车间.Width = 125;
+            this.车间.Width = 60;
             // 
             // 单位
             // 
@@ -162,7 +284,7 @@
             this.仓库编码.HeaderText = "仓库编码";
             this.仓库编码.MinimumWidth = 6;
             this.仓库编码.Name = "仓库编码";
-            this.仓库编码.Width = 125;
+            this.仓库编码.Width = 80;
             // 
             // 仓库名称
             // 
@@ -170,147 +292,13 @@
             this.仓库名称.HeaderText = "仓库名称";
             this.仓库名称.MinimumWidth = 6;
             this.仓库名称.Name = "仓库名称";
-            this.仓库名称.Width = 125;
-            // 
-            // label12
-            // 
-            this.label12.Font = new System.Drawing.Font("宋体", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label12.ForeColor = System.Drawing.Color.Red;
-            this.label12.Location = new System.Drawing.Point(8, 78);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(36, 130);
-            this.label12.TabIndex = 137;
-            this.label12.Text = "转换前物料";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(69, 24);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 20);
-            this.label1.TabIndex = 138;
-            this.label1.Text = "物料";
-            // 
-            // txtGoodsCode
-            // 
-            this.txtGoodsCode.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtGoodsCode.Location = new System.Drawing.Point(132, 19);
-            this.txtGoodsCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtGoodsCode.Name = "txtGoodsCode";
-            this.txtGoodsCode.ReadOnly = true;
-            this.txtGoodsCode.Size = new System.Drawing.Size(132, 30);
-            this.txtGoodsCode.TabIndex = 139;
-            // 
-            // txtPc
-            // 
-            this.txtPc.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtPc.Location = new System.Drawing.Point(547, 19);
-            this.txtPc.Margin = new System.Windows.Forms.Padding(4);
-            this.txtPc.Name = "txtPc";
-            this.txtPc.ReadOnly = true;
-            this.txtPc.Size = new System.Drawing.Size(132, 30);
-            this.txtPc.TabIndex = 141;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label2.Location = new System.Drawing.Point(484, 24);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 20);
-            this.label2.TabIndex = 140;
-            this.label2.Text = "批次";
-            // 
-            // txtQty
-            // 
-            this.txtQty.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtQty.Location = new System.Drawing.Point(787, 19);
-            this.txtQty.Margin = new System.Windows.Forms.Padding(4);
-            this.txtQty.Name = "txtQty";
-            this.txtQty.ReadOnly = true;
-            this.txtQty.Size = new System.Drawing.Size(132, 30);
-            this.txtQty.TabIndex = 143;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label3.Location = new System.Drawing.Point(724, 24);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 20);
-            this.label3.TabIndex = 142;
-            this.label3.Text = "数量";
-            // 
-            // btn_Convet
-            // 
-            this.btn_Convet.Font = new System.Drawing.Font("宋体", 11F);
-            this.btn_Convet.Image = global::DesktopApp.Properties.Resources.ok;
-            this.btn_Convet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Convet.Location = new System.Drawing.Point(1071, 19);
-            this.btn_Convet.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_Convet.Name = "btn_Convet";
-            this.btn_Convet.Size = new System.Drawing.Size(120, 38);
-            this.btn_Convet.TabIndex = 145;
-            this.btn_Convet.Text = "物料转换";
-            this.btn_Convet.UseVisualStyleBackColor = true;
-            this.btn_Convet.Click += new System.EventHandler(this.btn_Convet_Click);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Font = new System.Drawing.Font("宋体", 11F);
-            this.btn_Search.Image = global::DesktopApp.Properties.Resources.search1;
-            this.btn_Search.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Search.Location = new System.Drawing.Point(939, 19);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(120, 38);
-            this.btn_Search.TabIndex = 144;
-            this.btn_Search.Text = "查询原料";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // txtGoodsName
-            // 
-            this.txtGoodsName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtGoodsName.Location = new System.Drawing.Point(343, 19);
-            this.txtGoodsName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtGoodsName.Name = "txtGoodsName";
-            this.txtGoodsName.ReadOnly = true;
-            this.txtGoodsName.Size = new System.Drawing.Size(132, 30);
-            this.txtGoodsName.TabIndex = 147;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label4.Location = new System.Drawing.Point(280, 24);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 20);
-            this.label4.TabIndex = 146;
-            this.label4.Text = "名称";
-            // 
-            // lblTS
-            // 
-            this.lblTS.AutoSize = true;
-            this.lblTS.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTS.ForeColor = System.Drawing.Color.Red;
-            this.lblTS.Location = new System.Drawing.Point(44, 458);
-            this.lblTS.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblTS.Name = "lblTS";
-            this.lblTS.Size = new System.Drawing.Size(0, 20);
-            this.lblTS.TabIndex = 148;
+            this.仓库名称.Width = 120;
             // 
             // frmGoodsConvet
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 492);
+            this.ClientSize = new System.Drawing.Size(910, 394);
             this.Controls.Add(this.lblTS);
             this.Controls.Add(this.txtGoodsName);
             this.Controls.Add(this.label4);
@@ -325,7 +313,6 @@
             this.Controls.Add(this.label12);
             this.Controls.Add(this.dataGridView1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmGoodsConvet";
             this.Text = "物料转换";
             this.Load += new System.EventHandler(this.frmGoodsConvet_Load);

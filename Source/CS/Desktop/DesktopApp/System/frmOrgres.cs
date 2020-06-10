@@ -930,13 +930,15 @@ namespace DesktopApp
                 {
                     try
                     {
-                        this.Enabled = false;
+      
+                        //this.Enabled = false;
+                        
                         Cursor.Current = Cursors.WaitCursor;
                         
                         GetImg("物料" + strGoodsCode + "批次" + strBatch + "单号" + Globels.strOrderNo, strGoodsName, strQty, strGoodsCode, strBatch,strBarcode);
                         //DeleteData(strId);
                         //SaveBarcode(strBarcode, strGoodsCode, strGoodsName, Convert.ToDecimal(strQty), strWorkShop);
-                        this.Enabled = true;
+                        //this.Enabled = true;
                         Cursor.Current = Cursors.Default;
 
                     }
