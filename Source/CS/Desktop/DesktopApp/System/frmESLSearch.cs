@@ -38,7 +38,7 @@ namespace DesktopApp
             listView1.Items.Clear();
             int nLen = ds.Tables[0].Rows.Count;
             this.listView1.BeginUpdate();
-            int sumQty = 0;
+            //decimal sumQty = 0;
             for (int i = 0; i < nLen; i++)
             {
 
@@ -57,11 +57,17 @@ namespace DesktopApp
 
                 lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Remark"].ToString());
                 this.listView1.Items.Add(lvi);
-                sumQty += Convert.ToInt32(ds.Tables[0].Rows[i]["B_Qty"].ToString());
+                //sumQty += Convert.ToDecimal(ds.Tables[0].Rows[i]["B_Qty"].ToString());
             }
 
-            //DataRow dr = ds.Tables[0].NewRow();
-            //dr[""]
+            //DataRow dr = ds.Tables[0].NewRow();  
+            //dr["B_Name"] = "合计：";
+            //dr["B_Qty"] = sumQty.ToString();
+            //ListViewItem lvi1 = new ListViewItem();
+            //lvi1.SubItems.Add(dr["B_Name"].ToString());
+            //lvi1.SubItems.Add(dr["B_Qty"].ToString());
+            //this.listView1.Items.Add(lvi1);
+            txtNum.Text = nLen.ToString();
             this.listView1.EndUpdate();
         }
     }

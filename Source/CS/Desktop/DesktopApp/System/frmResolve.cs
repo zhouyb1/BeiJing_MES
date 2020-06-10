@@ -63,9 +63,10 @@ namespace DesktopApp
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("输入法错误");
+                txtBarcode.Clear();
             }
         }
 
