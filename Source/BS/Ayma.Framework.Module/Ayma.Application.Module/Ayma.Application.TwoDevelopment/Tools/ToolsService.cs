@@ -167,7 +167,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<DepartmentEntity>();
+                return this.BaseRepository().FindList<DepartmentEntity>(x=>x.F_DeleteMark==0&&x.F_CompanyId=="207fa1a9-160c-4943-a89b-8fa4db0547ce");
             }
             catch (Exception ex)
             {
