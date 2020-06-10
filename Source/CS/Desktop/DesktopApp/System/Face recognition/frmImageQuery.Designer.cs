@@ -37,7 +37,6 @@
             this.设备 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cmb_Image = new System.Windows.Forms.ComboBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.btn_Upload = new System.Windows.Forms.Button();
             this.btn_Select = new System.Windows.Forms.Button();
             this.txtImageFile = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
@@ -46,6 +45,7 @@
             this.cmb_Device = new System.Windows.Forms.ComboBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_Upload = new System.Windows.Forms.Button();
             this.txt_RealName = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -94,7 +94,6 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(363, 362);
             this.dataGridView.TabIndex = 5;
-            //this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
             // 
             // 工号
             // 
@@ -161,18 +160,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(292, 362);
             this.panel3.TabIndex = 4;
-            // 
-            // btn_Upload
-            // 
-            this.btn_Upload.Image = global::DesktopApp.Properties.Resources.edit_remove;
-            this.btn_Upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btn_Upload.Location = new System.Drawing.Point(377, 26);
-            this.btn_Upload.Name = "btn_Upload";
-            this.btn_Upload.Size = new System.Drawing.Size(52, 23);
-            this.btn_Upload.TabIndex = 14;
-            this.btn_Upload.Text = "上传";
-            this.btn_Upload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_Upload.UseVisualStyleBackColor = true;
             // 
             // btn_Select
             // 
@@ -258,6 +245,19 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 60;
             this.pictureBox1.TabStop = false;
+            // 
+            // btn_Upload
+            // 
+            this.btn_Upload.Image = global::DesktopApp.Properties.Resources.edit_remove;
+            this.btn_Upload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btn_Upload.Location = new System.Drawing.Point(377, 26);
+            this.btn_Upload.Name = "btn_Upload";
+            this.btn_Upload.Size = new System.Drawing.Size(52, 23);
+            this.btn_Upload.TabIndex = 14;
+            this.btn_Upload.Text = "上传";
+            this.btn_Upload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_Upload.UseVisualStyleBackColor = true;
+            this.btn_Upload.Click += new System.EventHandler(this.btn_Upload_Click);
             // 
             // txt_RealName
             // 

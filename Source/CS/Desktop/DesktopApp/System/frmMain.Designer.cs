@@ -474,22 +474,23 @@
             // 人员管理ToolStripMenuItem
             // 
             this.人员管理ToolStripMenuItem.Name = "人员管理ToolStripMenuItem";
-            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.人员管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.人员管理ToolStripMenuItem.Text = "人员管理";
             this.人员管理ToolStripMenuItem.Click += new System.EventHandler(this.人员管理ToolStripMenuItem_Click);
             // 
             // 设备管理ToolStripMenuItem
             // 
             this.设备管理ToolStripMenuItem.Name = "设备管理ToolStripMenuItem";
-            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.设备管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.设备管理ToolStripMenuItem.Text = "设备管理";
             this.设备管理ToolStripMenuItem.Click += new System.EventHandler(this.设备管理ToolStripMenuItem_Click);
             // 
             // 照片管理ToolStripMenuItem
             // 
             this.照片管理ToolStripMenuItem.Name = "照片管理ToolStripMenuItem";
-            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(144, 26);
+            this.照片管理ToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.照片管理ToolStripMenuItem.Text = "照片管理";
+            this.照片管理ToolStripMenuItem.Visible = false;
             this.照片管理ToolStripMenuItem.Click += new System.EventHandler(this.照片管理ToolStripMenuItem_Click);
             // 
             // rFID管理ToolStripMenuItem

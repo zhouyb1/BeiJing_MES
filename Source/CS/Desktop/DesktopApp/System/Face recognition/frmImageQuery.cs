@@ -474,5 +474,10 @@ namespace DesktopApp
         {
 
         }
+
+        private void btn_Upload_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
