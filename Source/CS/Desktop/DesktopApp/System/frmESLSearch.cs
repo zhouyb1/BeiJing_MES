@@ -38,26 +38,30 @@ namespace DesktopApp
             listView1.Items.Clear();
             int nLen = ds.Tables[0].Rows.Count;
             this.listView1.BeginUpdate();
+            int sumQty = 0;
             for (int i = 0; i < nLen; i++)
             {
-                
-                    ListViewItem lvi = new ListViewItem(ds.Tables[0].Rows[i]["B_Code"].ToString());
-                    lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Name"].ToString());
-                    lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Qty"].ToString());
-                    if (ds.Tables[0].Rows[i]["B_Status"].ToString() == "1")
-                    {
-                        lvi.SubItems.Add("已生成");
-                    }
-                    else
-                    {
-                        lvi.SubItems.Add("已入库");
-                    }
+
+                ListViewItem lvi = new ListViewItem(ds.Tables[0].Rows[i]["B_Code"].ToString());
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Name"].ToString());
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Qty"].ToString());
+                if (ds.Tables[0].Rows[i]["B_Status"].ToString() == "1")
+                {
+                    lvi.SubItems.Add("已生成");
+                }
+                else
+                {
+                    lvi.SubItems.Add("已入库");
+                }
 
 
-                    lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Remark"].ToString());
-                    this.listView1.Items.Add(lvi);
-                
+                lvi.SubItems.Add(ds.Tables[0].Rows[i]["B_Remark"].ToString());
+                this.listView1.Items.Add(lvi);
+                sumQty += Convert.ToInt32(ds.Tables[0].Rows[i]["B_Qty"].ToString());
             }
+
+            //DataRow dr = ds.Tables[0].NewRow();
+            //dr[""]
             this.listView1.EndUpdate();
         }
     }

@@ -30,7 +30,7 @@ namespace DesktopApp
             InitializeComponent();
         }
 
-        
+
 
         private void txtBarcode_KeyDown(object sender, KeyEventArgs e)
         {
@@ -39,28 +39,28 @@ namespace DesktopApp
                 if (e.KeyValue == 13)
                 {
                     string strBarcode = txtBarcode.Text;
-                    
-                        string[] strTemp = strBarcode.Split(',');
+
+                    string[] strTemp = strBarcode.Split(',');
 
 
-                        //MessageBox.Show(strTemp.Length.ToString());
-                        txtCode.Text = Resolve(strTemp[0].ToString());
-                        txtBatch.Text = Resolve(strTemp[1].ToString());
-                        txtQty.Text = Resolve(strTemp[2].ToString());
+                    //MessageBox.Show(strTemp.Length.ToString());
+                    txtCode.Text = Resolve(strTemp[0].ToString());
+                    txtBatch.Text = Resolve(strTemp[1].ToString());
+                    txtQty.Text = Resolve(strTemp[2].ToString());
 
-                        m_strBarcode = strTemp[4].ToString(); ;
+                    m_strBarcode = strTemp[4].ToString(); ;
 
-                        MesGoodsBLL GoodsBLL = new MesGoodsBLL();
-                        var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
-                        int nLen = Goods_rows.Count;
-                        if (nLen > 0)
-                        {
-                            txtName.Text = Goods_rows[0].G_Name;
-                            txtUnit.Text = Goods_rows[0].G_Unit;
-                            //txtPrice.Text = Goods_rows[0].G_Price.ToString();
-                            
-                        }
-                    
+                    MesGoodsBLL GoodsBLL = new MesGoodsBLL();
+                    var Goods_rows = GoodsBLL.GetListCondit("where G_Code = '" + txtCode.Text + "'");
+                    int nLen = Goods_rows.Count;
+                    if (nLen > 0)
+                    {
+                        txtName.Text = Goods_rows[0].G_Name;
+                        txtUnit.Text = Goods_rows[0].G_Unit;
+                        //txtPrice.Text = Goods_rows[0].G_Price.ToString();
+
+                    }
+
                 }
             }
             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace DesktopApp
 
         private void btnResolve_Click(object sender, EventArgs e)
         {
-            if(txtResolveQty.Text == "")
+            if (txtResolveQty.Text == "")
             {
                 lblTS.Text = "请输入分写数量";
             }
@@ -93,23 +93,26 @@ namespace DesktopApp
                 decimal dQty = Convert.ToDecimal(txtQty.Text);
                 decimal dResolveQty = Convert.ToDecimal(txtResolveQty.Text);
                 decimal dNextQty = dQty - dResolveQty;
-                if(dNextQty < 0)
+                if (dNextQty < 0)
                 {
                     lblTS.Text = "补写标签的数量不能大于原来标签数量";
                     return;
                 }
                 string Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
-                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
+                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dResolveQty.ToString(), txtCode.Text, txtBatch.Text, Barcode);
                 SaveBarcode(Barcode, txtCode.Text, txtName.Text, dResolveQty, Globels.strWorkShop);
                 MessageBox.Show("请拿开第一张卡，放置第二张卡");
 
-                 Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
-                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text,Barcode);
+                Barcode = txtCode.Text + DateTime.Now.ToString("yyyyMMddHHmmss");
+                GetImg("物料" + txtCode.Text + "批次" + txtBatch.Text + "单号" + Globels.strOrderNo, txtName.Text, dNextQty.ToString(), txtCode.Text, txtBatch.Text, Barcode);
                 SaveBarcode(Barcode, txtCode.Text, txtName.Text, dNextQty, Globels.strWorkShop);
 
                 DeleteData(m_strBarcode);
+
+                this.Close();
+                this.Dispose();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 lblTS.Text = ex.ToString();
             }
@@ -125,7 +128,9 @@ namespace DesktopApp
         private void DeleteData(string strBarcode)
         {
             Mes_BarcodeBLL BarcodeBLL = new Mes_BarcodeBLL();
-            string strSql = "Update Mes_Barcode set B_Remark = '已经分写' where B_Barcode = '"+ strBarcode +"'";
+            //string strSql = "Update Mes_Barcode set B_Remark = '已经分写' where B_Barcode = '"+ strBarcode +"'";
+
+            string strSql = "delete from Mes_Barcode where B_Barcode = '" + strBarcode + "'";
             BarcodeBLL.Update(strSql);
         }
 
@@ -137,8 +142,8 @@ namespace DesktopApp
             int nLen = Goods_rows.Count;
             if (nLen > 0)
             {
-                 dd = Goods_rows[0].G_Period * 24;
-                
+                dd = Goods_rows[0].G_Period * 24;
+
             }
             return dd;
         }
@@ -178,7 +183,7 @@ namespace DesktopApp
         /// <param name="strHZ"></param>
         /// <param name="strGoodsName"></param>
         /// <param name="strQty"></param>
-        public void GetImg(string strHZ, string strGoodsName, string strQty, string strGoodsCode, string strBatch,string strBarcode)
+        public void GetImg(string strHZ, string strGoodsName, string strQty, string strGoodsCode, string strBatch, string strBarcode)
         {
             try
             {
