@@ -178,7 +178,7 @@ FROM    AM_Base_User
 FROM    AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-  WHERE AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%'", key);
+  WHERE  AM_Base_User.F_DeleteMark = '0' AND (AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%')", key);
                 }
 
                 SqlHelper db = new SqlHelper();
