@@ -548,9 +548,9 @@ namespace DesktopApp
 
             FileInfo fileInfo = new FileInfo(strPathFile);
             fileInfoLength = fileInfo.Length.ToString();
-            if (fileInfo.Length > 204800)
+            if (fileInfo.Length > 1024000)
             {
-                MessageBox.Show("上传的图片不能大于200K");
+                MessageBox.Show("上传的图片不能大于1M");
                 return;
             }
             else

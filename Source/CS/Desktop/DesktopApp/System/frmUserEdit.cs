@@ -16,6 +16,8 @@ using System.Reflection;
 using Microsoft.VisualBasic.Devices;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using System.Web;
+using System.Net;
 
 namespace DesktopApp
 {
@@ -144,7 +146,10 @@ namespace DesktopApp
                 cmbImage.Text = "照片1";
 
                 D_Code.Text = department;
-                R_Code.SelectedValue = role;
+                if (role != null)
+                {
+                    R_Code.SelectedValue = role;
+                }
                 if (strTeamCode != null)
                 {
                     cmbTeam.SelectedValue = strTeamCode;
@@ -210,6 +215,7 @@ namespace DesktopApp
 
                 //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + AMBaseAnnexesFileEntity.F_FilePath;
                 //string strPath = "http://183.236.45.60:7001/picture/10006.jpg";
+
                 //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
                 //Byte[] mybyte = new byte[fs.Length];
                 //fs.Read(mybyte, 0, mybyte.Length);
@@ -237,6 +243,38 @@ namespace DesktopApp
             {
                 untCommon.ErrorMsg("用户管理加载数据异常：" + ex.Message);
             }
+        }
+
+        private void Down()
+        {
+            //string url = "http://183.236.45.60:7001/picture/10006.jpg";
+            //// 设置参数
+            //HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+
+            ////发送请求并获取相应回应数据
+            //HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            ////直到request.GetResponse()程序才开始向目标网页发送Post请求
+            //Stream responseStream = response.GetResponseStream();
+
+            //string path = "";
+            ////创建本地文件写入流
+            //Stream stream = new FileStream(path, FileMode.Create);
+
+            //byte[] bArr = new byte[1024];
+            //int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //while (size > 0)
+            //{
+            //    stream.Write(bArr, 0, size);
+            //    size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            //}
+            //stream.Close();
+            //responseStream.Close();
+            //return path;
+
+
+
+
+
         }
 
         /// <summary>
