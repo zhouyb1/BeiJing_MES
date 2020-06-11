@@ -271,7 +271,7 @@ namespace Ayma.Application.Organization
             try
             {
                 var expression = LinqExtensions.True<UserEntity>();
-                expression = expression.And(t => t.F_Account == account);
+                expression = expression.And(t => t.F_Account == account&&t.F_DeleteMark==0);
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     expression = expression.And(t => t.F_UserId != keyValue);
