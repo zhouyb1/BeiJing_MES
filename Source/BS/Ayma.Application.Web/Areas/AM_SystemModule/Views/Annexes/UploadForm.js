@@ -6,6 +6,7 @@
  * 描 述：附件上传管理	
  */
 var keyVaule = request('keyVaule');
+var code = request('code');//用户的名字
 var extensions = request('extensions');
 
 var bootstrap = function ($, ayma) {
@@ -55,6 +56,7 @@ var bootstrap = function ($, ayma) {
         param['fileGuid'] = fileInfo[file.id].fileGuid;
         param['fileName'] = fileInfo[file.id].name;
         param['chunks'] = fileInfo[file.id].chunks;
+        param['code'] = code;
         ayma.httpAsyncPost(top.$.rootUrl + "/AM_SystemModule/Annexes/MergeAnnexesFile", param, function (res) {
             var $fileItem = $('#am_form_file_queue_list').find('#am_filequeue_' + file.id);
             $fileItem.find('.am-uploader-progress').remove();

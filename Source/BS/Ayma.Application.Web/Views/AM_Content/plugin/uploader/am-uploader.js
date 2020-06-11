@@ -3,6 +3,7 @@
  * 日 期：2017.05.24
  * 描 述：am-uploader 表单附件选择插件
  */
+
 (function ($, ayma) {
     "use strict";
 
@@ -56,13 +57,17 @@
             var $btn = $(this);
             var $self = $btn.parents('.Uploader-wrap');
             var dfop = $self[0]._Uploader.dfop;
+            if (dfop.func) {
+                dfop.func();
+                console.log("aymaFIle:" + ayma.fileName);
+            }
             if (dfop.value == "null" || dfop.value=="") {
                 dfop.value = ayma.newGuid();
             }
             ayma.layerForm({
                 id: dfop.id,
                 title: dfop.placeholder,
-                url: top.$.rootUrl + '/AM_SystemModule/Annexes/UploadForm?keyVaule=' + dfop.value + "&extensions=" + dfop.extensions,
+                url: top.$.rootUrl + '/AM_SystemModule/Annexes/UploadForm?keyVaule=' + dfop.value + '&code=' + ayma.fileName + "&extensions=" + dfop.extensions,
                 width: 600,
                 height: 400,
                 maxmin: true,
@@ -106,11 +111,14 @@
             isDown: true,
             extensions: ''
         }
-        
+       
         $.extend(dfop, op || {});
         dfop.id = $this.attr('id');
-        dfop.value = ayma.newGuid();
+        dfop.value = ayma.fileName;
         dfop.readonly = $this.attr("readonly");
+        if (op.func) {
+            dfop.func = op.func;
+        }
         $this[0]._Uploader = { dfop: dfop };
         $.Uploader.init($this);
     };

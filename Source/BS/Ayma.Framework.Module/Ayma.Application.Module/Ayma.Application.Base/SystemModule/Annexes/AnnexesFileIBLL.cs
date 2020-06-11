@@ -54,7 +54,7 @@ namespace Ayma.Application.Base.SystemModule
         /// <param name="fileName">文件名称</param>
         /// <param name="chunks">文件总共分多少片</param>
         /// <param name="fileStream">文件二进制流</param>
-        bool SaveAnnexes(string folderId, string fileGuid, string fileName, int chunks);
+        bool SaveAnnexes(string folderId, string fileGuid, string fileName, int chunks, string code);
          /// <summary>
         /// 保存附件（支持大文件分片传输）
         /// </summary>

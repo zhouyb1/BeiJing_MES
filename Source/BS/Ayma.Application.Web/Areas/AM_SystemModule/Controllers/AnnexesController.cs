@@ -98,9 +98,9 @@ namespace Ayma.Application.Web.Areas.AM_SystemModule.Controllers
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult MergeAnnexesFile(string folderId, string fileGuid, string fileName, int chunks)
+        public ActionResult MergeAnnexesFile(string folderId, string fileGuid, string fileName, int chunks,string code)
         {
-            bool res = annexesFileIBLL.SaveAnnexes(folderId, fileGuid, fileName, chunks);
+            bool res = annexesFileIBLL.SaveAnnexes(folderId, fileGuid, fileName, chunks, code);
             if (res)
             {
                 return Success("保存文件成功");

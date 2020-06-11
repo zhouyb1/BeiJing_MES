@@ -10,11 +10,14 @@ var companyId = request('companyId');
 
 var acceptClick;
 var keyValue = '';
+var name = ''
+var getImgName;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
         init: function () {
+            name = $("#F_RealName").val();
             page.bind();
             page.initData();
         },
@@ -30,7 +33,7 @@ var bootstrap = function ($, ayma) {
             // 性别
             $('#F_Gender').select();
             ////照片
-            $('#F_Picture1').Uploader();
+            $('#F_Picture1').Uploader({ func: getImgName });
             /*检测重复项*/
             $('#F_Account').on('blur', function () {
                 $.ExistField(keyValue, 'F_Account', top.$.rootUrl + '/AM_OrganizationModule/User/ExistAccount');
@@ -65,6 +68,7 @@ var bootstrap = function ($, ayma) {
     };
     // 保存数据
     acceptClick = function (callBack) {
+        alert($("#F_RealName").val());
         if (!$('#form').Validform()) {
             return false;
         }
@@ -79,5 +83,8 @@ var bootstrap = function ($, ayma) {
             }
         });
     };
+    getImgName = function () {
+        ayma.fileName = $("#F_Account").val();
+    }
     page.init();
 }

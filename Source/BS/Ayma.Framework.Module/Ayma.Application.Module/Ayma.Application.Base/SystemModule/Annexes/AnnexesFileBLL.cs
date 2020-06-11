@@ -148,7 +148,7 @@ namespace Ayma.Application.Base.SystemModule
         /// <param name="chunks">文件总共分多少片</param>
         /// <param name="fileStream">文件二进制流</param>
         /// <returns></returns>
-        public bool SaveAnnexes(string folderId, string fileGuid, string fileName, int chunks)
+        public bool SaveAnnexes(string folderId, string fileGuid, string fileName, int chunks,string code)
         {
             try
             {
@@ -163,7 +163,7 @@ namespace Ayma.Application.Base.SystemModule
                 {
                     userId = userInfo.userId;
                 }
-                string virtualPath = string.Format("{0}/{1}/{2}/{3}{4}", filePath, userId, uploadDate, fileGuid, FileEextension);
+                string virtualPath = string.Format("{0}/{1}/{2}{3}", filePath, userId, code, FileEextension);
                 //创建文件夹
                 string path = Path.GetDirectoryName(virtualPath);
                 Directory.CreateDirectory(path);
