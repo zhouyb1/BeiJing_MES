@@ -22,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var goodsEntity = goodsService.GetMes_GoodsEntity(code);//根据条码获取物料编码
             //获取原物料配料
 
-            var sqlGetBom = @"WITH CTE AS ( SELECT  DISTIC ID ,
+            var sqlGetBom = @"WITH CTE AS ( SELECT ID ,
                                                 B_ParentID ,
                                                 B_GoodsCode ,
                                                 B_GoodsName ,
