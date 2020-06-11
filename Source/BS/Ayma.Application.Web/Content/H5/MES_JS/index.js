@@ -86,15 +86,15 @@ window.onload = function () {
                     loading.style = 'opacity:0;z-index:-999;';
                     li[0].innerText = data.data.S_Name || '--';
                     li[1].innerText = data.data.S_MaterName || '--';
-                    li[2].innerText = timer_str || '--';
+                    li[2].innerText = data.data.S_ProductDate
                     li[3].innerText = data.data.S_Producer || '--';
                     li[4].innerText = data.data.S_Team || '--';
                     li[5].innerText = data.data.S_Quality || '--';
                     li[6].innerText = data.data.S_Standard || '--';
-                    li[7].innerText = data.data.S_ProductDate || '--';
-                    li[8].innerText = data.data.S_Storage || '--';
-                    li[9].innerText = '第 ' + data.data.S_ScanRecord + ' 次' || '--';
-                    li[10].innerText = data.data.S_ScanTime || '--';
+                    //li[7].innerText = data.data.S_ProductDate || '--';
+                    li[7].innerText = data.data.S_Storage || '--';
+                    li[8].innerText = '第 ' + data.data.S_ScanRecord + ' 次' || '--';
+                    li[9].innerText = data.data.S_ScanTime || '--';
                     var show_alert = document.querySelector("#show_alert");
                     show_alert.addEventListener('click', function () {
                         alts(data.data.S_MaterName, true);
@@ -112,7 +112,7 @@ window.onload = function () {
             };
         };
         var str = JSON.stringify({ barCode: code, printfTime: timer })
-        xmlhttp.open("GET", 'http://211.103.182.221:7001/webapi/ScanRecord/GetBarCodeInfo?data=' + str, true);
+        xmlhttp.open("GET", 'http://localhost:5201/webapi/ScanRecord/GetBarCodeInfo?data=' + str, true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded;charset=UTF-8");
         xmlhttp.send();
     } else {
