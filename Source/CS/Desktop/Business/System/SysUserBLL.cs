@@ -135,7 +135,7 @@ F_TeamName,
         F_Picture5
 FROM    AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
-        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account";
+        LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account ORDER BY AM_Base_User.F_CreateDate DESC";
                 }
                 else
                 {
@@ -178,7 +178,7 @@ FROM    AM_Base_User
 FROM    AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-  WHERE  AM_Base_User.F_DeleteMark = '0' AND (AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%')", key);
+  WHERE  AM_Base_User.F_DeleteMark = '0' AND (AM_Base_User.F_Account LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%') ORDER BY AM_Base_User.F_CreateDate DESC", key);
                 }
 
                 SqlHelper db = new SqlHelper();
@@ -243,7 +243,7 @@ FROM    AM_Base_User
 FROM    AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-  WHERE AM_Base_User.F_EnCode LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%'", key);
+  WHERE AM_Base_User.F_DeleteMark = '0' AND (AM_Base_User.F_EnCode LIKE '%{0}%' OR AM_Base_User.F_RealName LIKE '%{0}%' ORDER BY AM_Base_User.F_CreateDate DESC)", key);
 
                 SqlHelper db = new SqlHelper();
                 var rows = db.ExecuteDataTable(sql); //db.ExecuteObjects<SysUser>(sql);
@@ -306,7 +306,7 @@ FROM    AM_Base_User
   FROM AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-WHERE F_Account='{0}'", key);
+WHERE F_Account='{0}' ORDER BY AM_Base_User.F_CreateDate DESC", key);
 
 
                 SqlHelper db = new SqlHelper();
@@ -365,7 +365,7 @@ WHERE F_Account='{0}'", key);
   FROM AM_Base_User
         LEFT JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-  WHERE AM_Base_User.F_DepartmentId='{0}'", F_DepartmentId);
+  WHERE AM_Base_User.F_DepartmentId='{0}' ORDER BY AM_Base_User.F_CreateDate DESC", F_DepartmentId);
                 SqlHelper db = new SqlHelper();
                 var rows = db.ExecuteObject<SysUser>(sql);
 
@@ -417,7 +417,7 @@ WHERE F_Account='{0}'", key);
   FROM AM_Base_User
         left JOIN AM_Base_Department ON AM_Base_Department.F_DepartmentId = AM_Base_User.F_DepartmentId
         LEFT JOIN Sys_Role ON Sys_Role.R_Code = AM_Base_User.F_Account
-WHERE F_Account='{0}'", key);
+WHERE F_Account='{0}' ORDER BY AM_Base_User.F_CreateDate DESC", key);
 
 
                 SqlHelper db = new SqlHelper();

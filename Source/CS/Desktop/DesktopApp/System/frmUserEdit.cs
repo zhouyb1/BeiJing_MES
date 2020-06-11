@@ -145,7 +145,10 @@ namespace DesktopApp
 
                 D_Code.Text = department;
                 R_Code.SelectedValue = role;
-                cmbTeam.SelectedValue = strTeamCode;
+                if (strTeamCode != null)
+                {
+                    cmbTeam.SelectedValue = strTeamCode;
+                }
 
                 F_Mobile.Text = user.F_Mobile;
                 F_Email.Text = user.F_Email;
@@ -155,7 +158,7 @@ namespace DesktopApp
                 U_Address.Text = user.U_Address;
                 F_Description.Text = user.F_Description;
                 F_EnabledMark.Checked = user.F_EnabledMark;
-
+                
                 F_CreateUserName.Text = user.F_CreateUserName;
                 F_ModifyUserName.Text = user.F_ModifyUserName;
 
@@ -206,6 +209,7 @@ namespace DesktopApp
                 //AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture1);
 
                 //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + AMBaseAnnexesFileEntity.F_FilePath;
+                //string strPath = "http://183.236.45.60:7001/picture/10006.jpg";
                 //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
                 //Byte[] mybyte = new byte[fs.Length];
                 //fs.Read(mybyte, 0, mybyte.Length);
@@ -323,7 +327,7 @@ namespace DesktopApp
                     user.F_Account = F_Account.Text;
                     user.F_RealName = F_RealName.Text;
                     //user.F_Password = U_Pwd.Text;
-                    //user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
+                    user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
                     //user.D_Code = D_Code.SelectedValue.ToString();
                     user.D_Code = D_Code.Text;
                     user.F_DepartmentId = rows[0].F_DepartmentId;
@@ -338,7 +342,7 @@ namespace DesktopApp
 
                     user.U_Address = U_Address.Text;
                     user.F_Description = F_Description.Text;
-                    //user.F_EnabledMark = F_EnabledMark.Checked;
+                    user.F_EnabledMark = F_EnabledMark.Checked;
 
                     user.F_CreateUserName = F_CreateUserName.Text;
                     user.F_CreateDate = F_CreateDate.Value;
