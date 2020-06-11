@@ -323,7 +323,7 @@ namespace DesktopApp
                     user.F_Account = F_Account.Text;
                     user.F_RealName = F_RealName.Text;
                     //user.F_Password = U_Pwd.Text;
-                    user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
+                    //user.F_Gender = F_Gender.Text == "男" ? 1 : 0;
                     //user.D_Code = D_Code.SelectedValue.ToString();
                     user.D_Code = D_Code.Text;
                     user.F_DepartmentId = rows[0].F_DepartmentId;
@@ -338,7 +338,7 @@ namespace DesktopApp
 
                     user.U_Address = U_Address.Text;
                     user.F_Description = F_Description.Text;
-                    user.F_EnabledMark = F_EnabledMark.Checked;
+                    //user.F_EnabledMark = F_EnabledMark.Checked;
 
                     user.F_CreateUserName = F_CreateUserName.Text;
                     user.F_CreateDate = F_CreateDate.Value;
