@@ -287,7 +287,6 @@ var bootstrap = function ($, ayma) {
                         { label: '角色名称', name: 'F_FullName', width: 100, align: 'center' },
                         { label: '部门', name: 'D_Code', width: 100, align: 'center' },
                         //{ label: '角色编号', name: 'R_Code', width: 100, align: 'center' },
-                        { label: '班组名称', name: 'F_TeamName', width: 100, align: 'center',hidden:true},
                         {
                             label: "状态", name: "F_EnabledMark", index: "F_EnabledMark", width: 50, align: "center",
                             formatter: function (cellvalue) {

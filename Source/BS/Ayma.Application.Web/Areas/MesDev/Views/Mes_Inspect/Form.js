@@ -3,7 +3,8 @@
  * 描  述：抽检记录
  */
 var acceptClick;
-var keyValue = request('keyValue');
+var keyValue = request('keyValue'); 
+var status = request('status'); 
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
@@ -14,7 +15,7 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
             page.initData();
         },
         bind: function () {
-            if (!!keyValue) {
+            if (status==2) {
                 $('#I_GoodsCode').attr('readonly', true);
                 $('#I_StockCode').attr('readonly', true);
                 $('#I_Kind').attr('readonly', true);
@@ -22,44 +23,32 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $('#I_Batch').attr('readonly', true);
                 $('#I_Date').attr('disabled', true);
             }
-            $('#I_GoodsCode').select();
-            $('#I_Batch').select();
             //抽检类型
             $('#I_Kind').DataItemSelect({ code: 'InspectType' });
-            //仓库编码
-            $('#I_StockCode').select({
-                text: "s_name",
-                value: "s_code",
+            //车间编码
+            $("#I_StockCode").select({
                 type: 'default',
+                value: 'W_Code',
+                text: 'W_Name',
+                // 展开最大高度
                 maxHeight: 200,
+                // 是否允许搜索
                 allowSearch: true,
-                url: top.$.rootUrl + '/AM_SystemModule/DataSource/GetDataTable',
-                param: { code: "StockList", strWhere: "S_Kind = 3" },
-            }).on('change', function () {
-                var stock = $(this).selectGet();
-                $('#I_GoodsCode').selectRefresh({
-                    type: 'default',
-                    url: top.$.rootUrl + '/MesDev/Tools/GetProductList',
-                    value: 'i_goodscode',
-                    text: 'i_goodsname',
-                    maxHeight: 200,
-                    allowSearch: true,
-                    param: { stockCode: stock }
-                });
-
-            });
-
-            $('#I_GoodsCode').on('change', function () {
-                var goodsCode = $('#I_GoodsCode').selectGet();
-                $('#I_Batch').selectRefresh({
-                    type: 'default',
-                    url: top.$.rootUrl + '/MesDev/Tools/GetProductBatchList',
-                    value: 'i_batch',
-                    text: 'i_batch',
-                    maxHeight: 200,
-                    allowSearch: true,
-                    param: { goodsCode: goodsCode, stockCode: $('#I_StockCode').selectGet() }
-                });
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+            }); 
+            $("#I_GoodsCode").select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProjGoodsList',
+                // 访问数据接口参数
             });
           
             //不合格原因
@@ -77,21 +66,6 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 param: {}
             });
 
-            //生产订单号
-            $("#I_OrderNo").select({
-                type: 'default',
-                value: 'P_OrderNo',
-                text: 'P_OrderNo',
-                // 展开最大高度
-                maxHeight: 200,
-                // 是否允许搜索
-                allowSearch: true,
-                // 访问数据接口地址
-                url: top.$.rootUrl + '/MesDev/Tools/GetProductOrderList',
-                // 访问数据接口参数
-                param: {}
-            });
-           
             //生产订单号校验
             //$('#I_OrderNo').on('blur', function () {
             //    var orderNo = $.trim($(this).val()); //生产订单号

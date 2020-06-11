@@ -73,7 +73,7 @@ var bootstrap = function ($, ayma) {
                     ayma.layerForm({
                         id: 'form',
                         title: '编辑',
-                        url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form?keyValue=' + keyValue,
+                        url: top.$.rootUrl + '/MesDev/Mes_Inspect/Form?keyValue=' + keyValue + '&status=' + status,
                         width: 700,
                         height: 450,
                         maxmin: true,
@@ -141,9 +141,8 @@ var bootstrap = function ($, ayma) {
                         }
                     },
                     { label: "抽检单号", name: "I_InspectNo", width: 130, align: "left"},
-                    { label: "生产订单号", name: "I_OrderNo", width: 140, align: "left"},
-                    { label: "仓库", name: "I_StockName", width: 100, align: "left" },
-                    { label: "仓库编码", name: "I_StockCode", width: 60, align: "left" },
+                    { label: "车间", name: "I_StockName", width: 100, align: "left" },
+                    { label: "车间编码", name: "I_StockCode", width: 60, align: "left" },
                     { label: "物料名称", name: "I_GoodsName", width: 100, align: "left" },
                     { label: "物料编码", name: "I_GoodsCode", width: 80, align: "left" }, 
                     { label: "抽检批次", name: "I_Batch", width: 80, align: "left" },

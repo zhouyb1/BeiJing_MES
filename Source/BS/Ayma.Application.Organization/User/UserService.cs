@@ -128,7 +128,7 @@ namespace Ayma.Application.Organization
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT dbo.GetRoleByCode(t.R_Code) as F_FullName,");
                 strSql.Append(fieldSql.Replace("t.F_Password,", "").Replace("t.F_Secretkey,", ""));
-                strSql.Append(" FROM AM_Base_User t WHERE t.F_DeleteMark = 0 AND t.F_Account<>'System' AND t.F_Account<>@account AND t.F_CompanyId = @companyId ORDER BY t.F_DepartmentId,t.F_RealName ");
+                strSql.Append(" FROM AM_Base_User t WHERE t.F_DeleteMark = 0 AND t.F_Account<>'System' AND t.F_Account<>@account AND t.F_CompanyId = @companyId ORDER BY t.F_CreateDate DESC");
                 return this.BaseRepository().FindList<UserEntity>(strSql.ToString(), new { companyId = companyId,account=userInfo.account });
             }
             catch (Exception ex)
