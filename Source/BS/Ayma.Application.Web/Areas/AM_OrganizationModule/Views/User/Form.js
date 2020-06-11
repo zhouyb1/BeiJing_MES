@@ -30,7 +30,7 @@ var bootstrap = function ($, ayma) {
             // 性别
             $('#F_Gender').select();
             ////照片
-            //$('#F_Picture1').Uploader();
+            $('#F_Picture1').Uploader();
             /*检测重复项*/
             $('#F_Account').on('blur', function () {
                 $.ExistField(keyValue, 'F_Account', top.$.rootUrl + '/AM_OrganizationModule/User/ExistAccount');

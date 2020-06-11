@@ -43,6 +43,49 @@ var bootstrap = function ($, ayma) {
             $('#multiple_condition_query').MultipleQuery(function (queryJson) {
                 page.search(queryJson);
             }, 220, 400);
+            //抽检类型
+            $('#I_Kind').DataItemSelect({ code: 'InspectType' });
+            //车间编码
+            $("#I_StockCode").select({
+                type: 'default',
+                value: 'W_Code',
+                text: 'W_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetWorkShopList',
+                // 访问数据接口参数
+            });
+            $("#I_GoodsCode").select({
+                type: 'default',
+                value: 'G_Code',
+                text: 'G_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetProjGoodsList',
+                // 访问数据接口参数
+            });
+
+            //不合格原因
+            $('#I_Reson').select({
+                type: 'default',
+                value: 'R_Code',
+                text: 'R_Name',
+                // 展开最大高度
+                maxHeight: 200,
+                // 是否允许搜索
+                allowSearch: true,
+                // 访问数据接口地址
+                url: top.$.rootUrl + '/MesDev/Tools/GetReasonList',
+                // 访问数据接口参数
+                param: {}
+            });
+
             // 刷新
             $('#am_refresh').on('click', function () {
                 location.reload();

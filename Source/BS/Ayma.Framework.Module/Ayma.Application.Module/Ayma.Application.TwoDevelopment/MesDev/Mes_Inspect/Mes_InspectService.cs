@@ -57,20 +57,35 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                     dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.I_Date >= @startTime AND t.I_Date <= @endTime ) ");
                 }
-                if (!queryParam["I_Date"].IsEmpty())
+                if (!queryParam["I_Batch"].IsEmpty())
                 {
-                    dp.Add("I_Date", "%" + queryParam["I_Date"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.I_Date Like @I_Date ");
+                    dp.Add("I_Batch", "%" + queryParam["I_Batch"].ToString() + "%", DbType.String);
+                    strSql.Append(" AND t.I_Batch Like @I_Batch ");
                 }
                 if (!queryParam["I_InspectNo"].IsEmpty())
                 {
                     dp.Add("I_InspectNo", "%" + queryParam["I_InspectNo"].ToString() + "%", DbType.String);
                     strSql.Append(" AND t.I_InspectNo Like @I_InspectNo ");
                 }
-                if (!queryParam["I_OrderNo"].IsEmpty())
+                if (!queryParam["I_StockCode"].IsEmpty())
                 {
-                    dp.Add("I_OrderNo", "%" + queryParam["I_OrderNo"].ToString() + "%", DbType.String);
-                    strSql.Append(" AND t.I_OrderNo Like @I_OrderNo ");
+                    dp.Add("I_StockCode",queryParam["I_StockCode"].ToString(), DbType.String);
+                    strSql.Append(" AND t.I_StockCode=@I_StockCode ");
+                }
+                if (!queryParam["I_GoodsCode"].IsEmpty())
+                {
+                    dp.Add("I_GoodsCode", queryParam["I_GoodsCode"].ToString(), DbType.String);
+                    strSql.Append(" AND t.I_GoodsCode=@I_GoodsCode ");
+                }
+                if (!queryParam["I_Kind"].IsEmpty())
+                {
+                    dp.Add("I_Kind", queryParam["I_Kind"].ToString(), DbType.String);
+                    strSql.Append(" AND t.I_Kind=@I_Kind ");
+                }
+                if (!queryParam["I_Reson"].IsEmpty())
+                {
+                    dp.Add("I_Reson", queryParam["I_Reson"].ToString(), DbType.String);
+                    strSql.Append(" AND t.I_Reson=@I_Reson ");
                 }
                 return this.BaseRepository().FindList<Mes_InspectEntity>(strSql.ToString(),dp, pagination);
             }

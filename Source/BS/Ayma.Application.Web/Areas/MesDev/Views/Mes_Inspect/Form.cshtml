@@ -33,11 +33,11 @@
     </div>
     <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">不合格原因 <font face="宋体">*</font></div>
-        <div id="I_Reson" class="form-control" isvalid="yes"></div>
+        <div id="I_Reson" class="form-control" isvalid="yes" checkexpession="NotNull"></div>
     </div>
     @*<div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">物料编码 <font face="宋体">*</font></div>
-        <input id="I_GoodsCode" type="text" class="form-control" readonly="readonly"/>
+        <input id="I_GoodsCode" type="text" class="form-control" readonly="readonly" isvalid="yes" checkexpession="NotNull"/>
     </div>*@
     <div class="col-xs-6 am-form-item"  data-table="Mes_Inspect" >
         <div class="am-form-item-title">抽检数量 <font face="宋体">*</font></div>
@@ -49,7 +49,7 @@
     </div>
     <div class="col-xs-6 am-form-item" data-table="Mes_Inspect">
         <div class="am-form-item-title">批次 <font face="宋体">*</font></div>
-        <input id="I_Batch" class="form-control" isvalid="yes" checkexpession="NotNull"  value="@DateTime.Now.ToString("yyyyMMdd")"></input>
+        <input id="I_Batch" type="text" class="form-control" isvalid="yes" checkexpession="NotNull"  value="@DateTime.Now.ToString("yyyyMMdd")" ></input>
     </div>
 
 
