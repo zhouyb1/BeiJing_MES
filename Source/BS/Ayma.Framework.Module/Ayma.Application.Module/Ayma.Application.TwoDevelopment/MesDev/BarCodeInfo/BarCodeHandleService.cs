@@ -22,7 +22,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
             var goodsEntity = goodsService.GetMes_GoodsEntity(code);//根据条码获取物料编码
             //获取原物料配料
 
-            var sqlGetBom = @"WITH CTE AS ( SELECT   ID ,
+            var sqlGetBom = @"WITH CTE AS ( SELECT  DISTIC ID ,
                                                 B_ParentID ,
                                                 B_GoodsCode ,
                                                 B_GoodsName ,
@@ -39,7 +39,7 @@ namespace Ayma.Application.TwoDevelopment.MesDev
                                                 CTE Bom2
                                        WHERE    Bom1.B_ParentID = Bom2.ID
                                      )
-                            SELECT G.G_Name GoodsName 
+                            SELECT DISTINCT G.G_Name GoodsName,c.F_Level
                                  
                             FROM    CTE C
                                     LEFT JOIN Mes_Goods G ON C.B_GoodsCode = G.G_Code
