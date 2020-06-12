@@ -33,11 +33,9 @@ namespace Ayma.Application.Organization
             {
 
                 List<RoleEntity> list = cache.Read<List<RoleEntity>>(cacheKey, CacheId.role);
-                if (list == null)
-                {
+
                     list = (List<RoleEntity>)roleService.GetList();
-                    cache.Write<List<RoleEntity>>(cacheKey, list, CacheId.role);
-                }
+
                 return list;
             }
             catch (Exception ex)

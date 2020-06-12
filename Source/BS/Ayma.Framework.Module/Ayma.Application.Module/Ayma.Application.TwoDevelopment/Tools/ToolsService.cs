@@ -1446,7 +1446,7 @@ namespace Ayma.Application.TwoDevelopment.Tools
         {
             try
             {
-                return this.BaseRepository().FindList<RoleEntity>();
+                return this.BaseRepository().FindList<RoleEntity>(x=>x.F_DeleteMark==0&&x.F_EnabledMark==1);
             }
             catch (Exception ex)
             {

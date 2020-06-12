@@ -48,7 +48,7 @@ namespace Ayma.Application.Organization
                 var strSql = new StringBuilder();
                 strSql.Append("SELECT ");
                 strSql.Append(fieldSql);
-                strSql.Append(" FROM AM_Base_Role t WHERE t.F_EnabledMark = 1 AND t.F_DeleteMark = 0 ORDER BY t.F_CreateDate DESC");
+                strSql.Append(" FROM AM_Base_Role t WHERE  t.F_DeleteMark = 0 ORDER BY t.F_CreateDate DESC");
                 return this.BaseRepository().FindList<RoleEntity>(strSql.ToString());
             }
             catch (Exception ex)
