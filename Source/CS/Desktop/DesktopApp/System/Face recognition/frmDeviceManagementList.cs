@@ -90,6 +90,7 @@ namespace DesktopApp
                 if (rows == null || rows.Count < 1)
                 {
                     untCommon.InfoMsg("没有任何设备信息数据！");
+                    dataGridView.DataSource = rows;
                     return;
                 }
                 dataGridView.DataSource = rows;

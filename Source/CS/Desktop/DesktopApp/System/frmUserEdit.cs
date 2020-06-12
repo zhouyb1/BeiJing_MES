@@ -159,6 +159,8 @@ namespace DesktopApp
                 F_Email.Text = user.F_Email;
                 F_OICQ.Text = user.F_OICQ;
                 F_WeChat.Text = user.F_WeChat;
+                F_Indate.Text = user.F_Indate.ToString();
+                F_Outdate.Text = user.F_Outdate.ToString();
 
                 U_Address.Text = user.U_Address;
                 F_Description.Text = user.F_Description;
@@ -179,10 +181,7 @@ namespace DesktopApp
                         F_Kind.Text = "劳务工";
                         break;
                 }
-                if (AMBaseAnnexesFileEntity !=null && !string.IsNullOrEmpty(AMBaseAnnexesFileEntity.F_FilePath))
-                {
-                    txtImageFile.Text = AMBaseAnnexesFileEntity.F_FilePath;
-                }
+                
                 //switch (cmbImage.Text)
                 //{
                 //    case "照片1":
@@ -214,17 +213,20 @@ namespace DesktopApp
                 //AMBaseAnnexesFileEntity = AMBaseAnnexesFileBLL.GetEntity(user.F_Picture1);
 
                 //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + AMBaseAnnexesFileEntity.F_FilePath;
-                //string strPath = "http://183.236.45.60:7001/picture/10006.jpg";
+                //string strPath = "http://183.236.45.60:7001/picture/" + 10006.jpg";
+                
+                string strPath = Application.StartupPath + "\\img\\" + user.F_Account + ".jpg";
+                string url = "http://183.236.45.60:7001/picture/System/" + user.F_Account + ".jpg";
+                Down(strPath,url);
+                FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                Byte[] mybyte = new byte[fs.Length];
+                fs.Read(mybyte, 0, mybyte.Length);
+                fs.Close();
 
-                //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
-                //Byte[] mybyte = new byte[fs.Length];
-                //fs.Read(mybyte, 0, mybyte.Length);
-                //fs.Close();
-
-                //MemoryStream ms = new MemoryStream(mybyte);
-                //Bitmap myimge = new Bitmap(ms);
-                //pictureBox1.Image = myimge;
-
+                MemoryStream ms = new MemoryStream(mybyte);
+                Bitmap myimge = new Bitmap(ms);
+                pictureBox1.Image = myimge;
+                
                 if (user.F_CreateDate.HasValue)
                     F_CreateDate.Value = user.F_CreateDate.Value;
                 else
@@ -245,30 +247,30 @@ namespace DesktopApp
             }
         }
 
-        private void Down()
+        private void Down(string strPath,string url)
         {
-            //string url = "http://183.236.45.60:7001/picture/10006.jpg";
-            //// 设置参数
-            //HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+            
+            // 设置参数
+            HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
 
-            ////发送请求并获取相应回应数据
-            //HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-            ////直到request.GetResponse()程序才开始向目标网页发送Post请求
-            //Stream responseStream = response.GetResponseStream();
+            //发送请求并获取相应回应数据
+            HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+            //直到request.GetResponse()程序才开始向目标网页发送Post请求
+            Stream responseStream = response.GetResponseStream();
 
-            //string path = "";
-            ////创建本地文件写入流
-            //Stream stream = new FileStream(path, FileMode.Create);
+       
+            //创建本地文件写入流
+            Stream stream = new FileStream(strPath, FileMode.Create);
 
-            //byte[] bArr = new byte[1024];
-            //int size = responseStream.Read(bArr, 0, (int)bArr.Length);
-            //while (size > 0)
-            //{
-            //    stream.Write(bArr, 0, size);
-            //    size = responseStream.Read(bArr, 0, (int)bArr.Length);
-            //}
-            //stream.Close();
-            //responseStream.Close();
+            byte[] bArr = new byte[1024];
+            int size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            while (size > 0)
+            {
+                stream.Write(bArr, 0, size);
+                size = responseStream.Read(bArr, 0, (int)bArr.Length);
+            }
+            stream.Close();
+            responseStream.Close();
             //return path;
 
 
@@ -646,7 +648,7 @@ namespace DesktopApp
                     }
                     else
                     {
-                        txtImageFile.Text = fileDialog.FileName;
+                       
                         //string strPath = System.AppDomain.CurrentDomain.BaseDirectory + fileDialog.FileName;
                         //FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
                         //Byte[] mybyte = new byte[fs.Length];

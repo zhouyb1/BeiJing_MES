@@ -41,12 +41,6 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.panMain = new System.Windows.Forms.Panel();
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.cmsAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsDetail = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
-            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.F_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_RealName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,6 +69,12 @@
             this.F_ModifyUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_ModifyDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.F_EnabledMark = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cmsAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsDetail = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem = new System.Windows.Forms.ToolStripSeparator();
+            this.cmsDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.panTop.SuspendLayout();
             this.panMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
@@ -168,6 +168,7 @@
             this.btnDelete.Text = "删除";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Visible = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
@@ -249,57 +250,6 @@
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(895, 431);
             this.dataGridView.TabIndex = 0;
-            // 
-            // contextMenuStrip
-            // 
-            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cmsAdd,
-            this.cmsEdit,
-            this.cmsDetail,
-            this.toolStripMenuItem,
-            this.cmsDelete});
-            this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(105, 114);
-            // 
-            // cmsAdd
-            // 
-            this.cmsAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
-            this.cmsAdd.Name = "cmsAdd";
-            this.cmsAdd.Size = new System.Drawing.Size(104, 26);
-            this.cmsAdd.Text = "添加";
-            this.cmsAdd.Visible = false;
-            this.cmsAdd.Click += new System.EventHandler(this.cmsAdd_Click);
-            // 
-            // cmsEdit
-            // 
-            this.cmsEdit.Image = global::DesktopApp.Properties.Resources.edit1;
-            this.cmsEdit.Name = "cmsEdit";
-            this.cmsEdit.Size = new System.Drawing.Size(104, 26);
-            this.cmsEdit.Text = "修改";
-            this.cmsEdit.Click += new System.EventHandler(this.cmsEdit_Click);
-            // 
-            // cmsDetail
-            // 
-            this.cmsDetail.Image = global::DesktopApp.Properties.Resources.open;
-            this.cmsDetail.Name = "cmsDetail";
-            this.cmsDetail.Size = new System.Drawing.Size(104, 26);
-            this.cmsDetail.Text = "明细";
-            this.cmsDetail.Click += new System.EventHandler(this.cmsDetail_Click);
-            // 
-            // toolStripMenuItem
-            // 
-            this.toolStripMenuItem.Name = "toolStripMenuItem";
-            this.toolStripMenuItem.Size = new System.Drawing.Size(101, 6);
-            // 
-            // cmsDelete
-            // 
-            this.cmsDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
-            this.cmsDelete.Name = "cmsDelete";
-            this.cmsDelete.Size = new System.Drawing.Size(104, 26);
-            this.cmsDelete.Text = "删除";
-            this.cmsDelete.Visible = false;
-            this.cmsDelete.Click += new System.EventHandler(this.cmsDelete_Click);
             // 
             // F_Account
             // 
@@ -513,6 +463,57 @@
             this.F_EnabledMark.ReadOnly = true;
             this.F_EnabledMark.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.F_EnabledMark.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cmsAdd,
+            this.cmsEdit,
+            this.cmsDetail,
+            this.toolStripMenuItem,
+            this.cmsDelete});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(105, 114);
+            // 
+            // cmsAdd
+            // 
+            this.cmsAdd.Image = global::DesktopApp.Properties.Resources.edit_add;
+            this.cmsAdd.Name = "cmsAdd";
+            this.cmsAdd.Size = new System.Drawing.Size(104, 26);
+            this.cmsAdd.Text = "添加";
+            this.cmsAdd.Visible = false;
+            this.cmsAdd.Click += new System.EventHandler(this.cmsAdd_Click);
+            // 
+            // cmsEdit
+            // 
+            this.cmsEdit.Image = global::DesktopApp.Properties.Resources.edit1;
+            this.cmsEdit.Name = "cmsEdit";
+            this.cmsEdit.Size = new System.Drawing.Size(104, 26);
+            this.cmsEdit.Text = "修改";
+            this.cmsEdit.Click += new System.EventHandler(this.cmsEdit_Click);
+            // 
+            // cmsDetail
+            // 
+            this.cmsDetail.Image = global::DesktopApp.Properties.Resources.open;
+            this.cmsDetail.Name = "cmsDetail";
+            this.cmsDetail.Size = new System.Drawing.Size(104, 26);
+            this.cmsDetail.Text = "明细";
+            this.cmsDetail.Click += new System.EventHandler(this.cmsDetail_Click);
+            // 
+            // toolStripMenuItem
+            // 
+            this.toolStripMenuItem.Name = "toolStripMenuItem";
+            this.toolStripMenuItem.Size = new System.Drawing.Size(101, 6);
+            // 
+            // cmsDelete
+            // 
+            this.cmsDelete.Image = global::DesktopApp.Properties.Resources.edit_remove;
+            this.cmsDelete.Name = "cmsDelete";
+            this.cmsDelete.Size = new System.Drawing.Size(104, 26);
+            this.cmsDelete.Text = "删除";
+            this.cmsDelete.Visible = false;
+            this.cmsDelete.Click += new System.EventHandler(this.cmsDelete_Click);
             // 
             // frmUserList
             // 

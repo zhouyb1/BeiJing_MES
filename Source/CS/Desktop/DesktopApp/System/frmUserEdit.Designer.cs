@@ -43,11 +43,9 @@
             this.F_CreateUserName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnRegisterImage = new System.Windows.Forms.Button();
-            this.txtImageFile = new System.Windows.Forms.TextBox();
-            this.label26 = new System.Windows.Forms.Label();
+            this.cmbTeam = new System.Windows.Forms.ComboBox();
+            this.label27 = new System.Windows.Forms.Label();
             this.cmbImage = new System.Windows.Forms.ComboBox();
-            this.btnUploadImage = new System.Windows.Forms.Button();
             this.label25 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.F_Kind = new System.Windows.Forms.ComboBox();
@@ -90,8 +88,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.cmbTeam = new System.Windows.Forms.ComboBox();
-            this.label27 = new System.Windows.Forms.Label();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -224,11 +220,7 @@
             // 
             this.groupBox1.Controls.Add(this.cmbTeam);
             this.groupBox1.Controls.Add(this.label27);
-            this.groupBox1.Controls.Add(this.btnRegisterImage);
-            this.groupBox1.Controls.Add(this.txtImageFile);
-            this.groupBox1.Controls.Add(this.label26);
             this.groupBox1.Controls.Add(this.cmbImage);
-            this.groupBox1.Controls.Add(this.btnUploadImage);
             this.groupBox1.Controls.Add(this.label25);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.F_Kind);
@@ -276,36 +268,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "用户信息";
             // 
-            // btnRegisterImage
+            // cmbTeam
             // 
-            this.btnRegisterImage.Image = global::DesktopApp.Properties.Resources.up;
-            this.btnRegisterImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRegisterImage.Location = new System.Drawing.Point(604, 282);
-            this.btnRegisterImage.Name = "btnRegisterImage";
-            this.btnRegisterImage.Size = new System.Drawing.Size(76, 23);
-            this.btnRegisterImage.TabIndex = 35;
-            this.btnRegisterImage.Text = "注册照片";
-            this.btnRegisterImage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRegisterImage.UseVisualStyleBackColor = true;
-            this.btnRegisterImage.Visible = false;
-            this.btnRegisterImage.Click += new System.EventHandler(this.btnRegisterImage_Click);
+            this.cmbTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbTeam.FormattingEnabled = true;
+            this.cmbTeam.Location = new System.Drawing.Point(73, 114);
+            this.cmbTeam.Name = "cmbTeam";
+            this.cmbTeam.Size = new System.Drawing.Size(160, 20);
+            this.cmbTeam.TabIndex = 36;
             // 
-            // txtImageFile
+            // label27
             // 
-            this.txtImageFile.Location = new System.Drawing.Point(521, 114);
-            this.txtImageFile.Name = "txtImageFile";
-            this.txtImageFile.ReadOnly = true;
-            this.txtImageFile.Size = new System.Drawing.Size(160, 21);
-            this.txtImageFile.TabIndex = 34;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(463, 118);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(65, 12);
-            this.label26.TabIndex = 33;
-            this.label26.Text = "照片路径：";
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(11, 118);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(65, 12);
+            this.label27.TabIndex = 37;
+            this.label27.Text = "所属班组：";
             // 
             // cmbImage
             // 
@@ -317,42 +296,31 @@
             "照片3",
             "照片4",
             "照片5"});
-            this.cmbImage.Location = new System.Drawing.Point(522, 89);
+            this.cmbImage.Location = new System.Drawing.Point(375, 282);
             this.cmbImage.Name = "cmbImage";
             this.cmbImage.Size = new System.Drawing.Size(56, 20);
             this.cmbImage.TabIndex = 32;
+            this.cmbImage.Visible = false;
             this.cmbImage.SelectedIndexChanged += new System.EventHandler(this.cmbImage_SelectedIndexChanged);
-            // 
-            // btnUploadImage
-            // 
-            this.btnUploadImage.Image = global::DesktopApp.Properties.Resources.up;
-            this.btnUploadImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUploadImage.Location = new System.Drawing.Point(521, 282);
-            this.btnUploadImage.Name = "btnUploadImage";
-            this.btnUploadImage.Size = new System.Drawing.Size(76, 23);
-            this.btnUploadImage.TabIndex = 31;
-            this.btnUploadImage.Text = "上传照片";
-            this.btnUploadImage.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUploadImage.UseVisualStyleBackColor = true;
-            this.btnUploadImage.Visible = false;
-            this.btnUploadImage.Click += new System.EventHandler(this.btnUploadImage_Click);
             // 
             // label25
             // 
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(463, 92);
+            this.label25.Location = new System.Drawing.Point(316, 285);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(65, 12);
             this.label25.TabIndex = 30;
             this.label25.Text = "用户照片：";
+            this.label25.Visible = false;
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pictureBox1.Location = new System.Drawing.Point(521, 140);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(466, 91);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(160, 137);
+            this.pictureBox1.Size = new System.Drawing.Size(216, 182);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
@@ -386,6 +354,7 @@
             this.F_EnabledMark.Size = new System.Drawing.Size(15, 14);
             this.F_EnabledMark.TabIndex = 13;
             this.F_EnabledMark.UseVisualStyleBackColor = true;
+            this.F_EnabledMark.Visible = false;
             // 
             // label17
             // 
@@ -395,11 +364,13 @@
             this.label17.Size = new System.Drawing.Size(65, 12);
             this.label17.TabIndex = 26;
             this.label17.Text = "是否启用：";
+            this.label17.Visible = false;
             // 
             // F_Description
             // 
             this.F_Description.Location = new System.Drawing.Point(73, 257);
             this.F_Description.Name = "F_Description";
+            this.F_Description.ReadOnly = true;
             this.F_Description.Size = new System.Drawing.Size(384, 21);
             this.F_Description.TabIndex = 12;
             // 
@@ -407,6 +378,7 @@
             // 
             this.U_Address.Location = new System.Drawing.Point(296, 224);
             this.U_Address.Name = "U_Address";
+            this.U_Address.ReadOnly = true;
             this.U_Address.Size = new System.Drawing.Size(160, 21);
             this.U_Address.TabIndex = 11;
             // 
@@ -414,6 +386,7 @@
             // 
             this.F_WeChat.Location = new System.Drawing.Point(297, 144);
             this.F_WeChat.Name = "F_WeChat";
+            this.F_WeChat.ReadOnly = true;
             this.F_WeChat.Size = new System.Drawing.Size(160, 21);
             this.F_WeChat.TabIndex = 10;
             // 
@@ -421,6 +394,7 @@
             // 
             this.F_OICQ.Location = new System.Drawing.Point(73, 171);
             this.F_OICQ.Name = "F_OICQ";
+            this.F_OICQ.ReadOnly = true;
             this.F_OICQ.Size = new System.Drawing.Size(160, 21);
             this.F_OICQ.TabIndex = 9;
             // 
@@ -428,6 +402,7 @@
             // 
             this.F_Email.Location = new System.Drawing.Point(297, 114);
             this.F_Email.Name = "F_Email";
+            this.F_Email.ReadOnly = true;
             this.F_Email.Size = new System.Drawing.Size(160, 21);
             this.F_Email.TabIndex = 8;
             // 
@@ -464,6 +439,7 @@
             // 
             this.F_Mobile.Location = new System.Drawing.Point(73, 141);
             this.F_Mobile.Name = "F_Mobile";
+            this.F_Mobile.ReadOnly = true;
             this.F_Mobile.Size = new System.Drawing.Size(160, 21);
             this.F_Mobile.TabIndex = 7;
             // 
@@ -480,6 +456,7 @@
             // 
             this.F_Account.Location = new System.Drawing.Point(73, 25);
             this.F_Account.Name = "F_Account";
+            this.F_Account.ReadOnly = true;
             this.F_Account.Size = new System.Drawing.Size(160, 21);
             this.F_Account.TabIndex = 1;
             // 
@@ -487,6 +464,7 @@
             // 
             this.F_Origin.Location = new System.Drawing.Point(73, 197);
             this.F_Origin.Name = "F_Origin";
+            this.F_Origin.ReadOnly = true;
             this.F_Origin.Size = new System.Drawing.Size(160, 21);
             this.F_Origin.TabIndex = 2;
             // 
@@ -494,6 +472,7 @@
             // 
             this.F_Record.Location = new System.Drawing.Point(297, 197);
             this.F_Record.Name = "F_Record";
+            this.F_Record.ReadOnly = true;
             this.F_Record.Size = new System.Drawing.Size(160, 21);
             this.F_Record.TabIndex = 2;
             // 
@@ -501,6 +480,7 @@
             // 
             this.F_Nation.Location = new System.Drawing.Point(73, 225);
             this.F_Nation.Name = "F_Nation";
+            this.F_Nation.ReadOnly = true;
             this.F_Nation.Size = new System.Drawing.Size(160, 21);
             this.F_Nation.TabIndex = 2;
             // 
@@ -508,6 +488,7 @@
             // 
             this.F_Cert.Location = new System.Drawing.Point(297, 170);
             this.F_Cert.Name = "F_Cert";
+            this.F_Cert.ReadOnly = true;
             this.F_Cert.Size = new System.Drawing.Size(160, 21);
             this.F_Cert.TabIndex = 2;
             // 
@@ -515,6 +496,7 @@
             // 
             this.F_RFIDCode.Location = new System.Drawing.Point(522, 30);
             this.F_RFIDCode.Name = "F_RFIDCode";
+            this.F_RFIDCode.ReadOnly = true;
             this.F_RFIDCode.Size = new System.Drawing.Size(160, 21);
             this.F_RFIDCode.TabIndex = 2;
             // 
@@ -522,6 +504,7 @@
             // 
             this.F_RealName.Location = new System.Drawing.Point(297, 27);
             this.F_RealName.Name = "F_RealName";
+            this.F_RealName.ReadOnly = true;
             this.F_RealName.Size = new System.Drawing.Size(160, 21);
             this.F_RealName.TabIndex = 2;
             // 
@@ -704,24 +687,6 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // cmbTeam
-            // 
-            this.cmbTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTeam.FormattingEnabled = true;
-            this.cmbTeam.Location = new System.Drawing.Point(73, 114);
-            this.cmbTeam.Name = "cmbTeam";
-            this.cmbTeam.Size = new System.Drawing.Size(160, 20);
-            this.cmbTeam.TabIndex = 36;
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(11, 118);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(65, 12);
-            this.label27.TabIndex = 37;
-            this.label27.Text = "所属班组：";
-            // 
             // frmUserEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -803,12 +768,8 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Button btnUploadImage;
         private System.Windows.Forms.TextBox F_Origin;
         private System.Windows.Forms.ComboBox cmbImage;
-        private System.Windows.Forms.TextBox txtImageFile;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Button btnRegisterImage;
         private System.Windows.Forms.ComboBox cmbTeam;
         private System.Windows.Forms.Label label27;
     }

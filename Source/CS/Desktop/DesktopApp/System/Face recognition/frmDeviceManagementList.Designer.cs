@@ -168,6 +168,7 @@
             this.设备ID.HeaderText = "设备ID";
             this.设备ID.Name = "设备ID";
             this.设备ID.ReadOnly = true;
+            this.设备ID.Visible = false;
             // 
             // 设备名称
             // 
@@ -220,7 +221,7 @@
             this.Controls.Add(this.panTop);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frmDeviceManagementList";
             this.Text = "设备管理";
             this.Load += new System.EventHandler(this.frmDeviceManagementList_Load);
