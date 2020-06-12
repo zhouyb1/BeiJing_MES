@@ -228,7 +228,7 @@ namespace DesktopApp
             SysUser user = userbll.getDetail(F_Account);
 
             imagefile = Application.StartupPath + "\\img\\" + user.F_Account + ".jpg";
-            string urlpicture = "http://183.236.45.60:7001/picture/System/" + user.F_Account + ".jpg";
+            string urlpicture = "http://183.236.45.60:7001/picture/" + user.F_Account + ".jpg";
             Down(imagefile, urlpicture);
 
             //if(!File.Exists(imagefile))

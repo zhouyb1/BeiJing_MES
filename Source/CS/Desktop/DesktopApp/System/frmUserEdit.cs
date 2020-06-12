@@ -216,7 +216,7 @@ namespace DesktopApp
                 //string strPath = "http://183.236.45.60:7001/picture/" + 10006.jpg";
                 
                 string strPath = Application.StartupPath + "\\img\\" + user.F_Account + ".jpg";
-                string url = "http://183.236.45.60:7001/picture/System/" + user.F_Account + ".jpg";
+                string url = "http://183.236.45.60:7001/picture/" + user.F_Account + ".jpg";
                 Down(strPath,url);
                 FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
                 Byte[] mybyte = new byte[fs.Length];
