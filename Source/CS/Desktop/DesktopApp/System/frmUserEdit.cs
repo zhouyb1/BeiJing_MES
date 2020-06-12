@@ -218,14 +218,17 @@ namespace DesktopApp
                 string strPath = Application.StartupPath + "\\img\\" + user.F_Account + ".jpg";
                 string url = "http://183.236.45.60:7001/picture/" + user.F_Account + ".jpg";
                 Down(strPath,url);
-                FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
-                Byte[] mybyte = new byte[fs.Length];
-                fs.Read(mybyte, 0, mybyte.Length);
-                fs.Close();
+                if (File.Exists(strPath))
+                {
+                    FileStream fs = new FileStream(strPath, FileMode.Open, FileAccess.Read);
+                    Byte[] mybyte = new byte[fs.Length];
+                    fs.Read(mybyte, 0, mybyte.Length);
+                    fs.Close();
 
-                MemoryStream ms = new MemoryStream(mybyte);
-                Bitmap myimge = new Bitmap(ms);
-                pictureBox1.Image = myimge;
+                    MemoryStream ms = new MemoryStream(mybyte);
+                    Bitmap myimge = new Bitmap(ms);
+                    pictureBox1.Image = myimge;
+                }
                 
                 if (user.F_CreateDate.HasValue)
                     F_CreateDate.Value = user.F_CreateDate.Value;
