@@ -10,14 +10,12 @@ var companyId = request('companyId');
 
 var acceptClick;
 var keyValue = '';
-var name = ''
 var getImgName;
 var bootstrap = function ($, ayma) {
     "use strict";
     var selectedRow = ayma.frameTab.currentIframe().selectedRow;
     var page = {
         init: function () {
-            name = $("#F_RealName").val();
             page.bind();
             page.initData();
         },
