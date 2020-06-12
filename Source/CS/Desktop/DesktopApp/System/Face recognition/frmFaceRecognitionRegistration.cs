@@ -237,14 +237,18 @@ namespace DesktopApp
             //    this.Close();
             //    return;
             //}
-            FileStream fs = new FileStream(imagefile, FileMode.Open, FileAccess.Read);
-            Byte[] mybyte = new byte[fs.Length];
-            fs.Read(mybyte, 0, mybyte.Length);
-            fs.Close();
+            if (File.Exists(imagefile))
+            {
+                FileStream fs = new FileStream(imagefile, FileMode.Open, FileAccess.Read);
+                Byte[] mybyte = new byte[fs.Length];
+                fs.Read(mybyte, 0, mybyte.Length);
+                fs.Close();
 
-            MemoryStream ms = new MemoryStream(mybyte);
-            Bitmap myimge = new Bitmap(ms);
-            pictureBox1.Image = myimge;
+
+                MemoryStream ms = new MemoryStream(mybyte);
+                Bitmap myimge = new Bitmap(ms);
+                pictureBox1.Image = myimge;
+            }
 
             AMBaseDepartmentBLL AMBaseDepartmentBLL = new AMBaseDepartmentBLL();
            // var rows = AMBaseDepartmentBLL.GetList_ID(user.F_DepartmentId);
