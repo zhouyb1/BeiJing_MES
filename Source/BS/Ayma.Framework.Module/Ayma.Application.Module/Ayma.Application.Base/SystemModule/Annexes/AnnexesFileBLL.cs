@@ -163,7 +163,7 @@ namespace Ayma.Application.Base.SystemModule
                 {
                     userId = userInfo.userId;
                 }
-                string virtualPath = string.Format("{0}/{1}/{2}{3}", filePath, userId, code, FileEextension);
+                string virtualPath = string.Format("{0}/{1}{2}", filePath, code, FileEextension);
                 //创建文件夹
                 string path = Path.GetDirectoryName(virtualPath);
                 Directory.CreateDirectory(path);

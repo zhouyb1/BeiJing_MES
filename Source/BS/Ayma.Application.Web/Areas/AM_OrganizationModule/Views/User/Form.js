@@ -68,7 +68,6 @@ var bootstrap = function ($, ayma) {
     };
     // 保存数据
     acceptClick = function (callBack) {
-        alert($("#F_RealName").val());
         if (!$('#form').Validform()) {
             return false;
         }
