@@ -109,7 +109,7 @@ namespace Business.System
             try
             {
                 var strSql = new StringBuilder();
-                strSql.Append("SELECT F_FullName FROM AM_Base_Department");
+                strSql.Append("SELECT F_FullName FROM AM_Base_Department where F_DeleteMark='0' and F_CompanyId='207fa1a9-160c-4943-a89b-8fa4db0547ce'");
                 var rows = db.ExecuteObjects<AMBaseDepartmentEntity>(strSql.ToString());
                 return rows;
             }
