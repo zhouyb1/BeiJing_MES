@@ -114,7 +114,7 @@
        
         $.extend(dfop, op || {});
         dfop.id = $this.attr('id');
-        dfop.value = ayma.fileName;
+        dfop.value = ayma.newGuid;
         dfop.readonly = $this.attr("readonly");
         if (op.func) {
             dfop.func = op.func;
