@@ -21,11 +21,11 @@ $('.am-form-wrap').mCustomScrollbar({theme: "minimal-dark"});
                 $("#S_EffectTime").attr('disabled', true);
                 $("#S_Remark").attr('disabled', true);
             }
-            $('#S_Effect1').Uploader();
-            $('#S_Effect2').Uploader();
-            $('#S_Effect3').Uploader();
-            $('#S_Effect4').Uploader();
-            $('#S_Effect5').Uploader();
+            $('#S_Effect1').Uploader({ func: "" });
+            $('#S_Effect2').Uploader({ func: "" });
+            $('#S_Effect3').Uploader({ func: "" });
+            $('#S_Effect4').Uploader({ func: "" });
+            $('#S_Effect5').Uploader({ func: "" });
             //编码重复验证
             $("#S_Code").on('blur', function () {
                 var code = $.trim($(this).val()); //去除空格
