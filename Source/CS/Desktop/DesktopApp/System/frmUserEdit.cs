@@ -634,7 +634,7 @@ namespace DesktopApp
             OpenFileDialog fileDialog = new OpenFileDialog();
             //fileDialog.Filter = "(*.jpg)|*.jpg";
             //判断用户是否正确的选择了文件
-            if (fileDialog.ShowDialog() == DialogResult.OK)
+            if (fileDialog.ShowDialog() == DialogResult.OK)   
             {
                 //获取用户选择文件的后缀名
                 string extension = Path.GetExtension(fileDialog.FileName);
