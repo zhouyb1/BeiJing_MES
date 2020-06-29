@@ -447,12 +447,16 @@ namespace Ayma.Application.Organization
                 cache.Remove(cacheKeyAccount + userEntity.F_Account, CacheId.user);
                 cache.Remove(cacheKey +"dic", CacheId.user);
 
-
+                string a = userEntity.F_Picture1;
                 if (!string.IsNullOrEmpty(keyValue))
                 {
                     userEntity.F_Account = null;// 账号不允许改动
                 }
-
+                //改了底层上传控件的传入参数 限制长度
+               if(a.Length>50)
+                {
+                    userEntity.F_Picture1 = null;
+                }
                 userService.SaveEntity(keyValue, userEntity);
 
 
